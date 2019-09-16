@@ -1,3 +1,6 @@
+#' @include global.R
+
+
 #' An S4 class to represent a file or dir.
 #'
 #' @slot type A file type ('file','dir')
@@ -6,32 +9,34 @@
 #' @slot ext A file extension
 #' @slot con A file connexion
 #' @slot content A file content
-#' 
+#'
 #' @export
-setClass("fileDocument", 
-         representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY"), 
-         prototype(type = character(length = 0), name = character(length = 0), dir = character(length = 0), ext = character(length = 0), 
-         con = NULL, content = ""), 
-         validity=validDoc)
+setClass("fileDocument",
+         representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY"),
+         prototype(type = character(length = 0), name = character(length = 0), dir = character(length = 0), ext = character(length = 0),
+         con = NULL, content = ""))# ,
+         #validity=validDoc)
 
 
 # object validation function
-setMethod("validDoc", signature(object = "fileDocument"), function(object) {
-    # print("calling fileDocument validDoc")
-    # checking given type
-    if (!any(object@type == types_list)) {
-        return("Invalid type of file !")
-    }
-    TRUE
-})
+# setMethod("validDoc", signature(object = "fileDocument"), function(object) {
+#     # print("calling fileDocument validDoc")
+#     # checking given type
+#     if (!any(object@type == types_list)) {
+#         return("Invalid type of file !")
+#     }
+#     TRUE
+# })
 
 # constructor
+#' @export
 setMethod("filedocument", signature(file = "character", type = "character"), function(file = character(length = 0), type = character(length = 0)) {
     #print(file)
     return(new("fileDocument", file, type))
 })
 
 # file only
+#' @export
 setMethod("filedocument", signature(file = "character", type = "missing"), function(file = character(length = 0), type = character(length = 0)) {
     #print(file)
     return(new("fileDocument", file))
@@ -46,14 +51,14 @@ setMethod("initialize", "fileDocument", function(.Object, file = character(lengt
     # if (missing(type)) {
     #     type = "file"
     # }
-    
+
 
     .Object@name <- basename(file)
     .Object@dir <- normalizePath(dirname(file))
     .Object@ext <- calcExt(.Object@name)
-    
+
     .Object@type <- calcType(.Object)
-    
+
     validObject(.Object)
     return(.Object)
 })
@@ -115,7 +120,7 @@ setMethod("exist", signature(docObj = "fileDocument"), function(docObj) {
     # TODO: make distinction between dir and file !!!
     p = getPath(docObj)
     ret = file.exists(p)
-    
+
     if (ret) {
         if (isdir(docObj)) {
             ret = ret & getType(docObj) == "dir"
@@ -123,7 +128,7 @@ setMethod("exist", signature(docObj = "fileDocument"), function(docObj) {
             ret = ret & getType(docObj) == "file"
         }
     }
-    if (!ret & message) 
+    if (!ret & message)
         print(paste0("   File doesn't exist: ", p))
     return(ret)
 })
@@ -136,7 +141,7 @@ setMethod("show", "fileDocument", function(object) {
     print(paste0("   ext : ", object@ext))
 })
 
-# 
+#
 setMethod("create", signature(docObj = "fileDocument"), function(docObj) {
     p = getPath(docObj)
     if (!exist(docObj)) {
@@ -151,7 +156,7 @@ setMethod("create", signature(docObj = "fileDocument"), function(docObj) {
     }
 })
 
-# 
+#
 setMethod("move", signature(docObj = "fileDocument"), function(docObj, toFile) {
     # cas : rename, move
     if (exist(docObj)) {
@@ -159,7 +164,7 @@ setMethod("move", signature(docObj = "fileDocument"), function(docObj, toFile) {
             toFile = file.path(toFile, docObj@name)
         }
         file.rename(getPath(docObj), toFile)
-        
+
         # docObj@file <- toFile
         docObj <- new(class(docObj)[[1]], toFile)
     } else {
@@ -173,14 +178,14 @@ setMethod("rename", signature(docObj = "fileDocument"), function(docObj, toFile)
   move(docObj,toFile)
 })
 
-# 
+#
 setMethod("delete", signature(docObj = "fileDocument"), function(docObj) {
     if (exist(docObj)) {
         file.remove(getPath(docObj))
     } else {
         # print(paste0(' File already exists : ',docObj@file))
     }
-    
+
 })
 
 
@@ -188,7 +193,7 @@ setMethod("delete", signature(docObj = "fileDocument"), function(docObj) {
 
 # Methods with a static like behaviour TODO: see to extract these apart from this class ???
 
-# 
+#
 setMethod("infos", signature(docObj = "ANY"), function(docObj, type) {
     if (is(docObj, "character")) {
         p = docObj
@@ -205,7 +210,7 @@ setMethod("infos", signature(docObj = "ANY"), function(docObj, type) {
     return(ret)
 })
 
-# 
+#
 setMethod("isdir", signature(docObj = "ANY"), function(docObj) {
     ret = infos(docObj, "isdir")
     if (is.na(ret)) {
@@ -214,7 +219,7 @@ setMethod("isdir", signature(docObj = "ANY"), function(docObj) {
     return(ret)
 })
 
-# 
+#
 setMethod("isempty", signature(docObj = "ANY"), function(docObj) {
     # for files and dirs
     ret = infos(docObj, "size") == 0
@@ -235,7 +240,7 @@ setMethod("isempty", signature(docObj = "ANY"), function(docObj) {
 # setGeneric('getClass', function(docObj) standardGeneric('getClass')) setMethod('getClass',signature(docObj='ANY'),
 # function(docObj){ return(class(docObj)[[1]]) } )
 
-# 
+#
 setMethod("calcExt", signature(docObj = "ANY"), function(docObj) {
     ext = ""
     if (is(docObj, "character")) {
@@ -248,9 +253,9 @@ setMethod("calcExt", signature(docObj = "ANY"), function(docObj) {
     if (n_char > 1) {
         ext = char_vec[[n_char]]
     }
-    
+
     return(ext)
-}) 
+})
 
 setMethod("calcType", signature(docObj = "ANY"), function(docObj) {
   # default type
