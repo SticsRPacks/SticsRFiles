@@ -77,3 +77,11 @@ Collate:
     'write_obs.R'
     'xmlDocument.R'
     'zzz.R'
+Imports: 
+    XML,
+    data.table,
+    magrittr,
+    rstudioapi,
+    crayon,
+    xml2,
+    utils

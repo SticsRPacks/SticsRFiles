@@ -1,17 +1,15 @@
+#' @title Transforming a Stics xml file into a text file
+#' @description The input file according to his type (ini,plant,tec,station,soil,par)
+#' is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
+#' @param xml_file File path of the input xml file
+#' @param java_dir Root directory of the JavaStics installation
+#' @param out_dir Directory of the generated file
+#' @param out_file Name of the output file
+#'
+#' @export
+#'
 stics_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_file = NULL) {
-  #' @title Transforming a Stics xml file into a text file
-  #' @description The input file according to his type (ini,plant,tec,station,soil,par)
-  #' is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
-  #' @param xml_file File path of the input xml file
-  #' @param java_dir Root directory of the JavaStics installation
-  #' @param out_dir Directory of the generated file
-  #' @param out_file Name of the output file
-  #'
-  #' @export
-  #'
-  # for transforming xml javastics files to text files for Stics
 
-  library("xml2")
   # defining which xsl file to use according to the input xml file
   #files_types <- c("initialisations","sols","fichierplt","fichiertec")
   xsl_files <- c("ini2txt.xsl","sol2txt.xsl","xml2txt.xsl","xml2txt.xsl",
@@ -50,13 +48,9 @@ stics_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_fi
   out_file_path <- file.path(out_dir,out_file)
 
   # get the root element name for identifying the file type
-  doc <- read_xml(xml_file)
-  filet = xml2 :: xml_name (doc)
+  doc <- xml2::read_xml(xml_file)
+  filet = xml2::xml_name(doc)
   style_file = file.path(java_dir,"bin/resources/xml/stylesheet",xsl_files[filet])
-
-  #print(xml_file)
-  #print(style_file)
-  #print(out_file_path)
 
   # calling the function
   convert_xml2txt(xml_file,style_file, out_file_path)

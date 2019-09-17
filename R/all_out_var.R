@@ -12,7 +12,8 @@
 #' @export
 #'
 all_out_var= function(){
-  data("out_data", envir = environment())
+  out_data= NULL
+  utils::data("out_data", envir = environment())
   out_data
 }
 

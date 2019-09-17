@@ -1,20 +1,17 @@
+#' @title Transforming an xml file with the help of an xsl style file
+#' @description Using an xslt tranformation, an xml input file is converted to
+#' an other file format (text, xml). The output file name may be given or calculated.
+#' In the last case, the extension is defined after getting xsl method from the xsl file (xml, txt).
+#' @param xml_file File path of the input xml file
+#' @param style_file File path of the xsl file
+#' @param out_file File path of the generated file
+#'
+#' @export
+#'
 convert_xml2txt <- function( xml_file, style_file, out_file = NULL ) {
-  #' @title Transforming an xml file with the help of an xsl style file
-  #' @description Using an xslt tranformation, an xml input file is converted to
-  #' an other file format (text, xml). The output file name may be given or calculated.
-  #' In the last case, the extension is defined after getting xsl method from the xsl file (xml, txt).
-  #' @param xml_file File path of the input xml file
-  #' @param style_file File path of the xsl file
-  #' @param out_file File path of the generated file
-  #'
-  #' @export
-  #'
-  #'
-  library(xml2)
-  library(xslt)
 
-  #
-  # checking if all files exist
+  # library(xslt)
+
   f_names = c(xml_file, style_file)
   ex_files = file.exists( f_names )
 
@@ -33,13 +30,13 @@ convert_xml2txt <- function( xml_file, style_file, out_file = NULL ) {
   }
 
   # converting file
-  style <- read_xml(style_file)
-  doc <- read_xml(xml_file)
-  txt <- xml_xslt(doc,style)
+  style <- xml2::read_xml(style_file)
+  doc <- xml2::read_xml(xml_file)
+  txt <- xslt::xml_xslt(doc,style)
   out <- substr(txt,1,nchar(txt) - 1)
 
   # getting xsl output method for setting file extension
-  method = xml2 :: xml_attr(xml2::xml_children(style),"method")[1]
+  method = xml2::xml_attr(xml2::xml_children(style),"method")[1]
   ext = "xml"
   if ( method == "text" ) {
     ext = "txt"
@@ -57,7 +54,5 @@ convert_xml2txt <- function( xml_file, style_file, out_file = NULL ) {
   writeLines(out,con,sep ="")
   close(con)
 
-
   return(invisible(out))
-
 }

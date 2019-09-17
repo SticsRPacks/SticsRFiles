@@ -1,6 +1,6 @@
 expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
   #' @export
-  in_data <- read.table(in_csv_file,sep=";",stringsAsFactors = F, header = F)
+  in_data <- utils::read.table(in_csv_file,sep=";",stringsAsFactors = F, header = F)
   if (is.null(header_vec)) {
     names(in_data) <- c("name","def","unit","param","dim","type","min","max","optim","n")
   }
@@ -32,9 +32,9 @@ expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
   out_df <- out_df[order(out_df$name),]
 
 
-  write.table(out_df,file = out_csv_file,
-              sep=";", col.names = F, row.names = F,
-              quote = F, na = "")
+  utils::write.table(out_df,file = out_csv_file,
+                     sep=";", col.names = F, row.names = F,
+                     quote = F, na = "")
 
   return(invisible(out_df))
 }
