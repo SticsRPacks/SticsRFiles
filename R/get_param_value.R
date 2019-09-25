@@ -1,4 +1,5 @@
-#' @title Get a set of a (or a list of) Stics xml parameter(s) values from a request in an xmlDocument
+#' @title Get a set of a (or a list of) Stics xml parameter(s) values from a request
+#' @title in an xmlDocument or a list of
 #' @title Getting parameter value for different kinds of parameters
 #'
 #' @description Extracting parameter value from an xml document object
@@ -24,6 +25,13 @@ get_param_value <- function(xml_doc_object,param_name,
                             ids=NULL, show_xpath =FALSE){
 
 
+  # TODO : add the case : if param_name is a list of vectors of parameters names ?
+
+  # Getting param values for sams parameters for the xml documents list
+  if ( is.list(xml_doc_object) ) {
+    values <- lapply(xml_doc_object,function(x) get_param_value(x,param_name,parent_name,parent_sel_attr))
+    return(values)
+  }
 
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
