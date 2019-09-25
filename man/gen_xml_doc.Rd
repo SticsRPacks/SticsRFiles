@@ -4,7 +4,7 @@
 \alias{gen_xml_doc}
 \title{Generate from a template or modify a Stics sols or usms xmlDocument}
 \usage{
-gen_xml_doc(doc_type, xml_doc_object = NULL, nodes_nb = NULL,
+gen_xml_doc(doc_type, xml_doc = NULL, nodes_nb = NULL,
   nodes_param = NULL, stics_version = "last", overwrite = F)
 }
 \description{

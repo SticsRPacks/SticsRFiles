@@ -27,5 +27,5 @@ sort_params_table <- function(params_table) {
 
   par_names <- paste0(param_name,"_", sorted_idx)
 
-  return(select(params_table,par_names))
+  return(dplyr::select(params_table,par_names))
 }
