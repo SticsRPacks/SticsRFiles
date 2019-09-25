@@ -70,7 +70,7 @@ read_obs= function(dirpath=getwd(), filename=NULL, mixed= NULL){
     if(all(file.exists(file.path(dirpath,paste0(Plant_name,".obs"))))){
       Table_obs= lapply(Plant_name, function(x){
         Out= data.table::fread(file.path(dirpath,paste0(x,".obs")), data.table = F)
-        Out[Out<=-999.99]= NA
+        Out[Out<=-999.00]= NA
         Out$Plant= x
         Del_spe_col(Out)
       })
@@ -85,7 +85,7 @@ read_obs= function(dirpath=getwd(), filename=NULL, mixed= NULL){
         Table_obs= data.table::fread(file.path(dirpath,obs_files), data.table = F)
         Table_obs= Del_spe_col(Table_obs)
         attrfiles= obs_files
-        Table_obs[Table_obs<=-999.99]= NA
+        Table_obs[Table_obs<=-999.00]= NA
         Table_obs$Plant= obs_files
         warning("Observation file guessed from the only '.obs' file in dirpath",
                 Plant_name, "\n*.obs:",paste0(Plant_name,".obs"))
@@ -99,7 +99,7 @@ read_obs= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   }else{
     Table_obs= lapply(filename, function(x){
       Out= data.table::fread(file.path(dirpath,x), data.table = F)
-      Out[Out<=-999.99]= NA
+      Out[Out<=-999.00]= NA
       Out$Plant= x
       Del_spe_col(Out)
     })
