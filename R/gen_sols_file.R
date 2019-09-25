@@ -23,7 +23,7 @@ gen_sols_file <- function(sols_out_file,
     xml_doc <- xmldocument(sols_in_file)
   }
 
-  xml_doc <- gen_sols_doc(xml_doc = xml_doc,
+  xml_doc <- gen_sols_doc(xml_doc_object = xml_doc,
                           sols_nb = sols_nb,
                           sols_param = sols_param,
                           stics_version = stics_version)

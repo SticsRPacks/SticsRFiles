@@ -85,4 +85,7 @@ Imports:
     rstudioapi,
     crayon,
     xml2,
-    utils
+    utils,
+    lubridate,
+    methods,
+    testthat
