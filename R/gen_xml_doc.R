@@ -1,6 +1,6 @@
 #' @title Generate from a template or modify a Stics sols or usms xmlDocument
 #' @export
-gen_xml_doc <- function(doc_type, xml_doc_object = NULL,
+gen_xml_doc <- function(doc_type, xml_doc = NULL,
                         nodes_nb = NULL, nodes_param = NULL,
                         stics_version = "last", overwrite = F) {
 
@@ -31,11 +31,11 @@ gen_xml_doc <- function(doc_type, xml_doc_object = NULL,
   node_str <- paste0("//",node)
 
   # getting a default xml template
-  if ( is.null(xml_doc_object) ) {
+  if ( is.null(xml_doc) ) {
     # tmpl_file <- paste0("extdata/xml/templates/",stics_version,"/one_",root,".xml")
-    # xml_doc_object <- xmldocument(system.file(tmpl_file, package = "SticsOnR"))
+    # xml_doc <- xmldocument(system.file(tmpl_file, package = "SticsOnR"))
     # using function get_xml_base_doc
-    xml_doc_object <- get_xml_base_doc(xml_type = doc_type,
+    xml_doc <- get_xml_base_doc(xml_type = doc_type,
                                  stics_version = stics_version)
     overwrite = T
   }
@@ -44,7 +44,7 @@ gen_xml_doc <- function(doc_type, xml_doc_object = NULL,
 
   # identity or single usms/sols doc from the template file
   if ( all(is.null(c(nodes_nb, nodes_param))) ) {
-    return(xml_doc_object)
+    return(xml_doc)
   }
 
   # calculating nodes number
@@ -60,11 +60,11 @@ gen_xml_doc <- function(doc_type, xml_doc_object = NULL,
   }
 
   # getting usm/sol nodes
-  xml_nodes <- getNodeS(xml_doc_object, node_str)
+  xml_nodes <- getNodeS(xml_doc, node_str)
 
   # Nothing to do
   if ( length(xml_nodes) == elts_nb && is.null(nodes_param) ) {
-    return(xml_doc_object)
+    return(xml_doc)
   }
 
   # Creating doc structure from a base node
@@ -81,27 +81,27 @@ gen_xml_doc <- function(doc_type, xml_doc_object = NULL,
 
     new_node <- get_xml_base_node(root)
 
-    #add_node_to_doc(xml_doc_object, new_node, nodes_nb = elts_nb, root_str )
-    add_stics_nodes(xml_doc = xml_doc_object, file_tag = root, nodes_nb = elts_nb)
+    #add_node_to_doc(xml_doc, new_node, nodes_nb = elts_nb, root_str )
+    add_stics_nodes(xml_doc = xml_doc, file_tag = root, nodes_nb = elts_nb)
 
     # for ( u in 1:elts_nb ) {
-    #   addNodes(xml_doc_object,new_node,root_str)
+    #   addNodes(xml_doc,new_node,root_str)
     # }
 
   }
 
   if ( is.null(nodes_param) ) {
-    return(xml_doc_object)
+    return(xml_doc)
   }
 
   # setting data according to doc_type
   switch( doc_type,
-          usms = set_usms_param(xml_doc_object, nodes_param, overwrite = overwrite),
-          sols = set_sols_param(xml_doc_object, nodes_param, overwrite = overwrite)
+          usms = set_usms_param(xml_doc, nodes_param, overwrite = overwrite),
+          sols = set_sols_param(xml_doc, nodes_param, overwrite = overwrite)
           )
 
 
 
-  return(xml_doc_object)
+  return(xml_doc)
 
 }

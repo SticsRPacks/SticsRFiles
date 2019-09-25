@@ -34,7 +34,7 @@ gen_usms_file <- function(usms_out_file,
     usms_param[[v]][is.na(usms_param[[v]])] <- "null"
   }
 
-  xml_doc <- gen_usms_doc(xml_doc = xml_doc,
+  xml_doc <- gen_usms_doc(xml_doc_object = xml_doc,
                           usms_nb = usms_nb,
                           usms_param = usms_param,
                           stics_version = stics_version)

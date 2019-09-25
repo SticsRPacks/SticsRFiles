@@ -16,7 +16,7 @@ gen_sols_doc <- function(xml_doc_object = NULL,
 
 
   out_doc_object <- gen_xml_doc(doc_type = "sols",
-                                xml_doc_object,
+                                xml_doc = xml_doc_object,
                                 nodes_nb = sols_nb,
                                 nodes_param = sols_param,
                                 stics_version = stics_version)
