@@ -1,4 +1,4 @@
-#' @title Getting usms names list
+#' @title Getting usms names list for an usms.xml file or a list of
 #' @description Extracting a usm names list from an usms.xml file
 #' @param usms_path usms dir path or usm file path
 #' @param xml_name usms xml file name (optional, default = "usms.xml")
@@ -21,11 +21,14 @@ get_usms_list <- function(usms_path,xml_name="usms.xml"){
   } else {
     usms_xml_path = usms_path
   }
-  #xml_usms=xmldocument(usms_xml_path)
-  #usms_list=getAttrsValues(xml_usms,'//usm','nom')
+
 
   # new syntax with get_files_param_values
-  usms_list <- get_files_params_values(usms_xml_path,"usm")[[1]]$values[[1]]
+  #usms_list <- get_files_params_values(usms_xml_path,"usm")[[1]]$values[[1]]
+
+  usms_list <- get_files_params_values(usms_xml_path,"usm")
+
+  if (length(usms_list) == 1) usms_list <- unlist(usms_list)
 
   return(usms_list)
 }
