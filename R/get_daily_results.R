@@ -19,26 +19,26 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
 
   results_path=file.path(workspace,paste0("mod_s",usm_name,".sti"))
 
-  results_tbl <- try(as.tbl(read.table(results_path,header = TRUE,sep = ";",stringsAsFactors = FALSE)))
+  results_tbl <- try(dplyr::as.tbl(read.table(results_path,header = TRUE,sep = ";",stringsAsFactors = FALSE)))
 
-  if (is(results_tbl,"try-error")){
+  if (methods::is(results_tbl,"try-error")){
     stop("Error reading output file :",results_path)
   }
 
   # Add cum_jul to table (cumulative DOY)
   cum_doy <- compute_doy_cumul(results_tbl$jul, results_tbl$ian)
-  results_tbl <- mutate(results_tbl, cum_jul = cum_doy)
+  results_tbl <- dplyr::mutate(results_tbl, cum_jul = cum_doy)
 
   # filtering dates
   # only on cum_jul
   if ( ! is.null(doy_list) ) {
-    results_tbl <- results_tbl %>% filter( cum_jul %in% doy_list )
+    results_tbl <- results_tbl %>% dplyr::filter( cum_jul %in% doy_list )
   }
 
   # selecting variables columns
   if ( ! is.null(var_list) ){
     col_names=make.names(var_list)
-    results_tbl <- results_tbl %>% select(c("ian", "mo","jo", "jul"),one_of(col_names))
+    results_tbl <- results_tbl %>% dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
   }
 
   # TODO

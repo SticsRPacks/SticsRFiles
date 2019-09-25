@@ -16,6 +16,8 @@ Collate:
     'add_node_to_doc.R'
     'add_stics_nodes.R'
     'all_out_var.R'
+    'attributes_list2matrix.R'
+    'compute_doy_cumul.R'
     'convert_xml2txt.R'
     'exists_param.R'
     'expand_stics_names.R'
@@ -85,4 +87,7 @@ Imports:
     rstudioapi,
     crayon,
     xml2,
-    utils
+    utils,
+    lubridate,
+    methods,
+    testthat

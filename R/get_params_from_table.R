@@ -38,7 +38,9 @@ get_params_from_table <- function(params_table,
   # replacing column names starting with names of the dico list
   # with values of corresponding field in dico
   for (key in names(dict)) {
-    params_table <- params_table %>% rename_at(vars(starts_with(key)), funs(str_replace(.,key,dict[[key]])))
+    params_table <- params_table %>%
+      dplyr::rename_at(dplyr::vars(dplyr::starts_with(key)),
+                       dplyr::funs(stringr::str_replace(.,key,dict[[key]])))
   }
 
 

@@ -11,6 +11,8 @@
 #' @slot content A file content
 #'
 #' @export
+#' @import methods
+#'
 setClass("fileDocument",
          representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY"),
          prototype(type = character(length = 0), name = character(length = 0), dir = character(length = 0), ext = character(length = 0),
@@ -59,7 +61,7 @@ setMethod("initialize", "fileDocument", function(.Object, file = character(lengt
 
     .Object@type <- calcType(.Object)
 
-    validObject(.Object)
+    methods::validObject(.Object)
     return(.Object)
 })
 
@@ -195,7 +197,7 @@ setMethod("delete", signature(docObj = "fileDocument"), function(docObj) {
 
 #
 setMethod("infos", signature(docObj = "ANY"), function(docObj, type) {
-    if (is(docObj, "character")) {
+    if (methods::is(docObj, "character")) {
         p = docObj
     } else {
         p = getPath(docObj)
@@ -227,7 +229,7 @@ setMethod("isempty", signature(docObj = "ANY"), function(docObj) {
         stop("Unavailable information: file doesn't exist !")
     }
     if (isdir(docObj)) {
-        if (is(docObj, "character")) {
+        if (methods::is(docObj, "character")) {
             l = list.files(docObj)
         } else {
             l = list.files(getPath(docObj))
@@ -243,7 +245,7 @@ setMethod("isempty", signature(docObj = "ANY"), function(docObj) {
 #
 setMethod("calcExt", signature(docObj = "ANY"), function(docObj) {
     ext = ""
-    if (is(docObj, "character")) {
+    if (methods::is(docObj, "character")) {
         name = docObj
     } else {
         name = docObj@name
@@ -260,7 +262,7 @@ setMethod("calcExt", signature(docObj = "ANY"), function(docObj) {
 setMethod("calcType", signature(docObj = "ANY"), function(docObj) {
   # default type
   type="file"
-  if (is(docObj, "character")) {
+  if (methods::is(docObj, "character")) {
     name = docObj
   } else {
     name = getPath(docObj)

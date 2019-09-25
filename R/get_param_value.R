@@ -138,7 +138,7 @@ get_param_value <- function(xml_doc_object,param_name,
   num_value <- as.numeric(value)
   is_number <- suppressWarnings(!is.na(num_value))
   #if ( nb_num == length(value) )  {
-  if ( is_number )  {
+  if ( all(is_number) )  {
     value <- as.numeric(num_value)
   }
 

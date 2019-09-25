@@ -1,4 +1,4 @@
-library(SticsOnR)
+library(SticsRFiles)
 library(Classes)
 options(warn=-1)
 #xml_path="/home/plecharpent/Work/workspace/Example_Stics_Tests/R/SticsOnR/R/data/baresoil_plt.xml"

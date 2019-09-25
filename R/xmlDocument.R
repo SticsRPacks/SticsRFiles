@@ -1,4 +1,16 @@
 #' @include global.R
+#' An S4 class to represent a file or dir.
+#'
+#' @slot type A file type ('file','dir')
+#' @slot name A file name (with an extension or not)
+#' @slot dir A file dir or path
+#' @slot ext A file extension
+#' @slot con A file connexion
+#' @slot content A file content: an object of class XMLDocument
+#'
+#' @export
+#' @import methods
+#'
 
 # xml class based on fileDocument class
 setClass("xmlDocument", contains = c("fileDocument"),validity=validDoc)
@@ -33,17 +45,17 @@ setMethod("xmldocument", signature(file = "character"), function(file = characte
 })
 
 setMethod('initialize', 'xmlDocument', function(.Object,file = character(length = 0)){
-  .Object<-callNextMethod(.Object,file)
+  .Object <- methods::callNextMethod(.Object,file)
   # print('xmlDocument initialization')
   # print(file)
-  validObject(.Object)
+  methods::validObject(.Object)
   .Object<-loadContent(.Object)
   return(.Object)
 })
 
 
 setMethod("show", "xmlDocument", function(object) {
-  callNextMethod()
+  methods::callNextMethod()
   #print("show de xmlDocument")
   if (isLoaded(object)){
     print(paste0("   content : ",class(object@content)[[1]]))
@@ -52,7 +64,7 @@ setMethod("show", "xmlDocument", function(object) {
 
 # setter methods
 setReplaceMethod("setContent", signature(docObj = "xmlDocument"), function(docObj, value) {
-  if(!is(value,"XMLInternalDocument")){
+  if(! methods::is(value,"XMLInternalDocument")){
     stop("Input value is not a XMLInternalDocument class object")
   }
   docObj@content <- value
@@ -374,11 +386,11 @@ setMethod("loadContent", signature(docObj = "xmlDocument"), function(docObj) {
 
 
 setMethod("isLoaded", signature(docObj = "xmlDocument"), function(docObj) {
-  return(is(docObj@content,"XMLInternalDocument"))
+  return(methods::is(docObj@content,"XMLInternalDocument"))
 })
 
 setMethod("is.xmlDocument", signature(docObj = "ANY"), function(docObj) {
-  if (is(docObj , "xmlDocument")) {
+  if (methods::is(docObj , "xmlDocument")) {
     return(TRUE)
   } else {
     return(FALSE)
