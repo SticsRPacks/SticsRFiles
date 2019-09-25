@@ -19,9 +19,9 @@
 #'
 # ----------------------------------------------------------------------
 #  MODIFICATIONS (last commit)
-#  $Date: 2019-07-28 19:37:15 +0200 (dim. 28 juil. 2019) $
-#  $Author: plecharpent $
-#  $Revision: 1554 $
+#  $Date: 2019-09-24 17:57:18 +0200 (mar. 24 sept. 2019) $
+#  $Author: sbuis $
+#  $Revision: 1598 $
 # ----------------------------------------------------------------------
 
 get_files_params_values <- function(xml_files,param_names_list,
@@ -30,7 +30,7 @@ get_files_params_values <- function(xml_files,param_names_list,
 
   xml_docs <- lapply(xml_files,xmldocument)
 
-  values <- get_params_values(xml_docs, param_names_list = param_names_list,
+  values <- get_param_value(xml_docs, param_name = param_names_list,
                               parent_name = parent_name,
                               parent_sel_attr = parent_sel_attr)
 

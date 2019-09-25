@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_usms_list.R
 \name{get_usms_list}
 \alias{get_usms_list}
-\title{Getting usms names list}
+\title{Getting usms names list for an usms.xml file or a list of}
 \usage{
 get_usms_list(usms_path, xml_name = "usms.xml")
 }
