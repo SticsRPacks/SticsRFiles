@@ -16,9 +16,9 @@
 #'
 # ----------------------------------------------------------------------
 #  MODIFICATIONS (last commit)
-#  $Date: 2019-07-29 12:07:46 +0200 (lun. 29 juil. 2019) $
+#  $Date: 2019-09-25 12:21:57 +0200 (mer. 25 sept. 2019) $
 #  $Author: plecharpent $
-#  $Revision: 1560 $
+#  $Revision: 1601 $
 # ----------------------------------------------------------------------
 get_param_value <- function(xml_doc_object,param_name,
                             parent_name= NULL, parent_sel_attr = NULL,
@@ -134,9 +134,12 @@ get_param_value <- function(xml_doc_object,param_name,
 
   # Converting value to numeric if not any character in it
   # numbers may contain scientific notation e+ e-, decimal, and space
-  nb_num <- length(grep("[^0-9|.|e| |-|+]",value, invert = T))
-  if ( nb_num == length(value) )  {
-    value <- as.numeric(value)
+  #nb_num <- length(grep("[^- |0-9|.|e|+]",value, invert = T))
+  num_value <- as.numeric(value)
+  is_number <- suppressWarnings(!is.na(num_value))
+  #if ( nb_num == length(value) )  {
+  if ( is_number )  {
+    value <- as.numeric(num_value)
   }
 
   # TODO: see if finally useless, checks done in getValues ?
