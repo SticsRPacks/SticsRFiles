@@ -17,7 +17,7 @@
 #'
 #' @examples
 #'\dontrun{
-#' library(sticRs)
+#' library(SticsRFiles)
 #' Meteo= read_met()
 #'}
 #'

@@ -71,7 +71,7 @@ The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 \dontrun{
 # Replace the interrow distance parameter to 0.01:
 
-library(sticRs)
+library(SticsRFiles)
 set_param(dirpath = "stics_usm/usm_1", param= "interrang", value= 0.01)
 
 }

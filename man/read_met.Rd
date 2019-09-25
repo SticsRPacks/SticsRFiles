@@ -24,7 +24,7 @@ The time-related variables are summarised into one POSIXct column named
 }
 \examples{
 \dontrun{
-library(sticRs)
+library(SticsRFiles)
 Meteo= read_met()
 }
 

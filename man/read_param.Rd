@@ -81,7 +81,7 @@ Users generally only use \code{read_param} that identify parameters for
 \dontrun{
 # Read the interrow distance parameter:
 
-library(sticRs)
+library(SticsRFiles)
 read_param(param='interrang')
 
 }
