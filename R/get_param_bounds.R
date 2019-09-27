@@ -1,4 +1,25 @@
+#' @title Getting parameters bounds from an xmlDocument object
+#'
+#' @description Extracting parameters min and/or max bounds for a parameter
+#' or a vector of parameters from an xmlDocument class object.
+#'
+#' @param xml_doc an xmlDocument class object
+#' @param param_name a parameter name of a vector of parameters names
+#' @param bounds_name bounds name "min" or "max" (optional, default value c("min","max ))
+#'
+#' @return A list of parameters bounds values
+#'
+#' @examples
+#' library(SticsRFiles)
+#' xml_doc <- xmldocument("path/to/xmlfile")
+#' param_bounds <- get_param_bounds(xml_doc, "param", "min")
+#'
+#' param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"), "max")
+#'
+#' param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"))
+#'
 #' @export
+#'
 get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
   library("Classes")
 
