@@ -23,7 +23,9 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
 
   results_path=file.path(workspace,paste0("mod_s",usm_name,".sti"))
 
-  results_tbl <- try(dplyr::as.tbl(read.table(results_path,header = TRUE,sep = ";",stringsAsFactors = FALSE)))
+  results_tbl <- try(dplyr::as.tbl(utils::read.table(results_path,header = TRUE,
+                                                     sep = ";",
+                                                     stringsAsFactors = FALSE)))
 
   if (methods::is(results_tbl,"try-error")){
     stop("Error reading output file :",results_path)
