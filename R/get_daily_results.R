@@ -48,6 +48,10 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
   # a %>% filter(ian==1994,mo==10,jo==17:19)
   # or on
   # Dates (to be added to the table)
+  
+  # Using function from SticsRFiles for converting .n. by _n in the varname
+  # to be homogeneous with read_obs outputs
+  results_tbl = Del_spe_col(results_tbl)
 
 
 
