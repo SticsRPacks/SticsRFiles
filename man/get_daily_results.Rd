@@ -22,3 +22,7 @@ get_daily_results(workspace, usm_name, var_list = NULL,
 Reading a daily file as a tibble with possible selection
 on variables names, cumulative DOY, dates list
 }
+\examples{
+path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
+get_daily_results(path,"banana")
+}

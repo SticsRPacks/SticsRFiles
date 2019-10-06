@@ -30,10 +30,8 @@ If \code{filename} is not specified (or equal to \code{NULL}), the
          If usms_filename is not provided, existence of usms are checked in the usms.xml file.
 }
 \examples{
-\dontrun{
-library(sticRFiles)
-Meas= read_obs_to_list()
-}
+path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+Meas= read_obs_to_list(path)
 
 }
 \seealso{
