@@ -8,7 +8,7 @@
 # TODO: summarize with get_script
 get_inputs_example <- function(xl_name = NULL, dest_dir = getwd()) {
 
-  package <-  "SticsOnR"
+  package <-  "SticsRFiles"
   inst_dir <- "extdata/xl/"
   xl_patt <- ".(xls|xlsx)$"
 

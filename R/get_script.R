@@ -8,7 +8,7 @@
 # TODO: summarize with get_inputs_example
 get_script <- function( in_name = NULL, dest_dir = getwd()) {
 
-  package <-  "SticsOnR"
+  package <-  "SticsRFiles"
   inst_dir <- "extdata/scripts/"
 
   patt <- "*.R"

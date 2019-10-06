@@ -32,7 +32,7 @@ get_xml_base_doc <- function(xml_type = NULL,
 
   # getting a default xmldocument object template
   tmpl_file <- paste0("extdata/xml/templates/",stics_version,"/",pref,"_",xml_type,".xml")
-  xml_doc_object <- xmldocument(system.file(tmpl_file, package = "SticsOnR"))
+  xml_doc_object <- xmldocument(system.file(tmpl_file, package = "SticsRFiles"))
 
   return(xml_doc_object)
 

@@ -72,7 +72,7 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
 
 
   xml_file <- system.file(paste0("extdata/xml/templates/",stics_version,"/",
-                                 file_name), package = "SticsOnR")
+                                 file_name), package = "SticsRFiles")
 
   xml_doc <- xmldocument(xml_file)
 

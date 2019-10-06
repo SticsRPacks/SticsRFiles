@@ -2,7 +2,7 @@
 get_xml_stics_versions_tags <- function(version = "") {
 
   tmpl_file <- paste0("extdata/xml/templates/")
-  versions_tags <- list.dirs(system.file(tmpl_file, package = "SticsOnR"), full.names = F)
+  versions_tags <- list.dirs(system.file(tmpl_file, package = "SticsRFiles"), full.names = F)
 
   versions_tags <- versions_tags[! versions_tags == "" ]
 
