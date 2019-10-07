@@ -30,7 +30,8 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
                                                      stringsAsFactors = FALSE)))
 
   if (methods::is(results_tbl,"try-error")){
-    stop("Error reading output file :",results_path)
+    warning("Error reading output file :",results_path)
+    return()
   }
 
   # Add cum_jul to table (cumulative DOY)
