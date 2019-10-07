@@ -1,5 +1,6 @@
 get_daily_results <- function(workspace,usm_name,var_list=NULL,
-                              doy_list=NULL, dates_list=NULL) {
+                              doy_list=NULL, dates_list=NULL
+                              ) {
   #' @title Loading a daily Stics file
   #' @description Reading a daily file as a tibble with possible selection
   #' on variables names, cumulative DOY, dates list
@@ -47,17 +48,26 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
     results_tbl <- results_tbl %>% dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
   }
 
+  # Adding the Date  in the simulation results tibble
+  #Date= data.frame(Date=as.POSIXct(x = paste(sim_tmp$ian,sim_tmp$mo,sim_tmp$jo, sep="-"),
+  #                                 format = "%Y-%m-%d", tz="UTC"))
+
+  results_tbl <- results_tbl %>% dplyr::mutate(Date=as.POSIXct(x = paste(.$ian,
+                                                                         .$mo,
+                                                                         .$jo,
+                                                                         sep="-"),
+                                                               format = "%Y-%m-%d",
+                                                               tz="UTC"))
+
+  # Using function from SticsRFiles for converting .n. to _n in the varname
+  # to be homogeneous with read_obs outputs
+  colnames(results_tbl) = var_to_col_names(colnames(results_tbl))
+
   # TODO
   # on ian, mo, jo
   # a %>% filter(ian==1994,mo==10,jo==17:19)
   # or on
-  # Dates (to be added to the table)
-  
-  # Using function from SticsRFiles for converting .n. by _n in the varname
-  # to be homogeneous with read_obs outputs
-  results_tbl = Del_spe_col(results_tbl)
-
-
+  # Dates
 
   return(results_tbl)
 }
