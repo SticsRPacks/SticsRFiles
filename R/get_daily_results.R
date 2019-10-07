@@ -1,25 +1,26 @@
+#' @title Loading a daily Stics file
+#' @description Reading a daily file as a tibble with possible selection
+#' on variables names, cumulative DOY, dates list
+#' @param workspace Stics or JavaStics workspace path
+#' @param usm_name names of the usm
+#' @param var_list vector of output variables names (optional)
+#' @param doy_list vector of cumulative DOYs (optional)
+#' @param dates_list list of dates (optional)
+#' @export
+#' @examples
+#' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
+#' get_daily_results(path,"banana")
+#
+# ----------------------------------------------------------------------
+#  MODIFICATIONS (last commit)
+#  $Date: 2019-07-09 16:40:48 +0200 (mar. 09 juil. 2019) $
+#  $Author: sbuis $
+#  $Revision: 1491 $
+# ----------------------------------------------------------------------
+
 get_daily_results <- function(workspace,usm_name,var_list=NULL,
                               doy_list=NULL, dates_list=NULL
                               ) {
-  #' @title Loading a daily Stics file
-  #' @description Reading a daily file as a tibble with possible selection
-  #' on variables names, cumulative DOY, dates list
-  #' @param workspace Stics or JavaStics workspace path
-  #' @param usm_name names of the usm
-  #' @param var_list vector of output variables names (optional)
-  #' @param doy_list vector of cumulative DOYs (optional)
-  #' @param dates_list list of dates (optional)
-  #' @export
-  #' @examples
-  #' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
-  #' get_daily_results(path,"banana")
-  #
-  # ----------------------------------------------------------------------
-  #  MODIFICATIONS (last commit)
-  #  $Date: 2019-07-09 16:40:48 +0200 (mar. 09 juil. 2019) $
-  #  $Author: sbuis $
-  #  $Revision: 1491 $
-  # ----------------------------------------------------------------------
 
 
   results_path=file.path(workspace,paste0("mod_s",usm_name,".sti"))
@@ -57,7 +58,10 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
                                                                          .$jo,
                                                                          sep="-"),
                                                                format = "%Y-%m-%d",
-                                                               tz="UTC"))
+                                                               tz="UTC")) %>%
+    dplyr::select(Date, dplyr::everything())
+
+
 
   # Using function from SticsRFiles for converting .n. to _n in the varname
   # to be homogeneous with read_obs outputs
