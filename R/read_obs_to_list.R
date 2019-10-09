@@ -35,6 +35,15 @@ read_obs_to_list= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_
   # must have been run before ... could this be changed and still work with mixed crops?
   #
 
+  # For a list of folders recurive call
+  if ( length(dirpath) > 1) {
+    obs_list <- lapply(dirpath, function(x) read_obs_to_list(x,obs_filenames, usms, usms_filename))
+    n <- unlist(lapply(obs_list, function(x) names(x[1])))
+    obs_list <- lapply(obs_list, function(x) x[[1]])
+    names(obs_list) <- n
+    return(obs_list)
+  }
+
   if (is.null(obs_filenames)) {
     obs_filenames=list.files(dirpath)%>%.[grep("\\.obs$",.)]
   }
