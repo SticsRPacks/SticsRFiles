@@ -57,6 +57,7 @@ Collate:
     'get_params_types.R'
     'get_plants_nb.R'
     'get_script.R'
+    'get_txt_param_value.R'
     'get_usms_list.R'
     'get_values_from_table.R'
     'get_xml_base_doc.R'
