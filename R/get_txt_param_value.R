@@ -86,16 +86,31 @@ get_name_value_file_value <- function(file_path, param_names = NULL, names_dict=
   }
 
 
+
+  # Getting parameters names indices in par_list for each param_names
   par_idx <- lapply(param_names, function(x) par_list %in% x)
-
+  # Getting parameters values list according to parameters names
   par_values <- lapply(par_idx, function(x) as.numeric(par_val[x]))
-
-  # fixing values that are not numeric
-  non_numeric_names <- names(out)[is.na(out)]
-  non_numeric_idx <- par_list %in% non_numeric_names
-  par_values[param_names %in% non_numeric_names] <- par_val[non_numeric_idx]
-
   names(par_values) <- param_names
+
+  # Fixing values that are not numeric, if any
+  # Getting non numeric parameters names and idx in the original
+  # parameters values list (par_list)
+  non_numeric_names <- param_names[unlist(lapply(par_values, function(x) all(is.na(x))))]
+
+  # Not any non numeric parameters, exiting
+  if (! length(non_numeric_names)) return(par_values)
+
+  non_numeric_idx <- lapply(non_numeric_names, function(x) par_list %in% x)
+
+  # Getting non numeric parameters names indexes in the final parameters names
+  non_num_par_idx <- which(param_names %in% non_numeric_names)
+  # Setting non numeric parameters values with strings
+  for (i in 1:length(non_num_par_idx)) {
+    par_values[[non_num_par_idx[i]]] <- unlist(par_val[non_numeric_idx[[i]]])
+  }
+
+
 
   # TODO : A recuperer pour traiter le sol
   # par_val <- lapply(par_val[par_idx],function(x) unlist(strsplit(x, " ")))
