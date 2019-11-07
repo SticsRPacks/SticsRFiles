@@ -1,11 +1,13 @@
 #' @title Get a list of Stics xml parameters names an xmlDocument node
 #' @param xml_node an xml XMLInternalElementNode
 #' @param param_list param names vector, used for recursive calls
+#' @param full_list TRUE or getting all names, FALSE otherwise (default)
+#' for unique names list
 #'
 #' @return a character vector of parameters names
 #'
 #' @export
-get_params_names <- function(xml_node,param_list = c()) {
+get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
 
   # TODO
   # - for ini files
@@ -35,19 +37,21 @@ get_params_names <- function(xml_node,param_list = c()) {
 
 
   if (node_name =="option") {
-    #param_list <- c(param_list,)
-    #print(xmlAttrs(xml_node)["nomParam"])
     attr_name <- "nomParam"
   }
 
   if (node_name =="param") {
-    #param_list <- c(param_list,)
-    #print(xmlAttrs(xml_node)["nom"])
     attr_name <- "nom"
   }
 
+  # selecting param names : full for all values
+  tab_names <- c("ta_entete", "tableau_entete")
+  if (full_list) {
+    tab_names <- c("ta", "tableau")
+  }
+
   if (node_name =="colonne" &&
-      ( xmlName(xmlParent(xml_node)) %in% c("ta_entete", "tableau_entete") ) ) {
+      ( xmlName(xmlParent(xml_node)) %in% tab_names ) ) {
     attr_name <- "nom"
 
   }
@@ -57,31 +61,35 @@ get_params_names <- function(xml_node,param_list = c()) {
   }
 
   # Adding the param name t the list if it does not exist
+  # or if a full list is asked
   if ( attr_name %in% names(xmlAttrs(xml_node))) {
     param_name <- xmlAttrs(xml_node)[attr_name]
-    #print(param_name)
-    if ( ! param_name %in% param_list ) param_list <- c(param_list, param_name)
+    if ( full_list || ! (param_name %in% param_list )) {
+      param_list <- c(param_list, param_name)
+      print(param_name)
+    }
+
   }
 
 
   # TODO : see if it is usefull, look in the loop !
   #if (!childs_nb ) return()
 
-  #if (childs_names == "text") return()
-
+  # for a text node
   if ( (!childs_nb ) || (length(childs_names) == 1 && childs_names == "text") ) {
     return(param_list)
   }
 
 
 
+  # loop over childs
   for (n in 1:childs_nb) {
 
     if ( ! class(childs[[n]]) == "XMLInternalElementNode") {
       #print(class(childs[[n]]))
       next
     }
-    param_list <- get_params_names(childs[[n]], param_list)
+    param_list <- get_params_names(childs[[n]], param_list, full_list = full_list)
   }
 
   names(param_list) <- NULL
