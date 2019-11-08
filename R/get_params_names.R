@@ -35,6 +35,7 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
 
   childs_nb <- length(childs)
 
+  attr_name <- "none"
 
   if (node_name =="option") {
     attr_name <- "nomParam"
@@ -53,12 +54,15 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
   if (node_name =="colonne" &&
       ( xmlName(xmlParent(xml_node)) %in% tab_names ) ) {
     attr_name <- "nom"
-
   }
 
-  if ( ! exists("attr_name") ) {
-    attr_name <- "none"
+  # The param name is the node name
+  # but not "plante" or "horizon"
+  if ( attr_name == "none" &&
+       ! ( node_name %in% c("plante", "horizon", "initialisations", "sol")) ) {
+    param_list <- c(param_list, node_name)
   }
+
 
   # Adding the param name t the list if it does not exist
   # or if a full list is asked
@@ -66,10 +70,13 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
     param_name <- xmlAttrs(xml_node)[attr_name]
     if ( full_list || ! (param_name %in% param_list )) {
       param_list <- c(param_list, param_name)
-      print(param_name)
+      #print(param_name)
     }
-
   }
+
+
+
+
 
 
   # TODO : see if it is usefull, look in the loop !
