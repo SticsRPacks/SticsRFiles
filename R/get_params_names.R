@@ -10,7 +10,6 @@
 get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
 
   # TODO
-  # - for ini files
   # - for all: add an input parameter for specifying which formalism to use
   # to restrict params names list !
 
@@ -56,40 +55,36 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
     attr_name <- "nom"
   }
 
-  # The param name is the node name
-  # but not "plante" or "horizon"
+  # Getting param_name from a node name
+  # but not in list "plante", "horizon" ,"initialisations", "sol"
   if ( attr_name == "none" &&
        ! ( node_name %in% c("plante", "horizon", "initialisations", "sol")) ) {
-    param_list <- c(param_list, node_name)
+    param_name <- node_name
   }
 
 
-  # Adding the param name t the list if it does not exist
-  # or if a full list is asked
+  # Getting param_name from an attribute value
   if ( attr_name %in% names(xmlAttrs(xml_node))) {
     param_name <- xmlAttrs(xml_node)[attr_name]
-    if ( full_list || ! (param_name %in% param_list )) {
-      param_list <- c(param_list, param_name)
-      #print(param_name)
-    }
   }
 
 
+  # Adding the param name to the param names list
+  # - if it does not exist
+  # - if a full param names list is asked
+  if ( exists("param_name") &&
+       (full_list || ! (param_name %in% param_list )) )  {
+    param_list <- c(param_list, param_name)
+  }
 
 
-
-
-  # TODO : see if it is usefull, look in the loop !
-  #if (!childs_nb ) return()
-
-  # for a text node
+  # for a text node, not any childs
   if ( (!childs_nb ) || (length(childs_names) == 1 && childs_names == "text") ) {
     return(param_list)
   }
 
 
-
-  # loop over childs
+  # Loop over childs
   for (n in 1:childs_nb) {
 
     if ( ! class(childs[[n]]) == "XMLInternalElementNode") {
