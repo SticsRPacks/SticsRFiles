@@ -7,10 +7,10 @@
 #' @export
 #'
 
-set_usms_param <- function(xml_doc_object, usms_param, overwrite = FALSE) {
+set_usms_param <- function(xml_doc_object, usms_param = NULL, overwrite = FALSE) {
 
 
-  if ( ! "data.frame" %in% class(usms_param) ) {
+  if ( ! is.null(usms_param) && ! ("data.frame" %in% class(usms_param)) ) {
     stop("usms_param does not belong to data.frame class/type")
   }
 
