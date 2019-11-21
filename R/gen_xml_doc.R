@@ -8,6 +8,8 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
   # for usms and sols files
 
 
+  keep_existing = T
+
   # check/get version of templates xml files
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
@@ -32,12 +34,11 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
 
   # getting a default xml template
   if ( is.null(xml_doc) ) {
-    # tmpl_file <- paste0("extdata/xml/templates/",stics_version,"/one_",root,".xml")
-    # xml_doc <- xmldocument(system.file(tmpl_file, package = "SticsRFiles"))
     # using function get_xml_base_doc
     xml_doc <- get_xml_base_doc(xml_type = doc_type,
-                                 stics_version = stics_version)
+                                stics_version = stics_version)
     overwrite = T
+    keep_existing = F
   }
 
   elts_nb <- NULL
@@ -63,30 +64,25 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
   xml_nodes <- getNodeS(xml_doc, node_str)
 
   # Nothing to do
-  if ( length(xml_nodes) == elts_nb && is.null(nodes_param) ) {
+  doc_nodes_nb <- length(xml_nodes)
+  if ( doc_nodes_nb == elts_nb && is.null(nodes_param) ) {
     return(xml_doc)
   }
+
+  if (doc_nodes_nb < elts_nb ) overwrite = T
 
   # Creating doc structure from a base node
   if ( overwrite ) {
 
-    # Keeping only the root usms/sols node in the
-    # xml document
-    removeNodes(xml_nodes)
+    # Keeping only one usm node in the xml document
+    if ( doc_nodes_nb > 1) removeNodes(xml_nodes[2:doc_nodes_nb])
 
-    # # Keeping the usm node as model, deconnected from the xml document
-    # base_node_txt <- saveXML(xml_nodes[[1]])
-    # # Adding usm nodes to usms node
-    # new_node <- getNodeSet(xmlParse(base_node_txt), node_str)[[1]]
-
-    new_node <- get_xml_base_node(root)
-
-    #add_node_to_doc(xml_doc, new_node, nodes_nb = elts_nb, root_str )
-    add_stics_nodes(xml_doc = xml_doc, file_tag = root, nodes_nb = elts_nb)
-
-    # for ( u in 1:elts_nb ) {
-    #   addNodes(xml_doc,new_node,root_str)
-    # }
+    if ( keep_existing ) {
+      add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = (elts_nb - 1), paste0("//",root))
+    } else {
+      removeNodes(xml_nodes[1])
+      add_stics_nodes(xml_doc = xml_doc, file_tag = root, nodes_nb = elts_nb)
+    }
 
   }
 
@@ -98,7 +94,7 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
   switch( doc_type,
           usms = set_usms_param(xml_doc, nodes_param, overwrite = overwrite),
           sols = set_sols_param(xml_doc, nodes_param, overwrite = overwrite)
-          )
+  )
 
 
 
