@@ -27,11 +27,11 @@ gen_usms_file <- function(usms_out_file,
     xml_doc <- xmldocument(usms_in_file)
   }
 
-  if (! is.null(usms_param)) {
-    # replacing NA with "null"
-    vars <- c("flai_1", "fplt_2","ftec_2", "flai_2")
-
-    for (v in vars) {
+  vars <- c("flai_1", "fplt_2","ftec_2", "flai_2")
+  vars_idx <- vars %in% names(usms_param)
+  # replacing NA with "null", if any vars name in usms_param names
+  if (! is.null(usms_param) && any(vars_idx)) {
+    for (v in vars[vars_idx]) {
       usms_param[[v]][is.na(usms_param[[v]])] <- "null"
     }
   }
