@@ -7,11 +7,16 @@
 #' @export
 #'
 
-set_usms_param <- function(xml_doc_object, usms_param = NULL, overwrite = FALSE) {
+set_usms_param <- function(xml_doc_object, usms_param = NULL, overwrite = TRUE) {
 
-
-  if ( ! is.null(usms_param) && ! ("data.frame" %in% class(usms_param)) ) {
-    stop("usms_param does not belong to data.frame class/type")
+  if ( ! is.null(usms_param) ) {
+    if ( ! ("data.frame" %in% class(usms_param)) ) {
+      stop("usms_param does not belong to data.frame class/type")
+    }
+    # if any factor field type in data.frame
+    if ( any(unlist(lapply(usms_param,is.factor)))) {
+      stop("usms_param contains fields of factor type !")
+    }
   }
 
   if (! "xmlDocument" %in% class(xml_doc_object) ) {
