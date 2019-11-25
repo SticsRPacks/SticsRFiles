@@ -1,5 +1,4 @@
 library(SticsRFiles)
-library(Classes)
 options(warn=-1)
 #xml_path="/home/plecharpent/Work/workspace/Example_Stics_Tests/R/SticsOnR/R/data/baresoil_plt.xml"
 xml_path=file.path(system.file("extdata/xml/examples/V9.0", package="SticsOnRTemp"),"baresoil_plt.xml")

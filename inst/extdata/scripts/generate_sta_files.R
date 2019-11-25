@@ -2,7 +2,7 @@
 
 library(SticsOnR)
 library(readxl)
-library(Classes)
+library(SticsRFiles)
 
 
 
