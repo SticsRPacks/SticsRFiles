@@ -21,7 +21,7 @@
 #' @export
 #'
 get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
-  library("Classes")
+  library(SticsRFiles)
 
   def_names <- c("min","max")
 
@@ -46,7 +46,7 @@ get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
 
 
   bounds_values <- lapply(bounds_name, function(x)
-    Classes::getAttrsValues(xml_doc,param_type$xpath,x))
+    SticsRFiles::getAttrsValues(xml_doc,param_type$xpath,x))
 
 
   return(as.numeric(unlist(bounds_values)))
