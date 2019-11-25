@@ -2,8 +2,6 @@
 
 library(SticsOnR)
 library(readxl)
-library(Classes)
-
 
 out_file <- "/path/to/file/sols.xml" # or something like C://path//to//file//sols.xml" for Windows
 xl_dir <- "/path/to/xl/dir"          # or something like C://path//to//xl//dir" for Windows

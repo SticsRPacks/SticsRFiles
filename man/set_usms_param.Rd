@@ -4,7 +4,7 @@
 \alias{set_usms_param}
 \title{Setting a usm param value(s) in an usms xmlDocument}
 \usage{
-set_usms_param(xml_doc_object, usms_param, overwrite = FALSE)
+set_usms_param(xml_doc_object, usms_param = NULL, overwrite = TRUE)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object (created from an usms file)}

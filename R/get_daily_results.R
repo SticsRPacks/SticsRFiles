@@ -7,21 +7,16 @@
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
 #' @export
+#'
+#' @importFrom rlang .data
+#'
 #' @examples
 #' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
 #' get_daily_results(path,"banana")
-#
-# ----------------------------------------------------------------------
-#  MODIFICATIONS (last commit)
-#  $Date: 2019-07-09 16:40:48 +0200 (mar. 09 juil. 2019) $
-#  $Author: sbuis $
-#  $Revision: 1491 $
-# ----------------------------------------------------------------------
-
 get_daily_results <- function(workspace,usm_name,var_list=NULL,
                               doy_list=NULL, dates_list=NULL
                               ) {
-
+  .= NULL
 
   results_path=file.path(workspace,paste0("mod_s",usm_name,".sti"))
 
@@ -41,7 +36,7 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
   # filtering dates
   # only on cum_jul
   if ( ! is.null(doy_list) ) {
-    results_tbl <- results_tbl %>% dplyr::filter( cum_jul %in% doy_list )
+    results_tbl <- results_tbl %>% dplyr::filter( .data$cum_jul %in% doy_list )
   }
 
   # selecting variables columns
@@ -60,7 +55,7 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
                                                                          sep="-"),
                                                                format = "%Y-%m-%d",
                                                                tz="UTC")) %>%
-    dplyr::select(Date, dplyr::everything())
+    dplyr::select(.data$Date, dplyr::everything())
 
 
 

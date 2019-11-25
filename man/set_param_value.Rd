@@ -4,9 +4,15 @@
 \alias{set_param_value}
 \title{Setting parameter value for different kinds of parameters}
 \usage{
-set_param_value(xml_doc_object, param_name, param_value,
-  parent_name = NULL, parent_sel_attr = NULL, ids = NULL,
-  show_xpath = FALSE)
+set_param_value(
+  xml_doc_object,
+  param_name,
+  param_value,
+  parent_name = NULL,
+  parent_sel_attr = NULL,
+  ids = NULL,
+  show_xpath = FALSE
+)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object}
@@ -20,11 +26,9 @@ set_param_value(xml_doc_object, param_name, param_value,
 \item{parent_sel_attr}{parent attribute value (optional)}
 
 \item{ids}{elements indices (optional)}
+
+\item{show_xpath}{Print the xpath}
 }
 \description{
 Setting parameter value in a xmlDocument object
-}
-\examples{
-
-
 }

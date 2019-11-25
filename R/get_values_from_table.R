@@ -11,7 +11,6 @@ get_values_from_table <- function(params_table, param_names = NULL, lines_id = N
 
 
   # TODO: doing a merge with get_params_from_table
-  library(dplyr)
   # calling get_values_from_table
   # working on a parameters names list
 

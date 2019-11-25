@@ -4,8 +4,21 @@
 \alias{replace_string_in_file}
 \title{Replacing a string in a file}
 \usage{
-replace_string_in_file(file_path, target_string, replace_string,
-  new_file_path = NULL)
+replace_string_in_file(
+  file_path,
+  target_string,
+  replace_string,
+  new_file_path = NULL
+)
+}
+\arguments{
+\item{file_path}{The path to the file}
+
+\item{target_string}{The target string to replace}
+
+\item{replace_string}{The replacing string}
+
+\item{new_file_path}{The newly-created file path}
 }
 \description{
 Replacing occurrences of a string by another one, in place or creating a new file

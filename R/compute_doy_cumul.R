@@ -1,20 +1,17 @@
+#' @title Calculating cumulative day of year from days of year over 2 years
+#' @description For a vector of days of year and a vector of corresponding year
+#' for each one, calculation of cumulative days of years
+#' @param doys_vec vector of days of year
+#' @param years_vec vector of years corresponding to each day of year from doys_vec
+#' @return A vector of cumulative days of year over a 2 years period
+#'
+#' @importFrom lubridate leap_year
+#'
+#' @examples
+#' compute_doy_cumul(c(350,360,10,20,30),c(1990,1990,1991,1991,1991))
+#'
+#' @export
 compute_doy_cumul <- function(doys_vec, years_vec) {
-  #' @title Calculating cumulative day of year from days of year over 2 years
-  #' @description For a vector of days of year and a vector of corresponding year
-  #' for each one, calculation of cumulative days of years
-  #' @param doys_vec vector of days of year
-  #' @param years_vec vector of years corresponding to each day of year from doys_vec
-  #' @return A vector of cumulative days of year over a 2 years period
-  #' @examples
-  #' compute_doy_cumul(c(350,360,10,20,30),c(1990,1990,1991,1991,1991))
-  #' @export
-  # ----------------------------------------------------------------------
-  #  MODIFICATIONS (last commit)
-  #  $Date: 2019-06-03 11:56:53 +0200 (lun. 03 juin 2019) $
-  #  $Author: plecharpent $
-  #  $Revision: 1429 $
-  # ----------------------------------------------------------------------
-  #' @importFrom lubridate leap_year
 
   if (!all(c(class(doys_vec),class(years_vec)) %in% c("numeric","integer"))) {
     stop("Vectors are not all numeric/integer ones, aborting !")

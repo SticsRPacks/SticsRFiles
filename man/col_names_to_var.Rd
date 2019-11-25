@@ -13,6 +13,6 @@ col_names_to_var(var_list = c())
 List of Stics variables names
 }
 \description{
-Change the `varname.n.` or `varname_n` by `varname(n)`
+Change the \code{varname.n.} or \code{varname_n} by \code{varname(n)}
 other names are unchanged (i.e.: varname, varname(n), ...)
 }

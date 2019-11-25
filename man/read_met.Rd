@@ -13,14 +13,14 @@ read_met(dirpath = getwd(), filename = "climat.txt")
 }
 \value{
 A data.frame of the input meteorological variables used as input for the
-        STICS model.
+STICS model.
 }
 \description{
 Read the meteorology input for STICS ("climat.txt")
 }
 \note{
 The time-related variables are summarised into one POSIXct column named
-      code{Date}.
+code{Date}.
 }
 \examples{
 \dontrun{

@@ -18,6 +18,8 @@ A list of strings of options choice values
 Extracting options choices values from an xml file data
 }
 \examples{
+\dontrun{
 get_option_choices(path/to/xml/file)
+}
 
 }

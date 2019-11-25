@@ -4,8 +4,12 @@
 \alias{get_txt_param_value}
 \title{Getting parameters values from Stics text files}
 \usage{
-get_txt_param_value(file_path, param_names = NULL,
-  file_type = "name_value", names_dict = NULL)
+get_txt_param_value(
+  file_path,
+  param_names = NULL,
+  file_type = "name_value",
+  names_dict = NULL
+)
 }
 \arguments{
 \item{file_path}{file path}

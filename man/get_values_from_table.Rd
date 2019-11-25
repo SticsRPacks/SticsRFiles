@@ -4,8 +4,7 @@
 \alias{get_values_from_table}
 \title{Get a list of Stics xml parameters values from a table (data.frame, tibble)}
 \usage{
-get_values_from_table(params_table, param_names = NULL,
-  lines_id = NULL)
+get_values_from_table(params_table, param_names = NULL, lines_id = NULL)
 }
 \arguments{
 \item{params_table}{a table (df, tibble) containing parameters to use}

@@ -4,8 +4,21 @@
 \alias{replace_txt_param_value}
 \title{Replacing value in Stics parameters files}
 \usage{
-replace_txt_param_value(file_path, param_tag, param_value,
-  out_file_path = NULL)
+replace_txt_param_value(
+  file_path,
+  param_tag,
+  param_value,
+  out_file_path = NULL
+)
+}
+\arguments{
+\item{file_path}{The file path}
+
+\item{param_tag}{The parameter name}
+
+\item{param_value}{The parameter values}
+
+\item{out_file_path}{The new file path}
 }
 \description{
 Replacing one or several values in a source file corresponding to a parameter tag

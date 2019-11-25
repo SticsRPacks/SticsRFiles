@@ -4,8 +4,12 @@
 \alias{gen_tec_doc}
 \title{Generate  from a template or modify a Stics tec xmlDocument}
 \usage{
-gen_tec_doc(xml_doc_object = NULL, param_table = NULL,
-  stics_version = "last", dict = NULL)
+gen_tec_doc(
+  xml_doc_object = NULL,
+  param_table = NULL,
+  stics_version = "last",
+  dict = NULL
+)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object (created from an ini file)}
@@ -13,6 +17,8 @@ gen_tec_doc(xml_doc_object = NULL, param_table = NULL,
 \item{param_table}{a table (df, tibble) containing parameters to use}
 
 \item{stics_version}{the stics files version to use}
+
+\item{dict}{List of correspondance between given parameter names and internal names.}
 }
 \value{
 an xmlDocument object or a list of

@@ -1,3 +1,21 @@
+#' Output variables data
+#'
+#' All output variables from STICS, with their units and brief description
+#'
+#' @format A data frame with seven columns:
+#' \describe{
+#'   \item{variable}{Variable name}
+#'   \item{details}{a brief definition of the variable}
+#'   \item{unit}{unit of the variable}
+#'   \item{file}{the file where the variable comes from}
+#'   \item{type}{the data type}
+#'   \item{V1}{ }
+#'   \item{V2}{ }
+#' }
+#'
+"out_data"
+
+
 #' Return all possible STICS outputs for var.mod
 #'
 #' @description Helper function to print the list of all possible variables to set as output

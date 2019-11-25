@@ -9,9 +9,9 @@ get_xml_base_node(file_tag, form_name = NULL, stics_version = "last")
 \arguments{
 \item{file_tag}{file tag among "usms","sols", "tec"}
 
-\item{stics_version}{the stics files version to use}
+\item{form_name}{formalism name}
 
-\item{form_tag}{formalism tag}
+\item{stics_version}{the stics files version to use}
 }
 \description{
 Get an xmlDocument node (set of parameters) from a Stics xml node file template

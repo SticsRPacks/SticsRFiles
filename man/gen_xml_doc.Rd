@@ -4,8 +4,27 @@
 \alias{gen_xml_doc}
 \title{Generate from a template or modify a Stics sols or usms xmlDocument}
 \usage{
-gen_xml_doc(doc_type, xml_doc = NULL, nodes_nb = NULL,
-  nodes_param = NULL, stics_version = "last", overwrite = F)
+gen_xml_doc(
+  doc_type,
+  xml_doc = NULL,
+  nodes_nb = NULL,
+  nodes_param = NULL,
+  stics_version = "last",
+  overwrite = F
+)
+}
+\arguments{
+\item{doc_type}{Document type}
+
+\item{xml_doc}{The xml document}
+
+\item{nodes_nb}{The number of nodes}
+
+\item{nodes_param}{Node parameter}
+
+\item{stics_version}{Version of the STICS model}
+
+\item{overwrite}{Overwrite the document values ?}
 }
 \description{
 Generate from a template or modify a Stics sols or usms xmlDocument

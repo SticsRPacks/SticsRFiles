@@ -4,8 +4,12 @@
 \alias{read_obs_to_list}
 \title{Read STICS observation files (*.obs) and store data into a list}
 \usage{
-read_obs_to_list(dirpath = getwd(), obs_filenames = NULL,
-  usms = NULL, usms_filename = "usms.xml")
+read_obs_to_list(
+  dirpath = getwd(),
+  obs_filenames = NULL,
+  usms = NULL,
+  usms_filename = "usms.xml"
+)
 }
 \arguments{
 \item{dirpath}{Directory path}
@@ -24,10 +28,10 @@ Read STICS observation files for sole crops and store data into a list
 }
 \details{
 If \code{filename} is not specified (or equal to \code{NULL}), the
-         function read all obs files in the \code{dirpath} folder. If there are no .obs files,
-         the function returns \code{NULL}
-         If usms names are not provided they are supposed to have the same name as the obs file.
-         If usms_filename is not provided, existence of usms are checked in the usms.xml file.
+function read all obs files in the \code{dirpath} folder. If there are no .obs files,
+the function returns \code{NULL}
+If usms names are not provided they are supposed to have the same name as the obs file.
+If usms_filename is not provided, existence of usms are checked in the usms.xml file.
 }
 \examples{
 path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")

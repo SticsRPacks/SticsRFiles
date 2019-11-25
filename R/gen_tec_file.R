@@ -4,6 +4,7 @@
 #' @param tec_in_file file path for an input tec xml file
 #' @param out_path path for the ini output file
 #' @param stics_version the stics files version to use
+#' @param dict List of correspondance between given parameter names and internal names.
 #'
 #' @return an invisible xmlDocument object or a list of
 #'

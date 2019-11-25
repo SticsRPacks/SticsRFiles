@@ -18,5 +18,8 @@ A list with usms names
 Extracting a usm names list from an usms.xml file
 }
 \examples{
-usms_list <- get_usms_list("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example")
+\dontrun{
+usms_list <- get_usms_list("path/to/USM")
+}
+
 }

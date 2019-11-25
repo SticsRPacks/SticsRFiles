@@ -25,15 +25,13 @@ set_general(filepath = "tempopar.sti", param, value, add = F)
 
 set_tmp(filepath = "tempoparv6.sti", param, value, add = F)
 
-set_plant(filepath = "ficplt1.txt", param, value, add = F,
-  variety = NULL)
+set_plant(filepath = "ficplt1.txt", param, value, add = F, variety = NULL)
 
 set_tec(filepath = "fictec1.txt", param, value, add = F)
 
 set_soil(filepath = "param.sol", param, value)
 
-set_out_var(filepath = "var.mod", vars = c("lai(n)", "masec(n)"),
-  add = F)
+set_out_var(filepath = "var.mod", vars = c("lai(n)", "masec(n)"), add = F)
 }
 \arguments{
 \item{dirpath}{USM directory path}
@@ -54,18 +52,18 @@ set_out_var(filepath = "var.mod", vars = c("lai(n)", "masec(n)"),
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input
-             file. Generally used after calling \code{\link{import_usm}}.
+file.
 }
 \details{
 The \code{plant} parameter can be either equal to \code{1}, \code{2} for
-         the associated plant in the case of intercrop, or \code{c(1,2)} for both
-         Princiapl and associated plants.
-         \code{\link{all_out_var}} is a helper function that returns all possible
-         output variables.
+the associated plant in the case of intercrop, or \code{c(1,2)} for both
+Princiapl and associated plants.
+\code{\link{all_out_var}} is a helper function that returns all possible
+output variables.
 }
 \note{
 \code{set_out_var} is not used by \code{set_param}. To replace the output
-      variables required from STICS, please directly call \code{set_out_var}.
+variables required from STICS, please directly call \code{set_out_var}.
 }
 \examples{
 \dontrun{
@@ -76,7 +74,4 @@ set_param(dirpath = "stics_usm/usm_1", param= "interrang", value= 0.01)
 
 }
 
-}
-\seealso{
-\code{\link{import_usm}}.
 }

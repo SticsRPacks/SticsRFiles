@@ -1,20 +1,22 @@
+#' Get all stics XML versions
+#'
+#' @param last Boolean. Is only the last version needed ?
+#'
+#' @return All the STICS XML file versions available
 #' @export
-get_xml_stics_versions_tags <- function(version = "") {
+#'
+get_xml_stics_versions_tags <- function(last= FALSE) {
 
   tmpl_file <- paste0("extdata/xml/templates/")
   versions_tags <- list.dirs(system.file(tmpl_file, package = "SticsRFiles"), full.names = F)
 
   versions_tags <- versions_tags[! versions_tags == "" ]
 
-  # if ( ! nargs() ) {
-  #   return(versions_tags)
-  # }
-
   num_versions <- as.numeric(gsub(pattern = "^[V]","",versions_tags))
 
   last_version <- versions_tags[ num_versions == max(num_versions) ]
 
-  if ( version == "last") {
+  if (last) {
     return(last_version)
   }
 

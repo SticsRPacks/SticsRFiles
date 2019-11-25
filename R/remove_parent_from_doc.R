@@ -1,3 +1,14 @@
+
+#' Remove parent node
+#'
+#' @description Remove a parent node from an XML file.
+#'
+#' @param xml_doc The XML document
+#' @param param_name The parent name
+#' @param parent_path The parent path
+#' @param remove_parent Boolean. Do we remove the parent node?
+#' @param nodes_ids The requested node IDs.
+#'
 #' @export
 remove_parent_from_doc <- function( xml_doc, param_name ,
                                   parent_path = NULL,

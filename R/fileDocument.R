@@ -10,9 +10,6 @@
 #' @slot con A file connexion
 #' @slot content A file content
 #'
-#' @export
-#' @import methods
-#'
 setClass("fileDocument",
          representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY"),
          prototype(type = character(length = 0), name = character(length = 0), dir = character(length = 0), ext = character(length = 0),
@@ -31,17 +28,15 @@ setClass("fileDocument",
 # })
 
 # constructor
-#' @export
 setMethod("filedocument", signature(file = "character", type = "character"), function(file = character(length = 0), type = character(length = 0)) {
     #print(file)
-    return(new("fileDocument", file, type))
+    return(methods::new("fileDocument", file, type))
 })
 
 # file only
-#' @export
 setMethod("filedocument", signature(file = "character", type = "missing"), function(file = character(length = 0), type = character(length = 0)) {
     #print(file)
-    return(new("fileDocument", file))
+    return(methods::new("fileDocument", file))
 })
 
 
@@ -168,7 +163,7 @@ setMethod("move", signature(docObj = "fileDocument"), function(docObj, toFile) {
         file.rename(getPath(docObj), toFile)
 
         # docObj@file <- toFile
-        docObj <- new(class(docObj)[[1]], toFile)
+        docObj <- methods::new(class(docObj)[[1]], toFile)
     } else {
       setName(docObj)<-toFile
     }
@@ -272,3 +267,6 @@ setMethod("calcType", signature(docObj = "ANY"), function(docObj) {
   if (dir.exists(name)) type="dir"
   return(type)
 })
+
+
+

@@ -2,9 +2,6 @@
 
 library(SticsOnR)
 library(readxl)
-library(Classes)
-
-
 
 out_dir <- "/path/to/dir/"     # or something like C://path//to//dir" for Windows
 xl_dir <- "/path/to/xl/dir"    # or something like C://path//to//xl//dir" for Windows

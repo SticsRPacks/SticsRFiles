@@ -21,6 +21,7 @@ Extracting parameters min and/or max bounds for a parameter
 or a vector of parameters from a file or a vector of xml files.
 }
 \examples{
+\dontrun{
 library(SticsRFiles)
 xml_file <- "path/to/xmlfile"
 xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
@@ -31,5 +32,6 @@ param_bounds <- get_files_param_bounds(xml_file, c("param1", "param2"), "max")
 param_bounds <- get_files_param_bounds(xml_file, c("param1", "param2"))
 
 param_bounds <- get_files_param_bounds(xml_files_list, "param", "min")
+}
 
 }

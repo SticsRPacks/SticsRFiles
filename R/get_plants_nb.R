@@ -6,18 +6,13 @@
 #' @param usms_list Usms selection list inside usms from usms.xml file (optional)
 #'
 #' @examples
-#' get_plants_nb("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example")
-#' get_plants_nb("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example","ble")
-#' get_plants_nb("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example",c("ble","mais"))
+#' \dontrun{
+#' get_plants_nb("path/to/USM")
+#' get_plants_nb("path/to/USM","ble")
+#' get_plants_nb("path/to/USM",c("ble","mais"))
+#' }
 #'
 #' @export
-#'
-# ----------------------------------------------------------------------
-#  MODIFICATIONS (last commit)
-#  $Date: 2019-07-28 19:37:15 +0200 (dim. 28 juil. 2019) $
-#  $Author: plecharpent $
-#  $Revision: 1554 $
-# ----------------------------------------------------------------------
 get_plants_nb <- function(usm_xml_path,usms_list=c()){
 
   xml_usms=xmldocument(usm_xml_path)

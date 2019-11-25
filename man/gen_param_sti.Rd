@@ -20,6 +20,8 @@ Generating a parameters forcing file from parameters names
 and parameters values vectors
 }
 \examples{
+\dontrun{
 gen_param_sti(".", c("par1","par2"), c(1,2))
 gen_param_sti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
+}
 }

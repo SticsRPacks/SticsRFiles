@@ -7,9 +7,9 @@
 get_script(in_name = NULL, dest_dir = getwd())
 }
 \arguments{
-\item{dest_dir}{directory path where to copy the script}
+\item{in_name}{name of the script or partial match, or "all" for getting all scripts}
 
-\item{script_name}{name of the script or partial match, or "all" for getting all scripts}
+\item{dest_dir}{directory path where to copy the script}
 }
 \value{
 logical value TRUE if the file copy is successful, FALSE otherwise

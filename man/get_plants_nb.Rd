@@ -15,8 +15,10 @@ get_plants_nb(usm_xml_path, usms_list = c())
 Extracting plant number from usms.xml file data
 }
 \examples{
-get_plants_nb("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example")
-get_plants_nb("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example","ble")
-get_plants_nb("/home/plecharpent/Work/JavaSTICS-v131-stics-v841/example",c("ble","mais"))
+\dontrun{
+get_plants_nb("path/to/USM")
+get_plants_nb("path/to/USM","ble")
+get_plants_nb("path/to/USM",c("ble","mais"))
+}
 
 }
