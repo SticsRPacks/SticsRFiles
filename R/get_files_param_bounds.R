@@ -26,6 +26,7 @@
 #' @export
 get_files_param_bounds <- function(xml_file, param_name, bounds_name = NULL) {
 
+
   if (length(xml_file) > 1 ) {
 
     param_bounds <- lapply(xml_file,

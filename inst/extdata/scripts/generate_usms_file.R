@@ -2,6 +2,7 @@
 
 library(SticsOnR)
 library(readxl)
+library(SticsRFiles)
 
 out_file <- "/path/to/file/usms.xml" # or something like C://path//to//file//usms.xml" for Windows
 xl_dir <- "/path/to/xl/dir"          # or something like C://path//to//xl//dir" for Windows

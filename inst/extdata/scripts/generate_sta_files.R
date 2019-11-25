@@ -2,6 +2,7 @@
 
 library(SticsOnR)
 library(readxl)
+library(SticsRFiles)
 
 out_dir <- "/path/to/dir/"     # or something like C://path//to//dir" for Windows
 xl_dir <- "/path/to/xl/dir"    # or something like C://path//to//xl//dir" for Windows
@@ -22,4 +23,3 @@ gen_sta_file(param_table = xl_param, out_path = out_dir)
 in_file <- "/path/to/file_sta.xml"
 
 gen_ini_file(sta_in_file = in_file ,param_table = xl_param, out_path = out_dir)
-
