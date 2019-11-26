@@ -3,6 +3,7 @@
 #'
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param stics_version the stics files version to use
+#' @param dict List of correspondance between given parameter names and internal names.
 #'
 #' @return an xmlDocument object or a list of
 #'

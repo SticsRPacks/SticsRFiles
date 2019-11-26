@@ -4,8 +4,13 @@
 \alias{get_daily_results}
 \title{Loading a daily Stics file}
 \usage{
-get_daily_results(workspace, usm_name, var_list = NULL,
-  doy_list = NULL, dates_list = NULL)
+get_daily_results(
+  workspace,
+  usm_name,
+  var_list = NULL,
+  doy_list = NULL,
+  dates_list = NULL
+)
 }
 \arguments{
 \item{workspace}{Stics or JavaStics workspace path}

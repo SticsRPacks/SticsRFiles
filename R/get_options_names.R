@@ -8,7 +8,9 @@ get_options_names <- function(xml_file_path){
   #' @return A vector of strings of options parameter names
   #'
   #' @examples
+  #' \dontrun{
   #' get_options_names(path/to/xml/file)
+  #' }
   #'
   #' @export
   #'

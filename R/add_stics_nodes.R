@@ -1,3 +1,13 @@
+#' Add stics node
+#'
+#' @param xml_doc XML document
+#' @param file_tag File tag
+#' @param nodes_nb Nodes numbers
+#' @param formalism_name Name of the formalism
+#' @param stics_version The version of STICS (eg "V9.0")
+#'
+#' @export
+#'
 add_stics_nodes <- function(xml_doc, file_tag, nodes_nb = 1,formalism_name = NULL,
                             stics_version = "last" ) {
   #' @export

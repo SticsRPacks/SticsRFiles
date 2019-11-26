@@ -1,8 +1,15 @@
+#' @title Replacing value in Stics parameters files
+#'
+#' @description Replacing one or several values in a source file corresponding to a parameter tag
+#' for generating one (in place or not) or several files
+#'
+#' @param file_path The file path
+#' @param param_tag The parameter name
+#' @param param_value The parameter values
+#' @param out_file_path The new file path
+#'
+#' @export
 replace_txt_param_value <- function(file_path,param_tag,param_value,out_file_path=NULL){
-  #' @title Replacing value in Stics parameters files
-  #' @description Replacing one or several values in a source file corresponding to a parameter tag
-  #' for generating one (in place or not) or several files
-  #' @export
 
   # default values for redirecting output to another file, or other files
   # if several values and several output files !

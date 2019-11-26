@@ -9,7 +9,9 @@ get_options_choices <- function(xml_file_path, options_names=NULL){
   #' @return A list of strings of options choice values
   #'
   #' @examples
+  #' \dontrun{
   #' get_option_choices(path/to/xml/file)
+  #' }
   #'
   #' @export
   #'

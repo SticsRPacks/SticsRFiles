@@ -4,8 +4,13 @@
 \alias{gen_sta_file}
 \title{Generate from a template  or an input file a Stics sta xml file}
 \usage{
-gen_sta_file(sta_out_file = NULL, param_table = NULL,
-  sta_in_file = NULL, out_path = getwd(), stics_version = "last")
+gen_sta_file(
+  sta_out_file = NULL,
+  param_table = NULL,
+  sta_in_file = NULL,
+  out_path = getwd(),
+  stics_version = "last"
+)
 }
 \arguments{
 \item{sta_out_file}{file name of the output sta xml file}

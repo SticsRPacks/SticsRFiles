@@ -4,8 +4,7 @@
 \alias{get_params_from_doc_attr}
 \title{Get a list of Stics xml parameters names from nodes attributes in an xmlDocument}
 \usage{
-get_params_from_doc_attr(xml_doc_object, type_name = NULL,
-  unique_val = TRUE)
+get_params_from_doc_attr(xml_doc_object, type_name = NULL, unique_val = TRUE)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object (created from an xml file)}

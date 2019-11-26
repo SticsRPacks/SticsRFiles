@@ -4,8 +4,13 @@
 \alias{gen_sols_file}
 \title{Generate from a template a Stics sols xml file}
 \usage{
-gen_sols_file(sols_out_file, sols_nb = NULL, sols_param = NULL,
-  sols_in_file = NULL, stics_version = "last")
+gen_sols_file(
+  sols_out_file,
+  sols_nb = NULL,
+  sols_param = NULL,
+  sols_in_file = NULL,
+  stics_version = "last"
+)
 }
 \arguments{
 \item{sols_out_file}{file path of the output sols xml file}

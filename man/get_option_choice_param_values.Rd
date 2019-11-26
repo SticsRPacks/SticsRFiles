@@ -4,8 +4,11 @@
 \alias{get_option_choice_param_values}
 \title{Getting parameter values from an xml parameter file for an option choice}
 \usage{
-get_option_choice_param_values(xml_file_path, option_param_name,
-  choice_name_or_code)
+get_option_choice_param_values(
+  xml_file_path,
+  option_param_name,
+  choice_name_or_code
+)
 }
 \arguments{
 \item{xml_file_path}{path of xml parameter file}
@@ -23,6 +26,7 @@ Extracting parameter values from an xml file data, correponding to parameters
 defined in a option choice node
 }
 \examples{
+\dontrun{
 get_option_choice_param_values(path/to/xml/file,"codetemp","yes")
-
+}
 }

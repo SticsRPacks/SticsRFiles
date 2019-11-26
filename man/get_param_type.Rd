@@ -4,8 +4,13 @@
 \alias{get_param_type}
 \title{Get a Stics xml parameter type and xpath from a request in an xmlDocument}
 \usage{
-get_param_type(xml_doc, param_name, parent_name = NULL,
-  parent_sel_attr = NULL, id = NULL)
+get_param_type(
+  xml_doc,
+  param_name,
+  parent_name = NULL,
+  parent_sel_attr = NULL,
+  id = NULL
+)
 }
 \arguments{
 \item{xml_doc}{an xmlDocument object (created from an ini file)}

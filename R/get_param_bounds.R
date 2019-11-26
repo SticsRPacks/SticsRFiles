@@ -10,6 +10,7 @@
 #' @return A list of parameters bounds values
 #'
 #' @examples
+#' \dontrun{
 #' library(SticsRFiles)
 #' xml_doc <- xmldocument("path/to/xmlfile")
 #' param_bounds <- get_param_bounds(xml_doc, "param", "min")
@@ -17,10 +18,11 @@
 #' param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"), "max")
 #'
 #' param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"))
-#'
+#' }
 #' @export
 #'
 get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
+
   library(SticsRFiles)
 
   def_names <- c("min","max")
@@ -47,6 +49,7 @@ get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
 
   bounds_values <- lapply(bounds_name, function(x)
     SticsRFiles::getAttrsValues(xml_doc,param_type$xpath,x))
+
 
 
   return(as.numeric(unlist(bounds_values)))

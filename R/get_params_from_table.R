@@ -18,10 +18,7 @@ get_params_from_table <- function(params_table,
                                   dict = NULL) {
 
   # TODO: doing a merge with get_values_from_table
-  library(stringr)
-  library(dplyr)
-
-
+  .= NULL
 
   if (is.null(dict)) {
     dict <- list(julapI="julapI_or_sum_upvt",doseI="amount",

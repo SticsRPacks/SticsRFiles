@@ -10,6 +10,7 @@
 #' @return A list of parameters bounds values
 #'
 #' @examples
+#' \dontrun{
 #' library(SticsRFiles)
 #' xml_file <- "path/to/xmlfile"
 #' xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
@@ -20,9 +21,11 @@
 #' param_bounds <- get_files_param_bounds(xml_file, c("param1", "param2"))
 #'
 #' param_bounds <- get_files_param_bounds(xml_files_list, "param", "min")
+#' }
 #'
 #' @export
 get_files_param_bounds <- function(xml_file, param_name, bounds_name = NULL) {
+
   library("SticsRFiles")
 
 

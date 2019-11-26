@@ -8,19 +8,9 @@
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
 #' @param ids elements indices (optional)
-#'
-#' @examples
-#'
+#' @param show_xpath Print the xpath
 #'
 #' @export
-#'
-# ----------------------------------------------------------------------
-#  MODIFICATIONS (last commit)
-#  $Date: 2019-07-29 00:53:21 +0200 (lun. 29 juil. 2019) $
-#  $Author: plecharpent $
-#  $Revision: 1556 $
-# ----------------------------------------------------------------------
-
 set_param_value <- function(xml_doc_object,param_name,param_value,
                             parent_name= NULL,
                             parent_sel_attr = NULL, ids=NULL,

@@ -21,11 +21,14 @@ read_general(filepath = "tempopar.sti")
 
 read_tmp(filepath = "tempoparv6.sti")
 
-read_plant(filepath = "ficplt1.txt", variety = NULL,
-  max_variety = 30)
+read_plant(filepath = "ficplt1.txt", variety = NULL, max_variety = 30)
 
-read_tec(filepath = "fictec1.txt", several_fert = T,
-  several_thin = T, is_pasture = F)
+read_tec(
+  filepath = "fictec1.txt",
+  several_fert = T,
+  several_thin = T,
+  is_pasture = F
+)
 
 read_soil(filepath = "param.sol")
 
@@ -59,23 +62,23 @@ compatibility)}
 }
 \value{
 A list of all parameters:
-        \item{ini}{Initialization parameters}
-        \item{general}{General parameters}
-        \item{tec}{Technical parameters}
-        \item{plant}{Plant parameters}
-        \item{soil}{Soil parameters}
-        \item{station}{Station parameters}
-        \item{output}{The output variables the user require from STICS}
+\item{ini}{Initialization parameters}
+\item{general}{General parameters}
+\item{tec}{Technical parameters}
+\item{plant}{Plant parameters}
+\item{soil}{Soil parameters}
+\item{station}{Station parameters}
+\item{output}{The output variables the user require from STICS}
 The function can return several sub-lists for each \code{plant} and \code{tec}
- if mixed crops, numbered by usage
+if mixed crops, numbered by usage
 }
 \description{
 Read STICS model input parameters from a pre-existing STICS input
-             file. Generally used after calling \code{\link{set_usm}}.
+file. Generally used after calling \code{\link{set_usm}}.
 }
 \note{
 Users generally only use \code{read_param} that identify parameters for
-      other functions and call them.
+other functions and call them.
 }
 \examples{
 \dontrun{

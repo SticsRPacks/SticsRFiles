@@ -4,8 +4,13 @@
 \alias{gen_usms_file}
 \title{Generate from a template a Stics usms xml file}
 \usage{
-gen_usms_file(usms_out_file, usms_nb = NULL, usms_param = NULL,
-  usms_in_file = NULL, stics_version = "last")
+gen_usms_file(
+  usms_out_file,
+  usms_nb = NULL,
+  usms_param = NULL,
+  usms_in_file = NULL,
+  stics_version = "last"
+)
 }
 \arguments{
 \item{usms_out_file}{file name of the output usms xml file}

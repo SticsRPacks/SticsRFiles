@@ -4,8 +4,12 @@
 \alias{gen_sols_doc}
 \title{Generate from a template a Stics sols xmlDocument}
 \usage{
-gen_sols_doc(xml_doc_object = NULL, sols_nb = NULL,
-  sols_param = NULL, stics_version = "last")
+gen_sols_doc(
+  xml_doc_object = NULL,
+  sols_nb = NULL,
+  sols_param = NULL,
+  stics_version = "last"
+)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object (created from a sols.xml file)}

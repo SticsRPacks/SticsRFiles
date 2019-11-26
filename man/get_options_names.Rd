@@ -16,6 +16,8 @@ A vector of strings of options parameter names
 Extracting options parameter name from an xml file data
 }
 \examples{
+\dontrun{
 get_options_names(path/to/xml/file)
+}
 
 }

@@ -1,4 +1,12 @@
 #' @title Generate from a template or modify a Stics sols or usms xmlDocument
+
+#' @param doc_type Document type
+#' @param xml_doc  The xml document
+#' @param nodes_nb The number of nodes
+#' @param nodes_param Node parameter
+#' @param stics_version Version of the STICS model
+#' @param overwrite  Overwrite the document values ?
+#'
 #' @export
 gen_xml_doc <- function(doc_type, xml_doc = NULL,
                         nodes_nb = NULL, nodes_param = NULL,

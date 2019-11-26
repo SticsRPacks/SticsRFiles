@@ -3,6 +3,7 @@
 #' is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
 #' @param xml_file File path of the input xml file
 #' @param java_dir Root directory of the JavaStics installation
+#' @param plt_num The number of plants (sole crop: 1 ; mixed: 2)
 #' @param out_dir Directory of the generated file
 #' @param out_file Name of the output file
 #'

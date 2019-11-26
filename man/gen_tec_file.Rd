@@ -4,9 +4,14 @@
 \alias{gen_tec_file}
 \title{Generate from a template  or an input file a Stics tec xml file}
 \usage{
-gen_tec_file(tec_out_file = NULL, param_table = NULL,
-  tec_in_file = NULL, out_path = getwd(), stics_version = "last",
-  dict = NULL)
+gen_tec_file(
+  tec_out_file = NULL,
+  param_table = NULL,
+  tec_in_file = NULL,
+  out_path = getwd(),
+  stics_version = "last",
+  dict = NULL
+)
 }
 \arguments{
 \item{tec_out_file}{file name of the output tec xml file}
@@ -18,6 +23,8 @@ gen_tec_file(tec_out_file = NULL, param_table = NULL,
 \item{out_path}{path for the ini output file}
 
 \item{stics_version}{the stics files version to use}
+
+\item{dict}{List of correspondance between given parameter names and internal names.}
 }
 \value{
 an invisible xmlDocument object or a list of

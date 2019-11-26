@@ -4,13 +4,14 @@
 \alias{stics_xml2txt}
 \title{Transforming a Stics xml file into a text file}
 \usage{
-stics_xml2txt(xml_file, java_dir, plt_num = 1, out_dir = NULL,
-  out_file = NULL)
+stics_xml2txt(xml_file, java_dir, plt_num = 1, out_dir = NULL, out_file = NULL)
 }
 \arguments{
 \item{xml_file}{File path of the input xml file}
 
 \item{java_dir}{Root directory of the JavaStics installation}
+
+\item{plt_num}{The number of plants (sole crop: 1 ; mixed: 2)}
 
 \item{out_dir}{Directory of the generated file}
 

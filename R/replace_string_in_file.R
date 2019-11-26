@@ -1,7 +1,14 @@
+#' Replacing a string in a file
+#'
+#' @description Replacing occurrences of a string by another one, in place or creating a new file
+#'
+#' @param file_path The path to the file
+#' @param target_string The target string to replace
+#' @param replace_string The replacing string
+#' @param new_file_path The newly-created file path
+#'
+#' @export
 replace_string_in_file <- function(file_path,target_string,replace_string,new_file_path=NULL) {
-  #' @title Replacing a string in a file
-  #' @description Replacing occurrences of a string by another one, in place or creating a new file
-  #' @export
 
     if (!file.exists(file_path)){
     warning(paste(file_path,"doesn't exist, aborting !"))

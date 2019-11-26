@@ -20,7 +20,7 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
   node_name <- xmlName(xml_node)
 
   # getting only one usm node
-  if ( node_name == "usms" && unique_val ) {
+  if ( node_name == "usms" ) {
     xml_node <- xmlChildren(xmlRoot(xml_node))[[1]]
   }
 

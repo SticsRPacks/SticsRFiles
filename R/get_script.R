@@ -1,5 +1,5 @@
 #' @title Get script(s) example(s) for generating xml Stics files from tables (data.frame, tibble)
-#' @param script_name name of the script or partial match, or "all" for getting all scripts
+#' @param in_name name of the script or partial match, or "all" for getting all scripts
 #' @param dest_dir directory path where to copy the script
 #'
 #' @return logical value TRUE if the file copy is successful, FALSE otherwise

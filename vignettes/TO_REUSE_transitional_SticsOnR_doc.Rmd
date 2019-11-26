@@ -130,7 +130,7 @@ get_inputs_example(dest_dir = "/home/plecharpent/Work/workspace")
 * Getting example scripts for producing ini, sols, sta, tec and usms from the package
   * Getting scripts files list     
 ```{r}
-library(SticsOnR)
+library(SticsRFiles)
 get_script()
 
 ```      
@@ -170,7 +170,7 @@ get_script("all", dest_dir = "/path/to/dir")
   
 ```{r echo=FALSE,warning=FALSE, message=FALSE}
 library(knitr)
-library(SticsOnR)
+library(SticsRFiles)
 dict <- get_params_from_table()
 dt <- data.frame(shortcuts=names(dict), real_name=unlist(dict,use.names = FALSE))
 

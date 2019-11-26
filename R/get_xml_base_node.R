@@ -1,7 +1,6 @@
 #' @title Get an xmlDocument node (set of parameters) from a Stics xml node file template
 #' @param file_tag file tag among "usms","sols", "tec"
-#'
-#' @param form_tag formalism tag
+#' @param form_name formalism name
 #' @param stics_version the stics files version to use
 #'
 #' @export

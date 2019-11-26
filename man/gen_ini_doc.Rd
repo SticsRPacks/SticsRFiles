@@ -4,8 +4,13 @@
 \alias{gen_ini_doc}
 \title{Generate  from a template or modify a Stics ini xmlDocument}
 \usage{
-gen_ini_doc(xml_doc = NULL, param_table = NULL, crop_tag = "crop",
-  params_desc = NULL, stics_version = "last")
+gen_ini_doc(
+  xml_doc = NULL,
+  param_table = NULL,
+  crop_tag = "crop",
+  params_desc = NULL,
+  stics_version = "last"
+)
 }
 \arguments{
 \item{xml_doc}{an xmlDocument object (created from an ini file)}

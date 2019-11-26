@@ -9,6 +9,7 @@
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
 #' @param ids elements indices (optional)
+#' @param show_xpath Print the xpath
 #'
 #' @return a numeric vector values of parameter or a list of
 #'

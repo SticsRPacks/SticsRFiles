@@ -4,8 +4,12 @@
 \alias{gen_usms_doc}
 \title{Generate  from a template or modify a Stics usms xmlDocument}
 \usage{
-gen_usms_doc(xml_doc_object = NULL, usms_nb = NULL,
-  usms_param = NULL, stics_version = "last")
+gen_usms_doc(
+  xml_doc_object = NULL,
+  usms_nb = NULL,
+  usms_param = NULL,
+  stics_version = "last"
+)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object (created from an ini file)}

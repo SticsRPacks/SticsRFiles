@@ -9,14 +9,16 @@ gen_var_mod(workspace, var_names, file_name = "var.mod")
 \arguments{
 \item{workspace}{Stics or JavaStics workspace path}
 
-\item{file_name}{file name to generate (default value: var.mod)}
+\item{var_names}{vector of variables names}
 
-\item{par_names}{vector of variables names}
+\item{file_name}{file name to generate (default value: var.mod)}
 }
 \description{
 Generating a daily variable list file from variables names
 }
 \examples{
-gen_var_mod(".", c("var1","var2"))
-gen_var_mod("/path/to/stics/workspace", c("var1","var2"))
+\dontrun{
+ gen_var_mod(".", c("var1","var2"))
+ gen_var_mod("/path/to/stics/workspace", c("var1","var2"))
+}
 }

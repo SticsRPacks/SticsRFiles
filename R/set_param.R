@@ -1,7 +1,7 @@
 #' Set (replace) STICS input file parameters
 #'
 #' @description Replace or set an input parameter from a pre-existing STICS input
-#'              file. Generally used after calling \code{\link{import_usm}}.
+#'              file.
 #'
 #' @param dirpath  USM directory path
 #' @param filepath Path to the parameter file
@@ -21,7 +21,6 @@
 #' @note \code{set_out_var} is not used by \code{set_param}. To replace the output
 #'       variables required from STICS, please directly call \code{set_out_var}.
 #'
-#' @seealso \code{\link{import_usm}}.
 #'
 #' @importFrom magrittr "%>%"
 #'

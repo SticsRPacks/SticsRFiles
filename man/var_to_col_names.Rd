@@ -14,6 +14,6 @@ var_to_col_names(var_list = c())
 List of formatted column names
 }
 \description{
-Change the `varname(n)` or `varname.n.` to `varname_n`
+Change the \code{varname(n)} or \code{varname.n.} to \code{varname_n}
 other names are unchanged (i.e.: varname, varname_n, ...)
 }

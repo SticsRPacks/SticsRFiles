@@ -4,9 +4,14 @@
 \alias{gen_ini_file}
 \title{Generate from a template or an input file a Stics ini xml file}
 \usage{
-gen_ini_file(ini_out_file = NULL, param_table = NULL,
-  ini_in_file = NULL, out_path = getwd(), crop_tag = "crop",
-  stics_version = "last")
+gen_ini_file(
+  ini_out_file = NULL,
+  param_table = NULL,
+  ini_in_file = NULL,
+  out_path = getwd(),
+  crop_tag = "crop",
+  stics_version = "last"
+)
 }
 \arguments{
 \item{ini_out_file}{file name of the output ini xml file}

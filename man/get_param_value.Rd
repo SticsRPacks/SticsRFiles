@@ -4,8 +4,14 @@
 \alias{get_param_value}
 \title{Get a set of a (or a list of) Stics xml parameter(s) values from a request}
 \usage{
-get_param_value(xml_doc_object, param_name, parent_name = NULL,
-  parent_sel_attr = NULL, ids = NULL, show_xpath = FALSE)
+get_param_value(
+  xml_doc_object,
+  param_name,
+  parent_name = NULL,
+  parent_sel_attr = NULL,
+  ids = NULL,
+  show_xpath = FALSE
+)
 }
 \arguments{
 \item{xml_doc_object}{an xmlDocument object}
@@ -17,6 +23,8 @@ get_param_value(xml_doc_object, param_name, parent_name = NULL,
 \item{parent_sel_attr}{parent attribute value (optional)}
 
 \item{ids}{elements indices (optional)}
+
+\item{show_xpath}{Print the xpath}
 }
 \value{
 a numeric vector values of parameter or a list of

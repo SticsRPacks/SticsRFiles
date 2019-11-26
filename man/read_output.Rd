@@ -16,18 +16,18 @@ If \code{NULL}, the function tries to read it using \code{\link{read_usm}}}
 }
 \value{
 A data.frame (sole crop) or a list of two data.frames (mixed crops) of
-        the STICS outputs.
+the STICS outputs.
 }
 \description{
 Read STICS model outputs for sole or mixed crops.
 }
 \details{
 If \code{mixed} is not specified (or equal to \code{NULL}), the function try to
-         read the number of species from the input files.
+read the number of species from the input files.
 }
 \note{
 The STICS outputs are controled from the \code{var.mod} file.
-      \code{\link{set_out_var}} can be used to set the output variables.
+\code{\link{set_out_var}} can be used to set the output variables.
 }
 \examples{
 \dontrun{

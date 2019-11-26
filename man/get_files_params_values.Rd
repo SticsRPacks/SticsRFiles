@@ -4,14 +4,22 @@
 \alias{get_files_params_values}
 \title{Getting parameter values from xml files}
 \usage{
-get_files_params_values(xml_files, param_names_list, parent_name = NULL,
-  parent_sel_attr = NULL)
+get_files_params_values(
+  xml_files,
+  param_names_list,
+  parent_name = NULL,
+  parent_sel_attr = NULL
+)
 }
 \arguments{
 \item{xml_files}{an xml file, or a vector/list of}
 
 \item{param_names_list}{parameter names list (i.e.: option parameter name, parameter name,
 other kinds in ini and some tec parameters not taken into account for the moment)}
+
+\item{parent_name}{parent node name or attribute name (optional)}
+
+\item{parent_sel_attr}{parent attribute value (optional)}
 }
 \value{
 A list of parameter list length, with parameters values for each xml file
@@ -21,9 +29,11 @@ Extracting parameter values for a list of xmlDocument and
 of parameters
 }
 \examples{
+\dontrun{
 get_files_params_values(path/to/xml/file,"codetemp")
 get_files_params_values(c(path/to/xml/file1,path/to/xml/file2),"codetemp")
 get_files_params_values(path/to/xml/file,c("codetemp","codegdh"))
 get_files_params_values(c(path/to/xml/file1,path/to/xml/file2),c("codetemp","codegdh"))
+}
 
 }

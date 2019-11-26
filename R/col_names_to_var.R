@@ -6,7 +6,7 @@
 #' @export
 #'
 col_names_to_var <- function(var_list=c()) {
-
+  .= NULL
 
   # for varname_n
   var_list <-  gsub("_","(",var_list)
