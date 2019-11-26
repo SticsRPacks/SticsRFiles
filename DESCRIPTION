@@ -10,7 +10,9 @@ Authors@R:
               family = "Vezy",
               role = c("aut"),
               email = "remi.vezy@cirad.fr",
-              comment = c(ORCID = "0000-0002-0808-1461"))
+              comment = c(ORCID = "0000-0002-0808-1461")),
+      person(given = "SticsRPacks",
+              role = c("aut","cph"))
            )
 Description: The goal of SticsRFiles is to perform manipulations of the Stics model files.
 URL: https://github.com/SticsRPacks/SticsRFiles
@@ -39,7 +41,8 @@ Imports:
     xslt,
     dplyr
 Suggests:
-    knitr
+    knitr,
+    covr
 Collate: 
     'Del_spe_col.R'
     'add_node_to_doc.R'
@@ -86,7 +89,6 @@ Collate:
     'get_params_types.R'
     'get_plants_nb.R'
     'get_script.R'
-    'get_txt_param_value.R'
     'get_usms_list.R'
     'get_values_from_table.R'
     'get_xml_base_doc.R'
