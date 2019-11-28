@@ -3725,7 +3725,7 @@
             <colonne nom="infil"/>
             <colonne nom="epd"/>
         </tableau_entete>
-        <tableau nb_colonnes="8" nom="horizon 1">
+        <tableau nb_colonnes="8" nom="layer 1">
             <colonne nom="epc">10</colonne>
             <colonne nom="HCCF">20</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3735,7 +3735,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 2">
+        <tableau nb_colonnes="8" nom="layer 2">
             <colonne nom="epc">20</colonne>
             <colonne nom="HCCF">20</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3745,7 +3745,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 3">
+        <tableau nb_colonnes="8" nom="layer 3">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">17.0</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3755,7 +3755,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 4">
+        <tableau nb_colonnes="8" nom="layer 4">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">17.0</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3765,7 +3765,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 5">
+        <tableau nb_colonnes="8" nom="layer 5">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">17</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3843,7 +3843,7 @@
             <colonne nom="infil"/>
             <colonne nom="epd"/>
         </tableau_entete>
-        <tableau nb_colonnes="8" nom="horizon 1">
+        <tableau nb_colonnes="8" nom="layer 1">
             <colonne nom="epc">10</colonne>
             <colonne nom="HCCF">21.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3853,7 +3853,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 2">
+        <tableau nb_colonnes="8" nom="layer 2">
             <colonne nom="epc">20</colonne>
             <colonne nom="HCCF">21.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3863,7 +3863,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 3">
+        <tableau nb_colonnes="8" nom="layer 3">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">19.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3873,7 +3873,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 4">
+        <tableau nb_colonnes="8" nom="layer 4">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">19.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3883,7 +3883,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 5">
+        <tableau nb_colonnes="8" nom="layer 5">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">21.5</colonne>
             <colonne nom="HMINF">12</colonne>
