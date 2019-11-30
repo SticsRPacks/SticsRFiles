@@ -10,3 +10,7 @@ man/figures
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
+
+# temporary
+vignettes
+
