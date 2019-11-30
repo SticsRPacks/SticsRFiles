@@ -8,6 +8,5 @@ man/figures
 ^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml$
 ^docs$
-vignettes
-pkgdown
 ^pkgdown$
+^codecov\.yml$
