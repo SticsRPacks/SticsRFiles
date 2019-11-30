@@ -47,8 +47,7 @@ get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
 
 
 
-  bounds_values <- lapply(bounds_name, function(x)
-    SticsRFiles::getAttrsValues(xml_doc,param_type$xpath,x))
+  bounds_values <- lapply(bounds_name, function(x) getAttrsValues(xml_doc,param_type$xpath,x))
 
 
 
