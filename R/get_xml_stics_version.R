@@ -16,7 +16,7 @@ get_xml_stics_version <- function(stics_version = "last", xml_doc = NULL) {
   # it matches with, only used to avoid checking the version
   # this is a custom case, whatever its content ...
 
-  if (! is.null( xml_doc)) {
+  if (! base::is.null( xml_doc)) {
     # to be fixed when the doc will contain the version
     return("custom")
   }

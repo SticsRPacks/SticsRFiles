@@ -19,12 +19,12 @@ gen_tec_doc <- function(xml_doc_object = NULL,
                                          xml_doc = xml_doc_object)
 
   # getting a default xml template
-  if ( is.null(xml_doc_object) ) {
+  if ( base::is.null(xml_doc_object) ) {
     xml_doc_object <- get_xml_base_doc("tec",stics_version = stics_version)
   }
 
   # Nothing to do
-  # if ( is.null(param_table) ) {
+  # if ( base::is.null(param_table) ) {
   #   return(xml_doc_object)
   # }
 
@@ -135,7 +135,7 @@ gen_tec_doc <- function(xml_doc_object = NULL,
 
       par_form <- get_param_formalism( xml_document = xml_doc_object, par_name)
 
-      if ( is.null(par_form)) {
+      if ( base::is.null(par_form)) {
         print(paste("Error: formalism for par_name"))
       }
 

@@ -1,5 +1,5 @@
-#' @title Get a list of Stics xml parameters names an xmlDocument node
-#' @param xml_node an xml XMLInternalElementNode
+#' @title Get a list of Stics xml parameters names an xmlDocument or  XML node
+#' @param xml_object an xml XMLInternalElementNode or xmlDocument object
 #' @param param_list param names vector, used for recursive calls
 #' @param full_list TRUE or getting all names, FALSE otherwise (default)
 #' for unique names list
@@ -7,20 +7,32 @@
 #' @return a character vector of parameters names
 #'
 #' @export
-get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
+get_params_names <- function(xml_object,param_list = c(), full_list = FALSE) {
 
   # TODO
   # - for all: add an input parameter for specifying which formalism to use
   # to restrict params names list !
 
-  if ( ! class(xml_node) == "XMLInternalElementNode") {
-    stop("The document is not an xml node !")
+  xml_node <- NULL
+  param_name <- NULL
+
+  # If xml_object converting input argument to an XML node
+  if ( class(xml_object) =="xmlDocument" ) {
+    xml_node <- xmlRoot(xml_object@content)
+  } else if (class(xml_object) == "XMLInternalElementNode") {
+    xml_node <- xml_object
+  }
+
+  # Raising an error on xml_node type
+  if ( base::is.null(xml_node) ) {
+    stop("The XML object is neither an xml node nor an xml document !")
   }
 
   node_name <- xmlName(xml_node)
 
-  # getting only one usm node
-  if ( node_name == "usms" ) {
+  # getting only one usm node or sol node
+  if ( node_name %in% c("sols","usms") ) {
+  #if ( node_name == "usms" ) {
     xml_node <- xmlChildren(xmlRoot(xml_node))[[1]]
   }
 
@@ -72,7 +84,7 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
   # Adding the param name to the param names list
   # - if it does not exist
   # - if a full param names list is asked
-  if ( exists("param_name") &&
+  if ( ! base::is.null(param_name) &&
        (full_list || ! (param_name %in% param_list )) )  {
     param_list <- c(param_list, param_name)
   }
@@ -84,7 +96,7 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
   }
 
 
-  # Loop over childs
+  # Loop over childs and recursive call to the function
   for (n in 1:childs_nb) {
 
     if ( ! class(childs[[n]]) == "XMLInternalElementNode") {
@@ -96,5 +108,8 @@ get_params_names <- function(xml_node,param_list = c(), full_list = FALSE) {
 
   names(param_list) <- NULL
 
+  # filtering unwanted names
+  names_filt <- c("ta_entete", "tableau_entete", "ta", "tableau", "choix" )
+  param_list <- setdiff(param_list,names_filt)
   return(param_list)
 }

@@ -15,7 +15,7 @@ get_xml_doc_example <- function(xml_name = NULL,
                       path = system.file( paste0("extdata/xml/examples/",stics_version),
                                           package = "SticsRFiles"))
 
-  if ( is.null(xml_name) ) {
+  if ( base::is.null(xml_name) ) {
     return(files)
   }
 

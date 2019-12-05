@@ -13,7 +13,7 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   # when doc_types will be defined against Stics Version
   # because they may change with versions ?
 
-  if (is.null(doc_types)) {
+  if (base::is.null(doc_types)) {
     doc_types <- c("initialisations","usms", "sols", "fichiertec",
                    "fichiersta", "fichierplt", "fichierpar",
                    "fichierparamgen" )
@@ -26,7 +26,7 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   # not an xmlDocument
   if (! is.xmlDocument(xml_doc) ) { return(FALSE) }
 
-  if (!is.null(doc_type) && ! (doc_type %in% doc_types)) {
+  if (!base::is.null(doc_type) && ! (doc_type %in% doc_types)) {
     warning(paste0("Not any tag name \"",doc_type,"\" for stics xml document!"))
     return(FALSE)
   }
@@ -36,7 +36,7 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   # doc types
   root_name <- xmlName(XML::xmlRoot(xml_doc@content))
 
-  if (!is.null(doc_type) && ! doc_type == root_name ) {
+  if (!base::is.null(doc_type) && ! doc_type == root_name ) {
     return(FALSE)
   }
 

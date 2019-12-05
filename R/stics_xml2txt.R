@@ -26,12 +26,12 @@ stics_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_fi
   calc_name = length(idx) > 0
 
   # Not possible to define output file name
-  if ( is.null(out_file) & ! calc_name ) {
+  if ( base::is.null(out_file) & ! calc_name ) {
     stop("Output file name not found or not provided as argument! ")
   }
 
   # detecting plt or tec in xml file name
-  if ( calc_name & is.null(out_file) ) {
+  if ( calc_name & base::is.null(out_file) ) {
     tag = tags[[idx]]
     if ( tag == "_plt" | tag == "_tec" ) {
       out_file = files_names[[idx]][[plt_num]]
@@ -41,7 +41,7 @@ stics_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_fi
   }
 
   # getting the input dir if no output dir in args
-  if ( is.null(out_dir)) {
+  if ( base::is.null(out_dir)) {
     out_dir = dirname(xml_file)
   }
 

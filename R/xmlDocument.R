@@ -68,7 +68,7 @@ setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj,path=NU
   node_set=NULL
   if(!isLoaded(docObj)) { stop("xml file is not loaded in xmlDocument object")}
 
-  if (is.null(path)){
+  if (base::is.null(path)){
     # getting root node name to get corresponding node set
     node_set=getNodeSet(docObj@content,paste0('/',xmlName(xmlRoot(docObj@content))))
     #node_set=getNodeSet(docObj@content,'/')
@@ -91,7 +91,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   node_set=getNodeS(docObj,path)
   #
   # browser("test getAttrs")
-  if (is.null(node_set)) {
+  if (base::is.null(node_set)) {
     return(attr_list)
   }
 
@@ -99,7 +99,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   # vector is returned)
   attr_list = sapply(node_set,function(x) xmlAttrs(x))
   # not any attributes in nodeset
-  if (is.null(unlist(attr_list))) {
+  if (base::is.null(unlist(attr_list))) {
     return()
   }
 
@@ -120,7 +120,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   # # TODO: add a contition to test if rownames (dimnames[[1]]) are identical
   # # and dim()[[2]]==1
   # r_names = unique(rownames(attr_list))
-  # if (is.null(r_names)){
+  # if (base::is.null(r_names)){
   #
   # }
   # if (dim(attr_list)[[2]] ==1 & length(r_names) == 1) {
@@ -132,7 +132,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   # }
 
   # testing if any node has not any attribute
-  any_null=any(sapply(attr_list,function(x) is.null(x)))
+  any_null=any(sapply(attr_list,function(x) base::is.null(x)))
   # print(attr_list)
   if (any_null) {paste(warning("Existing nodes without any attributes on xpath",path))}
 
@@ -153,7 +153,7 @@ setMethod("getAttrsNames", signature(docObj = "xmlDocument"), function(docObj,pa
 
   #print(path)
   #  print(attr_list)
-  #   if (is.null(attr_list)){
+  #   if (base::is.null(attr_list)){
   #     return(attr_list)}
 
   # TODO: Normally USELESS, see getAttrs (as.matrix ...)
@@ -164,7 +164,7 @@ setMethod("getAttrsNames", signature(docObj = "xmlDocument"), function(docObj,pa
   #} # else {
   #print("attrs matrix ")
   dim_names=dimnames(attr_list)
-  if(!is.null(dim_names[[1]])){
+  if(!base::is.null(dim_names[[1]])){
     attr_names=dim_names[[1]]
     #print(attr_names)
   } else {
@@ -212,7 +212,7 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
   sel_values = attr_values[,sel_list]
 
   # keeping only lines specified by nodes_ids
-  if ( !is.null(nodes_ids) ) {
+  if ( !base::is.null(nodes_ids) ) {
     sel_values <- sel_values[nodes_ids, ]
   }
 
@@ -224,7 +224,7 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
 setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj,path,nodes_ids=NULL) {
   node_set=getNodeS(docObj,path)
 
-  if ( !is.null(nodes_ids) ) {
+  if ( !base::is.null(nodes_ids) ) {
     node_set = node_set[nodes_ids]
   }
 
@@ -238,8 +238,8 @@ setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj,path,n
 
 # addAttrs
 setMethod("addAttrs", signature(docObj = "xmlDocument"), function(docObj,path,named_vector) {
-  # add not is.null node_set !!!!
-  if (!is.null(names(named_vector))) {
+  # add not base::is.null node_set !!!!
+  if (!base::is.null(names(named_vector))) {
     node_set=getNodeS(docObj,path)
     invisible(sapply(node_set,function(x) xmlAttrs(x)<-named_vector))
   }
@@ -250,8 +250,8 @@ setMethod("addAttrs", signature(docObj = "xmlDocument"), function(docObj,path,na
 # delAttrs
 # TODO: to remove all attrs !!!!!!!!!
 setMethod("removeAttrs", signature(docObj = "xmlDocument"), function(docObj,path,attr_names) {
-  # add not is.null node_set !!!!
-  if (!is.null(attr_names)) {
+  # add not base::is.null node_set !!!!
+  if (!base::is.null(attr_names)) {
     node_set=getNodeS(docObj,path)
     attr_nb=length(attr_names)
     for (i in  1:attr_nb){
@@ -267,11 +267,11 @@ setMethod("removeAttrs", signature(docObj = "xmlDocument"), function(docObj,path
 setMethod("setAttrValues", signature(docObj = "xmlDocument"), function(docObj,path,attr_name,
                                                                        values_list,nodes_ids = NULL) {
   node_set=getNodeS(docObj,path)
-  if(is.null(node_set)) {
+  if(base::is.null(node_set)) {
     return(invisible())
   }
 
-  if ( ! is.null(nodes_ids) ) {
+  if ( ! base::is.null(nodes_ids) ) {
     node_set = node_set[nodes_ids]
   }
 
@@ -293,11 +293,11 @@ setMethod("setValues", signature(docObj = "xmlDocument"),
 
             node_set=getNodeS(docObj,path)
             #browser("setValues")
-            if(is.null(node_set)) {
+            if(base::is.null(node_set)) {
               return(invisible())
             }
 
-            if ( ! is.null(nodes_ids) ) {
+            if ( ! base::is.null(nodes_ids) ) {
               node_set = node_set[nodes_ids]
             }
 
@@ -324,13 +324,13 @@ setMethod("setValues", signature(docObj = "xmlDocument"),
 # addNodes
 setMethod("addNodes", signature(docObj = "xmlDocument"), function(docObj,nodes_to_add,parent_path=NULL){
   # parent node is root node
-  if (is.null(parent_path)){
+  if (base::is.null(parent_path)){
     pnode=xmlRoot(docObj@content)
     # getting parent node from given parent_path
   }else{
     node_set=getNodeS(docObj,parent_path)
     #print(node_set[[1]])
-    if (is.null(node_set)){
+    if (base::is.null(node_set)){
       return()
     }
     pnode=node_set[[1]]
@@ -352,7 +352,7 @@ setMethod("delNodes", signature(docObj = "xmlDocument"), function(docObj,path){
 
   node_set <- getNodeS(docObj,path)
 
-  if (is.null(node_set)){
+  if (base::is.null(node_set)){
     return()
   }
 

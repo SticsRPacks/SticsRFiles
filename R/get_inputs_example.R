@@ -12,7 +12,7 @@ get_inputs_example <- function(xl_name = NULL, dest_dir = getwd()) {
   inst_dir <- "extdata/xl/"
   xl_patt <- ".(xls|xlsx)$"
 
-  if (is.null(xl_name)) {
+  if (base::is.null(xl_name)) {
     xl_name <- xl_patt
   }
 

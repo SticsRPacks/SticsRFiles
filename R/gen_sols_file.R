@@ -19,7 +19,7 @@ gen_sols_file <- function(sols_out_file,
 
   xml_doc <- NULL
 
-  if (! is.null(sols_in_file) ) {
+  if (! base::is.null(sols_in_file) ) {
     xml_doc <- xmldocument(sols_in_file)
   }
 

@@ -41,7 +41,7 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
   node_str <- paste0("//",node)
 
   # getting a default xml template
-  if ( is.null(xml_doc) ) {
+  if ( base::is.null(xml_doc) ) {
     # using function get_xml_base_doc
     xml_doc <- get_xml_base_doc(xml_type = doc_type,
                                 stics_version = stics_version)
@@ -52,19 +52,19 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
   elts_nb <- NULL
 
   # identity or single usms/sols doc from the template file
-  if ( all(is.null(c(nodes_nb, nodes_param))) ) {
+  if ( all(base::is.null(c(nodes_nb, nodes_param))) ) {
     return(xml_doc)
   }
 
   # calculating nodes number
-  if (! is.null(nodes_nb)) { elts_nb = nodes_nb }
+  if (! base::is.null(nodes_nb)) { elts_nb = nodes_nb }
 
   if ( "data.frame" %in% class(nodes_param) ) {
     elts_nb <- dim(nodes_param)[1]
   }
 
   # checking nodes number value
-  if (is.null(elts_nb)) {
+  if (base::is.null(elts_nb)) {
     stop("Error in usm number or in soils parameters table !")
   }
 
@@ -73,7 +73,7 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
 
   # Nothing to do
   doc_nodes_nb <- length(xml_nodes)
-  if ( doc_nodes_nb == elts_nb && is.null(nodes_param) ) {
+  if ( doc_nodes_nb == elts_nb && base::is.null(nodes_param) ) {
     return(xml_doc)
   }
 
@@ -94,7 +94,7 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
 
   }
 
-  if ( is.null(nodes_param) ) {
+  if ( base::is.null(nodes_param) ) {
     return(xml_doc)
   }
 

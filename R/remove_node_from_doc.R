@@ -19,7 +19,7 @@ remove_node_from_doc <- function( xml_doc, param_name ,
                                parent_name = parent_path)$xpath
 
   # if type does not exist
-  if (is.null(xpath_node)){
+  if (base::is.null(xpath_node)){
     print(paste("Unknown parameter in xml doc: ",param_name))
     return(invisible())
   }
@@ -34,14 +34,14 @@ remove_node_from_doc <- function( xml_doc, param_name ,
     xml_nodes <- getNodeS(xml_doc, xpath_node)
   }
 
-  if (is.null(xml_nodes)){
+  if (base::is.null(xml_nodes)){
     print("No nodes to remove from xml doc !")
     return(invisible())
   }
 
   nodes_nb <- length(xml_nodes)
   # selecting nodes with nodes_ids
-  if (! is.null(nodes_ids) && max(nodes_ids) <= nodes_nb) {
+  if (! base::is.null(nodes_ids) && max(nodes_ids) <= nodes_nb) {
     xml_nodes <- xml_nodes[nodes_ids]
   }
 

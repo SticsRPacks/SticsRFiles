@@ -52,7 +52,7 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
   node <- node_names[file_idx]
 
   in_formalism_name <- FALSE
-  if ( ! is.null(form_name)) {
+  if ( ! base::is.null(form_name)) {
     in_formalism_name <- file_tag %in% names(formalism_names)
   }
 

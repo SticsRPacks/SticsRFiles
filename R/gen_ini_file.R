@@ -22,7 +22,7 @@ gen_ini_file <- function(ini_out_file = NULL, param_table = NULL,
 
   xml_doc <- NULL
 
-  if (! is.null(ini_in_file) ) {
+  if (! base::is.null(ini_in_file) ) {
     xml_doc <- xmldocument(ini_in_file)
   }
 
@@ -48,7 +48,7 @@ gen_ini_file <- function(ini_out_file = NULL, param_table = NULL,
 
 
   # defining output files paths
-  if (is.null(ini_out_file)) {
+  if (base::is.null(ini_out_file)) {
     out_name <- param_table[[ini_col]]
     ids <- grepl("_ini.xml$",out_name)
     if ( sum(ids) < length(out_name) ) {

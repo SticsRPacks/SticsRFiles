@@ -35,12 +35,12 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
 
   # filtering dates
   # only on cum_jul
-  if ( ! is.null(doy_list) ) {
+  if ( ! base::is.null(doy_list) ) {
     results_tbl <- results_tbl %>% dplyr::filter( .data$cum_jul %in% doy_list )
   }
 
   # selecting variables columns
-  if ( ! is.null(var_list) ){
+  if ( ! base::is.null(var_list) ){
     col_names=make.names(var_list)
     results_tbl <- results_tbl %>% dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
   }

@@ -22,7 +22,7 @@ get_options_choices <- function(xml_file_path, options_names=NULL){
   #  $Revision: 1144 $
   # ----------------------------------------------------------------------
 
-  if (is.null(options_names)) {
+  if (base::is.null(options_names)) {
     names_vec=get_options_names(xml_file_path)
   } else {
     names_vec = options_names

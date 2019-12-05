@@ -16,13 +16,13 @@ get_values_from_table <- function(params_table, param_names = NULL, lines_id = N
 
   tb_dims <- dim(params_table)
 
-  select_lines <- ! is.null(lines_id)
+  select_lines <- ! base::is.null(lines_id)
 
   if ( select_lines && length(unique(lines_id)) > tb_dims[2] )  {
     stop("Index out of range for selecting line in table")
   }
 
-  if (is.null(param_names)) {
+  if (base::is.null(param_names)) {
     # getting param names list from table
     #param_names <- unique(gsub(pattern = "_[0-9]*$","",names(params_table)))
     param_names <- names(params_table)

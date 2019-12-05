@@ -17,7 +17,7 @@ get_params_from_doc_attr <- function(xml_doc_object, type_name = NULL, unique_va
   #parent_for_values <- c("","","ta/")
 
 
-  if (is.null(type_name)) {
+  if (base::is.null(type_name)) {
     type_name <- type_names
   }
 
@@ -43,7 +43,7 @@ get_params_from_doc_attr <- function(xml_doc_object, type_name = NULL, unique_va
 
   for (t in 1:nb_types) {
     tmp <- getAttrsValues(xml_doc_object, xpath[t], name_field[t])
-    if ( !is.null(tmp) ) {
+    if ( !base::is.null(tmp) ) {
       params[[t]] <- tmp
       is_null[t] <- FALSE
     }
@@ -51,8 +51,8 @@ get_params_from_doc_attr <- function(xml_doc_object, type_name = NULL, unique_va
 
   #print(params)
 
-  params <- params[! is_null]
-  names(params) <- type_name[! is_null]
+  params <- params[! base::is.null]
+  names(params) <- type_name[! base::is.null]
 
   if (unique_val) {
     params <- lapply(params, unique)

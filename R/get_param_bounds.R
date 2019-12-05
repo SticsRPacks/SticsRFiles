@@ -27,7 +27,7 @@ get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
 
   def_names <- c("min","max")
 
-  if (is.null(bounds_name)) {
+  if (base::is.null(bounds_name)) {
     bounds_name <- def_names
   } else if ( ! all(is.element(bounds_name,def_names )) ) {
     stop("Names are not consitent with file bound names")
@@ -41,7 +41,7 @@ get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
   }
 
   param_type <- get_param_type(xml_doc, param_name)
-  exist_param <- !is.null(param_type$xpath)
+  exist_param <- !base::is.null(param_type$xpath)
 
   if (! exist_param ) return(NULL)
 

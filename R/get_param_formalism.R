@@ -21,7 +21,7 @@ get_param_formalism <- function(xml_document,param_name) {
 
   values <- getAttrsValues(xml_document,x_path,"nom")
 
-  if (! is.null(values)) {
+  if (! base::is.null(values)) {
     return(as.vector(values))
   }
 
@@ -29,7 +29,7 @@ get_param_formalism <- function(xml_document,param_name) {
   x_path <- paste0("//*[@nomParam=\"",param_name,"\"]/ancestor::formalisme")
   values <- getAttrsValues(xml_document,x_path,"nom")
 
-  if (! is.null(values)) {
+  if (! base::is.null(values)) {
     return(as.vector(values))
   }
 

@@ -17,7 +17,7 @@ gen_usms_doc <- function(xml_doc_object = NULL,
 
 
   # replacement of NA values with "null"
-  if (! is.null(usms_param)) {
+  if (! base::is.null(usms_param)) {
     usms_param[is.na(usms_param)] <- "null"
   }
 

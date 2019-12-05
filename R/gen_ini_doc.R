@@ -21,12 +21,12 @@ gen_ini_doc <- function(xml_doc = NULL,
   stics_version <- get_xml_stics_version(stics_version = stics_version, xml_doc = xml_doc)
 
   # getting a default xml template
-  if ( is.null(xml_doc) ) {
+  if ( base::is.null(xml_doc) ) {
     xml_doc <- get_xml_base_doc("ini", stics_version = stics_version)
   }
 
   # Nothing to do
-  if ( is.null(param_table) ) {
+  if ( base::is.null(param_table) ) {
      return(xml_doc)
   }
 
@@ -34,7 +34,7 @@ gen_ini_doc <- function(xml_doc = NULL,
   # TODO : replace with get_values_from_table
   # TODO : get_params_from_table to be completed with plant specificities crop
   # tag see treatment inside next block
-  if (is.null(params_desc)) {
+  if (base::is.null(params_desc)) {
     # detecting ini names column
     crop_regex <- paste0("_",tolower(crop_tag),"[0-9]*$")
     layer_regex <- "_[0-9]*$"

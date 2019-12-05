@@ -86,7 +86,7 @@ read_param= function(dirpath= getwd(),param= NULL,...){
     plant[paste0("plant",i)]=
       list(read_plant(file.path(dirpath,paste0("ficplt",i,".txt")),
                       variety=
-                        if(!is.null(param)){
+                        if(!base::is.null(param)){
                           tec[[paste0("plant",i)]]$P_variete
                         }else{
                           NULL
@@ -98,7 +98,7 @@ read_param= function(dirpath= getwd(),param= NULL,...){
                    plant= plant, soil= soil, station= station,
                    output= output,tmp=tmp)
 
-  if(!is.null(param)){
+  if(!base::is.null(param)){
     parameters= unlist(parameters)
     parameters= parameters[grep(paste0(param,"$"),names(parameters))]
     if(length(parameters)==0){
@@ -312,7 +312,7 @@ read_plant= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
   values= params[!seq_along(params)%%2]
 
   # No need to read all varieties if the variety is set and is not the last one
-  if(!is.null(variety)){
+  if(!base::is.null(variety)){
     max_variety= min(variety,max_variety)
   }
 
@@ -600,7 +600,7 @@ read_plant= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
   }
 
   # Keep only the variety asked:
-  if(!is.null(variety)){
+  if(!base::is.null(variety)){
     tmp= lapply(tmp, function(x)x[variety])
   }
 

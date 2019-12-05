@@ -20,7 +20,7 @@ get_params_from_table <- function(params_table,
   # TODO: doing a merge with get_values_from_table
   .= NULL
 
-  if (is.null(dict)) {
+  if (base::is.null(dict)) {
     dict <- list(julapI="julapI_or_sum_upvt",doseI="amount",
                  julapN="julapN_or_sum_upvt",doseN="absolute_value/%")
   }

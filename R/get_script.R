@@ -13,14 +13,14 @@ get_script <- function( in_name = NULL, dest_dir = getwd()) {
 
   patt <- "*.R"
   script_name <- in_name
-  if ( is.null( script_name ) || script_name =="all" ) {
+  if ( base::is.null( script_name ) || script_name =="all" ) {
     script_name <- patt
   }
 
 
   files_list <- list.files(path = system.file(inst_dir, package = package),pattern = script_name )
 
-  if (is.null(in_name)) {
+  if (base::is.null(in_name)) {
     return(files_list)
   }
 

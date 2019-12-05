@@ -20,7 +20,7 @@ replace_txt_param_value <- function(file_path,param_tag,param_value,out_file_pat
   new=out_file_path
   # if the target file is the input file
   # in place modification
-  if (is.null(out_file_path)) {
+  if (base::is.null(out_file_path)) {
     opt=" -i "
     redir = ""
     old=file.path(dirname(file_path),'tmp.txt')

@@ -55,7 +55,7 @@ all_out_var= function(){
 #'
 find_STICS_var= function(Var=NULL){
   All_vars= all_out_var()
-  if(!is.null(Var)){
+  if(!base::is.null(Var)){
     All_vars[grep(Var, All_vars$variable,ignore.case = TRUE),]
   }else{
     All_vars

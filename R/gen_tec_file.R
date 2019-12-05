@@ -21,7 +21,7 @@ gen_tec_file <- function(tec_out_file = NULL, param_table = NULL,
 
   xml_doc <- NULL
 
-  if (! is.null(tec_in_file) ) {
+  if (! base::is.null(tec_in_file) ) {
     xml_doc <- xmldocument(tec_in_file)
   }
 
@@ -47,7 +47,7 @@ gen_tec_file <- function(tec_out_file = NULL, param_table = NULL,
 
 
   # Finding non NULL elements in xml_docs (i.e. no errors in doc generation)
-  out_idx <- unlist(lapply(xml_docs, is.null))
+  out_idx <- unlist(lapply(xml_docs, base::is.null))
 
   if (any(out_idx)) {
     cat("\n")
@@ -65,7 +65,7 @@ gen_tec_file <- function(tec_out_file = NULL, param_table = NULL,
 
 
   # defining output files paths
-  if (is.null(tec_out_file)) {
+  if (base::is.null(tec_out_file)) {
     out_name <- param_table[[tec_col]]
     ids <- grepl("_tec.xml$",out_name)
     if ( sum(ids) < length(out_name) ) {

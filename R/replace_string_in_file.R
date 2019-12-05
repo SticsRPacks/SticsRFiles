@@ -16,7 +16,7 @@ replace_string_in_file <- function(file_path,target_string,replace_string,new_fi
   }
   in_place="i"
   redirect=""
-  if (!is.null(new_file_path)) {
+  if (!base::is.null(new_file_path)) {
     in_place=""
     redirect=paste(" >",new_file_path)
   }

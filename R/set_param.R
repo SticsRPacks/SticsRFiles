@@ -228,7 +228,7 @@ set_file= function(filepath,param,value,add,variety= NULL){
          },
          set_plant= {
            ref_index= grep(gsub('P_','',param_),params)+1
-           if(!is.null(variety)){
+           if(!base::is.null(variety)){
              ref_index= ref_index[variety]
            }
          },

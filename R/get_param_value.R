@@ -15,18 +15,17 @@
 #'
 #' @export
 #'
-# ----------------------------------------------------------------------
-#  MODIFICATIONS (last commit)
-#  $Date: 2019-09-25 12:21:57 +0200 (mer. 25 sept. 2019) $
-#  $Author: plecharpent $
-#  $Revision: 1601 $
-# ----------------------------------------------------------------------
+
 get_param_value <- function(xml_doc_object,param_name,
                             parent_name= NULL, parent_sel_attr = NULL,
                             ids=NULL, show_xpath =FALSE){
 
 
-  # TODO : add the case : if param_name is a list of vectors of parameters names ?
+  # TODO :
+  # 1 - set default param_name value to NULL and calculate le param_name vector calling
+  # the get_param_names function !
+  # 2 - add the case : if param_name is a list of vectors of parameters names ?
+
 
   # Getting param values for sams parameters for the xml documents list
   if ( is.list(xml_doc_object) ) {
@@ -66,7 +65,7 @@ get_param_value <- function(xml_doc_object,param_name,
     print(xpath)
   }
 
-  if ( is.null(xpath) ) {
+  if ( base::is.null(xpath) ) {
     #stop("Unknown parameter name !")
     return(value)
   }
@@ -144,7 +143,7 @@ get_param_value <- function(xml_doc_object,param_name,
   }
 
   # TODO: see if finally useless, checks done in getValues ?
-  # if (! is.null(ids) ) {
+  # if (! base::is.null(ids) ) {
   #   # check ids
   #   if ( max(ids) > param_type$length ) {
   #     stop("Subscript out of range, check ids !")

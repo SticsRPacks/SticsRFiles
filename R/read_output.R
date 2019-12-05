@@ -29,14 +29,14 @@
 #' @export
 read_output= function(dirpath=getwd(), mixed= NULL, name= NULL){
   .=NULL # to avoid CRAN note for pipe
-  if(is.null(mixed)){
+  if(base::is.null(mixed)){
     nbplants=
       read_usm(filepath = file.path(dirpath,"new_travail.usm"))$P_nbplantes%>%
       as.numeric
     if(nbplants>1){mixed= T}else{mixed= F}
   }
 
-  if(is.null(name)){
+  if(base::is.null(name)){
     name= read_usm(filepath = file.path(dirpath,"new_travail.usm"))$P_fplt
   }else{
     if(mixed&length(name)!=2){

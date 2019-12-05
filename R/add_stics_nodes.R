@@ -24,7 +24,7 @@ add_stics_nodes <- function(xml_doc, file_tag, nodes_nb = 1,formalism_name = NUL
                    sols = is_stics_sols(xml_doc),
                    tec = is_stics_tec(xml_doc))
 
-  if (is.null(doc_ok)) { doc_ok <- FALSE }
+  if (base::is.null(doc_ok)) { doc_ok <- FALSE }
 
   if ( ! doc_ok ) {
     stop("The xml document is of wrong type")
@@ -42,7 +42,7 @@ add_stics_nodes <- function(xml_doc, file_tag, nodes_nb = 1,formalism_name = NUL
 
   add_form = FALSE
   # checking formalisms tag
-  if ( ! is.null(formalism_name) && length(form_idx) ) {
+  if ( ! base::is.null(formalism_name) && length(form_idx) ) {
     add_form = TRUE
     #formalism_name <- node_types$form_names[[file_tag]][form_idx]
     formalism_tag <- node_types$form_tags[[file_tag]][form_idx]

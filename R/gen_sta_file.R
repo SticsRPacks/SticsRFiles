@@ -17,7 +17,7 @@ gen_sta_file <- function(sta_out_file = NULL, param_table = NULL,
 
   xml_doc <- NULL
 
-  if (! is.null(sta_in_file) ) {
+  if (! base::is.null(sta_in_file) ) {
     xml_doc <- xmldocument(sta_in_file)
   }
 
@@ -42,7 +42,7 @@ gen_sta_file <- function(sta_out_file = NULL, param_table = NULL,
 
 
   # defining output files paths
-  if (is.null(sta_out_file)) {
+  if (base::is.null(sta_out_file)) {
     out_name <- param_table[[sta_col]]
     ids <- grepl("_sta.xml$",out_name)
     if (sum(ids) < length(out_name)) {

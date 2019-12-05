@@ -44,7 +44,7 @@ read_obs_to_list= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_
     return(obs_list)
   }
 
-  if (is.null(obs_filenames)) {
+  if (base::is.null(obs_filenames)) {
     obs_filenames=list.files(dirpath)%>%.[grep("\\.obs$",.)]
   }
   if (length(obs_filenames)==0) {
@@ -52,13 +52,13 @@ read_obs_to_list= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_
     return(NULL)
   }
   obs_df=read_obs(dirpath, obs_filenames, mixed=FALSE)
-  if (is.null(obs_df)) {
+  if (base::is.null(obs_df)) {
     return(NULL)
   }
 
   # if usms not provided, suppose that usms names are obs filenames prefix
   obs_filenames_prefix=sapply(obs_filenames,function (x) unlist(strsplit(x,"\\."))[1])
-  if (is.null(usms)) {
+  if (base::is.null(usms)) {
     usms=obs_filenames_prefix
   } else if (length(usms)!=length(obs_filenames_prefix)) {
     stop("Size of usms list given in argument is different from size of obs files list => correspondance cannot be done.")
