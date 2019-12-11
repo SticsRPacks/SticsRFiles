@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_stics_nodes.R
 \name{add_stics_nodes}
 \alias{add_stics_nodes}
-\title{Add stics node}
+\title{Add node to a Stics XML document}
 \usage{
 add_stics_nodes(
   xml_doc,
@@ -15,7 +15,7 @@ add_stics_nodes(
 \arguments{
 \item{xml_doc}{XML document}
 
-\item{file_tag}{File tag}
+\item{file_tag}{File tag (i.e. usms, sols, or tec)}
 
 \item{nodes_nb}{Nodes numbers}
 
@@ -24,5 +24,5 @@ add_stics_nodes(
 \item{stics_version}{The version of STICS (eg "V9.0")}
 }
 \description{
-Add stics node
+Add node to a Stics XML document
 }

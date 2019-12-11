@@ -24,8 +24,10 @@
 #' @seealso \code{\link{set_out_var}}
 #'
 #' @examples
+#' \dontrun{
 #' library(SticsRFiles)
 #' All_vars= all_out_var()
+#'}
 #'
 #@export
 #'
@@ -48,8 +50,10 @@ all_out_var= function(){
 #' @seealso \code{\link{all_out_var}}
 #'
 #' @examples
+#' \dontrun{
 #' library(SticsRFiles)
 #' find_STICS_var("lai")
+#'}
 #'
 #@export
 #'

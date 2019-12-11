@@ -11,8 +11,11 @@ Helper function to print the list of all possible variables to set as output
 from the STICS model.
 }
 \examples{
+\dontrun{
 library(SticsRFiles)
 All_vars= all_out_var()
+}
+
 
 }
 \seealso{

@@ -11,7 +11,7 @@ add_node_to_doc(xml_doc, new_node, nodes_nb = 1, parent_path)
 
 \item{new_node}{New node to add}
 
-\item{nodes_nb}{Node numbers}
+\item{nodes_nb}{Nodes number}
 
 \item{parent_path}{Path to the parent node}
 }

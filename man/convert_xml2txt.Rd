@@ -2,19 +2,28 @@
 % Please edit documentation in R/convert_xml2txt.R
 \name{convert_xml2txt}
 \alias{convert_xml2txt}
-\title{Transforming an xml file with the help of an xsl style file}
+\title{Transforming a Stics xml file into a text file}
 \usage{
-convert_xml2txt(xml_file, style_file, out_file = NULL)
+convert_xml2txt(
+  xml_file,
+  java_dir,
+  plt_num = 1,
+  out_dir = NULL,
+  out_file = NULL
+)
 }
 \arguments{
 \item{xml_file}{File path of the input xml file}
 
-\item{style_file}{File path of the xsl file}
+\item{java_dir}{Root directory of the JavaStics installation}
 
-\item{out_file}{File path of the generated file}
+\item{plt_num}{The number of plants (sole crop: 1 ; mixed: 2)}
+
+\item{out_dir}{Directory of the generated file}
+
+\item{out_file}{Name of the output file}
 }
 \description{
-Using an xslt tranformation, an xml input file is converted to
-an other file format (text, xml). The output file name may be given or calculated.
-In the last case, the extension is defined after getting xsl method from the xsl file (xml, txt).
+The input file according to his type (ini,plant,tec,station,soil,par)
+is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
 }
