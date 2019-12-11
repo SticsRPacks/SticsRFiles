@@ -27,7 +27,7 @@
 #' library(SticsRFiles)
 #' All_vars= all_out_var()
 #'
-#' @export
+#@export
 #'
 all_out_var= function(){
   out_data= NULL
@@ -51,7 +51,7 @@ all_out_var= function(){
 #' library(SticsRFiles)
 #' find_STICS_var("lai")
 #'
-#' @export
+#@export
 #'
 find_STICS_var= function(Var=NULL){
   All_vars= all_out_var()

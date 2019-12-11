@@ -1,16 +1,15 @@
-#' Add stics node
+#' Add node to a Stics XML document
 #'
 #' @param xml_doc XML document
-#' @param file_tag File tag
+#' @param file_tag File tag (i.e. usms, sols, or tec)
 #' @param nodes_nb Nodes numbers
 #' @param formalism_name Name of the formalism
 #' @param stics_version The version of STICS (eg "V9.0")
 #'
-#' @export
+#@export
 #'
 add_stics_nodes <- function(xml_doc, file_tag, nodes_nb = 1,formalism_name = NULL,
                             stics_version = "last" ) {
-  #' @export
   # getting xml doc types == root node name
   # i.e. : "initialisation", "usms",...
   doc_types <- is_stics_doc()

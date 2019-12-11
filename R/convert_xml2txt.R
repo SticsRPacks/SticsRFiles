@@ -6,9 +6,9 @@
 #' @param style_file File path of the xsl file
 #' @param out_file File path of the generated file
 #'
-#' @export
+#@export
 #'
-convert_xml2txt <- function( xml_file, style_file, out_file = NULL ) {
+convert_xml2txt_int <- function( xml_file, style_file, out_file = NULL ) {
 
   # library(xslt)
 
