@@ -25,12 +25,12 @@
 #' @examples
 #'\dontrun{
 #' library(SticsRFiles)
-#' Meas= read_obs()
+#' Meas= read_obs_int()
 #'}
 #'
 #' @export
 #'
-read_obs= function(dirpath=getwd(), filename=NULL, mixed= NULL){
+read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   .=NULL # to avoid CRAN note for pipe
   if(base::is.null(mixed)){
     if(file.exists(file.path(dirpath,"new_travail.usm"))){

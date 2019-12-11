@@ -22,12 +22,12 @@
 #' @examples
 #' \dontrun{
 #' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
-#' Meas= read_obs_to_list(path)
+#' Meas= read_obs(path)
 #'}
 #'
 #' @export
 #'
-read_obs_to_list= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename="usms.xml"){
+read_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename="usms.xml"){
   .=NULL # to avoid CRAN note for pipe
 
   #
@@ -39,7 +39,7 @@ read_obs_to_list= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_
 
   # For a list of folders recurive call
   if ( length(dirpath) > 1) {
-    obs_list <- lapply(dirpath, function(x) read_obs_to_list(x,obs_filenames, usms, usms_filename))
+    obs_list <- lapply(dirpath, function(x) read_obs(x,obs_filenames, usms, usms_filename))
     n <- unlist(lapply(obs_list, function(x) names(x[1])))
     obs_list <- lapply(obs_list, function(x) x[[1]])
     names(obs_list) <- n
