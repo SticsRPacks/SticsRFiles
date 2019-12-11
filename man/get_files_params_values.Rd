@@ -8,7 +8,8 @@ get_files_params_values(
   xml_files,
   param_names_list,
   parent_name = NULL,
-  parent_sel_attr = NULL
+  parent_sel_attr = NULL,
+  show_xpath = FALSE
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ other kinds in ini and some tec parameters not taken into account for the moment
 \item{parent_name}{parent node name or attribute name (optional)}
 
 \item{parent_sel_attr}{parent attribute value (optional)}
+
+\item{show_xpath}{Logical for displaying or not xpath value}
 }
 \value{
 A list of parameter list length, with parameters values for each xml file

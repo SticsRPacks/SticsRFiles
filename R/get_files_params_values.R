@@ -8,6 +8,7 @@
 #' other kinds in ini and some tec parameters not taken into account for the moment)
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
+#' @param show_xpath Logical for displaying or not xpath value
 #'
 #' @return A list of parameter list length, with parameters values for each xml file
 #'
