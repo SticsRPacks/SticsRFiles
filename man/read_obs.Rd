@@ -37,6 +37,3 @@ Meas= read_obs()
 }
 
 }
-\seealso{
-\code{\link{read_output}}
-}
