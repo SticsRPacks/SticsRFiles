@@ -13,4 +13,13 @@ man/figures
 
 # temporary
 vignettes
+# for archives
+R/archives
+
+# local : plecharpent
+R/scripts/get_txt_tec_values.R
+R/get_txt_param_value.R
+new_versions
+scripts
+R/new_versions_functions
 

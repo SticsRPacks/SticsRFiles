@@ -38,9 +38,9 @@ Imports:
     dplyr
 Suggests:
     knitr,
-    covr
+    covr,
+    rmarkdown
 Collate: 
-    'Del_spe_col.R'
     'add_node_to_doc.R'
     'add_stics_nodes.R'
     'all_out_var.R'
@@ -67,6 +67,7 @@ Collate:
     'gen_xml_doc.R'
     'get_daily_results.R'
     'get_files_param_bounds.R'
+    'get_files_param_names.R'
     'get_files_params_values.R'
     'get_inputs_example.R'
     'get_option_choice_param_values.R'
@@ -96,7 +97,6 @@ Collate:
     'read_met.R'
     'read_obs.R'
     'read_obs_to_list.R'
-    'read_output.R'
     'read_param.R'
     'remove_node_from_doc.R'
     'remove_parent_from_doc.R'
