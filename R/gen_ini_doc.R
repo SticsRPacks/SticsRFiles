@@ -7,7 +7,7 @@
 #' @param stics_version the stics files version to use
 #'
 #' @return an xmlDocument object or a list of
-#' @export
+#
 #'
 
 gen_ini_doc <- function(xml_doc = NULL,

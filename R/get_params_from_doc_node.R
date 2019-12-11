@@ -6,7 +6,7 @@
 #'
 #' @return a character vector of parameters names
 #'
-#' @export
+#'
 get_params_from_doc_node <- function(xml_node,param_list = c(), unique_val = TRUE) {
 
   # for ini, usms files

@@ -6,7 +6,7 @@
 #'
 #' @return a numeric vector
 #'
-#' @export
+#'
 #'
 # TODO: may use get_param_types returning values nb in $length field
 get_param_number <- function(xml_doc_object,param_name,...) {

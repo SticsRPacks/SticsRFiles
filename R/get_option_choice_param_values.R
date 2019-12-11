@@ -14,7 +14,7 @@
 #' \dontrun{
 #' get_option_choice_param_values(path/to/xml/file,"codetemp","yes")
 #'}
-#' @export
+#'
 get_option_choice_param_values <- function(xml_file_path,option_param_name,choice_name_or_code){
 
   # testing choice_name_or_code

@@ -7,7 +7,7 @@
 #'
 #' @return an xmlDocument object
 #'
-#' @export
+#'
 #'
 gen_sols_doc <- function(xml_doc_object = NULL,
                          sols_nb = NULL,

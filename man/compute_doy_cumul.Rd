@@ -19,6 +19,8 @@ For a vector of days of year and a vector of corresponding year
 for each one, calculation of cumulative days of years
 }
 \examples{
+\dontrun{
 compute_doy_cumul(c(350,360,10,20,30),c(1990,1990,1991,1991,1991))
+}
 
 }

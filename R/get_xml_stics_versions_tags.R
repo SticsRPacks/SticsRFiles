@@ -3,7 +3,7 @@
 #' @param last Boolean. Is only the last version needed ?
 #'
 #' @return All the STICS XML file versions available
-#' @export
+#'
 #'
 get_xml_stics_versions_tags <- function(last= FALSE) {
 

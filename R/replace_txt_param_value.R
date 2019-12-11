@@ -8,7 +8,7 @@
 #' @param param_value The parameter values
 #' @param out_file_path The new file path
 #'
-#' @export
+#'
 replace_txt_param_value <- function(file_path,param_tag,param_value,out_file_path=NULL){
 
   # default values for redirecting output to another file, or other files

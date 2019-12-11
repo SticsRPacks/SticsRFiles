@@ -5,7 +5,7 @@
 #'
 #' @return an xmlDocument object
 #'
-#' @export
+#'
 get_xml_base_doc <- function(xml_type = NULL,
                              stics_version = "last") {
 

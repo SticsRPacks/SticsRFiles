@@ -29,4 +29,5 @@ defined in a option choice node
 \dontrun{
 get_option_choice_param_values(path/to/xml/file,"codetemp","yes")
 }
+
 }

@@ -12,7 +12,7 @@
 #' get_plants_nb("path/to/USM",c("ble","mais"))
 #' }
 #'
-#' @export
+#'
 get_plants_nb <- function(usm_xml_path,usms_list=c()){
 
   xml_usms=xmldocument(usm_xml_path)

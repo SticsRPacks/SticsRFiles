@@ -19,7 +19,7 @@
 #'
 #' param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"))
 #' }
-#' @export
+#'
 #'
 get_param_bounds <- function(xml_doc, param_name, bounds_name = NULL) {
 

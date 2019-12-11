@@ -6,7 +6,7 @@
 #'
 #' @return an xmlDocument object or a list of
 #'
-#' @export
+#'
 #'
 gen_sta_doc <- function(xml_doc_object = NULL,
                         param_table = NULL,

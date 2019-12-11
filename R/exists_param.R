@@ -7,7 +7,8 @@
 #' @param param_name The parameter name
 #' @param ... Other parameters to pass to [get_param_number()].
 #'
-#' @export
+#@export
+#'
 exists_param <- function(xml_doc_object,param_name, ...) {
 
   nb <- get_param_number(xml_doc_object,param_name, ...)

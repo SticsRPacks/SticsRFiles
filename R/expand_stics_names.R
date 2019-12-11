@@ -1,10 +1,11 @@
-#' Expand stics names
+#' Expand stics names from parameters/variables simple names
 #'
 #' @param in_csv_file Input csv file path
 #' @param out_csv_file Output csv file path
 #' @param header_vec An optional header vector
 #'
-#' @export
+#@export
+#'
 expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
   in_data <- utils::read.table(in_csv_file,sep=";",stringsAsFactors = F, header = F)
   if (base::is.null(header_vec)) {

@@ -12,7 +12,7 @@ get_options_names <- function(xml_file_path){
   #' get_options_names(path/to/xml/file)
   #' }
   #'
-  #' @export
+  #'
   #'
   # ----------------------------------------------------------------------
   #  MODIFICATIONS (last commit)

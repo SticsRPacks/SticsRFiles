@@ -4,7 +4,7 @@
 #'
 #' @return a list of list of parameter type, xpath and values number
 #'
-#' @export
+#'
 # TODO : may be merged with get_param_type !
 get_params_types <- function(xml_doc, param_names) {
 

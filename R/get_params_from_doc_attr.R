@@ -6,7 +6,8 @@
 #'
 #' @return a named list of parameter names
 #'
-#' @export
+#'
+#'
 get_params_from_doc_attr <- function(xml_doc_object, type_name = NULL, unique_val = TRUE) {
 
   # For tec, param newform, param gen, sols, station
@@ -51,8 +52,8 @@ get_params_from_doc_attr <- function(xml_doc_object, type_name = NULL, unique_va
 
   #print(params)
 
-  params <- params[! base::is.null]
-  names(params) <- type_name[! base::is.null]
+  params <- params[! is_null]
+  names(params) <- type_name[! is_null]
 
   if (unique_val) {
     params <- lapply(params, unique)

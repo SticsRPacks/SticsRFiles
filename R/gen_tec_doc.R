@@ -7,7 +7,7 @@
 #'
 #' @return an xmlDocument object or a list of
 #'
-#' @export
+#'
 #'
 gen_tec_doc <- function(xml_doc_object = NULL,
                         param_table = NULL,

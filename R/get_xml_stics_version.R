@@ -8,7 +8,7 @@
 #' @param xml_doc an xmlDocument of a Stics xml file (Unused for the moment, no version String included in xml files)
 #'
 #' @return a Stics version string
-#' @export
+#'
 #'
 get_xml_stics_version <- function(stics_version = "last", xml_doc = NULL) {
 

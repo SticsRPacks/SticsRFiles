@@ -3,7 +3,7 @@
 #'
 #' @param stics_version the stics files version to use
 #'
-#' @export
+#'
 get_xml_doc_example <- function(xml_name = NULL,
                                 stics_version = "last") {
 

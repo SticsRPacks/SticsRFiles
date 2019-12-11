@@ -6,7 +6,8 @@
 #'
 #' @return a character vector of parameters names
 #'
-#' @export
+#'
+#'
 get_params_from_doc <- function(xml_doc_object, type_name = NULL, unique_val = TRUE) {
 
   if ( ! class(xml_doc_object) == "xmlDocument") {

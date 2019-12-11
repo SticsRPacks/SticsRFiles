@@ -3,7 +3,7 @@
 #' @param param_name parameter name or vector of names
 #'
 #' @return a formalism name or a list of
-#' @export
+#'
 #'
 get_param_formalism <- function(xml_document,param_name) {
 

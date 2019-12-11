@@ -7,7 +7,8 @@
 #' @param stics_version Version of the STICS model
 #' @param overwrite  Overwrite the document values ?
 #'
-#' @export
+#'
+#'
 gen_xml_doc <- function(doc_type, xml_doc = NULL,
                         nodes_nb = NULL, nodes_param = NULL,
                         stics_version = "last", overwrite = F) {

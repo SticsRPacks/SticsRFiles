@@ -7,7 +7,7 @@
 #'
 #' @return an xmlDocument object
 #'
-#' @export
+#'
 #'
 
 gen_usms_doc <- function(xml_doc_object = NULL,
