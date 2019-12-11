@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-stics_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_file = NULL) {
+convert_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_file = NULL) {
 
   # defining which xsl file to use according to the input xml file
   #files_types <- c("initialisations","sols","fichierplt","fichiertec")
