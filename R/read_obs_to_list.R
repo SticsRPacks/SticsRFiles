@@ -20,8 +20,10 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
 #' Meas= read_obs_to_list(path)
+#'}
 #'
 #' @export
 #'
