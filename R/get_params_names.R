@@ -32,9 +32,15 @@ get_params_names <- function(xml_object,param_list = c(), full_list = FALSE) {
 
   # getting only one usm node or sol node
   if ( node_name %in% c("sols","usms") ) {
-  #if ( node_name == "usms" ) {
-    xml_node <- xmlChildren(xmlRoot(xml_node))[[1]]
+    #if ( node_name == "usms" ) {
+    xml_node <- xmlChildren(xml_node)[[1]]
   }
+
+  # # filtering root nodes
+  # if (node_name %in% c("fichierpar", "fichierparamgen", "fichiertec", "fichiersta",
+  #                      "initialisations", "fichierplt")) {
+  #   childs <- xmlChildren(xml_node)
+  # }
 
   childs <- xmlChildren(xml_node)
   childs_names <- names(childs)
@@ -109,7 +115,9 @@ get_params_names <- function(xml_object,param_list = c(), full_list = FALSE) {
   names(param_list) <- NULL
 
   # filtering unwanted names
-  names_filt <- c("ta_entete", "tableau_entete", "ta", "tableau", "choix" )
+  names_filt <- c("ta_entete", "tableau_entete", "ta", "tableau", "choix",
+                  "fichierpar", "fichierparamgen", "fichiertec", "fichiersta",
+                  "initialisations", "fichierplt", "formalisme")
   param_list <- setdiff(param_list,names_filt)
   return(param_list)
 }

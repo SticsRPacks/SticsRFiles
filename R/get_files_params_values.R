@@ -21,14 +21,16 @@
 #'
 #' @export
 get_files_params_values <- function(xml_files,param_names_list,
-                              parent_name = NULL, parent_sel_attr = NULL){
+                              parent_name = NULL, parent_sel_attr = NULL,
+                              show_xpath = FALSE){
 
 
   xml_docs <- lapply(xml_files,xmldocument)
 
   values <- get_param_value(xml_docs, param_name = param_names_list,
                               parent_name = parent_name,
-                              parent_sel_attr = parent_sel_attr)
+                              parent_sel_attr = parent_sel_attr,
+                              show_xpath = show_xpath)
 
 
   return(values)

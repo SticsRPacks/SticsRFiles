@@ -29,13 +29,18 @@ get_param_value <- function(xml_doc_object,param_name,
 
   # Getting param values for sams parameters for the xml documents list
   if ( is.list(xml_doc_object) ) {
-    values <- lapply(xml_doc_object,function(x) get_param_value(x,param_name,parent_name,parent_sel_attr))
+    values <- lapply(xml_doc_object,function(x) get_param_value(x,
+                                                                param_name,
+                                                                parent_name,
+                                                                parent_sel_attr,
+                                                                show_xpath = show_xpath))
     return(values)
   }
 
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
-    out <- lapply(param_name, function(x) get_param_value(xml_doc_object,x))
+    out <- lapply(param_name, function(x) get_param_value(xml_doc_object,x,
+                                                          show_xpath = show_xpath))
     names(out) <- param_name
     return(out)
   }

@@ -26,8 +26,6 @@
 #' @export
 get_files_param_bounds <- function(xml_file, param_name, bounds_name = NULL) {
 
-  library("SticsRFiles")
-
 
   if (length(xml_file) > 1 ) {
 
