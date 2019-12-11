@@ -11,7 +11,7 @@
 #' @return A data.frame of the input meteorological variables used as input for the
 #'         STICS model.
 #'
-#' @seealso \code{\link{read_obs}}
+#' @seealso \code{\link{read_obs_int}}
 #'
 #' @importFrom data.table fread
 #'

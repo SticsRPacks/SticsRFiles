@@ -2,38 +2,44 @@
 % Please edit documentation in R/read_obs.R
 \name{read_obs}
 \alias{read_obs}
-\title{Read STICS observation file (*.obs)}
+\title{Read STICS observation files (*.obs) and store data into a list}
 \usage{
-read_obs(dirpath = getwd(), filename = NULL, mixed = NULL)
+read_obs(
+  dirpath = getwd(),
+  obs_filenames = NULL,
+  usms = NULL,
+  usms_filename = "usms.xml"
+)
 }
 \arguments{
 \item{dirpath}{Directory path}
 
-\item{filename}{A vector of observation file name(s). Optional, see details.}
+\item{obs_filenames}{A vector of observation file name(s). Optional, see details.}
 
-\item{mixed}{(optional) Is the simulation on mixed species (boolean)}
+\item{usms}{A vector of usm name(s) corresponding the the obs files. Optional, see details.}
+
+\item{usms_filename}{name of the usm file. Optional, see details.}
 }
 \value{
-A data.frame (sole crop) or a list of two data.frames (mixed crops) of
-the STICS-formated observations. Return \code{NULL} if no files were found,
-or more files than useable.
+A list of STICS-formated observations. Return \code{NULL} if no files were found.
 }
 \description{
-Read STICS observation file for sole or mixed crops.
+Read STICS observation files for sole crops and store data into a list
 }
 \details{
 If \code{filename} is not specified (or equal to \code{NULL}), the
-function tries first to match the \code{mod_s*} names for the same \*.obs
-names, and then to use the \code{.obs} file if there is one only
-(used for sole crops or for both mixed crops). If there are no .obs files,
-or two but not specified for reading, the function returns \code{NULL}
-If \code{mixed} is not specified (or equal to \code{NULL}), the function
-tries to read the number of species from the input files.
+function read all obs files in the \code{dirpath} folder. If there are no .obs files,
+the function returns \code{NULL}
+If usms names are not provided they are supposed to have the same name as the obs file.
+If usms_filename is not provided, existence of usms are checked in the usms.xml file.
 }
 \examples{
 \dontrun{
-library(SticsRFiles)
-Meas= read_obs()
+path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+Meas= read_obs_int(path)
 }
 
+}
+\seealso{
+\code{\link{read_obs_int}}
 }

@@ -96,7 +96,7 @@ Collate:
     'is_stics_doc.R'
     'read_met.R'
     'read_obs.R'
-    'read_obs_to_list.R'
+    'read_obs_int.R'
     'read_param.R'
     'remove_node_from_doc.R'
     'remove_parent_from_doc.R'

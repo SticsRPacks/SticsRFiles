@@ -16,13 +16,13 @@
 #'
 #' @return A list of STICS-formated observations. Return \code{NULL} if no files were found.
 #'
-#' @seealso \code{\link{read_obs}}
+#' @seealso \code{\link{read_obs_int}}
 #'
 #'
 #' @examples
 #' \dontrun{
 #' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
-#' Meas= read_obs(path)
+#' Meas= read_obs_int(path)
 #'}
 #'
 #' @export
@@ -32,8 +32,8 @@ read_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename
 
   #
   # Does not work for mixed crops for the moment
-  # To reconsider (revise read_obs) when the definitive data structure for storing obs will be defined.
-  # read_obs searches obs files comparing with mod_s*** files if filename is not provided which means that Stics
+  # To reconsider (revise read_obs_int) when the definitive data structure for storing obs will be defined.
+  # read_obs_int searches obs files comparing with mod_s*** files if filename is not provided which means that Stics
   # must have been run before ... could this be changed and still work with mixed crops?
   #
 
@@ -53,7 +53,7 @@ read_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename
     warning("No observations files in the given directory ",dirpath)
     return(NULL)
   }
-  obs_df=read_obs(dirpath, obs_filenames, mixed=FALSE)
+  obs_df=read_obs_int(dirpath, obs_filenames, mixed=FALSE)
   if (base::is.null(obs_df)) {
     return(NULL)
   }
@@ -74,7 +74,7 @@ read_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename
   obs_list=vector("list", length(usms))
 
   # obs_df is splitted per USM and only columns containing Stics variables and not only NA are extracted
-  # not optimal of course ... will be done differently when read_obs will be rewritten
+  # not optimal of course ... will be done differently when read_obs_int will be rewritten
   obs_list=lapply(obs_filenames, function (x) within(obs_df[obs_df$Plant==x,],rm("ian","mo","jo","jul","Plant")))
   for (iusm in 1:length(obs_list)) {
     obs_list[[iusm]]=obs_list[[iusm]][,sapply(1:ncol(obs_list[[iusm]]),function (x) any(!is.na(obs_list[[iusm]][,x])))]

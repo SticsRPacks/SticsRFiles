@@ -60,7 +60,7 @@ get_daily_results <- function(workspace,usm_name,var_list=NULL,
 
 
   # Using function from SticsRFiles for converting .n. to _n in the varname
-  # to be homogeneous with read_obs outputs
+  # to be homogeneous with read_obs_int outputs
   colnames(results_tbl) = var_to_col_names(colnames(results_tbl))
 
   # TODO
