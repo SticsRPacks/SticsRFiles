@@ -54,6 +54,6 @@ convert_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_
   style_file = file.path(java_dir,"bin/resources/xml/stylesheet",xsl_files[filet])
 
   # calling the function
-  convert_xml2txt(xml_file,style_file, out_file_path)
+  convert_xml2txt_int(xml_file,style_file, out_file_path)
 
 }
