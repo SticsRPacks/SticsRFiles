@@ -13,13 +13,13 @@ setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
     return("file name is empty !")
   }
   if (!length(ext) || !ext == "xml") {
-    return("Error: pb with extension")
+    return("Error: no xml extension")
   }
   if (!exist(object)) {
-    return("Error: file doesn't exist !")
+    return(paste("Error: file doesn't exist:", object@name, "!"))
   }
   if (exist(object) && isempty(object)) {
-    return("Error: file is empty")
+    return(paste("Error: file is empty:", object@name, "!"))
   }
   TRUE
 })
