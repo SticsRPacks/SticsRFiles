@@ -72,7 +72,7 @@ read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
         Out= data.table::fread(file.path(dirpath,paste0(x,".obs")), data.table = F)
         Out[Out<=-999.00]= NA
         Out$Plant= x
-        var_to_col_names(Out)
+        colnames(Out)= var_to_col_names(colnames(Out))
       })
       Table_obs= data.table::rbindlist(Table_obs, fill=T)
       attrfiles= Plant_name
@@ -83,7 +83,7 @@ read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
       obs_files= list.files(dirpath)%>%.[grep("\\.obs$",.)]
       if(length(obs_files)==1){
         Table_obs= data.table::fread(file.path(dirpath,obs_files), data.table = F)
-        Table_obs= var_to_col_names(Table_obs)
+        colnames(Table_obs)= var_to_col_names(colnames(Table_obs))
         attrfiles= obs_files
         Table_obs[Table_obs<=-999.00]= NA
         Table_obs$Plant= obs_files
@@ -101,7 +101,7 @@ read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
       Out= data.table::fread(file.path(dirpath,x), data.table = F)
       Out[Out<=-999.00]= NA
       Out$Plant= x
-      var_to_col_names(Out)
+      colnames(Out)= var_to_col_names(colnames(Out))
     })
     Table_obs= data.table::rbindlist(Table_obs, fill=T)
     attrfiles= filename
