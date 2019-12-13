@@ -73,6 +73,7 @@ read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
         Out[Out<=-999.00]= NA
         Out$Plant= x
         colnames(Out)= var_to_col_names(colnames(Out))
+        return(Out)
       })
       Table_obs= data.table::rbindlist(Table_obs, fill=T)
       attrfiles= Plant_name
@@ -102,6 +103,7 @@ read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
       Out[Out<=-999.00]= NA
       Out$Plant= x
       colnames(Out)= var_to_col_names(colnames(Out))
+      return(Out)
     })
     Table_obs= data.table::rbindlist(Table_obs, fill=T)
     attrfiles= filename
