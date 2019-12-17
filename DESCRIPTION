@@ -1,6 +1,7 @@
 Package: SticsRFiles
 Title: Read And Modify STICS Input/Output Files
-Version: 0.0.0.9000
+Date: 2019-12-17
+Version: 0.1.0.9001
 Authors@R: 
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
       person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
@@ -8,7 +9,9 @@ Authors@R:
       person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")),
       person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")),
       person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
-      person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev"))
+      person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")),
+      person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")),
+      person(given = "Joel", family = "Leonard", email = joel.leonard@inra.fr", role = c("rev"))
       )
 Description: The goal of SticsRFiles is to perform manipulations of the Stics model files.
 URL: https://github.com/SticsRPacks/SticsRFiles
@@ -40,6 +43,8 @@ Suggests:
     knitr,
     covr,
     rmarkdown
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
