@@ -11,7 +11,7 @@ Authors@R:
       person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
       person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")),
       person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")),
-      person(given = "Joel", family = "Leonard", email = joel.leonard@inra.fr", role = c("rev"))
+      person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev"))
       )
 Description: The goal of SticsRFiles is to perform manipulations of the Stics model files.
 URL: https://github.com/SticsRPacks/SticsRFiles
@@ -43,8 +43,6 @@ Suggests:
     knitr,
     covr,
     rmarkdown
-VignetteBuilder: knitr
-Roxygen: list(markdown = TRUE)
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
