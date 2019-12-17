@@ -13,12 +13,41 @@
 #' @examples
 #' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
 #' get_daily_results(path,"banana")
-get_daily_results <- function(workspace,usm_name,var_list=NULL,
-                              doy_list=NULL, dates_list=NULL
-                              ) {
+#'
+get_daily_results <- function(workspace,
+                              usm_name,
+                              var_list=NULL,
+                              doy_list=NULL,
+                              dates_list=NULL) {
   .= NULL
 
+
+  # TODO:
+  # usm_name : optional (NULL, default)
+  # extract usm names
+  # get intercrop results !
+  # if (is.null ( usm_name )) {
+  #   sti_list <- list.files(path = "/tmp/test_SticsOnR/JavaSTICS-1.41-stics-9.1/example/",
+  #                          pattern = "^mod_s")
+  # }
+
+
+  # Getting outputs for multiple usms
+  if (length(usm_name) > 1) {
+    print(usm_name)
+    #stop("multiple results !")
+    results_tbl_list <- lapply(usm_name,
+                               function(x) get_daily_results(workspace,
+                                                             x,
+                                                             var_list = var_list,
+                                                             doy_list = doy_list,
+                                                             dates_list = dates_list))
+    names(results_tbl_list) <- usm_name
+    return(results_tbl_list)
+  }
+
   results_path=file.path(workspace,paste0("mod_s",usm_name,".sti"))
+
 
   results_tbl <- try(dplyr::as.tbl(utils::read.table(results_path,header = TRUE,
                                                      sep = ";",
