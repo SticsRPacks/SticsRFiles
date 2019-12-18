@@ -5,9 +5,9 @@
 #' Other names are unchanged (i.e.: varname, varname_n, ...)
 #' @param var_vec Valid names vector
 #' @return Vector of formatted column names
-#' @export
+#@export
 #'
-#' @example
+#' @examples
 #' var_names <- c("var1","var2(n)")
 #' valid_names <- var_to_col_names(var_names)
 #'

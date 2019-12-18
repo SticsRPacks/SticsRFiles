@@ -34,7 +34,7 @@ get_daily_results <- function(workspace,
 
   # Getting outputs for multiple usms
   if (length(usm_name) > 1) {
-    print(usm_name)
+    #print(usm_name)
     #stop("multiple results !")
     results_tbl_list <- lapply(usm_name,
                                function(x) get_daily_results(workspace,

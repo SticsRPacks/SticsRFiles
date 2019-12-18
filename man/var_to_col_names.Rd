@@ -3,17 +3,23 @@
 \name{var_to_col_names}
 \alias{var_to_col_names}
 \title{Convert Stics variables names, or generated column names to
-Stics specific columns names}
+valid conventional column names.}
 \usage{
-var_to_col_names(var_list = c())
+var_to_col_names(var_vec)
 }
 \arguments{
-\item{var_list}{Variables names}
+\item{var_vec}{Valid names vector}
 }
 \value{
-List of formatted column names
+Vector of formatted column names
 }
 \description{
-Change the \code{varname(n)} or \code{varname.n.} to \code{varname_n}
-other names are unchanged (i.e.: varname, varname_n, ...)
+Change Stics variables names as valid variable R name
+Like \code{varname(n)} or \code{varname.n.} to  \code{varname_n}.
+Other names are unchanged (i.e.: varname, varname_n, ...)
+}
+\examples{
+var_names <- c("var1","var2(n)")
+valid_names <- var_to_col_names(var_names)
+
 }

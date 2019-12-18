@@ -3,7 +3,7 @@
 #' other names are unchanged (i.e.: varname, varname(n), ...)
 #' @param var_list Columns names list
 #' @return List of Stics variables names
-#' @export
+#@export
 #'
 col_names_to_var <- function(var_list=c()) {
   .= NULL

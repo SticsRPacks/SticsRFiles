@@ -2,7 +2,7 @@
 #' @param params_table a table (df, tibble) with parameters names
 #' indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2
 #'
-#' @export
+#@export
 sort_params_table <- function(params_table) {
 
   pattern <- "_[0-9]*$"

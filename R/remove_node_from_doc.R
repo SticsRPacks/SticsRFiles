@@ -8,7 +8,7 @@
 #' @param remove_parent Boolean. Is the parent to be removed ?
 #' @param nodes_ids The requested node IDs
 #'
-#' @export
+#@export
 remove_node_from_doc <- function( xml_doc, param_name ,
                                   parent_path = NULL,
                                   remove_parent = FALSE,

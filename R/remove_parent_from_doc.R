@@ -9,7 +9,7 @@
 #' @param remove_parent Boolean. Do we remove the parent node?
 #' @param nodes_ids The requested node IDs.
 #'
-#' @export
+#@export
 remove_parent_from_doc <- function( xml_doc, param_name ,
                                   parent_path = NULL,
                                   remove_parent = FALSE,

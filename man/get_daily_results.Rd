@@ -30,4 +30,5 @@ on variables names, cumulative DOY, dates list
 \examples{
 path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
 get_daily_results(path,"banana")
+
 }
