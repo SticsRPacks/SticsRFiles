@@ -4,10 +4,10 @@
 #' @param usms_param usms parameters
 #' @param overwrite replace existing soil (TRUE) or not, updating existing ones (FALSE)
 #'
-#' @export
+#@export
 #'
 
-set_usms_param <- function(xml_doc_object, usms_param = NULL, overwrite = TRUE) {
+set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = TRUE) {
 
   if ( ! base::is.null(usms_param) ) {
     if ( ! ("data.frame" %in% class(usms_param)) ) {

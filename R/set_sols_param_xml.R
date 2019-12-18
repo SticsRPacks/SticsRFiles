@@ -4,10 +4,10 @@
 #' @param sols_param soils parameters
 #' @param overwrite replace existing soil (TRUE) or not, updating existing ones (FALSE)
 #'
-#' @export
+#@export
 #'
 
-set_sols_param <- function(xml_doc_object, sols_param, overwrite = FALSE) {
+set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
 
   if ( ! "data.frame" %in% class(sols_param) ) {
