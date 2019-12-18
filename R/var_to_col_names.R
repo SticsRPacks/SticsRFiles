@@ -1,23 +1,28 @@
 #' @title  Convert Stics variables names, or generated column names to
-#' Stics specific columns names
-#' @description Change the `varname(n)` or `varname.n.` to `varname_n`
-#' other names are unchanged (i.e.: varname, varname_n, ...)
-#' @param var_list Variables names
-#' @return List of formatted column names
+#' valid conventional column names.
+#' @description Change Stics variables names as valid variable R name
+#' Like `varname(n)` or `varname.n.` to  `varname_n`.
+#' Other names are unchanged (i.e.: varname, varname_n, ...)
+#' @param var_vec Valid names vector
+#' @return Vector of formatted column names
 #' @export
 #'
-var_to_col_names <- function(var_list=c()) {
+#' @example
+#' var_names <- c("var1","var2(n)")
+#' valid_names <- var_to_col_names(var_names)
+#'
+var_to_col_names <- function(var_vec) {
   .= NULL
-  # varname(n)
-  var_list <-
-    gsub("\\(","_",var_list) %>%
+  # Case: varname(n)
+  var_vec <-
+    gsub("\\(","_",var_vec) %>%
     gsub("\\)","",.)
 
-  # varname.n.
-  var_list <-
-    gsub("\\.","_",var_list) %>%
+  # Case: varname.n.
+  var_vec <-
+    gsub("\\.","_",var_vec) %>%
     gsub("_$","",.)
 
-  return(var_list)
+  return(var_vec)
 
 }
