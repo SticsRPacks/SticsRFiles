@@ -27,7 +27,7 @@
 #'
 #' @export
 #'
-read_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename="usms.xml"){
+get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename="usms.xml"){
   .=NULL # to avoid CRAN note for pipe
 
   #
