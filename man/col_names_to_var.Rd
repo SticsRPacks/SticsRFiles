@@ -16,3 +16,4 @@ List of Stics variables names
 Change the \code{varname.n.} or \code{varname_n} by \code{varname(n)}
 other names are unchanged (i.e.: varname, varname(n), ...)
 }
+\keyword{internal}

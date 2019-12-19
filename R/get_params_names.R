@@ -6,6 +6,7 @@
 #'
 #' @return a character vector of parameters names
 #'
+#' @keywords internal
 #'
 get_params_names <- function(xml_object,param_list = c(), full_list = FALSE) {
 

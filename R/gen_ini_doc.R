@@ -9,7 +9,8 @@
 #' @return an xmlDocument object or a list of
 #
 #'
-
+#' @keywords internal
+#'
 gen_ini_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         crop_tag = "crop",

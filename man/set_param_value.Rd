@@ -32,3 +32,4 @@ set_param_value(
 \description{
 Setting parameter value in a xmlDocument object
 }
+\keyword{internal}

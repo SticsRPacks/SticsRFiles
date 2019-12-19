@@ -26,3 +26,4 @@ add_stics_nodes(
 \description{
 Add node to a Stics XML document
 }
+\keyword{internal}

@@ -21,3 +21,4 @@ All_vars= all_out_var()
 \seealso{
 \code{\link{set_out_var}}
 }
+\keyword{internal}

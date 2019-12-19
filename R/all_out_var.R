@@ -31,6 +31,8 @@
 #'
 #@export
 #'
+#' @keywords internal
+#'
 all_out_var= function(){
   out_data= NULL
   utils::data("out_data", envir = environment())
@@ -56,6 +58,8 @@ all_out_var= function(){
 #'}
 #'
 #@export
+#'
+#' @keywords internal
 #'
 find_STICS_var= function(Var=NULL){
   All_vars= all_out_var()

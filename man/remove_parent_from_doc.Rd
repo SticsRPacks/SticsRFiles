@@ -26,3 +26,4 @@ remove_parent_from_doc(
 \description{
 Remove a parent node from an XML file.
 }
+\keyword{internal}

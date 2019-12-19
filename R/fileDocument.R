@@ -1,5 +1,5 @@
 #' @include global.R
-
+#' @keywords internal
 
 #' An S4 class to represent a file or dir.
 #'

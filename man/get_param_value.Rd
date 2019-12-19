@@ -32,3 +32,4 @@ a numeric vector values of parameter or a list of
 \description{
 Extracting parameter value from an xml document object
 }
+\keyword{internal}

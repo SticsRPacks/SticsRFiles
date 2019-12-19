@@ -9,7 +9,9 @@
 #'
 #' @examples
 #' var_names <- c("var1","var2(n)")
-#' valid_names <- var_to_col_names(var_names)
+#' valid_names <- SticsRFiles:::var_to_col_names(var_names)
+#'
+#' @keywords internal
 #'
 var_to_col_names <- function(var_vec) {
   .= NULL

@@ -7,7 +7,10 @@
 #' @param replace_string The replacing string
 #' @param new_file_path The newly-created file path
 #'
-#' @export
+#@export
+#'
+#' @keywords internal
+#'
 replace_string_in_file <- function(file_path,target_string,replace_string,new_file_path=NULL) {
 
     if (!file.exists(file_path)){

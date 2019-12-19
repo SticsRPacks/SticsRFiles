@@ -20,3 +20,4 @@ a character vector of parameters names
 \description{
 Get a list of Stics xml parameters names an xmlDocument or  XML node
 }
+\keyword{internal}

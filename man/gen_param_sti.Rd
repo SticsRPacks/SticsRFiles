@@ -24,4 +24,5 @@ and parameters values vectors
 gen_param_sti(".", c("par1","par2"), c(1,2))
 gen_param_sti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
 }
+
 }

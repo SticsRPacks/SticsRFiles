@@ -9,6 +9,8 @@
 #'
 #@export
 #'
+#' @keywords internal
+#'
 exists_param <- function(xml_doc_object,param_name, ...) {
 
   nb <- get_param_number(xml_doc_object,param_name, ...)

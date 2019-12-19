@@ -7,7 +7,7 @@
 #'
 #' @return a list with fields $type, $xpath and $length
 #'
-#'
+#' @keywords internal
 #'
 # TODO : may be merged with get_params_types !
 get_param_type <- function(xml_doc, param_name, parent_name = NULL,

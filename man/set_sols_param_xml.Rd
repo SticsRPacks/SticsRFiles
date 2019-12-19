@@ -16,3 +16,4 @@ set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 \description{
 Setting a sol param value(s) in a sols xmlDocument
 }
+\keyword{internal}

@@ -8,6 +8,8 @@
 #'
 #@export
 #'
+#' @keywords internal
+#'
 convert_xml2txt_int <- function( xml_file, style_file, out_file = NULL ) {
 
   # library(xslt)

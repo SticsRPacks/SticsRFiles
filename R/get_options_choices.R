@@ -12,6 +12,7 @@
 #' get_option_choices(path/to/xml/file)
 #' }
 #'
+#' @keywords internal
 #'
 get_options_choices <- function(xml_file_path, options_names=NULL){
 

@@ -29,3 +29,4 @@ gen_xml_doc(
 \description{
 Generate from a template or modify a Stics sols or usms xmlDocument
 }
+\keyword{internal}

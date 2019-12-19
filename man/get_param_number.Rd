@@ -19,3 +19,4 @@ a numeric vector
 \description{
 Get the number of a (or alist of) Stics xml parameter(s) occurence from a request in an xmlDocument
 }
+\keyword{internal}

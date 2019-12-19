@@ -22,5 +22,5 @@ Extracting options choices values from an xml file data
 get_option_choices(path/to/xml/file)
 }
 
-
 }
+\keyword{internal}

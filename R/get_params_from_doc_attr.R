@@ -6,7 +6,7 @@
 #'
 #' @return a named list of parameter names
 #'
-#'
+#' @keywords internal
 #'
 get_params_from_doc_attr <- function(xml_doc_object, type_name = NULL, unique_val = TRUE) {
 

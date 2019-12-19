@@ -11,6 +11,9 @@
 #' @param show_xpath Print the xpath
 #'
 #@export
+#'
+#' @keywords internal
+#'
 set_param_value <- function(xml_doc_object,param_name,param_value,
                             parent_name= NULL,
                             parent_sel_attr = NULL, ids=NULL,

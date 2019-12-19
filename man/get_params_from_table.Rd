@@ -32,3 +32,4 @@ a named list (with param names as list names) of data.frame/tibble
 \description{
 Get a list of Stics xml parameters names and values from a table (data.frame, tibble)
 }
+\keyword{internal}

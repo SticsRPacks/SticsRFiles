@@ -3,6 +3,9 @@
 #' indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2
 #'
 #@export
+#'
+#' @keywords internal
+#'
 sort_params_table <- function(params_table) {
 
   pattern <- "_[0-9]*$"

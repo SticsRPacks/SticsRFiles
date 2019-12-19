@@ -4,6 +4,7 @@
 #'
 #' @return All the STICS XML file versions available
 #'
+#' @keywords internal
 #'
 get_xml_stics_versions_tags <- function(last= FALSE) {
 

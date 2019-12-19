@@ -8,6 +8,7 @@
 #' @param param_value The parameter values
 #' @param out_file_path The new file path
 #'
+#' @keywords internal
 #'
 replace_txt_param_value <- function(file_path,param_tag,param_value,out_file_path=NULL){
 

@@ -21,4 +21,5 @@ Generating a daily variable list file from variables names
  gen_var_mod(".", c("var1","var2"))
  gen_var_mod("/path/to/stics/workspace", c("var1","var2"))
 }
+
 }

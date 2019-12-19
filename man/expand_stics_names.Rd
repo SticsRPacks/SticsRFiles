@@ -16,3 +16,4 @@ expand_stics_names(in_csv_file, out_csv_file, header_vec = NULL)
 \description{
 Expand stics names from parameters/variables simple names
 }
+\keyword{internal}

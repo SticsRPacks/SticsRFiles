@@ -26,3 +26,4 @@ an xmlDocument object
 \description{
 Generate  from a template or modify a Stics usms xmlDocument
 }
+\keyword{internal}

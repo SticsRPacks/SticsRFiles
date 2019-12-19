@@ -23,3 +23,4 @@ replace_string_in_file(
 \description{
 Replacing occurrences of a string by another one, in place or creating a new file
 }
+\keyword{internal}

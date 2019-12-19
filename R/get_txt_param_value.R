@@ -9,6 +9,9 @@
 #@export
 #'
 # @examples
+#'
+#' @keywords internal
+#'
 get_txt_param_value <- function(file_path, param_names, file_type, names_dict=NULL) {
 
   files_types <- c("name_value", "soil", "ini", "tec")

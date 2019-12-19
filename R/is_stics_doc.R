@@ -6,6 +6,7 @@
 #' @param doc_type The type of xml document
 #' @param doc_types The different possible document types (optionnal)
 #'
+#' @keywords internal
 #'
 is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
 

@@ -14,3 +14,4 @@ get_xml_doc_example(xml_name = NULL, stics_version = "last")
 \description{
 Get an xmlDocument from a Stics xml file example
 }
+\keyword{internal}

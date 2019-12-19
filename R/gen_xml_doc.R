@@ -7,7 +7,7 @@
 #' @param stics_version Version of the STICS model
 #' @param overwrite  Overwrite the document values ?
 #'
-#'
+#' @keywords internal
 #'
 gen_xml_doc <- function(doc_type, xml_doc = NULL,
                         nodes_nb = NULL, nodes_param = NULL,
@@ -101,8 +101,8 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
 
   # setting data according to doc_type
   switch( doc_type,
-          usms = set_usms_param(xml_doc, nodes_param, overwrite = overwrite),
-          sols = set_sols_param(xml_doc, nodes_param, overwrite = overwrite)
+          usms = set_usms_param_xml(xml_doc, nodes_param, overwrite = overwrite),
+          sols = set_sols_param_xml(xml_doc, nodes_param, overwrite = overwrite)
   )
 
 

@@ -15,3 +15,4 @@ All the STICS XML file versions available
 \description{
 Get all stics XML versions
 }
+\keyword{internal}

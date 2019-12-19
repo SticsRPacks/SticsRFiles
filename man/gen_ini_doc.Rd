@@ -29,3 +29,4 @@ an xmlDocument object or a list of
 \description{
 Generate  from a template or modify a Stics ini xmlDocument
 }
+\keyword{internal}

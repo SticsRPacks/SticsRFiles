@@ -9,6 +9,8 @@
 #'
 #'
 #@examples
+#' @keywords internal
+#'
 get_name_value_file_value <- function(file_path, param_names, names_dict=NULL) {
 
   # Case plt, station, tempopar.sti, tempoparv6.sti

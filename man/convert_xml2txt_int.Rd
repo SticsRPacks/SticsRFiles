@@ -18,3 +18,4 @@ Using an xslt tranformation, an xml input file is converted to
 an other file format (text, xml). The output file name may be given or calculated.
 In the last case, the extension is defined after getting xsl method from the xsl file (xml, txt).
 }
+\keyword{internal}

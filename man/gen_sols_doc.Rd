@@ -26,3 +26,4 @@ an xmlDocument object
 \description{
 Generate from a template a Stics sols xmlDocument
 }
+\keyword{internal}

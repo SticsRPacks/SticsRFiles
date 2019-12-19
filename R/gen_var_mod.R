@@ -9,7 +9,9 @@
 #'  gen_var_mod(".", c("var1","var2"))
 #'  gen_var_mod("/path/to/stics/workspace", c("var1","var2"))
 #' }
+#'
 #' @export
+#'
 gen_var_mod <- function(workspace, var_names, file_name ="var.mod") {
 
 

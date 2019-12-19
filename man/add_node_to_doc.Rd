@@ -18,3 +18,4 @@ add_node_to_doc(xml_doc, new_node, nodes_nb = 1, parent_path)
 \description{
 Add node to document
 }
+\keyword{internal}

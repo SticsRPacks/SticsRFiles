@@ -26,3 +26,4 @@ an xmlDocument object or a list of
 \description{
 Generate  from a template or modify a Stics tec xmlDocument
 }
+\keyword{internal}

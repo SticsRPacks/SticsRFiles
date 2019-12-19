@@ -13,3 +13,4 @@ indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2}
 \description{
 Sort a table against column names indexes with a suffix
 }
+\keyword{internal}

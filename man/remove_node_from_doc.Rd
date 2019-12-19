@@ -26,3 +26,4 @@ remove_node_from_doc(
 \description{
 Remove a node from an XML document
 }
+\keyword{internal}

@@ -8,6 +8,7 @@
 #'
 #@export
 #'
+#' @keywords internal
 add_stics_nodes <- function(xml_doc, file_tag, nodes_nb = 1,formalism_name = NULL,
                             stics_version = "last" ) {
   # getting xml doc types == root node name

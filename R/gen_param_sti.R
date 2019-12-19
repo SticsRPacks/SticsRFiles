@@ -10,7 +10,9 @@
 #' gen_param_sti(".", c("par1","par2"), c(1,2))
 #' gen_param_sti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
 #' }
+#'
 #' @export
+#'
 gen_param_sti <- function(workspace, par_names, par_values, file_name = "param.sti") {
   file_path <- file.path(workspace, file_name)
 

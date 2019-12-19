@@ -40,3 +40,4 @@ is_stics_newpar(xml_doc)
 \description{
 Test if an XML document is a STICS document.
 }
+\keyword{internal}

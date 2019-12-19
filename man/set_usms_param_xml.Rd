@@ -16,3 +16,4 @@ set_usms_param_xml(xml_doc_object, usms_param = NULL, overwrite = TRUE)
 \description{
 Setting a usm param value(s) in an usms xmlDocument
 }
+\keyword{internal}

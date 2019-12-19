@@ -29,3 +29,4 @@ a list with fields $type, $xpath and $length
 \description{
 Get a Stics xml parameter type and xpath from a request in an xmlDocument
 }
+\keyword{internal}

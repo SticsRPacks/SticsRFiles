@@ -19,3 +19,4 @@ a named list of parameter names
 \description{
 Get a list of Stics xml parameters names from nodes attributes in an xmlDocument
 }
+\keyword{internal}

@@ -8,6 +8,7 @@
 #' @return an xmlDocument object
 #'
 #'
+#' @keywords internal
 #'
 gen_sols_doc <- function(xml_doc_object = NULL,
                          sols_nb = NULL,

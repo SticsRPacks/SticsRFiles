@@ -1,3 +1,5 @@
+#' @keywords internal
+
 # xml class based on fileDocument class
 setClass("xmlDocument", contains = c("fileDocument"),validity=validDoc)
 

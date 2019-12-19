@@ -14,6 +14,8 @@
 #' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
 #' get_daily_results(path,"banana")
 #'
+#' @export
+#'
 get_daily_results <- function(workspace,
                               usm_name,
                               var_list=NULL,

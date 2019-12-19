@@ -17,3 +17,4 @@ an xmlDocument object
 \description{
 Get an xmlDocument from a Stics xml file template
 }
+\keyword{internal}

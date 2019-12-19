@@ -5,6 +5,8 @@
 #' @return List of Stics variables names
 #@export
 #'
+#' @keywords internal
+#'
 col_names_to_var <- function(var_list=c()) {
   .= NULL
 

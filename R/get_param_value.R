@@ -13,7 +13,7 @@
 #'
 #' @return a numeric vector values of parameter or a list of
 #'
-#'
+#' @keywords internal
 #'
 
 get_param_value <- function(xml_doc_object,param_name,

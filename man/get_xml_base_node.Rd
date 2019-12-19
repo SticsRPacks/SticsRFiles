@@ -16,3 +16,4 @@ get_xml_base_node(file_tag, form_name = NULL, stics_version = "last")
 \description{
 Get an xmlDocument node (set of parameters) from a Stics xml node file template
 }
+\keyword{internal}

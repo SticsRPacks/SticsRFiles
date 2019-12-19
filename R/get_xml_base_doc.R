@@ -5,6 +5,7 @@
 #'
 #' @return an xmlDocument object
 #'
+#' @keywords internal
 #'
 get_xml_base_doc <- function(xml_type = NULL,
                              stics_version = "last") {

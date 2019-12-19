@@ -22,9 +22,6 @@ Extracting parameters names for an xml files or a vector of files.
 library(SticsRFiles)
 xml_file <- "path/to/xmlfile"
 xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
-param_names <- get_files_params_names(xml_file)
-
-param_names <- get_files_params_names(xml_file)
 
 param_names <- get_files_params_names(xml_file)
 

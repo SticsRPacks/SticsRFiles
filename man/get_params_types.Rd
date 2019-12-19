@@ -17,3 +17,4 @@ a list of list of parameter type, xpath and values number
 \description{
 Get a list of Stics xml parameters types and xpath from a request in an xmlDocument
 }
+\keyword{internal}

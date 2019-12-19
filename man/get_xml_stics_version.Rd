@@ -17,3 +17,4 @@ a Stics version string
 \description{
 Get a version/or the laste version string of available Stics files templates in the package
 }
+\keyword{internal}

@@ -7,7 +7,7 @@
 #'
 #' @return an xmlDocument object
 #'
-#'
+#' @keywords internal
 #'
 
 gen_usms_doc <- function(xml_doc_object = NULL,

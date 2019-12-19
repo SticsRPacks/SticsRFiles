@@ -21,5 +21,5 @@ get_plants_nb("path/to/USM","ble")
 get_plants_nb("path/to/USM",c("ble","mais"))
 }
 
-
 }
+\keyword{internal}

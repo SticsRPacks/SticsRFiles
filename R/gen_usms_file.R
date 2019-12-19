@@ -11,9 +11,6 @@
 #'
 #' @export
 #'
-#'
-#'
-#'
 
 gen_usms_file <- function(usms_out_file,
                           usms_nb = NULL, usms_param = NULL,

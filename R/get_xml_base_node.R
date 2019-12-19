@@ -3,6 +3,7 @@
 #' @param form_name formalism name
 #' @param stics_version the stics files version to use
 #'
+#' @keywords internal
 #'
 # TODO: under construction !!!!!!!!!!!!!!!!!
 get_xml_base_node <- function(file_tag, form_name=NULL,

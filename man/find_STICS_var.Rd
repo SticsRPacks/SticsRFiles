@@ -27,3 +27,4 @@ find_STICS_var("lai")
 \seealso{
 \code{\link{all_out_var}}
 }
+\keyword{internal}

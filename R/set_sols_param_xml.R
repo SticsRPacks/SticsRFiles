@@ -6,6 +6,8 @@
 #'
 #@export
 #'
+#' @keywords internal
+#'
 
 set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 

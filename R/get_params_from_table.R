@@ -9,6 +9,7 @@
 #'
 #' @return a named list (with param names as list names) of data.frame/tibble
 #'
+#' @keywords internal
 #'
 get_params_from_table <- function(params_table,
                                   param_names = NULL,

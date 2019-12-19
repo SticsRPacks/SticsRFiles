@@ -6,6 +6,9 @@
 #'
 #@export
 #'
+#' @keywords internal
+#'
+
 
 set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = TRUE) {
 

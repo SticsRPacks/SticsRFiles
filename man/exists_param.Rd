@@ -16,3 +16,4 @@ exists_param(xml_doc_object, param_name, ...)
 \description{
 Test if a parameter exists in an XML file
 }
+\keyword{internal}

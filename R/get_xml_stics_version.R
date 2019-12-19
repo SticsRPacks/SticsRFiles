@@ -9,6 +9,7 @@
 #'
 #' @return a Stics version string
 #'
+#' @keywords internal
 #'
 get_xml_stics_version <- function(stics_version = "last", xml_doc = NULL) {
 
