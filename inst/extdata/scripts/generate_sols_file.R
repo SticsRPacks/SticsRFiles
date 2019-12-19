@@ -16,4 +16,4 @@ xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
 xl_param <- read_excel(xl_path,sheet = "Soils")
 
 # Generating a new sols.xml file, for all xl_param lines
-gen_sols_file(sols_param = xl_param, sols_out_file = out_file)
+gen_sols_file_xml(sols_param = xl_param, sols_out_file = out_file)

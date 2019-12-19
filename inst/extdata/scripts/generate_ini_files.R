@@ -21,10 +21,10 @@ xl_param <- read_excel(xl_path, sheet = "Ini")
 # for all the lines (one file per xl_param line)
 # without using an xml input file
 # (getting xml file from a template example in the package)
-gen_ini_file(param_table = xl_param, out_path = out_dir)
+gen_ini_file_xml(param_table = xl_param, out_path = out_dir)
 
 # using an existing input xml file
 in_file <- "/path/to/file_ini.xml"
 
-gen_ini_file(ini_in_file = in_file ,param_table = xl_param, out_path = out_dir)
+gen_ini_file_xml(ini_in_file = in_file ,param_table = xl_param, out_path = out_dir)
 

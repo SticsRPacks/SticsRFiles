@@ -12,7 +12,7 @@
 #'
 #'
 #'
-gen_sols_file <- function(sols_out_file,
+gen_sols_file_xml <- function(sols_out_file,
                           sols_nb = NULL,sols_param = NULL,
                           sols_in_file = NULL,
                           stics_version ="last") {

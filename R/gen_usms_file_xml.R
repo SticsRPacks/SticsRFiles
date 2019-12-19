@@ -12,7 +12,7 @@
 #' @export
 #'
 
-gen_usms_file <- function(usms_out_file,
+gen_usms_file_xml <- function(usms_out_file,
                           usms_nb = NULL, usms_param = NULL,
                           usms_in_file = NULL,
                           stics_version ="last") {

@@ -12,7 +12,7 @@
 #' @export
 #'
 # TODO: refactor with gen_sta_file, gen_tec_file : same code
-gen_ini_file <- function(ini_out_file = NULL, param_table = NULL,
+gen_ini_file_xml <- function(ini_out_file = NULL, param_table = NULL,
                          ini_in_file = NULL,
                          out_path = getwd(),
                          crop_tag = "crop",

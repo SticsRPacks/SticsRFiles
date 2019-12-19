@@ -18,9 +18,9 @@ xl_param <- read_excel(xl_path, sheet = "Station")
 ## Generating a list of files from the xl_param table
 # for all the lines (one file per xl_param line)
 # without using an xml input file (getting xml file from a template example in the package)
-gen_sta_file(param_table = xl_param, out_path = out_dir)
+gen_sta_file_xml(param_table = xl_param, out_path = out_dir)
 
 # using an existing input xml file
 in_file <- "/path/to/file_sta.xml"
 
-gen_ini_file(sta_in_file = in_file ,param_table = xl_param, out_path = out_dir)
+gen_ini_file_xml(sta_in_file = in_file ,param_table = xl_param, out_path = out_dir)

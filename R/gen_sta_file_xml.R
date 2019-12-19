@@ -10,7 +10,7 @@
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_file <- function(sta_out_file = NULL, param_table = NULL,
+gen_sta_file_xml <- function(sta_out_file = NULL, param_table = NULL,
                          sta_in_file = NULL,
                          out_path = getwd(),
                          stics_version ="last") {
