@@ -53,7 +53,7 @@ get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename=
     warning("No observations files in the given directory ",dirpath)
     return(NULL)
   }
-  obs_df=read_obs_int(dirpath, obs_filenames, mixed=FALSE)
+  obs_df=get_obs_int(dirpath, obs_filenames, mixed=FALSE)
   if (base::is.null(obs_df)) {
     return(NULL)
   }
