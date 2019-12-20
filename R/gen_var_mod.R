@@ -12,7 +12,7 @@
 #'
 #' @export
 #'
-gen_var_mod <- function(workspace, var_names, file_name ="var.mod") {
+gen_varmod <- function(workspace, var_names, file_name ="var.mod") {
 
 
   if (! dir.exists(workspace)) {
