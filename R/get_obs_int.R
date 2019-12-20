@@ -25,7 +25,7 @@
 #' @examples
 #'\dontrun{
 #' library(SticsRFiles)
-#' Meas= read_obs_int()
+#' Meas= get_obs_int()
 #'}
 #'
 # @export
