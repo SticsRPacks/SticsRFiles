@@ -30,5 +30,5 @@ Meteo= read_met()
 
 }
 \seealso{
-\code{\link{read_obs_int}}
+\code{\link{get_obs_int}}
 }

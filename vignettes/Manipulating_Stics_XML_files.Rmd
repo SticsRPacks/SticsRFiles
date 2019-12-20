@@ -1,0 +1,250 @@
+---
+title: "Manipulating Stics XML files"
+output: 
+   html_document:
+     theme: default
+     toc: true
+     toc_float:
+       collapsed: false
+       smooth_scroll: false
+     number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Manipulate_Stics_XML_files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+params:
+  xml_dir: !r system.file(file.path("extdata","xml","examples","V9.0"), package = "SticsRFiles" )
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SticsRFiles)
+#print(params$xml_dir)
+options(warn=-1)
+```
+
+
+# Introduction
+The purpose of this document is to provide starting information about how to use SticsRFiles functions for extracting data from XML Stics input files or replacing data into them.
+
+Using simple functions use cases
+
+Exploring files content for files sets ...
+
+
+# Understanding what are parameters in Stics XML files
+
+XML files are self documented files and hierarchically structured. Syntaxic rules are based on what we call nodes (tags ?, similar to html ones) and attributes.
+
+
+Stics XML files are filled with different kinds of parameters description
+structures according to their type/role in the model formalisms.
+
+As we can see in the above XML file extract from a general parameter file:    
+
+* Parameters are grouped according to formalisms (in a `xml <formalisme>...</formalisme> ` block)
+
+* Parameters may be defined by single values
+This kind of definition is common for all files types and the parameter name is stored in the `nom` attribute of a `param` XML node. So the first parameter name in the example is `beta` and its value is `1.40000` (inside param tags).
+
+* Option parameters (with or without attached parameters, eventually with sub-option)
+The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example.
+
+
+```xml
+<formalisme nom="Water absorption and nitrogen content of the plant">
+    <param format="real" max="2.0" min="1.0" nom="beta">1.40000</param>
+    <param format="real" max="1.0" min="0.2" nom="lvopt">0.50000</param>
+    <param format="real" max="0.07" min="0.0050" nom="rayon">0.02000</param>
+    <param format="real" max="0.1" min="0.01" nom="difN">0.04500</param>
+    <param format="real" max="3.0" min="0.0" nom="concrr">0.02000</param>
+    <param format="real" max="30.0" min="5.0" nom="plNmin">10.00000</param>
+    <param format="real" max="50.0" min="0.0" nom="irrlev">20.00000</param>
+    <param format="real" max="50.0" min="0.0" nom="QNpltminINN">0.00000</param>
+    <option choix="2" nom="Nitrogen fixation by legumes" nomParam="codesymbiose">
+      <choix code="1" nom="critical nitrogen"/>
+      <choix code="2" nom="nodule activity">
+        <option choix="2" nom="mineral nitrogen inhibition" nomParam="codefxn">
+          <choix code="1" nom="no effect"/>
+          <choix code="2" nom="nitrogen amount"/>
+          <choix code="3" nom="nitrogen concentration"/>
+        </option>
+      </choix>
+    </option>
+</formalisme>
+```
+
+* Parameters with several values (for soil layers, technical operations,...)    
+Several values may be defined for example relatively to soil parameters (different layers) or for crop management operations (with time repetitions). 
+
+  * example from soil files    
+  In the above file extract for soil parameters, each set of parameters is repeated for each soil layer (up to 5). The parameters names are defined in a `nom` attribute for each `colonne` XML tag.    
+  
+```xml
+
+<sol nom="solcanne">
+
+...
+
+<tableau nb_colonnes="8" nom="layer 1">
+  <colonne nom="epc">20.00</colonne>
+  <colonne nom="HCCF">46.80</colonne>
+  <colonne nom="HMINF">26.20</colonne>
+  <colonne nom="DAF">1.08</colonne>
+  <colonne nom="cailloux">0.00</colonne>
+  <colonne nom="typecailloux">1</colonne>
+  <colonne nom="infil">50.00</colonne>
+  <colonne nom="epd">10</colonne>
+</tableau>
+
+...
+
+<tableau nb_colonnes="8" nom="layer 5">
+<colonne nom="epc">20.00</colonne>
+<colonne nom="HCCF">50.10</colonne>
+<colonne nom="HMINF">25.50</colonne>
+<colonne nom="DAF">0.99</colonne>
+<colonne nom="cailloux">0.00</colonne>
+<colonne nom="typecailloux">1</colonne>
+<colonne nom="infil">50.00</colonne>
+<colonne nom="epd">10</colonne>
+</tableau>
+</sol>
+
+...
+
+```
+
+  * example from tec files    
+  In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number). The parameters names are defined in a `nom` attribute for each `colonne` XML tag, inside an `intervention` node.
+  
+```xml
+<formalisme nom="supply of organic residus">
+        <ta nb_interventions="5" nom="interventions">
+            <ta_entete nb_colonnes="7">
+                <colonne nom="julres"/>
+                <colonne nom="coderes"/>
+                <colonne nom="qres"/>
+                <colonne nom="Crespc"/>
+                <colonne nom="CsurNres"/>
+                <colonne nom="Nminres"/>
+                <colonne nom="eaures"/>
+            </ta_entete>
+            <intervention nb_colonnes="7">
+                <colonne nom="julres">112</colonne>
+                <colonne nom="coderes">1</colonne>
+                <colonne nom="qres">1.00</colonne>
+                <colonne nom="Crespc">42.00</colonne>
+                <colonne nom="CsurNres">60.00</colonne>
+                <colonne nom="Nminres">0.00</colonne>
+                <colonne nom="eaures">0.00</colonne>
+            </intervention>
+            
+            ...
+            
+            <intervention nb_colonnes="7">
+                <colonne nom="julres">220</colonne>
+                <colonne nom="coderes">2</colonne>
+                <colonne nom="qres">1.00</colonne>
+                <colonne nom="Crespc">42.00</colonne>
+                <colonne nom="CsurNres">60.00</colonne>
+                <colonne nom="Nminres">0.00</colonne>
+                <colonne nom="eaures">0.00</colonne>
+            </intervention>
+        </ta>
+    </formalisme>
+```
+
+
+
+
+
+
+# Retrieving parameters information from files
+
+Rules have been defined to search and extract information inside XML files in order to simplify the way of using functions dedicated to XML files manipulations.    
+
+In some cases information relative to upward dependence are needed for extracting parameters values, but in most cases only the parameters names are mandatory in functions arguments.
+
+## Getting parameters names list from a file or a file list    
+
+
+```{r}
+sols <- file.path(params$xml_dir,"sols.xml")
+
+get_files_params_names(sols)
+```
+
+```{r}
+files_list <- c(file.path(params$xml_dir,"param_gen.xml"),
+                file.path(params$xml_dir,"sols.xml"))
+
+param_names <- get_files_params_names(files_list)
+
+head(param_names[[1]])
+
+head(param_names[[2]])
+
+
+```
+
+
+## Getting parameters values from a file    
+* Scalar parameters
+  * for one parameter and several occurence    
+```{r}
+sols <- file.path(params$xml_dir,"sols.xml")
+
+get_files_params_values(sols,param_names_list = "argi", show_xpath = T )
+```    
+  * For one parameter and one occurence (conditional selection)    
+```{r}
+sols <- file.path(params$xml_dir,"sols.xml")
+
+get_files_params_values(sols,param_names_list = "argi", parent_name = "sol",
+                        parent_sel_attr = "solcanne", show_xpath = T)
+```    
+  * for several parameters and several occurrence    
+```{r}
+sols <- file.path(params$xml_dir,"sols.xml")
+
+get_files_params_values(sols,param_names_list = c("argi", "pH"), show_xpath = T )
+```    
+  * for several parameters and one occurrence (conditional selection)    
+  **THE RESULTS IS FALSE**
+```{r}
+sols <- file.path(params$xml_dir,"sols.xml")
+
+get_files_params_values(sols,param_names_list = c("argi", "pH") , parent_name = "sol",
+                        parent_sel_attr = "solcanne", show_xpath = T)
+```
+```{r}
+sols <- file.path(params$xml_dir,"param_gen.xml")
+
+get_files_params_values(sols,param_names_list = "iniprofil", show_xpath = T )
+```
+
+* Vector parameters
+  * All values (for all soil layers, or crop management operations)
+
+  * Selecting   
+  
+  
+## Getting parameters values for a files list 
+
+
+
+# Replacing parameters values in files
+
+
+
+# Using functions for multiple files
+
+
+

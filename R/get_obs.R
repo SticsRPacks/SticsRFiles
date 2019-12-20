@@ -22,7 +22,7 @@
 #' @examples
 #' \dontrun{
 #' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
-#' Meas= get_obs_int(path)
+#' Meas= get_obs(path)
 #'}
 #'
 #' @export
