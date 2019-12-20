@@ -32,7 +32,7 @@
 #'
 #' @keywords internal
 #'
-read_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
+get_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   .=NULL # to avoid CRAN note for pipe
   if(base::is.null(mixed)){
     if(file.exists(file.path(dirpath,"new_travail.usm"))){

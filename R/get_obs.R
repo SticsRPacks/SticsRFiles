@@ -16,13 +16,13 @@
 #'
 #' @return A list of STICS-formated observations. Return \code{NULL} if no files were found.
 #'
-#' @seealso \code{\link{read_obs_int}}
+#' @seealso \code{\link{get_obs_int}}
 #'
 #'
 #' @examples
 #' \dontrun{
 #' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
-#' Meas= read_obs_int(path)
+#' Meas= get_obs_int(path)
 #'}
 #'
 #' @export
@@ -32,14 +32,14 @@ get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename=
 
   #
   # Does not work for mixed crops for the moment
-  # To reconsider (revise read_obs_int) when the definitive data structure for storing obs will be defined.
-  # read_obs_int searches obs files comparing with mod_s*** files if filename is not provided which means that Stics
+  # To reconsider (revise get_obs_int) when the definitive data structure for storing obs will be defined.
+  # get_obs_int searches obs files comparing with mod_s*** files if filename is not provided which means that Stics
   # must have been run before ... could this be changed and still work with mixed crops?
   #
 
   # For a list of folders recurive call
   if ( length(dirpath) > 1) {
-    obs_list <- lapply(dirpath, function(x) read_obs(x,obs_filenames, usms, usms_filename))
+    obs_list <- lapply(dirpath, function(x) get_obs(x,obs_filenames, usms, usms_filename))
     n <- unlist(lapply(obs_list, function(x) names(x[1])))
     obs_list <- lapply(obs_list, function(x) x[[1]])
     names(obs_list) <- n
@@ -74,7 +74,7 @@ get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename=
   obs_list=vector("list", length(usms))
 
   # obs_df is splitted per USM and only columns containing Stics variables and not only NA are extracted
-  # not optimal of course ... will be done differently when read_obs_int will be rewritten
+  # not optimal of course ... will be done differently when get_obs_int will be rewritten
   obs_list=lapply(obs_filenames, function (x) within(obs_df[obs_df$Plant==x,],rm("ian","mo","jo","jul","Plant")))
   for (iusm in 1:length(obs_list)) {
     obs_list[[iusm]]=obs_list[[iusm]][,sapply(1:ncol(obs_list[[iusm]]),function (x) any(!is.na(obs_list[[iusm]][,x])))]
