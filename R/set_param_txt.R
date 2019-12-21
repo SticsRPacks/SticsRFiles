@@ -18,8 +18,8 @@
 #'          \code{\link{all_out_var}} is a helper function that returns all possible
 #'          output variables.
 #'
-#' @note \code{set_out_var} is not used by \code{set_param}. To replace the output
-#'       variables required from STICS, please directly call \code{set_out_var}.
+#' @note \code{set_out_var_txt} is not used by \code{set_param_txt}. To replace the output
+#'       variables required from STICS, please directly call \code{set_out_var_txt}.
 #'
 #'
 #' @importFrom magrittr "%>%"
@@ -29,12 +29,12 @@
 #' # Replace the interrow distance parameter to 0.01:
 #'
 #' library(SticsRFiles)
-#' set_param(dirpath = "stics_usm/usm_1", param= "interrang", value= 0.01)
+#' set_param_txt(dirpath = "stics_usm/usm_1", param= "interrang", value= 0.01)
 #'
 #'}
 #'
 #' @export
-set_param= function(dirpath=getwd(),param,value,add=F,plant=1){
+set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
   param_val= get_param_txt(dirpath = dirpath, param = param)
 
   file_type=
@@ -47,32 +47,32 @@ set_param= function(dirpath=getwd(),param,value,add=F,plant=1){
   }
   switch(file_type,
          ini= {
-           set_ini(filepath = file.path(dirpath,"ficini.txt"),
+           set_ini_txt(filepath = file.path(dirpath,"ficini.txt"),
                    param = param, value = value, add= add)
          },
          general= {
-           set_general(filepath = file.path(dirpath,"tempopar.sti"),
+           set_general_txt(filepath = file.path(dirpath,"tempopar.sti"),
                        param = param, value = value, add= add)
          },
          tmp= {
-           set_tmp(filepath = file.path(dirpath,"tempoparV6.sti"),
+           set_tmp_txt(filepath = file.path(dirpath,"tempoparV6.sti"),
                    param = param, value = value, add= add)
          },
          soil= {
-           set_soil(filepath = file.path(dirpath,"param.sol"),
+           set_soil_txt(filepath = file.path(dirpath,"param.sol"),
                     param = param, value = value)
          },
          usm= {
-           set_usm(filepath = file.path(dirpath,"new_travail.usm"),
+           set_usm_txt(filepath = file.path(dirpath,"new_travail.usm"),
                    param = param, value = value)
          },
          station= {
-           set_station(filepath = file.path(dirpath,"station.txt"),
+           set_station_txt(filepath = file.path(dirpath,"station.txt"),
                        param = param, value = value, add= add)
          },
          tec= {
            tmp= lapply(plant, function(x){
-             set_tec(filepath = file.path(dirpath,paste0("fictec",x,".txt")),
+             set_tec_txt(filepath = file.path(dirpath,paste0("fictec",x,".txt")),
                      param = param, value = value, add= add)
            })
          },
@@ -82,7 +82,7 @@ set_param= function(dirpath=getwd(),param,value,add=F,plant=1){
              as.numeric()
 
            tmp= lapply(plant, function(x){
-             set_plant(filepath = file.path(dirpath,paste0("ficplt",x,".txt")),
+             set_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")),
                        param = param, value = value, add= add, variety = variety[x])
            })
          },
@@ -92,53 +92,53 @@ set_param= function(dirpath=getwd(),param,value,add=F,plant=1){
 }
 
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_usm= function(filepath="new_travail.usm",param,value,add=F){
-  set_file(filepath,param,value,add)
+set_usm_txt= function(filepath="new_travail.usm",param,value,add=F){
+  set_file_txt(filepath,param,value,add)
 }
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_station= function(filepath="station.txt",param,value,add=F){
-  set_file(filepath,param,value,add)
-}
-
-
-#' @rdname set_param
-#' @export
-set_ini= function(filepath= "ficini.txt",param,value,add=F){
-  set_file(filepath,param,value,add)
+set_station_txt= function(filepath="station.txt",param,value,add=F){
+  set_file_txt(filepath,param,value,add)
 }
 
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_general= function(filepath= "tempopar.sti",param,value,add=F){
-  set_file(filepath,param,value,add)
+set_ini_txt= function(filepath= "ficini.txt",param,value,add=F){
+  set_file_txt(filepath,param,value,add)
 }
 
-#' @rdname set_param
+
+#' @rdname set_param_txt
 #' @export
-set_tmp= function(filepath= "tempoparv6.sti",param,value,add=F){
-  set_file(filepath,param,value,add)
+set_general_txt= function(filepath= "tempopar.sti",param,value,add=F){
+  set_file_txt(filepath,param,value,add)
 }
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_plant= function(filepath="ficplt1.txt",param,value,add=F,variety= NULL){
-  set_file(filepath,param,value,add,variety)
+set_tmp_txt= function(filepath= "tempoparv6.sti",param,value,add=F){
+  set_file_txt(filepath,param,value,add)
 }
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_tec= function(filepath="fictec1.txt",param,value,add=F){
-  set_file(filepath,param,value,add)
+set_plant_txt= function(filepath="ficplt1.txt",param,value,add=F,variety= NULL){
+  set_file_txt(filepath,param,value,add,variety)
 }
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_soil= function(filepath="param.sol",param,value){
+set_tec_txt= function(filepath="fictec1.txt",param,value,add=F){
+  set_file_txt(filepath,param,value,add)
+}
+
+#' @rdname set_param_txt
+#' @export
+set_soil_txt= function(filepath="param.sol",param,value){
   ref= get_soil_txt(filepath)
   param= paste0(param,"$")
   if(length(ref[[param]])!=length(value)){
@@ -175,9 +175,9 @@ set_soil= function(filepath="param.sol",param,value){
   }
 }
 
-#' @rdname set_param
+#' @rdname set_param_txt
 #' @export
-set_out_var= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F){
+set_out_var_txt= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F){
   cat(vars,file=filepath, sep="\n",append = add)
 }
 
@@ -198,19 +198,19 @@ set_out_var= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F){
 #'          of the \code{set_*} family it is called, so it won't work properly if called
 #'          by the user directly. This is why this function is internal.
 #'
-#' @note This function is not used for \code{\link{set_soil}}.
+#' @note This function is not used for \code{\link{set_soil_txt}}.
 #'
-#' @seealso \code{\link{set_param}}.
+#' @seealso \code{\link{set_param_txt}}.
 #'
 #' @keywords internal
 #' @export
-set_file= function(filepath,param,value,add,variety= NULL){
-  # access the function name from which set_file was called
+set_file_txt= function(filepath,param,value,add,variety= NULL){
+  # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
   params= readLines(filepath)
   param_= paste0(param,"$")
   switch(type,
-         set_usm = {
+         set_usm_txt = {
            ref= get_usm_txt(filepath)
            if(grep(param_,names(ref))<grep("P_fplt",names(ref))){
              ref_index= grep(param_,names(ref))*2
@@ -218,15 +218,15 @@ set_file= function(filepath,param,value,add,variety= NULL){
              ref_index= grep(gsub("P_","",param_),params)+1
            }
          },
-         set_station= {
+         set_station_txt= {
            ref= get_station_txt(filepath)
            ref_index= grep(param_,names(ref))*2
          },
-         set_ini= {
+         set_ini_txt= {
            ref= get_ini_txt(filepath)
            ref_index= grep(param_,names(ref))*2
          },
-         set_plant= {
+         set_plant_txt= {
            ref_index= grep(gsub('P_','',param_),params)+1
            if(!base::is.null(variety)){
              ref_index= ref_index[variety]

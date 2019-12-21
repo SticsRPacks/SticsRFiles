@@ -106,7 +106,7 @@ Collate:
     'replace_string_in_file.R'
     'replace_txt_param_value.R'
     'set_codeoptim.R'
-    'set_param.R'
+    'set_param_txt.R'
     'set_param_value.R'
     'set_sols_param_xml.R'
     'set_usms_param_xml.R'
