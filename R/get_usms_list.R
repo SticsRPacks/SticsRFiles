@@ -11,6 +11,8 @@
 #' @export
 get_usms_list <- function(usms_path,xml_name="usms.xml"){
 
+  # TODO: add select key: i.e. get all usms names
+  # with the same soil, plant 1,...
   if (isdir(usms_path)) {
     usms_xml_path=file.path(usms_path,xml_name)
   } else {
