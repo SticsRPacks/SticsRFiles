@@ -4,7 +4,7 @@
 #' @param xml_name usms xml file name (optional, default = "usms.xml")
 #' @return A list with usms names
 #' @examples
-#' path = system.file( paste0("extdata/xml/examples/","V9.0"),package = "SticsRFiles")
+#' path = system.file("extdata/xml/examples/V9.0", package = "SticsRFiles")
 #' usms_list <- get_usms_list(path)
 #'
 #'
@@ -16,10 +16,6 @@ get_usms_list <- function(usms_path,xml_name="usms.xml"){
   } else {
     usms_xml_path = usms_path
   }
-
-
-  # new syntax with get_files_param_values
-  #usms_list <- get_param_xml(usms_xml_path,"usm")[[1]]$values[[1]]
 
   usms_list <- get_param_xml(usms_xml_path,"usm")
 
