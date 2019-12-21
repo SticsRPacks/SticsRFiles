@@ -1,12 +1,13 @@
-#' @title Loading a daily Stics file
-#' @description Reading a daily file as a tibble with possible selection
+#' @title Loading Stics daily output file(s)
+#' @description Reading daily file(s) as a tibble with possible selection
 #' on variables names, cumulative DOY, dates list
 #' @param workspace Stics or JavaStics workspace path
 #' @param usm_name names of the usm
 #' @param var_list vector of output variables names (optional)
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
-#' @export
+#'
+#' @return A tibble or a list of
 #'
 #' @importFrom rlang .data
 #'
@@ -25,9 +26,11 @@ get_daily_results <- function(workspace,
 
 
   # TODO:
-  # usm_name : optional (NULL, default)
+  # - manage filtering for multiple files : potentially filters may be different
+  # for each file.
+  # - usm_name : optional (NULL, default)
   # extract usm names
-  # get intercrop results !
+  # - get intercrop results !
   # if (is.null ( usm_name )) {
   #   sti_list <- list.files(path = "/tmp/test_SticsOnR/JavaSTICS-1.41-stics-9.1/example/",
   #                          pattern = "^mod_s")
@@ -77,8 +80,6 @@ get_daily_results <- function(workspace,
   }
 
   # Adding the Date  in the simulation results tibble
-  #Date= data.frame(Date=as.POSIXct(x = paste(sim_tmp$ian,sim_tmp$mo,sim_tmp$jo, sep="-"),
-  #                                 format = "%Y-%m-%d", tz="UTC"))
 
   results_tbl <- results_tbl %>% dplyr::mutate(Date=as.POSIXct(x = paste(.$ian,
                                                                          .$mo,
@@ -90,15 +91,14 @@ get_daily_results <- function(workspace,
 
 
 
-  # Using function from SticsRFiles for converting .n. to _n in the varname
-  # to be homogeneous with get_obs_int outputs
+  # Converting .n. to _n in the varname
+  # to be homogeneous with get_obs_int output colnames
   colnames(results_tbl) = var_to_col_names(colnames(results_tbl))
 
-  # TODO
+  # TODO: add filtering capabilities
   # on ian, mo, jo
   # a %>% filter(ian==1994,mo==10,jo==17:19)
-  # or on
-  # Dates
+  # on Dates
 
   return(results_tbl)
 }
