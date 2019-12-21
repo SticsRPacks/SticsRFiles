@@ -6,8 +6,8 @@
 #'
 #' @examples
 #' \dontrun{
-#'  gen_var_mod(".", c("var1","var2"))
-#'  gen_var_mod("/path/to/stics/workspace", c("var1","var2"))
+#'  gen_varmod(".", c("var1","var2"))
+#'  gen_varmod("/path/to/stics/workspace", c("var1","var2"))
 #' }
 #'
 #' @export

@@ -80,11 +80,11 @@ Before using SticsOnR some dependencies packages must be installed.
 
       
   * Generate xml files using a table of parameters     
-    * gen_ini_file
-    * gen_sta_file
-    * gen_tec_file
-    * gen_usms_file
-    * gen_sols_file
+    * gen_ini_xml
+    * gen_sta_xml
+    * gen_tec_xml
+    * gen_usms_xml
+    * gen_sols_xml
 
       
   * manipulation of xl sheets
@@ -171,24 +171,24 @@ get_script("all", dest_dir = "/path/to/dir")
 ```{r echo=FALSE,warning=FALSE, message=FALSE}
 library(knitr)
 library(SticsRFiles)
-dict <- get_params_from_table()
+dict <- SticsRFiles:::get_params_from_table()
 dt <- data.frame(shortcuts=names(dict), real_name=unlist(dict,use.names = FALSE))
 
 kable(dt, caption = "List of possible builtin parameters names substitution")
 ```
 
-To get this correspondance list : call get_parameters_from_table(), as follows
+To get this correspondance list : call get_params_from_table(), as follows
 
 ```{r}
 library(knitr)
-library(SticsOnR)
-get_params_from_table()
+library(SticsRFiles)
+SticsRFiles:::get_params_from_table()
 
 ```
    * But, it is possible to create and provide a personal list through the `dict` argument of the function.
 This argument is usable at the moment for producing only *tec* files.  When calling `gen_tec_file` the argument dict may be set as follows
 ```{r eval=FALSE}  
-gen_tec_file(..., dict = myDict) 
+gen_tec_file_xml(..., dict = myDict) 
 ```
 
 

@@ -12,11 +12,11 @@
 #' @export
 #'
 # TODO: refactor with gen_sta_file, gen_tec_file : same code
-gen_ini_file_xml <- function(ini_out_file = NULL, param_table = NULL,
-                         ini_in_file = NULL,
-                         out_path = getwd(),
-                         crop_tag = "crop",
-                         stics_version ="last") {
+gen_ini_xml <- function(ini_out_file = NULL, param_table = NULL,
+                        ini_in_file = NULL,
+                        out_path = getwd(),
+                        crop_tag = "crop",
+                        stics_version ="last") {
 
 
 
@@ -38,9 +38,9 @@ gen_ini_file_xml <- function(ini_out_file = NULL, param_table = NULL,
   # generating xml documents for all table lines
   # removing ini names col
   xml_docs <- gen_ini_doc(xml_doc = xml_doc,
-                         param_table = param_table[ , - col_id],
-                         crop_tag = crop_tag,
-                         stics_version = stics_version)
+                          param_table = param_table[ , - col_id],
+                          crop_tag = crop_tag,
+                          stics_version = stics_version)
 
   if ( class(xml_docs) == "xmlDocument") {
     xml_docs <- list(xml_docs)
