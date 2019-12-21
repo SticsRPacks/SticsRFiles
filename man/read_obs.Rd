@@ -44,3 +44,4 @@ Meas= get_obs(path)
 \seealso{
 \code{\link{get_obs_int}}
 }
+\keyword{internal}

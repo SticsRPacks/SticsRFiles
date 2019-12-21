@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_daily_results.R
 \name{get_daily_results}
 \alias{get_daily_results}
-\title{Loading a daily Stics file}
+\title{Loading Stics daily output file(s)}
 \usage{
 get_daily_results(
   workspace,
@@ -23,8 +23,11 @@ get_daily_results(
 
 \item{dates_list}{list of dates (optional)}
 }
+\value{
+A tibble or a list of
+}
 \description{
-Reading a daily file as a tibble with possible selection
+Reading daily file(s) as a tibble with possible selection
 on variables names, cumulative DOY, dates list
 }
 \examples{
