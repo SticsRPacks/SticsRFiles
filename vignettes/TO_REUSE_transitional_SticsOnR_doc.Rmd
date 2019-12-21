@@ -118,9 +118,9 @@ func(arg1,"value3")
 ```{r eval=FALSE}
 library(SticsOnR)
 # getting the file in the current directory
-get_inputs_example()
+copy_mailing_example()
 # getting the file in a specic directory
-get_inputs_example(dest_dir = "/home/plecharpent/Work/workspace")
+copy_mailing_example(dest_dir = "/home/plecharpent/Work/workspace")
 
 > [1] "inputs_stics_example.xlsx  has been copied in directory  
  /home/plecharpent/Work/workspace"
@@ -131,19 +131,19 @@ get_inputs_example(dest_dir = "/home/plecharpent/Work/workspace")
   * Getting scripts files list     
 ```{r}
 library(SticsRFiles)
-get_script()
+copy_mailing_script_example()
 
 ```      
   * Getting a script or all scripts
   
 ```{r, eval=FALSE}
 # a specific
-get_script("generate_ini_files.R")
-get_script("generate_ini_files.R", dest_dir = "/path/to/dir")
+copy_mailing_script_example("generate_ini_files.R")
+copy_mailing_script_example("generate_ini_files.R", dest_dir = "/path/to/dir")
 
 # all scripts
-get_script("all")
-get_script("all", dest_dir = "/path/to/dir")
+copy_mailing_script_example("all")
+copy_mailing_script_example("all", dest_dir = "/path/to/dir")
 ```
    * Only adapt the paths / directories and files names. In these scripts the XL file is given just as an example. It will be replaced by by the user ones.
    
@@ -188,7 +188,7 @@ SticsRFiles:::get_params_from_table()
    * But, it is possible to create and provide a personal list through the `dict` argument of the function.
 This argument is usable at the moment for producing only *tec* files.  When calling `gen_tec_file` the argument dict may be set as follows
 ```{r eval=FALSE}  
-gen_tec_file_xml(..., dict = myDict) 
+gen_tec_xml(..., dict = myDict) 
 ```
 
 
