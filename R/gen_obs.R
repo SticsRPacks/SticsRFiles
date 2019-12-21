@@ -2,16 +2,16 @@
 #'
 #' @description Write STICS obs data from data.frame
 #'
-#' @param x       Data.frame to write
+#' @param x     data.frame to write
 #' @param path Path to the file to write to
 #'
 #' @examples
 #'\dontrun{
-#' write_obs(obs, "wheat.obs")
+#' gen_obs(obs, "wheat.obs")
 #'}
 #' @export
 #'
-write_obs= function(x,path){
+gen_obs= function(x,path){
   x= x[,-grep("Date|Plant",colnames(x))]
   x= data.frame(x[,grep("ian|mo|jo|jul",colnames(x))],
                 x[,-grep("ian|mo|jo|jul",colnames(x))])
