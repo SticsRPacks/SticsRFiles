@@ -1,7 +1,9 @@
 #' @keywords internal
 
 # xml class based on fileDocument class
-setClass("xmlDocument", contains = c("fileDocument"),validity=validDoc)
+setClass("xmlDocument",
+         contains = c("fileDocument"),
+         validity=validDoc)
 
 
 # object validation
@@ -28,19 +30,22 @@ setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
 
 
 # constructor
-setMethod("xmldocument", signature(file = "character"), function(file = character(length = 0)) {
-  # print(file)
-  methods::new("xmlDocument", file)
-})
+setMethod("xmldocument", signature(file = "character"),
+          function(file = character(length = 0)) {
+            # print(file)
+            methods::new("xmlDocument", file)
+          })
 
-setMethod('initialize', 'xmlDocument', function(.Object,file = character(length = 0)){
-  .Object<- methods::callNextMethod(.Object,file)
-  # print('xmlDocument initialization')
-  # print(file)
-  methods::validObject(.Object)
-  .Object<-loadContent(.Object)
-  return(.Object)
-})
+setMethod('initialize', 'xmlDocument',
+          function(.Object,file = character(length = 0), warn = FALSE){
+            .Object<- methods::callNextMethod(.Object,file)
+            # print('xmlDocument initialization')
+            # print(file)
+            methods::validObject(.Object)
+            .Object<-loadContent(.Object)
+            #.Object@warn <- warn
+            return(.Object)
+          })
 
 
 setMethod("show", "xmlDocument", function(object) {
@@ -82,7 +87,7 @@ setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj,path=NU
   }
 
   if (!length(node_set)) {
-    warning("Node set is empty, check xml input path !")
+    if (docObj@warn) warning("Node set is empty, check xml input path !")
     node_set=NULL
   }
   return(node_set)
@@ -136,12 +141,17 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   # testing if any node has not any attribute
   any_null=any(sapply(attr_list,function(x) base::is.null(x)))
   # print(attr_list)
-  if (any_null) {paste(warning("Existing nodes without any attributes on xpath",path))}
+  if (any_null && docObj@warn ) {
+    warning(paste("Existing nodes without any attributes on xpath",path))
+  }
 
   # testing if all nodes have the same attributes !!
-  if (!is.matrix(attr_list) & !is.matrix(attr_list[,]) ) {
-    print(class(attr_list))
-    {paste(warning("Existing nodes with different attributes comparing to others on xpath, missing attributes ?",path))}
+  if (!is.matrix(attr_list) && !is.matrix(attr_list[,]) ) {
+    if (docObj@warn) {
+      print(class(attr_list))
+      warning(paste("Existing nodes with different attributes comparing to others on xpath, missing attributes ?",
+                    path))
+    }
   }
 
   return(attr_list)
@@ -200,8 +210,10 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
 
   if (! any(sel)) {
     # not any given attr_list names exist in path
-    warning(paste("Not any given attribute name exist in ",path, "aborting !"))
-    return()
+    if (docObj@warn) {
+      warning(paste("Not any given attribute name exist in ",path, "aborting !"))
+      return()
+    }
   }
 
   # getting existing names from attr_list in attr_values

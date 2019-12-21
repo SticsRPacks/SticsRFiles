@@ -9,11 +9,12 @@
 #' @slot ext A file extension
 #' @slot con A file connexion
 #' @slot content A file content
+#' @slot warn Logical, to display (T) or not (F) warnings (default)
 #'
 setClass("fileDocument",
-         representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY"),
+         representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY", warn = "logical"),
          prototype(type = character(length = 0), name = character(length = 0), dir = character(length = 0), ext = character(length = 0),
-         con = NULL, content = ""))# ,
+         con = NULL, content = "", warn = FALSE))# ,
          #validity=validDoc)
 
 
@@ -33,6 +34,7 @@ setMethod("filedocument", signature(file = "character", type = "character"), fun
     return(methods::new("fileDocument", file, type))
 })
 
+
 # file only
 setMethod("filedocument", signature(file = "character", type = "missing"), function(file = character(length = 0), type = character(length = 0)) {
     #print(file)
@@ -40,7 +42,8 @@ setMethod("filedocument", signature(file = "character", type = "missing"), funct
 })
 
 
-setMethod("initialize", "fileDocument", function(.Object, file = character(length = 0), type = character(length = 0)) {
+setMethod("initialize", "fileDocument", function(.Object, file = character(length = 0),
+                                                 type = character(length = 0)) {
     # print("fileDocument initialization")
     if (missing(file)) {
         stop("missing file name")
@@ -56,6 +59,8 @@ setMethod("initialize", "fileDocument", function(.Object, file = character(lengt
 
     .Object@type <- calcType(.Object)
 
+    .Object@warn <- FALSE
+
     methods::validObject(.Object)
     return(.Object)
 })
@@ -64,6 +69,14 @@ setMethod("initialize", "fileDocument", function(.Object, file = character(lengt
 
 # setter method
 # replace
+
+# set
+setReplaceMethod("setWarn", signature(docObj = "fileDocument"), function(docObj, value) {
+  docObj@warn <- value
+  return(docObj)
+})
+
+
 setReplaceMethod("setName", signature(docObj = "fileDocument"), function(docObj, value) {
   docObj@name <- value
   return(docObj)
