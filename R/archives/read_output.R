@@ -5,7 +5,7 @@
 #' @param dirpath Directory path
 #' @param mixed   (optional) Is the simulation on mixed species (boolean)
 #' @param name    Plant name for the output. Especially usefull for mixed crops.
-#'                If \code{NULL}, the function tries to read it using \code{\link{read_usm}}
+#'                If \code{NULL}, the function tries to read it using \code{\link{get_usm_txt}}
 #'
 #' @details If \code{mixed} is not specified (or equal to \code{NULL}), the function try to
 #'          read the number of species from the input files.
@@ -31,13 +31,13 @@ read_output= function(dirpath=getwd(), mixed= NULL, name= NULL){
   .=NULL # to avoid CRAN note for pipe
   if(base::is.null(mixed)){
     nbplants=
-      read_usm(filepath = file.path(dirpath,"new_travail.usm"))$P_nbplantes%>%
+      get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$P_nbplantes%>%
       as.numeric
     if(nbplants>1){mixed= T}else{mixed= F}
   }
 
   if(base::is.null(name)){
-    name= read_usm(filepath = file.path(dirpath,"new_travail.usm"))$P_fplt
+    name= get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$P_fplt
   }else{
     if(mixed&length(name)!=2){
       stop("name argument should have a length of 2")

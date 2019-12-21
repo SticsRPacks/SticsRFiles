@@ -37,7 +37,7 @@ get_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   if(base::is.null(mixed)){
     if(file.exists(file.path(dirpath,"new_travail.usm"))){
       nbplants=
-        read_usm(filepath = file.path(dirpath,"new_travail.usm"))$P_nbplantes%>%
+        get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$P_nbplantes%>%
         as.numeric
       if(nbplants>1){mixed= T}else{mixed= F}
     }else{

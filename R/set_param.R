@@ -35,7 +35,7 @@
 #'
 #' @export
 set_param= function(dirpath=getwd(),param,value,add=F,plant=1){
-  param_val= read_param(dirpath = dirpath, param = param)
+  param_val= get_param_txt(dirpath = dirpath, param = param)
 
   file_type=
     lapply(strsplit(names(param_val),"\\."), function(x){x[1]})%>%
@@ -78,7 +78,7 @@ set_param= function(dirpath=getwd(),param,value,add=F,plant=1){
          },
          plant= {
            variety=
-             read_param(dirpath = dirpath, param = "variete")[plant]%>%
+             get_param_txt(dirpath = dirpath, param = "variete")[plant]%>%
              as.numeric()
 
            tmp= lapply(plant, function(x){
@@ -139,7 +139,7 @@ set_tec= function(filepath="fictec1.txt",param,value,add=F){
 #' @rdname set_param
 #' @export
 set_soil= function(filepath="param.sol",param,value){
-  ref= read_soil(filepath)
+  ref= get_soil_txt(filepath)
   param= paste0(param,"$")
   if(length(ref[[param]])!=length(value)){
     stop(paste("Length of input value different from parameter value length.\n",
@@ -211,7 +211,7 @@ set_file= function(filepath,param,value,add,variety= NULL){
   param_= paste0(param,"$")
   switch(type,
          set_usm = {
-           ref= read_usm(filepath)
+           ref= get_usm_txt(filepath)
            if(grep(param_,names(ref))<grep("P_fplt",names(ref))){
              ref_index= grep(param_,names(ref))*2
            }else{
@@ -219,11 +219,11 @@ set_file= function(filepath,param,value,add,variety= NULL){
            }
          },
          set_station= {
-           ref= read_station(filepath)
+           ref= get_station_txt(filepath)
            ref_index= grep(param_,names(ref))*2
          },
          set_ini= {
-           ref= read_ini(filepath)
+           ref= get_ini_txt(filepath)
            ref_index= grep(param_,names(ref))*2
          },
          set_plant= {

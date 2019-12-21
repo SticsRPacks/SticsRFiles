@@ -13,10 +13,10 @@
 #' @param max_variety  Maximum number of variety authorized (this is only for STICS
 #'                     compatibility)
 #' @param variety      Integer. The plant variety to get the parameter from.
-#' @param ...          Helper to pass arguments from \code{\link{read_param}} to the
+#' @param ...          Helper to pass arguments from \code{\link{get_param_txt}} to the
 #'                     other functions
 #'
-#' @note Users generally only use \code{read_param} that identify parameters for
+#' @note Users generally only use \code{get_param_txt} that identify parameters for
 #'       other functions and call them.
 #'
 #' @return A list of all parameters:
@@ -39,13 +39,21 @@
 #' # Read the interrow distance parameter:
 #'
 #' library(SticsRFiles)
-#' read_param(param='interrang')
+#' path = system.file("extdata/xml/examples/V9.0", package = "SticsRFiles")
+#' get_param_txt(param='interrang')
 #'
 #'}
 #'
 #' @export
 #'
-read_param= function(dirpath= getwd(),param= NULL,...){
+#'
+# TODO:
+# - Not generic:
+# * manage dynamic fields in lists
+# * use param names from xml files
+# because for tec files some parameter names are not stored in txt files
+#
+get_param_txt= function(dirpath= getwd(),param= NULL,...){
   dot_args= list(...)
   if(isTRUE(dot_args$several_fert)){
     several_fert= dot_args$several_fert
@@ -68,23 +76,23 @@ read_param= function(dirpath= getwd(),param= NULL,...){
     max_variety= 30
   }
 
-  ini= read_ini(file.path(dirpath,"ficini.txt"))
-  general= read_general(file.path(dirpath,"tempopar.sti"))
-  soil= read_soil(file.path(dirpath,"param.sol"))
-  station= read_station(file.path(dirpath,"station.txt"))
-  usm= read_usm(file.path(dirpath,"new_travail.usm"))
-  output= read_out_var(file.path(dirpath,"var.mod"))
-  tmp= read_tmp(file.path(dirpath,"tempoparv6.sti"))
+  ini= get_ini_txt(file.path(dirpath,"ficini.txt"))
+  general= get_general_txt(file.path(dirpath,"tempopar.sti"))
+  soil= get_soil_txt(file.path(dirpath,"param.sol"))
+  station= get_station_txt(file.path(dirpath,"station.txt"))
+  usm= get_usm_txt(file.path(dirpath,"new_travail.usm"))
+  output= get_out_var_txt(file.path(dirpath,"var.mod"))
+  tmp= get_tmp_txt(file.path(dirpath,"tempoparv6.sti"))
   tec= plant= setNames(vector(mode = "list", length = ini$nbplantes),
                         paste0("plant",1:ini$nbplantes))
 
   for(i in seq_len(ini$nbplantes)){
     tec[paste0("plant",i)]=
-      list(read_tec(file.path(dirpath,paste0("fictec",i,".txt")),
+      list(get_tec_txt(file.path(dirpath,paste0("fictec",i,".txt")),
                several_fert = several_fert, several_thin = several_thin,
                is_pasture = is_pasture))
     plant[paste0("plant",i)]=
-      list(read_plant(file.path(dirpath,paste0("ficplt",i,".txt")),
+      list(get_plant_txt(file.path(dirpath,paste0("ficplt",i,".txt")),
                       variety=
                         if(!base::is.null(param)){
                           tec[[paste0("plant",i)]]$P_variete
@@ -109,9 +117,9 @@ read_param= function(dirpath= getwd(),param= NULL,...){
   return(parameters)
 }
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_ini= function(filepath="ficini.txt"){
+get_ini_txt= function(filepath="ficini.txt"){
   params= readLines(filepath)
   ini= vector(mode='list', length = 0)
   values= params[!seq_along(params)%%2]
@@ -126,9 +134,9 @@ read_ini= function(filepath="ficini.txt"){
   return(ini)
 }
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_general= function(filepath="tempopar.sti"){
+get_general_txt= function(filepath="tempopar.sti"){
 
   params= readLines(filepath)
   pg= vector(mode='list', length = 0)
@@ -292,9 +300,9 @@ read_general= function(filepath="tempopar.sti"){
   return(pg_out)
 }
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_tmp= function(filepath="tempoparv6.sti"){
+get_tmp_txt= function(filepath="tempoparv6.sti"){
   params= readLines(filepath)
   p_tmp= vector(mode='list', length = 0)
   p_tmp= as.list(params[seq_along(params)%%2==0])
@@ -303,9 +311,9 @@ read_tmp= function(filepath="tempoparv6.sti"){
   return(p_tmp)
 }
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_plant= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
+get_plant_txt= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
 
   params= readLines(filepath)
   plant= vector(mode='list', length = 0)
@@ -563,7 +571,7 @@ read_plant= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
   plant$P_stadebbchrec= val()
   plant$P_stadebbchfindorm= val()
 
-  read_variety= function(p_list){
+  get_variety_txt= function(p_list){
 
     p_list$P_codevar= c(p_list$P_codevar,val())
     p_list$P_stlevamf= c(p_list$P_stlevamf,val())
@@ -589,7 +597,7 @@ read_plant= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
 
   # could use while but STICS uses a for loop
   for(i in 1:max_variety){
-    err= read_variety(tmp)
+    err= get_variety_txt(tmp)
     if(!any(is.na(err$P_codevar))){tmp= err}else{break}
   }
 
@@ -618,9 +626,9 @@ read_plant= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
 }
 
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_tec= function(filepath="fictec1.txt",several_fert=T,several_thin=T,is_pasture=F){
+get_tec_txt= function(filepath="fictec1.txt",several_fert=T,several_thin=T,is_pasture=F){
 
   params= readLines(filepath)
   itk= vector(mode='list', length = 0)
@@ -923,9 +931,9 @@ read_tec= function(filepath="fictec1.txt",several_fert=T,several_thin=T,is_pastu
 }
 
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_soil= function(filepath= "param.sol"){
+get_soil_txt= function(filepath= "param.sol"){
 
   params= readLines(filepath,warn=F)
   soil= vector(mode='list', length = 0)
@@ -967,9 +975,9 @@ read_soil= function(filepath= "param.sol"){
   return(soil_out)
 }
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_station= function(filepath="station.txt"){
+get_station_txt= function(filepath="station.txt"){
 
   params= readLines(filepath)
   sta= vector(mode='list', length = 0)
@@ -1020,9 +1028,9 @@ read_station= function(filepath="station.txt"){
 }
 
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_usm= function(filepath="new_travail.usm"){
+get_usm_txt= function(filepath="new_travail.usm"){
   params= readLines(filepath)
   usm= vector(mode='list', length = 0)
   values= params[!seq_along(params)%%2]
@@ -1058,9 +1066,9 @@ read_usm= function(filepath="new_travail.usm"){
 }
 
 
-#' @rdname read_param
+#' @rdname get_param_txt
 #' @export
-read_out_var= function(filepath="var.mod"){
+get_out_var_txt= function(filepath="var.mod"){
   Vars= readLines(filepath)
   return(Vars)
 }
