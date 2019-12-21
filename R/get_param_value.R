@@ -144,7 +144,7 @@ get_param_value <- function(xml_doc_object,param_name,
   is_number <- suppressWarnings(!is.na(num_value))
   #if ( nb_num == length(value) )  {
   if ( all(is_number) )  {
-    value <- as.numeric(num_value)
+    value <- suppressWarnings(as.numeric(num_value))
   }
 
   # TODO: see if finally useless, checks done in getValues ?
@@ -157,5 +157,7 @@ get_param_value <- function(xml_doc_object,param_name,
   # }
 
 
-  return(as.vector(value))
+  value <- suppressWarnings(as.vector(value))
+
+  return(value)
 }
