@@ -19,6 +19,6 @@ All_vars= all_out_var()
 
 }
 \seealso{
-\code{\link{set_out_var}}
+\code{\link{set_out_var_txt}}
 }
 \keyword{internal}

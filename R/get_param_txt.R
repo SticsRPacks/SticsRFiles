@@ -1,7 +1,7 @@
 #' Read STICS input parameters
 #'
 #' @description Read STICS model input parameters from a pre-existing STICS input
-#'              file. Generally used after calling \code{\link{set_usm}}.
+#'              file. Generally used after calling \code{\link{set_usm_txt}}.
 #'
 #' @param dirpath      Directory path
 #' @param filepath     File path
@@ -30,7 +30,7 @@
 #' The function can return several sub-lists for each \code{plant} and \code{tec}
 #'  if mixed crops, numbered by usage
 #'
-#' @seealso \code{\link{set_param}}.
+#' @seealso \code{\link{set_param_txt}}.
 #'
 #' @importFrom stats setNames
 #'

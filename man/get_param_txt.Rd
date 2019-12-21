@@ -74,7 +74,7 @@ if mixed crops, numbered by usage
 }
 \description{
 Read STICS model input parameters from a pre-existing STICS input
-file. Generally used after calling \code{\link{set_usm}}.
+file. Generally used after calling \code{\link{set_usm_txt}}.
 }
 \note{
 Users generally only use \code{get_param_txt} that identify parameters for
@@ -92,5 +92,5 @@ get_param_txt(param='interrang')
 
 }
 \seealso{
-\code{\link{set_param}}.
+\code{\link{set_param_txt}}.
 }

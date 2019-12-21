@@ -21,7 +21,7 @@
 #' @description Helper function to print the list of all possible variables to set as output
 #' from the STICS model.
 #'
-#' @seealso \code{\link{set_out_var}}
+#' @seealso \code{\link{set_out_var_txt}}
 #'
 #' @examples
 #' \dontrun{
