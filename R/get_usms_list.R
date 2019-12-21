@@ -19,9 +19,9 @@ get_usms_list <- function(usms_path,xml_name="usms.xml"){
 
 
   # new syntax with get_files_param_values
-  #usms_list <- get_files_params_values(usms_xml_path,"usm")[[1]]$values[[1]]
+  #usms_list <- get_param_xml(usms_xml_path,"usm")[[1]]$values[[1]]
 
-  usms_list <- get_files_params_values(usms_xml_path,"usm")
+  usms_list <- get_param_xml(usms_xml_path,"usm")
 
   if (length(usms_list) == 1) usms_list <- unlist(usms_list)
 

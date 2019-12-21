@@ -201,33 +201,33 @@ head(param_names[[2]])
 ```{r}
 sols <- file.path(params$xml_dir,"sols.xml")
 
-get_files_params_values(sols,param_names_list = "argi", show_xpath = T )
+get_param_xml(sols,param_names_list = "argi", show_xpath = T )
 ```    
   * For one parameter and one occurence (conditional selection)    
 ```{r}
 sols <- file.path(params$xml_dir,"sols.xml")
 
-get_files_params_values(sols,param_names_list = "argi", parent_name = "sol",
+get_param_xml(sols,param_names_list = "argi", parent_name = "sol",
                         parent_sel_attr = "solcanne", show_xpath = T)
 ```    
   * for several parameters and several occurrence    
 ```{r}
 sols <- file.path(params$xml_dir,"sols.xml")
 
-get_files_params_values(sols,param_names_list = c("argi", "pH"), show_xpath = T )
+get_param_xml(sols,param_names_list = c("argi", "pH"), show_xpath = T )
 ```    
   * for several parameters and one occurrence (conditional selection)    
   **THE RESULTS IS FALSE**
 ```{r}
 sols <- file.path(params$xml_dir,"sols.xml")
 
-get_files_params_values(sols,param_names_list = c("argi", "pH") , parent_name = "sol",
+get_param_xml(sols,param_names_list = c("argi", "pH") , parent_name = "sol",
                         parent_sel_attr = "solcanne", show_xpath = T)
 ```
 ```{r}
 sols <- file.path(params$xml_dir,"param_gen.xml")
 
-get_files_params_values(sols,param_names_list = "iniprofil", show_xpath = T )
+get_param_xml(sols,param_names_list = "iniprofil", show_xpath = T )
 ```
 
 * Vector parameters

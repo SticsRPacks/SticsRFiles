@@ -14,14 +14,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_files_params_values(path/to/xml/file,"codetemp")
-#' get_files_params_values(c(path/to/xml/file1,path/to/xml/file2),"codetemp")
-#' get_files_params_values(path/to/xml/file,c("codetemp","codegdh"))
-#' get_files_params_values(c(path/to/xml/file1,path/to/xml/file2),c("codetemp","codegdh"))
+#' get_param_xml(path/to/xml/file,"codetemp")
+#' get_param_xml(c(path/to/xml/file1,path/to/xml/file2),"codetemp")
+#' get_param_xml(path/to/xml/file,c("codetemp","codegdh"))
+#' get_param_xml(c(path/to/xml/file1,path/to/xml/file2),c("codetemp","codegdh"))
 #' }
 #'
 #' @export
-get_files_params_values <- function(xml_files,param_names_list,
+get_param_xml <- function(xml_files,param_names_list,
                               parent_name = NULL, parent_sel_attr = NULL,
                               show_xpath = FALSE){
 
