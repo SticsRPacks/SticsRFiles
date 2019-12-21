@@ -14,20 +14,20 @@
 #' xml_file <- "path/to/xmlfile"
 #' xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
 #'
-#' param_names <- get_files_params_names(xml_file)
+#' param_names <- get_param_names_xml(xml_file)
 #'
-#' param_names <- get_files_params_names(xml_files_list)
+#' param_names <- get_param_names_xml(xml_files_list)
 #' }
 #'
 #' @export
 #'
-get_files_params_names <- function(xml_file, mult=FALSE) {
+get_param_names_xml <- function(xml_file, mult=FALSE) {
 
 
   if ( length(xml_file) > 1 ) {
 
     param_names <- lapply(xml_file,
-                           function(x) get_files_params_names(x, mult=TRUE))
+                           function(x) get_param_names_xml(x, mult=TRUE))
 
     return(param_names)
   }
