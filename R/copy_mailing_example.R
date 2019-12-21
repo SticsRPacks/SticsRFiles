@@ -6,7 +6,7 @@
 #'
 
 # TODO: summarize with get_script
-get_inputs_example <- function(xl_name = NULL, dest_dir = getwd()) {
+copy_mailing_example <- function(xl_name = NULL, dest_dir = getwd()) {
 
   package <-  "SticsRFiles"
   inst_dir <- "extdata/xl/"

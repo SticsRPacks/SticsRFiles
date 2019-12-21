@@ -6,7 +6,7 @@
 #' @export
 #'
 # TODO: summarize with get_inputs_example
-get_script <- function( in_name = NULL, dest_dir = getwd()) {
+copy_mailing_script_example <- function( in_name = NULL, dest_dir = getwd()) {
 
   package <-  "SticsRFiles"
   inst_dir <- "extdata/scripts/"
