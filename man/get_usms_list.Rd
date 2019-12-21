@@ -18,8 +18,8 @@ A list with usms names
 Extracting a usm names list from an usms.xml file
 }
 \examples{
-\dontrun{
-usms_list <- get_usms_list("path/to/USM")
-}
+path = system.file( paste0("extdata/xml/examples/","V9.0"),package = "SticsRFiles")
+usms_list <- get_usms_list(path)
+
 
 }

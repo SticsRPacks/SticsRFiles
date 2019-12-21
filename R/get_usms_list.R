@@ -4,9 +4,9 @@
 #' @param xml_name usms xml file name (optional, default = "usms.xml")
 #' @return A list with usms names
 #' @examples
-#' \dontrun{
-#' usms_list <- get_usms_list("path/to/USM")
-#' }
+#' path = system.file( paste0("extdata/xml/examples/","V9.0"),package = "SticsRFiles")
+#' usms_list <- get_usms_list(path)
+#'
 #'
 #' @export
 get_usms_list <- function(usms_path,xml_name="usms.xml"){
