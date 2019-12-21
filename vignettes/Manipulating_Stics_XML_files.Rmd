@@ -174,18 +174,19 @@ In some cases information relative to upward dependence are needed for extractin
 
 ## Getting parameters names list from a file or a file list    
 
+### Soil file
 
 ```{r}
 sols <- file.path(params$xml_dir,"sols.xml")
 
-get_files_params_names(sols)
+get_param_names_xml(sols)
 ```
 
 ```{r}
 files_list <- c(file.path(params$xml_dir,"param_gen.xml"),
                 file.path(params$xml_dir,"sols.xml"))
 
-param_names <- get_files_params_names(files_list)
+param_names <- get_param_names_xml(files_list)
 
 head(param_names[[1]])
 
@@ -195,7 +196,16 @@ head(param_names[[2]])
 ```
 
 
+### Usms file
+
+### Other files ...
+
+
 ## Getting parameters values from a file    
+
+
+### Soil file
+
 * Scalar parameters
   * for one parameter and several occurence    
 ```{r}
@@ -235,6 +245,11 @@ get_param_xml(sols,param_names_list = "iniprofil", show_xpath = T )
 
   * Selecting   
   
+### Usms file
+
+### Other files ...
+
+
   
 ## Getting parameters values for a files list 
 
@@ -242,6 +257,15 @@ get_param_xml(sols,param_names_list = "iniprofil", show_xpath = T )
 
 # Replacing parameters values in files
 
+### Soil file
+
+- all soils
+
+- for selected soils
+
+### Usms file
+
+### Other files ...
 
 
 # Using functions for multiple files
