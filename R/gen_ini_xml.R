@@ -3,11 +3,19 @@
 #'
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param ini_in_file file path for an input ini xml file
-#' @param out_path path for the ini output file
+#' @param out_path path for the ini output file (optional)
 #' @param crop_tag identifier for the crop parameters names
 #' @param stics_version the stics files version to use
 #'
 #' @return an invisible xmlDocument object or a list of
+#'
+#' @examples \dontrun{
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "path/to/dest/dir")
+#' xl_path <- file.path("path/to/dest/dir","inputs_stics_example.xlsx")
+#' ini_param_df <- read_excel(xl_path, sheet = "Ini")
+#' gen_ini_xml(param_table = ini_param_df)
+#'
+#' }
 #'
 #' @export
 #'
@@ -46,6 +54,11 @@ gen_ini_xml <- function(ini_out_file = NULL, param_table = NULL,
     xml_docs <- list(xml_docs)
   }
 
+
+  # checking if out_path exists
+  if ( ! dir.exists(out_path) ) {
+    stop(paste("The directory does not exist",out_path ))
+  }
 
   # defining output files paths
   if (base::is.null(ini_out_file)) {

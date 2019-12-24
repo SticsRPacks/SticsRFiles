@@ -20,7 +20,7 @@ gen_ini_xml(
 
 \item{ini_in_file}{file path for an input ini xml file}
 
-\item{out_path}{path for the ini output file}
+\item{out_path}{path for the ini output file (optional)}
 
 \item{crop_tag}{identifier for the crop parameters names}
 
@@ -31,4 +31,14 @@ an invisible xmlDocument object or a list of
 }
 \description{
 Generate from a template or an input file a Stics ini xml file
+}
+\examples{
+\dontrun{
+copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "path/to/dest/dir")
+xl_path <- file.path("path/to/dest/dir","inputs_stics_example.xlsx")
+ini_param_df <- read_excel(xl_path, sheet = "Ini")
+gen_ini_xml(param_table = ini_param_df)
+
+}
+
 }
