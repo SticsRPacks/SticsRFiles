@@ -1,6 +1,13 @@
-#' @title Get an example of an XL parameters file into a directory (from package data)
-#' @param xl_name name of the XL file or partial match
-#' @param dest_dir directory path where to copy the XL file
+#' @title Copying an example of an Excel parameters file into a directory (from package data)
+#' @param xl_name Name of an Excel file (optional, needed if several files in library)
+#' @param dest_dir Directory path where to copy the XL file
+#'  (optional, default: current directory)
+#'
+#' @examples
+#' \dontrun{
+#' copy_mailing_example()
+#' copy_mailing_example(dest_dir = "/path/to/destination/dir")
+#' }
 #'
 #' @export
 #'

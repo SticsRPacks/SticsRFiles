@@ -2,15 +2,23 @@
 % Please edit documentation in R/copy_mailing_example.R
 \name{copy_mailing_example}
 \alias{copy_mailing_example}
-\title{Get an example of an XL parameters file into a directory (from package data)}
+\title{Copying an example of an Excel parameters file into a directory (from package data)}
 \usage{
 copy_mailing_example(xl_name = NULL, dest_dir = getwd())
 }
 \arguments{
-\item{xl_name}{name of the XL file or partial match}
+\item{xl_name}{Name of an Excel file (optional, needed if several files in library)}
 
-\item{dest_dir}{directory path where to copy the XL file}
+\item{dest_dir}{Directory path where to copy the XL file
+(optional, default: current directory)}
 }
 \description{
-Get an example of an XL parameters file into a directory (from package data)
+Copying an example of an Excel parameters file into a directory (from package data)
+}
+\examples{
+\dontrun{
+copy_mailing_example()
+copy_mailing_example(dest_dir = "/path/to/destination/dir")
+}
+
 }
