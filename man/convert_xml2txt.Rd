@@ -17,13 +17,22 @@ convert_xml2txt(
 
 \item{java_dir}{Root directory of the JavaStics installation}
 
-\item{plt_num}{The number of plants (sole crop: 1 ; mixed: 2)}
+\item{plt_num}{The plant identifier (main crop: 1 ; associated crop: 2)}
 
-\item{out_dir}{Directory of the generated file}
+\item{out_dir}{Output directory of the generated file (optional, default:
+path of the input xml file)}
 
-\item{out_file}{Name of the output file}
+\item{out_file}{Name of the output file (optional, default: fixed name for Stics)}
 }
 \description{
 The input file according to his type (ini,plant,tec,station,soil,par)
 is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
+}
+\examples{
+\dontrun{
+xml_path <- "/path/to/corn_plt.xml"
+javastics_path <- "/path/to/javastics/root"
+convert_xml2txt(xml_file = xml_path, java_dir = javastics_path)
+}
+
 }
