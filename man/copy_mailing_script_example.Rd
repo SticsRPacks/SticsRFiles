@@ -4,16 +4,32 @@
 \alias{copy_mailing_script_example}
 \title{Get script(s) example(s) for generating xml Stics files from tables (data.frame, tibble)}
 \usage{
-copy_mailing_script_example(in_name = NULL, dest_dir = getwd())
+copy_mailing_script_example(in_name = NULL, dest_dir = getwd(), overwrite = F)
 }
 \arguments{
-\item{in_name}{name of the script or partial match, or "all" for getting all scripts}
+\item{in_name}{Name of the script or partial match, or "all" for getting all scripts}
 
-\item{dest_dir}{directory path where to copy the script}
+\item{dest_dir}{Directory path where to copy the script (optional, default: current directory)}
+
+\item{overwrite}{Logical value to overwrite files (TRUE) or not (FALSE, default)}
 }
 \value{
-logical value TRUE if the file copy is successful, FALSE otherwise
+Logical value TRUE if the file copy is successful, FALSE otherwise
 }
 \description{
 Get script(s) example(s) for generating xml Stics files from tables (data.frame, tibble)
+}
+\examples{
+
+\dontrun{
+# getting files list
+copy_mailing_script_example()
+[1] "generate_ini_files.R" "generate_sols_file.R" "generate_sta_files.R" "generate_tec_files.R"
+[5] "generate_usms_file.R"
+# copying all scripts
+copy_mailing_script_example("all")
+# copying ini and sols scripts
+copy_mailing_script_example("ini", "sols")
+}
+
 }
