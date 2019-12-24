@@ -4,10 +4,10 @@
 \alias{gen_obs}
 \title{Write STICS obs data from data.frame}
 \usage{
-gen_obs(x, path)
+gen_obs(obs_table, path)
 }
 \arguments{
-\item{x}{data.frame to write}
+\item{obs_table}{data.frame to write}
 
 \item{path}{Path to the file to write to}
 }
@@ -16,6 +16,9 @@ Write STICS obs data from data.frame
 }
 \examples{
 \dontrun{
-gen_obs(obs, "wheat.obs")
+xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx")
+obs_df <- read_excel(xl_path, sheet = "Obs")
+gen_obs(obs_df, "USM_2017_T1_CI.obs")
 }
+
 }

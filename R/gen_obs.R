@@ -2,31 +2,34 @@
 #'
 #' @description Write STICS obs data from data.frame
 #'
-#' @param x     data.frame to write
+#' @param obs_table data.frame to write
 #' @param path Path to the file to write to
 #'
 #' @examples
 #'\dontrun{
-#' gen_obs(obs, "wheat.obs")
+#' xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx")
+#' obs_df <- read_excel(xl_path, sheet = "Obs")
+#' gen_obs(obs_df, "USM_2017_T1_CI.obs")
 #'}
+#'
 #' @export
 #'
-gen_obs= function(x,path){
-  x= x[,-grep("Date|Plant",colnames(x))]
-  x= data.frame(x[,grep("ian|mo|jo|jul",colnames(x))],
-                x[,-grep("ian|mo|jo|jul",colnames(x))])
+gen_obs= function(obs_table,path){
+  # obs_table= obs_table[,-grep("Date|Plant",colnames(obs_table))]
+  obs_table= data.frame(obs_table[,grep("ian|mo|jo|jul",colnames(obs_table))],
+                obs_table[,-grep("ian|mo|jo|jul",colnames(obs_table))])
 
-  colnames(x)= gsub("_n","(n)",colnames(x))
-  colnames(x)[grep("_[0-9]$",colnames(x))]=
-    gsub("$",")",gsub("_","(",colnames(x)[grep("_[0-9]$",colnames(x))]))
-  colnames(x)[grep("_[0-9]_sd$",colnames(x))]=
-    gsub("_sd$",")_sd",gsub("_","(",colnames(x)[grep("_[0-9]_sd$",colnames(x))]))
+  colnames(obs_table)= gsub("_n","(n)",colnames(obs_table))
+  colnames(obs_table)[grep("_[0-9]$",colnames(obs_table))]=
+    gsub("$",")",gsub("_","(",colnames(obs_table)[grep("_[0-9]$",colnames(obs_table))]))
+  colnames(obs_table)[grep("_[0-9]_sd$",colnames(obs_table))]=
+    gsub("_sd$",")_sd",gsub("_","(",colnames(obs_table)[grep("_[0-9]_sd$",colnames(obs_table))]))
 
-  splitted_sd= strsplit(colnames(x)[grep("_[0-9]_sd$",colnames(x))],"_")
-  colnames(x)[grep("_[0-9]_sd$",colnames(x))]=
+  splitted_sd= strsplit(colnames(obs_table)[grep("_[0-9]_sd$",colnames(obs_table))],"_")
+  colnames(obs_table)[grep("_[0-9]_sd$",colnames(obs_table))]=
     lapply(splitted_sd, function(z){
       z= paste(c(paste(z[1:2], collapse = "("),z[3]), collapse = ")_")
     })
 
-  utils::write.table(x,path,sep=";",na="-999.99",row.names= F, quote=F)
+  utils::write.table(obs_table,path,sep=";",na="-999.99",row.names= F, quote=F)
 }
