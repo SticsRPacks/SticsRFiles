@@ -7,6 +7,15 @@
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
+#' @examples
+#' \dontrun{
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' sta_param_df <- read_excel(xl_path, sheet = "Station")
+#' gen_sta_xml(out_path = file.path("/path/to/dest/dir","sta"),
+#' param_table = sta_param_df)
+#'}
+#'
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
@@ -40,6 +49,11 @@ gen_sta_xml <- function(sta_out_file = NULL, param_table = NULL,
     xml_docs <- list(xml_docs)
   }
 
+
+  # checking if out_path exists
+  if ( ! dir.exists(out_path) ) {
+    stop(paste("The directory does not exist",out_path ))
+  }
 
   # defining output files paths
   if (base::is.null(sta_out_file)) {

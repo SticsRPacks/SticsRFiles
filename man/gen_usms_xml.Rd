@@ -29,3 +29,13 @@ an invisible xmlDocument object
 \description{
 Generate from a template a Stics usms xml file
 }
+\examples{
+\dontrun{
+copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+usms_param_df <- read_excel(xl_path, sheet = "USMs")
+gen_usms_xml(usms_out_file = file.path("/path/to/dest/dir","usms.xml"),
+usms_param = usms_param_df)
+}
+
+}

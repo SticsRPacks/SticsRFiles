@@ -57,7 +57,7 @@ get_params_from_table <- function(params_table,
     message_str <- sprintf("\n%s\n%s\n\n%s\n\n%s\n\n","Unknown parameters found in table: ",
                            paste(unknown_params, collapse = ", "),
                            "Verify parameters names in xml files or",
-                           "check substitution names in list returned by get_param_from_table()")
+                           "check substitution names in list returned by get_params_from_table()")
     if ( stopping) {
       stop(message_str)
     } else {

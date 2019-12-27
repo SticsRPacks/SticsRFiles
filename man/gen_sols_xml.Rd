@@ -29,3 +29,13 @@ an invisible xmlDocument object
 \description{
 Generate from a template a Stics sols xml file
 }
+\examples{
+\dontrun{
+copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+sols_param_df <- read_excel(xl_path, sheet = "Soils")
+gen_sols_xml(sols_out_file = file.path("/path/to/dest/dir","sols.xml"),
+sols_param = sols_param_df)
+}
+
+}

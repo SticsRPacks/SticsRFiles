@@ -9,6 +9,15 @@
 #'
 #' @return an invisible xmlDocument object
 #'
+#' @examples
+#' \dontrun{
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' usms_param_df <- read_excel(xl_path, sheet = "USMs")
+#' gen_usms_xml(usms_out_file = file.path("/path/to/dest/dir","usms.xml"),
+#' usms_param = usms_param_df)
+#' }
+#'
 #' @export
 #'
 
@@ -26,6 +35,7 @@ gen_usms_xml <- function(usms_out_file,
 
   vars <- c("flai_1", "fplt_2","ftec_2", "flai_2")
   vars_idx <- vars %in% names(usms_param)
+
   # replacing NA with "null", if any vars name in usms_param names
   if (! base::is.null(usms_param) && any(vars_idx)) {
     for (v in vars[vars_idx]) {
@@ -37,6 +47,13 @@ gen_usms_xml <- function(usms_out_file,
                           usms_nb = usms_nb,
                           usms_param = usms_param,
                           stics_version = stics_version)
+
+  # checking if out dir exists
+  out_path <- dirname(usms_out_file)
+  if ( ! dir.exists(out_path) ) {
+    stop(paste("The directory does not exist",out_path))
+  }
+
 
   saveXmlDoc(xml_doc, usms_out_file)
 

@@ -9,12 +9,13 @@
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
-#' @examples \dontrun{
-#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "path/to/dest/dir")
-#' xl_path <- file.path("path/to/dest/dir","inputs_stics_example.xlsx")
+#' @examples
+#' \dontrun{
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
-#' gen_ini_xml(param_table = ini_param_df)
-#'
+#' gen_ini_xml(out_path = file.path("/path/to/dest/dir","ini"),
+#' param_table = ini_param_df)
 #' }
 #'
 #' @export
