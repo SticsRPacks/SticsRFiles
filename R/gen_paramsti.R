@@ -14,27 +14,40 @@
 #'
 #' @export
 #'
-gen_paramsti <- function(workspace, par_names, par_values, file_name = "param.sti") {
-  file_path <- file.path(workspace, file_name)
+gen_paramsti <- function(workspace,
+                         par_names,
+                         par_values,
+                         file_name = "param.sti") {
 
+  # Full file path & removing file if exists
+  file_path <- file.path(workspace, file_name)
   if (file.exists(file_path)) {
     file.remove(file_path)
   }
 
-  # checking par consistency
+  # Checking parameters vectors consistency
+  # exiting if not
   nb_par <- unique(c(length(par_names), length(par_values)))
-
   if (length(nb_par) > 1) {
     return(FALSE)
   }
 
-  # TODO: checking if par_names exist ?
+  # TODO: checking if par_names exist (related to Stics version) ?
 
   # Writing file content
   con <- file(file_path, method = "w+")
-  write(paste0(nb_par,"\n",paste0(sprintf("%s\n%f",par_names,par_values), collapse="\n")), con)
+  w <- try(write(paste0(nb_par,"\n",
+                        paste0(sprintf("%s\n%f",par_names,par_values), collapse="\n")),
+                 con))
+
+  # Checking if any error writing the file
+  if (methods::is(w,"try-error")) {
+    return(invisible(FALSE))
+  }
+
   close(con)
 
+  # Returning file creation status
   return(invisible(TRUE))
 
 
