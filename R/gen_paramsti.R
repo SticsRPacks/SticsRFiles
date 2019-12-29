@@ -19,6 +19,11 @@ gen_paramsti <- function(workspace,
                          par_values,
                          file_name = "param.sti") {
 
+  # Checking if workspace exists
+  if (! dir.exists(workspace)) {
+    stop(paste(workspace,": directory does not exist !"))
+  }
+
   # Full file path & removing file if exists
   file_path <- file.path(workspace, file_name)
   if (file.exists(file_path)) {
@@ -40,12 +45,12 @@ gen_paramsti <- function(workspace,
                         paste0(sprintf("%s\n%f",par_names,par_values), collapse="\n")),
                  con))
 
+  close(con)
+
   # Checking if any error writing the file
   if (methods::is(w,"try-error")) {
     return(invisible(FALSE))
   }
-
-  close(con)
 
   # Returning file creation status
   return(invisible(TRUE))

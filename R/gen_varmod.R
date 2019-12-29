@@ -15,26 +15,35 @@
 gen_varmod <- function(workspace, var_names, file_name ="var.mod") {
 
 
+  # Checking if workspace exists
   if (! dir.exists(workspace)) {
-    stop(paste(workspace,"directory does not exist !"))
+    stop(paste(workspace,": directory does not exist !"))
   }
 
+  # Removing file if it exists
   file_path <- file.path(workspace, file_name)
 
   if (file.exists(file_path)) {
     file.remove(file_path)
   }
 
-  # TODO: checking if par_names exist ?
-
-
-  # checking par consistency
-  nb_var <- length(var_names)
+  # TODO: checking if var_names exist (according to Stics version)?
+  # checking variables names consistency
+  #nb_var <- length(var_names)
 
   # Writing file content
   con <- file(file_path, method = "w+")
-  write(paste0(sprintf("%s",var_names), collapse = "\n"), con)
+  w <- try(write(paste0(sprintf("%s",var_names), collapse = "\n"), con))
+
+
   close(con)
 
+  # Checking if any error writing the file
+  if (methods::is(w,"try-error")) {
+    return(invisible(FALSE))
+  }
+
+
+  return(invisible(TRUE))
 
 }
