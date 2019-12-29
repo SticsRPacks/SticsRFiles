@@ -22,14 +22,35 @@
 #'
 #' @export
 #'
-get_climate_txt= function(dirpath=getwd(), filename="climat.txt"){
+get_climate_txt= function(dirpath=getwd(),
+                          filename="climat.txt",
+                          preserve = TRUE){
+
   file_path <- file.path(dirpath,filename)
-  Met= data.table::fread(file_path, data.table = F)
-  colnames(Met)= c("station","year","month","day","julian","ttmin","ttmax",
-                   "ttrg","ttetp","ttrr","ttvent","ttpm","ttco2")
-  Date= data.frame(Date=as.POSIXct(x = paste(Met$year,Met$month,Met$day, sep="-"),
+
+  # Checking file
+  if (! file.exists(file_path)) {
+    warning("File does not exist: ",file_path)
+    return()
+  }
+
+  meteo_data= data.table::fread(file_path, data.table = F)
+  colnames(meteo_data)= c("station","year","month","day","julian","ttmin","ttmax",
+                          "ttrg","ttetp","ttrr","ttvent","ttpm","ttco2")
+  Date= data.frame(Date=as.POSIXct(x = paste(meteo_data$year,meteo_data$month,meteo_data$day, sep="-"),
                                    format = "%Y-%m-%d", tz="UTC"))
-  Table_Met= cbind(Date,Met[,-c(grep("year|month|day|julian",colnames(Met)))])
-  attr(Table_Met, "file")= file_path
-  return(Table_Met)
+
+  # For removing original date components columns
+  if (! preserve ) {
+    col_idx <- grep("year|month|day|julian",colnames(meteo_data))
+    if (length(col_idx)) meteo_data <- meteo_data[,-col_idx]
+  }
+
+  # Adding Date to data.frame
+  meteo_data= cbind(Date, meteo_data)
+
+  # Adding file path as attribute
+  attr(meteo_data, "file")= file_path
+
+  return(meteo_data)
 }
