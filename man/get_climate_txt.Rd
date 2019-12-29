@@ -4,12 +4,15 @@
 \alias{get_climate_txt}
 \title{Read STICS input meteo file}
 \usage{
-get_climate_txt(dirpath = getwd(), filename = "climat.txt")
+get_climate_txt(dirpath = getwd(), filename = "climat.txt", preserve = TRUE)
 }
 \arguments{
 \item{dirpath}{Directory path}
 
 \item{filename}{The meteorology file name (default to \code{climat.txt}).}
+
+\item{preserve}{Logical, TRUE for keeping original Stics meteo columns (default)
+or FALSE otherwise.}
 }
 \value{
 A data.frame of the input meteorological variables used as input for the

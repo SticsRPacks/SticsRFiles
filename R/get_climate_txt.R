@@ -4,6 +4,8 @@
 #'
 #' @param dirpath  Directory path
 #' @param filename The meteorology file name (default to \code{climat.txt}).
+#' @param preserve Logical, TRUE for keeping original Stics meteo columns (default)
+#' or FALSE otherwise.
 #'
 #' @note The time-related variables are summarised into one POSIXct column named
 #'       code{Date}.
