@@ -81,17 +81,18 @@ get_daily_results <- function(workspace,
 
   # Adding the Date  in the simulation results tibble
 
-  results_tbl <- results_tbl %>% dplyr::mutate(Date=as.POSIXct(x = paste(.$ian,
-                                                                         .$mo,
-                                                                         .$jo,
-                                                                         sep="-"),
-                                                               format = "%Y-%m-%d",
-                                                               tz="UTC")) %>%
+  results_tbl <- results_tbl %>%
+    dplyr::mutate(Date=as.POSIXct(x = paste(.$ian,
+                                            .$mo,
+                                            .$jo,
+                                            sep="-"),
+                                  format = "%Y-%m-%d",
+                                  tz="UTC")) %>%
     dplyr::select(.data$Date, dplyr::everything())
 
 
 
-  # Converting .n. to _n in the varname
+  # Converting .n. to _n in variables names
   # to be homogeneous with get_obs_int output colnames
   colnames(results_tbl) = var_to_col_names(colnames(results_tbl))
 

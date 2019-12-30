@@ -2,13 +2,16 @@
 #' @description Extracting a usm names list from an usms.xml file
 #' @param usms_path usms dir path or usm file path
 #' @param xml_name usms xml file name (optional, default = "usms.xml")
+#'
 #' @return A list with usms names
+#'
 #' @examples
 #' path = system.file("extdata/xml/examples/V9.0", package = "SticsRFiles")
 #' usms_list <- get_usms_list(path)
 #'
 #'
 #' @export
+#'
 get_usms_list <- function(usms_path,xml_name="usms.xml"){
 
   # TODO: add select key: i.e. get all usms names

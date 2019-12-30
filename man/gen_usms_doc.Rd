@@ -26,4 +26,13 @@ an xmlDocument object
 \description{
 Generate  from a template or modify a Stics usms xmlDocument
 }
+\examples{
+\dontrun{
+copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+usms_param_df <- read_excel(xl_path, sheet = "USMs")
+usms_doc <- SticsRFiles:::gen_usms_doc(usms_param = usms_param_df)
+}
+
+}
 \keyword{internal}

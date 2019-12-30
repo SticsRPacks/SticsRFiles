@@ -5,6 +5,14 @@
 #' parameters values forcing)
 #' @param file_name Name of the file
 #'
+#' @examples
+#' \dontrun{
+#'
+#' ws <- "path/to/stics/workspace"
+#' SticsRFiles:::set_codoptim(workspace = ws, value = 0)
+#'
+#' }
+#'
 #'
 set_codeoptim <- function(workspace, value = 1, file_name = "new_travail.usm") {
 

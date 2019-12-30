@@ -12,6 +12,9 @@ copy_mailing_example(xl_name = NULL, dest_dir = getwd())
 \item{dest_dir}{Directory path where to copy the XL file
 (optional, default: current directory)}
 }
+\value{
+A copy status, TRUE if successfull, FALSE otherwise
+}
 \description{
 Copying an example of an Excel parameters file into a directory (from package data)
 }

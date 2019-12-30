@@ -9,11 +9,24 @@ exists_param(xml_doc_object, param_name, ...)
 \arguments{
 \item{xml_doc_object}{XML document}
 
-\item{param_name}{The parameter name}
+\item{param_name}{The parameter name or a vector of}
 
 \item{...}{Other parameters to pass to \code{\link[=get_param_number]{get_param_number()}}.}
 }
+\value{
+A vector of logical values
+}
 \description{
 Test if a parameter exists in an XML file
+}
+\examples{
+xml_sols <- system.file(paste0("extdata/xml/examples/V9.0/sols.xml"),
+package = "SticsRFiles")
+
+xml_doc <- SticsRFiles:::xmldocument(xml_sols)
+
+SticsRFiles:::exists_param(xml_doc, "cfes")
+SticsRFiles:::exists_param(xml_doc, c("cfes","mulchbat"))
+
 }
 \keyword{internal}

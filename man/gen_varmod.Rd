@@ -13,6 +13,9 @@ gen_varmod(workspace, var_names, file_name = "var.mod")
 
 \item{file_name}{file name to generate (default value: var.mod)}
 }
+\value{
+A logical status TRUE if successfull generation, FALSE otherwise
+}
 \description{
 Generating a daily variable list file from variables names
 }

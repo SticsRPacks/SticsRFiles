@@ -15,6 +15,9 @@ gen_paramsti(workspace, par_names, par_values, file_name = "param.sti")
 
 \item{file_name}{file name to generate (default value: param.sti)}
 }
+\value{
+A logical status TRUE if successfull, FALSE otherwise
+}
 \description{
 Generating a parameters forcing file from parameters names
 and parameters values vectors

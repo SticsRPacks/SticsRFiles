@@ -3,6 +3,8 @@
 #' @param dest_dir Directory path where to copy the XL file
 #'  (optional, default: current directory)
 #'
+#' @return A copy status, TRUE if successfull, FALSE otherwise
+#'
 #' @examples
 #' \dontrun{
 #' copy_mailing_example()

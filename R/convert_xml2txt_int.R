@@ -6,7 +6,17 @@
 #' @param style_file File path of the xsl file
 #' @param out_file File path of the generated file
 #'
-#@export
+#' @return Path of the generated file
+#'
+#' @examples
+#' \dontrun{
+#' xml_plt <- system.file(paste0("extdata/xml/examples/V9.0/baresoil_plt.xml"),
+#' package = "SticsRFiles")
+#' xsl_file <- "/path/to/javastics/dir/bin/resources/xml/stylesheet/xml2txt.xsl"
+#'
+#' SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
+#'
+#' }
 #'
 #' @keywords internal
 #'

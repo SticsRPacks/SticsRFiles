@@ -11,15 +11,19 @@ get_plants_nb(usm_xml_path, usms_list = c())
 
 \item{usms_list}{Usms selection list inside usms from usms.xml file (optional)}
 }
+\value{
+A numeric vector of plants number per usm
+}
 \description{
 Extracting plant number from usms.xml file data
 }
 \examples{
 \dontrun{
-get_plants_nb("path/to/USM")
-get_plants_nb("path/to/USM","ble")
-get_plants_nb("path/to/USM",c("ble","mais"))
+xml_usms <- system.file(paste0("extdata/xml/examples/V9.0/usms.xml"),
+package = "SticsRFiles")
+get_plants_nb(xml_usms)
+get_plants_nb(xml_usms,"wheat")
+get_plants_nb(xml_usms,c("wheat","intercrop_pea_barley"))
 }
 
 }
-\keyword{internal}

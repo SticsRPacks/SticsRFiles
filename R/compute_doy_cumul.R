@@ -9,10 +9,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' compute_doy_cumul(c(350,360,10,20,30),c(1990,1990,1991,1991,1991))
+#' SticsRFiles:::compute_doy_cumul(c(350,360,10,20,30),c(1990,1990,1991,1991,1991))
 #'}
 #'
-#@export
+#
 #' @keywords internal
 #'
 compute_doy_cumul <- function(doys_vec, years_vec) {

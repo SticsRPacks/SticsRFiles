@@ -17,3 +17,13 @@ parameters values forcing)}
 \description{
 Change value of codeoptim in the new_travail.usm file
 }
+\examples{
+\dontrun{
+
+ws <- "path/to/stics/workspace"
+SticsRFiles:::set_codoptim(workspace = ws, value = 0)
+
+}
+
+
+}

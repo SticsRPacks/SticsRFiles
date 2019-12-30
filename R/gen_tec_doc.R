@@ -7,6 +7,15 @@
 #'
 #' @return an xmlDocument object or a list of
 #'
+#'
+#' @examples
+#' \dontrun{
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' ini_param_df <- read_excel(xl_path, sheet = "Tec")
+#' tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)
+#' }
+#'
 #' @keywords internal
 #'
 gen_tec_doc <- function(xml_doc_object = NULL,

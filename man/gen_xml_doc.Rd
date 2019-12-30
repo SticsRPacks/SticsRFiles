@@ -26,7 +26,28 @@ gen_xml_doc(
 
 \item{overwrite}{Overwrite the document values ?}
 }
+\value{
+An xmlDocument object
+}
 \description{
 Generate from a template or modify a Stics sols or usms xmlDocument
+}
+\examples{
+\dontrun{
+# A newly created one, with one or more usms and
+# fake parameters values
+xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms")
+xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms", node_nb = 3)
+
+# With changing parameters values, from an existing document
+# and a data.frame contaning usms parameters values
+existing_doc <- SticsRFiles:::xmldocument("/path/to/usms.xml")
+
+out_xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms",
+xml_doc = existing_doc, nodes_param = param_data_frame)
+
+
+}
+
 }
 \keyword{internal}

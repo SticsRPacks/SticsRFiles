@@ -7,6 +7,25 @@
 #' @param stics_version Version of the STICS model
 #' @param overwrite  Overwrite the document values ?
 #'
+#' @return An xmlDocument object
+#'
+#' @examples
+#' \dontrun{
+#' # A newly created one, with one or more usms and
+#' # fake parameters values
+#' xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms")
+#' xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms", node_nb = 3)
+#'
+#' # With changing parameters values, from an existing document
+#' # and a data.frame contaning usms parameters values
+#' existing_doc <- SticsRFiles:::xmldocument("/path/to/usms.xml")
+#'
+#' out_xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms",
+#' xml_doc = existing_doc, nodes_param = param_data_frame)
+#'
+#'
+#' }
+#'
 #' @keywords internal
 #'
 gen_xml_doc <- function(doc_type, xml_doc = NULL,

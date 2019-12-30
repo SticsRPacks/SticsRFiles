@@ -6,6 +6,8 @@
 #' @param par_values vector of parameters values
 #' @param file_name file name to generate (default value: param.sti)
 #'
+#' @return A logical status TRUE if successfull, FALSE otherwise
+#'
 #' @examples
 #' \dontrun{
 #' gen_paramsti(".", c("par1","par2"), c(1,2))

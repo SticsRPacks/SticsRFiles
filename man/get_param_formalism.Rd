@@ -17,3 +17,19 @@ a formalism name or a list of
 \description{
 Get the "formalisme" node "@nom" attribute value of a (or a list of) parameter(s) in an xmlDocument
 }
+\examples{
+\dontrun{
+
+xml_sta <- system.file(paste0("extdata/xml/examples/V9.0/file_sta.xml"),
+package = "SticsRFiles")
+
+sta_doc <- SticsRFiles:::xmldocument(xml_sta)
+
+par_form <- SticsRFiles:::get_param_formalism(sta_doc,"zr")
+
+par_form_list <- SticsRFiles:::get_param_formalism(sta_doc,c("zr","altistation"))
+
+}
+
+
+}

@@ -4,6 +4,8 @@
 #' @param var_names vector of variables names
 #' @param file_name file name to generate (default value: var.mod)
 #'
+#' @return A logical status TRUE if successfull generation, FALSE otherwise
+#'
 #' @examples
 #' \dontrun{
 #'  gen_varmod(".", c("var1","var2"))

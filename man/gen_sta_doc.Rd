@@ -19,4 +19,13 @@ an xmlDocument object or a list of
 \description{
 Generate  from a template or modify a Stics sta xmlDocument
 }
+\examples{
+\dontrun{
+copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+sta_param_df <- read_excel(xl_path, sheet = "Station")
+sta_doc <- SticsRFiles:::gen_sta_doc(param_table = sta_param_df)
+}
+
+}
 \keyword{internal}

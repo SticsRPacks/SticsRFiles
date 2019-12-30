@@ -19,4 +19,18 @@ a numeric vector
 \description{
 Get the number of a (or alist of) Stics xml parameter(s) occurence from a request in an xmlDocument
 }
+\examples{
+\dontrun{
+xml_usms <- system.file(paste0("extdata/xml/examples/V9.0/usms.xml"),
+package = "SticsRFiles")
+
+usms_doc <- SticsRFiles:::xmldocument(xml_usms)
+
+par_nb <- SticsRFiles:::get_param_number(usms_doc,"usm")
+
+par_nb_vec <- SticsRFiles:::get_param_number(usms_doc,c("usm","fplt"))
+
+}
+
+}
 \keyword{internal}

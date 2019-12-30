@@ -13,9 +13,23 @@ convert_xml2txt_int(xml_file, style_file, out_file = NULL)
 
 \item{out_file}{File path of the generated file}
 }
+\value{
+Path of the generated file
+}
 \description{
 Using an xslt tranformation, an xml input file is converted to
 an other file format (text, xml). The output file name may be given or calculated.
 In the last case, the extension is defined after getting xsl method from the xsl file (xml, txt).
+}
+\examples{
+\dontrun{
+xml_plt <- system.file(paste0("extdata/xml/examples/V9.0/baresoil_plt.xml"),
+package = "SticsRFiles")
+xsl_file <- "/path/to/javastics/dir/bin/resources/xml/stylesheet/xml2txt.xsl"
+
+SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
+
+}
+
 }
 \keyword{internal}

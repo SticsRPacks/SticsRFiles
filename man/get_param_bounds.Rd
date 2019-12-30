@@ -22,13 +22,18 @@ or a vector of parameters from an xmlDocument class object.
 }
 \examples{
 \dontrun{
-library(SticsRFiles)
-xml_doc <- xmldocument("path/to/xmlfile")
-param_bounds <- get_param_bounds(xml_doc, "param", "min")
+xml_sta <- system.file(paste0("extdata/xml/examples/V9.0/file_sta.xml"),
+package = "SticsRFiles")
 
-param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"), "max")
+sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 
-param_bounds <- get_param_bounds(xml_doc, c("param1", "param2"))
+par_bounds <- SticsRFiles:::get_param_bounds(sta_doc,"zr")
+
+par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"))
+
+
+SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"),"min")
+
 }
 
 

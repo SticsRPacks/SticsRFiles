@@ -1,10 +1,20 @@
-#' Expand stics names from parameters/variables simple names
+#' Expand stics names from parameters/variables simple names,
+#' with indices (i.e. par(1), par(2),...regarding to parameter/variable dimensions)
 #'
 #' @param in_csv_file Input csv file path
 #' @param out_csv_file Output csv file path
 #' @param header_vec An optional header vector
 #'
-#@export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' csv_file <- "/path/to/javastics/dir/config/inputs.csv"
+#' out_csv_file <- "/path/to/out/dir/config/inputs_xpanded.csv"
+#'
+#' SticsRFiles:::expand_stics_names(csv_file, out_csv_file)
+#'
+#' }
 #'
 #' @keywords internal
 #'

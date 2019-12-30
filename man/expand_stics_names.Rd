@@ -2,7 +2,8 @@
 % Please edit documentation in R/expand_stics_names.R
 \name{expand_stics_names}
 \alias{expand_stics_names}
-\title{Expand stics names from parameters/variables simple names}
+\title{Expand stics names from parameters/variables simple names,
+with indices (i.e. par(1), par(2),...regarding to parameter/variable dimensions)}
 \usage{
 expand_stics_names(in_csv_file, out_csv_file, header_vec = NULL)
 }
@@ -14,6 +15,18 @@ expand_stics_names(in_csv_file, out_csv_file, header_vec = NULL)
 \item{header_vec}{An optional header vector}
 }
 \description{
-Expand stics names from parameters/variables simple names
+Expand stics names from parameters/variables simple names,
+with indices (i.e. par(1), par(2),...regarding to parameter/variable dimensions)
+}
+\examples{
+\dontrun{
+
+csv_file <- "/path/to/javastics/dir/config/inputs.csv"
+out_csv_file <- "/path/to/out/dir/config/inputs_xpanded.csv"
+
+SticsRFiles:::expand_stics_names(csv_file, out_csv_file)
+
+}
+
 }
 \keyword{internal}
