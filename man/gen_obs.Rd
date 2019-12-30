@@ -4,20 +4,23 @@
 \alias{gen_obs}
 \title{Write STICS obs data from data.frame}
 \usage{
-gen_obs(obs_table, path)
+gen_obs(obs_table, file_path)
 }
 \arguments{
 \item{obs_table}{data.frame to write}
 
-\item{path}{Path to the file to write to}
+\item{file_path}{Path to the file to write to}
+}
+\value{
+A logical value if the file generation succeeded (T) or not (F)
 }
 \description{
-Write STICS obs data from data.frame
+Write STICS obs data from data.frame/tibble
 }
 \examples{
 \dontrun{
 xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx")
-obs_df <- read_excel(xl_path, sheet = "Obs")
+obs_df <- read_excel(xl_path, sheet = "Obs") \%>\% dplyr::filter( usm_name \%in\% "USM_2017_T1_CI")
 gen_obs(obs_df, "USM_2017_T1_CI.obs")
 }
 
