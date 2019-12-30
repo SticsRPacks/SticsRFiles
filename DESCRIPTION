@@ -70,6 +70,7 @@ Collate:
     'gen_tec_doc.R'
     'gen_tec_xml.R'
     'gen_usms_doc.R'
+    'gen_usms_obs.R'
     'gen_usms_xml.R'
     'gen_varmod.R'
     'gen_xml_doc.R'
