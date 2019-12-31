@@ -1,14 +1,21 @@
 #' @title Get a list of Stics xml parameters names an xmlDocument or  XML node
 #' @param xml_object an xml XMLInternalElementNode or xmlDocument object
-#' @param param_list param names vector, used for recursive calls
-#' @param full_list TRUE or getting all names, FALSE otherwise (default)
+#' @param param_list param names vector, only used for recursive calls
+#' @param full_list TRUE for getting all names, FALSE otherwise (default)
 #' for unique names list
 #'
 #' @return a character vector of parameters names
 #'
+#' @examples
+#' \dontrun{
+#' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
+#' SticsRFiles:::get_params_names(sols_doc)
+#' }
+#'
 #' @keywords internal
 #'
-get_params_names <- function(xml_object,param_list = c(), full_list = FALSE) {
+get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
 
   # TODO
   # - for all: add an input parameter for specifying which formalism to use
