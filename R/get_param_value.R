@@ -142,11 +142,12 @@ get_param_value <- function(xml_doc_object,param_name,
   # Converting value to numeric if not any character in it
   # numbers may contain scientific notation e+ e-, decimal, and space
   #nb_num <- length(grep("[^- |0-9|.|e|+]",value, invert = T))
-  num_value <- as.numeric(value)
+  num_value <- suppressWarnings(as.numeric(value))
   is_number <- suppressWarnings(!is.na(num_value))
   #if ( nb_num == length(value) )  {
   if ( all(is_number) )  {
-    value <- suppressWarnings(as.numeric(num_value))
+    #value <- suppressWarnings(as.numeric(num_value))
+    value <- num_value
   }
 
   # TODO: see if finally useless, checks done in getValues ?
