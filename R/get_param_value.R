@@ -39,12 +39,14 @@ get_param_value <- function(xml_doc_object,param_name,
 
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
-    out <- lapply(param_name, function(x) get_param_value(xml_doc_object,x,
+    out <- lapply(param_name, function(x) get_param_value(xml_doc_object,
+                                                          x,
+                                                          parent_name,
+                                                          parent_sel_attr,
                                                           show_xpath = show_xpath))
     names(out) <- param_name
     return(out)
   }
-
 
   param_types=get_param_type()
 
