@@ -13,9 +13,9 @@ get_param_type(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an ini file)}
+\item{xml_doc}{an xmlDocument object (created from an xml file)}
 
-\item{param_name}{parameter name}
+\item{param_name}{parameter name or a vector of names}
 
 \item{parent_name}{xml parent node name}
 
@@ -24,7 +24,12 @@ get_param_type(
 \item{id}{node identifier(s) (if multiple nodes) for selecting}
 }
 \value{
-a list with fields $type, $xpath and $length
+a list with fields $type, $xpath and $length, or a list of
+
+xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+sols_doc <- SticsRFiles:::xmldocument(xml_path)
+SticsRFiles:::get_param_type(sols_doc, "argi")
+SticsRFiles:::get_param_type(sols_doc, c("argi", "norg"))
 }
 \description{
 Get a Stics xml parameter type and xpath from a request in an xmlDocument

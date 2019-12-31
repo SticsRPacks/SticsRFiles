@@ -1,11 +1,16 @@
 #' @title Get a Stics xml parameter type and xpath from a request in an xmlDocument
-#' @param xml_doc an xmlDocument object (created from an ini file)
-#' @param param_name parameter name
+#' @param xml_doc an xmlDocument object (created from an xml file)
+#' @param param_name parameter name or a vector of names
 #' @param parent_name xml parent node name
 #' @param parent_sel_attr parent attribute value for selecting
 #' @param id node identifier(s) (if multiple nodes) for selecting
 #'
-#' @return a list with fields $type, $xpath and $length
+#' @return a list with fields $type, $xpath and $length, or a named list of
+#'
+#' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
+#' SticsRFiles:::get_param_type(sols_doc, "argi")
+#' SticsRFiles:::get_param_type(sols_doc, c("argi", "norg"))
 #'
 #' @keywords internal
 #'
@@ -18,12 +23,21 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
                 "node_param","form_option", "node_attr","attr", "attrname",
                 "attr_attr", "choix_attr","nodename", "attr_attr2")
 
+
   char_to_filter <- c("-", ".", ":", "/", "%", "#", " ","(",")")
 
   # returning param types list if no arguments given
   if ( ! nargs() ) {
     return(param_types)
   }
+
+  # for multiple param names
+  if (length(param_name) > 1) {
+    param_types <- lapply(param_name, function(x) get_param_type(xml_doc,x))
+    names(param_types) <- param_name
+    return(param_types)
+  }
+
 
   param_name <- param_name[1]
   parent_name <- parent_name[1]
