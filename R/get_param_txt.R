@@ -39,8 +39,8 @@
 #' # Read the interrow distance parameter:
 #'
 #' library(SticsRFiles)
-#' path = system.file("extdata/xml/examples/V9.0", package = "SticsRFiles")
-#' get_param_txt(param='interrang')
+#' path = system.file("extdata/txt/V9.0", package = "SticsRFiles")
+#' get_param_txt(path, param='interrang')
 #'
 #'}
 #'
