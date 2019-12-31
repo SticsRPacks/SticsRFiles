@@ -96,7 +96,6 @@ Collate:
     'get_params_from_doc_node.R'
     'get_params_from_table.R'
     'get_params_names.R'
-    'get_params_types.R'
     'get_plants_nb.R'
     'get_txt_param_value.R'
     'get_usms_list.R'

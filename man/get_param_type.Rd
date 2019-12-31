@@ -24,7 +24,7 @@ get_param_type(
 \item{id}{node identifier(s) (if multiple nodes) for selecting}
 }
 \value{
-a list with fields $type, $xpath and $length, or a list of
+a list with fields $type, $xpath and $length, or a named list of
 
 xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
