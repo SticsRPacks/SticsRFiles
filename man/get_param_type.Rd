@@ -25,13 +25,17 @@ get_param_type(
 }
 \value{
 a list with fields $type, $xpath and $length, or a named list of
-
+}
+\description{
+Get a Stics xml parameter type and xpath from a request in an xmlDocument
+}
+\examples{
+\dontrun{
 xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
 SticsRFiles:::get_param_type(sols_doc, "argi")
 SticsRFiles:::get_param_type(sols_doc, c("argi", "norg"))
 }
-\description{
-Get a Stics xml parameter type and xpath from a request in an xmlDocument
+
 }
 \keyword{internal}

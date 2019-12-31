@@ -32,4 +32,23 @@ a numeric vector values of parameter or a list of
 \description{
 Extracting parameter value from an xml document object
 }
+\examples{
+\dontrun{
+xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+sols_doc <- SticsRFiles:::xmldocument(xml_path)
+SticsRFiles:::get_param_value(sols_doc, "argi")
+SticsRFiles:::get_param_value(sols_doc, c("argi", "norg"))
+
+SticsRFiles:::get_param_value(sols_doc, "argi",
+parent_name = "sol", parent_sel_attr = "solcanne"))
+
+SticsRFiles:::get_param_value(sols_doc, c("argi", "norg"),
+parent_name = "sol", parent_sel_attr = c("solcanne", "solbanane"))
+
+SticsRFiles:::get_param_value(list(sols_doc, sols_doc), c("argi","norg"),
+parent_name = "sol", parent_sel_attr = c("solcanne","solbanane"))
+
+}
+
+}
 \keyword{internal}

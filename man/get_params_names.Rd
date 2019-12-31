@@ -9,9 +9,9 @@ get_params_names(xml_object, param_list = c(), full_list = FALSE)
 \arguments{
 \item{xml_object}{an xml XMLInternalElementNode or xmlDocument object}
 
-\item{param_list}{param names vector, used for recursive calls}
+\item{param_list}{param names vector, only used for recursive calls}
 
-\item{full_list}{TRUE or getting all names, FALSE otherwise (default)
+\item{full_list}{TRUE for getting all names, FALSE otherwise (default)
 for unique names list}
 }
 \value{
@@ -19,5 +19,13 @@ a character vector of parameters names
 }
 \description{
 Get a list of Stics xml parameters names an xmlDocument or  XML node
+}
+\examples{
+\dontrun{
+xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+sols_doc <- SticsRFiles:::xmldocument(xml_path)
+SticsRFiles:::get_params_names(sols_doc)
+}
+
 }
 \keyword{internal}
