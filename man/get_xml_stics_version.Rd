@@ -17,4 +17,18 @@ a Stics version string
 \description{
 Get a version/or the laste version string of available Stics files templates in the package
 }
+\examples{
+\dontrun{
+# View available Stics files version
+SticsRFiles:::get_xml_stics_version()
+
+# View the last version
+SticsRFiles:::get_xml_stics_version("last")
+
+# Checking if a version exists
+SticsRFiles:::get_xml_stics_version("V9.2")
+
+}
+
+}
 \keyword{internal}

@@ -9,6 +9,19 @@
 #'
 #' @return a Stics version string
 #'
+#' @examples
+#' \dontrun{
+#' # View available Stics files version
+#' SticsRFiles:::get_xml_stics_version()
+#'
+#' # View the last version
+#' SticsRFiles:::get_xml_stics_version("last")
+#'
+#' # Checking if a version exists
+#' SticsRFiles:::get_xml_stics_version("V9.2")
+#'
+#' }
+#'
 #' @keywords internal
 #'
 get_xml_stics_version <- function(stics_version = "last", xml_doc = NULL) {

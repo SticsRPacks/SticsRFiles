@@ -22,12 +22,16 @@ A list containing a vector of strings of parameters values ($values)
 and a vector of strings of parameters names ($names)
 }
 \description{
-Extracting parameter values from an xml file data, correponding to parameters
-defined in a option choice node
+Extracting parameter values from an xml file, correponding to parameters
+defined in a option choice node (as \emph{param} nodes)
 }
 \examples{
 \dontrun{
-get_option_choice_param_values(path/to/xml/file,"codetemp","yes")
+
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/baresoil_plt.xml"))
+
+get_option_choice_param_values(xml_path,"codetemp","2")
+
 }
 
 }

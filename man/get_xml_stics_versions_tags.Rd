@@ -10,9 +10,20 @@ get_xml_stics_versions_tags(last = FALSE)
 \item{last}{Boolean. Is only the last version needed ?}
 }
 \value{
-All the STICS XML file versions available
+A list with all the STICS XML file versions available in the package
+templates and the last version, or only the last one.
 }
 \description{
 Get all stics XML versions
+}
+\examples{
+\dontrun{
+
+SticsRFiles:::get_xml_stics_versions_tags()
+
+SticsRFiles:::get_xml_stics_versions_tags(last=TRUE)
+
+}
+
 }
 \keyword{internal}

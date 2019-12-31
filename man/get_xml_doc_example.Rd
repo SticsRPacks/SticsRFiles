@@ -11,7 +11,21 @@ get_xml_doc_example(xml_name = NULL, stics_version = "last")
 
 \item{stics_version}{the stics files version to use}
 }
+\value{
+An xmlDocument object
+}
 \description{
 Get an xmlDocument from a Stics xml file example
+}
+\examples{
+\dontrun{
+# Retrieving xml examples files to get xmlDocument from
+SticsRFiles:::get_xml_doc_example()
+
+# Loading an usms.xml file
+usm_doc <- SticsRFiles:::get_xml_doc_example("usms.xml")
+
+}
+
 }
 \keyword{internal}

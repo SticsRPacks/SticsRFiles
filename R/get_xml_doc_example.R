@@ -3,6 +3,18 @@
 #'
 #' @param stics_version the stics files version to use
 #'
+#' @return An xmlDocument object
+#'
+#' @examples
+#' \dontrun{
+#' # Retrieving xml examples files to get xmlDocument from
+#' SticsRFiles:::get_xml_doc_example()
+#'
+#' # Loading an usms.xml file
+#' usm_doc <- SticsRFiles:::get_xml_doc_example("usms.xml")
+#'
+#' }
+#'
 #' @keywords internal
 #'
 get_xml_doc_example <- function(xml_name = NULL,
