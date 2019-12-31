@@ -5,6 +5,23 @@
 #'
 #' @return an xmlDocument object
 #'
+#' @examples
+#' \dontrun{
+#' # Getting xml Stics files types list (i.e. keywords)
+#' SticsRFiles:::get_xml_base_doc()
+#'
+#' # Getting a soil document with one soil definition
+#' SticsRFiles:::get_xml_base_doc("sols")
+#'
+#' # Stics version can be provided, for the moment only V9.0
+#' # is available and corresponds to stics_version = "last"
+#' # View available Stics files version
+#' SticsRFiles:::get_xml_stics_version()
+#' # Giving Stics version
+#' SticsRFiles:::get_xml_base_doc("sols", stics_version = "V9.0")
+#'
+#' }
+#'
 #' @keywords internal
 #'
 get_xml_base_doc <- function(xml_type = NULL,

@@ -13,7 +13,24 @@ get_xml_base_node(file_tag, form_name = NULL, stics_version = "last")
 
 \item{stics_version}{the stics files version to use}
 }
+\value{
+An xml node of type "usm", "sol", "intervention"
+}
 \description{
 Get an xmlDocument node (set of parameters) from a Stics xml node file template
+}
+\examples{
+\dontrun{
+SticsRFiles:::get_xml_base_node("usms")
+
+SticsRFiles:::get_xml_base_node("sols")
+
+# Formalism labels can be retrieved using
+SticsRFiles:::get_xml_base_node()$form_names$tec
+
+SticsRFiles:::get_xml_base_node("tec","irrigation")
+
+}
+
 }
 \keyword{internal}

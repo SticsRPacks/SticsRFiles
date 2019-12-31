@@ -3,13 +3,29 @@
 #' @param form_name formalism name
 #' @param stics_version the stics files version to use
 #'
+#'
+#' @return An xml node of type "usm", "sol", "intervention"
+#'
+#' @examples
+#' \dontrun{
+#' SticsRFiles:::get_xml_base_node("usms")
+#'
+#' SticsRFiles:::get_xml_base_node("sols")
+#'
+#' # Formalism labels can be retrieved using
+#' SticsRFiles:::get_xml_base_node()$form_names$tec
+#'
+#' SticsRFiles:::get_xml_base_node("tec","irrigation")
+#'
+#' }
+#'
 #' @keywords internal
 #'
 # TODO: under construction !!!!!!!!!!!!!!!!!
 get_xml_base_node <- function(file_tag, form_name=NULL,
                           stics_version = "last") {
 
-  # check/get version
+  # check/get Stics version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
 
@@ -61,8 +77,10 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
     stop(paste0("unknown node for ",file_tag))
   }
 
+  # Retrieving the formalism tag
   form_tag <- formalism_tags[[file_tag]][formalism_names[[file_tag]] %in% form_name]
 
+  # Setting the right template name
   if ( ! in_formalism_name ) {
     file_name <- paste0("one_",file_tag,".xml")
   } else {
@@ -70,15 +88,18 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
     file_name <- paste0("one_",form_tag,"_",file_tag,".xml")
   }
 
-
+  # Template path in the library
   xml_file <- system.file(paste0("extdata/xml/templates/",stics_version,"/",
                                  file_name), package = "SticsRFiles")
 
+  # Loading the template into an xmDocument
   xml_doc <- xmldocument(xml_file)
 
+  # Convert it into a string
   base_node_txt <- saveXML(getNodeS(xml_doc,paste0("//",node))[[1]])
 
   # TODO: see if usefull to call xmlClone or not ?
+  # Getting the node from a node set
   new_node <- getNodeSet(xmlParse(base_node_txt),paste0("//",node))[[1]]
 
   return(new_node)

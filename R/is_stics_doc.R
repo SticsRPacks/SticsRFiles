@@ -1,10 +1,22 @@
-#' Is it a STICS document
+#' Is it a STICS xml document
 #'
 #' @description Test if an XML document is a STICS document.
 #'
 #' @param xml_doc An xml document
 #' @param doc_type The type of xml document
 #' @param doc_types The different possible document types (optionnal)
+#'
+#' @return A logical value giving if xml_doc is a Stics xmlDoxument object
+#' (TRUE), or not (FALSE)
+#'
+#'
+#' @examples
+#' \dontrun{
+#' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
+#' SticsRFiles:::is_stics_doc(sols_doc)
+#' }
+#'
 #'
 #' @keywords internal
 #'

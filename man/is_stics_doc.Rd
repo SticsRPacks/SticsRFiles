@@ -10,7 +10,7 @@
 \alias{is_stics_plt}
 \alias{is_stics_par}
 \alias{is_stics_newpar}
-\title{Is it a STICS document}
+\title{Is it a STICS xml document}
 \usage{
 is_stics_doc(xml_doc, doc_type = NULL, doc_types = NULL)
 
@@ -37,7 +37,20 @@ is_stics_newpar(xml_doc)
 
 \item{doc_types}{The different possible document types (optionnal)}
 }
+\value{
+A logical value giving if xml_doc is a Stics xmlDoxument object
+(TRUE), or not (FALSE)
+}
 \description{
 Test if an XML document is a STICS document.
+}
+\examples{
+\dontrun{
+xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+sols_doc <- SticsRFiles:::xmldocument(xml_path)
+SticsRFiles:::is_stics_doc(sols_doc)
+}
+
+
 }
 \keyword{internal}
