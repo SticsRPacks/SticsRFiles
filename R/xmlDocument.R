@@ -78,12 +78,17 @@ setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj,path=NU
   if (base::is.null(path)){
     # getting root node name to get corresponding node set
     node_set=getNodeSet(docObj@content,paste0('/',xmlName(xmlRoot(docObj@content))))
-    #node_set=getNodeSet(docObj@content,'/')
   } else {
-    #print("getting node set")
-    #print(path)
-    node_set=getNodeSet(docObj@content,path)
+    node_set<- getNodeSet(docObj@content,path[1])
     #browser("test getNodeS")
+    # For a path vector, a loop is necessary
+    # to keep results according to the path order !
+    path_nb <- length(path)
+    if ( path_nb > 1 ) {
+      for (i in 2:path_nb) {
+        node_set <- merge_nodesets(node_set, getNodeSet(docObj@content,path[i]))
+      }
+    }
   }
 
   if (!length(node_set)) {

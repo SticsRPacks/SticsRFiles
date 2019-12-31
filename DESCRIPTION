@@ -107,6 +107,7 @@ Collate:
     'get_xml_stics_version.R'
     'get_xml_stics_versions_tags.R'
     'is_stics_doc.R'
+    'merge_nodesets.R'
     'read_obs.R'
     'remove_node_from_doc.R'
     'remove_parent_from_doc.R'
