@@ -19,7 +19,7 @@ the STICS-formated observations. Return \code{NULL} if no files were found,
 or more files than useable.
 }
 \description{
-Read STICS observation file for sole or mixed crops.
+Read STICS observation file(s) for sole and/or mixed crops.
 }
 \details{
 If \code{filename} is not specified (or equal to \code{NULL}), the
@@ -32,8 +32,9 @@ tries to read the number of species from the input files.
 }
 \examples{
 \dontrun{
-library(SticsRFiles)
-Meas= get_obs_int()
+
+obs_table = SticsRFiles:::get_obs_int()
+
 }
 
 

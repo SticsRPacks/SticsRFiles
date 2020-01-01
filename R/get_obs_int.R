@@ -1,6 +1,6 @@
 #' Read STICS observation file (*.obs)
 #'
-#' @description Read STICS observation file for sole or mixed crops.
+#' @description Read STICS observation file(s) for sole and/or mixed crops.
 #'
 #' @param dirpath  Directory path
 #' @param filename A vector of observation file name(s). Optional, see details.
@@ -24,11 +24,11 @@
 #'
 #' @examples
 #'\dontrun{
-#' library(SticsRFiles)
-#' Meas= get_obs_int()
-#'}
 #'
-# @export
+#' obs_table = SticsRFiles:::get_obs_int()
+#'
+#' }
+#'
 #'
 #' @keywords internal
 #'
@@ -56,67 +56,67 @@ get_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   # (2) use the *.obs file if there is only one
   if(base::is.null(filename)){
     if(mixed){
-      Plant_name=
+      plant_name=
         list.files(dirpath)%>%.[grep("mod_sp",.)]%>%gsub("mod_sp","",.)%>%
         strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}
-      Plant_name=
+      plant_name=
         list.files(dirpath)%>%.[grep("mod_sa",.)]%>%gsub("mod_sa","",.)%>%
-        strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}%>%c(Plant_name,.)
+        strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}%>%c(plant_name,.)
     }else{
-      Plant_name=
+      plant_name=
         list.files(dirpath)%>%.[grep("mod_s",.)]%>%gsub("mod_s","",.)%>%
         strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}
     }
 
     # If the *.obs names are the same used for mod_s* files, read them accordingly...
-    if(all(file.exists(file.path(dirpath,paste0(Plant_name,".obs"))))){
-      Table_obs= lapply(Plant_name, function(x){
-        Out= data.table::fread(file.path(dirpath,paste0(x,".obs")), data.table = F)
-        Out[Out<=-999.00]= NA
-        Out$Plant= x
-        colnames(Out)= var_to_col_names(colnames(Out))
-        return(Out)
+    if(all(file.exists(file.path(dirpath,paste0(plant_name,".obs"))))){
+      obs_table= lapply(plant_name, function(x){
+        out= data.table::fread(file.path(dirpath,paste0(x,".obs")), data.table = F)
+        out[out<=-999.00]= NA
+        out$Plant= x
+        colnames(out)= var_to_col_names(colnames(out))
+        return(out)
       })
-      Table_obs= data.table::rbindlist(Table_obs, fill=T)
-      attrfiles= Plant_name
+      obs_table= data.table::rbindlist(obs_table, fill=T)
+      attrfiles= plant_name
       warning("Observation file names read from matching mod_s* file names.\nmod_s* names:",
-              Plant_name, "\n*.obs:",paste0(Plant_name,".obs"))
+              plant_name, "\n*.obs:",paste0(plant_name,".obs"))
     }else{
     # ...else try to read a single *.obs file (multiple .obs file are not allowed)
       obs_files= list.files(dirpath)%>%.[grep("\\.obs$",.)]
       if(length(obs_files)==1){
-        Table_obs= data.table::fread(file.path(dirpath,obs_files), data.table = F)
-        colnames(Table_obs)= var_to_col_names(colnames(Table_obs))
+        obs_table= data.table::fread(file.path(dirpath,obs_files), data.table = F)
+        colnames(obs_table)= var_to_col_names(colnames(obs_table))
         attrfiles= obs_files
-        Table_obs[Table_obs<=-999.00]= NA
-        Table_obs$Plant= obs_files
+        obs_table[obs_table<=-999.00]= NA
+        obs_table$Plant= obs_files
         warning("Observation file guessed from the only '.obs' file in dirpath",
-                Plant_name, "\n*.obs:",paste0(Plant_name,".obs"))
+                plant_name, "\n*.obs:",paste0(plant_name,".obs"))
       }else{
         warning("\nObservation file names do not match mod_s* file names and several *.obs ",
              "file names are present. Please provide the *.obs file names using the ",
              "filename parameter")
-        Table_obs= NULL
+        obs_table= NULL
       }
     }
   }else{
-    Table_obs= lapply(filename, function(x){
-      Out= data.table::fread(file.path(dirpath,x), data.table = F)
-      Out[Out<=-999.00]= NA
-      Out$Plant= x
-      colnames(Out)= var_to_col_names(colnames(Out))
-      return(Out)
+    obs_table= lapply(filename, function(x){
+      out= data.table::fread(file.path(dirpath,x), data.table = F)
+      out[out<=-999.00]= NA
+      out$Plant= x
+      colnames(out)= var_to_col_names(colnames(out))
+      return(out)
     })
-    Table_obs= data.table::rbindlist(Table_obs, fill=T)
+    obs_table= data.table::rbindlist(obs_table, fill=T)
     attrfiles= filename
   }
 
-  if(!base::is.null(Table_obs)){
-    Date= data.frame(Date=as.POSIXct(x = paste(Table_obs$ian,Table_obs$mo,Table_obs$jo, sep="-"),
+  if(!base::is.null(obs_table)){
+    Date= data.frame(Date=as.POSIXct(x = paste(obs_table$ian,obs_table$mo,obs_table$jo, sep="-"),
                                      format = "%Y-%m-%d", tz="UTC"))
-    Table_obs= cbind(Date,Table_obs)
-    attr(Table_obs, "file")= attrfiles
+    obs_table= cbind(Date,obs_table)
+    attr(obs_table, "file")= attrfiles
   }
 
-  return(Table_obs)
+  return(obs_table)
 }
