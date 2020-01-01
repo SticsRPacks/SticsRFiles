@@ -4,20 +4,29 @@
 \alias{get_options_names}
 \title{Getting options parameter names from an xml parameter file}
 \usage{
-get_options_names(xml_file_path)
+get_options_names(xml_file_path, option_names = NULL)
 }
 \arguments{
 \item{xml_file_path}{path of xml parameter file}
+
+\item{option_names}{options names vector (optional)}
 }
 \value{
 A vector of strings of options parameter names
 }
 \description{
-Extracting options parameter name from an xml file data
+Extracting options parameter name from an xml file data, and checking
+names if provided in options_names
 }
 \examples{
 \dontrun{
-get_options_names(path/to/xml/file)
+
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/baresoil_plt.xml"))
+
+SticsRFiles:::get_options_names(xml_path)
+
+SticsRFiles:::get_options_names(xml_path, c("codemonocot", "codlainet"))
+
 }
 
 }

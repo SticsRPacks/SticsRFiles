@@ -2,20 +2,22 @@
 % Please edit documentation in R/get_param_formalism.R
 \name{get_param_formalism}
 \alias{get_param_formalism}
-\title{Get the "formalisme" node "@nom" attribute value of a (or a list of) parameter(s) in an xmlDocument}
+\title{Get the "formalisme" node "@nom" attribute value of a
+(or a list of) parameter(s) in an xmlDocument}
 \usage{
 get_param_formalism(xml_document, param_name)
 }
 \arguments{
 \item{xml_document}{an xmlDocument object (created from any xml file)}
 
-\item{param_name}{parameter name or vector of names}
+\item{param_name}{a formalism name or a vector of}
 }
 \value{
 a formalism name or a list of
 }
 \description{
-Get the "formalisme" node "@nom" attribute value of a (or a list of) parameter(s) in an xmlDocument
+Get the "formalisme" node "@nom" attribute value of a
+(or a list of) parameter(s) in an xmlDocument
 }
 \examples{
 \dontrun{

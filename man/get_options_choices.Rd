@@ -9,7 +9,7 @@ get_options_choices(xml_file_path, options_names = NULL)
 \arguments{
 \item{xml_file_path}{path of xml parameter file}
 
-\item{options_names}{options names to take into account}
+\item{options_names}{options names to take into account (optional)}
 }
 \value{
 A list of strings of options choice values
@@ -19,7 +19,15 @@ Extracting options choices values from an xml file data
 }
 \examples{
 \dontrun{
-get_option_choices(path/to/xml/file)
+
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/baresoil_plt.xml"))
+
+# For getting all options choices
+SticsRFiles:::get_options_choices(xml_path)
+
+# For getting one option choices or more
+SticsRFiles:::get_options_choices(xml_path,"codetemp")
+SticsRFiles:::get_options_choices(xml_path,c("codegdh", "codetemp"))
 }
 
 }

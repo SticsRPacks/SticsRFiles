@@ -1,6 +1,7 @@
-#' @title Get the "formalisme" node "@nom" attribute value of a (or a list of) parameter(s) in an xmlDocument
+#' @title Get the "formalisme" node "@nom" attribute value of a
+#' (or a list of) parameter(s) in an xmlDocument
 #' @param xml_document an xmlDocument object (created from any xml file)
-#' @param param_name parameter name or vector of names
+#' @param param_name a formalism name or a vector of
 #'
 #'
 #' @return a formalism name or a list of
@@ -31,6 +32,16 @@ get_param_formalism <- function(xml_document,param_name) {
   }
 
 
+  # Checking if any "formalisme" nodes in xml_document
+  form <- getAttrsValues(xml_document,"//formalisme","nom")
+
+  # exiting if no formalisms
+  if (base::is.null(form)) {
+    warning("Not any \"formalisme\" element in xml document !")
+    return(NULL)
+  }
+
+
   # case : param name as value of @nom attribute
   x_path <- paste0("//*[@nom=\"",param_name,"\"]/ancestor::formalisme")
 
@@ -49,8 +60,8 @@ get_param_formalism <- function(xml_document,param_name) {
   }
 
 
-
-
   # TODO : other cases
+
+  return(values)
 
 }
