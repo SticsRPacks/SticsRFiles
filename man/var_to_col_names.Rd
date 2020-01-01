@@ -19,7 +19,7 @@ Like \code{varname(n)} or \code{varname.n.} to  \code{varname_n}.
 Other names are unchanged (i.e.: varname, varname_n, ...)
 }
 \examples{
-var_names <- c("var1","var2(n)")
+var_names <- c("var1","var2(n)" ,"var2.n.")
 valid_names <- SticsRFiles:::var_to_col_names(var_names)
 
 }

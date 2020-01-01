@@ -2,8 +2,13 @@
 #' @description Change the `varname.n.` or `varname_n` by `varname(n)`
 #' other names are unchanged (i.e.: varname, varname(n), ...)
 #' @param var_list Columns names list
+#'
 #' @return List of Stics variables names
-#@export
+#'
+#' @examples
+#' col_names <- c("var1","var2_n","var3.1.")
+#' valid_names <- SticsRFiles:::col_names_to_var(col_names)
+#'
 #'
 #' @keywords internal
 #'

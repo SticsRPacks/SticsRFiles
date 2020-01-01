@@ -4,11 +4,12 @@
 #' Like `varname(n)` or `varname.n.` to  `varname_n`.
 #' Other names are unchanged (i.e.: varname, varname_n, ...)
 #' @param var_vec Valid names vector
+#'
 #' @return Vector of formatted column names
-#@export
+#'
 #'
 #' @examples
-#' var_names <- c("var1","var2(n)")
+#' var_names <- c("var1","var2(n)" ,"var2.n.")
 #' valid_names <- SticsRFiles:::var_to_col_names(var_names)
 #'
 #' @keywords internal
