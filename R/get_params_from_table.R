@@ -9,6 +9,18 @@
 #'
 #' @return a named list (with param names as list names) of data.frame/tibble
 #'
+#' @examples
+#' \dontrun{
+#'
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' ini_param_df <- read_excel(xl_path, sheet = "Ini")
+#' xml_path <- "path/to/ini/xml"
+#' ini_doc <- SticsRFiles:::xmldocument(xml_path)
+#' get_params_from_table(ini_param_df, ini_doc)
+#'
+#' }
+#'
 #' @keywords internal
 #'
 get_params_from_table <- function(params_table,

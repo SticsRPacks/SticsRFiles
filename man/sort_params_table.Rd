@@ -10,7 +10,21 @@ sort_params_table(params_table)
 \item{params_table}{a table (df, tibble) with parameters names
 indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2}
 }
+\value{
+Sorted table on indexed parameters names or a list of
+}
 \description{
 Sort a table against column names indexes with a suffix
+}
+\examples{
+\dontrun{
+copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+sols_param_df <- read_excel(xl_path, sheet = "Soils")
+
+SticsRFiles:::sort_params_table(sols_param_df)
+
+}
+
 }
 \keyword{internal}

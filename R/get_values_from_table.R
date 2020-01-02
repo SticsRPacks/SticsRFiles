@@ -6,6 +6,23 @@
 #'
 #' @return a named list (with param names as list names) of data.frame/tibble
 #'
+#' @examples
+#' \dontrun{
+#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' sols_param_df <- read_excel(xl_path, sheet = "Soils")
+#'
+#' SticsRFiles:::get_values_from_table(sols_param_df)
+#'
+#' SticsRFiles:::get_values_from_table(sols_param_df, param_names = c("DAF","HMINF"))
+#'
+#' SticsRFiles:::get_values_from_table(sols_param_df, lines_id = c(1,10))
+#'
+#' SticsRFiles:::get_values_from_table(sols_param_df,
+#' param_names = c("DAF","HMINF"), lines_id = c(1,10))
+#'
+#' }
+#'
 #' @keywords internal
 #'
 get_values_from_table <- function(params_table, param_names = NULL, lines_id = NULL) {
@@ -23,35 +40,23 @@ get_values_from_table <- function(params_table, param_names = NULL, lines_id = N
     stop("Index out of range for selecting line in table")
   }
 
-  if (base::is.null(param_names)) {
-    # getting param names list from table
-    #param_names <- unique(gsub(pattern = "_[0-9]*$","",names(params_table)))
-    param_names <- names(params_table)
+  # Splitting parameters table into tables named list
+  # with indexed parameters sorted (*_N)
+  splitted_params <- sort_params_table(params_table)
+
+  # Selecting parameters tables with param_names
+  if (!is.null(param_names)) {
+
+    tables_idx <- names(splitted_params) %in% param_names
+
+    if ( sum(tables_idx) != length(param_names)) {
+      warning("Some of param_names do not exist in tables !")
+    }
+
+    splitted_params <- splitted_params[tables_idx]
   }
 
-  patt <- "_[0-9]*$"
-  # cut parameters in sub-groups for getting vectors
-  scal_names <- grep(pattern = patt,param_names, invert = T, value = T)
-
-  vec_names <- unique( gsub(pattern = patt, replacement = "",
-                            x = grep(pattern = patt,param_names, value = T)) )
-
-
-  splitted_params_vec <- lapply(vec_names,
-                                function(x) dplyr::select(params_table,
-                                                          dplyr::starts_with(paste0(x,"_"))))
-  names(splitted_params_vec) <- vec_names
-
-  # sort tables with param index suffix _X
-  splitted_params_vec <- lapply(splitted_params_vec, sort_params_table)
-
-  splitted_params_scal <- lapply(scal_names,function(x) dplyr::select(params_table,x))
-
-  names(splitted_params_scal) <- scal_names
-
-  splitted_params <- c(splitted_params_scal, splitted_params_vec)
-
-  # selecting lines if lines_id
+  # Selecting lines if lines_id
   if (select_lines) {
     splitted_params <- lapply(splitted_params,function(x) dplyr::slice(x,lines_id))
   }
