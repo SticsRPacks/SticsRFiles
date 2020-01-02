@@ -2,12 +2,12 @@
 % Please edit documentation in R/remove_node_from_doc.R
 \name{remove_node_from_doc}
 \alias{remove_node_from_doc}
-\title{Remove node}
+\title{Remove a node from an xml object}
 \usage{
 remove_node_from_doc(
   xml_doc,
   param_name,
-  parent_path = NULL,
+  parent_name = NULL,
   remove_parent = FALSE,
   nodes_ids = NULL
 )
@@ -17,13 +17,34 @@ remove_node_from_doc(
 
 \item{param_name}{The parameter name}
 
-\item{parent_path}{The path to the parent}
+\item{parent_name}{The name of the parent parameter (node name or attribute value of nom, nomParam)}
 
-\item{remove_parent}{Boolean. Is the parent to be removed ?}
+\item{remove_parent}{Logical, indicating if the parent node must be removed (TRUE) or not
+(FALSE)}
 
-\item{nodes_ids}{The requested node IDs}
+\item{nodes_ids}{The node IDs to be removed (optional)}
 }
 \description{
-Remove a node from an XML document
+Remove a node from an xmlDocument instance
+}
+\examples{
+\dontrun{
+
+xml_path = system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+tec_doc <- SticsRFiles:::xmldocument(xml_path)
+
+# removing a single parameter
+SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "jultrav")
+
+# removing all the parent nodes the parameter belongs to
+SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
+ remove_parent = TRUE)
+
+# removing some of the parent nodes the parameter belongs to
+SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
+ remove_parent = TRUE, nodes_ids = c(1,3))
+
+}
+
 }
 \keyword{internal}

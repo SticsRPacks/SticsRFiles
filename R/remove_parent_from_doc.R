@@ -1,25 +1,36 @@
 
-#' Remove parent node
+#' Remove parent node of a parameter
 #'
 #' @description Remove a parent node from an XML file.
 #'
 #' @param xml_doc The XML document
-#' @param param_name The parent name
-#' @param parent_path The parent path
-#' @param remove_parent Boolean. Do we remove the parent node?
-#' @param nodes_ids The requested node IDs.
+#' @param param_name The parameter name
+#' @param nodes_ids The node IDs to be removed (optional)
 #'
-#@export
+#' @examples
+#' \dontrun{
+#'
+#' xml_path = system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+#' tec_doc <- SticsRFiles:::xmldocument(xml_path)
+#'
+#' # removing all the parent nodes the parameter belongs to
+#' SticsRFiles:::remove_parent_from_doc(tec_doc, param_name = "julapI_or_sum_upvt")
+#'
+#' # removing some of the parent nodes the parameter belongs to
+#' SticsRFiles:::remove_parent_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
+#' nodes_ids = c(1,3))
+#'
+#' }
 #'
 #' @keywords internal
 #'
-remove_parent_from_doc <- function( xml_doc, param_name ,
-                                  parent_path = NULL,
-                                  remove_parent = FALSE,
-                                  nodes_ids = NULL ) {
+remove_parent_from_doc <- function( xml_doc,
+                                    param_name ,
+                                    nodes_ids = NULL ) {
 
-  remove_node_from_doc(xml_doc = xml_doc, param_name = param_name,
-                       parent_path = parent_path, remove_parent = TRUE,
+  remove_node_from_doc(xml_doc = xml_doc,
+                       param_name = param_name,
+                       remove_parent = TRUE,
                        nodes_ids = nodes_ids)
 
   return(invisible(xml_doc))
