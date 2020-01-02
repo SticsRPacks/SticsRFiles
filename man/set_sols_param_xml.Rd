@@ -9,11 +9,38 @@ set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 \arguments{
 \item{xml_doc_object}{an xmlDocument object (created from an xml sols file)}
 
-\item{sols_param}{soils parameters}
+\item{sols_param}{soils parameters (data.frame)}
 
 \item{overwrite}{replace existing soil (TRUE) or not, updating existing ones (FALSE)}
 }
 \description{
 Setting a sol param value(s) in a sols xmlDocument
+}
+\examples{
+\dontrun{
+xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+sols_doc <- SticsRFiles:::xmldocument(xml_path)
+
+xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx"))
+sols_df <- read_excel(xl_path, sheet = "Soils")
+
+# For updating an existing xml doc (using existing soils names)
+# Creating a fake existing_doc
+existing_doc <- SticsRFiles:::gen_xml_doc("sols",nodes_nb = 3)
+SticsRFiles:::set_param_value(existing_doc, param_name = "sol",
+param_value = sols_df$Soil_name[c(3,1,5)])
+
+SticsRFiles:::set_sols_param_xml(existing_doc, sols_df)
+
+
+# For a new xml doc
+In that case: sols_df must contain all the soils parameters !)
+soils_nb <- dim(sols_df)[1]
+new_doc <- SticsRFiles:::gen_xml_doc("sols",nodes_nb = soils_nb)
+
+SticsRFiles:::set_sols_param_xml(new_doc, sols_df, overwrite = T)
+
+}
+
 }
 \keyword{internal}

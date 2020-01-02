@@ -1,10 +1,35 @@
 #' @title Setting a sol param value(s) in a sols xmlDocument
 #' @param xml_doc_object an xmlDocument object (created from an xml sols file)
 #'
-#' @param sols_param soils parameters
+#' @param sols_param soils parameters (data.frame)
 #' @param overwrite replace existing soil (TRUE) or not, updating existing ones (FALSE)
 #'
-#@export
+#'
+#' @examples
+#' \dontrun{
+#' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
+#'
+#' xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx"))
+#' sols_df <- read_excel(xl_path, sheet = "Soils")
+#'
+#' # For updating an existing xml doc (using existing soils names)
+#' # Creating a fake existing_doc
+#' existing_doc <- SticsRFiles:::gen_xml_doc("sols",nodes_nb = 3)
+#' SticsRFiles:::set_param_value(existing_doc, param_name = "sol",
+#' param_value = sols_df$Soil_name[c(3,1,5)])
+#'
+#' SticsRFiles:::set_sols_param_xml(existing_doc, sols_df)
+#'
+#'
+#' # For a new xml doc
+#' In that case: sols_df must contain all the soils parameters !)
+#' soils_nb <- dim(sols_df)[1]
+#' new_doc <- SticsRFiles:::gen_xml_doc("sols",nodes_nb = soils_nb)
+#'
+#' SticsRFiles:::set_sols_param_xml(new_doc, sols_df, overwrite = T)
+#'
+#' }
 #'
 #' @keywords internal
 #'
@@ -34,18 +59,21 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   if ( ! overwrite ) {
     # getting soils names
     xml_sols <- as.vector(get_param_value(xml_doc_object,"sol"))
-    #sols_idx <- is.element(in_soils_names, xml_sols)
+
+
+    ###############################################
+    # TODO : see adding sols not in xml file ?
+    ###############################################
 
     # checking xl names against xml names
     xl_in_xml <- sols_param[[sol_col]] %in% xml_sols
-    if ( ! all(xl_in_xml) ) {
-      stop("All sols names in sols_param table are not in sols names in xml doc !")
-    }
 
+    if ( ! any(xl_in_xml) ) {
+      stop("Not any sol name in sols_param table is in xml doc !")
+    }
 
     # xl sols idx in xml doc to be updated
     sols_xml_idx <- which(xml_sols %in% sols_param[[sol_col]])
-
 
     # Selecting data & ordering upon xml
     # order
@@ -55,7 +83,6 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   } else {
     # setting soils names
     set_param_value(xml_doc_object,"sol",sols_param[[sol_col]])
-    #sols_idx <- 1:length(sols_param[[sol_col]])
   }
 
 

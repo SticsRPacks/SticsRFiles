@@ -1,16 +1,41 @@
 #' @title Setting a usm param value(s) in an usms xmlDocument
 #' @param xml_doc_object an xmlDocument object (created from an usms file)
 #'
-#' @param usms_param usms parameters
-#' @param overwrite replace existing soil (TRUE) or not, updating existing ones (FALSE)
+#' @param usms_param usms parameters (data.frame)
+#' @param overwrite replace existing usms (TRUE) or not, updating existing ones (FALSE)
 #'
-#@export
+#' @examples
+#' \dontrun{
+#' xml_path = system.file("extdata/xml/examples/V9.0/usms.xml", package = "SticsRFiles")
+#' usms_doc <- SticsRFiles:::xmldocument(xml_path)
+#'
+#' xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx"))
+#' usms_df <- read_excel(xl_path, sheet = "USMs")
+#'
+#' # For updating an existing xml doc (using existing usms names)
+#' # Creating a fake existing_doc
+#' existing_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = 3)
+#' SticsRFiles:::set_param_value(existing_doc, param_name = "usm",
+#' param_value = usms_df$usm_nom[c(3,1,5)])
+#'
+#' SticsRFiles:::set_usms_param_xml(existing_doc, usms_df)
+#'
+#'
+#' # For a new xml doc
+#' In that case: usms_df must contain all the usms parameters !)
+#' usms_nb <- dim(usms_df)[1]
+#' new_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = usms_nb)
+#'
+#' SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = T)
+#'
+#' }
+#'
 #'
 #' @keywords internal
 #'
 
 
-set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = TRUE) {
+set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FALSE) {
 
   if ( ! base::is.null(usms_param) ) {
     if ( ! ("data.frame" %in% class(usms_param)) ) {
@@ -30,46 +55,44 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = TR
   in_params <- names(usms_param)
   usm_col <- grep("^usm",in_params, value = T)
 
-  fix_usms_names <- length(usm_col) != 0
   # default idx
   usms_xml_idx <- 1:dim(usms_param)[1]
 
-  if ( fix_usms_names || length(usm_col) > 1 ) {
+  #if ( fix_usms_names || length(usm_col) > 1 ) {
+  if ( length(usm_col) == 0 || length(usm_col) > 1 ) {
     warning("No usm names column detected, or multiple columns with \"usm\" prefix")
   }
 
   # checking usms based on names if overwrite == FALSE
-  if (fix_usms_names) {
-    if ( ! overwrite ) {
-      # getting usm names
-      xml_usms <- as.vector(get_param_value(xml_doc_object,"usm"))
+  if ( ! overwrite ) {
+    # getting usm names
+    xml_usms <- as.vector(get_param_value(xml_doc_object,"usm"))
 
-      ###############################################
-      # TODO : see adding usms not in xml file ?
-      ###############################################
-
-
-      # checking xl names against xml names
-      xl_in_xml <- usms_param[[usm_col]] %in% xml_usms
-      if ( ! all(xl_in_xml) ) {
-        stop("All usms names in usms_param table are not in usms names in xml doc !")
-      }
-
-      # xl usms idx in xml doc to be updated
-      usms_xml_idx <- which(xml_usms %in% usms_param[[usm_col]])
+    ###############################################
+    # TODO : see adding usms not in xml file ?
+    ###############################################
 
 
-      # Selecting data & ordering upon xml
-      # order
-      usms_param <- usms_param[xl_in_xml,]
-      usms_param <- usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]),]
+    # checking xl names against xml names
+    xl_in_xml <- usms_param[[usm_col]] %in% xml_usms
 
-    } else {
-      # setting usms names
-      set_param_value(xml_doc_object,"usm",usms_param[[usm_col]])
-      usms_xml_idx <- 1:length(usms_param[[usm_col]])
+    if ( ! any(xl_in_xml) ) {
+      stop("Not any usm name in usms_param table is in xml doc !")
     }
 
+    # xl usms idx in xml doc to be updated
+    usms_xml_idx <- which(xml_usms %in% usms_param[[usm_col]])
+
+
+    # Selecting data & ordering upon xml
+    # order
+    usms_param <- usms_param[xl_in_xml,]
+    usms_param <- usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]),]
+
+  } else {
+    # setting usms names
+    set_param_value(xml_doc_object,"usm",usms_param[[usm_col]])
+    usms_xml_idx <- 1:length(usms_param[[usm_col]])
   }
 
   # Managing parameter values replacement from usms_param
