@@ -2,7 +2,7 @@
 % Please edit documentation in R/attributes_list2matrix.R
 \name{attributes_list2matrix}
 \alias{attributes_list2matrix}
-\title{Converting attributes list to matrix}
+\title{Converting an attributes list to a matrix}
 \usage{
 attributes_list2matrix(attr_list)
 }
@@ -13,6 +13,34 @@ attributes_list2matrix(attr_list)
 A matrix with attributes names as column names
 }
 \description{
-Converting attributes list to matrix
+Converting an attributes list to a matrix
+}
+\examples{
+\dontrun{
+
+xml_path <- system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+sols_doc <- SticsRFiles:::xmldocument(xml_path)
+node_set <- SticsRFiles:::getNodeS(sols_doc, "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
+attr_list <- sapply(node_set,function(x) xmlAttrs(x))
+
+[[1]]
+nom
+"solcanne"
+[[2]]
+format        max        min        nom
+"real"      "2.0"      "0.0" "mulchbat"
+[[3]]
+format        max        min        nom
+"real"      "2.0"      "0.0" "mulchbat"
+
+SticsRFiles:::attributes_list2matrix(attr_list)
+
+     nom        format max   min
+[1,] "solcanne" NA     NA    NA
+[2,] "mulchbat" "real" "2.0" "0.0"
+[3,] "mulchbat" "real" "2.0" "0.0"
+
+}
+
 }
 \keyword{internal}
