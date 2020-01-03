@@ -1,14 +1,44 @@
-#' Add node to document
+#' Add node to an xmlDocument object
 #'
-#' @param xml_doc XML document
-#' @param new_node New node to add
-#' @param nodes_nb Nodes number
-#' @param parent_path Path to the parent node
+#' @param xml_doc an xmlDocument
+#' @param new_node a new node to add
+#' @param nodes_nb nodes number to add to parent node
+#' @param parent_path path of the parent node
 #'
-#@export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' tec_xml <- system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+#' tec_doc <- SticsRFiles:::xmldocument(tec_xml)
+#'
+#' # Getting a new irrigation operation node
+#' irrigation_node <- SticsRFiles:::get_xml_base_node("tec", "irrigation")
+#' parent_path <- SticsRFiles:::get_param_type(tec_doc,"ta","formalisme","irrigation")$xpath
+#'
+#' # Adding one irrigation operation
+#' SticsRFiles:::add_node_to_doc(xml_doc = tec_doc, new_node = irrigation_node,
+#' nodes_nb = 1, parent_path = parent_path)
+#'
+#' # Checking irrigations operations number
+#' irrigations_nb <- length(SticsRFiles:::get_param_value(tec_doc, "julapI_or_sum_upvt"))
+#' # Fixing it in nb_interventions attribute
+#' SticsRFiles:::set_param_value(tec_doc, "nb_interventions",  irrigations_nb, "irrigation"  )
+#'
+#' }
 #'
 #' @keywords internal
 #'
 add_node_to_doc <- function(xml_doc, new_node, nodes_nb = 1, parent_path ) {
+
+  # Checking that parent_path is valid xpath for xml_doc
+  if ( is.null(getNodeS(xml_doc, parent_path)) ) {
+    warning(paste("Given xpath is not a valid one:", parent_path))
+    return(invisible())
+  }
+
+  # Adding nodes_nb new_node to the xml_doc under parent node
+  # after existing sibling nodes
   replicate(nodes_nb, addNodes(xml_doc,xmlClone(new_node), parent_path ))
+
 }
