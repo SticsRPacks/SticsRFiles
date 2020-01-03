@@ -102,7 +102,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   attr_list=NULL
   node_set=getNodeS(docObj,path)
   #
-  # browser("test getAttrs")
+  #browser("test getAttrs")
   if (base::is.null(node_set)) {
     return(attr_list)
   }
@@ -198,9 +198,16 @@ setMethod("getAttrsNames", signature(docObj = "xmlDocument"), function(docObj,pa
 setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,path,
                                                                         attr_list=character(length = 0),
                                                                         nodes_ids=NULL) {
+  #browser()
   sel_values=NULL
-  # getting attributes valeus from doc
+
+  # getting attributes values from doc
   attr_values=getAttrs(docObj,path)
+
+  # no attributes for the query
+  if (base::is.null(attr_values)) {
+    return(sel_values)
+  }
 
   # selecting outputs
   # empty attr_list
@@ -241,13 +248,15 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
 
 # factoriser avec getAttrs!! + getNode(docObj,path,kind)
 setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj,path,nodes_ids=NULL) {
+
+  #browser()
   node_set=getNodeS(docObj,path)
+
+  if (length(node_set) == 0) { return(invisible()) }
 
   if ( !base::is.null(nodes_ids) ) {
     node_set = node_set[nodes_ids]
   }
-
-  if (length(node_set) == 0) { return(invisible()) }
 
   # browser("getValues")
   val_list=unlist(lapply(node_set,function(x) xmlValue(x)))
