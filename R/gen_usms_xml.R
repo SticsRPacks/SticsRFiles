@@ -43,7 +43,7 @@ gen_usms_xml <- function(usms_out_file,
     }
   }
 
-  xml_doc <- gen_usms_doc(xml_doc_object = xml_doc,
+  xml_doc <- gen_usms_doc(xml_doc = xml_doc,
                           usms_nb = usms_nb,
                           usms_param = usms_param,
                           stics_version = stics_version)

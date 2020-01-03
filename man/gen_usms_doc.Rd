@@ -5,14 +5,14 @@
 \title{Generate  from a template or modify a Stics usms xmlDocument}
 \usage{
 gen_usms_doc(
-  xml_doc_object = NULL,
+  xml_doc = NULL,
   usms_nb = NULL,
   usms_param = NULL,
   stics_version = "last"
 )
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from an ini file)}
+\item{xml_doc}{an xmlDocument object (created from an ini file)}
 
 \item{usms_nb}{number of usms to create}
 

@@ -5,14 +5,14 @@
 \title{Generate from a template a Stics sols xmlDocument}
 \usage{
 gen_sols_doc(
-  xml_doc_object = NULL,
+  xml_doc = NULL,
   sols_nb = NULL,
   sols_param = NULL,
   stics_version = "last"
 )
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from a sols.xml file)}
+\item{xml_doc}{an xmlDocument object (created from a sols.xml file)}
 
 \item{sols_nb}{number of soils to create}
 

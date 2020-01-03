@@ -5,14 +5,14 @@
 \title{Generate  from a template or modify a Stics tec xmlDocument}
 \usage{
 gen_tec_doc(
-  xml_doc_object = NULL,
+  xml_doc = NULL,
   param_table = NULL,
   stics_version = "last",
   dict = NULL
 )
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from an ini file)}
+\item{xml_doc}{an xmlDocument object (created from an ini file)}
 
 \item{param_table}{a table (df, tibble) containing parameters to use}
 

@@ -44,7 +44,7 @@ gen_tec_xml <- function(tec_out_file = NULL, param_table = NULL,
   tec_col <- param_names[ col_id  ]
 
 
-  xml_docs <- gen_tec_doc(xml_doc_object = xml_doc,
+  xml_docs <- gen_tec_doc(xml_doc = xml_doc,
                           param_table = param_table[ , - col_id],
                           stics_version = stics_version,
                           dict = dict)

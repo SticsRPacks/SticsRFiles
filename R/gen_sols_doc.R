@@ -1,5 +1,5 @@
 #' @title Generate from a template a Stics sols xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from a sols.xml file)
+#' @param xml_doc an xmlDocument object (created from a sols.xml file)
 #'
 #' @param sols_nb number of soils to create
 #' @param sols_param a table (df, tibble) containing parameters to use
@@ -18,14 +18,14 @@
 #'
 #' @keywords internal
 #'
-gen_sols_doc <- function(xml_doc_object = NULL,
+gen_sols_doc <- function(xml_doc = NULL,
                          sols_nb = NULL,
                          sols_param = NULL,
                          stics_version ="last") {
 
 
   out_doc_object <- gen_xml_doc(doc_type = "sols",
-                                xml_doc = xml_doc_object,
+                                xml_doc = xml_doc,
                                 nodes_nb = sols_nb,
                                 nodes_param = sols_param,
                                 stics_version = stics_version)

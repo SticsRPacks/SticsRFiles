@@ -1,5 +1,5 @@
 #' @title Generate  from a template or modify a Stics usms xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from an ini file)
+#' @param xml_doc an xmlDocument object (created from an ini file)
 #'
 #' @param usms_nb number of usms to create
 #' @param usms_param a table (df, tibble) containing parameters to use
@@ -19,7 +19,7 @@
 #' @keywords internal
 #'
 
-gen_usms_doc <- function(xml_doc_object = NULL,
+gen_usms_doc <- function(xml_doc = NULL,
                          usms_nb = NULL,
                          usms_param = NULL,
                          stics_version ="last") {
@@ -31,7 +31,7 @@ gen_usms_doc <- function(xml_doc_object = NULL,
   }
 
   out_doc_object <- gen_xml_doc(doc_type = "usms",
-                                xml_doc_object,
+                                xml_doc,
                                 nodes_nb = usms_nb,
                                 nodes_param = usms_param,
                                 stics_version = stics_version)
