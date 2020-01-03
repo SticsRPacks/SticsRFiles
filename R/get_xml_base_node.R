@@ -41,7 +41,8 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
   formalism_names$tec <- c("supply of organic residus",
                            "soil tillage",
                            "irrigation",
-                           "fertilisation") #,
+                           "fertilisation",
+                           "special techniques") #,
                            #"calendar in days",
                            #"calendar in degree days")
 
