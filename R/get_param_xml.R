@@ -15,16 +15,16 @@
 #' @examples
 #' \dontrun{
 #' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
-#' SticsRFiles:::get_param_xml(xml_path, "argi")
-#' SticsRFiles:::get_param_xml(xml_path, c("argi", "norg"))
+#' get_param_xml(xml_path, "argi")
+#' get_param_xml(xml_path, c("argi", "norg"))
 #'
-#' SticsRFiles:::get_param_xml(xml_path, "argi",
+#' get_param_xml(xml_path, "argi",
 #' parent_name = "sol", parent_sel_attr = "solcanne")
 #'
-#' SticsRFiles:::get_param_xml(xml_path, c("argi", "norg"),
+#' get_param_xml(xml_path, c("argi", "norg"),
 #' parent_name = "sol", parent_sel_attr = c("solcanne", "solbanane"))
 #'
-#' SticsRFiles:::get_param_xml(list(xml_path, xml_path), c("argi","norg"),
+#' get_param_xml(list(xml_path, xml_path), c("argi","norg"),
 #' parent_name = "sol", parent_sel_attr = c("solcanne","solbanane"))
 #'
 #' }

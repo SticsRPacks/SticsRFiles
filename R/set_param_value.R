@@ -10,7 +10,31 @@
 #' @param ids elements indices (optional)
 #' @param show_xpath Print the xpath
 #'
-#@export
+#' @examples
+#' \dontrun{
+#' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
+#' SticsRFiles:::get_param_value(sols_doc, "argi")
+#'
+#'  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0 27.0 30.7  0.1
+#' [18] 27.3 25.0 10.2 25.0 28.6 36.0 29.0 10.2 21.2 22.2 13.0 17.0 15.0 26.0 28.2 20.0
+#'
+#' # setting all argi parameters with the same value
+#' SticsRFiles:::set_param_value(sols_doc, "argi", 15)
+#' SticsRFiles:::get_param_value(sols_doc, "argi")
+#'
+#'  [1] 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
+#' [29] 15 15 15 15 15
+#'
+#' # setting specific values for some soils
+#' SticsRFiles:::set_param_value(sols_doc, "argi", c(30,35),
+#' parent_name = "sol", parent_sel_attr = c("solcanne","solbanane"))
+#' SticsRFiles:::get_param_value(sols_doc, "argi")
+#'
+#'  [1] 30 15 15 15 15 15 35 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
+#' [29] 15 15 15 15 15
+#'
+#' }
 #'
 #' @keywords internal
 #'
