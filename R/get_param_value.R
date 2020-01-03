@@ -4,7 +4,7 @@
 #'
 #' @description Extracting parameter value from an xml document object
 #'
-#' @param xml_doc_object an xmlDocument object
+#' @param xml_doc an xmlDocument object
 #' @param param_name parameter name or a vector of names
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
@@ -34,7 +34,7 @@
 #' @keywords internal
 #'
 
-get_param_value <- function(xml_doc_object,param_name,
+get_param_value <- function(xml_doc,param_name,
                             parent_name= NULL, parent_sel_attr = NULL,
                             ids=NULL, show_xpath =FALSE){
 
@@ -46,8 +46,8 @@ get_param_value <- function(xml_doc_object,param_name,
 
 
   # Getting param values for sams parameters for the xml documents list
-  if ( is.list(xml_doc_object) ) {
-    values <- lapply(xml_doc_object,function(x) get_param_value(x,
+  if ( is.list(xml_doc) ) {
+    values <- lapply(xml_doc,function(x) get_param_value(x,
                                                                 param_name,
                                                                 parent_name,
                                                                 parent_sel_attr,
@@ -57,7 +57,7 @@ get_param_value <- function(xml_doc_object,param_name,
 
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
-    out <- lapply(param_name, function(x) get_param_value(xml_doc_object,
+    out <- lapply(param_name, function(x) get_param_value(xml_doc,
                                                           x,
                                                           parent_name,
                                                           parent_sel_attr,
@@ -79,7 +79,7 @@ get_param_value <- function(xml_doc_object,param_name,
   }
 
 
-  param_type <- get_param_type(xml_doc_object,
+  param_type <- get_param_type(xml_doc,
                                param_name, parent_name, parent_sel_attr, ids)
   type <- param_type$type
   xpath <- param_type$xpath
@@ -100,57 +100,57 @@ get_param_value <- function(xml_doc_object,param_name,
   # TODO: see if could be simplified with a default case !
   switch(type,
          nodename= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          attr= {
            #xpath=paste0('//option[@nomParam="',param_name,'"]')
-           value=getAttrsValues(xml_doc_object,xpath,param_type$attr,ids)
+           value=getAttrsValues(xml_doc,xpath,param_type$attr,ids)
          },
          attrname= {
            #xpath=paste0('//option[@nomParam="',param_name,'"]')
-           value=getAttrsValues(xml_doc_object,xpath,param_type$attr,ids)
+           value=getAttrsValues(xml_doc,xpath,param_type$attr,ids)
          },
          param= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          option= {
-           value=getAttrsValues(xml_doc_object,xpath,"choix",ids)
+           value=getAttrsValues(xml_doc,xpath,"choix",ids)
          },
          table= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          table2= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          node_param= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          choix_param= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          node_node= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          node_option= {
-           value=getAttrsValues(xml_doc_object,xpath,"choix",ids)
+           value=getAttrsValues(xml_doc,xpath,"choix",ids)
          },
          form_option= {
-           value=getAttrsValues(xml_doc_object,xpath,"choix",ids)
+           value=getAttrsValues(xml_doc,xpath,"choix",ids)
          },
          node_table= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          node_attr= {
-           value=getAttrsValues(xml_doc_object,xpath,"nom",ids)
+           value=getAttrsValues(xml_doc,xpath,"nom",ids)
          },
          attr_attr= {
-           value=getValues(xml_doc_object,xpath,ids)
+           value=getValues(xml_doc,xpath,ids)
          },
          attr_attr2= {
-           value=getAttrsValues(xml_doc_object,xpath, param_name,ids)
+           value=getAttrsValues(xml_doc,xpath, param_name,ids)
          },
          choix_attr= {
-           value=getAttrsValues(xml_doc_object,xpath,param_name,ids)
+           value=getAttrsValues(xml_doc,xpath,param_name,ids)
          }
 
          # TODO : add other cases for tables in ini, soil, and other specific parameters

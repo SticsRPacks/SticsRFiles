@@ -5,7 +5,7 @@
 \title{Setting parameter value for different kinds of parameters}
 \usage{
 set_param_value(
-  xml_doc_object,
+  xml_doc,
   param_name,
   param_value,
   parent_name = NULL,
@@ -15,7 +15,7 @@ set_param_value(
 )
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object}
+\item{xml_doc}{an xmlDocument object}
 
 \item{param_name}{parameter name}
 

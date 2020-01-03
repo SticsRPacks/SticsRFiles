@@ -5,7 +5,7 @@
 \title{Get a set of a (or a list of) Stics xml parameter(s) values from a request}
 \usage{
 get_param_value(
-  xml_doc_object,
+  xml_doc,
   param_name,
   parent_name = NULL,
   parent_sel_attr = NULL,
@@ -14,7 +14,7 @@ get_param_value(
 )
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object}
+\item{xml_doc}{an xmlDocument object}
 
 \item{param_name}{parameter name or a vector of names}
 
