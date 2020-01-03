@@ -60,9 +60,9 @@ all_out_var= function(){
 #'
 #' @keywords internal
 #'
-find_out_var = function(Var=NULL){
+find_out_var = function(var=NULL){
   all_vars= all_out_var()
-  if(!base::is.null(Var)) {
+  if(!base::is.null(var)) {
     all_vars[grep(var, all_vars$variable,ignore.case = TRUE),]
   }else{
     all_vars

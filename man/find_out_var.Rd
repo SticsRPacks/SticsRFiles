@@ -4,7 +4,7 @@
 \alias{find_out_var}
 \title{Find output variable names for STICS}
 \usage{
-find_out_var(Var = NULL)
+find_out_var(var = NULL)
 }
 \arguments{
 \item{Var}{Character vector with a (partial) STICS output variable name}
