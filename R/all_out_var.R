@@ -25,11 +25,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(SticsRFiles)
-#' All_vars= all_out_var()
+#'
+#' SticsRFiles:::all_vars= all_out_var()
 #'}
 #'
-#@export
 #'
 #' @keywords internal
 #'
@@ -53,20 +52,20 @@ all_out_var= function(){
 #'
 #' @examples
 #' \dontrun{
-#' library(SticsRFiles)
-#' find_STICS_var("lai")
+#'
+#' SticsRFiles:::find_out_var("lai")
+#'
 #'}
 #'
-#@export
 #'
 #' @keywords internal
 #'
-find_STICS_var= function(Var=NULL){
-  All_vars= all_out_var()
-  if(!base::is.null(Var)){
-    All_vars[grep(Var, All_vars$variable,ignore.case = TRUE),]
+find_out_var = function(Var=NULL){
+  all_vars= all_out_var()
+  if(!base::is.null(Var)) {
+    all_vars[grep(var, all_vars$variable,ignore.case = TRUE),]
   }else{
-    All_vars
+    all_vars
   }
 
 }

@@ -12,8 +12,8 @@ from the STICS model.
 }
 \examples{
 \dontrun{
-library(SticsRFiles)
-All_vars= all_out_var()
+
+SticsRFiles:::all_vars= all_out_var()
 }
 
 
