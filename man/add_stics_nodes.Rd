@@ -6,24 +6,36 @@
 \usage{
 add_stics_nodes(
   xml_doc,
-  file_tag,
-  nodes_nb = 1,
   formalism_name = NULL,
+  nodes_nb = 1,
   stics_version = "last"
 )
 }
 \arguments{
 \item{xml_doc}{XML document}
 
-\item{file_tag}{File tag (i.e. usms, sols, or tec)}
+\item{formalism_name}{Name of the formalism (optional)}
 
-\item{nodes_nb}{Nodes numbers}
-
-\item{formalism_name}{Name of the formalism}
+\item{nodes_nb}{number of operations to add}
 
 \item{stics_version}{The version of STICS (eg "V9.0")}
 }
 \description{
 Add node to a Stics XML document
+}
+\examples{
+\dontrun{
+
+tec_xml <- system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+tec_doc <- SticsRFiles:::xmldocument(tec_xml)
+
+# Adding one irrigation operation
+SticsRFiles:::add_stics_nodes(tec_doc, "irrigation")
+
+# Adding three irrigation operations
+SticsRFiles:::add_stics_nodes(tec_doc, "irrigation", nodes_nb = 3)
+
+}
+
 }
 \keyword{internal}

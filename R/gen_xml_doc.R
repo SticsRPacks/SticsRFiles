@@ -109,7 +109,7 @@ gen_xml_doc <- function(doc_type, xml_doc = NULL,
       add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = (elts_nb - 1), paste0("//",root))
     } else {
       removeNodes(xml_nodes[1])
-      add_stics_nodes(xml_doc = xml_doc, file_tag = root, nodes_nb = elts_nb)
+      add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb)
     }
 
   }
