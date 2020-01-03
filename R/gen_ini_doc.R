@@ -35,7 +35,7 @@ gen_ini_doc <- function(xml_doc = NULL,
 
   # Nothing to do
   if ( base::is.null(param_table) ) {
-     return(xml_doc)
+    return(xml_doc)
   }
 
 

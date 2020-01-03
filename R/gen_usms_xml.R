@@ -22,9 +22,9 @@
 #'
 
 gen_usms_xml <- function(usms_out_file,
-                          usms_nb = NULL, usms_param = NULL,
-                          usms_in_file = NULL,
-                          stics_version ="last") {
+                         usms_nb = NULL, usms_param = NULL,
+                         usms_in_file = NULL,
+                         stics_version ="last") {
 
 
   xml_doc <- NULL

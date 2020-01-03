@@ -21,10 +21,10 @@
 #'
 # TODO: refactor with gen_sta_file, gen_ini_file : same code
 gen_tec_xml <- function(tec_out_file = NULL, param_table = NULL,
-                         tec_in_file = NULL,
-                         out_path = getwd(),
-                         stics_version = "last",
-                         dict = NULL) {
+                        tec_in_file = NULL,
+                        out_path = getwd(),
+                        stics_version = "last",
+                        dict = NULL) {
 
 
 

@@ -20,9 +20,9 @@
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
 gen_sta_xml <- function(sta_out_file = NULL, param_table = NULL,
-                         sta_in_file = NULL,
-                         out_path = getwd(),
-                         stics_version ="last") {
+                        sta_in_file = NULL,
+                        out_path = getwd(),
+                        stics_version ="last") {
 
   xml_doc <- NULL
 
@@ -41,8 +41,8 @@ gen_sta_xml <- function(sta_out_file = NULL, param_table = NULL,
 
 
   xml_docs <- gen_sta_doc(xml_doc = xml_doc,
-                         param_table = param_table[ , - col_id],
-                         stics_version = stics_version)
+                          param_table = param_table[ , - col_id],
+                          stics_version = stics_version)
 
 
   if ( class(xml_docs) == "xmlDocument") {

@@ -21,9 +21,9 @@
 #'
 #'
 gen_sols_xml <- function(sols_out_file,
-                          sols_nb = NULL,sols_param = NULL,
-                          sols_in_file = NULL,
-                          stics_version ="last") {
+                         sols_nb = NULL,sols_param = NULL,
+                         sols_in_file = NULL,
+                         stics_version ="last") {
 
   xml_doc <- NULL
 
