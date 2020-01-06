@@ -14,6 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 params:
   xml_dir: !r system.file(file.path("extdata","xml","examples","V9.0"), package = "SticsRFiles" )
+  xml_loc_dir: !r "/home/plecharpent/tmp/tests_SticsRFiles/xml"
 ---
 
 ```{r, include = FALSE}
@@ -25,8 +26,18 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(SticsRFiles)
-#print(params$xml_dir)
+#print(xml_dir)
 options(warn=-1)
+xml_loc_dir <- params$xml_loc_dir
+```
+
+```{r rm_files, results='hide', echo=F}
+files_list <- list.files(path = xml_loc_dir, pattern = "\\.xml$", full.names = T)
+files_list
+if (length(files_list))  {
+  print("Removing files")
+  file.remove(files_list)
+}
 ```
 
 
@@ -51,7 +62,7 @@ As we can see in the above XML file extract from a general parameter file:
 * Parameters are grouped according to formalisms (in a `xml <formalisme>...</formalisme> ` block)
 
 * Parameters may be defined by single values
-This kind of definition is common for all files types and the parameter name is stored in the `nom` attribute of a `param` XML node. So the first parameter name in the example is `beta` and its value is `1.40000` (inside param tags).
+This kind of definition is common for all files types and the parameter name is stored in the `nom` attribute of a `param` XML node. So the first parameter name in the example is `beta` and its value is `1.40000` (inside `param` tags).
 
 * Option parameters (with or without attached parameters, eventually with sub-option)
 The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example.
@@ -59,33 +70,33 @@ The corresponding parameter name for an **option** node is stored in an attribut
 
 ```xml
 <formalisme nom="Water absorption and nitrogen content of the plant">
-    <param format="real" max="2.0" min="1.0" nom="beta">1.40000</param>
-    <param format="real" max="1.0" min="0.2" nom="lvopt">0.50000</param>
-    <param format="real" max="0.07" min="0.0050" nom="rayon">0.02000</param>
-    <param format="real" max="0.1" min="0.01" nom="difN">0.04500</param>
-    <param format="real" max="3.0" min="0.0" nom="concrr">0.02000</param>
-    <param format="real" max="30.0" min="5.0" nom="plNmin">10.00000</param>
-    <param format="real" max="50.0" min="0.0" nom="irrlev">20.00000</param>
-    <param format="real" max="50.0" min="0.0" nom="QNpltminINN">0.00000</param>
-    <option choix="2" nom="Nitrogen fixation by legumes" nomParam="codesymbiose">
-      <choix code="1" nom="critical nitrogen"/>
-      <choix code="2" nom="nodule activity">
-        <option choix="2" nom="mineral nitrogen inhibition" nomParam="codefxn">
-          <choix code="1" nom="no effect"/>
-          <choix code="2" nom="nitrogen amount"/>
-          <choix code="3" nom="nitrogen concentration"/>
-        </option>
-      </choix>
-    </option>
+<param format="real" max="2.0" min="1.0" nom="beta">1.40000</param>
+<param format="real" max="1.0" min="0.2" nom="lvopt">0.50000</param>
+<param format="real" max="0.07" min="0.0050" nom="rayon">0.02000</param>
+<param format="real" max="0.1" min="0.01" nom="difN">0.04500</param>
+<param format="real" max="3.0" min="0.0" nom="concrr">0.02000</param>
+<param format="real" max="30.0" min="5.0" nom="plNmin">10.00000</param>
+<param format="real" max="50.0" min="0.0" nom="irrlev">20.00000</param>
+<param format="real" max="50.0" min="0.0" nom="QNpltminINN">0.00000</param>
+<option choix="2" nom="Nitrogen fixation by legumes" nomParam="codesymbiose">
+<choix code="1" nom="critical nitrogen"/>
+<choix code="2" nom="nodule activity">
+<option choix="2" nom="mineral nitrogen inhibition" nomParam="codefxn">
+<choix code="1" nom="no effect"/>
+<choix code="2" nom="nitrogen amount"/>
+<choix code="3" nom="nitrogen concentration"/>
+</option>
+</choix>
+</option>
 </formalisme>
 ```
 
 * Parameters with several values (for soil layers, technical operations,...)    
 Several values may be defined for example relatively to soil parameters (different layers) or for crop management operations (with time repetitions). 
 
-  * example from soil files    
-  In the above file extract for soil parameters, each set of parameters is repeated for each soil layer (up to 5). The parameters names are defined in a `nom` attribute for each `colonne` XML tag.    
-  
+* example from soil files    
+In the above file extract for soil parameters, each set of parameters is repeated for each soil layer (up to 5). The parameters names are defined in a `nom` attribute for each `colonne` XML tag.    
+
 ```xml
 
 <sol nom="solcanne">
@@ -93,14 +104,14 @@ Several values may be defined for example relatively to soil parameters (differe
 ...
 
 <tableau nb_colonnes="8" nom="layer 1">
-  <colonne nom="epc">20.00</colonne>
-  <colonne nom="HCCF">46.80</colonne>
-  <colonne nom="HMINF">26.20</colonne>
-  <colonne nom="DAF">1.08</colonne>
-  <colonne nom="cailloux">0.00</colonne>
-  <colonne nom="typecailloux">1</colonne>
-  <colonne nom="infil">50.00</colonne>
-  <colonne nom="epd">10</colonne>
+<colonne nom="epc">20.00</colonne>
+<colonne nom="HCCF">46.80</colonne>
+<colonne nom="HMINF">26.20</colonne>
+<colonne nom="DAF">1.08</colonne>
+<colonne nom="cailloux">0.00</colonne>
+<colonne nom="typecailloux">1</colonne>
+<colonne nom="infil">50.00</colonne>
+<colonne nom="epd">10</colonne>
 </tableau>
 
 ...
@@ -121,154 +132,313 @@ Several values may be defined for example relatively to soil parameters (differe
 
 ```
 
-  * example from tec files    
-  In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number). The parameters names are defined in a `nom` attribute for each `colonne` XML tag, inside an `intervention` node.
-  
+* example from tec files    
+In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number). The parameters names are defined in a `nom` attribute for each `colonne` XML tag, inside an `intervention` node.
+
 ```xml
 <formalisme nom="supply of organic residus">
-        <ta nb_interventions="5" nom="interventions">
-            <ta_entete nb_colonnes="7">
-                <colonne nom="julres"/>
-                <colonne nom="coderes"/>
-                <colonne nom="qres"/>
-                <colonne nom="Crespc"/>
-                <colonne nom="CsurNres"/>
-                <colonne nom="Nminres"/>
-                <colonne nom="eaures"/>
-            </ta_entete>
-            <intervention nb_colonnes="7">
-                <colonne nom="julres">112</colonne>
-                <colonne nom="coderes">1</colonne>
-                <colonne nom="qres">1.00</colonne>
-                <colonne nom="Crespc">42.00</colonne>
-                <colonne nom="CsurNres">60.00</colonne>
-                <colonne nom="Nminres">0.00</colonne>
-                <colonne nom="eaures">0.00</colonne>
-            </intervention>
-            
-            ...
-            
-            <intervention nb_colonnes="7">
-                <colonne nom="julres">220</colonne>
-                <colonne nom="coderes">2</colonne>
-                <colonne nom="qres">1.00</colonne>
-                <colonne nom="Crespc">42.00</colonne>
-                <colonne nom="CsurNres">60.00</colonne>
-                <colonne nom="Nminres">0.00</colonne>
-                <colonne nom="eaures">0.00</colonne>
-            </intervention>
-        </ta>
-    </formalisme>
+<ta nb_interventions="5" nom="interventions">
+<ta_entete nb_colonnes="7">
+<colonne nom="julres"/>
+<colonne nom="coderes"/>
+<colonne nom="qres"/>
+<colonne nom="Crespc"/>
+<colonne nom="CsurNres"/>
+<colonne nom="Nminres"/>
+<colonne nom="eaures"/>
+</ta_entete>
+<intervention nb_colonnes="7">
+<colonne nom="julres">112</colonne>
+<colonne nom="coderes">1</colonne>
+<colonne nom="qres">1.00</colonne>
+<colonne nom="Crespc">42.00</colonne>
+<colonne nom="CsurNres">60.00</colonne>
+<colonne nom="Nminres">0.00</colonne>
+<colonne nom="eaures">0.00</colonne>
+</intervention>
+
+...
+
+<intervention nb_colonnes="7">
+<colonne nom="julres">220</colonne>
+<colonne nom="coderes">2</colonne>
+<colonne nom="qres">1.00</colonne>
+<colonne nom="Crespc">42.00</colonne>
+<colonne nom="CsurNres">60.00</colonne>
+<colonne nom="Nminres">0.00</colonne>
+<colonne nom="eaures">0.00</colonne>
+</intervention>
+</ta>
+</formalisme>
+```
+
+# Getting XML file copy from the library
+
+> We have included several XML examples files in the package in order to make `reproducible`
+> **manipulations** and **results** described in this document. They are extracted from the JavaStics 
+> standard distribution (some of them have just been renamed).
+
+## Set the XML files examples source directory 
+In xml_dir, we store the directory path of the XML files included in the library installation.
+
+```{r set_xml_dir}
+xml_dir <- system.file(file.path("extdata","xml","examples","V9.0"), package = "SticsRFiles" )
+
+# For linux 
+#> "/path/to/R/user/libraries/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.0"
+
+# For windows
+#> "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.0"
+
+```
+
+## List examples files
+
+```{r}
+xml_files <- list.files(path = xml_dir, pattern = ".xml", full.names = T)
+```
+
+
+
+## Copying files in a local directory
+
+### A specific file
+
+
+```{r}
+
+xml_loc_dir
+file.copy(from = file.path(xml_dir,"sols.xml"), to = xml_loc_dir)
+```
+
+### All files
+```{r}
+file.copy(from = xml_files,to = xml_loc_dir)
 ```
 
 
 
 
 
-
-# Retrieving parameters information from files
+# Retrieving parameters names from files
 
 Rules have been defined to search and extract information inside XML files in order to simplify the way of using functions dedicated to XML files manipulations.    
 
 In some cases information relative to upward dependence are needed for extracting parameters values, but in most cases only the parameters names are mandatory in functions arguments.
 
-## Getting parameters names list from a file or a file list    
 
-### Soil file
+## From a file
 
 ```{r}
-sols <- file.path(params$xml_dir,"sols.xml")
+sols <- file.path(xml_loc_dir,"sols.xml")
 
 get_param_names_xml(sols)
 ```
 
+
+## From a files list
 ```{r}
-files_list <- c(file.path(params$xml_dir,"param_gen.xml"),
-                file.path(params$xml_dir,"sols.xml"))
+par_gen <- file.path(xml_loc_dir,"param_gen.xml")
+
+files_list <- c(sols, par_gen)
 
 param_names <- get_param_names_xml(files_list)
 
-head(param_names[[1]])
+# Displaying only some head lines of the list elements
+head(param_names[[1]], n = 10)
 
-head(param_names[[2]])
+head(param_names[[2]], n = 10)
 
 
 ```
 
 
-### Usms file
-
-### Other files ...
+# Getting parameters values from a file    
 
 
-## Getting parameters values from a file    
-
-
-### Soil file
-
-* Scalar parameters
-  * for one parameter and several occurence    
+## Scalar parameters
+* for one parameter and one occurence    
 ```{r}
-sols <- file.path(params$xml_dir,"sols.xml")
 
-get_param_xml(sols,param_names_list = "argi", show_xpath = T )
-```    
-  * For one parameter and one occurence (conditional selection)    
-```{r}
-sols <- file.path(params$xml_dir,"sols.xml")
 
-get_param_xml(sols,param_names_list = "argi", parent_name = "sol",
-                        parent_sel_attr = "solcanne", show_xpath = T)
-```    
-  * for several parameters and several occurrence    
-```{r}
-sols <- file.path(params$xml_dir,"sols.xml")
+# A option parameter
+get_param_xml(par_gen, param_names = "codeactimulch" )
 
-get_param_xml(sols,param_names_list = c("argi", "pH"), show_xpath = T )
-```    
-  * for several parameters and one occurrence (conditional selection)    
-  **THE RESULTS IS FALSE**
-```{r}
-sols <- file.path(params$xml_dir,"sols.xml")
+# A simple parameter
+get_param_xml(par_gen, param_names = "tnitopt" )
 
-get_param_xml(sols,param_names_list = c("argi", "pH") , parent_name = "sol",
-                        parent_sel_attr = "solcanne", show_xpath = T)
-```
-```{r}
-sols <- file.path(params$xml_dir,"param_gen.xml")
-
-get_param_xml(sols,param_names_list = "iniprofil", show_xpath = T )
 ```
 
-* Vector parameters
-  * All values (for all soil layers, or crop management operations)
+* for one parameter and several occurences    
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For all soils
+get_param_xml(sols,param_names = "argi" )
+```    
+* For one parameter and one occurence (conditional selection)    
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For one soil
+get_param_xml(sols,param_names = "argi", parent_name = "sol",
+              parent_sel_attr = "solcanne")
+```    
+* for several parameters and several occurrences    
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For all soils
+get_param_xml(sols,param_names = c("argi", "pH") )
+```    
+* for several parameters and one occurrence (conditional selection)    
 
-  * Selecting   
-  
-### Usms file
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For one soil
+get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
+              parent_sel_attr = "solcanne")
+```
 
-### Other files ...
+
+## Vector parameters
+* All values (for all soil layers, or crop management operations)
+```{r}
+# For all soil layers
+get_param_xml(sols, param_names = c("epc", "infil"), parent_name = "sol",
+              parent_sel_attr = "solcanne" )
+```
+
+```{r}
+# For all irrigation operations
+tec <- file.path(xml_loc_dir,"file_tec.xml")
+get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"))
+
+```
+
+* Selecting with values index   
+
+```{r}
+# For soil layers 1 to 3
+get_param_xml(sols,param_names = c("epc", "infil"), parent_name = "sol",
+              parent_sel_attr = "solcanne", ids = 1:3 )
+```
+
+```{r}
+
+# For irrigation operations 1 to 5
+get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
+
+```
 
 
-  
-## Getting parameters values for a files list 
+## Getting parameters values for a files list ???
+
+
+
+
+
+
+
+
+
 
 
 
 # Replacing parameters values in files
 
-### Soil file
+## Defining the output file from functions arguments
+* Overwriting the existing file: use ```overwrite = TRUE```
 
-- all soils
+* Generating a file in another directory with the same name: use `out_path` for setting an output directory
 
-- for selected soils
+* Specifying a new file name: use  `out_file` for giving the new file name
 
-### Usms file
+> These options may be combined
 
-### Other files ...
+## Scalar parameters
+* for one parameter and one occurence    
+```{r}
 
 
-# Using functions for multiple files
+# A option parameter
+set_param_xml(par_gen,param_names = "codeactimulch", param_values = 2, overwrite = T )
+get_param_xml(par_gen, param_names = "codeactimulch" )
+
+# A simple parameter
+set_param_xml(par_gen, param_names = "tnitopt", param_values = 29.5, overwrite = T )
+get_param_xml(par_gen, param_names = "tnitopt" )
+
+
+```
+
+* for one parameter and several occurences    
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For all soils
+# One value per occurence
+set_param_xml(sols, param_names = "argi", param_values = list(1:33), overwrite = T )
+get_param_xml(sols,param_names = "argi" )
+# Same value for all occurences
+set_param_xml(sols, param_names = "argi", param_values = 40, overwrite = T )
+get_param_xml(sols,param_names = "argi" )
+
+
+```    
+* For one parameter and one occurence (conditional selection)   
+
+<!-- TODO: to be continued from here -->
+
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For one soil
+get_param_xml(sols,param_names = "argi", parent_name = "sol",
+              parent_sel_attr = "solcanne")
+```    
+* for several parameters and several occurrences    
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For all soils
+get_param_xml(sols,param_names = c("argi", "pH") )
+```    
+* for several parameters and one occurrence (conditional selection)    
+
+```{r}
+#sols <- file.path(xml_loc_dir,"sols.xml")
+# For one soil
+get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
+              parent_sel_attr = "solcanne")
+```
+
+
+## Vector parameters
+* All values (for all soil layers, or crop management operations)
+```{r}
+# For all soil layers
+get_param_xml(sols, param_names = c("epc", "infil"), parent_name = "sol",
+              parent_sel_attr = "solcanne" )
+```
+
+```{r}
+# For all irrigation operations
+tec <- file.path(xml_loc_dir,"file_tec.xml")
+get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"))
+
+```
+
+* Selecting with values index   
+
+```{r}
+# For soil layers 1 to 3
+get_param_xml(sols,param_names = c("epc", "infil"), parent_name = "sol",
+              parent_sel_attr = "solcanne", ids = 1:3 )
+```
+
+```{r}
+
+# For irrigation operations 1 to 5
+get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
+
+```
+
+# Using functions for multiple files ???
 
 
 
