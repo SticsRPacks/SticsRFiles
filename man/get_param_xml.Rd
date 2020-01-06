@@ -6,7 +6,7 @@
 \usage{
 get_param_xml(
   xml_files,
-  param_names_list,
+  param_names,
   parent_name = NULL,
   parent_sel_attr = NULL,
   ids = NULL,
@@ -16,7 +16,7 @@ get_param_xml(
 \arguments{
 \item{xml_files}{an xml file, or a vector/list of}
 
-\item{param_names_list}{parameter names list (i.e.: option parameter name, parameter name,
+\item{param_names}{parameter names list (i.e.: option parameter name, parameter name,
 other kinds in ini and some tec parameters not taken into account for the moment)}
 
 \item{parent_name}{parent node name or attribute name (optional)}

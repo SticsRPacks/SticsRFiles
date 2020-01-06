@@ -4,7 +4,7 @@
 #' of parameters
 #'
 #' @param xml_files an xml file, or a vector/list of
-#' @param param_names_list parameter names list (i.e.: option parameter name, parameter name,
+#' @param param_names parameter names list (i.e.: option parameter name, parameter name,
 #' other kinds in ini and some tec parameters not taken into account for the moment)
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
@@ -32,7 +32,7 @@
 #'
 #' @export
 get_param_xml <- function(xml_files,
-                          param_names_list,
+                          param_names,
                           parent_name = NULL,
                           parent_sel_attr = NULL,
                           ids = NULL,
@@ -42,7 +42,7 @@ get_param_xml <- function(xml_files,
   xml_docs <- lapply(xml_files,xmldocument)
 
   values <- get_param_value(xml_docs,
-                            param_name = param_names_list,
+                            param_name = param_names,
                             parent_name = parent_name,
                             parent_sel_attr = parent_sel_attr,
                             ids = ids,
