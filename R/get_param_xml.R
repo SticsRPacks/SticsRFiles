@@ -8,6 +8,7 @@
 #' other kinds in ini and some tec parameters not taken into account for the moment)
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
+#' @param ids elements indices (optional)
 #' @param show_xpath Logical for displaying or not xpath value
 #'
 #' @return A list of parameter list length, with parameters values for each xml file
@@ -30,17 +31,22 @@
 #' }
 #'
 #' @export
-get_param_xml <- function(xml_files,param_names_list,
-                              parent_name = NULL, parent_sel_attr = NULL,
-                              show_xpath = FALSE){
+get_param_xml <- function(xml_files,
+                          param_names_list,
+                          parent_name = NULL,
+                          parent_sel_attr = NULL,
+                          ids = NULL,
+                          show_xpath = FALSE){
 
 
   xml_docs <- lapply(xml_files,xmldocument)
 
-  values <- get_param_value(xml_docs, param_name = param_names_list,
-                              parent_name = parent_name,
-                              parent_sel_attr = parent_sel_attr,
-                              show_xpath = show_xpath)
+  values <- get_param_value(xml_docs,
+                            param_name = param_names_list,
+                            parent_name = parent_name,
+                            parent_sel_attr = parent_sel_attr,
+                            ids = ids,
+                            show_xpath = show_xpath)
 
 
   return(values)

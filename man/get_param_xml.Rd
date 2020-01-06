@@ -9,6 +9,7 @@ get_param_xml(
   param_names_list,
   parent_name = NULL,
   parent_sel_attr = NULL,
+  ids = NULL,
   show_xpath = FALSE
 )
 }
@@ -21,6 +22,8 @@ other kinds in ini and some tec parameters not taken into account for the moment
 \item{parent_name}{parent node name or attribute name (optional)}
 
 \item{parent_sel_attr}{parent attribute value (optional)}
+
+\item{ids}{elements indices (optional)}
 
 \item{show_xpath}{Logical for displaying or not xpath value}
 }

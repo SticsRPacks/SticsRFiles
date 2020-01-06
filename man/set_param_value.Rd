@@ -19,7 +19,7 @@ set_param_value(
 
 \item{param_name}{parameter name}
 
-\item{param_value}{parameter value}
+\item{param_value}{vector of parameter values, or a list of}
 
 \item{parent_name}{parent node name or attribute name (optional)}
 
@@ -28,6 +28,9 @@ set_param_value(
 \item{ids}{elements indices (optional)}
 
 \item{show_xpath}{Print the xpath}
+}
+\value{
+A logical vector with successes status return
 }
 \description{
 Setting parameter value in a xmlDocument object

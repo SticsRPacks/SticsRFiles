@@ -34,9 +34,12 @@
 #' @keywords internal
 #'
 
-get_param_value <- function(xml_doc,param_name,
-                            parent_name= NULL, parent_sel_attr = NULL,
-                            ids=NULL, show_xpath =FALSE){
+get_param_value <- function(xml_doc,
+                            param_name,
+                            parent_name= NULL,
+                            parent_sel_attr = NULL,
+                            ids = NULL,
+                            show_xpath =FALSE){
 
 
   # TODO :
@@ -47,11 +50,12 @@ get_param_value <- function(xml_doc,param_name,
 
   # Getting param values for sams parameters for the xml documents list
   if ( is.list(xml_doc) ) {
-    values <- lapply(xml_doc,function(x) get_param_value(x,
-                                                                param_name,
-                                                                parent_name,
-                                                                parent_sel_attr,
-                                                                show_xpath = show_xpath))
+    values <- lapply(xml_doc, function(x) get_param_value(x,
+                                                         param_name,
+                                                         parent_name,
+                                                         parent_sel_attr,
+                                                         ids = ids,
+                                                         show_xpath = show_xpath))
     return(values)
   }
 
@@ -61,6 +65,7 @@ get_param_value <- function(xml_doc,param_name,
                                                           x,
                                                           parent_name,
                                                           parent_sel_attr,
+                                                          ids = ids,
                                                           show_xpath = show_xpath))
     names(out) <- param_name
     return(out)
