@@ -64,7 +64,7 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
 
 
   # treatment of parameters with no dependencies
-  if (base::is.null(parent_name) && base::is.null(parent_sel_attr) && base::is.null(id)) {
+  if (base::is.null(parent_name) && base::is.null(parent_sel_attr)) { #&& base::is.null(id)) {
     xpath_nodename <- paste0("//",param_name)
     xpath_attrname <- paste0("//*","[@",param_name,"]")
     xpath_param <- paste0("//param[@nom=\"",param_name,"\"]")
