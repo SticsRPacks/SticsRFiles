@@ -142,7 +142,7 @@ gen_tec_doc <- function(xml_doc = NULL,
 
       nodes_nb <- ncol(table_params[[par_name]])
 
-      par_form <- get_param_formalism( xml_document = xml_doc, par_name)
+      par_form <- get_param_formalism( xml_doc = xml_doc, par_name)
 
       if ( base::is.null(par_form)) {
         print(paste("Error: formalism for par_name"))

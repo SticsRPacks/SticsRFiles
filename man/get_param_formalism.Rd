@@ -5,10 +5,10 @@
 \title{Get the "formalisme" node "@nom" attribute value of a
 (or a list of) parameter(s) in an xmlDocument}
 \usage{
-get_param_formalism(xml_document, param_name)
+get_param_formalism(xml_doc, param_name)
 }
 \arguments{
-\item{xml_document}{an xmlDocument object (created from any xml file)}
+\item{xml_doc}{an xmlDocument object (created from any xml file)}
 
 \item{param_name}{a formalism name or a vector of}
 }
