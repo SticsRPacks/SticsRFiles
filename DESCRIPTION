@@ -115,6 +115,7 @@ Collate:
     'set_codeoptim.R'
     'set_param_txt.R'
     'set_param_value.R'
+    'set_param_xml.R'
     'set_sols_param_xml.R'
     'set_usms_param_xml.R'
     'sort_params_table.R'

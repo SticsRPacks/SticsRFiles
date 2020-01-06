@@ -4,11 +4,13 @@
 #'
 #' @param xml_doc an xmlDocument object
 #' @param param_name parameter name
-#' @param param_value parameter value
+#' @param param_value vector of parameter values, or a list of
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
 #' @param ids elements indices (optional)
 #' @param show_xpath Print the xpath
+#'
+#' @return A logical vector with successes status return
 #'
 #' @examples
 #' \dontrun{
@@ -38,21 +40,39 @@
 #'
 #' @keywords internal
 #'
-set_param_value <- function(xml_doc,param_name,param_value,
+set_param_value <- function(xml_doc,
+                            param_name,
+                            param_value,
                             parent_name= NULL,
-                            parent_sel_attr = NULL, ids=NULL,
+                            parent_sel_attr = NULL,
+                            ids=NULL,
                             show_xpath =FALSE){
 
   # for managing vector values
   param_value <- as.list(param_value)
 
   # calling the for several parameters
-  nb_param <- length(param_name)
-  if ( nb_param > 1) {
-    for (p in 1:nb_param) {
-      set_param_value(xml_doc,param_name = param_name[p], param_value = param_value[[p]])
+  param_nb <- length(param_name)
+
+  # Checking consistency between names and valuess dimensions
+  if ( length(param_value) != param_nb) {
+    warning("Parameters names and list of values are no of the same length !")
+    return(invisible(FALSE))
+  }
+
+  # Loop over param number
+  if ( param_nb > 1) {
+    ret <- vector("logical", param_nb)
+    for (p in 1:param_nb) {
+      ret[p] <- set_param_value(xml_doc,
+                                param_name = param_name[p],
+                                param_value = param_value[[p]],
+                                parent_name = parent_name,
+                                parent_sel_attr = parent_sel_attr,
+                                ids = ids,
+                                show_xpath = show_xpath)
     }
-    return(invisible())
+    return(invisible(ret))
   }
 
   # back to scalar or vector
@@ -93,24 +113,24 @@ set_param_value <- function(xml_doc,param_name,param_value,
   # TODO: see if could be simplified with a default case !
   switch(type,
          nodename= {
-           setValues(xml_doc,xpath,param_value, ids)
+           value=setValues(xml_doc,xpath,param_value, ids)
          },
          attr= {
            #xpath=paste0('//option[@nomParam="',param_name,'"]')
-           setAttrValues(xml_doc,xpath,"nom",param_value, ids)
+           value=setAttrValues(xml_doc,xpath,"nom",param_value, ids)
          },
          attrname= {
            #xpath=paste0('//option[@nomParam="',param_name,'"]')
-           setAttrValues(xml_doc,xpath,param_name,param_value, ids)
+           value=setAttrValues(xml_doc,xpath,param_name,param_value, ids)
          },
          param= {
            #xpath=paste0('//param[@nom="',param_name,'"]')
 
-           setValues(xml_doc,xpath,param_value, ids)
+           value=setValues(xml_doc,xpath,param_value, ids)
          },
          option= {
            #xpath=paste0('//option[@nomParam="',param_name,'"]')
-           setAttrValues(xml_doc,xpath,"choix",param_value, ids)
+           value=setAttrValues(xml_doc,xpath,"choix",param_value, ids)
          },
          table= {
            #xpath=paste0('//param[@nom="',param_name,'"]')
@@ -119,40 +139,40 @@ set_param_value <- function(xml_doc,param_name,param_value,
            if ( length(param_value) > param_type$length ) {
              stop("Too many values to set !")
            }
-           setValues(xml_doc,xpath,param_value, ids)
+           value=setValues(xml_doc,xpath,param_value, ids)
          },
          table2= {
 
            if ( length(param_value) > param_type$length ) {
              stop("Too many values to set !")
            }
-           setValues(xml_doc,xpath,param_value, ids)
+           value=setValues(xml_doc,xpath,param_value, ids)
          },
          node_param= {
-           setValues(xml_doc,xpath,param_value,ids)
+           value=setValues(xml_doc,xpath,param_value,ids)
          },
          choix_param= {
-           setAttrValues(xml_doc,xpath,"choix",param_value,ids)
+           value=setAttrValues(xml_doc,xpath,"choix",param_value,ids)
          },
          node_node= {
-           setValues(xml_doc,xpath,param_value,ids)
+           value=setValues(xml_doc,xpath,param_value,ids)
          },
 
          node_option= {
-           setAttrValues(xml_doc,xpath,"choix",param_value,ids)
+           value=setAttrValues(xml_doc,xpath,"choix",param_value,ids)
          },
 
          form_option= {
-           setAttrValues(xml_doc,xpath,"choix",param_value,ids)
+           value=setAttrValues(xml_doc,xpath,"choix",param_value,ids)
          },
          node_table= {
-           setValues(xml_doc,xpath,param_value,ids)
+           value=setValues(xml_doc,xpath,param_value,ids)
          },
          node_attr= {
-           setAttrValues(xml_doc,xpath,"nom",param_value,ids)
+           value=setAttrValues(xml_doc,xpath,"nom",param_value,ids)
          },
          attr_attr= {
-           setValues(xml_doc,xpath,param_value,ids)
+           value=setValues(xml_doc,xpath,param_value,ids)
          },
          attr_attr2= {
            value=setAttrValues(xml_doc,xpath, param_name,param_value,ids)
@@ -164,7 +184,9 @@ set_param_value <- function(xml_doc,param_name,param_value,
 
   )
 
+  ret <- TRUE
+  # unsuccessfull replacement
+  if (base::is.null(value)) ret <- FALSE
 
-  #return(xml_doc)
-  return(invisible())
+  return(invisible(ret))
 }
