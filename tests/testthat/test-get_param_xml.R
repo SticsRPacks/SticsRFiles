@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/baresoil_plt.xml"))
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/file_plt.xml"))
 context("Getting param values")
 
 
