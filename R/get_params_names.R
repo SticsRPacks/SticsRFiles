@@ -25,9 +25,9 @@ get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
   param_name <- NULL
 
   # If xml_object converting input argument to an XML node
-  if ( class(xml_object) =="xmlDocument" ) {
+  if ( base::is.element("xmlDocument", class(xml_object)) ) {
     xml_node <- xmlRoot(xml_object@content)
-  } else if (class(xml_object) == "XMLInternalElementNode") {
+  } else if (base::is.element("XMLInternalElementNode", class(xml_object)) ) {
     xml_node <- xml_object
   }
 
@@ -113,7 +113,7 @@ get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
   # Loop over childs and recursive call to the function
   for (n in 1:childs_nb) {
 
-    if ( ! class(childs[[n]]) == "XMLInternalElementNode") {
+    if ( ! base::is.element("XMLInternalElementNode", class(childs[[n]])) ) {
       #print(class(childs[[n]]))
       next
     }
@@ -122,10 +122,12 @@ get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
 
   names(param_list) <- NULL
 
-  # filtering unwanted names
+  # Filtering unwanted list elements using names
   names_filt <- c("ta_entete", "tableau_entete", "ta", "tableau", "choix",
                   "fichierpar", "fichierparamgen", "fichiertec", "fichiersta",
-                  "initialisations", "fichierplt", "formalisme")
+                  "initialisations", "fichierplt", "formalisme", "intervention",
+                  "colonne")
   param_list <- setdiff(param_list,names_filt)
+
   return(param_list)
 }
