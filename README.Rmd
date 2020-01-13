@@ -24,24 +24,40 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 <!-- badges: end -->
 
-The goal of SticsRFiles is to perform manipulations of the Stics model files. 
+The goal of SticsRFiles is to perform manipulations of the Stics model files either on XML files (used by the JavaStics GUI) or on text files used by the model fortran executable.
+
+The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files.
+
+Advanced functionnalities are dedicated to produce XML parameters files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
 
 ## Installation
 
 The development version from [GitHub](https://github.com/) can be installed with:
 
 ``` r
-devtools::install_github("SticsRPacks/SticsRFiles")
+devtools::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 Or using the lightweight [remotes](https://github.com/r-lib/remotes#readme) package: 
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("SticsRPacks/SticsRFiles")
+remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+* A description of how to use the functions for manipulating XML input files is detailed 
+[here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html) 
+
+* A description of mailing functions usefull for generating XML input files from usms parameters data stored in Excel files sheets will be available soon.
+
+* A description of how to use the functions for manipulating text input files will be available soon.
 
 
+## Code of conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+## Authors and acknowledgments
+
+The SticsRFiles package is developed by Patrice Lecharpentier, Rémi Vezy and the [SticsRFiles Team](https://github.com/orgs/SticsRPacks/teams/sticsrfiles).
