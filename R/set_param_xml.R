@@ -19,6 +19,7 @@
 #' @return A logical value TRUE for operation success, FALSE otherwise
 #'
 #' @examples
+#'
 #' \dontrun{
 #' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
 #' file.copy(xml_path, getwd())
@@ -38,7 +39,7 @@
 #'
 #'
 #' # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
-#' set_param_xml("sols.xml", c("argi", "norg"),list(100,150)
+#' set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
 #' parent_name = "sol", parent_sel_attr = "solcanne")
 #'
 #' get_param_xml("sols.xml", c("argi", "norg"),

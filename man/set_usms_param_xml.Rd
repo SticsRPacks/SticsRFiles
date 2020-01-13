@@ -17,6 +17,7 @@ set_usms_param_xml(xml_doc_object, usms_param = NULL, overwrite = FALSE)
 Setting a usm param value(s) in an usms xmlDocument
 }
 \examples{
+
 \dontrun{
 xml_path = system.file("extdata/xml/examples/V9.0/usms.xml", package = "SticsRFiles")
 usms_doc <- SticsRFiles:::xmldocument(xml_path)

@@ -14,24 +14,24 @@
 #' node_set <- SticsRFiles:::getNodeS(sols_doc, "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
 #' attr_list <- sapply(node_set,function(x) xmlAttrs(x))
 #'
-#' [[1]]
-#' nom
-#' "solcanne"
-
-#' [[2]]
-#' format        max        min        nom
-#' "real"      "2.0"      "0.0" "mulchbat"
-
-#' [[3]]
-#' format        max        min        nom
-#' "real"      "2.0"      "0.0" "mulchbat"
+#' #> [[1]]
+#' #> nom
+#' #> "solcanne"
+#'
+#' #> [[2]]
+#' #> format        max        min        nom
+#' #> "real"      "2.0"      "0.0" "mulchbat"
+#'
+#' #> [[3]]
+#' #> format        max        min        nom
+#' #> "real"      "2.0"      "0.0" "mulchbat"
 #'
 #' SticsRFiles:::attributes_list2matrix(attr_list)
 #'
-#'      nom        format max   min
-#' [1,] "solcanne" NA     NA    NA
-#' [2,] "mulchbat" "real" "2.0" "0.0"
-#' [3,] "mulchbat" "real" "2.0" "0.0"
+#' #>      nom        format max   min
+#' #> [1,] "solcanne" NA     NA    NA
+#' #> [2,] "mulchbat" "real" "2.0" "0.0"
+#' #> [3,] "mulchbat" "real" "2.0" "0.0"
 #'
 #' }
 #'

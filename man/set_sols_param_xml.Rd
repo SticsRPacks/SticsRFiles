@@ -17,6 +17,7 @@ set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 Setting a sol param value(s) in a sols xmlDocument
 }
 \examples{
+
 \dontrun{
 xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)

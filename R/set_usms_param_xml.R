@@ -5,6 +5,7 @@
 #' @param overwrite replace existing usms (TRUE) or not, updating existing ones (FALSE)
 #'
 #' @examples
+#'
 #' \dontrun{
 #' xml_path = system.file("extdata/xml/examples/V9.0/usms.xml", package = "SticsRFiles")
 #' usms_doc <- SticsRFiles:::xmldocument(xml_path)

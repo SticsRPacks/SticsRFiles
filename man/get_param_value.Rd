@@ -33,6 +33,7 @@ a numeric vector values of parameter or a list of
 Extracting parameter value from an xml document object
 }
 \examples{
+
 \dontrun{
 xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)

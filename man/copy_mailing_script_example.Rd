@@ -24,10 +24,13 @@ Get script(s) example(s) for generating xml Stics files from tables (data.frame,
 \dontrun{
 # getting files list
 copy_mailing_script_example()
-[1] "generate_ini_files.R" "generate_sols_file.R" "generate_sta_files.R" "generate_tec_files.R"
-[5] "generate_usms_file.R"
+
+#> [1] "generate_ini_files.R" "generate_sols_file.R" "generate_sta_files.R" "generate_tec_files.R"
+#> [5] "generate_usms_file.R"
+
 # copying all scripts
 copy_mailing_script_example("all")
+
 # copying ini and sols scripts
 copy_mailing_script_example("ini", "sols")
 }

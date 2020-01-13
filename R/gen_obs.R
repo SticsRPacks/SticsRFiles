@@ -6,17 +6,26 @@
 #' @param file_path Path to the file to write to
 #'
 #' @examples
-#'\dontrun{
-#' xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx")
-#' obs_df <- read_excel(xl_path, sheet = "Obs") %>% dplyr::filter( usm_name %in% "USM_2017_T1_CI")
+#'
+#' \dontrun{
+#'
+#' # Getting observations data
+#' xl_path <- file.path(system.file(package="SticsRFiles",
+#' file.path("extdata", "xl", "inputs_stics_example.xlsx"))
+#'
+#' obs_df <- read_excel(xl_path, sheet = "Obs") %>%
+#' dplyr::filter( usm_name %in% "USM_2017_T1_CI")
+#'
+#' # Generating the csv file
 #' gen_obs(obs_df, "USM_2017_T1_CI.obs")
-#'}
+#'
+#' }
 #'
 #' @return A logical value if the file generation succeeded (T) or not (F)
 #'
 #' @export
 #'
-gen_obs= function(obs_table,file_path){
+gen_obs= function(obs_table, file_path){
 
 
   # Checking file path

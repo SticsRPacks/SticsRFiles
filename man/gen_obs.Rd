@@ -18,10 +18,19 @@ A logical value if the file generation succeeded (T) or not (F)
 Write STICS obs data from data.frame/tibble
 }
 \examples{
+
 \dontrun{
-xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx")
-obs_df <- read_excel(xl_path, sheet = "Obs") \%>\% dplyr::filter( usm_name \%in\% "USM_2017_T1_CI")
+
+# Getting observations data
+xl_path <- file.path(system.file(package="SticsRFiles",
+file.path("extdata", "xl", "inputs_stics_example.xlsx"))
+
+obs_df <- read_excel(xl_path, sheet = "Obs") \%>\%
+dplyr::filter( usm_name \%in\% "USM_2017_T1_CI")
+
+# Generating the csv file
 gen_obs(obs_df, "USM_2017_T1_CI.obs")
+
 }
 
 }

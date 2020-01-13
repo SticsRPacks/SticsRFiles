@@ -29,7 +29,7 @@
 #' # Replace the interrow distance parameter to 0.01:
 #'
 #' library(SticsRFiles)
-#' set_param_txt(dirpath = "stics_usm/usm_1", param= "interrang", value= 0.01)
+#' set_param_txt(dirpath = "stics_usm/usm_1", param = "interrang", value = 0.01)
 #'
 #'}
 #'
@@ -203,7 +203,7 @@ set_out_var_txt= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F)
 #' @seealso \code{\link{set_param_txt}}.
 #'
 #' @keywords internal
-#' @export
+#'
 set_file_txt= function(filepath,param,value,add,variety= NULL){
   # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
