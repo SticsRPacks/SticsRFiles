@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a list of Stics xml parameters names an xmlDocument node — get_params_names • SticsRFiles</title>
+<title>Get a list of Stics xml parameters names an xmlDocument or  XML node — get_params_names • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Get a list of Stics xml parameters names an xmlDocument node — get_params_names" />
-<meta property="og:description" content="Get a list of Stics xml parameters names an xmlDocument node" />
+<meta property="og:title" content="Get a list of Stics xml parameters names an xmlDocument or  XML node — get_params_names" />
+<meta property="og:description" content="Get a list of Stics xml parameters names an xmlDocument or  XML node" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -117,31 +117,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a list of Stics xml parameters names an xmlDocument node</h1>
+    <h1>Get a list of Stics xml parameters names an xmlDocument or  XML node</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_params_names.R'><code>R/get_params_names.R</code></a></small>
     <div class="hidden name"><code>get_params_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get a list of Stics xml parameters names an xmlDocument node</p>
+    <p>Get a list of Stics xml parameters names an xmlDocument or  XML node</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_params_names</span>(<span class='no'>xml_node</span>, <span class='kw'>param_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(), <span class='kw'>full_list</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_params_names</span>(<span class='no'>xml_object</span>, <span class='kw'>param_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(), <span class='kw'>full_list</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>xml_node</th>
-      <td><p>an xml XMLInternalElementNode</p></td>
+      <th>xml_object</th>
+      <td><p>an xml XMLInternalElementNode or xmlDocument object</p></td>
     </tr>
     <tr>
       <th>param_list</th>
-      <td><p>param names vector, used for recursive calls</p></td>
+      <td><p>param names vector, only used for recursive calls</p></td>
     </tr>
     <tr>
       <th>full_list</th>
-      <td><p>TRUE or getting all names, FALSE otherwise (default)
+      <td><p>TRUE for getting all names, FALSE otherwise (default)
 for unique names list</p></td>
     </tr>
     </table>
@@ -150,12 +150,19 @@ for unique names list</p></td>
 
     <p>a character vector of parameters names</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.0/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
+<span class='no'>sols_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'>xmldocument</span>(<span class='no'>xml_path</span>)
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_params_names.html'>get_params_names</a></span>(<span class='no'>sols_doc</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
@@ -164,7 +171,7 @@ for unique names list</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

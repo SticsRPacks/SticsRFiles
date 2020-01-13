@@ -36,8 +36,8 @@
 
 
 <meta property="og:title" content="Getting parameter values from an xml parameter file for an option choice — get_option_choice_param_values" />
-<meta property="og:description" content="Extracting parameter values from an xml file data, correponding to parameters
-defined in a option choice node" />
+<meta property="og:description" content="Extracting parameter values from an xml file, correponding to parameters
+defined in a option choice node (as param nodes)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +70,7 @@ defined in a option choice node" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ defined in a option choice node" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -124,8 +124,8 @@ defined in a option choice node" />
     </div>
 
     <div class="ref-description">
-    <p>Extracting parameter values from an xml file data, correponding to parameters
-defined in a option choice node</p>
+    <p>Extracting parameter values from an xml file, correponding to parameters
+defined in a option choice node (as <em>param</em> nodes)</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_option_choice_param_values</span>(
@@ -158,7 +158,11 @@ and a vector of strings of parameters names ($names)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_option_choice_param_values</span>(<span class='no'>path</span>/<span class='no'>to</span>/<span class='no'>xml</span>/<span class='no'>file</span>,<span class='st'>"codetemp"</span>,<span class='st'>"yes"</span>)
+
+<span class='no'>xml_path</span><span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span><span class='kw'>=</span><span class='st'>"SticsRFiles"</span>,<span class='st'>"extdata/xml/examples/V9.0/baresoil_plt.xml"</span>))
+
+<span class='fu'>get_option_choice_param_values</span>(<span class='no'>xml_path</span>,<span class='st'>"codetemp"</span>,<span class='st'>"2"</span>)
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -175,7 +179,7 @@ and a vector of strings of parameters names ($names)</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

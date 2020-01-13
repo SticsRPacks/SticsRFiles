@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add stics node — add_stics_nodes • SticsRFiles</title>
+<title>Add node to a Stics XML document — add_stics_nodes • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Add stics node — add_stics_nodes" />
-<meta property="og:description" content="Add stics node" />
+<meta property="og:title" content="Add node to a Stics XML document — add_stics_nodes" />
+<meta property="og:description" content="Add node to a Stics XML document" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -117,20 +117,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add stics node</h1>
+    <h1>Add node to a Stics XML document</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/add_stics_nodes.R'><code>R/add_stics_nodes.R</code></a></small>
     <div class="hidden name"><code>add_stics_nodes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Add stics node</p>
+    <p>Add node to a Stics XML document</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_stics_nodes</span>(
   <span class='no'>xml_doc</span>,
-  <span class='no'>file_tag</span>,
-  <span class='kw'>nodes_nb</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>formalism_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>nodes_nb</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>stics_version</span> <span class='kw'>=</span> <span class='st'>"last"</span>
 )</pre>
 
@@ -142,16 +141,12 @@
       <td><p>XML document</p></td>
     </tr>
     <tr>
-      <th>file_tag</th>
-      <td><p>File tag</p></td>
+      <th>formalism_name</th>
+      <td><p>Name of the formalism (optional)</p></td>
     </tr>
     <tr>
       <th>nodes_nb</th>
-      <td><p>Nodes numbers</p></td>
-    </tr>
-    <tr>
-      <th>formalism_name</th>
-      <td><p>Name of the formalism</p></td>
+      <td><p>number of operations to add</p></td>
     </tr>
     <tr>
       <th>stics_version</th>
@@ -160,11 +155,25 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
+<span class='no'>tec_xml</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.0/file_tec.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
+<span class='no'>tec_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'>xmldocument</span>(<span class='no'>tec_xml</span>)
+
+<span class='co'># Adding one irrigation operation</span>
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/add_stics_nodes.html'>add_stics_nodes</a></span>(<span class='no'>tec_doc</span>, <span class='st'>"irrigation"</span>)
+
+<span class='co'># Adding three irrigation operations</span>
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/add_stics_nodes.html'>add_stics_nodes</a></span>(<span class='no'>tec_doc</span>, <span class='st'>"irrigation"</span>, <span class='kw'>nodes_nb</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
@@ -173,7 +182,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

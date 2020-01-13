@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -141,12 +141,26 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>An xmlDocument object</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Retrieving xml examples files to get xmlDocument from</span>
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_xml_doc_example.html'>get_xml_doc_example</a></span>()
+
+<span class='co'># Loading an usms.xml file</span>
+<span class='no'>usm_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_xml_doc_example.html'>get_xml_doc_example</a></span>(<span class='st'>"usms.xml"</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
@@ -155,7 +169,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

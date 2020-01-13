@@ -2,5 +2,5 @@ pandoc: 2.7.2
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  TO_REUSE_transitional_SticsOnR_doc: TO_REUSE_transitional_SticsOnR_doc.html
+  Manipulating_Stics_XML_files: Manipulating_Stics_XML_files.html
 

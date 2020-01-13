@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -164,12 +164,33 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>An xmlDocument object</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># A newly created one, with one or more usms and</span>
+<span class='co'># fake parameters values</span>
+<span class='no'>xml_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/gen_xml_doc.html'>gen_xml_doc</a></span>(<span class='kw'>doc_type</span> <span class='kw'>=</span> <span class='st'>"usms"</span>)
+<span class='no'>xml_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/gen_xml_doc.html'>gen_xml_doc</a></span>(<span class='kw'>doc_type</span> <span class='kw'>=</span> <span class='st'>"usms"</span>, <span class='kw'>node_nb</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+
+<span class='co'># With changing parameters values, from an existing document</span>
+<span class='co'># and a data.frame contaning usms parameters values</span>
+<span class='no'>existing_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'>xmldocument</span>(<span class='st'>"/path/to/usms.xml"</span>)
+
+<span class='no'>out_xml_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/gen_xml_doc.html'>gen_xml_doc</a></span>(<span class='kw'>doc_type</span> <span class='kw'>=</span> <span class='st'>"usms"</span>,
+<span class='kw'>xml_doc</span> <span class='kw'>=</span> <span class='no'>existing_doc</span>, <span class='kw'>nodes_param</span> <span class='kw'>=</span> <span class='no'>param_data_frame</span>)
+
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
@@ -178,7 +199,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

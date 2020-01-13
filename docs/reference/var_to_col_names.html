@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Convert Stics variables names, or generated column names to
-Stics specific columns names — var_to_col_names • SticsRFiles</title>
+valid conventional column names. — var_to_col_names • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -37,9 +37,10 @@ Stics specific columns names — var_to_col_names • SticsRFiles</title>
 
 
 <meta property="og:title" content="Convert Stics variables names, or generated column names to
-Stics specific columns names — var_to_col_names" />
-<meta property="og:description" content="Change the varname(n) or varname.n. to varname_n
-other names are unchanged (i.e.: varname, varname_n, ...)" />
+valid conventional column names. — var_to_col_names" />
+<meta property="og:description" content="Change Stics variables names as valid variable R name
+Like varname(n) or varname.n. to  varname_n.
+Other names are unchanged (i.e.: varname, varname_n, ...)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -72,7 +73,7 @@ other names are unchanged (i.e.: varname, varname_n, ...)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -95,7 +96,7 @@ other names are unchanged (i.e.: varname, varname_n, ...)" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -121,37 +122,42 @@ other names are unchanged (i.e.: varname, varname_n, ...)" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert Stics variables names, or generated column names to
-Stics specific columns names</h1>
+valid conventional column names.</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/var_to_col_names.R'><code>R/var_to_col_names.R</code></a></small>
     <div class="hidden name"><code>var_to_col_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Change the <code>varname(n)</code> or <code>varname.n.</code> to <code>varname_n</code>
-other names are unchanged (i.e.: varname, varname_n, ...)</p>
+    <p>Change Stics variables names as valid variable R name
+Like <code>varname(n)</code> or <code>varname.n.</code> to  <code>varname_n</code>.
+Other names are unchanged (i.e.: varname, varname_n, ...)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>var_to_col_names</span>(<span class='kw'>var_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>())</pre>
+    <pre class="usage"><span class='fu'>var_to_col_names</span>(<span class='no'>var_vec</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>var_list</th>
-      <td><p>Variables names</p></td>
+      <th>var_vec</th>
+      <td><p>Valid names vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>List of formatted column names</p>
+    <p>Vector of formatted column names</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>var_names</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"var1"</span>,<span class='st'>"var2(n)"</span> ,<span class='st'>"var2.n."</span>)
+<span class='no'>valid_names</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/var_to_col_names.html'>var_to_col_names</a></span>(<span class='no'>var_names</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
@@ -160,7 +166,7 @@ other names are unchanged (i.e.: varname, varname_n, ...)</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

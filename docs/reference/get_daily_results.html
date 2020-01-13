@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Loading a daily Stics file — get_daily_results • SticsRFiles</title>
+<title>Loading Stics daily output file(s) — get_daily_results • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Loading a daily Stics file — get_daily_results" />
-<meta property="og:description" content="Reading a daily file as a tibble with possible selection
+<meta property="og:title" content="Loading Stics daily output file(s) — get_daily_results" />
+<meta property="og:description" content="Reading daily file(s) as a tibble with possible selection
 on variables names, cumulative DOY, dates list" />
 <meta name="twitter:card" content="summary" />
 
@@ -70,7 +70,7 @@ on variables names, cumulative DOY, dates list" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ on variables names, cumulative DOY, dates list" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/TO_REUSE_transitional_SticsOnR_doc.html">Starting user guide draft and notes for the SticsOnR package</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -118,13 +118,13 @@ on variables names, cumulative DOY, dates list" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Loading a daily Stics file</h1>
+    <h1>Loading Stics daily output file(s)</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_daily_results.R'><code>R/get_daily_results.R</code></a></small>
     <div class="hidden name"><code>get_daily_results.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reading a daily file as a tibble with possible selection
+    <p>Reading daily file(s) as a tibble with possible selection
 on variables names, cumulative DOY, dates list</p>
     </div>
 
@@ -161,36 +161,41 @@ on variables names, cumulative DOY, dates list</p>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A tibble or a list of</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"extdata"</span>,<span class='st'>"sti"</span>,<span class='st'>"V9.0"</span>), <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
-<span class='fu'>get_daily_results</span>(<span class='no'>path</span>,<span class='st'>"banana"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 271 x 51</span><span>
+<span class='fu'>get_daily_results</span>(<span class='no'>path</span>,<span class='st'>"banana"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 271 x 51</span><span>
 #&gt;    Date                  ian    mo    jo   jul lai_n masec_n mafruit  HR_1  HR_2
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> 1996-01-30 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     1    30    30 0       0           0  39.0  40.3
-#&gt; </span><span style='color: #555555;'> 2</span><span> 1996-01-31 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     1    31    31 0       0           0  38.0  39.7
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1996-02-01 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     1    32 0       0           0  37.4  39.0
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1996-02-02 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     2    33 0.100   0.500       0  36.7  38.3
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1996-02-03 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     3    34 0.100   0.500       0  36.1  37.6
-#&gt; </span><span style='color: #555555;'> 6</span><span> 1996-02-04 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     4    35 0.100   0.500       0  35.5  37.0
-#&gt; </span><span style='color: #555555;'> 7</span><span> 1996-02-05 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     5    36 0.100   0.500       0  34.8  36.3
-#&gt; </span><span style='color: #555555;'> 8</span><span> 1996-02-06 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     6    37 0.100   0.500       0  34.2  35.7
-#&gt; </span><span style='color: #555555;'> 9</span><span> 1996-02-07 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     7    38 0.100   0.500       0  33.6  35.0
-#&gt; </span><span style='color: #555555;'>10</span><span> 1996-02-08 </span><span style='color: #555555;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     8    39 0.100   0.500       0  32.9  34.4
-#&gt; </span><span style='color: #555555;'># ... with 261 more rows, and 41 more variables: HR_3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, HR_4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   HR_5 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, resmes </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, drain </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, esol </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, et </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, zrac </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   tcult </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZnit_1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZnit_2 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZnit_3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZnit_4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   AZnit_5 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, Qles </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, QNplante </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, azomes </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, inn </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   chargefruit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZamm_1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZamm_2 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZamm_3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   AZamm_4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, AZamm_5 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, CNgrain </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, concNO3les </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, drat </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   fapar </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, hauteur </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, Hmax </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, humidite </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LRACH_1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   LRACH_2 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LRACH_3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LRACH_4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, LRACH_5 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mafrais </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   pdsfruitfrais </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, Qdrain </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, rnet </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, cum_jul </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div></span></pre>
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 1996-01-30 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     1    30    30 0       0           0  39.0  40.3
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 1996-01-31 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     1    31    31 0       0           0  38.0  39.7
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1996-02-01 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     1    32 0       0           0  37.4  39.0
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 1996-02-02 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     2    33 0.100   0.500       0  36.7  38.3
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 1996-02-03 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     3    34 0.100   0.500       0  36.1  37.6
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 1996-02-04 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     4    35 0.100   0.500       0  35.5  37.0
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1996-02-05 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     5    36 0.100   0.500       0  34.8  36.3
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 1996-02-06 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     6    37 0.100   0.500       0  34.2  35.7
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1996-02-07 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     7    38 0.100   0.500       0  33.6  35.0
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 1996-02-08 </span><span style='color: #949494;'>00:00:00</span><span>  </span><span style='text-decoration: underline;'>1</span><span>996     2     8    39 0.100   0.500       0  32.9  34.4
+#&gt; </span><span style='color: #949494;'># … with 261 more rows, and 41 more variables: HR_3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, HR_4 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   HR_5 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, resmes </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, drain </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, esol </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, et </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, zrac </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   tcult </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZnit_1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZnit_2 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZnit_3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZnit_4 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   AZnit_5 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, Qles </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, QNplante </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, azomes </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, inn </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   chargefruit </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZamm_1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZamm_2 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZamm_3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   AZamm_4 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, AZamm_5 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, CNgrain </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, concNO3les </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, drat </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   fapar </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, hauteur </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, Hmax </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, humidite </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, LRACH_1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   LRACH_2 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, LRACH_3 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, LRACH_4 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, LRACH_5 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, mafrais </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   pdsfruitfrais </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, Qdrain </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, rnet </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, cum_jul </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -200,7 +205,7 @@ on variables names, cumulative DOY, dates list</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy.</p>
+  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">

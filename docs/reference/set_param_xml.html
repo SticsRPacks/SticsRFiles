@@ -70,7 +70,7 @@ with a parameters values vector" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9002</span>
       </span>
     </div>
 
@@ -193,7 +193,33 @@ other kinds in ini and some tec parameters not taken into account for the moment
     <p>A logical value TRUE for operation success, FALSE otherwise</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.0/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>xml_path</span>, <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>())
+<span class='fu'><a href='get_param_xml.html'>get_param_xml</a></span>(<span class='st'>"sols.xml"</span>, <span class='st'>"argi"</span>)
+
+<span class='co'># Setting all "argi" values to 50</span>
+<span class='fu'>set_param_xml</span>(<span class='st'>"sols.xml"</span>, <span class='st'>"argi"</span>, <span class='fl'>50</span>)
+
+<span class='fu'><a href='get_param_xml.html'>get_param_xml</a></span>(<span class='st'>"sols.xml"</span>, <span class='st'>"argi"</span>)
+
+<span class='co'># Setting a specific value to "argi" for "solcanne" soil</span>
+<span class='fu'>set_param_xml</span>(<span class='st'>"sols.xml"</span>, <span class='st'>"argi"</span>,<span class='fl'>56</span>,
+<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
+
+<span class='fu'><a href='get_param_xml.html'>get_param_xml</a></span>(<span class='st'>"sols.xml"</span>, <span class='st'>"argi"</span>,
+<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
+
+
+<span class='co'># Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil</span>
+<span class='fu'>set_param_xml</span>(<span class='st'>"sols.xml"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>),<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>100</span>,<span class='fl'>150</span>),
+<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
+
+<span class='fu'><a href='get_param_xml.html'>get_param_xml</a></span>(<span class='st'>"sols.xml"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>),
+<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
