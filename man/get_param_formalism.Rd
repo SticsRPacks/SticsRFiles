@@ -10,7 +10,7 @@ get_param_formalism(xml_doc, param_name)
 \arguments{
 \item{xml_doc}{an xmlDocument object (created from any xml file)}
 
-\item{param_name}{a formalism name or a vector of}
+\item{param_name}{a parameter name or a vector of}
 }
 \value{
 a formalism name or a list of

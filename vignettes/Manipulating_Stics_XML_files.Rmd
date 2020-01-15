@@ -12,9 +12,6 @@ vignette: >
   %\VignetteIndexEntry{Manipulate_Stics_XML_files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-params:
-  xml_loc_dir: /home/plecharpent/tmp/tests_SticsRFiles/xml
-  show_xpath: TRUE
 ---
 
 ```{r, include = FALSE}
@@ -28,8 +25,7 @@ knitr::opts_chunk$set(
 suppressMessages(library(SticsRFiles))
 #print(xml_dir)
 options(warn=-1)
-xml_loc_dir <- params$xml_loc_dir
-show_xpath <- params$show_xpath
+xml_loc_dir <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
 ```
 
 ```{r rm_files, results='hide', echo=F}
@@ -49,7 +45,7 @@ The purpose of this document is to provide starting information about:
 * how to use SticsRFiles functions for extracting data from XML Stics input files
 * how to use SticsRFiles functions for replacing data into them.
 
-Simple functions reproducible use cases based on 2 essential functions **get_params_xml** and **set_params_xml** are described in this document.
+Simple functions reproducible use cases based on 2 essential functions **get_param_xml** and **set_param_xml** are described in this document.
 
 Exploring files content for files sets are also possible.
 

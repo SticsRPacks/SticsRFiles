@@ -1,7 +1,7 @@
 #' @title Get the "formalisme" node "@nom" attribute value of a
 #' (or a list of) parameter(s) in an xmlDocument
 #' @param xml_doc an xmlDocument object (created from any xml file)
-#' @param param_name a formalism name or a vector of
+#' @param param_name a parameter name or a vector of
 #'
 #'
 #' @return a formalism name or a list of
