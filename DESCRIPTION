@@ -55,6 +55,7 @@ Collate:
     'convert_xml2txt_int.R'
     'copy_mailing_example.R'
     'copy_mailing_script_example.R'
+    'download_data.R'
     'exists_param.R'
     'expand_stics_names.R'
     'global.R'

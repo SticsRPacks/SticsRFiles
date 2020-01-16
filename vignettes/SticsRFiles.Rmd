@@ -41,7 +41,7 @@ All the example data used in this article is available from the [`data` reposito
 
 SticsRFiles provides a function to download it from the command line: 
 
-```{r setup}
+```{r eval=FALSE}
 library(SticsRFiles)
 example_data= SticsRFiles::download_data()
 ```
