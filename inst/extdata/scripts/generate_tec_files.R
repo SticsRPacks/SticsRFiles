@@ -1,13 +1,12 @@
 # Generate tec files
 
-library(SticsOnR)
 library(readxl)
 library(SticsRFiles)
 
 
 
-out_dir <- "/path/to/dir/"     # or something like C://path//to//dir" for Windows
-xl_dir <- "/path/to/xl/dir"    # or something like C://path//to//xl//dir" for Windows
+out_dir <- "/path/to/dir/"     # or something like C:/path/to/dir" for Windows
+xl_dir <- "/path/to/xl/dir"    # or something like C:/path/to/xl/dir" for Windows
 
 # Using an XL example file (from the package)
 copy_mailing_example("inputs_stics_example.xlsx", dest_dir = xl_dir)
