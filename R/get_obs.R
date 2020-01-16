@@ -68,7 +68,7 @@ get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename=
   # check usms existence
   flag_exist=sapply(usms,function (x) is.element(x,get_usms_list(dirpath,usms_filename)))
   if (any(!flag_exist)) {
-    stop(paste0("USMs ",usms[~flag_exist]," are not listed in file ",usms_filename,", please modify or provide usms argument."))
+    stop(paste0("USMs ",usms[!flag_exist]," are not listed in file ",usms_filename,", please modify or provide usms argument."))
   }
 
   obs_list=vector("list", length(usms))
