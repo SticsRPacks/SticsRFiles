@@ -6,6 +6,9 @@
 \usage{
 download_data(dir = NULL)
 }
+\arguments{
+\item{dir}{The directory where to download the data}
+}
 \value{
 Download the data and return the path to the folder where the data was downloaded
 }
