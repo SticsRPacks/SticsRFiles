@@ -3,4 +3,5 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   Manipulating_Stics_XML_files: Manipulating_Stics_XML_files.html
+  SticsRFiles: SticsRFiles.html
 

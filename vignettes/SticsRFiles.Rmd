@@ -1,0 +1,53 @@
+---
+title: "SticsRFiles"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SticsRFiles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model. 
+
+The executable of the STICS model uses text files with standard names and format as inputs that describe one single unit of simulation (USM), e.g. one crop for one year. The XML files are not used directly by the STICS executable, but by the JavaSTICS GUI instead. The JavaSTICS GUI is used to easily build the input text files for the STICS executable according to the choices of the user. The XML files have the benefit to store more information than the text files: they not only store the parameter values but also their description, the maximum and minimum boundary values, all existing formalisms along with the different choices allowed, and more importantly they allow for the management of several USMs in a same folder, and can help make successive USMs.
+
+Hence, SticsRFiles can be used to manage the XML input files (get and set parameter values, build the text files), the input text files (get and set parameter values) and the outputs from the model execution. 
+
+Advanced functionnalities include also:
+
+* The generation of XML input files from templates included in the package, and   
+* The production of XML input files using a mailing process from XML templates and Excel sheets containing multiple simulations contexts 
+
+
+The goal of this article is to help new comers to getting started with the basic functionalities of the package, i.e.:
+
+* `get_param_names_xml()`: get parameter names from xml files;  
+* `get_param_xml()`: get parameter values from xml files;
+* `set_param_xml()`: set parameter values from xml files;
+* `gen_obs()`: generate observation files from a `data.frame`
+
+## Example data
+
+All the example data used in this article is available from the [`data` repository](https://github.com/SticsRPacks/data) in the `SticsRPacks` organisation.  
+
+SticsRFiles provides a function to download it from the command line: 
+
+```{r setup}
+library(SticsRFiles)
+example_data= SticsRFiles::download_data()
+```
+
+By default the example data is downloaded in a temporary folder. 
+
+
+## `get_param_names_xml()`
+
