@@ -22,9 +22,8 @@ get_usms_list <- function(usms_path,xml_name="usms.xml"){
     usms_xml_path = usms_path
   }
 
+  # Get usms list
   usms_list <- get_param_xml(usms_xml_path,"usm")
-
-  if (length(usms_list) == 1) usms_list <- unlist(usms_list)
 
   return(usms_list)
 }
