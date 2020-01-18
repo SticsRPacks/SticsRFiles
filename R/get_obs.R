@@ -66,7 +66,7 @@ get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename=
     stop("Size of usms list given in argument is different from size of obs files list => correspondance cannot be done.")
   }
   # check usms existence
-  flag_exist=sapply(usms,function (x) is.element(x,get_usms_list(dirpath,usms_filename)))
+  flag_exist=sapply(usms,function (x) is.element(x,get_usms_list(dirpath,usms_filename)[[1]]))
   if (any(!flag_exist)) {
     stop(paste0("USMs ",usms[!flag_exist]," are not listed in file ",usms_filename,", please modify or provide usms argument."))
   }
