@@ -18,7 +18,8 @@ download_data= function(dir= NULL){
   data_dir= normalizePath(dir, winslash = "/", mustWork = FALSE)
   data_dir_zip= normalizePath(file.path(data_dir,"master.zip"), winslash = "/", mustWork = FALSE)
   utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip", data_dir_zip)
+  df_name=utils::unzip(data_dir_zip, exdir = data_dir,list = TRUE)
   utils::unzip(data_dir_zip, exdir = data_dir)
   unlink(data_dir_zip)
-  normalizePath(file.path(data_dir,utils::unzip(data_dir_zip,list = TRUE)[1,1]), winslash = "/")
+  normalizePath(file.path(data_dir,df_name[1,1]), winslash = "/")
 }
