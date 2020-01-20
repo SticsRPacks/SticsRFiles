@@ -7,7 +7,7 @@ content}
 \usage{
 gen_usms_xml2txt(
   javastics_path,
-  javastics_workspace_path = NULL,
+  workspace_path = NULL,
   target_path = NULL,
   usms_list = c(),
   display = FALSE,
@@ -17,14 +17,14 @@ gen_usms_xml2txt(
 \arguments{
 \item{javastics_path}{Path of JavaStics installation directory}
 
-\item{javastics_workspace_path}{Path of a JavaStics workspace (Optional), if not
+\item{workspace_path}{Path of a JavaStics workspace (Optional), if not
 provided the current workspace stored in JavaStics preferences will be used.}
 
 \item{target_path}{The path of the directory where to create usms directories (Optional),
 if not provided the JavaStics workspace will be used as root}
 
 \item{usms_list}{List of usms to generate (Optional). If not provided, all
-usms contained in javastics_workspace_path/usms.xml file will be generated.}
+usms contained in workspace_path/usms.xml file will be generated.}
 
 \item{display}{Logical value for displaying (TRUE) ot not (FALSE) usm name}
 

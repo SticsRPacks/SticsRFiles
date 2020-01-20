@@ -101,6 +101,7 @@ Collate:
     'get_params_names.R'
     'get_plants_nb.R'
     'get_txt_param_value.R'
+    'get_usms_files.R'
     'get_usms_list.R'
     'get_values_from_table.R'
     'get_xml_base_doc.R'

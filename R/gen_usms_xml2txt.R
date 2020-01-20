@@ -10,12 +10,12 @@
 #'
 #'
 #' @param javastics_path Path of JavaStics installation directory
-#' @param javastics_workspace_path Path of a JavaStics workspace (Optional), if not
+#' @param workspace_path Path of a JavaStics workspace (Optional), if not
 #' provided the current workspace stored in JavaStics preferences will be used.
 #' @param target_path The path of the directory where to create usms directories (Optional),
 #' if not provided the JavaStics workspace will be used as root
 #' @param usms_list List of usms to generate (Optional). If not provided, all
-#' usms contained in javastics_workspace_path/usms.xml file will be generated.
+#' usms contained in workspace_path/usms.xml file will be generated.
 #' @param display Logical value for displaying (TRUE) ot not (FALSE) usm name
 #' @param dir_per_usm_flag logical, TRUE if one want to create one directory per USM,
 #' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
@@ -48,19 +48,19 @@
 #'
 
 gen_usms_xml2txt <- function(javastics_path,
-                          javastics_workspace_path = NULL,
-                          target_path = NULL,
-                          usms_list = c(),
-                          display = FALSE,
-                          dir_per_usm_flag=TRUE) {
-                          # overwrite = FALSE,parallelized = FALSE, exec_time = FALSE) {
+                             workspace_path = NULL,
+                             target_path = NULL,
+                             usms_list = c(),
+                             display = FALSE,
+                             dir_per_usm_flag=TRUE) {
+  # overwrite = FALSE,parallelized = FALSE, exec_time = FALSE) {
 
 
   ################### TODO ######################################
   # TODO : for file overwriting right, activate obverwriting arg
   # and add overwriting management in the code !
   #
-  # TODO : for parallel work add a copy of javastics_workspace_path
+  # TODO : for parallel work add a copy of workspace_path
   # and calculate if at the beginning of the foreach loop !
 
   #library(doParallel)
@@ -84,7 +84,7 @@ gen_usms_xml2txt <- function(javastics_path,
 
 
   # Checking and getting JavaStics workspace path
-  ws <- SticsOnR:::check_java_workspace(javastics_path,javastics_workspace_path)
+  ws <- SticsOnR:::check_java_workspace(javastics_path,workspace_path)
   if (base::is.null(ws)) {
     return()
   }
@@ -116,6 +116,20 @@ gen_usms_xml2txt <- function(javastics_path,
       stop("At least one usm does not exist us usms.xml file : ",usms_list[!usms_exist])
     }
 
+  }
+
+  # Checking XML files existence, get_usms_files
+  # returns a list : elemenst containing existing
+  # files list and a all_exist status !
+  usms_files <- get_usms_files(workspace_path = workspace_path,
+                               javastics_path =javastics_path,
+                               usms_list = usms_list)
+  # For all usms
+  all_files_exist <- unlist(lapply(usms_files, function(x) x$all_exist), use.names = F)
+  # If any file missing, stopping
+  if (!all(all_files_exist)) {
+    stop(paste("Missing files have been detected for usm(s):",
+               paste(usms_list[!all_files_exist], collapse = ", ")))
   }
 
   # Command string without usm name
@@ -169,7 +183,7 @@ gen_usms_xml2txt <- function(javastics_path,
   #start_time <- Sys.time()
 
   for (i in 1:usms_number) {
-  #foreach(i = 1:usms_number, .export = ".GlobalEnv") %dopar% {
+    #foreach(i = 1:usms_number, .export = ".GlobalEnv") %dopar% {
 
     usm_name=usms_list[i]
     if (dir_per_usm_flag) {
@@ -220,6 +234,8 @@ gen_usms_xml2txt <- function(javastics_path,
                                       to = usm_path, overwrite = T)
     }
 
+
+
     # Storing global files copy status
     global_copy_status[i] <- copy_status & out_copy_status
 
@@ -227,6 +243,13 @@ gen_usms_xml2txt <- function(javastics_path,
     if (display) cat(paste0(usm_name,"\n"))
 
 
+  }
+
+  # Messages if failing copies
+  if (!all(global_copy_status)) {
+    failed_usms <- usms_list[global_copy_status]
+    warning(paste("Errors occured while generating or copying files to usms directories for usms:\n",
+                  paste(failed_usms, collapse = ", ")))
   }
 
   # stopping the cluster
