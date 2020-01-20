@@ -28,6 +28,12 @@ generated and directly usable from the JavaStics interface (GUI or
 command line), or with an R JavaStics interface provided by the
 [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
 
+## Pre-requisities and technical tips
+
+Some information about software requirements and operating system
+constraints are given in the SticsOnR package documentation
+[here](https://sticsrpacks.github.io/SticsOnR).
+
 ## Installation
 
 The development version from [GitHub](https://github.com/) can be
