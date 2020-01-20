@@ -73,6 +73,7 @@ Collate:
     'gen_usms_doc.R'
     'gen_usms_obs.R'
     'gen_usms_xml.R'
+    'gen_usms_xml2txt.R'
     'gen_varmod.R'
     'gen_xml_doc.R'
     'get_climate_txt.R'
