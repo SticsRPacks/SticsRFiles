@@ -23,7 +23,7 @@
 #'
 #'
 #' # For a new xml doc
-#' In that case: usms_df must contain all the usms parameters !)
+#' # In that case: usms_df must contain all the usms parameters !)
 #' usms_nb <- dim(usms_df)[1]
 #' new_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = usms_nb)
 #'

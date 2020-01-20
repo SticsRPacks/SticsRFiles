@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_obs.R
 \name{get_obs}
 \alias{get_obs}
-\title{Read STICS observation files (*.obs) and store data into a list}
+\title{Read STICS observation files *.obs and store data into a list}
 \usage{
 get_obs(
   dirpath = getwd(),
@@ -34,12 +34,8 @@ If usms names are not provided they are supposed to have the same name as the ob
 If usms_filename is not provided, existence of usms are checked in the usms.xml file.
 }
 \examples{
+
 \dontrun{
-path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
-Meas <- get_obs(path)
 }
 
-}
-\seealso{
-\code{\link{get_obs_int}}
 }

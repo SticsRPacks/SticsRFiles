@@ -24,7 +24,7 @@
 #'
 #'
 #' # For a new xml doc
-#' In that case: sols_df must contain all the soils parameters !)
+#' # In that case: sols_df must contain all the soils parameters !)
 #' soils_nb <- dim(sols_df)[1]
 #' new_doc <- SticsRFiles:::gen_xml_doc("sols",nodes_nb = soils_nb)
 #'
