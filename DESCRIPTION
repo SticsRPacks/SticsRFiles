@@ -39,7 +39,8 @@ Imports:
     stringr,
     xslt,
     dplyr,
-    readxl
+    readxl,
+    SticsOnR
 Suggests:
     knitr,
     covr,
