@@ -47,16 +47,24 @@ remotes::install_github("SticsRPacks/SticsRFiles@*release")
 
 ## Examples
 
+### Files manipulations
+
   - A description of how to use the functions for manipulating XML input
     files is detailed
     [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html)
+
+  - A description of how to use the functions for manipulating text
+    input files will be available soon.
+
+### Files generation
 
   - A description of mailing functions usefull for generating XML input
     files from usms parameters data stored in Excel files sheets will be
     available soon.
 
-  - A description of how to use the functions for manipulating text
-    input files will be available soon.
+  - A description of functions for generating text input files from XML
+    one of usms parameters is available
+    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html).
 
 ## Code of conduct
 

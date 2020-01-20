@@ -200,7 +200,10 @@ xml_dir <- system.file(file.path("extdata","xml","examples","V9.0"), package = "
 ## List examples files
 
 ```{r}
+
 xml_files <- list.files(path = xml_dir, pattern = ".xml$", full.names = T)
+
+# Listing only the first three files of the entire list 
 
 # head(xml_files, n = 3)
 # For linux 
