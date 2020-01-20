@@ -18,22 +18,27 @@ knitr::opts_chunk$set(
 
 The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model. 
 
-The executable of the STICS model uses text files with standard names and format as inputs that describe one single unit of simulation (USM), e.g. one crop for one year. The XML files are not used directly by the STICS executable, but by the JavaSTICS GUI instead. The JavaSTICS GUI is used to easily build the input text files for the STICS executable according to the choices of the user. The XML files have the benefit to store more information than the text files: they not only store the parameter values but also their description, the maximum and minimum boundary values, all existing formalisms along with the different choices allowed, and more importantly they allow for the management of several USMs in a same folder, and can help make successive USMs.
+The executable of the STICS model uses text files with standard names and format as inputs that describe one single unit of simulation (USM), e.g. one crop for one year.    
+
+XML files are not used directly by the STICS executable, but only by the JavaSTICS GUI instead. 
+
+The JavaSTICS GUI is used to easily build input text files for the STICS executable according to the user's choices. The XML files have the benefit to store more information than the text files: they not only store the parameter values but also their description, the maximum and minimum boundary values, all existing formalisms along with the different choices allowed, and more importantly they allow for the management of several USMs in a same folder, and can help make successive USMs.
 
 Hence, SticsRFiles can be used to manage the XML input files (get and set parameter values, build the text files), the input text files (get and set parameter values) and the outputs from the model execution. 
 
-Advanced functionnalities include also:
+Advanced functionnalities also include:
 
 * The generation of XML input files from templates included in the package, and   
 * The production of XML input files using a mailing process from XML templates and Excel sheets containing multiple simulations contexts 
 
 
-The goal of this article is to help new comers getting started with the basic functionalities of the package, i.e. the main functions to deal with the XML files:
+The goal of this article is to help new comers getting started with the basic functionalities of the package, i.e. the main functions to deal with the XML files.
 
-* `get_param_names_xml()`: get parameter names from xml files;  
+<!-- * `get_param_names_xml()`: get parameter names from xml files;  
 * `get_param_xml()`: get parameter values from xml files;
 * `set_param_xml()`: set parameter values from xml files;
 * `gen_obs()`: generate observation files from a `data.frame`
+-->
 
 ## Example data
 
@@ -49,18 +54,21 @@ example_data= SticsRFiles::download_data()
 By default the example data is downloaded in a temporary folder. 
 
 
+## Functions examples for using XML files
 ## Get parameter names
 
-`get_param_names_xml()`
+`get_param_names_xml()`: get parameter names from xml files
 
 ## Get parameter values
 
-`get_param_xml()`
+`get_param_xml()`: get parameter values from xml files
 
 ## Set parameter values
 
-`set_param_xml()`
+`set_param_xml()`: set parameter values from xml files
 
-## Generate observations
+## Generate observations files
 
-`gen_obs()`
+`gen_obs()`: generate observation files from a `data.frame`
+
+

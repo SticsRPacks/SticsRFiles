@@ -1,0 +1,116 @@
+---
+title: "Generating Stics text files from XML files"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Generating_Stics_text_files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+params:
+  javastics_path: /tmp/JavaSTICS-v141-stics-v9.1
+  workspace_path: /tmp/JavaSTICS-v141-stics-v9.1/example
+  output_path: /tmp/example
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup_old, echo= FALSE, eval = TRUE}
+suppressMessages(library(SticsOnR))
+```
+
+```{r setup, echo= TRUE, eval = TRUE}
+library(SticsRFiles)
+```
+
+
+```{r, echo = FALSE, eval = TRUE}
+javastics_path <- params$javastics_path
+workspace_path <- params$workspace_path
+output_path <- params$output_path
+```
+
+## Introduction
+
+* In this part information are focusing on functionalities related to generation of text input files for the Stics model.
+
+* Generated files will be directly usable for running the model with **SticsOnR** package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR).
+
+
+## Converting JavaStics workspace files
+For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace.
+
+Observation files may also be copied if they have a standard name as an usm name and a `.obs` extension. If not, they must be renamed to do so.
+
+```{r paths_def}
+# Specifying the JavaStics folder
+javastics_path <- "/path/to/JavaSTICS-1.41-stics-9.1"
+
+# Specifying a workspace as a subfolder of JavaStics 
+workspace_path <- "example"
+# or an absolute path to an extrenal folder
+# workspace_path <- "/path/to/javastics/workspace"
+
+# Specifying an output folder path 
+output_path <- "/path/to/output/folder"
+
+```
+
+## Converting files into separated folders (one per usm)
+```{r convert_to_separate}
+# Generating files for all the usms contained in the workspace
+# Into the workspace
+gen_usms_xml2txt(javastics_path, workspace_path)
+# Into a specific output folder
+gen_usms_xml2txt(javastics_path, workspace_path, target_path = output_path)
+
+# Generating files for a subset of usms
+# Into the workspace
+gen_usms_xml2txt(javastics_path, workspace_path, usms_list = c("banana","wheat"))
+# Into a specific folder
+gen_usms_xml2txt(javastics_path, workspace_path, usms_list = c("banana","wheat"), target_path = output_path)
+
+# Getting returned information about files generation
+gen_info <- gen_usms_xml2txt(javastics_path, workspace_path, usms_list = c("banana","wheat"), target_path = output_path)
+
+gen_info
+#> $usms_paths
+#> [1] "banana" "wheat" 
+#> 
+#> $files_path
+#>  [1] "/tmp/JavaSTICS-v141-stics-v9.1/example/climat.txt"     
+#>  [2] "/tmp/JavaSTICS-v141-stics-v9.1/example/param.sol"      
+#>  [3] "/tmp/JavaSTICS-v141-stics-v9.1/example/ficini.txt"     
+#>  [4] "/tmp/JavaSTICS-v141-stics-v9.1/example/ficplt1.txt"    
+#>  [5] "/tmp/JavaSTICS-v141-stics-v9.1/example/fictec1.txt"    
+#>  [6] "/tmp/JavaSTICS-v141-stics-v9.1/example/station.txt"    
+#>  [7] "/tmp/JavaSTICS-v141-stics-v9.1/example/new_travail.usm"
+#>  [8] "/tmp/JavaSTICS-v141-stics-v9.1/example/tempopar.sti"   
+#>  [9] "/tmp/JavaSTICS-v141-stics-v9.1/example/tempoparv6.sti" 
+#> [10] "/tmp/JavaSTICS-v141-stics-v9.1/example/ficplt2.txt"    
+#> [11] "/tmp/JavaSTICS-v141-stics-v9.1/example/fictec2.txt"    
+#> 
+#> $copy_status
+#> [1] TRUE TRUE
+#> 
+#> $obs_copy_status
+#> [1] TRUE TRUE
+```
+
+## Converting files into one folder (overwriting case) 
+```{r convert_to_one}
+# Generating files directly in the workspace or a specific folder (no usm sub-folder) 
+# In this case the model files are overwritten at each gen_usms_xml2txt call !
+# In the workspace
+gen_usms_xml2txt(javastics_path, workspace_path, usms_list = "banana", dir_per_usm_flag = FALSE)
+
+# In a specific folder
+gen_usms_xml2txt(javastics_path, workspace_path, usms_list = "banana", 
+                 target_path = output_path, dir_per_usm_flag = FALSE)
+
+
+```
