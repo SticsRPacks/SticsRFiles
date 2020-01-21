@@ -33,14 +33,14 @@ Getting existing xml files path list per usm from an usms.xml file
 
 \dontrun{
 
-get_usms_files(workspace_path = "/path/to/javastics",
-javastics_path = "path_to_javastics")
+get_usms_files(workspace_path = "/path/to/workspace",
+javastics_path = "/path/to/javastics")
 
-get_usms_files(workspace_path = "/path/to/javastics",
-javastics_path = "path_to_javastics", usm_list = c("usm1", "usm3"))
+get_usms_files(workspace_path = "/path/to/workspace",
+javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3"))
 
-get_usms_files(workspace_path = "/path/to/javastics",
-file_type = "c("finit", ""ftec" ))
+get_usms_files(workspace_path = "/path/to/workspace",
+file_type = c("finit", "ftec" ))
 
 
 }
