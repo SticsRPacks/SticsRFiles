@@ -94,6 +94,7 @@ Collate:
     'get_param_type.R'
     'get_param_value.R'
     'get_param_xml.R'
+    'get_params_dict.R'
     'get_params_from_doc.R'
     'get_params_from_doc_attr.R'
     'get_params_from_doc_node.R'
