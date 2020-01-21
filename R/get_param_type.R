@@ -65,6 +65,7 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
 
   # treatment of parameters with no dependencies
   if (base::is.null(parent_name) && base::is.null(parent_sel_attr)) { #&& base::is.null(id)) {
+    xpath_nodename_childs <- paste0("//",param_name,"//*")
     xpath_nodename <- paste0("//",param_name)
     xpath_attrname <- paste0("//*","[@",param_name,"]")
     xpath_param <- paste0("//param[@nom=\"",param_name,"\"]")
@@ -83,6 +84,13 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
       attr_values <- getAttrsValues(xml_doc,xpath_nodename,"dominance")
       if ( ! base::is.null(attr_values) ) {
         return(list(type="attr", xpath=xpath_nodename, length=1, attr="dominance"))
+      }
+
+      # new case for getting values of the node childs
+      values <- getValues(xml_doc, xpath_nodename_childs)
+      if ( ! base::is.null(values) ) {
+        return(list(type="nodename_childs", xpath=xpath_nodename_childs,
+                    length=length(values)))
       }
 
       # or getNodeS ?
@@ -274,7 +282,8 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
   new_parent_name <- parent_name
   # with possible select with @dominance attribute value
   if ( !base::is.null(parent_sel_attr) ) {
-    new_parent_name <- paste0(parent_name,"[@dominance=\"",parent_sel_attr,"\"]")
+    new_parent_name <- paste0(parent_name,"[@dominance=\"",
+                              as.character(parent_sel_attr),"\"]")
   }
   # param node name is parent of target nodes
   xpath_node_node <- paste0("//",new_parent_name,"//",param_name,"/horizon")
@@ -289,7 +298,8 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
   new_parent_name <- parent_name
   # with possible select with @dominance attribute value
   if ( !base::is.null(parent_sel_attr) ) {
-    new_parent_name <- paste0(parent_name,"[@dominance=\"",parent_sel_attr,"\"]")
+    new_parent_name <- paste0(parent_name,"[@dominance=\"",
+                              as.character(parent_sel_attr),"\"]")
   }
 
   xpath_node_node <- paste0("//",new_parent_name,"//",param_name)

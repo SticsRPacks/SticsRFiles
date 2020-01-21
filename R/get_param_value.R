@@ -73,15 +73,15 @@ get_param_value <- function(xml_doc,
 
   param_types=get_param_type()
 
-  if (is.numeric(parent_name)) {
-    ids <- parent_name
-    parent_name <- NULL
-  }
-
-  if (is.numeric(parent_sel_attr)) {
-    ids <- parent_sel_attr
-    parent_sel_attr <- NULL
-  }
+  # if (is.numeric(parent_name)) {
+  #   ids <- parent_name
+  #   parent_name <- NULL
+  # }
+  #
+  # if (is.numeric(parent_sel_attr)) {
+  #   ids <- parent_sel_attr
+  #   parent_sel_attr <- NULL
+  # }
 
 
   param_type <- get_param_type(xml_doc,
@@ -156,7 +156,11 @@ get_param_value <- function(xml_doc,
          },
          choix_attr= {
            value=getAttrsValues(xml_doc,xpath,param_name,ids)
+         },
+         nodename_childs= {
+           value=getValues(xml_doc,xpath,ids)
          }
+
 
          # TODO : add other cases for tables in ini, soil, and other specific parameters
   )
