@@ -70,6 +70,15 @@ get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
     attr_name <- "nom"
   }
 
+  if (node_name == "tv") {
+    attr_name = "nom"
+  }
+
+  if (node_name == "optionv") {
+    attr_name = "nom"
+  }
+
+
   # selecting param names : full for all values
   tab_names <- c("ta_entete", "tableau_entete")
   if (full_list) {
