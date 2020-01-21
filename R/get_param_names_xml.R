@@ -4,9 +4,14 @@
 #'
 #' @param xml_file an xml file path or a vector of paths
 #'
-#' @param mult extra argument for detecting a single file use
+#' @param output Output data format either "list" or "data.frame" (default)
 #'
-#' @return A list of parameters names list
+#' @param combine Logical, usefull only for data.frame.
+#' TRUE, to transform a data.frame list to a unique data.frame,
+#' FALSE otherwise.
+#'
+#' @return A list of parameters names data.frames or list, or a unique data.frame
+#' for multiple files.
 #'
 #' @examples
 #' \dontrun{
@@ -21,22 +26,47 @@
 #'
 #' @export
 #'
-get_param_names_xml <- function(xml_file, mult=FALSE) {
+#' @importFrom dplyr bind_rows
+#'
+#'
+get_param_names_xml <- function(xml_file, output="data.frame", combine = TRUE) {
 
 
+  output_formats <- c("list", "data.frame")
+
+  # Switch for transformations to data.frame format
+  df_out <- output == "data.frame"
+  df_comb <- df_out & combine
+
+  # Recusring when multiple files in xml_file
   if ( length(xml_file) > 1 ) {
 
     param_names <- lapply(xml_file,
-                           function(x) get_param_names_xml(x, mult=TRUE))
+                          function(x) get_param_names_xml(xml_file = x,
+                                                          output = output,
+                                                          combine = combine))
+    # To a named list
+    param_names <- unlist(param_names, recursive = FALSE)
+
+    # Only for data.frames list
+    if (df_comb) param_names <- dplyr::bind_rows(param_names)
 
     return(param_names)
   }
 
-  xml_doc <- xmldocument(xml_file)
+  # Getting param names for one xml document
+  param_names <- list(get_params_names(xml_object = xmldocument(xml_file)))
 
-  param_names <- get_params_names(xml_doc)
+  # Transforming list to data.frame (default behaviour)
+  if (df_out) {
 
-  if (! mult ) param_names <- list(param_names)
+    param_names <- list(data.frame(file = base::basename(xml_file),
+                                   name=unlist(param_names),
+                                   stringsAsFactors = FALSE))
+  }
+
+  # To a named list
+  names(param_names) <- base::basename(xml_file)
 
   return(param_names)
 

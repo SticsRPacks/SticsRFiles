@@ -4,15 +4,20 @@
 \alias{get_param_names_xml}
 \title{Getting parameters names from xml files}
 \usage{
-get_param_names_xml(xml_file, mult = FALSE)
+get_param_names_xml(xml_file, output = "data.frame", combine = TRUE)
 }
 \arguments{
 \item{xml_file}{an xml file path or a vector of paths}
 
-\item{mult}{extra argument for detecting a single file use}
+\item{output}{Output data format either "list" or "data.frame" (default)}
+
+\item{combine}{Logical, usefull only for data.frame.
+TRUE, to transform a data.frame list to a unique data.frame,
+FALSE otherwise.}
 }
 \value{
-A list of parameters names list
+A list of parameters names data.frames or list, or a unique data.frame
+for multiple files.
 }
 \description{
 Extracting parameters names for an xml files or a vector of files.

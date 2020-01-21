@@ -258,17 +258,41 @@ get_param_names_xml(sols)
 
 
 ## From a files list
+### Getting a list of data.frames
 ```{r}
 par_gen <- file.path(xml_loc_dir,"param_gen.xml")
 
 files_list <- c(sols, par_gen)
 
-param_names <- get_param_names_xml(files_list)
+param_names <- get_param_names_xml(xml_file = files_list, combine = FALSE)
+
+
+# Displaying only some head lines of the data.frame elements
+head(param_names$sols.xml, n = 10)
+
+head(param_names$param_gen.xml, n = 10)
+
+
+```
+### Getting a unique of data.frame (with file names)
+```{r}
+
+param_names <- get_param_names_xml(xml_file = files_list)
+
+# Displaying only some head lines of the data.frame
+head(param_names, n = 10)
+
+
+```
+
+### Getting a list of parameters names vectors
+```{r}
+param_names <- get_param_names_xml(xml_file = files_list, output = "list")
 
 # Displaying only some head lines of the list elements
-head(param_names[[1]], n = 10)
+head(param_names$sols.xml, n = 10)
 
-head(param_names[[2]], n = 10)
+head(param_names$param_gen.xml, n = 10)
 
 
 ```
