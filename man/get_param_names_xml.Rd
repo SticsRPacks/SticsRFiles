@@ -4,7 +4,12 @@
 \alias{get_param_names_xml}
 \title{Getting parameters names from xml files}
 \usage{
-get_param_names_xml(xml_file, output = "data.frame", combine = TRUE)
+get_param_names_xml(
+  xml_file,
+  bounds = TRUE,
+  output = "data.frame",
+  combine = TRUE
+)
 }
 \arguments{
 \item{xml_file}{an xml file path or a vector of paths}

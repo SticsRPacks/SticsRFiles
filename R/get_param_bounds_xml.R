@@ -6,6 +6,7 @@
 #' @param xml_file an xml file path or a vector of paths
 #' @param param_name a parameter name of a vector of parameters names
 #' @param bounds_name bounds name "min" or "max" (optional, default value c("min","max ))
+#' @param output Output data format either "list" or "data.frame" (default)
 #'
 #' @return A list of parameters bounds values
 #'
@@ -25,21 +26,25 @@
 #'
 #' @export
 #'
-get_param_bounds_xml <- function(xml_file, param_name, bounds_name = NULL) {
+get_param_bounds_xml <- function(xml_file,
+                                 param_name,
+                                 bounds_name = NULL,
+                                 output = "data.frame") {
 
 
   if (length(xml_file) > 1 ) {
 
     param_bounds <- lapply(xml_file,
                            function(x) get_param_bounds_xml(x,
-                                                              param_name,
-                                                              bounds_name))
+                                                            param_name,
+                                                            bounds_name,
+                                                            output))
     return(param_bounds)
   }
 
   xml_doc <- xmldocument(xml_file)
 
-  param_bounds <- get_param_bounds(xml_doc, param_name, bounds_name)
+  param_bounds <- get_param_bounds(xml_doc, param_name, bounds_name, output)
 
   return(param_bounds)
 
