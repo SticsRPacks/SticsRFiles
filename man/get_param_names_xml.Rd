@@ -6,6 +6,7 @@
 \usage{
 get_param_names_xml(
   xml_file,
+  par_name = NULL,
   bounds = TRUE,
   output = "data.frame",
   combine = TRUE
@@ -19,6 +20,8 @@ get_param_names_xml(
 \item{combine}{Logical, usefull only for data.frame.
 TRUE, to transform a data.frame list to a unique data.frame,
 FALSE otherwise.}
+
+\item{param_name}{Parameter name or name part, or a vector of}
 }
 \value{
 A list of parameters names data.frames or list, or a unique data.frame
@@ -36,6 +39,9 @@ xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
 param_names <- get_param_names_xml(xml_file)
 
 param_names <- get_param_names_xml(xml_files_list)
+
+param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"))
+
 }
 
 }
