@@ -20,7 +20,7 @@ Extracting options choices values from an xml file data
 \examples{
 \dontrun{
 
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/baresoil_plt.xml"))
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_plt.xml"))
 
 # For getting all options choices
 SticsRFiles:::get_options_choices(xml_path)

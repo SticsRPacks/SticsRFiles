@@ -22,7 +22,7 @@ Get the "formalisme" node "@nom" attribute value of a
 \examples{
 \dontrun{
 
-xml_sta <- system.file(paste0("extdata/xml/examples/V9.0/file_sta.xml"),
+xml_sta <- system.file(paste0("extdata/xml/examples/V9.1/file_sta.xml"),
 package = "SticsRFiles")
 
 sta_doc <- SticsRFiles:::xmldocument(xml_sta)

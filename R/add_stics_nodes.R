@@ -3,12 +3,12 @@
 #' @param xml_doc XML document
 #' @param formalism_name Name of the formalism (optional)
 #' @param nodes_nb number of operations to add
-#' @param stics_version The version of STICS (eg "V9.0")
+#' @param stics_version The version of STICS (eg "V9.1")
 #'
 #' @examples
 #' \dontrun{
 #'
-#' tec_xml <- system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+#' tec_xml <- system.file("extdata/xml/examples/V9.1/file_tec.xml", package = "SticsRFiles")
 #' tec_doc <- SticsRFiles:::xmldocument(tec_xml)
 #'
 #' # Adding one irrigation operation

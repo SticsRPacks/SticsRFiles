@@ -6,6 +6,9 @@
 #'
 #' @param name Parameter name or name part, or a vector of
 #'
+#' @param bounds A logical value for getting parameter(s)
+#' bounds (TRUE) or not (FALSE)
+#'
 #' @param output Output data format either "list" or "data.frame" (default)
 #'
 #' @param combine Logical, usefull only for data.frame.
@@ -53,11 +56,15 @@ get_param_names_xml <- function(xml_file,
     param_names <- lapply(xml_file,
                           function(x) get_param_names_xml(xml_file = x,
                                                           name = name,
+                                                          bounds = bounds,
                                                           output = output,
                                                           combine = combine))
 
-    # Empty param names list
+    # Empty param_names list
     if (length(param_names) == 0 ) return(NULL)
+
+    # Filtering NULL elements
+    param_names <- param_names[! unlist(lapply(param_names, base::is.null))]
 
     # To a named list
     if (!df_out) param_names <- unlist(param_names, recursive = FALSE)
@@ -71,7 +78,8 @@ get_param_names_xml <- function(xml_file,
   }
 
   # Getting param names for one xml document
-  param_names <- get_param_names(xml_object = xmldocument(xml_file))
+  xml_doc <- xmldocument(xml_file)
+  param_names <- get_param_names(xml_object = xml_doc)
 
 
   # Search based on names or a substring of parameters names
@@ -93,9 +101,9 @@ get_param_names_xml <- function(xml_file,
   # Transforming list to data.frame (default behaviour)
   if (df_out) {
 
-    param_names <- list(data.frame(file = base::basename(xml_file),
-                                   name = unlist(param_names),
-                                   stringsAsFactors = FALSE))
+    param_names <- data.frame(name = unlist(param_names),
+                              file = base::basename(xml_file),
+                              stringsAsFactors = FALSE)
 
     if (bounds) {
       param_names <- merge(param_names, param_bounds)

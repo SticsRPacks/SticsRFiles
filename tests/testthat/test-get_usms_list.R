@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_usms= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/usms.xml"))
+xml_usms= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/usms.xml"))
 xml_usms_list <- c(xml_usms, xml_usms)
 usms_names <- get_usms_list(xml_usms)
 usms_names_list <- get_usms_list(xml_usms_list)

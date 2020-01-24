@@ -9,7 +9,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path <- system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' xml_path <- system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
 #' node_set <- SticsRFiles:::getNodeS(sols_doc, "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
 #' attr_list <- sapply(node_set,function(x) xmlAttrs(x))

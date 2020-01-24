@@ -20,7 +20,7 @@ A vector of logical values
 Test if a parameter exists in an XML file
 }
 \examples{
-xml_sols <- system.file(paste0("extdata/xml/examples/V9.0/sols.xml"),
+xml_sols <- system.file(paste0("extdata/xml/examples/V9.1/sols.xml"),
 package = "SticsRFiles")
 
 xml_doc <- SticsRFiles:::xmldocument(xml_sols)

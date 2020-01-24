@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+#' xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
 #' get_param_xml(xml_path, "argi")
 #' get_param_xml(xml_path, c("argi", "norg"))
 #'

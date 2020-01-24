@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/file_tec.xml"))
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_tec.xml"))
 context("Getting tec param values")
 
 test_that("single value from single node" , {

@@ -10,7 +10,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path = system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+#' xml_path = system.file("extdata/xml/examples/V9.1/file_tec.xml", package = "SticsRFiles")
 #' tec_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
 #' # removing all the parent nodes the parameter belongs to

@@ -35,7 +35,7 @@ If usms_filename is not provided, existence of usms are checked in the usms.xml 
 }
 \examples{
 \dontrun{
-path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+path <- system.file(file.path("extdata","obs","V9.1"), package = "SticsRFiles")
 Meas= get_obs(path)
 }
 

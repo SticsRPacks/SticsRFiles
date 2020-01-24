@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_plt <- system.file(paste0("extdata/xml/examples/V9.0/baresoil_plt.xml"),
+#' xml_plt <- system.file(paste0("extdata/xml/examples/V9.1/file_plt.xml"),
 #' package = "SticsRFiles")
 #' xsl_file <- "/path/to/javastics/dir/bin/resources/xml/stylesheet/xml2txt.xsl"
 #'

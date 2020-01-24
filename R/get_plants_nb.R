@@ -10,7 +10,7 @@
 #' @examples
 #' \dontrun{
 
-#' xml_usms <- system.file(paste0("extdata/xml/examples/V9.0/usms.xml"),
+#' xml_usms <- system.file(paste0("extdata/xml/examples/V9.1/usms.xml"),
 #' package = "SticsRFiles")
 #' get_plants_nb(xml_usms)
 #' get_plants_nb(xml_usms,"wheat")

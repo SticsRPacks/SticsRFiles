@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_usms <- system.file(paste0("extdata/xml/examples/V9.0/usms.xml"),
+#' xml_usms <- system.file(paste0("extdata/xml/examples/V9.1/usms.xml"),
 #' package = "SticsRFiles")
 #'
 #' usms_doc <- SticsRFiles:::xmldocument(xml_usms)

@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/sols.xml"))
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/sols.xml"))
 context("Getting grounds param values")
 
 res = c(30.2,21.0,27.0,39.0,1.0, 12.2, 70.0, 22.0,  9.9, 10.2, 10.2, 17.0, 23.1, 22.0, 27.0, 30.7,

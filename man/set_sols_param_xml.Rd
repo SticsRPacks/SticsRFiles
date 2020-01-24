@@ -19,7 +19,7 @@ Setting a sol param value(s) in a sols xmlDocument
 \examples{
 
 \dontrun{
-xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
+xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
 
 xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx"))

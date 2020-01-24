@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/usms.xml"))
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/usms.xml"))
 context("Getting usms param values")
 
 test_that("getting all param from an usm", {

@@ -7,7 +7,7 @@
 get_param_bounds(
   xml_doc,
   param_name,
-  bounds_names = NULL,
+  bounds_name = NULL,
   output = "data.frame"
 )
 }
@@ -16,9 +16,9 @@ get_param_bounds(
 
 \item{param_name}{a parameter name of a vector of parameters names}
 
-\item{output}{Output data format either "list" or "data.frame" (default)}
-
 \item{bounds_name}{bound(s) name(s) "min" or "max" (optional, default value c("min","max ))}
+
+\item{output}{Output data format either "list" or "data.frame" (default)}
 }
 \value{
 A data.frame with the name of the parameter and min, max values or
@@ -31,7 +31,7 @@ or a vector of parameters from an xmlDocument class object.
 }
 \examples{
 \dontrun{
-xml_sta <- system.file(paste0("extdata/xml/examples/V9.0/file_sta.xml"),
+xml_sta <- system.file(paste0("extdata/xml/examples/V9.1/file_sta.xml"),
 package = "SticsRFiles")
 
 sta_doc <- SticsRFiles:::xmldocument(xml_sta)

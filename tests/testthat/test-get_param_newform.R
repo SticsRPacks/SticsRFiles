@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.0/param_newform.xml"))
+xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/param_newform.xml"))
 context("Getting newform param values")
 
 test_that("get option parameters from option node", {

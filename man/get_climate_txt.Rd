@@ -27,7 +27,7 @@ code{Date}.
 }
 \examples{
 library(SticsRFiles)
-path <- system.file("extdata/txt/V9.0", package = "SticsRFiles")
+path <- system.file("extdata/txt/V9.1", package = "SticsRFiles")
 Meteo <- get_climate_txt(path)
 
 }

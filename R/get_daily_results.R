@@ -12,7 +12,7 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
+#' path <- system.file(file.path("extdata","sti","V9.1"), package = "SticsRFiles")
 #' get_daily_results(path,"banana")
 #'
 #' @export

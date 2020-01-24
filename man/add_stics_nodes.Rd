@@ -18,7 +18,7 @@ add_stics_nodes(
 
 \item{nodes_nb}{number of operations to add}
 
-\item{stics_version}{The version of STICS (eg "V9.0")}
+\item{stics_version}{The version of STICS (eg "V9.1")}
 }
 \description{
 Add node to a Stics XML document
@@ -26,7 +26,7 @@ Add node to a Stics XML document
 \examples{
 \dontrun{
 
-tec_xml <- system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+tec_xml <- system.file("extdata/xml/examples/V9.1/file_tec.xml", package = "SticsRFiles")
 tec_doc <- SticsRFiles:::xmldocument(tec_xml)
 
 # Adding one irrigation operation

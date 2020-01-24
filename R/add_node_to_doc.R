@@ -9,7 +9,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' tec_xml <- system.file("extdata/xml/examples/V9.0/file_tec.xml", package = "SticsRFiles")
+#' tec_xml <- system.file("extdata/xml/examples/V9.1/file_tec.xml", package = "SticsRFiles")
 #' tec_doc <- SticsRFiles:::xmldocument(tec_xml)
 #'
 #' # Getting a new irrigation operation node

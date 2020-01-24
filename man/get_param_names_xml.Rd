@@ -17,6 +17,9 @@ get_param_names_xml(
 
 \item{name}{Parameter name or name part, or a vector of}
 
+\item{bounds}{A logical value for getting parameter(s)
+bounds (TRUE) or not (FALSE)}
+
 \item{output}{Output data format either "list" or "data.frame" (default)}
 
 \item{combine}{Logical, usefull only for data.frame.

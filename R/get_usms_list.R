@@ -6,7 +6,7 @@
 #' @return A list with usms names
 #'
 #' @examples
-#' path = system.file("extdata/xml/examples/V9.0", package = "SticsRFiles")
+#' path = system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
 #' usms_list <- get_usms_list(path)[[1]]
 #'
 #'

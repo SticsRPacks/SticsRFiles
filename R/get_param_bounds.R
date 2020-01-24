@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_sta <- system.file(paste0("extdata/xml/examples/V9.0/file_sta.xml"),
+#' xml_sta <- system.file(paste0("extdata/xml/examples/V9.1/file_sta.xml"),
 #' package = "SticsRFiles")
 #'
 #' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
@@ -31,7 +31,7 @@
 #'
 get_param_bounds <- function(xml_doc,
                              param_name,
-                             bounds_names = NULL,
+                             bounds_name = NULL,
                              output = "data.frame") {
 
 
@@ -41,11 +41,11 @@ get_param_bounds <- function(xml_doc,
   df_out <- output == "data.frame"
 
   # Just in case ...get unique bounds names
-  bounds_names <- unique(bounds_names)
+  bounds_name <- unique(bounds_name)
 
-  if (base::is.null(bounds_names)) {
-    bounds_names <- def_names
-  } else if ( ! all(is.element(bounds_names,def_names )) ) {
+  if (base::is.null(bounds_name)) {
+    bounds_name <- def_names
+  } else if ( ! all(is.element(bounds_name,def_names )) ) {
     stop("Names are not consitent with file bound names")
   }
 
@@ -54,7 +54,7 @@ get_param_bounds <- function(xml_doc,
     bounds_list <- lapply(as.list(param_name),
                           function(x) get_param_bounds(xml_doc = xml_doc,
                                                        x,
-                                                       bounds_names = bounds_names,
+                                                       bounds_name = bounds_name,
                                                        output = output))
 
 
@@ -80,12 +80,12 @@ get_param_bounds <- function(xml_doc,
     xpath <- paste0(xpath,"/choix")
     tmp_values <- as.numeric(getAttrsValues(xml_doc, xpath, "code"))
     bounds_values <- c(min(tmp_values),
-                       max(tmp_values))[def_names == bounds_names]
+                       max(tmp_values))[def_names == bounds_name]
 
   } else {
     # for all other parameters ?
     # Adding unique for repeated parameters : for exmaple in sols.xml
-    bounds_values <- lapply(bounds_names,
+    bounds_values <- lapply(bounds_name,
                             function(x) as.numeric(getAttrsValues(xml_doc, xpath, x)))
   }
 
@@ -93,7 +93,7 @@ get_param_bounds <- function(xml_doc,
   #print(xpath)
 
   # Fixing bounds values
-  bounds_values <- list(fix_bounds(bounds_values, bounds_names))
+  bounds_values <- list(fix_bounds(bounds_values, bounds_name))
   names(bounds_values) <- param_name
 
   # For returning a data.frame
@@ -109,11 +109,11 @@ get_param_bounds <- function(xml_doc,
 
 }
 
-fix_bounds <- function(values, bounds_names) {
+fix_bounds <- function(values, bounds_name) {
 
-  values <- fix_dup_bounds(values, bounds_names)
+  values <- fix_dup_bounds(values, bounds_name)
 
-  values <- fix_missing_bounds(values, bounds_names)
+  values <- fix_missing_bounds(values, bounds_name)
 
   #if (all(base::is.na(values))) return(values)
 
@@ -128,7 +128,7 @@ fix_bounds <- function(values, bounds_names) {
 #' naming bounds values vector with bounds names
 #'
 #' @param values Vector of bounds values (may be NULL or empty value)
-#' @param bounds_names Character vector of bounds names (in "min", "max"
+#' @param bounds_name Character vector of bounds names (in "min", "max"
 #' one of them or both)
 #'
 #' @return A named vector for bound(s)
@@ -137,7 +137,7 @@ fix_bounds <- function(values, bounds_names) {
 #'
 #'
 #'
-fix_missing_bounds <- function(values, bounds_names) {
+fix_missing_bounds <- function(values, bounds_name) {
 
   # Fixing missing values
   val <- unlist(values)
@@ -145,17 +145,17 @@ fix_missing_bounds <- function(values, bounds_names) {
   if ( ! base::is.null(val) && length(val) != 0 ) {
     values <- as.numeric(val)
   } else {
-    values <- c(NA, NA)[1:length(bounds_names)]
+    values <- c(NA, NA)[1:length(bounds_name)]
   }
 
-  names(values) <- bounds_names
+  names(values) <- bounds_name
 
   return(values)
 
 }
 
 
-fix_dup_bounds <- function(values, bounds_names) {
+fix_dup_bounds <- function(values, bounds_name) {
 
 
   # Fixing duplicates
@@ -165,20 +165,20 @@ fix_dup_bounds <- function(values, bounds_names) {
   if (! any(duplicates)) return(values)
 
   for (i in 1:length(duplicates)){
-    if (duplicates[i] && bounds_names[i] == "min") {
+    if (duplicates[i] && bounds_name[i] == "min") {
       values[[i]] <- min(values[[i]])
     }
 
-    if (duplicates[i] && bounds_names[i] == "max") {
+    if (duplicates[i] && bounds_name[i] == "max") {
       values[[i]] <- max(values[[i]])
     }
   }
 
   if (any(duplicates)) {
     warning(paste("Found duplicate values in bound(s) \n",
-                  paste(bounds_names[duplicates], collapse = ", "),
+                  paste(bounds_name[duplicates], collapse = ", "),
                   "\n","They have been replaced with min or max values !\n",
-                  paste(sprintf("%s: %s",bounds_names[duplicates],
+                  paste(sprintf("%s: %s",bounds_name[duplicates],
                         as.character(values[duplicates])), collapse = "\n")))
   }
 
