@@ -4,7 +4,12 @@
 \alias{get_param_bounds_xml}
 \title{Getting parameters bounds from xml files}
 \usage{
-get_param_bounds_xml(xml_file, param_name, bounds_name = NULL)
+get_param_bounds_xml(
+  xml_file,
+  param_name,
+  bounds_name = NULL,
+  output = "data.frame"
+)
 }
 \arguments{
 \item{xml_file}{an xml file path or a vector of paths}
@@ -12,6 +17,8 @@ get_param_bounds_xml(xml_file, param_name, bounds_name = NULL)
 \item{param_name}{a parameter name of a vector of parameters names}
 
 \item{bounds_name}{bounds name "min" or "max" (optional, default value c("min","max ))}
+
+\item{output}{Output data format either "list" or "data.frame" (default)}
 }
 \value{
 A list of parameters bounds values

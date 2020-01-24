@@ -96,7 +96,8 @@
         </option>
     </formalisme>
     <formalisme nom="Soil C and N processes and fertiliser losses">
-    <param format="real" max="0.5" min="0.05" nom="FTEMh">0.12000</param>
+        <param format="real" max="0.5" min="0.05" nom="tmin_mineralisation">0.0</param>	
+        <param format="real" max="0.5" min="0.05" nom="FTEMh">0.12000</param>
         <param format="real" max="50.0" min="10.0" nom="FTEMha">25.00000</param>
         <param format="real" max="20.0" min="-10.0" nom="TREFh">15.00000</param>
         <param format="real" max="0.5" min="0.05" nom="FTEMr">0.10300</param>

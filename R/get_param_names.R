@@ -10,12 +10,12 @@
 #' \dontrun{
 #' xml_path = system.file("extdata/xml/examples/V9.0/sols.xml", package = "SticsRFiles")
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
-#' SticsRFiles:::get_params_names(sols_doc)
+#' SticsRFiles:::get_param_names(sols_doc)
 #' }
 #'
 #' @keywords internal
 #'
-get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
+get_param_names <- function(xml_object, param_list = c(), full_list = FALSE) {
 
   # TODO
   # - for all: add an input parameter for specifying which formalism to use
@@ -126,7 +126,7 @@ get_params_names <- function(xml_object, param_list = c(), full_list = FALSE) {
       #print(class(childs[[n]]))
       next
     }
-    param_list <- get_params_names(childs[[n]], param_list, full_list = full_list)
+    param_list <- get_param_names(childs[[n]], param_list, full_list = full_list)
   }
 
   names(param_list) <- NULL

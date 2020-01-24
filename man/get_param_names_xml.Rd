@@ -4,10 +4,18 @@
 \alias{get_param_names_xml}
 \title{Getting parameters names from xml files}
 \usage{
-get_param_names_xml(xml_file, output = "data.frame", combine = TRUE)
+get_param_names_xml(
+  xml_file,
+  name = NULL,
+  bounds = TRUE,
+  output = "data.frame",
+  combine = TRUE
+)
 }
 \arguments{
 \item{xml_file}{an xml file path or a vector of paths}
+
+\item{name}{Parameter name or name part, or a vector of}
 
 \item{output}{Output data format either "list" or "data.frame" (default)}
 
@@ -31,6 +39,9 @@ xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
 param_names <- get_param_names_xml(xml_file)
 
 param_names <- get_param_names_xml(xml_files_list)
+
+param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"))
+
 }
 
 }
