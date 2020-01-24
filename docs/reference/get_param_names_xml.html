@@ -95,6 +95,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -129,7 +138,13 @@
     <p>Extracting parameters names for an xml files or a vector of files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_param_names_xml</span>(<span class='no'>xml_file</span>, <span class='kw'>mult</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_param_names_xml</span>(
+  <span class='no'>xml_file</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>,
+  <span class='kw'>combine</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,14 +154,29 @@
       <td><p>an xml file path or a vector of paths</p></td>
     </tr>
     <tr>
-      <th>mult</th>
-      <td><p>extra argument for detecting a single file use</p></td>
+      <th>name</th>
+      <td><p>Parameter name or name part, or a vector of</p></td>
+    </tr>
+    <tr>
+      <th>bounds</th>
+      <td><p>Boolean. Are the parameter bounds to be returned ?</p></td>
+    </tr>
+    <tr>
+      <th>output</th>
+      <td><p>Output data format either "list" or "data.frame" (default)</p></td>
+    </tr>
+    <tr>
+      <th>combine</th>
+      <td><p>Logical, usefull only for data.frame.
+TRUE, to transform a data.frame list to a unique data.frame,
+FALSE otherwise.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of parameters names list</p>
+    <p>A list of parameters names data.frames or list, or a unique data.frame
+for multiple files.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -157,6 +187,9 @@
 <span class='no'>param_names</span> <span class='kw'>&lt;-</span> <span class='fu'>get_param_names_xml</span>(<span class='no'>xml_file</span>)
 
 <span class='no'>param_names</span> <span class='kw'>&lt;-</span> <span class='fu'>get_param_names_xml</span>(<span class='no'>xml_files_list</span>)
+
+<span class='no'>param_names</span> <span class='kw'>&lt;-</span> <span class='fu'>get_param_names_xml</span>(<span class='no'>xml_files_list</span>, <span class='kw'>param_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"al"</span>, <span class='st'>"albedo"</span>))
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -96,6 +96,15 @@ or a vector of parameters from a file or a vector of xml files." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -131,7 +140,12 @@ or a vector of parameters from a file or a vector of xml files." />
 or a vector of parameters from a file or a vector of xml files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_param_bounds_xml</span>(<span class='no'>xml_file</span>, <span class='no'>param_name</span>, <span class='kw'>bounds_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_param_bounds_xml</span>(
+  <span class='no'>xml_file</span>,
+  <span class='no'>param_name</span>,
+  <span class='kw'>bounds_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +161,10 @@ or a vector of parameters from a file or a vector of xml files.</p>
     <tr>
       <th>bounds_name</th>
       <td><p>bounds name "min" or "max" (optional, default value c("min","max ))</p></td>
+    </tr>
+    <tr>
+      <th>output</th>
+      <td><p>Output data format either "list" or "data.frame" (default)</p></td>
     </tr>
     </table>
 

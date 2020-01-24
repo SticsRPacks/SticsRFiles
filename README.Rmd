@@ -26,9 +26,9 @@ knitr::opts_chunk$set(
 
 The goal of SticsRFiles is to perform manipulations of the Stics model files either on XML files (used by the JavaStics GUI) or on text files used by the model fortran executable.
 
-The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files.
+The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the [Get started page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
-Advanced functionnalities are dedicated to produce XML parameters files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
+Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
 
 ## Prerequisites and technical tips
 
@@ -54,7 +54,7 @@ remotes::install_github("SticsRPacks/SticsRFiles@*release")
 * A description of how to use the functions for manipulating XML input files is detailed 
 [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html)
 
-* A description of how to use the functions for manipulating text input files will be available soon.
+* A description of how to use the functions for manipulating text input files is available [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files).
 
 ### Files generation
 * A description of mailing functions usefull for generating XML input files from usms parameters data stored in Excel files sheets will be available soon.
@@ -64,6 +64,8 @@ remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ## Code of conduct
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+The package is under intensive development, so you can fill an issue or request us a feature [here](https://github.com/SticsRPacks/SticsRFiles/issues) at any time. 
 
 ## Authors and acknowledgments
 

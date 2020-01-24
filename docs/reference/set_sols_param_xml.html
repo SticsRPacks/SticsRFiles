@@ -95,6 +95,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -150,7 +159,31 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.0/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
+<span class='no'>sols_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'>xmldocument</span>(<span class='no'>xml_path</span>)
+
+<span class='no'>xl_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span><span class='kw'>=</span><span class='st'>"SticsRFiles"</span>,<span class='st'>"extdata/xl/inputs_stics_example.xlsx"</span>))
+<span class='no'>sols_df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_excel</span>(<span class='no'>xl_path</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Soils"</span>)
+
+<span class='co'># For updating an existing xml doc (using existing soils names)</span>
+<span class='co'># Creating a fake existing_doc</span>
+<span class='no'>existing_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/gen_xml_doc.html'>gen_xml_doc</a></span>(<span class='st'>"sols"</span>,<span class='kw'>nodes_nb</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/set_param_value.html'>set_param_value</a></span>(<span class='no'>existing_doc</span>, <span class='kw'>param_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>,
+<span class='kw'>param_value</span> <span class='kw'>=</span> <span class='no'>sols_df</span>$<span class='no'>Soil_name</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>,<span class='fl'>1</span>,<span class='fl'>5</span>)])
+
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/set_sols_param_xml.html'>set_sols_param_xml</a></span>(<span class='no'>existing_doc</span>, <span class='no'>sols_df</span>)
+
+
+<span class='co'># For a new xml doc</span>
+<span class='co'># In that case: sols_df must contain all the soils parameters !)</span>
+<span class='no'>soils_nb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>sols_df</span>)[<span class='fl'>1</span>]
+<span class='no'>new_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/gen_xml_doc.html'>gen_xml_doc</a></span>(<span class='st'>"sols"</span>,<span class='kw'>nodes_nb</span> <span class='kw'>=</span> <span class='no'>soils_nb</span>)
+
+<span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/set_sols_param_xml.html'>set_sols_param_xml</a></span>(<span class='no'>new_doc</span>, <span class='no'>sols_df</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='no'>T</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

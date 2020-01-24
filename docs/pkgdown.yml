@@ -2,6 +2,9 @@ pandoc: 2.7.2
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  Generating_Stics_text_files: Generating_Stics_text_files.html
+  Generating_Stics_XML_files: Generating_Stics_XML_files.html
+  Manipulating_Stics_text_files: Manipulating_Stics_text_files.html
   Manipulating_Stics_XML_files: Manipulating_Stics_XML_files.html
   SticsRFiles: SticsRFiles.html
 

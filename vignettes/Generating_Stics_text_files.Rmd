@@ -42,7 +42,7 @@ output_path <- params$output_path
 
 
 ## Converting JavaStics workspace files
-For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace.
+For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace. The model is then run using the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html)
 
 Observation files may also be copied if they have a standard name as an usm name and a `.obs` extension. If not, they must be renamed to do so.
 

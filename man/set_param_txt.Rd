@@ -57,7 +57,7 @@ file.
 \details{
 The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 the associated plant in the case of intercrop, or \code{c(1,2)} for both
-Princiapl and associated plants.
+Principal and associated plants.
 \code{\link{all_out_var}} is a helper function that returns all possible
 output variables.
 }

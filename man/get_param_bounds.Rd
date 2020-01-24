@@ -16,12 +16,13 @@ get_param_bounds(
 
 \item{param_name}{a parameter name of a vector of parameters names}
 
-\item{output}{Output data format either "list" or "data.frame" (default)}
+\item{bounds_names}{bound(s) name(s) "min" or "max" (optional, default value c("min","max ))}
 
-\item{bounds_name}{bound(s) name(s) "min" or "max" (optional, default value c("min","max ))}
+\item{output}{Output data format either "list" or "data.frame" (default)}
 }
 \value{
 A data.frame with the name of the parameter and min, max values or
+
 one of them. Or a named list (with parameter name) containing a named vector
 for bounds.
 }

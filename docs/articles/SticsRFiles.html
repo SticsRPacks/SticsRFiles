@@ -57,6 +57,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -92,21 +101,77 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(SticsRFiles)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co">#&gt; Learn SticsRFiles at: https://SticsRPacks.github.io/SticsRFiles</span></a></code></pre></div>
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model.</p>
-<p>The executable of the STICS model uses text files with standard names and format as inputs that describe one single unit of simulation (USM), e.g. one crop for one year. The XML files are not used directly by the STICS executable, but by the JavaSTICS GUI instead. The JavaSTICS GUI is used to easily build the input text files for the STICS executable according to the choices of the user. The XML files have the benefit to store more information than the text files: they not only store the parameter values but also their description, the maximum and minimum boundary values, all existing formalisms along with the different choices allowed, and more importantly they allow for the management of several USMs in a same folder, and can help make successive USMs.</p>
+<p>The executable of the STICS model uses text files with standard names and format as inputs that describe one single unit of simulation (USM), e.g. one crop for one year.</p>
+<p>XML files are not used directly by the STICS executable, but only by the JavaSTICS GUI instead.</p>
+<p>The JavaSTICS GUI is used to easily build input text files for the STICS executable according to the user’s choices. The XML files have the benefit to store more information than the text files: they not only store the parameter values but also their description, the maximum and minimum boundary values, all existing formalisms along with the different choices allowed, and more importantly they allow for the management of several USMs in a same folder, and can help make successive USMs.</p>
 <p>Hence, SticsRFiles can be used to manage the XML input files (get and set parameter values, build the text files), the input text files (get and set parameter values) and the outputs from the model execution.</p>
-<p>Advanced functionnalities include also:</p>
+<p>Advanced functionnalities also include:</p>
 <ul>
 <li>The generation of XML input files from templates included in the package, and<br>
 </li>
 <li>The production of XML input files using a mailing process from XML templates and Excel sheets containing multiple simulations contexts</li>
 </ul>
+<p>The goal of this article is to help new comers getting started with the basic functionalities of the package, i.e. the main functions to deal with the XML files.</p>
+<!-- * `get_param_names_xml()`: get parameter names from xml files;  
+* `get_param_xml()`: get parameter values from xml files;
+* `set_param_xml()`: set parameter values from xml files;
+* `gen_obs()`: generate observation files from a `data.frame`
+-->
 </div>
+<div id="example-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-data" class="anchor"></a>Example data</h2>
+<p>All the example data used in this article is available from the <a href="https://github.com/SticsRPacks/data"><code>data</code> repository</a> in the <code>SticsRPacks</code> organisation.</p>
+<p>SticsRFiles provides a function to download it from the command line:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(SticsRFiles)</a>
+<a class="sourceLine" id="cb1-2" title="2">example_data=<span class="st"> </span>SticsRFiles<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/SticsRFiles/man/download_data.html">download_data</a></span>()</a></code></pre></div>
+<p>By default the example data is downloaded in a temporary folder.</p>
+</div>
+<div id="functions-examples-for-using-xml-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#functions-examples-for-using-xml-files" class="anchor"></a>Functions examples for using XML files</h2>
+</div>
+<div id="get-parameter-names" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-parameter-names" class="anchor"></a>Get parameter names</h2>
+<p><code><a href="../reference/get_param_names_xml.html">get_param_names_xml()</a></code>: get parameter names from xml files</p>
+</div>
+<div id="get-parameter-values" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-parameter-values" class="anchor"></a>Get parameter values</h2>
+<p><code><a href="../reference/get_param_xml.html">get_param_xml()</a></code>: get parameter values from xml files</p>
+</div>
+<div id="set-parameter-values" class="section level2">
+<h2 class="hasAnchor">
+<a href="#set-parameter-values" class="anchor"></a>Set parameter values</h2>
+<p><code><a href="../reference/set_param_xml.html">set_param_xml()</a></code>: set parameter values from xml files</p>
+</div>
+<div id="generate-observations-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#generate-observations-files" class="anchor"></a>Generate observations files</h2>
+<p><code><a href="../reference/gen_obs.html">gen_obs()</a></code>: generate observation files from a <code>data.frame</code></p>
+</div>
+  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#introduction">Introduction</a></li>
+      <li><a href="#example-data">Example data</a></li>
+      <li><a href="#functions-examples-for-using-xml-files">Functions examples for using XML files</a></li>
+      <li><a href="#get-parameter-names">Get parameter names</a></li>
+      <li><a href="#get-parameter-values">Get parameter values</a></li>
+      <li><a href="#set-parameter-values">Set parameter values</a></li>
+      <li><a href="#generate-observations-files">Generate observations files</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
