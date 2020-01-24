@@ -5,9 +5,6 @@ vignette: >
   %\VignetteIndexEntry{Generating_Stics_XML_files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-params:
-  javastics_path: /home/plecharpent/Work/projet_tests_modulostics/JavaSTICS-v141-stics-v9.0
-  workspace_path: /home/plecharpent/Work/projet_stics/projet_SticsRPacks/z_SticsRPacks_tests_dir/SticsRFiles/workspace
 ---
 
 ```{r, include = FALSE}
@@ -24,8 +21,7 @@ suppressMessages(library(SticsRFiles))
 
 
 ```{r, echo = FALSE, eval = TRUE}
-javastics_path <- params$javastics_path
-workspace_path <- params$workspace_path
+workspace_path <- tempdir()
 ```
 
 # Introduction
