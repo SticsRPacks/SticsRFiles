@@ -61,6 +61,7 @@ Collate:
     'expand_stics_names.R'
     'global.R'
     'fileDocument.R'
+    'find_param_names.R'
     'gen_ini_doc.R'
     'gen_ini_xml.R'
     'gen_obs.R'

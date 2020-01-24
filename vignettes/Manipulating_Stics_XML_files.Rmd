@@ -177,6 +177,11 @@ In the above file extract for crop management parameters, each set of parameters
 </formalisme>
 ```
 
+> Rules have been defined to search and extract information inside XML files in order to simplify the way of using functions dedicated to XML files manipulations.    
+>
+>In some cases, information relative to upward dependence are needed for extracting parameters values, but in most cases only the parameters names are mandatory in functions arguments.
+
+
 # Getting XML files examples from the library
 
 > We have included several XML examples files in the package in order to make `reproducible`
@@ -187,13 +192,13 @@ In the above file extract for crop management parameters, each set of parameters
 In xml_dir, we store the directory path of the XML files included in the library installation.
 
 ```{r set_xml_dir}
-xml_dir <- system.file(file.path("extdata","xml","examples","V9.0"), package = "SticsRFiles" )
+xml_dir <- system.file(file.path("extdata","xml","examples","V9.1"), package = "SticsRFiles" )
 
 # For linux 
-#> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.0"
+#> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1"
 
 # For windows
-#> "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.0"
+#> "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1"
 
 ```
 
@@ -207,14 +212,14 @@ xml_files <- list.files(path = xml_dir, pattern = ".xml$", full.names = T)
 
 # head(xml_files, n = 3)
 # For linux 
-#> [1] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.0/file_ini.xml"     
-#> [2] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.0/file_plt.xml"     
-#> [3] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.0/file_sta.xml"     
+#> [1] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_ini.xml"     
+#> [2] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_plt.xml"     
+#> [3] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_sta.xml"     
 
 # For windows
-#> [1] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.0/file_ini.xml"   
-#> [2] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.0/file_plt.xml"    
-#> [3] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.0/file_sta.xml"     
+#> [1] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_ini.xml"   
+#> [2] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_plt.xml"    
+#> [3] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_sta.xml"     
 
 ```
 
@@ -241,11 +246,7 @@ file.copy(from = xml_files,to = xml_loc_dir)
 
 
 
-# Retrieving parameters names from files (function: **get_param_names_xml**)
-
-Rules have been defined to search and extract information inside XML files in order to simplify the way of using functions dedicated to XML files manipulations.    
-
-In some cases, information relative to upward dependence are needed for extracting parameters values, but in most cases only the parameters names are mandatory in functions arguments.
+# Retrieving parameters names from files
 
 
 ## From a file
@@ -266,11 +267,9 @@ files_list <- c(sols, par_gen)
 
 param_names <- get_param_names_xml(xml_file = files_list, combine = FALSE)
 
+head(param_names[[1]], n = 10)
 
-# Displaying only some head lines of the data.frame elements
-head(param_names$sols.xml, n = 10)
-
-head(param_names$param_gen.xml, n = 10)
+head(param_names[[2]], n = 10)
 
 
 ```
@@ -279,26 +278,56 @@ head(param_names$param_gen.xml, n = 10)
 
 param_names <- get_param_names_xml(xml_file = files_list)
 
-# Displaying only some head lines of the data.frame
 head(param_names, n = 10)
 
 
 ```
 
-### Getting a list of parameters names vectors
+# Searching parameters names from files
+
+In the previous section, extractions made with the `get_param_names_xml` need to specify in which XML file or files list.
+
+The `find_param_names` only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
+
+In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
+
+
+Some warnings may be displayed, in case of duplicate values for bounds. In that case the retained values are indicated in the warning message.
+
+
+## Finding one or more parameters names
+
 ```{r}
-param_names <- get_param_names_xml(xml_file = files_list, output = "list")
 
-# Displaying only some head lines of the list elements
-head(param_names$sols.xml, n = 10)
+param_names <- find_param_names(name = "albedo")
 
-head(param_names$param_gen.xml, n = 10)
 
+param_names
+
+
+param_names <- find_param_names(name = c("albedo", "latitude", "humcapil"))
+
+param_names
 
 ```
 
+## Finding parameters names using partial names
 
-# Getting parameters values from a file  (function: **get_param_xml**)   
+```{r}
+
+param_names <- find_param_names(name = "hum")
+
+param_names
+
+
+param_names <- find_param_names(name = c("al","hum"))
+
+# Displaying only some head lines of the data.frame
+head(param_names, n = 10)
+
+```
+
+# Getting parameters values from a file
 
 
 ## Scalar parameters
@@ -385,7 +414,7 @@ head(tec_param_values, n = 10)
 ```
 
 
-# Replacing parameters values in files  (function: **set_param_xml**)
+# Replacing parameters values in files
 
 ## Defining the output file from functions arguments
 The function **set_param_xml** allows to set the output file with the following optional arguments as follows:
