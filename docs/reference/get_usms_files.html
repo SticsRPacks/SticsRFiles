@@ -95,10 +95,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
       <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
@@ -176,14 +179,14 @@
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='co'>#get_usms_files(workspace_path = "/path/to/workspace",</span>
-<span class='co'>#javastics_path = "/path/to/javastics")</span>
+<span class='fu'>get_usms_files</span>(<span class='kw'>workspace_path</span> <span class='kw'>=</span> <span class='st'>"/path/to/workspace"</span>,
+<span class='kw'>javastics_path</span> <span class='kw'>=</span> <span class='st'>"/path/to/javastics"</span>)
 
-<span class='co'>#get_usms_files(workspace_path = "/path/to/workspace",</span>
-<span class='co'>#javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3"))</span>
+<span class='fu'>get_usms_files</span>(<span class='kw'>workspace_path</span> <span class='kw'>=</span> <span class='st'>"/path/to/workspace"</span>,
+<span class='kw'>javastics_path</span> <span class='kw'>=</span> <span class='st'>"/path/to/javastics"</span>, <span class='kw'>usm_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"usm1"</span>, <span class='st'>"usm3"</span>))
 
-<span class='co'>#get_usms_files(workspace_path = "/path/to/workspace",</span>
-<span class='co'>#file_type = "c("finit", "ftec" ))</span>
+<span class='fu'>get_usms_files</span>(<span class='kw'>workspace_path</span> <span class='kw'>=</span> <span class='st'>"/path/to/workspace"</span>,
+<span class='kw'>file_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"finit"</span>, <span class='st'>"ftec"</span> ))
 
 
 }</div></pre>

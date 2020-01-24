@@ -19,9 +19,11 @@ files either on XML files (used by the JavaStics GUI) or on text files
 used by the model fortran executable.
 
 The basic functionnalites allows to read parameters names and values
-through XML queries and replace parameters values in files.
+through XML queries and replace parameters values in files. A starting
+guide is available on the [Get started
+page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
-Advanced functionnalities are dedicated to produce XML parameters files
+Advanced functionnalities are dedicated to produce XML parameter files
 using a mailing process like from XML templates and Excel sheets
 containing multiple simulations contexts. A JavaStics workspace is
 generated and directly usable from the JavaStics interface (GUI or
@@ -60,7 +62,8 @@ remotes::install_github("SticsRPacks/SticsRFiles@*release")
     [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html)
 
   - A description of how to use the functions for manipulating text
-    input files will be available soon.
+    input files is available
+    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files).
 
 ### Files generation
 
@@ -77,6 +80,10 @@ remotes::install_github("SticsRPacks/SticsRFiles@*release")
 Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
 to abide by its terms.
+
+The package is under intensive development, so you can fill an issue or
+request us a feature
+[here](https://github.com/SticsRPacks/SticsRFiles/issues) at any time.
 
 ## Authors and acknowledgments
 

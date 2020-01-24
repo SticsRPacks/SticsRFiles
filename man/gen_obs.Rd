@@ -20,13 +20,11 @@ Write STICS obs data from data.frame/tibble
 \examples{
 
 \dontrun{
-
 # Getting observations data
-xl_path <- file.path(system.file(package="SticsRFiles",
-file.path("extdata", "xl", "inputs_stics_example.xlsx")))
+xl_path <- system.file(file.path("extdata", "xl", "inputs_stics_example.xlsx"),
+                       package="SticsRFiles")
 
-obs_df <- read_excel(xl_path, sheet = "Obs") \%>\%
-dplyr::filter( usm_name \%in\% "USM_2017_T1_CI")
+obs_df <- read_excel(xl_path,sheet="Obs")%>%dplyr::filter(usm_name%in%"USM_2017_T1_CI")
 
 # Generating the csv file
 gen_obs(obs_df, "USM_2017_T1_CI.obs")

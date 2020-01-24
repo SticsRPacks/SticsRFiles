@@ -6,8 +6,7 @@
 #'
 #' @param name Parameter name or name part, or a vector of
 #'
-#' @param bounds A logical value for getting parameter(s)
-#' bounds (TRUE) or not (FALSE)
+#' @param bounds Boolean. Are the parameter bounds to be returned ?
 #'
 #' @param output Output data format either "list" or "data.frame" (default)
 #'

@@ -5,9 +5,11 @@
 #'
 #' @param xml_doc an xmlDocument class object
 #' @param param_name a parameter name of a vector of parameters names
-#' @param bounds_name bound(s) name(s) "min" or "max" (optional, default value c("min","max ))
+#' @param bounds_name bounds name "min" or "max" (optional, default value c("min","max ))
 #' @param output Output data format either "list" or "data.frame" (default)
+#'
 #' @return A data.frame with the name of the parameter and min, max values or
+#'
 #' one of them. Or a named list (with parameter name) containing a named vector
 #' for bounds.
 #'

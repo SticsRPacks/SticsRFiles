@@ -95,6 +95,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -149,7 +158,18 @@
     <p>A logical value if the file generation succeeded (T) or not (F)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Getting observations data</span>
+<span class='no'>xl_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"xl"</span>, <span class='st'>"inputs_stics_example.xlsx"</span>),
+                       <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"SticsRFiles"</span>)
+
+<span class='no'>obs_df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_excel</span>(<span class='no'>xl_path</span>,<span class='kw'>sheet</span><span class='kw'>=</span><span class='st'>"Obs"</span>)
+
+<span class='co'># Generating the csv file</span>
+<span class='fu'>gen_obs</span>(<span class='no'>obs_df</span>, <span class='st'>"USM_2017_T1_CI.obs"</span>)
+
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

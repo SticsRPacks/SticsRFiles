@@ -22,6 +22,7 @@ get_param_bounds(
 }
 \value{
 A data.frame with the name of the parameter and min, max values or
+
 one of them. Or a named list (with parameter name) containing a named vector
 for bounds.
 }

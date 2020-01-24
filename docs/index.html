@@ -57,6 +57,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -87,8 +96,13 @@
 <!-- badges: start -->
 
 <p>The goal of SticsRFiles is to perform manipulations of the Stics model files either on XML files (used by the JavaStics GUI) or on text files used by the model fortran executable.</p>
-<p>The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files.</p>
-<p>Advanced functionnalities are dedicated to produce XML parameters files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the <a href="https://SticsRPacks.github.io/SticsOnR">SticsOnR</a> package.</p>
+<p>The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html">Get started page</a>.</p>
+<p>Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the <a href="https://SticsRPacks.github.io/SticsOnR">SticsOnR</a> package.</p>
+<div id="prerequisites-and-technical-tips" class="section level2">
+<h2 class="hasAnchor">
+<a href="#prerequisites-and-technical-tips" class="anchor"></a>Prerequisites and technical tips</h2>
+<p>Some information about software requirements and operating system constraints are given in the SticsOnR package documentation <a href="https://sticsrpacks.github.io/SticsOnR">here</a>.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -101,16 +115,28 @@
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
+<div id="files-manipulations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#files-manipulations" class="anchor"></a>Files manipulations</h3>
 <ul>
 <li><p>A description of how to use the functions for manipulating XML input files is detailed <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html">here</a></p></li>
-<li><p>A description of mailing functions usefull for generating XML input files from usms parameters data stored in Excel files sheets will be available soon.</p></li>
-<li><p>A description of how to use the functions for manipulating text input files will be available soon.</p></li>
+<li><p>A description of how to use the functions for manipulating text input files is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files">here</a>.</p></li>
 </ul>
+</div>
+<div id="files-generation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#files-generation" class="anchor"></a>Files generation</h3>
+<ul>
+<li><p>A description of mailing functions usefull for generating XML input files from usms parameters data stored in Excel files sheets will be available soon.</p></li>
+<li><p>A description of functions for generating text input files from XML one of usms parameters is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html">here</a>.</p></li>
+</ul>
+</div>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of conduct</h2>
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<p>The package is under intensive development, so you can fill an issue or request us a feature <a href="https://github.com/SticsRPacks/SticsRFiles/issues">here</a> at any time.</p>
 </div>
 <div id="authors-and-acknowledgments" class="section level2">
 <h2 class="hasAnchor">

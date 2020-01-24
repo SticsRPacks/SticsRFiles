@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read STICS input meteo file — get_climate_txt • SticsRFiles</title>
+<title>Setting bounds values (min, max) for missing bounds and/or
+naming bounds values vector with bounds names — fix_missing_bounds • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +36,10 @@
 
 
 
-<meta property="og:title" content="Read STICS input meteo file — get_climate_txt" />
-<meta property="og:description" content="Read the meteorology input for STICS (&quot;climat.txt&quot;)" />
+<meta property="og:title" content="Setting bounds values (min, max) for missing bounds and/or
+naming bounds values vector with bounds names — fix_missing_bounds" />
+<meta property="og:description" content="Setting bounds values (min, max) for missing bounds and/or
+naming bounds values vector with bounds names" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,60 +132,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read STICS input meteo file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_climate_txt.R'><code>R/get_climate_txt.R</code></a></small>
-    <div class="hidden name"><code>get_climate_txt.Rd</code></div>
+    <h1>Setting bounds values (min, max) for missing bounds and/or
+naming bounds values vector with bounds names</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_param_bounds.R'><code>R/get_param_bounds.R</code></a></small>
+    <div class="hidden name"><code>fix_missing_bounds.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Read the meteorology input for STICS ("climat.txt")</p>
+    <p>Setting bounds values (min, max) for missing bounds and/or
+naming bounds values vector with bounds names</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_climate_txt</span>(<span class='kw'>dirpath</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(), <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"climat.txt"</span>, <span class='kw'>preserve</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>fix_missing_bounds</span>(<span class='no'>values</span>, <span class='no'>bounds_names</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dirpath</th>
-      <td><p>Directory path</p></td>
+      <th>values</th>
+      <td><p>Vector of bounds values (may be NULL or empty value)</p></td>
     </tr>
     <tr>
-      <th>filename</th>
-      <td><p>The meteorology file name (default to <code>climat.txt</code>).</p></td>
-    </tr>
-    <tr>
-      <th>preserve</th>
-      <td><p>Logical, TRUE for keeping original Stics meteo columns (default)
-or FALSE otherwise.</p></td>
+      <th>bounds_names</th>
+      <td><p>Character vector of bounds names (in "min", "max"
+one of them or both)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame of the input meteorological variables used as input for the
-STICS model.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <p>A named vector for bound(s)</p>
 
-    <p>The time-related variables are summarised into one POSIXct column named
-codeDate.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='get_obs_int.html'>get_obs_int</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>SticsRFiles</span>)
-<span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/txt/V9.0"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
-<span class='no'>Meteo</span> <span class='kw'>&lt;-</span> <span class='fu'>get_climate_txt</span>(<span class='no'>path</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

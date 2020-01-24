@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read STICS observation files (*.obs) and store data into a list — get_obs • SticsRFiles</title>
+<title>Read STICS observation files *.obs and store data into a list — get_obs • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Read STICS observation files (*.obs) and store data into a list — get_obs" />
+<meta property="og:title" content="Read STICS observation files *.obs and store data into a list — get_obs" />
 <meta property="og:description" content="Read STICS observation files for sole crops and store data into a list" />
 <meta name="twitter:card" content="summary" />
 
@@ -95,6 +95,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+    </li>
+    <li>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
@@ -120,7 +129,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read STICS observation files (*.obs) and store data into a list</h1>
+    <h1>Read STICS observation files *.obs and store data into a list</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_obs.R'><code>R/get_obs.R</code></a></small>
     <div class="hidden name"><code>get_obs.Rd</code></div>
     </div>
@@ -167,9 +176,6 @@ function read all obs files in the <code>dirpath</code> folder. If there are no 
 the function returns <code>NULL</code>
 If usms names are not provided they are supposed to have the same name as the obs file.
 If usms_filename is not provided, existence of usms are checked in the usms.xml file.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='get_obs_int.html'>get_obs_int</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -183,7 +189,6 @@ If usms_filename is not provided, existence of usms are checked in the usms.xml 
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

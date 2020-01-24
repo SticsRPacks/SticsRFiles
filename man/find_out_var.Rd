@@ -7,7 +7,7 @@
 find_out_var(var = NULL)
 }
 \arguments{
-\item{Var}{Character vector with a (partial) STICS output variable name}
+\item{var}{Character vector with a (partial) STICS output variable name}
 }
 \description{
 Helper function that return the name used as input
@@ -28,4 +28,3 @@ SticsRFiles:::find_out_var("lai")
 \seealso{
 \code{\link{all_out_var}}
 }
-\keyword{internal}

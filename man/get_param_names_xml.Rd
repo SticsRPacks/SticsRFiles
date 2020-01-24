@@ -17,8 +17,9 @@ get_param_names_xml(
 
 \item{name}{Parameter name or name part, or a vector of}
 
-\item{bounds}{A logical value for getting parameter(s)
-bounds (TRUE) or not (FALSE)}
+
+\item{bounds}{Boolean. Are the parameter bounds to be returned ?}
+
 
 \item{output}{Output data format either "list" or "data.frame" (default)}
 
