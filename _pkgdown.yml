@@ -1,1 +1,104 @@
 destination: docs
+url: https://sticsrpacks.github.io/SticsRFiles/
+
+    c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
+      person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
+      person(given = "SticsRPacks", role = c("aut","cph")),
+      person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")),
+      person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")),
+      person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
+      person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")),
+      person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")),
+      person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev"))
+      )
+
+reference:
+  - title: "Main functions"
+    desc: The higher-level functions to manipulate XML files
+    contents:
+      - get_param_names_xml
+      - get_param_xml
+      - set_param_xml
+      - gen_obs
+
+  - title: "XML files generation"
+    desc: Generate XML files from a template
+    contents:
+      - starts_with("gen")
+
+  - title: "Get info XML"
+    desc: Getting information from XML files
+    contents:
+      - get_param_xml
+      - get_param_formalism
+      - get_param_names_xml
+      - get_plants_nb
+      - get_usms_files
+      - get_usms_list
+      - get_param_bounds_xml
+      - get_param_bounds
+      - get_params_dict
+
+  - title: "Set values XML"
+    desc: Setting new values in an XML files
+    contents:
+      - set_param_xml
+      - set_codeoptim
+
+  - title: "Get values text"
+    desc: Getting values from the STICS input text files
+    contents:
+      - get_param_txt
+      - get_ini_txt
+      - get_general_txt
+      - get_tmp_txt
+      - get_plant_txt
+      - get_tec_txt
+      - get_soil_txt
+      - get_station_txt
+      - get_usm_txt
+      - get_out_var_txt
+      - find_out_var
+
+  - title: "Set values text"
+    desc: Setting new values in the STICS input text files
+    contents:
+      - set_param_txt
+      - set_usm_txt
+      - set_station_txt
+      - set_ini_txt
+      - set_general_txt
+      - set_tmp_txt
+      - set_plant_txt
+      - set_tec_txt
+      - set_soil_txt
+      - set_out_var_txt
+
+  - title: "Climate and observations"
+    desc: Read climate data and observations
+    contents:
+      - get_climate_txt
+      - get_obs
+
+  - title: "STICS outputs"
+    desc: Get STICS daily outputs
+    contents:
+      - get_daily_results
+
+
+
+  - title: "XML to text conversion"
+    desc: Build STICS input text files from XML files
+    contents:
+      - convert_xml2txt
+
+  - title: "Download example data"
+    desc: For complex examples
+    contents:
+      - download_data
+
+  - title: "Mailing"
+    desc: All functions related to mailing (automatic generation of XML from a table)
+    contents:
+      - copy_mailing_example
+      - copy_mailing_script_example

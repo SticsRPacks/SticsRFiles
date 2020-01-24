@@ -20,4 +20,4 @@ out_data
 \description{
 All output variables from STICS, with their units and brief description
 }
-\keyword{datasets}
+\keyword{internal}

@@ -13,6 +13,8 @@
 #'   \item{V2}{ }
 #' }
 #'
+#' @keywords internal
+#'
 "out_data"
 
 
@@ -44,7 +46,7 @@ all_out_var= function(){
 #' @description Helper function that return the name used as input
 #' for the STICS model with a partial match.
 #'
-#' @param Var Character vector with a (partial) STICS output variable name
+#' @param var Character vector with a (partial) STICS output variable name
 #'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
@@ -58,7 +60,7 @@ all_out_var= function(){
 #'}
 #'
 #'
-#' @keywords internal
+#' @export
 #'
 find_out_var = function(var=NULL){
   all_vars= all_out_var()
