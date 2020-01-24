@@ -4,7 +4,7 @@
 #'
 #' @param xml_file an xml file path or a vector of paths
 #'
-#' @param param_name Parameter name or name part, or a vector of
+#' @param name Parameter name or name part, or a vector of
 #'
 #' @param output Output data format either "list" or "data.frame" (default)
 #'
@@ -35,7 +35,7 @@
 #'
 #'
 get_param_names_xml <- function(xml_file,
-                                par_name=NULL,
+                                name=NULL,
                                 bounds = TRUE,
                                 output="data.frame",
                                 combine = TRUE) {
@@ -52,7 +52,7 @@ get_param_names_xml <- function(xml_file,
 
     param_names <- lapply(xml_file,
                           function(x) get_param_names_xml(xml_file = x,
-                                                          par_name = par_name,
+                                                          name = name,
                                                           output = output,
                                                           combine = combine))
 
@@ -75,8 +75,8 @@ get_param_names_xml <- function(xml_file,
 
 
   # Search based on names or a substring of parameters names
-  if (!base::is.null(par_name)) {
-    param_names <- unique(unlist(lapply(par_name, function(x) grep(x = param_names, pattern = x, value = TRUE))))
+  if (!base::is.null(name)) {
+    param_names <- unique(unlist(lapply(name, function(x) grep(x = param_names, pattern = x, value = TRUE))))
   }
 
   # No parameters names found

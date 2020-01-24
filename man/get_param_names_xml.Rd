@@ -6,7 +6,7 @@
 \usage{
 get_param_names_xml(
   xml_file,
-  par_name = NULL,
+  name = NULL,
   bounds = TRUE,
   output = "data.frame",
   combine = TRUE
@@ -15,13 +15,13 @@ get_param_names_xml(
 \arguments{
 \item{xml_file}{an xml file path or a vector of paths}
 
+\item{name}{Parameter name or name part, or a vector of}
+
 \item{output}{Output data format either "list" or "data.frame" (default)}
 
 \item{combine}{Logical, usefull only for data.frame.
 TRUE, to transform a data.frame list to a unique data.frame,
 FALSE otherwise.}
-
-\item{param_name}{Parameter name or name part, or a vector of}
 }
 \value{
 A list of parameters names data.frames or list, or a unique data.frame
