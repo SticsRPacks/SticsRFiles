@@ -26,7 +26,7 @@
 find_param_names <- function(name, version=NULL) {
 
   # Check Stics version
-  version <- SticsRFiles:::get_xml_stics_version(version)
+  version <- get_xml_stics_version(version)
 
 # Getting XML examples files dir from the package
   xml_dir <- system.file(file.path("extdata","xml","examples",version),
