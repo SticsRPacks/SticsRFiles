@@ -33,5 +33,5 @@ par_form_list <- SticsRFiles:::get_param_formalism(sta_doc,c("zr","altistation")
 
 }
 
-
 }
+\keyword{internal}

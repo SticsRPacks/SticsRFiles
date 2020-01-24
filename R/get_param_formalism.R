@@ -20,6 +20,8 @@
 #'
 #' }
 #'
+#' @keywords internal
+#'
 #'
 get_param_formalism <- function(xml_doc,param_name) {
 
