@@ -39,21 +39,29 @@ get_param_formalism <- function(xml_doc, name = NULL, form_only = FALSE) {
     return(names)
   }
 
+  # if one doc
+  if (base::is.list(xml_doc)) xml_doc <- unlist(xml_doc)
+
   # If no parameter name is given
   if (base::is.null(name)) name <- get_param_names(xml_doc)
+
 
   # recursive call for a parameter name list
   if (length(name) > 1) {
     form_list <- lapply(name, function(x) get_param_formalism(xml_doc,
                                                               x,
                                                               form_only = form_only))
-
-    names(form_list) <- name
+    # if no formalism
+    if (all(unlist(lapply(form_list, base::is.null)))) {
+      form_list <- list(NA)
+      return(form_list)
+    }
 
     if (form_only)  form_list <- unique(unlist(form_list, use.names = FALSE))
 
     return(form_list)
   }
+
 
   # Checking if any "formalisme" nodes in xml_doc
   form <- getAttrsValues(xml_doc,"//formalisme","nom")
@@ -67,24 +75,33 @@ get_param_formalism <- function(xml_doc, name = NULL, form_only = FALSE) {
 
 
   # case : param name as value of @nom attribute
-  x_path <- paste0("//*[@nom=\"",name,"\"]/ancestor::formalisme")
+  x_path <- paste0("//*[@nom=\"",name,"\"]//ancestor::formalisme")
 
-  values <- getAttrsValues(xml_doc,x_path,"nom")
+  values <- param_formalism_elt(xml_doc, x_path, name)
+  if (! base::is.null(values)) return(values)
 
-  if (! base::is.null(values)) {
-    return(as.vector(values))
-  }
 
   # case : param name as value of @nomParam attribute
-  x_path <- paste0("//*[@nomParam=\"",name,"\"]/ancestor::formalisme")
-  values <- getAttrsValues(xml_doc,x_path,"nom")
-
-  if (! base::is.null(values)) {
-    return(as.vector(values))
-  }
+  x_path <- paste0("//*[@nomParam=\"",name,"\"]//ancestor::formalisme")
+  values <- param_formalism_elt(xml_doc, x_path, name)
+  if (! base::is.null(values)) return(values)
 
 
-  # TODO : other cases
+  return(values)
+
+}
+
+
+param_formalism_elt <- function(xml_doc, xpath, name) {
+
+  # Formatting a parameter formalism list unit
+  values <- getAttrsValues(xml_doc,xpath,"nom")
+
+  if (base::is.null(values)) return(values)
+
+  # Just for an unnamed vector
+  names(values[[1]]) <- NULL
+  names(values) <- name
 
   return(values)
 

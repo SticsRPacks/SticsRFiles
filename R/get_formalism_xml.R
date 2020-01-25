@@ -35,15 +35,16 @@ get_formalism_xml <- function(xml_file,
 
   # Loading XML files in a XmlDocument list
   xml_doc <- lapply(xml_file, xmldocument)
+  doc_nb <- length(xml_doc)
 
   # If only one element
-  if(length(xml_doc) == 1) xml_doc <- xml_doc[[1]]
+  if(doc_nb == 1) xml_doc <- xml_doc[[1]]
 
   # Getting the parameters formalism list by file
   form_list <- get_param_formalism(xml_doc, par_name)
 
   # if only one element
-  if(length(xml_doc) == 1) form_list <- list(form_list)
+  if(doc_nb== 1) form_list <- list(form_list)
 
   # Naming with xml files names
   names(form_list) <- base::basename(xml_file)
@@ -65,6 +66,10 @@ param_by_form <- function(form_list) {
   for (n in 1:files_nb) {
     form_names <- unlist(form_list[[files_names[[n]]]])
 
+    if (all(base::is.na(form_names))) {
+      out_l[[n]] <- NA
+      next
+    }
     u_forms <- unique(form_names)
     nb_forms <- length(u_forms)
     out <- vector("list", length(u_forms))
