@@ -29,6 +29,8 @@
 #'
 #' }
 #'
+#' @keywords internal
+#'
 #' @importFrom dplyr bind_rows
 #'
 get_param_bounds <- function(xml_doc,

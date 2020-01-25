@@ -47,3 +47,4 @@ SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"),"min")
 }
 
 }
+\keyword{internal}
