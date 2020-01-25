@@ -17,7 +17,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  tidy=TRUE
 )
 ```
 
@@ -243,9 +244,8 @@ file.copy(from = xml_files,to = xml_loc_dir)
 ```
 
 
-
-
-
+<!--
+# REMOVED SECTION, only describing find_param_names
 # Retrieving parameters names from files
 
 
@@ -281,23 +281,21 @@ param_names <- get_param_names_xml(xml_file = files_list)
 head(param_names, n = 10)
 
 
-```
+``` 
+-->
 
 # Searching parameters names from files
-
-In the previous section, extractions made with the `get_param_names_xml` need to specify in which XML file or files list.
 
 The `find_param_names` only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
 
 In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
-
 
 Some warnings may be displayed, in case of duplicate values for bounds. In that case the retained values are indicated in the warning message.
 
 
 ## Finding one or more parameters names
 
-```{r}
+```{r, results="markup"}
 
 param_names <- find_param_names(name = "albedo")
 
@@ -326,6 +324,53 @@ param_names <- find_param_names(name = c("al","hum"))
 head(param_names, n = 10)
 
 ```
+
+> More specific extractions for parameter names can be performed using the `get_param_names_xml`. In that case, XML file or files list in which to search must be specified as a function input argument.
+
+
+
+
+
+# Searching parameters formalisms from files
+
+The `find_param_formalisms` as `find_param_names`, only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
+
+In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
+
+## Finding one or more parameters formalisms
+
+```{r, warning=FALSE}
+
+param_formalisms <- find_param_formalisms(name = "albedo")
+
+
+param_formalisms
+
+
+param_formalisms <- find_param_formalisms(name = c("albedo", "latitude", "humcapil"))
+
+param_formalisms
+
+```
+
+## Finding formalisms using partial parameters names
+
+```{r, warning=FALSE}
+
+param_formalisms <- find_param_formalisms(name = "hum")
+
+param_formalisms
+
+
+param_formalisms <- find_param_formalisms(name = c("al","hum"))
+
+param_formalisms
+
+```
+
+> More specific extractions for parameter names can be performed using the `get_formalisms_xml`. In that case, XML file or files list in which to search must be specified as a function input argument.
+
+
 
 # Getting parameters values from a file
 

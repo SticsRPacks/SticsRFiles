@@ -16,22 +16,22 @@
 #'
 #' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 #'
-#' par_form <- SticsRFiles:::get_param_formalism(sta_doc,"zr")
+#' par_form <- SticsRFiles:::get_param_formalisms(sta_doc,"zr")
 #'
-#' par_form_list <- SticsRFiles:::get_param_formalism(sta_doc,c("zr","altistation"))
+#' par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc,c("zr","altistation"))
 #'
 #' }
 #'
 #' @keywords internal
 #'
 #'
-get_param_formalism <- function(xml_doc, name = NULL, form_only = FALSE) {
+get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 
   # For multiple documents
   if ( length(xml_doc) > 1 ) {
 
     names <- lapply(xml_doc,
-                    function(x) get_param_formalism(xml_doc = x,
+                    function(x) get_param_formalisms(xml_doc = x,
                                                     name = name,
                                                     form_only = form_only))
 
@@ -48,7 +48,7 @@ get_param_formalism <- function(xml_doc, name = NULL, form_only = FALSE) {
 
   # recursive call for a parameter name list
   if (length(name) > 1) {
-    form_list <- lapply(name, function(x) get_param_formalism(xml_doc,
+    form_list <- lapply(name, function(x) get_param_formalisms(xml_doc,
                                                               x,
                                                               form_only = form_only))
     # if no formalism

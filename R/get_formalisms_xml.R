@@ -14,18 +14,18 @@
 #' xml_sta <- system.file(paste0("extdata/xml/examples/V9.1/file_sta.xml"),
 #' package = "SticsRFiles")
 #'
-#' par_form <- get_formalism_xml(xml_sta, "zr")
+#' par_form <- get_formalisms_xml(xml_sta, "zr")
 #'
-#' par_form_list <- get_formalism_xml(xml_sta, c("zr","altistation"))
+#' par_form_list <- get_formalisms_xml(xml_sta, c("zr","altistation"))
 #'
-#' par_form_list <- get_formalism_xml(xml_sta)
+#' par_form_list <- get_formalisms_xml(xml_sta)
 #'
 #' }
 #'
 #' @export
 #'
 #'
-get_formalism_xml <- function(xml_file,
+get_formalisms_xml <- function(xml_file,
                               par_name=NULL,
                               by_form = TRUE) {
 
@@ -41,7 +41,7 @@ get_formalism_xml <- function(xml_file,
   if(doc_nb == 1) xml_doc <- xml_doc[[1]]
 
   # Getting the parameters formalism list by file
-  form_list <- get_param_formalism(xml_doc, par_name)
+  form_list <- get_param_formalisms(xml_doc, par_name)
 
   # if only one element
   if(doc_nb== 1) form_list <- list(form_list)
