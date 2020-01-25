@@ -80,6 +80,7 @@ Collate:
     'gen_xml_doc.R'
     'get_climate_txt.R'
     'get_daily_results.R'
+    'get_formalism_xml.R'
     'get_name_value_file_value.R'
     'get_obs.R'
     'get_obs_int.R'

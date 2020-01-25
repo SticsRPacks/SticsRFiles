@@ -30,13 +30,12 @@ reference:
     desc: Getting information from XML files
     contents:
       - get_param_xml
-      - get_param_formalism
+      - get_formalism_xml
       - get_param_names_xml
       - get_plants_nb
       - get_usms_files
       - get_usms_list
       - get_param_bounds_xml
-      - get_param_bounds
       - get_params_dict
 
   - title: "Set values XML"
