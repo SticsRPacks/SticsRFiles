@@ -39,9 +39,9 @@ Imports:
     stringr,
     xslt,
     dplyr,
-    readxl,
-    SticsOnR
+    readxl
 Suggests:
+    SticsOnR,
     knitr,
     covr,
     rmarkdown
