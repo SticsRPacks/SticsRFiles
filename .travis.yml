@@ -9,3 +9,6 @@ os:
 
 after_success:
     - Rscript -e 'covr::codecov()'
+
+r_github_packages:
+  - SticsRPacks/SticsOnR
