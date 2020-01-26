@@ -1,18 +1,12 @@
 ---
 title: "Manipulating Stics XML files"
-output: 
-   html_document:
-     theme: default
-     toc: true
-     toc_float:
-       collapsed: false
-       smooth_scroll: false
-     number_sections: true
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Manipulate_Stics_XML_files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -22,12 +16,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo=F, results='hide'}
-suppressMessages(library(SticsRFiles))
-#print(xml_dir)
+
+```{r}
+library(SticsRFiles)
+```
+
+```{r setup, results='hide', echo=FALSE}
 options(warn=-1)
 xml_loc_dir <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
 ```
+
+
+
 
 ```{r rm_files, results='hide', echo=F}
 files_list <- list.files(path = xml_loc_dir, pattern = "\\.xml$", full.names = T)
@@ -364,7 +364,7 @@ param_formalisms
 
 param_formalisms <- find_param_formalisms(name = c("al","hum"))
 
-param_formalisms
+head(param_formalisms)
 
 ```
 
@@ -478,15 +478,21 @@ The function **set_param_xml** allows to set the output file with the following 
 
 # A option parameter
 set_param_xml(par_gen,param_names = "codeactimulch", param_values = 2, overwrite = T )
+
+# Controlling written values
 get_param_xml(par_gen, param_names = "codeactimulch" )
 
 # A simple parameter
 set_param_xml(par_gen, param_names = "tnitopt", param_values = 29.5, overwrite = T )
+
+# Controlling written values:
 get_param_xml(par_gen, param_names = "tnitopt" )
 
 # Using a conditional selection
 set_param_xml(sols, param_names = "argi", param_values = 33, parent_name = "sol",
               parent_sel_attr = "solcanne", overwrite = T )
+
+# Controlling written values
 get_param_xml(sols,param_names = "argi", parent_name = "sol",
               parent_sel_attr = "solcanne")
 
@@ -499,9 +505,13 @@ get_param_xml(sols,param_names = "argi", parent_name = "sol",
 # For all soils
 # One value per occurence
 set_param_xml(sols, param_names = "argi", param_values = list(1:33), overwrite = T )
+# Controlling written values
 get_param_xml(sols,param_names = "argi" )
+
 # Same value for all occurences
 set_param_xml(sols, param_names = "argi", param_values = 40, overwrite = T )
+
+# Controlling written values
 get_param_xml(sols,param_names = "argi" )
 
 
@@ -513,10 +523,12 @@ get_param_xml(sols,param_names = "argi" )
 # For all soils
 # One value per occurence
 set_param_xml(sols, param_names = list("argi", "pH"), param_values = list(1:33,33:1), overwrite = T )
+# Controlling written values
 get_param_xml(sols,param_names = c("argi", "pH") )
 
 # Same value for all occurences
 set_param_xml(sols, param_names = c("argi", "pH"), param_values = list(50, 8), overwrite = T )
+# Controlling written values
 get_param_xml(sols,param_names = c("argi", "pH") )
 
 
@@ -528,6 +540,7 @@ get_param_xml(sols,param_names = c("argi", "pH") )
 # For one soil
 set_param_xml(sols, param_names = c("argi", "pH"), param_values = list(50,8), parent_name = "sol",
               parent_sel_attr = "solcanne", overwrite = T )
+# Controlling written values
 get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
               parent_sel_attr = "solcanne")
 ```
@@ -538,6 +551,7 @@ get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
 ```{r}
 # For all soil layers
 set_param_xml(sols, param_names = c("epc", "infil"), param_values = list(18:22,48:52), parent_name = "sol", parent_sel_attr = "solcanne", overwrite = T )
+# Controlling written values
 get_param_xml(sols, param_names = c("epc", "infil"), parent_name = "sol",
               parent_sel_attr = "solcanne" )
 ```
@@ -546,6 +560,7 @@ get_param_xml(sols, param_names = c("epc", "infil"), parent_name = "sol",
 # For all irrigation operations
 tec <- file.path(xml_loc_dir,"file_tec.xml")
 set_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"), param_values = list(200:215,20:35), overwrite = T )
+# Controlling written values
 get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"))
 
 ```
@@ -555,6 +570,7 @@ get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"))
 ```{r}
 # For soil layers 1 to 3
 set_param_xml(sols, param_names = c("epc", "infil"), param_values = list(20:18,50:48), parent_name = "sol", parent_sel_attr = "solcanne", overwrite = T, ids = 1:3 )
+# Controlling written values
 get_param_xml(sols,param_names = c("epc", "infil"), parent_name = "sol",
               parent_sel_attr = "solcanne", ids = 1:3 )
 ```
@@ -563,6 +579,7 @@ get_param_xml(sols,param_names = c("epc", "infil"), parent_name = "sol",
 
 # For irrigation operations 1 to 5 (same indices for all parameters)
 set_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"), param_values = list(204:200,24:20), overwrite = T, ids = 1:5)
+# Controlling written values
 get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
 
 ```
