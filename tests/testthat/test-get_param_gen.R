@@ -5,7 +5,7 @@ context("Getting gen param values")
 
 test_that ("all values from a single node", {
   expect_equal(unname(unlist(get_param_xml(xml_path,c("masvolcx","hcccx"),
-                                    parent_name = "Lutetian Brackish marl and limestone"))),
+                                    select = "Lutetian Brackish marl and limestone"))),
                c(2.3,5))
 })
 

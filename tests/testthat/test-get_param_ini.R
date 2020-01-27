@@ -12,15 +12,15 @@ test_that("single param option value ", {
 test_that("multiple param option value", {
   val <- unlist(get_param_xml(xml_path,c("stade0","lai0","masec0","QNplante0",
                                   "magrain0","zrac0","resperenne0"),
-                       parent_name ="plante",parent_sel_attr = 1 ), use.names = FALSE)
+                       select ="plante",value = 1 ), use.names = FALSE)
 
   expect_equal(val, c("snu","0","0","0","0","0","0"))
 })
 
 
 test_that("multiple param option value 2", {
-  val <- unlist(get_param_xml(xml_path,"densinitial", parent_name ="plante",
-                                     parent_sel_attr = 1 ))
+  val <- unlist(get_param_xml(xml_path,"densinitial", select ="plante",
+                                     value = 1 ))
   expect_equal(val, c(0,0,0,0,0))
 })
 
@@ -30,7 +30,7 @@ test_that("multiple values from single node", {
 })
 
 # test_that("multiple values from single node with parent node specified", {
-#   expect_equal(unlist(get_param_xml(xml_path,"hinit",parent_name = "sol")),
+#   expect_equal(unlist(get_param_xml(xml_path,"hinit",select = "sol")),
 #                c(23.5,21.6,23.9,27.6,0))
 # })
 
