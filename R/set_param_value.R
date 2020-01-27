@@ -45,8 +45,7 @@ set_param_value <- function(xml_doc,
                             param_value,
                             parent_name= NULL,
                             parent_sel_attr = NULL,
-                            ids=NULL,
-                            show_xpath =FALSE){
+                            ...){
 
   # For managing a vector of values
   if (! base::is.list(param_value)) param_value <- list(param_value)
@@ -60,6 +59,20 @@ set_param_value <- function(xml_doc,
     return(invisible(FALSE))
   }
 
+
+  # Manage ids and show_xpath and remove them from the list
+  ids <- NULL
+  show_xpath <- FALSE
+
+  # ... for getting : ids, show_xpath arguments
+  dot_args= list(...)
+  dot_names <- names(dot_args)
+
+
+  # Getting ids and show_xpath
+  if ("ids" %in% dot_names) ids <- dot_args$ids
+  if ("show_xpath" %in% dot_names) show_xpath <- dot_args$show_xpath
+
   # Loop over param number
   if ( param_nb > 1) {
     ret <- vector("logical", param_nb)
@@ -69,8 +82,7 @@ set_param_value <- function(xml_doc,
                                 param_value = param_value[[p]],
                                 parent_name = parent_name,
                                 parent_sel_attr = parent_sel_attr,
-                                ids = ids,
-                                show_xpath = show_xpath)
+                                ...)
     }
     return(invisible(ret))
   }

@@ -4,14 +4,7 @@
 \alias{get_param_xml}
 \title{Getting parameter values from xml files}
 \usage{
-get_param_xml(
-  xml_files,
-  param_names,
-  parent_name = NULL,
-  parent_sel_attr = NULL,
-  ids = NULL,
-  show_xpath = FALSE
-)
+get_param_xml(xml_files, param_names, select = NULL, value = NULL, ...)
 }
 \arguments{
 \item{xml_files}{an xml file, or a vector/list of}
@@ -19,13 +12,11 @@ get_param_xml(
 \item{param_names}{parameter names list (i.e.: option parameter name, parameter name,
 other kinds in ini and some tec parameters not taken into account for the moment)}
 
-\item{parent_name}{parent node name or attribute name (optional)}
+\item{select}{node name or attribute name name to use for selection  (optional)}
 
-\item{parent_sel_attr}{parent attribute value (optional)}
+\item{value}{value used for select (optional)}
 
-\item{ids}{elements indices (optional)}
-
-\item{show_xpath}{Logical for displaying or not xpath value}
+\item{...}{To pass some other arguments}
 }
 \value{
 A list of parameter list length, with parameters values for each xml file
@@ -41,13 +32,13 @@ get_param_xml(xml_path, "argi")
 get_param_xml(xml_path, c("argi", "norg"))
 
 get_param_xml(xml_path, "argi",
-parent_name = "sol", parent_sel_attr = "solcanne")
+select = "sol", value = "solcanne")
 
 get_param_xml(xml_path, c("argi", "norg"),
-parent_name = "sol", parent_sel_attr = c("solcanne", "solbanane"))
+select = "sol", value = c("solcanne", "solbanane"))
 
 get_param_xml(list(xml_path, xml_path), c("argi","norg"),
-parent_name = "sol", parent_sel_attr = c("solcanne","solbanane"))
+select = "sol", value = c("solcanne","solbanane"))
 
 }
 

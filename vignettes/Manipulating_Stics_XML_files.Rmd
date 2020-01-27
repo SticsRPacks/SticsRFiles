@@ -387,8 +387,8 @@ get_param_xml(par_gen, param_names = "codeactimulch" )
 get_param_xml(par_gen, param_names = "tnitopt" )
 
 # Using a conditional selection
-get_param_xml(sols,param_names = "argi", parent_name = "sol",
-              parent_sel_attr = "solcanne")
+get_param_xml(sols,param_names = "argi", select = "sol",
+              value = "solcanne")
 
 ```
 
@@ -410,8 +410,8 @@ get_param_xml(sols,param_names = c("argi", "pH") )
 ```{r}
 
 # For one soil
-get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
-              parent_sel_attr = "solcanne")
+get_param_xml(sols,param_names = c("argi", "pH") , select = "sol",
+              value = "solcanne")
 ```
 
 
@@ -419,8 +419,8 @@ get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
 * All values (for all soil layers, or crop management operations)
 ```{r}
 # For all soil layers
-get_param_xml(sols, param_names = c("epc", "infil"), parent_name = "sol",
-              parent_sel_attr = "solcanne" )
+get_param_xml(sols, param_names = c("epc", "infil"), select = "sol",
+              value = "solcanne" )
 ```
 
 ```{r}
@@ -434,8 +434,8 @@ get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"))
 
 ```{r}
 # For soil layers 1 to 3
-get_param_xml(sols,param_names = c("epc", "infil"), parent_name = "sol",
-              parent_sel_attr = "solcanne", ids = 1:3 )
+get_param_xml(sols,param_names = c("epc", "infil"), select = "sol",
+              value = "solcanne", ids = 1:3 )
 ```
 
 ```{r}
@@ -489,12 +489,12 @@ set_param_xml(par_gen, param_names = "tnitopt", param_values = 29.5, overwrite =
 get_param_xml(par_gen, param_names = "tnitopt" )
 
 # Using a conditional selection
-set_param_xml(sols, param_names = "argi", param_values = 33, parent_name = "sol",
-              parent_sel_attr = "solcanne", overwrite = T )
+set_param_xml(sols, param_names = "argi", param_values = 33, select = "sol",
+              value = "solcanne", overwrite = T )
 
 # Controlling written values
-get_param_xml(sols,param_names = "argi", parent_name = "sol",
-              parent_sel_attr = "solcanne")
+get_param_xml(sols,param_names = "argi", select = "sol",
+              value = "solcanne")
 
 ```
 
@@ -538,11 +538,11 @@ get_param_xml(sols,param_names = c("argi", "pH") )
 ```{r}
 
 # For one soil
-set_param_xml(sols, param_names = c("argi", "pH"), param_values = list(50,8), parent_name = "sol",
-              parent_sel_attr = "solcanne", overwrite = T )
+set_param_xml(sols, param_names = c("argi", "pH"), param_values = list(50,8), select = "sol",
+              value = "solcanne", overwrite = T )
 # Controlling written values
-get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
-              parent_sel_attr = "solcanne")
+get_param_xml(sols,param_names = c("argi", "pH") , select = "sol",
+              value = "solcanne")
 ```
 
 
@@ -550,10 +550,10 @@ get_param_xml(sols,param_names = c("argi", "pH") , parent_name = "sol",
 * All values (for all soil layers, or crop management operations)
 ```{r}
 # For all soil layers
-set_param_xml(sols, param_names = c("epc", "infil"), param_values = list(18:22,48:52), parent_name = "sol", parent_sel_attr = "solcanne", overwrite = T )
+set_param_xml(sols, param_names = c("epc", "infil"), param_values = list(18:22,48:52), select = "sol", value = "solcanne", overwrite = T )
 # Controlling written values
-get_param_xml(sols, param_names = c("epc", "infil"), parent_name = "sol",
-              parent_sel_attr = "solcanne" )
+get_param_xml(sols, param_names = c("epc", "infil"), select = "sol",
+              value = "solcanne" )
 ```
 
 ```{r}
@@ -569,10 +569,10 @@ get_param_xml(tec, param_names = c("julapI_or_sum_upvt", "amount"))
 
 ```{r}
 # For soil layers 1 to 3
-set_param_xml(sols, param_names = c("epc", "infil"), param_values = list(20:18,50:48), parent_name = "sol", parent_sel_attr = "solcanne", overwrite = T, ids = 1:3 )
+set_param_xml(sols, param_names = c("epc", "infil"), param_values = list(20:18,50:48), select = "sol", value = "solcanne", overwrite = T, ids = 1:3 )
 # Controlling written values
-get_param_xml(sols,param_names = c("epc", "infil"), parent_name = "sol",
-              parent_sel_attr = "solcanne", ids = 1:3 )
+get_param_xml(sols,param_names = c("epc", "infil"), select = "sol",
+              value = "solcanne", ids = 1:3 )
 ```
 
 ```{r}

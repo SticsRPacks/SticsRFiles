@@ -9,8 +9,7 @@ get_param_value(
   param_name,
   parent_name = NULL,
   parent_sel_attr = NULL,
-  ids = NULL,
-  show_xpath = FALSE
+  ...
 )
 }
 \arguments{
@@ -22,9 +21,7 @@ get_param_value(
 
 \item{parent_sel_attr}{parent attribute value (optional)}
 
-\item{ids}{elements indices (optional)}
-
-\item{show_xpath}{Print the xpath}
+\item{...}{To pass some other arguments}
 }
 \value{
 a numeric vector values of parameter or a list of

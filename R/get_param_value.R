@@ -8,8 +8,7 @@
 #' @param param_name parameter name or a vector of names
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
-#' @param ids elements indices (optional)
-#' @param show_xpath Print the xpath
+#' @param ... To pass some other arguments
 #'
 #' @return a numeric vector values of parameter or a list of
 #'
@@ -36,10 +35,9 @@
 
 get_param_value <- function(xml_doc,
                             param_name,
-                            parent_name= NULL,
+                            parent_name = NULL,
                             parent_sel_attr = NULL,
-                            ids = NULL,
-                            show_xpath =FALSE){
+                            ...) {
 
 
   # TODO :
@@ -47,15 +45,39 @@ get_param_value <- function(xml_doc,
   # the get_param_names function !
   # 2 - add the case : if param_name is a list of vectors of parameters names ?
 
+  # Manage ids and show_xpath and remove them from the list
+  ids <- NULL
+  show_xpath <- FALSE
 
-  # Getting param values for sams parameters for the xml documents list
+  # ... for getting : ids, show_xpath arguments
+  dot_args= list(...)
+  dot_names <- names(dot_args)
+
+  # Getting ids and show_xpath
+  if ("ids" %in% dot_names) ids <- dot_args$ids
+  if ("show_xpath" %in% dot_names) show_xpath <- dot_args$show_xpath
+
+  # Getting parent informations to put them in the query
+  # parent_idx <- dot_names %in% c("ids", "show_xpath")
+  # dot_args <- dot_args[!parent_idx]
+  # parent_list <- get_param_parent(dot_args)
+  #
+  # if (length(dot_args) && base::is.null(parent_list$parent_name)){
+  #   warning(paste0("Not any possible selection using ", names(dot_args),
+  #                  " with value \"",dot_args[[names(dot_args)]],"\" ",
+  #                  "for parameter named ", param_name))
+  #   return(NULL)
+  # }
+
+
+
+  # Getting param values for the same parameters for the xml documents list
   if ( is.list(xml_doc) ) {
     values <- lapply(xml_doc, function(x) get_param_value(x,
-                                                         param_name,
-                                                         parent_name,
-                                                         parent_sel_attr,
-                                                         ids = ids,
-                                                         show_xpath = show_xpath))
+                                                          param_name,
+                                                          parent_name,
+                                                          parent_sel_attr,
+                                                          ...))
     return(values)
   }
 
@@ -65,25 +87,16 @@ get_param_value <- function(xml_doc,
                                                           x,
                                                           parent_name,
                                                           parent_sel_attr,
-                                                          ids = ids,
-                                                          show_xpath = show_xpath))
+                                                          ...))
     names(out) <- param_name
     return(out)
   }
 
-  param_types=get_param_type()
+  # Fixing parent's information
+  #parent_name <- parent_list$parent_name
+  #parent_sel_attr <- parent_list$parent_sel_attr
 
-  # if (is.numeric(parent_name)) {
-  #   ids <- parent_name
-  #   parent_name <- NULL
-  # }
-  #
-  # if (is.numeric(parent_sel_attr)) {
-  #   ids <- parent_sel_attr
-  #   parent_sel_attr <- NULL
-  # }
-
-
+  # Getting param type and path
   param_type <- get_param_type(xml_doc,
                                param_name, parent_name, parent_sel_attr, ids)
   type <- param_type$type
@@ -190,4 +203,39 @@ get_param_value <- function(xml_doc,
   value <- suppressWarnings(as.vector(value))
 
   return(value)
+}
+
+
+
+get_param_parent <- function(args_list){
+  #dot_args= list(...)
+  parent_name <- NULL
+  parent_sel_attr <- NULL
+
+  #if (!length(dot_args)) stop("Not any args !")
+
+  if (length(args_list) > 1) stop("Too much args !")
+
+
+  # Argument names to be detected
+  #arg_names <- c("soil", "plant", "variete", "usm")
+  files_types <- c("sols", "ini", "plt", "usms")
+  parent_names <- c("sol", "plante", "variete", "usm")
+
+  parent_list <- list(parent_name = parent_name,
+                      parent_sel_attr = parent_sel_attr)
+
+
+  #parent_idx <- arg_names %in% names(args_list)
+  parent_idx <- parent_names %in% names(args_list)
+
+  if (!any(parent_idx)) {
+    #warning(paste("Unknown name for ",as.character(args_list[[1]]), "value"))
+    return(parent_list)
+  }
+
+  parent_list$parent_name <- parent_names[parent_idx]
+  parent_list$parent_sel_attr <- as.character(args_list[[1]])
+
+  return(parent_list)
 }

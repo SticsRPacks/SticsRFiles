@@ -10,11 +10,10 @@
 #' @param param_values parameter(s) values or a list of
 #' @param out_path a directory path
 #' @param out_file an xml file name
-#' @param parent_name parent node name or attribute name (optional)
-#' @param parent_sel_attr parent attribute value (optional)
-#' @param ids elements indices (optional)
-#' @param show_xpath Logical for displaying or not xpath value
+#' @param select node name or attribute name name to use for selection (optional)
+#' @param value value used for select (optional)
 #' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
+#' @param... To pass some other arguments
 #'
 #' @return A logical value TRUE for operation success, FALSE otherwise
 #'
@@ -32,18 +31,18 @@
 #'
 #' # Setting a specific value to "argi" for "solcanne" soil
 #' set_param_xml("sols.xml", "argi",56,
-#' parent_name = "sol", parent_sel_attr = "solcanne")
+#' select = "sol", value = "solcanne")
 #'
 #' get_param_xml("sols.xml", "argi",
-#' parent_name = "sol", parent_sel_attr = "solcanne")
+#' select = "sol", value = "solcanne")
 #'
 #'
 #' # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
 #' set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-#' parent_name = "sol", parent_sel_attr = "solcanne")
+#' select = "sol", value = "solcanne")
 #'
 #' get_param_xml("sols.xml", c("argi", "norg"),
-#' parent_name = "sol", parent_sel_attr = "solcanne")
+#' select = "sol", value = "solcanne")
 #'
 #' }
 #'
@@ -53,11 +52,14 @@ set_param_xml <- function(xml_file,
                           param_values,
                           out_path = NULL,
                           out_file = NULL,
-                          parent_name = NULL,
-                          parent_sel_attr = NULL,
-                          ids = NULL,
-                          show_xpath = FALSE,
-                          overwrite = FALSE){
+                          select = NULL,
+                          value = NULL,
+                          overwrite = FALSE,
+                          ...){
+
+  # ... argument for passing : ids, show_xpath to get_param_value
+
+
 
 
   #  Setting output directory path or checking
@@ -94,10 +96,9 @@ set_param_xml <- function(xml_file,
   set_param_value(xml_doc,
                   param_name = param_names,
                   param_value = param_values,
-                  parent_name = parent_name,
-                  parent_sel_attr = parent_sel_attr,
-                  ids = ids,
-                  show_xpath = show_xpath)
+                  parent_name = select,
+                  parent_sel_attr = value,
+                  ...)
 
 
   # Saving

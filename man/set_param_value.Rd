@@ -10,8 +10,7 @@ set_param_value(
   param_value,
   parent_name = NULL,
   parent_sel_attr = NULL,
-  ids = NULL,
-  show_xpath = FALSE
+  ...
 )
 }
 \arguments{

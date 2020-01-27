@@ -10,11 +10,10 @@ set_param_xml(
   param_values,
   out_path = NULL,
   out_file = NULL,
-  parent_name = NULL,
-  parent_sel_attr = NULL,
-  ids = NULL,
-  show_xpath = FALSE,
-  overwrite = FALSE
+  select = NULL,
+  value = NULL,
+  overwrite = FALSE,
+  ...
 )
 }
 \arguments{
@@ -30,15 +29,13 @@ other kinds in ini and some tec parameters not taken into account for the moment
 
 \item{out_file}{an xml file name}
 
-\item{parent_name}{parent node name or attribute name (optional)}
+\item{select}{node name or attribute name name to use for selection (optional)}
 
-\item{parent_sel_attr}{parent attribute value (optional)}
-
-\item{ids}{elements indices (optional)}
-
-\item{show_xpath}{Logical for displaying or not xpath value}
+\item{value}{value used for select (optional)}
 
 \item{overwrite}{Logical TRUE for overwriting the output file, FALSE otherwise (default)}
+
+\item{...}{To pass some other arguments}
 }
 \value{
 A logical value TRUE for operation success, FALSE otherwise
@@ -61,18 +58,18 @@ get_param_xml("sols.xml", "argi")
 
 # Setting a specific value to "argi" for "solcanne" soil
 set_param_xml("sols.xml", "argi",56,
-parent_name = "sol", parent_sel_attr = "solcanne")
+select = "sol", value = "solcanne")
 
 get_param_xml("sols.xml", "argi",
-parent_name = "sol", parent_sel_attr = "solcanne")
+select = "sol", value = "solcanne")
 
 
 # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
 set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-parent_name = "sol", parent_sel_attr = "solcanne")
+select = "sol", value = "solcanne")
 
 get_param_xml("sols.xml", c("argi", "norg"),
-parent_name = "sol", parent_sel_attr = "solcanne")
+select = "sol", value = "solcanne")
 
 }
 
