@@ -32,9 +32,9 @@ command line), or with an R JavaStics interface provided by the
 
 ## Prerequisites and technical tips
 
-Some information about software requirements and operating system
-constraints are given in the SticsOnR package documentation
-[here](https://sticsrpacks.github.io/SticsOnR).
+> Some information about software requirements and operating system
+> constraints are given in the SticsOnR package documentation
+> [here](https://sticsrpacks.github.io/SticsOnR).
 
 ## Installation
 

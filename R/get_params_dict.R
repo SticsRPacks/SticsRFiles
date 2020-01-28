@@ -28,15 +28,65 @@
 get_params_dict <- function(in_dict = NULL) { #, javastics_dir = NULL) {
 
   # TODO: replace get_params_from_table with a call
-  # to the future function that will load the correspondance table (inputs.csv ?)
+  # to the future function that will load the correspondence table (inputs.csv ?)
   # file when it will contain the XML parameters names correspondence
   # or if specifying a dict type as files types i.e. tec, ini,...
   # that will allow to load parameters names from anb XML file
   # (regarding to the Stics version)
   #if ( base::is.null(in_dict)) return(get_params_from_table())
 
-  base_dict <- list(julapI="julapI_or_sum_upvt",doseI="amount",
-               julapN="julapN_or_sum_upvt",doseN="absolute_value/%")
+  # For V9.1
+  base_dict <- list(doseN="absolute_value/%",
+                    doseI="amount",
+                    codcueille="codceuille",
+                    code_auto_profres_1="code_auto_profres(1)",
+                    code_auto_profres_2="code_auto_profres(2)",
+                    codedyntalle_1="codedyntalle(1)",
+                    codedyntalle_2="codedyntalle(2)",
+                    codemontaison_1="codemontaison(1)",
+                    codemontaison_2="codemontaison(2)",
+                    coefracoupe_1="coefracoupe(1)",
+                    coefracoupe_2="coefracoupe(2)",
+                    CsurNsol0="csurNsol",
+                    ficinit="finit",
+                    Hinitf="hinit",
+                    julapI="julapI_or_sum_upvt",
+                    julapN="julapN_or_sum_upvt",
+                    kdesat="k_desat",
+                    maxtalle_1="MaxTalle(1)" ,
+                    maxtalle_2="MaxTalle(2)",
+                    nbcueille="nbceuille",
+                    NH4initf="NH4init",
+                    NO3initf="NO3init",
+                    codedate_irrigauto="P_codedate_irrigauto",
+                    pH0="pH",
+                    Pns="ps",
+                    resk_1="resk(1)",
+                    resk_2="resk(2)",
+                    resplmax_1="resplmax(1)",
+                    resplmax_2="resplmax(2)",
+                    resz_1="resz(1)",
+                    resz_2="resz(2)",
+                    seuilLAIapex_1="SeuilLAIapex(1)",
+                    seuilLAIapex_2="SeuilLAIapex(2)",
+                    seuilmortalle_1="SeuilMorTalle(1)",
+                    seuilmortalle_2="SeuilMorTalle(2)",
+                    seuilreconspeupl_1="SeuilReconsPeupl(1)",
+                    seuilreconspeupl_2="SeuilReconsPeupl(2)",
+                    sigmadistalle_1="SigmaDisTalle(1)",
+                    sigmadistalle_2="SigmaDisTalle(2)",
+                    surfapex_1="SurfApex(1)",
+                    surfapex_2="SurfApex(2)",
+                    tigefeuilcoupe_1="tigefeuilcoupe(1)",
+                    tigefeuilcoupe_2="tigefeuilcoupe(2)",
+                    vitreconspeupl_1="VitReconsPeupl(1)",
+                    vitreconspeupl_2="VitReconsPeupl(2)"
+
+  )
+
+
+
+
 
   # Returning intern dict
   if (base::is.null(in_dict)) return(base_dict)

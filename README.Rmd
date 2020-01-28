@@ -32,7 +32,7 @@ Advanced functionnalities are dedicated to produce XML parameter files using a m
 
 ## Prerequisites and technical tips
 
-Some information about software requirements and operating system constraints are given in the SticsOnR package documentation [here](https://sticsrpacks.github.io/SticsOnR).
+> Some information about software requirements and operating system constraints are given in the SticsOnR package documentation [here](https://sticsrpacks.github.io/SticsOnR).
 
 ## Installation
 
