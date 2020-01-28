@@ -99,13 +99,10 @@ or a vector of parameters from an xmlDocument class object." />
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
-    </li>
-    <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -143,7 +140,7 @@ or a vector of parameters from an xmlDocument class object.</p>
     <pre class="usage"><span class='fu'>get_param_bounds</span>(
   <span class='no'>xml_doc</span>,
   <span class='no'>param_name</span>,
-  <span class='kw'>bounds_names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bounds_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"data.frame"</span>
 )</pre>
 
@@ -159,8 +156,8 @@ or a vector of parameters from an xmlDocument class object.</p>
       <td><p>a parameter name of a vector of parameters names</p></td>
     </tr>
     <tr>
-      <th>bounds_names</th>
-      <td><p>bound(s) name(s) "min" or "max" (optional, default value c("min","max ))</p></td>
+      <th>bounds_name</th>
+      <td><p>bounds name "min" or "max" (optional, default value c("min","max ))</p></td>
     </tr>
     <tr>
       <th>output</th>
@@ -176,7 +173,7 @@ for bounds.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>xml_sta</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"extdata/xml/examples/V9.0/file_sta.xml"</span>),
+<span class='no'>xml_sta</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"extdata/xml/examples/V9.1/file_sta.xml"</span>),
 <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
 
 <span class='no'>sta_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'>xmldocument</span>(<span class='no'>xml_sta</span>)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Getting an intern dictionnary or merging it with an given dictionnary
+<title>Getting an intern dictionnary or merging it with a given dictionnary
 given as argument — get_params_dict • SticsRFiles</title>
 
 
@@ -36,9 +36,9 @@ given as argument — get_params_dict • SticsRFiles</title>
 
 
 
-<meta property="og:title" content="Getting an intern dictionnary or merging it with an given dictionnary
+<meta property="og:title" content="Getting an intern dictionnary or merging it with a given dictionnary
 given as argument — get_params_dict" />
-<meta property="og:description" content="Getting an intern dictionnary or merging it with an given dictionnary
+<meta property="og:description" content="Getting an intern dictionnary or merging it with a given dictionnary
 given as argument" />
 <meta name="twitter:card" content="summary" />
 
@@ -101,13 +101,10 @@ given as argument" />
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
-    </li>
-    <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -132,14 +129,14 @@ given as argument" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Getting an intern dictionnary or merging it with an given dictionnary
+    <h1>Getting an intern dictionnary or merging it with a given dictionnary
 given as argument</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_params_dict.R'><code>R/get_params_dict.R</code></a></small>
     <div class="hidden name"><code>get_params_dict.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Getting an intern dictionnary or merging it with an given dictionnary
+    <p>Getting an intern dictionnary or merging it with a given dictionnary
 given as argument</p>
     </div>
 
@@ -166,12 +163,12 @@ given as argument</p>
 <span class='co'># Giving a new dictionnary</span>
 <span class='no'>in_dict</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>name1</span> <span class='kw'>=</span> <span class='st'>"param_name1"</span>, <span class='kw'>name2</span> <span class='kw'>=</span> <span class='st'>"param_name2"</span>)
 
-<span class='co'>#get_params_dict(in_dict)</span>
+<span class='fu'>get_params_dict</span>(<span class='no'>in_dict</span>)
 
 <span class='co'># Giving a new dictionnary with common values with the internal one</span>
 <span class='no'>in_dict</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>name1</span> <span class='kw'>=</span> <span class='st'>"amount"</span>, <span class='kw'>name2</span> <span class='kw'>=</span> <span class='st'>"julapI_or_sum_upvt"</span>)
 
-<span class='co'>#get_params_dict(in_dict)</span>
+<span class='fu'>get_params_dict</span>(<span class='no'>in_dict</span>)
 
 }</div></pre>
   </div>

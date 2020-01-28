@@ -99,13 +99,10 @@ of parameters" />
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
-    </li>
-    <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -140,14 +137,7 @@ of parameters" />
 of parameters</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_param_xml</span>(
-  <span class='no'>xml_files</span>,
-  <span class='no'>param_names</span>,
-  <span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>show_xpath</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_param_xml</span>(<span class='no'>xml_files</span>, <span class='no'>param_names</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,20 +152,16 @@ of parameters</p>
 other kinds in ini and some tec parameters not taken into account for the moment)</p></td>
     </tr>
     <tr>
-      <th>parent_name</th>
-      <td><p>parent node name or attribute name (optional)</p></td>
+      <th>select</th>
+      <td><p>node name or attribute name name to use for selection  (optional)</p></td>
     </tr>
     <tr>
-      <th>parent_sel_attr</th>
-      <td><p>parent attribute value (optional)</p></td>
+      <th>value</th>
+      <td><p>value used for select (optional)</p></td>
     </tr>
     <tr>
-      <th>ids</th>
-      <td><p>elements indices (optional)</p></td>
-    </tr>
-    <tr>
-      <th>show_xpath</th>
-      <td><p>Logical for displaying or not xpath value</p></td>
+      <th>...</th>
+      <td><p>To pass some other arguments</p></td>
     </tr>
     </table>
 
@@ -185,18 +171,18 @@ other kinds in ini and some tec parameters not taken into account for the moment
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.0/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
+<span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.1/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
 <span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='st'>"argi"</span>)
 <span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>))
 
 <span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='st'>"argi"</span>,
-<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
+<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
 
 <span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>),
-<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>, <span class='st'>"solbanane"</span>))
+<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>, <span class='st'>"solbanane"</span>))
 
 <span class='fu'>get_param_xml</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>xml_path</span>, <span class='no'>xml_path</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>,<span class='st'>"norg"</span>),
-<span class='kw'>parent_name</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>parent_sel_attr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>,<span class='st'>"solbanane"</span>))
+<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>,<span class='st'>"solbanane"</span>))
 
 }</div></pre>
   </div>

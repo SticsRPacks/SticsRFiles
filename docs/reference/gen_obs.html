@@ -98,13 +98,10 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
-    </li>
-    <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -164,7 +161,7 @@
 <span class='no'>xl_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"xl"</span>, <span class='st'>"inputs_stics_example.xlsx"</span>),
                        <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"SticsRFiles"</span>)
 
-<span class='no'>obs_df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_excel</span>(<span class='no'>xl_path</span>,<span class='kw'>sheet</span><span class='kw'>=</span><span class='st'>"Obs"</span>)
+<span class='no'>obs_df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_excel</span>(<span class='no'>xl_path</span>,<span class='kw'>sheet</span><span class='kw'>=</span><span class='st'>"Obs"</span>)<span class='kw'>%&gt;%</span><span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>usm_name</span><span class='kw'>%in%</span><span class='st'>"USM_2017_T1_CI"</span>)
 
 <span class='co'># Generating the csv file</span>
 <span class='fu'>gen_obs</span>(<span class='no'>obs_df</span>, <span class='st'>"USM_2017_T1_CI.obs"</span>)
