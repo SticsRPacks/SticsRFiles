@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the "formalisme" node "@nom" attribute value of a
-(or a list of) parameter(s) in an xmlDocument — get_param_formalism • SticsRFiles</title>
+<title>Finding parameters names or formalism using partial search words — find_param • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,8 @@
 
 
 
-<meta property="og:title" content="Get the "formalisme" node "@nom" attribute value of a
-(or a list of) parameter(s) in an xmlDocument — get_param_formalism" />
-<meta property="og:description" content="Get the &quot;formalisme&quot; node &quot;@nom&quot; attribute value of a
-(or a list of) parameter(s) in an xmlDocument" />
+<meta property="og:title" content="Finding parameters names or formalism using partial search words — find_param" />
+<meta property="og:description" content="Finding parameters names or formalism using partial search words" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -101,13 +98,10 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from XL files data, `mailing` use case</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
-    </li>
-    <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -132,49 +126,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the "formalisme" node "@nom" attribute value of a
-(or a list of) parameter(s) in an xmlDocument</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_param_formalism.R'><code>R/get_param_formalism.R</code></a></small>
-    <div class="hidden name"><code>get_param_formalism.Rd</code></div>
+    <h1>Finding parameters names or formalism using partial search words</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/find_param.R'><code>R/find_param.R</code></a></small>
+    <div class="hidden name"><code>find_param.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the "formalisme" node "@nom" attribute value of a
-(or a list of) parameter(s) in an xmlDocument</p>
+    <p>Finding parameters names or formalism using partial search words</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_param_formalism</span>(<span class='no'>xml_doc</span>, <span class='no'>param_name</span>)</pre>
+    <pre class="usage"><span class='fu'>find_param</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"parameter"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>xml_doc</th>
-      <td><p>an xmlDocument object (created from any xml file)</p></td>
+      <th>name</th>
+      <td><p>Name or partial name or a vector of</p></td>
     </tr>
     <tr>
-      <th>param_name</th>
-      <td><p>a parameter name or a vector of</p></td>
+      <th>version</th>
+      <td><p>Optional, Stics version.
+Only the 2 last are referenced: V9.0, V9.1 (default value)</p></td>
+    </tr>
+    <tr>
+      <th>kind</th>
+      <td><p>Kind of information to be retrieved for parameters
+among "paramete", "formalism"</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a formalism name or a list of</p>
+    <p>A data.frame containing parameters names,
+their origin (file name) and their bounds or a named list
+of files containing formalisms and attached parameters names.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-
-<span class='no'>xml_sta</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"extdata/xml/examples/V9.0/file_sta.xml"</span>),
-<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
-
-<span class='no'>sta_doc</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'>xmldocument</span>(<span class='no'>xml_sta</span>)
-
-<span class='no'>par_form</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_param_formalism.html'>get_param_formalism</a></span>(<span class='no'>sta_doc</span>,<span class='st'>"zr"</span>)
-
-<span class='no'>par_form_list</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_param_formalism.html'>get_param_formalism</a></span>(<span class='no'>sta_doc</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"zr"</span>,<span class='st'>"altistation"</span>))
-
-}</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
