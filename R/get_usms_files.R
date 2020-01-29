@@ -68,7 +68,7 @@ get_usms_files <- function(workspace_path,
   }
 
   # Getting usms_list
-  usms_full_list <- get_usms_list(usms_xml_path)[[1]]
+  usms_full_list <- get_usms_list(usms_path = usms_xml_path)[[1]]
 
   # Getting the full list or a subset
   if ( base::is.null(usms_list) ) {
@@ -89,10 +89,10 @@ get_usms_files <- function(workspace_path,
   # Loop over usms names
   for (i in 1:usms_nb) {
     usm_name <- usms_list[i]
-    usm_files <- unlist(get_param_xml(usms_xml_path,
-                                      file_type,
-                                      parent_name = "usm",
-                                      parent_sel_attr = usm_name)[[1]], use.names = F)
+    usm_files <- unlist(get_param_xml(xml_files = usms_xml_path,
+                                      param_names = file_type,
+                                      select = "usm",
+                                      value = usm_name), use.names = F)
 
     usm_files <- usm_files[usm_files != "null"]
     usm_files_path <- file.path(workspace_path, usm_files)
@@ -103,10 +103,10 @@ get_usms_files <- function(workspace_path,
     plt_files <- NULL
     plt_files_path <- NULL
     if (check_plt) {
-      plt_files <- unlist(get_param_xml(usms_xml_path,
-                                        "fplt",
-                                        parent_name = "usm",
-                                        parent_sel_attr = usm_name)[[1]], use.names = F)
+      plt_files <- unlist(get_param_xml(xml_files = usms_xml_path,
+                                        param_names = "fplt",
+                                        select = "usm",
+                                        value = usm_name)[[1]], use.names = F)
 
       plt_files <- plt_files[plt_files != "null"]
       # applying for multiple paths (javastics, workspace)

@@ -73,20 +73,20 @@ get_param_value <- function(xml_doc,
 
   # Getting param values for the same parameters for the xml documents list
   if ( is.list(xml_doc) ) {
-    values <- lapply(xml_doc, function(x) get_param_value(x,
-                                                          param_name,
-                                                          parent_name,
-                                                          parent_sel_attr,
+    values <- lapply(xml_doc, function(x) get_param_value(xml_doc = x,
+                                                          param_name = param_name,
+                                                          parent_name = parent_name,
+                                                          parent_sel_attr = parent_sel_attr,
                                                           ...))
     return(values)
   }
 
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
-    out <- lapply(param_name, function(x) get_param_value(xml_doc,
-                                                          x,
-                                                          parent_name,
-                                                          parent_sel_attr,
+    out <- lapply(param_name, function(x) get_param_value(xml_doc = xml_doc,
+                                                          param_name = x,
+                                                          parent_name = parent_name,
+                                                          parent_sel_attr = parent_sel_attr,
                                                           ...))
     names(out) <- param_name
     return(out)
@@ -97,8 +97,11 @@ get_param_value <- function(xml_doc,
   #parent_sel_attr <- parent_list$parent_sel_attr
 
   # Getting param type and path
-  param_type <- get_param_type(xml_doc,
-                               param_name, parent_name, parent_sel_attr, ids)
+  param_type <- get_param_type(xml_doc = xml_doc,
+                               param_name = param_name,
+                               parent_name = parent_name,
+                               parent_sel_attr = parent_sel_attr,
+                               id = ids)
   type <- param_type$type
   xpath <- param_type$xpath
 

@@ -40,7 +40,7 @@ get_param_xml <- function(xml_files,
 
   xml_docs <- lapply(xml_files,xmldocument)
 
-  values <- get_param_value(xml_docs,
+  values <- get_param_value( xml_doc = xml_docs,
                             param_name = param_names,
                             parent_name = select,
                             parent_sel_attr = value,
