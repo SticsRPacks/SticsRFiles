@@ -4,13 +4,15 @@
 \alias{find_param_names}
 \title{Finding parameters names using partial search words}
 \usage{
-find_param_names(name, version = NULL)
+find_param_names(name, version = NULL, exact = FALSE)
 }
 \arguments{
 \item{name}{Name or partial name or a vector of}
 
 \item{version}{Optional, Stics version.
 Only the 2 last are referenced: V9.0, V9.1 (default value)}
+
+\item{exact}{Logical, if TRUE, the exact name is searched}
 }
 \value{
 A data.frame containing parameters names,
@@ -29,6 +31,8 @@ find_param_names(name = "albedo", version = "V9.0")
 find_param_names(name = c("albedo", "latitude", "humcapil"))
 
 find_param_names(name = c("al", "hum"))
+
+find_param_names(name = "albedo", exact = TRUE)
 
 }
 

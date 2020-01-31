@@ -4,6 +4,8 @@
 #' @param version Optional, Stics version.
 #' Only the 2 last are referenced: V9.0, V9.1 (default value)
 #'
+#' @param exact Logical, if TRUE, the exact name is searched
+#'
 #' @return A data.frame containing parameters names,
 #' their origin (file name) and their bounds.
 #'
@@ -20,13 +22,16 @@
 #'
 #' find_param_names(name = c("al", "hum"))
 #'
+#' find_param_names(name = "albedo", exact = TRUE)
+#'
 #' }
 #'
 #'
-find_param_names <- function(name, version = NULL) {
+find_param_names <- function(name, version = NULL, exact = FALSE) {
 
   param_names <- find_param(name = name,
-                                version = version,
-                                kind = "parameter")
+                            version = version,
+                            kind = "parameter",
+                            fixed = exact)
   return(param_names)
 }

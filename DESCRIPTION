@@ -58,6 +58,7 @@ Collate:
     'copy_mailing_script_example.R'
     'download_data.R'
     'exists_param.R'
+    'exist_param_xml.R'
     'expand_stics_names.R'
     'global.R'
     'fileDocument.R'

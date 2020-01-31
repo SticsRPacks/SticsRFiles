@@ -9,7 +9,8 @@ get_param_names_xml(
   name = NULL,
   bounds = TRUE,
   output = "data.frame",
-  combine = TRUE
+  combine = TRUE,
+  fixed = FALSE
 )
 }
 \arguments{
@@ -24,6 +25,8 @@ get_param_names_xml(
 \item{combine}{Logical, usefull only for data.frame.
 TRUE, to transform a data.frame list to a unique data.frame,
 FALSE otherwise.}
+
+\item{fixed}{Logical, if TRUE, the exact name is searched}
 }
 \value{
 A list of parameters names data.frames or list, or a unique data.frame

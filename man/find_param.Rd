@@ -4,7 +4,7 @@
 \alias{find_param}
 \title{Finding parameters names or formalism using partial search words}
 \usage{
-find_param(name, version = NULL, kind = "parameter")
+find_param(name, version = NULL, kind = "parameter", fixed = FALSE)
 }
 \arguments{
 \item{name}{Name or partial name or a vector of}
@@ -14,6 +14,8 @@ Only the 2 last are referenced: V9.0, V9.1 (default value)}
 
 \item{kind}{Kind of information to be retrieved for parameters
 among "paramete", "formalism"}
+
+\item{fixed}{Logical, if TRUE, the exact name is searched}
 }
 \value{
 A data.frame containing parameters names,

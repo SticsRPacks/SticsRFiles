@@ -6,6 +6,8 @@
 #' @param kind Kind of information to be retrieved for parameters
 #' among "paramete", "formalism"
 #'
+#' @param fixed Logical, if TRUE, the exact name is searched
+#'
 #' @return A data.frame containing parameters names,
 #' their origin (file name) and their bounds or a named list
 #' of files containing formalisms and attached parameters names.
@@ -29,7 +31,10 @@
 #' }
 #'
 #'
-find_param <- function(name, version=NULL, kind = "parameter") {
+find_param <- function(name,
+                       version=NULL,
+                       kind = "parameter",
+                       fixed = FALSE) {
 
   kinds <- c("parameter", "formalism")
 
@@ -60,7 +65,8 @@ find_param <- function(name, version=NULL, kind = "parameter") {
 
   # Getting parameters names bounds and file
   param_names <- get_param_names_xml(xml_file = files_list,
-                                     name = name)
+                                     name = name,
+                                     fixed = fixed)
 
   # Not any parameters found
   if (all(dim(param_names)==0)) {

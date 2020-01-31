@@ -14,6 +14,8 @@
 #' TRUE, to transform a data.frame list to a unique data.frame,
 #' FALSE otherwise.
 #'
+#' @param fixed Logical, if TRUE, the exact name is searched
+#'
 #' @return A list of parameters names data.frames or list, or a unique data.frame
 #' for multiple files.
 #'
@@ -40,7 +42,8 @@ get_param_names_xml <- function(xml_file,
                                 name=NULL,
                                 bounds = TRUE,
                                 output="data.frame",
-                                combine = TRUE) {
+                                combine = TRUE,
+                                fixed = FALSE) {
 
 
   output_formats <- c("list", "data.frame")
@@ -57,7 +60,8 @@ get_param_names_xml <- function(xml_file,
                                                           name = name,
                                                           bounds = bounds,
                                                           output = output,
-                                                          combine = combine))
+                                                          combine = combine,
+                                                          fixed = fixed))
 
     # Empty param_names list
     if (length(param_names) == 0 ) return(NULL)
@@ -82,8 +86,9 @@ get_param_names_xml <- function(xml_file,
 
 
   # Search based on names or a substring of parameters names
+  # exact match with fixed == TRUE
   if (!base::is.null(name)) {
-    param_names <- unique(unlist(lapply(name, function(x) grep(x = param_names, pattern = x, value = TRUE))))
+    param_names <- grep_names(param_names = param_names, fixed = fixed, name = name)
   }
 
   # No parameters names found
@@ -117,6 +122,23 @@ get_param_names_xml <- function(xml_file,
       names(param_names) <- base::basename(xml_file)
     }
   }
+
+  return(param_names)
+
+}
+
+
+grep_names <- function(param_names, name, fixed = FALSE) {
+
+  patt_str <- "x"
+  if (fixed) patt_str <- "^x$"
+
+  param_names <- unique(
+    unlist(lapply(name,
+                  function(x)
+                    grep(x = param_names,
+                         pattern = gsub(pattern = "x",replacement = x, x = patt_str),
+                         value = TRUE))))
 
   return(param_names)
 
