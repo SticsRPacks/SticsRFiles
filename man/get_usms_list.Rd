@@ -4,10 +4,12 @@
 \alias{get_usms_list}
 \title{Getting usms names list for an usms.xml file or a list of}
 \usage{
-get_usms_list(usms_path, xml_name = "usms.xml")
+get_usms_list(usms_path, name = NULL, xml_name = "usms.xml")
 }
 \arguments{
 \item{usms_path}{usms dir path or usm file path}
+
+\item{name}{Usm name or partial name}
 
 \item{xml_name}{usms xml file name (optional, default = "usms.xml")}
 }
