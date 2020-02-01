@@ -21,7 +21,10 @@ Extracting a usm names list from an usms.xml file
 }
 \examples{
 path = system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
-usms_list <- get_usms_list(path)[[1]]
+usms_list <- get_usms_list(usms_path = path)[[1]]
 
+usms_list <- get_usms_list(usms_path = path, name = "usm1")[[1]]
+
+usms_list <- get_usms_list(usms_path = path, name = c("usm1", "usm2"))[[1]]
 
 }

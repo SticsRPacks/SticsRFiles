@@ -2,8 +2,8 @@ library(SticsRFiles)
 options(warn=-1)
 xml_usms= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/usms.xml"))
 xml_usms_list <- c(xml_usms, xml_usms)
-usms_names <- get_usms_list(xml_usms)
-usms_names_list <- get_usms_list(xml_usms_list)
+usms_names <- get_usms_list(usms_path = xml_usms)
+usms_names_list <- get_usms_list(usms_path = xml_usms_list)
 
 # Testing returned type for one or several files
 context("Getting returned type, one or two files")
