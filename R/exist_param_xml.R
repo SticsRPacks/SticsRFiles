@@ -26,7 +26,9 @@ exist_param_xml <- function(name,
                             version=NULL) {
 
   # Finding exact matchs in found names
-  par_names <- find_param_names(name = name, version = version, exact = TRUE)
+  par_names <- find_param_names(name = name,
+                                version = version,
+                                exact = TRUE)$name
 
   # Checking if any correspondence for each element of name
   exist_status <- unlist(lapply(name, function(x) any(par_names %in% x)))
