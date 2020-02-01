@@ -38,7 +38,9 @@ get_usms_list <- function(usms_path, name = NULL, xml_name = "usms.xml"){
 
 grep_usms <- function(usms_list, name) {
 
-  usms_idx <- grep(pattern = name, x = usms_list)
+  usms_idx <- unlist(lapply(name, function(x) grep(pattern = x, x = usms_list)))
+
+  #usms_idx <- grep(pattern = name, x = usms_list)
 
   if (!length(usms_idx)) return(NULL)
 
