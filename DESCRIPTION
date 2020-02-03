@@ -1,7 +1,7 @@
 Package: SticsRFiles
 Title: Read And Modify STICS Input/Output Files
-Date: 2019-01-29
-Version: 0.1.0.9003
+Date: 2019-02-03
+Version: 0.1.0.9004
 Authors@R: 
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
       person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),

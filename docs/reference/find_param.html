@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9004</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     <p>Finding parameters names or formalism using partial search words</p>
     </div>
 
-    <pre class="usage"><span class='fu'>find_param</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"parameter"</span>)</pre>
+    <pre class="usage"><span class='fu'>find_param</span>(<span class='no'>name</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>kind</span> <span class='kw'>=</span> <span class='st'>"parameter"</span>, <span class='kw'>fixed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,6 +153,10 @@ Only the 2 last are referenced: V9.0, V9.1 (default value)</p></td>
       <th>kind</th>
       <td><p>Kind of information to be retrieved for parameters
 among "paramete", "formalism"</p></td>
+    </tr>
+    <tr>
+      <th>fixed</th>
+      <td><p>Logical, if TRUE, the exact name is searched</p></td>
     </tr>
     </table>
 
