@@ -191,6 +191,9 @@ set_param_value <- function(xml_doc,
          },
          choix_attr= {
            value=setAttrValues(xml_doc,xpath,param_name,param_value,ids)
+         },
+         nodename_childs= {
+           value=setValues(xml_doc,xpath,param_value,ids)
          }
 
 

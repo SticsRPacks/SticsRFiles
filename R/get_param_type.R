@@ -21,10 +21,11 @@
 get_param_type <- function(xml_doc, param_name, parent_name = NULL,
                            parent_sel_attr = NULL, id = NULL) {
 
-  param_types=c("node","param","option", "table","table2",
+  param_types=c("param","option", "table","table2",
                 "choix_param", "node_node","node_option", "node_table",
                 "node_param","form_option", "node_attr","attr", "attrname",
-                "attr_attr", "choix_attr","nodename", "attr_attr2")
+                "attr_attr", "choix_attr","nodename", "attr_attr2",
+                "nodename_childs")
 
 
   char_to_filter <- c("-", ".", ":", "/", "%", "#", " ","(",")")
