@@ -1,6 +1,7 @@
-#' @title Generate Stics tec xml file(s) from a template and an input file
+#' @title Generate Stics tec xml file(s) from a template or an input file
+#'
 #' @param param_table a table (df, tibble) containing parameters to use (see details)
-#' @param tec_in_file file path to the template tec xml file
+#' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
 #' @param stics_version the stics version to use (default to last)
 #' @param dict List of correspondance between given parameter names and internal names.
@@ -38,7 +39,7 @@
 #' @export
 #'
 # TODO: refactor with gen_sta_file, gen_ini_file : same code
-gen_tec_xml <- function(tec_out_file = NULL, param_table = NULL,
+gen_tec_xml <- function(param_table = NULL,
                         tec_in_file = NULL,
                         out_path = getwd(),
                         stics_version = "last",
@@ -97,22 +98,12 @@ gen_tec_xml <- function(tec_out_file = NULL, param_table = NULL,
   }
 
   # defining output files paths
-  if (base::is.null(tec_out_file)) {
-    out_name <- param_table[[tec_col]]
-    ids <- grepl("_tec.xml$",out_name)
-    if ( sum(ids) < length(out_name) ) {
-      out_name[ids] <- paste0(param_table[[tec_col]][ids],"_tec.xml")
-    }
-    tec_out_file <- file.path(out_path,out_name)
-  } else {
-    # file names generation if multiple files
-
-    tec_out_file <- file.path(out_path,tec_out_file)
-    if ( length(xml_docs) > 1) {
-      tec_out_file <- paste(gsub(x = tec_out_file, replacement = "", pattern = "_tec.xml$"),
-                            1:length(xml_docs), sep = "_","tec.xml" )
-    }
+  out_name <- param_table[[tec_col]]
+  ids <- grepl("_tec.xml$",out_name)
+  if ( sum(ids) < length(out_name) ) {
+    out_name[ids] <- paste0(param_table[[tec_col]][ids],"_tec.xml")
   }
+  tec_out_file <- file.path(out_path,out_name)
 
 
 

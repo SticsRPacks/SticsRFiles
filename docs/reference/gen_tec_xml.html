@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate Stics tec xml file(s) from a template and an input file — gen_tec_xml • SticsRFiles</title>
+<title>Generate Stics tec xml file(s) from a template or an input file — gen_tec_xml • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Generate Stics tec xml file(s) from a template and an input file — gen_tec_xml" />
-<meta property="og:description" content="Generate Stics tec xml file(s) from a template and an input file" />
+<meta property="og:title" content="Generate Stics tec xml file(s) from a template or an input file — gen_tec_xml" />
+<meta property="og:description" content="Generate Stics tec xml file(s) from a template or an input file" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,17 +126,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate Stics tec xml file(s) from a template and an input file</h1>
+    <h1>Generate Stics tec xml file(s) from a template or an input file</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/gen_tec_xml.R'><code>R/gen_tec_xml.R</code></a></small>
     <div class="hidden name"><code>gen_tec_xml.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate Stics tec xml file(s) from a template and an input file</p>
+    <p>Generate Stics tec xml file(s) from a template or an input file</p>
     </div>
 
     <pre class="usage"><span class='fu'>gen_tec_xml</span>(
-  <span class='kw'>tec_out_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>param_table</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tec_in_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>out_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
@@ -153,7 +152,7 @@
     </tr>
     <tr>
       <th>tec_in_file</th>
-      <td><p>file path to the template tec xml file</p></td>
+      <td><p>file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)</p></td>
     </tr>
     <tr>
       <th>out_path</th>

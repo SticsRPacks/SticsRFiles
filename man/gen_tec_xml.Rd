@@ -2,10 +2,9 @@
 % Please edit documentation in R/gen_tec_xml.R
 \name{gen_tec_xml}
 \alias{gen_tec_xml}
-\title{Generate Stics tec xml file(s) from a template and an input file}
+\title{Generate Stics tec xml file(s) from a template or an input file}
 \usage{
 gen_tec_xml(
-  tec_out_file = NULL,
   param_table = NULL,
   tec_in_file = NULL,
   out_path = getwd(),
@@ -16,7 +15,7 @@ gen_tec_xml(
 \arguments{
 \item{param_table}{a table (df, tibble) containing parameters to use (see details)}
 
-\item{tec_in_file}{file path to the template tec xml file}
+\item{tec_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
 
 \item{out_path}{path to an optional folder where to write the output file(s)}
 
@@ -28,7 +27,7 @@ gen_tec_xml(
 an invisible xmlDocument object or a list of
 }
 \description{
-Generate Stics tec xml file(s) from a template and an input file
+Generate Stics tec xml file(s) from a template or an input file
 }
 \details{
 \code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
