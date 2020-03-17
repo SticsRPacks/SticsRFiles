@@ -135,17 +135,17 @@
     <p>Extracting parameter values for a list of xml files and parameters</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_param_xml</span>(<span class='no'>xml_files</span>, <span class='no'>param_names</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_param_xml</span>(<span class='no'>xml_file</span>, <span class='no'>param_name</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>xml_files</th>
-      <td><p>an xml file, or a vector/list of</p></td>
+      <th>xml_file</th>
+      <td><p>An xml file, or a vector/list of</p></td>
     </tr>
     <tr>
-      <th>param_names</th>
+      <th>param_name</th>
       <td><p>parameter names vector, i.e.: parameter name or option code</p></td>
     </tr>
     <tr>
@@ -164,24 +164,57 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of parameter list length, with parameters values for each xml file</p>
+    <p>A list of parameter values for each xml_file (a list of list)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.1/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
-<span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='st'>"argi"</span>)
-<span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>))
-
+    <pre class="examples"><div class='input'><span class='no'>xml_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/xml/examples/V9.1/sols.xml"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"SticsRFiles"</span>)
+<span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='st'>"argi"</span>)</div><div class='output co'>#&gt; $sols.xml
+#&gt;  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0 27.0
+#&gt; [16] 30.7  0.1 27.3 25.0 10.2 25.0 28.6 36.0 29.0 10.2 21.2 22.2 13.0 17.0 15.0
+#&gt; [31] 26.0 28.2 20.0
+#&gt; </div><div class='input'><span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>))</div><div class='output co'>#&gt; $sols.xml
+#&gt; $sols.xml$argi
+#&gt;  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0 27.0
+#&gt; [16] 30.7  0.1 27.3 25.0 10.2 25.0 28.6 36.0 29.0 10.2 21.2 22.2 13.0 17.0 15.0
+#&gt; [31] 26.0 28.2 20.0
+#&gt; 
+#&gt; $sols.xml$norg
+#&gt;  [1] 0.270 0.100 0.210 0.150 0.700 0.110 0.200 0.120 0.070 0.160 0.180 0.210
+#&gt; [13] 0.140 0.120 0.140 0.140 0.070 0.080 0.200 0.180 0.100 0.120 0.150 0.120
+#&gt; [25] 0.140 0.070 0.110 0.100 0.150 0.080 0.088 0.088 0.100
+#&gt; 
+#&gt; </div><div class='input'>
 <span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='st'>"argi"</span>,
-<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)
-
+<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"solcanne"</span>)</div><div class='output co'>#&gt; $sols.xml
+#&gt; [1] 30.2
+#&gt; </div><div class='input'>
 <span class='fu'>get_param_xml</span>(<span class='no'>xml_path</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>, <span class='st'>"norg"</span>),
-<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>, <span class='st'>"solbanane"</span>))
-
+<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>, <span class='st'>"solbanane"</span>))</div><div class='output co'>#&gt; $sols.xml
+#&gt; $sols.xml$argi
+#&gt; [1] 30.2 70.0
+#&gt; 
+#&gt; $sols.xml$norg
+#&gt; [1] 0.27 0.20
+#&gt; 
+#&gt; </div><div class='input'>
 <span class='fu'>get_param_xml</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>xml_path</span>, <span class='no'>xml_path</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"argi"</span>,<span class='st'>"norg"</span>),
-<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>,<span class='st'>"solbanane"</span>))
-
-}</div></pre>
+<span class='kw'>select</span> <span class='kw'>=</span> <span class='st'>"sol"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"solcanne"</span>,<span class='st'>"solbanane"</span>))</div><div class='output co'>#&gt; $sols.xml
+#&gt; $sols.xml$argi
+#&gt; [1] 30.2 70.0
+#&gt; 
+#&gt; $sols.xml$norg
+#&gt; [1] 0.27 0.20
+#&gt; 
+#&gt; 
+#&gt; $xml_2_sols.xml
+#&gt; $xml_2_sols.xml$argi
+#&gt; [1] 30.2 70.0
+#&gt; 
+#&gt; $xml_2_sols.xml$norg
+#&gt; [1] 0.27 0.20
+#&gt; 
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
