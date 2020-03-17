@@ -91,8 +91,8 @@ get_usms_files <- function(workspace_path,
   # Loop over usms names
   for (i in 1:usms_nb) {
     usm_name <- usms_list[i]
-    usm_files <- unlist(get_param_xml(xml_files = usms_xml_path,
-                                      param_names = file_type,
+    usm_files <- unlist(get_param_xml(xml_file = usms_xml_path,
+                                      param_name = file_type,
                                       select = "usm",
                                       value = usm_name), use.names = F)
 
@@ -105,8 +105,8 @@ get_usms_files <- function(workspace_path,
     plt_files <- NULL
     plt_files_path <- NULL
     if (check_plt) {
-      plt_files <- unlist(get_param_xml(xml_files = usms_xml_path,
-                                        param_names = "fplt",
+      plt_files <- unlist(get_param_xml(xml_file = usms_xml_path,
+                                        param_name = "fplt",
                                         select = "usm",
                                         value = usm_name)[[1]], use.names = F)
 

@@ -36,8 +36,7 @@
 
 
 <meta property="og:title" content="Getting parameter values from xml files — get_param_xml" />
-<meta property="og:description" content="Extracting parameter values for a list of xmlDocument and
-of parameters" />
+<meta property="og:description" content="Extracting parameter values for a list of xml files and parameters" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,8 +132,7 @@ of parameters" />
     </div>
 
     <div class="ref-description">
-    <p>Extracting parameter values for a list of xmlDocument and
-of parameters</p>
+    <p>Extracting parameter values for a list of xml files and parameters</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_param_xml</span>(<span class='no'>xml_files</span>, <span class='no'>param_names</span>, <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
@@ -148,12 +146,11 @@ of parameters</p>
     </tr>
     <tr>
       <th>param_names</th>
-      <td><p>parameter names list (i.e.: option parameter name, parameter name,
-other kinds in ini and some tec parameters not taken into account for the moment)</p></td>
+      <td><p>parameter names vector, i.e.: parameter name or option code</p></td>
     </tr>
     <tr>
       <th>select</th>
-      <td><p>node name or attribute name name to use for selection  (optional)</p></td>
+      <td><p>node name or attribute name to use for selection (optional, default to no selection)</p></td>
     </tr>
     <tr>
       <th>value</th>
@@ -161,7 +158,7 @@ other kinds in ini and some tec parameters not taken into account for the moment
     </tr>
     <tr>
       <th>...</th>
-      <td><p>To pass some other arguments</p></td>
+      <td><p>Pass further arguments to <code><a href='get_param_value.html'>get_param_value()</a></code></p></td>
     </tr>
     </table>
 

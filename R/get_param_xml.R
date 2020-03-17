@@ -1,19 +1,16 @@
 #' @title Getting parameter values from xml files
 #'
-#' @description Extracting parameter values for a list of xmlDocument and
-#' of parameters
+#' @description Extracting parameter values for a list of xml files and parameters
 #'
-#' @param xml_files an xml file, or a vector/list of
-#' @param param_names parameter names list (i.e.: option parameter name, parameter name,
-#' other kinds in ini and some tec parameters not taken into account for the moment)
-#' @param select node name or attribute name name to use for selection  (optional)
+#' @param xml_file An xml file, or a vector/list of
+#' @param param_name parameter names vector, i.e.: parameter name or option code
+#' @param select node name or attribute name to use for selection (optional, default to no selection)
 #' @param value value used for select (optional)
-#' @param ... To pass some other arguments
+#' @param ... Pass further arguments to `get_param_value()`
 #'
-#' @return A list of parameter list length, with parameters values for each xml file
+#' @return A list of parameter values for each xml_file (a list of list)
 #'
 #' @examples
-#' \dontrun{
 #' xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
 #' get_param_xml(xml_path, "argi")
 #' get_param_xml(xml_path, c("argi", "norg"))
@@ -27,28 +24,29 @@
 #' get_param_xml(list(xml_path, xml_path), c("argi","norg"),
 #' select = "sol", value = c("solcanne","solbanane"))
 #'
-#' }
-#'
 #' @export
-get_param_xml <- function(xml_files,
-                          param_names,
+get_param_xml <- function(xml_file,
+                          param_name,
                           select = NULL,
                           value = NULL,
                           ...) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
 
-  xml_docs <- lapply(xml_files,xmldocument)
+  xml_docs <- lapply(xml_file,xmldocument)
 
-  values <- get_param_value( xml_doc = xml_docs,
-                            param_name = param_names,
+  values <- get_param_value(xml_doc = xml_docs,
+                            param_name = param_name,
                             parent_name = select,
                             parent_sel_attr = value,
                             ...)
+  xml_names= lapply(xml_file, basename)%>%unlist()
 
+  # If there are duplicated names in xml_file:
+  is_duplicated_name= xml_names%>%duplicated()
+  xml_names[is_duplicated_name]= paste0("xml_",which(is_duplicated_name==TRUE),"_",xml_names[is_duplicated_name])
 
+  names(values) <- xml_names
 
   return(values)
-
-
 }
