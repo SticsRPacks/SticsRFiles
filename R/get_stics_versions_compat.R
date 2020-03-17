@@ -1,22 +1,11 @@
 #' Get all stics XML versions
 #'
-#' @param last Boolean. Is only the last version needed ?
-#'
-#' @return A list with all the STICS XML file versions available in the package
-#' templates and the last version, or only the last one.
+#' @return A list of the STICS versions compatible with this package, and the last version in use.
 #'
 #' @examples
-#' \dontrun{
+#' SticsRFiles:::get_stics_versions_compat()
 #'
-#' SticsRFiles:::get_xml_stics_versions_tags()
-#'
-#' SticsRFiles:::get_xml_stics_versions_tags(last=TRUE)
-#'
-#' }
-#'
-#' @keywords internal
-#'
-get_xml_stics_versions_tags <- function(last = FALSE) {
+get_stics_versions_compat <- function(last = FALSE) {
 
   # Getting available versions tags
   tmpl_file <- paste0("extdata/xml/templates/")

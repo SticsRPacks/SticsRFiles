@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate Stics tec xml file(s) from a template or an input file — gen_tec_xml • SticsRFiles</title>
+<title>Get all stics XML versions — get_stics_versions_compat • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Generate Stics tec xml file(s) from a template or an input file — gen_tec_xml" />
-<meta property="og:description" content="Generate Stics tec xml file(s) from a template or an input file" />
+<meta property="og:title" content="Get all stics XML versions — get_stics_versions_compat" />
+<meta property="og:description" content="Get all stics XML versions" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,90 +126,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate Stics tec xml file(s) from a template or an input file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/gen_tec_xml.R'><code>R/gen_tec_xml.R</code></a></small>
-    <div class="hidden name"><code>gen_tec_xml.Rd</code></div>
+    <h1>Get all stics XML versions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_stics_versions_compat.R'><code>R/get_stics_versions_compat.R</code></a></small>
+    <div class="hidden name"><code>get_stics_versions_compat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate Stics tec xml file(s) from a template or an input file</p>
+    <p>Get all stics XML versions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gen_tec_xml</span>(
-  <span class='kw'>param_table</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tec_in_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>out_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>stics_version</span> <span class='kw'>=</span> <span class='st'>"last"</span>,
-  <span class='kw'>dict</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_stics_versions_compat</span>(<span class='kw'>last</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>param_table</th>
-      <td><p>a table (df, tibble) containing parameters to use (see details)</p></td>
-    </tr>
-    <tr>
-      <th>tec_in_file</th>
-      <td><p>file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)</p></td>
-    </tr>
-    <tr>
-      <th>out_path</th>
-      <td><p>path to an optional folder where to write the output file(s)</p></td>
-    </tr>
-    <tr>
-      <th>stics_version</th>
-      <td><p>the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.</p></td>
-    </tr>
-    <tr>
-      <th>dict</th>
-      <td><p>List of correspondance between given parameter names and internal names.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an invisible xmlDocument object or a list of</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Please see <code><a href='get_stics_versions_compat.html'>get_stics_versions_compat()</a></code> for the full list of stics versions that can be used for the
-argument <code>stics_version</code>.
-<code>param_table</code> is a <code>data.frame</code> with the following format:</p><table class='table'>
-<tr><td>Tec_name</td><td>julres_1</td><td>coderes_1</td><td>qres_1</td><td>Crespc_1</td><td>CsurNres_1</td></tr>
-<tr><td>USM_2017_T1_CI_tec.xml</td><td>999</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml</td><td>110</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml</td><td>73</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml</td><td>82</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml</td><td>82</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml</td><td>70</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml</td><td>81</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml</td><td>100</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml</td><td>100</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml</td><td>92</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-<tr><td>FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml</td><td>82</td><td>1</td><td>9</td><td>42</td><td>90</td></tr>
-</table>
-
-
-
-<p>The first column give the tec file name (to be generated), all following columns give the parameter value to put
-in the file, and each line denotes a separate tec file (for e.g. several USMs).</p>
+    <p>A list of the STICS versions compatible with this package, and the last version in use.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>xl_path</span> <span class='kw'>&lt;-</span> <span class='st'>"inputs_stics_example.xlsx"</span>
-<span class='fu'><a href='copy_mailing_example.html'>copy_mailing_example</a></span>(<span class='kw'>xl_name</span> <span class='kw'>=</span> <span class='no'>xl_path</span>)
-<span class='no'>tec_param_df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readxl</span><span class='kw ns'>::</span><span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span>(<span class='no'>xl_path</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Tec"</span>)
-<span class='fu'>gen_tec_xml</span>(<span class='kw'>out_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"/path/to/dest/dir"</span>,<span class='st'>"tec"</span>),
-<span class='kw'>param_table</span> <span class='kw'>=</span> <span class='no'>tec_param_df</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_stics_versions_compat.html'>get_stics_versions_compat</a></span>()</div><div class='output co'>#&gt; $versions_list
+#&gt; [1] "V9.0" "V9.1"
+#&gt; 
+#&gt; $last_version
+#&gt; [1] "V9.1"
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

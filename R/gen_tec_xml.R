@@ -3,10 +3,12 @@
 #' @param param_table a table (df, tibble) containing parameters to use (see details)
 #' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
-#' @param stics_version the stics version to use (default to last)
+#' @param stics_version the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.
 #' @param dict List of correspondance between given parameter names and internal names.
 #'
-#' @details `param_table` is a `data.frame` with the following format:
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
+#'  `param_table` is a `data.frame` with the following format:
 #'
 #' |Tec_name                                         | julres_1| coderes_1| qres_1| Crespc_1| CsurNres_1|
 #' |:------------------------------------------------|--------:|---------:|------:|--------:|----------:|
