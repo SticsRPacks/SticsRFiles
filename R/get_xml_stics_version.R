@@ -37,7 +37,7 @@ get_xml_stics_version <- function(stics_version = NULL, xml_doc = NULL) {
 
   if (base::is.null(stics_version)) stics_version = "last"
 
-  known_versions <- get_xml_stics_versions_tags()
+  known_versions <- get_stics_versions_compat()
 
   if ( stics_version =="last" ) {
     stics_version <- known_versions$last_version

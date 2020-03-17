@@ -3,12 +3,14 @@
 #' @param workspace_path JavaStics workspace path
 #' @param usms_list Vector of usms names (Optional)
 #' @param file_name Usms XML file name (Optional)
-#' @param file_type Type of file to get (see Types definition)
+#' @param file_type Vector of file(s) type to get (if not given, all types are returned, see details)
 #' @param javastics_path JavaStics installation path (Optional)
+#'
+#' @details The possible values of file types are: "fplt", "finit", "fclim1",
+#' "fclim2", "fstation" and "ftec"
 #'
 #' @return A named list with existing files path in each usm element
 #'
-#@keywords internal
 #' @export
 #'
 #' @examples
@@ -68,7 +70,7 @@ get_usms_files <- function(workspace_path,
   }
 
   # Getting usms_list
-  usms_full_list <- get_usms_list(usms_path = usms_xml_path)[[1]]
+  usms_full_list <- get_usms_list(usm_path = usms_xml_path)
 
   # Getting the full list or a subset
   if ( base::is.null(usms_list) ) {

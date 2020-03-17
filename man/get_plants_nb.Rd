@@ -9,13 +9,16 @@ get_plants_nb(usm_xml_path, usms_list = c())
 \arguments{
 \item{usm_xml_path}{Path of usms.xml file}
 
-\item{usms_list}{Usms selection list inside usms from usms.xml file (optional)}
+\item{usms_list}{Usms selection list inside usms from usms.xml file (optional, see details)}
 }
 \value{
 A numeric vector of plants number per usm
 }
 \description{
 Extracting plant number from usms.xml file data
+}
+\details{
+Use \code{get_usms_list()} to get the list of the usm names.
 }
 \examples{
 \dontrun{

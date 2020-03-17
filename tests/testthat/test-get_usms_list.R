@@ -1,16 +1,13 @@
 library(SticsRFiles)
 options(warn=-1)
 xml_usms= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/usms.xml"))
-xml_usms_list <- c(xml_usms, xml_usms)
-usms_names <- get_usms_list(usms_path = xml_usms)
-usms_names_list <- get_usms_list(usms_path = xml_usms_list)
+usms_names <- get_usms_list(usm_path = xml_usms)
 
 # Testing returned type for one or several files
 context("Getting returned type, one or two files")
 
 test_that("type, one or two files", {
   expect_is(usms_names, "list")
-  expect_is(usms_names_list, "list")
 })
 
 
@@ -19,7 +16,6 @@ usm_name <- "SugarCane"
 test_that("name, one file", {
   #expect_true(usm_name %in% usms_names[[1]])
   expect_true(all(lapply(usms_names, function(x) usm_name %in% x)))
-  expect_true(all(lapply(usms_names_list, function(x) usm_name %in% x)))
 })
 
 
@@ -29,5 +25,4 @@ usm_name <- "UsmTest"
 test_that("name, one file", {
   #expect_false(usm_name %in% usms_names[[1]])
   expect_false(all(lapply(usms_names, function(x) usm_name %in% x)))
-  expect_false(all(lapply(usms_names_list, function(x) usm_name %in% x)))
 })

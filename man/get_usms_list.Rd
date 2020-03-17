@@ -2,29 +2,26 @@
 % Please edit documentation in R/get_usms_list.R
 \name{get_usms_list}
 \alias{get_usms_list}
-\title{Getting usms names list for an usms.xml file or a list of}
+\title{Getting usms names list for an usms.xml file}
 \usage{
-get_usms_list(usms_path, name = NULL, xml_name = "usms.xml")
+get_usms_list(usm_path, name = NULL)
 }
 \arguments{
-\item{usms_path}{usms dir path or usm file path}
+\item{usm_path}{usm file path (e.g. "usms.xml")}
 
-\item{name}{Usm name or partial name}
-
-\item{xml_name}{usms xml file name (optional, default = "usms.xml")}
+\item{name}{A vector of usm name(s) or partial name(s), optional}
 }
 \value{
-A list with usms names
+A vector of usm names
 }
 \description{
 Extracting a usm names list from an usms.xml file
 }
 \examples{
 path = system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
-usms_list <- get_usms_list(usms_path = path)[[1]]
 
-usms_list <- get_usms_list(usms_path = path, name = "usm1")[[1]]
+usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"))
 
-usms_list <- get_usms_list(usms_path = path, name = c("usm1", "usm2"))[[1]]
+usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"), name = c("usm1", "usm2"))
 
 }

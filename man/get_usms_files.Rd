@@ -19,7 +19,7 @@ get_usms_files(
 
 \item{file_name}{Usms XML file name (Optional)}
 
-\item{file_type}{Type of file to get (see Types definition)}
+\item{file_type}{Vector of file(s) type to get (if not given, all types are returned, see details)}
 
 \item{javastics_path}{JavaStics installation path (Optional)}
 }
@@ -28,6 +28,10 @@ A named list with existing files path in each usm element
 }
 \description{
 Getting existing xml files path list per usm from an usms.xml file
+}
+\details{
+The possible values of file types are: "fplt", "finit", "fclim1",
+"fclim2", "fstation" and "ftec"
 }
 \examples{
 
