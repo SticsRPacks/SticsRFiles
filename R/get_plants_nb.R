@@ -3,7 +3,9 @@
 #' @description Extracting plant number from usms.xml file data
 #'
 #' @param usm_xml_path Path of usms.xml file
-#' @param usms_list Usms selection list inside usms from usms.xml file (optional)
+#' @param usms_list Usms selection list inside usms from usms.xml file (optional, see details)
+#'
+#' @details Use `get_usms_list()` to get the list of the usm names.
 #'
 #' @return A numeric vector of plants number per usm
 #'
