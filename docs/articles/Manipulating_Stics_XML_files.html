@@ -60,10 +60,10 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -234,13 +234,13 @@ In the above file extract for crop management parameters, each set of parameters
 <h2 class="hasAnchor">
 <a href="#set-the-xml-files-examples-source-directory" class="anchor"></a>Set the XML files examples source directory</h2>
 <p>In xml_dir, we store the directory path of the XML files included in the library installation.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">xml_dir &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"extdata"</span>, <span class="st">"xml"</span>, <span class="st">"examples"</span>, <span class="st">"V9.1"</span>), <span class="dt">package =</span> <span class="st">"SticsRFiles"</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">xml_dir &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="st">"extdata"</span>,<span class="st">"xml"</span>,<span class="st">"examples"</span>,<span class="st">"V9.1"</span>), <span class="dt">package =</span> <span class="st">"SticsRFiles"</span> )</a>
 <a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co"># For linux &gt;</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1'</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># For linux </span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1"</span></a>
 <a class="sourceLine" id="cb5-5" title="5"></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co"># For windows &gt;</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1'</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co"># For windows</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1"</span></a></code></pre></div>
 </div>
 <div id="list-examples-files" class="section level2">
 <h2 class="hasAnchor">
@@ -248,21 +248,18 @@ In the above file extract for crop management parameters, each set of parameters
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
 <a class="sourceLine" id="cb6-2" title="2">xml_files &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="dt">path =</span> xml_dir, <span class="dt">pattern =</span> <span class="st">".xml$"</span>, <span class="dt">full.names =</span> T)</a>
 <a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Listing only the first three files of the entire list</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Listing only the first three files of the entire list </span></a>
 <a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co"># head(xml_files, n = 3) For linux &gt; [1]</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_ini.xml'</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co"># &gt; [2]</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_plt.xml'</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co"># &gt; [3]</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_sta.xml'</span></a>
-<a class="sourceLine" id="cb6-12" title="12"></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co"># For windows &gt; [1]</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_ini.xml'</span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co"># &gt; [2]</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_plt.xml'</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co"># &gt; [3]</span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_sta.xml'</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co"># head(xml_files, n = 3)</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co"># For linux </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; [1] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_ini.xml"     </span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; [2] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_plt.xml"     </span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; [3] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_sta.xml"     </span></a>
+<a class="sourceLine" id="cb6-11" title="11"></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co"># For windows</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; [1] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_ini.xml"   </span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; [2] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_plt.xml"    </span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt; [3] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/examples/V9.1/file_sta.xml"     </span></a></code></pre></div>
 <p>The correponding files types to file names is given in the above table</p>
 <table class="table">
 <caption>Correspondence between files names and parameters groups</caption>
@@ -312,16 +309,17 @@ In the above file extract for crop management parameters, each set of parameters
 <div id="a-specific-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-specific-file" class="anchor"></a>A specific file</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Setting a local directory path xml_loc_dir &lt;- '/path/to/local/directory'</span></a>
-<a class="sourceLine" id="cb7-2" title="2"></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="dt">from =</span> <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_dir, <span class="st">"sols.xml"</span>), <span class="dt">to =</span> xml_loc_dir)</a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Setting a local directory path</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># xml_loc_dir &lt;- "/path/to/local/directory"</span></a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="dt">from =</span> <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_dir,<span class="st">"sols.xml"</span>), <span class="dt">to =</span> xml_loc_dir)</a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
 <div id="all-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#all-files" class="anchor"></a>All files</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="dt">from =</span> xml_files, <span class="dt">to =</span> xml_loc_dir)</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="dt">from =</span> xml_files,<span class="dt">to =</span> xml_loc_dir)</a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE</span></a></code></pre></div>
 </div>
 </div>
@@ -379,7 +377,7 @@ In the above file extract for crop management parameters, each set of parameters
 <a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt; 9           profhum          sols.xml 10.0 150.0</span></a>
 <a class="sourceLine" id="cb10-19" title="19"></a>
 <a class="sourceLine" id="cb10-20" title="20"></a>
-<a class="sourceLine" id="cb10-21" title="21">param_names &lt;-<span class="st"> </span><span class="kw"><a href="../reference/find_param_names.html">find_param_names</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"al"</span>, <span class="st">"hum"</span>))</a>
+<a class="sourceLine" id="cb10-21" title="21">param_names &lt;-<span class="st"> </span><span class="kw"><a href="../reference/find_param_names.html">find_param_names</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"al"</span>,<span class="st">"hum"</span>))</a>
 <a class="sourceLine" id="cb10-22" title="22"><span class="co">#&gt; Warning in fix_dup_bounds(values, bounds_name): Found duplicate values in bound(s) </span></a>
 <a class="sourceLine" id="cb10-23" title="23"><span class="co">#&gt;  max </span></a>
 <a class="sourceLine" id="cb10-24" title="24"><span class="co">#&gt;  They have been replaced with min or max values !</span></a>
@@ -480,7 +478,7 @@ In the above file extract for crop management parameters, each set of parameters
 <a class="sourceLine" id="cb12-24" title="24"><span class="co">#&gt; [1] NA</span></a>
 <a class="sourceLine" id="cb12-25" title="25"></a>
 <a class="sourceLine" id="cb12-26" title="26"></a>
-<a class="sourceLine" id="cb12-27" title="27">param_formalisms &lt;-<span class="st"> </span><span class="kw"><a href="../reference/find_param_formalisms.html">find_param_formalisms</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"al"</span>, <span class="st">"hum"</span>))</a>
+<a class="sourceLine" id="cb12-27" title="27">param_formalisms &lt;-<span class="st"> </span><span class="kw"><a href="../reference/find_param_formalisms.html">find_param_formalisms</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"al"</span>,<span class="st">"hum"</span>))</a>
 <a class="sourceLine" id="cb12-28" title="28"></a>
 <a class="sourceLine" id="cb12-29" title="29"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(param_formalisms)</a>
 <a class="sourceLine" id="cb12-30" title="30"><span class="co">#&gt; $file_ini.xml</span></a>
@@ -578,29 +576,30 @@ In the above file extract for crop management parameters, each set of parameters
 <li>For one parameter and one occurence</li>
 </ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Fixing files paths</span></a>
-<a class="sourceLine" id="cb13-2" title="2">sols &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir, <span class="st">"sols.xml"</span>)</a>
-<a class="sourceLine" id="cb13-3" title="3">par_gen &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir, <span class="st">"param_gen.xml"</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2">sols &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir,<span class="st">"sols.xml"</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3">par_gen &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir,<span class="st">"param_gen.xml"</span>)</a>
 <a class="sourceLine" id="cb13-4" title="4"></a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="co"># A option parameter</span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"codeactimulch"</span>)</a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"codeactimulch"</span> )</a>
 <a class="sourceLine" id="cb13-7" title="7"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb13-8" title="8"><span class="co">#&gt; [1] 1</span></a>
 <a class="sourceLine" id="cb13-9" title="9"></a>
 <a class="sourceLine" id="cb13-10" title="10"><span class="co"># A simple parameter</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"tnitopt"</span>)</a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"tnitopt"</span> )</a>
 <a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt; [1] 30</span></a>
 <a class="sourceLine" id="cb13-14" title="14"></a>
 <a class="sourceLine" id="cb13-15" title="15"><span class="co"># Using a conditional selection</span></a>
-<a class="sourceLine" id="cb13-16" title="16"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
-<a class="sourceLine" id="cb13-17" title="17"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb13-18" title="18"><span class="co">#&gt; [1] 30.2</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-16" title="16"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb13-17" title="17">              <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb13-19" title="19"><span class="co">#&gt; [1] 30.2</span></a></code></pre></div>
 <ul>
 <li>For one parameter and several occurences</li>
 </ul>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"></a>
 <a class="sourceLine" id="cb14-2" title="2"><span class="co"># For all soils</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="st">"argi"</span> )</a>
 <a class="sourceLine" id="cb14-4" title="4"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb14-5" title="5"><span class="co">#&gt;  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0 27.0</span></a>
 <a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt; [16] 30.7  0.1 27.3 25.0 10.2 25.0 28.6 36.0 29.0 10.2 21.2 22.2 13.0 17.0 15.0</span></a>
@@ -610,7 +609,7 @@ In the above file extract for crop management parameters, each set of parameters
 </ul>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"></a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="co"># For all soils</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>))</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>) )</a>
 <a class="sourceLine" id="cb15-4" title="4"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; [[1]]$argi</span></a>
 <a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt;  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0 27.0</span></a>
@@ -626,13 +625,14 @@ In the above file extract for crop management parameters, each set of parameters
 </ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="co"># For one soil</span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; [[1]]$argi</span></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; [1] 30.2</span></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt; [[1]]$pH</span></a>
-<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; [1] 7</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>) , <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb16-4" title="4">              <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; [[1]]$argi</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt; [1] 30.2</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; [[1]]$pH</span></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt; [1] 7</span></a></code></pre></div>
 </div>
 <div id="vector-parameters" class="section level2">
 <h2 class="hasAnchor">
@@ -641,15 +641,16 @@ In the above file extract for crop management parameters, each set of parameters
 <li>All values (for all soil layers, or crop management operations)</li>
 </ul>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># For all soil layers</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt; [[1]]$epc</span></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt; [1] 20 20 20 20 20</span></a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb17-7" title="7"><span class="co">#&gt; [[1]]$infil</span></a>
-<a class="sourceLine" id="cb17-8" title="8"><span class="co">#&gt; [1] 50 50 50 50 50</span></a></code></pre></div>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb17-3" title="3">              <span class="dt">value =</span> <span class="st">"solcanne"</span> )</a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">#&gt; [[1]]$epc</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co">#&gt; [1] 20 20 20 20 20</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co">#&gt; [[1]]$infil</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="co">#&gt; [1] 50 50 50 50 50</span></a></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># For all irrigation operations</span></a>
-<a class="sourceLine" id="cb18-2" title="2">tec &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir, <span class="st">"file_tec.xml"</span>)</a>
+<a class="sourceLine" id="cb18-2" title="2">tec &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir,<span class="st">"file_tec.xml"</span>)</a>
 <a class="sourceLine" id="cb18-3" title="3"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>))</a>
 <a class="sourceLine" id="cb18-4" title="4"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb18-5" title="5"><span class="co">#&gt; [[1]]$julapI_or_sum_upvt</span></a>
@@ -661,8 +662,8 @@ In the above file extract for crop management parameters, each set of parameters
 <li>Selecting with values index</li>
 </ul>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># For soil layers 1 to 3</span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, </a>
-<a class="sourceLine" id="cb19-3" title="3">    <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb19-3" title="3">              <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> )</a>
 <a class="sourceLine" id="cb19-4" title="4"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb19-5" title="5"><span class="co">#&gt; [[1]]$epc</span></a>
 <a class="sourceLine" id="cb19-6" title="6"><span class="co">#&gt; [1] 20 20 20</span></a>
@@ -740,58 +741,60 @@ In the above file extract for crop management parameters, each set of parameters
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"></a>
 <a class="sourceLine" id="cb22-2" title="2"></a>
 <a class="sourceLine" id="cb22-3" title="3"><span class="co"># A option parameter</span></a>
-<a class="sourceLine" id="cb22-4" title="4"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"codeactimulch"</span>, <span class="dt">param_values =</span> <span class="dv">2</span>, <span class="dt">overwrite =</span> T)</a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(par_gen,<span class="dt">param_names =</span> <span class="st">"codeactimulch"</span>, <span class="dt">param_values =</span> <span class="dv">2</span>, <span class="dt">overwrite =</span> T )</a>
 <a class="sourceLine" id="cb22-5" title="5"></a>
 <a class="sourceLine" id="cb22-6" title="6"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb22-7" title="7"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"codeactimulch"</span>)</a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"codeactimulch"</span> )</a>
 <a class="sourceLine" id="cb22-8" title="8"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb22-9" title="9"><span class="co">#&gt; [1] 2</span></a>
 <a class="sourceLine" id="cb22-10" title="10"></a>
 <a class="sourceLine" id="cb22-11" title="11"><span class="co"># A simple parameter</span></a>
-<a class="sourceLine" id="cb22-12" title="12"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"tnitopt"</span>, <span class="dt">param_values =</span> <span class="fl">29.5</span>, <span class="dt">overwrite =</span> T)</a>
+<a class="sourceLine" id="cb22-12" title="12"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"tnitopt"</span>, <span class="dt">param_values =</span> <span class="fl">29.5</span>, <span class="dt">overwrite =</span> T )</a>
 <a class="sourceLine" id="cb22-13" title="13"></a>
 <a class="sourceLine" id="cb22-14" title="14"><span class="co"># Controlling written values:</span></a>
-<a class="sourceLine" id="cb22-15" title="15"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"tnitopt"</span>)</a>
+<a class="sourceLine" id="cb22-15" title="15"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(par_gen, <span class="dt">param_names =</span> <span class="st">"tnitopt"</span> )</a>
 <a class="sourceLine" id="cb22-16" title="16"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb22-17" title="17"><span class="co">#&gt; [1] 29.5</span></a>
 <a class="sourceLine" id="cb22-18" title="18"></a>
 <a class="sourceLine" id="cb22-19" title="19"><span class="co"># Using a conditional selection</span></a>
-<a class="sourceLine" id="cb22-20" title="20"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">param_values =</span> <span class="dv">33</span>, <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, </a>
-<a class="sourceLine" id="cb22-21" title="21">    <span class="dt">overwrite =</span> T)</a>
+<a class="sourceLine" id="cb22-20" title="20"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">param_values =</span> <span class="dv">33</span>, <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb22-21" title="21">              <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T )</a>
 <a class="sourceLine" id="cb22-22" title="22"></a>
 <a class="sourceLine" id="cb22-23" title="23"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb22-24" title="24"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
-<a class="sourceLine" id="cb22-25" title="25"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb22-26" title="26"><span class="co">#&gt; [1] 33</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-24" title="24"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb22-25" title="25">              <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
+<a class="sourceLine" id="cb22-26" title="26"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb22-27" title="27"><span class="co">#&gt; [1] 33</span></a></code></pre></div>
 <ul>
 <li>For one parameter and several occurences</li>
 </ul>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"></a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="co"># For all soils One value per occurence</span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">33</span>), <span class="dt">overwrite =</span> T)</a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb23-5" title="5"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>)</a>
-<a class="sourceLine" id="cb23-6" title="6"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb23-7" title="7"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</span></a>
-<a class="sourceLine" id="cb23-8" title="8"><span class="co">#&gt; [26] 26 27 28 29 30 31 32 33</span></a>
-<a class="sourceLine" id="cb23-9" title="9"></a>
-<a class="sourceLine" id="cb23-10" title="10"><span class="co"># Same value for all occurences</span></a>
-<a class="sourceLine" id="cb23-11" title="11"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">param_values =</span> <span class="dv">40</span>, <span class="dt">overwrite =</span> T)</a>
-<a class="sourceLine" id="cb23-12" title="12"></a>
-<a class="sourceLine" id="cb23-13" title="13"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb23-14" title="14"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>)</a>
-<a class="sourceLine" id="cb23-15" title="15"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb23-16" title="16"><span class="co">#&gt;  [1] 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40</span></a>
-<a class="sourceLine" id="cb23-17" title="17"><span class="co">#&gt; [26] 40 40 40 40 40 40 40 40</span></a></code></pre></div>
+<a class="sourceLine" id="cb23-2" title="2"><span class="co"># For all soils</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co"># One value per occurence</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">33</span>), <span class="dt">overwrite =</span> T )</a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co"># Controlling written values</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="st">"argi"</span> )</a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</span></a>
+<a class="sourceLine" id="cb23-9" title="9"><span class="co">#&gt; [26] 26 27 28 29 30 31 32 33</span></a>
+<a class="sourceLine" id="cb23-10" title="10"></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="co"># Same value for all occurences</span></a>
+<a class="sourceLine" id="cb23-12" title="12"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="st">"argi"</span>, <span class="dt">param_values =</span> <span class="dv">40</span>, <span class="dt">overwrite =</span> T )</a>
+<a class="sourceLine" id="cb23-13" title="13"></a>
+<a class="sourceLine" id="cb23-14" title="14"><span class="co"># Controlling written values</span></a>
+<a class="sourceLine" id="cb23-15" title="15"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="st">"argi"</span> )</a>
+<a class="sourceLine" id="cb23-16" title="16"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb23-17" title="17"><span class="co">#&gt;  [1] 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40</span></a>
+<a class="sourceLine" id="cb23-18" title="18"><span class="co">#&gt; [26] 40 40 40 40 40 40 40 40</span></a></code></pre></div>
 <ul>
 <li>For several parameters and several occurrences</li>
 </ul>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="co"># For all soils One value per occurence</span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">33</span>, <span class="dv">33</span><span class="op">:</span><span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb24-4" title="4">    <span class="dt">overwrite =</span> T)</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="co"># For all soils</span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="co"># One value per occurence</span></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">33</span>,<span class="dv">33</span><span class="op">:</span><span class="dv">1</span>), <span class="dt">overwrite =</span> T )</a>
 <a class="sourceLine" id="cb24-5" title="5"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>))</a>
+<a class="sourceLine" id="cb24-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>) )</a>
 <a class="sourceLine" id="cb24-7" title="7"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb24-8" title="8"><span class="co">#&gt; [[1]]$argi</span></a>
 <a class="sourceLine" id="cb24-9" title="9"><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</span></a>
@@ -802,9 +805,9 @@ In the above file extract for crop management parameters, each set of parameters
 <a class="sourceLine" id="cb24-14" title="14"><span class="co">#&gt; [26]  8  7  6  5  4  3  2  1</span></a>
 <a class="sourceLine" id="cb24-15" title="15"></a>
 <a class="sourceLine" id="cb24-16" title="16"><span class="co"># Same value for all occurences</span></a>
-<a class="sourceLine" id="cb24-17" title="17"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">50</span>, <span class="dv">8</span>), <span class="dt">overwrite =</span> T)</a>
+<a class="sourceLine" id="cb24-17" title="17"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">50</span>, <span class="dv">8</span>), <span class="dt">overwrite =</span> T )</a>
 <a class="sourceLine" id="cb24-18" title="18"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb24-19" title="19"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>))</a>
+<a class="sourceLine" id="cb24-19" title="19"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>) )</a>
 <a class="sourceLine" id="cb24-20" title="20"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb24-21" title="21"><span class="co">#&gt; [[1]]$argi</span></a>
 <a class="sourceLine" id="cb24-22" title="22"><span class="co">#&gt;  [1] 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50</span></a>
@@ -817,16 +820,17 @@ In the above file extract for crop management parameters, each set of parameters
 </ul>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"></a>
 <a class="sourceLine" id="cb25-2" title="2"><span class="co"># For one soil</span></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">50</span>, <span class="dv">8</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, </a>
-<a class="sourceLine" id="cb25-4" title="4">    <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T)</a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">50</span>,<span class="dv">8</span>), <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb25-4" title="4">              <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T )</a>
 <a class="sourceLine" id="cb25-5" title="5"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb25-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="co">#&gt; [[1]]$argi</span></a>
-<a class="sourceLine" id="cb25-9" title="9"><span class="co">#&gt; [1] 50</span></a>
-<a class="sourceLine" id="cb25-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb25-11" title="11"><span class="co">#&gt; [[1]]$pH</span></a>
-<a class="sourceLine" id="cb25-12" title="12"><span class="co">#&gt; [1] 8</span></a></code></pre></div>
+<a class="sourceLine" id="cb25-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"argi"</span>, <span class="st">"pH"</span>) , <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb25-7" title="7">              <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb25-9" title="9"><span class="co">#&gt; [[1]]$argi</span></a>
+<a class="sourceLine" id="cb25-10" title="10"><span class="co">#&gt; [1] 50</span></a>
+<a class="sourceLine" id="cb25-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb25-12" title="12"><span class="co">#&gt; [[1]]$pH</span></a>
+<a class="sourceLine" id="cb25-13" title="13"><span class="co">#&gt; [1] 8</span></a></code></pre></div>
 </div>
 <div id="vector-parameters-1" class="section level2">
 <h2 class="hasAnchor">
@@ -835,10 +839,10 @@ In the above file extract for crop management parameters, each set of parameters
 <li>All values (for all soil layers, or crop management operations)</li>
 </ul>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># For all soil layers</span></a>
-<a class="sourceLine" id="cb26-2" title="2"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">18</span><span class="op">:</span><span class="dv">22</span>, <span class="dv">48</span><span class="op">:</span><span class="dv">52</span>), </a>
-<a class="sourceLine" id="cb26-3" title="3">    <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T)</a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb26-5" title="5"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>)</a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">18</span><span class="op">:</span><span class="dv">22</span>,<span class="dv">48</span><span class="op">:</span><span class="dv">52</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T )</a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="co"># Controlling written values</span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb26-5" title="5">              <span class="dt">value =</span> <span class="st">"solcanne"</span> )</a>
 <a class="sourceLine" id="cb26-6" title="6"><span class="co">#&gt; [[1]]</span></a>
 <a class="sourceLine" id="cb26-7" title="7"><span class="co">#&gt; [[1]]$epc</span></a>
 <a class="sourceLine" id="cb26-8" title="8"><span class="co">#&gt; [1] 18 19 20 21 22</span></a>
@@ -846,44 +850,41 @@ In the above file extract for crop management parameters, each set of parameters
 <a class="sourceLine" id="cb26-10" title="10"><span class="co">#&gt; [[1]]$infil</span></a>
 <a class="sourceLine" id="cb26-11" title="11"><span class="co">#&gt; [1] 48 49 50 51 52</span></a></code></pre></div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># For all irrigation operations</span></a>
-<a class="sourceLine" id="cb27-2" title="2">tec &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir, <span class="st">"file_tec.xml"</span>)</a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">200</span><span class="op">:</span><span class="dv">215</span>, </a>
-<a class="sourceLine" id="cb27-4" title="4">    <span class="dv">20</span><span class="op">:</span><span class="dv">35</span>), <span class="dt">overwrite =</span> T)</a>
-<a class="sourceLine" id="cb27-5" title="5"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb27-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>))</a>
-<a class="sourceLine" id="cb27-7" title="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb27-8" title="8"><span class="co">#&gt; [[1]]$julapI_or_sum_upvt</span></a>
-<a class="sourceLine" id="cb27-9" title="9"><span class="co">#&gt;  [1] 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215</span></a>
-<a class="sourceLine" id="cb27-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb27-11" title="11"><span class="co">#&gt; [[1]]$amount</span></a>
-<a class="sourceLine" id="cb27-12" title="12"><span class="co">#&gt;  [1] 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35</span></a></code></pre></div>
+<a class="sourceLine" id="cb27-2" title="2">tec &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(xml_loc_dir,<span class="st">"file_tec.xml"</span>)</a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">200</span><span class="op">:</span><span class="dv">215</span>,<span class="dv">20</span><span class="op">:</span><span class="dv">35</span>), <span class="dt">overwrite =</span> T )</a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="co"># Controlling written values</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>))</a>
+<a class="sourceLine" id="cb27-6" title="6"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="co">#&gt; [[1]]$julapI_or_sum_upvt</span></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="co">#&gt;  [1] 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215</span></a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb27-10" title="10"><span class="co">#&gt; [[1]]$amount</span></a>
+<a class="sourceLine" id="cb27-11" title="11"><span class="co">#&gt;  [1] 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35</span></a></code></pre></div>
 <ul>
 <li>Some values</li>
 </ul>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># For soil layers 1 to 3</span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">20</span><span class="op">:</span><span class="dv">18</span>, <span class="dv">50</span><span class="op">:</span><span class="dv">48</span>), </a>
-<a class="sourceLine" id="cb28-3" title="3">    <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T, <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb28-5" title="5"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, </a>
-<a class="sourceLine" id="cb28-6" title="6">    <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb28-8" title="8"><span class="co">#&gt; [[1]]$epc</span></a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="co">#&gt; [1] 20 19 18</span></a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb28-11" title="11"><span class="co">#&gt; [[1]]$infil</span></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="co">#&gt; [1] 50 49 48</span></a></code></pre></div>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(sols, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">20</span><span class="op">:</span><span class="dv">18</span>,<span class="dv">50</span><span class="op">:</span><span class="dv">48</span>), <span class="dt">select =</span> <span class="st">"sol"</span>, <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">overwrite =</span> T, <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> )</a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="co"># Controlling written values</span></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(sols,<span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"epc"</span>, <span class="st">"infil"</span>), <span class="dt">select =</span> <span class="st">"sol"</span>,</a>
+<a class="sourceLine" id="cb28-5" title="5">              <span class="dt">value =</span> <span class="st">"solcanne"</span>, <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span> )</a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="co">#&gt; [[1]]$epc</span></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="co">#&gt; [1] 20 19 18</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb28-10" title="10"><span class="co">#&gt; [[1]]$infil</span></a>
+<a class="sourceLine" id="cb28-11" title="11"><span class="co">#&gt; [1] 50 49 48</span></a></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"></a>
 <a class="sourceLine" id="cb29-2" title="2"><span class="co"># For irrigation operations 1 to 5 (same indices for all parameters)</span></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">204</span><span class="op">:</span><span class="dv">200</span>, </a>
-<a class="sourceLine" id="cb29-4" title="4">    <span class="dv">24</span><span class="op">:</span><span class="dv">20</span>), <span class="dt">overwrite =</span> T, <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb29-5" title="5"><span class="co"># Controlling written values</span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>), <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb29-8" title="8"><span class="co">#&gt; [[1]]$julapI_or_sum_upvt</span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="co">#&gt; [1] 204 203 202 201 200</span></a>
-<a class="sourceLine" id="cb29-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="co">#&gt; [[1]]$amount</span></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="co">#&gt; [1] 24 23 22 21 20</span></a></code></pre></div>
+<a class="sourceLine" id="cb29-3" title="3"><span class="kw"><a href="../reference/set_param_xml.html">set_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>), <span class="dt">param_values =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dv">204</span><span class="op">:</span><span class="dv">200</span>,<span class="dv">24</span><span class="op">:</span><span class="dv">20</span>), <span class="dt">overwrite =</span> T, <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb29-4" title="4"><span class="co"># Controlling written values</span></a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="kw"><a href="../reference/get_param_xml.html">get_param_xml</a></span>(tec, <span class="dt">param_names =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span>), <span class="dt">ids =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb29-6" title="6"><span class="co">#&gt; [[1]]</span></a>
+<a class="sourceLine" id="cb29-7" title="7"><span class="co">#&gt; [[1]]$julapI_or_sum_upvt</span></a>
+<a class="sourceLine" id="cb29-8" title="8"><span class="co">#&gt; [1] 204 203 202 201 200</span></a>
+<a class="sourceLine" id="cb29-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb29-10" title="10"><span class="co">#&gt; [[1]]$amount</span></a>
+<a class="sourceLine" id="cb29-11" title="11"><span class="co">#&gt; [1] 24 23 22 21 20</span></a></code></pre></div>
 </div>
 </div>
 <div id="using-functions-with-a-files-list" class="section level1">

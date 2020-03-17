@@ -4,7 +4,8 @@
 \name{out_data}
 \alias{out_data}
 \title{Output variables data}
-\format{A data frame with seven columns:
+\format{
+A data frame with seven columns:
 \describe{
 \item{variable}{Variable name}
 \item{details}{a brief definition of the variable}
@@ -13,7 +14,8 @@
 \item{type}{the data type}
 \item{V1}{ }
 \item{V2}{ }
-}}
+}
+}
 \usage{
 out_data
 }
