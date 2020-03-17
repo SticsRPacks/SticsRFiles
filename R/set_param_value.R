@@ -48,7 +48,7 @@ set_param_value <- function(xml_doc,
                             ...){
 
   # For managing a vector of values
-  if (! base::is.list(param_value)) param_value <- list(param_value)
+  if (! base::is.list(param_value)) param_value <- as.list(param_value)
 
   # calling the for several parameters
   param_nb <- length(param_name)
