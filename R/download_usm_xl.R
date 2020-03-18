@@ -1,21 +1,27 @@
-#' @title Copying an example of an Excel parameters file into a directory (from package data)
-#' @param xl_name Name of an Excel file (optional, needed if several files in library)
-#' @param dest_dir Directory path where to copy the XL file
+#' @title Downloading an Excel usms data file example into a directory
+#' @description
+#' @details The file is an example that can be used for generating JavaStics input files
+#' from parameters values stored in Excel spreadsheet format (USMs, Ini, Soils, Tec, Station, ...).
+#' Each sheet contains parameters values to insert into XML files, with the help of
+#' these functions: \code{\link{gen_usms_xml}}, \code{\link{gen_sols_xml}}, \code{\link{gen_tec_xml}},
+#' \code{\link{gen_sta_xml}}, \code{\link{gen_usms_xml}}, \code{\link{gen_ini_xml}}
+#' @param xl_name Name of an Excel file (optional, not used for the moment)
+#' @param dest_dir Directory path where to copy the Excel file
 #'  (optional, default: current directory)
 #'
 #' @return A copy status, TRUE if successfull, FALSE otherwise
 #'
 #' @examples
 #' \dontrun{
-#' copy_mailing_example()
-#' copy_mailing_example(dest_dir = "/path/to/destination/dir")
+#' download_usm_xl()
+#' download_usm_xl(dest_dir = "/path/to/destination/dir")
 #' }
 #'
 #' @export
 #'
 
 # TODO: summarize with get_script
-copy_mailing_example <- function(xl_name = NULL, dest_dir = getwd()) {
+download_usm_xl <- function(xl_name = NULL, dest_dir = getwd()) {
 
   package <-  "SticsRFiles"
   inst_dir <- "extdata/xl/"
