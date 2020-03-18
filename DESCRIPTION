@@ -38,13 +38,13 @@ Imports:
     rlang,
     stringr,
     xslt,
-    dplyr,
-    readxl
+    dplyr
 Suggests:
     SticsOnR,
     knitr,
     covr,
-    rmarkdown
+    rmarkdown,
+    readxl
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
