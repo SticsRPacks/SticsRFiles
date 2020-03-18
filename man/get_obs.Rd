@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_obs.R
 \name{get_obs}
 \alias{get_obs}
-\title{Read STICS observation files *.obs and store data into a list}
+\title{Read STICS observation files (*.obs)}
 \usage{
 get_obs(
   dirpath = getwd(),
@@ -12,7 +12,7 @@ get_obs(
 )
 }
 \arguments{
-\item{dirpath}{Directory path}
+\item{dirpath}{Path to the directory containing the obs path}
 
 \item{obs_filenames}{A vector of observation file name(s). Optional, see details.}
 
