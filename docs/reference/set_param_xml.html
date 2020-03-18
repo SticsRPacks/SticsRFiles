@@ -99,10 +99,10 @@ with a parameters values vector" />
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -139,8 +139,8 @@ with a parameters values vector</p>
 
     <pre class="usage"><span class='fu'>set_param_xml</span>(
   <span class='no'>xml_file</span>,
-  <span class='no'>param_names</span>,
-  <span class='no'>param_values</span>,
+  <span class='no'>param_name</span>,
+  <span class='no'>param_value</span>,
   <span class='kw'>out_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>out_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -157,26 +157,24 @@ with a parameters values vector</p>
       <td><p>an xml file path</p></td>
     </tr>
     <tr>
-      <th>param_names</th>
-      <td><p>parameter names vector
-(i.e.: option parameter name, parameter name,
-other kinds in ini and some tec parameters not taken into account for the moment)</p></td>
+      <th>param_name</th>
+      <td><p>parameter names vector, i.e.: parameter name or option code</p></td>
     </tr>
     <tr>
-      <th>param_values</th>
-      <td><p>parameter(s) values or a list of</p></td>
+      <th>param_value</th>
+      <td><p>A vector or a list of parameter(s) values (see details).</p></td>
     </tr>
     <tr>
       <th>out_path</th>
-      <td><p>a directory path</p></td>
+      <td><p>a directory path (optional, default uses the folder of the path from xml_file)</p></td>
     </tr>
     <tr>
       <th>out_file</th>
-      <td><p>an xml file name</p></td>
+      <td><p>an xml file name (optional, default to xml_file)</p></td>
     </tr>
     <tr>
       <th>select</th>
-      <td><p>node name or attribute name name to use for selection (optional)</p></td>
+      <td><p>node name or attribute name to use for selection (optional, default to no selection)</p></td>
     </tr>
     <tr>
       <th>value</th>
@@ -188,13 +186,17 @@ other kinds in ini and some tec parameters not taken into account for the moment
     </tr>
     <tr>
       <th>...</th>
-      <td><p>To pass some other arguments</p></td>
+      <td><p>Pass further arguments to <code><a href='set_param_value.html'>set_param_value()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A logical value TRUE for operation success, FALSE otherwise</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>It is possible to give several values for a parameter by passing a vector of values. For example
+for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -230,6 +232,7 @@ other kinds in ini and some tec parameters not taken into account for the moment
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

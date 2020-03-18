@@ -1,18 +1,39 @@
-#' @title Generate from a template  or an input file a Stics tec xml file
-#' @param tec_out_file file name of the output tec xml file
-#' @param param_table a table (df, tibble) containing parameters to use
-#' @param tec_in_file file path for an input tec xml file
-#' @param out_path path for the ini output file
-#' @param stics_version the stics files version to use
+#' @title Generate Stics tec xml file(s) from a template or an input file
+#'
+#' @param param_table a table (df, tibble) containing parameters to use (see details)
+#' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
+#' @param out_path path to an optional folder where to write the output file(s)
+#' @param stics_version the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.
 #' @param dict List of correspondance between given parameter names and internal names.
+#'
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
+#'  `param_table` is a `data.frame` with the following format:
+#'
+#' |Tec_name                                         | julres_1| coderes_1| qres_1| Crespc_1| CsurNres_1|
+#' |:------------------------------------------------|--------:|---------:|------:|--------:|----------:|
+#' |USM_2017_T1_CI_tec.xml                           |      999|         1|      9|       42|         90|
+#' |BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml |      110|         1|      9|       42|         90|
+#' |BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml     |       73|         1|      9|       42|         90|
+#' |AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
+#' |AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
+#' |FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml             |       70|         1|      9|       42|         90|
+#' |MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml             |       81|         1|      9|       42|         90|
+#' |MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml       |      100|         1|      9|       42|         90|
+#' |MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml       |      100|         1|      9|       42|         90|
+#' |FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml       |       92|         1|      9|       42|         90|
+#' |FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
+#'
+#' The first column give the tec file name (to be generated), all following columns give the parameter value to put
+#' in the file, and each line denotes a separate tec file (for e.g. several USMs).
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
 #' @examples
 #' \dontrun{
-#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
-#' tec_param_df <- read_excel(xl_path, sheet = "Tec")
+#' xl_path <- "inputs_stics_example.xlsx"
+#' copy_mailing_example(xl_name = xl_path)
+#' tec_param_df <- readxl::read_excel(xl_path, sheet = "Tec")
 #' gen_tec_xml(out_path = file.path("/path/to/dest/dir","tec"),
 #' param_table = tec_param_df)
 #'}
@@ -20,7 +41,7 @@
 #' @export
 #'
 # TODO: refactor with gen_sta_file, gen_ini_file : same code
-gen_tec_xml <- function(tec_out_file = NULL, param_table = NULL,
+gen_tec_xml <- function(param_table = NULL,
                         tec_in_file = NULL,
                         out_path = getwd(),
                         stics_version = "last",
@@ -79,22 +100,12 @@ gen_tec_xml <- function(tec_out_file = NULL, param_table = NULL,
   }
 
   # defining output files paths
-  if (base::is.null(tec_out_file)) {
-    out_name <- param_table[[tec_col]]
-    ids <- grepl("_tec.xml$",out_name)
-    if ( sum(ids) < length(out_name) ) {
-      out_name[ids] <- paste0(param_table[[tec_col]][ids],"_tec.xml")
-    }
-    tec_out_file <- file.path(out_path,out_name)
-  } else {
-    # file names generation if multiple files
-
-    tec_out_file <- file.path(out_path,tec_out_file)
-    if ( length(xml_docs) > 1) {
-      tec_out_file <- paste(gsub(x = tec_out_file, replacement = "", pattern = "_tec.xml$"),
-                            1:length(xml_docs), sep = "_","tec.xml" )
-    }
+  out_name <- param_table[[tec_col]]
+  ids <- grepl("_tec.xml$",out_name)
+  if ( sum(ids) < length(out_name) ) {
+    out_name[ids] <- paste0(param_table[[tec_col]][ids],"_tec.xml")
   }
+  tec_out_file <- file.path(out_path,out_name)
 
 
 

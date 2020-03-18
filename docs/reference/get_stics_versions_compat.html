@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate from a template a Stics sols xml file — gen_sols_xml • SticsRFiles</title>
+<title>Get all stics XML versions — get_stics_versions_compat • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Generate from a template a Stics sols xml file — gen_sols_xml" />
-<meta property="og:description" content="Generate from a template a Stics sols xml file" />
+<meta property="og:title" content="Get all stics XML versions — get_stics_versions_compat" />
+<meta property="og:description" content="Get all stics XML versions" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,65 +126,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate from a template a Stics sols xml file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/gen_sols_xml.R'><code>R/gen_sols_xml.R</code></a></small>
-    <div class="hidden name"><code>gen_sols_xml.Rd</code></div>
+    <h1>Get all stics XML versions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_stics_versions_compat.R'><code>R/get_stics_versions_compat.R</code></a></small>
+    <div class="hidden name"><code>get_stics_versions_compat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate from a template a Stics sols xml file</p>
+    <p>Get all stics XML versions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gen_sols_xml</span>(
-  <span class='no'>sols_out_file</span>,
-  <span class='kw'>sols_nb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sols_param</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sols_in_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>stics_version</span> <span class='kw'>=</span> <span class='st'>"last"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_stics_versions_compat</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>sols_out_file</th>
-      <td><p>file path of the output sols xml file</p></td>
-    </tr>
-    <tr>
-      <th>sols_nb</th>
-      <td><p>number of soils to create</p></td>
-    </tr>
-    <tr>
-      <th>sols_param</th>
-      <td><p>a table (df, tibble) containing parameters to use</p></td>
-    </tr>
-    <tr>
-      <th>sols_in_file</th>
-      <td><p>file path for an input sols xml file</p></td>
-    </tr>
-    <tr>
-      <th>stics_version</th>
-      <td><p>the stics files version to use</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an invisible xmlDocument object</p>
+    <p>A list of the STICS versions compatible with this package, and the last version in use.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='copy_mailing_example.html'>copy_mailing_example</a></span>(<span class='kw'>xl_name</span> <span class='kw'>=</span> <span class='st'>"inputs_stics_example.xlsx"</span>, <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='st'>"/path/to/dest/dir"</span>)
-<span class='no'>xl_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"/path/to/dest/dir"</span>,<span class='st'>"inputs_stics_example.xlsx"</span>)
-<span class='no'>sols_param_df</span> <span class='kw'>&lt;-</span> <span class='fu'>read_excel</span>(<span class='no'>xl_path</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Soils"</span>)
-<span class='fu'>gen_sols_xml</span>(<span class='kw'>sols_out_file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"/path/to/dest/dir"</span>,<span class='st'>"sols.xml"</span>),
-<span class='kw'>sols_param</span> <span class='kw'>=</span> <span class='no'>sols_param_df</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw pkg'>SticsRFiles</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/SticsRFiles/man/get_stics_versions_compat.html'>get_stics_versions_compat</a></span>()</div><div class='output co'>#&gt; $versions_list
+#&gt; [1] "V9.0" "V9.1"
+#&gt; 
+#&gt; $last_version
+#&gt; [1] "V9.1"
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

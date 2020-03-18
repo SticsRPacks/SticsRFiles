@@ -5,15 +5,15 @@ context("Getting param values")
 
 
 test_that("single param option value", {
-  expect_equal(unlist(get_param_xml(xml_path,"codetemp")), 1)
-  expect_equal(unlist(get_param_xml(xml_path,"codegdh")), 1)
-  expect_equal(unlist(get_param_xml(xml_path,"codephot")), 2)
+  expect_equivalent(get_param_xml(xml_path,"codetemp"), 1)
+  expect_equivalent(get_param_xml(xml_path,"codegdh"), 1)
+  expect_equivalent(get_param_xml(xml_path,"codephot"), 2)
 })
 
 test_that("single param value", {
-  expect_equal(unlist(get_param_xml(xml_path,"jvcmini")),7.00000)
-  expect_equal(unlist(get_param_xml(xml_path,"innsen")), 0.35000)
-  expect_equal(unlist(get_param_xml(xml_path,"efcroiveg")), 4.25000)
+  expect_equivalent(get_param_xml(xml_path,"jvcmini"),7.00000)
+  expect_equivalent(get_param_xml(xml_path,"innsen"), 0.35000)
+  expect_equivalent(get_param_xml(xml_path,"efcroiveg"), 4.25000)
 })
 
 test_that("two param option values, and order", {

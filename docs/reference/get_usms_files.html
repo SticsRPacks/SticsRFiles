@@ -98,10 +98,10 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -160,7 +160,7 @@
     </tr>
     <tr>
       <th>file_type</th>
-      <td><p>Type of file to get (see Types definition)</p></td>
+      <td><p>Vector of file(s) type to get (if not given, all types are returned, see details)</p></td>
     </tr>
     <tr>
       <th>javastics_path</th>
@@ -171,6 +171,10 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A named list with existing files path in each usm element</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The possible values of file types are: "fplt", "finit", "fclim1",
+"fclim2", "fstation" and "ftec"</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -193,6 +197,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -6,8 +6,8 @@
 \usage{
 set_param_xml(
   xml_file,
-  param_names,
-  param_values,
+  param_name,
+  param_value,
   out_path = NULL,
   out_file = NULL,
   select = NULL,
@@ -19,23 +19,21 @@ set_param_xml(
 \arguments{
 \item{xml_file}{an xml file path}
 
-\item{param_names}{parameter names vector
-(i.e.: option parameter name, parameter name,
-other kinds in ini and some tec parameters not taken into account for the moment)}
+\item{param_name}{parameter names vector, i.e.: parameter name or option code}
 
-\item{param_values}{parameter(s) values or a list of}
+\item{param_value}{A vector or a list of parameter(s) values (see details).}
 
-\item{out_path}{a directory path}
+\item{out_path}{a directory path (optional, default uses the folder of the path from xml_file)}
 
-\item{out_file}{an xml file name}
+\item{out_file}{an xml file name (optional, default to xml_file)}
 
-\item{select}{node name or attribute name name to use for selection (optional)}
+\item{select}{node name or attribute name to use for selection (optional, default to no selection)}
 
 \item{value}{value used for select (optional)}
 
 \item{overwrite}{Logical TRUE for overwriting the output file, FALSE otherwise (default)}
 
-\item{...}{To pass some other arguments}
+\item{...}{Pass further arguments to \code{set_param_value()}.}
 }
 \value{
 A logical value TRUE for operation success, FALSE otherwise
@@ -43,6 +41,10 @@ A logical value TRUE for operation success, FALSE otherwise
 \description{
 Setting parameter values for a parameter or a vector of and
 with a parameters values vector
+}
+\details{
+It is possible to give several values for a parameter by passing a vector of values. For example
+for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
 

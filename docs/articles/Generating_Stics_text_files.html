@@ -60,10 +60,10 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -113,7 +113,7 @@
 <div id="converting-javastics-workspace-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#converting-javastics-workspace-files" class="anchor"></a>Converting JavaStics workspace files</h2>
-<p>For using the model directly neither using the JavaStics graphical interface nor the <code>run_javastics</code> function interface, we provide a function, <code>gen_usms_xml2txt</code>, for converting JavaStics XML files to Stics text files from a JavaStics workspace. The model is then run using the <a href="https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html"><code><a href="https://rdrr.io/pkg/SticsOnR/man/run_stics.html">run_stics()</a></code></a> function from <a href="https://sticsrpacks.github.io/SticsOnR/index.html">SticsOnR</a></p>
+<p>For using the model directly neither using the JavaStics graphical interface nor the <code>run_javastics</code> function interface, we provide a function, <code>gen_usms_xml2txt</code>, for converting JavaStics XML files to Stics text files from a JavaStics workspace. The model is then run using the <a href="https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html"><code>run_stics()</code></a> function from <a href="https://sticsrpacks.github.io/SticsOnR/index.html">SticsOnR</a></p>
 <p>Observation files may also be copied if they have a standard name as an usm name and a <code>.obs</code> extension. If not, they must be renamed to do so.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Specifying the JavaStics folder</span></a>
 <a class="sourceLine" id="cb2-2" title="2">javastics_path &lt;-<span class="st"> "/path/to/JavaSTICS-1.41-stics-9.1"</span></a>

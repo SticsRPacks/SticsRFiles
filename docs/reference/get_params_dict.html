@@ -101,10 +101,10 @@ given as argument" />
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
     </li>
   </ul>
 </li>
@@ -140,7 +140,7 @@ given as argument</h1>
 given as argument</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_params_dict</span>(<span class='kw'>in_dict</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>map_key</span> <span class='kw'>=</span> <span class='st'>"to_xml"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_params_dict</span>(<span class='kw'>in_dict</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,15 +157,15 @@ given as argument</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Getting internal dictionary default content</span>
+<span class='co'># Getting internal dictionnary default content</span>
 <span class='co'># get_param_dict()</span>
 
-<span class='co'># Giving a new dictionary</span>
+<span class='co'># Giving a new dictionnary</span>
 <span class='no'>in_dict</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>name1</span> <span class='kw'>=</span> <span class='st'>"param_name1"</span>, <span class='kw'>name2</span> <span class='kw'>=</span> <span class='st'>"param_name2"</span>)
 
 <span class='fu'>get_params_dict</span>(<span class='no'>in_dict</span>)
 
-<span class='co'># Giving a new dictionary with common values with the internal one</span>
+<span class='co'># Giving a new dictionnary with common values with the internal one</span>
 <span class='no'>in_dict</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>name1</span> <span class='kw'>=</span> <span class='st'>"amount"</span>, <span class='kw'>name2</span> <span class='kw'>=</span> <span class='st'>"julapI_or_sum_upvt"</span>)
 
 <span class='fu'>get_params_dict</span>(<span class='no'>in_dict</span>)

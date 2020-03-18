@@ -142,7 +142,7 @@ gen_tec_doc <- function(xml_doc = NULL,
 
       nodes_nb <- ncol(table_params[[par_name]])
 
-      par_form <- get_param_formalism( xml_doc = xml_doc, par_name)
+      par_form <- get_param_formalisms( xml_doc = xml_doc, par_name)
 
       if ( base::is.null(par_form)) {
         print(paste("Error: formalism for par_name"))
@@ -175,7 +175,7 @@ gen_tec_doc <- function(xml_doc = NULL,
                       param_value = table_params[[par_name]])
 
       # fixing nb interventions
-      par_form <- get_param_formalism(xml_doc,par_name)
+      par_form <- get_param_formalisms(xml_doc,par_name)
       set_param_value(xml_doc = xml_doc,"nb_interventions",nodes_nb,par_form)
 
       # if ( par_name == "julapI_or_sum_upvt" ) {

@@ -103,3 +103,8 @@ reference:
     contents:
       - copy_mailing_example
       - copy_mailing_script_example
+
+  - title: "Misc"
+    desc: Miscellaneous helper functions
+    contents:
+      - get_stics_versions_compat
