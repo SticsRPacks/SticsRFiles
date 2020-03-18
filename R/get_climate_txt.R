@@ -4,16 +4,14 @@
 #'
 #' @param dirpath  Directory path
 #' @param filename The meteorology file name (default to \code{climat.txt}).
-#' @param preserve Logical, TRUE for keeping original Stics meteo columns (default)
-#' or FALSE otherwise.
+#' @param preserve Logical, `TRUE`` for keeping the stics columns related to date (year,
+#' month, day, julian), or only keep the date as a `POSIXct` otherwise. Default to `TRUE`.
 #'
 #' @note The time-related variables are summarised into one POSIXct column named
-#'       code{Date}.
+#'       `Date`.
 #'
 #' @return A data.frame of the input meteorological variables used as input for the
 #'         STICS model.
-#'
-#' @seealso \code{\link{get_obs_int}}
 #'
 #' @importFrom data.table fread
 #'

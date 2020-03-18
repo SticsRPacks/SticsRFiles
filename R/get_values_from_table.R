@@ -42,7 +42,7 @@ get_values_from_table <- function(params_table, param_names = NULL, lines_id = N
 
   # Splitting parameters table into tables named list
   # with indexed parameters sorted (*_N)
-  splitted_params <- sort_params_table(params_table)
+  splitted_params <- split_params_table(params_table)
 
   # Selecting parameters tables with param_names
   if (!is.null(param_names)) {

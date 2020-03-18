@@ -1,18 +1,21 @@
 #' @title Loading Stics daily output file(s)
-#' @description Reading daily file(s) as a tibble with possible selection
-#' on variables names, cumulative DOY, dates list
-#' @param workspace Stics or JavaStics workspace path
-#' @param usm_name names of the usm
+#' @description Reading daily file(s) (mod_s*.sti) as a tibble with possible selection
+#' on variable names, cumulative DOY, dates list.
+#' @param workspace Stics or JavaStics workspace path containing the `mod_s*.sti` files (see details)
+#' @param usm_name vector of usm(s) names
 #' @param var_list vector of output variables names (optional)
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
+#'
+#' @details For intercrops, please add a "p" or a "a" before the USM name in `usm_name` to
+#' get the results for the principal or associated crop respectively.
 #'
 #' @return A tibble or a list of
 #'
 #' @importFrom rlang .data
 #'
 #' @examples
-#' path <- system.file(file.path("extdata","sti","V9.1"), package = "SticsRFiles")
+#' path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
 #' get_daily_results(path,"banana")
 #'
 #' @export

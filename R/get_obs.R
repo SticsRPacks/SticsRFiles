@@ -1,8 +1,8 @@
-#' Read STICS observation files *.obs and store data into a list
+#' Read STICS observation files (*.obs)
 #'
 #' @description Read STICS observation files for sole crops and store data into a list
 #'
-#' @param dirpath Directory path
+#' @param dirpath Path to the directory containing the obs path
 #' @param obs_filenames A vector of observation file name(s). Optional, see details.
 #' @param usms A vector of usm name(s) corresponding the the obs files. Optional, see details.
 #' @param usms_filename name of the usm file. Optional, see details.

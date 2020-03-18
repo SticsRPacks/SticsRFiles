@@ -9,7 +9,7 @@ gen_varmod(workspace, var_names, file_name = "var.mod")
 \arguments{
 \item{workspace}{Stics or JavaStics workspace path}
 
-\item{var_names}{vector of variables names}
+\item{var_names}{vector of variables names (see details)}
 
 \item{file_name}{file name to generate (default value: var.mod)}
 }
@@ -18,6 +18,9 @@ A logical status TRUE if successfull generation, FALSE otherwise
 }
 \description{
 Generating a daily variable list file from variables names
+}
+\details{
+The variable names can be found using \code{find_var_info()}
 }
 \examples{
 \dontrun{
