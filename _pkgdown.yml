@@ -37,72 +37,36 @@ reference:
       - get_plants_nb
       - get_usms_files
       - get_usms_list
+      - get_soils_list
 
-
-
-  - title: "Set values XML"
-    desc: Setting new values in an XML files
+  - title: "Generate Stics Input files (Text format)"
     contents:
-      - set_param_xml
-      - set_codeoptim
-
-  - title: "Get values text"
-    desc: Getting values from the STICS input text files
-    contents:
-      - get_param_txt
-      - get_ini_txt
-      - get_general_txt
-      - get_tmp_txt
-      - get_plant_txt
-      - get_tec_txt
-      - get_soil_txt
-      - get_station_txt
-      - get_usm_txt
-      - get_out_var_txt
-      - find_out_var
-
-  - title: "Set values text"
-    desc: Setting new values in the STICS input text files
+      - gen_usms_xml2txt
+      - gen_varmod
+      
+  - title: "Set values in Stics Input files (Text format)"
     contents:
       - set_param_txt
-      - set_usm_txt
-      - set_station_txt
-      - set_ini_txt
-      - set_general_txt
-      - set_tmp_txt
-      - set_plant_txt
-      - set_tec_txt
-      - set_soil_txt
-      - set_out_var_txt
-
-  - title: "Climate and observations"
-    desc: Read climate data and observations
+      
+  - title: "Get values in Stics Input files (Text format)"
     contents:
+      - get_param_txt
       - get_climate_txt
-      - get_obs
 
-  - title: "STICS outputs"
-    desc: Get STICS daily outputs
+  - title: "Get values in Stics Output files"
     contents:
       - get_daily_results
 
-
-
-  - title: "XML to text conversion"
-    desc: Build STICS input text files from XML files
+  - title: "Manage observation files"
     contents:
-      - convert_xml2txt
+      - gen_usms_obs
+      - get_obs
 
-  - title: "Download example data"
+  - title: "Example data"
     desc: For complex examples
     contents:
       - download_data
-
-  - title: "Mailing"
-    desc: All functions related to mailing (automatic generation of XML from a table)
-    contents:
-      - copy_mailing_example
-      - copy_mailing_script_example
+      - download_usm_xl
 
   - title: "Misc"
     desc: Miscellaneous helper functions
