@@ -13,32 +13,32 @@ url: https://sticsrpacks.github.io/SticsRFiles/
       )
 
 reference:
-  - title: "Main functions"
-    desc: The higher-level functions to manipulate XML files
+  - title: "Find information on parameters and variables"
     contents:
-      - get_param_names_xml
-      - get_param_xml
+      - find_param_info
+      - find_var_info
+
+  - title: "Generate JavaStics Input files (XML format)"
+    desc: Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)
+    contents:
+      - gen_ini_xml
+      - gen_sols_xml
+      - gen_sta_xml
+      - gen_tec_xml
+      - gen_usms_xml
+
+  - title: "Set values in JavaStics Input files (XML format)"
+    contents:
       - set_param_xml
-      - gen_obs
 
-  - title: "XML files generation"
-    desc: Generate XML files from a template
-    contents:
-      - starts_with("gen")
-
-  - title: "Get info XML"
-    desc: Getting information from XML files
-    contents:
+  - title: "Get values from JavaStics Input files (XML format)"
+    contents:  
       - get_param_xml
-      - get_formalisms_xml
-      - find_param_formalisms
-      - get_param_names_xml
-      - find_param_names
       - get_plants_nb
       - get_usms_files
       - get_usms_list
-      - get_param_bounds_xml
-      - get_params_dict
+
+
 
   - title: "Set values XML"
     desc: Setting new values in an XML files
