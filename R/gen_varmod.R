@@ -1,9 +1,10 @@
 #' @title Generating a var.mod type file
 #' @description Generating a daily variable list file from variables names
 #' @param workspace Stics or JavaStics workspace path
-#' @param var_names vector of variables names
+#' @param var_names vector of variables names (see details)
 #' @param file_name file name to generate (default value: var.mod)
 #'
+#' @details The variable names can be found using `find_var_info()`
 #' @return A logical status TRUE if successfull generation, FALSE otherwise
 #'
 #' @examples

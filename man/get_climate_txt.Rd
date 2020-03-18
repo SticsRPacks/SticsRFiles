@@ -11,8 +11,7 @@ get_climate_txt(dirpath = getwd(), filename = "climat.txt", preserve = TRUE)
 
 \item{filename}{The meteorology file name (default to \code{climat.txt}).}
 
-\item{preserve}{Logical, TRUE for keeping original Stics meteo columns (default)
-or FALSE otherwise.}
+\item{preserve}{Logical, \verb{TRUE`` for keeping the stics columns related to date (year, month, day, julian), or only keep the date as a }POSIXct\verb{otherwise. Default to}TRUE`.}
 }
 \value{
 A data.frame of the input meteorological variables used as input for the
@@ -23,14 +22,11 @@ Read the meteorology input for STICS ("climat.txt")
 }
 \note{
 The time-related variables are summarised into one POSIXct column named
-code{Date}.
+\code{Date}.
 }
 \examples{
 library(SticsRFiles)
 path <- system.file("extdata/txt/V9.1", package = "SticsRFiles")
 Meteo <- get_climate_txt(path)
 
-}
-\seealso{
-\code{\link{get_obs_int}}
 }
