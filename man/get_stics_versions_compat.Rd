@@ -4,7 +4,7 @@
 \alias{get_stics_versions_compat}
 \title{Get all stics XML versions}
 \usage{
-get_stics_versions_compat(last = FALSE)
+get_stics_versions_compat()
 }
 \value{
 A list of the STICS versions compatible with this package, and the last version in use.

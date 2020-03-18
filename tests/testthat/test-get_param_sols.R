@@ -8,8 +8,8 @@ res = c(30.2,21.0,27.0,39.0,1.0, 12.2, 70.0, 22.0,  9.9, 10.2, 10.2, 17.0, 23.1,
         20.0)
 
 test_that("single param option value version sols -> argi", {
-  expect_equal(unlist(get_param_xml(xml_path,"argi")),res)
-  expect_equal(unlist(get_param_xml(xml_path,"argi"))[13],23.1)
+  expect_equivalent(get_param_xml(xml_path,"argi")[[1]],res)
+  expect_equivalent(unlist(get_param_xml(xml_path,"argi"))[13],23.1)
 })
 
 
@@ -24,31 +24,31 @@ res <- c(li1,li2)
 
 # unname(query) because result is just numbers, it doesn't have names
 test_that("multiple param option value version sols -> norg, profhum", {
-  expect_equal(unname(unlist(get_param_xml(xml_path,c("norg","profhum")))),res)
+  expect_equivalent(unname(unlist(get_param_xml(xml_path,c("norg","profhum")))),res)
   query <- unlist(lapply(get_param_xml(xml_path,c("norg","profhum"))[[1]],function (x) x[[1]][1]))
-  expect_equal(unname(query),c(0.27,40.00))
+  expect_equivalent(unname(query),c(0.27,40.00))
 })
 
 test_that("single option param name choice value", {
-  expect_equal(unlist(get_param_xml(xml_path,"coderemontcap"))[1],2)
+  expect_equivalent(unlist(get_param_xml(xml_path,"coderemontcap"))[1],2)
 })
 
 test_that(" single column name value", {
-  expect_equal(unlist(get_param_xml(xml_path,"epc"))[2],20)
+  expect_equivalent(unlist(get_param_xml(xml_path,"epc"))[2],20)
 })
 
 test_that("multiple option choice value and param name's value from choice list", {
-  expect_equal(unname(unlist(lapply(get_param_xml(xml_path,c("codefente","profimper"))[[1]],
+  expect_equivalent(unname(unlist(lapply(get_param_xml(xml_path,c("codefente","profimper"))[[1]],
                              function (x) x[[1]][1]))),c(2,10))
 })
 
 test_that("triple param name's value ", {
-  expect_equal(unname(unlist(lapply(get_param_xml(xml_path,c("argi","norg","pH"))[[1]],
+  expect_equivalent(unname(unlist(lapply(get_param_xml(xml_path,c("argi","norg","pH"))[[1]],
                                     function (x) x[[1]][1]))),c(30.2,0.27,7))
 })
 
 test_that("quadruple param's name value from differents sections", {
-  expect_equal(unname(unlist(lapply(get_param_xml(xml_path,c("obstarac","humcapil","codenitrif",
+  expect_equivalent(unname(unlist(lapply(get_param_xml(xml_path,c("obstarac","humcapil","codenitrif",
                                                              "HCCF"))[[1]],
                                     function (x) x[[2]][1]))),c(155,10,2,46.40))
 })

@@ -139,8 +139,8 @@ with a parameters values vector</p>
 
     <pre class="usage"><span class='fu'>set_param_xml</span>(
   <span class='no'>xml_file</span>,
-  <span class='no'>param_names</span>,
-  <span class='no'>param_values</span>,
+  <span class='no'>param_name</span>,
+  <span class='no'>param_value</span>,
   <span class='kw'>out_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>out_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>select</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -157,11 +157,11 @@ with a parameters values vector</p>
       <td><p>an xml file path</p></td>
     </tr>
     <tr>
-      <th>param_names</th>
+      <th>param_name</th>
       <td><p>parameter names vector, i.e.: parameter name or option code</p></td>
     </tr>
     <tr>
-      <th>param_values</th>
+      <th>param_value</th>
       <td><p>A vector or a list of parameter(s) values (see details).</p></td>
     </tr>
     <tr>
@@ -196,7 +196,7 @@ with a parameters values vector</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>It is possible to give several values for a parameter by passing a vector of values. For example
-for two parameters with two values each: param_values= list(c(1,2), c(2.3,4.5))</p>
+for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

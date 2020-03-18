@@ -5,7 +5,7 @@
 #' @examples
 #' SticsRFiles:::get_stics_versions_compat()
 #'
-get_stics_versions_compat <- function(last = FALSE) {
+get_stics_versions_compat <- function() {
 
   # Getting available versions tags
   tmpl_file <- paste0("extdata/xml/templates/")
@@ -17,11 +17,6 @@ get_stics_versions_compat <- function(last = FALSE) {
 
   # Getting the last version
   last_version <- versions_tags[ num_versions == max(num_versions) ]
-
-  # if the last version wanted
-  if (last) {
-    return(last_version)
-  }
 
   # List of versions tags ans last version tag
   versions <- list(versions_list = versions_tags, last_version = last_version )

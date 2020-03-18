@@ -4,8 +4,8 @@
 #' with a parameters values vector
 #'
 #' @param xml_file an xml file path
-#' @param param_names parameter names vector, i.e.: parameter name or option code
-#' @param param_values A vector or a list of parameter(s) values (see details).
+#' @param param_name parameter names vector, i.e.: parameter name or option code
+#' @param param_value A vector or a list of parameter(s) values (see details).
 #' @param out_path a directory path (optional, default uses the folder of the path from xml_file)
 #' @param out_file an xml file name (optional, default to xml_file)
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
@@ -16,7 +16,7 @@
 #' @return A logical value TRUE for operation success, FALSE otherwise
 #'
 #' @details It is possible to give several values for a parameter by passing a vector of values. For example
-#' for two parameters with two values each: param_values= list(c(1,2), c(2.3,4.5))
+#' for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
 #'
@@ -49,8 +49,8 @@
 #'
 #' @export
 set_param_xml <- function(xml_file,
-                          param_names,
-                          param_values,
+                          param_name,
+                          param_value,
                           out_path = NULL,
                           out_file = NULL,
                           select = NULL,
@@ -95,8 +95,8 @@ set_param_xml <- function(xml_file,
 
   # Setting parameters values in the xmlDoxument object
   set_param_value(xml_doc,
-                  param_name = param_names,
-                  param_value = param_values,
+                  param_name = param_name,
+                  param_value = param_value,
                   parent_name = select,
                   parent_sel_attr = value,
                   ...)

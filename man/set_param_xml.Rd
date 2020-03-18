@@ -6,8 +6,8 @@
 \usage{
 set_param_xml(
   xml_file,
-  param_names,
-  param_values,
+  param_name,
+  param_value,
   out_path = NULL,
   out_file = NULL,
   select = NULL,
@@ -19,9 +19,9 @@ set_param_xml(
 \arguments{
 \item{xml_file}{an xml file path}
 
-\item{param_names}{parameter names vector, i.e.: parameter name or option code}
+\item{param_name}{parameter names vector, i.e.: parameter name or option code}
 
-\item{param_values}{A vector or a list of parameter(s) values (see details).}
+\item{param_value}{A vector or a list of parameter(s) values (see details).}
 
 \item{out_path}{a directory path (optional, default uses the folder of the path from xml_file)}
 
@@ -44,7 +44,7 @@ with a parameters values vector
 }
 \details{
 It is possible to give several values for a parameter by passing a vector of values. For example
-for two parameters with two values each: param_values= list(c(1,2), c(2.3,4.5))
+for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
 

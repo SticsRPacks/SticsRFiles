@@ -4,29 +4,26 @@
 \alias{get_param_xml}
 \title{Getting parameter values from xml files}
 \usage{
-get_param_xml(xml_files, param_names, select = NULL, value = NULL, ...)
+get_param_xml(xml_file, param_name, select = NULL, value = NULL, ...)
 }
 \arguments{
-\item{xml_files}{an xml file, or a vector/list of}
+\item{xml_file}{An xml file, or a vector/list of}
 
-\item{param_names}{parameter names list (i.e.: option parameter name, parameter name,
-other kinds in ini and some tec parameters not taken into account for the moment)}
+\item{param_name}{parameter names vector, i.e.: parameter name or option code}
 
-\item{select}{node name or attribute name name to use for selection  (optional)}
+\item{select}{node name or attribute name to use for selection (optional, default to no selection)}
 
 \item{value}{value used for select (optional)}
 
-\item{...}{To pass some other arguments}
+\item{...}{Pass further arguments to \code{get_param_value()}}
 }
 \value{
-A list of parameter list length, with parameters values for each xml file
+A list of parameter values for each xml_file (a list of list)
 }
 \description{
-Extracting parameter values for a list of xmlDocument and
-of parameters
+Extracting parameter values for a list of xml files and parameters
 }
 \examples{
-\dontrun{
 xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
 get_param_xml(xml_path, "argi")
 get_param_xml(xml_path, c("argi", "norg"))
@@ -39,7 +36,5 @@ select = "sol", value = c("solcanne", "solbanane"))
 
 get_param_xml(list(xml_path, xml_path), c("argi","norg"),
 select = "sol", value = c("solcanne","solbanane"))
-
-}
 
 }
