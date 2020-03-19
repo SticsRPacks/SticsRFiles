@@ -113,13 +113,13 @@ gen_usms_xml2txt <- function(javastics_path,
 
     # Error if any unknown usm name !
     if (!all(usms_exist)){
-      stop("At least one usm does not exist us usms.xml file : ",usms_list[!usms_exist])
+      stop("At least one usm does not exist in usms.xml file : ",usms_list[!usms_exist])
     }
 
   }
 
   # Checking XML files existence, get_usms_files
-  # returns a list : elemenst containing existing
+  # returns a list : element containing existing
   # files list and a all_exist status !
   usms_files <- get_usms_files(workspace_path = workspace_path,
                                javastics_path =javastics_path,
@@ -129,7 +129,9 @@ gen_usms_xml2txt <- function(javastics_path,
   # If any file missing, stopping
   if (!all(all_files_exist)) {
     stop(paste("Missing files have been detected for usm(s):",
-               paste(usms_list[!all_files_exist], collapse = ", ")))
+               paste(usms_list[!all_files_exist], collapse = ", "),
+               ". Please note that with SticsRpacks plant folders (that contains plant files)",
+               " MUST but be put inside the workspace (plant folder in JavaStics path is not taken into account for the moment)."))
   }
 
   # Command string without usm name
