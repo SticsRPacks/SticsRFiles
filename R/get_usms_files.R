@@ -56,10 +56,10 @@ get_usms_files <- function(workspace_path,
   }
 
   # Getting javastics plant path
-#  if (check_plt) {
-#    plt_path <- c(plt_path, file.path(javastics_path, "plant"))
-#    file_type <- setdiff(file_type, "fplt")
-#  }
+  if (check_plt) {
+    plt_path <- c(plt_path) # , file.path(javastics_path, "plant"))
+    file_type <- setdiff(file_type, "fplt")
+  }
 
   # Getting usms.xml path
   usms_xml_path <- file.path(workspace_path, file_name)
