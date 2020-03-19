@@ -41,8 +41,8 @@ get_param_value <- function(xml_doc,
 
 
   # TODO :
-  # 1 - set default param_name value to NULL and calculate le param_name vector calling
-  # the get_param_names function !
+  # For one parameter: return also a named list, not a vector to be consistent
+  # with several parameters
 
   # Manage ids and show_xpath and remove them from the list
   ids <- NULL

@@ -21,13 +21,13 @@ get_usms_list <- function(usm_path, name = NULL){
   # with the same soil, plant 1,...
 
   # Get usms list
-  usms_list <- get_param_xml(usm_path,"usm")
+  usms_list <- get_param_xml(usm_path,"usm")[[1]]
 
   # Not any name
   if (base::is.null(name)) return(usms_list)
 
   # Filter usms list with partial match
-  usms_list <- lapply(usms_list, function(x) grep_usms(x,name))
+  usms_list <- unlist(grep_usms(usms_list,name))
 
   return(usms_list)
 }
