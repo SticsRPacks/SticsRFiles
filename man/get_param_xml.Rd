@@ -4,12 +4,12 @@
 \alias{get_param_xml}
 \title{Getting parameter values from xml files}
 \usage{
-get_param_xml(xml_file, param_name, select = NULL, value = NULL, ...)
+get_param_xml(xml_file, param_name = NULL, select = NULL, value = NULL, ...)
 }
 \arguments{
 \item{xml_file}{An xml file, or a vector/list of}
 
-\item{param_name}{parameter names vector, i.e.: parameter name or option code}
+\item{param_name}{parameter names vector (i.e.: parameter name or option code, optional)}
 
 \item{select}{node name or attribute name to use for selection (optional, default to no selection)}
 

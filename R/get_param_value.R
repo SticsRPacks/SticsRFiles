@@ -5,7 +5,7 @@
 #' @description Extracting parameter value from an xml document object
 #'
 #' @param xml_doc an xmlDocument object
-#' @param param_name parameter name or a vector of names
+#' @param param_name parameter name or a vector of names (optional)
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)
 #' @param ... To pass some other arguments
@@ -34,7 +34,7 @@
 #'
 
 get_param_value <- function(xml_doc,
-                            param_name,
+                            param_name=NULL,
                             parent_name = NULL,
                             parent_sel_attr = NULL,
                             ...) {
@@ -43,7 +43,6 @@ get_param_value <- function(xml_doc,
   # TODO :
   # 1 - set default param_name value to NULL and calculate le param_name vector calling
   # the get_param_names function !
-  # 2 - add the case : if param_name is a list of vectors of parameters names ?
 
   # Manage ids and show_xpath and remove them from the list
   ids <- NULL
@@ -72,7 +71,7 @@ get_param_value <- function(xml_doc,
 
 
   # Getting param values for the same parameters for the xml documents list
-  if ( is.list(xml_doc) ) {
+  if ( base::is.list((xml_doc)) ) {
     values <- lapply(xml_doc, function(x) get_param_value(xml_doc = x,
                                                           param_name = param_name,
                                                           parent_name = parent_name,
@@ -81,16 +80,31 @@ get_param_value <- function(xml_doc,
     return(values)
   }
 
+  # If no given parameters names
+  if (base::is.null(param_name)) param_name <- get_param_names(xml_doc)
+
+  # only one parameter
+  # if (length(param_name) == 1) {
+  #   param_value <- list(get_param_value(xml_doc = xml_doc,
+  #                   param_name = param_name,
+  #                   parent_name = parent_name,
+  #                   parent_sel_attr = parent_sel_attr,
+  #                   ...))
+  #   names(param_value) <- param_name
+  #   return(param_value)
+  # }
+
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
-    out <- lapply(param_name, function(x) get_param_value(xml_doc = xml_doc,
+    param_value <- lapply(param_name, function(x) get_param_value(xml_doc = xml_doc,
                                                           param_name = x,
                                                           parent_name = parent_name,
                                                           parent_sel_attr = parent_sel_attr,
                                                           ...))
-    names(out) <- param_name
-    return(out)
+    names(param_value) <- param_name
+    return(param_value)
   }
+
 
   # Fixing parent's information
   #parent_name <- parent_list$parent_name

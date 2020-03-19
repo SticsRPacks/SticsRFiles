@@ -6,7 +6,7 @@
 \usage{
 get_param_value(
   xml_doc,
-  param_name,
+  param_name = NULL,
   parent_name = NULL,
   parent_sel_attr = NULL,
   ...
@@ -15,7 +15,7 @@ get_param_value(
 \arguments{
 \item{xml_doc}{an xmlDocument object}
 
-\item{param_name}{parameter name or a vector of names}
+\item{param_name}{parameter name or a vector of names (optional)}
 
 \item{parent_name}{parent node name or attribute name (optional)}
 

@@ -3,7 +3,7 @@
 #' @description Extracting parameter values for a list of xml files and parameters
 #'
 #' @param xml_file An xml file, or a vector/list of
-#' @param param_name parameter names vector, i.e.: parameter name or option code
+#' @param param_name parameter names vector (i.e.: parameter name or option code, optional)
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
 #' @param value value used for select (optional)
 #' @param ... Pass further arguments to `get_param_value()`
@@ -26,7 +26,7 @@
 #'
 #' @export
 get_param_xml <- function(xml_file,
-                          param_name,
+                          param_name=NULL,
                           select = NULL,
                           value = NULL,
                           ...) {
