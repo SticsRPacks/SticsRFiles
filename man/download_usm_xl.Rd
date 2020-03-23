@@ -16,9 +16,6 @@ download_usm_xl(xl_name = NULL, dest_dir = getwd())
 A copy status, TRUE if successfull, FALSE otherwise
 }
 \description{
-Downloading an Excel usms data file example into a directory
-}
-\details{
 The file is an example that can be used for generating JavaStics input files
 from parameters values stored in Excel spreadsheet format (USMs, Ini, Soils, Tec, Station, ...).
 Each sheet contains parameters values to insert into XML files, with the help of

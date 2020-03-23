@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_stics_versions_compat.R
 \name{get_stics_versions_compat}
 \alias{get_stics_versions_compat}
-\title{Get all stics XML versions}
+\title{Get the compatible stics versions}
 \usage{
 get_stics_versions_compat()
 }
@@ -10,7 +10,7 @@ get_stics_versions_compat()
 A list of the STICS versions compatible with this package, and the last version in use.
 }
 \description{
-Get all stics XML versions
+Get the versions of stics that are fully compatible with this package.
 }
 \examples{
 SticsRFiles:::get_stics_versions_compat()

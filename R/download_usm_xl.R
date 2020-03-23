@@ -1,10 +1,11 @@
 #' @title Downloading an Excel usms data file example into a directory
-#' @description
-#' @details The file is an example that can be used for generating JavaStics input files
+#'
+#' @description The file is an example that can be used for generating JavaStics input files
 #' from parameters values stored in Excel spreadsheet format (USMs, Ini, Soils, Tec, Station, ...).
 #' Each sheet contains parameters values to insert into XML files, with the help of
 #' these functions: \code{\link{gen_usms_xml}}, \code{\link{gen_sols_xml}}, \code{\link{gen_tec_xml}},
 #' \code{\link{gen_sta_xml}}, \code{\link{gen_usms_xml}}, \code{\link{gen_ini_xml}}
+#'
 #' @param xl_name Name of an Excel file (optional, not used for the moment)
 #' @param dest_dir Directory path where to copy the Excel file
 #'  (optional, default: current directory)

@@ -1,43 +1,26 @@
-#' Output variables data
-#'
-#' All output variables from STICS, with their units and brief description
-#'
-#' @format A data frame with seven columns:
-#' \describe{
-#'   \item{variable}{Variable name}
-#'   \item{details}{a brief definition of the variable}
-#'   \item{unit}{unit of the variable}
-#'   \item{file}{the file where the variable comes from}
-#'   \item{type}{the data type}
-#'   \item{V1}{ }
-#'   \item{V2}{ }
-#' }
-#'
-#' @keywords internal
-#'
-"out_data"
-
 
 #' Return all possible STICS outputs for var.mod
 #'
 #' @description Helper function to print the list of all possible variables to set as output
 #' from the STICS model.
 #'
-#' @seealso \code{\link{set_out_var_txt}}
+#' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
+#' to "last", a special code to get the last version.
+#'
+#' @seealso `find_var_info()`, `set_out_var_txt()`, and `get_stics_versions_compat()`
 #'
 #' @examples
 #' \dontrun{
-#'
-#' SticsRFiles:::all_vars= all_out_var()
-#'}
-#'
-#'
+#'  all_out_var()
+#' }
 #' @keywords internal
 #'
-all_out_var= function(){
-  out_data= NULL
-  utils::data("out_data", envir = environment())
-  out_data
+all_out_var <- function(version= "last"){
+  if(version=="last"){
+    version <- get_stics_versions_compat()$last_version
+  }
+  version <- match.arg(version, get_stics_versions_compat()$versions_list, several.ok = FALSE)
+  utils::read.csv2(system.file(file.path("extdata/csv",version,"outputs.csv"), package = "SticsRFiles"))
 }
 
 
@@ -47,27 +30,32 @@ all_out_var= function(){
 #' for the STICS model with a partial match.
 #'
 #' @param var Character vector with a (partial) STICS output variable name
+#' @param keyword Search by keyword instead of the variable name (search in the description)
+#' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
+#' to "last", a special code to get the last version.
 #'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
 #' @seealso \code{\link{all_out_var}}
 #'
 #' @examples
-#' \dontrun{
+#' # Find by variable name (fuzzy search):
+#' SticsRFiles::find_var_info("lai")
 #'
-#' SticsRFiles:::find_out_var("lai")
+#' # Find by keyword (fuzzy search in variable description):
+#' SticsRFiles::find_var_info(keyword= "lai")
 #'
-#'}
-#'
-#'
+#' # Find for a particular version:
+#' SticsRFiles::find_var_info("lai", version= "V9.0")
 #' @export
 #'
-find_out_var = function(var=NULL){
-  all_vars= all_out_var()
-  if(!base::is.null(var)) {
+find_var_info <- function(var=NULL,keyword=NULL,version= "last"){
+  all_vars <- all_out_var(version)
+  if(!is.null(var)) {
     all_vars[grep(var, all_vars$variable,ignore.case = TRUE),]
+  }else if(!is.null(keyword)){
+    all_vars[grep(keyword, all_vars$details,ignore.case = TRUE),]
   }else{
     all_vars
   }
-
 }

@@ -12,7 +12,7 @@
 #' @return A named list with existing files path in each usm element
 #'
 #' @export
-#'
+#' @seealso See `get_soils_list` to get all soils in a usm file.
 #' @examples
 #'
 #' \dontrun{

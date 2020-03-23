@@ -105,6 +105,7 @@ Collate:
     'get_params_from_doc_node.R'
     'get_params_from_table.R'
     'get_plants_nb.R'
+    'get_soils_list.R'
     'get_stics_versions_compat.R'
     'get_txt_param_value.R'
     'get_usms_files.R'

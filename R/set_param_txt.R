@@ -15,7 +15,7 @@
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 #'          the associated plant in the case of intercrop, or \code{c(1,2)} for both
 #'          Principal and associated plants.
-#'          \code{\link{all_out_var}} is a helper function that returns all possible
+#'          \code{\link{find_var_info}} is a helper function that returns all possible
 #'          output variables.
 #'
 #' @note \code{set_out_var_txt} is not used by \code{set_param_txt}. To replace the output
@@ -194,7 +194,7 @@ set_out_var_txt= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F)
 #' @param value    New parameter value
 #' @param add      Boolean. Append input to existing file (add to the list)
 #'
-#' @details The function uses \code{\link[base]{sys.call}} to know from which function
+#' @details The function uses `base::sys.call()` to know from which function
 #'          of the \code{set_*} family it is called, so it won't work properly if called
 #'          by the user directly. This is why this function is internal.
 #'

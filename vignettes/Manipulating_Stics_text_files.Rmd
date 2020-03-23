@@ -165,9 +165,9 @@ set_out_var_txt(filepath = file.path(example_txt_dir,"var.mod"), vars = "hauteur
 get_out_var_txt(filepath = file.path(example_txt_dir,"var.mod"))
 ```
 
-To get the possible output variables from the model, the user can use the `find_out_var()` function that provide a fuzzy search: 
+To get the possible output variables from the model, the user can use the `find_var_info()` function that provide a fuzzy search: 
 
 ```{r}
-find_out_var("lai")
+find_var_info("lai")
 ```
 

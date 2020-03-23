@@ -4,7 +4,11 @@
 \alias{all_out_var}
 \title{Return all possible STICS outputs for var.mod}
 \usage{
-all_out_var()
+all_out_var(version = "last")
+}
+\arguments{
+\item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
+to "last", a special code to get the last version.}
 }
 \description{
 Helper function to print the list of all possible variables to set as output
@@ -12,13 +16,10 @@ from the STICS model.
 }
 \examples{
 \dontrun{
-
-SticsRFiles:::all_vars= all_out_var()
+ all_out_var()
 }
-
-
 }
 \seealso{
-\code{\link{set_out_var_txt}}
+\code{find_var_info()}, \code{set_out_var_txt()}, and \code{get_stics_versions_compat()}
 }
 \keyword{internal}

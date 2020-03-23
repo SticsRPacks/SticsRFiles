@@ -1,4 +1,6 @@
-#' Get all stics XML versions
+#' Get the compatible stics versions
+#'
+#' @description Get the versions of stics that are fully compatible with this package.
 #'
 #' @return A list of the STICS versions compatible with this package, and the last version in use.
 #'

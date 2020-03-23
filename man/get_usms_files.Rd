@@ -50,3 +50,6 @@ file_type = c("finit", "ftec" ))
 }
 
 }
+\seealso{
+See \code{get_soils_list} to get all soils in a usm file.
+}
