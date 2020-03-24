@@ -84,15 +84,15 @@ gen_usms_xml2txt <- function(javastics_path,
 
 
   # Checking and getting JavaStics workspace path
-  ws <- SticsOnR:::check_java_workspace(javastics_path,workspace_path)
-  if (base::is.null(ws)) {
+  workspace_path <- SticsOnR:::check_java_workspace(javastics_path,workspace_path)
+  if (base::is.null(workspace_path)) {
     return()
   }
 
 
   # Setting the javastics workspace as root directory for usms
   # directories to generate
-  if (base::is.null(target_path)) target_path <- ws
+  if (base::is.null(target_path)) target_path <- workspace_path
 
   # Creating target dir if not exists
   if (! dir.exists(target_path)) {
@@ -100,7 +100,7 @@ gen_usms_xml2txt <- function(javastics_path,
   }
 
   # Retrieving usm names list from the usms.xml file
-  full_usms_list = SticsRFiles :: get_usms_list(usm_path = file.path(ws,"usms.xml"))
+  full_usms_list = SticsRFiles :: get_usms_list(usm_path = file.path(workspace_path,"usms.xml"))
 
   if (length(usms_list) == 0){
 
