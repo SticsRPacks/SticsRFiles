@@ -50,14 +50,6 @@ get_daily_results <- function(workspace,
   if (length(usm_name) > 1) {
     #print(usm_name)
     #stop("multiple results !")
-    results_tbl_list <- lapply(usm_name,
-                               function(x) get_daily_results(workspace,
-                                                             x,
-                                                             var_list = var_list,
-                                                             doy_list = doy_list,
-                                                             dates_list = dates_list))
-
-
     results_tbl_list <-
       mapply(function(x,y){
         get_daily_results(workspace,
@@ -68,7 +60,7 @@ get_daily_results <- function(workspace,
                           mixed = y,
                           usms_file = usms_file)
       },
-      x= usm_name, y= mixed)
+      x= usm_name, y= mixed,SIMPLIFY = FALSE)
 
     names(results_tbl_list) <- usm_name
     return(results_tbl_list)
@@ -116,7 +108,7 @@ get_daily_results <- function(workspace,
 
     Table_1 =
       try(data.table::fread(file.path(workspace,paste0("mod_sp",usm_name,".sti")),
-                            data.table = F))
+                            data.table = FALSE))
 
     if(inherits(Table_1,"try-error")){
       warning("Error reading output file :",
@@ -126,7 +118,7 @@ get_daily_results <- function(workspace,
 
     Table_2 =
       try(data.table::fread(file.path(workspace,paste0("mod_sa",usm_name,".sti")),
-                            data.table = F))
+                            data.table = FALSE))
 
     if(inherits(Table_2,"try-error")){
       warning("Error reading output file :",
@@ -141,12 +133,13 @@ get_daily_results <- function(workspace,
     results_tbl =
       dplyr::bind_rows(Table_1, Table_2)%>%
       dplyr::group_by(Dominance)%>%
-      dplyr::mutate(cum_jul= compute_doy_cumul(.data$jul, .data$ian))
+      dplyr::mutate(cum_jul= compute_doy_cumul(.data$jul, .data$ian))%>%
+      dplyr::ungroup()
 
   }else{
     results_tbl =
       try(data.table::fread(file.path(workspace,paste0("mod_s",usm_name,".sti")),
-                            data.table = F)%>%dplyr::as.tbl())
+                            data.table = FALSE)%>%dplyr::as.tbl())
     if(inherits(results_tbl,"try-error")){
       warning("Error reading output file :",
               file.path(workspace,paste0("mod_s",usm_name,".sti")))
@@ -179,7 +172,7 @@ get_daily_results <- function(workspace,
   # Adding the Date  in the simulation results tibble
   results_tbl <-
     results_tbl%>%
-    dplyr::mutate(Date=as.POSIXct(x = paste(.$ian,.$mo,.$jo,sep="-"),
+    dplyr::mutate(Date=as.POSIXct(x = paste(.data$ian,.data$mo,.data$jo,sep="-"),
                                   format = "%Y-%m-%d",tz="UTC"))%>%
     dplyr::select(.data$Date, dplyr::everything())
 
