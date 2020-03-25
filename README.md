@@ -49,13 +49,10 @@ suggested.*
 
 -----
 
-The package installation can be done directly from
-[GitHub](https://github.com/) using either `devtools` or the lightweight
-`remote` one [remotes](https://github.com/r-lib/remotes#readme) package
-
 The package installation can be remotely done directly from
 [GitHub](https://github.com/), using either `devtools` or the
-lightweight `remote` one package (check remotes tools installation notes
+lightweight `remotes` one package (check remotes tools installation
+notes
 [here](https://sticsrpacks.github.io/SticsOnR#remote-installation-tools))
 
 The last release version can be installed using:
