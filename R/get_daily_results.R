@@ -91,10 +91,15 @@ get_daily_results <- function(workspace,
   }
 
   if(mixed){
-    usms_file= normalizePath(file.path(workspace,usms_file))
+    usms_file= normalizePath(file.path(workspace,usms_file), mustWork = FALSE)
 
-    plant_xml= get_param_xml(xml_file = usms_file, param_name = "fplt",
-                             select = "usm", usm_name)[[1]]
+    plant_xml= try(get_param_xml(xml_file = usms_file, param_name = "fplt",
+                                 select = "usm", usm_name)[[1]])
+
+    if(inherits(plant_xml,"try-error")){
+      plant_xml= c("plant_1","plant_2")
+      warning("Error reading usms file, using dummy plant file names")
+    }
 
     plant_names=
       try(
