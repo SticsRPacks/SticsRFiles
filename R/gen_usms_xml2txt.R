@@ -135,7 +135,7 @@ gen_usms_xml2txt <- function(javastics_path,
   }
 
   # Command string without usm name
-  cmd_generate=paste("java -jar",jexe,"--generate-txt",ws)
+  cmd_generate=paste("java -jar",jexe,"--generate-txt",workspace_path)
 
 
   usms_number <- length(usms_list)
@@ -172,7 +172,7 @@ gen_usms_xml2txt <- function(javastics_path,
   files_nb <- length(files_list)
 
   # Generating source files paths
-  files_path <- file.path(ws, files_list)
+  files_path <- file.path(workspace_path, files_list)
 
   # Fixing files linked to associated crops
   mandatory_files <- c(rep(T,9), F , F)
@@ -218,7 +218,7 @@ gen_usms_xml2txt <- function(javastics_path,
 
     # If only one usm, for exiting the loop if taarget_path
     # is the workspace path, no need to copy files
-    if (!dir_per_usm_flag && target_path == ws) next
+    if (!dir_per_usm_flag && target_path == workspace_path) next
 
     # Copying files to the usm directory
     exist_files <- file.exists(files_path)
@@ -230,7 +230,7 @@ gen_usms_xml2txt <- function(javastics_path,
                                      to = usm_path, overwrite = T))
 
     # Copying observation files
-    obs_path <- file.path(ws, paste0(usm_name,".obs"))
+    obs_path <- file.path(workspace_path, paste0(usm_name,".obs"))
     if ( file.exists(obs_path) ) {
       obs_copy_status[i] <- file.copy(from = obs_path,
                                       to = usm_path, overwrite = T)
