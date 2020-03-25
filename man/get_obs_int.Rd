@@ -14,9 +14,10 @@ get_obs_int(dirpath = getwd(), filename = NULL, mixed = NULL)
 \item{mixed}{(optional) Is the simulation on mixed species (boolean)}
 }
 \value{
-A data.frame (sole crop) or a list of two data.frames (mixed crops) of
-the STICS-formated observations. Return \code{NULL} if no files were found,
-or more files than useable.
+A data.frameof the STICS-formated observations. Return \code{NULL} if no files were found,
+or more files than useable. If mixed crops (two \code{filename} provided), the function binds
+them and add a new column called "Plant" which corresponds to the name of each observation
+file.
 }
 \description{
 Read STICS observation file(s) for sole and/or mixed crops.

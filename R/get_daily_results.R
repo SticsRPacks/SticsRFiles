@@ -132,7 +132,7 @@ get_daily_results <- function(workspace,
 
     results_tbl =
       dplyr::bind_rows(Table_1, Table_2)%>%
-      dplyr::group_by(Dominance)%>%
+      dplyr::group_by(.data$Dominance)%>%
       dplyr::mutate(cum_jul= compute_doy_cumul(.data$jul, .data$ian))%>%
       dplyr::ungroup()
 
