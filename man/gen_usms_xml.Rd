@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_usms_xml.R
 \name{gen_usms_xml}
 \alias{gen_usms_xml}
-\title{Generate from a template a Stics usms xml file}
+\title{Generate Stics usms xml file from a template or an input file}
 \usage{
 gen_usms_xml(
   usms_out_file,
@@ -13,29 +13,58 @@ gen_usms_xml(
 )
 }
 \arguments{
-\item{usms_out_file}{file name of the output usms xml file}
+\item{usms_out_file}{file path of the output usms xml file}
 
-\item{usms_nb}{number of usms to create}
+\item{usms_nb}{number of usms to create (optional)}
 
-\item{usms_param}{a table (df, tibble) containing parameters to use}
+\item{usms_param}{a table (df, tibble) containing parameters to use (see details)}
 
-\item{usms_in_file}{file path for an input usms xml file}
+\item{usms_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics version to use (optional, default to last). Only used if usms_in_file= NULL, see details.}
 }
 \value{
 an invisible xmlDocument object
 }
 \description{
-Generate from a template a Stics usms xml file
+Generate Stics usms xml file from a template or an input file
+}
+\details{
+Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+argument \code{stics_version}.
+\code{usms_param} is a \code{data.frame} with the following format:\tabular{lrrlll}{
+   usm_name \tab datedebut \tab datefin \tab finit \tab nomsol \tab fstation \cr
+   USM_2017_T1_CI \tab 199 \tab 263 \tab USM_2017_T1_ini.xml \tab USM_T1 \tab climatex_sta.xml \cr
+   USM_2018_T1 \tab 264 \tab 570 \tab USM_2017_T1_ini.xml \tab USM_T1 \tab climatex_sta.xml \cr
+   BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q \tab 199 \tab 263 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q \tab 264 \tab 570 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   AGA_ARB_13_IRR_220-0-0_37K_ARB13_C \tab 199 \tab 263 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   AGA_ARB_13_SEC_220-0-0_37K_ARB13_C \tab 264 \tab 570 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   FRA_ARB_11_SEC_220-0-0_38K_E \tab 199 \tab 263 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   MAG_ARB_09_SEC_220-0-0_38K_E \tab 264 \tab 570 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   MAG_ARV_12_IRR_220-0-0_36K_ARV12_C \tab 199 \tab 263 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   MAG_ARV_12_SEC_220-0-0_36K_ARV12_C \tab 264 \tab 570 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   FRA_ARB_12_SEC_220-0-0_31K_ARB12_C \tab 199 \tab 263 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+   FRA_ARB_13_SEC_220-0-0_37K_ARB13_C \tab 264 \tab 570 \tab Vill11_ini.xml \tab LF1 \tab climatex_sta.xml \cr
+}
+
+
+The first column gives the usm name, all following
+columns give the parameter values to put in the usms.xml file for each usm row.
+
+The first column name must contain the keyword Usm or usm or USM as a prefix to be detected
+(as shown in the table extract above).
 }
 \examples{
 \dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+library(readxl)
+
+xl_path <- "inputs_stics_example.xlsx"
+download_usm_xl(xl_name = xl_path)
 usms_param_df <- read_excel(xl_path, sheet = "USMs")
-gen_usms_xml(usms_out_file = file.path("/path/to/dest/dir","usms.xml"),
+gen_usms_xml(usms_out_file = "usms.xml"),
 usms_param = usms_param_df)
+
 }
 
 }

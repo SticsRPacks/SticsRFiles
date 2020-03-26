@@ -52,3 +52,15 @@ in the file, and each line denotes a separate ini file (for e.g. several USMs).
 The first column name must contain the keyword ini or Ini or INI as a prefix to be detected
 (as shown in the table extract above).
 }
+\examples{
+\dontrun{
+library(readxl)
+
+xl_path <- "inputs_stics_example.xlsx"
+download_usm_xl(xl_name = xl_path)
+ini_param_df <- read_excel(xl_path, sheet = "Ini")
+gen_ini_xml(out_path = "/path/to/dest/dir",
+param_table = ini_param_df)
+}
+
+}

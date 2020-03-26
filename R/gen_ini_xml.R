@@ -12,8 +12,8 @@
 #'  `param_table` is a `data.frame` with the following format:
 #'
 #'
-#'|Ini_name            | nbplantes|stade0_Crop1 | lai0_Crop1| masec0_Crop1| QNplante0_Crop1|
-#'|:-------------------|---------:|:------------|----------:|------------:|---------------:|
+#'  |Ini_name            | nbplantes|stade0_Crop1 | lai0_Crop1| masec0_Crop1| QNplante0_Crop1|
+#'  |:-------------------|---------:|:------------|----------:|------------:|---------------:|
 #'  |USM_2017_T1_ini.xml |         1|snu          |          0|            0|               0|
 #'  |Vill09_ini.xml      |         1|snu          |          0|            0|               0|
 #'  |Vill10_ini.xml      |         1|snu          |          0|            0|               0|
@@ -37,7 +37,7 @@
 #' \dontrun{
 #' library(readxl)
 #'
-#' xl_path <- inputs_stics_example.xlsx"
+#' xl_path <- "inputs_stics_example.xlsx"
 #' download_usm_xl(xl_name = xl_path)
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' gen_ini_xml(out_path = "/path/to/dest/dir",

@@ -28,8 +28,10 @@ Generate  from a template or modify a Stics usms xmlDocument
 }
 \examples{
 \dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' library(readxl)
+
+xl_path <- "inputs_stics_example.xlsx"
+download_usm_xl(xl_name = xl_path)
 usms_param_df <- read_excel(xl_path, sheet = "USMs")
 usms_doc <- SticsRFiles:::gen_usms_doc(usms_param = usms_param_df)
 }

@@ -1,28 +1,58 @@
-#' @title Generate from a template a Stics usms xml file
-#' @param usms_out_file file name of the output usms xml file
+#' @title Generate Stics usms xml file from a template or an input file
+#' @param usms_out_file file path of the output usms xml file
 #'
-#' @param usms_nb number of usms to create
-#' @param usms_param a table (df, tibble) containing parameters to use
-#' @param usms_in_file file path for an input usms xml file
-#' @param stics_version the stics files version to use
+#' @param usms_nb number of usms to create (optional)
+#' @param usms_param a table (df, tibble) containing parameters to use (see details)
+#' @param usms_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
+#' @param stics_version the stics version to use (optional, default to last). Only used if usms_in_file= NULL, see details.
+#'
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
+#'  `usms_param` is a `data.frame` with the following format:
+#'
+#'  |usm_name                                  | datedebut| datefin|finit               |nomsol |fstation         |
+#'  |:----------------------------------------|---------:|-------:|:-------------------|:------|:----------------|
+#'  |USM_2017_T1_CI                           |       199|     263|USM_2017_T1_ini.xml |USM_T1 |climatex_sta.xml |
+#'  |USM_2018_T1                              |       264|     570|USM_2017_T1_ini.xml |USM_T1 |climatex_sta.xml |
+#'  |BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q |       199|     263|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q     |       264|     570|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |AGA_ARB_13_IRR_220-0-0_37K_ARB13_C       |       199|     263|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |AGA_ARB_13_SEC_220-0-0_37K_ARB13_C       |       264|     570|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |FRA_ARB_11_SEC_220-0-0_38K_E             |       199|     263|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |MAG_ARB_09_SEC_220-0-0_38K_E             |       264|     570|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |MAG_ARV_12_IRR_220-0-0_36K_ARV12_C       |       199|     263|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |MAG_ARV_12_SEC_220-0-0_36K_ARV12_C       |       264|     570|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |FRA_ARB_12_SEC_220-0-0_31K_ARB12_C       |       199|     263|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'  |FRA_ARB_13_SEC_220-0-0_37K_ARB13_C       |       264|     570|Vill11_ini.xml      |LF1    |climatex_sta.xml |
+#'
+#'
+#' The first column gives the usm name, all following
+#' columns give the parameter values to put in the usms.xml file for each usm row.
+#'
+#' The first column name must contain the keyword Usm or usm or USM as a prefix to be detected
+#' (as shown in the table extract above).
 #'
 #'
 #' @return an invisible xmlDocument object
 #'
 #' @examples
 #' \dontrun{
-#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' library(readxl)
+#'
+#' xl_path <- "inputs_stics_example.xlsx"
+#' download_usm_xl(xl_name = xl_path)
 #' usms_param_df <- read_excel(xl_path, sheet = "USMs")
-#' gen_usms_xml(usms_out_file = file.path("/path/to/dest/dir","usms.xml"),
+#' gen_usms_xml(usms_out_file = "usms.xml"),
 #' usms_param = usms_param_df)
+#'
 #' }
 #'
 #' @export
 #'
 
 gen_usms_xml <- function(usms_out_file,
-                         usms_nb = NULL, usms_param = NULL,
+                         usms_nb = NULL,
+                         usms_param = NULL,
                          usms_in_file = NULL,
                          stics_version ="last") {
 

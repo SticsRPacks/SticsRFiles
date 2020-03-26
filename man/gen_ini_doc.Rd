@@ -29,4 +29,15 @@ an xmlDocument object or a list of
 \description{
 Generate  from a template or modify a Stics ini xmlDocument
 }
+\examples{
+\dontrun{
+library(readxl)
+
+xl_path <- "inputs_stics_example.xlsx"
+download_usm_xl(xl_name = xl_path)
+ini_param_df <- read_excel(xl_path, sheet = "Ini")
+ini_doc <- SticsRFiles:::gen_ini_doc(param_table = ini_param_df)
+}
+
+}
 \keyword{internal}
