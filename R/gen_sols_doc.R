@@ -5,14 +5,14 @@
 #' @param sols_param a table (df, tibble) containing parameters to use
 #' @param stics_version the stics files version to use
 #'
-#' @return an xmlDocument object
+#' @return an an invisible xmlDocument object
 #'
 #' @examples
 #' \dontrun{
 #' library(readxl)
 #'
+#' xl_path <- "inputs_stics_example.xlsx"
 #' download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 #' sols_param_df <- read_excel(xl_path, sheet = "Soils")
 #' soil_doc <- SticsRFiles:::gen_sols_doc(sols_param = sols_param_df)
 #' }
@@ -32,6 +32,6 @@ gen_sols_doc <- function(xml_doc = NULL,
                                 nodes_param = sols_param,
                                 stics_version = stics_version)
 
-  return(out_doc_object)
+  return(invisible(out_doc_object))
 
 }

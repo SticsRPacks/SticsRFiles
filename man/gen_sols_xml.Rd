@@ -17,9 +17,9 @@ gen_sols_xml(
 
 \item{sols_nb}{number of soils to create (optional)}
 
-\item{sols_param}{a table (df, tibble) containing parameters to use}
+\item{sols_param}{a table (df, tibble) containing parameters to use (see details)}
 
-\item{sols_in_file}{file path for an input sols xml file}
+\item{sols_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
 
 \item{stics_version}{the stics version to use (optional, default to last). Only used if sols_in_file= NULL, see details.}
 }
@@ -60,10 +60,10 @@ The first column name must contain the keyword Soil or soil or SOIL as a prefix 
 \dontrun{
 library(readxl)
 
-download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+xl_path <- "inputs_stics_example.xlsx"
+download_usm_xl(xl_name = xl_path)
 sols_param_df <- read_excel(xl_path, sheet = "Soils")
-gen_sols_xml(sols_out_file = file.path("/path/to/dest/dir","sols.xml"),
+gen_sols_xml(sols_out_file = "sols.xml"),
 sols_param = sols_param_df)
 
 }
