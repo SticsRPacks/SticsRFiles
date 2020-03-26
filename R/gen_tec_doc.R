@@ -1,4 +1,4 @@
-#' @title Generate  from a template or modify a Stics tec xmlDocument
+#' @title Generate from a template or modify a Stics tec xmlDocument
 #' @param xml_doc an xmlDocument object (created from an ini file)
 #'
 #' @param param_table a table (df, tibble) containing parameters to use
@@ -10,7 +10,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' library(readxl)
+#'
+#' download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
 #' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 #' tec_param_df <- read_excel(xl_path, sheet = "Tec")
 #' tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)
@@ -21,7 +23,14 @@
 gen_tec_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         stics_version = "last",
-                        dict = NULL) {
+                        dict = NULL,
+                        ...) {
+
+
+  # Fix first time
+  sort = TRUE
+  dot_args= list(...)
+  if ("sort" %in% names(dot_args)) sort = dot_args$sort
 
   # check/get version
   stics_version <- get_xml_stics_version(stics_version = stics_version,
@@ -37,17 +46,28 @@ gen_tec_doc <- function(xml_doc = NULL,
   #   return(xml_doc)
   # }
 
+  # if (sort) {
+  #   #table_params <- get_params_from_table(param_table,"tec",xml_doc, dict = dict)
+  #   #table_names <- names(table_params)
+  #   #param_table <- table_params
+  #   param_table <- get_params_from_table(param_table,"tec",xml_doc, dict = dict)
+  #
+  # }
+
+  table_names <- names(param_table)
+  table_params <- param_table
 
   # managing several doc generation based upon the lines number in param_table
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
-    #xml_docs <- vector("list",lines_nb)
     xml_docs <- apply(param_table,1,
-                      function(x) gen_tec_doc(xml_doc = cloneXmlDoc(xml_doc),
+                      #function(x) gen_tec_doc(xml_doc = cloneXmlDoc(xml_doc),
+                      function(x) gen_tec_doc(
                                               param_table = as.data.frame(t(x),
                                                                           stringsAsFactors = F ),
                                               stics_version = stics_version,
-                                              dict = dict))
+                                              dict = dict,
+                                              sort = FALSE))
     return(xml_docs)
   }
 
@@ -64,23 +84,27 @@ gen_tec_doc <- function(xml_doc = NULL,
   doc_params <- get_params_from_doc(xml_doc)
 
   # getting unknown param names
-  unknown_param <- setdiff(table_names,unlist(doc_params))
+  unknown_param <- setdiff(unlist(table_names),unlist(doc_params))
 
   # temporary select for avoiding errors
-  table_params <- table_params[ table_names %in% unknown_param == FALSE ]
-  table_names <- names(table_params)
+  unknown_idx <- table_names %in% unknown_param
 
+  # TODO: message listing unknown parameter names !!!
 
-  # getting scal names
+  # Updating param names and table
+  if (any(unknown_idx)) {
+    table_params <- table_params[ ! unknown_idx ]
+    table_names <- names(table_params)
+  }
+
+  # Getting scalar parameter names
   vec_idx <- unlist(lapply(table_params,
                            function(x) length(grep(pattern = "_[0-9]*$",names(x))) > 0 ), use.names = F)
 
   scal_names <- table_names[! vec_idx]
   vec_names <- table_names[vec_idx]
 
-
   # Setting scalar parameters values
-  #
   for ( scal_name in scal_names) {
     set_param_value(xml_doc, scal_name, table_params[[ scal_name ]]) #, show_xpath = T)
   }
@@ -97,8 +121,9 @@ gen_tec_doc <- function(xml_doc = NULL,
     #print(par_name)
 
     nb_par <- get_param_number(xml_doc, par_name)
-    nb_values <- dim(table_params[[par_name]])[2]
-    if ( nb_par == nb_values) {
+    #nb_values <- dim(table_params[[par_name]])[2]
+    nb_values <- length(table_params[[par_name]])
+    if ( ! base::is.null(nb_values) && (nb_par == nb_values)) {
       # if the nodes number is already matching
       # or a previous pass in the else condition
       # permitted to add the needed nodes number.
@@ -140,7 +165,7 @@ gen_tec_doc <- function(xml_doc = NULL,
 
 
 
-      nodes_nb <- ncol(table_params[[par_name]])
+      nodes_nb <- length(table_params[[par_name]])
 
       par_form <- get_param_formalisms( xml_doc = xml_doc, par_name)
 
@@ -187,6 +212,8 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   }
 
+  #print(param_table$densitesem)
+  #print(address(xml_doc))
 
   if (gen_error) {
     xml_doc <- NULL

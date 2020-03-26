@@ -18,7 +18,7 @@ gen_tec_xml(
 
 \item{out_path}{path to an optional folder where to write the output file(s)}
 
-\item{stics_version}{the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.}
+\item{stics_version}{the stics version to use (optional, default to last). Only used if tec_in_file= NULL, see details.}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -58,8 +58,7 @@ library(readxl)
 xl_path <- "inputs_stics_example.xlsx"
 download_usm_xl(xl_name = xl_path)
 tec_param_df <- readxl::read_excel(xl_path, sheet = "Tec")
-gen_tec_xml(out_path = file.path("/path/to/dest/dir","tec"),
-param_table = tec_param_df)
+gen_tec_xml(out_path = "/path/to/dest/dir", param_table = tec_param_df)
 }
 
 }

@@ -54,7 +54,7 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
 
   # detecting usm names column
   in_params <- names(usms_param)
-  usm_col <- grep("^usm",in_params, value = T)
+  usm_col <- grep("^usm",tolower(in_params), value = T)
 
   # default idx
   usms_xml_idx <- 1:dim(usms_param)[1]
@@ -127,5 +127,7 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
     set_param_value(xml_doc_object,p,usms_param[[p]],
                     usms_xml_idx)
   }
+
+  return(xml_doc_object)
 
 }

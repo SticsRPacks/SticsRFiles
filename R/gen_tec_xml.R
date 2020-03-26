@@ -3,7 +3,7 @@
 #' @param param_table a table (df, tibble) containing parameters to use (see details)
 #' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
-#' @param stics_version the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.
+#' @param stics_version the stics version to use (optional, default to last). Only used if tec_in_file= NULL, see details.
 # @param dict List of correspondance between given parameter names and internal names.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
@@ -39,8 +39,7 @@
 #' xl_path <- "inputs_stics_example.xlsx"
 #' download_usm_xl(xl_name = xl_path)
 #' tec_param_df <- readxl::read_excel(xl_path, sheet = "Tec")
-#' gen_tec_xml(out_path = file.path("/path/to/dest/dir","tec"),
-#' param_table = tec_param_df)
+#' gen_tec_xml(out_path = "/path/to/dest/dir", param_table = tec_param_df)
 #'}
 #'
 #' @export
@@ -108,7 +107,7 @@ gen_tec_xml <- function(param_table = NULL,
   out_name <- param_table[[tec_col]]
   ids <- grepl("_tec.xml$",out_name)
   if ( sum(ids) < length(out_name) ) {
-    out_name[ids] <- paste0(param_table[[tec_col]][ids],"_tec.xml")
+    out_name[!ids] <- paste0(param_table[[tec_col]][!ids],"_tec.xml")
   }
   tec_out_file <- file.path(out_path,out_name)
 

@@ -10,8 +10,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' library(readxl)
+#'
+#' xl_path <- inputs_stics_example.xlsx"
+#' download_usm_xl(xl_name = xl_path)
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' ini_doc <- SticsRFiles:::gen_ini_doc(param_table = ini_param_df)
 #' }

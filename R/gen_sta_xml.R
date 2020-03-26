@@ -1,25 +1,40 @@
-#' @title Generate from a template  or an input file a Stics sta xml file
-#' @param sta_out_file file name of the output sta xml file
-#' @param param_table a table (df, tibble) containing parameters to use
-#' @param sta_in_file file path for an input sta xml file
-#' @param out_path path for the sta output file
-#' @param stics_version the stics files version to use
+#' @title Generate Stics sta xml file(s) from a template or an input file
+#'
+#' @param param_table a table (df, tibble) containing parameters to use (see details)
+#' @param sta_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
+#' @param out_path path to an optional folder where to write the output file(s)
+#' @param stics_version the stics version to use (optional, default to last). Only used if sta_in_file= NULL, see details.
+#'
+#'
+#'  |Sta_name         |  zr| NH3ref| latitude| patm| aclim|
+#'  |:----------------|---:|------:|--------:|----:|-----:|
+#'  |climatex_sta.xml | 2.5|      0|       49| 1000|    20|
+#'  |climatex2_sta.xml | 2.8|      0|       49| 1000|    20|
+#'  |climatex3_sta.xml | 2.2|      0|       49| 1000|    20|
+#'
+#' The first column gives the sta file name (to be generated), all following columns give the parameter value to put
+#' in the file, and each line denotes a separate sta file (for e.g. several USMs).
+#'
+#' The first column name must contain the keyword sta or Sta or STA as a prefix to be detected
+#' (as shown in the table extract above).
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
 #' @examples
 #' \dontrun{
-#' copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
-#' sta_param_df <- read_excel(xl_path, sheet = "Station")
-#' gen_sta_xml(out_path = file.path("/path/to/dest/dir","sta"),
-#' param_table = sta_param_df)
+#' library(readxl)
+#'
+#' xl_path <- "inputs_stics_example.xlsx"
+#' download_usm_xl(xl_name = xl_path)
+#' sta_param_df <- readxl::read_excel(xl_path, sheet = "Station")
+#' gen_sta_xml(out_path = "/path/to/dest/dir", param_table = sta_param_df)
+#'
 #'}
 #'
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_xml <- function(sta_out_file = NULL, param_table = NULL,
+gen_sta_xml <- function(param_table = NULL,
                         sta_in_file = NULL,
                         out_path = getwd(),
                         stics_version ="last") {
@@ -50,26 +65,35 @@ gen_sta_xml <- function(sta_out_file = NULL, param_table = NULL,
   }
 
 
+  # Finding non NULL elements in xml_docs (i.e. no errors in doc generation)
+  out_idx <- unlist(lapply(xml_docs, base::is.null))
+
+  if (any(out_idx)) {
+    cat("\n")
+    cat("Errors have been detected while trying to replace parameters values in xml documents\n")
+    cat(paste(sum(!out_idx), "files have been generated !\n"))
+    # selecting available documents to produce
+    xml_docs <- xml_docs[out_idx]
+  }
+
+  # No files will be generated
+  if (all(out_idx)) {
+    return(invisible())
+  }
+
+
   # checking if out_path exists
   if ( ! dir.exists(out_path) ) {
     stop(paste("The directory does not exist",out_path ))
   }
 
   # defining output files paths
-  if (base::is.null(sta_out_file)) {
-    out_name <- param_table[[sta_col]]
-    ids <- grepl("_sta.xml$",out_name)
-    if (sum(ids) < length(out_name)) {
-      out_name <- paste0(param_table[[sta_col]][ids],"_sta.xml")
-    }
-    sta_out_file <- file.path(out_path,out_name)
-  } else {
-    sta_out_file <- file.path(out_path,sta_out_file)
-    if ( length(xml_docs) > 1) {
-      sta_out_file <- paste(gsub(x = sta_out_file, replacement = "", pattern = "_sta.xml$"),
-                            1:length(xml_docs), sep = "_","sta.xml" )
-    }
+  out_name <- param_table[[sta_col]]
+  ids <- grepl("_sta.xml$",out_name)
+  if (sum(ids) < length(out_name)) {
+    out_name[!ids] <- paste0(param_table[[sta_col]][!ids],"_sta.xml")
   }
+  sta_out_file <- file.path(out_path,out_name)
 
   # checking dimensions
   if ( ! length(xml_docs) == length(sta_out_file) ) {

@@ -2,10 +2,9 @@
 % Please edit documentation in R/gen_sta_xml.R
 \name{gen_sta_xml}
 \alias{gen_sta_xml}
-\title{Generate from a template  or an input file a Stics sta xml file}
+\title{Generate Stics sta xml file(s) from a template or an input file}
 \usage{
 gen_sta_xml(
-  sta_out_file = NULL,
   param_table = NULL,
   sta_in_file = NULL,
   out_path = getwd(),
@@ -13,29 +12,41 @@ gen_sta_xml(
 )
 }
 \arguments{
-\item{sta_out_file}{file name of the output sta xml file}
+\item{param_table}{a table (df, tibble) containing parameters to use (see details)}
 
-\item{param_table}{a table (df, tibble) containing parameters to use}
+\item{sta_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
 
-\item{sta_in_file}{file path for an input sta xml file}
+\item{out_path}{path to an optional folder where to write the output file(s)}
 
-\item{out_path}{path for the sta output file}
+\item{stics_version}{the stics version to use (optional, default to last). Only used if sta_in_file= NULL, see details.\tabular{lrrrrr}{
+   Sta_name \tab zr \tab NH3ref \tab latitude \tab patm \tab aclim \cr
+   climatex_sta.xml \tab 2.5 \tab 0 \tab 49 \tab 1000 \tab 20 \cr
+   climatex2_sta.xml \tab 2.8 \tab 0 \tab 49 \tab 1000 \tab 20 \cr
+   climatex3_sta.xml \tab 2.2 \tab 0 \tab 49 \tab 1000 \tab 20 \cr
+}
 
-\item{stics_version}{the stics files version to use}
+
+The first column gives the sta file name (to be generated), all following columns give the parameter value to put
+in the file, and each line denotes a separate sta file (for e.g. several USMs).
+
+The first column name must contain the keyword sta or Sta or STA as a prefix to be detected
+(as shown in the table extract above).}
 }
 \value{
 an invisible xmlDocument object or a list of
 }
 \description{
-Generate from a template  or an input file a Stics sta xml file
+Generate Stics sta xml file(s) from a template or an input file
 }
 \examples{
 \dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
-sta_param_df <- read_excel(xl_path, sheet = "Station")
-gen_sta_xml(out_path = file.path("/path/to/dest/dir","sta"),
-param_table = sta_param_df)
+library(readxl)
+
+xl_path <- "inputs_stics_example.xlsx"
+download_usm_xl(xl_name = xl_path)
+sta_param_df <- readxl::read_excel(xl_path, sheet = "Station")
+gen_sta_xml(out_path = "/path/to/dest/dir", param_table = sta_param_df)
+
 }
 
 }

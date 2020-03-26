@@ -2,10 +2,9 @@
 % Please edit documentation in R/gen_ini_xml.R
 \name{gen_ini_xml}
 \alias{gen_ini_xml}
-\title{Generate from a template or an input file a Stics ini xml file}
+\title{Generate Stics ini xml file(s) from a template or an input file}
 \usage{
 gen_ini_xml(
-  ini_out_file = NULL,
   param_table = NULL,
   ini_in_file = NULL,
   out_path = getwd(),
@@ -14,31 +13,42 @@ gen_ini_xml(
 )
 }
 \arguments{
-\item{ini_out_file}{file name of the output ini xml file}
+\item{param_table}{a table (df, tibble) containing parameters to use (see details)}
 
-\item{param_table}{a table (df, tibble) containing parameters to use}
+\item{ini_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
 
-\item{ini_in_file}{file path for an input ini xml file}
+\item{out_path}{path to an optional folder where to write the output file(s)}
 
-\item{out_path}{path for the ini output file (optional)}
+\item{crop_tag}{identifier for the crop parameters names related to the main crop, or the associated crop if any
+(example: Crop is used in the param_table example in the details section below)}
 
-\item{crop_tag}{identifier for the crop parameters names}
-
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics version to use (optionnal, default to last). Only used if ini_in_file= NULL, see details.}
 }
 \value{
 an invisible xmlDocument object or a list of
 }
 \description{
-Generate from a template or an input file a Stics ini xml file
+Generate Stics ini xml file(s) from a template or an input file
 }
-\examples{
-\dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
-ini_param_df <- read_excel(xl_path, sheet = "Ini")
-gen_ini_xml(out_path = file.path("/path/to/dest/dir","ini"),
-param_table = ini_param_df)
+\details{
+Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+argument \code{stics_version}.
+\code{param_table} is a \code{data.frame} with the following format:\tabular{lrlrrr}{
+   Ini_name \tab nbplantes \tab stade0_Crop1 \tab lai0_Crop1 \tab masec0_Crop1 \tab QNplante0_Crop1 \cr
+   USM_2017_T1_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Vill09_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Vill10_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Vill11_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Vill12_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Vill13_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Vill14_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+   Standard_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
 }
 
+
+The first column gives the ini file name (to be generated), all following columns give the parameter value to put
+in the file, and each line denotes a separate ini file (for e.g. several USMs).
+
+The first column name must contain the keyword ini or Ini or INI as a prefix to be detected
+(as shown in the table extract above).
 }
