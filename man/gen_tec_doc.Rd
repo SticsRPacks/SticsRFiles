@@ -2,13 +2,14 @@
 % Please edit documentation in R/gen_tec_doc.R
 \name{gen_tec_doc}
 \alias{gen_tec_doc}
-\title{Generate  from a template or modify a Stics tec xmlDocument}
+\title{Generate from a template or modify a Stics tec xmlDocument}
 \usage{
 gen_tec_doc(
   xml_doc = NULL,
   param_table = NULL,
   stics_version = "last",
-  dict = NULL
+  dict = NULL,
+  ...
 )
 }
 \arguments{
@@ -24,11 +25,13 @@ gen_tec_doc(
 an xmlDocument object or a list of
 }
 \description{
-Generate  from a template or modify a Stics tec xmlDocument
+Generate from a template or modify a Stics tec xmlDocument
 }
 \examples{
 \dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+library(readxl)
+
+download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
 xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 tec_param_df <- read_excel(xl_path, sheet = "Tec")
 tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)

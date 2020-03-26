@@ -7,12 +7,14 @@
 get_stics_versions_compat()
 }
 \value{
-A list of the STICS versions compatible with this package, and the last version in use.
+A named list with the STICS versions compatible with this package ($versions_list),
+and the last version in use ($last_version).
 }
 \description{
 Get the versions of stics that are fully compatible with this package.
 }
 \examples{
-SticsRFiles:::get_stics_versions_compat()
+get_stics_versions_compat()
+
 
 }

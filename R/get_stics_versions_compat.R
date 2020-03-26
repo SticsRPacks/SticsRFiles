@@ -2,10 +2,14 @@
 #'
 #' @description Get the versions of stics that are fully compatible with this package.
 #'
-#' @return A list of the STICS versions compatible with this package, and the last version in use.
+#' @return A named list with the STICS versions compatible with this package ($versions_list),
+#' and the last version in use ($last_version).
 #'
 #' @examples
-#' SticsRFiles:::get_stics_versions_compat()
+#' get_stics_versions_compat()
+#'
+#'
+#' @export
 #'
 get_stics_versions_compat <- function() {
 

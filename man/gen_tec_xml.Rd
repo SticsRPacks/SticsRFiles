@@ -8,8 +8,7 @@ gen_tec_xml(
   param_table = NULL,
   tec_in_file = NULL,
   out_path = getwd(),
-  stics_version = "last",
-  dict = NULL
+  stics_version = "last"
 )
 }
 \arguments{
@@ -20,8 +19,6 @@ gen_tec_xml(
 \item{out_path}{path to an optional folder where to write the output file(s)}
 
 \item{stics_version}{the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.}
-
-\item{dict}{List of correspondance between given parameter names and internal names.}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -48,13 +45,18 @@ argument \code{stics_version}.
 }
 
 
-The first column give the tec file name (to be generated), all following columns give the parameter value to put
+The first column gives the tec file name (to be generated), all following columns give the parameter value to put
 in the file, and each line denotes a separate tec file (for e.g. several USMs).
+
+The first column name must contain the keyword tec or Tec or TEC as a prefix to be detected
+(as shown in the table extract above).
 }
 \examples{
 \dontrun{
+library(readxl)
+
 xl_path <- "inputs_stics_example.xlsx"
-copy_mailing_example(xl_name = xl_path)
+download_usm_xl(xl_name = xl_path)
 tec_param_df <- readxl::read_excel(xl_path, sheet = "Tec")
 gen_tec_xml(out_path = file.path("/path/to/dest/dir","tec"),
 param_table = tec_param_df)

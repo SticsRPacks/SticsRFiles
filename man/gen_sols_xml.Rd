@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sols_xml.R
 \name{gen_sols_xml}
 \alias{gen_sols_xml}
-\title{Generate from a template a Stics sols xml file}
+\title{Generate Stics sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
   sols_out_file,
@@ -15,27 +15,57 @@ gen_sols_xml(
 \arguments{
 \item{sols_out_file}{file path of the output sols xml file}
 
-\item{sols_nb}{number of soils to create}
+\item{sols_nb}{number of soils to create (optional)}
 
 \item{sols_param}{a table (df, tibble) containing parameters to use}
 
 \item{sols_in_file}{file path for an input sols xml file}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics version to use (optional, default to last). Only used if sols_in_file= NULL, see details.}
 }
 \value{
 an invisible xmlDocument object
 }
 \description{
-Generate from a template a Stics sols xml file
+Generate Stics sols xml file from a template or an input file
+}
+\details{
+Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+argument \code{stics_version}.
+\code{sols_param} is a \code{data.frame} with the following format:\tabular{lrrrrrrr}{
+   Soil_name \tab argi \tab norg \tab calc \tab pH \tab albedo \tab q0 \tab epc_1 \cr
+   USM_T1 \tab 20.35000 \tab 0.100 \tab 0.52 \tab 8.23 \tab 0.22 \tab 9.630 \tab 30 \cr
+   LF1 \tab 17.00000 \tab 1.900 \tab 0.00 \tab 6.70 \tab 0.22 \tab 9.360 \tab 30 \cr
+   LF2 \tab 17.00000 \tab 1.800 \tab 0.00 \tab 6.70 \tab 0.22 \tab 9.360 \tab 30 \cr
+   LAP \tab 22.00000 \tab 2.000 \tab 0.00 \tab 6.50 \tab 0.22 \tab 9.760 \tab 25 \cr
+   LAS \tab 24.05000 \tab 2.500 \tab 30.00 \tab 8.00 \tab 0.22 \tab 9.928 \tab 30 \cr
+   LA0 \tab 30.00675 \tab 2.300 \tab 0.50 \tab 7.50 \tab 0.22 \tab 10.400 \tab 30 \cr
+   LC0 \tab 22.38750 \tab 2.000 \tab 10.00 \tab 7.90 \tab 0.22 \tab 9.792 \tab 25 \cr
+   Vill09 \tab 25.00000 \tab 0.101 \tab 0.40 \tab 7.90 \tab 0.22 \tab 10.000 \tab 30 \cr
+   Vill10 \tab 14.30000 \tab 0.099 \tab 1.50 \tab 8.20 \tab 0.22 \tab 9.144 \tab 30 \cr
+   Vill11 \tab 11.80000 \tab 0.100 \tab 0.00 \tab 7.30 \tab 0.22 \tab 8.944 \tab 30 \cr
+   Vill12 \tab 14.30000 \tab 0.091 \tab 0.60 \tab 8.30 \tab 0.22 \tab 9.144 \tab 30 \cr
+   Vill13 \tab 16.80000 \tab 0.088 \tab 0.20 \tab 7.80 \tab 0.22 \tab 9.344 \tab 30 \cr
+   Vill14 \tab 15.10000 \tab 0.095 \tab 1.30 \tab 7.90 \tab 0.22 \tab 9.208 \tab 30 \cr
+}
+
+
+The first column gives the soil name, all following
+columns give the parameter values to put in the sols.xml file for each soil row.
+
+The first column name must contain the keyword Soil or soil or SOIL as a prefix to be detected
+(as shown in the table extract above).
 }
 \examples{
 \dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+library(readxl)
+
+download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
 xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 sols_param_df <- read_excel(xl_path, sheet = "Soils")
 gen_sols_xml(sols_out_file = file.path("/path/to/dest/dir","sols.xml"),
 sols_param = sols_param_df)
+
 }
 
 }
