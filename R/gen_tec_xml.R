@@ -4,7 +4,7 @@
 #' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
 #' @param stics_version the stics version to use (optionnal, default to last). Only used if tec_in_file= NULL, see details.
-#' @param dict List of correspondance between given parameter names and internal names.
+# @param dict List of correspondance between given parameter names and internal names.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
@@ -24,15 +24,20 @@
 #' |FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml       |       92|         1|      9|       42|         90|
 #' |FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
 #'
-#' The first column give the tec file name (to be generated), all following columns give the parameter value to put
+#' The first column gives the tec file name (to be generated), all following columns give the parameter value to put
 #' in the file, and each line denotes a separate tec file (for e.g. several USMs).
+#'
+#' The first column name must contain the keyword tec or Tec or TEC as a prefix to be detected
+#' (as shown in the table extract above).
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
 #' @examples
 #' \dontrun{
+#' library(readxl)
+#'
 #' xl_path <- "inputs_stics_example.xlsx"
-#' copy_mailing_example(xl_name = xl_path)
+#' download_usm_xl(xl_name = xl_path)
 #' tec_param_df <- readxl::read_excel(xl_path, sheet = "Tec")
 #' gen_tec_xml(out_path = file.path("/path/to/dest/dir","tec"),
 #' param_table = tec_param_df)
@@ -44,8 +49,8 @@
 gen_tec_xml <- function(param_table = NULL,
                         tec_in_file = NULL,
                         out_path = getwd(),
-                        stics_version = "last",
-                        dict = NULL) {
+                        stics_version = "last") { #,
+  #dict = NULL) {
 
 
 
@@ -64,11 +69,11 @@ gen_tec_xml <- function(param_table = NULL,
   }
   tec_col <- param_names[ col_id  ]
 
-
+  # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(xml_doc = xml_doc,
                           param_table = param_table[ , - col_id],
-                          stics_version = stics_version,
-                          dict = dict)
+                          stics_version = stics_version) #,
+  #dict = dict)
 
 
   if ( class(xml_docs) == "xmlDocument") {
