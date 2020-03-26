@@ -13,7 +13,7 @@ get_usms_files(
 )
 }
 \arguments{
-\item{workspace_path}{JavaStics workspace path}
+\item{workspace_path}{The path to a JavaStics-compatible workspace}
 
 \item{usms_list}{Vector of usms names (Optional)}
 
@@ -21,7 +21,8 @@ get_usms_files(
 
 \item{file_type}{Vector of file(s) type to get (if not given, all types are returned, see details)}
 
-\item{javastics_path}{JavaStics installation path (Optional)}
+\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace_path}
+but rather in the JavaStics default workspace)}
 }
 \value{
 A named list with existing files path in each usm element
@@ -51,5 +52,6 @@ file_type = c("finit", "ftec" ))
 
 }
 \seealso{
-See \code{get_soils_list} to get all soils in a usm file.
+See \code{get_soils_list()} to get all soils in a usm file, and \code{get_usms_list()} to get
+the list of usms.
 }

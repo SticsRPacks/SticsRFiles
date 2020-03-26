@@ -14,9 +14,10 @@
 #'          If \code{mixed} is not specified (or equal to \code{NULL}), the function
 #'          tries to read the number of species from the input files.
 #'
-#' @return A data.frame (sole crop) or a list of two data.frames (mixed crops) of
-#'         the STICS-formated observations. Return \code{NULL} if no files were found,
-#'         or more files than useable.
+#' @return A data.frameof the STICS-formated observations. Return \code{NULL} if no files were found,
+#'         or more files than useable. If mixed crops (two `filename` provided), the function binds
+#'         them and add a new column called "Plant" which corresponds to the name of each observation
+#'         file.
 #'
 # @seealso \code{\link{read_output}}
 #'

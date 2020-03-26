@@ -6,9 +6,11 @@
 #' @param var_list vector of output variables names (optional)
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
+#' @param mixed    value (recycled) or vector of. `TRUE`: intercrop, `FALSE`: sole crops (default), `NULL`: guess from XML files.
+#' @param usms_file The name of the usms file (e.g. "usms.xml") in case of `NULL` values in `mixed`.
 #'
-#' @details For intercrops, please add a "p" or a "a" before the USM name in `usm_name` to
-#' get the results for the principal or associated crop respectively.
+#' @details The function can guess if the usm(s) are mixed or not by reading the XML
+#' input files. To do so, set the `mixed` argument to `NULL`.
 #'
 #' @return A tibble or a list of
 #'
@@ -24,10 +26,14 @@ get_daily_results <- function(workspace,
                               usm_name,
                               var_list=NULL,
                               doy_list=NULL,
-                              dates_list=NULL) {
+                              dates_list=NULL,
+                              mixed= rep(FALSE,length(usm_name)),
+                              usms_file= "usms.xml") {
   .= NULL
 
-
+  if(length(mixed)>1 & length(mixed)!=length(usm_name)){
+    stop("The 'mixed' argument must either be of length one or length(usm_name)")
+  }
   # TODO:
   # - manage filtering for multiple files : potentially filters may be different
   # for each file.
@@ -44,65 +50,135 @@ get_daily_results <- function(workspace,
   if (length(usm_name) > 1) {
     #print(usm_name)
     #stop("multiple results !")
-    results_tbl_list <- lapply(usm_name,
-                               function(x) get_daily_results(workspace,
-                                                             x,
-                                                             var_list = var_list,
-                                                             doy_list = doy_list,
-                                                             dates_list = dates_list))
+    results_tbl_list <-
+      mapply(function(x,y){
+        get_daily_results(workspace,
+                          x,
+                          var_list = var_list,
+                          doy_list = doy_list,
+                          dates_list = dates_list,
+                          mixed = y,
+                          usms_file = usms_file)
+      },
+      x= usm_name, y= mixed,SIMPLIFY = FALSE)
+
     names(results_tbl_list) <- usm_name
     return(results_tbl_list)
   }
 
-  results_path=file.path(workspace,paste0("mod_s",usm_name,".sti"))
 
+  if(is.null(mixed)){
+    # Try to guess if it is a mixture or not
+    nb_plant= try(get_plants_nb(usm_xml_path = usms_file,usms_list = usm_name))
 
-  results_tbl <- try(dplyr::as.tbl(utils::read.table(results_path,header = TRUE,
-                                                     sep = ";",
-                                                     stringsAsFactors = FALSE)))
+    if(inherits(nb_plant,"nb_plant")){
+      stop("Unable to guess if the usm is an intercrop. Please set mixed to TRUE or FALSE")
+    }
 
-  if (methods::is(results_tbl,"try-error")){
-    warning("Error reading output file :",results_path)
-    return()
+    if(nb_plant==1){
+      mixed= FALSE
+    }else{
+      mixed= TRUE
+    }
   }
 
-  # Add cum_jul to table (cumulative DOY)
-  cum_doy <- compute_doy_cumul(results_tbl$jul, results_tbl$ian)
-  results_tbl <- dplyr::mutate(results_tbl, cum_jul = cum_doy)
+  if(mixed){
+    usms_file= normalizePath(file.path(workspace,usms_file), mustWork = FALSE)
+
+    plant_xml= try(get_param_xml(xml_file = usms_file, param_name = "fplt",
+                                 select = "usm", usm_name)[[1]])
+
+    if(inherits(plant_xml,"try-error")){
+      plant_xml= c("plant_1","plant_2")
+      warning("Error reading usms file, using dummy plant file names")
+    }
+
+    plant_names=
+      try(
+        lapply(plant_xml, function(x){
+          get_param_xml(xml_file = normalizePath(file.path(workspace,"plant",x)),
+                        param_name = "codeplante")[[1]]
+        })%>%unlist()
+      )
+
+    if(inherits(plant_names,"try-error")){
+      plant_names= plant_xml
+      warning("Error reading plant names, using plant file names instead")
+    }
+
+    Table_1 =
+      try(data.table::fread(file.path(workspace,paste0("mod_sp",usm_name,".sti")),
+                            data.table = FALSE))
+
+    if(inherits(Table_1,"try-error")){
+      warning("Error reading output file :",
+              file.path(workspace,paste0("mod_sp",usm_name,".sti")))
+      return()
+    }
+
+    Table_2 =
+      try(data.table::fread(file.path(workspace,paste0("mod_sa",usm_name,".sti")),
+                            data.table = FALSE))
+
+    if(inherits(Table_2,"try-error")){
+      warning("Error reading output file :",
+              file.path(workspace,paste0("mod_sa",usm_name,".sti")))
+      return()
+    }
+    Table_1$Plant = plant_names[1]
+    Table_2$Plant = plant_names[2]
+    Table_1$Dominance = "Principal"
+    Table_2$Dominance = "Associated"
+
+    results_tbl =
+      dplyr::bind_rows(Table_1, Table_2)%>%
+      dplyr::group_by(.data$Dominance)%>%
+      dplyr::mutate(cum_jul= compute_doy_cumul(.data$jul, .data$ian))%>%
+      dplyr::ungroup()
+
+  }else{
+    results_tbl =
+      try(data.table::fread(file.path(workspace,paste0("mod_s",usm_name,".sti")),
+                            data.table = FALSE)%>%dplyr::as.tbl())
+    if(inherits(results_tbl,"try-error")){
+      warning("Error reading output file :",
+              file.path(workspace,paste0("mod_s",usm_name,".sti")))
+      return()
+    }
+
+    # Add cum_jul to table (cumulative DOY)
+
+    results_tbl <-
+      results_tbl%>%
+      dplyr::mutate(cum_jul= compute_doy_cumul(.data$jul, .data$ian))
+  }
 
   # filtering dates
   # only on cum_jul
-  if ( ! base::is.null(doy_list) ) {
-    results_tbl <- results_tbl %>% dplyr::filter( .data$cum_jul %in% doy_list )
+  if(!is.null(doy_list) ) {
+    results_tbl <-
+      results_tbl%>%
+      dplyr::filter(.data$cum_jul %in% doy_list)
   }
 
   # selecting variables columns
-  if ( ! base::is.null(var_list) ){
+  if (!is.null(var_list)){
     col_names=make.names(var_list)
-    results_tbl <- results_tbl %>% dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
+    results_tbl <-
+      results_tbl%>%
+      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
   }
 
   # Adding the Date  in the simulation results tibble
-
-  results_tbl <- results_tbl %>%
-    dplyr::mutate(Date=as.POSIXct(x = paste(.$ian,
-                                            .$mo,
-                                            .$jo,
-                                            sep="-"),
-                                  format = "%Y-%m-%d",
-                                  tz="UTC")) %>%
+  results_tbl <-
+    results_tbl%>%
+    dplyr::mutate(Date=as.POSIXct(x = paste(.data$ian,.data$mo,.data$jo,sep="-"),
+                                  format = "%Y-%m-%d",tz="UTC"))%>%
     dplyr::select(.data$Date, dplyr::everything())
 
-
-
-  # Converting .n. to _n in variables names
-  # to be homogeneous with get_obs_int output colnames
-  colnames(results_tbl) = var_to_col_names(colnames(results_tbl))
-
-  # TODO: add filtering capabilities
-  # on ian, mo, jo
-  # a %>% filter(ian==1994,mo==10,jo==17:19)
-  # on Dates
+  # Converting .n. to _n in variable names to be homogeneous with get_obs_int
+  # output colnames
+  colnames(results_tbl)= var_to_col_names(colnames(results_tbl))
 
   return(results_tbl)
 }

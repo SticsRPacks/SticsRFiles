@@ -9,7 +9,9 @@ get_daily_results(
   usm_name,
   var_list = NULL,
   doy_list = NULL,
-  dates_list = NULL
+  dates_list = NULL,
+  mixed = rep(FALSE, length(usm_name)),
+  usms_file = "usms.xml"
 )
 }
 \arguments{
@@ -22,6 +24,10 @@ get_daily_results(
 \item{doy_list}{vector of cumulative DOYs (optional)}
 
 \item{dates_list}{list of dates (optional)}
+
+\item{mixed}{value (recycled) or vector of. \code{TRUE}: intercrop, \code{FALSE}: sole crops (default), \code{NULL}: guess from XML files.}
+
+\item{usms_file}{The name of the usms file (e.g. "usms.xml") in case of \code{NULL} values in \code{mixed}.}
 }
 \value{
 A tibble or a list of
@@ -31,8 +37,8 @@ Reading daily file(s) (mod_s*.sti) as a tibble with possible selection
 on variable names, cumulative DOY, dates list.
 }
 \details{
-For intercrops, please add a "p" or a "a" before the USM name in \code{usm_name} to
-get the results for the principal or associated crop respectively.
+The function can guess if the usm(s) are mixed or not by reading the XML
+input files. To do so, set the \code{mixed} argument to \code{NULL}.
 }
 \examples{
 path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
