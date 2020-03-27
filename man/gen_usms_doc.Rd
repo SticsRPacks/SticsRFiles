@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_usms_doc.R
 \name{gen_usms_doc}
 \alias{gen_usms_doc}
-\title{Generate  from a template or modify a Stics usms xmlDocument}
+\title{Generate from a template a Stics usms xmlDocument}
 \usage{
 gen_usms_doc(
   xml_doc = NULL,
@@ -12,23 +12,23 @@ gen_usms_doc(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an ini file)}
+\item{xml_doc}{an optional xmlDocument object (created from an usms.xml file)}
 
-\item{usms_nb}{number of usms to create}
+\item{usms_nb}{number of usms (usm nodes) to create in the xmlDocument (optional)}
 
-\item{usms_param}{a table (df, tibble) containing parameters to use}
+\item{usms_param}{a table (df, tibble) containing parameters to use (optional)}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 }
 \value{
-an xmlDocument object
+an invisible xmlDocument object
 }
 \description{
-Generate  from a template or modify a Stics usms xmlDocument
+Generate from a template a Stics usms xmlDocument
 }
 \examples{
 \dontrun{
-#' library(readxl)
+library(readxl)
 
 xl_path <- "inputs_stics_example.xlsx"
 download_usm_xl(xl_name = xl_path)

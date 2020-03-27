@@ -12,16 +12,16 @@ gen_sols_doc(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from a sols.xml file)}
+\item{xml_doc}{an optional xmlDocument object (created from a sols.xml file)}
 
-\item{sols_nb}{number of soils to create}
+\item{sols_nb}{number of soils (sol nodes) to create in the xmlDocument (optional)}
 
-\item{sols_param}{a table (df, tibble) containing parameters to use}
+\item{sols_param}{a table (df, tibble) containing parameters to use (optional)}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 }
 \value{
-an an invisible xmlDocument object
+an invisible xmlDocument object
 }
 \description{
 Generate from a template a Stics sols xmlDocument

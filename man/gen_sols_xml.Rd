@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sols_xml.R
 \name{gen_sols_xml}
 \alias{gen_sols_xml}
-\title{Generate Stics sols xml file from a template or an input file}
+\title{Generate Stics a sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
   sols_out_file,
@@ -27,7 +27,7 @@ gen_sols_xml(
 an invisible xmlDocument object
 }
 \description{
-Generate Stics sols xml file from a template or an input file
+Generate Stics a sols xml file from a template or an input file
 }
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the

@@ -5,6 +5,9 @@
 #' @param out_path path to an optional folder where to write the output file(s)
 #' @param stics_version the stics version to use (optional, default to last). Only used if sta_in_file= NULL, see details.
 #'
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
+#'  `param_table` is a `data.frame` with the following format:
 #'
 #'  |Sta_name         |  zr| NH3ref| latitude| patm| aclim|
 #'  |:----------------|---:|------:|--------:|----:|-----:|

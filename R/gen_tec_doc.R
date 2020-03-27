@@ -1,11 +1,11 @@
 #' @title Generate from a template or modify a Stics tec xmlDocument
+#'
 #' @param xml_doc an xmlDocument object (created from an ini file)
-#'
 #' @param param_table a table (df, tibble) containing parameters to use
-#' @param stics_version the stics files version to use
-#' @param dict List of correspondance between given parameter names and internal names.
+#' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
+#' @param dict List of correspondance between given parameter names and Stics internal names.
 #'
-#' @return an xmlDocument object or a list of
+#' @return an invisible xmlDocument object or a list of
 #'
 #'
 #' @examples
@@ -219,6 +219,6 @@ gen_tec_doc <- function(xml_doc = NULL,
     xml_doc <- NULL
   }
 
-  return(xml_doc)
+  return(invisible(xml_doc))
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_ini_doc.R
 \name{gen_ini_doc}
 \alias{gen_ini_doc}
-\title{Generate  from a template or modify a Stics ini xmlDocument}
+\title{Generatefrom a template a Stics ini xmlDocument}
 \usage{
 gen_ini_doc(
   xml_doc = NULL,
@@ -13,21 +13,22 @@ gen_ini_doc(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an ini file)}
+\item{xml_doc}{an optional xmlDocument object (created from an ini file)}
 
-\item{param_table}{a table (df, tibble) containing parameters to use}
+\item{param_table}{a table (df, tibble) containing parameters to use (optional)}
 
-\item{crop_tag}{a crop identifier for crop parameters ()}
+\item{crop_tag}{a crop identifier for crop parameters
+(for example like "crop" used for in a parameter suffix : param_crop1, param_crop2)}
 
 \item{params_desc}{a list decribing crop parameters and others}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 }
 \value{
-an xmlDocument object or a list of
+an invisible xmlDocument object or a list of
 }
 \description{
-Generate  from a template or modify a Stics ini xmlDocument
+Generatefrom a template a Stics ini xmlDocument
 }
 \examples{
 \dontrun{

@@ -17,12 +17,12 @@ gen_tec_doc(
 
 \item{param_table}{a table (df, tibble) containing parameters to use}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 
-\item{dict}{List of correspondance between given parameter names and internal names.}
+\item{dict}{List of correspondance between given parameter names and Stics internal names.}
 }
 \value{
-an xmlDocument object or a list of
+an invisible xmlDocument object or a list of
 }
 \description{
 Generate from a template or modify a Stics tec xmlDocument

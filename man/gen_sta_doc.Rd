@@ -2,22 +2,22 @@
 % Please edit documentation in R/gen_sta_doc.R
 \name{gen_sta_doc}
 \alias{gen_sta_doc}
-\title{Generate  from a template or modify a Stics sta xmlDocument}
+\title{Generatefrom a template a Stics sta xmlDocument}
 \usage{
 gen_sta_doc(xml_doc = NULL, param_table = NULL, stics_version = "last")
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an sta file)}
+\item{xml_doc}{an optional xmlDocument object (created from an sta file)}
 
-\item{param_table}{a table (df, tibble) containing parameters to use}
+\item{param_table}{a table (df, tibble) containing parameters to use (optional)}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 }
 \value{
-an xmlDocument object or a list of
+an invisible xmlDocument object or a list of
 }
 \description{
-Generate  from a template or modify a Stics sta xmlDocument
+Generatefrom a template a Stics sta xmlDocument
 }
 \examples{
 \dontrun{

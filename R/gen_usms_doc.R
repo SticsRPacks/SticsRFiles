@@ -1,16 +1,16 @@
-#' @title Generate  from a template or modify a Stics usms xmlDocument
-#' @param xml_doc an xmlDocument object (created from an ini file)
+#' @title Generate from a template a Stics usms xmlDocument
 #'
-#' @param usms_nb number of usms to create
-#' @param usms_param a table (df, tibble) containing parameters to use
-#' @param stics_version the stics files version to use
+#' @param xml_doc an optional xmlDocument object (created from an usms.xml file)
+#' @param usms_nb number of usms (usm nodes) to create in the xmlDocument (optional)
+#' @param usms_param a table (df, tibble) containing parameters to use (optional)
+#' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
 #'
-#' @return an xmlDocument object
+#' @return an invisible xmlDocument object
 #'
 #'
 #' @examples
 #' \dontrun{
-#' #' library(readxl)
+#' library(readxl)
 #'
 #' xl_path <- "inputs_stics_example.xlsx"
 #' download_usm_xl(xl_name = xl_path)
@@ -38,6 +38,6 @@ gen_usms_doc <- function(xml_doc = NULL,
                                 nodes_param = usms_param,
                                 stics_version = stics_version)
 
-  return(out_doc_object)
+  return(invisible(out_doc_object))
 
 }

@@ -1,10 +1,10 @@
-#' @title Generate Stics sols xml file from a template or an input file
+#' @title Generate Stics a sols xml file from a template or an input file
+#'
 #' @param sols_out_file file path of the output sols xml file
 #' @param sols_nb number of soils to create (optional)
 #' @param sols_param a table (df, tibble) containing parameters to use (see details)
 #' @param sols_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param stics_version the stics version to use (optional, default to last). Only used if sols_in_file= NULL, see details.
-#'
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
@@ -72,7 +72,7 @@ gen_sols_xml <- function(sols_out_file,
   # checking if out dir exists
   out_path <- dirname(sols_out_file)
   if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist",out_path))
+    stop(paste("The directory does not exist: ",out_path))
   }
 
   saveXmlDoc(xml_doc, sols_out_file)

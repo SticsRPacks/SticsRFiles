@@ -1,6 +1,6 @@
 #' @title Generate Stics usms xml file from a template or an input file
-#' @param usms_out_file file path of the output usms xml file
 #'
+#' @param usms_out_file file path of the output usms xml file
 #' @param usms_nb number of usms to create (optional)
 #' @param usms_param a table (df, tibble) containing parameters to use (see details)
 #' @param usms_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
@@ -81,7 +81,7 @@ gen_usms_xml <- function(usms_out_file,
   # checking if out dir exists
   out_path <- dirname(usms_out_file)
   if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist",out_path))
+    stop(paste("The directory does not exist: ",out_path))
   }
 
 

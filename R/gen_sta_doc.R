@@ -1,10 +1,10 @@
-#' @title Generate  from a template or modify a Stics sta xmlDocument
-#' @param xml_doc an xmlDocument object (created from an sta file)
+#' @title Generatefrom a template a Stics sta xmlDocument
 #'
-#' @param param_table a table (df, tibble) containing parameters to use
-#' @param stics_version the stics files version to use
+#' @param xml_doc an optional xmlDocument object (created from an sta file)
+#' @param param_table a table (df, tibble) containing parameters to use (optional)
+#' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
 #'
-#' @return an xmlDocument object or a list of
+#' @return an invisible xmlDocument object or a list of
 #'
 #'
 #' @examples
@@ -58,6 +58,6 @@ gen_sta_doc <- function(xml_doc = NULL,
   }
 
 
-  return(xml_doc)
+  return(invisible(xml_doc))
 
 }
