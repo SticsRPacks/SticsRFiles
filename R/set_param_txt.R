@@ -78,7 +78,7 @@ set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
          },
          plant= {
            variety=
-             get_param_txt(dirpath = dirpath, param = "variete")[plant]%>%
+             get_param_txt(dirpath = dirpath, param = "variete")%>%
              as.numeric()
 
            tmp= lapply(plant, function(x){
