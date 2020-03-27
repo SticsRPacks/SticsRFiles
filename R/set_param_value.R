@@ -47,11 +47,12 @@ set_param_value <- function(xml_doc,
                             parent_sel_attr = NULL,
                             ...){
 
-  # For managing a vector of values
-  if (! base::is.list(param_value)) param_value <- as.list(param_value)
 
-  # calling the for several parameters
+  # Calling the for several parameters
   param_nb <- length(param_name)
+
+  # For managing a vector of values
+  if (! base::is.list(param_value)) param_value <- list(param_value)
 
   # Checking consistency between names and valuess dimensions
   if ( length(param_value) != param_nb) {
