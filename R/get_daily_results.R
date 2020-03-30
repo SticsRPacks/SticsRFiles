@@ -158,11 +158,15 @@ get_daily_results <- function(workspace,
       dplyr::filter(.data$cum_jul %in% doy_list)
   }
 
+  # Converting (n) to _n in variable names to be homogeneous with get_obs_int
+  # output colnames
+  colnames(results_tbl)= var_to_col_names(colnames(results_tbl))
+
   # selecting variables columns
   if(!is.null(var_list)){
     results_tbl <-
       results_tbl%>%
-      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(var_list))
+      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(var_to_col_names(var_list)))
   }
 
   # Adding the Date  in the simulation results tibble
@@ -172,9 +176,7 @@ get_daily_results <- function(workspace,
                                   format = "%Y-%m-%d",tz="UTC"))%>%
     dplyr::select(.data$Date, dplyr::everything())
 
-  # Converting .n. to _n in variable names to be homogeneous with get_obs_int
-  # output colnames
-  colnames(results_tbl)= var_to_col_names(colnames(results_tbl))
+
 
   return(results_tbl)
 }
