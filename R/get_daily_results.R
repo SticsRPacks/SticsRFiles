@@ -34,22 +34,19 @@ get_daily_results <- function(workspace,
   if(length(mixed)>1 & length(mixed)!=length(usm_name)){
     stop("The 'mixed' argument must either be of length one or length(usm_name)")
   }
+
   # TODO:
   # - manage filtering for multiple files : potentially filters may be different
   # for each file.
-  # - usm_name : optional (NULL, default)
-  # extract usm names
-  # - get intercrop results !
-  # if (is.null ( usm_name )) {
-  #   sti_list <- list.files(path = "/tmp/test_SticsOnR/JavaSTICS-1.41-stics-9.1/example/",
-  #                          pattern = "^mod_s")
-  # }
 
 
   # Getting outputs for multiple usms
-  if (length(usm_name) > 1) {
-    #print(usm_name)
-    #stop("multiple results !")
+  if(length(usm_name) > 1){
+
+    if(is.null(mixed)){
+      mixed= "NULL"
+    }
+
     results_tbl_list <-
       mapply(function(x,y){
         get_daily_results(workspace,
@@ -57,7 +54,7 @@ get_daily_results <- function(workspace,
                           var_list = var_list,
                           doy_list = doy_list,
                           dates_list = dates_list,
-                          mixed = y,
+                          mixed = if(y=="NULL"){NULL}else{y},
                           usms_file = usms_file)
       },
       x= usm_name, y= mixed,SIMPLIFY = FALSE)
@@ -66,10 +63,11 @@ get_daily_results <- function(workspace,
     return(results_tbl_list)
   }
 
+  usms_file= normalizePath(file.path(workspace,usms_file), mustWork = FALSE)
 
   if(is.null(mixed)){
     # Try to guess if it is a mixture or not
-    nb_plant= try(get_plants_nb(usm_xml_path = usms_file,usms_list = usm_name))
+    nb_plant= try(get_plants_nb(usm_xml_path = usms_file, usms_list = usm_name))
 
     if(inherits(nb_plant,"nb_plant")){
       stop("Unable to guess if the usm is an intercrop. Please set mixed to TRUE or FALSE")
@@ -83,7 +81,6 @@ get_daily_results <- function(workspace,
   }
 
   if(mixed){
-    usms_file= normalizePath(file.path(workspace,usms_file), mustWork = FALSE)
 
     plant_xml= try(get_param_xml(xml_file = usms_file, param_name = "fplt",
                                  select = "usm", usm_name)[[1]])
@@ -155,14 +152,14 @@ get_daily_results <- function(workspace,
 
   # filtering dates
   # only on cum_jul
-  if(!is.null(doy_list) ) {
+  if(!is.null(doy_list)){
     results_tbl <-
       results_tbl%>%
       dplyr::filter(.data$cum_jul %in% doy_list)
   }
 
   # selecting variables columns
-  if (!is.null(var_list)){
+  if(!is.null(var_list)){
     col_names=make.names(var_list)
     results_tbl <-
       results_tbl%>%
