@@ -3,7 +3,7 @@
 #' on variable names, cumulative DOY, dates list.
 #' @param workspace Stics or JavaStics workspace path containing the `mod_s*.sti` files (see details)
 #' @param usm_name vector of usm(s) names
-#' @param var_list vector of output variables names (optional)
+#' @param var_list vector of output variables names (optional, see `find_var_info()` to get the names of the variables)
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
 #' @param mixed    value (recycled) or vector of. `TRUE`: intercrop, `FALSE`: sole crops (default), `NULL`: guess from XML files.
