@@ -69,7 +69,7 @@ get_daily_results <- function(workspace,
     # Try to guess if it is a mixture or not
     nb_plant= try(get_plants_nb(usm_xml_path = usms_file, usms_list = usm_name))
 
-    if(inherits(nb_plant,"nb_plant")){
+    if(inherits(nb_plant,"try-error")){
       stop("Unable to guess if the usm is an intercrop. Please set mixed to TRUE or FALSE")
     }
 
