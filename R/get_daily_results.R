@@ -8,6 +8,8 @@
 #' @param dates_list list of dates (optional)
 #' @param mixed    value (recycled) or vector of. `TRUE`: intercrop, `FALSE`: sole crops (default), `NULL`: guess from XML files.
 #' @param usms_file The name of the usms file (e.g. "usms.xml") in case of `NULL` values in `mixed`.
+#' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
+#' but rather in the JavaStics default workspace)
 #'
 #' @details The function can guess if the usm(s) are mixed or not by reading the XML
 #' input files. To do so, set the `mixed` argument to `NULL`.
@@ -28,7 +30,8 @@ get_daily_results <- function(workspace,
                               doy_list=NULL,
                               dates_list=NULL,
                               mixed= rep(FALSE,length(usm_name)),
-                              usms_file= "usms.xml") {
+                              usms_file= "usms.xml",
+                              javastics_path = NULL) {
   .= NULL
 
   if(length(mixed)>1 & length(mixed)!=length(usm_name)){
@@ -90,17 +93,27 @@ get_daily_results <- function(workspace,
       warning("Error reading usms file, using dummy plant file names")
     }
 
+    if(is.null(javastics_path)){
+      plt_path <- file.path(workspace, "plant")
+      if(!dir.exists(plt_path)){
+        warning("plant folder not found in the workspace, please add javastics_path to use the plant folder",
+                "from javaStics.")
+      }
+    }else{
+      plt_path <- try(normalizePath(file.path(workspace, "plant")))
+    }
+
     plant_names=
       try(
         lapply(plant_xml, function(x){
-          get_param_xml(xml_file = normalizePath(file.path(workspace,"plant",x)),
+          get_param_xml(xml_file = normalizePath(file.path(plt_path,x)),
                         param_name = "codeplante")[[1]]
         })%>%unlist()
       )
 
     if(inherits(plant_names,"try-error")){
       plant_names= plant_xml
-      warning("Error reading plant names, using plant file names instead")
+      warning("Error reading plant names, using plant file names for the output instead")
     }
 
     Table_1 =
