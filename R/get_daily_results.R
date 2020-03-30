@@ -160,10 +160,9 @@ get_daily_results <- function(workspace,
 
   # selecting variables columns
   if(!is.null(var_list)){
-    col_names=make.names(var_list)
     results_tbl <-
       results_tbl%>%
-      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
+      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(var_list))
   }
 
   # Adding the Date  in the simulation results tibble
