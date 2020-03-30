@@ -59,7 +59,7 @@ get_usms_files <- function(workspace_path,
         stop("plant folder not found, please add javastics_path to check in the plant files from javaStics !")
       }
     }else{
-      plt_path <- try(normalizePath(file.path(javastics_path,workspace_path, "plant")))
+      plt_path <- try(normalizePath(file.path(workspace_path, "plant")))
     }
     check_plt <- TRUE
     file_type <- setdiff(file_type, "fplt")
