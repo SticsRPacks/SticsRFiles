@@ -11,7 +11,8 @@ get_daily_results(
   doy_list = NULL,
   dates_list = NULL,
   mixed = rep(FALSE, length(usm_name)),
-  usms_file = "usms.xml"
+  usms_file = "usms.xml",
+  javastics_path = NULL
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ get_daily_results(
 \item{mixed}{value (recycled) or vector of. \code{TRUE}: intercrop, \code{FALSE}: sole crops (default), \code{NULL}: guess from XML files.}
 
 \item{usms_file}{The name of the usms file (e.g. "usms.xml") in case of \code{NULL} values in \code{mixed}.}
+
+\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
+but rather in the JavaStics default workspace)}
 }
 \value{
 A tibble or a list of
