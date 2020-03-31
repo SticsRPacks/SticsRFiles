@@ -131,7 +131,8 @@ gen_usms_xml2txt <- function(javastics_path,
     stop(paste("Missing files have been detected for usm(s):",
                paste(usms_list[!all_files_exist], collapse = ", "),
                ". Please note that with SticsRpacks, plant folder (that contains plant files)",
-               "MUST be put inside the workspace (plant folder in JavaStics path is not taken into account for the moment)."))
+               "can be located either inside the workspace or in the JavaStics path.\n",
+               "Check that your plant files exist in one of these."))
   }
 
   # Command string without usm name

@@ -53,13 +53,30 @@ get_usms_files <- function(workspace_path,
   # Getting first the plant dir path from the workspace, if any
   if("fplt" %in% file_type){
 
-    if(is.null(javastics_path)){
-      plt_path <- file.path(workspace_path, "plant")
-      if(!dir.exists(plt_path)){
-        stop("plant folder not found, please add javastics_path to check in the plant files from javaStics !")
-      }
-    }else{
-      plt_path <- try(normalizePath(file.path(workspace_path, "plant")))
+    javastics_plt_path <- NULL
+    ws_plt_path <- NULL
+
+    if (! base::is.null(javastics_path) && dir.exists(file.path(javastics_path, "plant")))  {
+      javastics_plt_path <- suppressWarnings(normalizePath(file.path(javastics_path, "plant")))
+    }
+
+    if (dir.exists(file.path(workspace_path,"plant"))) {
+      ws_plt_path <- suppressWarnings(normalizePath(file.path(workspace_path,"plant")))
+    }
+
+    # if(is.null(javastics_path)){
+    #   plt_path <- file.path(workspace_path, "plant")
+    #   if(!dir.exists(plt_path)){
+    #     stop("plant folder not found, please add javastics_path to check in the plant files from javaStics !")
+    #   }
+    # }else{
+    #   plt_path <- try(normalizePath(file.path(workspace_path, "plant")))
+    # }
+
+    plt_path <- c(ws_plt_path, javastics_plt_path)
+
+    if (base::is.null(plt_path)) {
+      stop("not any plant folder found, please add javastics_path directory as function input argument or a workspace plant directory !")
     }
     check_plt <- TRUE
     file_type <- setdiff(file_type, "fplt")
@@ -119,7 +136,8 @@ get_usms_files <- function(workspace_path,
       plt_files_path <- unlist(lapply(plt_path, function(x) file.path(x, plt_files)))
       plt_idx <- file.exists(plt_files_path)
       plt_files_path <- plt_files_path[plt_idx]
-      plt_files_all_exist <- length(plt_files) == length(plt_files_path)
+      # If one occurrence of each file at least, NOT checking duplicates !
+      plt_files_all_exist <- length(plt_files) <= length(plt_files_path)
     }
     # Adding the files lists
     usms_files[[i]] <- list(paths=c(usm_files_path, plt_files_path),
