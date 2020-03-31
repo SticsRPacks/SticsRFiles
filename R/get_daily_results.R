@@ -3,11 +3,13 @@
 #' on variable names, cumulative DOY, dates list.
 #' @param workspace Stics or JavaStics workspace path containing the `mod_s*.sti` files (see details)
 #' @param usm_name vector of usm(s) names
-#' @param var_list vector of output variables names (optional)
+#' @param var_list vector of output variables names (optional, see `find_var_info()` to get the names of the variables)
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
 #' @param mixed    value (recycled) or vector of. `TRUE`: intercrop, `FALSE`: sole crops (default), `NULL`: guess from XML files.
 #' @param usms_file The name of the usms file (e.g. "usms.xml") in case of `NULL` values in `mixed`.
+#' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
+#' but rather in the JavaStics default workspace)
 #'
 #' @details The function can guess if the usm(s) are mixed or not by reading the XML
 #' input files. To do so, set the `mixed` argument to `NULL`.
@@ -28,7 +30,8 @@ get_daily_results <- function(workspace,
                               doy_list=NULL,
                               dates_list=NULL,
                               mixed= rep(FALSE,length(usm_name)),
-                              usms_file= "usms.xml") {
+                              usms_file= "usms.xml",
+                              javastics_path = NULL) {
   .= NULL
 
   if(length(mixed)>1 & length(mixed)!=length(usm_name)){
@@ -69,7 +72,7 @@ get_daily_results <- function(workspace,
     # Try to guess if it is a mixture or not
     nb_plant= try(get_plants_nb(usm_xml_path = usms_file, usms_list = usm_name))
 
-    if(inherits(nb_plant,"nb_plant")){
+    if(inherits(nb_plant,"try-error")){
       stop("Unable to guess if the usm is an intercrop. Please set mixed to TRUE or FALSE")
     }
 
@@ -90,17 +93,27 @@ get_daily_results <- function(workspace,
       warning("Error reading usms file, using dummy plant file names")
     }
 
+    if(is.null(javastics_path)){
+      plt_path <- file.path(workspace, "plant")
+      if(!dir.exists(plt_path)){
+        warning("plant folder not found in the workspace, please add javastics_path to use the plant folder",
+                "from javaStics.")
+      }
+    }else{
+      plt_path <- try(normalizePath(file.path(workspace, "plant")))
+    }
+
     plant_names=
       try(
         lapply(plant_xml, function(x){
-          get_param_xml(xml_file = normalizePath(file.path(workspace,"plant",x)),
+          get_param_xml(xml_file = normalizePath(file.path(plt_path,x)),
                         param_name = "codeplante")[[1]]
         })%>%unlist()
       )
 
     if(inherits(plant_names,"try-error")){
       plant_names= plant_xml
-      warning("Error reading plant names, using plant file names instead")
+      warning("Error reading plant names, using plant file names for the output instead")
     }
 
     Table_1 =
@@ -158,12 +171,15 @@ get_daily_results <- function(workspace,
       dplyr::filter(.data$cum_jul %in% doy_list)
   }
 
+  # Converting (n) to _n in variable names to be homogeneous with get_obs_int
+  # output colnames
+  colnames(results_tbl)= var_to_col_names(colnames(results_tbl))
+
   # selecting variables columns
   if(!is.null(var_list)){
-    col_names=make.names(var_list)
     results_tbl <-
       results_tbl%>%
-      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(col_names))
+      dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(var_to_col_names(var_list)))
   }
 
   # Adding the Date  in the simulation results tibble
@@ -173,9 +189,7 @@ get_daily_results <- function(workspace,
                                   format = "%Y-%m-%d",tz="UTC"))%>%
     dplyr::select(.data$Date, dplyr::everything())
 
-  # Converting .n. to _n in variable names to be homogeneous with get_obs_int
-  # output colnames
-  colnames(results_tbl)= var_to_col_names(colnames(results_tbl))
+
 
   return(results_tbl)
 }

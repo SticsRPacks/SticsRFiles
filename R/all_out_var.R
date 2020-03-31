@@ -51,8 +51,10 @@ all_out_var <- function(version= "last"){
 #'
 find_var_info <- function(var=NULL,keyword=NULL,version= "last"){
   all_vars <- all_out_var(version)
+  var= var_to_col_names(var)
+  vars_names_parsed= var_to_col_names(all_vars$variable)
   if(!is.null(var)) {
-    all_vars[grep(var, all_vars$variable,ignore.case = TRUE),]
+    all_vars[grep(var, vars_names_parsed,ignore.case = TRUE),]
   }else if(!is.null(keyword)){
     all_vars[grep(keyword, all_vars$details,ignore.case = TRUE),]
   }else{
