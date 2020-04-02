@@ -94,7 +94,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,...){
     plant[paste0("plant",i)]=
       list(get_plant_txt(file.path(dirpath,paste0("ficplt",i,".txt")),
                       variety=
-                        if(!base::is.null(param)){
+                        if(!is.null(param)){
                           tec[[paste0("plant",i)]]$P_variete
                         }else{
                           NULL
@@ -106,7 +106,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,...){
                    plant= plant, soil= soil, station= station,
                    output= output,tmp=tmp)
 
-  if(!base::is.null(param)){
+  if(!is.null(param)){
     parameters= unlist(parameters)
     parameters= parameters[grep(paste0(param,"$"),names(parameters))]
     if(length(parameters)==0){
@@ -318,11 +318,6 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
   params= readLines(filepath)
   plant= vector(mode='list', length = 0)
   values= params[!seq_along(params)%%2]
-
-  # No need to read all varieties if the variety is set and is not the last one
-  if(!base::is.null(variety)){
-    max_variety= min(variety,max_variety)
-  }
 
   index= 1
   val= function(){
@@ -608,7 +603,10 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL, max_variety=30){
   }
 
   # Keep only the variety asked:
-  if(!base::is.null(variety)){
+  if(!is.null(variety)){
+    if(is.character(variety)){
+      variety= which(tmp$P_codevar==variety)
+    }
     tmp= lapply(tmp, function(x)x[variety])
   }
 
