@@ -7,7 +7,7 @@
 #' @param doy_list vector of cumulative DOYs (optional)
 #' @param dates_list list of dates (optional)
 #' @param mixed    value (recycled) or vector of. `TRUE`: intercrop, `FALSE`: sole crops (default), `NULL`: guess from XML files.
-#' @param usms_file The name of the usms file (e.g. "usms.xml") in case of `NULL` values in `mixed`.
+#' @param usms_file usms file path (e.g. "usms.xml") in case of `NULL` values in `mixed`.
 #' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace)
 #'
@@ -66,9 +66,22 @@ get_daily_results <- function(workspace,
     return(results_tbl_list)
   }
 
-  usms_file= normalizePath(file.path(workspace,usms_file), mustWork = FALSE)
+  # Checking usms file
+  usms_files = c(suppressWarnings(normalizePath(file.path(workspace,usms_file), mustWork = FALSE)),
+                 usms_file)
+  usms_file_exists <- file.exists(usms_files)
+  usms_file <- usms_files[usms_file_exists]
 
   if(is.null(mixed)){
+
+    if ( !any(usms_file_exists) ) {
+      stop("Unable to find an usms.xml file in the workspace directory.\n",
+           "Please consider to set a valid usms.xml path in usms_file for getting information about intercrop usms !")
+    }
+
+    # Keeping usms.xml from the workspace (default)
+    if ( all(usms_file_exists) ) usms_file <- usms_file[1]
+
     # Try to guess if it is a mixture or not
     nb_plant= try(get_plants_nb(usm_xml_path = usms_file, usms_list = usm_name))
 
@@ -85,7 +98,7 @@ get_daily_results <- function(workspace,
 
   if(mixed){
 
-    plant_xml= try(get_param_xml(xml_file = usms_file, param_name = "fplt",
+    plant_xml= try(get_param_xml(xml_file = usms_file[1], param_name = "fplt",
                                  select = "usm", usm_name)[[1]])
 
     if(inherits(plant_xml,"try-error")){
@@ -152,7 +165,9 @@ get_daily_results <- function(workspace,
                             data.table = FALSE)%>%dplyr::as.tbl())
     if(inherits(results_tbl,"try-error")){
       warning("Error reading output file :",
-              file.path(workspace,paste0("mod_s",usm_name,".sti")))
+              file.path(workspace,paste0("mod_s",usm_name,".sti")),
+              "\n Perhaps usm ", usm_name,
+              " is an intercropping one, try adding in function inputs mixed = TRUE")
       return()
     }
 
