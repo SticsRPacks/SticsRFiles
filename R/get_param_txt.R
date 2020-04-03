@@ -39,14 +39,14 @@
 #' # Getting varietal values:
 #'
 #' # Get the leaf lifespan of the variety used in the usm:
-#' get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF") #0.29
+#' get_param_txt(dirpath = path, param = "durvieF") #0.29
 #' # Get the leaf lifespan of another variety available in the plant file:
-#' get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer")
+#' get_param_txt(dirpath = path, param = "durvieF", variety = "Nefer")
 #' # To get the values for several (or all) varieties, either put all varieties:
-#' get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF",
-#' variety = c("Biensur","Acalou","Amarillo","Lloyd","Neodur","Nefer","Montseg"))
+#' varieties= c("Biensur","Acalou","Amarillo","Lloyd","Neodur","Nefer","Montseg")
+#' get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
 #' # Or get it from the output of the function returning all parameters:
-#' get_param_txt(dirpath = "inst/extdata/txt/V8.5")$plant$plant1$durvieF
+#' get_param_txt(dirpath = path)$plant$plant1$durvieF
 #'
 #' @export
 get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
