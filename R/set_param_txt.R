@@ -37,7 +37,12 @@
 #' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer", value = 178)
 #'
 #' # Change the value of infil for a given layer:
-#' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "infil", variety = "Nefer", value = 178)
+#' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "infil", layer = 2, value = 60)
+#'
+#' # If the parameter is found in several files, use the set_* functions direclty, e.g.
+#' # cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
+#' # change its value in the soil file, we use set_soil_txt():
+#' set_soil_txt(filepath = "inst/extdata/txt/V8.5/param.sol", param = "cailloux", layer = 2, value = 1)
 #'}
 #'
 #' @export
@@ -158,7 +163,7 @@ set_tec_txt= function(filepath="fictec1.txt",param,value,add=F){
 set_soil_txt= function(filepath="param.sol",param,value,layer=NULL){
   param= gsub("P_","",param)
   ref= get_soil_txt(filepath)
-  param= paste0(param,"$")
+  param= paste0("^",param,"$")
 
   if(!is.null(layer)){
     length_param_file= length(ref[grep(param,names(ref))][layer])
