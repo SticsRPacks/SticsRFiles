@@ -40,14 +40,19 @@ Users would generally use \code{get_param_txt} to identify parameters names and 
 them to other functions.
 }
 \examples{
-\dontrun{
 # Read the interrow distance parameter:
 
 library(SticsRFiles)
 path = system.file("extdata/txt/V9.1", package = "SticsRFiles")
 get_param_txt(path, param='interrang')
 
-}
+# Getting varietal values:
+
+# Get the leaf lifespan of the variety used in the usm:
+get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF") #0.29
+# Get the leaf lifespan of another variety available in the plant file:
+get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer")
+
 
 }
 \seealso{

@@ -64,7 +64,6 @@ variables required from STICS, please directly call \code{set_out_var_txt}.
 \dontrun{
 # Replace the interrow distance parameter to 0.01:
 
-library(SticsRFiles)
 set_param_txt(dirpath = "stics_usm/usm_1", param = "interrang", value = 0.01)
 
 }
