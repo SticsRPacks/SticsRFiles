@@ -12,7 +12,14 @@
 \alias{set_soil_txt}
 \title{Set (replace) STICS input file parameters}
 \usage{
-set_param_txt(dirpath = getwd(), param, value, add = F, plant = 1)
+set_param_txt(
+  dirpath = getwd(),
+  param,
+  value,
+  add = F,
+  plant = 1,
+  variety = NULL
+)
 
 set_usm_txt(filepath = "new_travail.usm", param, value, add = F)
 
@@ -41,9 +48,9 @@ set_soil_txt(filepath = "param.sol", param, value)
 
 \item{plant}{Plant index. Optional, only for plant or technical parameters}
 
-\item{filepath}{Path to the parameter file}
+\item{variety}{Integer. The plant variety to set the parameter value.}
 
-\item{variety}{Integer. The plant variety to get the parameter from.}
+\item{filepath}{Path to the parameter file}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input

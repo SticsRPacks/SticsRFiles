@@ -9,7 +9,7 @@
 #' @param value    New parameter value
 #' @param plant    Plant index. Optional, only for plant or technical parameters
 #' @param add      Boolean. Append input to existing file (add to the list)
-#' @param variety  Integer. The plant variety to get the parameter from.
+#' @param variety  Integer. The plant variety to set the parameter value.
 #'
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 #'          the associated plant in the case of intercrop, or \code{c(1,2)} for both
@@ -32,7 +32,7 @@
 #'}
 #'
 #' @export
-set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
+set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1, variety= NULL){
   param= gsub("P_","",param)
   param_val= get_param_txt(dirpath = dirpath, param = param)
 
@@ -76,18 +76,27 @@ set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
            })
          },
          plant= {
-           variety=
-             get_param_txt(dirpath = dirpath, param = "variete")%>%
-             as.numeric()
-
            tmp= lapply(plant, function(x){
+             if(is.null(variety)){
+               variety=
+                 get_param_txt(dirpath = dirpath, param = "variete")%>%
+                 as.numeric()
+             }else{
+               if(is.character(variety)){
+                 varieties= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")))$codevar
+                 variety= match(variety,varieties)
+                 if(is.na(variety)){
+                   cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+                   return()
+                 }
+               }
+             }
              set_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")),
-                       param = param, value = value, add= add, variety = variety[x])
+                       param = param, value = value, add= add, variety = variety)
            })
          },
          stop("Parameter not found")
   )
-
 }
 
 
@@ -222,7 +231,7 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
          },
          set_plant_txt= {
            ref_index= grep(param_,params)+1
-           if(!base::is.null(variety)){
+           if(!is.null(variety)){
              ref_index= ref_index[variety]
            }
          },
