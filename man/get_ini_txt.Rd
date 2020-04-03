@@ -21,9 +21,10 @@ get_plant_txt(filepath = "ficplt1.txt", variety = NULL)
 
 get_tec_txt(
   filepath = "fictec1.txt",
-  several_fert = T,
-  several_thin = T,
-  is_pasture = F
+  several_fert,
+  several_thin,
+  is_pasture,
+  ...
 )
 
 get_soil_txt(filepath = "param.sol")
@@ -37,11 +38,13 @@ get_usm_txt(filepath = "new_travail.usm")
 
 \item{variety}{Integer. The plant variety to get the parameter from.}
 
-\item{several_fert}{Is there several fertilization in the USM ?}
+\item{several_fert}{Is there several fertilization in the USM ? See details.}
 
-\item{several_thin}{Is there several thinning in the USM ?}
+\item{several_thin}{Is there several thinning in the USM ? See details.}
 
-\item{is_pasture}{Is the plant a pasture ?}
+\item{is_pasture}{Is the plant a pasture ? See details.}
+
+\item{...}{Further arguments to pass (for future-proofing only)}
 }
 \value{
 A list of parameters, depending on the file/function:
@@ -51,17 +54,20 @@ A list of parameters, depending on the file/function:
 \item{plant}{Plant parameters}
 \item{soil}{Soil parameters}
 \item{station}{Station parameters}
+\item{tmp}{Temporary parameters}
 }
 \description{
 Read a specific STICS model input parameter file.
 Users would generally use the wrapper \code{get_param_txt()} instead.
 }
 \details{
-he functions are compatible with intercrops.
+\code{several_fert}, \code{several_thin} and \code{is_pasture} are read from the tmp
+file (\code{tempoparv6.sti}). \code{get_param_txt()} does it automatically. If you absolutely
+need to use directly \code{get_tec_txt}, please see example.
 }
 \note{
-Users generally only use \code{get_param_txt()}, which is a wrapper for all
-these functions.
+The functions are compatible with intercrops. Users generally only use
+\code{get_param_txt()}, which is a wrapper for all these functions.
 }
 \examples{
 \dontrun{
@@ -69,6 +75,18 @@ these functions.
 library(SticsRFiles)
 path = system.file("extdata/txt/V9.1/ficini.txt", package = "SticsRFiles")
 get_ini_txt(path)
+
+# Read the tec file directly:
+
+# First, get the parameters from the tmp file:
+tmp= get_tmp_txt(filepath = system.file("extdata/txt/V9.1/tempoparv6.sti", package = "SticsRFiles"))
+several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
+several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
+is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
+
+# Then, get the technical parameters:
+get_tec_txt(filepath= system.file("extdata/txt/V9.1/fictec1.txt", package = "SticsRFiles"),
+several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 }
 
 }

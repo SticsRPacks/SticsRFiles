@@ -14,8 +14,7 @@ return an object with all parameters}
 
 \item{variety}{Either the variety name or index for plant parameters (optional, see details).}
 
-\item{...}{Helper to pass arguments from \code{\link{get_param_txt}} to the
-other functions}
+\item{...}{Further arguments to pass (for future-proofing only).}
 }
 \value{
 A parameter value, or if \code{param= NULL} a list of all parameters:

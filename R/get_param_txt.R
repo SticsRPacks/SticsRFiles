@@ -7,8 +7,7 @@
 #' @param param        Parameter name. Optional, if not provided, the function
 #'                     return an object with all parameters
 #' @param variety      Either the variety name or index for plant parameters (optional, see details).
-#' @param ...          Helper to pass arguments from \code{\link{get_param_txt}} to the
-#'                     other functions
+#' @param ...          Further arguments to pass (for future-proofing only).
 #'
 #' @details If the `variety` is not given and a `param` is asked, the function will return the values
 #' for the variety that is simulated in the USM by checking the `variete` parameter in the technical file.
@@ -42,22 +41,10 @@
 #'
 #' @export
 get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
-  dot_args= list(...)
-  if(isTRUE(dot_args$several_fert)){
-    several_fert= dot_args$several_fert
-  }else{
-    several_fert= F
-  }
-  if(isTRUE(dot_args$several_thin)){
-    several_thin= dot_args$several_thin
-  }else{
-    several_thin= F
-  }
-  if(isTRUE(dot_args$is_pasture)){
-    is_pasture= dot_args$is_pasture
-  }else{
-    is_pasture= F
-  }
+
+  dot_args= as.list(...) # Future-proof the function. We can add arguments now without
+  # breaking it. I think for example to a "version argument" because the tec file is not
+  # generic.
 
   ini= get_ini_txt(file.path(dirpath,"ficini.txt"))
   general= get_general_txt(file.path(dirpath,"tempopar.sti"))
@@ -66,6 +53,11 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   usm= get_usm_txt(file.path(dirpath,"new_travail.usm"))
   output= get_var_mod(dirpath)
   tmp= get_tmp_txt(file.path(dirpath,"tempoparv6.sti"))
+
+  several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
+  several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
+  is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
+
   tec= plant= setNames(vector(mode = "list", length = ini$nbplantes),
                        paste0("plant",1:ini$nbplantes))
 
@@ -111,15 +103,19 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 #' Users would generally use the wrapper `get_param_txt()` instead.
 #'
 #' @param filepath     File path
-#' @param several_fert Is there several fertilization in the USM ?
-#' @param several_thin Is there several thinning in the USM ?
-#' @param is_pasture   Is the plant a pasture ?
+#' @param several_fert Is there several fertilization in the USM ? See details.
+#' @param several_thin Is there several thinning in the USM ? See details.
+#' @param is_pasture   Is the plant a pasture ? See details.
 #' @param variety      Integer. The plant variety to get the parameter from.
+#' @param ...          Further arguments to pass (for future-proofing only)
 #'
-#' @details he functions are compatible with intercrops.
+#' @details `several_fert`, `several_thin` and `is_pasture` are read from the tmp
+#' file (`tempoparv6.sti`). `get_param_txt()` does it automatically. If you absolutely
+#' need to use directly `get_tec_txt`, please see example.
 #'
-#' @note Users generally only use `get_param_txt()`, which is a wrapper for all
-#' these functions.
+#'
+#' @note The functions are compatible with intercrops. Users generally only use
+#'  `get_param_txt()`, which is a wrapper for all these functions.
 #'
 #' @return A list of parameters, depending on the file/function:
 #'         \item{ini}{Initialization parameters}
@@ -128,6 +124,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 #'         \item{plant}{Plant parameters}
 #'         \item{soil}{Soil parameters}
 #'         \item{station}{Station parameters}
+#'         \item{tmp}{Temporary parameters}
 #'
 #' @seealso `get_param_txt()`.
 #'
@@ -137,6 +134,18 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 #' library(SticsRFiles)
 #' path = system.file("extdata/txt/V9.1/ficini.txt", package = "SticsRFiles")
 #' get_ini_txt(path)
+#'
+#' # Read the tec file directly:
+#'
+#' # First, get the parameters from the tmp file:
+#' tmp= get_tmp_txt(filepath = system.file("extdata/txt/V9.1/tempoparv6.sti", package = "SticsRFiles"))
+#' several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
+#' several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
+#' is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
+#'
+#' # Then, get the technical parameters:
+#' get_tec_txt(filepath= system.file("extdata/txt/V9.1/fictec1.txt", package = "SticsRFiles"),
+#' several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 #'}
 #'
 #' @export
@@ -189,7 +198,11 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
 
 #' @rdname get_ini_txt
 #' @export
-get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pasture){
+get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pasture,...){
+
+  dot_args= as.list(...) # Future-proofing the function. We can add arguments now without
+  # breaking it. I think for example to a "version argument" because the tec file is not
+  # generic.
 
   params= readLines(filepath)
   itk= vector(mode='list', length = 0)
