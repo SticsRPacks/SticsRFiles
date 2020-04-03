@@ -52,7 +52,7 @@ get_param_txt(path, param='interrang')
 get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF") #0.29
 # Get the leaf lifespan of another variety available in the plant file:
 get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer")
-# To get the values for all varieties, either put all varieties:
+# To get the values for several (or all) varieties, either put all varieties:
 get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF",
 variety = c("Biensur","Acalou","Amarillo","Lloyd","Neodur","Nefer","Montseg"))
 # Or get it from the output of the function returning all parameters:
