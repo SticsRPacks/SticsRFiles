@@ -71,7 +71,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
                          variety=
                            if(is.null(variety)){
                              if(!is.null(param)){
-                               tec[[paste0("plant",i)]]$P_variete
+                               tec[[paste0("plant",i)]]$variete
                              }else{
                                NULL
                              }
@@ -214,191 +214,191 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
     return(values[index-1])
   }
 
-  itk$P_nbjres= as.numeric(val())
+  itk$nbjres= as.numeric(val())
 
-  if(itk$P_nbjres > 0){
-    for(i in 1:itk$P_nbjres){
+  if(itk$nbjres > 0){
+    for(i in 1:itk$nbjres){
       vec= strsplit(x = val(),split = " ")[[1]]
-      itk$P_julres= c(itk$P_julres, vec[1])
-      itk$P_coderes= c(itk$P_coderes,vec[2])
-      itk$P_qres= c(itk$P_qres,vec[3])
-      itk$P_Crespc= c(itk$P_Crespc,vec[4])
-      itk$P_CsurNres= c(itk$P_CsurNres,vec[5])
-      itk$P_Nminres= c(itk$P_Nminres,vec[6])
-      itk$P_eaures= c(itk$P_eaures,vec[7])
+      itk$julres= c(itk$julres, vec[1])
+      itk$coderes= c(itk$coderes,vec[2])
+      itk$qres= c(itk$qres,vec[3])
+      itk$Crespc= c(itk$Crespc,vec[4])
+      itk$CsurNres= c(itk$CsurNres,vec[5])
+      itk$Nminres= c(itk$Nminres,vec[6])
+      itk$eaures= c(itk$eaures,vec[7])
     }
   }
-  itk$P_nbjtrav= as.numeric(val())
-  if(itk$P_nbjtrav > 0){
-    for(i in 1:itk$P_nbjtrav){
+  itk$nbjtrav= as.numeric(val())
+  if(itk$nbjtrav > 0){
+    for(i in 1:itk$nbjtrav){
       vec= strsplit(x = val(),split = " ")[[1]]
-      itk$P_jultrav= c(itk$P_jultrav, vec[1])
-      itk$P_profres= c(itk$P_profres, vec[2])
-      itk$P_proftrav= c(itk$P_proftrav, vec[3])
+      itk$jultrav= c(itk$jultrav, vec[1])
+      itk$profres= c(itk$profres, vec[2])
+      itk$proftrav= c(itk$proftrav, vec[3])
     }
   }
 
-  itk$P_iplt0= val()
-  itk$P_profsem= val()
-  itk$P_densitesem= val()
-  itk$P_variete= val()
-  itk$P_codetradtec= val()
-  itk$P_interrang= val()
-  itk$P_orientrang= val()
-  itk$P_codedecisemis= val()
-  itk$P_nbjmaxapressemis= val()
-  itk$P_nbjseuiltempref= val()
-  itk$P_codestade= val()
-  itk$P_ilev= val()
-  itk$P_iamf= val()
-  itk$P_ilax= val()
-  itk$P_isen= val()
-  itk$P_ilan= val()
-  itk$P_iflo= val()
-  itk$P_idrp= val()
-  itk$P_imat= val()
-  itk$P_irec= val()
-  itk$P_irecbutoir= val()
-  itk$P_effirr= val()
-  itk$P_codecalirrig= val()
-  itk$P_ratiol= val()
-  itk$P_dosimx= val()
-  itk$P_doseirrigmin= val()
-  itk$P_codedateappH2O= as.numeric(val())
+  itk$iplt0= val()
+  itk$profsem= val()
+  itk$densitesem= val()
+  itk$variete= val()
+  itk$codetradtec= val()
+  itk$interrang= val()
+  itk$orientrang= val()
+  itk$codedecisemis= val()
+  itk$nbjmaxapressemis= val()
+  itk$nbjseuiltempref= val()
+  itk$codestade= val()
+  itk$ilev= val()
+  itk$iamf= val()
+  itk$ilax= val()
+  itk$isen= val()
+  itk$ilan= val()
+  itk$iflo= val()
+  itk$idrp= val()
+  itk$imat= val()
+  itk$irec= val()
+  itk$irecbutoir= val()
+  itk$effirr= val()
+  itk$codecalirrig= val()
+  itk$ratiol= val()
+  itk$dosimx= val()
+  itk$doseirrigmin= val()
+  itk$codedateappH2O= as.numeric(val())
   itk$nap= as.numeric(val())
 
   if(itk$nap > 0){
     for(i in 1:itk$nap){
-      if(itk$P_codedateappH2O != 1) {
+      if(itk$codedateappH2O != 1) {
         vec= strsplit(x = val(),split = " ")[[1]]
-        itk$P_julapI= c(itk$P_julapI,vec[1])
-        itk$P_doseI= c(itk$P_doseI,vec[2])
+        itk$julapI= c(itk$julapI,vec[1])
+        itk$doseI= c(itk$doseI,vec[2])
       }else{
         vec= strsplit(x = val(),split = " ")[[1]]
-        itk$P_upvttapI= c(itk$P_upvttapI,vec[1])
-        itk$P_doseI= c(itk$P_doseI,vec[2])
+        itk$upvttapI= c(itk$upvttapI,vec[1])
+        itk$doseI= c(itk$doseI,vec[2])
       }
     }
   }
 
-  itk$P_codlocirrig= val()
-  itk$P_locirrig= val()
-  itk$P_profmes= val()
+  itk$codlocirrig= val()
+  itk$locirrig= val()
+  itk$profmes= val()
 
   if(!several_fert){
-    itk$P_engrais= val()
+    itk$engrais= val()
   }else{
     # val()
   }
 
-  itk$P_concirr= val()
-  itk$P_codedateappN= as.numeric(val())
-  itk$P_codefracappN= as.numeric(val())
-  itk$P_Qtot_N= val()
+  itk$concirr= val()
+  itk$codedateappN= as.numeric(val())
+  itk$codefracappN= as.numeric(val())
+  itk$Qtot_N= val()
   itk$napN= as.numeric(val())
 
   if(itk$napN > 0){
     for(i in 1:itk$napN){
-      if(itk$P_codedateappN != 1) {
-        if(itk$P_codefracappN == 1) {
+      if(itk$codedateappN != 1) {
+        if(itk$codefracappN == 1) {
           if(several_fert){
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_julapN= c(itk$P_julapN, vec[1])
-            itk$P_doseN= c(itk$P_doseN, vec[2])
-            itk$P_engrais= c(itk$P_engrais, vec[3])
+            itk$julapN= c(itk$julapN, vec[1])
+            itk$doseN= c(itk$doseN, vec[2])
+            itk$engrais= c(itk$engrais, vec[3])
           }else{
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_julapN= c(itk$P_julapN, vec[1])
-            itk$P_doseN= c(itk$P_doseN, vec[2])
+            itk$julapN= c(itk$julapN, vec[1])
+            itk$doseN= c(itk$doseN, vec[2])
           }
         }else{
           if(several_fert){
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_julapN= c(itk$P_julapN, vec[1])
-            itk$P_fracN= c(itk$P_fracN, vec[2])
-            itk$P_engrais= c(itk$P_engrais, vec[3])
+            itk$julapN= c(itk$julapN, vec[1])
+            itk$fracN= c(itk$fracN, vec[2])
+            itk$engrais= c(itk$engrais, vec[3])
           }else{
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_julapN= c(itk$P_julapN, vec[1])
-            itk$P_fracN= c(itk$P_fracN, vec[2])
+            itk$julapN= c(itk$julapN, vec[1])
+            itk$fracN= c(itk$fracN, vec[2])
           }
         }
       }else{
-        if (itk$P_codefracappN == 1) {
+        if (itk$codefracappN == 1) {
           if(several_fert){
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_upvttapN= c(itk$P_upvttapN, vec[1])
-            itk$P_doseN= c(itk$P_doseN, vec[2])
-            itk$P_engrais= c(itk$P_engrais, vec[3])
+            itk$upvttapN= c(itk$upvttapN, vec[1])
+            itk$doseN= c(itk$doseN, vec[2])
+            itk$engrais= c(itk$engrais, vec[3])
           }else{
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_upvttapN= c(itk$P_upvttapN, vec[1])
-            itk$P_doseN= c(itk$P_doseN, vec[2])
+            itk$upvttapN= c(itk$upvttapN, vec[1])
+            itk$doseN= c(itk$doseN, vec[2])
           }
         }else{
           if(several_fert){
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_upvttapN= c(itk$P_upvttapN, vec[1])
-            itk$P_fracN= c(itk$P_fracN, vec[2])
-            itk$P_engrais= c(itk$P_engrais, vec[3])
+            itk$upvttapN= c(itk$upvttapN, vec[1])
+            itk$fracN= c(itk$fracN, vec[2])
+            itk$engrais= c(itk$engrais, vec[3])
           }else{
             vec= strsplit(x = val(),split = " ")[[1]]
-            itk$P_upvttapN= c(itk$P_upvttapN, vec[1])
-            itk$P_fracN= c(itk$P_fracN, vec[2])
+            itk$upvttapN= c(itk$upvttapN, vec[1])
+            itk$fracN= c(itk$fracN, vec[2])
           }
         }
       }
     }
   }
 
-  itk$P_codlocferti= val()
-  itk$P_locferti= val()
-  itk$P_ressuite= val()
-  itk$P_codcueille= val()
-  itk$P_nbcueille= val()
-  itk$P_cadencerec= val()
-  itk$P_codrecolte= val()
-  itk$P_codeaumin= val()
-  itk$P_h2ograinmin= val()
-  itk$P_h2ograinmax= val()
-  itk$P_sucrerec= val()
-  itk$P_CNgrainrec= val()
-  itk$P_huilerec= val()
-  itk$P_coderecolteassoc= val()
-  itk$P_codedecirecolte= val()
-  itk$P_nbjmaxapresrecolte= val()
-  itk$P_codefauche= val()
-  itk$P_mscoupemini= val()
-  itk$P_codemodfauche= as.numeric(val())
+  itk$codlocferti= val()
+  itk$locferti= val()
+  itk$ressuite= val()
+  itk$codcueille= val()
+  itk$nbcueille= val()
+  itk$cadencerec= val()
+  itk$codrecolte= val()
+  itk$codeaumin= val()
+  itk$h2ograinmin= val()
+  itk$h2ograinmax= val()
+  itk$sucrerec= val()
+  itk$CNgrainrec= val()
+  itk$huilerec= val()
+  itk$coderecolteassoc= val()
+  itk$codedecirecolte= val()
+  itk$nbjmaxapresrecolte= val()
+  itk$codefauche= val()
+  itk$mscoupemini= val()
+  itk$codemodfauche= as.numeric(val())
 
-  if(itk$P_codemodfauche == 1) {
+  if(itk$codemodfauche == 1) {
     itk$lecfauche= FALSE
   }else{
     itk$lecfauche= TRUE
   }
 
-  itk$P_hautcoupedefaut= val()
-  itk$P_stadecoupedf= val()
+  itk$hautcoupedefaut= val()
+  itk$stadecoupedf= val()
   nbcoupe2= as.numeric(val())
 
-  if (itk$P_codemodfauche == 2) {
+  if (itk$codemodfauche == 2) {
     for(i in 1:nbcoupe2){
       if(is_pasture){
         vec= strsplit(x = val(),split = " ")[[1]]
-        itk$P_julfauche= c(itk$P_julfauche, vec[1])
-        itk$P_hautcoupe= c(itk$P_hautcoupe, vec[2])
-        itk$P_lairesiduel= c(itk$P_lairesiduel, vec[3])
-        itk$P_msresiduel= c(itk$P_msresiduel, vec[4])
-        itk$P_anitcoupe= c(itk$P_anitcoupe, vec[5])
-        itk$P_restit= c(itk$P_restit, vec[6])
-        itk$P_mscoupemini= c(itk$P_mscoupemini, vec[7])
+        itk$julfauche= c(itk$julfauche, vec[1])
+        itk$hautcoupe= c(itk$hautcoupe, vec[2])
+        itk$lairesiduel= c(itk$lairesiduel, vec[3])
+        itk$msresiduel= c(itk$msresiduel, vec[4])
+        itk$anitcoupe= c(itk$anitcoupe, vec[5])
+        itk$restit= c(itk$restit, vec[6])
+        itk$mscoupemini= c(itk$mscoupemini, vec[7])
       }else{
         vec= strsplit(x = val(),split = " ")[[1]]
-        itk$P_julfauche= c(itk$P_julfauche, vec[1])
-        itk$P_hautcoupe= c(itk$P_hautcoupe, vec[2])
-        itk$P_lairesiduel= c(itk$P_lairesiduel, vec[3])
-        itk$P_msresiduel= c(itk$P_msresiduel, vec[4])
-        itk$P_anitcoupe= c(itk$P_anitcoupe, vec[5])
+        itk$julfauche= c(itk$julfauche, vec[1])
+        itk$hautcoupe= c(itk$hautcoupe, vec[2])
+        itk$lairesiduel= c(itk$lairesiduel, vec[3])
+        itk$msresiduel= c(itk$msresiduel, vec[4])
+        itk$anitcoupe= c(itk$anitcoupe, vec[5])
       }
     }
     itk$nbcoupe = nbcoupe2
@@ -410,24 +410,24 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
 
   nbcoupe3= as.numeric(val())
 
-  if(itk$P_codemodfauche == 3) {
+  if(itk$codemodfauche == 3) {
     for(i in 1:nbcoupe3){
       if(is_pasture){
         vec= strsplit(x = val(),split = " ")[[1]]
-        itk$P_tempfauche= c(itk$P_tempfauche, vec[1])
-        itk$P_hautcoupe= c(itk$P_hautcoupe, vec[2])
-        itk$P_lairesiduel= c(itk$P_lairesiduel, vec[3])
-        itk$P_msresiduel= c(itk$P_msresiduel, vec[4])
-        itk$P_anitcoupe= c(itk$P_anitcoupe, vec[5])
-        itk$P_restit= c(itk$P_restit, vec[6])
-        itk$P_mscoupemini= c(itk$P_mscoupemini, vec[7])
+        itk$tempfauche= c(itk$tempfauche, vec[1])
+        itk$hautcoupe= c(itk$hautcoupe, vec[2])
+        itk$lairesiduel= c(itk$lairesiduel, vec[3])
+        itk$msresiduel= c(itk$msresiduel, vec[4])
+        itk$anitcoupe= c(itk$anitcoupe, vec[5])
+        itk$restit= c(itk$restit, vec[6])
+        itk$mscoupemini= c(itk$mscoupemini, vec[7])
       }else{
         vec= strsplit(x = val(),split = " ")[[1]]
-        itk$P_tempfauche= c(itk$P_tempfauche, vec[1])
-        itk$P_hautcoupe= c(itk$P_hautcoupe, vec[2])
-        itk$P_lairesiduel= c(itk$P_lairesiduel, vec[3])
-        itk$P_msresiduel= c(itk$P_msresiduel, vec[4])
-        itk$P_anitcoupe= c(itk$P_anitcoupe, vec[5])
+        itk$tempfauche= c(itk$tempfauche, vec[1])
+        itk$hautcoupe= c(itk$hautcoupe, vec[2])
+        itk$lairesiduel= c(itk$lairesiduel, vec[3])
+        itk$msresiduel= c(itk$msresiduel, vec[4])
+        itk$anitcoupe= c(itk$anitcoupe, vec[5])
       }
     }
     itk$nbcoupe= nbcoupe3
@@ -437,69 +437,69 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
     }
   }
 
-  itk$P_codepaillage= val()
-  itk$P_couvermulchplastique= val()
-  itk$P_albedomulchplastique= val()
-  itk$P_codrognage= val()
-  itk$P_largrogne= val()
-  itk$P_hautrogne= val()
-  itk$P_biorognem= val()
-  itk$P_codcalrogne= val()
-  itk$P_julrogne= val()
-  itk$P_margerogne= val()
-  itk$P_codeclaircie= val()
+  itk$codepaillage= val()
+  itk$couvermulchplastique= val()
+  itk$albedomulchplastique= val()
+  itk$codrognage= val()
+  itk$largrogne= val()
+  itk$hautrogne= val()
+  itk$biorognem= val()
+  itk$codcalrogne= val()
+  itk$julrogne= val()
+  itk$margerogne= val()
+  itk$codeclaircie= val()
 
   if(several_thin){
-    itk$P_nb_eclair= as.numeric(val())
-    for(i in 1:itk$P_nb_eclair){
+    itk$nb_eclair= as.numeric(val())
+    for(i in 1:itk$nb_eclair){
       vec= strsplit(x = val(),split = " ")[[1]]
-      itk$P_juleclair=  c(itk$P_juleclair, vec[1])
-      itk$P_nbinfloecl=  c(itk$P_nbinfloecl, vec[2])
+      itk$juleclair=  c(itk$juleclair, vec[1])
+      itk$nbinfloecl=  c(itk$nbinfloecl, vec[2])
     }
   }else{
     # vec= strsplit(x = val(),split = " ")[[1]]
-    itk$P_nb_eclair= 1
-    itk$P_juleclair=  val()
-    itk$P_nbinfloecl=  val()
+    itk$nb_eclair= 1
+    itk$juleclair=  val()
+    itk$nbinfloecl=  val()
   }
 
-  itk$P_codeffeuil= val()
-  itk$P_codhauteff= val()
-  itk$P_codcaleffeuil= val()
-  itk$P_laidebeff= val()
-  itk$P_effeuil= val()
-  itk$P_juleffeuil= val()
-  itk$P_laieffeuil= val()
-  itk$P_codetaille= val()
-  itk$P_jultaille= val()
-  itk$P_codepalissage= val()
-  itk$P_hautmaxtec= val()
-  itk$P_largtec= val()
-  itk$P_codabri= val()
-  itk$P_transplastic= val()
-  itk$P_surfouvre1= val()
-  itk$P_julouvre2= val()
-  itk$P_surfouvre2= val()
-  itk$P_julouvre3= val()
-  itk$P_surfouvre3= val()
-  itk$P_codeDST= val()
-  itk$P_dachisel= val()
-  itk$P_dalabour= val()
-  itk$P_rugochisel= val()
-  itk$P_rugolabour= val()
-  itk$P_codeDSTtass= val()
-  itk$P_profhumsemoir= val()
-  itk$P_dasemis= val()
-  itk$P_profhumrecolteuse= val()
-  itk$P_darecolte= val()
-  itk$P_codeDSTnbcouche= val()
+  itk$codeffeuil= val()
+  itk$codhauteff= val()
+  itk$codcaleffeuil= val()
+  itk$laidebeff= val()
+  itk$effeuil= val()
+  itk$juleffeuil= val()
+  itk$laieffeuil= val()
+  itk$codetaille= val()
+  itk$jultaille= val()
+  itk$codepalissage= val()
+  itk$hautmaxtec= val()
+  itk$largtec= val()
+  itk$codabri= val()
+  itk$transplastic= val()
+  itk$surfouvre1= val()
+  itk$julouvre2= val()
+  itk$surfouvre2= val()
+  itk$julouvre3= val()
+  itk$surfouvre3= val()
+  itk$codeDST= val()
+  itk$dachisel= val()
+  itk$dalabour= val()
+  itk$rugochisel= val()
+  itk$rugolabour= val()
+  itk$codeDSTtass= val()
+  itk$profhumsemoir= val()
+  itk$dasemis= val()
+  itk$profhumrecolteuse= val()
+  itk$darecolte= val()
+  itk$codeDSTnbcouche= val()
 
   # Transform into numeric:
   itk_out= character_to_numeric_list(itk)
   # Two parameters are not numeric, resetting them
   # to their original value:
-  itk_out$P_stadecoupedf= itk$P_stadecoupedf
-  itk_out$P_ressuite= itk$P_ressuite
+  itk_out$stadecoupedf= itk$stadecoupedf
+  itk_out$ressuite= itk$ressuite
 
   return(itk_out)
 }
@@ -522,15 +522,15 @@ get_soil_txt= function(filepath= "param.sol"){
 
   soil$nbcouchessol_max= 1000
 
-  soil[c("P_numsol","P_typsol","P_argi","P_Norg","P_profhum","P_calc","P_pH",
-         "P_concseuil","P_albedo","P_q0","P_ruisolnu","P_obstarac","P_pluiebat",
-         "P_mulchbat","P_zesx","P_cfes","P_z0solnu","P_CsurNsol", "P_penterui")]= val()
+  soil[c("numsol","typsol","argi","Norg","profhum","calc","pH",
+         "concseuil","albedo","q0","ruisolnu","obstarac","pluiebat",
+         "mulchbat","zesx","cfes","z0solnu","CsurNsol", "penterui")]= val()
 
-  soil[c("P_numsol","P_codecailloux","P_codemacropor","P_codefente",
-         "P_codrainage","P_coderemontcap","P_codenitrif","P_codedenit")]= val()
+  soil[c("numsol","codecailloux","codemacropor","codefente",
+         "codrainage","coderemontcap","codenitrif","codedenit")]= val()
 
-  soil[c("P_numsol","P_profimper","P_ecartdrain","P_ksol","P_profdrain",
-         "P_capiljour","P_humcapil","P_profdenit","P_vpotdenit")]= val()
+  soil[c("numsol","profimper","ecartdrain","ksol","profdrain",
+         "capiljour","humcapil","profdenit","vpotdenit")]= val()
 
   vec= matrix(data = NA,nrow = 9, ncol = 5)
   for(i in 1:5){
@@ -538,8 +538,8 @@ get_soil_txt= function(filepath= "param.sol"){
   }
   vec= apply(vec,MARGIN = 1,FUN = list)
 
-  soil[c("P_numsol","P_epc","P_hccf","P_hminf","P_DAF",
-         "P_cailloux","P_typecailloux","P_infil","P_epd")]=
+  soil[c("numsol","epc","hccf","hminf","DAF",
+         "cailloux","typecailloux","infil","epd")]=
     lapply(vec, unlist)
 
   # Transform into numeric:

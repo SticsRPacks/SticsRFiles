@@ -31,13 +31,13 @@ read_output= function(dirpath=getwd(), mixed= NULL, name= NULL){
   .=NULL # to avoid CRAN note for pipe
   if(base::is.null(mixed)){
     nbplants=
-      get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$P_nbplantes%>%
+      get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$nbplantes%>%
       as.numeric
     if(nbplants>1){mixed= T}else{mixed= F}
   }
 
   if(base::is.null(name)){
-    name= get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$P_fplt
+    name= get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$fplt
   }else{
     if(mixed&length(name)!=2){
       stop("name argument should have a length of 2")

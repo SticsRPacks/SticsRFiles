@@ -34,6 +34,7 @@
 #'
 #' @export
 set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
+  param= gsub("P_","",param)
   param_val= get_param_txt(dirpath = dirpath, param = param)
 
   file_type=
@@ -138,6 +139,7 @@ set_tec_txt= function(filepath="fictec1.txt",param,value,add=F){
 #' @rdname set_param_txt
 #' @export
 set_soil_txt= function(filepath="param.sol",param,value){
+  param= gsub("P_","",param)
   ref= get_soil_txt(filepath)
   param= paste0(param,"$")
   if(length(ref[[param]])!=length(value)){
@@ -147,29 +149,29 @@ set_soil_txt= function(filepath="param.sol",param,value){
   }
   ref[[param]]= format(value, scientific=F)
 
-  writeLines(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_typsol,
-                   ref$P_argi,ref$P_Norg,ref$P_profhum,ref$P_calc,
-                   ref$P_pH,ref$P_concseuil,ref$P_albedo,ref$P_q0,
-                   ref$P_ruisolnu,ref$P_obstarac,ref$P_pluiebat,
-                   ref$P_mulchbat,ref$P_zesx,ref$P_cfes,
-                   ref$P_z0solnu ,ref$P_CsurNsol,ref$P_penterui),
+  writeLines(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$typsol,
+                   ref$argi,ref$Norg,ref$profhum,ref$calc,
+                   ref$pH,ref$concseuil,ref$albedo,ref$q0,
+                   ref$ruisolnu,ref$obstarac,ref$pluiebat,
+                   ref$mulchbat,ref$zesx,ref$cfes,
+                   ref$z0solnu ,ref$CsurNsol,ref$penterui),
              filepath)
 
-  write(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_codecailloux,ref$P_codemacropor,
-              ref$P_codefente,ref$P_codrainage,ref$P_coderemontcap,
-              ref$P_codenitrif,ref$P_codedenit),
+  write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$codecailloux,ref$codemacropor,
+              ref$codefente,ref$codrainage,ref$coderemontcap,
+              ref$codenitrif,ref$codedenit),
         filepath,append = T)
 
-  write(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_profimper,ref$P_ecartdrain,ref$P_ksol,
-              ref$P_profdrain,ref$P_capiljour,ref$P_humcapil,
-              ref$P_profdenit,ref$P_vpotdenit),
+  write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$profimper,ref$ecartdrain,ref$ksol,
+              ref$profdrain,ref$capiljour,ref$humcapil,
+              ref$profdenit,ref$vpotdenit),
         filepath,append = T)
 
   for(icou in 1:5){
-    write(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_epc[icou],ref$P_hccf[icou],
-                ref$P_hminf[icou],ref$P_DAF[icou],ref$P_cailloux[icou],
-                ref$P_typecailloux[icou],ref$P_infil[icou],
-                ref$P_epd[icou]),
+    write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$epc[icou],ref$hccf[icou],
+                ref$hminf[icou],ref$DAF[icou],ref$cailloux[icou],
+                ref$typecailloux[icou],ref$infil[icou],
+                ref$epd[icou]),
           filepath,append = T)
   }
 }
@@ -197,6 +199,7 @@ set_soil_txt= function(filepath="param.sol",param,value){
 #' @keywords internal
 #'
 set_file_txt= function(filepath,param,value,add,variety= NULL){
+  param= gsub("P_","",param)
   # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
   params= readLines(filepath)
@@ -204,10 +207,10 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
   switch(type,
          set_usm_txt = {
            ref= get_usm_txt(filepath)
-           if(grep(param_,names(ref))<grep("P_fplt",names(ref))){
+           if(grep(param_,names(ref))<grep("fplt",names(ref))){
              ref_index= grep(param_,names(ref))*2
            }else{
-             ref_index= grep(gsub("P_","",param_),params)+1
+             ref_index= grep(param_,params)+1
            }
          },
          set_station_txt= {
@@ -219,14 +222,14 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
            ref_index= grep(param_,names(ref))*2
          },
          set_plant_txt= {
-           ref_index= grep(gsub('P_','',param_),params)+1
+           ref_index= grep(param_,params)+1
            if(!base::is.null(variety)){
              ref_index= ref_index[variety]
            }
          },
          # Default here
          {
-           ref_index= grep(gsub('P_','',param_),params)+1
+           ref_index= grep(param_,params)+1
          }
   )
 
@@ -234,7 +237,7 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
     if(add){
       value= paste(value, collapse = " ")
       params= c(params,param,value)
-      ref_index= grep(gsub('P_','',param_),params)+1
+      ref_index= grep(param_,params)+1
     }else{
       stop(paste(param,"parameter not found in:\n",filepath))
     }
