@@ -42,7 +42,11 @@
 #' get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF") #0.29
 #' # Get the leaf lifespan of another variety available in the plant file:
 #' get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer")
-#'
+#' # To get the values for all varieties, either put all varieties:
+#' get_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF",
+#' variety = c("Biensur","Acalou","Amarillo","Lloyd","Neodur","Nefer","Montseg"))
+#' # Or get it from the output of the function returning all parameters:
+#' get_param_txt(dirpath = "inst/extdata/txt/V8.5")$plant$plant1$durvieF
 #'
 #' @export
 get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
@@ -92,7 +96,12 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 
   if(!is.null(param)){
     parameters= unlist(parameters)
-    parameters= parameters[grep(paste0(param,"$"),names(parameters))]
+    parameters= parameters[grep(paste0(param,".{0,1}$"),names(parameters))]
+
+    if(!is.null(variety)){
+      names(parameters)= paste0(gsub("[1-999]","",names(parameters)),".",variety)
+    }
+
     if(length(parameters)==0){
       stop(param," parameter not found")
     }
