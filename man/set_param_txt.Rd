@@ -16,9 +16,10 @@ set_param_txt(
   dirpath = getwd(),
   param,
   value,
-  add = F,
+  add = FALSE,
   plant = 1,
-  variety = NULL
+  variety = NULL,
+  layer = NULL
 )
 
 set_usm_txt(filepath = "new_travail.usm", param, value, add = F)
@@ -35,7 +36,7 @@ set_plant_txt(filepath = "ficplt1.txt", param, value, add = F, variety = NULL)
 
 set_tec_txt(filepath = "fictec1.txt", param, value, add = F)
 
-set_soil_txt(filepath = "param.sol", param, value)
+set_soil_txt(filepath = "param.sol", param, value, layer = NULL)
 }
 \arguments{
 \item{dirpath}{USM directory path}
@@ -49,6 +50,8 @@ set_soil_txt(filepath = "param.sol", param, value)
 \item{plant}{Plant index. Optional, only for plant or technical parameters}
 
 \item{variety}{Integer. The plant variety to set the parameter value.}
+
+\item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
 \item{filepath}{Path to the parameter file}
 }

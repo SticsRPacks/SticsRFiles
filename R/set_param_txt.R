@@ -10,6 +10,7 @@
 #' @param plant    Plant index. Optional, only for plant or technical parameters
 #' @param add      Boolean. Append input to existing file (add to the list)
 #' @param variety  Integer. The plant variety to set the parameter value.
+#' @param layer    The soil layer if any (only concerns soil-related parameters)
 #'
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 #'          the associated plant in the case of intercrop, or \code{c(1,2)} for both
@@ -35,10 +36,12 @@
 #' # Change the value of durvieF for another variety:
 #' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer", value = 178)
 #'
+#' # Change the value of infil for a given layer:
+#' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "infil", variety = "Nefer", value = 178)
 #'}
 #'
 #' @export
-set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1, variety= NULL){
+set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NULL,layer=NULL){
   param= gsub("P_","",param)
   param_val= get_param_txt(dirpath = dirpath, param = param)
 
@@ -65,7 +68,7 @@ set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1, variety= NULL
          },
          soil= {
            set_soil_txt(filepath = file.path(dirpath,"param.sol"),
-                    param = param, value = value)
+                    param = param, value = value, layer= layer)
          },
          usm= {
            set_usm_txt(filepath = file.path(dirpath,"new_travail.usm"),
@@ -152,16 +155,30 @@ set_tec_txt= function(filepath="fictec1.txt",param,value,add=F){
 
 #' @rdname set_param_txt
 #' @export
-set_soil_txt= function(filepath="param.sol",param,value){
+set_soil_txt= function(filepath="param.sol",param,value,layer=NULL){
   param= gsub("P_","",param)
   ref= get_soil_txt(filepath)
   param= paste0(param,"$")
-  if(length(ref[[param]])!=length(value)){
-    stop(paste("Length of input value different from parameter value length.\n",
-               "Original values:\n",paste(ref[[param]],collapse= ", "),
-               "\ninput:\n",paste(value,collapse= ", ")))
+
+  if(!is.null(layer)){
+    length_param_file= length(ref[grep(param,names(ref))][layer])
+  }else{
+    length_param_file= length(ref[grep(param,names(ref))])
   }
-  ref[[param]]= format(value, scientific=F)
+
+  if(length_param_file!=length(value)){
+    cli::cli_alert_danger(paste("Length of input value different from parameter value length.\n",
+                                "Original values: {.val {ref[grep(param,names(ref))]}} \n",
+                                "Input values: {.val { value}}"))
+    stop("Number of values don't match.")
+  }
+
+  if(!is.null(layer)){
+    ref[[grep(param,names(ref))]][layer]= format(value, scientific=F)
+  }else{
+    ref[[grep(param,names(ref))]]= format(value, scientific=F)
+  }
+
 
   writeLines(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$typsol,
                    ref$argi,ref$Norg,ref$profhum,ref$calc,
