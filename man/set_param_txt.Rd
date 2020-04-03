@@ -44,8 +44,6 @@ set_soil_txt(filepath = "param.sol", param, value)
 \item{filepath}{Path to the parameter file}
 
 \item{variety}{Integer. The plant variety to get the parameter from.}
-
-\item{vars}{Vector of variable names for STICS output requirements}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input

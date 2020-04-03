@@ -40,8 +40,10 @@ var_to_col_names <- function(var_vec) {
 #' @param var     Vector of variable names
 #' @param version Stics version.
 #'
-#' @return
+#' @return A vector of variable names compatible with stics (usually used for `gen_varmod()`)
 #' @keywords internal
+#'
+#' @seealso `gen_varmod()`
 #'
 #' @examples
 #' var_to_stics_name(c("lai_n","masec_n"))

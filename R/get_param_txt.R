@@ -1,34 +1,27 @@
 #' Read STICS input parameters from text files
 #'
-#' @description Read STICS model input parameters from a pre-existing STICS input
-#'              file. Generally used after calling building a usm with `JavaStics`.
+#' @description Read STICS model input parameters from a usm in text format (STICS input)
+#' Generally used after calling building a usm with `JavaStics`.
 #'
 #' @param dirpath      USM directory path
-#' @param filepath     File path
 #' @param param        Parameter name. Optional, if not provided, the function
 #'                     return an object with all parameters
-#' @param several_fert Is there several fertilization in the USM ?
-#' @param several_thin Is there several thinning in the USM ?
-#' @param is_pasture   Is the plant a pasture ?
-#' @param variety      Integer. The plant variety to get the parameter from.
+#' @param variety      Either the variety name or index for plant parameters (optional, see details).
 #' @param ...          Helper to pass arguments from \code{\link{get_param_txt}} to the
 #'                     other functions
 #'
-#' @note Users generally only use \code{get_param_txt} that identify parameters for
-#'       other functions and call them.
+#' @note Users would generally use `get_param_txt` to identify parameters names and values and pass
+#' them to other functions.
 #'
-#' @return A list of all parameters:
+#' @return A parameter value, or if `param= NULL` a list of all parameters:
 #'         \item{ini}{Initialization parameters}
 #'         \item{general}{General parameters}
 #'         \item{tec}{Technical parameters}
 #'         \item{plant}{Plant parameters}
 #'         \item{soil}{Soil parameters}
 #'         \item{station}{Station parameters}
-#'         \item{output}{The output variables the user require from STICS}
-#' The function can return several sub-lists for each \code{plant} and \code{tec}
-#'  if mixed crops, numbered by usage
 #'
-#' @seealso \code{\link{set_param_txt}}.
+#' @seealso `gen_varmod()`,
 #'
 #' @importFrom stats setNames
 #'
@@ -66,7 +59,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,...){
   soil= get_soil_txt(file.path(dirpath,"param.sol"))
   station= get_station_txt(file.path(dirpath,"station.txt"))
   usm= get_usm_txt(file.path(dirpath,"new_travail.usm"))
-  output= get_out_var_txt(file.path(dirpath,"var.mod"))
+  output= get_var_mod(dirpath)
   tmp= get_tmp_txt(file.path(dirpath,"tempoparv6.sti"))
   tec= plant= setNames(vector(mode = "list", length = ini$nbplantes),
                        paste0("plant",1:ini$nbplantes))
@@ -543,26 +536,6 @@ get_station_txt= function(filepath="station.txt"){
 #' @export
 get_usm_txt= function(filepath="new_travail.usm"){
   get_txt_generic(filepath)
-}
-
-
-
-#' Get desired STICS outputs
-#'
-#' @description Get the variables STICS will return ("var.mod" file)
-#'
-#' @param filepath The path to the "var.mod" file.
-#'
-#' @return The variables that will be returned by STICS
-#' @export
-#'
-#' @seealso `gen_varmod`
-#' @examples
-#' get_out_var_txt(file.path(system.file("extdata/txt/V8.5", package = "SticsRFiles"),"var.mod"))
-#'
-get_out_var_txt= function(filepath="var.mod"){
-  Vars= readLines(filepath)
-  return(Vars)
 }
 
 

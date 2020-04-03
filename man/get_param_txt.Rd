@@ -15,35 +15,24 @@ return an object with all parameters}
 \item{...}{Helper to pass arguments from \code{\link{get_param_txt}} to the
 other functions}
 
-\item{filepath}{File path}
-
-\item{several_fert}{Is there several fertilization in the USM ?}
-
-\item{several_thin}{Is there several thinning in the USM ?}
-
-\item{is_pasture}{Is the plant a pasture ?}
-
-\item{variety}{Integer. The plant variety to get the parameter from.}
+\item{variety}{Either the variety name or index for plant parameters (optional, see details).}
 }
 \value{
-A list of all parameters:
+A parameter value, or if \code{param= NULL} a list of all parameters:
 \item{ini}{Initialization parameters}
 \item{general}{General parameters}
 \item{tec}{Technical parameters}
 \item{plant}{Plant parameters}
 \item{soil}{Soil parameters}
 \item{station}{Station parameters}
-\item{output}{The output variables the user require from STICS}
-The function can return several sub-lists for each \code{plant} and \code{tec}
-if mixed crops, numbered by usage
 }
 \description{
-Read STICS model input parameters from a pre-existing STICS input
-file. Generally used after calling building a usm with \code{JavaStics}.
+Read STICS model input parameters from a usm in text format (STICS input)
+Generally used after calling building a usm with \code{JavaStics}.
 }
 \note{
-Users generally only use \code{get_param_txt} that identify parameters for
-other functions and call them.
+Users would generally use \code{get_param_txt} to identify parameters names and values and pass
+them to other functions.
 }
 \examples{
 \dontrun{
@@ -57,5 +46,5 @@ get_param_txt(path, param='interrang')
 
 }
 \seealso{
-\code{\link{set_param_txt}}.
+\code{gen_varmod()},
 }

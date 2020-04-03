@@ -8,7 +8,6 @@
 #' @param param    Parameter name
 #' @param value    New parameter value
 #' @param plant    Plant index. Optional, only for plant or technical parameters
-#' @param vars     Vector of variable names for STICS output requirements
 #' @param add      Boolean. Append input to existing file (add to the list)
 #' @param variety  Integer. The plant variety to get the parameter from.
 #'
