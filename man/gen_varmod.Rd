@@ -4,7 +4,13 @@
 \alias{gen_varmod}
 \title{Generating a var.mod type file}
 \usage{
-gen_varmod(workspace, var_names, append = FALSE, file_name = "var.mod")
+gen_varmod(
+  workspace,
+  var_names,
+  append = FALSE,
+  file_name = "var.mod",
+  version = "last"
+)
 }
 \arguments{
 \item{workspace}{Stics or JavaStics workspace path}
@@ -14,6 +20,8 @@ gen_varmod(workspace, var_names, append = FALSE, file_name = "var.mod")
 \item{append}{Boolean. Append to existing file ?}
 
 \item{file_name}{file name to generate (default value: var.mod)}
+
+\item{version}{The version of the STICS model used (used to control the variable names)}
 }
 \value{
 Nothing. Writes to a file.
@@ -22,7 +30,9 @@ Nothing. Writes to a file.
 Generating a daily variable list file from variables names
 }
 \details{
-The variable names can be found using \code{find_var_info()}
+The variable names can be found using \code{find_var_info()}. The variable names are
+checked before writting. If any variable names does not exist, the function will return
+an error.
 }
 \examples{
 \dontrun{
