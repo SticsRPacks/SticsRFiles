@@ -42,7 +42,7 @@
 #' @export
 get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 
-  dot_args= as.list(...) # Future-proof the function. We can add arguments now without
+  dot_args= list(...) # Future-proof the function. We can add arguments now without
   # breaking it. I think for example to a "version argument" because the tec file is not
   # generic.
 
@@ -63,7 +63,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 
   for(i in seq_len(ini$nbplantes)){
     tec[paste0("plant",i)]=
-      list(get_tec_txt(file.path(dirpath,paste0("fictec",i,".txt")),
+      list(get_tec_txt(filepath = file.path(dirpath,paste0("fictec",i,".txt")),
                        several_fert = several_fert, several_thin = several_thin,
                        is_pasture = is_pasture))
     plant[paste0("plant",i)]=
@@ -200,7 +200,7 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
 #' @export
 get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pasture,...){
 
-  dot_args= as.list(...) # Future-proofing the function. We can add arguments now without
+  dot_args= list(...) # Future-proofing the function. We can add arguments now without
   # breaking it. I think for example to a "version argument" because the tec file is not
   # generic.
 
@@ -381,7 +381,7 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
   itk$stadecoupedf= val()
   nbcoupe2= as.numeric(val())
 
-  if (itk$codemodfauche == 2) {
+  if(itk$codemodfauche == 2){
     for(i in 1:nbcoupe2){
       if(is_pasture){
         vec= strsplit(x = val(),split = " ")[[1]]
@@ -496,10 +496,6 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
 
   # Transform into numeric:
   itk_out= character_to_numeric_list(itk)
-  # Two parameters are not numeric, resetting them
-  # to their original value:
-  itk_out$stadecoupedf= itk$stadecoupedf
-  itk_out$ressuite= itk$ressuite
 
   return(itk_out)
 }
