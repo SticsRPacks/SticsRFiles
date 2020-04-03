@@ -51,9 +51,9 @@ all_out_var <- function(version= "last"){
 #'
 find_var_info <- function(var=NULL,keyword=NULL,version= "last"){
   all_vars <- all_out_var(version)
-  var= var_to_col_names(var)
-  vars_names_parsed= var_to_col_names(all_vars$variable)
-  if(!is.null(var)) {
+  if(!is.null(var)){
+    var= var_to_col_names(var)
+    vars_names_parsed= var_to_col_names(all_vars$variable)
     all_vars[grep(var, vars_names_parsed,ignore.case = TRUE),]
   }else if(!is.null(keyword)){
     all_vars[grep(keyword, all_vars$details,ignore.case = TRUE),]
@@ -61,3 +61,36 @@ find_var_info <- function(var=NULL,keyword=NULL,version= "last"){
     all_vars
   }
 }
+
+#' Search if a STICS variable exist
+#'
+#' @description Tells if one or more variable names are valid STICS output variables.
+#'
+#' @param var     A vector of variable names
+#' @param version The version of the model
+#'
+#' @return A boolean vector: `TRUE` if the variable exist, `FALSE` if it doesn't
+#'
+#' @seealso `find_var_info()` for interactive use.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' is_stics_var(c("lai(n)",'masec(n)',"truc"))
+#' }
+is_stics_var= function(var,version= "last"){
+  all_vars <- all_out_var(version)
+  var_parsed= var_to_col_names(var)
+  vars_names_parsed= var_to_col_names(all_vars$variable)
+
+  index_var= match(var_parsed,vars_names_parsed)
+  var_found= !is.na(index_var)
+  if(any(!var_found)){
+    cli::cli_alert_warning("Variable{?s} {.var {var_parsed[!var_found]}} not found. Try {.code find_var_info()}.")
+  }
+  return(var_found)
+}
+
+
+

@@ -29,3 +29,29 @@ var_to_col_names <- function(var_vec) {
   return(var_vec)
 
 }
+
+
+
+#' Variable name to stics variable name
+#'
+#' @description Convert a variable name into a stics-compatible variable name. E.g.
+#' `lai_n` into `lai(n)`.
+#'
+#' @param var     Vector of variable names
+#' @param version Stics version.
+#'
+#' @return
+#' @keywords internal
+#'
+#' @examples
+#' var_to_stics_name(c("lai_n","masec_n"))
+var_to_stics_name= function(var,version="last"){
+  var_exist= is_stics_var(var,version)
+  if(any(!var_exist)){
+    stop()
+  }
+  all_vars <- all_out_var(version)
+  var_parsed= var_to_col_names(var)
+  vars_names_parsed= var_to_col_names(all_vars$variable)
+  as.character(all_vars$variable[match(var_parsed,vars_names_parsed)])
+}
