@@ -73,6 +73,12 @@ variables required from STICS, please directly call \code{set_out_var_txt}.
 
 set_param_txt(dirpath = "stics_usm/usm_1", param = "interrang", value = 0.01)
 
+# Change the value of durvieF for the current variety:
+set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", value = 245)
+
+# Change the value of durvieF for another variety:
+set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer", value = 178)
+
 }
 
 }
