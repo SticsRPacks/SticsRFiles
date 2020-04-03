@@ -19,7 +19,10 @@ Convert a variable name into a stics-compatible variable name. E.g.
 \code{lai_n} into \code{lai(n)}.
 }
 \examples{
+\dontrun{
 var_to_stics_name(c("lai_n","masec_n"))
+}
+
 }
 \seealso{
 \code{gen_varmod()}

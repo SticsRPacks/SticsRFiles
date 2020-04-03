@@ -46,7 +46,10 @@ var_to_col_names <- function(var_vec) {
 #' @seealso `gen_varmod()`
 #'
 #' @examples
+#' \dontrun{
 #' var_to_stics_name(c("lai_n","masec_n"))
+#' }
+#'
 var_to_stics_name= function(var,version="last"){
   var_exist= is_stics_var(var,version)
   if(any(!var_exist)){

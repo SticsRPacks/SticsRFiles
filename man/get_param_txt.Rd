@@ -4,7 +4,7 @@
 \alias{get_param_txt}
 \title{Read STICS input parameters from text files}
 \usage{
-get_param_txt(dirpath = getwd(), param = NULL, ...)
+get_param_txt(dirpath = getwd(), param = NULL, variety = NULL, ...)
 }
 \arguments{
 \item{dirpath}{USM directory path}
@@ -12,10 +12,10 @@ get_param_txt(dirpath = getwd(), param = NULL, ...)
 \item{param}{Parameter name. Optional, if not provided, the function
 return an object with all parameters}
 
+\item{variety}{Either the variety name or index for plant parameters (optional, see details).}
+
 \item{...}{Helper to pass arguments from \code{\link{get_param_txt}} to the
 other functions}
-
-\item{variety}{Either the variety name or index for plant parameters (optional, see details).}
 }
 \value{
 A parameter value, or if \code{param= NULL} a list of all parameters:
@@ -29,6 +29,12 @@ A parameter value, or if \code{param= NULL} a list of all parameters:
 \description{
 Read STICS model input parameters from a usm in text format (STICS input)
 Generally used after calling building a usm with \code{JavaStics}.
+}
+\details{
+If the \code{variety} is not given and a \code{param} is asked, the function will return the values
+for the variety that is simulated in the USM by checking the \code{variete} parameter in the technical file.
+If \code{param} is not provided by the user, the values from all varieties will be returned unless the user
+ask for a given \code{variety}.
 }
 \note{
 Users would generally use \code{get_param_txt} to identify parameters names and values and pass

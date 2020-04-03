@@ -7,7 +7,9 @@
 get_var_mod(workspace, file_name = "var.mod")
 }
 \arguments{
-\item{filepath}{The path to the "var.mod" file.}
+\item{workspace}{Stics or JavaStics workspace path}
+
+\item{file_name}{file name to generate (default value: "var.mod")}
 }
 \value{
 The variables that will be returned by STICS

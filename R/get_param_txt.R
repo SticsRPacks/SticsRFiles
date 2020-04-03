@@ -10,6 +10,11 @@
 #' @param ...          Helper to pass arguments from \code{\link{get_param_txt}} to the
 #'                     other functions
 #'
+#' @details If the `variety` is not given and a `param` is asked, the function will return the values
+#' for the variety that is simulated in the USM by checking the `variete` parameter in the technical file.
+#' If `param` is not provided by the user, the values from all varieties will be returned unless the user
+#' ask for a given `variety`.
+#'
 #' @note Users would generally use `get_param_txt` to identify parameters names and values and pass
 #' them to other functions.
 #'
@@ -36,7 +41,7 @@
 #'}
 #'
 #' @export
-get_param_txt= function(dirpath= getwd(),param= NULL,...){
+get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   dot_args= list(...)
   if(isTRUE(dot_args$several_fert)){
     several_fert= dot_args$several_fert
@@ -72,11 +77,16 @@ get_param_txt= function(dirpath= getwd(),param= NULL,...){
     plant[paste0("plant",i)]=
       list(get_plant_txt(file.path(dirpath,paste0("ficplt",i,".txt")),
                          variety=
-                           if(!is.null(param)){
-                             tec[[paste0("plant",i)]]$P_variete
+                           if(is.null(variety)){
+                             if(!is.null(param)){
+                               tec[[paste0("plant",i)]]$P_variete
+                             }else{
+                               NULL
+                             }
                            }else{
-                             NULL
-                           }))
+                             variety
+                           }
+                           ))
   }
 
   parameters= list(usm= usm, ini= ini, general= general, tec= tec,
@@ -550,7 +560,9 @@ get_usm_txt= function(filepath="new_travail.usm"){
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' get_txt_generic(file.path(system.file("extdata/txt/V8.5", package = "SticsRFiles"),"station.txt"))
+#' }
 #'
 get_txt_generic= function(filepath, names=TRUE){
   params= readLines(filepath)

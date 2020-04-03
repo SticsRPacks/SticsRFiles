@@ -38,7 +38,8 @@ Imports:
     rlang,
     stringr,
     xslt,
-    dplyr
+    dplyr,
+    cli
 Suggests:
     SticsOnR,
     knitr,

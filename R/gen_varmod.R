@@ -3,7 +3,7 @@
 #' @param workspace Stics or JavaStics workspace path
 #' @param var_names vector of variables names (see details)
 #' @param append    Boolean. Append to existing file ?
-#' @param file_name file name to generate (default value: var.mod)
+#' @param file_name file name to generate (default value: "var.mod")
 #' @param version The version of the STICS model used (used to control the variable names)
 #'
 #' @details The variable names can be found using `find_var_info()`. The variable names are

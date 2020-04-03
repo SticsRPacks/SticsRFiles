@@ -3,7 +3,8 @@
 #'
 #' @description Get the variables STICS will return ("var.mod" file)
 #'
-#' @param filepath The path to the "var.mod" file.
+#' @param workspace Stics or JavaStics workspace path
+#' @param file_name file name to generate (default value: "var.mod")
 #'
 #' @return The variables that will be returned by STICS
 #' @export

@@ -18,7 +18,9 @@ A named (if names=TRUE) list of parameter values
 Generic function to read STICS parameter files
 }
 \examples{
+\dontrun{
 get_txt_generic(file.path(system.file("extdata/txt/V8.5", package = "SticsRFiles"),"station.txt"))
+}
 
 }
 \keyword{internal}
