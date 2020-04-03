@@ -189,7 +189,7 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
 
 #' @rdname get_ini_txt
 #' @export
-get_tec_txt= function(filepath="fictec1.txt",several_fert=T,several_thin=T,is_pasture=F){
+get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pasture){
 
   params= readLines(filepath)
   itk= vector(mode='list', length = 0)
