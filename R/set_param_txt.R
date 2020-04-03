@@ -175,13 +175,6 @@ set_soil_txt= function(filepath="param.sol",param,value){
   }
 }
 
-#' @rdname set_param_txt
-#' @export
-set_out_var_txt= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F){
-  cat(vars,file=filepath, sep="\n",append = add)
-}
-
-
 
 #' Internal function to set some STICS input file parameters
 #'

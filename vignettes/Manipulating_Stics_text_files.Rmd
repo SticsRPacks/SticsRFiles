@@ -34,7 +34,7 @@ Using this package, it is possible to:
 * convert the XML files to text files (`convert_xml2txt()`), please see the [Generating Stics text files](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files) vignette;  
 * read ([`get_param_txt()`](R/read_param.R)) or set ([`set_param_txt()`](R/read_param.R)) parameters;  
 * Read the climate (`get_climate_txt()`);  
-* Set the output variables required (`set_out_var_txt()`).  
+* Set the output variables required (`gen_varmod()`).  
 
 To run a STICS simulation on these input files, please refer to the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html).
 
@@ -146,10 +146,10 @@ All these functions are exported for convenience, but `set_param_txt()` is easie
 
 ## Set the output variables
 
-The `set_out_var_txt()` function is used to set the required output variables in the `var.mod` file. For example if the user need the LAI and the dry mass: 
+The `gen_varmod()` function is used to set the required output variables in the `var.mod` file. For example if the user need the LAI and the dry mass: 
 
 ```{r}
-set_out_var_txt(filepath = file.path(example_txt_dir,"var.mod"), vars = c("lai(n)","masec(n)"))
+gen_varmod(workspace = example_txt_dir, var_names = c("lai(n)","masec(n)"))
 ```
 
 Controlling if the values where written: 
@@ -161,7 +161,7 @@ get_out_var_txt(filepath = file.path(example_txt_dir,"var.mod"))
 Alternatively, the user can append a variable to the pre-existing vector of values using the `add` argument: 
 
 ```{r}
-set_out_var_txt(filepath = file.path(example_txt_dir,"var.mod"), vars = "hauteur", add = TRUE)
+gen_varmod(workspace = example_txt_dir, var_names = c("hauteur"), append = TRUE)
 get_out_var_txt(filepath = file.path(example_txt_dir,"var.mod"))
 ```
 

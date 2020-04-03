@@ -10,7 +10,6 @@
 \alias{set_plant_txt}
 \alias{set_tec_txt}
 \alias{set_soil_txt}
-\alias{set_out_var_txt}
 \title{Set (replace) STICS input file parameters}
 \usage{
 set_param_txt(dirpath = getwd(), param, value, add = F, plant = 1)
@@ -30,8 +29,6 @@ set_plant_txt(filepath = "ficplt1.txt", param, value, add = F, variety = NULL)
 set_tec_txt(filepath = "fictec1.txt", param, value, add = F)
 
 set_soil_txt(filepath = "param.sol", param, value)
-
-set_out_var_txt(filepath = "var.mod", vars = c("lai(n)", "masec(n)"), add = F)
 }
 \arguments{
 \item{dirpath}{USM directory path}
