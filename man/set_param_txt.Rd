@@ -67,8 +67,8 @@ Principal and associated plants.
 output variables.
 }
 \note{
-\code{set_out_var_txt} is not used by \code{set_param_txt}. To replace the output
-variables required from STICS, please directly call \code{set_out_var_txt}.
+\code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
+variables required from STICS, please directly call \code{gen_varmod}.
 }
 \examples{
 \dontrun{

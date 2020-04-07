@@ -20,6 +20,6 @@ from the STICS model.
 }
 }
 \seealso{
-\code{find_var_info()}, \code{set_out_var_txt()}, and \code{get_stics_versions_compat()}
+\code{find_var_info()}, \code{gen_varmod()}, and \code{get_stics_versions_compat()}
 }
 \keyword{internal}

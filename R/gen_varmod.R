@@ -4,11 +4,12 @@
 #' @param var_names vector of variables names (see details)
 #' @param append    Boolean. Append to existing file ?
 #' @param file_name file name to generate (default value: "var.mod")
-#' @param version The version of the STICS model used (used to control the variable names)
+#' @param version   The version of the STICS model used (used to control the variable names)
+#' @param force     Force the variable writing even if the variable is not a STICS variable.
 #'
 #' @details The variable names can be found using `find_var_info()`. The variable names are
-#' checked before writting. If any variable names does not exist, the function will return
-#' an error.
+#' checked before writting. If any variable names does not exist, the function will still write the
+#' variables that exist, but not the variable that does not exist, unless `force= TRUE`
 #'
 #' @return Nothing. Writes to a file.
 #'
@@ -23,7 +24,7 @@
 #'
 #' @export
 #'
-gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod", version= "last"){
+gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod", version= "last", force= FALSE){
   # Checking if workspace exists
   if(!dir.exists(workspace)){
     stop(paste(workspace,": directory does not exist !"))
@@ -32,11 +33,17 @@ gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod",
 
   # Check if the variable exist:
   var_exist= is_stics_var(var_names,version)
-  if(any(!var_exist)){
-    return()
+
+
+  if(any(!var_exist)&&isFALSE(force)){
+    var_names= var_names[var_exist]
   }
 
-  var_names= var_to_stics_name(var_names)
+  if(isTRUE(force)){
+    var_names[var_exist]= var_to_stics_name(var_names[var_exist])
+  }else{
+    var_names= var_to_stics_name(var_names)
+  }
 
   # Add possibility to append a variable to var.mod.
   if(isTRUE(append)){

@@ -7,7 +7,7 @@
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
 #' to "last", a special code to get the last version.
 #'
-#' @seealso `find_var_info()`, `set_out_var_txt()`, and `get_stics_versions_compat()`
+#' @seealso `find_var_info()`, `gen_varmod()`, and `get_stics_versions_compat()`
 #'
 #' @examples
 #' \dontrun{
