@@ -7,7 +7,7 @@
 get_params_from_table(
   params_table,
   param_names = NULL,
-  xml_doc = NULL,
+  xml_doc,
   lines_id = NULL,
   stopping = FALSE,
   dict = NULL
@@ -35,7 +35,7 @@ Get a list of Stics xml parameters names and values from a table (data.frame, ti
 \examples{
 \dontrun{
 
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
 xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 ini_param_df <- read_excel(xl_path, sheet = "Ini")
 xml_path <- "path/to/ini/xml"

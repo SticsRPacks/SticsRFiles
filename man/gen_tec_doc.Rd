@@ -20,6 +20,8 @@ gen_tec_doc(
 \item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 
 \item{dict}{List of correspondance between given parameter names and Stics internal names.}
+
+\item{...}{Additional arguments}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -35,6 +37,7 @@ download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest
 xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 tec_param_df <- read_excel(xl_path, sheet = "Tec")
 tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)
+
 }
 
 }
