@@ -8,9 +8,9 @@
 #' @param param    Parameter name
 #' @param value    New parameter value
 #' @param plant    Plant index. Optional, only for plant or technical parameters
-#' @param vars     Vector of variable names for STICS output requirements
 #' @param add      Boolean. Append input to existing file (add to the list)
-#' @param variety  Integer. The plant variety to get the parameter from.
+#' @param variety  Integer. The plant variety to set the parameter value.
+#' @param layer    The soil layer if any (only concerns soil-related parameters)
 #'
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 #'          the associated plant in the case of intercrop, or \code{c(1,2)} for both
@@ -18,8 +18,8 @@
 #'          \code{\link{find_var_info}} is a helper function that returns all possible
 #'          output variables.
 #'
-#' @note \code{set_out_var_txt} is not used by \code{set_param_txt}. To replace the output
-#'       variables required from STICS, please directly call \code{set_out_var_txt}.
+#' @note \code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
+#'       variables required from STICS, please directly call \code{gen_varmod}.
 #'
 #'
 #' @importFrom magrittr "%>%"
@@ -28,13 +28,26 @@
 #'\dontrun{
 #' # Replace the interrow distance parameter to 0.01:
 #'
-#' library(SticsRFiles)
 #' set_param_txt(dirpath = "stics_usm/usm_1", param = "interrang", value = 0.01)
 #'
+#' # Change the value of durvieF for the current variety:
+#' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", value = 245)
+#'
+#' # Change the value of durvieF for another variety:
+#' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer", value = 178)
+#'
+#' # Change the value of infil for a given layer:
+#' set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "infil", layer = 2, value = 60)
+#'
+#' # If the parameter is found in several files, use the set_* functions direclty, e.g.
+#' # cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
+#' # change its value in the soil file, we use set_soil_txt():
+#' set_soil_txt(filepath = "inst/extdata/txt/V8.5/param.sol", param = "cailloux", layer = 2, value = 1)
 #'}
 #'
 #' @export
-set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
+set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NULL,layer=NULL){
+  param= gsub("P_","",param)
   param_val= get_param_txt(dirpath = dirpath, param = param)
 
   file_type=
@@ -60,7 +73,7 @@ set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
          },
          soil= {
            set_soil_txt(filepath = file.path(dirpath,"param.sol"),
-                    param = param, value = value)
+                    param = param, value = value, layer= layer)
          },
          usm= {
            set_usm_txt(filepath = file.path(dirpath,"new_travail.usm"),
@@ -77,18 +90,27 @@ set_param_txt= function(dirpath=getwd(),param,value,add=F,plant=1){
            })
          },
          plant= {
-           variety=
-             get_param_txt(dirpath = dirpath, param = "variete")%>%
-             as.numeric()
-
            tmp= lapply(plant, function(x){
+             if(is.null(variety)){
+               variety=
+                 get_param_txt(dirpath = dirpath, param = "variete")[plant]%>%
+                 as.numeric()
+             }else{
+               if(is.character(variety)){
+                 varieties= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")))$codevar
+                 variety= match(variety,varieties)
+                 if(is.na(variety)){
+                   cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+                   return()
+                 }
+               }
+             }
              set_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")),
-                       param = param, value = value, add= add, variety = variety[x])
+                       param = param, value = value, add= add, variety = variety)
            })
          },
          stop("Parameter not found")
   )
-
 }
 
 
@@ -138,49 +160,57 @@ set_tec_txt= function(filepath="fictec1.txt",param,value,add=F){
 
 #' @rdname set_param_txt
 #' @export
-set_soil_txt= function(filepath="param.sol",param,value){
+set_soil_txt= function(filepath="param.sol",param,value,layer=NULL){
+  param= gsub("P_","",param)
   ref= get_soil_txt(filepath)
-  param= paste0(param,"$")
-  if(length(ref[[param]])!=length(value)){
-    stop(paste("Length of input value different from parameter value length.\n",
-               "Original values:\n",paste(ref[[param]],collapse= ", "),
-               "\ninput:\n",paste(value,collapse= ", ")))
-  }
-  ref[[param]]= format(value, scientific=F)
+  param= paste0("^",param,"$")
 
-  writeLines(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_typsol,
-                   ref$P_argi,ref$P_Norg,ref$P_profhum,ref$P_calc,
-                   ref$P_pH,ref$P_concseuil,ref$P_albedo,ref$P_q0,
-                   ref$P_ruisolnu,ref$P_obstarac,ref$P_pluiebat,
-                   ref$P_mulchbat,ref$P_zesx,ref$P_cfes,
-                   ref$P_z0solnu ,ref$P_CsurNsol,ref$P_penterui),
+  if(!is.null(layer)){
+    length_param_file= length(ref[grep(param,names(ref))][layer])
+  }else{
+    length_param_file= length(ref[grep(param,names(ref))])
+  }
+
+  if(length_param_file!=length(value)){
+    cli::cli_alert_danger(paste("Length of input value different from parameter value length.\n",
+                                "Original values: {.val {ref[grep(param,names(ref))]}} \n",
+                                "Input values: {.val { value}}"))
+    stop("Number of values don't match.")
+  }
+
+  if(!is.null(layer)){
+    ref[[grep(param,names(ref))]][layer]= format(value, scientific=F)
+  }else{
+    ref[[grep(param,names(ref))]]= format(value, scientific=F)
+  }
+
+
+  writeLines(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$typsol,
+                   ref$argi,ref$Norg,ref$profhum,ref$calc,
+                   ref$pH,ref$concseuil,ref$albedo,ref$q0,
+                   ref$ruisolnu,ref$obstarac,ref$pluiebat,
+                   ref$mulchbat,ref$zesx,ref$cfes,
+                   ref$z0solnu ,ref$CsurNsol,ref$penterui),
              filepath)
 
-  write(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_codecailloux,ref$P_codemacropor,
-              ref$P_codefente,ref$P_codrainage,ref$P_coderemontcap,
-              ref$P_codenitrif,ref$P_codedenit),
+  write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$codecailloux,ref$codemacropor,
+              ref$codefente,ref$codrainage,ref$coderemontcap,
+              ref$codenitrif,ref$codedenit),
         filepath,append = T)
 
-  write(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_profimper,ref$P_ecartdrain,ref$P_ksol,
-              ref$P_profdrain,ref$P_capiljour,ref$P_humcapil,
-              ref$P_profdenit,ref$P_vpotdenit),
+  write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$profimper,ref$ecartdrain,ref$ksol,
+              ref$profdrain,ref$capiljour,ref$humcapil,
+              ref$profdenit,ref$vpotdenit),
         filepath,append = T)
 
   for(icou in 1:5){
-    write(paste(" "," "," ",ref$P_numsol[1]," "," "," ",ref$P_epc[icou],ref$P_hccf[icou],
-                ref$P_hminf[icou],ref$P_DAF[icou],ref$P_cailloux[icou],
-                ref$P_typecailloux[icou],ref$P_infil[icou],
-                ref$P_epd[icou]),
+    write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$epc[icou],ref$hccf[icou],
+                ref$hminf[icou],ref$DAF[icou],ref$cailloux[icou],
+                ref$typecailloux[icou],ref$infil[icou],
+                ref$epd[icou]),
           filepath,append = T)
   }
 }
-
-#' @rdname set_param_txt
-#' @export
-set_out_var_txt= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F){
-  cat(vars,file=filepath, sep="\n",append = add)
-}
-
 
 
 #' Internal function to set some STICS input file parameters
@@ -205,6 +235,7 @@ set_out_var_txt= function(filepath="var.mod",vars=c("lai(n)","masec(n)"),add= F)
 #' @keywords internal
 #'
 set_file_txt= function(filepath,param,value,add,variety= NULL){
+  param= gsub("P_","",param)
   # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
   params= readLines(filepath)
@@ -212,10 +243,10 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
   switch(type,
          set_usm_txt = {
            ref= get_usm_txt(filepath)
-           if(grep(param_,names(ref))<grep("P_fplt",names(ref))){
+           if(grep(param_,names(ref))<grep("fplt",names(ref))){
              ref_index= grep(param_,names(ref))*2
            }else{
-             ref_index= grep(gsub("P_","",param_),params)+1
+             ref_index= grep(param_,params)+1
            }
          },
          set_station_txt= {
@@ -227,14 +258,14 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
            ref_index= grep(param_,names(ref))*2
          },
          set_plant_txt= {
-           ref_index= grep(gsub('P_','',param_),params)+1
-           if(!base::is.null(variety)){
+           ref_index= grep(param_,params)+1
+           if(!is.null(variety)){
              ref_index= ref_index[variety]
            }
          },
          # Default here
          {
-           ref_index= grep(gsub('P_','',param_),params)+1
+           ref_index= grep(param_,params)+1
          }
   )
 
@@ -242,7 +273,7 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
     if(add){
       value= paste(value, collapse = " ")
       params= c(params,param,value)
-      ref_index= grep(gsub('P_','',param_),params)+1
+      ref_index= grep(param_,params)+1
     }else{
       stop(paste(param,"parameter not found in:\n",filepath))
     }

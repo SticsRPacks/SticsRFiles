@@ -38,7 +38,8 @@ Imports:
     rlang,
     stringr,
     xslt,
-    dplyr
+    dplyr,
+    cli
 Suggests:
     SticsOnR,
     knitr,
@@ -107,10 +108,10 @@ Collate:
     'get_plants_nb.R'
     'get_soils_list.R'
     'get_stics_versions_compat.R'
-    'get_txt_param_value.R'
     'get_usms_files.R'
     'get_usms_list.R'
     'get_values_by_param.R'
+    'get_var_mod.R'
     'get_xml_base_doc.R'
     'get_xml_base_node.R'
     'get_xml_doc_example.R'

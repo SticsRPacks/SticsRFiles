@@ -10,10 +10,17 @@
 \alias{set_plant_txt}
 \alias{set_tec_txt}
 \alias{set_soil_txt}
-\alias{set_out_var_txt}
 \title{Set (replace) STICS input file parameters}
 \usage{
-set_param_txt(dirpath = getwd(), param, value, add = F, plant = 1)
+set_param_txt(
+  dirpath = getwd(),
+  param,
+  value,
+  add = FALSE,
+  plant = 1,
+  variety = NULL,
+  layer = NULL
+)
 
 set_usm_txt(filepath = "new_travail.usm", param, value, add = F)
 
@@ -29,9 +36,7 @@ set_plant_txt(filepath = "ficplt1.txt", param, value, add = F, variety = NULL)
 
 set_tec_txt(filepath = "fictec1.txt", param, value, add = F)
 
-set_soil_txt(filepath = "param.sol", param, value)
-
-set_out_var_txt(filepath = "var.mod", vars = c("lai(n)", "masec(n)"), add = F)
+set_soil_txt(filepath = "param.sol", param, value, layer = NULL)
 }
 \arguments{
 \item{dirpath}{USM directory path}
@@ -44,11 +49,11 @@ set_out_var_txt(filepath = "var.mod", vars = c("lai(n)", "masec(n)"), add = F)
 
 \item{plant}{Plant index. Optional, only for plant or technical parameters}
 
+\item{variety}{Integer. The plant variety to set the parameter value.}
+
+\item{layer}{The soil layer if any (only concerns soil-related parameters)}
+
 \item{filepath}{Path to the parameter file}
-
-\item{variety}{Integer. The plant variety to get the parameter from.}
-
-\item{vars}{Vector of variable names for STICS output requirements}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input
@@ -62,16 +67,28 @@ Principal and associated plants.
 output variables.
 }
 \note{
-\code{set_out_var_txt} is not used by \code{set_param_txt}. To replace the output
-variables required from STICS, please directly call \code{set_out_var_txt}.
+\code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
+variables required from STICS, please directly call \code{gen_varmod}.
 }
 \examples{
 \dontrun{
 # Replace the interrow distance parameter to 0.01:
 
-library(SticsRFiles)
 set_param_txt(dirpath = "stics_usm/usm_1", param = "interrang", value = 0.01)
 
+# Change the value of durvieF for the current variety:
+set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", value = 245)
+
+# Change the value of durvieF for another variety:
+set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer", value = 178)
+
+# Change the value of infil for a given layer:
+set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "infil", layer = 2, value = 60)
+
+# If the parameter is found in several files, use the set_* functions direclty, e.g.
+# cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
+# change its value in the soil file, we use set_soil_txt():
+set_soil_txt(filepath = "inst/extdata/txt/V8.5/param.sol", param = "cailloux", layer = 2, value = 1)
 }
 
 }

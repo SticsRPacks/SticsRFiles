@@ -2,51 +2,61 @@
 #' @description Generating a daily variable list file from variables names
 #' @param workspace Stics or JavaStics workspace path
 #' @param var_names vector of variables names (see details)
-#' @param file_name file name to generate (default value: var.mod)
+#' @param append    Boolean. Append to existing file ?
+#' @param file_name file name to generate (default value: "var.mod")
+#' @param version   The version of the STICS model used (used to control the variable names)
+#' @param force     Force the variable writing even if the variable is not a STICS variable.
 #'
-#' @details The variable names can be found using `find_var_info()`
-#' @return A logical status TRUE if successfull generation, FALSE otherwise
+#' @details The variable names can be found using `find_var_info()`. The variable names are
+#' checked before writting. If any variable names does not exist, the function will still write the
+#' variables that exist, but not the variable that does not exist, unless `force= TRUE`
+#'
+#' @return Nothing. Writes to a file.
 #'
 #' @examples
 #' \dontrun{
-#'  gen_varmod(".", c("var1","var2"))
-#'  gen_varmod("/path/to/stics/workspace", c("var1","var2"))
+#'  gen_varmod(".", c("lai(n)","hauteur"))
+#'  gen_varmod("/path/to/stics/workspace", c("lai(n)","hauteur"))
+#'  # Add a variable to the others:
+#'  gen_varmod(., "masec(n)", add= TRUE)
+#'  # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
 #' }
 #'
 #' @export
 #'
-gen_varmod <- function(workspace, var_names, file_name ="var.mod") {
-
-
+gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod", version= "last", force= FALSE){
   # Checking if workspace exists
-  if (! dir.exists(workspace)) {
+  if(!dir.exists(workspace)){
     stop(paste(workspace,": directory does not exist !"))
   }
-
-  # Removing file if it exists
   file_path <- file.path(workspace, file_name)
 
-  if (file.exists(file_path)) {
-    file.remove(file_path)
+  # Check if the variable exist:
+  var_exist= is_stics_var(var_names,version)
+
+
+  if(any(!var_exist)&&isFALSE(force)){
+    var_names= var_names[var_exist]
   }
 
-  # TODO: checking if var_names exist (according to Stics version)?
-  # checking variables names consistency
-  #nb_var <- length(var_names)
-
-  # Writing file content
-  con <- file(file_path, method = "w+")
-  w <- try(write(paste0(sprintf("%s",var_names), collapse = "\n"), con))
-
-
-  close(con)
-
-  # Checking if any error writing the file
-  if (methods::is(w,"try-error")) {
-    return(invisible(FALSE))
+  if(isTRUE(force)){
+    var_names[var_exist]= var_to_stics_name(var_names[var_exist])
+  }else{
+    var_names= var_to_stics_name(var_names)
   }
 
+  # Add possibility to append a variable to var.mod.
+  if(isTRUE(append)){
+    vars= readLines(file_path)
+    commonvars= var_names%in%vars
+    if(any(commonvars)){
+      cli::cli_alert_warning("Variable{?s} {.var {var_names[commonvars]}} already in {.code var.mod}. Not repeating it.")
+    }
+    var_names= var_names[!commonvars]
+    if(length(var_names)==0){
+      return()
+    }
+  }
 
-  return(invisible(TRUE))
-
+  cat(var_names,file= file_path, sep="\n", append=append)
 }
