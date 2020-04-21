@@ -7,7 +7,7 @@
 #' @param version   The version of the STICS model used (used to control the variable names)
 #' @param force     Force the variable writing even if the variable is not a STICS variable.
 #'
-#' @details The variable names can be found using `find_var_info()`. The variable names are
+#' @details The variable names can be found using `get_var_info()`. The variable names are
 #' checked before writting. If any variable names does not exist, the function will still write the
 #' variables that exist, but not the variable that does not exist, unless `force= TRUE`
 #'
