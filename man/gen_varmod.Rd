@@ -33,7 +33,7 @@ Nothing. Writes to a file.
 Generating a daily variable list file from variables names
 }
 \details{
-The variable names can be found using \code{find_var_info()}. The variable names are
+The variable names can be found using \code{get_var_info()}. The variable names are
 checked before writting. If any variable names does not exist, the function will still write the
 variables that exist, but not the variable that does not exist, unless \code{force= TRUE}
 }

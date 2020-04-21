@@ -63,7 +63,7 @@ file.
 The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 the associated plant in the case of intercrop, or \code{c(1,2)} for both
 Principal and associated plants.
-\code{\link{find_var_info}} is a helper function that returns all possible
+\code{\link{get_var_info}} is a helper function that returns all possible
 output variables.
 }
 \note{

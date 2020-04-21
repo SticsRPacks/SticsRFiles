@@ -23,5 +23,5 @@ is_stics_var(c("lai(n)",'masec(n)',"truc"))
 }
 }
 \seealso{
-\code{find_var_info()} for interactive use.
+\code{get_var_info()} for interactive use.
 }
