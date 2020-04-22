@@ -7,7 +7,7 @@
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
 #' to "last", a special code to get the last version.
 #'
-#' @seealso `find_var_info()`, `gen_varmod()`, and `get_stics_versions_compat()`
+#' @seealso `get_var_info()`, `gen_varmod()`, and `get_stics_versions_compat()`
 #'
 #' @examples
 #' \dontrun{
@@ -40,16 +40,16 @@ all_out_var <- function(version= "last"){
 #'
 #' @examples
 #' # Find by variable name (fuzzy search):
-#' SticsRFiles::find_var_info("lai")
+#' SticsRFiles::get_var_info("lai")
 #'
 #' # Find by keyword (fuzzy search in variable description):
-#' SticsRFiles::find_var_info(keyword= "lai")
+#' SticsRFiles::get_var_info(keyword= "lai")
 #'
 #' # Find for a particular version:
-#' SticsRFiles::find_var_info("lai", version= "V9.0")
+#' SticsRFiles::get_var_info("lai", version= "V9.0")
 #' @export
 #'
-find_var_info <- function(var=NULL,keyword=NULL,version= "last"){
+get_var_info <- function(var=NULL,keyword=NULL,version= "last"){
   all_vars <- all_out_var(version)
   if(!is.null(var)){
     var= var_to_col_names(var)
@@ -71,7 +71,7 @@ find_var_info <- function(var=NULL,keyword=NULL,version= "last"){
 #'
 #' @return A boolean vector: `TRUE` if the variable exist, `FALSE` if it doesn't
 #'
-#' @seealso `find_var_info()` for interactive use.
+#' @seealso `get_var_info()` for interactive use.
 #'
 #' @export
 #'
@@ -87,7 +87,7 @@ is_stics_var= function(var,version= "last"){
   index_var= match(var_parsed,vars_names_parsed)
   var_found= !is.na(index_var)
   if(any(!var_found)){
-    cli::cli_alert_warning("Variable{?s} {.var {var_parsed[!var_found]}} not found. Try {.code find_var_info()}.")
+    cli::cli_alert_warning("Variable{?s} {.var {var_parsed[!var_found]}} not found. Try {.code get_var_info()}.")
   }
   return(var_found)
 }

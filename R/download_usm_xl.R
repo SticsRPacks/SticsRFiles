@@ -9,8 +9,10 @@
 #' @param xl_name Name of an Excel file (optional, not used for the moment)
 #' @param dest_dir Directory path where to copy the Excel file
 #'  (optional, default: current directory)
+#' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
 #'
-#' @return A copy status, TRUE if successfull, FALSE otherwise
+#' @return A copy status, TRUE if successfull, FALSE otherwise.
+#' With an attached attribute "path" containing copied files path.
 #'
 #' @examples
 #' \dontrun{
@@ -22,7 +24,7 @@
 #'
 
 # TODO: summarize with get_script
-download_usm_xl <- function(xl_name = NULL, dest_dir = getwd()) {
+download_usm_xl <- function(xl_name = NULL, dest_dir = getwd(), overwrite = FALSE) {
 
   package <-  "SticsRFiles"
   inst_dir <- "extdata/xl/"
@@ -46,8 +48,9 @@ download_usm_xl <- function(xl_name = NULL, dest_dir = getwd()) {
 
   dest_list <- file.path(dest_dir, files_list)
   exist_files <- file.exists(dest_list)
-  if ( any(exist_files) ) {
+  if ( !overwrite && any(exist_files) ) {
     print(paste(files_list[exist_files],"already exists in ", dest_dir))
+    print("Consider to set overwrite = TRUE to overwrite (it | them )")
     return(invisible(FALSE))
   }
 
@@ -55,6 +58,8 @@ download_usm_xl <- function(xl_name = NULL, dest_dir = getwd()) {
 
   if ( success ) {
     print(paste(files_list," has been copied in directory ", dest_dir))
+    # Adding file(s) path as attr
+    attr(success,"path") <- dest_list
   }
 
   return(invisible(success))

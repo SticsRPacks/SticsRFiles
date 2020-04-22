@@ -20,7 +20,7 @@ get_daily_results(
 
 \item{usm_name}{vector of usm(s) names}
 
-\item{var_list}{vector of output variables names (optional, see \code{find_var_info()} to get the names of the variables)}
+\item{var_list}{vector of output variables names (optional, see \code{get_var_info()} to get the names of the variables)}
 
 \item{doy_list}{vector of cumulative DOYs (optional)}
 

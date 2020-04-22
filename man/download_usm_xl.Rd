@@ -4,16 +4,19 @@
 \alias{download_usm_xl}
 \title{Downloading an Excel usms data file example into a directory}
 \usage{
-download_usm_xl(xl_name = NULL, dest_dir = getwd())
+download_usm_xl(xl_name = NULL, dest_dir = getwd(), overwrite = FALSE)
 }
 \arguments{
 \item{xl_name}{Name of an Excel file (optional, not used for the moment)}
 
 \item{dest_dir}{Directory path where to copy the Excel file
 (optional, default: current directory)}
+
+\item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
 }
 \value{
-A copy status, TRUE if successfull, FALSE otherwise
+A copy status, TRUE if successfull, FALSE otherwise.
+With an attached attribute "path" containing copied files path.
 }
 \description{
 The file is an example that can be used for generating JavaStics input files

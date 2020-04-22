@@ -7,7 +7,7 @@
 #'
 #' @details Use `get_usms_list()` to get the list of the usm names.
 #'
-#' @return A numeric vector of plants number per usm
+#' @return A names numeric vector of plants number per usm
 #'
 #' @examples
 #' \dontrun{
@@ -27,14 +27,16 @@ get_plants_nb <- function(usm_xml_path,usms_list=c()){
   xml_usms=xmldocument(usm_xml_path)
 
   # Getting plants nb per usm
-  plants_nb=getValues(xml_usms,'//nbplantes')
+  plants_nb=as.numeric(getValues(xml_usms,'//nbplantes'))
+
+  # Xml usms names
+  usm_names <- getAttrs(xml_usms,'//usm')
+  names(plants_nb) <- usm_names
 
   # Filtering using usms_list if needed
   if ( length(usms_list)!=0 ){
-    usms=getAttrs(xml_usms,'//usm')
-    usms_ids=unlist(lapply(usms,function(x) is.element(x,usms_list)))
-    plants_nb=plants_nb[usms_ids]
+    plants_nb=plants_nb[usm_names %in% usms_list]
   }
 
-  return(as.numeric(plants_nb))
+  return(plants_nb)
 }
