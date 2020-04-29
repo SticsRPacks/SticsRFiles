@@ -79,6 +79,8 @@ gen_usms_xml2txt <- function(javastics_path,
 
   # checking javastics path
   SticsOnR:::check_java_path(javastics_path)
+  start_wd= getwd()
+  on.exit(setwd(start_wd))
 
   setwd(javastics_path)
 
