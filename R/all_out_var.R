@@ -39,6 +39,7 @@ all_out_var <- function(version= "last"){
 #' @seealso \code{\link{all_out_var}}
 #'
 #' @examples
+#' \dontrun{
 #' # Find by variable name (fuzzy search):
 #' SticsRFiles::get_var_info("lai")
 #'
@@ -47,6 +48,8 @@ all_out_var <- function(version= "last"){
 #'
 #' # Find for a particular version:
 #' SticsRFiles::get_var_info("lai", version= "V9.0")
+#' }
+#'
 #' @export
 #'
 get_var_info <- function(var=NULL,keyword=NULL,version= "last"){

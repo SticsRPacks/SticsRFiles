@@ -30,8 +30,8 @@ get_values_by_param <- function(params_table, param_name = NULL, lines_id = NULL
   # For multiple lines
   if (nrow(params_table) > 1) {
     # Lines selection, if any id
-    if (!is.null(lines_id) &&
-        base:is.numeric(lines_id)
+    if (!base::is.null(lines_id) &&
+        base::is.numeric(lines_id)
         && max(lines_id) <= nrow(params_table)) {
       params_table <- params_table[lines_id,]
     }

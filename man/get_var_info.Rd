@@ -22,6 +22,7 @@ for the STICS model with a partial match.
 The function understand \code{\link[base]{regex}} as input.
 }
 \examples{
+\dontrun{
 # Find by variable name (fuzzy search):
 SticsRFiles::get_var_info("lai")
 
@@ -30,6 +31,8 @@ SticsRFiles::get_var_info(keyword= "lai")
 
 # Find for a particular version:
 SticsRFiles::get_var_info("lai", version= "V9.0")
+}
+
 }
 \seealso{
 \code{\link{all_out_var}}
