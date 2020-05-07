@@ -106,7 +106,7 @@ Collate:
     'get_params_from_doc_attr.R'
     'get_params_from_doc_node.R'
     'get_params_from_table.R'
-    'get_plants_name.R'
+    'get_plant_name.R'
     'get_plants_nb.R'
     'get_soils_list.R'
     'get_stics_versions_compat.R'

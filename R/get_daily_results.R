@@ -10,6 +10,7 @@
 #' @param usms_file usms file path (e.g. "usms.xml") in case of `NULL` values in `mixed`.
 #' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace)
+#' @param verbose  Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
 #'
 #' @details The function can guess if the usm(s) are mixed or not by reading the XML
 #' input files. To do so, set the `mixed` argument to `NULL`.
@@ -25,31 +26,31 @@
 #' @export
 #'
 get_daily_results <- function(workspace,
-                              usm_name,
+                              usm_name=NULL,
                               var_list=NULL,
                               doy_list=NULL,
                               dates_list=NULL,
                               mixed= rep(FALSE,length(usm_name)),
                               usms_file= "usms.xml",
-                              javastics_path = NULL) {
+                              javastics_path = NULL,
+                              verbose= TRUE) {
   .= NULL
+
 
   if(length(mixed)>1 & length(mixed)!=length(usm_name)){
     stop("The 'mixed' argument must either be of length one or length(usm_name)")
   }
 
-  # TODO:
-  # - manage filtering for multiple files : potentially filters may be different
-  # for each file.
-
+  if(is.null(usm_name)){
+    # getting usms names from the usms.xml file if no usm is provided:
+    usm_name= get_usms_list(usm_path = file.path(workspace,usms_file))
+  }
 
   # Getting outputs for multiple usms
   if(length(usm_name) > 1){
-
     if(is.null(mixed)){
       mixed= "NULL"
     }
-
     results_tbl_list <-
       mapply(function(x,y){
         get_daily_results(workspace,
@@ -67,23 +68,20 @@ get_daily_results <- function(workspace,
   }
 
   # Checking usms file
-  usms_files = c(suppressWarnings(normalizePath(file.path(workspace,usms_file), mustWork = FALSE)),
-                 usms_file)
-  usms_file_exists <- file.exists(usms_files)
-  usms_file <- usms_files[usms_file_exists]
+  usms_file_exists <- file.exists(file.path(workspace,usms_file))
 
   if(is.null(mixed)){
 
-    if ( !any(usms_file_exists) ) {
-      stop("Unable to find an usms.xml file in the workspace directory.\n",
-           "Please consider to set a valid usms.xml path in usms_file for getting information about intercrop usms !")
+    if(!usms_file_exists){
+      if(verbose){
+        cli::cli_alert_danger("Unable to find an {.val usms.xml} file in the workspace directory.")
+        cli::cli_alert_info("Please consider to set a valid {.val usms.xml} path as {.val usms_file} or put a value to {.val mixed}!")
+      }
+      stop("usms file not found")
     }
 
-    # Keeping usms.xml from the workspace (default)
-    if ( all(usms_file_exists) ) usms_file <- usms_file[1]
-
     # Try to guess if it is a mixture or not
-    nb_plant= try(get_plants_nb(usm_xml_path = usms_file, usms_list = usm_name))
+    nb_plant= try(get_plants_nb(usm_xml_path = file.path(workspace,usms_file), usms_list = usm_name))
 
     if(inherits(nb_plant,"try-error")){
       stop("Unable to guess if the usm is an intercrop. Please set mixed to TRUE or FALSE")
@@ -98,56 +96,45 @@ get_daily_results <- function(workspace,
 
   if(mixed){
 
-    plant_xml= try(get_param_xml(xml_file = usms_file[1], param_name = "fplt",
-                                 select = "usm", usm_name)[[1]])
-
-    if(inherits(plant_xml,"try-error")){
-      plant_xml= c("plant_1","plant_2")
-      warning("Error reading usms file, using dummy plant file names")
-    }
-
-    if(is.null(javastics_path)){
-      plt_path <- file.path(workspace, "plant")
-      if(!dir.exists(plt_path)){
-        warning("plant folder not found in the workspace, please add javastics_path to use the plant folder",
-                "from javaStics.")
-      }
-    }else{
-      plt_path <- try(normalizePath(file.path(javastics_path, "plant")))
-    }
-
-    plant_names=
-      try(
-        lapply(plant_xml, function(x){
-          get_param_xml(xml_file = normalizePath(file.path(plt_path,x)),
-                        param_name = "codeplante")[[1]]
-        })%>%unlist()
-      )
+    plant_names= try(get_plant_name(workspace = workspace, usm_name = usm_name,
+                       usms_filename = usms_file, javastics_path = javastics_path,
+                       verbose = verbose))%>%unlist()
 
     if(inherits(plant_names,"try-error")){
-      plant_names= plant_xml
-      warning("Error reading plant names, using plant file names for the output instead")
+      plant_names= c("plant_1", "plant_2")
+      if(verbose) cli::cli_alert_warning("Error reading usms file, using dummy plant names")
     }
 
-    Table_1 =
-      try(data.table::fread(file.path(workspace,paste0("mod_sp",usm_name,".sti")),
-                            data.table = FALSE))
+    out_file_path= file.path(workspace,paste0("mod_sp",usm_name,".sti"))
+
+    if(!file.exists(out_file_path)){
+      cli::cli_alert_warning("couldn't find output files for usm {.val {usm_name}}. Expected {.val {out_file_path}}")
+      cli::cli_alert_info("Check if the simulation ran correctly, or if the simulation was a cole crop instead of an intercrop")
+      return()
+    }
+
+    Table_1= try(data.table::fread(out_file_path,data.table = FALSE))
 
     if(inherits(Table_1,"try-error")){
-      warning("Error reading output file :",
-              file.path(workspace,paste0("mod_sp",usm_name,".sti")))
+      cli::cli_alert_warning("couldn't find valid outputs for usm {.val {usm_name}}: {.val {out_file_path}}")
       return()
     }
 
-    Table_2 =
-      try(data.table::fread(file.path(workspace,paste0("mod_sa",usm_name,".sti")),
-                            data.table = FALSE))
+    out_file_path= file.path(workspace,paste0("mod_sa",usm_name,".sti"))
+
+    if(!file.exists(out_file_path)){
+      cli::cli_alert_warning("couldn't find output files for usm {.val {usm_name}}. Expected {.val {out_file_path}}")
+      cli::cli_alert_info("Check if the simulation ran correctly, or if the simulation was a cole crop instead of an intercrop")
+      return()
+    }
+
+    Table_2= try(data.table::fread(out_file_path, data.table = FALSE))
 
     if(inherits(Table_2,"try-error")){
-      warning("Error reading output file :",
-              file.path(workspace,paste0("mod_sa",usm_name,".sti")))
+      cli::cli_alert_warning("couldn't find valid outputs for usm {.val {usm_name}}: {.val {out_file_path}}")
       return()
     }
+
     Table_1$Plant = plant_names[1]
     Table_2$Plant = plant_names[2]
     Table_1$Dominance = "Principal"
@@ -160,14 +147,20 @@ get_daily_results <- function(workspace,
       dplyr::ungroup()
 
   }else{
+
+    out_file_path= file.path(workspace,paste0("mod_s",usm_name,".sti"))
+
+    if(!file.exists(out_file_path)){
+      cli::cli_alert_warning("couldn't find output files for usm {.val {usm_name}}. Expected {.val {out_file_path}}")
+      cli::cli_alert_info("Check if the simulation ran correctly, or if the simulation was an intercrop instead of a sole crop")
+      return()
+    }
+
     results_tbl =
       try(data.table::fread(file.path(workspace,paste0("mod_s",usm_name,".sti")),
                             data.table = FALSE)%>%dplyr::as.tbl())
     if(inherits(results_tbl,"try-error")){
-      warning("Error reading output file :",
-              file.path(workspace,paste0("mod_s",usm_name,".sti")),
-              "\n Perhaps usm ", usm_name,
-              " is an intercropping one, try adding in function inputs mixed = TRUE")
+      cli::cli_alert_warning("couldn't find valid outputs for usm {.val {usm_name}}. Please check the file: {.val {out_file_path}}")
       return()
     }
 
@@ -203,7 +196,6 @@ get_daily_results <- function(workspace,
     dplyr::mutate(Date=as.POSIXct(x = paste(.data$ian,.data$mo,.data$jo,sep="-"),
                                   format = "%Y-%m-%d",tz="UTC"))%>%
     dplyr::select(.data$Date, dplyr::everything())
-
 
 
   return(results_tbl)

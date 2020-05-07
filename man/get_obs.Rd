@@ -6,7 +6,7 @@
 \usage{
 get_obs(
   workspace = getwd(),
-  usms_list = NULL,
+  usm_name = NULL,
   usms_filename = "usms.xml",
   javastics_path = NULL,
   verbose = TRUE
@@ -15,7 +15,7 @@ get_obs(
 \arguments{
 \item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
 
-\item{usms_list}{Vector of usms to read (optional, used to filter usms)}
+\item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
 \item{usms_filename}{Name of the usm file (optional, default to the standard \code{usms.xml})}
 
@@ -35,7 +35,7 @@ Read STICS observation files from a JavaStics workspace and store data into a li
 The \code{.obs} files names should match the name of the USM, e.g. for a usm called "banana",
 the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name should be suffixed by "p" for
 the principal and "a" for the associated plant.
-If \code{usms_list} is not specified (or equal to \code{NULL}), the
+If \code{usm_name} is not specified (or equal to \code{NULL}), the
 function read the obs files from all usms listed in \code{usms_filename} and present in the \code{workspace} folder.
 }
 \examples{
