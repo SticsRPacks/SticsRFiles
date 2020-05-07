@@ -32,6 +32,7 @@
 #' @examples
 #' # Read the interrow distance parameter:
 #'
+#' \dontrun{
 #' library(SticsRFiles)
 #' path = system.file("extdata/txt/V9.1", package = "SticsRFiles")
 #' get_param_txt(path, param='interrang')
@@ -47,6 +48,7 @@
 #' get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
 #' # Or get it from the output of the function returning all parameters:
 #' get_param_txt(dirpath = path)$plant$plant1$durvieF
+#' }
 #'
 #' @export
 get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){

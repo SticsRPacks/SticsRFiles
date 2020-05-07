@@ -10,14 +10,8 @@ man/figures
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
+^bin$
+^tmp$
 
-# temporary
-vignettes/new/*
-# for archives
-R/archives/*
-
-# local : plecharpent
-R/scripts/*
-R/new_versions_functions/*
 
 

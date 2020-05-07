@@ -165,9 +165,9 @@ gen_varmod(workspace = example_txt_dir, var_names = c("hauteur"), append = TRUE)
 get_var_mod(example_txt_dir)
 ```
 
-To get the possible output variables from the model, the user can use the `find_var_info()` function that provide a fuzzy search: 
+To get the possible output variables from the model, the user can use the `get_var_info()` function that provide a fuzzy search: 
 
 ```{r}
-find_var_info("lai")
+get_var_info("lai")
 ```
 
