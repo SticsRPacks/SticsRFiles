@@ -118,7 +118,6 @@ Collate:
     'get_xml_stics_version.R'
     'is_stics_doc.R'
     'merge_nodesets.R'
-    'read_obs.R'
     'remove_node_from_doc.R'
     'remove_parent_from_doc.R'
     'replace_string_in_file.R'

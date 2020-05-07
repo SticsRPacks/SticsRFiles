@@ -74,8 +74,7 @@ get_obs= function(workspace_path=getwd(), usms_list=NULL, usms_filename="usms.xm
     }else{
       data.frame()
     }
-    },
-    dirpath= workspace_path, filename= obs_name, mixed= is_mixed, read_it= file_exist, SIMPLIFY = FALSE)
+    },dirpath= workspace_path, filename= obs_name, mixed= is_mixed, read_it= file_exist, SIMPLIFY = FALSE)
   names(obs_list)= usms
 
   return(obs_list)
