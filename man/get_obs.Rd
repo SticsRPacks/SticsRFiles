@@ -5,18 +5,22 @@
 \title{Read STICS observation files (*.obs)}
 \usage{
 get_obs(
-  workspace_path = getwd(),
+  workspace = getwd(),
   usms_list = NULL,
   usms_filename = "usms.xml",
+  javastics_path = NULL,
   verbose = TRUE
 )
 }
 \arguments{
-\item{workspace_path}{Path of a JavaStics workspace, or a vector of (recursive call).}
+\item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
 
 \item{usms_list}{Vector of usms to read (optional, used to filter usms)}
 
 \item{usms_filename}{Name of the usm file (optional, default to the standard \code{usms.xml})}
+
+\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
+but rather in the JavaStics default workspace). Only used to get the plants names.}
 
 \item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 }
@@ -32,7 +36,7 @@ The \code{.obs} files names should match the name of the USM, e.g. for a usm cal
 the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name should be suffixed by "p" for
 the principal and "a" for the associated plant.
 If \code{usms_list} is not specified (or equal to \code{NULL}), the
-function read the obs files from all usms listed in \code{usms_filename} and present in the \code{workspace_path} folder.
+function read the obs files from all usms listed in \code{usms_filename} and present in the \code{workspace} folder.
 }
 \examples{
 \dontrun{
@@ -42,6 +46,9 @@ path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
 Meas <- get_obs(path)
 # Get observations only for banana:
 Meas_banana <- get_obs(path, "banana")
+
+# Get oservations with real plant names when plant folder is not in the workspace:
+get_obs(path, "banana", javastics_path= "path/to/javastics")
 }
 
 }

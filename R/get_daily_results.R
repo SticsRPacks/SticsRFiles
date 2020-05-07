@@ -113,7 +113,7 @@ get_daily_results <- function(workspace,
                 "from javaStics.")
       }
     }else{
-      plt_path <- try(normalizePath(file.path(workspace, "plant")))
+      plt_path <- try(normalizePath(file.path(javastics_path, "plant")))
     }
 
     plant_names=
