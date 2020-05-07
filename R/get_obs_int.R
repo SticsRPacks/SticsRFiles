@@ -35,7 +35,7 @@
 #'
 get_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   .=NULL # to avoid CRAN note for pipe
-  if(base::is.null(mixed)){
+  if(is.null(mixed)){
     if(file.exists(file.path(dirpath,"new_travail.usm"))){
       nbplants=
         get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$nbplantes%>%
@@ -55,7 +55,7 @@ get_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   # If no filename is given, trying to:
   # (1) use the mod_s* names or
   # (2) use the *.obs file if there is only one
-  if(base::is.null(filename)){
+  if(is.null(filename)){
     if(mixed){
       plant_name=
         list.files(dirpath)%>%.[grep("mod_sp",.)]%>%gsub("mod_sp","",.)%>%
@@ -112,7 +112,7 @@ get_obs_int= function(dirpath=getwd(), filename=NULL, mixed= NULL){
     attrfiles= filename
   }
 
-  if(!base::is.null(obs_table)){
+  if(!is.null(obs_table)){
     Date= data.frame(Date=as.POSIXct(x = paste(obs_table$ian,obs_table$mo,obs_table$jo, sep="-"),
                                      format = "%Y-%m-%d", tz="UTC"))
     obs_table= cbind(Date,obs_table)
