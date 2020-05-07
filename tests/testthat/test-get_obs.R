@@ -7,8 +7,6 @@ Meas <- get_obs(path)
 # Get observations only for banana:
 Meas_banana <- get_obs(path, "banana")
 
-
-
 test_that("no observation return an empty data.frame", {
   expect_true(is.data.frame(Meas$SugarCane))
 })

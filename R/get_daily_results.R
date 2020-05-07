@@ -30,12 +30,11 @@ get_daily_results <- function(workspace,
                               var_list=NULL,
                               doy_list=NULL,
                               dates_list=NULL,
-                              mixed= rep(FALSE,length(usm_name)),
+                              mixed= NULL,
                               usms_file= "usms.xml",
                               javastics_path = NULL,
-                              verbose= TRUE) {
+                              verbose= TRUE){
   .= NULL
-
 
   if(length(mixed)>1 & length(mixed)!=length(usm_name)){
     stop("The 'mixed' argument must either be of length one or length(usm_name)")
@@ -61,7 +60,7 @@ get_daily_results <- function(workspace,
                           mixed = if(y=="NULL"){NULL}else{y},
                           usms_file = usms_file)
       },
-      x= usm_name, y= mixed,SIMPLIFY = FALSE)
+      x= usm_name, y= mixed, SIMPLIFY = FALSE)
 
     names(results_tbl_list) <- usm_name
     return(results_tbl_list)

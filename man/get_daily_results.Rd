@@ -10,7 +10,7 @@ get_daily_results(
   var_list = NULL,
   doy_list = NULL,
   dates_list = NULL,
-  mixed = rep(FALSE, length(usm_name)),
+  mixed = NULL,
   usms_file = "usms.xml",
   javastics_path = NULL,
   verbose = TRUE

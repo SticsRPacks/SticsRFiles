@@ -11,5 +11,8 @@ test_that("output is a data.frame", {
 
 test_that("get output without usm argument", {
   outputs= get_daily_results(workspace = path)
-  expect_true(is.data.frame(outputs))
+  # There are two USMs in the usms.xml file, but only one output file (banana):
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(is.data.frame(outputs$banana))
+  expect_true(is.null(outputs$proto_rice))
 })
