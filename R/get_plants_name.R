@@ -4,7 +4,7 @@
 #' @description Get the plant name (and file name) for each usm in a workspace
 #'
 #' @param workspace      Path of a JavaStics workspace, or a vector of (recursive call).
-#' @param usms_list      Vector of usms to read (optional, used to filter usms)
+#' @param usm_name      Vector of usms to read (optional, used to filter usms)
 #' @param usms_filename  Name of the usm file (optional, default to the standard `usms.xml`)
 #' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace). Only used to get the plants names.
@@ -29,24 +29,24 @@
 #'
 #' }
 #'
-get_plant_name= function(workspace,usms_list=NULL,usms_filename= "usms.xml",javastics_path = NULL, verbose=TRUE){
+get_plant_name= function(workspace,usm_name=NULL,usms_filename= "usms.xml",javastics_path = NULL, verbose=TRUE){
 
   # getting usms names from the usms.xml file:
   usms= get_usms_list(usm_path = file.path(workspace,usms_filename))
 
   # Filtering USMs if required:
-  if(!is.null(usms_list)){
-    usm_exist <- usms_list %in% usms
+  if(!is.null(usm_name)){
+    usm_exist <- usm_name %in% usms
 
     # Some provided usms are not available:
     if(!all(usm_exist)){
       if(verbose){
-        cli::cli_alert_danger("The usm{?s} {.val {usms_list[!usm_exist]}} d{?oes/o} not exist in the workspace!")
+        cli::cli_alert_danger("The usm{?s} {.val {usm_name[!usm_exist]}} d{?oes/o} not exist in the workspace!")
         cli::cli_alert_info("Usm{?s} found in the workspace: {.val {usms}}")
       }
-      stop("usms_list do not match usms")
+      stop("usm_name do not match usms")
     }
-    usms= usms_list
+    usms= usm_name
   }
 
   nb_plant= get_plants_nb(file.path(workspace,usms_filename))[usms]
