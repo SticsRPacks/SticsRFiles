@@ -45,15 +45,16 @@ get_examples_path <- function(file_type, version_name = "last") {
 }
 
 # TODO: evaluate if usefull ?
-# list_examples_files <- function(file_type, version_name = "last") {
-#
-#   examples_path <- get_examples_path(file_type = file_type, version_name = version_name)
-#
-#   files_list <- list.files(pattern = file_type, path = examples_path)
-#
-#   return(files_list)
-#
-# }
+list_examples_files <- function(file_type, version_name = "last") {
+
+  examples_path <- get_examples_path(file_type = file_type, version_name = version_name)
+
+
+  files_list <- list.files(pattern = "\\.[a-zA-Z]+$", path = examples_path)
+
+  return(files_list)
+
+}
 
 
 get_examples_types <- function() {
