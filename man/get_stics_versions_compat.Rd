@@ -14,7 +14,14 @@ and the last version in use ($last_version).
 Get the versions of stics that are fully compatible with this package.
 }
 \examples{
+\dontrun{
 get_stics_versions_compat()
 
+#> $versions_list
+#> [1] "V8.5" "V9.0" "V9.1"
+#>
+#> $last_version
+#> [1] "V9.1"
+}
 
 }
