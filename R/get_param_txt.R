@@ -586,7 +586,8 @@ get_usm_txt= function(filepath="new_travail.usm"){
 #'
 #' @examples
 #' \dontrun{
-#' get_txt_generic(file.path(get_examples_path( file_type = "txt", version_name = "V8.5"), "station.txt"))
+#' path <- file.path(get_examples_path(file_type = "txt", version_name = "V8.5"), "station.txt")
+#' get_txt_generic(path)
 #' }
 #'
 get_txt_generic= function(filepath, names=TRUE){

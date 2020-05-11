@@ -94,13 +94,14 @@ get_versions_info <- function(version_name = NULL) {
 
   # Getting available versions info from a file
   ver_file <- system.file("extdata/versions/stics_versions_info.csv", package = "SticsRFiles")
-  ver_info <- read.csv2(file = ver_file, stringsAsFactors = FALSE, na.strings = "")
+  ver_info <- utils::read.csv2(file = ver_file, stringsAsFactors = FALSE, na.strings = "")
 
   # Returning the full data.frame for all versions
   if (base::is.null(version_name)) return(ver_info)
 
   # Selecting data according to the desired version
-  if (version_name %in% ver_info$versions) return(dplyr::filter(ver_info, versions == version_name ))
+  #if (version_name %in% ver_info$versions) return(dplyr::filter(ver_info, versions == version_name ))
+  if (version_name %in% ver_info$versions) return(ver_info[ver_info$versions == version_name,])
 
   # Nothing to return for unknown version
   return()

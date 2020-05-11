@@ -48,7 +48,8 @@ The function can guess if the usm(s) are mixed or not by reading the XML
 input files. To do so, set the \code{mixed} argument to \code{NULL}.
 }
 \examples{
+\dontrun{
 path <- get_examples_path( file_type = "sti", version_name = "V9.0" )
 get_daily_results(path,"banana")
-
+}
 }

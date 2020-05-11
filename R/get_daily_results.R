@@ -20,9 +20,10 @@
 #' @importFrom rlang .data
 #'
 #' @examples
+#' \dontrun{
 #' path <- get_examples_path( file_type = "sti", version_name = "V9.0" )
 #' get_daily_results(path,"banana")
-#'
+#' }
 #' @export
 #'
 get_daily_results <- function(workspace,
