@@ -24,7 +24,7 @@ A list of parameter values for each xml_file (a list of list)
 Extracting parameter values for a list of xml files and parameters
 }
 \examples{
-xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
+xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 get_param_xml(xml_path, "argi")
 get_param_xml(xml_path, c("argi", "norg"))
 

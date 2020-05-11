@@ -40,7 +40,7 @@ function read the obs files from all usms listed in \code{usms_filename} and pre
 }
 \examples{
 \dontrun{
-path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+path <- file.path(get_examples_path( file_type = "obs"))
 
 # Get observations for all usms, but only banana has observations:
 Meas <- get_obs(path)

@@ -49,7 +49,7 @@ for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
 \examples{
 
 \dontrun{
-xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
+xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 file.copy(xml_path, getwd())
 get_param_xml("sols.xml", "argi")
 

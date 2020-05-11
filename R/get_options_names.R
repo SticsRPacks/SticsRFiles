@@ -11,7 +11,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_plt.xml"))
+#' xml_path = file.path(get_examples_path( file_type = "xml"),"file_plt.xml")
 #'
 #' SticsRFiles:::get_options_names(xml_path)
 #'

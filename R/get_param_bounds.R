@@ -15,8 +15,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_sta <- system.file(paste0("extdata/xml/examples/V9.1/file_sta.xml"),
-#' package = "SticsRFiles")
+#' xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
 #'
 #' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 #'

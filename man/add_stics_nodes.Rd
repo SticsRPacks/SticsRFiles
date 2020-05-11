@@ -26,7 +26,7 @@ Add node to a Stics XML document
 \examples{
 \dontrun{
 
-tec_xml <- system.file("extdata/xml/examples/V9.1/file_tec.xml", package = "SticsRFiles")
+tec_xml <- file.path(get_examples_path( file_type = "xml" ), "file_tec.xml")
 tec_doc <- SticsRFiles:::xmldocument(tec_xml)
 
 # Adding one irrigation operation

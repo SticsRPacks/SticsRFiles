@@ -50,8 +50,7 @@ find_param <- function(name,
   version <- get_xml_stics_version(version)
 
   # Getting XML examples files dir from the package
-  xml_dir <- system.file(file.path("extdata","xml","examples",version),
-                         package = "SticsRFiles")
+  xml_dir <- get_examples_path( file_type = "xml", version_name = version)
 
   # Getting the XML files list
   files_list <- list.files(path = xml_dir,

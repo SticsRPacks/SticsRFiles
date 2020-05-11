@@ -11,7 +11,7 @@
 #' @return A vector of soil names
 #'
 #' @examples
-#' path = system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
+#' path = get_examples_path( file_type = "xml" )
 #'
 #' # Read from a usms file (soils used in a USM):
 #' soil_list <- get_soils_list(file_path = file.path(path, "usms.xml"))

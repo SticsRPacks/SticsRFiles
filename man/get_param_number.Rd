@@ -21,8 +21,7 @@ Get the number of a (or alist of) Stics xml parameter(s) occurence from a reques
 }
 \examples{
 \dontrun{
-xml_usms <- system.file(paste0("extdata/xml/examples/V9.1/usms.xml"),
-package = "SticsRFiles")
+xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
 
 usms_doc <- SticsRFiles:::xmldocument(xml_usms)
 

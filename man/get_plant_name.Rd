@@ -32,7 +32,7 @@ Get the plant name (and file name) for each usm in a workspace
 }
 \examples{
 \dontrun{
-path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+path <- get_examples_path( file_type = "xml")
 
 # Get plant names for all usms (no javastics path, so only the file name is returned):
 get_plant_name(path)

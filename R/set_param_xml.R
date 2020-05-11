@@ -21,7 +21,7 @@
 #' @examples
 #'
 #' \dontrun{
-#' xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
+#' xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 #' file.copy(xml_path, getwd())
 #' get_param_xml("sols.xml", "argi")
 #'

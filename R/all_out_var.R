@@ -15,12 +15,12 @@
 #' }
 #' @keywords internal
 #'
-all_out_var <- function(version= "last"){
+all_out_var <- function(version = "last"){
   if(version=="last"){
     version <- get_stics_versions_compat()$last_version
   }
   version <- match.arg(version, get_stics_versions_compat()$versions_list, several.ok = FALSE)
-  utils::read.csv2(system.file(file.path("extdata/csv",version,"outputs.csv"), package = "SticsRFiles"))
+  utils::read.csv2(file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"))
 }
 
 

@@ -12,7 +12,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path = system.file("extdata/xml/examples/V9.1/file_tec.xml", package = "SticsRFiles")
+#' xml_path = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
 #' tec_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
 #' # removing a single parameter

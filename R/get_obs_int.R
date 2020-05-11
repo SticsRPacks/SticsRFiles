@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+#' path <- file.path(get_examples_path( file_type = "obs"))
 #' get_obs_int(path, "banana.obs")
 #' }
 get_obs_int= function(workspace,filename,plant_name=NULL){

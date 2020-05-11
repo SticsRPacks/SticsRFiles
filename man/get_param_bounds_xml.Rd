@@ -32,13 +32,13 @@ or a vector of parameters from a file or a vector of xml files.
 library(SticsRFiles)
 xml_file <- "path/to/xmlfile"
 xml_files_list <- c("path/to/xmlfile1", "path/to/xmlfile2")
-param_bounds <- get_files_param_bounds(xml_file, "param", "min")
+param_bounds <- get_param_bounds_xml(xml_file, "param", "min")
 
-param_bounds <- get_files_param_bounds(xml_file, c("param1", "param2"), "max")
+param_bounds <- get_param_bounds_xml(xml_file, c("param1", "param2"), "max")
 
-param_bounds <- get_files_param_bounds(xml_file, c("param1", "param2"))
+param_bounds <- get_param_bounds_xml(xml_file, c("param1", "param2"))
 
-param_bounds <- get_files_param_bounds(xml_files_list, "param", "min")
+param_bounds <- get_param_bounds_xml(xml_files_list, "param", "min")
 }
 
 }

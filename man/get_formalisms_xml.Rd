@@ -24,8 +24,7 @@ Get the formalism(s) parameters from a file or a list of
 \examples{
 \dontrun{
 
-xml_sta <- system.file(paste0("extdata/xml/examples/V9.1/file_sta.xml"),
-package = "SticsRFiles")
+xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
 
 par_form <- get_formalisms_xml(xml_sta, "zr")
 

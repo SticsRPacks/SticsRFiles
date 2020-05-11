@@ -11,7 +11,7 @@
 #'
 #' @seealso `gen_varmod`
 #' @examples
-#' get_var_mod(system.file("extdata/txt/V8.5", package = "SticsRFiles"))
+#' get_var_mod(get_examples_path( file_type = "txt" ))
 #'
 get_var_mod= function(workspace,file_name="var.mod"){
   file_path <- file.path(workspace, file_name)

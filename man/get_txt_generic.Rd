@@ -19,7 +19,7 @@ Generic function to read STICS parameter files
 }
 \examples{
 \dontrun{
-get_txt_generic(file.path(system.file("extdata/txt/V8.5", package = "SticsRFiles"),"station.txt"))
+get_txt_generic(file.path(get_examples_path( file_type = "txt", version_name = "V8.5"), "station.txt"))
 }
 
 }

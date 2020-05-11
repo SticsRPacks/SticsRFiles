@@ -9,8 +9,7 @@
 #'
 #' \dontrun{
 #' # Getting observations data
-#' xl_path <- system.file(file.path("extdata", "xl", "inputs_stics_example.xlsx"),
-#'                        package="SticsRFiles")
+#' xl_path <- file.path(get_examples_path( file_type = "xl" ), "inputs_stics_example.xlsx")
 #'
 #' obs_df <- read_excel(xl_path,sheet="Obs")%>%dplyr::filter(usm_name%in%"USM_2017_T1_CI")
 #'

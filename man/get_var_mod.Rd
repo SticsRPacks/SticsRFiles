@@ -18,7 +18,7 @@ The variables that will be returned by STICS
 Get the variables STICS will return ("var.mod" file)
 }
 \examples{
-get_var_mod(system.file("extdata/txt/V8.5", package = "SticsRFiles"))
+get_var_mod(get_examples_path( file_type = "txt" ))
 
 }
 \seealso{

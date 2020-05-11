@@ -73,19 +73,19 @@ The functions are compatible with intercrops. Users generally only use
 \dontrun{
 # Read the initialisation file (ficini.txt):
 library(SticsRFiles)
-path = system.file("extdata/txt/V9.1/ficini.txt", package = "SticsRFiles")
+path = file.path(get_examples_path( file_type = "txt"), "ficini.txt")
 get_ini_txt(path)
 
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp= get_tmp_txt(filepath = system.file("extdata/txt/V9.1/tempoparv6.sti", package = "SticsRFiles"))
+tmp= get_tmp_txt(filepath = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
 several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
 several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
 is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
 
 # Then, get the technical parameters:
-get_tec_txt(filepath= system.file("extdata/txt/V9.1/fictec1.txt", package = "SticsRFiles"),
+get_tec_txt(filepath= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
 several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 }
 

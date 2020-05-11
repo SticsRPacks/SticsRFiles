@@ -24,9 +24,7 @@ get_xml_doc_example <- function(xml_name = NULL,
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
   # stics_xml_types
-  files <- list.files(pattern = ".xml$",
-                      path = system.file( paste0("extdata/xml/examples/",stics_version),
-                                          package = "SticsRFiles"))
+  files <- list.files(pattern = ".xml$", path = get_examples_path( file_type = "xml"))
 
   if ( base::is.null(xml_name) ) {
     return(files)
@@ -37,8 +35,8 @@ get_xml_doc_example <- function(xml_name = NULL,
   }
 
   # getting a default xmldocument object template
-  xml_file <- paste0("extdata/xml/examples/",stics_version,"/",xml_name)
-  xml_doc_object <- xmldocument(system.file(xml_file, package = "SticsRFiles"))
+  xml_file <- file.path(get_examples_path( file_type = "xml", version_name = stics_version),xml_name)
+  xml_doc_object <- xmldocument(xml_file)
 
   return(xml_doc_object)
 

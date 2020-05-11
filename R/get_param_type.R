@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
+#' xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
 #' SticsRFiles:::get_param_type(sols_doc, "argi")
 #' SticsRFiles:::get_param_type(sols_doc, c("argi", "norg"))

@@ -7,7 +7,7 @@
 #' @return A vector of usm names
 #'
 #' @examples
-#' path = system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
+#' path = get_examples_path( file_type = "xml")
 #'
 #' usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"))
 #'

@@ -23,8 +23,7 @@ In the last case, the extension is defined after getting xsl method from the xsl
 }
 \examples{
 \dontrun{
-xml_plt <- system.file(paste0("extdata/xml/examples/V9.1/file_plt.xml"),
-package = "SticsRFiles")
+xml_plt <- file.path(get_examples_path( file_type = "xml"),"file_plt.xml")
 xsl_file <- "/path/to/javastics/dir/bin/resources/xml/stylesheet/xml2txt.xsl"
 
 SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)

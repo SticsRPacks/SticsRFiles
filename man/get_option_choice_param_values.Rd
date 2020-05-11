@@ -28,7 +28,7 @@ defined in a option choice node (as \emph{param} nodes)
 \examples{
 \dontrun{
 
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_plt.xml"))
+xml_path = file.path(get_examples_path( file_type = "xml"),"file_plt.xml")
 
 get_option_choice_param_values(xml_path,"codetemp","2")
 

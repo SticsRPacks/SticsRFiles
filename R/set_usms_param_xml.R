@@ -5,12 +5,11 @@
 #' @param overwrite replace existing usms (TRUE) or not, updating existing ones (FALSE)
 #'
 #' @examples
-#'
 #' \dontrun{
-#' xml_path = system.file("extdata/xml/examples/V9.1/usms.xml", package = "SticsRFiles")
+#' xml_path = file.path(get_examples_path( file_type = "xml" ),"usms.xml")
 #' usms_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx"))
+#' xl_path <- file.path(get_examples_path( file_type = "xml" ),"inputs_stics_example.xlsx")
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
 #' # For updating an existing xml doc (using existing usms names)
@@ -23,7 +22,7 @@
 #'
 #'
 #' # For a new xml doc
-#' # In that case: usms_df must contain all the usms parameters !)
+#' # In that case: usms_df must contain all the usms parameters !
 #' usms_nb <- dim(usms_df)[1]
 #' new_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = usms_nb)
 #'

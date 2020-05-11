@@ -23,18 +23,17 @@
 #' @export
 #'
 
-# TODO: summarize with get_script
 download_usm_xl <- function(xl_name = NULL, dest_dir = getwd(), overwrite = FALSE) {
 
-  package <-  "SticsRFiles"
-  inst_dir <- "extdata/xl/"
   xl_patt <- ".(xls|xlsx)$"
 
   if (base::is.null(xl_name)) {
     xl_name <- xl_patt
   }
 
-  files_list <- list.files(system.file(paste0(inst_dir), package = package),pattern = xl_name)
+  xl_dir <- get_examples_path( file_type = "xl")
+
+  files_list <- list.files(xl_dir,pattern = xl_name)
 
   if (length(files_list) > 1) {
     warning("You must give a file name, see in returned list !")
@@ -43,7 +42,7 @@ download_usm_xl <- function(xl_name = NULL, dest_dir = getwd(), overwrite = FALS
 
   if (!length(files_list)) {
     print("No matching files found, see in returned list !")
-    return(list.files(system.file(paste0(inst_dir), package = package),pattern = xl_patt))
+    return(list.files(xl_dir, pattern = xl_patt))
   }
 
   dest_list <- file.path(dest_dir, files_list)
@@ -54,7 +53,8 @@ download_usm_xl <- function(xl_name = NULL, dest_dir = getwd(), overwrite = FALS
     return(invisible(FALSE))
   }
 
-  success <- file.copy(from = system.file(paste0(inst_dir,files_list), package = package),to = dest_dir)
+  src_list <- file.path(xl_dir, files_list)
+  success <- file.copy(from = src_list, to = dest_dir)
 
   if ( success ) {
     print(paste(files_list," has been copied in directory ", dest_dir))

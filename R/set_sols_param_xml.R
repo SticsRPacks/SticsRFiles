@@ -8,10 +8,10 @@
 #' @examples
 #'
 #' \dontrun{
-#' xml_path = system.file("extdata/xml/examples/V9.1/sols.xml", package = "SticsRFiles")
+#' xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(system.file(package="SticsRFiles","extdata/xl/inputs_stics_example.xlsx"))
+#' xl_path <- file.path(get_examples_path( file_type = "xl"),"inputs_stics_example.xlsx")
 #' sols_df <- read_excel(xl_path, sheet = "Soils")
 #'
 #' # For updating an existing xml doc (using existing soils names)

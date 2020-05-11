@@ -90,8 +90,7 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
   }
 
   # Template path in the library
-  xml_file <- system.file(paste0("extdata/xml/templates/",stics_version,"/",
-                                 file_name), package = "SticsRFiles")
+  xml_file <- file.path(get_examples_path( file_type = "xml_tmpl", version_name = stics_version ), file_name)
 
   # Loading the template into an xmDocument
   xml_doc <- xmldocument(xml_file)

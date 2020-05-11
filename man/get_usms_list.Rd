@@ -18,7 +18,7 @@ A vector of usm names
 Extracting a usm names list from an usms.xml file
 }
 \examples{
-path = system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
+path = get_examples_path( file_type = "xml")
 
 usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"))
 

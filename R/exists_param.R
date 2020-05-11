@@ -10,8 +10,7 @@
 #' @return A vector of logical values
 #'
 #' @examples
-#' xml_sols <- system.file(paste0("extdata/xml/examples/V9.1/sols.xml"),
-#' package = "SticsRFiles")
+#' xml_sols <- file.path(get_examples_path( file_type = "xml"),"sols.xml")
 #'
 #' xml_doc <- SticsRFiles:::xmldocument(xml_sols)
 #'

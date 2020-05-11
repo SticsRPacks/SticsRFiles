@@ -26,7 +26,7 @@ The time-related variables are summarised into one POSIXct column named
 }
 \examples{
 library(SticsRFiles)
-path <- system.file("extdata/txt/V9.1", package = "SticsRFiles")
+path <- get_examples_path( file_type = "txt")
 Meteo <- get_climate_txt(path)
 
 }
