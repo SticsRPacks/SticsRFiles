@@ -1,85 +1,93 @@
 #' Read STICS observation files (*.obs)
 #'
-#' @description Read STICS observation files for sole crops and store data into a list
+#' @description Read STICS observation files from a JavaStics workspace and store data into a list per usm
 #'
-#' @param dirpath Path to the directory containing the obs path
-#' @param obs_filenames A vector of observation file name(s). Optional, see details.
-#' @param usms A vector of usm name(s) corresponding the the obs files. Optional, see details.
-#' @param usms_filename name of the usm file. Optional, see details.
+#' @param workspace Path of a JavaStics workspace, or a vector of (recursive call).
+#' @param usm_name      Vector of usms to read (optional, used to filter usms)
+#' @param usms_filename  Name of the usm file (optional, default to the standard `usms.xml`)
+#' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
+#' but rather in the JavaStics default workspace). Only used to get the plants names.
+#' @param verbose        Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
 #'
-#' @details If `filename` is not specified (or equal to `NULL`), the
-#' function read all obs files in the `dirpath` folder. If there are no .obs files,
-#' the function returns `NULL`
-#' If usms names are not provided they are supposed to have the same name as the obs file.
-#' If usms_filename is not provided, existence of usms are checked in the usms.xml file.
+#' @details The `.obs` files names should match the name of the USM, e.g. for a usm called "banana",
+#' the `.obs` file should be named `banana.obs`. For intercrops, the name should be suffixed by "p" for
+#' the principal and "a" for the associated plant.
+#' If `usm_name` is not specified (or equal to `NULL`), the
+#' function read the obs files from all usms listed in `usms_filename` and present in the `workspace` folder.
 #'
-#'
-#' @return A list of STICS-formated observations. Return `NULL` if no files were found.
-#'
-#'
+#' @return A list of `data.frame`s with observations. The function always returns a list of `data.frame`s for the corresponding usm,
+#' even if an `.obs` file is missing (in this case it returns a `data.frame` with 0 rows and 0 columns.
 #'
 #' @examples
 #' \dontrun{
 #' path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+#'
+#' # Get observations for all usms, but only banana has observations:
 #' Meas <- get_obs(path)
+#' # Get observations only for banana:
+#' Meas_banana <- get_obs(path, "banana")
+#'
+#' # Get oservations with real plant names when plant folder is not in the workspace:
+#' get_obs(path, "banana", javastics_path= "path/to/javastics")
 #' }
 #'
 #' @export
 #'
-get_obs= function(dirpath=getwd(), obs_filenames=NULL, usms=NULL, usms_filename="usms.xml"){
-  .=NULL # to avoid CRAN note for pipe
-
-  #
-  # Does not work for mixed crops for the moment
-  # To reconsider (revise get_obs_int) when the definitive data structure for storing obs will be defined.
-  # get_obs_int searches obs files comparing with mod_s*** files if filename is not provided which means that Stics
-  # must have been run before ... could this be changed and still work with mixed crops?
-  #
+get_obs= function(workspace=getwd(), usm_name=NULL, usms_filename="usms.xml",javastics_path = NULL,verbose=TRUE){
 
   # For a list of folders recurive call
-  if ( length(dirpath) > 1) {
-    obs_list <- lapply(dirpath, function(x) get_obs(x,obs_filenames, usms, usms_filename))
+  if(length(workspace) > 1){
+    obs_list <- lapply(workspace, function(x) get_obs(x,usm_name, usms_filename))
     n <- unlist(lapply(obs_list, function(x) names(x[1])))
     obs_list <- lapply(obs_list, function(x) x[[1]])
     names(obs_list) <- n
     return(obs_list)
   }
 
-  if (base::is.null(obs_filenames)) {
-    obs_filenames=list.files(dirpath)%>%.[grep("\\.obs$",.)]
-  }
-  if (length(obs_filenames)==0) {
-    warning("No observations files in the given directory ",dirpath)
-    return(NULL)
-  }
-  obs_df=get_obs_int(dirpath, obs_filenames, mixed=FALSE)
-  if (base::is.null(obs_df)) {
-    return(NULL)
+  # getting usms names from the usms.xml file:
+  usms= get_usms_list(usm_path = file.path(workspace,usms_filename))
+
+  # Filtering USMs if required:
+  if(!is.null(usm_name)){
+    usm_exist <- usm_name %in% usms
+
+    # Some provided usms are not available:
+    if(!all(usm_exist)){
+      if(verbose){
+        cli::cli_alert_danger("The usm{?s} {.val {usm_name[!usm_exist]}} d{?oes/o} not exist in the workspace!")
+        cli::cli_alert_info("Usm{?s} found in the workspace: {.val {usms}}")
+      }
+      stop("usm_name do not match usms")
+    }
+    usms= usm_name
   }
 
-  # if usms not provided, suppose that usms names are obs filenames prefix
-  obs_filenames_prefix=sapply(obs_filenames,function (x) unlist(strsplit(x,"\\."))[1])
-  if (base::is.null(usms)) {
-    usms=obs_filenames_prefix
-  } else if (length(usms)!=length(obs_filenames_prefix)) {
-    stop("Size of usms list given in argument is different from size of obs files list => correspondance cannot be done.")
-  }
-  # check usms existence
-  flag_exist=sapply(usms,function (x) is.element(x,get_usms_list(usm_path = file.path(dirpath,usms_filename))))
-  if (any(!flag_exist)) {
-    stop(paste0("USMs ",usms[!flag_exist]," are not listed in file ",usms_filename,", please modify or provide usms argument."))
-  }
+  nb_plants= get_plants_nb(file.path(workspace,usms_filename))[usms]
+  is_mixed= nb_plants > 1
+  # Extracting expected observation file names:
+  obs_name= vector(mode= "list", length = length(usms))
+  names(obs_name)= usms
+  obs_name[!is_mixed]= paste0(usms[!is_mixed],".obs")
+  obs_name[is_mixed]= lapply(usms[is_mixed], function(x){paste0(x,c("p","a"),".obs")})
 
-  obs_list=vector("list", length(usms))
+  file_exist= lapply(obs_name, function(x)file.exists(file.path(workspace,x)))
 
-  # obs_df is splitted per USM and only columns containing Stics variables and not only NA are extracted
-  # not optimal of course ... will be done differently when get_obs_int will be rewritten
-  obs_list=lapply(obs_filenames, function (x) within(obs_df[obs_df$Plant==x,],rm("ian","mo","jo","jul","Plant")))
-  for (iusm in 1:length(obs_list)) {
-    obs_list[[iusm]]=obs_list[[iusm]][,sapply(1:ncol(obs_list[[iusm]]),function (x) any(!is.na(obs_list[[iusm]][,x])))]
-    obs_list[[iusm]]=obs_list[[iusm]][sapply(1:nrow(obs_list[[iusm]]),function (x) any(!is.na(obs_list[[iusm]][x,]))),]
-  }
-  names(obs_list)=usms
+  # Getting plant names:
+  plant_names= get_plant_name(workspace, usm_name, usms_filename, javastics_path, verbose)
+
+  obs_list= mapply(function(dirpath,filename,mixed,read_it,p_name){
+    if(all(read_it)){
+      get_obs_int(dirpath,filename,p_name)%>%
+        dplyr::select_if(function(x){any(!is.na(x))}) # Remove variables with only NAs.
+    }else{
+      data.frame()
+    }
+    },dirpath= workspace, filename= obs_name, read_it= file_exist,
+    p_name= plant_names, SIMPLIFY = FALSE)
+  names(obs_list)= usms
 
   return(obs_list)
 }
+
+
+

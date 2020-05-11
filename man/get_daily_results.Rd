@@ -6,13 +6,14 @@
 \usage{
 get_daily_results(
   workspace,
-  usm_name,
+  usm_name = NULL,
   var_list = NULL,
   doy_list = NULL,
   dates_list = NULL,
-  mixed = rep(FALSE, length(usm_name)),
+  mixed = NULL,
   usms_file = "usms.xml",
-  javastics_path = NULL
+  javastics_path = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ get_daily_results(
 
 \item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace)}
+
+\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 }
 \value{
 A tibble or a list of

@@ -4,40 +4,26 @@
 \alias{get_obs_int}
 \title{Read STICS observation file (*.obs)}
 \usage{
-get_obs_int(dirpath = getwd(), filename = NULL, mixed = NULL)
+get_obs_int(workspace, filename, plant_name = NULL)
 }
 \arguments{
-\item{dirpath}{Directory path}
+\item{workspace}{A directory where to read the files}
 
-\item{filename}{A vector of observation file name(s). Optional, see details.}
+\item{filename}{A vector of observation file names}
 
-\item{mixed}{(optional) Is the simulation on mixed species (boolean)}
+\item{plant_name}{A vector of plant names. Length of filename, or recycled if one (optional).}
 }
 \value{
-A data.frameof the STICS-formated observations. Return \code{NULL} if no files were found,
-or more files than useable. If mixed crops (two \code{filename} provided), the function binds
-them and add a new column called "Plant" which corresponds to the name of each observation
-file.
+A \code{data.frame} of all observation files concatenated by row.
 }
 \description{
-Read STICS observation file(s) for sole and/or mixed crops.
-}
-\details{
-If \code{filename} is not specified (or equal to \code{NULL}), the
-function tries first to match the \code{mod_s*} names for the same \*.obs
-names, and then to use the \code{.obs} file if there is one only
-(used for sole crops or for both mixed crops). If there are no .obs files,
-or two but not specified for reading, the function returns \code{NULL}
-If \code{mixed} is not specified (or equal to \code{NULL}), the function
-tries to read the number of species from the input files.
+Read STICS observation file(s). This function is not exported because
+it only read and pre-formate an obs file without any clever tests for intercrops or usms.
 }
 \examples{
 \dontrun{
-
-obs_table = SticsRFiles:::get_obs_int()
-
+path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+get_obs_int(path, "banana.obs")
 }
-
-
 }
 \keyword{internal}

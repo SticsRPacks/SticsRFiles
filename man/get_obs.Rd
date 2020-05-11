@@ -5,38 +5,50 @@
 \title{Read STICS observation files (*.obs)}
 \usage{
 get_obs(
-  dirpath = getwd(),
-  obs_filenames = NULL,
-  usms = NULL,
-  usms_filename = "usms.xml"
+  workspace = getwd(),
+  usm_name = NULL,
+  usms_filename = "usms.xml",
+  javastics_path = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
-\item{dirpath}{Path to the directory containing the obs path}
+\item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
 
-\item{obs_filenames}{A vector of observation file name(s). Optional, see details.}
+\item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
-\item{usms}{A vector of usm name(s) corresponding the the obs files. Optional, see details.}
+\item{usms_filename}{Name of the usm file (optional, default to the standard \code{usms.xml})}
 
-\item{usms_filename}{name of the usm file. Optional, see details.}
+\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
+but rather in the JavaStics default workspace). Only used to get the plants names.}
+
+\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 }
 \value{
-A list of STICS-formated observations. Return \code{NULL} if no files were found.
+A list of \code{data.frame}s with observations. The function always returns a list of \code{data.frame}s for the corresponding usm,
+even if an \code{.obs} file is missing (in this case it returns a \code{data.frame} with 0 rows and 0 columns.
 }
 \description{
-Read STICS observation files for sole crops and store data into a list
+Read STICS observation files from a JavaStics workspace and store data into a list per usm
 }
 \details{
-If \code{filename} is not specified (or equal to \code{NULL}), the
-function read all obs files in the \code{dirpath} folder. If there are no .obs files,
-the function returns \code{NULL}
-If usms names are not provided they are supposed to have the same name as the obs file.
-If usms_filename is not provided, existence of usms are checked in the usms.xml file.
+The \code{.obs} files names should match the name of the USM, e.g. for a usm called "banana",
+the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name should be suffixed by "p" for
+the principal and "a" for the associated plant.
+If \code{usm_name} is not specified (or equal to \code{NULL}), the
+function read the obs files from all usms listed in \code{usms_filename} and present in the \code{workspace} folder.
 }
 \examples{
 \dontrun{
 path <- system.file(file.path("extdata","obs","V9.0"), package = "SticsRFiles")
+
+# Get observations for all usms, but only banana has observations:
 Meas <- get_obs(path)
+# Get observations only for banana:
+Meas_banana <- get_obs(path, "banana")
+
+# Get oservations with real plant names when plant folder is not in the workspace:
+get_obs(path, "banana", javastics_path= "path/to/javastics")
 }
 
 }
