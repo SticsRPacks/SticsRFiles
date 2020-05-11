@@ -41,7 +41,7 @@ To run a STICS simulation on these input files, please refer to the [`run_stics(
 Some example data is available from the package and can be retreived using: 
 
 ```{r}
-example_txt_dir <- system.file(file.path("extdata","txt","V9.0"), package = "SticsRFiles" )
+example_txt_dir <- get_examples_path( file_type = "txt", version_name = "V9.0")
 ```
 
 

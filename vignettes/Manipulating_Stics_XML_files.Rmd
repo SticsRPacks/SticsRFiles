@@ -196,7 +196,7 @@ In the above file extract for crop management parameters, each set of parameters
 In xml_dir, we store the directory path of the XML files included in the library installation.
 
 ```{r set_xml_dir}
-xml_dir <- system.file(file.path("extdata","xml","examples","V9.1"), package = "SticsRFiles" )
+xml_dir <- get_examples_path( file_type = "xml", version_name = "V9.1")
 
 # For linux 
 #> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1"
@@ -573,7 +573,7 @@ get_param_xml(tec, param_name = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
 # Using functions with a files list
 It's so possible to extract parameters names list for a list of files.
 
-This is also handled already for easily getting parameters values from files of the same kind.
+This is also already handled for getting parameters values from files of the same kind.
 
 But, setting parameters values into several files is not possible at the moment.
 
