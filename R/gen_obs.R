@@ -20,7 +20,7 @@
 #'
 #' @return A logical value if the file generation succeeded (T) or not (F)
 #'
-#' @export
+#' @keywords internal
 #'
 gen_obs= function(obs_table, file_path){
 

@@ -4,12 +4,15 @@
 \alias{gen_usms_obs}
 \title{Generating observation data files from a data.frame}
 \usage{
-gen_usms_obs(obs_table, out_path = getwd())
+gen_usms_obs(obs_table, out_path = getwd(), usms_list = NULL)
 }
 \arguments{
 \item{obs_table}{The input onservations data.frame}
 
-\item{out_path}{The output directory path for storing .obs files}
+\item{out_path}{A path to an optional folder where to write the .obs files}
+
+\item{usms_list}{An optional list of usms names to be used for selecting which files to generate
+from the obs_table}
 }
 \value{
 A return logical status indicating if any error when writing files (FALSE),
@@ -18,12 +21,30 @@ TRUE when no errors.
 \description{
 Generating observation data files from a data.frame
 }
+\details{
+\code{obs_table} is a \code{data.frame} with the following format:\tabular{lrrrrlrrrrrr}{
+   usm_name \tab ian \tab mo \tab jo \tab jul \tab densite \tab lai(n) \tab masec(n) \tab azomes \tab ammomes \tab resmes \tab AZnit(1) \cr
+   USM_2017_T1_CI \tab 2017 \tab 9 \tab 6 \tab 249 \tab NA \tab NA \tab 0.31 \tab 27.07395 \tab 9.364425 \tab 285 \tab 15.39825 \cr
+   USM_2017_T1_CI \tab 2017 \tab 9 \tab 20 \tab 263 \tab NA \tab NA \tab 0.60 \tab 27.90000 \tab 9.800000 \tab 270 \tab NA \cr
+   USM_2018_T1 \tab 2017 \tab 10 \tab 20 \tab 293 \tab NA \tab 0.1 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
+   USM_2018_T2 \tab 2018 \tab 5 \tab 15 \tab 482 \tab NA \tab 1.2 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
+}
+
+\itemize{
+\item \code{usm_name} column contains usms names which are used as output .obs files names
+\item \code{ian}, \code{mo}, \code{jo} and \code{jul} are mandatory (year, month, day and julian date)
+\item Other columns one per variable contain observations values or NA
+}
+
+@seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable.
+}
 \examples{
 \dontrun{
-copy_mailing_example(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+library(readxl)
+
+xl_path <- file.path(get_examples_path("xl"), "inputs_stics_example.xlsx")
 obs_df <- read_excel(xl_path, sheet = "Obs")
-gen_usms_obs(obs_table = obs_df, out_path = file.path("/path/to/dest/dir","obs"))
+gen_usms_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
 }
 
 }
