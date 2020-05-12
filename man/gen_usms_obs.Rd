@@ -27,7 +27,7 @@ Generating observation data files from a data.frame
    USM_2017_T1_CI \tab 2017 \tab 9 \tab 6 \tab 249 \tab NA \tab NA \tab 0.31 \tab 27.07395 \tab 9.364425 \tab 285 \tab 15.39825 \cr
    USM_2017_T1_CI \tab 2017 \tab 9 \tab 20 \tab 263 \tab NA \tab NA \tab 0.60 \tab 27.90000 \tab 9.800000 \tab 270 \tab NA \cr
    USM_2018_T1 \tab 2017 \tab 10 \tab 20 \tab 293 \tab NA \tab 0.1 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
-   USM_2018_T2 \tab 2018 \tab 5 \tab 15 \tab 482 \tab NA \tab 1.2 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
+   USM_2018_T1 \tab 2018 \tab 5 \tab 15 \tab 482 \tab NA \tab 1.2 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
 }
 
 \itemize{
@@ -36,7 +36,7 @@ Generating observation data files from a data.frame
 \item Other columns one per variable contain observations values or NA
 }
 
-@seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable.
+@seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable name.
 }
 \examples{
 \dontrun{

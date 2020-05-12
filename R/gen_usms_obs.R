@@ -14,13 +14,13 @@
 #' |USM_2017_T1_CI | 2017|  9|  6| 249|NA      |     NA|     0.31| 27.07395| 9.364425|    285| 15.39825|
 #' |USM_2017_T1_CI | 2017|  9| 20| 263|NA      |     NA|     0.60| 27.90000| 9.800000|    270|       NA|
 #' |USM_2018_T1    | 2017| 10| 20| 293|NA      |    0.1|       NA|       NA|       NA|     NA|       NA|
-#' |USM_2018_T2    | 2018|  5| 15| 482|NA      |    1.2|       NA|       NA|       NA|     NA|       NA|
+#' |USM_2018_T1    | 2018|  5| 15| 482|NA      |    1.2|       NA|       NA|       NA|     NA|       NA|
 #'
 #' * `usm_name` column contains usms names which are used as output .obs files names
 #' * `ian`, `mo`, `jo` and `jul` are mandatory (year, month, day and julian date)
 #' * Other columns one per variable contain observations values or NA
 #'
-#'  @seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable.
+#'  @seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable name.
 #'
 #' @return A return logical status indicating if any error when writing files (FALSE),
 #' TRUE when no errors.

@@ -4,13 +4,20 @@
 \alias{download_usm_xl}
 \title{Downloading an Excel usms data file example into a directory}
 \usage{
-download_usm_xl(xl_name = NULL, dest_dir = getwd(), overwrite = FALSE)
+download_usm_xl(
+  xl_name = NULL,
+  dest_dir = getwd(),
+  version_name = "last",
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{xl_name}{Name of an Excel file (optional, not used for the moment)}
 
 \item{dest_dir}{Directory path where to copy the Excel file
 (optional, default: current directory)}
+
+\item{version_name}{An optional version string (default: last version returned by get_stics_versions_compat())}
 
 \item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
 }

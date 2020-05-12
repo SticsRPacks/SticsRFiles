@@ -9,6 +9,7 @@
 #' @param xl_name Name of an Excel file (optional, not used for the moment)
 #' @param dest_dir Directory path where to copy the Excel file
 #'  (optional, default: current directory)
+#' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
 #' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
 #'
 #' @return A copy status, TRUE if successfull, FALSE otherwise.
@@ -23,7 +24,10 @@
 #' @export
 #'
 
-download_usm_xl <- function(xl_name = NULL, dest_dir = getwd(), overwrite = FALSE) {
+download_usm_xl <- function(xl_name = NULL,
+                            dest_dir = getwd(),
+                            version_name = "last",
+                            overwrite = FALSE) {
 
   xl_patt <- ".(xls|xlsx)$"
 
@@ -31,7 +35,7 @@ download_usm_xl <- function(xl_name = NULL, dest_dir = getwd(), overwrite = FALS
     xl_name <- xl_patt
   }
 
-  xl_dir <- get_examples_path( file_type = "xl")
+  xl_dir <- get_examples_path( file_type = "xl", version_name = version_name)
 
   files_list <- list.files(xl_dir,pattern = xl_name)
 
