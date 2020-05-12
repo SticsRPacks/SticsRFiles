@@ -7,7 +7,7 @@
 #' @param doc_types The different possible document types (optionnal)
 #'
 #' @return A logical value giving if xml_doc is a Stics xmlDoxument object
-#' (TRUE), or not (FALSE)
+#' (TRUE, with document type as attribute "type"), or not (FALSE)
 #'
 #'
 #' @examples
@@ -30,6 +30,7 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
     doc_types <- c("initialisations","usms", "sols", "fichiertec",
                    "fichiersta", "fichierplt", "fichierpar",
                    "fichierparamgen" )
+    #files_types <- c("ini", "usm", "sol", "tec", "sta", "plt", "par", "newpar")
   }
 
   if (! nargs() ) {
@@ -53,11 +54,16 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
     return(FALSE)
   }
 
-  if (! root_name %in% doc_types ) {
+  type_idx <- doc_types %in% root_name
+
+  if (! any(type_idx) ) {
     return(FALSE)
   }
 
-  return(TRUE)
+  ret <- TRUE
+  #attr(ret, "type") <- files_types[type_idx]
+  attr(ret, "type") <- root_name
+  return(ret)
 
 }
 
