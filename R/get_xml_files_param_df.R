@@ -36,14 +36,17 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' dir_path <- get_examples_path("xml")
 #' get_xml_files_param_df(file_path = file.path(dir_path,"sols.xml"))
 #'
-#' get_xml_files_param_df(file_path = file.path(dir_path,"sols.xml"), select = "sol", c("solcanne", "solble"))
+#' get_xml_files_param_df(file_path = file.path(dir_path,"sols.xml"),
+#' select = "sol", c("solcanne", "solble"))
 #'
 #' files_list <- file.path(dir_path, c("sols.xml", "usms.xml", "param_gen.xml" ))
 #' get_xml_files_param_df(file_path = files_list)
 #'
+#' }
 #'
 #'
 get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL) {

@@ -20,7 +20,7 @@
 #'
 is_stics_xml <- function(xml_path, file_type = NULL) {
 
-  xml_doc <- SticsRFiles:::xmldocument(xml_path)
+  xml_doc <- xmldocument(xml_path)
 
   return(is_stics_doc(xml_doc, doc_type = file_type ))
 }
