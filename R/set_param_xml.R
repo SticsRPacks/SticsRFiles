@@ -6,8 +6,7 @@
 #' @param xml_file an xml file path
 #' @param param_name parameter names vector, i.e.: parameter name or option code
 #' @param param_value A vector or a list of parameter(s) values (see details).
-#' @param out_path a directory path (optional, default uses the folder of the path from xml_file)
-#' @param out_file an xml file name (optional, default to xml_file)
+#' @param out_path an xml file path (optional, default: xml_file)
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
 #' @param value value used for select (optional)
 #' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
@@ -21,18 +20,21 @@
 #' @examples
 #'
 #' \dontrun{
-#' xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
-#' file.copy(xml_path, getwd())
-#' get_param_xml("sols.xml", "argi")
 #'
-#' # Setting all "argi" values to 50
-#' set_param_xml("sols.xml", "argi", 50)
+#' # Soil file
+#'
+#' file.copy(file.path(get_examples_path( file_type = "xml"),"sols.xml"), getwd())
+#'
+#' # For scalar parameters per soil
+#'
+#' # Setting all soils "argi" values to 50
+#' set_param_xml("sols.xml", "argi", 50, overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", "argi")
 #'
 #' # Setting a specific value to "argi" for "solcanne" soil
 #' set_param_xml("sols.xml", "argi",56,
-#' select = "sol", value = "solcanne")
+#' select = "sol", value = "solcanne", overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", "argi",
 #' select = "sol", value = "solcanne")
@@ -40,10 +42,26 @@
 #'
 #' # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
 #' set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-#' select = "sol", value = "solcanne")
+#' select = "sol", value = "solcanne", overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", c("argi", "norg"),
 #' select = "sol", value = "solcanne")
+#'
+#'
+#' # For vector parameters per soil (5 values, one per soil layer)
+#' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"),
+#' param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
+#'
+#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"))
+#'
+#'
+#' # Crop management file
+#' file.copy(file.path(get_examples_path( file_type = "xml"),"file_tec.xml"), getwd())
+#'
+#' # Modifying irrigations parameters
+#' set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"), param_value = list(200:215,20:35), overwrite = TRUE)
+#'
+#' get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
 #'
 #' }
 #'
@@ -52,7 +70,6 @@ set_param_xml <- function(xml_file,
                           param_name,
                           param_value,
                           out_path = NULL,
-                          out_file = NULL,
                           select = NULL,
                           value = NULL,
                           overwrite = FALSE,
@@ -62,23 +79,9 @@ set_param_xml <- function(xml_file,
 
 
 
-
-  #  Setting output directory path or checking
-  if (base::is.null(out_path)) {
-    out_path <- base::dirname(xml_file)
-    if (out_path == ".") out_path <- getwd()
-
-  } else if ( !base::file.exists(out_path) ) {
-    warning(paste("The directory does not exist:", out_path))
-    return(FALSE)
-  }
-
-
   # Setting output file path
-  if (! base::is.null(out_file) ) {
-    out_path <- base::file.path(out_path, out_file)
-  } else {
-    out_path <- base::file.path(out_path, base::basename(xml_file))
+  if (base::is.null(out_path) ) {
+    out_path <- xml_file
   }
 
   # Ckecking if file exists and overwriting right

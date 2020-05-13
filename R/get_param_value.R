@@ -96,11 +96,11 @@ get_param_value <- function(xml_doc,
 
   # recursive call for a parameter name list
   if (length(param_name) > 1) {
-    param_value <- lapply(param_name, function(x) value <- get_param_value(xml_doc = xml_doc,
-                                                          param_name = x,
-                                                          parent_name = parent_name,
-                                                          parent_sel_attr = parent_sel_attr,
-                                                          ...))
+    param_value <- lapply(param_name, function(x) get_param_value(xml_doc = xml_doc,
+                                                                  param_name = x,
+                                                                  parent_name = parent_name,
+                                                                  parent_sel_attr = parent_sel_attr,
+                                                                  ...))
 
     sel_values <- !unlist(lapply(param_value, base::is.null))
     param_value <- param_value[sel_values]
