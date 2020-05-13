@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' path <- get_examples_path( file_type = "sti", version_name = "V9.0" )
+#' path <- get_examples_path( file_type = "sti")
 #' get_daily_results(path,"banana")
 #' }
 #' @export
