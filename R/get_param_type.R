@@ -149,21 +149,25 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
     return(list(type="attr_attr", xpath=xpath_attr_attr, length=length(values)))
   }
 
-  # path to nb_interventions ta node
-  if (!base::is.null(parent_name)){
-    xpath_attr_attr <- paste0("//*[@nom=\"",parent_name,
-                              "\"]","//*[@",param_name,"]",
-                              sel_id)
-  }
-  # if (!base::is.null(id)) {
-  #   xpath_attr_attr <- paste0(xpath_attr_attr,sel_id)
-  # }
+  # No special character in param_name
+  if (! filter_name ) {
+    # path to nb_interventions ta node
+    if (!base::is.null(parent_name)){
+      xpath_attr_attr <- paste0("//*[@nom=\"",parent_name,
+                                "\"]","//*[@",param_name,"]",
+                                sel_id)
+    }
 
-  values <- getAttrsValues(xml_doc,xpath_attr_attr,param_name)
-  if ( ! base::is.null(values) ) {
-    return(list(type="attr_attr2", xpath=xpath_attr_attr, length=length(values)))
-  }
+    # if (!base::is.null(id)) {
+    #   xpath_attr_attr <- paste0(xpath_attr_attr,sel_id)
+    # }
 
+    values <- getAttrsValues(xml_doc,xpath_attr_attr,param_name)
+    if ( ! base::is.null(values) ) {
+      return(list(type="attr_attr2", xpath=xpath_attr_attr, length=length(values)))
+    }
+
+  }
 
   # node with attr value for any attr (@nom, @code) as param_name
   # with a link to a parent node selected with a @nomParam name
@@ -181,22 +185,23 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
     return(list(type="choix_attr", xpath=xpath_choix_attr, length=length(attr_values)))
   }
 
+  # No special character in param_name
+  if (! filter_name ) {
+    # node with attr value for @nom as param_name
+    if (!base::is.null(parent_name)){
+      xpath_node_attr <- paste0("//",param_name,
+                                "[@nom=\"",parent_name,"\"]",
+                                sel_id)
+    }
+    # if (!base::is.null(id)) {
+    #   xpath_node_attr <- paste0("//",param_name,sel_id)
+    # }
 
-  # node with attr value for @nom as param_name
-  if (!base::is.null(parent_name)){
-    xpath_node_attr <- paste0("//",param_name,
-                              "[@nom=\"",parent_name,"\"]",
-                              sel_id)
+    attr_values <- getAttrsValues(xml_doc,xpath_node_attr,"nom")
+    if ( ! base::is.null(attr_values) ) {
+      return(list(type="node_attr", xpath=xpath_node_attr, length=length(attr_values)))
+    }
   }
-  # if (!base::is.null(id)) {
-  #   xpath_node_attr <- paste0("//",param_name,sel_id)
-  # }
-
-  attr_values <- getAttrsValues(xml_doc,xpath_node_attr,"nom")
-  if ( ! base::is.null(attr_values) ) {
-    return(list(type="node_attr", xpath=xpath_node_attr, length=length(attr_values)))
-  }
-
 
   # param node, with parent node with possible selection on @nom
   new_parent_name <- parent_name
@@ -266,51 +271,52 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
 
   # simple node with possible simple node parent (ini files, ...)
   # with possible select with @nom attribute value
-  new_parent_name <- parent_name
+  # No special character in param_name
+  if (! filter_name ) {
+    new_parent_name <- parent_name
 
-  if ( !base::is.null(parent_sel_attr) ) {
-    new_parent_name <- paste0(parent_name,"[@nom=\"",parent_sel_attr,"\"]")
+    if ( !base::is.null(parent_sel_attr) ) {
+      new_parent_name <- paste0(parent_name,"[@nom=\"",parent_sel_attr,"\"]")
+    }
+
+    xpath_node_node <- paste0("//",new_parent_name,"//",param_name)
+
+    values <- getValues(xml_doc,xpath_node_node)
+    if ( ! base::is.null(values) ) {
+      return(list(type="node_node", xpath=xpath_node_node, length=length(values)))
+    }
+
+
+    new_parent_name <- parent_name
+    # with possible select with @dominance attribute value
+    if ( !base::is.null(parent_sel_attr) ) {
+      new_parent_name <- paste0(parent_name,"[@dominance=\"",
+                                as.character(parent_sel_attr),"\"]")
+    }
+    # param node name is parent of target nodes
+    xpath_node_node <- paste0("//",new_parent_name,"//",param_name,"/horizon")
+
+    values <- getValues(xml_doc,xpath_node_node)
+    if ( ! base::is.null(values) ) {
+      return(list(type="node_node", xpath=xpath_node_node, length=length(values)))
+    }
+
+
+    new_parent_name <- parent_name
+    # with possible select with @dominance attribute value
+    if ( !base::is.null(parent_sel_attr) ) {
+      new_parent_name <- paste0(parent_name,"[@dominance=\"",
+                                as.character(parent_sel_attr),"\"]")
+    }
+
+    xpath_node_node <- paste0("//",new_parent_name,"//",param_name)
+
+    values <- getValues(xml_doc,xpath_node_node)
+    if ( ! base::is.null(values) ) {
+      return(list(type="node_node", xpath=xpath_node_node, length=length(values)))
+    }
+
   }
-
-  xpath_node_node <- paste0("//",new_parent_name,"//",param_name)
-
-  values <- getValues(xml_doc,xpath_node_node)
-  if ( ! base::is.null(values) ) {
-    return(list(type="node_node", xpath=xpath_node_node, length=length(values)))
-  }
-
-
-  new_parent_name <- parent_name
-  # with possible select with @dominance attribute value
-  if ( !base::is.null(parent_sel_attr) ) {
-    new_parent_name <- paste0(parent_name,"[@dominance=\"",
-                              as.character(parent_sel_attr),"\"]")
-  }
-  # param node name is parent of target nodes
-  xpath_node_node <- paste0("//",new_parent_name,"//",param_name,"/horizon")
-
-  values <- getValues(xml_doc,xpath_node_node)
-  if ( ! base::is.null(values) ) {
-    return(list(type="node_node", xpath=xpath_node_node, length=length(values)))
-  }
-
-
-
-  new_parent_name <- parent_name
-  # with possible select with @dominance attribute value
-  if ( !base::is.null(parent_sel_attr) ) {
-    new_parent_name <- paste0(parent_name,"[@dominance=\"",
-                              as.character(parent_sel_attr),"\"]")
-  }
-
-  xpath_node_node <- paste0("//",new_parent_name,"//",param_name)
-
-  values <- getValues(xml_doc,xpath_node_node)
-  if ( ! base::is.null(values) ) {
-    return(list(type="node_node", xpath=xpath_node_node, length=length(values)))
-  }
-
-
 
 
 
@@ -330,7 +336,19 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
     return(list(type="node_table", xpath=xpath_node_table, length=length(values)))
   }
 
+  # intervention/colonne node with a possible parent simple node, possible selection with @nom
+  new_parent_name <- parent_name
 
+  if ( !base::is.null(parent_sel_attr) ) {
+    new_parent_name <- paste0(parent_name,"[@nom=\"",parent_sel_attr,"\"]")
+  }
+
+  xpath_node_table2 <- paste0("//",new_parent_name,"//intervention/colonne[@nom=\"",param_name,"\"]")
+
+  values <- getValues(xml_doc,xpath_node_table2)
+  if ( ! base::is.null(values) ) {
+    return(list(type="node_table2", xpath=xpath_node_table2, length=length(values)))
+  }
 
 
 

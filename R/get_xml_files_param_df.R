@@ -114,10 +114,6 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   # Getting parameters values number
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
-  # Filtering parameters with values
-  param_values <- param_values[values_nb > 0]
-  values_nb <- values_nb[values_nb > 0]
-
   # Getting expanded parameters names vector
   param <-  rep(names(param_values), values_nb)
 
