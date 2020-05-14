@@ -85,7 +85,8 @@ get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne",
 file.copy(file.path(get_examples_path( file_type = "xml"),"file_tec.xml"), getwd())
 
 # Modifying irrigations parameters
-set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"), param_value = list(200:215,20:35), overwrite = TRUE)
+set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"), param_value = list(200:215,20:35),
+ overwrite = TRUE)
 
 get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
 
