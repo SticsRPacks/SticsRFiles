@@ -10,7 +10,7 @@ gen_usms_xml2txt(
   workspace_path = NULL,
   target_path = NULL,
   usms_list = c(),
-  display = FALSE,
+  verbose = TRUE,
   dir_per_usm_flag = TRUE
 )
 }
@@ -26,7 +26,7 @@ if not provided the JavaStics workspace will be used as root}
 \item{usms_list}{List of usms to generate (Optional). If not provided, all
 usms contained in workspace_path/usms.xml file will be generated.}
 
-\item{display}{Logical value for displaying (TRUE) ot not (FALSE) usm name}
+\item{verbose}{Logical value for displaying information  while running (TRUE) ot not (FALSE)}
 
 \item{dir_per_usm_flag}{logical, TRUE if one want to create one directory per USM,
 FALSE if USM files are generated in the target_path (only useful for usms_list of size one)}

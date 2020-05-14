@@ -16,7 +16,7 @@
 #' if not provided the JavaStics workspace will be used as root
 #' @param usms_list List of usms to generate (Optional). If not provided, all
 #' usms contained in workspace_path/usms.xml file will be generated.
-#' @param display Logical value for displaying (TRUE) ot not (FALSE) usm name
+#' @param verbose Logical value for displaying information  while running (TRUE) ot not (FALSE)
 #' @param dir_per_usm_flag logical, TRUE if one want to create one directory per USM,
 #' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
 #'
@@ -51,7 +51,7 @@ gen_usms_xml2txt <- function(javastics_path,
                              workspace_path = NULL,
                              target_path = NULL,
                              usms_list = c(),
-                             display = FALSE,
+                             verbose = TRUE,
                              dir_per_usm_flag=TRUE) {
   # overwrite = FALSE,parallelized = FALSE, exec_time = FALSE) {
 
@@ -138,8 +138,7 @@ gen_usms_xml2txt <- function(javastics_path,
   }
 
   # Command string without usm name
-  cmd_generate=paste("java -jar",jexe,"--generate-txt",workspace_path)
-
+  cmd_generate= paste0('-jar ',jexe,' --generate-txt "',workspace_path,'"')
 
   usms_number <- length(usms_list)
 
@@ -214,7 +213,8 @@ gen_usms_xml2txt <- function(javastics_path,
     if ( length(opt_files) ) file.remove(opt_files)
 
     # Generating text files
-    system(paste(cmd_generate,usm_name), intern = TRUE)
+    system2(command = "java", args = paste(cmd_generate,usm_name),
+            stdout= if(verbose){""}else{NULL})
     # TODO: replacing with system2
     # using args from com <- strsplit(ccm_generate," ")[[1]]
     #ret <- run_system_cmd(com[1], args = com[2:6])
@@ -245,7 +245,7 @@ gen_usms_xml2txt <- function(javastics_path,
     global_copy_status[i] <- copy_status & out_copy_status
 
     # displaying usm name
-    if (display) cat(paste0(usm_name,"\n"))
+    if(verbose) cli::cli_alert_info("USM {.val {usm_name}} successfully created")
 
 
   }
