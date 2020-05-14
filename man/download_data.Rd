@@ -4,13 +4,19 @@
 \alias{download_data}
 \title{Download example USMs}
 \usage{
-download_data(dir = NULL)
+download_data(dir = tempdir(), example_dirs = NULL, version_name = NULL)
 }
 \arguments{
 \item{dir}{The directory where to download the data}
+
+\item{example_dirs}{List of use case directories names (optional)}
+
+\item{version_name}{An optional version string
+within those given by get_stics_versions_compat()$versions_list, or "last"
+for getting the last version (default : NULL)}
 }
 \value{
-Download the data and return the path to the folder where the data was downloaded
+The path to the folder where data have been downloaded
 }
 \description{
 Download locally the example data from the \href{https://github.com/SticsRPacks/data}{data repository}
@@ -18,6 +24,15 @@ in the SticsRPacks organisation.
 }
 \examples{
 \dontrun{
+
+# Getting all data
 download_data()
+
+download_data(example_dirs = "study_case_1")
+
+# Getting data for a given example : study_case_1 and a given version
+download_data(example_dirs = "study_case_1", version_name = "V9.0")
+
+
 }
 }

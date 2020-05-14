@@ -30,7 +30,7 @@ get_examples_path <- function(file_type, version_name = "last") {
 
   # Checking if files available for the given version
   ver_data <- get_versions_info(version_name = version_name)
-  if (base::is.null(ver_data)) stop("No examples avaiblable for version: ",version_name)
+  if (base::is.null(ver_data)) stop("No examples available for version: ",version_name)
 
   # Getting files dir path for the given type
   version_dir <- ver_data[[file_type]]

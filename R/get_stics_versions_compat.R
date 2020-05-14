@@ -94,7 +94,8 @@ get_versions_info <- function(version_name = NULL) {
 
   # Getting available versions info from a file
   ver_file <- system.file("extdata/versions/stics_versions_info.csv", package = "SticsRFiles")
-  ver_info <- utils::read.csv2(file = ver_file, stringsAsFactors = FALSE, na.strings = "")
+  ver_info <- utils::read.csv2(file = ver_file, stringsAsFactors = FALSE,
+                               na.strings = "", colClasses = "character")
 
   # Returning the full data.frame for all versions
   if (base::is.null(version_name)) return(ver_info)
