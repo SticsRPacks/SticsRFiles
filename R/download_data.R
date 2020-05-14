@@ -81,6 +81,7 @@ download_data= function(dir = tempdir(), example_dirs = NULL, version_name = NUL
 #' SticsRFiles:::get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0" )
 #'
 #' }
+#'
 get_referenced_dirs <- function(dirs = NULL, version_name = NULL) {
 
   # Loading csv file with data information
@@ -103,7 +104,7 @@ get_referenced_dirs <- function(dirs = NULL, version_name = NULL) {
   if(base::is.null(version_name)) return(dirs)
 
   # Getting data according to version and dirs
-  version_data <- ver_data %>% dplyr::select(all_of(dirs))
+  version_data <- ver_data %>% dplyr::select(dirs)
 
   # Compiling referenced dirs/version strings, for existing version
   is_na <- base::is.na(version_data)

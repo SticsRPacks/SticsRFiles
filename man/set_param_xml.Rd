@@ -24,7 +24,8 @@ set_param_xml(
 
 \item{out_path}{an xml file path (optional, default: xml_file)}
 
-\item{select}{node name or attribute name to use for selection (optional, default to no selection)}
+\item{select}{node name or attribute name to use for selection
+(optional, default to no selection)}
 
 \item{value}{value used for select (optional)}
 
@@ -40,8 +41,8 @@ Setting parameter values for a parameter or a vector of and
 with a parameters values vector
 }
 \details{
-It is possible to give several values for a parameter by passing a vector of values. For example
-for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
+It is possible to give several values for a parameter by passing a vector of values.
+For example, for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
 
@@ -85,7 +86,8 @@ get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne",
 file.copy(file.path(get_examples_path( file_type = "xml"),"file_tec.xml"), getwd())
 
 # Modifying irrigations parameters
-set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"), param_value = list(200:215,20:35), overwrite = TRUE)
+set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
+param_value = list(200:215,20:35), overwrite = TRUE)
 
 get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
 

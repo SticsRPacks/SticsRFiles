@@ -7,15 +7,16 @@
 #' @param param_name parameter names vector, i.e.: parameter name or option code
 #' @param param_value A vector or a list of parameter(s) values (see details).
 #' @param out_path an xml file path (optional, default: xml_file)
-#' @param select node name or attribute name to use for selection (optional, default to no selection)
+#' @param select node name or attribute name to use for selection
+#' (optional, default to no selection)
 #' @param value value used for select (optional)
 #' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
 #' @param... Pass further arguments to `set_param_value()`.
 #'
 #' @return A logical value TRUE for operation success, FALSE otherwise
 #'
-#' @details It is possible to give several values for a parameter by passing a vector of values. For example
-#' for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
+#' @details It is possible to give several values for a parameter by passing a vector of values.
+#' For example, for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
 #'
@@ -59,7 +60,8 @@
 #' file.copy(file.path(get_examples_path( file_type = "xml"),"file_tec.xml"), getwd())
 #'
 #' # Modifying irrigations parameters
-#' set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"), param_value = list(200:215,20:35), overwrite = TRUE)
+#' set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
+#' param_value = list(200:215,20:35), overwrite = TRUE)
 #'
 #' get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
 #'

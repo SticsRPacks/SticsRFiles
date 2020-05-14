@@ -1,7 +1,6 @@
 context("get model outputs")
 
-path <- system.file(file.path("extdata","sti","V9.0"), package = "SticsRFiles")
-
+path <- get_examples_path(file_type = "sti")
 
 
 test_that("output is a data.frame", {
