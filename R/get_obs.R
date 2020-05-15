@@ -85,7 +85,7 @@ get_obs= function(workspace=getwd(), usm_name=NULL, usms_filename="usms.xml",jav
     },dirpath= workspace, filename= obs_name, read_it= file_exist,
     p_name= plant_names, SIMPLIFY = FALSE)
   names(obs_list)= usms
-
+  attr(obs_list, "class")= "stics_observation"
   return(obs_list)
 }
 
