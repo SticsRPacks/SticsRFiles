@@ -1,0 +1,233 @@
+---
+title: "Generating Stics XML files from Excel files data, `mailing` use case"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Generating_Stics_XML_files}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r setup, eval = TRUE, echo = TRUE}
+library(SticsRFiles)
+```
+
+
+```{r, echo = FALSE, eval = TRUE}
+workspace_path <- tempdir()
+```
+
+# Introduction
+
+* In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated files. As Excel or CSV files.
+
+* The functions operate on data stored in data.frames loaded from Excel sheets
+
+* Specialized functions for producing XML files are taking into account: initialization files, stations files, crop management files, usms and sols files 
+
+* Observations data files generation have been included while they are not in XML format. 
+
+* The generation of wheather files files are not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
+
+
+
+<!-- revoir, ou faire tableau avec type fichier et nom fonction -->
+
+# Package functions
+
+
+  * Generate xml files using a table of parameters     
+    * gen_ini_xml
+    * gen_sta_xml
+    * gen_tec_xml
+    * gen_usms_xml
+    * gen_sols_xml
+
+      
+<!--   * Used for manipulation of data from tables
+    * get_params_dict -->
+
+
+# Getting example table file
+
+## Getting inputs `Excel` example file from the `SticsRFiles` package
+
+In the following example `/path/to/target/dir` must be replaced with a real path depending on the operating system (i.e. starting with `c:/` for windows for example)
+
+```{r}
+# Getting the file in the current directory
+download_usm_xl()
+# getting the file in a specic directory
+download_usm_xl(dest_dir = "/path/to/target/dir")
+
+#> [1] "inputs_stics_example.xlsx  has been copied in directory  
+#> "/path/to/target/dir
+
+```
+
+```{r, eval=TRUE, echo = FALSE, results='hide'}
+#workspace_path
+download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = workspace_path)
+```
+
+
+## File content description
+
+**MONTRER EXEMPLE CONTENU: captures**
+
+<!-- sheets, naming conventions,... -->
+### Files names or usms/sols names in Excel sheet
+  * key words for detecting names or file names column: usm_, tec_, ini_, soil_, sta_
+
+  * files names : may be either full files names or only file names without any suffix like _tec.xml, _ini.xml or _sta.xml 
+
+
+### Consistency data checks in Excel sheets    
+For the moment *no consistency checks* functionnalities have been included in the package. So, we must take care of links between xml files names for example files names defined for usms related to names declared in `Tec`, `Station`, and so on. 
+
+
+### Excel sheets names    
+Excel sheet names are completely free, but must be meaningfull regarding to the kind of parameters they contain.
+
+
+
+# Script example for generating the `usms` XML file (*usms.xml*)
+
+## Content
+
+<!-- Only for the show -->
+```{r generate_usms_file}
+# Generate an usms.xml file
+
+library(readxl)
+library(SticsRFiles)
+
+out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
+xl_dir <- "/path/to/xl/dir"          # or something like C:/path/to/xl/dir" for Windows
+
+# Using an Excel example file (from the package)
+download_usm_xl("inputs_stics_example.xlsx", dest_dir = xl_dir)
+xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
+
+# Reading the Excel file
+xl_param <- read_excel(xl_path,sheet = "USMs")
+
+# Generating a new usms.xml file, for all xl_param lines
+gen_usms_xml(usms_param = xl_param, usms_out_file = out_file)
+```
+
+<!-- active chunk to be run -->
+```{r eval_generate_usms_file, eval = TRUE, echo = FALSE, results='hide'}
+# Generate an usms.xml file
+
+library(readxl)
+library(SticsRFiles)
+
+out_file <- file.path(workspace_path,"usms.xml")
+xl_dir <- workspace_path
+
+# Using an Excel example file (from the package)
+download_usm_xl("inputs_stics_example.xlsx", dest_dir = xl_dir)
+xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
+
+# Reading the Excel file
+xl_param <- read_excel(xl_path,sheet = "USMs")
+
+# Generating a new usms.xml file, for all xl_param lines
+gen_usms_xml(usms_param = xl_param, usms_out_file = out_file)
+```
+
+## Output XML files content
+**MONTRER EXEMPLE CONTENU: captures**
+
+## Adaptation of the script content
+
+   * For generating other files kind, the other functions may be used instead of `gen_usms_xml`, then the Excel sheet name depends on the called function. In the given Excel file as example sheets are named:
+      * ini: 
+      * ...
+      
+      The sheet name in the script is to be replaced by the above names.
+   
+   * Only adapt the **paths / directories** and **files names**. In the example script, the Excel file is given just as an example. It will be replaced by the user ones.
+   
+   * The table loaded from an Excel sheet is entirely used in the examples, but a selection may be made to generate files only for a subset
+   
+   **METTRE UN EXEMPLE DE SELECTION D'USMS**
+   
+   * One may add every function call in the script in order to produce all the files associated with all usms or a selection of. The directory containing generated files may be used directly as a JavaStics workspace for running simulations on the prevoulsy generated usms
+
+# Constraints or limitations
+  
+## For `usms` and `sols` files: 
+       
+* For the moment the functions are not taking into account the xml files content update: i.e. parameters values modification for existing `usm` or `sol`, or adding new usm or sol. This means that xml sols or usms files are newly generated upon values contained in the Excel sheets. 
+* So, all the **usm** or **sol** parameters must be present in the Excel sheet
+    
+## For `tec`, `sta` and `ini` files : 
+    
+* Take care with consistency of the base xml file provided to be duplicated and modified with parameters present in Excel sheets. Messages will be displayed in case of a misspelled parameter, or an unknown parameter in the xml file which may correspond to another Stics version than the desired one.
+  
+* **Warning**: all the parameters are not mandatory in the Excel sheet, only those that are to be modified must nbe entered.
+
+
+<!-- A REVOIR 
+Pour la partie parameter names syntax
+peut-être donner la liste des noms de parametres pour lesquels il n'y a pas correspondance
+ceux à mettre dans le fichier XL !!!
+On verra plus tard pour le dico et quand W sur la mise en cohérence des parametres
+dans le code et dans les fichiers XML !!!
+-->
+## Note on parameters names syntax
+* The exact parameters names existing in xml files (with respect to case sensitive) must be used generally in Excel sheets. But, we added some **shortcuts parameters** names for some of the which are too long or meaningless for the user.   
+
+* A list have been added to facilitate Excel sheet filling. It have been included while retreiving data from data frame with names replacement for existing ones in the correspondence list.     
+At the moment, this list is very short and restricted to few `crop management parameters` (see table below). But we intent to generalize the use of that kind of correspondance list to facilitate comprehension and parameters names manipulations.
+
+<!-- GARDER LE TABLEAU DE CORRESPONDANCE -->
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, eval = TRUE}
+library(knitr)
+library(SticsRFiles)
+dict <- get_params_dict()
+dt <- data.frame(shortcuts=names(dict), real_name=unlist(dict,use.names = FALSE))
+
+kable(dt, caption = "List of possible builtin parameters names substitution")
+```
+
+* To get this correspondance list : call get_params_dict(), as follows
+
+```{r, eval = TRUE}
+library(SticsRFiles)
+get_params_dict()
+
+```
+
+* But, it is possible to create and provide a personal list through the `dict` argument of the function.
+This argument is usable at the moment for producing only *tec* files.  When calling `gen_tec_xml` the argument dict may be set as follows, for example for irrigations parameters:
+
+```{r}  
+
+irr_dict <- list(IrrDay="julapI_or_sum_upvt", IrrDose="amount") 
+  
+gen_tec_xml(..., dict = irr_dict) 
+```
+
+* The final used dictionnary is calculated as follows, merged from the internal one and the given one 
+```{r, eval=TRUE}  
+
+irr_dict <- list(IrrDay="julapI_or_sum_upvt", IrrDose="amount") 
+  
+dict <- get_params_dict(irr_dict)
+
+dict
+
+```
+
+
