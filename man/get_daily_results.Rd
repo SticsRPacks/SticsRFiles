@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_daily_results.R
 \name{get_daily_results}
 \alias{get_daily_results}
-\title{Loading Stics daily output file(s)}
+\title{Load and format Stics daily output file(s)}
 \usage{
 get_daily_results(
   workspace,
@@ -19,17 +19,17 @@ get_daily_results(
 \arguments{
 \item{workspace}{Stics or JavaStics workspace path containing the \code{mod_s*.sti} files (see details)}
 
-\item{usm_name}{vector of usm(s) names}
+\item{usm_name}{usm name(s) to filter}
 
-\item{var_list}{vector of output variables names (optional, see \code{get_var_info()} to get the names of the variables)}
+\item{var_list}{vector of output variables names to filter (optional, see \code{get_var_info()} to get the names of the variables)}
 
-\item{doy_list}{vector of cumulative DOYs (optional)}
+\item{doy_list}{vector of cumulative DOYs to filter (optional)}
 
-\item{dates_list}{list of dates (optional)}
+\item{dates_list}{list of dates to filter (optional)}
 
-\item{mixed}{value (recycled) or vector of. \code{TRUE}: intercrop, \code{FALSE}: sole crops (default), \code{NULL}: guess from XML files.}
+\item{mixed}{A booean (recycled), or a list of. \code{TRUE}: intercrop, \code{FALSE}: sole crops (default), \code{NULL}: guess from XML file.}
 
-\item{usms_file}{usms file path (e.g. "usms.xml") in case of \code{NULL} values in \code{mixed}.}
+\item{usms_file}{usms file path (e.g. "usms.xml") if any \code{mixed= NULL}.}
 
 \item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace)}
@@ -37,15 +37,16 @@ but rather in the JavaStics default workspace)}
 \item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 }
 \value{
-A tibble or a list of
+A list, where each element is a tibble of simulation results for the given usm. The list is named
+after the usm name.
 }
 \description{
-Reading daily file(s) (mod_s*.sti) as a tibble with possible selection
-on variable names, cumulative DOY, dates list.
+Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
+possible selection on variable names, cumulative DOY, dates list.
 }
 \details{
-The function can guess if the usm(s) are mixed or not by reading the XML
-input files. To do so, set the \code{mixed} argument to \code{NULL}.
+The function can guess if the usm(s) is/are mixed or not by reading the XML
+input file. To do so, set the \code{mixed} argument to \code{NULL}.
 }
 \examples{
 \dontrun{
