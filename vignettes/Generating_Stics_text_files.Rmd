@@ -6,8 +6,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 params:
-  javastics_path: /tmp/JavaSTICS-v141-stics-v9.1
-  workspace_path: /tmp/JavaSTICS-v141-stics-v9.1/example
+  javastics_path: /tmp/JavaSTICS-1.41-stics-9.1
+  workspace_path: /tmp/JavaSTICS-1.41-stics-9.1/example
   output_path: /tmp/example
 ---
 
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo= TRUE, eval = TRUE}
+```{r setup, echo = TRUE, eval = TRUE}
 library(SticsRFiles)
 library(SticsOnR)
 ```
@@ -39,17 +39,19 @@ output_path <- params$output_path
 
 
 ## Converting JavaStics workspace files
-For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace. The model is then run using the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html)
+For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace. 
 
-Observation files may also be copied if they have a standard name as an usm name and a `.obs` extension. If not, they must be renamed to do so.
+Then, the model can be run using the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html)
 
-```{r paths_def}
+Observation files may also be copied if they have a standard name corresponding to a usm name and a `.obs` extension. If not, they must be renamed to do so.
+
+```{r paths_def, eval = FALSE}
 # Specifying the JavaStics folder
 javastics_path <- "/path/to/JavaSTICS-1.41-stics-9.1"
 
 # Specifying a workspace as a subfolder of JavaStics 
 workspace_path <- "example"
-# or an absolute path to an extrenal folder
+# or an absolute path to an external folder
 # workspace_path <- "/path/to/javastics/workspace"
 
 # Specifying an output folder path 
@@ -58,38 +60,92 @@ output_path <- "/path/to/output/folder"
 ```
 
 ## Converting files into separated folders (one per usm)
-```{r convert_to_separate}
-# Generating files for all the usms contained in the workspace
-# Into the workspace
+```{r convert_to_separate_1, eval = FALSE}
+## Generating files for all the usms contained in the workspace
+
+# Into the workspace directory
 gen_usms_xml2txt(javastics_path, workspace_path)
-# Into a specific output folder
-gen_usms_xml2txt(javastics_path, workspace_path, target_path = output_path)
+#> ℹ USM 'SugarCane' successfully created
+#> ℹ USM 'potato' successfully created
+#> ℹ USM 'banana' successfully created
+#> ℹ USM 'sorghum' successfully created
+#> ℹ USM 'barley' successfully created
+#> ℹ USM 'sugarbeet' successfully created
+#> ℹ USM 'wheat' successfully created
+#> ℹ USM 'maize' successfully created
+#> ℹ USM 'soybean' successfully created
+#> ℹ USM 'lettuce' successfully created
+#> ℹ USM 'tomato' successfully created
+#> ℹ USM 'DurumWheat' successfully created
+#> ℹ USM 'rapeseed' successfully created
+#> ℹ USM 'sunflower' successfully created
+#> ℹ USM 'grass' successfully created
+#> ℹ USM 'BareSoil' successfully created
+#> ℹ USM 'demo_Wheat1' successfully created
+#> ℹ USM 'demo_BareSoil2' successfully created
+#> ℹ USM 'demo_maize3' successfully created
+#> ℹ USM 'DurumWheat_4years' successfully created
+#> ℹ USM 'maize_4years' successfully created
+#> ℹ USM 'strawberry' successfully created
+#> ℹ USM 'pea' successfully created
+#> ℹ USM 'vine' successfully created
+#> ℹ USM 'fescue' successfully created
+#> ℹ USM 'flax' successfully created
+#> ℹ USM 'intercrop_pea_barley' successfully created
+#> ℹ USM 'timothy' successfully created
+#> ℹ USM 'DurumWheat_snow' successfully created
+#> ℹ USM 'Turmeric' successfully created
+#> ℹ USM 'cc_BristleOat' successfully created
+#> ℹ USM 'cc_mustard' successfully created
+#> ℹ USM 'cc_ItalianRyegrass' successfully created
+#> ℹ USM 'cc_vetch' successfully created
+#> ℹ USM 'cc_CrimsonClover' successfully created
+#> ℹ USM 'proto_rice' successfully created
 
-# Generating files for a subset of usms
-# Into the workspace
-gen_usms_xml2txt(javastics_path, workspace_path, usms_list = c("banana","wheat"))
+```
+
+```{r convert_to_separate_2, eval = FALSE}
+
+# Into a specific output folder, with verbose mode turned off
+gen_usms_xml2txt(javastics_path, workspace_path,
+                 target_path = output_path,
+                 verbose = FALSE)
+
+
+## Generating files for a subset of usms
+# Into the workspace directory
+gen_usms_xml2txt(javastics_path, workspace_path, 
+                 usms_list = c("banana","wheat"))
+#> ℹ USM 'banana' successfully created
+#> ℹ USM 'wheat' successfully created
+
 # Into a specific folder
-gen_usms_xml2txt(javastics_path, workspace_path, usms_list = c("banana","wheat"), target_path = output_path)
+gen_usms_xml2txt(javastics_path, workspace_path, 
+                 usms_list = c("banana","wheat"),
+                 target_path = output_path)
+#> ℹ USM 'banana' successfully created
+#> ℹ USM 'wheat' successfully created
 
-# Getting returned information about files generation
-gen_info <- gen_usms_xml2txt(javastics_path, workspace_path, usms_list = c("banana","wheat"), target_path = output_path)
+```
+
+```{r convert_to_separate_3, eval = FALSE}
+## Getting returned information about files generation
+gen_info <- gen_usms_xml2txt(javastics_path, workspace_path,
+                             usms_list = c("banana","wheat"),
+                             target_path = output_path)
+#> ℹ USM 'banana' successfully created
+#> ℹ USM 'wheat' successfully created
+
 
 gen_info
-#> $usms_paths
-#> [1] "banana" "wheat" 
+#> $usms_path
+#> [1] "/path/to/JavaSTICS-1.41-stics-9.1/example/banana"
+#> [2] "/path/to/JavaSTICS-1.41-stics-9.1/example/wheat" 
 #> 
-#> $files_path
-#>  [1] "/tmp/JavaSTICS-v141-stics-v9.1/example/climat.txt"     
-#>  [2] "/tmp/JavaSTICS-v141-stics-v9.1/example/param.sol"      
-#>  [3] "/tmp/JavaSTICS-v141-stics-v9.1/example/ficini.txt"     
-#>  [4] "/tmp/JavaSTICS-v141-stics-v9.1/example/ficplt1.txt"    
-#>  [5] "/tmp/JavaSTICS-v141-stics-v9.1/example/fictec1.txt"    
-#>  [6] "/tmp/JavaSTICS-v141-stics-v9.1/example/station.txt"    
-#>  [7] "/tmp/JavaSTICS-v141-stics-v9.1/example/new_travail.usm"
-#>  [8] "/tmp/JavaSTICS-v141-stics-v9.1/example/tempopar.sti"   
-#>  [9] "/tmp/JavaSTICS-v141-stics-v9.1/example/tempoparv6.sti" 
-#> [10] "/tmp/JavaSTICS-v141-stics-v9.1/example/ficplt2.txt"    
-#> [11] "/tmp/JavaSTICS-v141-stics-v9.1/example/fictec2.txt"    
+#> $files
+#>  [1] "climat.txt"      "param.sol"       "ficini.txt"      "ficplt1.txt"    
+#>  [5] "fictec1.txt"     "station.txt"     "new_travail.usm" "tempopar.sti"   
+#>  [9] "tempoparv6.sti"  "ficplt2.txt"     "fictec2.txt"    
 #> 
 #> $copy_status
 #> [1] TRUE TRUE
@@ -103,11 +159,13 @@ gen_info
 # Generating files directly in the workspace or a specific folder (no usm sub-folder) 
 # In this case the model files are overwritten at each gen_usms_xml2txt call !
 # In the workspace
-gen_usms_xml2txt(javastics_path, workspace_path, usms_list = "banana", dir_per_usm_flag = FALSE)
+gen_usms_xml2txt(javastics_path, workspace_path, usms_list = "banana",
+                 dir_per_usm_flag = FALSE, verbose = FALSE)
 
 # In a specific folder
 gen_usms_xml2txt(javastics_path, workspace_path, usms_list = "banana", 
-                 target_path = output_path, dir_per_usm_flag = FALSE)
+                 target_path = output_path, dir_per_usm_flag = FALSE,
+                 verbose = FALSE)
 
 
 ```

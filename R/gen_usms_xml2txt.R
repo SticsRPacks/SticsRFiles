@@ -21,9 +21,9 @@
 #' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
 #'
 #' @return A list with named elements:
-#' usms_paths : created directories names (Stics input files),
-#' files_path : generated files list paths (in JavaStics workspace origin),
-#' copy_status : logical value vector, indicating if all files have been generated
+#' usms_path : created directories paths (for storing Stics input files),
+#' files : generated files list (in JavaStics workspace origin),
+#' copy_status : logical value vector, indicating if all files have been generated for each usm
 #' obs_copy_status : logical value vector, indicating if observaion files have been
 #' successfully copied in usms directories
 #'
@@ -185,6 +185,8 @@ gen_usms_xml2txt <- function(javastics_path,
 
 
   #start_time <- Sys.time()
+  # For keeping target usms dir paths
+  usms_path <- vector(mode = "character", usms_number)
 
   for (i in 1:usms_number) {
     #foreach(i = 1:usms_number, .export = ".GlobalEnv") %dopar% {
@@ -247,7 +249,8 @@ gen_usms_xml2txt <- function(javastics_path,
     # displaying usm name
     if(verbose) cli::cli_alert_info("USM {.val {usm_name}} successfully created")
 
-
+    # Storing the current usm target path
+    usms_path[i] <- usm_path
   }
 
   # Messages if failing copies
@@ -264,10 +267,9 @@ gen_usms_xml2txt <- function(javastics_path,
 
   # Returning a list of created directories and files copy status
   # for each directory ( FALSE if any files copy error )
-  return(invisible(list(usms_paths = usms_list, files_path = files_path,
+  return(invisible(list(usms_path = usms_path, files = basename(files_path),
                         copy_status = global_copy_status,
                         obs_copy_status = obs_copy_status)))
-
 
 
 }

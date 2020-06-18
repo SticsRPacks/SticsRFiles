@@ -33,9 +33,9 @@ FALSE if USM files are generated in the target_path (only useful for usms_list o
 }
 \value{
 A list with named elements:
-usms_paths : created directories names (Stics input files),
-files_path : generated files list paths (in JavaStics workspace origin),
-copy_status : logical value vector, indicating if all files have been generated
+usms_path : created directories paths (for storing Stics input files),
+files : generated files list (in JavaStics workspace origin),
+copy_status : logical value vector, indicating if all files have been generated for each usm
 obs_copy_status : logical value vector, indicating if observaion files have been
 successfully copied in usms directories
 }
