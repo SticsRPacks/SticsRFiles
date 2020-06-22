@@ -2,30 +2,37 @@
 % Please edit documentation in R/get_plants_nb.R
 \name{get_plants_nb}
 \alias{get_plants_nb}
-\title{Getting plants number per usm, all or selected from a given list}
+\title{Getting plants number per usm for all usms or selected from a usm name vector}
 \usage{
-get_plants_nb(usm_xml_path, usms_list = c())
+get_plants_nb(usm_file_path, usms_list = c())
 }
 \arguments{
-\item{usm_xml_path}{Path of usms.xml file}
+\item{usm_file_path}{Path of usms.xml or new_travail.usm file}
 
-\item{usms_list}{Usms selection list inside usms from usms.xml file (optional, see details)}
+\item{usms_list}{Usm(s) name(s) (optional, see details)}
 }
 \value{
-A names numeric vector of plants number per usm
+A named numeric vector of plants number per usm
 }
 \description{
-Extracting plant number from usms.xml file data
+Extracting plant number from usms.xml or new_travail.usm file data
 }
 \details{
-Use \code{get_usms_list()} to get the list of the usm names.
+Use \code{get_usms_list()} to get the list of the usm names for an usms.xml file.
 }
 \examples{
 \dontrun{
+
+# Xml case
 xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
 get_plants_nb(xml_usms)
 get_plants_nb(xml_usms,"wheat")
 get_plants_nb(xml_usms,c("wheat","intercrop_pea_barley"))
+
+# Txt case
+txt_usm <- file.path(get_examples_path( file_type = "txt"),"new_travail.usm")
+get_plants_nb(txt_usm)
+
 }
 
 }
