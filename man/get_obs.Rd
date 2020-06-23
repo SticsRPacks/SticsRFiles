@@ -26,7 +26,7 @@ but rather in the JavaStics default workspace). Only used to get the plants name
 }
 \value{
 A list of \code{data.frame}s with observations. The function always returns a list of \code{data.frame}s for the corresponding usm,
-even if an \code{.obs} file is missing (in this case it returns a \code{data.frame} with 0 rows and 0 columns.
+even if an \code{.obs} file is missing (in this case it returns an empty \code{data.frame}).
 }
 \description{
 Read STICS observation files from a JavaStics workspace and store data into a list per usm

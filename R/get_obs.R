@@ -81,7 +81,7 @@ get_obs= function(workspace=getwd(), usm_name=NULL, usms_filename="usms.xml",jav
       get_obs_int(dirpath,filename,p_name)%>%
         dplyr::select_if(function(x){any(!is.na(x))}) # Remove variables with only NAs.
     }else{
-      #data.frame()
+      data.frame()
     }
     },dirpath= workspace, filename= obs_name, read_it= file_exist,
     p_name= plant_names, SIMPLIFY = FALSE)
