@@ -16,7 +16,7 @@
 #' function read the obs files from all usms listed in `usms_filename` and present in the `workspace` folder.
 #'
 #' @return A list of `data.frame`s with observations. The function always returns a list of `data.frame`s for the corresponding usm,
-#' even if an `.obs` file is missing (in this case it returns a `data.frame` with 0 rows and 0 columns.
+#' even if an `.obs` file is missing (in this case it returns an empty `data.frame`).
 #'
 #' @examples
 #' \dontrun{
@@ -62,13 +62,14 @@ get_obs= function(workspace=getwd(), usm_name=NULL, usms_filename="usms.xml",jav
     usms= usm_name
   }
 
-  nb_plants= get_plants_nb(file.path(workspace,usms_filename))[usms]
-  is_mixed= nb_plants > 1
+  # Intercopping ?
+  mixed= get_plants_nb(file.path(workspace,usms_filename))[usms] > 1
+
   # Extracting expected observation file names:
   obs_name= vector(mode= "list", length = length(usms))
   names(obs_name)= usms
-  obs_name[!is_mixed]= paste0(usms[!is_mixed],".obs")
-  obs_name[is_mixed]= lapply(usms[is_mixed], function(x){paste0(x,c("p","a"),".obs")})
+  obs_name[!mixed]= paste0(usms[!mixed],".obs")
+  obs_name[mixed]= lapply(usms[mixed], function(x){paste0(x,c("p","a"),".obs")})
 
   file_exist= lapply(obs_name, function(x)file.exists(file.path(workspace,x)))
 
@@ -80,7 +81,7 @@ get_obs= function(workspace=getwd(), usm_name=NULL, usms_filename="usms.xml",jav
       get_obs_int(dirpath,filename,p_name)%>%
         dplyr::select_if(function(x){any(!is.na(x))}) # Remove variables with only NAs.
     }else{
-      data.frame()
+      #data.frame()
     }
     },dirpath= workspace, filename= obs_name, read_it= file_exist,
     p_name= plant_names, SIMPLIFY = FALSE)
