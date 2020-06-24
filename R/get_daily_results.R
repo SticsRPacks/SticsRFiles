@@ -208,7 +208,7 @@ get_daily_result <- function(workspace,
 
     results_tbl =
       try(data.table::fread(file.path(workspace,paste0("mod_s",usm_name,".sti")),
-                            data.table = FALSE)%>%dplyr::as.tbl())
+                            data.table = FALSE)%>%tibble::as_tibble())
     if(inherits(results_tbl,"try-error")){
       cli::cli_alert_warning("couldn't find valid outputs for usm {.val {usm_name}}. Please check the file: {.val {out_file_path}}")
       return()
