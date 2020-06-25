@@ -49,20 +49,30 @@
 #' }
 #'
 #'
-get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL) {
+get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL, flat_shape = TRUE) {
 
 
   # for managing a files list
   if (length(file_path) > 1) {
     files_exist <- file.exists(file_path)
 
-    if (!all(files_exist)) warning("Missing files: ", paste(file_path[!files_exist]), collapse=",")
+    if (!all(files_exist)) warning("Missing files: ", paste(file_path[!files_exist], collapse=","))
 
-    df <- data.table::rbindlist(lapply(file_path[files_exist],
-                                       function(x) get_xml_files_param_df(x,
-                                                                          select = select,
-                                                                          name = name,
-                                                                          param_names = param_names)))
+    if (!any(files_exist)) stop("Not any files exist !")
+
+    files_df <- lapply(file_path[files_exist],
+           function(x) get_xml_files_param_df(x,
+                                              select = select,
+                                              name = name,
+                                              param_names = param_names,
+                                              flat_shape = TRUE))
+
+    df <- data.table::rbindlist(files_df)
+
+    if (! flat_shape) {
+      df <- df_wider(df)
+    }
+
     return(df)
   }
 
@@ -78,33 +88,23 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   if (!base::is.null(select)) names_list <- get_param_xml(file_path, param_name = select)[[1]]
 
   # Getting all usm or sol names from the file
+  select_name <- FALSE
   if (is.null(name)) {
-    name <- names_list
+    #name <- names_list
   } else {
     # Checking names
-    exist_names <- name %in% names_list
-    if (! all(exist_names)) {
-      stop("Missing names in file: ", paste(name[!exist_names], collapse = ","))
+    exist_names <- names_list %in% name
+    if (sum(exist_names) < length(name)) {
+      miss_names <- setdiff(name, names_list[exist_names])
+      warning("Missing names in file: ", paste(miss_names, collapse = ","))
     }
-  }
-
-
-  ### Add filter on name at the end ###################
-
-  # Getting full param names list
-  all_param_names <- get_param_names_xml(file_path)$name
-
-  # Getting parameters names vector
-  # Without or with selection against param_names list
-  if (base::is.null(param_names)) {
-    param_names <- all_param_names
-  } else {
-    param_names <- all_param_names[ all_param_names %in% param_names ]
+    select_name <- TRUE
+    target_name <- names_list[exist_names]
   }
 
   # for one name
   # param_values <- get_param_xml(file_path, param_names = param_names, select = select, value = name)[[1]]
-  param_values <- get_param_xml(file_path, param_name = param_names, select = select, value = name)[[1]]
+  param_values <- get_param_xml(file_path, param_name = param_names)[[1]]
 
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
@@ -119,19 +119,19 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   param <- rep(names(param_values), values_nb)
 
   # Calculating identifier for each occurrence of a parameter and name column
-  if (base::is.null(name)) {
+  if (base::is.null(select)) {
     id <- unlist(lapply(values_nb, function(x)  {l <- NA; if (x > 1) l <- 1:x; return(l)}), use.names = FALSE)
     name_col <- rep(basename(file_path), sum(values_nb))
   } else {
     # Getting values nb for each usm or sol
-    values_per_par <- length(name)
+    values_per_par <- length(names_list)
 
     id <- unlist(lapply(values_nb, function(x)
     {l <- rep(NA, x); if (x > values_per_par) l <- rep(1:(x/values_per_par), values_per_par); return(l)}),
     use.names = FALSE)
 
     name_col <- unlist(lapply(values_nb, function(x)
-    {l <- name; if (x > values_per_par) l <- unlist(lapply(name, function(y) rep(y,x/values_per_par))); return(l)}),
+    {l <- names_list; if (x > values_per_par) l <- unlist(lapply(names_list, function(y) rep(y,x/values_per_par))); return(l)}),
     use.names = FALSE)
   }
 
@@ -146,5 +146,32 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
                         id = id,
                         value = unlist(param_values, use.names = F),
                         stringsAsFactors = FALSE)
+
+  if (select_name) {
+    filter(data_df, name_list %in% target_name)
+  }
+
+  if ( !flat_shape ) {
+    data_df <- df_wider(data_df)
+  }
+
+
   return(data_df)
 }
+
+
+
+df_wider <- function(df, convert_type = TRUE, stringAsFactors = FALSE) {
+
+  valid_id <- !is.na(df$id)
+  df$param[valid_id] <- paste0(df$param[valid_id], "_", as.character(df$id[valid_id]))
+
+  # parameters wider data.frame
+  df <- df %>% select(-id) %>% tidyr::pivot_wider(names_from = param, values_from = value)
+
+  if (convert_type) df <- type.convert(df, as.is = !stringAsFactors)
+
+  return(df)
+}
+
+

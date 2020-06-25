@@ -8,7 +8,8 @@ get_xml_files_param_df(
   file_path,
   select = NULL,
   name = NULL,
-  param_names = NULL
+  param_names = NULL,
+  flat_shape = TRUE
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ get_xml_files_param_df(
 \item{name}{value used for select (optional)}
 
 \item{param_names}{vector of parameters names (optional)}
+
+\item{flat_shape}{optional logical for keeping the flat data.frame (TRUE, default)
+or converting it to a wider one (FALSE)}
 }
 \value{
 A data.frame with name, type, param, id and value columns
