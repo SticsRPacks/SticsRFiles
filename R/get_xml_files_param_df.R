@@ -4,6 +4,8 @@
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
 #' @param name value used for select (optional)
 #' @param param_names vector of parameters names (optional)
+#' @param flat_shape optional logical for keeping the flat data.frame (TRUE, default)
+#' or converting it to a wider one (FALSE)
 #'
 #' @return A data.frame with name, type, param, id and value columns
 #'
@@ -52,7 +54,7 @@
 get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL, flat_shape = TRUE) {
 
 
-  # for managing a files list
+  # For managing a files list
   if (length(file_path) > 1) {
     files_exist <- file.exists(file_path)
 
@@ -69,6 +71,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
     df <- data.table::rbindlist(files_df)
 
+    # Conversion to a wider table (with type conversion)
     if (! flat_shape) {
       df <- df_wider(df)
     }
@@ -118,6 +121,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   # Getting expanded parameters names vector
   param <- rep(names(param_values), values_nb)
 
+  id <- NULL
   # Calculating identifier for each occurrence of a parameter and name column
   if (base::is.null(select)) {
     id <- unlist(lapply(values_nb, function(x)  {l <- NA; if (x > 1) l <- 1:x; return(l)}), use.names = FALSE)
@@ -148,9 +152,10 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
                         stringsAsFactors = FALSE)
 
   if (select_name) {
-    filter(data_df, name_list %in% target_name)
+    dplyr::filter(data_df, names_list %in% target_name)
   }
 
+  # Conversion to a wider table (with type conversion)
   if ( !flat_shape ) {
     data_df <- df_wider(data_df)
   }
@@ -167,9 +172,9 @@ df_wider <- function(df, convert_type = TRUE, stringAsFactors = FALSE) {
   df$param[valid_id] <- paste0(df$param[valid_id], "_", as.character(df$id[valid_id]))
 
   # parameters wider data.frame
-  df <- df %>% select(-id) %>% tidyr::pivot_wider(names_from = param, values_from = value)
+  df <- df %>% dplyr::select(-"id") %>% tidyr::pivot_wider(names_from = "param", values_from = "value")
 
-  if (convert_type) df <- type.convert(df, as.is = !stringAsFactors)
+  if (convert_type) df <- utils::type.convert(df, as.is = !stringAsFactors)
 
   return(df)
 }

@@ -40,7 +40,8 @@ Imports:
     xslt,
     dplyr,
     cli,
-    tibble
+    tibble,
+    tidyr
 Suggests:
     SticsOnR,
     knitr,
