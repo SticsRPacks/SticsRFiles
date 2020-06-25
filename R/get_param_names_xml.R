@@ -97,7 +97,7 @@ get_param_names_xml <- function(xml_file,
 
   # Getting optional bounds
   if (bounds) {
-    param_bounds <- get_param_bounds(xml_doc = xmldocument(xml_file),
+    param_bounds <- get_param_bounds(xml_doc = xml_doc,
                                      param_name = param_names,
                                      output = output)
   }
