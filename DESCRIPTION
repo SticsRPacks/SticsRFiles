@@ -39,7 +39,8 @@ Imports:
     stringr,
     xslt,
     dplyr,
-    cli
+    cli,
+    tibble
 Suggests:
     SticsOnR,
     knitr,
