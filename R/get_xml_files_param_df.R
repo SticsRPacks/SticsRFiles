@@ -60,9 +60,9 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
     df <- data.table::rbindlist(lapply(file_path[files_exist],
                                        function(x) get_xml_files_param_df(x,
-                                                                         select = select,
-                                                                         name = name,
-                                                                         param_names = param_names)))
+                                                                          select = select,
+                                                                          name = name,
+                                                                          param_names = param_names)))
     return(df)
   }
 
@@ -88,14 +88,8 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
     }
   }
 
-  # For a vector of usm or sol names
-  if (length(name) > 1) {
-    return(data.table::rbindlist(lapply(name,
-                                        function(x) get_xml_files_param_df(file_path = file_path,
-                                                                          select = select,
-                                                                          name = x,
-                                                                          param_names = param_names))))
-  }
+
+  ### Add filter on name at the end ###################
 
   # Getting full param names list
   all_param_names <- get_param_names_xml(file_path)$name
@@ -109,22 +103,38 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   }
 
   # for one name
-  param_values <- get_param_xml(file_path, param_names = param_names, select = select, value = name)[[1]]
+  # param_values <- get_param_xml(file_path, param_names = param_names, select = select, value = name)[[1]]
+  param_values <- get_param_xml(file_path, param_name = param_names, select = select, value = name)[[1]]
+
+  # Checking if only one parameter, param_values == numerical vector
+  if (length(param_names) == 1) {
+    param_values <- list(param_values)
+    names(param_values) <- param_names
+  }
 
   # Getting parameters values number
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
   # Getting expanded parameters names vector
-  param <-  rep(names(param_values), values_nb)
+  param <- rep(names(param_values), values_nb)
 
-  # Calculating identifier for each occurrence of a parameter
-  id <- unlist(lapply(values_nb, function(x)  {l <- NA; if (x > 1) l <- 1:x; return(l)}), use.names = FALSE)
-
+  # Calculating identifier for each occurrence of a parameter and name column
   if (base::is.null(name)) {
+    id <- unlist(lapply(values_nb, function(x)  {l <- NA; if (x > 1) l <- 1:x; return(l)}), use.names = FALSE)
     name_col <- rep(basename(file_path), sum(values_nb))
   } else {
-    name_col <- rep(name, sum(values_nb))
+    # Getting values nb for each usm or sol
+    values_per_par <- length(name)
+
+    id <- unlist(lapply(values_nb, function(x)
+    {l <- rep(NA, x); if (x > values_per_par) l <- rep(1:(x/values_per_par), values_per_par); return(l)}),
+    use.names = FALSE)
+
+    name_col <- unlist(lapply(values_nb, function(x)
+    {l <- name; if (x > values_per_par) l <- unlist(lapply(name, function(y) rep(y,x/values_per_par))); return(l)}),
+    use.names = FALSE)
   }
+
 
   # Setting file type
   type_col <- rep(get_xml_type(file_path), sum(values_nb))
@@ -134,7 +144,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
                         type = type_col,
                         param = param,
                         id = id,
-                        value=unlist(param_values, use.names = F),
+                        value = unlist(param_values, use.names = F),
                         stringsAsFactors = FALSE)
   return(data_df)
 }
