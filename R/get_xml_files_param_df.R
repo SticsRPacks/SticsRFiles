@@ -152,7 +152,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
                         stringsAsFactors = FALSE)
 
   if (select_name) {
-    dplyr::filter(data_df, names_list %in% target_name)
+    data_df <- dplyr::filter(data_df, name %in% target_name)
   }
 
   # Conversion to a wider table (with type conversion)
