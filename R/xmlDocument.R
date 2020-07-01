@@ -102,7 +102,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   attr_list=NULL
   node_set=getNodeS(docObj,path)
   #
-  #browser("test getAttrs")
+
   if (base::is.null(node_set)) {
     return(attr_list)
   }
@@ -149,6 +149,8 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj,path) {
   if (any_null && docObj@warn ) {
     warning(paste("Existing nodes without any attributes on xpath",path))
   }
+
+  #browser("test getAttrs")
 
   # testing if all nodes have the same attributes !!
   if (!is.matrix(attr_list) && !is.matrix(attr_list[,]) ) {
@@ -201,6 +203,8 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
   #browser()
   sel_values=NULL
 
+
+
   # getting attributes values from doc
   attr_values=getAttrs(docObj,path)
 
@@ -215,7 +219,6 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
     return(attr_values)
   }
 
-  #browser()
 
   # finding existing attr names in path
   sel = is.element(colnames(attr_values),attr_list)
@@ -228,6 +231,8 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
     }
   }
 
+  #browser()
+
   # getting existing names from attr_list in attr_values
   # and getting the original order in initial attr_list
   found_list <- intersect(colnames(attr_values)[sel], attr_list)
@@ -237,9 +242,18 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
   #by the col names
   sel_values = attr_values[,sel_list]
 
+  # If only one column selected, restoring matrix format
+  if ( length(sel_list) == 1 ) {
+    sel_values <- as.matrix(sel_values)
+    colnames(sel_values) <- sel_list
+  }
+
   # keeping only lines specified by nodes_ids
-  if ( !base::is.null(nodes_ids) ) {
+  if ( !base::is.null(nodes_ids) &&
+       max(nodes_ids)<= dim(sel_values)[1] ) {
     sel_values <- sel_values[nodes_ids, ]
+  } else {
+    stop("Subscript out of range, check ids !")
   }
 
   return(sel_values)
@@ -249,17 +263,27 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
 # factoriser avec getAttrs!! + getNode(docObj,path,kind)
 setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj,path,nodes_ids=NULL) {
 
-  #browser()
+
   node_set=getNodeS(docObj,path)
 
-  if (length(node_set) == 0) { return(invisible()) }
+  # getting nodes number
+  nodes_nb <- length(node_set)
 
-  if ( !base::is.null(nodes_ids) ) {
+  if ( nodes_nb == 0) { return(invisible()) }
+
+  # browser()
+
+  if ( !base::is.null(nodes_ids) &&
+       max(nodes_ids) <= nodes_nb ) {
     node_set = node_set[nodes_ids]
+  } else {
+    stop("Subscript out of range, check ids !")
+    # return(invisible())
   }
 
-  # browser("getValues")
-  val_list=unlist(lapply(node_set,function(x) xmlValue(x)))
+  # Getting values from the node_set
+  val_list <- unlist(lapply(node_set,function(x) xmlValue(x)))
+
   return(val_list)
 })
 

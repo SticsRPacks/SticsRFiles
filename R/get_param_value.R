@@ -44,17 +44,15 @@ get_param_value <- function(xml_doc,
   # For one parameter: return also a named list, not a vector to be consistent
   # with several parameters
 
-  # Manage ids and show_xpath and remove them from the list
-  ids <- NULL
-  show_xpath <- FALSE
 
-  # ... for getting : ids, show_xpath arguments
+  # ... for getting : ids, show_xpath and mult_par arguments
   dot_args= list(...)
   dot_names <- names(dot_args)
 
   # Getting ids and show_xpath
-  if ("ids" %in% dot_names) ids <- dot_args$ids
-  if ("show_xpath" %in% dot_names) show_xpath <- dot_args$show_xpath
+  if ("ids" %in% dot_names) ids <- dot_args$ids else ids <- NULL
+  if ("show_xpath" %in% dot_names) show_xpath <- dot_args$show_xpath else show_xpath <- FALSE
+
 
   # Getting parent informations to put them in the query
   # parent_idx <- dot_names %in% c("ids", "show_xpath")
@@ -71,7 +69,7 @@ get_param_value <- function(xml_doc,
 
 
   # Getting param values for the same parameters for the xml documents list
-  if ( base::is.list((xml_doc)) ) {
+  if ( base::is.list( xml_doc ) ) {
     values <- lapply(xml_doc, function(x) get_param_value(xml_doc = x,
                                                           param_name = param_name,
                                                           parent_name = parent_name,
@@ -83,23 +81,17 @@ get_param_value <- function(xml_doc,
   # If no given parameters names
   if (base::is.null(param_name)) param_name <- get_param_names(xml_doc)
 
-  # only one parameter
-  # if (length(param_name) == 1) {
-  #   param_value <- list(get_param_value(xml_doc = xml_doc,
-  #                   param_name = param_name,
-  #                   parent_name = parent_name,
-  #                   parent_sel_attr = parent_sel_attr,
-  #                   ...))
-  #   names(param_value) <- param_name
-  #   return(param_value)
-  # }
+  # Setting multiple parameters names flag
+  if ("mult_par" %in% dot_names) mult_par <- dot_args$mult_par else mult_par = FALSE
 
-  # recursive call for a parameter name list
+
+  # recursive call for a list of parameter names
   if (length(param_name) > 1) {
     param_value <- lapply(param_name, function(x) get_param_value(xml_doc = xml_doc,
                                                                   param_name = x,
                                                                   parent_name = parent_name,
                                                                   parent_sel_attr = parent_sel_attr,
+                                                                  mult_par = TRUE,
                                                                   ...))
 
     sel_values <- !unlist(lapply(param_value, base::is.null))
@@ -107,11 +99,6 @@ get_param_value <- function(xml_doc,
     names(param_value) <- param_name[sel_values]
     return(param_value)
   }
-
-
-  # Fixing parent's information
-  #parent_name <- parent_list$parent_name
-  #parent_sel_attr <- parent_list$parent_sel_attr
 
   # Getting param type and path
   param_type <- get_param_type(xml_doc = xml_doc,
@@ -129,13 +116,12 @@ get_param_value <- function(xml_doc,
   }
 
   if ( base::is.null(xpath) ) {
-    #stop("Unknown parameter name !")
     return(value)
   }
 
 
 
-  # TODO: see if could be simplified with a default case !
+  # TODO: see if it could be simplified with a default case !
   switch(type,
          nodename= {
            value=getValues(xml_doc,xpath,ids)
@@ -207,23 +193,21 @@ get_param_value <- function(xml_doc,
   #nb_num <- length(grep("[^- |0-9|.|e|+]",value, invert = T))
   num_value <- suppressWarnings(as.numeric(value))
   is_number <- suppressWarnings(!is.na(num_value))
-  #if ( nb_num == length(value) )  {
+
+  # conversion to numeric
   if ( all(is_number) )  {
-    #value <- suppressWarnings(as.numeric(num_value))
     value <- num_value
   }
 
-  # TODO: see if finally useless, checks done in getValues ?
-  # if (! base::is.null(ids) ) {
-  #   # check ids
-  #   if ( max(ids) > param_type$length ) {
-  #     stop("Subscript out of range, check ids !")
-  #   }
-  #   #value=value[ids]
-  # }
-
 
   value <- suppressWarnings(as.vector(value))
+
+  # Converting value to a names list for only one parameter request
+  if (!mult_par) {
+    value <- list(value)
+    names(value) <- param_name
+  }
+
 
   return(value)
 }

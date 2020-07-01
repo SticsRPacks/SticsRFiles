@@ -3,7 +3,8 @@
 #' @param file_type A file type string among files types ("csv", "obs", "sti", "txt", "xml")
 #' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
 #'
-#' @return A directory path for examples files for given file type and STICS version
+#' @return A directory path for examples files for given file type and STICS version or
+#' NULL if missing file_type (types list is displayed)
 #'
 #' @export
 #'
@@ -22,8 +23,17 @@
 #' }
 get_examples_path <- function(file_type, version_name = "last") {
 
-  # Checking file type existence
-  if (! file_type %in% get_examples_types()) stop("Unknown file_type: ", file_type)
+  # Getting files types list
+  example_types <- get_examples_types()
+
+  # If not any arguments : displaying files types list
+  if( missing(file_type)) {
+    cat("Available files types: ", paste(get_examples_types(), collapse=","))
+    return(invisible())
+  }
+
+  # Checking if file_type exists
+  if (! file_type %in% example_types) stop("Unknown file_type: ", file_type)
 
   # Validating the version string
   version_name <- check_version_compat(version_name)
@@ -45,12 +55,12 @@ get_examples_path <- function(file_type, version_name = "last") {
 }
 
 # TODO: evaluate if usefull ?
-list_examples_files <- function(file_type, version_name = "last") {
+list_examples_files <- function(file_type, version_name = "last", full_names = TRUE) {
 
   examples_path <- get_examples_path(file_type = file_type, version_name = version_name)
 
 
-  files_list <- list.files(pattern = "\\.[a-zA-Z]+$", path = examples_path)
+  files_list <- list.files(pattern = "\\.[a-zA-Z]+$", path = examples_path, full.names = full_names)
 
   return(files_list)
 

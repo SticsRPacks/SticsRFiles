@@ -12,7 +12,8 @@ get_examples_path(file_type, version_name = "last")
 \item{version_name}{An optional version string (default: last version returned by get_stics_versions_compat())}
 }
 \value{
-A directory path for examples files for given file type and STICS version
+A directory path for examples files for given file type and STICS version or
+NULL if missing file_type (types list is displayed)
 }
 \description{
 Getting examples files path attached to a STICS version for a given file type
