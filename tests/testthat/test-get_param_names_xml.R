@@ -1,13 +1,14 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_plt= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_plt.xml"))
-xml_sols= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/sols.xml"))
-xml_ini= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_ini.xml"))
-xml_sta=file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_sta.xml"))
-xml_tec=file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_tec.xml"))
-xml_usms=file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/usms.xml"))
-xml_gen=file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/param_gen.xml"))
-xml_new=file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/param_newform.xml"))
+xml_dir <- get_examples_path("xml")
+xml_plt= file.path(xml_dir,"file_plt.xml")
+xml_sols= file.path(xml_dir,"sols.xml")
+xml_ini= file.path(xml_dir,"file_ini.xml")
+xml_sta=file.path(xml_dir,"file_sta.xml")
+xml_tec=file.path(xml_dir,"file_tec.xml")
+xml_usms=file.path(xml_dir,"usms.xml")
+xml_gen=file.path(xml_dir,"param_gen.xml")
+xml_new=file.path(xml_dir,"param_newform.xml")
 # ----------------------------------------------------------
 
 context("Getting plt param names")
@@ -28,7 +29,6 @@ test_that("param name", {
 
 context("Getting sol param names")
 
-xml_sols= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/sols.xml"))
 param_names <- unlist(get_param_names_xml(xml_sols)[[1]])
 
 test_that("option name", {

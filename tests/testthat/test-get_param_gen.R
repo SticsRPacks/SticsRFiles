@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/param_gen.xml"))
+xml_path= file.path(get_examples_path("xml"), "param_gen.xml")
 context("Getting gen param values")
 
 test_that ("all values from a single node", {

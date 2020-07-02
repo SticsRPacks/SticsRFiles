@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/file_ini.xml"))
+xml_path= file.path(get_examples_path("xml"), "file_ini.xml")
 context("Getting initialisation param values")
 
 test_that("single param option value ", {
@@ -28,11 +28,6 @@ test_that("multiple values from single node", {
   val <- unlist(get_param_xml(xml_path,"hinit"))
   expect_equivalent(val, c(23.5,21.6,23.9,27.6,0))
 })
-
-# test_that("multiple values from single node with parent node specified", {
-#   expect_equal(unlist(get_param_xml(xml_path,"hinit",select = "sol")),
-#                c(23.5,21.6,23.9,27.6,0))
-# })
 
 test_that("multiple values from multiple nodes", {
   val <- unlist(get_param_xml(xml_path,c("hinit","NO3init","NH4init")), use.names = FALSE)

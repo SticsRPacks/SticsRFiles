@@ -1,6 +1,6 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_path= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/sols.xml"))
+xml_path= file.path(get_examples_path("xml"), "sols.xml")
 context("Getting grounds param values")
 
 res = c(30.2,21.0,27.0,39.0,1.0, 12.2, 70.0, 22.0,  9.9, 10.2, 10.2, 17.0, 23.1, 22.0, 27.0, 30.7,
@@ -8,8 +8,8 @@ res = c(30.2,21.0,27.0,39.0,1.0, 12.2, 70.0, 22.0,  9.9, 10.2, 10.2, 17.0, 23.1,
         20.0)
 
 test_that("single param option value version sols -> argi", {
-  expect_equivalent(get_param_xml(xml_path,"argi")[[1]],res)
-  expect_equivalent(unlist(get_param_xml(xml_path,"argi"))[13],23.1)
+  expect_equivalent(get_param_xml(xml_path,"argi")[[1]]$argi,res)
+  expect_equivalent(get_param_xml(xml_path,"argi")[[1]]$argi[13],23.1)
 })
 
 
@@ -30,11 +30,12 @@ test_that("multiple param option value version sols -> norg, profhum", {
 })
 
 test_that("single option param name choice value", {
-  expect_equivalent(unlist(get_param_xml(xml_path,"coderemontcap"))[1],2)
+  expect_equivalent(get_param_xml(xml_path,"coderemontcap")[[1]]$coderemontcap[1],2)
 })
 
+
 test_that(" single column name value", {
-  expect_equivalent(unlist(get_param_xml(xml_path,"epc"))[2],20)
+  expect_equivalent(get_param_xml(xml_path,"epc")[[1]]$epc[2],20)
 })
 
 test_that("multiple option choice value and param name's value from choice list", {

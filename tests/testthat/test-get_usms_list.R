@@ -1,12 +1,12 @@
 library(SticsRFiles)
 options(warn=-1)
-xml_usms= file.path(system.file(package="SticsRFiles","extdata/xml/examples/V9.1/usms.xml"))
+xml_usms= file.path(get_examples_path("xml"),"usms.xml")
 usms_names <- get_usms_list(usm_path = xml_usms)
 
 # Testing returned type for one or several files
 context("Getting returned type")
 
-test_that("type, character vestor", {
+test_that("type, character vector", {
   expect_is(usms_names, "character")
 })
 
@@ -26,3 +26,12 @@ test_that("name, one file", {
   expect_false(usm_name %in% usms_names)
   #expect_false(all(lapply(usms_names, function(x) usm_name %in% x)))
 })
+
+
+context("getting usms names with partial match search")
+
+test_that("with or without success", {
+  expect_equal(get_usms_list(usm_path = xml_usms, name = "to"),c("potato", "tomato", "proto_rice"))
+  expect_equal(get_usms_list(usm_path = xml_usms, name = "zzz"),NULL)
+})
+
