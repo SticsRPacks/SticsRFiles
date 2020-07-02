@@ -55,7 +55,7 @@ get_plant_name= function(workspace,usm_name=NULL,usms_filename= "usms.xml",javas
   plant_xml= try(
     mapply(function(x,y){
       get_param_xml(xml_file = file.path(workspace,usms_filename), param_name = "fplt",
-                    select = "usm", x)[[1]][1:y]
+                    select = "usm", x)[[1]]$fplt[1:y]
     },x= usms, y= nb_plant)
   )
 
