@@ -248,12 +248,15 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj,p
     colnames(sel_values) <- sel_list
   }
 
+  #browser()
+
   # keeping only lines specified by nodes_ids
-  if ( !base::is.null(nodes_ids) &&
-       max(nodes_ids)<= dim(sel_values)[1] ) {
-    sel_values <- sel_values[nodes_ids, ]
-  } else {
-    stop("Subscript out of range, check ids !")
+  if ( !base::is.null(nodes_ids) ) {
+    if ( max(nodes_ids) <= dim(sel_values)[1] ) {
+      sel_values <- sel_values[nodes_ids, ]
+    } else {
+      stop("Subscript out of range, check ids !")
+    }
   }
 
   return(sel_values)
@@ -273,12 +276,14 @@ setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj,path,n
 
   # browser()
 
-  if ( !base::is.null(nodes_ids) &&
-       max(nodes_ids) <= nodes_nb ) {
-    node_set = node_set[nodes_ids]
-  } else {
-    stop("Subscript out of range, check ids !")
-    # return(invisible())
+  if ( !base::is.null(nodes_ids) ) {
+
+    if ( max(nodes_ids) <= nodes_nb ) {
+      node_set = node_set[nodes_ids]
+    } else {
+      stop("Subscript out of range, check ids !")
+      # return(invisible())
+    }
   }
 
   # Getting values from the node_set
