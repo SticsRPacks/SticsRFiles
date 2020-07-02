@@ -20,28 +20,40 @@ get_usms_list <- function(usm_path, name = NULL){
   # TODO: add select key: i.e. get all usms names
   # with the same soil, plant 1,...
 
-  # Get usms list
-  usms_list <- get_param_xml(usm_path,"usm")[[1]]
+  # Detecting file type
+  if ( !is_usms_xml(usm_path) ) {
+    stop("The file must be a usm (usms) file")
+  }
 
-  # Not any name
-  if (base::is.null(name)) return(usms_list)
+  return(find_usms_soils_names(file_path = usm_path, xml_name = "usm", name = name))
 
-  # Filter usms list with partial match
-  usms_list <- unlist(grep_usms(usms_list,name))
-
-  return(usms_list)
 }
 
-grep_usms <- function(usms_list, name) {
 
-  usms_idx <- unlist(lapply(name, function(x) grep(pattern = x, x = usms_list)))
+find_usms_soils_names <- function(file_path, xml_name, name = NULL) {
 
-  #usms_idx <- grep(pattern = name, x = usms_list)
+  # Getting names usms/soils list
+  names_list <- get_param_xml(file_path, xml_name)[[1]][[xml_name]]
 
-  if (!length(usms_idx)) return(NULL)
+  # Not any names, (may be useless bcause xml file already checked!)
+  if(is.null(names_list)) return(names_list)
 
-  usms_list <- usms_list[usms_idx]
+  # Filter names list with partial match
+  if (base::is.null(name)) return(names_list)
 
-  return(usms_list)
+  # Filter usms/soils list with partial match
+  return(find_names(names_list, name))
+}
+
+
+find_names <- function(names_list, name) {
+
+  names_idx <- unlist(lapply(name, function(x) grep(pattern = x, x = names_list)))
+
+  if (!length(names_idx)) return(NULL)
+
+  names_list <- names_list[names_idx]
+
+  return(names_list)
 
 }
