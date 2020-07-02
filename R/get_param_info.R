@@ -4,15 +4,15 @@
 #' @param version Optional, Stics version.
 #' Only the 2 last are referenced: V9.0, V9.1 (default value)
 #' @param kind Kind of information to be retrieved for parameters
-#' among "paramete", "formalism"
+#' among "parameter", "formalism" or "all" for both of them
 #'
-#' @param fixed Logical, if TRUE, the exact name is searched
+#' @param exact Logical, if TRUE, the exact name is searched
 #'
 #' @return A data.frame containing parameters names,
 #' their origin (file name) and their bounds or a named list
 #' of files containing formalisms and attached parameters names.
 #'
-#' @keywords internal
+#' @keywords export
 #'
 #' @examples
 #' \dontrun{
@@ -33,10 +33,10 @@
 #'
 find_param <- function(name,
                        version=NULL,
-                       kind = "parameter",
-                       fixed = FALSE) {
+                       kind = "all",
+                       exact = FALSE) {
 
-  kinds <- c("parameter", "formalism")
+  kinds <- c("parameter", "formalism", "all")
 
   # Checking kind
   if (! kind %in% kinds ) {
@@ -65,7 +65,7 @@ find_param <- function(name,
   # Getting parameters names bounds and file
   param_names <- get_param_names_xml(xml_file = files_list,
                                      name = name,
-                                     fixed = fixed)
+                                     exact = exact)
 
   # Not any parameters found
   if (all(dim(param_names)==0)) {
@@ -80,5 +80,10 @@ find_param <- function(name,
   param_formalism <- get_formalisms_xml(xml_file = files_list,
                                        par_name = param_names$name)
 
-  return(param_formalism)
+  # if formalism request
+  if (kind == "formalism") return(param_formalism)
+
+  # merging all information from names and formalisms
+
+
 }
