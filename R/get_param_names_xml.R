@@ -123,7 +123,7 @@ get_param_names_xml <- function(xml_file,
     }
   }
 
-  return(param_names)
+  return(dplyr::as_tibble(param_names))
 
 }
 

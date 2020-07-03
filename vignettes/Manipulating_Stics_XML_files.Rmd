@@ -265,7 +265,7 @@ file.copy(from = xml_files,to = xml_loc_dir)
 
 # Searching parameters names from files
 
-The `find_param_names` only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
+The `get_param_info` only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
 
 In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
 
@@ -276,15 +276,9 @@ Some warnings may be displayed, in case of duplicate values for bounds. In that 
 
 ```{r, results="markup"}
 
-param_names <- find_param_names(name = "albedo")
+get_param_info(parameter = "albedo")
 
-
-param_names
-
-
-param_names <- find_param_names(name = c("albedo", "latitude", "humcapil"))
-
-param_names
+get_param_info(parameter = c("albedo", "latitude", "humcapil"))
 
 ```
 
@@ -292,12 +286,10 @@ param_names
 
 ```{r}
 
-param_names <- find_param_names(name = "hum")
-
-param_names
+get_param_info( parameter = "hum")
 
 
-param_names <- find_param_names(name = c("al","hum"))
+param_names <- get_param_info(parameter = c("al","hum"))
 
 # Displaying only some head lines of the data.frame
 head(param_names, n = 10)
@@ -312,7 +304,10 @@ head(param_names, n = 10)
 
 # Searching parameters formalisms from files
 
-The `find_param_formalisms` as `find_param_names`, only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
+<!-- mentionning that as default behaviour that get_param_info returns also formalisms taht param
+is attached to, see if usefulle to keep this section ????? --> 
+
+The `get_param_info` as `get_param_info`, only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
 
 In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
 
@@ -320,15 +315,11 @@ In that case, we do not care of which XML file(s) may contain the searched param
 
 ```{r, warning=FALSE}
 
-param_formalisms <- find_param_formalisms(name = "albedo")
+get_param_info(parameter = "albedo")
 
 
-param_formalisms
+get_param_info(parameter = c("albedo", "latitude", "humcapil"))
 
-
-param_formalisms <- find_param_formalisms(name = c("albedo", "latitude", "humcapil"))
-
-param_formalisms
 
 ```
 
@@ -336,12 +327,10 @@ param_formalisms
 
 ```{r, warning=FALSE}
 
-param_formalisms <- find_param_formalisms(name = "hum")
-
-param_formalisms
+get_param_info(parameter = "hum")
 
 
-param_formalisms <- find_param_formalisms(name = c("al","hum"))
+param_formalisms <- get_param_info(parameter = c("al","hum"))
 
 head(param_formalisms)
 
@@ -434,13 +423,15 @@ get_param_xml(tec, param_name = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
 
 ## Getting all parameters values
 
+<!-- rewrite all the things -->
+
 ```{r}
-tec_param_names <- get_param_names_xml(tec)[[1]]
-
-tec_param_values <- get_param_xml(tec, param_name = tec_param_names)[[1]]
-
-# Displaying only a subset of the list
-head(tec_param_values, n = 10)
+# tec_param_names <- get_param_names_xml(tec)[[1]]
+# 
+# tec_param_values <- get_param_xml(tec, param_name = tec_param_names)[[1]]
+# 
+# # Displaying only a subset of the list
+# head(tec_param_values, n = 10)
 
 ```
 

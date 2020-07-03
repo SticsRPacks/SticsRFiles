@@ -135,7 +135,7 @@ get_param_names <- function(xml_object, param_list = c(), full_list = FALSE) {
   names_filt <- c("ta_entete", "tableau_entete", "ta", "tableau", "choix",
                   "fichierpar", "fichierparamgen", "fichiertec", "fichiersta",
                   "initialisations", "fichierplt", "formalisme", "intervention",
-                  "colonne")
+                  "colonne", "variete")
   param_list <- setdiff(param_list,names_filt)
 
   return(param_list)

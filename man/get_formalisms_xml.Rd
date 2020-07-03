@@ -35,3 +35,4 @@ par_form_list <- get_formalisms_xml(xml_sta)
 }
 
 }
+\keyword{internal}
