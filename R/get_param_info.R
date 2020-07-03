@@ -1,5 +1,105 @@
 #' Finding parameters information using partial search words
 #'
+#' @param parameter Optional, parameter name or partial name, or a vector of
+
+#'
+#' @param formalism Optional, formalism name or partial name, or a vector of
+#'
+#' @param keyword Optional, strings or a vector of to be used for searching
+#' in parameters data (i.e.: parameters names, formalisms description,
+#' file names or part to which parameters are attached to)
+#'
+#' @param version Optional, Stics version.
+#' Only the 2 last are referenced: V9.0, V9.1 (default value)
+#'
+#' @details parameter and formalism may be both set or only one of them, but
+#' none of them can be if keyword argument is used.
+#'
+#' @return A data.frame containing parameters names,
+#' their file name origin, their bounds and the formalism they belong to.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' get_param_info(parameter = "albedo")
+#'
+#' get_param_info(parameter = "albedo", formalism = "special")
+#'
+#' get_param_info(parameter = "albedo", version = "V9.0")
+#'
+#' get_param_info(parameter = c("alb", "lat"))
+#'
+#' get_param_info( keyword = "tec" )
+#'
+#' }
+#'
+#'
+#'
+get_param_info <- function(parameter = NULL,
+                           formalism = NULL,
+                           keyword = NULL,
+                           version = NULL) {
+
+  # Defining compatible cases
+  # param and/or formalism may be not NULL
+  # if keyword is not NULL param and formalism must be NULL
+  # or if param and/or formalism are/is not NULL keyword must be NULL
+  par_use <- !base::is.null(parameter)
+  form_use <- !base::is.null(formalism)
+  parform_use <- all(c( par_use, form_use ))
+  keyword_use <- !base::is.null(keyword)
+
+  if ( all(c(any(parform_use), keyword_use)) ) {
+    stop("Incompatible search using both parameter and/or formalism words and keywords !")
+  }
+
+
+  # Getting data when only searching in parameters name
+  # or all other cases
+  if ( par_use & !form_use ) {
+    param_data_df <- suppressWarnings(get_param_data_df( version = version, name = parameter ))
+  } else{
+    param_data_df <- suppressWarnings(get_param_data_df( version = version))
+  }
+
+
+  # Extract data without filtering
+  # or filtering done in the previous step
+  # when generating param_data_df
+  if ( !any(c(par_use, form_use, keyword_use)) |
+       (par_use & !form_use) ) {
+    return(param_data_df)
+  }
+
+  # Searching in all columns
+  if ( keyword_use ) {
+    param_names <- find_names(names = param_data_df$name, name = keyword)
+    form_names <- find_names(names = param_data_df$formalism, name = keyword)
+    file_names <- find_names(names = param_data_df$file, name = keyword)
+    return(filter(param_data_df,
+                  formalism %in% form_names | file %in% file_names | name %in% param_names ))
+  }
+
+  # getting formalism names
+  form_names <- find_names(names = param_data_df$formalism, name = formalism)
+
+  # Only searching in formalism
+  if ( !par_use & form_use ) {
+    return(filter(param_data_df, formalism %in% form_names))
+  }
+
+  # Searching in both name and formalism
+  if ( parform_use ) {
+    param_names <- find_names(names = param_data_df$name, name = parameter)
+    return(filter(param_data_df, formalism %in% form_names | name %in% param_names ))
+  }
+}
+
+
+#' Getting parameters information using partial search words
+#'
 #' @param name Optional name or partial name or a vector of
 #' @param version Optional, Stics version.
 #' Only the 2 last are referenced: V9.0, V9.1 (default value)
@@ -20,24 +120,24 @@
 #' @examples
 #' \dontrun{
 #'
-#' get_param_info(name = "albedo")
+#' get_param_data_df(name = "albedo")
 #'
-#' get_param_info(name = "albedo", kind = "formalism)
+#' get_param_data_df(name = "albedo", kind = "formalism)
 #'
-#' get_param_info(name = "albedo", version = "V9.0")
+#' get_param_data_df(name = "albedo", version = "V9.0")
 #'
-#' get_param_info(name = c("albedo", "latitude", "humcapil"))
+#' get_param_data_df(name = c("albedo", "latitude", "humcapil"))
 #'
-#' get_param_info(name = c("albedo", "latitude", "humcapil"),
+#' get_param_data_df(name = c("albedo", "latitude", "humcapil"),
 #' kind = "formalism)
 #'
 #' }
 #'
 #'
-get_param_info <- function(name = NULL,
-                           version=NULL,
-                           kind = "all",
-                           exact = FALSE) {
+get_param_data_df <- function(name = NULL,
+                              version=NULL,
+                              kind = "all",
+                              exact = FALSE) {
 
   kinds <- c("parameter", "formalism", "all")
 
@@ -66,13 +166,14 @@ get_param_info <- function(name = NULL,
   }
 
   # Getting parameters names bounds and file
-  param_names <- get_param_names_xml(xml_file = files_list,
+  param_names <- suppressWarnings(get_param_names_xml(xml_file = files_list,
                                      name = name,
-                                     exact = exact)
+                                     exact = exact))
 
   # Not any parameters found
   if (all(dim(param_names)==0)) {
     warning(paste("Not any parameter found for Stics version: ", version))
+    return(invisible())
   }
 
   # Returning parameters information
@@ -93,6 +194,8 @@ get_param_info <- function(name = NULL,
   return(param_df)
 
 }
+
+
 
 form_list2df <- function(formalism_list) {
 
@@ -121,7 +224,7 @@ form_list2df <- function(formalism_list) {
     out[[i]] <- data.frame(file = out_file, formalism = out_form, name = out_param, stringsAsFactors = FALSE)
   }
 
-  # returning the data.frame
-  dplyr::bind_rows(out)
+  # returning the tibble
+  dplyr::as_tibble(dplyr::bind_rows(out))
 }
 

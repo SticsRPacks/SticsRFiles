@@ -4,46 +4,51 @@
 \alias{get_param_info}
 \title{Finding parameters information using partial search words}
 \usage{
-get_param_info(name = NULL, version = NULL, kind = "all", exact = FALSE)
+get_param_info(
+  parameter = NULL,
+  formalism = NULL,
+  keyword = NULL,
+  version = NULL
+)
 }
 \arguments{
-\item{name}{Optional name or partial name or a vector of}
+\item{parameter}{Optional, parameter name or partial name, or a vector of}
+
+\item{formalism}{Optional, formalism name or partial name, or a vector of}
+
+\item{keyword}{Optional, strings or a vector of to be used for searching
+in parameters data (i.e.: parameters names, formalisms description,
+file names or part to which parameters are attached to)}
 
 \item{version}{Optional, Stics version.
 Only the 2 last are referenced: V9.0, V9.1 (default value)}
-
-\item{kind}{Kind of information to be retrieved for parameters
-among "parameter", "formalism" or "all" for both of them}
-
-\item{exact}{Logical, if TRUE, the exact name is searched}
 }
 \value{
-A data.frame containing parameters names and
-their origin (file name), and their bounds or the formalism they belong to,
-or both of them.
+A data.frame containing parameters names,
+their file name origin, their bounds and the formalism they belong to.
 }
 \description{
 Finding parameters information using partial search words
 }
 \details{
-If not any name vector of names, information are extracted for
-all the existing parameters
+parameter and formalism may be both set or only one of them, but
+none of them can be if keyword argument is used.
 }
 \examples{
 \dontrun{
 
-get_param_info(name = "albedo")
+get_param_info(parameter = "albedo")
 
-get_param_info(name = "albedo", kind = "formalism)
+get_param_info(parameter = "albedo", formalism = "special")
 
-get_param_info(name = "albedo", version = "V9.0")
+get_param_info(parameter = "albedo", version = "V9.0")
 
-get_param_info(name = c("albedo", "latitude", "humcapil"))
+get_param_info(parameter = c("alb", "lat"))
 
-get_param_info(name = c("albedo", "latitude", "humcapil"),
-kind = "formalism)
+get_param_info( keyword = "tec" )
 
 }
+
 
 
 }
