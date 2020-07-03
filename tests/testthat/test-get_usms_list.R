@@ -32,6 +32,6 @@ context("getting usms names with partial match search")
 
 test_that("with or without success", {
   expect_equal(get_usms_list(usm_path = xml_usms, name = "to"),c("potato", "tomato", "proto_rice"))
-  expect_equal(get_usms_list(usm_path = xml_usms, name = "zzz"),NULL)
+  expect_equal(get_usms_list(usm_path = xml_usms, name = "zzz"), character(0))
 })
 

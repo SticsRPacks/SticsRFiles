@@ -24,7 +24,7 @@
 #' param_bounds <- get_param_bounds_xml(xml_files_list, "param", "min")
 #' }
 #'
-#' @keyword internal
+#' @keywords internal
 #'
 get_param_bounds_xml <- function(xml_file,
                                  param_name,

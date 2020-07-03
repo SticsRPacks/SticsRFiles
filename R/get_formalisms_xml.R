@@ -21,7 +21,7 @@
 #'
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #'
 get_formalisms_xml <- function(xml_file,

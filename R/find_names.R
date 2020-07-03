@@ -11,11 +11,11 @@
 #'
 #' names <- c("abscission", "alphaphot", "codelaitr", "dlaimax", "lai")
 #'
-#' find_names(names, "lai")
+#' SticsRFiles:::find_names(names, "lai")
 #'
 #' #> [1] "codelaitr" "dlaimax"
 #'
-#' find_names(names, "lai", exact)
+#' SticsRFiles:::find_names(names, "lai", exact = TRUE)
 #'
 #' #> [1] "lai"
 #'

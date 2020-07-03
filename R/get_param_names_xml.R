@@ -88,7 +88,7 @@ get_param_names_xml <- function(xml_file,
   # Search based on names or a substring of parameters names
   # exact match with exact == TRUE
   if (!base::is.null(name)) {
-    param_names <- find_names(param_names = param_names, exact = exact, name = name)
+    param_names <- find_names(names = param_names, exact = exact, name = name)
   }
 
   # No parameters names found
