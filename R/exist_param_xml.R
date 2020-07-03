@@ -6,7 +6,7 @@
 #'
 #' @return A logical vector of existing parameters
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
@@ -26,7 +26,7 @@ exist_param_xml <- function(name,
                             version=NULL) {
 
   # Finding exact matchs in found names
-  par_names <- find_param_names(name = name,
+  par_names <- get_param_info(name = name,
                                 version = version,
                                 exact = TRUE)$name
 

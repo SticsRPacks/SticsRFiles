@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_param_info.R
 \name{get_param_info}
 \alias{get_param_info}
-\title{Finding parameters names or formalism using partial search words}
+\title{Finding parameters information using partial search words}
 \usage{
-get_param_info(name, version = NULL, kind = "all", exact = FALSE)
+get_param_info(name = NULL, version = NULL, kind = "all", exact = FALSE)
 }
 \arguments{
-\item{name}{Name or partial name or a vector of}
+\item{name}{Optional name or partial name or a vector of}
 
 \item{version}{Optional, Stics version.
 Only the 2 last are referenced: V9.0, V9.1 (default value)}
@@ -18,12 +18,16 @@ among "parameter", "formalism" or "all" for both of them}
 \item{exact}{Logical, if TRUE, the exact name is searched}
 }
 \value{
-A data.frame containing parameters names,
-their origin (file name) and their bounds or a named list
-of files containing formalisms and attached parameters names.
+A data.frame containing parameters names and
+their origin (file name), and their bounds or the formalism they belong to,
+or both of them.
 }
 \description{
-Finding parameters names or formalism using partial search words
+Finding parameters information using partial search words
+}
+\details{
+If not any name vector of names, information are extracted for
+all the existing parameters
 }
 \examples{
 \dontrun{
@@ -43,4 +47,3 @@ kind = "formalism)
 
 
 }
-\keyword{export}

@@ -33,3 +33,4 @@ exist_param_xml(name = c("albedo", "latitude", "humcapi"))
 
 
 }
+\keyword{internal}

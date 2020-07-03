@@ -44,16 +44,3 @@ find_usms_soils_names <- function(file_path, xml_name, name = NULL) {
   # Filter usms/soils list with partial match
   return(find_names(names_list, name))
 }
-
-
-find_names <- function(names_list, name) {
-
-  names_idx <- unlist(lapply(name, function(x) grep(pattern = x, x = names_list)))
-
-  if (!length(names_idx)) return(NULL)
-
-  names_list <- names_list[names_idx]
-
-  return(names_list)
-
-}

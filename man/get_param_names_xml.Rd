@@ -10,7 +10,7 @@ get_param_names_xml(
   bounds = TRUE,
   output = "data.frame",
   combine = TRUE,
-  fixed = FALSE
+  exact = FALSE
 )
 }
 \arguments{
@@ -26,7 +26,7 @@ get_param_names_xml(
 TRUE, to transform a data.frame list to a unique data.frame,
 FALSE otherwise.}
 
-\item{fixed}{Logical, if TRUE, the exact name is searched}
+\item{exact}{Logical, if TRUE, the exact name is searched, FALSE otherwise for partial search}
 }
 \value{
 A list of parameters names data.frames or list, or a unique data.frame
@@ -50,3 +50,4 @@ param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"
 }
 
 }
+\keyword{internal}
