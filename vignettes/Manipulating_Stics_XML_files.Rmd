@@ -45,20 +45,25 @@ if (length(files_list))  {
 # Introduction
 The purpose of this document is to provide starting information about:
 
-* how parameters are defined in Stics XML files
-* how to use SticsRFiles functions for extracting data from XML Stics input files
-* how to use SticsRFiles functions for replacing data into them.
+* how parameters are defined/structured in Stics XML files
+* how to find information about parameters among an XML files set
+* how to use functions for extracting data from XML Stics input files
+* how to use functions for replacing data into them
 
-Simple functions reproducible use cases based on 2 essential functions **get_param_xml** and **set_param_xml** are described in this document.
-
-Exploring files content for files sets are also possible.
-
-But, some queries kind are not taken into account. Some conditional queries are possible to do using parent nodes/attribues like getting soil parameters for a usm selection. But, queries inspecting elements downwards are not available for the moment. For example, getting soil names/parameters using a criterion like argi values > 20 ...  
+Simple reproducible use cases based on 3 essential functions **get_param_info**, **get_param_xml** and **set_param_xml** are described in this document.
 
 
+For the moment, queries for selecting information among `usms`, `soils` are limited.
+For example, getting soil parameters for a list of soils is possible, as getting usms informations using a usms list.
+
+Queries inspecting elements downwards are not available yet; as for example, getting soil names/parameters using a criterion like `argi` values > 20.
+
+Exploring files content for files sets are also possible, but not replacing parameters values.
 
 
 # Understanding what are parameters in Stics XML files
+
+## XML files structures describing parameters 
 
 XML files are self documented files and hierarchically structured. Syntaxic rules are based on what we call nodes (i.e. nodes names, similar to html tags) and attributes (nodes attributes values).
 
@@ -70,10 +75,10 @@ As we can see in the above XML file extract from a general parameter file:
 
 * Parameters are grouped according to formalisms (in a `xml <formalisme>...</formalisme> ` block)
 
-* Parameters may be defined by single values
+* Parameters may be defined by single values    
 This kind of definition is common for all files types and the parameter name is stored in the `nom` attribute of a `param` XML node. So the first parameter name in the example is `beta` and its value is `1.40000` (inside `param` tags).
 
-* Option parameters (with or without attached parameters, eventually with sub-option)
+* Option parameters (with or without attached parameters, eventually with sub-option)    
 The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example.
 
 
@@ -100,10 +105,10 @@ The corresponding parameter name for an **option** node is stored in an attribut
 </formalisme>
 ```
 
-* Parameters with several values (for soil layers, technical operations,...)    
+* Parameters with several values (for soil layers, technical operations,...)     
 Several values may be defined for example relatively to soil parameters (different layers) or for crop management operations (with time repetitions). 
 
-* Example from soil files    
+* Example from soil files     
 In the above file extract for soil parameters, each set of parameters is repeated for each soil layer (up to 5). The parameters names are defined in a `nom` attribute for each `colonne` XML tag.    
 
 ```xml
@@ -181,19 +186,20 @@ In the above file extract for crop management parameters, each set of parameters
 </formalisme>
 ```
 
-> Rules have been defined to search and extract information inside XML files in order to simplify the way of using functions dedicated to XML files manipulations.    
->
->In some cases, information relative to upward dependence are needed for extracting parameters values, but in most cases only the parameters names are mandatory in functions arguments.
+## Functions for XML files manipulations
+Rules have been defined to easily search and extract information from XML files in order to simplify the way of using functions dedicated to XML files manipulations.
+
+In some cases, information relative to upward dependence are needed for extracting parameters values, but in most cases only the parameters names are mandatory in functions arguments.
 
 
-# Getting XML files examples from the library
+# Getting XML files examples from `SticsRFiles` library
 
-> We have included several XML examples files in the package in order to make `reproducible`
-> **manipulations** and **results** described in this document. They are extracted from the JavaStics 
-> standard distribution (some of them have just been renamed).
+Several XML examples files have bee included  in the package in order to use them in `reproducible`
+**manipulations** and **results** described in this document. These examples files are extracted from the JavaStics 
+standard distribution (some of them have been renamed).
 
-## Set the XML files examples source directory 
-In xml_dir, we store the directory path of the XML files included in the library installation.
+## Getting the XML files source directory 
+In xml_dir, we store the directory path of the XML files available in the SticsRFiles installation directory.
 
 ```{r set_xml_dir}
 xml_dir <- get_examples_path( file_type = "xml", version_name = "V9.1")
@@ -238,7 +244,7 @@ dt <- data.frame(files = files_list, groups=legend )
 The correponding files types to file names is given in the above table
 ``` {r, echo = FALSE}
                         
-knitr::kable(dt, caption = "Correspondence between files names and parameters groups")
+knitr::kable(dt, caption = "Correspondence between XML example files names and parameters groups")
 
 ```
 
@@ -263,16 +269,46 @@ file.copy(from = xml_files,to = xml_loc_dir)
 ```
 
 
-# Searching parameters names from files
+# Getting information about parameters
 
-The `get_param_info` only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
+## Searching parameters names from files
 
-In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
+The `get_param_info` function only take names or names substring of parameters or a list of. The search is performed in an XML files list depending on the model version (9.1 as the default one).
 
-Some warnings may be displayed, in case of duplicate values for bounds. In that case the retained values are indicated in the warning message.
+In that case, no need to care of which XML file(s) may contain the searched parameter(s). 
+
+Some warnings may be displayed in case of duplicated bounds values. In that case retained values are indicated in warning messages.
+
+The information columns in the returned tibble are:
+
+* `name`: parameter name
+* `file`: XML file name
+* `min`: minimal bound
+* `max`: maximal bound
+* `formalism`: formalism short description
+
+Whatever the arguments list is when calling the function, the returned tibble always contains these columns.
 
 
-## Finding one or more parameters names
+Information about bounds or formalism, may be missing according to the parameter kind (initialization, usm), or type (character).
+
+
+### Getting all STICS parameters information
+
+
+Using the `get_param_info` function whithout any argument, or with specifying the desired STICS version, allows to get a table containing all the input parameters.
+
+```{r}
+
+param_names <- get_param_info()
+
+# Displaying the returned data as a paged table
+rmarkdown::paged_table(param_names)
+
+```
+
+
+### Finding one or more parameters names
 
 ```{r, results="markup"}
 
@@ -282,7 +318,7 @@ get_param_info(parameter = c("albedo", "latitude", "humcapil"))
 
 ```
 
-## Finding parameters names using partial names
+### Finding parameters names using partial names
 
 ```{r}
 
@@ -291,52 +327,29 @@ get_param_info( parameter = "hum")
 
 param_names <- get_param_info(parameter = c("al","hum"))
 
-# Displaying only some head lines of the data.frame
+# Displaying the returned data as a paged table
 rmarkdown::paged_table(param_names)
 
 ```
 
-> More specific extractions for parameter names can be performed using the `get_param_names_xml`. In that case, XML file or files list in which to search must be specified as a function input argument.
 
+## Searching parameters attached to formalisms
 
-
-
-
-# Searching formalisms from files
-
-<!-- mentionning that as default behaviour that get_param_info returns also formalisms taht param
-is attached to, see if usefulle to keep this section ????? --> 
-
-The `get_param_info` as `get_param_info`, only take the names or names substring of a parameter or a parameters list and by default searches in an XML files list according to a model version (9.1 as the default one).
-
-In that case, we do not care of which XML file(s) may contain the searched parameter(s). 
-
-## Finding one or more parameters formalisms
-
-```{r, warning=FALSE}
-
-get_param_info(parameter = "albedo")
-
-
-get_param_info(parameter = c("albedo", "latitude", "humcapil"))
-
-
-```
-
-## Finding formalisms using partial formalism names (description !)
+### Finding formalisms using partial names (i.e. short description)
 
 ```{r, warning=FALSE}
 
 get_param_info(formalism = "yield")
 
 
-param_formalisms <- get_param_info(parameter = c("yield","leaves"))
+param_formalisms <- get_param_info(formalism = c("yield","leaves"))
 
-get_param_info(param_formalisms)
+head(param_formalisms)
 
 ```
 
-## Finding formalisms using partial formalism and parameters names (description !)
+
+### Finding formalisms using partial formalism and parameters names
 
 ```{r, warning=FALSE}
 
@@ -350,12 +363,32 @@ rmarkdown::paged_table(param_formalisms)
 ```
 
 
-# Getting parameters values from a file
 
-```{r, echo=FALSE}
+## Searching information using keywords
 
+The keyword argument (one or several strings) of the function may be used to search in all textual columns as `name`, `file` or `formalism`.  
+
+
+```{r, warning=FALSE}
+
+get_param_info(keyword = "plant")
+
+
+param_names <- get_param_info(keyword = c("plant","leave"))
+
+# Displaying the returned data as a paged table
+rmarkdown::paged_table(param_names)
 
 ```
+
+
+
+
+# Getting parameters values from a file
+
+The `get_param_xml` function is used for extracting parameters values in XML files, providing it a parameter name or a names list.
+
+For usms or soils parameter, a conditional selection may be used to filter parameter values respectively through a list of usms or soils. 
 
 
 ## Scalar parameters
@@ -433,16 +466,29 @@ get_param_xml(tec, param_name = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
 
 ## Getting all parameters values
 
-<!-- rewrite all the things -->
+Using the function whithout any argument produces a list of all parameters values from a file.
 
 ```{r}
-# tec_param_names <- get_param_names_xml(tec)[[1]]
+tec_param_values <- get_param_xml(tec)[[1]]
 # 
-# tec_param_values <- get_param_xml(tec, param_name = tec_param_names)[[1]]
-# 
-# # Displaying only a subset of the list
-# head(tec_param_values, n = 10)
+# Displaying only a subset of the list
+head(tec_param_values, n = 10)
 
+```
+
+A files list may be used also to get all parameters as follows in the same list
+
+
+```{r}
+param_values <- get_param_xml(c(tec,sols))
+
+# Sub-list names
+names(param_values)
+
+# param_values extract for each sub-list
+head(param_values$file_tec.xml, n = 5)
+
+head(param_values$sols.xml, n = 5)
 ```
 
 
@@ -450,6 +496,7 @@ get_param_xml(tec, param_name = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
 
 ## Defining the output file from functions arguments
 The function **set_param_xml** allows to set the output file with the following optional arguments as follows:
+
 * For overwriting the existing file: use ```overwrite = TRUE```
 
 * For generating a file in another directory: use `out_path` for setting an output directory
@@ -570,14 +617,6 @@ set_param_xml(tec, param_name = c("julapI_or_sum_upvt", "amount"), param_value =
 get_param_xml(tec, param_name = c("julapI_or_sum_upvt", "amount"), ids = 1:5)
 
 ```
-
-# Using functions with a files list
-It's so possible to extract parameters names list for a list of files.
-
-This is also already handled for getting parameters values from files of the same kind.
-
-But, setting parameters values into several files is not possible at the moment.
-
 
 
 

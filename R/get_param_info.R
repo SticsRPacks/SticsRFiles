@@ -78,8 +78,11 @@ get_param_info <- function(parameter = NULL,
     param_names <- find_names(names = param_data_df$name, name = keyword)
     form_names <- find_names(names = param_data_df$formalism, name = keyword)
     file_names <- find_names(names = param_data_df$file, name = keyword)
-    return(dplyr::filter(param_data_df,
-                  formalism %in% form_names | file %in% file_names | name %in% param_names ))
+
+    lines_filter <- param_data_df$formalism %in% form_names | param_data_df$file %in% file_names |
+      param_data_df$name %in% param_names
+
+    return(dplyr::filter(param_data_df, lines_filter ))
   }
 
   # getting formalism names
@@ -87,13 +90,15 @@ get_param_info <- function(parameter = NULL,
 
   # Only searching in formalism
   if ( !par_use & form_use ) {
-    return(dplyr::filter(param_data_df, formalism %in% form_names))
+    return(dplyr::filter(param_data_df, param_data_df$formalism %in% form_names))
   }
 
   # Searching in both name and formalism
   if ( parform_use ) {
     param_names <- find_names(names = param_data_df$name, name = parameter)
-    return(dplyr::filter(param_data_df, formalism %in% form_names | name %in% param_names ))
+    lines_filter <- param_data_df$formalism %in% form_names |
+      param_data_df$name %in% param_names
+    return(dplyr::filter(param_data_df, lines_filter ))
   }
 }
 
