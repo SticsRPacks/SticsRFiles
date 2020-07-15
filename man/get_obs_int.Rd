@@ -4,7 +4,7 @@
 \alias{get_obs_int}
 \title{Read STICS observation file (*.obs)}
 \usage{
-get_obs_int(workspace, filename, plant_name = NULL)
+get_obs_int(workspace, filename, plant_name = NULL, verbose = TRUE)
 }
 \arguments{
 \item{workspace}{A directory where to read the files}
@@ -12,6 +12,8 @@ get_obs_int(workspace, filename, plant_name = NULL)
 \item{filename}{A vector of observation file names}
 
 \item{plant_name}{A vector of plant names. Length of filename, or recycled if one (optional).}
+
+\item{verbose}{Logical value (optional), TRUE to display read file name, FALSE otherwise (default)}
 }
 \value{
 A \code{data.frame} of all observation files concatenated by row.

@@ -7,7 +7,7 @@
 get_obs(
   workspace = getwd(),
   usm_name = NULL,
-  usms_filename = "usms.xml",
+  usms_filename = NULL,
   javastics_path = NULL,
   verbose = TRUE
 )
@@ -17,26 +17,27 @@ get_obs(
 
 \item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
-\item{usms_filename}{Name of the usm file (optional, default to the standard \code{usms.xml})}
+\item{usms_filename}{Name of the usm file (optional)}
 
-\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
+\item{javastics_path}{JavaStics installation path (optional, needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace). Only used to get the plants names.}
 
 \item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 }
 \value{
-A list of \code{data.frame}s with observations. The function always returns a list of \code{data.frame}s for the corresponding usm,
-even if an \code{.obs} file is missing (in this case it returns an empty \code{data.frame}).
+A named list of \code{data.frame}s with observations data. Names of the list elements may be either usms names,
+or observation file name if the \code{usms_filename} is not specified.
 }
 \description{
 Read STICS observation files from a JavaStics workspace and store data into a list per usm
 }
 \details{
-The \code{.obs} files names should match the name of the USM, e.g. for a usm called "banana",
+The \code{.obs} files names should match USMs mames, e.g. for a usm called "banana",
 the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name should be suffixed by "p" for
 the principal and "a" for the associated plant.
 If \code{usm_name} is not specified (or equal to \code{NULL}), the
-function read the obs files from all usms listed in \code{usms_filename} and present in the \code{workspace} folder.
+function reads the observation files from all usms listed in \code{usms_filename} and present in the \code{workspace} folder(s).
+Or if \code{usms_filename} is not specified, all the .obs files are loaded from the \code{workspace} folder(s).
 }
 \examples{
 \dontrun{

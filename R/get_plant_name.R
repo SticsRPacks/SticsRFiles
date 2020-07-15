@@ -29,7 +29,11 @@
 #'
 #' }
 #'
-get_plant_name= function(workspace,usm_name=NULL,usms_filename= "usms.xml",javastics_path = NULL, verbose=TRUE){
+get_plant_name= function(workspace,
+                         usm_name=NULL,
+                         usms_filename= "usms.xml",
+                         javastics_path = NULL,
+                         verbose=TRUE){
 
   # getting usms names from the usms.xml file:
   usms= get_usms_list(usm_path = file.path(workspace,usms_filename))
@@ -51,13 +55,17 @@ get_plant_name= function(workspace,usm_name=NULL,usms_filename= "usms.xml",javas
 
   nb_plant= get_plants_nb(file.path(workspace,usms_filename))[usms]
 
-  # Get plant file(s) for each usm:
+  # Getting plant files (fplt) for a set of usm
+  plant_files <- get_param_xml(xml_file = file.path(workspace,usms_filename), param_name = "fplt", select = "usm", value = usms)
+  plant_list <- unlist(apply(matrix(plant_files$usms.xml$fplt, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+  names(plant_list) <- usms
+
+  # Keeping only usefull files names according to nb_plant data
   plant_xml= try(
     mapply(function(x,y){
-      get_param_xml(xml_file = file.path(workspace,usms_filename), param_name = "fplt",
-                    select = "usm", x)[[1]]$fplt[1:y]
-    },x= usms, y= nb_plant)
-  )
+      list(x[1:y])
+    }, x = plant_list, y = nb_plant)
+    )
 
   if(inherits(plant_xml,"try-error")){
     plant_xml= vector(mode = "list", length = length(usms))

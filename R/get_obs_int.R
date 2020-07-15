@@ -6,6 +6,7 @@
 #' @param workspace  A directory where to read the files
 #' @param filename   A vector of observation file names
 #' @param plant_name A vector of plant names. Length of filename, or recycled if one (optional).
+#' @param verbose   Logical value (optional), TRUE to display read file name, FALSE otherwise (default)
 #'
 #' @return A `data.frame` of all observation files concatenated by row.
 #' @keywords internal
@@ -15,7 +16,9 @@
 #' path <- file.path(get_examples_path( file_type = "obs"))
 #' get_obs_int(path, "banana.obs")
 #' }
-get_obs_int= function(workspace,filename,plant_name=NULL){
+get_obs_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
+
+  if (verbose) print(filename)
 
   if(!is.null(plant_name)){
     if(length(plant_name)>1 && length(plant_name)!=length(filename)){
