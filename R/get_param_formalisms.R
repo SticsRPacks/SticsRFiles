@@ -61,29 +61,16 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
     return(form_list)
   }
 
-
-  # Checking if any "formalisme" nodes in xml_doc
-  form <- getAttrsValues(xml_doc,"//formalisme","nom")
-
-
-  # exiting if no formalisms
-  if (base::is.null(form)) {
-    warning("Not any \"formalisme\" element in xml document !")
-    return(NULL)
-  }
-
-
   # case : param name as value of @nom attribute
   x_path <- paste0("//*[@nom=\"",name,"\"]//ancestor::formalisme")
-
   values <- param_formalism_elt(xml_doc, x_path, name)
-  if (! base::is.null(values)) return(values)
+  if (! base::is.null(values) && ! values == "none") return(values)
 
 
   # case : param name as value of @nomParam attribute
   x_path <- paste0("//*[@nomParam=\"",name,"\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
-  if (! base::is.null(values)) return(values)
+  if (! base::is.null(values) && ! values == "none") return(values)
 
 
   return(values)
@@ -96,7 +83,17 @@ param_formalism_elt <- function(xml_doc, xpath, name) {
   # Formatting a parameter formalism list unit
   values <- getAttrsValues(xml_doc,xpath,"nom")
 
-  if (base::is.null(values)) return(values)
+  param_values <- get_param_value(xml_doc = xml_doc, param_name = name)
+
+  if (base::is.null(values)) {
+    # Fix: parameter exists but no formalism
+    if (! base::is.null(param_values)) {
+      values <- matrix("none")
+      names(values) <- name
+    }
+    return(values)
+  }
+
 
   # Just for an unnamed vector
   names(values[[1]]) <- NULL

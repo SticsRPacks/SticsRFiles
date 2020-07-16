@@ -186,8 +186,12 @@ get_param_data_df <- function(name = NULL,
 
   # Getting parameter formalism information
   files_list <- file.path(xml_dir, unique(param_names$file))
+
+  # Some parameters names may be found in several files (i.e.: nbplantes)
+  uniq_param_names <- unique(param_names$name)
+
   param_formalism <- get_formalisms_xml(xml_file = files_list,
-                                        par_name = param_names$name)
+                                        par_name = uniq_param_names)
 
   param_formalism <- form_list2df(param_formalism)
 
