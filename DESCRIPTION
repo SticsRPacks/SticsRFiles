@@ -133,6 +133,7 @@ Collate:
     'set_param_xml.R'
     'set_sols_param_xml.R'
     'set_usms_param_xml.R'
+    'stics_environment.R'
     'stics_examples_utils.R'
     'var_to_col_names.R'
     'xmlDocument.R'
