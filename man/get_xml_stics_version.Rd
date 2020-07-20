@@ -4,7 +4,7 @@
 \alias{get_xml_stics_version}
 \title{Get a version/or the laste version string of available Stics files templates in the package}
 \usage{
-get_xml_stics_version(stics_version = NULL, xml_doc = NULL)
+get_xml_stics_version(stics_version = "last", xml_doc = NULL)
 }
 \arguments{
 \item{stics_version}{A version key of a Stics version (i.e. V9.1)}

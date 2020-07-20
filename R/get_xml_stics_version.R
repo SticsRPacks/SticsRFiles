@@ -24,7 +24,7 @@
 #'
 #' @keywords internal
 #'
-get_xml_stics_version <- function(stics_version = NULL, xml_doc = NULL) {
+get_xml_stics_version <- function(stics_version = "last", xml_doc = NULL) {
 
   # for the moment the xml_doc does not contain the model version
   # it matches with, only used to avoid checking the version
@@ -35,17 +35,7 @@ get_xml_stics_version <- function(stics_version = NULL, xml_doc = NULL) {
     return("custom")
   }
 
-  if (base::is.null(stics_version)) stics_version = "last"
+  # Getting version from compat csv file
+  return(SticsRFiles:::check_version_compat(version_name = stics_version))
 
-  known_versions <- get_stics_versions_compat()
-
-  if ( stics_version =="last" ) {
-    stics_version <- known_versions$last_version
-  }
-
-  if ( ! stics_version %in% known_versions$versions_list ) {
-    stop(paste0("The Stics version is unknown : ", stics_version))
-  }
-
-  return(stics_version)
 }
