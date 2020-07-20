@@ -20,7 +20,11 @@ all_out_var <- function(version = "last"){
     version <- get_stics_versions_compat()$last_version
   }
   version <- match.arg(version, get_stics_versions_compat()$versions_list, several.ok = FALSE)
-  utils::read.csv2(file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"))
+  var_df <- utils::read.csv2(file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"))
+
+  # Adding a version  attribute
+  attr(x = var_df, which = "version") <- version
+  return(var_df)
 }
 
 

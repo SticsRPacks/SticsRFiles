@@ -200,6 +200,9 @@ get_param_data_df <- function(name = NULL,
 
   # merging all information from names and formalisms
   param_df <- suppressMessages(dplyr::left_join(param_names,param_formalism))
+
+  # Adding a version  attribute
+  attr(x = param_df, which = "version") <- version
   return(param_df)
 
 }
