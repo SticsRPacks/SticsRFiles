@@ -4,7 +4,7 @@
 \alias{get_param_data_df}
 \title{Getting parameters information using partial search words}
 \usage{
-get_param_data_df(name = NULL, version = NULL, kind = "all", exact = FALSE)
+get_param_data_df(name = NULL, version = "last", kind = "all", exact = FALSE)
 }
 \arguments{
 \item{name}{Optional name or partial name or a vector of}

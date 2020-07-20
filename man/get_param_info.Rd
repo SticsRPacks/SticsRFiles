@@ -8,7 +8,7 @@ get_param_info(
   parameter = NULL,
   formalism = NULL,
   keyword = NULL,
-  version = NULL
+  version = "last"
 )
 }
 \arguments{
