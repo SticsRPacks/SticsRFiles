@@ -62,7 +62,7 @@ library(readxl)
 xl_path <- "inputs_stics_example.xlsx"
 download_usm_xl(xl_name = xl_path)
 usms_param_df <- read_excel(xl_path, sheet = "USMs")
-gen_usms_xml(usms_out_file = "usms.xml"),
+gen_usms_xml(usms_out_file = "usms.xml",
 usms_param = usms_param_df)
 
 }

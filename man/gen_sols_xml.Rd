@@ -63,7 +63,7 @@ library(readxl)
 xl_path <- "inputs_stics_example.xlsx"
 download_usm_xl(xl_name = xl_path)
 sols_param_df <- read_excel(xl_path, sheet = "Soils")
-gen_sols_xml(sols_out_file = "sols.xml"),
+gen_sols_xml(sols_out_file = "sols.xml",
 sols_param = sols_param_df)
 
 }
