@@ -5,7 +5,7 @@
 \title{Generate Stics usms xml file from a template or an input file}
 \usage{
 gen_usms_xml(
-  usms_out_file,
+  usms_out_file = NULL,
   usms_nb = NULL,
   usms_param = NULL,
   usms_in_file = NULL,
@@ -13,7 +13,7 @@ gen_usms_xml(
 )
 }
 \arguments{
-\item{usms_out_file}{file path of the output usms xml file}
+\item{usms_out_file}{file path of the output usms xml file (optional)}
 
 \item{usms_nb}{number of usms to create (optional)}
 

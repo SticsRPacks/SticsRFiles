@@ -1,6 +1,6 @@
 #' @title Generate Stics a sols xml file from a template or an input file
 #'
-#' @param sols_out_file file path of the output sols xml file
+#' @param sols_out_file file path of the output sols xml file (optional)
 #' @param sols_nb number of soils to create (optional)
 #' @param sols_param a table (df, tibble) containing parameters to use (see details)
 #' @param sols_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
@@ -52,7 +52,7 @@
 #'
 #'
 #'
-gen_sols_xml <- function(sols_out_file,
+gen_sols_xml <- function(sols_out_file = NULL,
                          sols_nb = NULL,
                          sols_param = NULL,
                          sols_in_file = NULL,
@@ -64,10 +64,16 @@ gen_sols_xml <- function(sols_out_file,
     xml_doc <- xmldocument(sols_in_file)
   }
 
-  xml_doc <- gen_sols_doc(xml_doc = xml_doc,
-                          sols_nb = sols_nb,
-                          sols_param = sols_param,
-                          stics_version = stics_version)
+  # xml_doc <- gen_sols_doc(xml_doc = xml_doc,
+  #                         sols_nb = sols_nb,
+  #                         sols_param = sols_param,
+  #                         stics_version = stics_version)
+
+  xml_doc <- gen_usms_sols_doc(doc_type = "sols",
+                         xml_doc = xml_doc,
+                         nodes_nb = sols_nb,
+                         nodes_param = sols_param,
+                         stics_version = stics_version)
 
   # checking if out dir exists
   out_path <- dirname(sols_out_file)
@@ -75,7 +81,10 @@ gen_sols_xml <- function(sols_out_file,
     stop(paste("The directory does not exist: ",out_path))
   }
 
-  saveXmlDoc(xml_doc, sols_out_file)
+  # for getting onlye the xml doc in return
+  if (!base::is.null(sols_out_file)) {
+    saveXmlDoc(xml_doc, sols_out_file)
+  }
 
   return(invisible(xml_doc))
 

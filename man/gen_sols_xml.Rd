@@ -5,7 +5,7 @@
 \title{Generate Stics a sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
-  sols_out_file,
+  sols_out_file = NULL,
   sols_nb = NULL,
   sols_param = NULL,
   sols_in_file = NULL,
@@ -13,7 +13,7 @@ gen_sols_xml(
 )
 }
 \arguments{
-\item{sols_out_file}{file path of the output sols xml file}
+\item{sols_out_file}{file path of the output sols xml file (optional)}
 
 \item{sols_nb}{number of soils to create (optional)}
 

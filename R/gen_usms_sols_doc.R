@@ -28,7 +28,7 @@
 #'
 #' @keywords internal
 #'
-gen_xml_doc <- function(doc_type, xml_doc = NULL,
+gen_usms_sols_doc <- function(doc_type, xml_doc = NULL,
                         nodes_nb = NULL, nodes_param = NULL,
                         stics_version = "last", overwrite = F) {
 
