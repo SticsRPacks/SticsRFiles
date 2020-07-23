@@ -63,6 +63,14 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
     warning("No usm names column detected, or multiple columns with \"usm\" prefix")
   }
 
+  # Checking parameter names from table against xml ones
+  in_names <- unique(gsub(pattern = "\\_[1-9]+", x = in_params, ""))
+  diff_names <- setdiff(in_names, c(usm_col, get_param_names(xml_object = xml_doc_object)))
+
+  if ( length(diff_names) ) {
+    stop("Unknown parameter(s) name(s): \n", paste(diff_names, collapse = ", "))
+  }
+
   # checking usms based on names if overwrite == FALSE
   if ( ! overwrite ) {
     # getting usm names

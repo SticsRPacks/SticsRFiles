@@ -52,9 +52,20 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   sol_col <- in_params[grep("^soil",tolower(in_params))]
   #in_soils_names <- sols_param[[sol_col]]
 
-  if ( length(sol_col) == 0 || length(sol_col) > 1 ) {
+  # if ( length(sol_col) == 0 || length(sol_col) > 1 ) {
+  if ( length(sol_col) != 1 ) {
     stop("No soil names column detected, or multiple columns with \"soils\" prefix")
   }
+
+  # Checking parameter names from table against xml ones
+  in_names <- unique(gsub(pattern = "\\_[1-9]+", x = in_params, ""))
+  diff_names <- setdiff(in_names, c(sol_col, get_param_names(xml_object = xml_doc_object)))
+
+  if ( length(diff_names) ) {
+    stop("Unknown parameter(s) name(s): \n", paste(diff_names, collapse = ", "))
+  }
+
+
 
   # checking soils based on names if overwrite == FALSE
   if ( ! overwrite ) {
@@ -96,10 +107,10 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   # set_sols_param(xml_doc_object, "epc", epc_vec)
 
   layers_params <- grep("_[0-9]*$",in_params, value = T)
-  layers_params_pref <- unique(gsub("_[0-9]*$","",layers_params))
+  layers_params_names <- unique(gsub("_[0-9]*$","",layers_params))
 
   for (i in 1:5) {
-    for (p in layers_params_pref){
+    for (p in layers_params_names){
       par <- paste0(p,"_",i)
       layer <- paste("layer",as.character(i))
       if (is.element(par,layers_params)) {
@@ -115,6 +126,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
   # setting param values
   for (p in other_params) {
+    print(p)
     set_param_value(xml_doc_object,p,sols_param[[p]])
   }
 
