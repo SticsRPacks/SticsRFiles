@@ -9,7 +9,8 @@ gen_ini_doc(
   param_table = NULL,
   crop_tag = "crop",
   params_desc = NULL,
-  stics_version = "last"
+  stics_version = "last",
+  check_names = TRUE
 )
 }
 \arguments{

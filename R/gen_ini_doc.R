@@ -6,6 +6,7 @@
 #' (for example like "crop" used for in a parameter suffix : param_crop1, param_crop2)
 #' @param params_desc a list decribing crop parameters and others
 #' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
+#' @param check_names logical for checking names of param_table columns or not
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
@@ -25,7 +26,8 @@ gen_ini_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         crop_tag = "crop",
                         params_desc = NULL,
-                        stics_version ="last") {
+                        stics_version ="last",
+                        check_names = TRUE) {
 
 
   # check/get version
@@ -77,13 +79,21 @@ gen_ini_doc <- function(xml_doc = NULL,
   }
 
 
+  # Checking parameter names from param_table against xml ones
+  if (check_names) {
+    check_param_names(param_names = param_names,
+                      ref_names = get_param_names(xml_object = xml_doc),
+                      pattern_tag = crop_tag)
+  }
+
   # managing several doc generation based upon the lines number in param_table
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
     xml_docs <- apply(param_table,1,function(x) gen_ini_doc(xml_doc = cloneXmlDoc(xml_doc),
                                                             param_table = as.data.frame(t(x)),
                                                             params_desc = params_desc,
-                                                            stics_version = stics_version))
+                                                            stics_version = stics_version,
+                                                            check_names = FALSE))
     return(xml_docs)
   }
 

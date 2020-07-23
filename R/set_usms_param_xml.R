@@ -53,23 +53,18 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
 
   # detecting usm names column
   in_params <- names(usms_param)
-  usm_col <- grep("^usm",tolower(in_params), value = T)
+  col_id <- grep("^usm",tolower(in_params))
+  if (! length(col_id)) {
+    stop("The column for identifying usm names has not been found !")
+  }
+  usm_col <- in_params[ col_id ]
 
   # default idx
   usms_xml_idx <- 1:dim(usms_param)[1]
 
-  #if ( fix_usms_names || length(usm_col) > 1 ) {
-  if ( length(usm_col) == 0 || length(usm_col) > 1 ) {
-    warning("No usm names column detected, or multiple columns with \"usm\" prefix")
-  }
-
-  # Checking parameter names from table against xml ones
-  in_names <- unique(gsub(pattern = "\\_[1-9]+", x = in_params, ""))
-  diff_names <- setdiff(in_names, c(usm_col, get_param_names(xml_object = xml_doc_object)))
-
-  if ( length(diff_names) ) {
-    stop("Unknown parameter(s) name(s): \n", paste(diff_names, collapse = ", "))
-  }
+  # Checking parameter names from param_table against xml ones
+  check_param_names(param_names = in_params[ - col_id],
+                    ref_names = get_param_names(xml_object = xml_doc_object))
 
   # checking usms based on names if overwrite == FALSE
   if ( ! overwrite ) {
@@ -128,6 +123,8 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
   }
   # Getting independant params from plante
   other_params <- setdiff(in_params, c(plante_params,usm_col))
+
+  if ( ! length(other_params) ) return(xml_doc_object)
 
   # Setting param values
   for (p in other_params) {

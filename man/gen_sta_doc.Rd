@@ -4,7 +4,12 @@
 \alias{gen_sta_doc}
 \title{Generatefrom a template a Stics sta xmlDocument}
 \usage{
-gen_sta_doc(xml_doc = NULL, param_table = NULL, stics_version = "last")
+gen_sta_doc(
+  xml_doc = NULL,
+  param_table = NULL,
+  stics_version = "last",
+  check_names = TRUE
+)
 }
 \arguments{
 \item{xml_doc}{an optional xmlDocument object (created from an sta file)}
