@@ -17,6 +17,8 @@ gen_sta_doc(
 \item{param_table}{a table (df, tibble) containing parameters to use (optional)}
 
 \item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
+
+\item{check_names}{logical for checking names of param_table columns or not}
 }
 \value{
 an invisible xmlDocument object or a list of

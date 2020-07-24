@@ -1,15 +1,5 @@
-#' Getting the stics environment object
-#'
-#' @return stics environment
-#@export
-#'
-# @examples
-sticsenv <- function() {
-  return(stics_env())
-}
 
-
-stics_env <- function(name = NULL, env = .GlobalEnv, create = TRUE) {
+stics_env <- function(name = NULL, env = globalenv(), create = TRUE) {
 
   exists_stics <- stics_exists()
 
@@ -18,16 +8,22 @@ stics_env <- function(name = NULL, env = .GlobalEnv, create = TRUE) {
   if (!exists_stics && create) {
     assign(
       x = "stics",
-      value = new.env(parent = .GlobalEnv),
-      pos = .GlobalEnv
+      value = new.env(parent = globalenv()),
+      pos = globalenv()
     )
 
     stics_set_name(name = "stics", env = ".GlobalEnv")
   }
 
 
+  # Change stics env with local env : link to
+  # stics
+  # local_stics <- get("stics", envir = globalenv())
+  # voire supprimer le env en arg ?
+
+  local_stics <- get("stics", envir = globalenv())
   if (base::is.null(name) || name == "stics") {
-    return(get("stics", envir = .GlobalEnv))
+    return(local_stics)
   }
 
 
@@ -49,11 +45,16 @@ stics_env <- function(name = NULL, env = .GlobalEnv, create = TRUE) {
 }
 
 
+#' @export
+sticsenv <- stics_env
+
+
+
 stics_set_name <- function(name, env = "stics", fix_name = NULL) {
 
   if (!stics_exists(name = name, env_name = env )) return(invisible(FALSE))
 
-  envir <- get(env, envir = .GlobalEnv)
+  envir <- get(env, envir = globalenv())
 
   env_str <- "stics"
   if (name != "stics") env_str <- "stics$name"
@@ -101,7 +102,7 @@ stics_ls <- function(name = NULL, detail = FALSE) {
 
 
 stics_exists <- function(name = NULL, env_name = "stics") {
-  exists_stics <- exists(x = "stics", envir = .GlobalEnv, inherits = FALSE)
+  exists_stics <- exists(x = "stics", envir = globalenv(), inherits = FALSE)
 
   if (base::is.null(name) || name =="stics") {
     return(exists_stics)
@@ -119,8 +120,17 @@ stics_exists <- function(name = NULL, env_name = "stics") {
   val <- eval(parse( text = paste0("stics","$",env_name,"$", name)))
   if (!base::is.null(val)) return(TRUE)
 
+  # For a variable containing a list
+  name <- stics_split_list(name)[1]
+  val <- eval(parse( text = paste0("stics","$",env_name,"$", name)))
+  if (!base::is.null(val)) return(TRUE)
+
   return(FALSE)
 }
+
+#' @export
+sticsexists <- stics_exists
+
 
 
 
@@ -134,14 +144,17 @@ stics_get <- function(name = NULL, env_name = "stics") {
     name <- name[1]
   }
 
+
   envir <- stics_env(name = env_name, create = FALSE)
 
-  if (!stics_exists(name = name, env_name = env_name)) {
-    warning(name, " does not exist in environment ", environmentName(envir))
+  elts <- stics_split_list(name)
+
+  if (!stics_exists(name = elts[1], env_name = env_name)) {
+    warning(elts[1], " does not exist in environment ", environmentName(envir))
     return()
   }
 
-  elts <- stics_split_list(name)
+
 
   loc_var <- get(elts[1], envir = envir, inherits = FALSE)
 
@@ -154,6 +167,9 @@ stics_get <- function(name = NULL, env_name = "stics") {
 
   eval(parse(text = xpression))
 }
+
+#' @export
+sticsget <- stics_get
 
 
 
@@ -190,6 +206,9 @@ stics_set <- function(name, value, env_name = "stics") {
 
   return(invisible(TRUE))
 }
+
+#' @export
+sticsset <- stics_set
 
 
 stics_class <- function(name, env_name = "stics") {

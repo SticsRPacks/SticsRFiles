@@ -24,6 +24,8 @@ gen_ini_doc(
 \item{params_desc}{a list decribing crop parameters and others}
 
 \item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
+
+\item{check_names}{logical for checking names of param_table columns or not}
 }
 \value{
 an invisible xmlDocument object or a list of
