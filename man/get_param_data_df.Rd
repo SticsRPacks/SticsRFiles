@@ -9,8 +9,8 @@ get_param_data_df(name = NULL, version = "last", kind = "all", exact = FALSE)
 \arguments{
 \item{name}{Optional name or partial name or a vector of}
 
-\item{version}{Optional, Stics version.
-Only the 2 last are referenced: V9.0, V9.1 (default value)}
+\item{version}{Optional, Stics version (default value, "last")
+Only the 2 last are referenced: V9.0, V9.1}
 
 \item{kind}{Kind of information to be retrieved for parameters
 among "parameter", "formalism" or "all" for both of them}

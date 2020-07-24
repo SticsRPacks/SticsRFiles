@@ -66,6 +66,8 @@ check_version_compat <- function(version_name = "last") {
   stop(version_name,": is an unknown version!")
 }
 
+#' @export
+checkversion <- check_version_compat
 
 #' Getting versions data (versions strings and examples files directories list)
 #'
