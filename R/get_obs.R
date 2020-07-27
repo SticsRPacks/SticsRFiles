@@ -57,9 +57,18 @@ get_obs <- function(workspace = getwd(),
   # Getting obs files list from usms.xml file or obs files found in workspace
 
   # Getting existing obs files list using usms.xml
+
   if (! base::is.null(usms_filename)) {
+
+    usms_path <- file.path(workspace,usms_filename)
+
+    if(! file.exists(usms_path)){
+      stop(usms_filename, ": does not exist in directory ",workspace)
+    }
+
+
     obs_name <- get_obs_from_usms(workspace = workspace,
-                                  usms_path = file.path(workspace,usms_filename),
+                                  usms_path = usms_path,
                                   usms_filename = usms_filename,
                                   usm_name = usm_name)
 
