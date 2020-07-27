@@ -55,26 +55,36 @@ get_obs <- function(workspace = getwd(),
   }
 
   # Getting obs files list from usms.xml file or obs files found in workspace
-  if (! base::is.null(usms_filename)) {
 
-    # Getting existing obs files list using usms.xml
+  # Getting existing obs files list using usms.xml
+  if (! base::is.null(usms_filename)) {
     obs_name <- get_obs_from_usms(workspace = workspace,
                                   usms_path = file.path(workspace,usms_filename),
                                   usms_filename = usms_filename,
                                   usm_name = usm_name)
-    # Getting plant files names
+
+    # Getting plant names, if javastics_path or workspace path contains
+    # a plant directory
+    #
     usms <- names(obs_name)
     plant_names <- get_plant_name(workspace, usms, usms_filename, javastics_path, verbose)
 
   } else {
     # Getting obs files list from directory
     obs_name <- as.list(list.files(pattern = "\\.obs$", path = workspace, full.names = FALSE))
+
+    # No obs file found
+    if (!length(obs_name)) return()
+
     usms <- gsub(pattern = "\\.obs$", replacement = "",x = obs_name)
     names(obs_name) <- usms
 
     # Selecting using usm_name
     if (!base::is.null(usm_name)) {
       usms <- intersect(usms, usm_name)
+
+      # Not any matching manes
+      if (!length(usms)) return()
       obs_name <- obs_name[usms]
 
     }
