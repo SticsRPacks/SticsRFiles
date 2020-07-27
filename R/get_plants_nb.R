@@ -34,6 +34,8 @@ get_plants_nb <- function(usm_file_path, usms_list=c()){
   # Neither .usm nor .xml
   if (! (usm | usms) ) return()
 
+  if (!base::file.exists(usm_file_path)) stop(usm_file_path, " does not exist")
+
   if (usm) return(get_plants_nb_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
 
   if (usms) return(get_plants_nb_xml(usm_xml_path = usm_file_path, usms_list = usms_list))
@@ -90,7 +92,6 @@ get_plants_nb_txt <- function(usm_txt_path, usm_name = NULL) {
 
   if (base::basename(usm_txt_path) != "new_travail.usm") return()
 
-  if (!base::file.exists(usm_txt_path)) stop(usm_txt_path, " does not exist")
 
   if (length(usm_name) > 1) stop("Only one usm name may be given !")
 
