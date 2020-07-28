@@ -16,11 +16,13 @@
 #' @keywords internal
 #'
 all_out_var <- function(version = "last"){
-  if(version=="last"){
-    version <- get_stics_versions_compat()$last_version
-  }
-  version <- match.arg(version, get_stics_versions_compat()$versions_list, several.ok = FALSE)
-  var_df <- utils::read.csv2(file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"))
+
+  # Checking and getting the rigth version
+  version <- check_version_compat( version_name = version)
+
+  var_df <- utils::read.csv2(
+    file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"),
+    stringsAsFactors = FALSE)
 
   # Adding a version  attribute
   attr(x = var_df, which = "version") <- version

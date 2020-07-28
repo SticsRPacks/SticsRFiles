@@ -93,7 +93,7 @@ get_param_names <- function(xml_object, param_list = c(), full_list = FALSE) {
   # Getting param_name from a node name
   # but not in list "plante", "horizon" ,"initialisations", "sol", "usm"
   if ( attr_name == "none" &&
-       ! ( node_name %in% c("plante", "horizon", "initialisations", "sol", "usm")) ) {
+       ! ( node_name %in% c("plante", "horizon", "initialisations", "sol", "usm", "snow")) ) {
     param_name <- node_name
   }
 
