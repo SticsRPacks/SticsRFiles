@@ -385,8 +385,8 @@ kcouvmlch;extinction coefficient connecting the soil cover to the amount of plan
 Kd;Affinity constant for NO3 in denitrification;mg N/L;PARAM;1;real;10;500;1;0
 kdesat;rate constant of de-saturation ;d-1 ;PARAM;1;real;1;20;1;0
 khaut;extinction coefficient connecting LAI to crop height;*;PARAM;1;real;0.2;2;1;0
-Kmabs1;affinity constant of N uptake by roots for the fast uptake system;µmole.L-1;PARPLT;1;real;20;200;1;0
-Kmabs2;affinity constant of N uptake by roots for the low uptake system;µmole.L-1;PARPLT;1;real;4000;40000;1;0
+Kmabs1;affinity constant of N uptake by roots for the fast uptake system;ï¿½mole.L-1;PARPLT;1;real;20;200;1;0
+Kmabs2;affinity constant of N uptake by roots for the low uptake system;ï¿½mole.L-1;PARPLT;1;real;4000;40000;1;0
 kmax;maximum crop coefficient for water requirements (= MET/PET);SD;PARPLT;1;real;0.5;4;1;0
 Kmin;minimum snow melting rate on 21 December;mm.degreeC.d-1;STATION;1;real;1.5;2.5;1;0
 krepracperm;parameter of biomass root partitioning : evolution of the ratio root/total (permanent trophic link);SD;PARPLT;1;real;0.0001;1;1;0
@@ -672,11 +672,11 @@ vitprophuile;rate of increase of oil harvest index vs time;g oil.g-1.d-1;PARPLT;
 vitpropsucre;rate of increase of sugar harvest index vs time;g sugar.g-1.d-1;PARPLT;1;real;0.001;0.01;1;0
 vitreconspeupl;rate of regeneration of the tiller population;degreeC-1;PARAMV6;2;real;0;0.1;1;0
 vlaimax;ulai at the inflexion point of the function DELTAI=f(ULAI);SD;PARPLT;1;real;1.5;2.5;1;0
-Vmax1;maximum specific N uptake rate with the low affinity transport system;µmole.cm-1 h-1;PARPLT;1;real;0.0002;0.01;1;0
-Vmax2;maximum specific N uptake rate with the high affinity transport system;µmole.cm-1 h-1;PARPLT;1;real;0.002;0.1;1;0
+Vmax1;maximum specific N uptake rate with the low affinity transport system;micromole.cm-1 h-1;PARPLT;1;real;0.0002;0.01;1;0
+Vmax2;maximum specific N uptake rate with the high affinity transport system;micromole.cm-1 h-1;PARPLT;1;real;0.002;0.1;1;0
 vnitmax;maximum nitrification rate if michaelis_menten option used;mg N kg-1 d-1;PARAM;1;real;0;100;1;0
 voleng;maximal fraction of mineral fertilizer that can be volatilized ;SD;PARAM;8;real;0;1;1;0
-vpotdenit;potential rate of denitrificaion on profdenit (kg N/ha/day) (2 by default, or fonction of 5*Corg-4);kg.ha-1.d-1;PARSOL;1;real;0.3;10;1;0
+vpotdenit;potential rate of denitrification profdenit(kg N/ha/day) (2 by default, or fonction of 5*Corg-4);kg.ha-1.d-1;PARSOL;1;real;0.3;10;1;0
 wdata1;name of the first climate file;SD;USM;1;character;;;0;0
 wdata2;name of the last climate file;SD;USM;1;character;;;0;0
 wfpsc;wfps threshold beyond which denitrification occurs;SD;PARAM;1;real;0.3;1;1;0
