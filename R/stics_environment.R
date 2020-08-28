@@ -21,7 +21,6 @@ sticsenv_name <- function() {
 #' @param env_name The environment name
 #' @param create   Create the environment name
 #'
-#' @return
 #' @keywords internal
 #'
 stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
@@ -284,7 +283,7 @@ stics_set <- function(name, value, env_name = sticsenv_name()) {
   # Simple variable, existing or not
   if (length(elts) == 1) {
     eval(parse(text = paste0(name, " <- value")), envir = envir)
-    sticsenv_remove(name = "value", env_name = env_name)
+    stics_remove(name = "value", env_name = env_name)
     return(invisible(TRUE))
   }
 
@@ -305,7 +304,7 @@ stics_set <- function(name, value, env_name = sticsenv_name()) {
   eval(parse(text = xpression), envir = envir)
 
   # deleting temporary value variable
-  sticsenv_remove(name = "value", env_name = env_name)
+  stics_remove(name = "value", env_name = env_name)
 
   return(invisible(TRUE))
 }

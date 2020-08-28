@@ -13,9 +13,6 @@ stics_env(name = NULL, env_name = globalenv(), create = TRUE)
 
 \item{create}{Create the environment name}
 }
-\value{
-
-}
 \description{
 Too complicated, does so many things I don't know what to tell
 about this function. Patrice, can you write the doc, or simplify

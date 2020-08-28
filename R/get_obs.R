@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' path <- file.path(get_examples_path( file_type = "obs"))
+#' path <- file.path(get_examples_path(file_type = "obs"),"simple_exemple")
 #'
 #' # Get observations for all usms, but only banana has observations:
 #' Meas <- get_obs(path)
@@ -155,8 +155,3 @@ get_obs_from_usms <- function(workspace,
   return(obs_name)
 
 }
-
-
-
-
-

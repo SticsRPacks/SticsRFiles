@@ -41,7 +41,7 @@ Or if \code{usms_filename} is not specified, all the .obs files are loaded from 
 }
 \examples{
 \dontrun{
-path <- file.path(get_examples_path( file_type = "obs"))
+path <- file.path(get_examples_path(file_type = "obs"),"simple_exemple")
 
 # Get observations for all usms, but only banana has observations:
 Meas <- get_obs(path)
