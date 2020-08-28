@@ -32,6 +32,8 @@
 #'
 #' Meas_banana_sorghum <- get_obs(path, "IC_banana_sorghum")
 #'
+#' Meas_banana_sorghum <- get_obs(path, "IC_banana_sorghum", usms_filename = "usms.xml")
+#'
 #' # Get oservations with real plant names when plant folder is not in the workspace:
 #' get_obs(path, "banana", javastics_path= "path/to/javastics")
 #' }
@@ -60,25 +62,27 @@ get_obs <- function(workspace = getwd(),
 
   # Getting existing obs files list using usms.xml
 
-  if (! base::is.null(usms_filename)) {
+  if(!is.null(usms_filename)){
 
-    usms_path <- file.path(workspace,usms_filename)
+    # Try relative path first
+    usms_path <- normalizePath(file.path(workspace,usms_filename), mustWork = FALSE)
 
-    if(! file.exists(usms_path)){
-      stop(usms_filename, ": does not exist in directory ",workspace)
+    if(!file.exists(usms_path)){
+      usms_path <- normalizePath(usms_filename, mustWork = FALSE)
+      if(!file.exists(usms_path)){
+        stop(usms_filename, " not found in workspace or as an absolute path")
+      }
     }
-
 
     obs_name <- get_obs_from_usms(workspace = workspace,
                                   usms_path = usms_path,
-                                  usms_filename = usms_filename,
                                   usm_name = usm_name)
 
     # Getting plant names, if javastics_path or workspace path contains
     # a plant directory
     #
     usms <- names(obs_name)
-    plant_names <- get_plant_name(workspace, usms, usms_filename, javastics_path, verbose)
+    plant_names <- get_plant_name(workspace, usms, usms_path, javastics_path, verbose)
 
   } else {
     # Getting obs files list from directory
@@ -126,7 +130,6 @@ get_obs <- function(workspace = getwd(),
 
 get_obs_from_usms <- function(workspace,
                               usms_path,
-                              usms_filename,
                               usm_name = NULL,
                               verbose = TRUE) {
 
@@ -149,7 +152,7 @@ get_obs_from_usms <- function(workspace,
   }
 
   # Intercopping
-  mixed <- get_plants_nb(file.path(workspace,usms_filename))[usms] > 1
+  mixed <- get_plants_nb(usms_path)[usms] > 1
 
   # Extracting expected observation file names:
   obs_name <- vector(mode = "list", length = length(usms))

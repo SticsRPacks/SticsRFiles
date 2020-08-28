@@ -35,8 +35,17 @@ get_plant_name= function(workspace,
                          javastics_path = NULL,
                          verbose=TRUE){
 
+  usms_path = file.path(workspace,usms_filename)
+
+  if(!file.exists(usms_path)){
+    usms_path <- normalizePath(usms_filename, mustWork = FALSE)
+    if(!file.exists(usms_path)){
+      stop(usms_filename, " not found in workspace or as an absolute path")
+    }
+  }
+
   # getting usms names from the usms.xml file:
-  usms= get_usms_list(usm_path = file.path(workspace,usms_filename))
+  usms= get_usms_list(usm_path = usms_path)
 
   # Filtering USMs if required:
   if(!is.null(usm_name)){
@@ -53,14 +62,14 @@ get_plant_name= function(workspace,
     usms= usm_name
   }
 
-  nb_plant= get_plants_nb(file.path(workspace,usms_filename))[usms]
+  nb_plant= get_plants_nb(usms_path)[usms]
 
   # Getting plant files (fplt) for a set of usm
-  plant_files <- get_param_xml(xml_file = file.path(workspace,usms_filename), param_name = "fplt", select = "usm", value = usms)
+  plant_files <- get_param_xml(xml_file = usms_path, param_name = "fplt", select = "usm", value = usms)
   plant_list <- unlist(apply(matrix(plant_files$usms.xml$fplt, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
   names(plant_list) <- usms
 
-  # Keeping only usefull files names according to nb_plant data
+  # Keeping only useful files names according to nb_plant data
   plant_xml= try(
     mapply(function(x,y){
       list(x[1:y])

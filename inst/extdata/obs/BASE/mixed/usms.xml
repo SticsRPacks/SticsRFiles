@@ -43,5 +43,27 @@
       <ftec>null</ftec>                                                                             
       <flai>null</flai>                                                                             
     </plante>                                                                                       
-  </usm>                                                                                                                                                                                                                                                                      
+  </usm>       
+  <usm nom="sorghum">                                                                               
+    <datedebut>112</datedebut>                                                                      
+    <datefin>360</datefin>                                                                          
+    <finit>sorgho_ini.xml</finit>                                                                   
+    <nomsol>solsorgho</nomsol>                                                                      
+    <fstation>climsorj_sta.xml</fstation>                                                           
+    <fclim1>climsorj.1996</fclim1>                                                                  
+    <fclim2>climsorj.1996</fclim2>                                                                  
+    <culturean>1</culturean>                                                                        
+    <nbplantes>1</nbplantes>                                                                        
+    <codesimul>0</codesimul>                                                                        
+    <plante dominance="1">                                                                          
+      <fplt>proto_sorghum_plt.xml</fplt>                                                            
+      <ftec>sorgho_tec.xml</ftec>                                                                   
+      <flai>sorgho.lai</flai>                                                                       
+    </plante>                                                                                       
+    <plante dominance="2">                                                                          
+      <fplt>null</fplt>                                                                             
+      <ftec>null</ftec>                                                                             
+      <flai>null</flai>                                                                             
+    </plante>                                                                                       
+  </usm>                                                                                                                                                                                                                                                                    
 </usms>
