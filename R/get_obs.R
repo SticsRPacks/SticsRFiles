@@ -155,3 +155,32 @@ get_obs_from_usms <- function(workspace,
   return(obs_name)
 
 }
+
+
+#' Get mixed obs
+#'
+#' Get mixed observation files by name
+#'
+#' @return
+#' @keywords internal
+#'
+#' @examples
+#' path = file.path(get_examples_path(file_type = "obs"),"mixed")
+#'
+parse_mixed_obs = function(obs_names){
+  is_potential_mixed = grepl("a|p.obs",obs_names)
+
+  potential_mixed = gsub(pattern = "((a|p)\\.obs)$", replacement = "",x = obs_names[is_potential_mixed])
+
+  obs_names2 = obs_names
+  for(i in seq_along(potential_mixed)){
+    mixed = which(potential_mixed[i] == potential_mixed)
+    if(length(mixed) > 1){
+      mixed_names = unlist(obs_name[is_potential_mixed][mixed])
+      associated_index = grep("a.obs$",mixed_names)
+      obs_name2[is_potential_mixed][[i]] = c(mixed_names[-associated_index], mixed_names[associated_index])
+    }
+  }
+
+  unique(obs_names2)
+}
