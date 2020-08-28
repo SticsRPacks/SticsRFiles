@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' path <- file.path(get_examples_path(file_type = "obs"),"simple_exemple")
+#' path <- file.path(get_examples_path(file_type = "obs"),"mixed")
 #'
 #' # Get observations for all usms, but only banana has observations:
 #' Meas <- get_obs(path)
@@ -81,12 +81,9 @@ get_obs <- function(workspace = getwd(),
   } else {
     # Getting obs files list from directory
     obs_name <- as.list(list.files(pattern = "\\.obs$", path = workspace, full.names = FALSE))
-
+    obs_name = parse_mixed_obs(obs_name)
     # No obs file found
     if (!length(obs_name)) return()
-
-    usms <- gsub(pattern = "\\.obs$", replacement = "",x = obs_name)
-    names(obs_name) <- usms
 
     # Selecting using usm_name
     if (!base::is.null(usm_name)) {
@@ -97,7 +94,16 @@ get_obs <- function(workspace = getwd(),
       obs_name <- obs_name[usms]
 
     }
-    plant_names <- rep("NA",length(obs_name))
+
+
+    plant_names = lapply(obs_name, function(x){
+      if(length(x)>1){
+        c("plant_1", "plant_2")
+      }else{
+        c("plant_1")
+      }
+    })
+
   }
 
   # Getting obs data list, removing variables with only NAs
@@ -106,7 +112,7 @@ get_obs <- function(workspace = getwd(),
       dplyr::select_if(function(x){any(!is.na(x))})
   },dirpath = workspace, filename = obs_name, p_name = plant_names, SIMPLIFY = FALSE)
 
-  names(obs_list) <- usms
+  names(obs_list) <- names(obs_name)
 
   # Not used elsewhere, commented for the moment !
   # attr(obs_list, "class") <- "stics_observation"
@@ -165,22 +171,32 @@ get_obs_from_usms <- function(workspace,
 #' @keywords internal
 #'
 #' @examples
-#' path = file.path(get_examples_path(file_type = "obs"),"mixed")
+#'
+#' parse_mixed_obs(list("banana.obs", "IC_banana_sorghuma.obs", "IC_banana_sorghump.obs"))
 #'
 parse_mixed_obs = function(obs_names){
-  is_potential_mixed = grepl("a|p.obs",obs_names)
 
-  potential_mixed = gsub(pattern = "((a|p)\\.obs)$", replacement = "",x = obs_names[is_potential_mixed])
+  usm_names= gsub(pattern = "\\.obs$", replacement = "",x = obs_names)
+  names(obs_names) = usm_names
+
+  is_potential_mixed = grepl("((a|p)\\.obs)$",obs_names)
+  usm_name_potential_mixed = gsub(pattern = "((a|p)\\.obs)$", replacement = "",x = obs_names)
+  potential_mixed = usm_name_potential_mixed[is_potential_mixed]
 
   obs_names2 = obs_names
-  for(i in seq_along(potential_mixed)){
-    mixed = which(potential_mixed[i] == potential_mixed)
+
+  mixed_and_not_duplicated = seq_along(obs_names)[is_potential_mixed][!duplicated(potential_mixed)]
+
+  for(i in mixed_and_not_duplicated){
+    mixed = which(usm_name_potential_mixed[i] == usm_name_potential_mixed & is_potential_mixed)
+    # [!duplicated(potential_mixed)]
     if(length(mixed) > 1){
-      mixed_names = unlist(obs_name[is_potential_mixed][mixed])
+      mixed_names = unlist(obs_names[mixed])
       associated_index = grep("a.obs$",mixed_names)
-      obs_name2[is_potential_mixed][[i]] = c(mixed_names[-associated_index], mixed_names[associated_index])
+      obs_names2[[i]] = c(mixed_names[-associated_index], mixed_names[associated_index])
+      names(obs_names2)[i] = usm_name_potential_mixed[i]
     }
   }
 
-  unique(obs_names2)
+  obs_names2[c(which(!is_potential_mixed),mixed_and_not_duplicated)]
 }
