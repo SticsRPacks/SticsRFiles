@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_desc.R
 \name{get_param_desc}
 \alias{get_param_desc}
-\title{Title}
+\title{get param desc}
 \usage{
 get_param_desc(file_path = NULL, version = "last", name = NULL, kind = FALSE)
 }
@@ -17,5 +17,6 @@ to "last", a special code to get the last version.}
 \item{kind}{a name vector for selecting loaded content using kind column matching}
 }
 \description{
-Title
+get param desc
 }
+\keyword{internal}

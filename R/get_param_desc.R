@@ -1,4 +1,4 @@
-#' Title
+#' get param desc
 #'
 #' @param file_path csv file path
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
@@ -6,7 +6,7 @@
 #' @param name a name vector for selecting loaded content using name column matching
 #' @param kind a name vector for selecting loaded content using kind column matching
 #'
-#' @export internal
+#' @keywords internal
 #'
 get_param_desc <- function(file_path = NULL,
                            version = "last",
