@@ -30,9 +30,6 @@
 #' # Get observations only for banana:
 #' Meas_banana <- get_obs(path, "banana")
 #'
-#' Meas_banana_sorghum <- get_obs(path, "IC_banana_sorghum")
-#'
-#' Meas_banana_sorghum <- get_obs(path, "IC_banana_sorghum", usms_filename = "usms.xml")
 #'
 #' # Get oservations with real plant names when plant folder is not in the workspace:
 #' get_obs(path, "banana", javastics_path= "path/to/javastics")
@@ -46,32 +43,73 @@ get_obs <- function(workspace = getwd(),
                     javastics_path = NULL,
                     verbose = TRUE){
 
-  # For a list of folders recurive call
-  if(length(workspace) > 1){
-    obs_list <- unlist(lapply(workspace,
-                              function(x) get_obs(x,
-                                                  usm_name = usm_name,
-                                                  usms_filename = usms_filename,
-                                                  javastics_path = javastics_path,
-                                                  verbose = verbose)),
-                       recursive = FALSE)
-    return(obs_list)
+  if(length(workspace> 1) && !is.null(usms_filename) &&
+     file.exists(normalizePath(usms_filename, mustWork = FALSE))){
+    # Try absolute path here (if it is, read the file only once, and pass its content)
+    usms_path <- normalizePath(usms_filename, mustWork = FALSE)
+
+    obs_name = get_obs_from_usms(workspace = NULL, usms_path = usms_path, usm_name = usm_name)
+
+    workspace_files = list.files(workspace,recursive = TRUE)
+
+    obs_files = workspace_files[grepl(".obs",workspace_files)]
+
+    # obs_name actually found in the folders:
+    obs_name = obs_name[obs_name %in% obs_files]
+
+    # Getting plant names, if javastics_path or workspace path contains
+    # a plant directory
+
+    plant_names <- lapply(workspace,function(x){
+      get_plant_name(x, names(obs_name), usms_path, javastics_path, verbose= FALSE)
+    })
+
+    plant_names = unlist(plant_names, recursive = FALSE)
+
+    plant_names = plant_names[!duplicated(names(plant_names))]
+    # names(plant_names) = names(obs_name)
+
+    mapply(function(x,y,z){
+      get_obs_(y,
+               usm_name = usm_name,
+               usms_filename = usms_filename,
+               javastics_path = javastics_path,
+               verbose = verbose,x,z)
+    },obs_name,workspace,plant_names)
+  }else{
+    unlist(lapply(workspace,function(x){
+      get_obs_(x,
+               usm_name = usm_name,
+               usms_filename = usms_filename,
+               javastics_path = javastics_path,
+               verbose = verbose)
+    }), recursive = FALSE)
   }
+}
+
+#' @rdname get_obs
+#' @keywords internal
+get_obs_ <- function(workspace = getwd(),
+                     usm_name = NULL,
+                     usms_filename = NULL,
+                     javastics_path = NULL,
+                     verbose = TRUE,
+                     obs_name = NULL,
+                     plant_names = NULL){
 
   # Getting obs files list from usms.xml file or obs files found in workspace
 
-  # Getting existing obs files list using usms.xml
 
-  if(!is.null(usms_filename)){
+  # get_obs(), the calling function did not found the usms.xml file given using
+  # an absolute path, but the user gives a usms_filename, so it must be relative to
+  # the workspace
+  if(!is.null(usms_filename) && is.null(obs_name) && is.null(plant_names)){
 
     # Try relative path first
     usms_path <- normalizePath(file.path(workspace,usms_filename), mustWork = FALSE)
 
     if(!file.exists(usms_path)){
-      usms_path <- normalizePath(usms_filename, mustWork = FALSE)
-      if(!file.exists(usms_path)){
-        stop(usms_filename, " not found in workspace or as an absolute path")
-      }
+      stop(usms_filename, " not found in workspace or as an absolute path")
     }
 
     obs_name <- get_obs_from_usms(workspace = workspace,
@@ -80,11 +118,14 @@ get_obs <- function(workspace = getwd(),
 
     # Getting plant names, if javastics_path or workspace path contains
     # a plant directory
-    #
+
     usms <- names(obs_name)
     plant_names <- get_plant_name(workspace, usms, usms_path, javastics_path, verbose)
+  }
 
-  } else {
+  # The user did not provide any usms_filename, so using the names of the .obs files
+  # as information.
+  if(is.null(usms_filename) && is.null(obs_name) && is.null(plant_names)) {
     # Getting obs files list from directory
     obs_name <- as.list(list.files(pattern = "\\.obs$", path = workspace, full.names = FALSE))
     obs_name = parse_mixed_obs(obs_name)

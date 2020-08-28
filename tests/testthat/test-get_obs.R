@@ -4,7 +4,7 @@ path <- file.path(get_examples_path(file_type = "obs"),"simple_exemple")
 path_mixed = file.path(get_examples_path(file_type = "obs"),"mixed")
 
 # Get observations for all usms, but only banana has observations:
-Meas <- get_obs(path)
+Meas <- get_obs(workspace = path)
 Meas_mixed = get_obs(path_mixed)
 
 # Get observations only for banana:
@@ -72,4 +72,17 @@ test_that("reading mixed usms with usms_filename to usms.xml outside of folder",
   expect_length(Meas_mixed3,2) # NB: only two because intecrop usms absent from this usms.xml
   expect_equal(Meas_mixed$banana$lai_n, Meas_mixed3$banana$lai_n)
 })
+
+# Testing with .obs in different folders (e.g. one for each usm, but a common usms.xml)
+
+test_that("reading mixed usms with usms_filename to usms.xml outside of folder, and usms in different folders", {
+  path = file.path(get_examples_path(file_type = "obs"),"usms_outside")
+  paths = list.dirs(path)[-1]
+  Meas_2 <- get_obs(workspace = paths, usms_filename = file.path(path,"usms.xml"))
+
+  expect_length(Meas_mixed3,2) # NB: only two because intecrop usms absent from this usms.xml
+  expect_equal(Meas_mixed$banana$lai_n, Meas_mixed3$banana$lai_n)
+})
+
+
 

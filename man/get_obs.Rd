@@ -2,6 +2,7 @@
 % Please edit documentation in R/get_obs.R
 \name{get_obs}
 \alias{get_obs}
+\alias{get_obs_}
 \title{Read STICS observation files (*.obs)}
 \usage{
 get_obs(
@@ -10,6 +11,16 @@ get_obs(
   usms_filename = NULL,
   javastics_path = NULL,
   verbose = TRUE
+)
+
+get_obs_(
+  workspace = getwd(),
+  usm_name = NULL,
+  usms_filename = NULL,
+  javastics_path = NULL,
+  verbose = TRUE,
+  obs_name = NULL,
+  plant_names = NULL
 )
 }
 \arguments{
@@ -48,8 +59,10 @@ Meas <- get_obs(path)
 # Get observations only for banana:
 Meas_banana <- get_obs(path, "banana")
 
+
 # Get oservations with real plant names when plant folder is not in the workspace:
 get_obs(path, "banana", javastics_path= "path/to/javastics")
 }
 
 }
+\keyword{internal}
