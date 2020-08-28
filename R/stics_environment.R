@@ -1,7 +1,29 @@
+
+
+#' stics env name
+#'
+#' Get the default stics environment name
+#'
+#' @return The default stics env name
+#' @keywords internal
+#'
 sticsenv_name <- function() {
   return(".stics")
 }
 
+#' Don't know what purpose this function serve
+#'
+#' Too complicated, does so many things I don't know what to tell
+#' about this function. Patrice, can you write the doc, or simplify
+#' the interface ?
+#'
+#' @param name     Name of an object in an env OR env name ??? (optional)
+#' @param env_name The environment name
+#' @param create   Create the environment name
+#'
+#' @return
+#' @keywords internal
+#'
 stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
 
   exists_env <- stics_exists()
@@ -47,11 +69,16 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
   return(local_env)
 }
 
-
-#' @export
-sticsenv <- stics_env
-
-
+#' Create a stics env
+#'
+#' Create a new stics envirnoment
+#'
+#' @param name The name of the stics environment
+#' @param env_name The name of the parent environment
+#'
+#' @return The new environment
+#' @keywords internal
+#'
 sticsenv_create <- function(name, env_name = ".GlobalEnv") {
 
   parent <- eval(parse(text = env_name))
@@ -69,7 +96,17 @@ sticsenv_create <- function(name, env_name = ".GlobalEnv") {
   return(new_env)
 }
 
-
+#' Replace stics env name
+#'
+#' Set the name of the environment where an object is found
+#'
+#' @param name The name of an object potentially found in a stics environment
+#' @param env_name The name of the stics environment
+#' @param fix_name Fix the name of the environment to `fix_name`, or to `paste0("R_", name)`
+#' if `NULL` (default).
+#'
+#' @return The new environment
+#' @keywords internal
 sticsenv_set_name <- function(name, env_name = sticsenv_name(), fix_name = NULL) {
 
   envir <- suppressWarnings(stics_get(name = name, env_name = env_name))
@@ -88,6 +125,15 @@ sticsenv_set_name <- function(name, env_name = sticsenv_name(), fix_name = NULL)
 }
 
 
+#' Get stics env name from object
+#'
+#' Get the name of the environment where an object is found
+#'
+#' @param name The name of an object potentially found in a stics environment
+#' @param env_name The name of the stics environment
+#'
+#' @return A vector of environment names
+#' @keywords internal
 sticsenv_get_name <- function(name = NULL, env_name = sticsenv_name()) {
 
   if (!stics_exists(name = name, env_name = env_name)) return(invisible())
@@ -97,6 +143,16 @@ sticsenv_get_name <- function(name = NULL, env_name = sticsenv_name()) {
 }
 
 
+#' List stics env
+#'
+#' List all objects in a stics environment
+#'
+#' @param name Optionally, the name of an object in the stics environment
+#' @param env_name The name of the stics environment
+#' @param detail Return all details ? (use `ls.str()`)
+#'
+#' @return A vector of all object names in the environment
+#' @keywords internal
 sticsenv_ls <- function(name = NULL, env_name = sticsenv_name(), detail = FALSE) {
 
   envir <- stics_get(name, env_name = env_name )
@@ -110,10 +166,15 @@ sticsenv_ls <- function(name = NULL, env_name = sticsenv_name(), detail = FALSE)
   return(ls(envir))
 }
 
-#' @export
-sticsls <- sticsenv_ls
-
-
+#' Is object part of stics env
+#'
+#' Test if an object is in a stics environment
+#'
+#' @param name Name of the object in the stics environment
+#' @param env_name The name of the stics environment
+#'
+#' @return A boolean, `TRUE` if the object is in the env, `FALSE` otherwise.
+#' @keywords internal
 stics_exists <- function(name = NULL, env_name = sticsenv_name()) {
 
 
@@ -146,15 +207,16 @@ stics_exists <- function(name = NULL, env_name = sticsenv_name()) {
   return(FALSE)
 }
 
-#' @export
-sticsexists <- stics_exists
-
-
-
-
+#' Get object from stics env
+#'
+#' Get an object from the stics environment
+#'
+#' @param name Name of the object in the stics environment
+#' @param env_name The name of the stics environment
+#'
+#' @return The object value.
+#' @keywords internal
 stics_get <- function(name = NULL, env_name = sticsenv_name()) {
-
-  #browser()
 
   if (base::is.null(name) || name == sticsenv_name()) {
     return(stics_env(create = FALSE))
@@ -198,11 +260,17 @@ stics_get <- function(name = NULL, env_name = sticsenv_name()) {
   return(loc_var)
 }
 
-#' @export
-sticsget <- stics_get
-
-
-
+#' Add to stics env
+#'
+#' Add an object to the stics environment
+#'
+#' @param name Name of the object used in the stics environment
+#' @param value Value to associate to the object
+#' @param env_name The name of the stics environment
+#'
+#' @return Nothing. Just adds an object to the given environment.
+#' @keywords internal
+#'
 stics_set <- function(name, value, env_name = sticsenv_name()) {
 
   envir <- stics_env(name = env_name)
@@ -242,21 +310,40 @@ stics_set <- function(name, value, env_name = sticsenv_name()) {
   return(invisible(TRUE))
 }
 
-#' @export
-sticsset <- stics_set
 
-
+#' Get the class of a stics object
+#'
+#' @return A vector of classes
+#' @keywords internal
+#'
 stics_class <- function(name, env_name = sticsenv_name()) {
   return(class(stics_get(name = name, env_name = env_name)))
 }
 
 
+#' Split stics names
+#'
+#' Split stics names by "$"
+#'
+#' @return A vector of names
+#' @keywords internal
+#'
 stics_split_list <- function(name) {
   return(unlist(strsplit(x = name, split = "\\$")))
 }
 
-
-sticsenv_remove <- function(name = NULL, env_name = sticsenv_name()) {
+#' Remove objects from stics environment
+#'
+#' Remove objects listed in a stics environment.
+#'
+#' @return Nothing. Just removes an object from the stics environment.
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#'  stics_remove()
+#' }
+stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
  # browser()
   envir <- stics_get(name = env_name)
 
@@ -308,16 +395,21 @@ sticsenv_remove <- function(name = NULL, env_name = sticsenv_name()) {
 
 }
 
-#' @export
-sticsremove <- sticsenv_remove
 
-sticsenv_clean <- function() {
+#' Clean stics environment
+#'
+#' @return Nothing. Just cleans the stics environment.
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#'  stics_clean()
+#' }
+stics_clean <- function() {
   names <- sticsenv_ls()
 
   if (base::is.null(names) || !length(names)) return()
 
-  sticsenv_remove(name = names)
+  stics_remove(name = names)
 }
 
-#' @export
-sticsclean <- sticsenv_clean()

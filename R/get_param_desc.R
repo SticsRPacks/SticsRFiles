@@ -6,10 +6,7 @@
 #' @param name a name vector for selecting loaded content using name column matching
 #' @param kind a name vector for selecting loaded content using kind column matching
 #'
-# @return
-#' @keywords internal
-#'
-#@examples
+#' @export internal
 #'
 get_param_desc <- function(file_path = NULL,
                            version = "last",
@@ -57,5 +54,3 @@ get_param_desc <- function(file_path = NULL,
 
 }
 
-#' @export
-getparamdesc <- get_param_desc

@@ -66,7 +66,24 @@ check_version_compat <- function(version_name = "last") {
   stop(version_name,": is an unknown version!")
 }
 
+#' Checking the validity of a given version code
+#'
+#' @param version An optional version name as listed in get_stics_versions_compat() return
+#'
+#' @return A valid version string
+#'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' checkversion()
+#' [1] "V9.1"
+#'
+#' checkversion(version = "V8.5")
+#' [1] "V8.5"
+#'
+#' }
 checkversion <- check_version_compat
 
 #' Getting versions data (versions strings and examples files directories list)

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>                                              
+<usms>                                                                                                                                                                                      
+  <usm nom="IC_banana_sorghum">                                                                                
+    <datedebut>30</datedebut>                                                                       
+    <datefin>300</datefin>                                                                          
+    <finit>banane_ini.xml</finit>                                                                   
+    <nomsol>solbanane</nomsol>                                                                      
+    <fstation>climbanj_sta.xml</fstation>                                                           
+    <fclim1>climbanj.1996</fclim1>                                                                  
+    <fclim2>climbanj.1996</fclim2>                                                                  
+    <culturean>1</culturean>                                                                        
+    <nbplantes>2</nbplantes>                                                                        
+    <codesimul>0</codesimul>                                                                        
+    <plante dominance="1">                                                                          
+      <fplt>proto_banana_plt.xml</fplt>                                                             
+      <ftec>banane_tec.xml</ftec>                                                                   
+      <flai>null</flai>                                                                             
+    </plante>                                                                                       
+    <plante dominance="2">                                                                          
+      <fplt>proto_sorghum_plt.xml</fplt>                                                                             
+      <ftec>sorgho_tec.xml</ftec>                                                                             
+      <flai>sorgho.lai</flai>                                                                             
+    </plante>                                                                                       
+  </usm>        
+  <usm nom="banana">                                                                                
+    <datedebut>30</datedebut>                                                                       
+    <datefin>300</datefin>                                                                          
+    <finit>banane_ini.xml</finit>                                                                   
+    <nomsol>solbanane</nomsol>                                                                      
+    <fstation>climbanj_sta.xml</fstation>                                                           
+    <fclim1>climbanj.1996</fclim1>                                                                  
+    <fclim2>climbanj.1996</fclim2>                                                                  
+    <culturean>1</culturean>                                                                        
+    <nbplantes>1</nbplantes>                                                                        
+    <codesimul>0</codesimul>                                                                        
+    <plante dominance="1">                                                                          
+      <fplt>proto_banana_plt.xml</fplt>                                                             
+      <ftec>banane_tec.xml</ftec>                                                                   
+      <flai>null</flai>                                                                             
+    </plante>                                                                                       
+    <plante dominance="2">                                                                          
+      <fplt>null</fplt>                                                                             
+      <ftec>null</ftec>                                                                             
+      <flai>null</flai>                                                                             
+    </plante>                                                                                       
+  </usm>                                                                                                                                                                                                                                                                      
+</usms>

@@ -32,7 +32,7 @@ reference:
       - set_param_xml
 
   - title: "Get values from JavaStics Input files (XML format)"
-    contents:  
+    contents:
       - get_param_xml
       - get_plants_nb
       - get_usms_files
@@ -43,11 +43,11 @@ reference:
     contents:
       - gen_usms_xml2txt
       - gen_varmod
-      
+
   - title: "Set values in Stics Input files (Text format)"
     contents:
       - set_param_txt
-      
+
   - title: "Get values in Stics Input files (Text format)"
     contents:
       - get_param_txt
