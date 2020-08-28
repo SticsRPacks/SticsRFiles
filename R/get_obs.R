@@ -214,12 +214,17 @@ get_obs_from_usms <- function(workspace,
 #'
 #' Get mixed observation files by name
 #'
-#' @return
+#' @note The function use the obs files names to retrieve the usm name.
+#' So each obs file should be named with the usm name, followed by a or p
+#' at the end in the case of associated crops.
+#'
+#' @return A list of observation files associated to their usm name.
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' parse_mixed_obs(list("banana.obs", "IC_banana_sorghuma.obs", "IC_banana_sorghump.obs"))
+#' }
 #'
 parse_mixed_obs = function(obs_names){
 

@@ -7,14 +7,20 @@
 parse_mixed_obs(obs_names)
 }
 \value{
-
+A list of observation files associated to their usm name.
 }
 \description{
 Get mixed observation files by name
 }
+\note{
+The function use the obs files names to retrieve the usm name.
+So each obs file should be named with the usm name, followed by a or p
+at the end in the case of associated crops.
+}
 \examples{
-
+\dontrun{
 parse_mixed_obs(list("banana.obs", "IC_banana_sorghuma.obs", "IC_banana_sorghump.obs"))
+}
 
 }
 \keyword{internal}

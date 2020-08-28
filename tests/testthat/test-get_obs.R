@@ -1,6 +1,7 @@
 context("reading observations")
 
 path <- file.path(get_examples_path(file_type = "obs"),"simple_exemple")
+
 path_mixed = file.path(get_examples_path(file_type = "obs"),"mixed")
 
 # Get observations for all usms, but only banana has observations:
