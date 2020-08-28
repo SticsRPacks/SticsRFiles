@@ -30,6 +30,8 @@
 #' # Get observations only for banana:
 #' Meas_banana <- get_obs(path, "banana")
 #'
+#' Meas_banana_sorghum <- get_obs(path, "IC_banana_sorghum")
+#'
 #' # Get oservations with real plant names when plant folder is not in the workspace:
 #' get_obs(path, "banana", javastics_path= "path/to/javastics")
 #' }
@@ -82,6 +84,7 @@ get_obs <- function(workspace = getwd(),
     # Getting obs files list from directory
     obs_name <- as.list(list.files(pattern = "\\.obs$", path = workspace, full.names = FALSE))
     obs_name = parse_mixed_obs(obs_name)
+    usms = names(obs_name)
     # No obs file found
     if (!length(obs_name)) return()
 
