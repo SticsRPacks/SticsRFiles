@@ -19,7 +19,7 @@ BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
