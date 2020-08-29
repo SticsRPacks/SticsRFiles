@@ -2,7 +2,7 @@
 title: "Generating Stics XML files from Excel files data, `mailing` use case"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Generating_Stics_XML_files}
+  %\VignetteIndexEntry{Generating Stics XML files from Excel files data, `mailing` use case}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

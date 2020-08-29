@@ -2,7 +2,7 @@
 title: "Manipulating Stics text files"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Manipulating_Stics_text_files}
+  %\VignetteIndexEntry{Manipulating Stics text files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

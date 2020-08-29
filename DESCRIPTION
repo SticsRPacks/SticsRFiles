@@ -34,7 +34,6 @@ Imports:
     utils,
     lubridate,
     methods,
-    testthat,
     rlang,
     stringr,
     xslt,
@@ -46,6 +45,7 @@ Suggests:
     SticsOnR,
     knitr,
     covr,
+    testthat,
     rmarkdown,
     readxl
 Collate: 
