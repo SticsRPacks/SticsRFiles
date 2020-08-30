@@ -50,17 +50,12 @@ test_that("filtering observation list return a list of data.frame", {
   expect_true(is.data.frame(Meas_banana$banana))
 })
 
-
-test_that("reading mixed usms works", {
-  expect_length(Meas_mixed,3)
-  expect_named(Meas_mixed,c("IC_banana_sorghum","banana","sorghum"), ignore.order = TRUE)
-  expect_known_hash(Meas_mixed, "668a142c84")
-})
-
 test_that("reading mixed usms works", {
   expect_length(Meas_mixed,3)
   expect_named(Meas_mixed,c("sorghum","banana","IC_banana_sorghum"), ignore.order = TRUE)
-  expect_known_hash(Meas_mixed, "668a142c84")
+  expect_equal(sum(Meas_mixed$sorghum$lai_n,na.rm = TRUE), 19.62)
+  expect_equal(sum(Meas_mixed$banana$lai_n,na.rm = TRUE), 34.446)
+  expect_equal(sum(Meas_mixed$IC_banana_sorghum$lai_n,na.rm = TRUE), 54.066)
 })
 
 test_that("reading mixed usms with usms_filename to usms.xml", {
