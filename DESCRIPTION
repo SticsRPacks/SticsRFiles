@@ -40,7 +40,8 @@ Imports:
     dplyr,
     cli,
     tibble,
-    tidyr
+    tidyr,
+    curl
 Suggests:
     SticsOnR,
     knitr,
@@ -122,6 +123,7 @@ Collate:
     'get_xml_stics_version.R'
     'is_stics_doc.R'
     'is_stics_xml.R'
+    'manage_stics_versions.R'
     'merge_nodesets.R'
     'remove_node_from_doc.R'
     'remove_parent_from_doc.R'

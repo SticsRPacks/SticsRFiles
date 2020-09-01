@@ -7,7 +7,8 @@
 check_version_compat(version_name = "last")
 }
 \arguments{
-\item{version}{An optional version name as listed in get_stics_versions_compat() return}
+\item{version}{An optional version name as listed in
+get_stics_versions_compat() return}
 }
 \value{
 A valid version string
@@ -18,7 +19,8 @@ Checking the validity of a given version code
 \examples{
 \dontrun{
 
-check_version_compat()
+SticsRFiles:::check_version_compat()
+
 [1] "V9.1"
 
 check_version_compat(version = "V8.5")

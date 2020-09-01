@@ -1,13 +1,14 @@
-#' Get the compatible stics versions
+#' Get the compatible Stics versions list
 #'
-#' @description Get the versions of stics that are fully compatible with this package.
+#' @description Get the versions of stics that are fully compatible
+#' with this package.
 #'
-#' @return A named list with the STICS versions compatible with this package ($versions_list),
-#' and the last version in use ($last_version).
+#' @return A named list with the STICS versions compatible with this package
+#' ($versions_list), and the last version in use ($last_version).
 #'
 #' @examples
 #' \dontrun{
-#' get_stics_versions_compat()
+#' SticsRFiles::get_stics_versions_compat()
 #'
 #' #> $versions_list
 #' #> [1] "V8.5" "V9.0" "V9.1"
@@ -19,7 +20,8 @@
 #' @export
 #'
 #'
-# TODO: may be in stics_versions_utils get_stics_versions_compat & new function check version
+# TODO: may be in stics_versions_utils get_stics_versions_compat
+# & new function check version
 get_stics_versions_compat <- function() {
 
   # Getting versions list
@@ -37,10 +39,10 @@ get_stics_versions_compat <- function() {
 }
 
 
-
 #' Checking the validity of a given version code
 #'
-#' @param version An optional version name as listed in get_stics_versions_compat() return
+#' @param version An optional version name as listed in
+#' get_stics_versions_compat() return
 #'
 #' @return A valid version string
 #'
@@ -49,7 +51,8 @@ get_stics_versions_compat <- function() {
 #' @examples
 #' \dontrun{
 #'
-#' check_version_compat()
+#' SticsRFiles:::check_version_compat()
+#'
 #' [1] "V9.1"
 #'
 #' check_version_compat(version = "V8.5")
@@ -66,9 +69,13 @@ check_version_compat <- function(version_name = "last") {
   stop(version_name,": is an unknown version!")
 }
 
+
 #' Getting versions data (versions strings and examples files directories list)
 #'
 #' @param version_name Optional version string (i.e. "VX.Y")
+#'
+#' @param versions_dir Optional, either an `extdata` directory path
+#' of the installed SticsRFiles library (default) or of the package project
 #'
 #' @return A data.frame with versions data
 #'
@@ -76,7 +83,8 @@ check_version_compat <- function(version_name = "last") {
 #'
 #' @examples
 #' \dontrun{
-#' get_versions_info()
+#'
+#' SticsRFiles:::get_versions_info()
 #'
 #' versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
 #' 1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
@@ -88,11 +96,21 @@ check_version_compat <- function(version_name = "last") {
 #' versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
 #' 1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
 #'
+#'
+#' get_versions_info(version_name = "V8.5",
+#'                   versions_dir = "path/to/SticsRFilesproject/inst/extdata")
+#'
+#'
 #'}
-get_versions_info <- function(version_name = NULL) {
+get_versions_info <- function(version_name = NULL,
+                              versions_dir = system.file("extdata",
+                                                         package = "SticsRFiles") ) {
 
   # Getting available versions info from a file
-  ver_file <- system.file("extdata/versions/stics_versions_info.csv", package = "SticsRFiles")
+  ver_file <- file.path(versions_dir, "versions",get_versions_file_name())
+
+  if (!file.exists(ver_file)) return()
+
   ver_info <- utils::read.csv2(file = ver_file, stringsAsFactors = FALSE,
                                na.strings = "", colClasses = "character")
 
@@ -100,10 +118,29 @@ get_versions_info <- function(version_name = NULL) {
   if (base::is.null(version_name)) return(ver_info)
 
   # Selecting data according to the desired version
-  #if (version_name %in% ver_info$versions) return(dplyr::filter(ver_info, versions == version_name ))
-  if (version_name %in% ver_info$versions) return(ver_info[ver_info$versions == version_name,])
+  if (version_name %in% ver_info$versions) {
+    return(ver_info[ver_info$versions == version_name,])
+  }
 
   # Nothing to return for unknown version
   return()
+}
+
+
+
+
+#' Getting the csv file name storing versions information
+#'
+#' @return file name
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' SticsRFiles:::get_versions_file_name()
+#' }
+get_versions_file_name <- function() {
+
+  return("stics_versions_info.csv")
+
 }
 
