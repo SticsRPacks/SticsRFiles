@@ -222,7 +222,7 @@ set_versions_info <- function(version_name,
   versions_info_file <- file.path(dir_path, "stics_versions_info.csv")
 
   # Getting existing data about versions
-  versions_info <- SticsRFiles::get_versions_info( versions_dir = versions_dir )
+  versions_info <- get_versions_info( versions_dir = versions_dir )
 
   # Setting data for a new file, only with csv column filled
   if (base::is.null(versions_info)) versions_info <- version_info

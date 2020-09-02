@@ -22,7 +22,10 @@ all_out_var <- function(version = "last"){
 
   var_df <- utils::read.csv2(
     file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"),
-    stringsAsFactors = FALSE)
+    header = FALSE,
+    stringsAsFactors = FALSE)[,1:4]
+
+  names(var_df) <- c("name", "definition", "unit", "type")
 
   # Adding a version  attribute
   attr(x = var_df, which = "version") <- version
