@@ -90,7 +90,7 @@ codedormance;option for the calculation of dormancy and chilling requirements (1
 codeDST;option to activate the variations in soil physical soil conditions due to tillage (1 = yes, 2 = no);code 1/2;PARTEC;1;integer;1;2;1;0
 codeDSTnbcouche;number of compacted soil layers (1 = one layer, 2 = two layers);code 1/2;PARTEC;1;integer;1;2;1;0
 codeDSTtass;option to activate the soil compaction at sowing and harvest  (1 = yes, 2 = no);code 1/2;PARTEC;1;integer;1;2;1;0
-codedyntalle;option to activate the module simulating tillers dynamics (1 = yes, 2 = no);code 1/2;PARAMV6/PLT;2;integer;1;2;1;0
+codedyntalle;option to activate the module simulating tillers dynamics (1 = yes, 2 = no);code 1/2;PARAMV6;2;integer;1;2;1;0
 codeetp;option for the method of calculating PET (1 = forced Penman, 2 = calculated Penman, 3= Shuttleworth & Wallace, 4 = Priestley & Taylor);code 1/2/3/4;STATION;1;integer;1;4;1;0
 codefauche;option to activate cuts of forage crops (1 = yes, 2 = no);code 1/2;PARTEC;1;integer;1;2;1;0
 codefente;option to activate an additional water compartment for swelling soils (1 = yes, 2 = no);code 0/1;PARSOL;1;integer;0;1;1;0
@@ -191,7 +191,7 @@ coeflaxsen;multiplier coefficient of the development phase LAX (maximum leaf are
 coeflevamf;multiplier coefficient of the development phase LEV (emergence) - AMF (maximum acceleration of leaf growth, end of juvenile phase)  to use crop temperature;SD;PARPLT;1;real;1;2;1;0
 coeflevdrp;multiplier coefficient of the development phase LEV (emergence)  - DRP (starting date of filling of harvested organs) to use crop temperature;SD;PARPLT;1;real;1;2;1;0
 coefmshaut;ratio biomass/ useful height cut of crops ;t.ha-1.m-1;PARPLT;1;real;2;50;1;0
-coefracoupe;coefficient to define the proportion of dying roots after cut of forage crops;SD;PARAMV6/PLT;2;real;0.001;1;1;0
+coefracoupe;coefficient to define the proportion of dying roots after cut of forage crops;SD;PARAMV6;2;real;0.001;1;1;0
 coefrnet;coefficient of calculation of the net radiation under greenhouse;SD;STATION;1;real;0.001;1;1;0
 coefsenlan;multiplier coefficient of the development phase SEN (beginning of leaf senescence)  - LAN (leaf index nil) to use crop temperature;SD;PARPLT;1;real;1;2;1;0
 concirr;concentration of mineral N (NH4+NO3-N) in irrigation water;kg.ha-1 mm-1;PARTEC;1;real;0;0.2;1;0
@@ -417,7 +417,7 @@ masecplantule;initial shoot biomass of plantlet;t.ha-1;PARPLT;1;real;0.002;4;1;0
 masvolcx;bulk density of each type of pebble;g.cm-3;PARAM;10;real;0.5;5;1;0
 max_pdenit;max value of denitrification potential;unknown;PARAM;1;real;0;100;1;0
 maxazorac;mineral N concentration in soil above which root growth is maximum ;kg.ha-1.cm-1;PARPLT;1;real;0.1;5;1;0
-maxtalle;maximum tillers density  per soil area;nb.m-2;PARAMV6/PLT;2;real;0;10000;1;0
+maxtalle;maximum tillers density  per soil area;nb.m-2;PARAMV6;2;real;0;10000;1;0
 min_pdenit;min value of denitrification potential;unknown;PARAM;1;real;0;2;1;0
 minazorac;mineral N concentration in soil below which root growth is reduced ;kg.ha-1.cm-1;PARPLT;1;real;0;5;1;0
 minefnra;reduction factor on root growth when soil mineral N is limiting (< minazorac);SD;PARPLT;1;real;0;1;1;0
@@ -554,10 +554,10 @@ sensanox;index of anoxia sensitivity (0 = insensitive);SD;PARPLT;1;real;0;1;1;0
 sensiphot;index of photoperiod sensitivity (1=insensitive);SD;PARPLT;1;real;0;1;1;1
 sensrsec;index of root sensitivity to drought (1=insensitive);SD;PARPLT;1;real;0;1;1;0
 separateurrapport;column separator in rapport.sti file;SD;PARAM;1;character;;;0;0
-seuilLAIapex;maximal value of LAI+LAIapex when LAIapex is > 0;m2.m-2;PARAMV6/PLT;2;real;0;10;1;0
-seuilmortalle;relative transpiring threshold to calculate tiller mortality;mm;PARAMV6/PLT;2;real;0;10;1;0
-seuilreconspeupl;tiller density below which the entire population will not be regenerated;nb.m-2;PARAMV6/PLT;2;real;0;4000;1;0
-sigmadistalle;parameter used for calculating tiller mortality (gamma law) ;SD;PARAMV6/PLT;2;real;0;0.5;1;0
+seuilLAIapex;maximal value of LAI+LAIapex when LAIapex is > 0;m2.m-2;PARAMV6;2;real;0;10;1;0
+seuilmortalle;relative transpiring threshold to calculate tiller mortality;mm;PARAMV6;2;real;0;10;1;0
+seuilreconspeupl;tiller density below which the entire population will not be regenerated;nb.m-2;PARAMV6;2;real;0;4000;1;0
+sigmadistalle;parameter used for calculating tiller mortality (gamma law) ;SD;PARAMV6;2;real;0;0.5;1;0
 slamax;maximum SLA (specific leaf area) of green leaves;cm2.g-1;PARPLT;1;real;50;500;1;0
 slamin;minimum SLA (specific leaf area) of green leaves;cm2.g-1;PARPLT;1;real;50;500;1;0
 spfrmax;maximal sources/sinks value allowing the trophic stress calculation for fruit onset;SD;PARPLT;1;real;0.7;2;1;0
@@ -599,7 +599,7 @@ stpltger;cumulative thermal time allowing germination;degree-d;PARPLT;1;real;0;1
 stressdev;maximum phasic delay allowed due to stresses ;SD;PARPLT;1;real;0.1;0.9;1;0
 stsenlan;cumulative thermal time between the stages SEN (beginning of leaf senescence)  et LAN;degree-d;PARPLT;1;real;0;6000;1;1
 sucrerec;minimal sugar concentration at harvest (/ fresh matter);g.g-1 FW;PARTEC;1;real;0.0001;0.5;1;0
-surfapex;equivalent surface of a transpiring apex;m2;PARAMV6/PLT;2;real;0;0.0001;1;0
+surfapex;equivalent surface of a transpiring apex;m2;PARAMV6;2;real;0;0.0001;1;0
 surfouvre1;relative area of the shelter opened the first day of opening;SD;PARTEC;1;real;0.1;0.8;1;0
 surfouvre2;relative area of the shelter opened the second day of opening;SD;PARTEC;1;real;0.1;0.8;1;0
 surfouvre3;relative area of the shelter opened the third day of opening;SD;PARTEC;1;real;0.1;0.8;1;0
@@ -637,7 +637,7 @@ tgelveg10;temperature resulting in 10% of frost damage on LAI (adult stage);degr
 tgelveg90;temperature resulting in 90% of frost damage on LAI (adult stage);degreeC;PARPLT;1;real;-25;0;1;0
 tgmin;minimum temperature below which emergence is stopped;degreeC;PARPLT;1;real;-10;15;1;0
 tigefeuil;ratio stem (structural part)/leaf;SD;PARPLT;1;real;0;3;1;0
-tigefeuilcoupe;ratio stem (structural part)/leaf on the cutting day;SD;PARAMV6/PLT;2;real;0;3;1;0
+tigefeuilcoupe;ratio stem (structural part)/leaf on the cutting day;SD;PARAMV6;2;real;0;3;1;0
 tletale;lethal temperature for the plant;degreeC;PARPLT;1;real;-30;-1;1;0
 tmaxremp;maximal temperature above which grain filling stops;degreeC;PARPLT;1;real;10;40;1;0
 tmaxseuil;maximum temperature when snow cover is higher than prof;degreeC;STATION;1;real;-0.5;0.5;1;0
