@@ -4,13 +4,15 @@
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
 #' @param name value used for select (optional)
 #' @param param_names vector of parameters names (optional)
-#' @param flat_shape optional logical for keeping the flat data.frame (TRUE, default)
-#' or converting it to a wider one (FALSE)
+#' @param wide_shape Optional logical for keeping the long data.frame format FALSE, default)
+#' or converting it to a wider format one (TRUE)
 #'
 #' @return A data.frame with name, type, param, id and value columns
 #'
 #'
-#' @details An extract of an example of data.frame
+#' @details An extract of an example of data.frame for the 2 formats
+#'
+#'  * Default one
 #'
 #' |name          |type       |param     | id|value            |
 #' |:-------------|:----------|:---------|--:|:----------------|
@@ -33,6 +35,20 @@
 #' id: NA for scalar, integer id for vectors parameters
 #' value: parameter value
 #'
+#' * wide format
+#'
+#'  |name      |type | datedebut| datefin|finit          |nomsol    |fstation         |fclim1        |fclim2        |
+#'  |:---------|:----|---------:|-------:|:--------------|:---------|:----------------|:-------------|:-------------|
+#'  |SugarCane |usms |       286|     650|canne_ini.xml  |solcanne  |climcanj_sta.xml |climcanj.1998 |climcanj.1999 |
+#'  |potato    |usms |        91|     250|patate_ini.xml |solpatate |climpdtj_sta.xml |climpdtj.1997 |climpdtj.1997 |
+#'  |banana    |usms |        30|     300|banane_ini.xml |solbanane |climbanj_sta.xml |climbanj.1996 |climbanj.1996 |
+#'  |sorghum   |usms |       112|     360|sorgho_ini.xml |solsorgho |climsorj_sta.xml |climsorj.1996 |climsorj.1996 |
+#'  |barley    |usms |        88|     196|orge_ini.xml   |solorge   |climorgj_sta.xml |climorgj.2002 |climorgj.2002 |
+#'
+#' name: a file name or an usm or soil name
+#' type: type of file
+#' all other columns names correspond to parameter names, with indices as suffix
+#' for multiple values
 #'
 #' @keywords internal
 #'
@@ -51,7 +67,7 @@
 #' }
 #'
 #'
-get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL, flat_shape = TRUE) {
+get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL, wide_shape = FALSE) {
 
 
   # For managing a files list
@@ -67,12 +83,12 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
                                               select = select,
                                               name = name,
                                               param_names = param_names,
-                                              flat_shape = TRUE))
+                                              wide_shape = FALSE))
 
     df <- data.table::rbindlist(files_df)
 
     # Conversion to a wider table (with type conversion)
-    if (! flat_shape) {
+    if (wide_shape) {
       df <- df_wider(df)
     }
 
@@ -156,7 +172,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   }
 
   # Conversion to a wider table (with type conversion)
-  if ( !flat_shape ) {
+  if ( wide_shape ) {
     data_df <- df_wider(data_df)
   }
 
