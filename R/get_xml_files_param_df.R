@@ -88,7 +88,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
   # Getting usm or sol names vector
   names_list <- NULL
-  if (!base::is.null(select)) names_list <- get_param_xml(file_path, param_name = select)[[1]]
+  if (!base::is.null(select)) names_list <- get_param_xml(file_path, param_name = select)[[1]][[select]]
 
   # Getting all usm or sol names from the file
   select_name <- FALSE
