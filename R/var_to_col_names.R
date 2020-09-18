@@ -57,6 +57,6 @@ var_to_stics_name= function(var,version="last"){
   }
   all_vars <- all_out_var(version)
   var_parsed= var_to_col_names(var)
-  vars_names_parsed= var_to_col_names(all_vars$variable)
-  as.character(all_vars$variable[match(var_parsed,vars_names_parsed)])
+  vars_names_parsed= var_to_col_names(all_vars$name)
+  as.character(all_vars$name[match(var_parsed,vars_names_parsed)])
 }

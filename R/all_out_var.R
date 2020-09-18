@@ -65,7 +65,7 @@ get_var_info <- function(var=NULL,keyword=NULL,version= "last"){
   all_vars <- all_out_var(version)
   if(!is.null(var)){
     var= var_to_col_names(var)
-    vars_names_parsed= var_to_col_names(all_vars$variable)
+    vars_names_parsed= var_to_col_names(all_vars$name)
     all_vars[grep(var, vars_names_parsed,ignore.case = TRUE),]
   }else if(!is.null(keyword)){
     all_vars[grep(keyword, all_vars$details,ignore.case = TRUE),]
@@ -94,7 +94,7 @@ get_var_info <- function(var=NULL,keyword=NULL,version= "last"){
 is_stics_var= function(var,version= "last"){
   all_vars <- all_out_var(version)
   var_parsed= var_to_col_names(var)
-  vars_names_parsed= var_to_col_names(all_vars$variable)
+  vars_names_parsed= var_to_col_names(all_vars$name)
 
   index_var= match(var_parsed,vars_names_parsed)
   var_found= !is.na(index_var)
