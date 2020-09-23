@@ -16,6 +16,11 @@
 #' }
 get_svn_identifiers <- function() {
 
+  # logged user identifiers !
+  # linux : ~/.subversion/auth/svn.simple/cf86c1bb672ad0bf1613d66194e04e91
+
+  # windows : encrypted !!
+
   return(list(username="sticsread", password="sticsread2020"))
 }
 
@@ -154,7 +159,7 @@ add_stics_version <- function(version_name,
                     versions_dir = dest_dir,
                     verbose = verbose)
 
-  cat(paste0(version_name, " successfully set in SticsRFiles ", dest, ".\n"))
+  if (verbose) cat(paste0(version_name, " successfully set in SticsRFiles ", dest, ".\n"))
 }
 
 
