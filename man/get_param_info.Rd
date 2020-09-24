@@ -6,6 +6,7 @@
 \usage{
 get_param_info(
   parameter = NULL,
+  file_path = NULL,
   formalism = NULL,
   keyword = NULL,
   version = "last"

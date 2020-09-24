@@ -4,10 +4,16 @@
 \alias{get_param_data_df}
 \title{Getting parameters information using partial search words}
 \usage{
-get_param_data_df(name = NULL, version = "last", kind = "all", exact = FALSE)
+get_param_data_df(
+  parameter = NULL,
+  file_path = NULL,
+  version = "last",
+  kind = "all",
+  exact = FALSE
+)
 }
 \arguments{
-\item{name}{Optional name or partial name or a vector of}
+\item{parameter}{Optional name or partial name or a vector of}
 
 \item{version}{Optional, Stics version (default value, "last")
 Only the 2 last are referenced: V9.0, V9.1}
@@ -32,15 +38,15 @@ all the existing parameters
 \examples{
 \dontrun{
 
-get_param_data_df(name = "albedo")
+get_param_data_df(parameter = "albedo")
 
-get_param_data_df(name = "albedo", kind = "formalism)
+get_param_data_df(parameter = "albedo", kind = "formalism)
 
-get_param_data_df(name = "albedo", version = "V9.0")
+get_param_data_df(parameter = "albedo", version = "V9.0")
 
-get_param_data_df(name = c("albedo", "latitude", "humcapil"))
+get_param_data_df(parameter = c("albedo", "latitude", "humcapil"))
 
-get_param_data_df(name = c("albedo", "latitude", "humcapil"),
+get_param_data_df(parameter = c("albedo", "latitude", "humcapil"),
 kind = "formalism)
 
 }

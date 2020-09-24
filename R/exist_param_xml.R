@@ -1,6 +1,6 @@
 #' Checking existing parameters names in XML files
 #'
-#' @param name Parameter name or a vector of
+#' @param parameter Parameter name or a vector of
 #' @param version Optional, Stics version.
 #' Only the 2 last are referenced: V9.0, V9.1 (default value)
 #'
@@ -11,22 +11,22 @@
 #' @examples
 #' \dontrun{
 #'
-#' exist_param_xml(name = "albedo")
+#' exist_param_xml(parameter = "albedo")
 #'
-#' exist_param_xml(name = "albedo", version = "V9.0")
+#' exist_param_xml(parameter = "albedo", version = "V9.0")
 #'
-#' exist_param_xml(name = c("albedo", "latitude", "humcapil"))
+#' exist_param_xml(parameter = c("albedo", "latitude", "humcapil"))
 #'
-#' exist_param_xml(name = c("albedo", "latitude", "humcapi"))
+#' exist_param_xml(parameter = c("albedo", "latitude", "humcapi"))
 #'
 #' }
 #'
 #'
-exist_param_xml <- function(name,
+exist_param_xml <- function(parameter,
                             version=NULL) {
 
   # Finding exact matchs in found names
-  par_names <- get_param_data_df(name = name ,
+  par_names <- get_param_data_df(parameter = parameter ,
                                  version = version,
                                  exact = TRUE)$name
 

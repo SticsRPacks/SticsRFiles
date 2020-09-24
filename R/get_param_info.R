@@ -1,7 +1,8 @@
 #' Finding parameters information using partial search words
 #'
 #' @param parameter Optional, parameter name or partial name, or a vector of
-
+#'
+#' @param file_path Optional, xml file path or a vector of
 #'
 #' @param formalism Optional, formalism name or partial name, or a vector of
 #'
@@ -25,6 +26,8 @@
 #'
 #' get_param_info(parameter = "albedo")
 #'
+#' get_param_info(parameter = "albedo", file_path ="/path/to/file.xml")
+#'
 #' get_param_info(parameter = "albedo", formalism = "special")
 #'
 #' get_param_info(parameter = "albedo", version = "V9.0")
@@ -38,6 +41,7 @@
 #'
 #'
 get_param_info <- function(parameter = NULL,
+                           file_path = NULL,
                            formalism = NULL,
                            keyword = NULL,
                            version = "last") {
@@ -59,9 +63,12 @@ get_param_info <- function(parameter = NULL,
   # Getting data when only searching in parameters name
   # or all other cases
   if ( par_use & !form_use ) {
-    param_data_df <- suppressWarnings(get_param_data_df( version = version, name = parameter ))
+    param_data_df <- suppressWarnings(get_param_data_df( file_path = file_path,
+                                                         parameter = parameter,
+                                                         version = version,))
   } else{
-    param_data_df <- suppressWarnings(get_param_data_df( version = version))
+    param_data_df <- suppressWarnings(get_param_data_df(file_path = file_path,
+                                                        version = version))
   }
 
 
@@ -105,7 +112,10 @@ get_param_info <- function(parameter = NULL,
 
 #' Getting parameters information using partial search words
 #'
-#' @param name Optional name or partial name or a vector of
+#' @param parameter Optional name or partial name or a vector of
+#'
+#' @param file_path Optional, xml file path or a vector of
+#'
 #' @param version Optional, Stics version (default value, "last")
 #' Only the 2 last are referenced: V9.0, V9.1
 #' @param kind Kind of information to be retrieved for parameters
@@ -125,21 +135,24 @@ get_param_info <- function(parameter = NULL,
 #' @examples
 #' \dontrun{
 #'
-#' get_param_data_df(name = "albedo")
+#' get_param_data_df(parameter = "albedo")
 #'
-#' get_param_data_df(name = "albedo", kind = "formalism)
+#' get_param_data_df(parameter = "albedo", file_path ="/path/to/file.xml")
 #'
-#' get_param_data_df(name = "albedo", version = "V9.0")
+#' get_param_data_df(parameter = "albedo", kind = "formalism)
 #'
-#' get_param_data_df(name = c("albedo", "latitude", "humcapil"))
+#' get_param_data_df(parameter = "albedo", version = "V9.0")
 #'
-#' get_param_data_df(name = c("albedo", "latitude", "humcapil"),
+#' get_param_data_df(parameter = c("albedo", "latitude", "humcapil"))
+#'
+#' get_param_data_df(parameter = c("albedo", "latitude", "humcapil"),
 #' kind = "formalism)
 #'
 #' }
 #'
 #'
-get_param_data_df <- function(name = NULL,
+get_param_data_df <- function(parameter = NULL,
+                              file_path = NULL,
                               version = "last",
                               kind = "all",
                               exact = FALSE) {
@@ -152,28 +165,32 @@ get_param_data_df <- function(name = NULL,
   }
 
   # Just in case
-  #name <- unique(name)
+  parameter <- unique(parameter)
 
-  # Check Stics version
-  version <- get_xml_stics_version(version)
+  if (base::is.null(file_path)) {
+    # Check Stics version
+    version <- get_xml_stics_version(version)
 
-  # Getting XML examples files dir from the package
-  xml_dir <- get_examples_path( file_type = "xml", version_name = version)
+    # Getting XML examples files dir from the package
+    xml_dir <- get_examples_path( file_type = "xml", version_name = version)
 
-  # Getting the XML files list
-  files_list <- list.files(path = xml_dir,
-                           pattern = "\\.xml$",
-                           full.names = TRUE)
+    # Getting the XML files list
+    files_list <- list.files(path = xml_dir,
+                             pattern = "\\.xml$",
+                             full.names = TRUE)
 
-  # Not any files found !
-  if (length(files_list) == 0) {
-    stop("Examples XML files not found in the package !")
+    # Not any files found !
+    if (length(files_list) == 0) {
+      stop("Examples XML files not found in the package !")
+    }
+  } else {
+    files_list <- file_path
   }
 
   # Getting parameters names bounds and file
   param_names <- suppressWarnings(get_param_names_xml(xml_file = files_list,
-                                     name = name,
-                                     exact = exact))
+                                                      name = parameter,
+                                                      exact = exact))
 
   # Not any parameters found
   if (all(dim(param_names)==0)) {
@@ -185,7 +202,7 @@ get_param_data_df <- function(name = NULL,
   if (kind == "parameter") return(param_names)
 
   # Getting parameter formalism information
-  files_list <- file.path(xml_dir, unique(param_names$file))
+  #files_list <- file.path(xml_dir, unique(param_names$file))
 
   # Some parameters names may be found in several files (i.e.: nbplantes)
   uniq_param_names <- unique(param_names$name)

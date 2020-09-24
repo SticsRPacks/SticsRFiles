@@ -4,10 +4,10 @@
 \alias{exist_param_xml}
 \title{Checking existing parameters names in XML files}
 \usage{
-exist_param_xml(name, version = NULL)
+exist_param_xml(parameter, version = NULL)
 }
 \arguments{
-\item{name}{Parameter name or a vector of}
+\item{parameter}{Parameter name or a vector of}
 
 \item{version}{Optional, Stics version.
 Only the 2 last are referenced: V9.0, V9.1 (default value)}
@@ -21,13 +21,13 @@ Checking existing parameters names in XML files
 \examples{
 \dontrun{
 
-exist_param_xml(name = "albedo")
+exist_param_xml(parameter = "albedo")
 
-exist_param_xml(name = "albedo", version = "V9.0")
+exist_param_xml(parameter = "albedo", version = "V9.0")
 
-exist_param_xml(name = c("albedo", "latitude", "humcapil"))
+exist_param_xml(parameter = c("albedo", "latitude", "humcapil"))
 
-exist_param_xml(name = c("albedo", "latitude", "humcapi"))
+exist_param_xml(parameter = c("albedo", "latitude", "humcapi"))
 
 }
 
