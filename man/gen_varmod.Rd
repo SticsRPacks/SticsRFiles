@@ -22,7 +22,7 @@ gen_varmod(
 
 \item{file_name}{file name to generate (default value: "var.mod")}
 
-\item{version}{The version of the STICS model used (used to control the variable names)}
+\item{version}{The version of the STICS model used (used to check variable names)}
 
 \item{force}{Force the variable writing even if the variable is not a STICS variable.}
 }
@@ -33,16 +33,17 @@ Nothing. Writes to a file.
 Generating a daily variable list file from variables names
 }
 \details{
-The variable names can be found using \code{get_var_info()}. The variable names are
-checked before writting. If any variable names does not exist, the function will still write the
-variables that exist, but not the variable that does not exist, unless \code{force= TRUE}
+Variable names can be found using \code{get_var_info()}. They are
+checked before writting. If any variable names does not exist,
+the function will still write the variables that exist,
+\code{force= TRUE} may be used to write also variables that does not exist.
 }
 \examples{
 \dontrun{
  gen_varmod(".", c("lai(n)","hauteur"))
  gen_varmod("/path/to/stics/workspace", c("lai(n)","hauteur"))
  # Add a variable to the others:
- gen_varmod(., "masec(n)", add= TRUE)
+ gen_varmod(".", "masec(n)", append = TRUE)
  # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
 }
 

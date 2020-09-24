@@ -111,6 +111,7 @@ Collate:
     'get_params_from_table.R'
     'get_plant_name.R'
     'get_plants_nb.R'
+    'get_report_results.R'
     'get_soils_list.R'
     'get_stics_versions_compat.R'
     'get_usms_files.R'

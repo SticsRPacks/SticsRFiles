@@ -1,4 +1,3 @@
-"variable";"details";"unit";"type"
 "abso(n)";"N uptake rate by the crop";"kg.ha-1.d-1";"real"
 "age_prairie";"age of the forage crop since sowing";"year";"integer"
 "airg(n)";"daily amount of irrigation water";"mm.d-1";"real"

@@ -9,7 +9,7 @@ get_xml_files_param_df(
   select = NULL,
   name = NULL,
   param_names = NULL,
-  flat_shape = TRUE
+  wide_shape = FALSE
 )
 }
 \arguments{
@@ -21,8 +21,8 @@ get_xml_files_param_df(
 
 \item{param_names}{vector of parameters names (optional)}
 
-\item{flat_shape}{optional logical for keeping the flat data.frame (TRUE, default)
-or converting it to a wider one (FALSE)}
+\item{wide_shape}{Optional logical for keeping the long data.frame format FALSE, default)
+or converting it to a wider format one (TRUE)}
 }
 \value{
 A data.frame with name, type, param, id and value columns
@@ -31,7 +31,10 @@ A data.frame with name, type, param, id and value columns
 Extracting a data.frame of parameters values for an xml file or a set of (whatever the xml file kind)
 }
 \details{
-An extract of an example of data.frame\tabular{lllrl}{
+An extract of an example of data.frame for the 2 formats
+\itemize{
+\item Default one
+}\tabular{lllrl}{
    name \tab type \tab param \tab id \tab value \cr
    SugarCane \tab usms \tab datedebut \tab NA \tab 286 \cr
    SugarCane \tab usms \tab datefin \tab NA \tab 650 \cr
@@ -53,6 +56,22 @@ type: type of file
 param: param name
 id: NA for scalar, integer id for vectors parameters
 value: parameter value
+\itemize{
+\item wide format
+}\tabular{llrrlllll}{
+   name \tab type \tab datedebut \tab datefin \tab finit \tab nomsol \tab fstation \tab fclim1 \tab fclim2 \cr
+   SugarCane \tab usms \tab 286 \tab 650 \tab canne_ini.xml \tab solcanne \tab climcanj_sta.xml \tab climcanj.1998 \tab climcanj.1999 \cr
+   potato \tab usms \tab 91 \tab 250 \tab patate_ini.xml \tab solpatate \tab climpdtj_sta.xml \tab climpdtj.1997 \tab climpdtj.1997 \cr
+   banana \tab usms \tab 30 \tab 300 \tab banane_ini.xml \tab solbanane \tab climbanj_sta.xml \tab climbanj.1996 \tab climbanj.1996 \cr
+   sorghum \tab usms \tab 112 \tab 360 \tab sorgho_ini.xml \tab solsorgho \tab climsorj_sta.xml \tab climsorj.1996 \tab climsorj.1996 \cr
+   barley \tab usms \tab 88 \tab 196 \tab orge_ini.xml \tab solorge \tab climorgj_sta.xml \tab climorgj.2002 \tab climorgj.2002 \cr
+}
+
+
+name: a file name or an usm or soil name
+type: type of file
+all other columns names correspond to parameter names, with indices as suffix
+for multiple values
 }
 \examples{
 
