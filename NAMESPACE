@@ -3,6 +3,7 @@
 export(convert_xml2txt)
 export(download_data)
 export(download_usm_xl)
+export(force_param_values)
 export(gen_ini_xml)
 export(gen_paramsti)
 export(gen_sols_xml)

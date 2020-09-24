@@ -67,6 +67,7 @@ Collate:
     'global.R'
     'fileDocument.R'
     'find_names.R'
+    'force_param_values.R'
     'gen_ini_doc.R'
     'gen_ini_xml.R'
     'gen_obs.R'
