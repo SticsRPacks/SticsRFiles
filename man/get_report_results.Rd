@@ -29,4 +29,12 @@ A data.frame
 \description{
 Extracting data from the Stics report file
 }
-\keyword{internal}
+\examples{
+\dontrun{
+path <- get_examples_path(file_type = "sti")
+get_report_results(workspace = path)
+
+get_report_results(workspace = path, file_name = "mod_rapportA.sti")
+}
+
+}
