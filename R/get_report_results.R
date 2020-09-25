@@ -9,6 +9,10 @@
 #' @param var_list vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
 #'
+#' @details The data may be filtered using `usm_name` vector of usm names and
+#' and/or `var_list` vector of variables names. In the returned data.frame, variables
+#' names respect the same syntax as in the get_daily_results output.
+#'
 #' @return A data.frame
 #'
 #' @export
@@ -18,7 +22,17 @@
 #' path <- get_examples_path(file_type = "sti")
 #' get_report_results(workspace = path)
 #'
+#' get_report_results(workspace = path, usm_name = c("DurumWheat", "grass") )
+#'
+#' get_report_results(workspace = path, var_list = c("masec(n)", "QNplante") )
+#'
+#' get_report_results(workspace = path, usm_name = c("DurumWheat", "grass") )
+#'
+#' get_report_results(workspace = path)
+#'
 #' get_report_results(workspace = path, file_name = "mod_rapportA.sti")
+#'
+#'
 #' }
 #'
 get_report_results <- function(workspace,
@@ -69,7 +83,7 @@ get_report_results <- function(workspace,
   # If report header is present
   # otherwise column are named V1 to Vncol
   if (length(h_idx)) {
-    col_names <- unlist(h[1,])
+    col_names <- unlist(h[1,], use.names = FALSE)
     df <- df[,1:length(col_names)]
     names(df) <- col_names
   } else {
@@ -77,7 +91,7 @@ get_report_results <- function(workspace,
   }
 
   # To be homogenous with get_daily_results, get_obs_int
-  colnames(df)= var_to_col_names(colnames(df))
+  colnames(df) <- var_to_col_names(col_names)
 
   # Filtering usms
   if (!base::is.null(usm_name))  {
