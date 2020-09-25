@@ -31,7 +31,7 @@ exist_param_xml <- function(parameter,
                                  exact = TRUE)$name
 
   # Checking if any correspondence for each element of name
-  exist_status <- unlist(lapply(name, function(x) any(par_names %in% x)))
+  exist_status <- unlist(lapply(parameter, function(x) any(par_names %in% x)))
 
   # Exiting status vector
   return(exist_status)
