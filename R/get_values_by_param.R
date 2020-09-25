@@ -27,7 +27,8 @@ get_values_by_param <- function(params_table, param_name = NULL, lines_id = NULL
   # Getting the parameter names vector, if not given
   if ((base::is.null(param_name))) {
     #param_name <- unique(gsub(pattern = "_[0-9]*$", "",x = names(params_table)))
-    param_name <- unique(unlist(lapply(strsplit(table_names, split = "_"), function(x) x[1])))
+    param_name <- unique(gsub(pattern = "(.*)_[0-9]+$",x = table_names, replacement = "\\1"))
+    # param_name <- unique(unlist(lapply(strsplit(table_names, split = "_"), function(x) x[1])))
   }
 
   # For multiple lines

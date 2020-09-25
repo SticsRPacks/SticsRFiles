@@ -15,6 +15,8 @@ get_param_data_df(
 \arguments{
 \item{parameter}{Optional name or partial name or a vector of}
 
+\item{file_path}{Optional, xml file path or a vector of}
+
 \item{version}{Optional, Stics version (default value, "last")
 Only the 2 last are referenced: V9.0, V9.1}
 
@@ -39,6 +41,8 @@ all the existing parameters
 \dontrun{
 
 get_param_data_df(parameter = "albedo")
+
+get_param_data_df(parameter = "albedo", file_path ="/path/to/file.xml")
 
 get_param_data_df(parameter = "albedo", kind = "formalism)
 

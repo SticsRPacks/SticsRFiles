@@ -15,6 +15,8 @@ get_param_info(
 \arguments{
 \item{parameter}{Optional, parameter name or partial name, or a vector of}
 
+\item{file_path}{Optional, xml file path or a vector of}
+
 \item{formalism}{Optional, formalism name or partial name, or a vector of}
 
 \item{keyword}{Optional, strings or a vector of to be used for searching
@@ -39,6 +41,8 @@ none of them can be if keyword argument is used.
 \dontrun{
 
 get_param_info(parameter = "albedo")
+
+get_param_info(parameter = "albedo", file_path ="/path/to/file.xml")
 
 get_param_info(parameter = "albedo", formalism = "special")
 
