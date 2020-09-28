@@ -15,8 +15,8 @@ url: https://sticsrpacks.github.io/SticsRFiles/
 reference:
   - title: "Find information on parameters and variables"
     contents:
-      - find_param_info
-      - find_var_info
+      - get_param_info
+      - get_var_info
 
   - title: "Generate JavaStics Input files (XML format)"
     desc: Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)
@@ -42,6 +42,7 @@ reference:
   - title: "Generate Stics Input files (Text format)"
     contents:
       - gen_usms_xml2txt
+      - force_param_values
       - gen_varmod
 
   - title: "Set values in Stics Input files (Text format)"
@@ -56,6 +57,7 @@ reference:
   - title: "Get values in Stics Output files"
     contents:
       - get_daily_results
+      - get_report_results
 
   - title: "Manage observation files"
     contents:
@@ -63,7 +65,9 @@ reference:
       - get_obs
 
   - title: "Example data"
-    desc: For complex examples
+    desc: For files examples by Stics version
+      - get_examples_path
+    desc: For use cases examples
     contents:
       - download_data
       - download_usm_xl
