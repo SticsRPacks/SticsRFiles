@@ -1,8 +1,8 @@
 ---
-title: "Generating Stics XML files from Excel files data, `mailing` use case"
+title: "Generating Stics XML files from tabulated data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Generating Stics XML files from Excel files data, `mailing` use case}
+  %\VignetteIndexEntry{Generating Stics XML files tabulated data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,11 +28,11 @@ workspace_path <- tempdir()
 
 * In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated files. As Excel or CSV files.
 
-* The functions operate on data stored in data.frames loaded from Excel sheets
+* The functions operate on data loaded as data.frames from Excel sheets
 
-* Specialized functions for producing XML files are taking into account: initialization files, stations files, crop management files, usms and sols files 
+* Specialized functions for producing XML files are taking into account: initialization files, stations files, crop management files, usms and sols files. General parameters files generation are not available, but will be eventually included in future developments.
 
-* Observations data files generation have been included while they are not in XML format. 
+* Observations data files generation have been included even if they are not in XML format. 
 
 * The generation of wheather files files are not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
 
@@ -43,7 +43,7 @@ workspace_path <- tempdir()
 # Package functions
 
 
-  * Generate xml files using a table of parameters     
+  * Generate xml files using tables of parameters     
     * gen_ini_xml
     * gen_sta_xml
     * gen_tec_xml
@@ -55,20 +55,25 @@ workspace_path <- tempdir()
     * get_params_dict -->
 
 
-# Getting example table file
+# Getting a table file example {#download-excel-example}
 
 ## Getting inputs `Excel` example file from the `SticsRFiles` package
 
 In the following example `/path/to/target/dir` must be replaced with a real path depending on the operating system (i.e. starting with `c:/` for windows for example)
 
 ```{r}
+library(readxl)
+
 # Getting the file in the current directory
 download_usm_xl()
-# getting the file in a specic directory
-download_usm_xl(dest_dir = "/path/to/target/dir")
+
+# Getting the file in a specic directory
+xl_dir <- "/path/to/xl/dir" # or something like C:/path/to/xl/dir" for Windows  
+
+download_usm_xl(dest_dir = xl_dir)
 
 #> [1] "inputs_stics_example.xlsx  has been copied in directory  
-#> "/path/to/target/dir
+#> "/path/to/xl/dir
 
 ```
 
@@ -77,91 +82,358 @@ download_usm_xl(dest_dir = "/path/to/target/dir")
 download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = workspace_path)
 ```
 
+!!!!!!!!!!!!!!!!!! VOIR pour exemple CSV ?????????????? !!!!!!
+
+
 
 ## File content description
+!!!!!!!!!!!!!!!!!!!!!!! A REVOIR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+### Excel sheets
 
-**MONTRER EXEMPLE CONTENU: captures**
+* names
+Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters they contain.
 
+* column names
+identifiers or files names (or prefix) : 
+
+
+A REVOIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 <!-- sheets, naming conventions,... -->
-### Files names or usms/sols names in Excel sheet
+Files names or usms/sols names in Excel sheet
   * key words for detecting names or file names column: usm_, tec_, ini_, soil_, sta_
 
   * files names : may be either full files names or only file names without any suffix like _tec.xml, _ini.xml or _sta.xml 
 
-
 ### Consistency data checks in Excel sheets    
-For the moment *no consistency checks* functionnalities have been included in the package. So, we must take care of links between xml files names for example files names defined for usms related to names declared in `Tec`, `Station`, and so on. 
+For the moment *no consistency checks* functionnalities have been included in the package. 
+So, one must take care of links between xml files names for example files names defined for usms related to names declared in `Tec`, `Station`, and so on. 
 
 
-### Excel sheets names    
-Excel sheet names are completely free, but must be meaningfull regarding to the kind of parameters they contain.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+### Excel sheet example
+
+The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters).
+
+The following example contains data extracted from a sheet named `USMs` containing a list of USMS parameters.
+<!-- MONTRER EXEMPLE CONTENU: captures ecran ? -->
+
+```{r, eval = TRUE, echo = FALSE }
+library(readxl)
+xl_path <- file.path(workspace_path, "inputs_stics_example.xlsx")
+xl_param <- read_excel(xl_path, sheet = "USMs")
+xl_param[is.na(xl_param)] <- ""
+knitr::kable(xl_param)
+
+```
 
 
 
-# Script example for generating the `usms` XML file (*usms.xml*)
 
-## Content
+
+
+
+# Example 1: generating the `usms` XML file (*usms.xml*)
+
+## Script content
+
+The `gen_usms_xml` function is working on a data.frame object that can be loaded from an Excel file sheet. Here after code shows how to get it from the downloaded example [file](#download-excel-example)
 
 <!-- Only for the show -->
 ```{r generate_usms_file}
-# Generate an usms.xml file
 
-library(readxl)
 library(SticsRFiles)
 
+# Generate an usms.xml file
+
 out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
-xl_dir <- "/path/to/xl/dir"          # or something like C:/path/to/xl/dir" for Windows
 
 # Using an Excel example file (from the package)
-download_usm_xl("inputs_stics_example.xlsx", dest_dir = xl_dir)
 xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
 
 # Reading the Excel file
-xl_param <- read_excel(xl_path,sheet = "USMs")
+xl_param <- read_excel(xl_path, sheet = "USMs")
 
 # Generating a new usms.xml file, for all xl_param lines
 gen_usms_xml(usms_param = xl_param, usms_out_file = out_file)
 ```
 
 <!-- active chunk to be run -->
-```{r eval_generate_usms_file, eval = TRUE, echo = FALSE, results='hide'}
+```{r eval_generate_usms_file, eval = TRUE, echo = FALSE}
 # Generate an usms.xml file
 
 library(readxl)
 library(SticsRFiles)
 
 out_file <- file.path(workspace_path,"usms.xml")
+
+#print(out_file)
+
 xl_dir <- workspace_path
 
 # Using an Excel example file (from the package)
-download_usm_xl("inputs_stics_example.xlsx", dest_dir = xl_dir)
 xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
 
 # Reading the Excel file
 xl_param <- read_excel(xl_path,sheet = "USMs")
 
 # Generating a new usms.xml file, for all xl_param lines
-gen_usms_xml(usms_param = xl_param, usms_out_file = out_file)
+gen_usms_xml(usms_out_file = out_file, usms_param = xl_param)
 ```
 
-## Output XML files content
-**MONTRER EXEMPLE CONTENU: captures**
+## `usms.xml` file content
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<usms>
+  <usm nom="USM_2017_T1_CI">
+     <datedebut>199</datedebut>
+     <datefin>263</datefin>
+     <finit>USM_2017_T1_ini.xml</finit>
+     <nomsol>USM_T1</nomsol>
+     <fstation>climatex_sta.xml</fstation>
+     <fclim1>climatex.2017</fclim1>
+     <fclim2>climatex.2017</fclim2>
+     <culturean>1</culturean>
+     <nbplantes>1</nbplantes>
+     <codesimul>0</codesimul>
+     <plante dominance="1">
+       <fplt>rapeseed_plt.xml</fplt>
+       <ftec>USM_2017_T1_CI_tec.xml</ftec>
+       <flai>null</flai>
+     </plante>
+     <plante dominance="2">
+       <fplt>null</fplt>
+       <ftec>null</ftec>
+       <flai>null</flai>
+     </plante>
+  </usm>
+
+...
+
+  <usm nom="FRA_ARB_13_SEC_220-0-0_37K_ARB13_C">
+    <datedebut>264</datedebut>
+    <datefin>570</datefin>
+    <finit>Vill11_ini.xml</finit>
+    <nomsol>LF1</nomsol>
+    <fstation>climatex_sta.xml</fstation>
+    <fclim1>climatex.2017</fclim1>
+    <fclim2>climatex.2018</fclim2>
+    <culturean>2</culturean>
+    <nbplantes>1</nbplantes>
+    <codesimul>0</codesimul>
+    <plante dominance="1">
+      <fplt>proto_potato_plt.xml</fplt>
+      <ftec>FRA_ARB_13_SEC_220-0-0_37K_ARB13_tec.xml</ftec>
+      <flai>null</flai>
+    </plante>
+    <plante dominance="2">
+      <fplt>null</fplt>
+      <ftec>null</ftec>
+      <flai>null</flai>
+    </plante>
+  </usm>
+</usms>
+
+```
+
+# Example 2: generating the `sols` XML file (*sols.xml*)
+
+## Script content
+
+As for `gen_usms_xml`, `gen_sols_xml` function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the `sols.xml` file generation section. 
+
+<!-- Only for the show -->
+```{r generate_sols_file}
+# Generate sols.xml file
+out_file <- file.path(workspace_path,"sols.xml")
+
+# Using an Excel example file (from the package)
+xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
+
+# Reading the Excel file
+xl_param <- read_excel(xl_path,sheet = "Soils")
+
+# Generating a new sols.xml file, for all xl_param lines
+gen_sols_xml(usms_param = xl_param, usms_out_file = out_file)
+```
+
+<!-- active chunk to be run -->
+```{r eval_generate_sols_file, eval = TRUE, echo = FALSE}
+# Generate sols.xml file
+out_file <- file.path(workspace_path,"sols.xml")
+
+# Using an Excel example file (from the package)
+xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
+
+# Reading the Excel file
+xl_param <- read_excel(xl_path,sheet = "Soils")
+
+# Generating a new sols.xml file, for all xl_param lines
+gen_sols_xml(sols_param = xl_param, sols_out_file = out_file)
+```
+
+## `sols.xml` file content
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<sols>
+  <sol nom="USM_T1">
+    <param format="real" max="60.0" min="0.0" nom="argi">20.35</param>
+    <param format="real" max="0.5" min="0.05" nom="norg">0.1</param>
+    <param format="real" max="60.0" min="10.0" nom="profhum">40.0000</param>
+    <param format="real" max="100.0" min="0.0" nom="calc">0.52</param>
+    <param format="real" max="9.0" min="4.0" nom="pH">8.23</param>
+    <param format="real" max="0.5" min="0.0" nom="concseuil">0.2000</param>
+    <param format="real" max="0.6" min="0.05" nom="albedo">0.22</param>
+    <param format="real" max="50.0" min="0.0" nom="q0">9.63</param>
+    <param format="real" max="1.0" min="0.0" nom="ruisolnu">0.0000</param>
+    <param format="real" max="1000.0" min="10.0" nom="obstarac">200.0000</param>
+    <param format="real" max="100.0" min="5.0" nom="pluiebat">50.0000</param>
+    <param format="real" max="2.0" min="0.0" nom="mulchbat">0.5000</param>
+    <param format="real" max="150.0" min="10.0" nom="zesx">60.0000</param>
+    <param format="real" max="10.0" min="-10.0" nom="cfes">5.0000</param>
+    <param format="real" max="0.2" min="0.01" nom="z0solnu">0.0100</param>
+    <param format="real" max="20.0" min="8.0" nom="csurNsol">0.0000</param>
+    <param format="real" max="5.0" min="0.0" nom="penterui">0.3300</param>
+    <option choix="2" nom="pebbles" nomParam="codecailloux">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="1" nom="macroporosity" nomParam="codemacropor">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="cracks (case of swelling clay soils)" nomParam="codefente">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="artificial drainage" nomParam="codrainage">
+      <choix code="1" nom="yes">
+        <param nom="profimper">10.0000</param>
+        <param nom="ecartdrain">0.0000</param>
+        <param nom="ksol">0.0000</param>
+        <param nom="profdrain">0.0000</param>
+      </choix>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="capillary rise" nomParam="coderemontcap">
+      <choix code="1" nom="yes">
+        <param nom="capiljour">1.0000</param>
+        <param nom="humcapil">10.0000</param>
+      </choix>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="nitrification" nomParam="codenitrif">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="denitrification" nomParam="codedenit">
+      <choix code="1" nom="yes">
+        <param nom="profdenit">20</param>
+        <param nom="vpotdenit">2.0000</param>
+      </choix>
+      <choix code="2" nom="no"/>
+    </option>
+    <tableau_entete nb_colonnes="8">
+      <colonne nom="epc"/>
+      <colonne nom="HCCF"/>
+      <colonne nom="HMINF"/>
+      <colonne nom="DAF"/>
+      <colonne nom="cailloux"/>
+      <colonne nom="typecailloux"/>
+      <colonne nom="infil"/>
+      <colonne nom="epd"/>
+    </tableau_entete>
+    <tableau nb_colonnes="8" nom="layer 1">
+      <colonne nom="epc">30</colonne>
+      <colonne nom="HCCF">23.75</colonne>
+      <colonne nom="HMINF">10.69</colonne>
+      <colonne nom="DAF">1.378</colonne>
+      <colonne nom="cailloux">0.00</colonne>
+      <colonne nom="typecailloux">1</colonne>
+      <colonne nom="infil">50.00</colonne>
+      <colonne nom="epd">10</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 2">
+      <colonne nom="epc">30</colonne>
+      <colonne nom="HCCF">23.75</colonne>
+      <colonne nom="HMINF">10.69</colonne>
+      <colonne nom="DAF">1.5</colonne>
+      <colonne nom="cailloux">0.00</colonne>
+      <colonne nom="typecailloux">1</colonne>
+      <colonne nom="infil">50.00</colonne>
+      <colonne nom="epd">10</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 3">
+      <colonne nom="epc">30</colonne>
+      <colonne nom="HCCF">22.2</colonne>
+      <colonne nom="HMINF">9.99</colonne>
+      <colonne nom="DAF">1.556</colonne>
+      <colonne nom="cailloux">0.00</colonne>
+      <colonne nom="typecailloux">1</colonne>
+      <colonne nom="infil">50.00</colonne>
+      <colonne nom="epd">10</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 4">
+      <colonne nom="epc">30</colonne>
+      <colonne nom="HCCF">22.28</colonne>
+      <colonne nom="HMINF">10.02</colonne>
+      <colonne nom="DAF">1.588</colonne>
+      <colonne nom="cailloux">0.00</colonne>
+      <colonne nom="typecailloux">1</colonne>
+      <colonne nom="infil">50.00</colonne>
+      <colonne nom="epd">10</colonne>
+    </tableau>
+  </sol>
+  
+  ...
+</sols>
+
+```
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+REPRENDRE A PARTIR DE LA
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# Example 3: generating multiple `tec` XML files (`*_tec.xml`)
+## Script content
+
+## XML file content
 
 ## Adaptation of the script content
 
-   * For generating other files kind, the other functions may be used instead of `gen_usms_xml`, then the Excel sheet name depends on the called function. In the given Excel file as example sheets are named:
-      * ini: 
-      * ...
+
+<!-- DEBUT partie à reprendre -->
+## Adaptation of the script content
+   * For generating other files kind, the other functions may be used instead of `gen_usms_xml`, then the Excel sheet name depends on the called function.     
+   
+   <!-- soils == usm -->
+         * **Soils**: to use with gen_sols_xml
+   <!-- on peut donner un fichier en sortie -->
+   
+   In the given Excel file as example, sheets are named:
+      * **Ini**: to use with gen_ini_xml
+
+      * **Tec**: to use with gen_tec_xml
+      * **sta**: to use with gen_sols_xml
       
       The sheet name in the script is to be replaced by the above names.
+      <!-- voir pour les obs : TRANSFERT VERS GENERATION TEXT FILES ??? -->
    
    * Only adapt the **paths / directories** and **files names**. In the example script, the Excel file is given just as an example. It will be replaced by the user ones.
    
+   <!-- ATTENTION  REFORMULER -->
+   * **POSSIBILITY to use**: an existing file as template, in that case Excel sheets may contain only parameters which are to be replaced/changed among usms!
+   
+   <!-- fin utilisation fichier template --> 
+   
    * The table loaded from an Excel sheet is entirely used in the examples, but a selection may be made to generate files only for a subset
    
-   **METTRE UN EXEMPLE DE SELECTION D'USMS**
+   <!-- METTRE UN EXEMPLE DE SELECTION D'USMS -->
    
-   * One may add every function call in the script in order to produce all the files associated with all usms or a selection of. The directory containing generated files may be used directly as a JavaStics workspace for running simulations on the prevoulsy generated usms
+   * In the end, ne may add **every function call** in the script in order to produce all the XML files associated with all usms or a selection of. The directory containing generated files may be used directly as a JavaStics workspace for running simulations on the prevoulsy generated usms
+
+<!-- FIN partie à reprendre -->
 
 # Constraints or limitations
   
