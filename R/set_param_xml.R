@@ -86,12 +86,19 @@ set_param_xml <- function(xml_file,
     out_path <- xml_file
   }
 
+
+  # Checking output directory
+  if (!dir.exists(dirname(path = out_path))) {
+    stop("The output directory does not exist: ", dirname(path = out_path))
+  }
+
   # Ckecking if file exists and overwriting right
   if ( base::file.exists(out_path) && !overwrite ) {
     warning(paste("The file already exists, set overwrite argument to TRUE or delete the file: ",
                   out_path))
     return(invisible(FALSE))
   }
+
 
   # For future version
   # TODO: multiple files and multiple params list and values ...ids ...?
