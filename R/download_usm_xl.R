@@ -58,7 +58,7 @@ download_usm_xl <- function(xl_name = NULL,
   }
 
   src_list <- file.path(xl_dir, files_list)
-  success <- file.copy(from = src_list, to = dest_dir)
+  success <- file.copy(from = src_list, to = dest_dir, overwrite = overwrite)
 
   if ( success ) {
     print(paste(files_list," has been copied in directory ", dest_dir))
