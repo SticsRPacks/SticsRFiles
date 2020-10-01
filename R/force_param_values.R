@@ -28,23 +28,23 @@ force_param_values <- function(workspace,
     if (suppressWarnings(file.remove(file.path(workspace,
                                                "param.sti")))) {
       tryCatch(set_codeoptim(workspace, value=0), error=function(cond) return(FALSE))
-      return(TRUE)
     }
 
   } else {
 
+    # convert into vector in case a tibble is given instead of a vector
+    param_values <- setNames(as.numeric(param_values),names(param_values))
     ind_non_na<-!is.na(param_values)
     param_values <- param_values[ind_non_na]
 
     ret <- gen_paramsti(workspace, names(param_values), param_values)
     if ( ! ret ) {
-     return(ret)
+     return(FALSE)
     }
 
     tryCatch(set_codeoptim(workspace, value=1), error=function(cond) return(FALSE))
-    return(TRUE)
 
   }
 
-
+  return(TRUE)
 }
