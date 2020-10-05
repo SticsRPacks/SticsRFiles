@@ -30,10 +30,11 @@ get_svn_identifiers <- function() {
 #'
 #' @param branch_url Address of the branch or tag
 #' @param dest_dir Directory path where to store files
-#' @param file File name (inputs.csv or ouputs.csv)
+#' @param file_name File name(s)
 #' or keyword "all" for both files (default)
 #' @param ids Connexion identifiers to the subversion server
 #' @param overwrite Logical, TRUE for overwtiting files, FALSE otherwise
+#' @param verbose TRUE to display warnings (default), FALSE otherwise
 #'
 # @return
 #' @keywords internal
@@ -46,17 +47,18 @@ get_svn_identifiers <- function() {
 #' }
 get_csv_files <- function(branch_url,
                           dest_dir,
-                          file = "all",
+                          file_name = "all",
                           ids = get_svn_identifiers(),
-                          overwrite = FALSE) {
+                          overwrite = FALSE,
+                          verbose = TRUE) {
 
   files_list <- c("inputs.csv", "outputs.csv")
 
-  if (file =="all") {
-    file <- files_list
+  if (length(file_name) == 1 && file_name =="all") {
+    file_name <- files_list
   }
 
-  if (!all( file %in% files_list)) stop("Unknown given file !")
+  #if (!all( file_name %in% files_list)) stop("Unknown given file !")
 
 
   # Initialization of authentication on the subversion server
@@ -68,10 +70,13 @@ get_csv_files <- function(branch_url,
   curl::handle_setopt(h, password = ids$password)
 
   # Setting the files url and download
-  file_url <- paste0(branch_url, "/doc/", file )
+  file_url <- paste0(branch_url, "/doc/", file_name )
+
+  # local files_path
+  file_path <- vector(mode = "list", length = length(file_url))
 
   for (f in 1:length(file_url)) {
-    dest_file <- file.path(dest_dir, file[f])
+    dest_file <- file.path(dest_dir, file_name[f])
 
     if (file.exists(dest_file) && !overwrite ) {
       warning("File ", dest_file,
@@ -79,10 +84,20 @@ get_csv_files <- function(branch_url,
               "(consider set overwrite to TRUE for passing through)!")
     }
 
-    curl::curl_download(file_url[f],
+    file_path[[f]] <- try(curl::curl_download(file_url[f],
                         handle = h,
-                        destfile = dest_file)
+                        destfile = dest_file),
+                        TRUE)
   }
+
+  err_idx <- unlist(lapply(file_path, function(x) class(x) == "try-error"))
+
+  if (any(err_idx) && verbose) warning("A least one file does not exist on the server !")
+
+  file_path[err_idx] <- NA
+
+  # Returning local file(s) path(s) vector
+  invisible(unlist(file_path))
 }
 
 
@@ -92,6 +107,7 @@ get_csv_files <- function(branch_url,
 #' in the csv file containing informations about versions
 #' @param url Subversion repository address of the branch, tag to get
 #' information from
+#' @param file_name File name(s)
 #' @param dest The destination where to write information "install" for writing
 #' things in the installed SticsRFiles library (default), "package" for writing
 #' them in the package project (in RStudio)
@@ -110,6 +126,7 @@ get_csv_files <- function(branch_url,
 #' }
 add_stics_version <- function(version_name,
                               url,
+                              file_name = "all",
                               dest = "install",
                               overwrite = FALSE,
                               verbose = TRUE) {
@@ -151,7 +168,7 @@ add_stics_version <- function(version_name,
 
 
   # Getting csv files from repos (branch or tag url) or overwriting them
-  get_csv_files(url, dir_path, overwrite = overwrite)
+  get_csv_files(url, dir_path, file_name = file_name, overwrite = overwrite, verbose = verbose)
 
 
   # Writing data updated with new version information (about csv files location)
@@ -185,12 +202,14 @@ add_stics_version <- function(version_name,
 #' }
 update_stics_version <-function(version_name,
                                 url,
+                                file_name = "all",
                                 dest = "install",
                                 verbose = FALSE) {
 
   # Forcing csv files overwriting
   add_stics_version(version_name,
                     url,
+                    file_name = file_name,
                     dest = dest,
                     overwrite = TRUE,
                     verbose = verbose)

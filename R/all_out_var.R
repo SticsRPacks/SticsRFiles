@@ -17,7 +17,7 @@
 #'
 all_out_var <- function(version = "last"){
 
-  # Checking and getting the rigth version
+  # Checking and getting the right version
   version <- check_version_compat( version_name = version)
 
   var_df <- utils::read.csv2(
