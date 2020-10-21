@@ -81,4 +81,10 @@ test_that("reading mixed usms with usms_filename to usms.xml outside of folder, 
 })
 
 
-
+# Testing empty obs:
+test_that("reading empty usms returns a 0 row data", {
+  path_empty = file.path(get_examples_path(file_type = "obs"),"empty")
+  meas = get_obs(workspace = path_empty)
+  expect_true(is.data.frame(meas$empty))
+  expect_length(meas$empty,0)
+})
