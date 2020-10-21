@@ -41,12 +41,14 @@ get_obs_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
     return(out)
   },x= filename, y= plant_name, SIMPLIFY= FALSE)
 
-  obs_table= dplyr::bind_rows(obs_table)
+  obs_table = dplyr::bind_rows(obs_table)
 
   if(nrow(obs_table) > 0){
-    Date= data.frame(Date=as.POSIXct(x = paste(obs_table$ian,obs_table$mo,obs_table$jo, sep="-"),
-                                     format = "%Y-%m-%d", tz="UTC"))
-    obs_table= cbind(Date,obs_table)
+    # Adding the date column:
+    obs_table = dplyr::transmute(obs_table,Date = as.POSIXct(x = paste(.data$ian,.data$mo,
+                                                             .data$jo, sep="-"),
+                                                   format = "%Y-%m-%d", tz="UTC"),
+                                 dplyr::across(dplyr::everything()))
   }
 
   obs_table

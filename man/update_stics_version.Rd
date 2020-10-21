@@ -18,6 +18,8 @@ update_stics_version(
 \item{url}{Subversion repository address of the branch, tag to get
 information from}
 
+\item{file_name}{File name(s)}
+
 \item{dest}{The destination where to write information "install" for writing
 things in the installed SticsRFiles library (default), "package" for writing
 them in the package project (in RStudio)}
