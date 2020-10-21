@@ -117,7 +117,7 @@ get_usms_files <- function(workspace_path,
                                       select = "usm",
                                       value = usm_name), use.names = F)
 
-    usm_files <- usm_files[usm_files != "null"]
+    usm_files <- unique(usm_files[usm_files != "null"])
     usm_files_path <- file.path(workspace_path, usm_files)
     files_idx <- file.exists(usm_files_path)
     usm_files_path <- usm_files_path[files_idx]
