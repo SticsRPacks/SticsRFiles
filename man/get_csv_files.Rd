@@ -7,9 +7,10 @@
 get_csv_files(
   branch_url,
   dest_dir,
-  file = "all",
+  file_name = "all",
   ids = get_svn_identifiers(),
-  overwrite = FALSE
+  overwrite = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -17,12 +18,14 @@ get_csv_files(
 
 \item{dest_dir}{Directory path where to store files}
 
-\item{file}{File name (inputs.csv or ouputs.csv)
+\item{file_name}{File name(s)
 or keyword "all" for both files (default)}
 
 \item{ids}{Connexion identifiers to the subversion server}
 
 \item{overwrite}{Logical, TRUE for overwtiting files, FALSE otherwise}
+
+\item{verbose}{TRUE to display warnings (default), FALSE otherwise}
 }
 \description{
 Dowloading inputs and/or outputs csv files from a repository branch/tag

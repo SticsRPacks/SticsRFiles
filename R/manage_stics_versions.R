@@ -185,6 +185,7 @@ add_stics_version <- function(version_name,
 #' @param version_name name (i.e. "VX.Y") of the version
 #' @param url Subversion repository address of the branch, tag to get
 #' information from
+#' @param file_name File name(s)
 #' @param dest The destination where to write information "install" for writing
 #' things in the installed SticsRFiles library (default), "package" for writing
 #' them in the package project (in RStudio)

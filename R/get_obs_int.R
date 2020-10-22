@@ -35,14 +35,15 @@ get_obs_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
   obs_table= mapply(function(x,y){
     out= data.table::fread(file.path(workspace,x), data.table = F)
     out[out<=-999.00]= NA
-    out$Plant= y
     colnames(out)= var_to_col_names(colnames(out))
+    if(nrow(out) == 0) return(NULL)
+    out$Plant= y
     return(out)
   },x= filename, y= plant_name, SIMPLIFY= FALSE)
 
-  obs_table= data.table::rbindlist(obs_table, fill = TRUE)
+  obs_table = dplyr::bind_rows(obs_table)
 
-  if(!is.null(obs_table)){
+  if(nrow(obs_table) > 0){
     Date= data.frame(Date=as.POSIXct(x = paste(obs_table$ian,obs_table$mo,obs_table$jo, sep="-"),
                                      format = "%Y-%m-%d", tz="UTC"))
     obs_table= cbind(Date,obs_table)

@@ -66,7 +66,17 @@ get_plant_name= function(workspace,
 
   # Getting plant files (fplt) for a set of usm
   plant_files <- get_param_xml(xml_file = usms_path, param_name = "fplt", select = "usm", value = usms)
-  plant_list <- unlist(apply(matrix(plant_files$usms.xml$fplt, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+
+  # Getting plant list:
+  if(length(plant_files$usms.xml$fplt) == 2*length(usms)){
+    # If plante dominance="1" and plante dominance="2" are declared, put each one in a column:
+    plant_list <- unlist(apply(matrix(plant_files$usms.xml$fplt, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+  }else if(length(plant_files$usms.xml$fplt) == length(usms)){
+    # If plante dominance="2" is not declared, repeat plante dominance="1" twice to get the same data structure:
+    plant_list <- unlist(apply(matrix(c(plant_files$usms.xml$fplt,plant_files$usms.xml$fplt), ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+  }else{
+    stop('plante dominance="2" should always be declared in usms.xml even for sole crops (use null as values).')
+  }
   names(plant_list) <- usms
 
   # Keeping only useful files names according to nb_plant data

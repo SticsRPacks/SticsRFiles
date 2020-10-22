@@ -7,6 +7,7 @@
 add_stics_version(
   version_name,
   url,
+  file_name = "all",
   dest = "install",
   overwrite = FALSE,
   verbose = TRUE
@@ -18,6 +19,8 @@ in the csv file containing informations about versions}
 
 \item{url}{Subversion repository address of the branch, tag to get
 information from}
+
+\item{file_name}{File name(s)}
 
 \item{dest}{The destination where to write information "install" for writing
 things in the installed SticsRFiles library (default), "package" for writing

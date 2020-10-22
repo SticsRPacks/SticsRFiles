@@ -4,13 +4,21 @@
 \alias{update_stics_version}
 \title{Updating csv files for a given version}
 \usage{
-update_stics_version(version_name, url, dest = "install", verbose = FALSE)
+update_stics_version(
+  version_name,
+  url,
+  file_name = "all",
+  dest = "install",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{version_name}{name (i.e. "VX.Y") of the version}
 
 \item{url}{Subversion repository address of the branch, tag to get
 information from}
+
+\item{file_name}{File name(s)}
 
 \item{dest}{The destination where to write information "install" for writing
 things in the installed SticsRFiles library (default), "package" for writing
