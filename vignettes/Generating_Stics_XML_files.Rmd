@@ -113,7 +113,7 @@ So, one must take care of links between xml files names for example files names 
 
 ### Excel sheet example
 
-The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters).
+The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).
 
 The following example contains data extracted from a sheet named `USMs` containing a list of USMS parameters.
 <!-- MONTRER EXEMPLE CONTENU: captures ecran ? -->

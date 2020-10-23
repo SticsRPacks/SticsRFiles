@@ -41,7 +41,8 @@ Imports:
     cli,
     tibble,
     tidyr,
-    curl
+    curl,
+    tools
 Suggests:
     SticsOnR,
     knitr,

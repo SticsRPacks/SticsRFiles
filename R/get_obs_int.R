@@ -34,9 +34,9 @@ get_obs_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
 
   obs_table= mapply(function(x,y){
     out= data.table::fread(file.path(workspace,x), data.table = F)
-    out[out<=-999.00]= NA
     colnames(out)= var_to_col_names(colnames(out))
     if(nrow(out) == 0) return(NULL)
+    out[out<=-999.00]= NA
     out$Plant= y
     return(out)
   },x= filename, y= plant_name, SIMPLIFY= FALSE)

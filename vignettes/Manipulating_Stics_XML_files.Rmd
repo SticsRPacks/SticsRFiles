@@ -2,7 +2,7 @@
 title: "Manipulating Stics XML files"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Manipulate_Stics_XML_files}
+  %\VignetteIndexEntry{Manipulating Stics XML files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 params:

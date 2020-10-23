@@ -2,7 +2,7 @@
 title: "Generating Stics text files from XML files"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Generating_Stics_text_files}
+  %\VignetteIndexEntry{Generating Stics text files from XML files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 params:
