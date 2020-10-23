@@ -102,12 +102,10 @@ check_version_compat <- function(version_name = "last") {
 #'
 #'
 #'}
-get_versions_info <- function(version_name = NULL,
-                              versions_dir = system.file("extdata",
-                                                         package = "SticsRFiles") ) {
+get_versions_info <- function(version_name = NULL, location = "install") {
 
   # Getting available versions info from a file
-  ver_file <- file.path(versions_dir, "versions",get_versions_file_name())
+  ver_file <- get_versions_file_path(location = location)
 
   if (!file.exists(ver_file)) return()
 

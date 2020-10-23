@@ -22,7 +22,8 @@ Get a basic data.frame for a version
 \dontrun{
 SticsRFiles:::get_versions_info(version_name = "V10.0")
 
-  versions   csv obs sti txt xml xml_tmpl xl study_case_1
+>
+>  versions   csv obs sti txt xml xml_tmpl xl study_case_1
   1    V10.0 V10.0
 
 }

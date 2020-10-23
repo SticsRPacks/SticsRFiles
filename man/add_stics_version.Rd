@@ -8,7 +8,7 @@ add_stics_version(
   version_name,
   url,
   file_name = "all",
-  dest = "install",
+  location = "install",
   overwrite = FALSE,
   verbose = TRUE
 )
@@ -20,16 +20,17 @@ in the csv file containing informations about versions}
 \item{url}{Subversion repository address of the branch, tag to get
 information from}
 
-\item{file_name}{File name(s)}
+\item{file_name}{File name(s)
+or keyword "all" for both files (default)}
 
-\item{dest}{The destination where to write information "install" for writing
+\item{location}{The destination where to write information "install" for writing
 things in the installed SticsRFiles library (default), "package" for writing
 them in the package project (in RStudio)}
 
 \item{overwrite}{A logical, TRUE to overwrite csv files,
 FALSE otherwise (default)}
 
-\item{verbose}{Logical, TRUE for displaying warnings, FALSE otherwise}
+\item{verbose}{Logical, TRUE for displaying warnings (default), FALSE otherwise}
 }
 \value{
 An invisible data.frame containing versions data
@@ -41,6 +42,10 @@ Adding a new version in the SticsRFiles library or package
 \dontrun{
 SticsRFiles:::add_stics_version(version_name = "V10.0",
  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10")
+
+SticsRFiles:::add_stics_version(version_name = "V10.0",
+ url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+ location = "package")
 
 }
 }

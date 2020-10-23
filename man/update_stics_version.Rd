@@ -8,7 +8,7 @@ update_stics_version(
   version_name,
   url,
   file_name = "all",
-  dest = "install",
+  location = "install",
   verbose = FALSE
 )
 }
@@ -20,7 +20,7 @@ information from}
 
 \item{file_name}{File name(s)}
 
-\item{dest}{The destination where to write information "install" for writing
+\item{location}{The destination where to write information "install" for writing
 things in the installed SticsRFiles library (default), "package" for writing
 them in the package project (in RStudio)}
 
@@ -37,6 +37,10 @@ Updating csv files for a given version
 \dontrun{
 SticsRFiles::update_stics_version(version_name = "V10.0",
  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10")
+
+SticsRFiles::update_stics_version(version_name = "V10.0",
+ url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+ location = "package")
 
 }
 }

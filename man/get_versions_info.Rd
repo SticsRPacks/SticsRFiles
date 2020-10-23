@@ -4,10 +4,7 @@
 \alias{get_versions_info}
 \title{Getting versions data (versions strings and examples files directories list)}
 \usage{
-get_versions_info(
-  version_name = NULL,
-  versions_dir = system.file("extdata", package = "SticsRFiles")
-)
+get_versions_info(version_name = NULL, location = "install")
 }
 \arguments{
 \item{version_name}{Optional version string (i.e. "VX.Y")}

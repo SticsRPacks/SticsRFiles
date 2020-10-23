@@ -7,7 +7,8 @@ directories in the SticsRFiles library or package}
 \usage{
 set_versions_info(
   version_name,
-  versions_dir = system.file("extdata", package = "SticsRFiles"),
+  location = "install",
+  overwrite = FALSE,
   verbose = TRUE
 )
 }
@@ -15,10 +16,14 @@ set_versions_info(
 \item{version_name}{name (i.e. "VX.Y") of the version to add in versions
 information}
 
-\item{versions_dir}{Optional, , either an \code{extdata} directory path
-of the installed SticsRFiles library (default) or of the package project}
+\item{location}{The destination where to write information "install" for writing
+things in the installed SticsRFiles library (default), "package" for writing
+them in the package project (in RStudio)}
 
-\item{verbose}{Logical, TRUE for displaying warnings, FALSE otherwise}
+\item{overwrite}{A logical, TRUE to overwrite versions info file,
+FALSE otherwise (default)}
+
+\item{verbose}{Logical, TRUE for displaying warnings (default), FALSE otherwise}
 }
 \description{
 Writing information about Stics versions and related example files
