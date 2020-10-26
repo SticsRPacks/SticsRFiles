@@ -11,9 +11,9 @@
 #'  (optional, default: current directory)
 #' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
 #' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
+#' @param ... Additional arguments to be passed
 #'
-#' @return A copy status, TRUE if successfull, FALSE otherwise.
-#' With an attached attribute "path" containing copied files path.
+#' @return A vector of copied files path.
 #'
 #' @examples
 #' \dontrun{
@@ -27,9 +27,15 @@
 download_usm_xl <- function(xl_name = NULL,
                             dest_dir = getwd(),
                             version_name = "last",
-                            overwrite = FALSE) {
+                            overwrite = FALSE,
+                            ...) {
 
-  xl_patt <- ".(xls|xlsx)$"
+  args <- list(...)
+
+
+  xl_patt <- "\\.(xls|xlsx)$"
+
+  if ("type" %in% names(args) && args$type == "csv") xl_patt <- "\\.csv$"
 
   if (base::is.null(xl_name)) {
     xl_name <- xl_patt
@@ -54,17 +60,60 @@ download_usm_xl <- function(xl_name = NULL,
   if ( !overwrite && any(exist_files) ) {
     print(paste(files_list[exist_files],"already exists in ", dest_dir))
     print("Consider to set overwrite = TRUE to overwrite (it | them )")
-    return(invisible(FALSE))
+    #return(invisible(FALSE))
+    # filtering existing files, not copied if overwrite == FALSE
+    files_list <- files_list[!exist_files]
   }
 
   src_list <- file.path(xl_dir, files_list)
   success <- file.copy(from = src_list, to = dest_dir, overwrite = overwrite)
 
-  if ( success ) {
-    print(paste(files_list," has been copied in directory ", dest_dir))
+  if ( any(success) ) {
+    print(paste(files_list[success]," has been copied in directory ", dest_dir))
     # Adding file(s) path as attr
-    attr(success,"path") <- dest_list
+    #attr(success,"path") <- dest_list
+    dest_list <- dest_list[success]
   }
 
-  return(invisible(success))
+  if (!all(success)) warning("Error copying files:\n", paste(src_list[!success], collapse = "\n"))
+  #return(invisible(success))
+  return(invisible(dest_list))
+}
+
+
+
+#' @title Downloading a CSV usms data file example into a directory
+#'
+#' @description The file is an example that can be used for generating JavaStics
+#' usms.xml input file from parameters values stored in a CSV file using the function
+#' \code{\link{gen_usms_xml}}
+#'
+#' @param csv_name Name of a csv file (optional, not used for the moment)
+#' @param dest_dir Directory path where to copy the CSV file
+#'  (optional, default: current directory)
+#' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
+#' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
+#'
+#' @return A vector of copied files path.
+#'
+#' @examples
+#' \dontrun{
+#' download_usm_csv(dest_dir = "/path/to/destination/dir")
+#' }
+#'
+#' @export
+#'
+
+download_usm_csv <- function(csv_name = NULL,
+                            dest_dir = getwd(),
+                            version_name = "last",
+                            overwrite = FALSE) {
+
+
+  download_usm_xl(xl_name = csv_name,
+                  dest_dir = dest_dir,
+                  version_name = version_name,
+                  overwrite = overwrite,
+                  type="csv")
+
 }

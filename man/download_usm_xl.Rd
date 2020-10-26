@@ -8,7 +8,8 @@ download_usm_xl(
   xl_name = NULL,
   dest_dir = getwd(),
   version_name = "last",
-  overwrite = FALSE
+  overwrite = FALSE,
+  ...
 )
 }
 \arguments{
@@ -22,8 +23,7 @@ download_usm_xl(
 \item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
 }
 \value{
-A copy status, TRUE if successfull, FALSE otherwise.
-With an attached attribute "path" containing copied files path.
+A vector of copied files path.
 }
 \description{
 The file is an example that can be used for generating JavaStics input files
