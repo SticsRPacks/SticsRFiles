@@ -95,7 +95,7 @@ if(params$gen_help) {
 ### Tutorial directory
 Either all files downloaded files or generated ones while executing this tutorial will be stored under the user home directory (i.e. /home/username for linux or C:\\Users\\username\\Documents).
 
-For the current demo session the full path is: **`r params$work_dir`**.
+For the current demo session the full path is: **`r work_dir`**.
 
 ## Function get_usms_list
 
