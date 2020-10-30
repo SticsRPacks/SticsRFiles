@@ -22,7 +22,7 @@ params:
 ---
 
 ```{r set_var, echo=FALSE, results='hide'}
-#library(SticsRFiles)
+library(SticsRFiles)
 
 work_dir <- params$work_dir
 
