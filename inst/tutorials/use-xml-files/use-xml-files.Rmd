@@ -1,0 +1,421 @@
+---
+title: "SticsRFiles: tutorial for manipulating XML files and generating model text files"
+output: 
+  learnr::tutorial:
+    theme: cerulean
+    #theme: united
+    ace_theme: merbivore
+
+# output:
+#   slidy_presentation:
+#     font_adjustment: -2
+#     footer: "SticsRPacks Team, 2020."
+runtime: shiny_prerendered
+params:
+  gen_help: TRUE
+  javastics: JavaSTICS-1.41-stics-9.1
+  workspace_xml: JavaSTICS-1.41-stics-9.1/example
+  workspace_txt: example
+  use_default: TRUE
+  work_dir: !r file.path(Sys.getenv("HOME"),"R","SticsRfiles-tuto-xml-files")
+  #alt_dir: !r file.path(tempdir(), "get-xml-infos")
+---
+
+```{r set_var, echo=FALSE, results='hide'}
+#library(SticsRFiles)
+
+work_dir <- params$work_dir
+if (!dir.exists(work_dir)) dir.create(work_dir)
+
+
+# Getting JavaStics
+# h <- curl::new_handle()
+# curl::handle_setopt(h, username = "plecharpent")
+# curl::handle_setopt(h, password = "vi8,gife")
+# file_url <- "https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip"
+# curl::curl_download(url = file_url, handle = h, destfile = file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip"), mode = "wb")
+
+javastics <- file.path(work_dir, params$javastics)
+
+if (!dir.exists(javastics)) dir.create(javastics)
+
+if (!length(grep("JavaStics.exe",list.files(javastics)))) {
+  system(paste("curl -u plecharpent:vi8,gife https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip --output", file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip")))
+  
+  unzip(file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip"), exdir = javastics)
+}
+
+workspace_xml <- file.path(work_dir, params$workspace_xml)
+workspace_txt <- file.path(work_dir, params$workspace_txt)
+ex_lines <- params$lines
+```
+
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+tutorial_options(exercise.lines = 5)
+#source("static_help.R")
+```
+
+
+
+
+## SticsRFiles package
+
+### Description
+The goal of SticsRFiles is to perform manipulations of the Stics model files either on `XML files` (used by the JavaStics GUI) or on `text files` used by the model fortran executable.
+
+### Content of the demo
+We are focusing in this demo only on `XML files` manipulations and their transformation to `text files`.
+
+Some of the main functions are presented here with possible interactive run directly inside the document.
+
+### Package loading and content
+
+```{r, echo = TRUE}
+library(SticsOnR)
+library(SticsRFiles)
+```
+
+```{r, echo=FALSE, warning=FALSE, results='hide'}
+# Generating html help files, one for each function
+if(params$gen_help) {
+  help_dir <- file.path(work_dir, "SticsRFiles_help")
+  if (!dir.exists(help_dir)) dir.create(help_dir)
+  SticsRFiles:::static_help(pkg = "SticsRFiles", 
+                            overwrite = FALSE, 
+                            out_dir = help_dir)
+}
+```
+
+### Tutorial directory
+Either all files downloaded files or generated ones while executing this tutorial will be stored under the user home directory (i.e. /home/username for linux or C:\\Users\\username\\Documents).
+
+For the current demo session the full path is: **`r params$work_dir`**.
+
+## Function get_usms_list
+
+### Aim
+> _**Getting a list of `usms` names from a usms.xml file of a workspace**_
+
+<!-- FOR DISPLAYING a part of the online help
+FROM Usage to Value -->
+
+```{r, results="asis"}
+lines <- SticsRFiles:::get_from_help(file.path(help_dir, "get_usms_list.html"))
+cat( paste( lines , collapse="\n" ) )
+```
+
+### Example
+```{r, echo = TRUE}
+# Path used for workspace
+workspace_xml
+# Getting usms list
+get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"))
+```
+#### Getting usms list using a filter name
+```{r get_usms_list_1, exercise=TRUE}
+get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"), name = "gar")
+
+```
+
+#### Getting usms list using filter names
+```{r get_usms_list_2, exercise=TRUE}
+get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"), name = c("Sugar", "pe"))
+
+```
+
+
+## Function `get_param_info`
+
+### Aim
+> _**Find on the overall model parameters information a kwown parameter, with a possible search using a partial match string.**_
+
+<!-- FOR DISPLAYING a part of the online help
+FROM Usage to Value -->
+
+```{r, results="asis"}
+lines <- SticsRFiles:::get_from_help(file.path(help_dir, "get_param_info.html"))
+cat( paste( lines , collapse="\n" ) )
+```
+
+### Example
+```{r, echo = TRUE}
+get_param_info("albedo", version = "V9.1")
+```
+
+
+### Use cases examples
+
+#### Finding parameters names containing a keyword
+
+```{r find_param_names_1, exercise=TRUE}
+get_param_info(parameter = "hum", version = "V9.1")
+
+get_param_info(parameter = "prof", version = "V9.1")
+```
+
+#### Finding parameters names containing several keywords
+
+```{r find_param_names_2, exercise=TRUE}
+get_param_info(parameter = c("profsem", "profhum"), version = "V9.1")
+
+```
+<!--
+#### The function `exist_param_xml` may also be used for checking if parameters names exist
+
+```{r exist_param_xml, exercise = TRUE, warning = FALSE}
+exist_param_xml(name = c("profsem", "profhum"), version = "V9.1")
+
+```
+-->
+
+## Function get_param_xml
+
+```{r sols_path, echo=FALSE}
+xml_path <- system.file("extdata/xml/examples/V9.1", package = "SticsRFiles")
+xml_soil <- file.path(workspace_xml,"sols.xml")
+```
+
+### Aim
+> _**Find parameters information using their name or a part of it.
+> For a file or a set of files**_
+
+<!-- FOR DISPLAYING a part of the online help
+FROM Usage to Value -->
+
+
+```{r, results="asis"}
+lines <- SticsRFiles:::get_from_help(file.path(help_dir, "get_param_xml.html"))
+cat( paste( lines , collapse="\n" ) )
+```
+
+### Example
+
+Getting parameter values from a soils parameter file
+```{r, echo = TRUE}
+# File containing soils parameters
+xml_soil
+
+get_param_xml(xml_file = xml_soil, param_name = "albedo")
+```
+
+
+### Use cases examples
+
+#### Getting parameters values for the parameter "argi" for all soils and the "solble" soil
+
+
+```{r get_param_xml_1, exercise=TRUE}
+get_param_xml(xml_file = xml_soil, param_name = "argi")
+
+get_param_xml(xml_file = xml_soil, param_name = "argi", select = "sol", value = "solble")
+```
+#### Getting parameters values for the parameters "argi" and "norg" for all soils and the "solble" soil
+
+```{r get_param_xml_2, exercise=TRUE}
+
+get_param_xml(xml_file = xml_soil, param_name =  c("argi", "norg"))
+
+#get_param_xml(xml_files = xml_soil, param_names =  c("argi", "norg"), select = "sol", value = "solble")
+```
+
+#### Getting soil parameters names and playing with `get_param_xml` using parameters names
+
+```{r get_param_xml_3, exercise=TRUE, warning = FALSE}
+
+get_param_names_xml(xml_file = xml_soil)
+
+get_param_xml(xml_file = xml_soil, param_name = "paramtest", select = "sol", value = "solble")
+```
+
+
+
+## Function set_param_xml
+
+
+### Aim
+> _**Setting parameter value or a vector of**_
+
+
+```{r, results="asis"}
+lines <- SticsRFiles:::get_from_help(file.path(help_dir, "set_param_xml.html"))
+cat( paste( lines , collapse="\n" ) )
+```
+
+### Example
+```{r, echo = FALSE, results='hide'}
+xml_gen_src <- file.path(xml_path,"param_gen.xml")
+xml_gen <- file.path(workspace_xml,"param_gen.xml")
+file.copy(from = xml_gen_src, xml_gen, overwrite = TRUE)
+```
+
+```{r, echo = TRUE}
+# File containing general parameters
+xml_gen
+
+set_param_xml(xml_gen, param_name = "tnitopt", param_value = 29.5, overwrite = TRUE )
+# Controlling the written values
+get_param_xml(xml_gen, param_name = "tnitopt" )
+
+```
+
+
+### Use cases examples
+```{r}
+set_param_xml(xml_soil, param_name = "argi", param_value = 23.1, select = "sol", value = "solble", overwrite = T )
+xml_tec <- file.path(workspace_xml,"Mais_tec.xml")
+jul <- c(178, 185, 193, 198, 200, 204, 207, 211, 214, 218, 221, 232, 239, 249, 257, 264)
+val <- c(20, 24, 29, 29, 28, 31, 21, 21, 23, 18, 22, 16, 16, 30, 29, 20)
+set_param_xml(xml_tec, param_name = c("julapI_or_sum_upvt", "amount"), param_value = list(jul, val), overwrite = T )
+```
+
+#### Setting a simple parameter value
+```{r set_param_xml_1, exercise=TRUE, warning = FALSE, exercise.lines = 10}
+param <- "codeactimulch"
+# Controlling the initial value
+get_param_xml(xml_gen, param_name = param )
+
+set_param_xml(xml_gen, param_name = param, param_value = 2, overwrite = TRUE )
+# Controlling the written value
+get_param_xml(xml_gen, param_name = param )
+```
+
+#### Setting a simple parameter value with selection
+```{r set_param_xml_2, exercise=TRUE, warning = FALSE, exercise.lines = 10}
+param <- "argi"
+# Controlling initial value
+get_param_xml(xml_soil, param_name = param, select = "sol", value = "solble")
+
+# Using a conditional selection
+set_param_xml(xml_soil, param_name = param, param_value = 33, select = "sol",
+              value = "solble", overwrite = T )
+
+# Controlling written values
+get_param_xml(xml_soil, param_name = param, select = "sol", value = "solble")
+```
+
+#### Setting multiple values
+
+```{r set_param_xml_3, exercise=TRUE, warning = FALSE, exercise.lines = 10}
+
+# Controlling initial value
+get_param_xml(xml_tec, param_name = c("julapI_or_sum_upvt", "amount"))
+
+set_param_xml(xml_tec, param_name = c("julapI_or_sum_upvt", "amount"), param_value = list(200:215,20:35), overwrite = T )
+
+# Controlling written values
+get_param_xml(xml_tec, param_name = c("julapI_or_sum_upvt", "amount"))
+```
+
+
+## Function gen_usms_xml2txt
+
+
+### Aim
+> _**Generating one or several usms directories from a javastics workspace**_
+
+
+```{r, results="asis"}
+lines <- SticsRFiles:::get_from_help(file.path(help_dir, "gen_usms_xml2txt.html"))
+cat( paste( lines , collapse="\n" ) )
+```
+
+### Example
+
+```{r, echo = FALSE}
+# Generating once, if all dirs exist
+l <- file.path(workspace_xml, get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"))[[1]])
+all_exists <- all(file.exists(l))
+
+if (!all_exists) {
+  value <- gen_usms_xml2txt(javastics_path = javastics, workspace_path = workspace_xml)
+}
+```
+
+
+```{r, echo = TRUE, eval = FALSE}
+# Workspace used as usms XML files source
+workspace_xml
+
+# Generating all the usms input directories
+value <- gen_usms_xml2txt(javastics_path = javastics, workspace_path = workspace_xml)
+
+value
+## $usms_paths
+##  [1] "SugarCane"            "potato"               "banana"              
+##  [4] "sorghum"              "barley"               "sugarbeet"           
+##  [7] "wheat"                "maize"                "soybean"             
+## [10] "lettuce"              "tomato"               "DurumWheat"          
+## [13] "rapeseed"             "sunflower"            "grass"               
+## [16] "BareSoil"             "demo_Wheat1"          "demo_BareSoil2"      
+## [19] "demo_maize3"          "DurumWheat_4years"    "maize_4years"        
+## [22] "strawberry"           "pea"                  "vine"                
+## [25] "fescue"               "flax"                 "intercrop_pea_barley"
+## [28] "timothy"              "DurumWheat_snow"      "Turmeric"            
+## [31] "cc_BristleOat"        "cc_mustard"           "cc_ItalianRyegrass"  
+## [34] "cc_vetch"             "cc_CrimsonClover"     "proto_rice"          
+## 
+## $files_path
+##  [1] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/climat.txt"     
+##  [2] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/param.sol"      
+##  [3] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficini.txt"     
+##  [4] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficplt1.txt"    
+##  [5] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/fictec1.txt"    
+##  [6] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/station.txt"    
+##  [7] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/new_travail.usm"
+##  [8] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/tempopar.sti"   
+##  [9] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/tempoparv6.sti" 
+## [10] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficplt2.txt"    
+## [11] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/fictec2.txt"    
+## 
+## $copy_status
+##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [31] TRUE TRUE TRUE TRUE TRUE TRUE
+## 
+## $obs_copy_status
+##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
+## [25]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
+
+```
+
+
+### Use cases examples
+```{r, echo = FALSE}
+#value <- gen_usms_xml2txt(javastics_path = javastics, workspace_path = workspace_xml, target_path = workspace_txt)
+```
+
+#### Generating directories for a subset of usms
+```{r , warning = FALSE, echo = TRUE}
+# Workspace used as usms XML files source
+workspace_xml
+
+# Existing usms in the xml workspace directory
+get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"))
+```
+
+```{r gen_usms_1, exercise=TRUE, warning = FALSE}
+value <- gen_usms_xml2txt(javastics_path = javastics, workspace_path = workspace_xml, usms_list = c("wheat", "pea"))
+
+value
+
+```
+
+#### Generating files in a specific directory
+```{r gen_usms_2, exercise=TRUE, warning = FALSE, exercise.lines = 10}
+# Directory where to generate files
+workspace_txt
+
+value <- gen_usms_xml2txt(javastics_path = javastics, 
+                          workspace_path = workspace_xml,
+                          target_path = workspace_txt, 
+                          usms_list = c("wheat", "pea" ))
+value
+
+```
+
+

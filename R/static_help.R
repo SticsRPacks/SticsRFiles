@@ -2,7 +2,7 @@
 #'
 #' @param pkg Package name
 #' @param links_level integer, 0: inside the given package, 1: with base and
-#' recommended packages, 2: other packages specified by lib.loc see \code{\link{tools::findHTMLlinks}}
+#' recommended packages, 2: other packages specified by .libPaths()
 #' @param topic Optional, selecting specific topics with their names vector (functions names)
 #' @param out_dir Optional, where to store html functions help files
 #' @param overwrite Optional, logical TRUE for overwriting hmtl files (default), FALSE otherwise
@@ -36,12 +36,14 @@ static_help = function(pkg,
     topics <- topics[topic_idx]
   }
 
-  files_path <- file.path(out_dir, paste(p, 'html', sep = '.'))
+  files_path <- file.path(out_dir, paste(topics, 'html', sep = '.'))
 
   for (f in files_path) {
 
     if(file.exists(f) && ! overwrite) next
-    p <- gsub(pattern = "\\.html$", x = f, replacement = "")
+    p <- gsub(pattern = "\\.html$", x = basename(f), replacement = "")
+    #cat(sprintf("topic : %s, file: %s\n",p,f))
+
     tools::Rd2HTML(pkgRdDB[[p]],f ,
                    package = pkg, Links = links, no_links = is.null(links))
   }

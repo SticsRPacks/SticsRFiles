@@ -33,10 +33,21 @@ output_path <- params$output_path
 
 ## Introduction
 
-* In this part information are focusing on functionalities related to generation of text input files for the Stics model.
+In this part information are focusing on functionalities related to generation of text input files for the Stics model.
 
-* Generated files will be directly usable for running the model with **SticsOnR** package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR).
+Generated files will be directly usable for running the model with **SticsOnR** package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR).
 
+A tutorial dedicated to this functionnality is available in the package
+
+* First install the `learnr` package
+* Then execute the following command to see available tutorials for the package    
+```{r eval = TRUE}
+learnr::available_tutorials(package = "SticsRFiles")
+```     
+* Then execute the following command to run the tutorial, and look at the section `Function gen_usms_xml2txt`    
+```{r eval = FALSE}
+learnr::run_tutorial(package = "SticsRFiles", name = "use-xml-files")
+```
 
 ## Converting JavaStics workspace files
 For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace. 

@@ -16,7 +16,7 @@ static_help(
 \item{pkg}{Package name}
 
 \item{links_level}{integer, 0: inside the given package, 1: with base and
-recommended packages, 2: other packages specified by lib.loc see \code{\link{tools::findHTMLlinks}}}
+recommended packages, 2: other packages specified by .libPaths()}
 
 \item{topic}{Optional, selecting specific topics with their names vector (functions names)}
 

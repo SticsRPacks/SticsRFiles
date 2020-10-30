@@ -21,6 +21,8 @@ download_usm_xl(
 \item{version_name}{An optional version string (default: last version returned by get_stics_versions_compat())}
 
 \item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
+
+\item{...}{Additional arguments to be passed}
 }
 \value{
 A vector of copied files path.

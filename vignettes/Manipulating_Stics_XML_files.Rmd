@@ -68,6 +68,18 @@ Queries inspecting elements downwards are not available yet; as for example, get
 
 Exploring files content for files sets are also possible, but not replacing parameters values.
 
+A tutorial dedicated to this functionnality is available in the package,
+
+* First install the `learnr` package
+* Then execute the following command to see available tutorials for the package    
+```{r}
+learnr::available_tutorials(package = "SticsRFiles")
+```
+* Then execute the following command to run the tutorial, and look at the section `Function gen_usms_xml2txt`    
+  
+```{r eval = FALSE}
+learnr::run_tutorial(package = "SticsRFiles", name = "use-xml-files")
+```
 
 # Understanding what are parameters in Stics XML files
 
