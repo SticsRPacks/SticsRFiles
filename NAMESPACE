@@ -2,6 +2,7 @@
 
 export(convert_xml2txt)
 export(download_data)
+export(download_usm_csv)
 export(download_usm_xl)
 export(force_param_values)
 export(gen_ini_xml)
