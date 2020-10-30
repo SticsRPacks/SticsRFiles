@@ -25,6 +25,9 @@ params:
 #library(SticsRFiles)
 
 work_dir <- params$work_dir
+
+# Checking OS
+if (Sys.info()['sysname'] == "Windows") work_dir <- shortPathName(work_dir)
 if (!dir.exists(work_dir)) dir.create(work_dir)
 
 
