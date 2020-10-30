@@ -50,7 +50,7 @@ if (!length(grep("JavaStics.exe",list.files(javastics)))) {
 
 workspace_xml <- file.path(work_dir, params$workspace_xml)
 workspace_txt <- file.path(work_dir, params$workspace_txt)
-ex_lines <- params$lines
+#ex_lines <- params$lines
 ```
 
 
@@ -96,6 +96,7 @@ if(params$gen_help) {
 Either all files downloaded files or generated ones while executing this tutorial will be stored under the user home directory (i.e. /home/username for linux or C:\\Users\\username\\Documents).
 
 For the current demo session the full path is: **`r work_dir`**.
+
 
 ## Function get_usms_list
 
