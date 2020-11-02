@@ -17,7 +17,7 @@ params:
   workspace_xml: JavaSTICS-1.41-stics-9.1/example
   workspace_txt: example
   use_default: TRUE
-  work_dir: !r file.path(Sys.getenv("HOME"),"R","SticsRfiles-tuto-xml-files")
+  work_dir: !r file.path(Sys.getenv("HOME"),"R","SticsRfiles-use-xml-files")
   #alt_dir: !r file.path(tempdir(), "get-xml-infos")
 ---
 
