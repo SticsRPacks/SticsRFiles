@@ -43,7 +43,6 @@ Imports:
     tidyr,
     curl,
     tools,
-    learnr,
     formatR
 Suggests:
     SticsOnR,
@@ -51,6 +50,7 @@ Suggests:
     covr,
     testthat,
     rmarkdown,
+    learnr,
     readxl
 Collate: 
     'add_node_to_doc.R'
