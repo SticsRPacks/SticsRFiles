@@ -42,7 +42,9 @@ Imports:
     tibble,
     tidyr,
     curl,
-    tools
+    tools,
+    learnr,
+    formatR
 Suggests:
     SticsOnR,
     knitr,
