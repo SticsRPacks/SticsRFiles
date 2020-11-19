@@ -166,7 +166,7 @@ gen_info
 ```
 
 ## Converting files into one folder (overwriting case) 
-```{r convert_to_one}
+```{r convert_to_one, eval = FALSE}
 # Generating files directly in the workspace or a specific folder (no usm sub-folder) 
 # In this case the model files are overwritten at each gen_usms_xml2txt call !
 # In the workspace

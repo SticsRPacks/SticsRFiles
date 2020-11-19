@@ -61,7 +61,7 @@ workspace_path <- tempdir()
 
 In the following example `/path/to/target/dir` must be replaced with a real path depending on the operating system (i.e. starting with `c:/` for windows for example)
 
-```{r}
+```{r eval=FALSE}
 library(readxl)
 
 # Getting the file in the current directory
@@ -118,18 +118,12 @@ The Excel file which contains parameters values to take into account for Stics i
 The following example contains data extracted from a sheet named `USMs` containing a list of USMS parameters.
 <!-- MONTRER EXEMPLE CONTENU: captures ecran ? -->
 
-```{r, eval = TRUE, echo = FALSE }
+```{r, eval = TRUE, echo = FALSE}
 library(readxl)
 xl_path <- file.path(workspace_path, "inputs_stics_example.xlsx")
 xl_param <- read_excel(xl_path, sheet = "USMs")
-xl_param[is.na(xl_param)] <- ""
 knitr::kable(xl_param)
-
 ```
-
-
-
-
 
 
 
@@ -140,7 +134,7 @@ knitr::kable(xl_param)
 The `gen_usms_xml` function is working on a data.frame object that can be loaded from an Excel file sheet. Here after code shows how to get it from the downloaded example [file](#download-excel-example)
 
 <!-- Only for the show -->
-```{r generate_usms_file}
+```{r generate_usms_file, eval = FALSE}
 
 library(SticsRFiles)
 

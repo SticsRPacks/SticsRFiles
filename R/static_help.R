@@ -28,7 +28,8 @@ static_help = function(pkg,
   pkg_dir <- find.package(pkg)
 
   links <- tools::findHTMLlinks(pkgDir = pkg_dir, level = links_level)
-  pkgRdDB = tools:::fetchRdDB(file.path(pkg_dir, 'help', pkg))
+  pkgRdDB = eval(parse(text = "tools:::fetchRdDB(file.path(pkg_dir, 'help', pkg))"))
+    # tools:::fetchRdDB(file.path(pkg_dir, 'help', pkg))
   force(links); topics = names(pkgRdDB)
 
   if (!base::is.null(topic)){
