@@ -129,6 +129,8 @@ get_file = function(workspace,
 #' @return A named list of `data.frame`s with observations or simulation data. The list elements are named after
 #' the usms names.
 #'
+#' @importFrom rlang .data
+#'
 #' @keywords internal
 #'
 get_file_ <- function(workspace = getwd(),
