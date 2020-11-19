@@ -237,8 +237,6 @@ get_file_ <- function(workspace = getwd(),
     if(length(p_name) > 1){
       out$Dominance = "Principal"
       out$Dominance[out$Plant == p_name[2]] = "Associated"
-    }else{
-      out = out[,- grep("Plant",colnames(out))]
     }
     out
   },dirpath = workspace, filename = file_name, p_name = plant_names, SIMPLIFY = FALSE)
