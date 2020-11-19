@@ -39,13 +39,13 @@ get_file = function(workspace,
 
   type = match.arg(type, c("sim","obs"), several.ok = FALSE)
 
-  if(type == "sim"){
-    file_pattern = "^mod_s"
-  }else{
-    file_pattern = "\\.obs$"
-  }
-
   if(!is.null(usms_filename) && file.exists(normalizePath(usms_filename, mustWork = FALSE))){
+    if(type == "sim"){
+      file_pattern = "^mod_s"
+    }else{
+      file_pattern = "\\.obs$"
+    }
+
     # Try absolute path here (if it is, read the file only once, and pass its content)
     usms_path <- normalizePath(usms_filename, mustWork = FALSE)
 
@@ -96,9 +96,6 @@ get_file = function(workspace,
     }), recursive = FALSE)
   }
 
-  if(type == "sim"){
-    attr(res, "class")= "stics_simulation"
-  }
   res
 }
 

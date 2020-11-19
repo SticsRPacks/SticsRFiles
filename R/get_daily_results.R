@@ -32,6 +32,9 @@ get_daily_results <- function(workspace,
                               usms_filename= NULL,
                               javastics_path = NULL,
                               verbose= TRUE){
-  get_file(workspace,usm_name,var_list,doy_list,dates_list,usms_filename,
-           javastics_path,verbose,"sim")
+  res = get_file(workspace,usm_name,var_list,doy_list,dates_list,usms_filename,
+                 javastics_path,verbose,"sim")
+
+  attr(res, "class")= "cropr_simulation"
+  res
 }

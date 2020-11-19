@@ -27,7 +27,7 @@ The function understand \code{\link[base]{regex}} as input.
 # Find by variable name (fuzzy search):
 SticsRFiles::get_var_info("lai")
 
-# Find by keyword (fuzzy search in variable name and description):
+# Find by keyword (fuzzy search in variable description):
 SticsRFiles::get_var_info(keyword= "lai")
 
 # Find for a particular version:
