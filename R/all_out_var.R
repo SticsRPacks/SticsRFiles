@@ -39,7 +39,8 @@ all_out_var <- function(version = "last"){
 #' for the STICS model with a partial match.
 #'
 #' @param var Character vector with a (partial) STICS output variable name
-#' @param keyword Search by keyword instead of the variable name (search in the description)
+#' @param keyword Search by keyword instead of the variable name
+#' (search in the name and the description fields)
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
 #' to "last", a special code to get the last version.
 #'
@@ -68,7 +69,9 @@ get_var_info <- function(var=NULL,keyword=NULL,version= "last"){
     vars_names_parsed= var_to_col_names(all_vars$name)
     all_vars[grep(var, vars_names_parsed,ignore.case = TRUE),]
   }else if(!is.null(keyword)){
-    all_vars[grep(keyword, all_vars$details,ignore.case = TRUE),]
+    idx <- grepl(keyword, all_vars$definition,ignore.case = TRUE)
+    idx <- idx | grepl(keyword, all_vars$name,ignore.case = TRUE)
+    all_vars[idx,]
   }else{
     all_vars
   }

@@ -9,7 +9,8 @@ get_var_info(var = NULL, keyword = NULL, version = "last")
 \arguments{
 \item{var}{Character vector with a (partial) STICS output variable name}
 
-\item{keyword}{Search by keyword instead of the variable name (search in the description)}
+\item{keyword}{Search by keyword instead of the variable name
+(search in the name and the description fields)}
 
 \item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
 to "last", a special code to get the last version.}
