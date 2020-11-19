@@ -42,8 +42,7 @@ Imports:
     tibble,
     tidyr,
     curl,
-    tools,
-    formatR
+    tools
 Suggests:
     SticsOnR,
     knitr,
@@ -51,7 +50,8 @@ Suggests:
     testthat,
     rmarkdown,
     learnr,
-    readxl
+    readxl,
+    formatR
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
