@@ -30,7 +30,10 @@
 download_data= function(dir = tempdir(), example_dirs = NULL, version_name = NULL){
 
   # setting version value from input for version == "last"
-  if (!base::is.null(version_name) && version_name == "last") version_name <- get_stics_versions_compat()$last_version
+  if (is.null(version_name) || version_name == "last"){
+    version_name <- get_stics_versions_compat()$last_version
+  }
+
 
   # Getting path string(s) from examples data file
   dirs_str <- get_referenced_dirs(dirs = example_dirs, version_name = version_name)
@@ -53,7 +56,8 @@ download_data= function(dir = tempdir(), example_dirs = NULL, version_name = NUL
   # Finally extracting data
   utils::unzip(data_dir_zip, exdir = data_dir, files = arch_files)
   unlink(data_dir_zip)
-  normalizePath(file.path(data_dir,df_name[1,1]), winslash = "/")
+
+  normalizePath(file.path(data_dir,arch_files[1]), winslash = "/")
 }
 
 
