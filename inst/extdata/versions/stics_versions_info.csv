@@ -1,4 +1,4 @@
-versions;csv;obs;sti;txt;xml;xml_tmpl;xl;study_case_1
-V8.5;V8.5;BASE;BASE;V8.5;examples/V8.5;templates/V8.5;BASE;
-V9.0;V9.0;BASE;BASE;V9.0;examples/V9.0;templates/V9.0;BASE;V9.0
-V9.1;V9.1;BASE;BASE;V9.1;examples/V9.1;templates/V9.1;BASE;
+versions;csv;obs;sti;txt;xml;xml_tmpl;xl;study_case_1;study_case_intercrop
+V8.5;V8.5;BASE;BASE;V8.5;examples/V8.5;templates/V8.5;BASE;;BASE
+V9.0;V9.0;BASE;BASE;V9.0;examples/V9.0;templates/V9.0;BASE;V9.0;BASE
+V9.1;V9.1;BASE;BASE;V9.1;examples/V9.1;templates/V9.1;BASE;;BASE
