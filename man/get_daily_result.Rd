@@ -11,7 +11,7 @@ get_daily_result(
   doy_list = NULL,
   dates_list = NULL,
   mixed = NULL,
-  usms_file = "usms.xml",
+  usms_filename = "usms.xml",
   javastics_path = NULL,
   verbose = TRUE
 )
@@ -29,7 +29,7 @@ get_daily_result(
 
 \item{mixed}{\code{TRUE}: intercrop, \code{FALSE}: sole crops (default), \code{NULL}: guess from XML file.}
 
-\item{usms_file}{usms file path (e.g. "usms.xml") if \code{mixed= NULL}.}
+\item{usms_filename}{usms file path (e.g. "usms.xml") if \code{mixed= NULL}.}
 
 \item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace)}
