@@ -5,6 +5,7 @@ output:
     theme: cerulean
     #theme: united
     ace_theme: merbivore
+    anchor_sections: FALSE
 
 # output:
 #   slidy_presentation:
@@ -229,7 +230,7 @@ get_param_xml(xml_file = xml_soil, param_name =  c("argi", "norg"))
 
 ```{r get_param_xml_3, exercise=TRUE, warning = FALSE}
 
-get_param_names_xml(xml_file = xml_soil)
+get_param_xml(xml_file = xml_soil)
 
 get_param_xml(xml_file = xml_soil, param_name = "paramtest", select = "sol", value = "solble")
 ```

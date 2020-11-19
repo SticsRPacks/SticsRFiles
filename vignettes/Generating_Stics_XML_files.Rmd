@@ -1,6 +1,8 @@
 ---
 title: "Generating Stics XML files from tabulated data"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    anchor_sections: FALSE
 vignette: >
   %\VignetteIndexEntry{Generating Stics XML files tabulated data}
   %\VignetteEngine{knitr::rmarkdown}

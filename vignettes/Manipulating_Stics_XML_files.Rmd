@@ -1,6 +1,8 @@
 ---
 title: "Manipulating Stics XML files"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    anchor_sections: FALSE
 vignette: >
   %\VignetteIndexEntry{Manipulating Stics XML files}
   %\VignetteEngine{knitr::rmarkdown}
