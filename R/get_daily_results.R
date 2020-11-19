@@ -29,7 +29,6 @@ get_daily_results <- function(workspace,
                               var_list=NULL,
                               doy_list=NULL,
                               dates_list=NULL,
-                              mixed= NULL,
                               usms_filename= NULL,
                               javastics_path = NULL,
                               verbose= TRUE){

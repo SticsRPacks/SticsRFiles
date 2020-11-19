@@ -1,5 +1,4 @@
-
-#' Read STICS observation or simulation files (\*.obs or mod_s\*)
+#' Read STICS observation or simulation files (.obs or mod_s)
 #'
 #' @description Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
 #' Used by `get_obs()` and `get_daily_results()`. Operate first computation and then call `get_file_()`.
@@ -17,7 +16,7 @@
 #' in the workspace directly
 #' @param plant_names    The plants names associated to the files (optional). If not provided, read `usms.xml`, or use
 #'  default values if not available.
-#'  @param type          The type of file to read, either "obs" or "sim".
+#' @param type          The type of file to read, either "obs" or "sim".
 #'
 #' @details The `.obs` files names should match USMs mames, e.g. for a usm called "banana",
 #' the `.obs` file should be named `banana.obs`. For intercrops, the name should be suffixed by "p" for
@@ -26,7 +25,7 @@
 #' @return A named list of `data.frame`s with observations or simulation data. The list elements are named after
 #' the usms names.
 #'
-#' @keyword internal
+#' @keywords internal
 #'
 get_file = function(workspace,
                     usm_name=NULL,
@@ -46,8 +45,7 @@ get_file = function(workspace,
     file_pattern = "\\.obs$"
   }
 
-  if(length(workspace) > 1 && !is.null(usms_filename) &&
-     file.exists(normalizePath(usms_filename, mustWork = FALSE))){
+  if(!is.null(usms_filename) && file.exists(normalizePath(usms_filename, mustWork = FALSE))){
     # Try absolute path here (if it is, read the file only once, and pass its content)
     usms_path <- normalizePath(usms_filename, mustWork = FALSE)
 
@@ -104,7 +102,7 @@ get_file = function(workspace,
   res
 }
 
-#' Read STICS observation or simulation files (\*.obs or mod_s\*)
+#' Read STICS observation or simulation files (.obs or mod_s)
 #'
 #' @description Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
 #' Used by `get_obs()` and `get_daily_results()`.
@@ -122,7 +120,7 @@ get_file = function(workspace,
 #' in the workspace directly
 #' @param plant_names    The plants names associated to the files (optional). If not provided, read `usms.xml`, or use
 #'  default values if not available.
-#'  @param type          The type of file to read, either "obs" or "sim".
+#' @param type          The type of file to read, either "obs" or "sim".
 #'
 #' @details The `.obs` files names should match USMs mames, e.g. for a usm called "banana",
 #' the `.obs` file should be named `banana.obs`. For intercrops, the name should be suffixed by "p" for
@@ -131,7 +129,7 @@ get_file = function(workspace,
 #' @return A named list of `data.frame`s with observations or simulation data. The list elements are named after
 #' the usms names.
 #'
-#' @keyword internal
+#' @keywords internal
 #'
 get_file_ <- function(workspace = getwd(),
                       usm_name = NULL,

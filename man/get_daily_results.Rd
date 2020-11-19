@@ -10,8 +10,7 @@ get_daily_results(
   var_list = NULL,
   doy_list = NULL,
   dates_list = NULL,
-  mixed = NULL,
-  usms_filename = "usms.xml",
+  usms_filename = NULL,
   javastics_path = NULL,
   verbose = TRUE
 )
@@ -25,9 +24,7 @@ get_daily_results(
 
 \item{doy_list}{vector of cumulative DOYs to filter (optional)}
 
-\item{dates_list}{list of dates to filter (optional)}
-
-\item{mixed}{A booean (recycled), or a list of. \code{TRUE}: intercrop, \code{FALSE}: sole crops (default), \code{NULL}: guess from XML file.}
+\item{dates_list}{list of dates to filter (optional, should be a POSIX date)}
 
 \item{usms_filename}{usms file path (e.g. "usms.xml") if any \code{mixed= NULL}.}
 
@@ -38,15 +35,12 @@ but rather in the JavaStics default workspace)}
 }
 \value{
 A list, where each element is a tibble of simulation results for the given usm. The list is named
-after the usm name.
+after the USM name. Intercrops are returned in a single tibble, and can be filtered
+using either of the "Plant" or "Dominance" columns.
 }
 \description{
 Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
 possible selection on variable names, cumulative DOY, dates list.
-}
-\details{
-The function can guess if the usm(s) is/are mixed or not by reading the XML
-input file. To do so, set the \code{mixed} argument to \code{NULL}.
 }
 \examples{
 \dontrun{
