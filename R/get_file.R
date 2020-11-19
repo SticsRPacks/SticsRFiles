@@ -39,7 +39,8 @@ get_file = function(workspace,
 
   type = match.arg(type, c("sim","obs"), several.ok = FALSE)
 
-  if(!is.null(usms_filename) && file.exists(normalizePath(usms_filename, mustWork = FALSE))){
+  if(!is.null(usms_filename) &&
+     file.exists(normalizePath(usms_filename, mustWork = FALSE))){
     if(type == "sim"){
       file_pattern = "^mod_s"
     }else{
@@ -179,7 +180,7 @@ get_file_ <- function(workspace = getwd(),
   if(is.null(usms_filename) && is.null(file_name) && is.null(plant_names)){
     # Getting obs files list from directory
     file_name <- as.list(list.files(pattern = file_pattern, path = workspace, full.names = FALSE))
-    file_name = parse_mixed_file(file_name, type)
+    file_name = parse_mixed_file(file_names = file_name, type = type)
     usms = names(file_name)
     # No obs file found
     if(!length(file_name)) return()
@@ -234,8 +235,8 @@ get_file_ <- function(workspace = getwd(),
     }
 
     if(length(p_name) > 1){
-      out$dominance = "Principal"
-      out$dominance[out$Plant == p_name[2]] = "Associated"
+      out$Dominance = "Principal"
+      out$Dominance[out$Plant == p_name[2]] = "Associated"
     }else{
       out = out[,- grep("Plant",colnames(out))]
     }
@@ -325,7 +326,7 @@ parse_mixed_file = function(file_names, type = c("sim","obs")){
 
   if(type == "sim"){
     usm_pattern = "^(mod_s)|(\\.sti)$"
-    mixed_pattern = "^(mod_s(a|p))"
+    mixed_pattern = "^(mod_s(a|p))|(\\.sti)$"
     associated_pattern = "^mod_sa"
   }else{
     usm_pattern = "\\.obs$"
