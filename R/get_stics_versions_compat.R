@@ -110,7 +110,7 @@ get_versions_info <- function(version_name = NULL, location = "install") {
   if (!file.exists(ver_file)) return()
 
   ver_info <- utils::read.csv2(file = ver_file, stringsAsFactors = FALSE,
-                               na.strings = "", colClasses = "character")
+                               colClasses = "character")
 
   # Returning the full data.frame for all versions
   if (base::is.null(version_name)) return(ver_info)

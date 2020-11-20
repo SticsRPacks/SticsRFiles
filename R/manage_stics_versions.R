@@ -374,7 +374,8 @@ set_versions_info <- function(version_name,
   version_idx <- versions_info$versions %in% version_name
 
   if (! any(version_idx) ) {
-    versions_info <- rbind(versions_info, version_info)
+    versions_info <- dplyr::bind_rows(versions_info, version_info)
+    versions_info[is.na(versions_info)] <- ""
   } else {
     write_file <- write_file & overwrite
     if (!write_file) {
@@ -444,6 +445,7 @@ get_version_info_tmpl <- function(version_name) {
               xml_tmpl ="",
               xl = "",
               study_case_1 = "",
+              study_case_intercrop = "",
               stringsAsFactors = FALSE
   )
 }
