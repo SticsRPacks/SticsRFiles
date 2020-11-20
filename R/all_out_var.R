@@ -53,7 +53,7 @@ all_out_var <- function(version = "last"){
 #' # Find by variable name (fuzzy search):
 #' SticsRFiles::get_var_info("lai")
 #'
-#' # Find by keyword (fuzzy search in variable description):
+#' # Find by keyword (fuzzy search in variable name and description):
 #' SticsRFiles::get_var_info(keyword= "lai")
 #'
 #' # Find for a particular version:
