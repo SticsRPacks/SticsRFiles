@@ -94,18 +94,20 @@ All these functions are exported for convenience, but `get_param_txt()` is easie
 The `get_climate_txt()` function helps to get the data from the `climat.txt` file, and is used as: 
 
 ```{r eval=FALSE}
-get_climate_txt(dirpath = example_txt_dir)
+get_climate_txt(dirpath = example_txt_dir) 
 ```
 
 ```{r echo=FALSE}
-head(get_climate_txt(dirpath = example_txt_dir))
+library(dplyr)
+get_climate_txt(dirpath = example_txt_dir) %>%
+  rmarkdown::paged_table()
 ```
 
 
 The function adds a `Date` column that is at the standard `POSIXct` format for convenience.
 
 
-## `set_param_txt()`
+## Setting parameter value
 
 `set_param_txt()` is used to set the value of a given parameter in a USM. It has three main arguments, the directory of the USM (`dirpath`, where the text files lives), the parameter name (`param`), and the new value of the parameter. 
 
