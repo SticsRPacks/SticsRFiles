@@ -29,3 +29,4 @@ gen_paramsti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
 }
 
 }
+\keyword{internal}

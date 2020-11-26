@@ -14,7 +14,7 @@
 #' gen_paramsti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 gen_paramsti <- function(workspace,
                          par_names,

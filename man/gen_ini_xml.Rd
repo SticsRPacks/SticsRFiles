@@ -22,7 +22,7 @@ gen_ini_xml(
 \item{crop_tag}{identifier for the crop parameters names related to the main crop, or the associated crop if any
 (example: Crop is used in the param_table example in the details section below)}
 
-\item{stics_version}{the stics version to use (optionnal, default to last). Only used if ini_in_file= NULL, see details.}
+\item{stics_version}{the stics version to use (optional, default to last). Only used if ini_in_file= NULL, see details.}
 }
 \value{
 an invisible xmlDocument object or a list of

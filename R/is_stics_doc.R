@@ -4,7 +4,7 @@
 #'
 #' @param xml_doc An xml document
 #' @param doc_type The type of xml document
-#' @param doc_types The different possible document types (optionnal)
+#' @param doc_types The different possible document types (optional)
 #'
 #' @return A logical value giving if xml_doc is a Stics xmlDoxument object
 #' (TRUE, with document type as attribute "type"), or not (FALSE)

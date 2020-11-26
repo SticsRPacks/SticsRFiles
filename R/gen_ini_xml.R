@@ -5,7 +5,7 @@
 #' @param out_path path to an optional folder where to write the output file(s)
 #' @param crop_tag identifier for the crop parameters names related to the main crop, or the associated crop if any
 #' (example: Crop is used in the param_table example in the details section below)
-#' @param stics_version the stics version to use (optionnal, default to last). Only used if ini_in_file= NULL, see details.
+#' @param stics_version the stics version to use (optional, default to last). Only used if ini_in_file= NULL, see details.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
