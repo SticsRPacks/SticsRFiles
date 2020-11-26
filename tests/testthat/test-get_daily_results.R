@@ -32,7 +32,7 @@ test_that("get simulations with intercrops", {
                c("plant_1","plant_2"))
   expect_equal(unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Dominance),
                c("Principal","Associated"))
-  expect_null(outputs$`SC_Pea_2005-2006_N0`$Plant)
+  expect_equal(unique(outputs$`SC_Pea_2005-2006_N0`$Plant), "plant_1")
   expect_null(outputs$`SC_Pea_2005-2006_N0`$Dominance)
 })
 
@@ -48,7 +48,7 @@ test_that("get simulations with intercrops, giving usms.xml file", {
                c("ble","poi"))
   expect_equal(unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Dominance),
                c("Principal","Associated"))
-  expect_null(outputs$`SC_Pea_2005-2006_N0`$Plant)
+  expect_equal(unique(outputs$`SC_Pea_2005-2006_N0`$Plant), "poi")
   expect_null(outputs$`SC_Pea_2005-2006_N0`$Dominance)
 })
 
