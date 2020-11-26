@@ -16,37 +16,39 @@ get_obs(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
+\item{workspace}{Path of a JavaStics workspace with the \code{mod_s*.sti} files, or a vector of (recursive call).}
 
-\item{usm_name}{Vector of usms to read (optional, used to filter usms)}
+\item{usm_name}{(optional) Vector of usms to read (optional, used to filter usms)}
 
-\item{usms_filename}{Name of the usm file (optional)}
+\item{usms_filename}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
 
-\item{var_list}{vector of output variables names to filter (optional, see \code{get_var_info()} to get the names of the variables)}
+\item{var_list}{(optional) vector of output variables names to filter (see \code{get_var_info()} to get variables names)}
 
-\item{doy_list}{vector of cumulative DOYs to filter (optional)}
+\item{doy_list}{(optional) vector of cumulative DOYs to filter (integers)}
 
-\item{dates_list}{list of dates to filter (optional, should be a POSIX date)}
+\item{dates_list}{(optional) list of dates to filter (POSIX date)}
 
-\item{javastics_path}{JavaStics installation path (optional, needed if the plant files are not in the \code{workspace}
-but rather in the JavaStics default workspace). Only used to get the plants names.}
+\item{javastics_path}{(optional) JavaStics installation path Needed if the plant files are not in the \code{workspace}
+but rather in the JavaStics default workspace. Only used to get the plants names.}
 
 \item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 }
 \value{
-A named list of \code{data.frame}s with observations data. The list elements are named after
-the usms names.
+A list, where each element is a \code{data.frame}s of observations for the given usm. The list is named
+after the USM name. Intercrops are returned in a single \code{data.frame}, and are identified
+using either the "Plant" or "Dominance" columns.
 }
 \description{
 Read STICS observation files from a JavaStics workspace and store data into a list per usm
 }
 \details{
-The \code{.obs} files names should match USMs mames, e.g. for a usm called "banana",
+The \code{.obs} files names must match USMs mames, \emph{e.g.} for a usm called "banana",
 the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name should be suffixed by "p" for
 the principal and "a" for the associated plant.
 If \code{usm_name} is not specified (or equal to \code{NULL}), the
-function reads the observation files from all usms listed in \code{usms_filename} and present in the \code{workspace} folder(s).
-Or if \code{usms_filename} is not specified, all the .obs files are loaded from the \code{workspace} folder(s).
+function reads the files from all usms in the \code{workspace}(s).
+If \code{usms_filename} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+intercrops).
 }
 \examples{
 \dontrun{
