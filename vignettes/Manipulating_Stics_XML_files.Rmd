@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 params:
-  version:"V9.1"
+  version: !r SticsRFiles:::get_stics_versions_compat()$last_version
 ---
 
 
@@ -16,7 +16,8 @@ params:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  tidy=TRUE
+  tidy=TRUE,
+  cache = TRUE
 )
 
 ```
@@ -27,7 +28,8 @@ library(SticsRFiles)
 ```
 
 ```{r echo=FALSE}
-version_name = get_stics_versions_compat()$last_version
+version_name = params$version
+cat(version_name)
 ```
 
 
@@ -101,112 +103,47 @@ As we can see in the above XML file extract from a general parameter file:
 This kind of definition is common for all files types and the parameter name is stored in the `nom` attribute of a `param` XML node. So the first parameter name in the example is `beta` and its value is `1.40000` (inside `param` tags).
 
 * Option parameters (with or without attached parameters, eventually with sub-option)    
-The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example.
+The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example (*choix="2"*).
 
-
-```xml
-<formalisme nom="Water absorption and nitrogen content of the plant">
-<param format="real" max="2.0" min="1.0" nom="beta">1.40000</param>
-<param format="real" max="1.0" min="0.2" nom="lvopt">0.50000</param>
-<param format="real" max="0.07" min="0.0050" nom="rayon">0.02000</param>
-<param format="real" max="0.1" min="0.01" nom="difN">0.04500</param>
-<param format="real" max="3.0" min="0.0" nom="concrr">0.02000</param>
-<param format="real" max="30.0" min="5.0" nom="plNmin">10.00000</param>
-<param format="real" max="50.0" min="0.0" nom="irrlev">20.00000</param>
-<param format="real" max="50.0" min="0.0" nom="QNpltminINN">0.00000</param>
-<option choix="2" nom="Nitrogen fixation by legumes" nomParam="codesymbiose">
-<choix code="1" nom="critical nitrogen"/>
-<choix code="2" nom="nodule activity">
-<option choix="2" nom="mineral nitrogen inhibition" nomParam="codefxn">
-<choix code="1" nom="no effect"/>
-<choix code="2" nom="nitrogen amount"/>
-<choix code="3" nom="nitrogen concentration"/>
-</option>
-</choix>
-</option>
-</formalisme>
+```{r , eval = TRUE, echo = FALSE, class.output="xml"}
+par_xml <- file.path(get_examples_path("xml"),"param_gen.xml")
+par <- readLines(par_xml)
+idx_water <- grep(pattern = "formalisme", par)[9:10]
+cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
 ```
+
+
+
 
 * Parameters with several values (for soil layers, technical operations,...)     
 Several values may be defined for example relatively to soil parameters (different layers) or for crop management operations (with time repetitions). 
 
 * Example from soil files     
-In the above file extract for soil parameters, each set of parameters is repeated for each soil layer (up to 5). The parameters names are defined in a `nom` attribute for each `colonne` XML tag.    
+In the above file extract for soil parameters, each set of parameters (included in `tableau` nodes) is repeated for each soil layer (layers names are set in the `nom` attributes from *layer 1* to *layer 5*). The parameters names are defined in a `nom` attribute in each `colonne` XML tag.    
 
-```xml
-
-<sol nom="solcanne">
-
-...
-
-<tableau nb_colonnes="8" nom="layer 1">
-<colonne nom="epc">20.00</colonne>
-<colonne nom="HCCF">46.80</colonne>
-<colonne nom="HMINF">26.20</colonne>
-<colonne nom="DAF">1.08</colonne>
-<colonne nom="cailloux">0.00</colonne>
-<colonne nom="typecailloux">1</colonne>
-<colonne nom="infil">50.00</colonne>
-<colonne nom="epd">10</colonne>
-</tableau>
-
-...
-
-<tableau nb_colonnes="8" nom="layer 5">
-<colonne nom="epc">20.00</colonne>
-<colonne nom="HCCF">50.10</colonne>
-<colonne nom="HMINF">25.50</colonne>
-<colonne nom="DAF">0.99</colonne>
-<colonne nom="cailloux">0.00</colonne>
-<colonne nom="typecailloux">1</colonne>
-<colonne nom="infil">50.00</colonne>
-<colonne nom="epd">10</colonne>
-</tableau>
-</sol>
-
-...
-
+```{r , eval = TRUE, echo = FALSE, class.output="xml"}
+sol_xml <- file.path(get_examples_path("xml"),"sols.xml")
+sol <- readLines(sol_xml)
+lines_sol <- c(sol[3],"...", sol[70:79], "...", sol[110:119], "...")
+cat(paste(lines_sol, collapse = "\n"))
 ```
+
+
+
 
 * Example from tec files    
-In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number). The parameters names are defined in a `nom` attribute for each `colonne` XML tag, inside an `intervention` node.
+In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number) corresponding to an `intervention` node . Inside each `intervention` node, parameters names are defined in a `nom` attribute for each `colonne` XML tag.
 
-```xml
-<formalisme nom="supply of organic residus">
-<ta nb_interventions="5" nom="interventions">
-<ta_entete nb_colonnes="7">
-<colonne nom="julres"/>
-<colonne nom="coderes"/>
-<colonne nom="qres"/>
-<colonne nom="Crespc"/>
-<colonne nom="CsurNres"/>
-<colonne nom="Nminres"/>
-<colonne nom="eaures"/>
-</ta_entete>
-<intervention nb_colonnes="7">
-<colonne nom="julres">112</colonne>
-<colonne nom="coderes">1</colonne>
-<colonne nom="qres">1.00</colonne>
-<colonne nom="Crespc">42.00</colonne>
-<colonne nom="CsurNres">60.00</colonne>
-<colonne nom="Nminres">0.00</colonne>
-<colonne nom="eaures">0.00</colonne>
-</intervention>
 
-...
+```{r , eval = TRUE, echo = FALSE, class.output="xml"}
+tec_xml <- file.path(get_examples_path("xml"),"file_tec.xml")
+tec <- readLines(tec_xml)[3:22]
+tec <- c(tec,"...",tec[12:20],"...")
+tec[23] <- gsub(pattern = "112",replacement = "220",tec[23])
 
-<intervention nb_colonnes="7">
-<colonne nom="julres">220</colonne>
-<colonne nom="coderes">2</colonne>
-<colonne nom="qres">1.00</colonne>
-<colonne nom="Crespc">42.00</colonne>
-<colonne nom="CsurNres">60.00</colonne>
-<colonne nom="Nminres">0.00</colonne>
-<colonne nom="eaures">0.00</colonne>
-</intervention>
-</ta>
-</formalisme>
+cat(paste(tec, collapse = "\n"))
 ```
+
 
 ## Functions for XML files manipulations
 Rules have been defined to easily search and extract information from XML files in order to simplify the way of using functions dedicated to XML files manipulations.
@@ -229,7 +166,7 @@ xml_dir <- get_examples_path( file_type = "xml", version_name = version_name)
 ```
 
 ```{r, eval=FALSE}
-xml_dir <- get_examples_path( file_type = "xml", version_name = "V9.1")
+xml_dir <- get_examples_path( file_type = "xml", version_name = version_name)
 
 # For linux 
 #> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1"
@@ -335,7 +272,7 @@ head(param_names)
 
 ```
 
-The full table content is presented above as a paged table.
+The full parameters data.frame content is presented in the above paged table.
 
 
 ```{r echo=FALSE}
@@ -366,9 +303,13 @@ get_param_info( parameter = "hum")
 
 param_names <- get_param_info(parameter = c("al","hum"))
 
+```
+
+The found parameters data.frame content is presented in the above paged table.
+
+```{r echo=FALSE}
 # Displaying the returned data as a paged table
 rmarkdown::paged_table(param_names)
-
 ```
 
 
@@ -388,6 +329,11 @@ head(param_formalisms)
 
 ```
 
+The found parameters data.frame content is presented in the above paged table.
+```{r echo=FALSE}
+# Displaying the returned data as a paged table
+rmarkdown::paged_table(param_names)
+```
 
 ### Finding parameters using partial match on formalism and parameter names
 
@@ -400,10 +346,15 @@ get_param_info(formalism = "yield", parameter = "grain")
 
 param_formalisms <- get_param_info(formalism = "yield", parameter = c("inflo","lai"))
 
+
+```
+The found parameters data.frame content is presented in the above paged table.
+
+```{r, warning=FALSE, echo = FALSE}
+
 rmarkdown::paged_table(param_formalisms)
 
 ```
-
 
 
 ## Searching parameters using keywords
@@ -418,12 +369,16 @@ get_param_info(keyword = "plant")
 
 param_names <- get_param_info(keyword = c("plant","leave"))
 
+
+```
+
+The found parameters data.frame content is presented in the above paged table.
+
+```{r, warning=FALSE, echo = FALSE}
 # Displaying the returned data as a paged table
 rmarkdown::paged_table(param_names)
 
 ```
-
-
 
 
 # Getting parameters values from XML files
