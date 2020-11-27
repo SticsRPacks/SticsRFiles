@@ -61,7 +61,7 @@ read_params_table <- function(file_path, sheet_name = NULL) {
   # Casting logical columns to character type
   out_table %>%
     tibble::as_tibble() %>%
-    mutate_if(is.logical, as.character) -> out_table
+    dplyr::mutate_if(is.logical, as.character) -> out_table
 
   # Replacing NA with empty string
   out_table[is.na(out_table)] <- ""
