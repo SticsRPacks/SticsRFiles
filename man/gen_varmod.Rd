@@ -18,13 +18,14 @@ gen_varmod(
 
 \item{var_names}{vector of variables names (see details)}
 
-\item{append}{Boolean. Append to existing file ?}
+\item{append}{Boolean (default: FALSE). Append to existing file ?}
 
 \item{file_name}{file name to generate (default value: "var.mod")}
 
 \item{version}{The version of the STICS model used (used to check variable names)}
 
-\item{force}{Force the variable writing even if the variable is not a STICS variable.}
+\item{force}{Force variables writing even if they are not a
+STICS variable (default: FALSE).}
 }
 \value{
 Nothing. Writes to a file.

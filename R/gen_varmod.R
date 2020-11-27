@@ -2,10 +2,11 @@
 #' @description Generating a daily variable list file from variables names
 #' @param workspace Stics or JavaStics workspace path
 #' @param var_names vector of variables names (see details)
-#' @param append    Boolean. Append to existing file ?
+#' @param append    Boolean (default: FALSE). Append to existing file ?
 #' @param file_name file name to generate (default value: "var.mod")
 #' @param version   The version of the STICS model used (used to check variable names)
-#' @param force     Force the variable writing even if the variable is not a STICS variable.
+#' @param force     Force variables writing even if they are not a
+#' STICS variable (default: FALSE).
 #'
 #' @details Variable names can be found using `get_var_info()`. They are
 #' checked before writting. If any variable names does not exist,
@@ -25,12 +26,23 @@
 #'
 #' @export
 #'
-gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod", version= "last", force= FALSE){
+gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod",
+                       version= "last", force= FALSE){
   # Checking if workspace exists
   if(!dir.exists(workspace)){
     stop(paste(workspace,": directory does not exist !"))
   }
+
   file_path <- file.path(workspace, file_name)
+
+  # Checking if file exists in append use case
+  if (append && isFALSE(file.exists(file_path))) {
+    msg <- ": file does not exist, remove append argument or set it to FALSE) !"
+    stop(paste(file_path, msg))
+  }
+
+  # Just in case: unique variable names list
+  var_names <- unique(var_names)
 
   # Check if the variable exist:
   var_exist= is_stics_var(var_names,version)
