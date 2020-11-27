@@ -16,35 +16,41 @@ get_daily_results(
 )
 }
 \arguments{
-\item{workspace}{Stics or JavaStics workspace path containing the \code{mod_s*.sti} files (see details)}
+\item{workspace}{Path of a JavaStics workspace with the \code{mod_s*.sti} files, or a vector of (recursive call).}
 
-\item{usm_name}{usm name(s) to filter}
+\item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
-\item{var_list}{vector of output variables names to filter (optional, see \code{get_var_info()} to get the names of the variables)}
+\item{var_list}{(optional) vector of output variables names to filter (see \code{get_var_info()} to get variables names)}
 
-\item{doy_list}{vector of cumulative DOYs to filter (optional)}
+\item{doy_list}{(optional) vector of cumulative DOYs to filter (integers)}
 
-\item{dates_list}{list of dates to filter (optional, should be a POSIX date)}
+\item{dates_list}{(optional) list of dates to filter (POSIX date)}
 
-\item{usms_filename}{usms file path (e.g. "usms.xml") if any \code{mixed= NULL}.}
+\item{usms_filename}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
 
-\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
-but rather in the JavaStics default workspace)}
+\item{javastics_path}{(optional) JavaStics installation path Needed if the plant files are not in the \code{workspace}
+but rather in the JavaStics default workspace. Only used to get the plants names.}
 
-\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
+\item{verbose}{(optional) Logical value, \code{TRUE} to display infos on error, \code{FALSE} otherwise (default)}
 }
 \value{
-A list, where each element is a tibble of simulation results for the given usm. The list is named
-after the USM name. Intercrops are returned in a single tibble, and can be filtered
-using either of the "Plant" or "Dominance" columns.
+A list, where each element is a \code{data.frame}s of simulation results for the given usm. The list is named
+after the USM name. Intercrops are returned in a single \code{data.frame}, and are identified
+using either the "Plant" or "Dominance" columns.
 }
 \description{
 Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
-possible selection on variable names, cumulative DOY, dates list.
+possible selection on variable names, cumulative DOY and dates
+}
+\details{
+If \code{usm_name} is not specified (or equal to \code{NULL}), the
+function reads the files from all usms in the \code{workspace}(s).
+If \code{usms_filename} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+intercrops).
 }
 \examples{
 \dontrun{
-path <- get_examples_path( file_type = "sti")
+path <- get_examples_path(file_type = "sti")
 get_daily_results(path,"banana")
 }
 }

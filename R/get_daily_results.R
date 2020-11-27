@@ -1,25 +1,30 @@
 #' Load and format Stics daily output file(s)
 #'
 #' @description Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
-#'  possible selection on variable names, cumulative DOY, dates list.
+#'  possible selection on variable names, cumulative DOY and dates
 #'
-#' @param workspace  Stics or JavaStics workspace path containing the `mod_s*.sti` files (see details)
-#' @param usm_name   usm name(s) to filter
-#' @param usms_filename  usms file path (e.g. "usms.xml") if any `mixed= NULL`.
-#' @param var_list   vector of output variables names to filter (optional, see `get_var_info()` to get the names of the variables)
-#' @param doy_list   vector of cumulative DOYs to filter (optional)
-#' @param dates_list list of dates to filter (optional, should be a POSIX date)
-#' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
-#' but rather in the JavaStics default workspace)
-#' @param verbose  Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
+#' @param workspace Path of a JavaStics workspace with the `mod_s*.sti` files, or a vector of (recursive call).
+#' @param usm_name      Vector of usms to read (optional, used to filter usms)
+#' @param usms_filename  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
+#' @param var_list   (optional) vector of output variables names to filter (see `get_var_info()` to get variables names)
+#' @param doy_list   (optional) vector of cumulative DOYs to filter (integers)
+#' @param dates_list (optional) list of dates to filter (POSIX date)
+#' @param javastics_path (optional) JavaStics installation path Needed if the plant files are not in the `workspace`
+#' but rather in the JavaStics default workspace. Only used to get the plants names.
+#' @param verbose    (optional) Logical value, `TRUE` to display infos on error, `FALSE` otherwise (default)
 #'
-#' @return A list, where each element is a tibble of simulation results for the given usm. The list is named
-#'  after the USM name. Intercrops are returned in a single tibble, and can be filtered
-#'  using either of the "Plant" or "Dominance" columns.
+#' @details If `usm_name` is not specified (or equal to `NULL`), the
+#' function reads the files from all usms in the `workspace`(s).
+#' If `usms_filename` is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+#' intercrops).
+#'
+#' @return A list, where each element is a `data.frame`s of simulation results for the given usm. The list is named
+#'  after the USM name. Intercrops are returned in a single `data.frame`, and are identified
+#'  using either the "Plant" or "Dominance" columns.
 #'
 #' @examples
 #' \dontrun{
-#' path <- get_examples_path( file_type = "sti")
+#' path <- get_examples_path(file_type = "sti")
 #' get_daily_results(path,"banana")
 #' }
 #' @export
