@@ -3,7 +3,7 @@
 #' @param file_path Excel or csv file path
 #' @param sheet_name Name of an Excel sheet (useless for csv files)
 #' @param num_na Replacement value for numerical NA values
-#' @param str_na Replacement value for character NA values
+#' @param char_na Replacement value for character NA values
 #'
 #' @details After data are loaded, numerical and string NA values are
 #' replaced repectively with num_na or str_na
@@ -14,7 +14,7 @@
 #' @examples
 #'
 #' usm_xl_file <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx")
-#' xl_param <- read_excel(usm_xl_file, sheet = "USMs")
+#' xl_param <- read_params_table(usm_xl_file, sheet = "USMs")
 #'
 #' usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv")
 #' read_params_table(file_path = usm_csv_file)
@@ -61,7 +61,7 @@ read_params_table <- function(file_path, sheet_name = NULL,
                                          stringsAsFactors = FALSE)
          },
          {
-           out_table <- readxl::read_excel(usm_xl_file, sheet = sheet_name)
+           out_table <- readxl::read_excel(file_path, sheet = sheet_name)
          }
   )
 
