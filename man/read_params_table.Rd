@@ -4,18 +4,26 @@
 \alias{read_params_table}
 \title{Getting parameters data from tables files (Excel sheet, csv)}
 \usage{
-read_params_table(file_path, sheet_name = NULL)
+read_params_table(file_path, sheet_name = NULL, num_na = 999, char_na = "")
 }
 \arguments{
 \item{file_path}{Excel or csv file path}
 
 \item{sheet_name}{Name of an Excel sheet (useless for csv files)}
+
+\item{num_na}{Replacement value for numerical NA values}
+
+\item{str_na}{Replacement value for character NA values}
 }
 \value{
 A tibble of parameters
 }
 \description{
 Getting parameters data from tables files (Excel sheet, csv)
+}
+\details{
+After data are loaded, numerical and string NA values are
+replaced repectively with num_na or str_na
 }
 \examples{
 
