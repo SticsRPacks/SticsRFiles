@@ -1,10 +1,8 @@
 ---
 title: "Generating Stics XML files from tabulated data"
-output:
-  rmarkdown::html_vignette:
-    anchor_sections: FALSE
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Generating Stics XML files tabulated data}
+  %\VignetteIndexEntry{Generating Stics XML files from tabulated data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,51 +26,45 @@ workspace_path <- tempdir()
 
 # Introduction
 
-* In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated files. As Excel or CSV files.
+* In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.
 
-* The functions operate on data loaded as data.frames from Excel sheets
+* The functions operate on data loaded as data.frames from Excel sheets or CSV files
 
-* Specialized functions for producing XML files are taking into account: initialization files, stations files, crop management files, usms and sols files. General parameters files generation are not available, but will be eventually included in future developments.
+* Specialized functions for producing XML files are taking into account: **initialization files**, **stations files**, **crop management files**, **usms file** and **soils files**. General parameters files generation are not available, but will be eventually included in future developments.
 
-* Observations data files generation have been included even if they are not in XML format. 
+* Observations data files generation have been included even if they are not in XML format.
 
-* The generation of wheather files files are not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
-
-
-
-<!-- revoir, ou faire tableau avec type fichier et nom fonction -->
-
-# Package functions
+* The generation of wheather files files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
 
 
-  * Generate xml files using tables of parameters     
-    * gen_ini_xml
-    * gen_sta_xml
-    * gen_tec_xml
-    * gen_usms_xml
-    * gen_sols_xml
+# Package functions to be used {#pkg-funs}
 
-      
-<!--   * Used for manipulation of data from tables
-    * get_params_dict -->
+There is not at the moment an integrated function which is able to produce all needed parameters files. Individual functions are dedicated to each parameter file kind and may be called individually or gathered in a single script for doing all tasks at once. Use examples are given in next parts below.
+
+* gen_usms_xml: for generating a `usms.xml` file
+* gen_sols_xml: for generating a `sols.xml` file
+* gen_ini_xml: for generating simulations initialization files (`*_ini.xml`)
+* gen_tec_xml: for generating crop management files (`*_ini.xml`)
+* gen_sta_xml: for generating weather stations files (`*_sta.xml`)
+
+
+
 
 
 # Getting a table file example {#download-excel-example}
 
-## Getting inputs `Excel` example file from the `SticsRFiles` package
+## Getting inputs `Excel` example file from the `SticsRFiles` package {#get-xl}
 
 In the following example `/path/to/target/dir` must be replaced with a real path depending on the operating system (i.e. starting with `c:/` for windows for example)
 
 ```{r eval=FALSE}
-library(readxl)
-
 # Getting the file in the current directory
-download_usm_xl()
+usm_xl_file <- download_usm_xl()
 
 # Getting the file in a specic directory
 xl_dir <- "/path/to/xl/dir" # or something like C:/path/to/xl/dir" for Windows  
 
-download_usm_xl(dest_dir = xl_dir)
+usm_xl_file <- download_usm_xl(dest_dir = xl_dir)
 
 #> [1] "inputs_stics_example.xlsx  has been copied in directory  
 #> "/path/to/xl/dir
@@ -80,98 +72,171 @@ download_usm_xl(dest_dir = xl_dir)
 ```
 
 ```{r, eval=TRUE, echo = FALSE, results='hide'}
-#workspace_path
-download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = workspace_path)
+usm_xl_file <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = workspace_path)
 ```
 
-!!!!!!!!!!!!!!!!!! VOIR pour exemple CSV ?????????????? !!!!!!
 
 
 
-## File content description
-!!!!!!!!!!!!!!!!!!!!!!! A REVOIR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-### Excel sheets
+## Getting an USMs inputs `CSV` example file from the `SticsRFiles` package {#get-csv}
 
-* names
-Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters they contain.
+```{r eval=FALSE}
+# Getting the file in the current directory
+usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv")
 
-* column names
-identifiers or files names (or prefix) : 
+# Getting the file in a specific directory
+csv_dir  <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows  
 
+usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv", dest_dir = csv_dir )
 
-A REVOIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-<!-- sheets, naming conventions,... -->
-Files names or usms/sols names in Excel sheet
-  * key words for detecting names or file names column: usm_, tec_, ini_, soil_, sta_
+#> [1] inputs_stics_example_USMs.csv  has been copied in directory    
+#> "/path/to/csv/dir
+```
 
-  * files names : may be either full files names or only file names without any suffix like _tec.xml, _ini.xml or _sta.xml 
-
-### Consistency data checks in Excel sheets    
-For the moment *no consistency checks* functionnalities have been included in the package. 
-So, one must take care of links between xml files names for example files names defined for usms related to names declared in `Tec`, `Station`, and so on. 
+```{r, eval=TRUE, echo = FALSE, results='hide'}
+usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv", dest_dir = workspace_path)
+```
 
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-### Excel sheet example
+
+
+# Description of tables expected content and use
+
+As told in the previous section, parameters data may be stored either in Excel files containing several sheets or in several equivalent individual CSV files.
+
+Sheets content and CSV files content is the same, only their use is different. But, CSV files are easily traced under verion control systems and they also can be generated programmatically with the help of functions dedicated for example to generating crop management parameters like irrigation, fertilization (interventions and doses calculations).
+
+
+## Important information
+
+The USMs data which are necessary for generating the `usms.xml` must be all provided either through an Excel sheet or a CSV file; as shown in the [USMs sheet example](#usms-table-example).
+
+Other data stored in Excel or CSV files must be adapted to the use cases here after:
+
+* For generating new files, containing parameters with differents values for each USM, tables **must contain values for all the files parameters**.
+
+* For generating files with a common set of parameter values and only a part of them must be overloaded with values coming from parameters tables, one **must give an existing** file as a template for files generation to functions `gen_*_xml` (listed [here](#pkg-funs)).
+
+
+## Specificities of Excel sheets
+
+Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters set they contain.
+
+In the example, usefull sheets for generating XML parameters files are named: **USMs, Ini, Soils, Tec, Station**
+
+
+
+
+
+
+## Common tables specifications
+
+The **first column** is used for storing identifiers or files names (or prefix) and the USMs table contains identifiers of the other linked tables in columns names **finit, nomsol, fstation, ftec_1, ftec_2** with respect to initialization files, soil name, station files and crop management files (for main crops and optionally associated crops).
+
+The **first column names** of data tables are automatically detected and must contain keywords prefix to do so as listed: **usm_, ini_, soil_, sta_, tec_**
+
+These first columns may contain either **names identifiers or files names** according to data type:
+
+* USMs or soil data: usm name or soil name
+* Initialization, station or crop management data: files names either with or without suffix and XML extension
+    (**\_ini.xml, \_tec.xml, or \_sta.xml**)
+
+Other columns of tables are named with **parameters names** according to the fololowing rules:
+
+* Scalar parameters    
+used parameter names must match the exact parameter names (checking it syntax with the help of the `get_param_info` function)
+* Vector parameters    
+used parameter names must also match real parameter names with adding a suffix indicating their index; for example jultrav_1, jultrav_2, and so on…
+* Exceptions    
+in some cases used parameters names in tables may be different from real parameter names
+
+Here is the actual **correspendance table** of `keywords` to be used in parameters tables in replacement of real names:
+
+```{r echo=FALSE, eval=TRUE, fig.align='center'}
+l <- SticsRFiles:::get_params_dict()
+df <- data.frame(keyword=names(l), realname=unlist(l, use.names = FALSE),
+                 stringsAsFactors = FALSE)
+rmarkdown::paged_table(df)
+```
+
+
+As an example, looking in the Tec sheet of the previously downloaded Excel file, irrigation parameters for setting days and amount of water supplied, are respectively named julapI_1, julapI_2,… and doseI_1, doseI_2,… instead of using **absolute_value/%** and **amount**.
+
+
+
+## Data consistency checks in tables
+
+For the moment, *no consistency checks* (between Excel sheets or CSV equivalents files) functionnalities have been included in the package in order to prevent missing generated files or misspelled file names or identifiers.
+
+So, one must take care of **links between xml files names** for example files names defined for usms related to names declared for example in Excel sheets `Tec`, `Station`, and so on.
+
+In future developments, checks will be included to run be run prior to files generations, for preventing errors.
+
+  
+## USMs table example {#usms-table-example}
 
 The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).
 
-The following example contains data extracted from a sheet named `USMs` containing a list of USMS parameters.
-<!-- MONTRER EXEMPLE CONTENU: captures ecran ? -->
+The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file. 
 
+  
 ```{r, eval = TRUE, echo = FALSE}
 library(readxl)
-xl_path <- file.path(workspace_path, "inputs_stics_example.xlsx")
-xl_param <- read_excel(xl_path, sheet = "USMs")
+xl_param <- read_params_table(usm_xl_file, sheet = "USMs")
 knitr::kable(xl_param)
+```
+  
+
+# Generating the `usms` XML file (*usms.xml*)
+
+The gen_usms_xml function is working on a data.frame object that can be loaded either from an Excel file sheet or from a csv file. Here after code shows how to get data from the downloaded examples [Excel](#get-xl) and [CSV](#get-csv) files.
+
+## Getting data
+
+
+<!-- Only for the show -->
+```{r read_xl_file_usms, eval = FALSE}
+# Reading the Excel file
+usms_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
+# Or 
+# Reading the CSV file
+usms_param <- read_params_table(usm_csv_file)
 ```
 
 
-
-# Example 1: generating the `usms` XML file (*usms.xml*)
-
-## Script content
-
-The `gen_usms_xml` function is working on a data.frame object that can be loaded from an Excel file sheet. Here after code shows how to get it from the downloaded example [file](#download-excel-example)
-
-<!-- Only for the show -->
-```{r generate_usms_file, eval = FALSE}
-
-library(SticsRFiles)
-
-# Generate an usms.xml file
-
-out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
-
-# Using an Excel example file (from the package)
-xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
+<!-- active chunk to be run -->
+```{r eval_read_xl_file_usms, eval = TRUE, echo = FALSE}
+library(readxl)
 
 # Reading the Excel file
-xl_param <- read_excel(xl_path, sheet = "USMs")
+xl_param <- read_params_table(usm_xl_file,sheet_name = "USMs")
+
+# xl_param <- read_excel(usm_xl_file,sheet = "USMs",col_types = c(rep("guess",13),rep("text", 4) ), na="NA")
+
+xl_param <- read_params_table(usm_xl_file,sheet_name = "USMs")
+
+#xl_param[is.na(xl_param)] <- ""
+
+rmarkdown::paged_table(xl_param)
+```
+  
+## Generating the file  
+  
+
+<!-- Only for the show -->
+```{r gen_usms_file, eval = FALSE}
+
+# Output file path
+out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new usms.xml file, for all xl_param lines
-gen_usms_xml(usms_param = xl_param, usms_out_file = out_file)
+gen_usms_xml(usms_out_file = out_file, usms_param = usms_param)
 ```
 
 <!-- active chunk to be run -->
-```{r eval_generate_usms_file, eval = TRUE, echo = FALSE}
-# Generate an usms.xml file
-
-library(readxl)
-library(SticsRFiles)
-
+```{r eval_gen_usms_file, eval = TRUE, echo = FALSE}
 out_file <- file.path(workspace_path,"usms.xml")
-
-#print(out_file)
-
-xl_dir <- workspace_path
-
-# Using an Excel example file (from the package)
-xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
-
-# Reading the Excel file
-xl_param <- read_excel(xl_path,sheet = "USMs")
 
 # Generating a new usms.xml file, for all xl_param lines
 gen_usms_xml(usms_out_file = out_file, usms_param = xl_param)
@@ -179,323 +244,200 @@ gen_usms_xml(usms_out_file = out_file, usms_param = xl_param)
 
 ## `usms.xml` file content
 
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<usms>
-  <usm nom="USM_2017_T1_CI">
-     <datedebut>199</datedebut>
-     <datefin>263</datefin>
-     <finit>USM_2017_T1_ini.xml</finit>
-     <nomsol>USM_T1</nomsol>
-     <fstation>climatex_sta.xml</fstation>
-     <fclim1>climatex.2017</fclim1>
-     <fclim2>climatex.2017</fclim2>
-     <culturean>1</culturean>
-     <nbplantes>1</nbplantes>
-     <codesimul>0</codesimul>
-     <plante dominance="1">
-       <fplt>rapeseed_plt.xml</fplt>
-       <ftec>USM_2017_T1_CI_tec.xml</ftec>
-       <flai>null</flai>
-     </plante>
-     <plante dominance="2">
-       <fplt>null</fplt>
-       <ftec>null</ftec>
-       <flai>null</flai>
-     </plante>
-  </usm>
+Example of the first `usm` parameters:
 
-...
-
-  <usm nom="FRA_ARB_13_SEC_220-0-0_37K_ARB13_C">
-    <datedebut>264</datedebut>
-    <datefin>570</datefin>
-    <finit>Vill11_ini.xml</finit>
-    <nomsol>LF1</nomsol>
-    <fstation>climatex_sta.xml</fstation>
-    <fclim1>climatex.2017</fclim1>
-    <fclim2>climatex.2018</fclim2>
-    <culturean>2</culturean>
-    <nbplantes>1</nbplantes>
-    <codesimul>0</codesimul>
-    <plante dominance="1">
-      <fplt>proto_potato_plt.xml</fplt>
-      <ftec>FRA_ARB_13_SEC_220-0-0_37K_ARB13_tec.xml</ftec>
-      <flai>null</flai>
-    </plante>
-    <plante dominance="2">
-      <fplt>null</fplt>
-      <ftec>null</ftec>
-      <flai>null</flai>
-    </plante>
-  </usm>
-</usms>
-
+```{r show_usms_file, eval = TRUE, echo = FALSE, class.output="xml"}
+l <- readLines(con = out_file)
+cat(paste(c(l[1:24],"...",l[length(l)-1]), collapse = "\n"))
 ```
 
-# Example 2: generating the `sols` XML file (*sols.xml*)
 
-## Script content
+# Generating the `sols` XML file (*sols.xml*)
 
-As for `gen_usms_xml`, `gen_sols_xml` function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the `sols.xml` file generation section. 
+As for `gen_usms_xml`, `gen_sols_xml` function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the `sols.xml` file generation section.
+
+
+## Getting data
 
 <!-- Only for the show -->
-```{r generate_sols_file}
-# Generate sols.xml file
-out_file <- file.path(workspace_path,"sols.xml")
+```{r read_xl_file_sols, eval = FALSE}
+# Reading the Excel file
+soils_param <- read_params_table(usm_xl_file, sheet_name = "Soils")
+```
 
-# Using an Excel example file (from the package)
-xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
+
+<!-- active chunk to be run -->
+```{r eval_read_xl_file_sols, eval = TRUE, echo = FALSE}
+library(readxl)
 
 # Reading the Excel file
-xl_param <- read_excel(xl_path,sheet = "Soils")
+soils_param <- read_params_table(usm_xl_file,sheet_name = "Soils")
+
+rmarkdown::paged_table(soils_param)
+```
+
+## Generating the file
+
+<!-- Only for the show -->
+```{r gen_sols_file, eval = FALSE}
+
+# Output file path
+out_file <- "/path/to/file/sols.xml" # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new sols.xml file, for all xl_param lines
-gen_sols_xml(usms_param = xl_param, usms_out_file = out_file)
+gen_sols_xml(sols_out_file = out_file, sols_param = soils_param)
 ```
 
 <!-- active chunk to be run -->
-```{r eval_generate_sols_file, eval = TRUE, echo = FALSE}
-# Generate sols.xml file
+```{r eval_gen_sols_file, eval = TRUE, echo = FALSE}
 out_file <- file.path(workspace_path,"sols.xml")
 
-# Using an Excel example file (from the package)
-xl_path <- file.path(xl_dir, "inputs_stics_example.xlsx")
-
-# Reading the Excel file
-xl_param <- read_excel(xl_path,sheet = "Soils")
-
 # Generating a new sols.xml file, for all xl_param lines
-gen_sols_xml(sols_param = xl_param, sols_out_file = out_file)
+gen_sols_xml(sols_out_file = out_file, sols_param = soils_param)
 ```
 
 ## `sols.xml` file content
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<sols>
-  <sol nom="USM_T1">
-    <param format="real" max="60.0" min="0.0" nom="argi">20.35</param>
-    <param format="real" max="0.5" min="0.05" nom="norg">0.1</param>
-    <param format="real" max="60.0" min="10.0" nom="profhum">40.0000</param>
-    <param format="real" max="100.0" min="0.0" nom="calc">0.52</param>
-    <param format="real" max="9.0" min="4.0" nom="pH">8.23</param>
-    <param format="real" max="0.5" min="0.0" nom="concseuil">0.2000</param>
-    <param format="real" max="0.6" min="0.05" nom="albedo">0.22</param>
-    <param format="real" max="50.0" min="0.0" nom="q0">9.63</param>
-    <param format="real" max="1.0" min="0.0" nom="ruisolnu">0.0000</param>
-    <param format="real" max="1000.0" min="10.0" nom="obstarac">200.0000</param>
-    <param format="real" max="100.0" min="5.0" nom="pluiebat">50.0000</param>
-    <param format="real" max="2.0" min="0.0" nom="mulchbat">0.5000</param>
-    <param format="real" max="150.0" min="10.0" nom="zesx">60.0000</param>
-    <param format="real" max="10.0" min="-10.0" nom="cfes">5.0000</param>
-    <param format="real" max="0.2" min="0.01" nom="z0solnu">0.0100</param>
-    <param format="real" max="20.0" min="8.0" nom="csurNsol">0.0000</param>
-    <param format="real" max="5.0" min="0.0" nom="penterui">0.3300</param>
-    <option choix="2" nom="pebbles" nomParam="codecailloux">
-      <choix code="1" nom="yes"/>
-      <choix code="2" nom="no"/>
-    </option>
-    <option choix="1" nom="macroporosity" nomParam="codemacropor">
-      <choix code="1" nom="yes"/>
-      <choix code="2" nom="no"/>
-    </option>
-    <option choix="2" nom="cracks (case of swelling clay soils)" nomParam="codefente">
-      <choix code="1" nom="yes"/>
-      <choix code="2" nom="no"/>
-    </option>
-    <option choix="2" nom="artificial drainage" nomParam="codrainage">
-      <choix code="1" nom="yes">
-        <param nom="profimper">10.0000</param>
-        <param nom="ecartdrain">0.0000</param>
-        <param nom="ksol">0.0000</param>
-        <param nom="profdrain">0.0000</param>
-      </choix>
-      <choix code="2" nom="no"/>
-    </option>
-    <option choix="2" nom="capillary rise" nomParam="coderemontcap">
-      <choix code="1" nom="yes">
-        <param nom="capiljour">1.0000</param>
-        <param nom="humcapil">10.0000</param>
-      </choix>
-      <choix code="2" nom="no"/>
-    </option>
-    <option choix="2" nom="nitrification" nomParam="codenitrif">
-      <choix code="1" nom="yes"/>
-      <choix code="2" nom="no"/>
-    </option>
-    <option choix="2" nom="denitrification" nomParam="codedenit">
-      <choix code="1" nom="yes">
-        <param nom="profdenit">20</param>
-        <param nom="vpotdenit">2.0000</param>
-      </choix>
-      <choix code="2" nom="no"/>
-    </option>
-    <tableau_entete nb_colonnes="8">
-      <colonne nom="epc"/>
-      <colonne nom="HCCF"/>
-      <colonne nom="HMINF"/>
-      <colonne nom="DAF"/>
-      <colonne nom="cailloux"/>
-      <colonne nom="typecailloux"/>
-      <colonne nom="infil"/>
-      <colonne nom="epd"/>
-    </tableau_entete>
-    <tableau nb_colonnes="8" nom="layer 1">
-      <colonne nom="epc">30</colonne>
-      <colonne nom="HCCF">23.75</colonne>
-      <colonne nom="HMINF">10.69</colonne>
-      <colonne nom="DAF">1.378</colonne>
-      <colonne nom="cailloux">0.00</colonne>
-      <colonne nom="typecailloux">1</colonne>
-      <colonne nom="infil">50.00</colonne>
-      <colonne nom="epd">10</colonne>
-    </tableau>
-    <tableau nb_colonnes="8" nom="layer 2">
-      <colonne nom="epc">30</colonne>
-      <colonne nom="HCCF">23.75</colonne>
-      <colonne nom="HMINF">10.69</colonne>
-      <colonne nom="DAF">1.5</colonne>
-      <colonne nom="cailloux">0.00</colonne>
-      <colonne nom="typecailloux">1</colonne>
-      <colonne nom="infil">50.00</colonne>
-      <colonne nom="epd">10</colonne>
-    </tableau>
-    <tableau nb_colonnes="8" nom="layer 3">
-      <colonne nom="epc">30</colonne>
-      <colonne nom="HCCF">22.2</colonne>
-      <colonne nom="HMINF">9.99</colonne>
-      <colonne nom="DAF">1.556</colonne>
-      <colonne nom="cailloux">0.00</colonne>
-      <colonne nom="typecailloux">1</colonne>
-      <colonne nom="infil">50.00</colonne>
-      <colonne nom="epd">10</colonne>
-    </tableau>
-    <tableau nb_colonnes="8" nom="layer 4">
-      <colonne nom="epc">30</colonne>
-      <colonne nom="HCCF">22.28</colonne>
-      <colonne nom="HMINF">10.02</colonne>
-      <colonne nom="DAF">1.588</colonne>
-      <colonne nom="cailloux">0.00</colonne>
-      <colonne nom="typecailloux">1</colonne>
-      <colonne nom="infil">50.00</colonne>
-      <colonne nom="epd">10</colonne>
-    </tableau>
-  </sol>
-  
-  ...
-</sols>
 
+Example of the first `sol` parameters sub-list:
+
+```{r show_sols_file, eval = TRUE, echo = FALSE, class.output="xml"}
+l <- readLines(con = out_file)
+cat(paste(c(l[1:30],"...",l[110], "...",l[length(l)-1]), collapse = "\n"))
 ```
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-REPRENDRE A PARTIR DE LA
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-# Example 3: generating multiple `tec` XML files (`*_tec.xml`)
-## Script content
 
+# Generating multiple crop management XML files (*\*\_tec.xml*)
+
+## Getting data
+<!-- Only for the show -->
+```{r read_xl_file_tec, eval = FALSE}
+# Reading the Excel file
+tec_param <- read_params_table(usm_xl_file, sheet_name = "Tec")
+```
+
+
+<!-- active chunk to be run -->
+```{r eval_read_xl_file_tec, eval = TRUE, echo = FALSE}
+library(readxl)
+
+# Reading the Excel file
+tec_param <- read_params_table(usm_xl_file,sheet_name = "Tec")
+
+rmarkdown::paged_table(tec_param)
+```
+
+## Generating files
+
+<!-- Only for the show -->
+```{r gen_tec_files, eval = FALSE}
+# *_tec.xml files, one for each xl_param line
+gen_tec_xml(param_table = tec_param, out_path = workspace_path )
+```
+
+<!-- active chunk to be run -->
+```{r eval_gen_tec_files, eval = TRUE, echo = FALSE}
+
+# *_tec.xml files, one for each xl_param line
+gen_tec_xml(param_table = tec_param, out_path = workspace_path )
+```
+
+Example of a `tec` parameters file content sub-list:
+
+```{r show_tec_file, eval = TRUE, echo = FALSE, class.output="xml"}
+l <- readLines(con = file.path(workspace_path,"USM_2017_T1_CI_tec.xml"))
+cat(paste(c(l[1:30],"...",l[length(l)-1]), collapse = "\n"))
+```
+
+
+# Generating multiple initialization XML files (*\*\_ini.xml*)
+
+## Getting data
+<!-- Only for the show -->
+```{r read_xl_file_ini, eval = FALSE}
+# Reading the Excel file
+ini_param <- read_params_table(usm_xl_file, sheet_name = "Ini")
+```
+
+
+<!-- active chunk to be run -->
+```{r eval_read_xl_file_ini, eval = TRUE, echo = FALSE}
+library(readxl)
+
+# Reading the Excel file
+ini_param <- read_params_table(usm_xl_file,sheet_name = "Ini")
+
+rmarkdown::paged_table(ini_param)
+```
+
+## Generating files
+
+<!-- Only for the show -->
+```{r gen_ini_files, eval = FALSE}
+# *_ini.xml files, one for each xl_param line
+gen_ini_xml(param_table = ini_param, out_path = workspace_path )
+```
+
+<!-- active chunk to be run -->
+```{r eval_gen_ini_files, eval = TRUE, echo = FALSE}
+
+# *_ini.xml files, one for each xl_param line
+gen_ini_xml(param_table = ini_param, out_path = workspace_path )
+```
 ## XML file content
 
-## Adaptation of the script content
+Example of a `ini` parameters file content sub-list:
 
-
-<!-- DEBUT partie à reprendre -->
-## Adaptation of the script content
-   * For generating other files kind, the other functions may be used instead of `gen_usms_xml`, then the Excel sheet name depends on the called function.     
-   
-   <!-- soils == usm -->
-         * **Soils**: to use with gen_sols_xml
-   <!-- on peut donner un fichier en sortie -->
-   
-   In the given Excel file as example, sheets are named:
-      * **Ini**: to use with gen_ini_xml
-
-      * **Tec**: to use with gen_tec_xml
-      * **sta**: to use with gen_sols_xml
-      
-      The sheet name in the script is to be replaced by the above names.
-      <!-- voir pour les obs : TRANSFERT VERS GENERATION TEXT FILES ??? -->
-   
-   * Only adapt the **paths / directories** and **files names**. In the example script, the Excel file is given just as an example. It will be replaced by the user ones.
-   
-   <!-- ATTENTION  REFORMULER -->
-   * **POSSIBILITY to use**: an existing file as template, in that case Excel sheets may contain only parameters which are to be replaced/changed among usms!
-   
-   <!-- fin utilisation fichier template --> 
-   
-   * The table loaded from an Excel sheet is entirely used in the examples, but a selection may be made to generate files only for a subset
-   
-   <!-- METTRE UN EXEMPLE DE SELECTION D'USMS -->
-   
-   * In the end, ne may add **every function call** in the script in order to produce all the XML files associated with all usms or a selection of. The directory containing generated files may be used directly as a JavaStics workspace for running simulations on the prevoulsy generated usms
-
-<!-- FIN partie à reprendre -->
-
-# Constraints or limitations
-  
-## For `usms` and `sols` files: 
-       
-* For the moment the functions are not taking into account the xml files content update: i.e. parameters values modification for existing `usm` or `sol`, or adding new usm or sol. This means that xml sols or usms files are newly generated upon values contained in the Excel sheets. 
-* So, all the **usm** or **sol** parameters must be present in the Excel sheet
-    
-## For `tec`, `sta` and `ini` files : 
-    
-* Take care with consistency of the base xml file provided to be duplicated and modified with parameters present in Excel sheets. Messages will be displayed in case of a misspelled parameter, or an unknown parameter in the xml file which may correspond to another Stics version than the desired one.
-  
-* **Warning**: all the parameters are not mandatory in the Excel sheet, only those that are to be modified must nbe entered.
-
-
-<!-- A REVOIR 
-Pour la partie parameter names syntax
-peut-être donner la liste des noms de parametres pour lesquels il n'y a pas correspondance
-ceux à mettre dans le fichier XL !!!
-On verra plus tard pour le dico et quand W sur la mise en cohérence des parametres
-dans le code et dans les fichiers XML !!!
--->
-## Note on parameters names syntax
-* The exact parameters names existing in xml files (with respect to case sensitive) must be used generally in Excel sheets. But, we added some **shortcuts parameters** names for some of the which are too long or meaningless for the user.   
-
-* A list have been added to facilitate Excel sheet filling. It have been included while retreiving data from data frame with names replacement for existing ones in the correspondence list.     
-At the moment, this list is very short and restricted to few `crop management parameters` (see table below). But we intent to generalize the use of that kind of correspondance list to facilitate comprehension and parameters names manipulations.
-
-<!-- GARDER LE TABLEAU DE CORRESPONDANCE -->
-
-```{r echo=FALSE, warning=FALSE, message=FALSE, eval = TRUE}
-library(knitr)
-library(SticsRFiles)
-dict <- get_params_dict()
-dt <- data.frame(shortcuts=names(dict), real_name=unlist(dict,use.names = FALSE))
-
-kable(dt, caption = "List of possible builtin parameters names substitution")
+```{r show_ini_file, eval = TRUE, echo = FALSE, class.output="xml"}
+l <- readLines(con = file.path(workspace_path,"USM_2017_T1_ini.xml"))
+cat(paste(c(l[1:19],"...",l[length(l)-1]), collapse = "\n"))
 ```
 
-* To get this correspondance list : call get_params_dict(), as follows
 
-```{r, eval = TRUE}
-library(SticsRFiles)
-get_params_dict()
 
+
+
+
+# Generating multiple meteorological station XML files (*\*\_sta.xml*)
+
+## Getting data
+<!-- Only for the show -->
+```{r read_xl_file_sta, eval = FALSE}
+# Reading the Excel file
+sta_param <- read_params_table(usm_xl_file, sheet_name = "Station")
 ```
 
-* But, it is possible to create and provide a personal list through the `dict` argument of the function.
-This argument is usable at the moment for producing only *tec* files.  When calling `gen_tec_xml` the argument dict may be set as follows, for example for irrigations parameters:
 
-```{r}  
+<!-- active chunk to be run -->
+```{r eval_read_xl_file_sta, eval = TRUE, echo = FALSE}
+library(readxl)
 
-irr_dict <- list(IrrDay="julapI_or_sum_upvt", IrrDose="amount") 
-  
-gen_tec_xml(..., dict = irr_dict) 
+# Reading the Excel file
+sta_param <- read_params_table(usm_xl_file, sheet_name = "Station")
+
+rmarkdown::paged_table(sta_param)
 ```
 
-* The final used dictionnary is calculated as follows, merged from the internal one and the given one 
-```{r, eval=TRUE}  
+## Generating files
 
-irr_dict <- list(IrrDay="julapI_or_sum_upvt", IrrDose="amount") 
-  
-dict <- get_params_dict(irr_dict)
-
-dict
-
+<!-- Only for the show -->
+```{r gen_sta_files, eval = FALSE}
+# *_sta.xml files, one for each xl_param line
+gen_sta_xml(param_table = sta_param, out_path = workspace_path )
 ```
 
+<!-- active chunk to be run -->
+```{r eval_gen_sta_files, eval = TRUE, echo = FALSE}
+
+# *_sta.xml files, one for each xl_param line
+gen_sta_xml(param_table = sta_param, out_path = workspace_path )
+```
+## XML file content
+
+Example of a `sta` parameters file content sub-list:
+
+```{r show_sta_file, eval = TRUE, echo = FALSE, class.output="xml"}
+l <- readLines(con = file.path(workspace_path,"climatex_sta.xml"))
+cat(paste(c(l[1:41],"...",l[length(l)-1]), collapse = "\n"))
+```
 
