@@ -2,9 +2,39 @@
 % Please edit documentation in R/get_param_txt.R
 \name{get_param_txt}
 \alias{get_param_txt}
+\alias{get_ini_txt}
+\alias{get_general_txt}
+\alias{get_tmp_txt}
+\alias{get_plant_txt}
+\alias{get_tec_txt}
+\alias{get_soil_txt}
+\alias{get_station_txt}
+\alias{get_usm_txt}
 \title{Read STICS input parameters from text files}
 \usage{
 get_param_txt(dirpath = getwd(), param = NULL, variety = NULL, ...)
+
+get_ini_txt(filepath = "ficini.txt")
+
+get_general_txt(filepath = "tempopar.sti")
+
+get_tmp_txt(filepath = "tempoparv6.sti")
+
+get_plant_txt(filepath = "ficplt1.txt", variety = NULL)
+
+get_tec_txt(
+  filepath = "fictec1.txt",
+  several_fert,
+  several_thin,
+  is_pasture,
+  ...
+)
+
+get_soil_txt(filepath = "param.sol")
+
+get_station_txt(filepath = "station.txt")
+
+get_usm_txt(filepath = "new_travail.usm")
 }
 \arguments{
 \item{dirpath}{USM directory path}
@@ -12,9 +42,17 @@ get_param_txt(dirpath = getwd(), param = NULL, variety = NULL, ...)
 \item{param}{Parameter name. Optional, if not provided, the function
 return an object with all parameters}
 
-\item{variety}{Either the variety name or index for plant parameters (optional, see details).}
+\item{variety}{Integer. The plant variety to get the parameter from.}
 
-\item{...}{Further arguments to pass (for future-proofing only).}
+\item{...}{Further arguments to pass (for future-proofing only)}
+
+\item{filepath}{File path}
+
+\item{several_fert}{Is there several fertilization in the USM ? See details.}
+
+\item{several_thin}{Is there several thinning in the USM ? See details.}
+
+\item{is_pasture}{Is the plant a pasture ? See details.}
 }
 \value{
 A parameter value, or if \code{param= NULL} a list of all parameters:
@@ -24,20 +62,39 @@ A parameter value, or if \code{param= NULL} a list of all parameters:
 \item{plant}{Plant parameters}
 \item{soil}{Soil parameters}
 \item{station}{Station parameters}
+
+A list of parameters, depending on the file/function:
+\item{ini}{Initialization parameters}
+\item{general}{General parameters}
+\item{tec}{Technical parameters}
+\item{plant}{Plant parameters}
+\item{soil}{Soil parameters}
+\item{station}{Station parameters}
+\item{tmp}{Temporary parameters}
 }
 \description{
 Read STICS model input parameters from a usm in text format (STICS input)
 Generally used after calling building a usm with \code{JavaStics}.
+
+Read a specific STICS model input parameter file.
+Users would generally use the wrapper \code{get_param_txt()} instead.
 }
 \details{
 If the \code{variety} is not given and a \code{param} is asked, the function will return the values
 for the variety that is simulated in the USM by checking the \code{variete} parameter in the technical file.
 If \code{param} is not provided by the user, the values from all varieties will be returned unless the user
 ask for a given \code{variety}.
+
+\code{several_fert}, \code{several_thin} and \code{is_pasture} are read from the tmp
+file (\code{tempoparv6.sti}). \code{get_param_txt()} does it automatically. If you absolutely
+need to use directly \code{get_tec_txt}, please see example.
 }
 \note{
 Users would generally use \code{get_param_txt} to identify parameters names and values and pass
 them to other functions.
+
+The functions are compatible with intercrops. Users generally only use
+\code{get_param_txt()}, which is a wrapper for all these functions.
 }
 \examples{
 # Read the interrow distance parameter:
@@ -60,7 +117,28 @@ get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
 get_param_txt(dirpath = path)$plant$plant1$durvieF
 }
 
+\dontrun{
+# Read the initialisation file (ficini.txt):
+library(SticsRFiles)
+path = file.path(get_examples_path( file_type = "txt"), "ficini.txt")
+get_ini_txt(path)
+
+# Read the tec file directly:
+
+# First, get the parameters from the tmp file:
+tmp= get_tmp_txt(filepath = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
+several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
+several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
+is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
+
+# Then, get the technical parameters:
+get_tec_txt(filepath= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
+several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
+}
+
 }
 \seealso{
 \code{gen_varmod()},
+
+\code{get_param_txt()}.
 }

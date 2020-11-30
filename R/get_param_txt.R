@@ -98,7 +98,10 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 
   if(!is.null(param)){
     parameters= unlist(parameters)
-    parameters= parameters[grep(paste0(param,".{0,1}$"),names(parameters))]
+    param <- gsub(pattern = "\\(", x=param, replacement="\\\\(\\1")
+    param <- gsub(pattern = "\\)", x=param, replacement="\\\\)\\1")
+
+    parameters= parameters[grep(paste0(param,".{0,}$"),names(parameters))]
 
     if(!is.null(variety)){
       names(parameters)= paste0(gsub("[1-999]","",names(parameters)),".",variety)
@@ -164,6 +167,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 #' several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 #'}
 #'
+#' @rdname get_param_txt
 #' @export
 get_ini_txt= function(filepath="ficini.txt"){
   params= get_txt_generic(filepath, names = FALSE)
@@ -173,20 +177,20 @@ get_ini_txt= function(filepath="ficini.txt"){
   return(ini)
 }
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_general_txt= function(filepath="tempopar.sti"){
   c(nbresidus= 21, get_txt_generic(filepath))
 }
 
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_tmp_txt= function(filepath="tempoparv6.sti"){
   get_txt_generic(filepath)
 }
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
   x= get_txt_generic(filepath)
@@ -212,7 +216,7 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
 }
 
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pasture,...){
 
@@ -517,7 +521,7 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
 }
 
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_soil_txt= function(filepath= "param.sol"){
 
@@ -560,14 +564,14 @@ get_soil_txt= function(filepath= "param.sol"){
   return(soil)
 }
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_station_txt= function(filepath="station.txt"){
   get_txt_generic(filepath)
 }
 
 
-#' @rdname get_ini_txt
+#' @rdname get_param_txt
 #' @export
 get_usm_txt= function(filepath="new_travail.usm"){
   get_txt_generic(filepath)
