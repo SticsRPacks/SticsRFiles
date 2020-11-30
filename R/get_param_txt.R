@@ -89,28 +89,29 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
                            }else{
                              variety
                            }
-                           ))
+      ))
   }
 
   parameters= list(usm= usm, ini= ini, general= general, tec= tec,
                    plant= plant, soil= soil, station= station,
                    output= output,tmp=tmp)
 
-  if(!is.null(param)){
-    parameters= unlist(parameters)
-    param <- gsub(pattern = "\\(", x=param, replacement="\\\\(\\1")
-    param <- gsub(pattern = "\\)", x=param, replacement="\\\\)\\1")
+  if(is.null(param)) return(parameters)
 
-    parameters= parameters[grep(paste0(param,".{0,}$"),names(parameters))]
+  parameters= unlist(parameters)
+  param <- gsub(pattern = "\\(", x=param, replacement="\\\\(\\1")
+  param <- gsub(pattern = "\\)", x=param, replacement="\\\\)\\1")
 
-    if(!is.null(variety)){
-      names(parameters)= paste0(gsub("[1-999]","",names(parameters)),".",variety)
-    }
+  parameters= parameters[grep(paste0(param,"[\\(\\)0-9]{0,}$"),names(parameters))]
 
-    if(length(parameters)==0){
-      stop(param," parameter not found")
-    }
+  if(length(parameters)==0){
+    stop(param," parameter not found")
   }
+
+  if(!is.null(variety)){
+    names(parameters)= paste0(gsub("[1-999]","",names(parameters)),".",variety)
+  }
+
 
   return(parameters)
 }
