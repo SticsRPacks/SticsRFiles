@@ -70,25 +70,3 @@ output variables.
 \code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
 variables required from STICS, please directly call \code{gen_varmod}.
 }
-\examples{
-\dontrun{
-# Replace the interrow distance parameter to 0.01:
-
-set_param_txt(dirpath = "stics_usm/usm_1", param = "interrang", value = 0.01)
-
-# Change the value of durvieF for the current variety:
-set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", value = 245)
-
-# Change the value of durvieF for another variety:
-set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "durvieF", variety = "Nefer", value = 178)
-
-# Change the value of infil for a given layer:
-set_param_txt(dirpath = "inst/extdata/txt/V8.5", param = "infil", layer = 2, value = 60)
-
-# If the parameter is found in several files, use the set_* functions direclty, e.g.
-# cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
-# change its value in the soil file, we use set_soil_txt():
-set_soil_txt(filepath = "inst/extdata/txt/V8.5/param.sol", param = "cailloux", layer = 2, value = 1)
-}
-
-}
