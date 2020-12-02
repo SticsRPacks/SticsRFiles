@@ -33,9 +33,11 @@ download_usm_xl <- function(xl_name = NULL,
                             verbose = FALSE,
                             ...) {
 
+  oldw <- getOption("warn")
   if(!verbose) {
-    oldw <- getOption("warn")
     options(warn=-1)
+  } else {
+    options(warn=0)
   }
 
   args <- list(...)
@@ -85,7 +87,7 @@ download_usm_xl <- function(xl_name = NULL,
 
   if (!all(success)) warning("Error copying files:\n", paste(src_list[!success], collapse = "\n"))
 
-  if (exists("oldw")) options(warn=oldw)
+  options(warn=oldw)
 
   #return(invisible(success))
   return(invisible(dest_list))
@@ -104,6 +106,8 @@ download_usm_xl <- function(xl_name = NULL,
 #'  (optional, default: current directory)
 #' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
 #' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
+#' @param verbose Optional, logical, TRUE for displaying messsages/ warnings,
+#' FALSE otherwise (default)
 #'
 #' @return A vector of copied files path.
 #'
