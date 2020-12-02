@@ -27,11 +27,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(readxl)
 #'
-#' xl_path <- file.path(get_examples_path("xl"), "inputs_stics_example.xlsx")
-#' obs_df <- read_excel(xl_path, sheet = "Obs")
+#' xl_path <- download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+#' obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs")
 #' gen_usms_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
+#'
 #' }
 #'
 #' @export

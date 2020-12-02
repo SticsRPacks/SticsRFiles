@@ -34,12 +34,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(readxl)
 #'
-#' xl_path <- "inputs_stics_example.xlsx"
-#' download_usm_xl(xl_name = xl_path)
-#' tec_param_df <- readxl::read_excel(xl_path, sheet = "Tec")
+#' xl_path <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+#' tec_param_df <- read_params_table(file_path = xl_path, sheet_name = "Tec")
 #' gen_tec_xml(out_path = "/path/to/dest/dir", param_table = tec_param_df)
+#'
 #'}
 #'
 #' @export

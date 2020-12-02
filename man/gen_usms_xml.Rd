@@ -57,13 +57,10 @@ The first column name must contain the keyword Usm or usm or USM as a prefix to 
 }
 \examples{
 \dontrun{
-library(readxl)
 
-xl_path <- "inputs_stics_example.xlsx"
-download_usm_xl(xl_name = xl_path)
-usms_param_df <- read_excel(xl_path, sheet = "USMs")
-gen_usms_xml(usms_out_file = "usms.xml",
-usms_param = usms_param_df)
+xl_path <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+usms_param_df <- read_params_table(file_path = xl_path, sheet_name = "USMs")
+gen_usms_xml(usms_out_file = "usms.xml", usms_param = usms_param_df)
 
 }
 

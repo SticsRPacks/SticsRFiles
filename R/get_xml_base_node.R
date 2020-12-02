@@ -33,7 +33,7 @@ get_xml_base_node <- function(file_tag, form_name=NULL,
   node_names <- c("usm","sol","intervention")
   parent_nodes <- c("usms","sols","ta")
   formalism_tags <- list()
-  formalism_tags$tec <- c("res", "till", "irr","ferN") #, "cutJul", "cutTemp")
+  formalism_tags$tec <- c("res", "till", "irr","ferN", "spec") #, "cutJul", "cutTemp")
   formalism_tags$usms <- c()
   formalism_tags$sols <- c()
 
