@@ -9,6 +9,7 @@ download_usm_xl(
   dest_dir = getwd(),
   version_name = "last",
   overwrite = FALSE,
+  verbose = FALSE,
   ...
 )
 }
@@ -21,6 +22,9 @@ download_usm_xl(
 \item{version_name}{An optional version string (default: last version returned by get_stics_versions_compat())}
 
 \item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
+
+\item{verbose}{Optional, logical, TRUE for displaying messsages/ warnings,
+FALSE otherwise (default)}
 
 \item{...}{Additional arguments to be passed}
 }

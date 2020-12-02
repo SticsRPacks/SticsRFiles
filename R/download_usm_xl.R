@@ -11,6 +11,8 @@
 #'  (optional, default: current directory)
 #' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
 #' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
+#' @param verbose Optional, logical, TRUE for displaying messsages/ warnings,
+#' FALSE otherwise (default)
 #' @param ... Additional arguments to be passed
 #'
 #' @return A vector of copied files path.
@@ -28,7 +30,13 @@ download_usm_xl <- function(xl_name = NULL,
                             dest_dir = getwd(),
                             version_name = "last",
                             overwrite = FALSE,
+                            verbose = FALSE,
                             ...) {
+
+  if(!verbose) {
+    oldw <- getOption("warn")
+    options(warn=-1)
+  }
 
   args <- list(...)
 
@@ -51,15 +59,15 @@ download_usm_xl <- function(xl_name = NULL,
   }
 
   if (!length(files_list)) {
-    print("No matching files found, see in returned list !")
+    warning("No matching files found, see in returned list !")
     return(list.files(xl_dir, pattern = xl_patt))
   }
 
   dest_list <- file.path(dest_dir, files_list)
   exist_files <- file.exists(dest_list)
   if ( !overwrite && any(exist_files) ) {
-    print(paste(files_list[exist_files],"already exists in ", dest_dir))
-    print("Consider to set overwrite = TRUE to overwrite (it | them )")
+    warning(paste(files_list[exist_files],"already exists in ", dest_dir,
+    "\nConsider to set overwrite = TRUE to overwrite (it | them )"))
     #return(invisible(FALSE))
     # filtering existing files, not copied if overwrite == FALSE
     files_list <- files_list[!exist_files]
@@ -69,13 +77,16 @@ download_usm_xl <- function(xl_name = NULL,
   success <- file.copy(from = src_list, to = dest_dir, overwrite = overwrite)
 
   if ( any(success) ) {
-    print(paste(files_list[success]," has been copied in directory ", dest_dir))
+    if (verbose) print(paste(files_list[success]," has been copied in directory ", dest_dir))
     # Adding file(s) path as attr
     #attr(success,"path") <- dest_list
     dest_list <- dest_list[success]
   }
 
   if (!all(success)) warning("Error copying files:\n", paste(src_list[!success], collapse = "\n"))
+
+  if (exists("oldw")) options(warn=oldw)
+
   #return(invisible(success))
   return(invisible(dest_list))
 }
@@ -107,13 +118,15 @@ download_usm_xl <- function(xl_name = NULL,
 download_usm_csv <- function(csv_name = NULL,
                             dest_dir = getwd(),
                             version_name = "last",
-                            overwrite = FALSE) {
+                            overwrite = FALSE,
+                            verbose = FALSE) {
 
 
   download_usm_xl(xl_name = csv_name,
                   dest_dir = dest_dir,
                   version_name = version_name,
                   overwrite = overwrite,
+                  verbose = verbose,
                   type="csv")
 
 }

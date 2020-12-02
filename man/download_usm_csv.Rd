@@ -8,7 +8,8 @@ download_usm_csv(
   csv_name = NULL,
   dest_dir = getwd(),
   version_name = "last",
-  overwrite = FALSE
+  overwrite = FALSE,
+  verbose = FALSE
 )
 }
 \arguments{
