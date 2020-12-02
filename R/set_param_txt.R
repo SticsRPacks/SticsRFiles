@@ -34,7 +34,7 @@
 #' set_param_txt(dirpath = path, param = "interrang", value = 0.01)
 #'
 #' # Change the value of durvieF for the current variety:
-#' set_param_txt(dirpath = "path, param = "durvieF", value = 245)
+#' set_param_txt(dirpath = path, param = "durvieF", value = 245)
 #'
 #' # Change the value of durvieF for another variety:
 #' set_param_txt(dirpath = path, param = "durvieF", variety = "Nefer", value = 178)
