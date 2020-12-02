@@ -14,8 +14,7 @@
 #' @examples
 #'
 #' usm_xl_file <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx")
-#' xl_param <- read_params_table(usm_xl_file, sheet = "USMs")
-#'
+#' read_params_table(usm_xl_file, sheet = "USMs")
 #' usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv")
 #' read_params_table(file_path = usm_csv_file)
 #'
