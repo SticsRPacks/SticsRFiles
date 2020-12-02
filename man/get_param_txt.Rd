@@ -107,11 +107,11 @@ get_param_txt(path, param='interrang')
 # Getting varietal values:
 
 # Get the leaf lifespan of the variety used in the usm:
-get_param_txt(dirpath = path, param = "durvieF") #0.29
+get_param_txt(dirpath = path, param = "durvieF")
 # Get the leaf lifespan of another variety available in the plant file:
-get_param_txt(dirpath = path, param = "durvieF", variety = "Nefer")
+get_param_txt(dirpath = path, param = "durvieF", variety = "Furio")
 # To get the values for several (or all) varieties, either put all varieties:
-varieties= c("Biensur","Acalou","Amarillo","Lloyd","Neodur","Nefer","Montseg")
+varieties= c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
 get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
 # Or get it from the output of the function returning all parameters:
 get_param_txt(dirpath = path)$plant$plant1$durvieF

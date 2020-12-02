@@ -40,11 +40,11 @@
 #' # Getting varietal values:
 #'
 #' # Get the leaf lifespan of the variety used in the usm:
-#' get_param_txt(dirpath = path, param = "durvieF") #0.29
+#' get_param_txt(dirpath = path, param = "durvieF")
 #' # Get the leaf lifespan of another variety available in the plant file:
-#' get_param_txt(dirpath = path, param = "durvieF", variety = "Nefer")
+#' get_param_txt(dirpath = path, param = "durvieF", variety = "Furio")
 #' # To get the values for several (or all) varieties, either put all varieties:
-#' varieties= c("Biensur","Acalou","Amarillo","Lloyd","Neodur","Nefer","Montseg")
+#' varieties= c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
 #' get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
 #' # Or get it from the output of the function returning all parameters:
 #' get_param_txt(dirpath = path)$plant$plant1$durvieF
@@ -62,7 +62,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   soil= get_soil_txt(file.path(dirpath,"param.sol"))
   station= get_station_txt(file.path(dirpath,"station.txt"))
   usm= get_usm_txt(file.path(dirpath,"new_travail.usm"))
-  output= get_var_mod(dirpath)
+  #output= get_var_mod(dirpath)
   tmp= get_tmp_txt(file.path(dirpath,"tempoparv6.sti"))
 
   several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
@@ -77,40 +77,80 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
       list(get_tec_txt(filepath = file.path(dirpath,paste0("fictec",i,".txt")),
                        several_fert = several_fert, several_thin = several_thin,
                        is_pasture = is_pasture))
+
+    varieties= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",i,".txt")))$codevar
+    tec_variety <- tec[[paste0("plant",i)]]$variete
+
     plant[paste0("plant",i)]=
       list(get_plant_txt(file.path(dirpath,paste0("ficplt",i,".txt")),
                          variety=
                            if(is.null(variety)){
                              if(!is.null(param)){
-                               tec[[paste0("plant",i)]]$variete
+                               varieties[tec_variety]
                              }else{
                                NULL
                              }
                            }else{
-                             variety
+                             #variety
+                             if(is.character(variety)){
+                               variety= match(variety,varieties)
+                               if(any(is.na(variety))) {
+                                 cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+                                 return()
+                               }
+                               varieties[variety]
+                             }
                            }
       ))
   }
 
+  # Fixes the current variety
+  if (is.null(variety)) variety <- tec_variety
+
   parameters= list(usm= usm, ini= ini, general= general, tec= tec,
                    plant= plant, soil= soil, station= station,
-                   output= output,tmp=tmp)
+                   #output= output,tmp=tmp)
+                   tmp=tmp)
 
+  # Returning the parameters list
   if(is.null(param)) return(parameters)
 
   parameters= unlist(parameters)
+  # Fixes parameters names including indices (?)
+  # For escaping braces and catching the right name
   param <- gsub(pattern = "\\(", x=param, replacement="\\\\(\\1")
   param <- gsub(pattern = "\\)", x=param, replacement="\\\\)\\1")
-
   parameters= parameters[grep(paste0(param,"[\\(\\)0-9]{0,}$"),names(parameters))]
 
   if(length(parameters)==0){
     stop(param," parameter not found")
   }
 
-  if(!is.null(variety)){
-    names(parameters)= paste0(gsub("[1-999]","",names(parameters)),".",variety)
+
+  # Removing ending numbers
+  param_names <- gsub(pattern = "[0-9]{0,}$", replacement = "", x = names(parameters))
+
+  param_names <- gsub(pattern = ".*\\.(.*[0-9]{0,})", replacement = "\\1", x = param_names )
+
+  idx_to_fix <- param_names %in% param
+  idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
+
+  if (any(idx_plant_to_fix)) {
+    variety_names <- varieties[variety]
+    if(length(variety_names) == 1) variety_names <- rep(variety_names, length(idx_plant_to_fix))
+    names(parameters)[idx_plant_to_fix]= paste0(gsub("[1-999]","",names(parameters)),
+                                          ".",
+                                          variety_names[idx_plant_to_fix])
   }
+
+  # TO BE FIXED if it makes sense ?
+  # idx_tec_to_fix <- idx_to_fix & grepl("^tec", names(parameters))
+  #
+  # if (any(idx_tec_to_fix)) {
+  #   names(parameters)[idx_tec_to_fix]= paste0(gsub("[1-999]","",names(parameters)),
+  #                                               ".",
+  #                                               varieties[tec_variety][idx_tec_to_fix])
+  # }
 
 
   return(parameters)
