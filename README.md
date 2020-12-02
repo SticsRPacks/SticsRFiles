@@ -109,9 +109,10 @@ packages.
 
 ### Files generation
 
-  - A description of mailing functions usefull for generating XML input
-    files from usms parameters data stored in Excel files sheets will be
-    available soon.
+  - A description of usefull functions for generating XML input files
+    from usms parameters data stored in Excel files sheets or CSV files
+    is available
+    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html).
 
   - A description of functions for generating text input files from XML
     one of usms parameters is available

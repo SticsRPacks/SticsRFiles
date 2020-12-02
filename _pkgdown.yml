@@ -17,10 +17,12 @@ reference:
     contents:
       - get_param_info
       - get_var_info
+      - is_stics_var
 
   - title: "Generate JavaStics Input files (XML format)"
     desc: Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)
     contents:
+      - read_params_table
       - gen_ini_xml
       - gen_sols_xml
       - gen_sta_xml
@@ -40,10 +42,13 @@ reference:
       - get_soils_list
 
   - title: "Generate Stics Input files (Text format)"
+    desc: Input parameters files, outputs definition files or observations files
     contents:
       - gen_usms_xml2txt
+      - convert_xml2txt
       - force_param_values
       - gen_varmod
+      - gen_usms_obs
 
   - title: "Set values in Stics Input files (Text format)"
     contents:
@@ -52,7 +57,9 @@ reference:
   - title: "Get values in Stics Input files (Text format)"
     contents:
       - get_param_txt
+      - get_plants_nb
       - get_climate_txt
+      - get_var_mod
 
   - title: "Get values in Stics Output files"
     contents:
@@ -66,11 +73,13 @@ reference:
 
   - title: "Example data"
     desc: For files examples by Stics version
-      - get_examples_path
-    desc: For use cases examples
+    #desc: For use cases examples
+
     contents:
+      - get_examples_path
       - download_data
       - download_usm_xl
+      - download_usm_csv
 
   - title: "Misc"
     desc: Miscellaneous helper functions
