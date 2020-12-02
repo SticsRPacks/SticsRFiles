@@ -5,6 +5,7 @@
 #' parameters values forcing)
 #' @param file_name Name of the file
 #'
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #'
