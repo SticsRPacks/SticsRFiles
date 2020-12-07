@@ -108,7 +108,7 @@ get_referenced_dirs <- function(dirs = NULL, version_name = NULL) {
   if(base::is.null(version_name)) return(dirs)
 
   # Getting data according to version and dirs
-  version_data <- ver_data %>% dplyr::select(dirs)
+  version_data <- ver_data %>% dplyr::select(dplyr::any_of(dirs))
 
   # Compiling referenced dirs/version strings, for existing version
   is_na <- base::is.na(version_data)
