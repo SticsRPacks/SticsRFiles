@@ -48,11 +48,7 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
   out_table = dplyr::bind_rows(out_table)
 
   if(nrow(out_table) > 0){
-    # Removed useless columns: ian, mo, jo, jul, cum_jul
-    # Date= data.frame(Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
-    #                                    format = "%Y-%m-%d", tz="UTC"),
-    #                  cum_jul = compute_doy_cumul(out_table$jul, out_table$ian))
-    # out_table= cbind(Date,out_table)
+
     dplyr::mutate(out_table,
                   Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
                                     format = "%Y-%m-%d",
