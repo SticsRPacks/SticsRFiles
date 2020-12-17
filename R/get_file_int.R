@@ -11,6 +11,8 @@
 #' @return A `data.frame` of all observation or simulation files concatenated by row.
 #' @keywords internal
 #'
+#' @importFrom rlang .data
+#'
 #' @examples
 #' \dontrun{
 #' path <- file.path(get_examples_path( file_type = "obs"))
@@ -53,8 +55,8 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
                   Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
                                     format = "%Y-%m-%d",
                                     tz="UTC")) %>%
-      dplyr::relocate(Date) %>%
-      dplyr::select(-c(ian, mo, jo, jul)) -> out_table
+      dplyr::relocate(.data$Date) %>%
+      dplyr::select(-c(.data$ian, .data$mo, .data$jo, .data$jul)) -> out_table
 
   }
   out_table
