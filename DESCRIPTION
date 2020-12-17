@@ -52,6 +52,8 @@ Suggests:
     learnr,
     readxl,
     formatR
+Remotes: 
+    github::SticsRPacks/SticsOnR@*release
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'

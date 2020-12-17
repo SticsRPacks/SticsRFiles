@@ -12,7 +12,7 @@ man/figures
 ^codecov\.yml$
 ^bin$
 ^tmp$
-
-
+^inputs_stics_example.xlsx$
+^inputs_stics_example_USMs.csv$
 
 ^\.github$

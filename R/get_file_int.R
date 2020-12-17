@@ -50,11 +50,11 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
   if(nrow(out_table) > 0){
 
     dplyr::mutate(out_table,
-                  Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
+                  .data$Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
                                     format = "%Y-%m-%d",
                                     tz="UTC")) %>%
-      dplyr::relocate(Date) %>%
-      dplyr::select(-c(ian, mo, jo, jul)) -> out_table
+      dplyr::relocate(.data$Date) %>%
+      dplyr::select(-c(.data$ian, .data$mo, .data$jo, .data$jul)) -> out_table
 
   }
   out_table
