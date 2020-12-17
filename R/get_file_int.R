@@ -52,7 +52,7 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
   if(nrow(out_table) > 0){
 
     dplyr::mutate(out_table,
-                  .data$Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
+                  Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
                                     format = "%Y-%m-%d",
                                     tz="UTC")) %>%
       dplyr::relocate(.data$Date) %>%
