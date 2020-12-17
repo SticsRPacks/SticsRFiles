@@ -11,6 +11,8 @@
 #' @return A `data.frame` of all observation or simulation files concatenated by row.
 #' @keywords internal
 #'
+#' @importFrom rlang .data
+#'
 #' @examples
 #' \dontrun{
 #' path <- file.path(get_examples_path( file_type = "obs"))
