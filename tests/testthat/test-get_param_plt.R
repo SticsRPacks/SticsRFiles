@@ -11,8 +11,8 @@ test_that("single param option value", {
 })
 
 test_that("single param value", {
-  expect_equivalent(get_param_xml(xml_path,"jvcmini"),7.00000)
-  expect_equivalent(get_param_xml(xml_path,"innsen"), 0.35000)
+  expect_equivalent(get_param_xml(xml_path,"jvcmini"),-999)
+  expect_equivalent(get_param_xml(xml_path,"innsen"), -999)
   expect_equivalent(get_param_xml(xml_path,"efcroiveg"), 4.25000)
 })
 
@@ -29,9 +29,9 @@ test_that("two param option values, and order", {
 test_that("a param option value and a param value, and order", {
   r <- unlist(get_param_xml(xml_path,c("codetemp","jvcmini"))[[1]])
   names(r) <- NULL
-  expect_equal(r, c(1,7.00000))
+  expect_equal(r, c(1,-999))
   r <- unlist(get_param_xml(xml_path,c("jvcmini","codetemp"))[[1]])
   names(r) <- NULL
-  expect_equal(r, c(7.00000,1))
+  expect_equal(r, c(-999,1))
 })
 
