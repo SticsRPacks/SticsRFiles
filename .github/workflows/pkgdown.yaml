@@ -9,6 +9,8 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # For avoiding checking missing help topics in package _pkgdown.yml
+      CI: false 
     steps:
       - uses: actions/checkout@v2
 
