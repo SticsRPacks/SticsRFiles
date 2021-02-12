@@ -1,5 +1,3 @@
-# SticsRFiles 0.2.1
-
 # SticsRFiles 0.2.0 (2020-01-15)
 
 ## General changes
