@@ -117,21 +117,45 @@ get_usms_files <- function(workspace_path,
                                       select = "usm",
                                       value = usm_name), use.names = F)
 
+    # For selecting plant files regarding plants number
+    plants_sel <- 1:get_plants_nb(usm_file_path = usms_xml_path,usms_list = usm_name)
+
+    # Getting all usms xml files, except plant files
     usm_files <- unique(usm_files[usm_files != "null"])
     usm_files_path <- file.path(workspace_path, usm_files)
+
+
+    # filtering tec files selection
+    tec_files <- unlist(get_param_xml(xml_file = usms_xml_path,
+                                      param_name = "ftec",
+                                      select = "usm",
+                                      value = usm_name)[[1]], use.names = FALSE)
+
+    tec_files_to_rm <- tec_files[tec_files != "null"][setdiff(1:2, plants_sel)]
+    # removing useless tec files
+    usm_files <-setdiff(usm_files, tec_files_to_rm)
+    usm_files_path <- setdiff(usm_files_path,
+                              file.path(workspace_path, tec_files_to_rm))
+
+    # Checking if all files exist
     files_idx <- file.exists(usm_files_path)
     usm_files_path <- usm_files_path[files_idx]
     usm_files_all_exist <- length(usm_files) == length(usm_files_path)
 
+
+    # Specific tec files management
     plt_files <- NULL
     plt_files_path <- NULL
+
     if(check_plt){
       plt_files <- unlist(get_param_xml(xml_file = usms_xml_path,
                                         param_name = "fplt",
                                         select = "usm",
-                                        value = usm_name)[[1]], use.names = F)
+                                        value = usm_name)[[1]], use.names = FALSE)
 
-      plt_files <- plt_files[plt_files != "null"]
+
+      plt_files <- plt_files[plt_files != "null"][plants_sel]
+
       # applying for multiple paths (javastics, workspace)
       plt_files_path <- unlist(lapply(plt_path, function(x) file.path(x, plt_files)))
       plt_idx <- file.exists(plt_files_path)
@@ -139,9 +163,11 @@ get_usms_files <- function(workspace_path,
       # If one occurrence of each file at least, NOT checking duplicates !
       plt_files_all_exist <- length(plt_files) <= length(plt_files_path)
     }
+
+    #
     # Adding the files lists
     usms_files[[i]] <- list(paths=c(usm_files_path, plt_files_path),
-                            all_exist=usm_files_all_exist & plt_files_all_exist)
+                            all_exist=usm_files_all_exist & plt_files_all_exist )
   }
 
   # Returning a named list
