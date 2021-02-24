@@ -18,17 +18,31 @@ params:
   workspace_xml: JavaSTICS-1.41-stics-9.1/example
   workspace_txt: example
   use_default: TRUE
-  work_dir: !r file.path(tempdir(), "get-xml-infos")
+  work_dir: !r file.path(Sys.getenv("HOME"),"R","SticsRfiles-tuto-xml-files", fsep ="/")
   #alt_dir: !r file.path(tempdir(), "get-xml-infos")
 ---
 
-```{r set_var, echo=FALSE, results='hide'}
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+tutorial_options(exercise.lines = 5)
 library(SticsRFiles)
+library(SticsOnR)
+```
+
+
+```{r set_var, echo=FALSE, results='hide'}
+
+
+# Add checking JavaStics path
+
+#javastics_path
 
 work_dir <- params$work_dir
+work_dir <- gsub(pattern = "\\\\", replacement="/", x=work_dir)
 
-# Checking OS
-if (Sys.info()['sysname'] == "Windows") work_dir <- shortPathName(work_dir)
+# Creating work_dir if needed
 if (!dir.exists(work_dir)) dir.create(work_dir)
 
 
@@ -39,7 +53,8 @@ if (!dir.exists(work_dir)) dir.create(work_dir)
 # file_url <- "https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip"
 # curl::curl_download(url = file_url, handle = h, destfile = file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip"), mode = "wb")
 
-javastics <- file.path(work_dir, params$javastics)
+javastics <- file.path(work_dir, params$javastics, fsep ="/")
+
 
 if (!dir.exists(javastics)) dir.create(javastics)
 
@@ -49,18 +64,39 @@ if (!length(grep("JavaStics.exe",list.files(javastics)))) {
   unzip(file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip"), exdir = javastics)
 }
 
-workspace_xml <- file.path(work_dir, params$workspace_xml)
-workspace_txt <- file.path(work_dir, params$workspace_txt)
-#ex_lines <- params$lines
+workspace_xml <- file.path(work_dir, params$workspace_xml, fsep ="/")
+workspace_txt <- file.path(work_dir, params$workspace_txt, fsep ="/")
+
+```
+
+<!-- TODO: managing setting javastics path
+```{r}
+#new_javastics_path <- "unknown"
 ```
 
 
-```{r setup, include=FALSE}
-library(learnr)
-knitr::opts_chunk$set(echo = FALSE)
-tutorial_options(exercise.lines = 5)
-#source("static_help.R")
+## Configuration
+```{r, context="server"}
+output$javasticspath <- renderText(java())
+java <- reactive(input$JavaStics_path)
+#new_javastics_path <<- java()
 ```
+
+```{r, echo=FALSE}
+# sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
+# plotOutput("distPlot")
+textInput("JavaStics_path", "JavaStics path:", "your JavaStics path")
+textOutput("javasticspath")
+```
+
+```{r}
+ls()
+print("JavaStics initial path")
+print(javastics)
+#print("JavaStics New path")
+#print(new_javastics_path)
+```
+-->
 
 
 
@@ -78,11 +114,13 @@ Some of the main functions are presented here with possible interactive run dire
 ### Package loading and content
 
 ```{r, echo = TRUE}
-library(SticsOnR)
-library(SticsRFiles)
+#library(SticsOnR)
+#library(SticsRFiles)
 ```
 
-```{r, echo=FALSE, warning=FALSE, results='hide'}
+<!--, results='hide'}-->
+```{r, echo=FALSE, warning=FALSE}
+
 # Generating html help files, one for each function
 if(params$gen_help) {
   help_dir <- file.path(work_dir, "SticsRFiles_help")
@@ -91,12 +129,15 @@ if(params$gen_help) {
                             overwrite = FALSE, 
                             out_dir = help_dir)
 }
+
 ```
 
 ### Tutorial directory
-Either all files downloaded files or generated ones while executing this tutorial will be stored under the user home directory (i.e. /home/username for linux or C:\\Users\\username\\Documents).
+Either all files downloaded files or generated ones while executing this tutorial will be stored under the user home directory (i.e. /home/username/R for linux or C:/Users/username/Documents/R).
 
-For the current demo session the full path is: **`r work_dir`**.
+For the current demo session the full path is: 
+
+**`r work_dir`**
 
 
 ## Function get_usms_list
@@ -113,9 +154,10 @@ cat( paste( lines , collapse="\n" ) )
 ```
 
 ### Example
-```{r, echo = TRUE}
+```{r, echo = TRUE, comment=""}
 # Path used for workspace
 workspace_xml
+
 # Getting usms list
 get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"))
 ```
@@ -199,7 +241,7 @@ cat( paste( lines , collapse="\n" ) )
 ### Example
 
 Getting parameter values from a soils parameter file
-```{r, echo = TRUE}
+```{r, echo = TRUE, comment=""}
 # File containing soils parameters
 xml_soil
 
@@ -230,7 +272,7 @@ get_param_xml(xml_file = xml_soil, param_name =  c("argi", "norg"))
 
 ```{r get_param_xml_3, exercise=TRUE, warning = FALSE}
 
-get_param_xml(xml_file = xml_soil)
+get_param_info(file_path = xml_soil)
 
 get_param_xml(xml_file = xml_soil, param_name = "paramtest", select = "sol", value = "solble")
 ```
@@ -256,7 +298,7 @@ xml_gen <- file.path(workspace_xml,"param_gen.xml")
 file.copy(from = xml_gen_src, xml_gen, overwrite = TRUE)
 ```
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, comment=""}
 # File containing general parameters
 xml_gen
 
@@ -316,6 +358,17 @@ get_param_xml(xml_tec, param_name = c("julapI_or_sum_upvt", "amount"))
 
 
 ## Function gen_usms_xml2txt
+<!--
+
+```{r setdir, exercise=TRUE}
+# Set JavaStics directory path
+javastics_path="your path"
+
+
+javastics_path
+  
+```
+-->
 
 
 ### Aim
@@ -339,53 +392,62 @@ if (!all_exists) {
 }
 ```
 
+<!--
+```{r}
+# Workspace used as usms XML files source
+#workspace_xml
+```
+-->
 
 ```{r, echo = TRUE, eval = FALSE}
-# Workspace used as usms XML files source
-workspace_xml
-
 # Generating all the usms input directories
 value <- gen_usms_xml2txt(javastics_path = javastics, workspace_path = workspace_xml)
 
 value
-## $usms_paths
-##  [1] "SugarCane"            "potato"               "banana"              
-##  [4] "sorghum"              "barley"               "sugarbeet"           
-##  [7] "wheat"                "maize"                "soybean"             
-## [10] "lettuce"              "tomato"               "DurumWheat"          
-## [13] "rapeseed"             "sunflower"            "grass"               
-## [16] "BareSoil"             "demo_Wheat1"          "demo_BareSoil2"      
-## [19] "demo_maize3"          "DurumWheat_4years"    "maize_4years"        
-## [22] "strawberry"           "pea"                  "vine"                
-## [25] "fescue"               "flax"                 "intercrop_pea_barley"
-## [28] "timothy"              "DurumWheat_snow"      "Turmeric"            
-## [31] "cc_BristleOat"        "cc_mustard"           "cc_ItalianRyegrass"  
-## [34] "cc_vetch"             "cc_CrimsonClover"     "proto_rice"          
-## 
-## $files_path
-##  [1] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/climat.txt"     
-##  [2] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/param.sol"      
-##  [3] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficini.txt"     
-##  [4] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficplt1.txt"    
-##  [5] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/fictec1.txt"    
-##  [6] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/station.txt"    
-##  [7] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/new_travail.usm"
-##  [8] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/tempopar.sti"   
-##  [9] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/tempoparv6.sti" 
-## [10] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficplt2.txt"    
-## [11] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/fictec2.txt"    
-## 
-## $copy_status
-##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
-## [31] TRUE TRUE TRUE TRUE TRUE TRUE
-## 
-## $obs_copy_status
-##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-## [13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-## [25]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+```
 
+```{r comment=""}
+txt <- '$usms_paths
+ [1] "SugarCane"            "potato"               "banana"              
+ [4] "sorghum"              "barley"               "sugarbeet"           
+ [7] "wheat"                "maize"                "soybean"             
+[10] "lettuce"              "tomato"               "DurumWheat"          
+[13] "rapeseed"             "sunflower"            "grass"               
+[16] "BareSoil"             "demo_Wheat1"          "demo_BareSoil2"      
+[19] "demo_maize3"          "DurumWheat_4years"    "maize_4years"        
+[22] "strawberry"           "pea"                  "vine"                
+[25] "fescue"               "flax"                 "intercrop_pea_barley"
+[28] "timothy"              "DurumWheat_snow"      "Turmeric"            
+[31] "cc_BristleOat"        "cc_mustard"           "cc_ItalianRyegrass"  
+[34] "cc_vetch"             "cc_CrimsonClover"     "proto_rice"          
 
+$files_path
+ [1] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/climat.txt"     
+ [2] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/param.sol"      
+ [3] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficini.txt"     
+ [4] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficplt1.txt"    
+ [5] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/fictec1.txt"    
+ [6] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/station.txt"    
+ [7] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/new_travail.usm"
+ [8] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/tempopar.sti"   
+ [9] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/tempoparv6.sti" 
+[10] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/ficplt2.txt"    
+[11] "/tmp/Demo-SticsRPacks/JavaSTICS-1.41-stics-9.1/example/fictec2.txt"    
+
+$copy_status
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+[31] TRUE TRUE TRUE TRUE TRUE TRUE
+
+$obs_copy_status
+ [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
+[25]  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+'
+
+txt <- gsub(pattern = "/tmp/Demo-SticsRPacks", replacement = work_dir, x= txt)
+
+cat(txt)
 ```
 
 
@@ -395,6 +457,7 @@ value
 ```
 
 #### Generating directories for a subset of usms
+<!--
 ```{r , warning = FALSE, echo = TRUE}
 # Workspace used as usms XML files source
 workspace_xml
@@ -402,6 +465,7 @@ workspace_xml
 # Existing usms in the xml workspace directory
 get_usms_list(usm_path = file.path(workspace_xml, "usms.xml"))
 ```
+-->
 
 ```{r gen_usms_1, exercise=TRUE, warning = FALSE}
 value <- gen_usms_xml2txt(javastics_path = javastics, workspace_path = workspace_xml, usms_list = c("wheat", "pea"))
@@ -422,5 +486,9 @@ value <- gen_usms_xml2txt(javastics_path = javastics,
 value
 
 ```
+
+
+
+
 
 
