@@ -14,8 +14,8 @@ output:
 runtime: shiny_prerendered
 params:
   gen_help: TRUE
-  javastics: JavaSTICS-1.41-stics-9.1
-  workspace_xml: JavaSTICS-1.41-stics-9.1/example
+  javastics: JavaSTICS-1.41-stics-9.2
+  workspace_xml: JavaSTICS-1.41-stics-9.2/example
   workspace_txt: example
   use_default: TRUE
   work_dir: !r file.path(Sys.getenv("HOME"),"R","SticsRfiles-tuto-xml-files", fsep ="/")
@@ -65,7 +65,7 @@ if (!dir.exists(javastics)) dir.create(javastics)
 
 if (length(grep("JavaStics.exe",list.files(javastics))) == 0) {
   zip_path <- file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip")
-  system(paste("curl -u stics_user:w10lptr6405 https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip --output", zip_path))
+  system(paste("curl -u stics_user:w10lptr6405 https://w3.avignon.inra.fr/forge/attachments/download/2402/JavaSTICS-1.41-stics-9.2.zip --output", zip_path))
   
   unzip(zip_path, exdir = javastics)
 }
