@@ -38,7 +38,7 @@ force_param_values <- function(workspace,
     param_values <- param_values[ind_non_na]
 
     # converting var names to Stics names
-    stics_names <- var_to_stics_name(names(param_values))
+    stics_names <- var_to_col_names(names(param_values))
 
     ret <- gen_paramsti(workspace, stics_names, param_values)
     if ( ! ret ) {
