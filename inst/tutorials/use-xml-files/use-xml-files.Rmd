@@ -27,6 +27,11 @@ params:
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 tutorial_options(exercise.lines = 5)
+```
+
+```{r, include=FALSE, echo=FALSE}
+# if (!require(SticsRFiles)) devtools::install_github("SticsRPacks/SticsRFiles")
+# if (!require(SticsOnR)) devtools::install_github("SticsRPacks/SticsOnR")
 library(SticsRFiles)
 library(SticsOnR)
 ```
@@ -58,10 +63,11 @@ javastics <- file.path(work_dir, params$javastics, fsep ="/")
 
 if (!dir.exists(javastics)) dir.create(javastics)
 
-if (!length(grep("JavaStics.exe",list.files(javastics)))) {
-  system(paste("curl -u plecharpent:vi8,gife https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip --output", file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip")))
+if (length(grep("JavaStics.exe",list.files(javastics))) == 0) {
+  zip_path <- file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip")
+  system(paste("curl -u stics_user:w10lptr6405 https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip --output", zip_path))
   
-  unzip(file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip"), exdir = javastics)
+  unzip(zip_path, exdir = javastics)
 }
 
 workspace_xml <- file.path(work_dir, params$workspace_xml, fsep ="/")
@@ -69,12 +75,12 @@ workspace_txt <- file.path(work_dir, params$workspace_txt, fsep ="/")
 
 ```
 
-<!-- TODO: managing setting javastics path
+<!--TODO: managing setting javastics path
 ```{r}
-#new_javastics_path <- "unknown"
+new_javastics_path <- "unknown"
 ```
-
-
+-->
+<!--
 ## Configuration
 ```{r, context="server"}
 output$javasticspath <- renderText(java())
@@ -109,7 +115,7 @@ The goal of SticsRFiles is to perform manipulations of the Stics model files eit
 ### Content of the demo
 We are focusing in this demo only on `XML files` manipulations and their transformation to `text files`.
 
-Some of the main functions are presented here with possible interactive run directly inside the document.
+Some of the main functions are presented here with possible interactive run directly inside this document.
 
 ### Package loading and content
 

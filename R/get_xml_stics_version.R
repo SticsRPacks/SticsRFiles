@@ -2,7 +2,7 @@
 # a generer et non pas version du modele exe.
 # il n'y aura plus de pb des que les fontions seront ventilees
 # dans les depots SticsOnR et SticsRFiles sur Github
-#' @title Get a version/or the laste version string of available Stics files templates in the package
+#' @title Get a version/or the last version string of available Stics files templates in the package
 #'
 #' @param stics_version A version key of a Stics version (i.e. V9.1)
 #' @param xml_doc an xmlDocument of a Stics xml file (Unused for the moment, no version String included in xml files)
@@ -32,7 +32,7 @@ get_xml_stics_version <- function(stics_version = "last", xml_doc = NULL) {
 
   if (! base::is.null( xml_doc)) {
     # to be fixed when the doc will contain the version
-    return("custom")
+    #return("custom")
   }
 
   # Getting version from compat csv file
