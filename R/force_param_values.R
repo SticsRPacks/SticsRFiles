@@ -37,14 +37,17 @@ force_param_values <- function(workspace,
     ind_non_na<-!is.na(param_values)
     param_values <- param_values[ind_non_na]
 
-    ret <- gen_paramsti(workspace, names(param_values), param_values)
+    # converting var names to Stics names
+    stics_names <- var_to_stics_name(names(param_values))
+
+    ret <- gen_paramsti(workspace, stics_names, param_values)
     if ( ! ret ) {
-     return(FALSE)
+     return(invisible(FALSE))
     }
 
     tryCatch(set_codeoptim(workspace, value=1), error=function(cond) return(FALSE))
 
   }
 
-  return(TRUE)
+  return(invisible(TRUE))
 }
