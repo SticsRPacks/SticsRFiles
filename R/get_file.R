@@ -178,11 +178,21 @@ get_file_ <- function(workspace = getwd(),
   # The user did not provide any usms_filename, so using the names of the .sti files
   # as information.
   if(is.null(usms_filename) && is.null(file_name) && is.null(plant_names)){
-    # Getting obs files list from directory
+    # Getting sim/obs files list from directory
     file_name <- as.list(list.files(pattern = file_pattern, path = workspace, full.names = FALSE))
+
+    # If empty file_name, results might be in a workspace sub-dir named with usm_name
+    if (!length(file_name) && !is.null(usm_name)) {
+      file_name <- as.list(list.files(pattern = file_pattern,
+                                      path = file.path(workspace, usm_name),
+                                      full.names = FALSE))
+      workspace <- file.path(workspace, usm_name)
+    }
+
     file_name = parse_mixed_file(file_names = file_name, type = type)
     usms = names(file_name)
-    # No obs file found
+
+    # No sim/obs file found
     if(!length(file_name)) return()
 
     # Selecting using usm_name

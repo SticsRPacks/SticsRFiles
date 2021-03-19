@@ -40,6 +40,9 @@ get_daily_results <- function(workspace,
   res = get_file(workspace,usm_name,var_list,doy_list,dates_list,usms_filename,
                  javastics_path,verbose,"sim")
 
-  attr(res, "class")= "cropr_simulation"
+  # Testing if results list is not empty
+  # otherwise, setting "cropr_simulation" class attribute will fail
+  if (length(res)) attr(res, "class") = "cropr_simulation"
+
   res
 }
