@@ -2,7 +2,7 @@ context("get model outputs")
 
 path <- get_examples_path(file_type = "sti")
 
-
+# Testing with a JavaStics workspace like
 test_that("output is always list", {
   outputs= get_daily_results(path,"banana")
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -16,6 +16,38 @@ test_that("get output without usm argument", {
   expect_true(is.data.frame(outputs$banana))
   expect_true(is.null(outputs$proto_rice))
 })
+
+# Testing without the usms.xml file
+if (file.exists(file.path(path, "usms.xml"))) {
+  file.rename(file.path(path, "usms.xml"), file.path(path, "usms.xml.ori"))
+}
+
+test_that("output is always list, without usms.xml", {
+  outputs= get_daily_results(path,"banana")
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  # Should always returns a list, even for one usm
+})
+
+test_that("get output without usm argument, without usms.xml", {
+  outputs= get_daily_results(workspace = path)
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(is.data.frame(outputs$banana))
+})
+
+
+# Testing a simple usm as path sub-directory
+test_that("output is always list, without usms.xml, banana sub-dir", {
+  if (!dir.exists(file.path(path,"banana"))) dir.create(file.path(path,"banana"))
+  file.copy(file.path(path,"mod_sbanana.sti"), file.path(path,"banana"))
+  outputs= get_daily_results(path,"banana")
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  # Should always returns a list, even for one usm
+  unlink(file.path(path,"banana"))
+})
+# Restoring usms.xml
+if (file.exists(file.path(path, "usms.xml.ori"))) {
+  file.rename(file.path(path, "usms.xml.ori"), file.path(path, "usms.xml") )
+}
 
 
 example_IC = download_data(example_dirs = "study_case_intercrop")
