@@ -24,7 +24,7 @@
 #'
 gen_ini_doc <- function(xml_doc = NULL,
                         param_table = NULL,
-                        crop_tag = "crop",
+                        crop_tag = "Crop",
                         params_desc = NULL,
                         stics_version ="last",
                         check_names = TRUE) {
@@ -49,12 +49,14 @@ gen_ini_doc <- function(xml_doc = NULL,
   # tag see treatment inside next block
   if (base::is.null(params_desc)) {
     # detecting ini names column
-    crop_regex <- paste0("_",tolower(crop_tag),"[0-9]*$")
+    #crop_regex <- paste0("_",tolower(crop_tag),"[0-9]*$")
+    crop_regex <- paste0("_",crop_tag,"[0-9]*$")
     layer_regex <- "_[0-9]*$"
 
     param_names <- names(param_table)
     #ini_col <- param_names[grep("^ini",tolower(param_names))]
-    plante_params <- param_names[grep(crop_regex,tolower(param_names))]
+    #plante_params <- param_names[grep(crop_regex,tolower(param_names))]
+    plante_params <- param_names[grep(crop_regex, param_names)]
 
     if (! length(plante_params)) {
       stop(paste0("Crop tag is not detected in columns names: ", crop_tag))

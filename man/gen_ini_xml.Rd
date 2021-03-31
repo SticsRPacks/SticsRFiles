@@ -8,7 +8,7 @@ gen_ini_xml(
   param_table = NULL,
   ini_in_file = NULL,
   out_path = getwd(),
-  crop_tag = "crop",
+  crop_tag = "Crop",
   stics_version = "last"
 )
 }

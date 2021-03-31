@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<intervention nb_colonnes="5">
-                                <colonne nom="tempfauche"/>
-                                <colonne nom="hautcoupe"/>
-                                <colonne nom="lairesiduel"/>
-                                <colonne nom="msresiduel"/>
-                                <colonne nom="anitcoupe"/>
-</intervention>

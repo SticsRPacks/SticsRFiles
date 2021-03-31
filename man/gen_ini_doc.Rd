@@ -7,7 +7,7 @@
 gen_ini_doc(
   xml_doc = NULL,
   param_table = NULL,
-  crop_tag = "crop",
+  crop_tag = "Crop",
   params_desc = NULL,
   stics_version = "last",
   check_names = TRUE

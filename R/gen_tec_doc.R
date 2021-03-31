@@ -52,12 +52,12 @@ gen_tec_doc <- function(xml_doc = NULL,
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
     xml_docs <- apply(param_table,1,
-                      function(x) gen_tec_doc(
-                                              param_table = as.data.frame(t(x),
-                                                                          stringsAsFactors = F ),
-                                              stics_version = stics_version,
-                                              dict = dict,
-                                              sort = FALSE))
+                      function(x) gen_tec_doc( xml_doc = cloneXmlDoc(xml_doc),
+                                               param_table = as.data.frame(t(x),
+                                                                           stringsAsFactors = F ),
+                                               stics_version = stics_version,
+                                               dict = dict,
+                                               sort = FALSE))
     return(xml_docs)
   }
 
@@ -87,7 +87,7 @@ gen_tec_doc <- function(xml_doc = NULL,
     table_names <- names(table_params)
   }
 
-  # Getting scalar parameter names
+  # Getting scalar and vector parameter names
   vec_idx <- unlist(lapply(table_params,
                            function(x) length(grep(pattern = "_[0-9]*$",names(x))) > 0 ), use.names = F)
 
@@ -101,26 +101,35 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   # Setting vector parameters
   # loop over vector names
+
+  # Special case for cutting
+  # treating first julfauche or tempfauche, bc other
+  # sibling parameters have common names : hautcoupe,
+  # lairesiduel, msresiduel, anitcoupe
+  # otherwise parameters might be set in the wrong "choix" block !
+  fauche <- intersect(c("tempfauche", "julfauche","hautcoupe",
+                        "lairesiduel", "msresiduel","anitcoupe"),
+                      vec_names)
+  if (length(fauche)) vec_names <- c(fauche, vec_names[!vec_names %in% fauche])
+
   for (par_name in vec_names) {
 
     #print(par_name)
 
     nb_par <- get_param_number(xml_doc, par_name)
-    #nb_values <- dim(table_params[[par_name]])[2]
     nb_values <- length(table_params[[par_name]])
-    if ( ! base::is.null(nb_values) && (nb_par == nb_values)) {
-      # if the nodes number is already matching
-      # or a previous pass in the else condition
-      # permitted to add the needed nodes number.
-      #print(par_name)
 
-      #print(paste0("avant set : ",par_name))
+    # If the nodes number is already matching
+    # or a previous pass in the else condition
+    # added needed nodes number for the parameter or set of.
+    if ( ! base::is.null(nb_values) && (nb_par == nb_values)) {
       set_param_value(xml_doc, param_name = par_name,
-                      param_value = table_params[[par_name]]) #, show_xpath = TRUE)
+                      param_value = table_params[[par_name]])
     } else {
 
       if ( nb_par > 0 ) {
-        # Remove all intervention nodes for adding new ones
+        # Remove all intervention nodes
+        # in order to add new ones
 
         xpath_node <- get_param_type(xml_doc = xml_doc,
                                      param_name = par_name)$xpath
@@ -142,13 +151,24 @@ gen_tec_doc <- function(xml_doc = NULL,
         if (par_name == "engrais") {
           print("ok for multiple engrais !")
         }
+
+        # Removing existing nodes, for creating new set of
+        # after that
         remove_parent_from_doc(xml_doc = xml_doc,
                                param_name = par_name)
 
-
       }
 
-      # Getting needed nodes number and formalism
+      # Generating an "intervention" node containing par_name in colonne nom
+      # attribute
+      # Cloning "ta_entete" node, from the current xml_doc
+      # renaming it and reusing it for intervention nodes creation
+      op_node <- xmlClone(getNodeS(xml_doc,
+                                   paste0("//ta_entete[colonne[@nom='",par_name,"']]"))[[1]])
+      xmlName(op_node) <- "intervention"
+
+
+      # Getting needed nodes number and formalism or choice
       # to which they are to be attached
       nodes_nb <- length(table_params[[par_name]])
       par_form <- get_param_formalisms( xml_doc = xml_doc, par_name)
@@ -157,9 +177,14 @@ gen_tec_doc <- function(xml_doc = NULL,
         print(paste("Error: formalism for:", par_name))
       }
 
-      # formalism to be detected in get_xml_base_node from param_name
-      parent_path <- get_param_type(xml_doc,"ta","formalisme",par_form)
-      op_node <- get_xml_base_node("tec",par_form)
+      # formalism or specific choix path to be calculated
+      idx <- c("tempfauche", "julfauche") %in% par_name
+      choix <- c("calendar in degree days","calendar in days")
+      if (any(idx)) {
+        parent_path <- get_param_type(xml_doc,"ta","choix", choix[idx])
+      } else {
+        parent_path <- get_param_type(xml_doc,"ta","formalisme",par_form)
+      }
 
       # adding needed nodes : nodes_nb
       add_node_to_doc(xml_doc = xml_doc,
@@ -167,23 +192,31 @@ gen_tec_doc <- function(xml_doc = NULL,
                       nodes_nb = nodes_nb,
                       parent_path = parent_path$xpath)
 
-      # TODO : replace with, but not functionning
-      # add_stics_nodes(xml_doc = xml_doc,
-      #                 file_tag = "tec",
-      #                 formalism_name = par_form,
-      #                 stics_version = stics_version)
-
       # Setting values for all the concerned nodes
       set_param_value(xml_doc = xml_doc,
                       param_name = par_name ,
                       param_value = table_params[[par_name]])
 
-      # fixing nb interventions
-      set_param_value(xml_doc = xml_doc,"nb_interventions",nodes_nb,par_form)
-
+      # Fixing nb_interventions
+      # according to specificities linked to common parameter names
+      # in choice "calendar in days" and "calendar in degree days"
+      if (any(idx)) {
+        # specific cas for "cut crop"
+        set_param_value(xml_doc = xml_doc,"nb_interventions",nodes_nb,choix[idx])
+      } else {
+        # general case for operations
+        set_param_value(xml_doc = xml_doc,"nb_interventions",nodes_nb,par_form)
+      }
     }
 
   }
+
+  # A PRIORI : Seulement pour ce qui concerne fauches !!!!!!!!!!!
+  # avec nb_interventions == 0
+  # TODO: remove useless intervention nodes, if any
+  # Set in template files from the package
+  # Nodes list for which day or temp sum == 999
+  # SticsRFiles:::getNodeS(out_tec, "//intervention[colonne[1]=999]")
 
   if (gen_error) {
     xml_doc <- NULL
