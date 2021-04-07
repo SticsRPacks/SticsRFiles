@@ -56,6 +56,12 @@ gen_usms_xml <- function(usms_out_file = NULL,
 
   xml_doc <- NULL
 
+  # Fix : default output file path if not provided
+  if (base::is.null(usms_out_file) ) {
+    usms_out_file <- file.path(getwd(), "usms.xml")
+  }
+
+  # If a template file is provided
   if (! base::is.null(usms_in_file) ) {
     xml_doc <- xmldocument(usms_in_file)
   }
@@ -63,25 +69,22 @@ gen_usms_xml <- function(usms_out_file = NULL,
   vars <- c("flai_1", "fplt_2","ftec_2", "flai_2")
   vars_idx <- vars %in% names(usms_param)
 
-  # replacing NA with "null", if any vars name in usms_param names
+  # replacing NA or "", with "null", if any vars name in usms_param names
   if (! base::is.null(usms_param) && any(vars_idx)) {
     for (v in vars[vars_idx]) {
-      usms_param[[v]][is.na(usms_param[[v]])] <- "null"
+      rep_idx <- is.na(usms_param[[v]]) | nchar(usms_param[[v]])==0
+      usms_param[[v]][rep_idx] <- "null"
     }
   }
 
-  # xml_doc <- gen_usms_doc(xml_doc = xml_doc,
-  #                         usms_nb = usms_nb,
-  #                         usms_param = usms_param,
-  #                         stics_version = stics_version)
-
+  # Common switch function for sols.xml and usms.xml files
   xml_doc <- gen_usms_sols_doc(doc_type = "usms",
                          xml_doc,
                          nodes_nb = usms_nb,
                          nodes_param = usms_param,
                          stics_version = stics_version)
 
-  # checking if out dir exists
+  # hecking if out dir exists
   out_path <- dirname(usms_out_file)
   if ( ! dir.exists(out_path) ) {
     stop(paste("The directory does not exist: ",out_path))
