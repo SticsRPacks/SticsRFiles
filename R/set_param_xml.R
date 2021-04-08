@@ -109,8 +109,9 @@ set_param_xml <- function(xml_file,
 
   # Checking if any of param_name can be in intervention
   # nodes of 2 option choices (specific of "cut crop" in tec files)
-  check_choice_param <- function( xml_doc = xml_doc,
-                                  param_name = param_name)
+  check_choice_param( xml_doc = xml_doc,
+                      param_name = param_name,
+                      stop = TRUE)
 
 
   # Setting parameters values in the xmlDoxument object

@@ -71,6 +71,11 @@ get_param_xml <- function(xml_file,
 
   xml_docs <- lapply(xml_file,xmldocument)
 
+  # Checking if any param duplicates in tec files, for 'cut crop' choices
+  lapply(xml_docs,
+         function(x) check_choice_param(xml_doc = x,
+                      param_name = param_name))
+
   values <- get_param_value(xml_doc = xml_docs,
                             param_name = param_name,
                             parent_name = select,

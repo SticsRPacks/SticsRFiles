@@ -2,6 +2,7 @@
 #'
 #' @param xml_doc an xmldocument object
 #' @param param_name parameter names vector, i.e.: parameter name or option code
+#' @param stop TRUE for rising an error, FALSE for just warning
 #'
 #' @return invisible NULL
 #' @keywords internal
@@ -11,7 +12,7 @@
 #'   check_choice_param( xml_doc = xml_doc, param_name = param_name)
 #' }
 #'
-check_choice_param <- function( xml_doc, param_name) {
+check_choice_param <- function( xml_doc, param_name, stop=FALSE) {
 
   #--------------------------------------------------------------------#
   # This is for the moment a specific case attached to tec files:
@@ -20,7 +21,7 @@ check_choice_param <- function( xml_doc, param_name) {
   #--------------------------------------------------------------------#
 
   # Early exiting for other docs than tec ones
-  if(! xmlName(xmlRoot(tec_jul_doc@content)) == "fichiertec" ) return(invisible())
+  if(! xmlName(xmlRoot(xml_doc@content)) == "fichiertec" ) return(invisible())
 
   # Parameters related to cut crop
   choice_specif_par <- c("julfauche","tempfauche")
@@ -31,10 +32,16 @@ check_choice_param <- function( xml_doc, param_name) {
 
   # Detecting incompatible choices parameters
   par_idx <- choice_specif_par %in% param_name
-  if (all(par_idx)) stop("Parameters ", paste(choice_specif_par,
-                                              collapse = ", ")
-                         ,"\ncannot be used for different choices of the same option 'cut crop'")
-
+  if (all(par_idx)) {
+    message <- sprintf("%s%s%s","Parameters ", paste(choice_specif_par,
+                                                     collapse = ", ")
+                       ,"\ncannot be used for different choices of the same option 'cut crop'")
+    if (stop) {
+      stop(message)
+    } else {
+      warning(message)
+    }
+  }
 
   # Checking common parameter names
   par_idx <- choice_common_par %in% param_name
@@ -48,9 +55,17 @@ check_choice_param <- function( xml_doc, param_name) {
   interv_nodes <- lapply(SticsRFiles:::getNodeS(xml_doc,common_par_path), xmlParent)
   interv_par_names <- unique(unlist(lapply(interv_nodes, function(x) xmlSApply(x, FUN = xmlAttrs))))
   if (all(choice_specif_par %in% interv_par_names)) {
+
     par_list <- intersect(interv_par_names, setdiff(param_name,choice_specif_par))
-    stop("Impossible to get/set values for parameters: ", paste(par_list, collapse = ", "),
-         "\nexisting in intervention nodes belonging to 2 choices of the same option 'cut crop'")
+    message <- sprintf("%s%s%s%s", "Impossible to get/set values for parameters: ",
+                       paste(par_list, collapse = ", "),
+                       "\nexisting in intervention nodes belonging",
+                       " to 2 choices of the same option 'cut crop'")
+    if (stop) {
+      stop(message)
+    } else {
+      warning(message)
+    }
   }
 
   invisible()
