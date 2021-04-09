@@ -113,14 +113,22 @@ set_param_value <- function(xml_doc,
   }
 
   if (! is.element(type,param_types) ) {
-    stop("Type error !")
+    #stop("Type error !")
+    warning("Setting values failed for parameter : ",
+            param_name,
+            ", \nunknown parameter, mispelled, or not taken into account yet.\n")
+    # returning success status
+    return(FALSE)
   }
 
   values_nb <- length(param_value)
   nodes_nb <- length(getNodeS(xml_doc,xpath))
   # checking dimensions between nodes ids and nodes number for xpath
   if ( base::is.null(ids) && values_nb > 1 && !values_nb == nodes_nb ) {
-    stop("Replacement values are not consistent with parameters number !")
+    warning(param_name,
+            "replacement values are not consistent with parameters number !")
+    # returning success status
+    return(FALSE)
   }
 
   # TODO: see if could be simplified with a default case !

@@ -177,44 +177,51 @@ gen_tec_doc <- function(xml_doc = NULL,
         print(paste("Error: formalism for:", par_name))
       }
 
-      # formalism or specific choix path to be calculated
-      idx <- c("tempfauche", "julfauche") %in% par_name
+      # General case, linked to formalisms
+      parent_path <- get_param_type(xml_doc,"ta","formalisme",par_form)$xpath
+      parent_name <- par_form
+
+      #-------------------------------------------------------------------------
+      # Specific cases linked to options/choix
+      # for getting parent path of intervention nodes to create
+      #
+      # specific choix path to be calculated
+      cut_idx <- c("tempfauche", "julfauche") %in% par_name
       choix <- c("calendar in degree days","calendar in days")
-      if (any(idx)) {
-        parent_path <- get_param_type(xml_doc,"ta","choix", choix[idx])
-      } else {
-        parent_path <- get_param_type(xml_doc,"ta","formalisme",par_form)
+      if (any(cut_idx)) {
+        parent_name <- choix[cut_idx]
+        parent_path <- get_param_type(xml_doc,"ta","choix", parent_name)$xpath
       }
 
-      # adding needed nodes : nodes_nb
+      # specific option calculation
+      is_thin <- par_name %in% c("juleclair", "nbinfloecl")
+      if (is_thin)  {
+        parent_name <- "thinning"
+        parent_path <- get_param_type(xml_doc, "ta", "option", parent_name)$xpath
+      }
+      #-------------------------------------------------------------------------
+
+      # Adding needed nodes : nodes_nb
       add_node_to_doc(xml_doc = xml_doc,
                       new_node = op_node,
                       nodes_nb = nodes_nb,
-                      parent_path = parent_path$xpath)
+                      parent_path = parent_path)
 
-      # Setting values for all the concerned nodes
+      # Setting values for all the concerned intervention nodes
       set_param_value(xml_doc = xml_doc,
                       param_name = par_name ,
                       param_value = table_params[[par_name]])
 
       # Fixing nb_interventions
-      # according to specificities linked to common parameter names
-      # in choice "calendar in days" and "calendar in degree days"
-      if (any(idx)) {
-        # specific cas for "cut crop"
-        set_param_value(xml_doc = xml_doc,"nb_interventions",nodes_nb,choix[idx])
-      } else {
-        # general case for operations
-        set_param_value(xml_doc = xml_doc,"nb_interventions",nodes_nb,par_form)
-      }
+      set_param_value(xml_doc = xml_doc,
+                      param_name = "nb_interventions",
+                      param_value = nodes_nb,
+                      parent_name = parent_name)
     }
 
   }
 
-  # A PRIORI : Seulement pour ce qui concerne fauches !!!!!!!!!!!
-  # avec nb_interventions == 0
   # TODO: remove useless intervention nodes, if any
-  # Set in template files from the package
   # Nodes list for which day or temp sum == 999
   # SticsRFiles:::getNodeS(out_tec, "//intervention[colonne[1]=999]")
 

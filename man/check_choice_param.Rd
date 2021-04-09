@@ -10,6 +10,8 @@ check_choice_param(xml_doc, param_name, stop = FALSE)
 \item{xml_doc}{an xmldocument object}
 
 \item{param_name}{parameter names vector, i.e.: parameter name or option code}
+
+\item{stop}{TRUE for rising an error, FALSE for just warning}
 }
 \value{
 invisible NULL
