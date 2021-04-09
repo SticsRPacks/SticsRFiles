@@ -22,7 +22,7 @@ get_usms_list <- function(usm_path, name = NULL){
 
   # Detecting file type
   if ( !is_usms_xml(usm_path) ) {
-    stop("The file must be a usm (usms) file")
+    stop("The file does not exist or is not a usms file")
   }
 
   return(find_usms_soils_names(file_path = usm_path, xml_name = "usm", name = name))

@@ -20,6 +20,10 @@
 #'
 is_stics_xml <- function(xml_path, file_type = NULL) {
 
+  if ( dir.exists(xml_path) | !file.exists(xml_path) ) {
+    return(FALSE)
+  }
+
   xml_doc <- xmldocument(xml_path)
 
   return(is_stics_doc(xml_doc, doc_type = file_type ))
