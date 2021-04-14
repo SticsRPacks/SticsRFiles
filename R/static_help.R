@@ -52,9 +52,14 @@ static_help = function(pkg,
 }
 
 
-get_from_help <- function(html_file, tag1 = "Usage", tag2 = "Example") {
+get_from_help <- function(html_file, tag1 = "Description", tag2 = NULL, header_level = "h4") {
   l <- readLines( html_file )
   l1 <- grep(pattern = tag1,x = l)
-  l2 <- grep(pattern = tag2,x = l) - 2
+  if(is.null(tag2)){
+    l2 <- length(l) - 2
+  }else{
+    l2 <- grep(pattern = tag2,x = l) - 2
+  }
+  l = gsub("h3",header_level,l)
   return(l[l1:l2])
 }
