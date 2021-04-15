@@ -1,5 +1,35 @@
 #' Load and format Stics daily output file(s)
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function was deprecated because we realised that it's
+#' a special case of the [get_sim()]
+#'
+#' @examples
+#'  \dontrun{
+#' get_daily_results(path,"banana")
+#' # ->
+#' get_sim(path,"banana")
+#' }
+#'
+#' @keywords internal
+#'
+#' @export
+
+
+get_daily_results <- function(...) {
+
+  lifecycle::deprecate_warn(
+    "0.3.0",
+    "get_daily_results()",
+    "get_sim()",
+    details = "This function is a special case of get_sim(); use it instead.")
+  get_sim(...)
+}
+
+#' Load and format Stics daily output file(s)
+#'
 #' @description Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
 #'  possible selection on variable names, cumulative DOY and dates
 #'
@@ -25,18 +55,18 @@
 #' @examples
 #' \dontrun{
 #' path <- get_examples_path(file_type = "sti")
-#' get_daily_results(path,"banana")
+#' get_sim(path,"banana")
 #' }
 #' @export
 #'
-get_daily_results <- function(workspace,
-                              usm_name=NULL,
-                              var_list=NULL,
-                              doy_list=NULL,
-                              dates_list=NULL,
-                              usms_filename= NULL,
-                              javastics_path = NULL,
-                              verbose= TRUE){
+get_sim <- function(workspace,
+                    usm_name=NULL,
+                    var_list=NULL,
+                    doy_list=NULL,
+                    dates_list=NULL,
+                    usms_filename= NULL,
+                    javastics_path = NULL,
+                    verbose= TRUE){
   res = get_file(workspace,usm_name,var_list,doy_list,dates_list,usms_filename,
                  javastics_path,verbose,"sim")
 

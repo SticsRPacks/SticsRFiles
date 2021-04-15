@@ -63,7 +63,7 @@ reference:
 
   - title: "Get values in Stics Output files"
     contents:
-      - get_daily_results
+      - get_sim
       - get_report_results
 
   - title: "Manage observation files"

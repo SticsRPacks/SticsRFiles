@@ -1,7 +1,7 @@
 Package: SticsRFiles
 Title: Read And Modify STICS Input/Output Files
-Date: 2020-01_15
-Version: 0.2.0
+Date: 2021-04-15
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
       person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
@@ -42,7 +42,8 @@ Imports:
     tibble,
     tidyr,
     curl,
-    tools
+    tools,
+    lifecycle
 Suggests:
     SticsOnR,
     knitr,
@@ -61,7 +62,6 @@ Collate:
     'attributes_list2matrix.R'
     'check_choice_param.R'
     'check_param_names.R'
-    'col_names_to_var.R'
     'compute_doy_cumul.R'
     'convert_xml2txt.R'
     'convert_xml2txt_int.R'
@@ -89,7 +89,6 @@ Collate:
     'gen_usms_xml2txt.R'
     'gen_varmod.R'
     'get_climate_txt.R'
-    'get_daily_results.R'
     'get_file.R'
     'get_file_int.R'
     'get_formalisms_xml.R'
@@ -119,6 +118,7 @@ Collate:
     'get_plant_name.R'
     'get_plants_nb.R'
     'get_report_results.R'
+    'get_sim.R'
     'get_soils_list.R'
     'get_stics_versions_compat.R'
     'get_usms_files.R'

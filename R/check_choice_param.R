@@ -52,7 +52,7 @@ check_choice_param <- function( xml_doc, param_name, stop=FALSE) {
 
   # Getting all nodes intervention containing a common parameter
   common_par_path <- get_param_type(xml_doc, param_name = common_par_name)$xpath
-  interv_nodes <- lapply(SticsRFiles:::getNodeS(xml_doc,common_par_path), xmlParent)
+  interv_nodes <- lapply(getNodeS(xml_doc,common_par_path), xmlParent)
   interv_par_names <- unique(unlist(lapply(interv_nodes, function(x) xmlSApply(x, FUN = xmlAttrs))))
   if (all(choice_specif_par %in% interv_par_names)) {
 

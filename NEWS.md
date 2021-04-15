@@ -1,4 +1,42 @@
-# SticsRFiles 0.2.0 (2020-01-15)
+# SticsRFiles 0.3.0 (2021-04-15)
+
+## General changes
+
+  * DESCRIPTION
+    * Imports: lifecycle
+
+  * Tests 
+    * new ones added for : gen_tec_xml, gen_ini_xml
+
+  * Functions:
+    * Now managing functions life cycle
+
+  * Files:
+    * useless XML template files have been removed  
+    
+## Specific changes
+  * get_sim: new function replacing get_daily_results
+  
+  * get_daily_results: has been set to deprecated (a warning is displayed)
+  
+  * set_param_value: changed error output to warning if any parameter name does not exist
+  
+  * gen_tec_xml: now taking into account specific parameters linked to cut crops 
+  management
+  
+  * gen_ini_xml: fix for crop identifiers management (plant 1 or 2)
+  
+  * get_usms_list: changed error output to warning  when the usms file does not exist
+  
+  * force_param_value: now uses either parameters names including () or _ for indexed ones 
+  (for example lai(n) or lai_n)
+  
+  * get_param_xml, set_param_xml: checks have been added for detecting parameters 
+  duplicates in tec files
+
+
+
+# SticsRFiles 0.2.0 (2021-01-15)
 
 ## General changes
 
