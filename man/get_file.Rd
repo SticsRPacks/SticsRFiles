@@ -48,7 +48,7 @@ the usms names.
 }
 \description{
 Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
-Used by \code{get_obs()} and \code{get_daily_results()}. Operate first computation and then call \code{get_file_()}.
+Used by \code{get_obs()} and \code{get_sim()}. Operate first computation and then call \code{get_file_()}.
 }
 \details{
 The \code{.obs} files names should match USMs mames, e.g. for a usm called "banana",

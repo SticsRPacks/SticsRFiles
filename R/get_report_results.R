@@ -90,7 +90,7 @@ get_report_results <- function(workspace,
     col_names <- names(df)
   }
 
-  # To be homogenous with get_daily_results, get_file_int
+  # To be homogenous with get_sim, get_file_int
   colnames(df) <- var_to_col_names(col_names)
 
   # Filtering usms

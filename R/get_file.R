@@ -1,7 +1,7 @@
 #' Read STICS observation or simulation files (.obs or mod_s)
 #'
 #' @description Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
-#' Used by `get_obs()` and `get_daily_results()`. Operate first computation and then call `get_file_()`.
+#' Used by `get_obs()` and `get_sim()`. Operate first computation and then call `get_file_()`.
 #'
 #' @param workspace      Path of a JavaStics workspace, or a vector of (recursive call).
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
@@ -103,7 +103,7 @@ get_file = function(workspace,
 #' Read STICS observation or simulation files (.obs or mod_s)
 #'
 #' @description Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
-#' Used by `get_obs()` and `get_daily_results()`.
+#' Used by `get_obs()` and `get_sim()`.
 #'
 #' @param workspace      Path of a JavaStics workspace, or a vector of (recursive call).
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
@@ -151,7 +151,7 @@ get_file_ <- function(workspace = getwd(),
   }
   # Getting sim files list from usms.xml file or obs files found in workspace
 
-  # get_daily_results(), the calling function did not found the usms.xml file given using
+  # get_sim(), the calling function did not found the usms.xml file given using
   # an absolute path, but the user gives a usms_filename, so it must be relative to
   # the workspace
   if(!is.null(usms_filename) && is.null(file_name) && is.null(plant_names)){

@@ -62,6 +62,7 @@ Collate:
     'attributes_list2matrix.R'
     'check_choice_param.R'
     'check_param_names.R'
+    'col_names_to_var.R'
     'compute_doy_cumul.R'
     'convert_xml2txt.R'
     'convert_xml2txt_int.R'
