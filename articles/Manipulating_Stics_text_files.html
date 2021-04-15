@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -70,7 +72,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -92,7 +94,7 @@
       <h1 data-toc-skip>Manipulating Stics text files</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/vignettes/Manipulating_Stics_text_files.Rmd"><code>vignettes/Manipulating_Stics_text_files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/vignettes/Manipulating_Stics_text_files.Rmd" class="external-link"><code>vignettes/Manipulating_Stics_text_files.Rmd</code></a></small>
       <div class="hidden name"><code>Manipulating_Stics_text_files.Rmd</code></div>
 
     </div>
@@ -100,19 +102,19 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles">SticsRFiles</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span>
 <span class="co">#&gt; Learn SticsRFiles at: https://SticsRPacks.github.io/SticsRFiles</span></code></pre></div>
 <hr>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>This package allows the user to programatically manipulate either the XML files used to store more information, or the text files directly used as inputs by the STICS model. This vignette explains the second one. For more details on how to manipulate XML files, please refer to the vignette <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>.</p>
+<p>This package allows the user to programatically manipulate either the XML files used to store more information, or the text files directly used as inputs by the STICS model. This vignette explains the second one. For more details on how to manipulate XML files, please refer to the vignette <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html" class="external-link">Manipulating Stics XML files</a>.</p>
 <blockquote>
 <p>Disclaimer: These functionalities are more oriented toward advanced users and/or developers.</p>
 </blockquote>
 <p>Using this package, it is possible to:</p>
 <ul>
-<li>convert the XML files to text files (<code><a href="../reference/convert_xml2txt.html">convert_xml2txt()</a></code>), please see the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files">Generating Stics text files</a> vignette;<br>
+<li>convert the XML files to text files (<code><a href="../reference/convert_xml2txt.html">convert_xml2txt()</a></code>), please see the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files" class="external-link">Generating Stics text files</a> vignette;<br>
 </li>
 <li>read (<a href="R/read_param.R"><code>get_param_txt()</code></a>) or set (<a href="R/read_param.R"><code>set_param_txt()</code></a>) parameters;<br>
 </li>
@@ -120,7 +122,7 @@
 </li>
 <li>Set the output variables required (<code><a href="../reference/gen_varmod.html">gen_varmod()</a></code>).</li>
 </ul>
-<p>To run a STICS simulation on these input files, please refer to the <a href="https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html"><code>run_stics()</code></a> function from <a href="https://sticsrpacks.github.io/SticsOnR/index.html">SticsOnR</a>.</p>
+<p>To run a STICS simulation on these input files, please refer to the <a href="https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html" class="external-link"><code>run_stics()</code></a> function from <a href="https://sticsrpacks.github.io/SticsOnR/index.html" class="external-link">SticsOnR</a>.</p>
 <p>Some example data is available from the package and can be retreived using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">example_txt_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_examples_path.html">get_examples_path</a></span><span class="op">(</span> file_type <span class="op">=</span> <span class="st">"txt"</span>, version_name <span class="op">=</span> <span class="st">"V9.0"</span><span class="op">)</span></code></pre></div>
@@ -241,14 +243,14 @@
 <a href="#set-the-output-variables" class="anchor"></a>Set the output variables</h2>
 <p>The <code><a href="../reference/gen_varmod.html">gen_varmod()</a></code> function is used to set the required output variables in the <code>var.mod</code> file. For example if the user need the LAI and the dry mass:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gen_varmod.html">gen_varmod</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">example_txt_dir</span>, var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lai(n)"</span>,<span class="st">"masec(n)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/gen_varmod.html">gen_varmod</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">example_txt_dir</span>, var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lai(n)"</span>,<span class="st">"masec(n)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Controlling if the values where written:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_var_mod.html">get_var_mod</a></span><span class="op">(</span><span class="va">example_txt_dir</span><span class="op">)</span>
 <span class="co">#&gt; [1] "lai(n)"   "masec(n)"</span></code></pre></div>
 <p>Alternatively, the user can append a variable to the pre-existing vector of values using the <code>add</code> argument:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gen_varmod.html">gen_varmod</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">example_txt_dir</span>, var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hauteur"</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/gen_varmod.html">gen_varmod</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">example_txt_dir</span>, var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hauteur"</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_var_mod.html">get_var_mod</a></span><span class="op">(</span><span class="va">example_txt_dir</span><span class="op">)</span>
 <span class="co">#&gt; [1] "lai(n)"   "masec(n)" "hauteur"</span></code></pre></div>
 <p>To get the possible output variables from the model, the user can use the <code><a href="../reference/get_var_info.html">get_var_info()</a></code> function that provide a fuzzy search:</p>
@@ -298,11 +300,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p>
+<p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -310,6 +314,8 @@
 
   
 
+
+  
 
   </body>
 </html>

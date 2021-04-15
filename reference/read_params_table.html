@@ -58,9 +58,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -176,42 +185,42 @@ replaced repectively with num_na or str_na</p>
 <span class='va'>usm_xl_file</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='st'>"inputs_stics_example.xlsx"</span>,
 verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='fu'>read_params_table</span><span class='op'>(</span><span class='va'>usm_xl_file</span>, sheet <span class='op'>=</span> <span class='st'>"USMs"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 17</span><span>
-#&gt;    usm_name datedebut datefin finit nomsol fstation fclim1 fclim2 culturean
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> USM_201…       199     263 USM_… USM_T1 climate… clima… clima…         1
-#&gt; </span><span style='color: #555555;'> 2</span><span> USM_201…       264     570 USM_… USM_T1 climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 3</span><span> BIN_CAN…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 4</span><span> BIN_AGT…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 5</span><span> AGA_ARB…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 6</span><span> AGA_ARB…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 7</span><span> FRA_ARB…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 8</span><span> MAG_ARB…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 9</span><span> MAG_ARV…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'>10</span><span> MAG_ARV…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'>11</span><span> FRA_ARB…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'>12</span><span> FRA_ARB…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'># … with 8 more variables: nbplantes </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, codesimul </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, fplt_1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   ftec_1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, flai_1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fplt_2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ftec_2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, flai_2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='va'>usm_csv_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='download_usm_csv.html'>download_usm_csv</a></span><span class='op'>(</span>csv_name <span class='op'>=</span> <span class='st'>"inputs_stics_example_USMs.csv"</span>,
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 x 17</span><span>
+#&gt;    usm_name    datedebut datefin finit   nomsol fstation fclim1 fclim2 culturean
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> USM_2017_T…       199     263 USM_20… USM_T1 climate… clima… clima…         1
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> USM_2018_T1       264     570 USM_20… USM_T1 climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> BIN_CAN_05…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> BIN_AGT_04…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> AGA_ARB_13…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> AGA_ARB_13…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> FRA_ARB_11…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> MAG_ARB_09…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> MAG_ARV_12…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> MAG_ARV_12…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> FRA_ARB_12…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> FRA_ARB_13…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #949494;'># … with 8 more variables: nbplantes &lt;dbl&gt;, codesimul &lt;dbl&gt;, fplt_1 &lt;chr&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   ftec_1 &lt;chr&gt;, flai_1 &lt;chr&gt;, fplt_2 &lt;chr&gt;, ftec_2 &lt;chr&gt;, flai_2 &lt;chr&gt;</span><span></div><div class='input'><span class='va'>usm_csv_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='download_usm_csv.html'>download_usm_csv</a></span><span class='op'>(</span>csv_name <span class='op'>=</span> <span class='st'>"inputs_stics_example_USMs.csv"</span>,
 verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='fu'>read_params_table</span><span class='op'>(</span>file_path <span class='op'>=</span> <span class='va'>usm_csv_file</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 17</span><span>
-#&gt;    usm_name datedebut datefin finit nomsol fstation fclim1 fclim2 culturean
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> USM_201…       199     263 USM_… USM_T1 climate… clima… clima…         1
-#&gt; </span><span style='color: #555555;'> 2</span><span> USM_201…       264     570 USM_… USM_T1 climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 3</span><span> BIN_CAN…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 4</span><span> BIN_AGT…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 5</span><span> AGA_ARB…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 6</span><span> AGA_ARB…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 7</span><span> FRA_ARB…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 8</span><span> MAG_ARB…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'> 9</span><span> MAG_ARV…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'>10</span><span> MAG_ARV…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'>11</span><span> FRA_ARB…       199     263 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'>12</span><span> FRA_ARB…       264     570 Vill… LF1    climate… clima… clima…         2
-#&gt; </span><span style='color: #555555;'># … with 8 more variables: nbplantes </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, codesimul </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, fplt_1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   ftec_1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, flai_1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, fplt_2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, ftec_2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, flai_2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 12 x 17</span><span>
+#&gt;    usm_name    datedebut datefin finit   nomsol fstation fclim1 fclim2 culturean
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> USM_2017_T…       199     263 USM_20… USM_T1 climate… clima… clima…         1
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> USM_2018_T1       264     570 USM_20… USM_T1 climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> BIN_CAN_05…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> BIN_AGT_04…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> AGA_ARB_13…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> AGA_ARB_13…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> FRA_ARB_11…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> MAG_ARB_09…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> MAG_ARV_12…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> MAG_ARV_12…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> FRA_ARB_12…       199     263 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> FRA_ARB_13…       264     570 Vill11… LF1    climate… clima… clima…         2
+#&gt; </span><span style='color: #949494;'># … with 8 more variables: nbplantes &lt;int&gt;, codesimul &lt;int&gt;, fplt_1 &lt;chr&gt;,</span><span>
+#&gt; </span><span style='color: #949494;'>#   ftec_1 &lt;chr&gt;, flai_1 &lt;chr&gt;, fplt_2 &lt;chr&gt;, ftec_2 &lt;chr&gt;, flai_2 &lt;chr&gt;</span><span></div><div class='input'>
 
 
 </div></span></pre>
@@ -226,11 +235,11 @@ verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -238,6 +247,8 @@ verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>
 
   
 
+
+  
 
   </body>
 </html>

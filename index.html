@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -92,16 +94,16 @@
 <a href="#sticsrfiles" class="anchor"></a>SticsRFiles</h1></div>
 <!-- badges: start -->
 
-<p><a href="https://zenodo.org/badge/latestdoi/187986787"><img src="https://zenodo.org/badge/187986787.svg" alt="DOI"></a> <!-- badges: end --></p>
+<p><a href="https://zenodo.org/badge/latestdoi/187986787" class="external-link"><img src="https://zenodo.org/badge/187986787.svg" alt="DOI"></a> <!-- badges: end --></p>
 <p>The goal of SticsRFiles is to perform manipulations of the Stics model files either on XML files (used by the JavaStics GUI) or on text files used by the model fortran executable.</p>
-<p>The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html">Get started page</a>.</p>
-<p>Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the <a href="https://SticsRPacks.github.io/SticsOnR">SticsOnR</a> package.</p>
-<p>If you want to be notified when a new release of this package is made, you can tick the Releases box in the “Watch / Unwatch =&gt; Custom” menu at the top right of <a href="https://github.com/SticsRPacks/SticsRFiles">this page</a>.</p>
+<p>The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html" class="external-link">Get started page</a>.</p>
+<p>Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the <a href="https://SticsRPacks.github.io/SticsOnR" class="external-link">SticsOnR</a> package.</p>
+<p>If you want to be notified when a new release of this package is made, you can tick the Releases box in the “Watch / Unwatch =&gt; Custom” menu at the top right of <a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">this page</a>.</p>
 <div id="prerequisites-and-technical-tips" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prerequisites-and-technical-tips" class="anchor"></a>Prerequisites and technical tips</h2>
 <blockquote>
-<p>Some information about software requirements and operating system constraints are given in the SticsOnR package documentation <a href="https://sticsrpacks.github.io/SticsOnR">here</a>.</p>
+<p>Some information about software requirements and operating system constraints are given in the SticsOnR package documentation <a href="https://sticsrpacks.github.io/SticsOnR" class="external-link">here</a>.</p>
 </blockquote>
 </div>
 <div id="installation" class="section level2">
@@ -119,7 +121,7 @@
 <h3 class="hasAnchor">
 <a href="#recommended-installation-sticsrpacks" class="anchor"></a>Recommended installation: <code>SticsRPacks</code>
 </h3>
-<p>The best way to install the packages from <code>SticsRPacks</code>, from which <code>SticsRFiles</code> is part of, is by installing the <code>[SticsRPacks]</code> package. The package can be installed from <a href="https://github.com/">GitHub</a> using either the <code>devtools</code> package, or the more lightweight <code>remotes</code> package:</p>
+<p>The best way to install the packages from <code>SticsRPacks</code>, from which <code>SticsRFiles</code> is part of, is by installing the <code>[SticsRPacks]</code> package. The package can be installed from <a href="https://github.com/" class="external-link">GitHub</a> using either the <code>devtools</code> package, or the more lightweight <code>remotes</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -128,7 +130,7 @@
 </ul>
 <!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></code></pre></div>
 <p>The package will install the packages for you at the last release version.</p>
 </div>
 <div id="or-install-directly" class="section level3">
@@ -146,7 +148,7 @@
 </ul>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></code></pre></div>
 <p>Normaly, all the package dependencies will be installed for CRAN packages.</p>
 </div>
 </div>
@@ -157,16 +159,16 @@
 <h3 class="hasAnchor">
 <a href="#files-manipulations" class="anchor"></a>Files manipulations</h3>
 <ul>
-<li><p>A description of how to use the functions for manipulating XML input files is detailed <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html">here</a></p></li>
-<li><p>A description of how to use the functions for manipulating text input files is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files">here</a>.</p></li>
+<li><p>A description of how to use the functions for manipulating XML input files is detailed <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html" class="external-link">here</a></p></li>
+<li><p>A description of how to use the functions for manipulating text input files is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files" class="external-link">here</a>.</p></li>
 </ul>
 </div>
 <div id="files-generation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#files-generation" class="anchor"></a>Files generation</h3>
 <ul>
-<li><p>A description of usefull functions for generating XML input files from usms parameters data stored in Excel files sheets or CSV files is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html">here</a>.</p></li>
-<li><p>A description of functions for generating text input files from XML one of usms parameters is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html">here</a>.</p></li>
+<li><p>A description of usefull functions for generating XML input files from usms parameters data stored in Excel files sheets or CSV files is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html" class="external-link">here</a>.</p></li>
+<li><p>A description of functions for generating text input files from XML one of usms parameters is available <a href="https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html" class="external-link">here</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -174,19 +176,19 @@
 <h2 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of conduct</h2>
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
-<p>The package is under intensive development, so you can fill an issue or request us a feature <a href="https://github.com/SticsRPacks/SticsRFiles/issues">here</a> at any time.</p>
+<p>The package is under intensive development, so you can fill an issue or request us a feature <a href="https://github.com/SticsRPacks/SticsRFiles/issues" class="external-link">here</a> at any time.</p>
 </div>
 <div id="authors-and-acknowledgments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#authors-and-acknowledgments" class="anchor"></a>Authors and acknowledgments</h2>
-<p>The SticsRFiles package is developed by Patrice Lecharpentier, Rémi Vezy and the <a href="https://github.com/orgs/SticsRPacks/teams/sticsrfiles">SticsRFiles Team</a>.</p>
+<p>The SticsRFiles package is developed by Patrice Lecharpentier, Rémi Vezy and the <a href="https://github.com/orgs/SticsRPacks/teams/sticsrfiles" class="external-link">SticsRFiles Team</a>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/SticsRPacks/SticsRFiles/">https://​github.com/​SticsRPacks/​SticsRFiles/​</a>
 </li>
@@ -194,47 +196,53 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Patrice Lecharpentier <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Remi Vezy <br><small class="roles"> Author </small>  </li>
 <li>SticsRPacks <br><small class="roles"> Author, copyright holder </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
-<li><a href="https://github.com/SticsRPacks/SticsRFiles/actions"><img src="https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/SticsRPacks/SticsRFiles?branch=master"><img src="https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
+<li><a href="https://github.com/SticsRPacks/SticsRFiles/actions" class="external-link"><img src="https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/SticsRPacks/SticsRFiles?branch=master" class="external-link"><img src="https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p>
+<p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -242,6 +250,8 @@
 
   
 
+
+  
 
   </body>
 </html>

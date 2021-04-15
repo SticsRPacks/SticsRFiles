@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -70,7 +72,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -92,7 +94,7 @@
       <h1 data-toc-skip>Generating Stics XML files from tabulated data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/vignettes/Generating_Stics_XML_files.Rmd"><code>vignettes/Generating_Stics_XML_files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/vignettes/Generating_Stics_XML_files.Rmd" class="external-link"><code>vignettes/Generating_Stics_XML_files.Rmd</code></a></small>
       <div class="hidden name"><code>Generating_Stics_XML_files.Rmd</code></div>
 
     </div>
@@ -100,7 +102,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles">SticsRFiles</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span>
 <span class="co">#&gt; Learn SticsRFiles at: https://SticsRPacks.github.io/SticsRFiles</span></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
@@ -530,32 +532,32 @@ in some cases used parameters names in tables may be different from real paramet
 <h2 class="hasAnchor">
 <a href="#usms-xml-file-content" class="anchor"></a><code>usms.xml</code> file content</h2>
 <p>Example of the first <code>usm</code> parameters:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb6-1"><a href="#cb6-1"></a>#&gt; <span class="kw">&lt;?xml</span> version="1.0" encoding="UTF-8" standalone="no"<span class="kw">?&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>#&gt; <span class="kw">&lt;usms&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>#&gt;   <span class="kw">&lt;usm</span><span class="ot"> nom=</span><span class="st">"USM_2017_T1_CI"</span><span class="kw">&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>#&gt;     <span class="kw">&lt;datedebut&gt;</span>199<span class="kw">&lt;/datedebut&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>#&gt;     <span class="kw">&lt;datefin&gt;</span>263<span class="kw">&lt;/datefin&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>#&gt;     <span class="kw">&lt;finit&gt;</span>USM_2017_T1_ini.xml<span class="kw">&lt;/finit&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>#&gt;     <span class="kw">&lt;nomsol&gt;</span>USM_T1<span class="kw">&lt;/nomsol&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>#&gt;     <span class="kw">&lt;fstation&gt;</span>climatex_sta.xml<span class="kw">&lt;/fstation&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>#&gt;     <span class="kw">&lt;fclim1&gt;</span>climatex.2017<span class="kw">&lt;/fclim1&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>#&gt;     <span class="kw">&lt;fclim2&gt;</span>climatex.2017<span class="kw">&lt;/fclim2&gt;</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>#&gt;     <span class="kw">&lt;culturean&gt;</span>1<span class="kw">&lt;/culturean&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>#&gt;     <span class="kw">&lt;nbplantes&gt;</span>1<span class="kw">&lt;/nbplantes&gt;</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a>#&gt;     <span class="kw">&lt;codesimul&gt;</span>0<span class="kw">&lt;/codesimul&gt;</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>#&gt;     <span class="kw">&lt;plante</span><span class="ot"> dominance=</span><span class="st">"1"</span><span class="kw">&gt;</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a>#&gt;       <span class="kw">&lt;fplt&gt;</span>rapeseed_plt.xml<span class="kw">&lt;/fplt&gt;</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a>#&gt;       <span class="kw">&lt;ftec&gt;</span>USM_2017_T1_CI_tec.xml<span class="kw">&lt;/ftec&gt;</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a>#&gt;       <span class="kw">&lt;flai&gt;&lt;/flai&gt;</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>#&gt;     <span class="kw">&lt;/plante&gt;</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a>#&gt;     <span class="kw">&lt;plante</span><span class="ot"> dominance=</span><span class="st">"2"</span><span class="kw">&gt;</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a>#&gt;       <span class="kw">&lt;fplt&gt;&lt;/fplt&gt;</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a>#&gt;       <span class="kw">&lt;ftec&gt;&lt;/ftec&gt;</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a>#&gt;       <span class="kw">&lt;flai&gt;&lt;/flai&gt;</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a>#&gt;     <span class="kw">&lt;/plante&gt;</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a>#&gt;   <span class="kw">&lt;/usm&gt;</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a>#&gt; ...</span>
-<span id="cb6-26"><a href="#cb6-26"></a>#&gt; <span class="kw">&lt;/usms&gt;</span></span></code></pre></div>
+<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+#&gt; &lt;usms&gt;
+#&gt;   &lt;usm nom="USM_2017_T1_CI"&gt;
+#&gt;     &lt;datedebut&gt;199&lt;/datedebut&gt;
+#&gt;     &lt;datefin&gt;263&lt;/datefin&gt;
+#&gt;     &lt;finit&gt;USM_2017_T1_ini.xml&lt;/finit&gt;
+#&gt;     &lt;nomsol&gt;USM_T1&lt;/nomsol&gt;
+#&gt;     &lt;fstation&gt;climatex_sta.xml&lt;/fstation&gt;
+#&gt;     &lt;fclim1&gt;climatex.2017&lt;/fclim1&gt;
+#&gt;     &lt;fclim2&gt;climatex.2017&lt;/fclim2&gt;
+#&gt;     &lt;culturean&gt;1&lt;/culturean&gt;
+#&gt;     &lt;nbplantes&gt;1&lt;/nbplantes&gt;
+#&gt;     &lt;codesimul&gt;0&lt;/codesimul&gt;
+#&gt;     &lt;plante dominance="1"&gt;
+#&gt;       &lt;fplt&gt;rapeseed_plt.xml&lt;/fplt&gt;
+#&gt;       &lt;ftec&gt;USM_2017_T1_CI_tec.xml&lt;/ftec&gt;
+#&gt;       &lt;flai&gt;null&lt;/flai&gt;
+#&gt;     &lt;/plante&gt;
+#&gt;     &lt;plante dominance="2"&gt;
+#&gt;       &lt;fplt&gt;null&lt;/fplt&gt;
+#&gt;       &lt;ftec&gt;null&lt;/ftec&gt;
+#&gt;       &lt;flai&gt;null&lt;/flai&gt;
+#&gt;     &lt;/plante&gt;
+#&gt;   &lt;/usm&gt;
+#&gt; ...
+#&gt; &lt;/usms&gt;</code></pre>
 </div>
 </div>
 <div id="generating-the-sols-xml-file-sols-xml" class="section level1">
@@ -593,40 +595,40 @@ in some cases used parameters names in tables may be different from real paramet
 <h2 class="hasAnchor">
 <a href="#sols-xml-file-content" class="anchor"></a><code>sols.xml</code> file content</h2>
 <p>Example of the first <code>sol</code> parameters sub-list:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1"></a>#&gt; <span class="kw">&lt;?xml</span> version="1.0" encoding="UTF-8"<span class="kw">?&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>#&gt; <span class="kw">&lt;sols&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>#&gt;   <span class="kw">&lt;sol</span><span class="ot"> nom=</span><span class="st">"USM_T1"</span><span class="kw">&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"60.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"argi"</span><span class="kw">&gt;</span>20.35<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.5"</span><span class="ot"> min=</span><span class="st">"0.05"</span><span class="ot"> nom=</span><span class="st">"norg"</span><span class="kw">&gt;</span>0.1<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"60.0"</span><span class="ot"> min=</span><span class="st">"10.0"</span><span class="ot"> nom=</span><span class="st">"profhum"</span><span class="kw">&gt;</span>40.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"100.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"calc"</span><span class="kw">&gt;</span>0.52<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"9.0"</span><span class="ot"> min=</span><span class="st">"4.0"</span><span class="ot"> nom=</span><span class="st">"pH"</span><span class="kw">&gt;</span>8.23<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.5"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"concseuil"</span><span class="kw">&gt;</span>0.2000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.6"</span><span class="ot"> min=</span><span class="st">"0.05"</span><span class="ot"> nom=</span><span class="st">"albedo"</span><span class="kw">&gt;</span>0.22<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"q0"</span><span class="kw">&gt;</span>9.63<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"ruisolnu"</span><span class="kw">&gt;</span>0.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1000.0"</span><span class="ot"> min=</span><span class="st">"10.0"</span><span class="ot"> nom=</span><span class="st">"obstarac"</span><span class="kw">&gt;</span>200.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"100.0"</span><span class="ot"> min=</span><span class="st">"5.0"</span><span class="ot"> nom=</span><span class="st">"pluiebat"</span><span class="kw">&gt;</span>50.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"mulchbat"</span><span class="kw">&gt;</span>0.5000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"150.0"</span><span class="ot"> min=</span><span class="st">"10.0"</span><span class="ot"> nom=</span><span class="st">"zesx"</span><span class="kw">&gt;</span>60.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"10.0"</span><span class="ot"> min=</span><span class="st">"-10.0"</span><span class="ot"> nom=</span><span class="st">"cfes"</span><span class="kw">&gt;</span>5.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.2"</span><span class="ot"> min=</span><span class="st">"0.01"</span><span class="ot"> nom=</span><span class="st">"z0solnu"</span><span class="kw">&gt;</span>0.0100<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"20.0"</span><span class="ot"> min=</span><span class="st">"8.0"</span><span class="ot"> nom=</span><span class="st">"csurNsol"</span><span class="kw">&gt;</span>0.0000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"5.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"penterui"</span><span class="kw">&gt;</span>0.3300<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a>#&gt;     <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"pebbles"</span><span class="ot"> nomParam=</span><span class="st">"codecailloux"</span><span class="kw">&gt;</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"yes"</span><span class="kw">/&gt;</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"no"</span><span class="kw">/&gt;</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a>#&gt;     <span class="kw">&lt;/option&gt;</span></span>
-<span id="cb9-25"><a href="#cb9-25"></a>#&gt;     <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"macroporosity"</span><span class="ot"> nomParam=</span><span class="st">"codemacropor"</span><span class="kw">&gt;</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"yes"</span><span class="kw">/&gt;</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"no"</span><span class="kw">/&gt;</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a>#&gt;     <span class="kw">&lt;/option&gt;</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a>#&gt;     <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"cracks (case of swelling clay soils)"</span><span class="ot"> nomParam=</span><span class="st">"codefente"</span><span class="kw">&gt;</span></span>
-<span id="cb9-30"><a href="#cb9-30"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"yes"</span><span class="kw">/&gt;</span></span>
-<span id="cb9-31"><a href="#cb9-31"></a>#&gt; ...</span>
-<span id="cb9-32"><a href="#cb9-32"></a>#&gt;   <span class="kw">&lt;/sol&gt;</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a>#&gt; ...</span>
-<span id="cb9-34"><a href="#cb9-34"></a>#&gt; <span class="kw">&lt;/sols&gt;</span></span></code></pre></div>
+<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+#&gt; &lt;sols&gt;
+#&gt;   &lt;sol nom="USM_T1"&gt;
+#&gt;     &lt;param format="real" max="60.0" min="0.0" nom="argi"&gt;20.35&lt;/param&gt;
+#&gt;     &lt;param format="real" max="0.5" min="0.05" nom="norg"&gt;0.1&lt;/param&gt;
+#&gt;     &lt;param format="real" max="60.0" min="10.0" nom="profhum"&gt;40.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="100.0" min="0.0" nom="calc"&gt;0.52&lt;/param&gt;
+#&gt;     &lt;param format="real" max="9.0" min="4.0" nom="pH"&gt;8.23&lt;/param&gt;
+#&gt;     &lt;param format="real" max="0.5" min="0.0" nom="concseuil"&gt;0.2000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="0.6" min="0.05" nom="albedo"&gt;0.22&lt;/param&gt;
+#&gt;     &lt;param format="real" max="50.0" min="0.0" nom="q0"&gt;9.63&lt;/param&gt;
+#&gt;     &lt;param format="real" max="1.0" min="0.0" nom="ruisolnu"&gt;0.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="1000.0" min="10.0" nom="obstarac"&gt;200.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="100.0" min="5.0" nom="pluiebat"&gt;50.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="2.0" min="0.0" nom="mulchbat"&gt;0.5000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="150.0" min="10.0" nom="zesx"&gt;60.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="10.0" min="-10.0" nom="cfes"&gt;5.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="0.2" min="0.01" nom="z0solnu"&gt;0.0100&lt;/param&gt;
+#&gt;     &lt;param format="real" max="20.0" min="8.0" nom="CsurNsol"&gt;0.0000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="5.0" min="0.0" nom="penterui"&gt;0.3300&lt;/param&gt;
+#&gt;     &lt;option choix="2" nom="pebbles" nomParam="codecailloux"&gt;
+#&gt;       &lt;choix code="1" nom="yes"/&gt;
+#&gt;       &lt;choix code="2" nom="no"/&gt;
+#&gt;     &lt;/option&gt;
+#&gt;     &lt;option choix="1" nom="macroporosity" nomParam="codemacropor"&gt;
+#&gt;       &lt;choix code="1" nom="yes"/&gt;
+#&gt;       &lt;choix code="2" nom="no"/&gt;
+#&gt;     &lt;/option&gt;
+#&gt;     &lt;option choix="2" nom="cracks (case of swelling clay soils)" nomParam="codefente"&gt;
+#&gt;       &lt;choix code="1" nom="yes"/&gt;
+#&gt; ...
+#&gt;   &lt;/sol&gt;
+#&gt; ...
+#&gt; &lt;/sols&gt;</code></pre>
 </div>
 </div>
 <div id="generating-multiple-crop-management-xml-files-_tec-xml" class="section level1">
@@ -655,38 +657,38 @@ in some cases used parameters names in tables may be different from real paramet
 <span class="fu"><a href="../reference/gen_tec_xml.html">gen_tec_xml</a></span><span class="op">(</span>param_table <span class="op">=</span> <span class="va">tec_param</span>, out_path <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></code></pre></div>
 <!-- active chunk to be run -->
 <p>Example of a <code>tec</code> parameters file content sub-list:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb12-1"><a href="#cb12-1"></a>#&gt; <span class="kw">&lt;?xml</span> version="1.0" encoding="UTF-8" standalone="no"<span class="kw">?&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>#&gt; <span class="kw">&lt;fichiertec&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>#&gt;   <span class="kw">&lt;formalisme</span><span class="ot"> nom=</span><span class="st">"supply of organic residus"</span><span class="kw">&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>#&gt;     <span class="kw">&lt;ta</span><span class="ot"> nb_interventions=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"interventions"</span><span class="kw">&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>#&gt;       <span class="kw">&lt;ta_entete</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span><span class="kw">&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a>#&gt;       <span class="kw">&lt;/ta_entete&gt;</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a>#&gt;       <span class="kw">&lt;intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span><span class="kw">&gt;</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span><span class="kw">&gt;</span>999<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span><span class="kw">&gt;</span>1<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span><span class="kw">&gt;</span>9<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span><span class="kw">&gt;</span>42<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span><span class="kw">&gt;</span>90<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span><span class="kw">&gt;</span>0<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span><span class="kw">&gt;</span>7<span class="kw">&lt;/colonne&gt;</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a>#&gt;       <span class="kw">&lt;/intervention&gt;</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a>#&gt;     <span class="kw">&lt;/ta&gt;</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a>#&gt;   <span class="kw">&lt;/formalisme&gt;</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a>#&gt;   <span class="kw">&lt;formalisme</span><span class="ot"> nom=</span><span class="st">"soil tillage"</span><span class="kw">&gt;</span></span>
-<span id="cb12-26"><a href="#cb12-26"></a>#&gt;     <span class="kw">&lt;ta</span><span class="ot"> nb_interventions=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"interventions"</span><span class="kw">&gt;</span></span>
-<span id="cb12-27"><a href="#cb12-27"></a>#&gt;       <span class="kw">&lt;ta_entete</span><span class="ot"> nb_colonnes=</span><span class="st">"3"</span><span class="kw">&gt;</span></span>
-<span id="cb12-28"><a href="#cb12-28"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"jultrav"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-29"><a href="#cb12-29"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"profres"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a>#&gt;         <span class="kw">&lt;colonne</span><span class="ot"> nom=</span><span class="st">"proftrav"</span><span class="kw">/&gt;</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a>#&gt; ...</span>
-<span id="cb12-32"><a href="#cb12-32"></a>#&gt; <span class="kw">&lt;/fichiertec&gt;</span></span></code></pre></div>
+<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+#&gt; &lt;fichiertec&gt;
+#&gt;   &lt;formalisme nom="supply of organic residus"&gt;
+#&gt;     &lt;ta nb_interventions="1" nom="interventions"&gt;
+#&gt;       &lt;ta_entete nb_colonnes="7"&gt;
+#&gt;         &lt;colonne nom="julres"/&gt;
+#&gt;         &lt;colonne nom="coderes"/&gt;
+#&gt;         &lt;colonne nom="qres"/&gt;
+#&gt;         &lt;colonne nom="Crespc"/&gt;
+#&gt;         &lt;colonne nom="CsurNres"/&gt;
+#&gt;         &lt;colonne nom="Nminres"/&gt;
+#&gt;         &lt;colonne nom="eaures"/&gt;
+#&gt;       &lt;/ta_entete&gt;
+#&gt;       &lt;intervention nb_colonnes="7"&gt;
+#&gt;         &lt;colonne nom="julres"&gt;999&lt;/colonne&gt;
+#&gt;         &lt;colonne nom="coderes"&gt;1&lt;/colonne&gt;
+#&gt;         &lt;colonne nom="qres"&gt;9&lt;/colonne&gt;
+#&gt;         &lt;colonne nom="Crespc"&gt;42&lt;/colonne&gt;
+#&gt;         &lt;colonne nom="CsurNres"&gt;90&lt;/colonne&gt;
+#&gt;         &lt;colonne nom="Nminres"&gt;0&lt;/colonne&gt;
+#&gt;         &lt;colonne nom="eaures"&gt;7&lt;/colonne&gt;
+#&gt;       &lt;/intervention&gt;
+#&gt;     &lt;/ta&gt;
+#&gt;   &lt;/formalisme&gt;
+#&gt;   &lt;formalisme nom="soil tillage"&gt;
+#&gt;     &lt;ta nb_interventions="1" nom="interventions"&gt;
+#&gt;       &lt;ta_entete nb_colonnes="3"&gt;
+#&gt;         &lt;colonne nom="jultrav"/&gt;
+#&gt;         &lt;colonne nom="profres"/&gt;
+#&gt;         &lt;colonne nom="proftrav"/&gt;
+#&gt; ...
+#&gt; &lt;/fichiertec&gt;</code></pre>
 </div>
 </div>
 <div id="generating-multiple-initialization-xml-files-_ini-xml" class="section level1">
@@ -719,27 +721,27 @@ in some cases used parameters names in tables may be different from real paramet
 <h2 class="hasAnchor">
 <a href="#xml-file-content" class="anchor"></a>XML file content</h2>
 <p>Example of a <code>ini</code> parameters file content sub-list:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb15-1"><a href="#cb15-1"></a>#&gt; <span class="kw">&lt;?xml</span> version="1.0" encoding="UTF-8"<span class="kw">?&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>#&gt; <span class="kw">&lt;initialisations&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>#&gt;   <span class="kw">&lt;nbplantes&gt;</span>1<span class="kw">&lt;/nbplantes&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>#&gt;   <span class="kw">&lt;plante</span><span class="ot"> dominance=</span><span class="st">"1"</span><span class="kw">&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>#&gt;     <span class="kw">&lt;stade0&gt;</span>snu<span class="kw">&lt;/stade0&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>#&gt;     <span class="kw">&lt;lai0&gt;</span>0.0<span class="kw">&lt;/lai0&gt;</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>#&gt;     <span class="kw">&lt;masec0&gt;</span>0.0<span class="kw">&lt;/masec0&gt;</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>#&gt;     <span class="kw">&lt;QNplante0&gt;</span>0.0<span class="kw">&lt;/QNplante0&gt;</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a>#&gt;     <span class="kw">&lt;magrain0&gt;</span>0.0<span class="kw">&lt;/magrain0&gt;</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a>#&gt;     <span class="kw">&lt;zrac0&gt;</span>0.0<span class="kw">&lt;/zrac0&gt;</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a>#&gt;     <span class="kw">&lt;resperenne0&gt;</span>0.0<span class="kw">&lt;/resperenne0&gt;</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a>#&gt;     <span class="kw">&lt;densinitial&gt;</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a>#&gt;       <span class="kw">&lt;horizon</span><span class="ot"> nh=</span><span class="st">"1"</span><span class="kw">&gt;</span>0.0<span class="kw">&lt;/horizon&gt;</span></span>
-<span id="cb15-14"><a href="#cb15-14"></a>#&gt;       <span class="kw">&lt;horizon</span><span class="ot"> nh=</span><span class="st">"2"</span><span class="kw">&gt;</span>0.0<span class="kw">&lt;/horizon&gt;</span></span>
-<span id="cb15-15"><a href="#cb15-15"></a>#&gt;       <span class="kw">&lt;horizon</span><span class="ot"> nh=</span><span class="st">"3"</span><span class="kw">&gt;</span>0.0<span class="kw">&lt;/horizon&gt;</span></span>
-<span id="cb15-16"><a href="#cb15-16"></a>#&gt;       <span class="kw">&lt;horizon</span><span class="ot"> nh=</span><span class="st">"4"</span><span class="kw">&gt;</span>0.0<span class="kw">&lt;/horizon&gt;</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a>#&gt;       <span class="kw">&lt;horizon</span><span class="ot"> nh=</span><span class="st">"5"</span><span class="kw">&gt;</span>0.0<span class="kw">&lt;/horizon&gt;</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a>#&gt;     <span class="kw">&lt;/densinitial&gt;</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a>#&gt;   <span class="kw">&lt;/plante&gt;</span></span>
-<span id="cb15-20"><a href="#cb15-20"></a>#&gt; ...</span>
-<span id="cb15-21"><a href="#cb15-21"></a>#&gt; <span class="kw">&lt;/initialisations&gt;</span></span></code></pre></div>
+<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+#&gt; &lt;initialisations&gt;
+#&gt;   &lt;nbplantes&gt;1&lt;/nbplantes&gt;
+#&gt;   &lt;plante dominance="1"&gt;
+#&gt;     &lt;stade0&gt;snu&lt;/stade0&gt;
+#&gt;     &lt;lai0&gt;0.0&lt;/lai0&gt;
+#&gt;     &lt;masec0&gt;0.0&lt;/masec0&gt;
+#&gt;     &lt;QNplante0&gt;0.0&lt;/QNplante0&gt;
+#&gt;     &lt;magrain0&gt;0.0&lt;/magrain0&gt;
+#&gt;     &lt;zrac0&gt;0.0&lt;/zrac0&gt;
+#&gt;     &lt;resperenne0&gt;0.0&lt;/resperenne0&gt;
+#&gt;     &lt;densinitial&gt;
+#&gt;       &lt;horizon nh="1"&gt;0.0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="2"&gt;0.0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="3"&gt;0.0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="4"&gt;0.0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="5"&gt;0.0&lt;/horizon&gt;
+#&gt;     &lt;/densinitial&gt;
+#&gt;   &lt;/plante&gt;
+#&gt; ...
+#&gt; &lt;/initialisations&gt;</code></pre>
 </div>
 </div>
 <div id="generating-multiple-meteorological-station-xml-files-_sta-xml" class="section level1">
@@ -772,49 +774,49 @@ in some cases used parameters names in tables may be different from real paramet
 <h2 class="hasAnchor">
 <a href="#xml-file-content-1" class="anchor"></a>XML file content</h2>
 <p>Example of a <code>sta</code> parameters file content sub-list:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb18-1"><a href="#cb18-1"></a>#&gt; <span class="kw">&lt;?xml</span> version="1.0" encoding="UTF-8" standalone="no"<span class="kw">?&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>#&gt; <span class="kw">&lt;fichiersta&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>#&gt;   <span class="kw">&lt;formalisme</span><span class="ot"> nom=</span><span class="st">"Weather station"</span><span class="kw">&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"10.0"</span><span class="ot"> min=</span><span class="st">"2.0"</span><span class="ot"> nom=</span><span class="st">"zr"</span><span class="kw">&gt;</span>2.5<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"10.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"NH3ref"</span><span class="kw">&gt;</span>0<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"90.0"</span><span class="ot"> min=</span><span class="st">"-90.0"</span><span class="ot"> nom=</span><span class="st">"latitude"</span><span class="kw">&gt;</span>49<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1200.0"</span><span class="ot"> min=</span><span class="st">"800.0"</span><span class="ot"> nom=</span><span class="st">"patm"</span><span class="kw">&gt;</span>1000<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a>#&gt;     <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"25.0"</span><span class="ot"> min=</span><span class="st">"4.0"</span><span class="ot"> nom=</span><span class="st">"aclim"</span><span class="kw">&gt;</span>20<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a>#&gt;   <span class="kw">&lt;/formalisme&gt;</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a>#&gt;   <span class="kw">&lt;formalisme</span><span class="ot"> nom=</span><span class="st">"climate"</span><span class="kw">&gt;</span></span>
-<span id="cb18-11"><a href="#cb18-11"></a>#&gt;     <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"reading OR calculation of PET"</span><span class="ot"> nomParam=</span><span class="st">"codeetp"</span><span class="kw">&gt;</span></span>
-<span id="cb18-12"><a href="#cb18-12"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"PET-Penman_reading"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-13"><a href="#cb18-13"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"PET-Penman_calculation"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"3"</span><span class="ot"> nom=</span><span class="st">"PET-Shuttleworth-Wallace_calculation"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-15"><a href="#cb18-15"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"4"</span><span class="ot"> nom=</span><span class="st">"PET-Priestley-Taylor_calculation"</span><span class="kw">&gt;</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2.0"</span><span class="ot"> min=</span><span class="st">"1.0"</span><span class="ot"> nom=</span><span class="st">"alphapt"</span><span class="kw">&gt;</span>1.25<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-17"><a href="#cb18-17"></a>#&gt;       <span class="kw">&lt;/choix&gt;</span></span>
-<span id="cb18-18"><a href="#cb18-18"></a>#&gt;     <span class="kw">&lt;/option&gt;</span></span>
-<span id="cb18-19"><a href="#cb18-19"></a>#&gt;     <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"climate change"</span><span class="ot"> nomParam=</span><span class="st">"codeclichange"</span><span class="kw">&gt;</span></span>
-<span id="cb18-20"><a href="#cb18-20"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"no"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-21"><a href="#cb18-21"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"yes"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-22"><a href="#cb18-22"></a>#&gt;     <span class="kw">&lt;/option&gt;</span></span>
-<span id="cb18-23"><a href="#cb18-23"></a>#&gt;     <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"climate in altitude"</span><span class="ot"> nomParam=</span><span class="st">"codaltitude"</span><span class="kw">&gt;</span></span>
-<span id="cb18-24"><a href="#cb18-24"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"no"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-25"><a href="#cb18-25"></a>#&gt;       <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"yes"</span><span class="kw">&gt;</span></span>
-<span id="cb18-26"><a href="#cb18-26"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2000.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"altistation"</span><span class="kw">&gt;</span>440<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-27"><a href="#cb18-27"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2000.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"altisimul"</span><span class="kw">&gt;</span>800<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-28"><a href="#cb18-28"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"3.0"</span><span class="ot"> min=</span><span class="st">"0.1"</span><span class="ot"> nom=</span><span class="st">"gradtn"</span><span class="kw">&gt;</span>-0.5<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-29"><a href="#cb18-29"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"3.0"</span><span class="ot"> min=</span><span class="st">"0.1"</span><span class="ot"> nom=</span><span class="st">"gradtx"</span><span class="kw">&gt;</span>-0.55<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-30"><a href="#cb18-30"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2000.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"altinversion"</span><span class="kw">&gt;</span>500<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-31"><a href="#cb18-31"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"3.0"</span><span class="ot"> min=</span><span class="st">"0.1"</span><span class="ot"> nom=</span><span class="st">"gradtninv"</span><span class="kw">&gt;</span>1.3<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-32"><a href="#cb18-32"></a>#&gt;         <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"cielclair"</span><span class="kw">&gt;</span>0.8<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-33"><a href="#cb18-33"></a>#&gt;         <span class="kw">&lt;option</span><span class="ot"> choix=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"option.adret.or.ubac"</span><span class="ot"> nomParam=</span><span class="st">"codadret"</span><span class="kw">&gt;</span></span>
-<span id="cb18-34"><a href="#cb18-34"></a>#&gt;           <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"adret(south)"</span><span class="kw">/&gt;</span></span>
-<span id="cb18-35"><a href="#cb18-35"></a>#&gt;           <span class="kw">&lt;choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"ubac(north)"</span><span class="kw">&gt;</span></span>
-<span id="cb18-36"><a href="#cb18-36"></a>#&gt;             <span class="kw">&lt;param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"5.0"</span><span class="ot"> min=</span><span class="st">"-5.0"</span><span class="ot"> nom=</span><span class="st">"ombragetx"</span><span class="kw">&gt;</span>-1.4<span class="kw">&lt;/param&gt;</span></span>
-<span id="cb18-37"><a href="#cb18-37"></a>#&gt;           <span class="kw">&lt;/choix&gt;</span></span>
-<span id="cb18-38"><a href="#cb18-38"></a>#&gt;         <span class="kw">&lt;/option&gt;</span></span>
-<span id="cb18-39"><a href="#cb18-39"></a>#&gt;       <span class="kw">&lt;/choix&gt;</span></span>
-<span id="cb18-40"><a href="#cb18-40"></a>#&gt;     <span class="kw">&lt;/option&gt;</span></span>
-<span id="cb18-41"><a href="#cb18-41"></a>#&gt;   <span class="kw">&lt;/formalisme&gt;</span></span>
-<span id="cb18-42"><a href="#cb18-42"></a>#&gt; ...</span>
-<span id="cb18-43"><a href="#cb18-43"></a>#&gt; <span class="kw">&lt;/fichiersta&gt;</span></span></code></pre></div>
+<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+#&gt; &lt;fichiersta&gt;
+#&gt;   &lt;formalisme nom="Weather station"&gt;
+#&gt;     &lt;param format="real" max="10.0" min="2.0" nom="zr"&gt;2.5&lt;/param&gt;
+#&gt;     &lt;param format="real" max="10.0" min="0.0" nom="NH3ref"&gt;0&lt;/param&gt;
+#&gt;     &lt;param format="real" max="90.0" min="-90.0" nom="latitude"&gt;49&lt;/param&gt;
+#&gt;     &lt;param format="real" max="1200.0" min="800.0" nom="patm"&gt;1000&lt;/param&gt;
+#&gt;     &lt;param format="real" max="25.0" min="4.0" nom="aclim"&gt;20&lt;/param&gt;
+#&gt;   &lt;/formalisme&gt;
+#&gt;   &lt;formalisme nom="climate"&gt;
+#&gt;     &lt;option choix="1" nom="reading OR calculation of PET" nomParam="codeetp"&gt;
+#&gt;       &lt;choix code="1" nom="PET-Penman_reading"/&gt;
+#&gt;       &lt;choix code="2" nom="PET-Penman_calculation"/&gt;
+#&gt;       &lt;choix code="3" nom="PET-Shuttleworth-Wallace_calculation"/&gt;
+#&gt;       &lt;choix code="4" nom="PET-Priestley-Taylor_calculation"&gt;
+#&gt;         &lt;param format="real" max="2.0" min="1.0" nom="alphapt"&gt;1.25&lt;/param&gt;
+#&gt;       &lt;/choix&gt;
+#&gt;     &lt;/option&gt;
+#&gt;     &lt;option choix="1" nom="climate change" nomParam="codeclichange"&gt;
+#&gt;       &lt;choix code="1" nom="no"/&gt;
+#&gt;       &lt;choix code="2" nom="yes"/&gt;
+#&gt;     &lt;/option&gt;
+#&gt;     &lt;option choix="1" nom="climate in altitude" nomParam="codaltitude"&gt;
+#&gt;       &lt;choix code="1" nom="no"/&gt;
+#&gt;       &lt;choix code="2" nom="yes"&gt;
+#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altistation"&gt;440&lt;/param&gt;
+#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altisimul"&gt;800&lt;/param&gt;
+#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtn"&gt;-0.5&lt;/param&gt;
+#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtx"&gt;-0.55&lt;/param&gt;
+#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altinversion"&gt;500&lt;/param&gt;
+#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtninv"&gt;1.3&lt;/param&gt;
+#&gt;         &lt;param format="real" max="1.0" min="0.0" nom="cielclair"&gt;0.8&lt;/param&gt;
+#&gt;         &lt;option choix="1" nom="option.adret.or.ubac" nomParam="codadret"&gt;
+#&gt;           &lt;choix code="1" nom="adret(south)"/&gt;
+#&gt;           &lt;choix code="2" nom="ubac(north)"&gt;
+#&gt;             &lt;param format="real" max="5.0" min="-5.0" nom="ombragetx"&gt;-1.4&lt;/param&gt;
+#&gt;           &lt;/choix&gt;
+#&gt;         &lt;/option&gt;
+#&gt;       &lt;/choix&gt;
+#&gt;     &lt;/option&gt;
+#&gt;   &lt;/formalisme&gt;
+#&gt; ...
+#&gt; &lt;/fichiersta&gt;</code></pre>
 </div>
 </div>
   </div>
@@ -830,11 +832,13 @@ in some cases used parameters names in tables may be different from real paramet
 
 
       <footer><div class="copyright">
-  <p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p>
+<p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -842,6 +846,8 @@ in some cases used parameters names in tables may be different from real paramet
 
   
 
+
+  
 
   </body>
 </html>
