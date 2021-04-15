@@ -33,14 +33,14 @@ all_out_var <- function(version = "last"){
 }
 
 
-#' Find output variable names for STICS
+#' Find STICS output variable names and description
 #'
-#' @description Helper function that return the name used as input
-#' for the STICS model with a partial match.
+#' @description Helper function that returns names and descriptions of STICS output variables
+#' from a partial name and/or descriptive keywords.
 #'
-#' @param var Character vector with a (partial) STICS output variable name
-#' @param keyword Search by keyword instead of the variable name
-#' (search in the name and the description fields)
+#' @param var Character vector containing a (part of the) name of a STICS output variable.
+#' @param keyword Search by keyword instead of variable name
+#' (search in the name and description field)
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
 #' to "last", a special code to get the last version.
 #'
