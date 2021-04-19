@@ -23,7 +23,7 @@
 #'
 #' }
 #'
-#'
+#' @importFrom dplyr %>%
 
 check_usms_files <- function(workspace_path,
                              javastics_path,
@@ -97,11 +97,11 @@ check_usms_files <- function(workspace_path,
 
   # specific checking for fplt
 
-  fplt1_exist <- file.exists(file.path(file.path(javastics, "plant"), usms_files$fplt1)) |
+  fplt1_exist <- file.exists(file.path(file.path(javastics_path, "plant"), usms_files$fplt1)) |
     file.exists(file.path(file.path(workspace_path, "plant"), usms_files$fplt1))
   fplt1_exist[usms_files$fplt1=="null"] <- TRUE
 
-  fplt2_exist <- file.exists(file.path(file.path(javastics, "plant"), usms_files$fplt2)) |
+  fplt2_exist <- file.exists(file.path(file.path(javastics_path, "plant"), usms_files$fplt2)) |
     file.exists(file.path(file.path(workspace_path, "plant"), usms_files$fplt2))
   fplt2_exist[usms_files$fplt2=="null"] <- TRUE
 

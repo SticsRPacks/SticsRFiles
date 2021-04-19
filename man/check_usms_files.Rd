@@ -40,6 +40,5 @@ javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3"))
 
 }
 
-
 }
 \keyword{internal}

@@ -123,7 +123,7 @@ gen_usms_xml2txt <- function(javastics_path,
   # Checking XML files existence, check_files
   if (check_files) {
     all_files_exist <- check_usms_files(workspace_path = workspace_path,
-                                        javastics_path = javastics,
+                                        javastics_path = javastics_path,
                                         usms_list = usms_list)$all_exist
 
     if (!all(all_files_exist)) stop(paste("Missing files have been detected for usm(s):",
