@@ -54,7 +54,8 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
     dplyr::mutate(out_table,
                   Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
                                     format = "%Y-%m-%d",
-                                    tz="UTC")) %>%
+                                    tz="UTC"),
+                  cum_jul = compute_doy_cumul(out_table$jul, out_table$ian)) %>%
       dplyr::relocate(.data$Date) %>%
       dplyr::select(-c(.data$ian, .data$mo, .data$jo, .data$jul)) -> out_table
 

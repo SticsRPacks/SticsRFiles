@@ -143,6 +143,10 @@ get_file_ <- function(workspace = getwd(),
                       plant_names = NULL,
                       type = c("sim","obs")){
 
+
+  # TODO: add checking dates_list format, or apply
+  # dates_list <- as.POSIXct(dates_list, tz="UTC", format = "%Y-%m-%d")
+
   type = match.arg(type, c("sim","obs"), several.ok = FALSE)
   if(type == "sim"){
     file_pattern = "^mod_s"
@@ -221,28 +225,37 @@ get_file_ <- function(workspace = getwd(),
       get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
       dplyr::select_if(function(x){any(!is.na(x))})
 
-    # selecting variables columns
-    if(!is.null(var_list)){
-      out <-
-        out%>%
-        dplyr::select(c("ian", "mo","jo", "jul"),dplyr::one_of(var_to_col_names(var_list)))
-    }
-
-    # Filtering:
-
-    # filtering dates on DOY (using cum_jul)
-    if(!is.null(doy_list)){
+    # Filtering
+    # filtering cum_jul on DOY list
+    if(!is.null(doy_list) & "cum_jul" %in% names(out)){
       out <-
         out%>%
         dplyr::filter(.data$cum_jul %in% doy_list)
     }
 
-    # filtering dates on Date
-    if(!is.null(dates_list)){
+    # Filtering Date on dates_list (format Posixct)
+    if(!is.null(dates_list) & "Date" %in% names(out)){
       out <-
         out%>%
         dplyr::filter(.data$Date %in% dates_list)
     }
+
+    # selecting variables columns
+    if(!is.null(var_list)){
+      # Managing output columns according to out content
+      out_cols <- var_to_col_names(var_list)
+      time_idx <- names(out) %in% c("ian", "mo","jo", "jul")
+      time_elts <- names(out)[time_idx]
+      out_cols <- c(time_elts, out_cols)
+      if("cum_jul" %in% names(out)) out_cols <- c("cum_jul", out_cols)
+      if ("Date" %in% names(out)) out_cols <- c("Date", out_cols)
+      if ("Plant" %in% names(out)) out_cols <- c(out_cols, "Plant")
+      out <-
+        out%>%
+        dplyr::select(dplyr::one_of(out_cols))
+    }
+
+
 
     if(length(p_name) > 1){
       out$Dominance = "Principal"
