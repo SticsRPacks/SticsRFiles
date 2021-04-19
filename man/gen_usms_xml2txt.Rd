@@ -11,7 +11,8 @@ gen_usms_xml2txt(
   target_path = NULL,
   usms_list = c(),
   verbose = TRUE,
-  dir_per_usm_flag = TRUE
+  dir_per_usm_flag = TRUE,
+  check_files = TRUE
 )
 }
 \arguments{

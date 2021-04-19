@@ -52,7 +52,8 @@ gen_usms_xml2txt <- function(javastics_path,
                              target_path = NULL,
                              usms_list = c(),
                              verbose = TRUE,
-                             dir_per_usm_flag=TRUE) {
+                             dir_per_usm_flag=TRUE,
+                             check_files = TRUE) {
   # overwrite = FALSE,parallelized = FALSE, exec_time = FALSE) {
 
 
@@ -75,7 +76,6 @@ gen_usms_xml2txt <- function(javastics_path,
   # registerDoParallel(cl)
   #################################################################
 
-  jexe="JavaSticsCmd.exe"
 
   # checking javastics path
   SticsOnR:::check_java_path(javastics_path)
@@ -120,25 +120,31 @@ gen_usms_xml2txt <- function(javastics_path,
 
   }
 
-  # Checking XML files existence, get_usms_files
-  # returns a list : element containing existing
-  # files list and a all_exist status !
-  usms_files <- get_usms_files(workspace_path = workspace_path,
-                               javastics_path =javastics_path,
-                               usms_list = usms_list)
-  # For all usms
-  all_files_exist <- unlist(lapply(usms_files, function(x) x$all_exist), use.names = F)
-  # If any file missing, stopping
-  if (!all(all_files_exist)) {
-    stop(paste("Missing files have been detected for usm(s):",
-               paste(usms_list[!all_files_exist], collapse = ", "),
-               ". Please note that with SticsRpacks, plant folder (that contains plant files)",
-               "can be located either inside the workspace or in the JavaStics path.\n",
-               "Check that your plant files exist in one of these."))
+  # Checking XML files existence, check_files
+  if (check_files) {
+    all_files_exist <- check_usms_files(workspace_path = workspace_path,
+                                        javastics_path = javastics,
+                                        usms_list = usms_list)$all_exist
+
+    if (!all(all_files_exist)) stop(paste("Missing files have been detected for usm(s):",
+                                          paste(usms_list[!all_files_exist], collapse = ", "),
+                                          ". Please note that with SticsRpacks, plant folder (that contains plant files)",
+                                          "can be located either inside the workspace or in the JavaStics path.\n",
+                                          "Check that your plant files exist in one of these."))
   }
 
+
   # Command string without usm name
-  cmd_generate= paste0('-jar ',jexe,' --generate-txt "',workspace_path,'"')
+  # according to OS type
+  jexe="JavaSticsCmd.exe"
+
+  if (tolower(Sys.info()["sysname"])=="windows") {
+    cmd <- jexe
+    cmd_args= paste0(' --generate-txt "',workspace_path,'"')
+  } else {
+    cmd <- "java"
+    cmd_args= paste0('-jar ',jexe,' --generate-txt "',workspace_path,'"')
+  }
 
   usms_number <- length(usms_list)
 
@@ -188,46 +194,44 @@ gen_usms_xml2txt <- function(javastics_path,
   # For keeping target usms dir paths
   usms_path <- vector(mode = "character", usms_number)
 
+  # Keeping execution status
+  exec_status <- rep(TRUE, length = usms_number)
+
   for (i in 1:usms_number) {
     #foreach(i = 1:usms_number, .export = ".GlobalEnv") %dopar% {
 
-    usm_name=usms_list[i]
+    usm_name <- usms_list[i]
+
+    # Removing all previous generated files, to be sure.
+    file.remove(files_path[file.exists(files_path)])
+
+    # Generating text files
+    ret <- system2(command = cmd, args = paste(cmd_args,usm_name),
+                   stdout= TRUE, stderr = TRUE)
+
+    # Get info returned by system2 for detecting errors
+    exec_status[i] <- !any(grepl(pattern = "ERROR", ret))
+    if (! exec_status[i]) {
+      # displaying usm name
+      if(verbose) cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
+      next
+    }
+
+    #  dir creation for the curent usm, if needed
     if (dir_per_usm_flag) {
       usm_path <- file.path(target_path, usm_name)
+      if (!dir.exists(usm_path)) dir.create(usm_path)
     } else {
       usm_path <- target_path
     }
 
-    if (!dir.exists(usm_path)) {
-      dir.create(usm_path)
-    }
-
-    ################################################
-    # TODO: check if overwrite = F and dir not empty
-    # and next, keeping in mind the dir list
-    # and display the list at the end ?
-    ################################################
-
-    # Removing if any, optional files for associated crop
-    # in the workspace
-    exist_opt_files <- file.exists(files_path[! mandatory_files])
-    opt_files <- files_path[! mandatory_files][exist_opt_files]
-    if ( length(opt_files) ) file.remove(opt_files)
-
-    # Generating text files
-    system2(command = "java", args = paste(cmd_generate,usm_name),
-            stdout= if(verbose){""}else{NULL})
-    # TODO: replacing with system2
-    # using args from com <- strsplit(ccm_generate," ")[[1]]
-    #ret <- run_system_cmd(com[1], args = com[2:6])
-
-    # If only one usm, for exiting the loop if taarget_path
+    # TODO: evaluate if return might be done here !
+    # If only one usm, for exiting the loop if target_path
     # is the workspace path, no need to copy files
     if (!dir_per_usm_flag && target_path == workspace_path) next
 
     # Copying files to the usm directory
-    exist_files <- file.exists(files_path)
-    copy_status <- all(file.copy(from = files_path[exist_files],
+    copy_status <- all(file.copy(from = files_path[file.exists(files_path)],
                                  to = usm_path, overwrite = T))
 
     # Copying default files for outputs definition
@@ -242,7 +246,6 @@ gen_usms_xml2txt <- function(javastics_path,
     }
 
 
-
     # Storing global files copy status
     global_copy_status[i] <- copy_status & out_copy_status
 
@@ -255,7 +258,7 @@ gen_usms_xml2txt <- function(javastics_path,
 
   # Messages if failing copies
   if (!all(global_copy_status)) {
-    failed_usms <- usms_list[global_copy_status]
+    failed_usms <- usms_list[!global_copy_status]
     warning(paste("Errors occured while generating or copying files to usms directories for usms:\n",
                   paste(failed_usms, collapse = ", ")))
   }
@@ -264,6 +267,11 @@ gen_usms_xml2txt <- function(javastics_path,
   # stopCluster(cl)
   # duration <- Sys.time() - start_time
   # print(duration)
+
+
+  # Message about execution errors
+  if (!all(exec_status)) warning("Errors have been detected for usm(s):",
+                                 paste(usms_list[!exec_status], collapse = ", "))
 
   # Returning a list of created directories and files copy status
   # for each directory ( FALSE if any files copy error )
