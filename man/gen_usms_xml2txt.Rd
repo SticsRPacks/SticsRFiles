@@ -31,6 +31,8 @@ usms contained in workspace_path/usms.xml file will be generated.}
 
 \item{dir_per_usm_flag}{logical, TRUE if one want to create one directory per USM,
 FALSE if USM files are generated in the target_path (only useful for usms_list of size one)}
+
+\item{check_files}{Logical, TRUE to check if usms files exist, FALSE otherwise}
 }
 \value{
 A list with named elements:
@@ -64,4 +66,5 @@ gen_usms_xml2txt(javastics, javastics_workspace, usm_list)
 gen_usms_xml2txt(javastics, javastics_workspace, dir_per_usm_flag=F, "usm1")
 
 }
+
 }

@@ -19,6 +19,7 @@
 #' @param verbose Logical value for displaying information  while running (TRUE) ot not (FALSE)
 #' @param dir_per_usm_flag logical, TRUE if one want to create one directory per USM,
 #' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
+#' @param check_files Logical, TRUE to check if usms files exist, FALSE otherwise
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing Stics input files),
@@ -43,6 +44,7 @@
 #' gen_usms_xml2txt(javastics, javastics_workspace, dir_per_usm_flag=F, "usm1")
 #'
 #' }
+#'
 #' @export
 #'
 #'
