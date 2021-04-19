@@ -71,7 +71,10 @@ check_usms_files <- function(workspace_path,
                            stringsAsFactors = FALSE)
 
   # Filtering usms
-  if (!is.null(usms_list)) usms_files <- usms_files %>% filter(usm %in% usms_list)
+  if (!is.null(usms_list)) {
+    usms_files <- usms_files %>%
+      dplyr::filter(.data$usm %in% usms_list)
+  }
 
   # fix: for intercrop used as sole crop, if nbplantes == 1, set file to "null"
   usms_files[usms_files$nbplantes == 1,"fplt2"] <- "null"
@@ -110,7 +113,7 @@ check_usms_files <- function(workspace_path,
   all_exist <- all_sta_exist & all_fclim_exist & all_ftec_exist & all_fplt_exist & all_init_exist
 
   # Adding files existence status
-  usms_files <- mutate(usms_files, all_exist = all_exist)
+  usms_files <- dplyr::mutate(usms_files, all_exist = all_exist)
 
   return(invisible(usms_files))
 }
