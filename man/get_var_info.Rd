@@ -2,22 +2,22 @@
 % Please edit documentation in R/all_out_var.R
 \name{get_var_info}
 \alias{get_var_info}
-\title{Find output variable names for STICS}
+\title{Find STICS output variable names and description}
 \usage{
 get_var_info(var = NULL, keyword = NULL, version = "last")
 }
 \arguments{
-\item{var}{Character vector with a (partial) STICS output variable name}
+\item{var}{Character vector containing a (part of the) name of a STICS output variable.}
 
-\item{keyword}{Search by keyword instead of the variable name
-(search in the name and the description fields)}
+\item{keyword}{Search by keyword instead of variable name
+(search in the name and description field)}
 
 \item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
 to "last", a special code to get the last version.}
 }
 \description{
-Helper function that return the name used as input
-for the STICS model with a partial match.
+Helper function that returns names and descriptions of STICS output variables
+from a partial name and/or descriptive keywords.
 }
 \details{
 The function understand \code{\link[base]{regex}} as input.

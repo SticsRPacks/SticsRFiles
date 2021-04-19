@@ -2,35 +2,49 @@
 % Please edit documentation in R/gen_obs.R
 \name{gen_obs}
 \alias{gen_obs}
-\title{Write STICS obs data from data.frame}
+\title{Generating observation data files from a data.frame}
 \usage{
-gen_obs(obs_table, file_path)
+gen_obs(obs_table, out_path = getwd(), usms_list = NULL)
 }
 \arguments{
-\item{obs_table}{data.frame to write}
+\item{obs_table}{The input observations data.frame}
 
-\item{file_path}{Path to the file to write to}
+\item{out_path}{A path to an optional folder where to write the .obs files}
+
+\item{usms_list}{An optional list of usms names to be used for selecting which files to generate
+from the obs_table}
 }
 \value{
-A logical value if the file generation succeeded (T) or not (F)
+A return logical status indicating if any error when writing files (FALSE),
+TRUE when no errors.
 }
 \description{
-Write STICS obs data from data.frame/tibble
+Generating observation data files from a data.frame
+}
+\details{
+\code{obs_table} is a \code{data.frame} with the following format:\tabular{lrrrrlrrrrrr}{
+   usm_name \tab ian \tab mo \tab jo \tab jul \tab densite \tab lai(n) \tab masec(n) \tab azomes \tab ammomes \tab resmes \tab AZnit(1) \cr
+   USM_2017_T1_CI \tab 2017 \tab 9 \tab 6 \tab 249 \tab NA \tab NA \tab 0.31 \tab 27.07395 \tab 9.364425 \tab 285 \tab 15.39825 \cr
+   USM_2017_T1_CI \tab 2017 \tab 9 \tab 20 \tab 263 \tab NA \tab NA \tab 0.60 \tab 27.90000 \tab 9.800000 \tab 270 \tab NA \cr
+   USM_2018_T1 \tab 2017 \tab 10 \tab 20 \tab 293 \tab NA \tab 0.1 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
+   USM_2018_T1 \tab 2018 \tab 5 \tab 15 \tab 482 \tab NA \tab 1.2 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
+}
+
+\itemize{
+\item \code{usm_name} column contains usms names which are used as output .obs files names
+\item \code{ian}, \code{mo}, \code{jo} and \code{jul} are mandatory (year, month, day and julian date)
+\item Other columns one per variable contain observations values or NA
+}
+
+@seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable name.
 }
 \examples{
-
 \dontrun{
-# Getting observations data
+
 xl_path <- download_usm_xl(xl_name = "inputs_stics_example.xlsx")
-
-# Loading and filtering data for usm "USM_2017_T1_CI"
-obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs") \%>\%
-dplyr::filter(usm_name \%in\% "USM_2017_T1_CI")
-
-# Generating the csv file
-gen_obs(obs_df, "USM_2017_T1_CI.obs")
+obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs")
+gen_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
 
 }
 
 }
-\keyword{internal}
