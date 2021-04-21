@@ -110,11 +110,6 @@ get_param_names <- function(xml_object,
     param_name <- xmlAttrs(xml_node)[attr_name]
   }
 
-  if(node_name == "param" && param_name == "variete") {
-    browser()
-    #param_name = "varietes"
-  }
-
   # Adding the param name to the param names list
   # - if it does not exist
   # - if a full param names list is asked
