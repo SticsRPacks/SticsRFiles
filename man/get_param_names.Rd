@@ -4,14 +4,23 @@
 \alias{get_param_names}
 \title{Get a list of Stics xml parameters names an xmlDocument or  XML node}
 \usage{
-get_param_names(xml_object, param_list = c(), full_list = FALSE)
+get_param_names(
+  xml_object,
+  param_list = c(),
+  full_list = FALSE,
+  root_name = NULL
+)
 }
 \arguments{
 \item{xml_object}{an xml XMLInternalElementNode or xmlDocument object}
 
 \item{param_list}{param names vector, only used for recursive calls}
 
-\item{full_list}{TRUE for getting all names, FALSE otherwise (default)
+\item{full_list}{TRUE for getting all names, FALSE otherwise (default)}
+
+\item{root_name}{Only for getting the root node name (file type),
+usefull for filtering unwanted names to be includes in parameters names list
+
 for unique names list}
 }
 \value{
