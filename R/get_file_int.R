@@ -36,6 +36,10 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
 
   out_table= mapply(function(x,y){
     out = try(data.table::fread(file.path(workspace,x), data.table = FALSE))
+
+    # Removing empty extra lines (without year)
+    out <- filter(out, !is.na(ian))
+
     if(inherits(out,"try-error")){
       cli::cli_alert_warning("couldn't find valid file for {.val {file.path(workspace,x)}}")
       return(NULL)

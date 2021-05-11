@@ -53,8 +53,8 @@ check_usms_files <- function(workspace_path,
 
   param_usms <- get_param_xml(file.path(workspace_path,"usms.xml"))$usms.xml[par_list]
 
-  id_plt_1 <- seq(1,to = usms_nb, by = 2)
-  id_plt_2 <- seq(2,to = usms_nb, by = 2)
+  id_plt_1 <- seq(1,to = usms_nb*2, by = 2)
+  id_plt_2 <- seq(2,to = usms_nb*2, by = 2)
 
   usms_files <- data.frame(usm = usms_full_list,
                            nbplantes = param_usms$nbplantes,
