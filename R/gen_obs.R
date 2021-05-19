@@ -135,8 +135,8 @@ gen_obs_= function(obs_table, file_path){
 
   # Checking date columns & variables columns
   patt_str <- "^ian$|^mo$|^jo$|^jul$"
-  obs_var_df <- obs_table[,-grep(patt_str, colnames(obs_table))]
-  obs_date_df <- obs_table[,grep(patt_str, colnames(obs_table))]
+  obs_var_df <- obs_table[,-grep(patt_str, colnames(obs_table)), drop=FALSE]
+  obs_date_df <- obs_table[,grep(patt_str, colnames(obs_table)), drop=FALSE]
 
   if (! dim(obs_var_df)[2] || dim(obs_date_df)[2] < 4){
     warning("Missing columns for dates, or no observation variables values to write !")
