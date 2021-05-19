@@ -48,7 +48,6 @@ reference:
       - convert_xml2txt
       - force_param_values
       - gen_varmod
-      - gen_usms_obs
 
   - title: "Set values in Stics Input files (Text format)"
     contents:
@@ -68,7 +67,7 @@ reference:
 
   - title: "Manage observation files"
     contents:
-      - gen_usms_obs
+      - gen_obs
       - get_obs
 
   - title: "Example data"
