@@ -9,7 +9,6 @@ get_file_(
   usm_name = NULL,
   usms_filename = NULL,
   var_list = NULL,
-  doy_list = NULL,
   dates_list = NULL,
   javastics_path = NULL,
   verbose = TRUE,
@@ -26,8 +25,6 @@ get_file_(
 \item{usms_filename}{Name of the usm file (optional)}
 
 \item{var_list}{vector of output variables names to filter (optional, see \code{get_var_info()} to get the names of the variables)}
-
-\item{doy_list}{vector of cumulative DOYs to filter (optional)}
 
 \item{dates_list}{list of dates to filter (optional, should be a POSIX date)}
 

@@ -37,7 +37,6 @@ get_daily_results <- function(...) {
 #' @param usm_name      Vector of usms to read (optional, used to filter usms)
 #' @param usms_filename  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
 #' @param var_list   (optional) vector of output variables names to filter (see `get_var_info()` to get variables names)
-#' @param doy_list   (optional) vector of cumulative DOYs to filter (integers)
 #' @param dates_list (optional) list of dates to filter (POSIX date)
 #' @param javastics_path (optional) JavaStics installation path Needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace. Only used to get the plants names.
@@ -62,12 +61,11 @@ get_daily_results <- function(...) {
 get_sim <- function(workspace,
                     usm_name=NULL,
                     var_list=NULL,
-                    doy_list=NULL,
                     dates_list=NULL,
                     usms_filename= NULL,
                     javastics_path = NULL,
                     verbose= TRUE){
-  res = get_file(workspace,usm_name,var_list,doy_list,dates_list,usms_filename,
+  res = get_file(workspace,usm_name,var_list,dates_list,usms_filename,
                  javastics_path,verbose,"sim")
 
   # Testing if results list is not empty
