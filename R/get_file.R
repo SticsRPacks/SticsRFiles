@@ -7,7 +7,6 @@
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
 #' @param usms_filename  Name of the usm file (optional)
 #' @param var_list   vector of output variables names to filter (optional, see `get_var_info()` to get the names of the variables)
-#' @param doy_list   vector of cumulative DOYs to filter (optional)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
 #' @param javastics_path JavaStics installation path (optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace). Only used to get the plants names.
@@ -30,7 +29,6 @@
 get_file = function(workspace,
                     usm_name=NULL,
                     var_list=NULL,
-                    doy_list=NULL,
                     dates_list=NULL,
                     usms_filename= NULL,
                     javastics_path = NULL,
@@ -76,7 +74,6 @@ get_file = function(workspace,
                 usm_name = usm_name,
                 usms_filename = usms_filename,
                 var_list = var_list,
-                doy_list = doy_list,
                 dates_list = dates_list,
                 javastics_path = javastics_path,
                 verbose = verbose,
@@ -90,7 +87,6 @@ get_file = function(workspace,
                 usm_name = usm_name,
                 usms_filename = usms_filename,
                 var_list = var_list,
-                doy_list = doy_list,
                 dates_list = dates_list,
                 javastics_path = javastics_path,
                 verbose = verbose, type = type)
@@ -109,7 +105,6 @@ get_file = function(workspace,
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
 #' @param usms_filename  Name of the usm file (optional)
 #' @param var_list   vector of output variables names to filter (optional, see `get_var_info()` to get the names of the variables)
-#' @param doy_list   vector of cumulative DOYs to filter (optional)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
 #' @param javastics_path JavaStics installation path (optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace). Only used to get the plants names.
@@ -135,7 +130,6 @@ get_file_ <- function(workspace = getwd(),
                       usm_name = NULL,
                       usms_filename = NULL,
                       var_list=NULL,
-                      doy_list=NULL,
                       dates_list=NULL,
                       javastics_path = NULL,
                       verbose = TRUE,
@@ -226,13 +220,6 @@ get_file_ <- function(workspace = getwd(),
       dplyr::select_if(function(x){any(!is.na(x))})
 
     # Filtering
-    # filtering cum_jul on DOY list
-    if(!is.null(doy_list) & "cum_jul" %in% names(out)){
-      out <-
-        out%>%
-        dplyr::filter(.data$cum_jul %in% doy_list)
-    }
-
     # Filtering Date on dates_list (format Posixct)
     if(!is.null(dates_list) & "Date" %in% names(out)){
       out <-

@@ -9,7 +9,6 @@ get_obs(
   usm_name = NULL,
   usms_filename = NULL,
   var_list = NULL,
-  doy_list = NULL,
   dates_list = NULL,
   javastics_path = NULL,
   verbose = TRUE
@@ -23,8 +22,6 @@ get_obs(
 \item{usms_filename}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
 
 \item{var_list}{(optional) vector of output variables names to filter (see \code{get_var_info()} to get variables names)}
-
-\item{doy_list}{(optional) vector of cumulative DOYs to filter (integers)}
 
 \item{dates_list}{(optional) list of dates to filter (POSIX date)}
 

@@ -36,6 +36,10 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
 
   out_table= mapply(function(x,y){
     out = try(data.table::fread(file.path(workspace,x), data.table = FALSE))
+
+    # Removing empty extra lines (without year)
+    out <- dplyr::filter(out, !is.na(.data$ian))
+
     if(inherits(out,"try-error")){
       cli::cli_alert_warning("couldn't find valid file for {.val {file.path(workspace,x)}}")
       return(NULL)
@@ -54,8 +58,7 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
     dplyr::mutate(out_table,
                   Date = as.POSIXct(x = paste(out_table$ian,out_table$mo,out_table$jo, sep="-"),
                                     format = "%Y-%m-%d",
-                                    tz="UTC"),
-                  cum_jul = compute_doy_cumul(out_table$jul, out_table$ian)) %>%
+                                    tz="UTC")) %>%
       dplyr::relocate(.data$Date) %>%
       dplyr::select(-c(.data$ian, .data$mo, .data$jo, .data$jul)) -> out_table
 
