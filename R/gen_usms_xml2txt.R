@@ -104,7 +104,15 @@ gen_usms_xml2txt <- function(javastics_path,
   }
 
   # Retrieving usm names list from the usms.xml file
-  full_usms_list = SticsRFiles :: get_usms_list(usm_path = file.path(workspace_path,"usms.xml"))
+  full_usms_list = get_usms_list(usm_path = file.path(workspace_path,"usms.xml"))
+
+  # Do some usms have lai forcing?
+  lai_forcing = get_lai_forcing_xml(file.path(workspace_path,"usms.xml"))
+  lai_file_path =
+    file.path(workspace_path,
+              get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
+                            param_name = "flai")[[1]]$flai)
+
 
   if (length(usms_list) == 0){
 
@@ -162,7 +170,7 @@ gen_usms_xml2txt <- function(javastics_path,
   # For storing if all files copy were successful or not
   # for each usm
   global_copy_status <- rep(FALSE, usms_number)
-  obs_copy_status <- global_copy_status
+  obs_copy_status = lai_copy_status = global_copy_status
 
 
   # Full list of the files to copy
@@ -245,9 +253,19 @@ gen_usms_xml2txt <- function(javastics_path,
     if ( file.exists(obs_path) ) {
       obs_copy_status[i] <- file.copy(from = obs_path,
                                       to = usm_path, overwrite = T)
+    }else{
+      if(verbose) cli::cli_alert_warning("Obs file not found for USM {.val {usm_name}}: {.file {obs_path}}")
     }
 
-
+    # Copying lai files if lai forcing
+    if (lai_forcing[i]) {
+      if(file.exists(lai_file_path[i])){
+        lai_copy_status[i] <- file.copy(from = lai_file_path[i],
+                                        to = usm_path, overwrite = T)
+      }else{
+        if(verbose) cli::cli_alert_warning("LAI file not found for USM {.val {usm_name}}: {.file {lai_file_path[i]}}")
+      }
+    }
     # Storing global files copy status
     global_copy_status[i] <- copy_status & out_copy_status
 
@@ -279,7 +297,8 @@ gen_usms_xml2txt <- function(javastics_path,
   # for each directory ( FALSE if any files copy error )
   return(invisible(list(usms_path = usms_path, files = basename(files_path),
                         copy_status = global_copy_status,
-                        obs_copy_status = obs_copy_status)))
+                        obs_copy_status = obs_copy_status,
+                        lai_copy_status = lai_copy_status)))
 
 
 }
