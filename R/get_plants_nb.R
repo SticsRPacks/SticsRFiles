@@ -36,10 +36,12 @@ get_plants_nb <- function(usm_file_path, usms_list=c()){
 
   if (!base::file.exists(usm_file_path)) stop(usm_file_path, " does not exist")
 
-  if (usm) return(get_plants_nb_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
-
-  if (usms) return(get_plants_nb_xml(usm_xml_path = usm_file_path, usms_list = usms_list))
-
+  if (usm){
+    return(get_plants_nb_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
+  }else{
+    return(get_plants_nb_xml(usm_xml_path = usm_file_path, usms_list = usms_list))
+  }
+  stop("Couldn't read the number of plants")
 }
 
 
