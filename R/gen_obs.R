@@ -65,13 +65,13 @@ gen_obs <- function(obs_table, out_path = getwd(), usms_list = NULL) {
   # Loop over usms names and files generation
   for (i in 1:nb_usms) {
     # Setting usm name
-    usm_name <- usm_names[i]
+    usm_name_tmp <- usm_names[i]
 
     # Setting the output file path
-    out_file_path <- file.path(out_path, paste0(usm_name, ".obs"))
+    out_file_path <- file.path(out_path, paste0(usm_name_tmp, ".obs"))
 
     # Selecting data for the current usm, eliminating all NA values columns
-    usm_df <- obs_table %>% dplyr::filter(obs_table[[usm_idx]] %in% usm_name) %>%
+    usm_df <- obs_table %>% dplyr::filter(obs_table[[usm_idx]] %in% usm_name_tmp) %>%
       dplyr::select_if(~!all(is.na(.)))
 
     # Writing the file and
