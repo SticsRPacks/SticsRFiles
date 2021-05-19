@@ -2,7 +2,7 @@
 #'
 #' @description Read STICS observation files from a JavaStics workspace and store data into a list per usm
 #'
-#' @param workspace Path of a JavaStics workspace with the `mod_s*.sti` files, or a vector of (recursive call).
+#' @param workspace Path of a JavaStics workspace containing the `*.obs` files, or a vector of (recursive call).
 #' @param usm_name   (optional) Vector of usms to read (optional, used to filter usms)
 #' @param usms_filename  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
 #' @param var_list   (optional) vector of output variables names to filter (see `get_var_info()` to get variables names)
@@ -11,7 +11,7 @@
 #' but rather in the JavaStics default workspace. Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
 #'
-#' @details The `.obs` files names must match USMs mames, *e.g.* for a usm called "banana",
+#' @details **The `.obs` files names must match USMs names**, *e.g.* for a usm called "banana",
 #' the `.obs` file should be named `banana.obs`. For intercrops, the name should be suffixed by "p" for
 #' the principal and "a" for the associated plant.
 #' If `usm_name` is not specified (or equal to `NULL`), the
@@ -34,7 +34,7 @@
 #' Meas_banana <- get_obs(path, "banana")
 #'
 #'
-#' # Get oservations with real plant names when plant folder is not in the workspace:
+#' # Get observations with real plant names when plant folder is not in the workspace:
 #' get_obs(path, "banana", javastics_path= "path/to/javastics")
 #' }
 #'

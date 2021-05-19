@@ -15,7 +15,7 @@ get_obs(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace with the \code{mod_s*.sti} files, or a vector of (recursive call).}
+\item{workspace}{Path of a JavaStics workspace containing the \verb{*.obs} files, or a vector of (recursive call).}
 
 \item{usm_name}{(optional) Vector of usms to read (optional, used to filter usms)}
 
@@ -39,7 +39,7 @@ using either the "Plant" or "Dominance" columns.
 Read STICS observation files from a JavaStics workspace and store data into a list per usm
 }
 \details{
-The \code{.obs} files names must match USMs mames, \emph{e.g.} for a usm called "banana",
+\strong{The \code{.obs} files names must match USMs names}, \emph{e.g.} for a usm called "banana",
 the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name should be suffixed by "p" for
 the principal and "a" for the associated plant.
 If \code{usm_name} is not specified (or equal to \code{NULL}), the
@@ -57,7 +57,7 @@ Meas <- get_obs(path)
 Meas_banana <- get_obs(path, "banana")
 
 
-# Get oservations with real plant names when plant folder is not in the workspace:
+# Get observations with real plant names when plant folder is not in the workspace:
 get_obs(path, "banana", javastics_path= "path/to/javastics")
 }
 
