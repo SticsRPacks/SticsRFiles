@@ -262,8 +262,12 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
          },
          set_plant_txt= {
            ref_index= grep(param_,params)+1
-           if(!is.null(variety)){
-             ref_index= ref_index[variety]
+           if(!is.null(variety) & length(ref_index>1)){
+             if (length(ref_index<=variety)) {
+               ref_index= ref_index[variety]
+             } else {
+               stop("Variety number set in the tec file is superior to the number of varieties defined in the plant file.")
+             }
            }
          },
          # Default here
