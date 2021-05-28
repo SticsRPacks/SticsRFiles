@@ -106,13 +106,41 @@ gen_usms_xml2txt <- function(javastics_path,
   # Retrieving usm names list from the usms.xml file
   full_usms_list = get_usms_list(usm_path = file.path(workspace_path,"usms.xml"))
 
-  # Do some usms have lai forcing?
+  # Do some usms have lai forcing? If so, read it accordingly:
   lai_forcing = get_lai_forcing_xml(file.path(workspace_path,"usms.xml"))
   lai_file_path =
     file.path(workspace_path,
               get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
                             param_name = "flai")[[1]]$flai)
 
+  dominance = get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
+                            param_name = "dominance")[[1]]$dominance
+
+
+  nbplantes = get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
+                            param_name = "nbplantes")[[1]]$nbplantes
+
+  flai_usms = vector(mode = "list", length = length(full_usms_list))
+  names(flai_usms) = full_usms_list
+  usm_index = 1 # This is equivalent of i, but tracks which usm we are doing in
+  # the for loop below, because sometimes we have two lai files
+
+  for(i in seq_along(lai_file_path)){
+    if(dominance[i] == 1){
+      flai_usms[[usm_index]] = lai_file_path[i]
+    }else if(nbplantes[usm_index] == 2){
+      # Here we provide the lai file for the second plant, but just if
+      # nbplantes = 2 because it can still be parameterized or be =null when
+      # nbplantes = 1 (but we don't want the 2nd file in this case)
+      flai_usms[[usm_index]] = c(flai_usms[[usm_index]],lai_file_path[i])
+    }
+
+    # We increment the usm_index if we just treated plant 2 or if the dominance
+    # of the next i is 1 (case were we only have lai file for plant 1)
+    if(dominance[i] == 2 | dominance[i + 1] == 1){
+      usm_index = usm_index + 1
+    }
+  }
 
   if (length(usms_list) == 0){
 
@@ -258,13 +286,15 @@ gen_usms_xml2txt <- function(javastics_path,
     }
 
     # Copying lai files if lai forcing
-    if (lai_forcing[i]) {
-      if(file.exists(lai_file_path[i])){
-        lai_copy_status[i] <- file.copy(from = lai_file_path[i],
-                                        to = usm_path, overwrite = T)
-      }else{
-        if(verbose) cli::cli_alert_warning("LAI file not found for USM {.val {usm_name}}: {.file {lai_file_path[i]}}")
-      }
+    if (lai_forcing[usm_name]) {
+      lapply(flai_usms[usm_name], function(x){
+        if(file.exists(x)){
+          lai_copy_status[i] <- file.copy(from = x,
+                                          to = usm_path, overwrite = T)
+        }else{
+          if(verbose) cli::cli_alert_warning("LAI file not found for USM {.val {usm_name}}: {.file {lai_file_path[i]}}")
+        }
+      })
     }
     # Storing global files copy status
     global_copy_status[i] <- copy_status & out_copy_status
