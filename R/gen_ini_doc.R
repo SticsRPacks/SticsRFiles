@@ -54,15 +54,16 @@ gen_ini_doc <- function(xml_doc = NULL,
     layer_regex <- "_[0-9]*$"
 
     param_names <- names(param_table)
-    #ini_col <- param_names[grep("^ini",tolower(param_names))]
-    #plante_params <- param_names[grep(crop_regex,tolower(param_names))]
+
+    base_params <- param_names[!grepl("[0-9]$", param_names)]
+
     plante_params <- param_names[grep(crop_regex, param_names)]
 
     if (! length(plante_params)) {
       stop(paste0("Crop tag is not detected in columns names: ", crop_tag))
     }
 
-    other_params <- setdiff(param_names,c(plante_params,"nbplantes"))
+    other_params <- setdiff(param_names,c(plante_params, base_params))
     other_params_pref <- unique(gsub(layer_regex,"",other_params))
 
     #plante_params <- gsub(crop_regex,"",plante_params)
@@ -72,11 +73,13 @@ gen_ini_doc <- function(xml_doc = NULL,
 
     params_desc <- list(plante_params_pref = plante_params_pref,
                         other_params_pref = other_params_pref,
+                        base_params = base_params,
                         param_names = param_names)
 
   } else {
-    plante_params_pref <- params_desc$plante_params_desc
+    plante_params_pref <- params_desc$plante_params_pref
     other_params_pref <- params_desc$other_params_pref
+    base_params <- params_desc$base_params
     param_names <- params_desc$param_names
   }
 
@@ -99,7 +102,15 @@ gen_ini_doc <- function(xml_doc = NULL,
     return(xml_docs)
   }
 
-  #print(param_table)
+  print(param_table)
+
+
+  # Setting base parameters
+  for (p in base_params) {
+    set_param_value(xml_doc = xml_doc,
+                    param_name = p,
+                    param_value = param_table[[p]])
+  }
 
   # Setting plant number in xml_doc
   # If columns with suffix crop_tag2 exist
@@ -111,14 +122,16 @@ gen_ini_doc <- function(xml_doc = NULL,
     plant_nb <- 2
   }
 
-  # plante params
+  # Setting plante params
   for (i in 1:2) {
     for (p in plante_params_pref) {
       par <- paste0(p,"_",crop_tag,i)
-      if (is.element(par,param_names)) {
-        set_param_value(xml_doc,p,
-                        param_table[[par]],
-                        "plante",as.character(i))
+      if (is.element(par, param_names)) {
+        set_param_value(xml_doc = xml_doc,
+                        param_name = p,
+                        param_value = param_table[[par]],
+                        parent_name = "plante",
+                        parent_sel_attr = as.character(i))
         #print(par)
         next
       }
@@ -128,23 +141,28 @@ gen_ini_doc <- function(xml_doc = NULL,
         par2 <- paste0(p,"_",j,"_",crop_tag,i)
         #print(par2)
         if (is.element(par2,param_names) && !is.na(param_table[[par2]])) {
-          set_param_value(xml_doc,p,
-                          param_table[[par2]],
-                          "plante",as.character(i))
+          set_param_value(xml_doc = xml_doc,
+                          param_name = p,
+                          param_value = param_table[[par2]],
+                          parent_name = "plante",
+                          parent_sel_attr = as.character(i),
+                          ids = j)
           #print(par2)
         }
       }
     }
   }
 
-  # other params
+  # Setting other params with suffix (layer index)
   for (j in 1:5) {
     for (p in other_params_pref) {
       par <- paste0(p,"_",j)
       if (is.element(par,param_names) && !is.na(param_table[[par]])) {
-        set_param_value(xml_doc,"horizon",
-                        param_table[[par]],
-                        p,j)
+        set_param_value(xml_doc = xml_doc,
+                        param_name = "horizon",
+                        param_value = param_table[[par]],
+                        parent_name =  p,
+                        parent_sel_attr = j)
         #print(par)
       }
     }
