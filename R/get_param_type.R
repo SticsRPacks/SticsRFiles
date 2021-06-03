@@ -268,6 +268,22 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
   }
 
 
+  # option node with a parent node with possible select with
+  # @dominance attribute value (ini files, ...)
+  new_parent_name <- parent_name
+
+  if ( !base::is.null(parent_sel_attr) ) {
+    new_parent_name <- paste0(parent_name,"[@dominance=\"",parent_sel_attr,"\"]")
+  }
+
+  xpath_node_option <- paste0("//",new_parent_name,"//option[@nomParam=\"",param_name,"\"]")
+
+  attr_values <- getAttrsValues(xml_doc,xpath_node_option,"choix")
+  if ( ! base::is.null(attr_values) ) {
+    return(list(type="node_option", xpath=xpath_node_option, length=length(attr_values)))
+  }
+
+
 
   # simple node with possible simple node parent (ini files, ...)
   # with possible select with @nom attribute value

@@ -94,15 +94,20 @@ gen_ini_doc <- function(xml_doc = NULL,
   # managing several doc generation based upon the lines number in param_table
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
-    xml_docs <- apply(param_table,1,function(x) gen_ini_doc(xml_doc = cloneXmlDoc(xml_doc),
-                                                            param_table = as.data.frame(t(x)),
-                                                            params_desc = params_desc,
-                                                            stics_version = stics_version,
-                                                            check_names = FALSE))
+    xml_docs <- apply(param_table,
+                      1,
+                      function(x) gen_ini_doc(
+                        xml_doc = cloneXmlDoc(xml_doc),
+                        param_table = as.data.frame(t(x),
+                                                    stringsAsFactors = FALSE),
+                        params_desc = params_desc,
+                        stics_version = stics_version,
+                        check_names = FALSE)
+    )
     return(xml_docs)
   }
 
-  print(param_table)
+  #print(param_table)
 
 
   # Setting base parameters
@@ -123,7 +128,7 @@ gen_ini_doc <- function(xml_doc = NULL,
   }
 
   # Setting plante params
-  for (i in 1:2) {
+  for (i in 1:plant_nb) {
     for (p in plante_params_pref) {
       par <- paste0(p,"_",crop_tag,i)
       if (is.element(par, param_names)) {
@@ -132,7 +137,6 @@ gen_ini_doc <- function(xml_doc = NULL,
                         param_value = param_table[[par]],
                         parent_name = "plante",
                         parent_sel_attr = as.character(i))
-        #print(par)
         next
       }
 
@@ -147,7 +151,6 @@ gen_ini_doc <- function(xml_doc = NULL,
                           parent_name = "plante",
                           parent_sel_attr = as.character(i),
                           ids = j)
-          #print(par2)
         }
       }
     }
@@ -163,7 +166,6 @@ gen_ini_doc <- function(xml_doc = NULL,
                         param_value = param_table[[par]],
                         parent_name =  p,
                         parent_sel_attr = j)
-        #print(par)
       }
     }
   }
