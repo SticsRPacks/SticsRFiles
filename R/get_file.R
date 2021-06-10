@@ -71,6 +71,12 @@ get_file = function(workspace,
     # names(plant_names) = names(sim_name)
 
     res = mapply(function(x,y,z){
+      # In the case we give the usms.xml file as an absolute path, and we are working
+      # with intercrops, the mapply would work on both files independently
+      # and get_file_int do not see it is an intercrop. So we put them in a list
+      # instead:
+      several = FALSE
+
       get_file_(workspace = y,
                 usm_name = usm_name,
                 usms_filename = usms_filename,
@@ -80,8 +86,9 @@ get_file = function(workspace,
                 verbose = verbose,
                 file_name = x,
                 plant_names = z,
-                type = type)
+                type = type, several = several)
     },sim_name,workspace,plant_names)
+    names(res) = names(sim_name)
   }else{
     res = unlist(lapply(workspace,function(x){
       get_file_(workspace = x,
@@ -90,7 +97,8 @@ get_file = function(workspace,
                 var_list = var_list,
                 dates_list = dates_list,
                 javastics_path = javastics_path,
-                verbose = verbose, type = type)
+                verbose = verbose, type = type,
+                several = TRUE)
     }), recursive = FALSE)
   }
 
@@ -115,7 +123,7 @@ get_file = function(workspace,
 #' @param plant_names    The plants names associated to the files (optional). If not provided, read `usms.xml`, or use
 #'  default values if not available.
 #' @param type          The type of file to read, either "obs" or "sim".
-#'
+#' @param several Is the function to be applied to eventually several workspace, file_name or plant_names?
 #' @details The `.obs` files names should match USMs mames, e.g. for a usm called "banana",
 #' the `.obs` file should be named `banana.obs`. For intercrops, the name should be suffixed by "p" for
 #' the principal and "a" for the associated plant.
@@ -136,7 +144,8 @@ get_file_ <- function(workspace = getwd(),
                       verbose = TRUE,
                       file_name = NULL,
                       plant_names = NULL,
-                      type = c("sim","obs")){
+                      type = c("sim","obs"),
+                      several){
 
 
   # TODO: add checking dates_list format, or apply
@@ -213,50 +222,74 @@ get_file_ <- function(workspace = getwd(),
     })
   }
 
-
-  # Getting obs data list, removing variables with only NAs
-  sim_list <- mapply(function(dirpath,filename,p_name){
-    out =
-      get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
-      dplyr::select_if(function(x){any(!is.na(x))})
-
-    # Filtering
-    # Filtering Date on dates_list (format Posixct)
-    if(!is.null(dates_list) & "Date" %in% names(out)){
-      out <-
-        out%>%
-        dplyr::filter(.data$Date %in% dates_list)
-    }
-
-    # selecting variables columns
-    if(!is.null(var_list)){
-      # Managing output columns according to out content
-      out_cols <- var_to_col_names(var_list)
-      time_idx <- names(out) %in% c("ian", "mo","jo", "jul")
-      time_elts <- names(out)[time_idx]
-      out_cols <- c(time_elts, out_cols)
-      if("cum_jul" %in% names(out)) out_cols <- c("cum_jul", out_cols)
-      if ("Date" %in% names(out)) out_cols <- c("Date", out_cols)
-      if ("Plant" %in% names(out)) out_cols <- c(out_cols, "Plant")
-      out <-
-        out%>%
-        dplyr::select(dplyr::one_of(out_cols))
-    }
-
-
-
-    if(length(p_name) > 1){
-      out$Dominance = "Principal"
-      out$Dominance[out$Plant == p_name[2]] = "Associated"
-    }
-    out
-  },dirpath = workspace, filename = file_name, p_name = plant_names, SIMPLIFY = FALSE)
-
-  names(sim_list) <- names(file_name)
+  if(several){
+    # Getting obs data list, removing variables with only NAs
+    sim_list <- mapply(function(dirpath,filename,p_name){
+      get_file_one(dirpath, filename, p_name,verbose, dates_list,var_list)
+    },dirpath = workspace, filename = file_name, p_name = plant_names,
+    SIMPLIFY = FALSE, USE.NAMES = FALSE)
+    names(sim_list) <- names(file_name)
+  }else{
+    sim_list = get_file_one(workspace, file_name, plant_names, verbose, dates_list,var_list)
+  }
 
   return(sim_list)
 }
 
+
+#' Get file for one workspace / file_name / plant_name
+#'
+#' Get a simulation or observation file for one situation at a time,
+#' for sole or intercrop
+#'
+#' @param dirpath Path of a JavaStics workspace, or a vector of (recursive call).
+#' @param filename File name(s)
+#' @param p_name Plant name(s)
+#' @param verbose Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
+#' @param dates_list list of dates to filter (optional, should be a POSIX date)
+#' @param var_list vector of output variables names to filter (optional, see `get_var_info()` to get the names of the variables)
+#'
+#'
+#' @return the obs or simulation output
+#' @keyword internal
+#'
+get_file_one = function(dirpath, filename, p_name,
+                        verbose, dates_list,var_list){
+  out =
+    get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
+    dplyr::select_if(function(x){any(!is.na(x))})
+
+  # Filtering
+  # Filtering Date on dates_list (format Posixct)
+  if(!is.null(dates_list) & "Date" %in% names(out)){
+    out <-
+      out%>%
+      dplyr::filter(.data$Date %in% dates_list)
+  }
+
+  # selecting variables columns
+  if(!is.null(var_list)){
+    # Managing output columns according to out content
+    out_cols <- var_to_col_names(var_list)
+    time_idx <- names(out) %in% c("ian", "mo","jo", "jul")
+    time_elts <- names(out)[time_idx]
+    out_cols <- c(time_elts, out_cols)
+    if("cum_jul" %in% names(out)) out_cols <- c("cum_jul", out_cols)
+    if ("Date" %in% names(out)) out_cols <- c("Date", out_cols)
+    if ("Plant" %in% names(out)) out_cols <- c(out_cols, "Plant")
+    out <-
+      out%>%
+      dplyr::select(dplyr::one_of(out_cols))
+  }
+
+
+
+  if(length(p_name) > 1){
+    out$Dominance = "Principal"
+    out$Dominance[out$Plant == p_name[2]] = "Associated"
+  }
+  out
+}
 
 get_file_from_usms <- function(workspace,
                                usms_path,

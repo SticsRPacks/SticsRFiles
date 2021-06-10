@@ -121,3 +121,17 @@ test_that("get obs with intercrops, giving usms.xml file", {
   expect_equal(unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Dominance),
                c("Principal","Associated"))
 })
+
+test_that("get obs with intercrops, giving usms.xml file as absolute path", {
+  outputs= get_obs(workspace = example_IC, usms_filename = file.path(example_IC,"usms.xml"))
+  # There are two USMs in the usms.xml file, but only one output file (banana):
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(all(names(outputs) %in%
+                    c("IC_Wheat_Pea_2005-2006_N0","SC_Pea_2005-2006_N0",
+                      "SC_Wheat_2005-2006_N0")))
+  expect_true(is.data.frame(outputs$`SC_Pea_2005-2006_N0`))
+  expect_equal(unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Plant),
+               c("ble","poi"))
+  expect_equal(unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Dominance),
+               c("Principal","Associated"))
+})
