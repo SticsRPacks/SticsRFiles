@@ -55,7 +55,8 @@ get_file = function(workspace,
     sim_files = workspace_files[grepl(file_pattern,workspace_files)]
 
     # sim_name actually found in the folders:
-    sim_name = sim_name[sim_name %in% sim_files]
+    exist_files <- unlist(lapply(sim_name, function(x) all(x %in% sim_files)))
+    sim_name = sim_name[exist_files]
 
     # Getting plant names, if javastics_path or workspace path contains
     # a plant directory
