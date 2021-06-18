@@ -52,14 +52,7 @@ if (!dir.exists(work_dir)) dir.create(work_dir)
 
 
 # Getting JavaStics
-# h <- curl::new_handle()
-# curl::handle_setopt(h, username = "plecharpent")
-# curl::handle_setopt(h, password = "vi8,gife")
-# file_url <- "https://w3.avignon.inra.fr/forge/attachments/download/2019/JavaSTICS-1.41-stics-9.1.zip"
-# curl::curl_download(url = file_url, handle = h, destfile = file.path(work_dir,"JavaSTICS-1.41-stics-9.1.zip"), mode = "wb")
-
 javastics <- file.path(work_dir, params$javastics, fsep ="/")
-
 
 if (!dir.exists(javastics)) dir.create(javastics)
 
