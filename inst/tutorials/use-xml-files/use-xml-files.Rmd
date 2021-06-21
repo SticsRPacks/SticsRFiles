@@ -48,7 +48,7 @@ work_dir <- params$work_dir
 work_dir <- gsub(pattern = "\\\\", replacement="/", x=work_dir)
 
 # Creating work_dir if needed
-if (!dir.exists(work_dir)) dir.create(work_dir)
+if (!dir.exists(work_dir)) dir.create(work_dir, recursive=TRUE)
 
 
 # Getting JavaStics
