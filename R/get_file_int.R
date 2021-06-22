@@ -22,6 +22,9 @@ get_file_int= function(workspace, filename, plant_name = NULL, verbose = TRUE){
 
   if (verbose) print(filename)
 
+  if (is.list(filename)) filename <- unlist(filename)
+  if (is.list(plant_name)) plant_name <- unlist(plant_name)
+
   if(!is.null(plant_name)){
     if(length(plant_name)>1 && length(plant_name)!=length(filename)){
       stop("length(plant_name) should be == 1 or length(filename)")

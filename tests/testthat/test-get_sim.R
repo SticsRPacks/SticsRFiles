@@ -34,22 +34,87 @@ test_that("get output without usm argument, without usms.xml", {
   expect_true(is.data.frame(outputs$banana))
 })
 
+# Testing with 2 workspaces ------------------------------------
+# returning always a single list
+path1 <- file.path(path,"workspace1")
+path2 <- file.path(path, "workspace2")
+paths <- c(path1, path2)
 
-# Testing a simple usm as path sub-directory
-test_that("output is always list, without usms.xml, banana sub-dir", {
-  if (!dir.exists(file.path(path,"banana"))) dir.create(file.path(path,"banana"))
-  file.copy(file.path(path,"mod_sbanana.sti"), file.path(path,"banana"))
-  outputs= get_sim(path,"banana")
+test_that("get output for 2 workspaces without usm argument, without usms.xml", {
+  files_nb <- length(list.files(paths))
+  outputs= get_sim(workspace = paths)
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  # Should always returns a list, even for one usm
-  unlink(file.path(path,"banana"))
+  expect_true(all(unlist(lapply(outputs,is.data.frame))))
 })
+
+# if usm_name is given, even with one usm in each workspace
+test_that("get output for 2 workspaces with usm argument, without usms.xml", {
+  files_nb <- length(list.files(paths))
+  outputs= get_sim(workspace = paths, usm_name = c("maize","wheat"))
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(all(unlist(lapply(outputs,is.data.frame))))
+  expect_true(all(names(outputs) %in% c("maize","wheat")))
+})
+
+test_that("get output for 2 workspaces without usm argument, with usms.xml", {
+  files_nb <- length(list.files(paths))
+  outputs= get_sim(workspace = paths, usms_filepath = file.path(path,"usms_example.xml"))
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(all(unlist(lapply(outputs,is.data.frame))))
+})
+
+
+test_that("get output for 2 workspaces with usm argument, with usms.xml", {
+  files_nb <- length(list.files(paths))
+  outputs= get_sim(workspace = paths, usms_filepath = file.path(path,"usms_example.xml"),
+                   usm_name = c("maize","wheat"))
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(all(unlist(lapply(outputs,is.data.frame))))
+  expect_true(all(names(outputs) %in% c("maize","wheat")))
+})
+
+# Common root dir
+path3 <- file.path(path,"workspace_root")
+if (!dir.exists(path3)) dir.create(path3)
+
+# Testing usm as path sub-directories  ------------------------------------
+if (!dir.exists(file.path(path3,"banana"))) dir.create(file.path(path3,"banana"))
+file.copy(file.path(path,"mod_sbanana.sti"), file.path(path3,"banana"))
+if (!dir.exists(file.path(path3,"wheat"))) dir.create(file.path(path3,"wheat"))
+file.copy(file.path(path2,"mod_swheat.sti"), file.path(path3,"wheat"))
+
+test_that("output is always list, without usms.xml, banana, wheat sub-dir", {
+
+  outputs= get_sim(path3,"banana")
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  outputs= get_sim(path3,usm_name = c("banana", "wheat"))
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+
+  #unlink(file.path(path,"banana"))
+
+})
+
 # Restoring usms.xml
 if (file.exists(file.path(path, "usms.xml.ori"))) {
   file.rename(file.path(path, "usms.xml.ori"), file.path(path, "usms.xml") )
 }
 
+test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
+  #if (!dir.exists(file.path(path,"banana"))) dir.create(file.path(path,"banana"))
+  #file.copy(file.path(path,"mod_sbanana.sti"), file.path(path,"banana"))
+  outputs= get_sim(path3,"banana", usms_filepath = file.path(path,"usms_example.xml"))
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  outputs= get_sim(path3,usm_name = c("banana", "wheat"), usms_filepath = file.path(path,"usms_example.xml"))
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
 
+  #unlink(file.path(path,"banana"))
+})
+
+unlink(file.path(path,"banana"))
+unlink(file.path(path,"wheat"))
+
+
+# Testing intercropping usms  ------------------------------------
 example_IC = download_data(example_dirs = "study_case_intercrop")
 
 test_that("get simulations with intercrops", {
@@ -69,7 +134,8 @@ test_that("get simulations with intercrops", {
 })
 
 test_that("get simulations with intercrops, giving usms.xml file", {
-  outputs= get_obs(workspace = example_IC, usms_filename = "usms.xml")
+  outputs= get_obs(workspace = example_IC,
+                   usms_filepath = file.path(example_IC, "usms.xml"))
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(all(names(outputs) %in%

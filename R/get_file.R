@@ -3,18 +3,14 @@
 #' @description Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
 #' Used by `get_obs()` and `get_sim()`. Operate first computation and then call `get_file_()`.
 #'
-#' @param workspace      Path of a JavaStics workspace, or a vector of (recursive call).
+#' @param workspace      Path of a JavaStics workspace, or a vector of.
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
-#' @param usms_filename  Name of the usm file (optional)
 #' @param var_list   vector of output variables names to filter (optional, see `get_var_info()` to get the names of the variables)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
+#' @param usms_filepath  Path of the usms file (optional)
 #' @param javastics_path JavaStics installation path (optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace). Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
-#' @param file_name      The names of the files to read (optional). read from `usms.xml` file if provided, or using file names
-#' in the workspace directly
-#' @param plant_names    The plants names associated to the files (optional). If not provided, read `usms.xml`, or use
-#'  default values if not available.
 #' @param type          The type of file to read, either "obs" or "sim".
 #'
 #' @details The `.obs` files names should match USMs mames, e.g. for a usm called "banana",
@@ -27,82 +23,119 @@
 #' @keywords internal
 #'
 get_file = function(workspace,
-                    usm_name=NULL,
-                    var_list=NULL,
-                    dates_list=NULL,
-                    usms_filename= NULL,
+                    usm_name = NULL,
+                    var_list = NULL,
+                    dates_list = NULL,
+                    usms_filepath = NULL,
                     javastics_path = NULL,
-                    verbose= TRUE,
+                    verbose = TRUE,
                     type = c("sim","obs")){
 
   type = match.arg(type, c("sim","obs"), several.ok = FALSE)
 
-  if(!is.null(usms_filename) &&
-     file.exists(normalizePath(usms_filename, mustWork = FALSE))){
-    if(type == "sim"){
-      file_pattern = "^mod_s"
-    }else{
-      file_pattern = "\\.obs$"
-    }
+  usms_path <- NULL
 
-    # Try absolute path here (if it is, read the file only once, and pass its content)
-    usms_path <- normalizePath(usms_filename, mustWork = FALSE)
-
-    sim_name = get_file_from_usms(workspace = NULL, usms_path = usms_path, type = type, usm_name = usm_name)
-
-    workspace_files = list.files(workspace, recursive = TRUE)
-
-    sim_files = workspace_files[grepl(file_pattern,workspace_files)]
-
-    # sim_name actually found in the folders:
-    exist_files <- unlist(lapply(sim_name, function(x) all(x %in% sim_files)))
-    sim_name = sim_name[exist_files]
-
-    # Getting plant names, if javastics_path or workspace path contains
-    # a plant directory
-
-    plant_names <- lapply(workspace,function(x){
-      get_plant_name(x, names(sim_name), usms_path, javastics_path, verbose= FALSE)
-    })
-
-    plant_names = unlist(plant_names, recursive = FALSE)
-
-    plant_names = plant_names[!duplicated(names(plant_names))]
-    # names(plant_names) = names(sim_name)
-
-    res = mapply(function(x,y,z){
-      # In the case we give the usms.xml file as an absolute path, and we are working
-      # with intercrops, the mapply would work on both files independently
-      # and get_file_int do not see it is an intercrop. So we put them in a list
-      # instead:
-      several = FALSE
-
-      get_file_(workspace = y,
-                usm_name = usm_name,
-                usms_filename = usms_filename,
-                var_list = var_list,
-                dates_list = dates_list,
-                javastics_path = javastics_path,
-                verbose = verbose,
-                file_name = x,
-                plant_names = z,
-                type = type, several = several)
-    },sim_name,workspace,plant_names)
-    names(res) = names(sim_name)
-  }else{
-    res = unlist(lapply(workspace,function(x){
-      get_file_(workspace = x,
-                usm_name = usm_name,
-                usms_filename = usms_filename,
-                var_list = var_list,
-                dates_list = dates_list,
-                javastics_path = javastics_path,
-                verbose = verbose, type = type,
-                several = TRUE)
-    }), recursive = FALSE)
+  # Try absolute path here (if it is, read the file only once, and pass its content)
+  if (!is.null(usms_filepath)) {
+    usms_path <- normalizePath(usms_filepath, mustWork = FALSE)
+  # For the moment searching the usms.xml file in the workspace dir
+  # is inactivated, before doing tests on performances.
+  # TODO: test and uncomment else condition !
+  # } else {
+  #   usms_path <-
+  #     normalizePath(file.path(workspace, "usms.xml"), mustWork = FALSE)
   }
 
-  res
+  # Not keeping usms_filepath if does not exist
+  if (!is.null(usms_path) && !file.exists(usms_path)) {
+    warning(usms_path, ": file does not exist !")
+    usms_path <- NULL
+  }
+
+  # Extracting data for a vector of workspace
+  res = unlist(lapply(workspace,function(x){
+    get_file_(workspace = x,
+              usm_name = usm_name,
+              usms_filepath = usms_path,
+              var_list = var_list,
+              dates_list = dates_list,
+              javastics_path = javastics_path,
+              verbose = verbose,
+              type = type )
+  }), recursive = FALSE)
+
+  # Manage duplicated list names ?
+  # TODO: is this usefull ?
+  # If same usms exist in different folders, with different parameterization
+  # this must be taken into account and rename duplicates instead of
+  # deleting them !
+  # res = res[!duplicated(names(res))]
+
+  return(res)
+
+
+  #if (!is.null(usms_filepath)) {
+  # if(type == "sim"){
+  #   file_pattern = "^mod_s"
+  # }else{
+  #   file_pattern = "\\.obs$"
+  # }
+  #
+  # sim_name = get_file_from_usms(workspace = NULL, usms_path = usms_path, type = type, usm_name = usm_name)
+  #
+  # workspace_files = list.files(workspace, recursive = TRUE)
+  #
+  # sim_files = workspace_files[grepl(file_pattern,workspace_files)]
+  #
+  # # sim_name actually found in the folders:
+  # exist_files <- unlist(lapply(sim_name, function(x) all(x %in% sim_files)))
+  # sim_name = sim_name[exist_files]
+  #
+  # # Getting plant names, if javastics_path or workspace path contains
+  # # a plant directory
+  #
+  # plant_names <- lapply(workspace,function(x){
+  #   get_plant_name(x, usms_path, names(sim_name), javastics_path, verbose= FALSE)
+  # })
+  #
+  # plant_names = unlist(plant_names, recursive = FALSE)
+  #
+  # plant_names = plant_names[!duplicated(names(plant_names))]
+  # # names(plant_names) = names(sim_name)
+  #
+  # res = mapply(function(x,y,z){
+  #   # In the case we give the usms.xml file as an absolute path, and we are working
+  #   # with intercrops, the mapply would work on both files independently
+  #   # and get_file_int do not see it is an intercrop. So we put them in a list
+  #   # instead:
+  #   several = FALSE
+  #
+  #   get_file_(workspace = y,
+  #             usm_name = usm_name,
+  #             usms_filepath = usms_filepath,
+  #             var_list = var_list,
+  #             dates_list = dates_list,
+  #             javastics_path = javastics_path,
+  #             verbose = verbose,
+  #             file_name = x,
+  #             plant_names = z,
+  #             type = type, several = several)
+  # },sim_name,workspace,plant_names)
+  # names(res) = names(sim_name)
+  #}else{
+  # res = unlist(lapply(workspace,function(x){
+  #   get_file_(workspace = x,
+  #             usm_name = usm_name,
+  #             usms_filepath = usms_filepath,
+  #             var_list = var_list,
+  #             dates_list = dates_list,
+  #             javastics_path = javastics_path,
+  #             verbose = verbose, type = type,
+  #             several = TRUE)
+  # }), recursive = FALSE)
+  #}
+
+  #res
 }
 
 #' Read STICS observation or simulation files (.obs or mod_s)
@@ -110,20 +143,20 @@ get_file = function(workspace,
 #' @description Read STICS observation or simulation files from a JavaStics workspace and store data into a list per usm.
 #' Used by `get_obs()` and `get_sim()`.
 #'
-#' @param workspace      Path of a JavaStics workspace, or a vector of (recursive call).
+#' @param workspace      Path of a JavaStics workspace
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
-#' @param usms_filename  Name of the usm file (optional)
+#' @param usms_filepath  Path of the usms file (optional)
 #' @param var_list   vector of output variables names to filter (optional, see `get_var_info()` to get the names of the variables)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
 #' @param javastics_path JavaStics installation path (optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace). Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
-#' @param file_name      The names of the files to read (optional). read from `usms.xml` file if provided, or using file names
+# @param file_name      The names of the files to read (optional). read from `usms.xml` file if provided, or using file names
 #' in the workspace directly
-#' @param plant_names    The plants names associated to the files (optional). If not provided, read `usms.xml`, or use
+# @param plant_names    The plants names associated to the files (optional). If not provided, read `usms.xml`, or use
 #'  default values if not available.
 #' @param type          The type of file to read, either "obs" or "sim".
-#' @param several Is the function to be applied to eventually several workspace, file_name or plant_names?
+# @param several Is the function to be applied to eventually several workspace, file_name or plant_names?
 #' @details The `.obs` files names should match USMs mames, e.g. for a usm called "banana",
 #' the `.obs` file should be named `banana.obs`. For intercrops, the name should be suffixed by "p" for
 #' the principal and "a" for the associated plant.
@@ -137,15 +170,15 @@ get_file = function(workspace,
 #'
 get_file_ <- function(workspace = getwd(),
                       usm_name = NULL,
-                      usms_filename = NULL,
+                      usms_filepath = NULL,
                       var_list=NULL,
                       dates_list=NULL,
                       javastics_path = NULL,
                       verbose = TRUE,
-                      file_name = NULL,
-                      plant_names = NULL,
-                      type = c("sim","obs"),
-                      several){
+                      #file_name = NULL,
+                      #plant_names = NULL,
+                      type = c("sim","obs")) {#,
+                      #several){
 
 
   # TODO: add checking dates_list format, or apply
@@ -157,62 +190,63 @@ get_file_ <- function(workspace = getwd(),
   }else{
     file_pattern = "\\.obs$"
   }
-  # Getting sim files list from usms.xml file or obs files found in workspace
 
-  # get_sim(), the calling function did not found the usms.xml file given using
-  # an absolute path, but the user gives a usms_filename, so it must be relative to
-  # the workspace
-  if(!is.null(usms_filename) && is.null(file_name) && is.null(plant_names)){
+  # Getting files list from workspace vector
+  workspace_files <- list.files(pattern = file_pattern, path = workspace)
+  # If no files found, and usms name are given,
+  # trying to find sub-directories named with usms names
+  if (!length(workspace_files) && !is.null(usm_name)) {
+    workspace <- file.path(workspace, usm_name)
+    workspace_files <- as.list(list.files(pattern = file_pattern, path = workspace))
+  }
 
-    # Try relative path first
-    usms_path <- normalizePath(file.path(workspace,usms_filename), mustWork = FALSE)
+  # No sim/obs file found
+  if(!length(workspace_files)) {
+    warning("Not any ", type, " file detected in workspace", workspace)
+    return()
+  }
 
-    if(!file.exists(usms_path)){
-      stop(usms_filename, " not found in workspace or as an absolute path")
-    }
 
+  # No usms file path is given
+  if(!is.null(usms_filepath) ){
+
+    # In the get_file_from_usms the usms are filtered against
+    # usm_name
     file_name <- get_file_from_usms(workspace = workspace,
-                                    usms_path = usms_path,
+                                    usms_path = usms_filepath,
                                     type = type,
                                     usm_name = usm_name)
 
-    # Getting plant names, if javastics_path or workspace path contains
-    # a plant directory
+    # Filtering existing files in file_name list
+    exist_files <- unlist(lapply(file_name, function(x) all(x %in% workspace_files)))
+    file_name = file_name[exist_files]
 
+    # Exiting: not any existing files
+    if (!length(file_name)) return()
+
+    # Getting plant names, if javastics_path or workspace path contains
+    # a plant directory, otherwise setting plant name to plant file name as a default.
     usms <- names(file_name)
-    plant_names <- get_plant_name(workspace, usms, usms_path, javastics_path, verbose)
+    plant_names <- get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
   }
 
-  # The user did not provide any usms_filename, so using the names of the .sti files
+  # The user did not provide any usms file path, so using the names of the .sti files
   # as information.
-  if(is.null(usms_filename) && is.null(file_name) && is.null(plant_names)){
+  if(is.null(usms_filepath) ) {
+
     # Getting sim/obs files list from directory
-    file_name <- as.list(list.files(pattern = file_pattern, path = workspace, full.names = FALSE))
-
-    # If empty file_name, results might be in a workspace sub-dir named with usm_name
-    if (!length(file_name) && !is.null(usm_name)) {
-      file_name <- as.list(list.files(pattern = file_pattern,
-                                      path = file.path(workspace, usm_name),
-                                      full.names = FALSE))
-      workspace <- file.path(workspace, usm_name)
-    }
-
-    file_name = parse_mixed_file(file_names = file_name, type = type)
+    file_name = parse_mixed_file(file_names = as.list(workspace_files), type = type)
     usms = names(file_name)
-
-    # No sim/obs file found
-    if(!length(file_name)) return()
 
     # Selecting using usm_name
     if(!is.null(usm_name)) {
       usms <- intersect(usms, usm_name)
-
-      # Not any matching manes
+      # Not any matching names
       if (!length(usms)) return()
       file_name <- file_name[usms]
-
     }
 
+    # Calculating plant ids
     plant_names = lapply(file_name, function(x){
       if(length(x)>1){
         c("plant_1", "plant_2")
@@ -222,16 +256,13 @@ get_file_ <- function(workspace = getwd(),
     })
   }
 
-  if(several){
-    # Getting obs data list, removing variables with only NAs
-    sim_list <- mapply(function(dirpath,filename,p_name){
-      get_file_one(dirpath, filename, p_name,verbose, dates_list,var_list)
-    },dirpath = workspace, filename = file_name, p_name = plant_names,
-    SIMPLIFY = FALSE, USE.NAMES = FALSE)
-    names(sim_list) <- names(file_name)
-  }else{
-    sim_list = get_file_one(workspace, file_name, plant_names, verbose, dates_list,var_list)
-  }
+  # Getting sim/obs data list
+  sim_list <- mapply(function(dirpath,filename,p_name){
+    get_file_one(dirpath, filename, p_name,verbose, dates_list,var_list)
+  },dirpath = workspace, filename = file_name, p_name = plant_names,
+  SIMPLIFY = FALSE, USE.NAMES = FALSE)
+
+  names(sim_list) <- names(file_name)
 
   return(sim_list)
 }
@@ -242,7 +273,7 @@ get_file_ <- function(workspace = getwd(),
 #' Get a simulation or observation file for one situation at a time,
 #' for sole or intercrop
 #'
-#' @param dirpath Path of a JavaStics workspace, or a vector of (recursive call).
+#' @param dirpath Path of a JavaStics workspace
 #' @param filename File name(s)
 #' @param p_name Plant name(s)
 #' @param verbose Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
@@ -251,10 +282,10 @@ get_file_ <- function(workspace = getwd(),
 #'
 #'
 #' @return the obs or simulation output
-#' @keyword internal
+#' @keywords internal
 #'
 get_file_one = function(dirpath, filename, p_name,
-                        verbose, dates_list,var_list){
+                        verbose, dates_list, var_list){
   out =
     get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
     dplyr::select_if(function(x){any(!is.na(x))})
@@ -310,7 +341,7 @@ get_file_from_usms <- function(workspace,
         cli::cli_alert_danger("The usm{?s} {.val {usm_name[!usm_exist]}} d{?oes/o} not exist in the workspace!")
         cli::cli_alert_info("Usm{?s} found in the workspace: {.val {usms}}")
       }
-      stop("usm_name do not match usms")
+      stop(usm_name,": do(es) not match usms")
     }
     usms <- usm_name
   }
@@ -330,7 +361,12 @@ get_file_from_usms <- function(workspace,
   }
 
   # Filtering with all files exist
-  files_exist <- unlist(lapply(file_name, function(x) all(file.exists(file.path(workspace,x)))))
+  # files_exist <- unlist(lapply(file_name, function(x) all(file.exists(file.path(workspace,x)))))
+  # Using now possible multiple workspaces
+  files_exist  <- mapply(function(dirpath,filename){
+    all(file.exists(file.path(dirpath, filename)))
+  },dirpath = workspace, filename = file_name)
+
   file_name <- file_name[files_exist]
 
   return(file_name)
@@ -341,12 +377,15 @@ get_file_from_usms <- function(workspace,
 #'
 #' Get mixed observation or simulation files by name
 #'
+#' @param file_names A list of files
+#' @param type      The type of file to read, either "obs" or "sim".
 #' @note The function use the obs/sim files names to retrieve the usm name.
 #' So each obs file should be named with the usm name, followed by a or p
 #' at the end in the case of associated crops.
 #'
 #' @return A list of observation or simulation files associated to their usm name. The mixed
 #'  crops are always returned as c("Principal","Associated").
+#'
 #' @keywords internal
 #'
 #' @examples

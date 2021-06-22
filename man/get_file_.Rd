@@ -7,22 +7,20 @@
 get_file_(
   workspace = getwd(),
   usm_name = NULL,
-  usms_filename = NULL,
+  usms_filepath = NULL,
   var_list = NULL,
   dates_list = NULL,
   javastics_path = NULL,
   verbose = TRUE,
-  file_name = NULL,
-  plant_names = NULL,
   type = c("sim", "obs")
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
+\item{workspace}{Path of a JavaStics workspace}
 
 \item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
-\item{usms_filename}{Name of the usm file (optional)}
+\item{usms_filepath}{Path of the usms file (optional)}
 
 \item{var_list}{vector of output variables names to filter (optional, see \code{get_var_info()} to get the names of the variables)}
 
@@ -31,12 +29,8 @@ get_file_(
 \item{javastics_path}{JavaStics installation path (optional, needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace). Only used to get the plants names.}
 
-\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
-
-\item{file_name}{The names of the files to read (optional). read from \code{usms.xml} file if provided, or using file names
-in the workspace directly}
-
-\item{plant_names}{The plants names associated to the files (optional). If not provided, read \code{usms.xml}, or use
+\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
+in the workspace directly
 default values if not available.}
 
 \item{type}{The type of file to read, either "obs" or "sim".}

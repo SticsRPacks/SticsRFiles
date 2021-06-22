@@ -9,7 +9,7 @@ get_sim(
   usm_name = NULL,
   var_list = NULL,
   dates_list = NULL,
-  usms_filename = NULL,
+  usms_filepath = NULL,
   javastics_path = NULL,
   verbose = TRUE
 )
@@ -23,7 +23,7 @@ get_sim(
 
 \item{dates_list}{(optional) list of dates to filter (POSIX date)}
 
-\item{usms_filename}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
+\item{usms_filepath}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
 
 \item{javastics_path}{(optional) JavaStics installation path Needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace. Only used to get the plants names.}
@@ -42,7 +42,7 @@ possible selection on variable names, cumulative DOY and dates
 \details{
 If \code{usm_name} is not specified (or equal to \code{NULL}), the
 function reads the files from all usms in the \code{workspace}(s).
-If \code{usms_filename} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+If \code{usms_filepath} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
 intercrops).
 }
 \examples{
@@ -50,4 +50,5 @@ intercrops).
 path <- get_examples_path(file_type = "sti")
 get_sim(path,"banana")
 }
+
 }

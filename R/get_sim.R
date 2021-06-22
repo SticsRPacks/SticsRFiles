@@ -35,7 +35,7 @@ get_daily_results <- function(...) {
 #'
 #' @param workspace Path of a JavaStics workspace with the `mod_s*.sti` files, or a vector of (recursive call).
 #' @param usm_name      Vector of usms to read (optional, used to filter usms)
-#' @param usms_filename  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
+#' @param usms_filepath  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
 #' @param var_list   (optional) vector of output variables names to filter (see `get_var_info()` to get variables names)
 #' @param dates_list (optional) list of dates to filter (POSIX date)
 #' @param javastics_path (optional) JavaStics installation path Needed if the plant files are not in the `workspace`
@@ -44,7 +44,7 @@ get_daily_results <- function(...) {
 #'
 #' @details If `usm_name` is not specified (or equal to `NULL`), the
 #' function reads the files from all usms in the `workspace`(s).
-#' If `usms_filename` is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+#' If `usms_filepath` is not specified, the plants are named "plant_1" by default (+ "plant_2" for
 #' intercrops).
 #'
 #' @return A list, where each element is a `data.frame`s of simulation results for the given usm. The list is named
@@ -56,21 +56,23 @@ get_daily_results <- function(...) {
 #' path <- get_examples_path(file_type = "sti")
 #' get_sim(path,"banana")
 #' }
+#'
 #' @export
 #'
 get_sim <- function(workspace,
-                    usm_name=NULL,
-                    var_list=NULL,
-                    dates_list=NULL,
-                    usms_filename= NULL,
+                    usm_name = NULL,
+                    var_list = NULL,
+                    dates_list = NULL,
+                    usms_filepath = NULL,
                     javastics_path = NULL,
-                    verbose= TRUE){
-  res = get_file(workspace,usm_name,var_list,dates_list,usms_filename,
-                 javastics_path,verbose,"sim")
+                    verbose = TRUE){
+
+  res <- get_file(workspace, usm_name, var_list, dates_list, usms_filepath,
+                 javastics_path, verbose, "sim")
 
   # Testing if results list is not empty
   # otherwise, setting "cropr_simulation" class attribute will fail
-  if (length(res)) attr(res, "class") = "cropr_simulation"
+  if (length(res)) attr(res, "class") <- "cropr_simulation"
 
   res
 }

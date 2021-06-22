@@ -4,7 +4,7 @@
 #'
 #' @param workspace Path of a JavaStics workspace containing the `*.obs` files, or a vector of (recursive call).
 #' @param usm_name   (optional) Vector of usms to read (optional, used to filter usms)
-#' @param usms_filename  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
+#' @param usms_filepath  (optional) usms file path (*e.g.* "usms.xml"). Used to get the real plant name in the Plant column.
 #' @param var_list   (optional) vector of output variables names to filter (see `get_var_info()` to get variables names)
 #' @param dates_list (optional) list of dates to filter (POSIX date)
 #' @param javastics_path (optional) JavaStics installation path Needed if the plant files are not in the `workspace`
@@ -16,7 +16,7 @@
 #' the principal and "a" for the associated plant.
 #' If `usm_name` is not specified (or equal to `NULL`), the
 #' function reads the files from all usms in the `workspace`(s).
-#' If `usms_filename` is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+#' If `usms_filepath` is not specified, the plants are named "plant_1" by default (+ "plant_2" for
 #' intercrops).
 #'
 #' @return A list, where each element is a `data.frame`s of observations for the given usm. The list is named
@@ -41,14 +41,15 @@
 #' @export
 #'
 get_obs <- function(workspace,
-                    usm_name=NULL,
-                    usms_filename= NULL,
-                    var_list=NULL,
-                    dates_list=NULL,
+                    usm_name = NULL,
+                    usms_filepath = NULL,
+                    var_list = NULL,
+                    dates_list = NULL,
                     javastics_path = NULL,
-                    verbose= TRUE){
+                    verbose = TRUE){
 
-  get_file(workspace,usm_name,var_list,dates_list,usms_filename,
-           javastics_path,verbose,"obs")
+  get_file(workspace, usm_name, var_list, dates_list, usms_filepath,
+           javastics_path, verbose, "obs")
+
 }
 

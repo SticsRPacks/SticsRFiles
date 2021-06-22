@@ -9,14 +9,14 @@ get_file(
   usm_name = NULL,
   var_list = NULL,
   dates_list = NULL,
-  usms_filename = NULL,
+  usms_filepath = NULL,
   javastics_path = NULL,
   verbose = TRUE,
   type = c("sim", "obs")
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
+\item{workspace}{Path of a JavaStics workspace, or a vector of.}
 
 \item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
@@ -24,7 +24,7 @@ get_file(
 
 \item{dates_list}{list of dates to filter (optional, should be a POSIX date)}
 
-\item{usms_filename}{Name of the usm file (optional)}
+\item{usms_filepath}{Path of the usms file (optional)}
 
 \item{javastics_path}{JavaStics installation path (optional, needed if the plant files are not in the \code{workspace}
 but rather in the JavaStics default workspace). Only used to get the plants names.}
@@ -32,12 +32,6 @@ but rather in the JavaStics default workspace). Only used to get the plants name
 \item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
 
 \item{type}{The type of file to read, either "obs" or "sim".}
-
-\item{file_name}{The names of the files to read (optional). read from \code{usms.xml} file if provided, or using file names
-in the workspace directly}
-
-\item{plant_names}{The plants names associated to the files (optional). If not provided, read \code{usms.xml}, or use
-default values if not available.}
 }
 \value{
 A named list of \code{data.frame}s with observations or simulation data. The list elements are named after

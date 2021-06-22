@@ -6,6 +6,11 @@
 \usage{
 parse_mixed_file(file_names, type = c("sim", "obs"))
 }
+\arguments{
+\item{file_names}{A list of files}
+
+\item{type}{The type of file to read, either "obs" or "sim".}
+}
 \value{
 A list of observation or simulation files associated to their usm name. The mixed
 crops are always returned as c("Principal","Associated").

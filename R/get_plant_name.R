@@ -4,8 +4,8 @@
 #' @description Get the plant name (and file name) for each usm in a workspace
 #'
 #' @param workspace      Path of a JavaStics workspace, or a vector of (recursive call).
+#' @param usms_filepath  Path of the usms file (`usms.xml`)
 #' @param usm_name      Vector of usms to read (optional, used to filter usms)
-#' @param usms_filename  Name of the usm file (optional, default to the standard `usms.xml`)
 #' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace`
 #' but rather in the JavaStics default workspace). Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)
@@ -30,19 +30,20 @@
 #' }
 #'
 get_plant_name= function(workspace,
+                         usms_filepath,
                          usm_name=NULL,
-                         usms_filename= "usms.xml",
                          javastics_path = NULL,
                          verbose=TRUE){
 
-  usms_path = file.path(workspace,usms_filename)
+
+  usms_path <- normalizePath(usms_filepath, mustWork = FALSE)
 
   if(!file.exists(usms_path)){
-    usms_path <- normalizePath(usms_filename, mustWork = FALSE)
-    if(!file.exists(usms_path)){
-      stop(usms_filename, " not found in workspace or as an absolute path")
-    }
+    stop(usms_filepath, ": not found !")
   }
+
+  # recalculating usms file name
+  usms_filename <- basename(usms_path)
 
   # getting usms names from the usms.xml file:
   usms= get_usms_list(usm_path = usms_path)
@@ -57,7 +58,7 @@ get_plant_name= function(workspace,
         cli::cli_alert_danger("The usm{?s} {.val {usm_name[!usm_exist]}} d{?oes/o} not exist in the workspace!")
         cli::cli_alert_info("Usm{?s} found in the workspace: {.val {usms}}")
       }
-      stop("usm_name do not match usms")
+      stop(usm_name,": do(es) not match usms")
     }
     usms= usm_name
   }
@@ -66,14 +67,15 @@ get_plant_name= function(workspace,
 
   # Getting plant files (fplt) for a set of usm
   plant_files <- get_param_xml(xml_file = usms_path, param_name = "fplt", select = "usm", value = usms)
+  plant_files <- plant_files[[usms_filename]]$fplt
 
   # Getting plant list:
-  if(length(plant_files$usms.xml$fplt) == 2*length(usms)){
+  if(length(plant_files) == 2*length(usms)){
     # If plante dominance="1" and plante dominance="2" are declared, put each one in a column:
-    plant_list <- unlist(apply(matrix(plant_files$usms.xml$fplt, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
-  }else if(length(plant_files$usms.xml$fplt) == length(usms)){
+    plant_list <- unlist(apply(matrix(plant_files, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+  }else if(length(plant_files) == length(usms)){
     # If plante dominance="2" is not declared, repeat plante dominance="1" twice to get the same data structure:
-    plant_list <- unlist(apply(matrix(c(plant_files$usms.xml$fplt,plant_files$usms.xml$fplt), ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+    plant_list <- unlist(apply(matrix(c(plant_files,plant_files), ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
   }else{
     stop('plante dominance="2" should always be declared in usms.xml even for sole crops (use null as values).')
   }
@@ -84,7 +86,7 @@ get_plant_name= function(workspace,
     mapply(function(x,y){
       list(x[1:y])
     }, x = plant_list, y = nb_plant)
-    )
+  )
 
   if(inherits(plant_xml,"try-error")){
     plant_xml= vector(mode = "list", length = length(usms))
@@ -97,7 +99,7 @@ get_plant_name= function(workspace,
 
   if(is.null(javastics_path)){
     plt_path <- file.path(workspace, "plant")
-    if(!dir.exists(plt_path)){
+    if(!all(dir.exists(plt_path))){
       cli::cli_alert_warning("plant folder not found in the workspace, please add {.code javastics_path} to use real plant names from javaStics.")
       return(plant_xml)
     }

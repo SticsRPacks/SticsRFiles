@@ -7,7 +7,7 @@
 get_obs(
   workspace,
   usm_name = NULL,
-  usms_filename = NULL,
+  usms_filepath = NULL,
   var_list = NULL,
   dates_list = NULL,
   javastics_path = NULL,
@@ -19,7 +19,7 @@ get_obs(
 
 \item{usm_name}{(optional) Vector of usms to read (optional, used to filter usms)}
 
-\item{usms_filename}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
+\item{usms_filepath}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
 
 \item{var_list}{(optional) vector of output variables names to filter (see \code{get_var_info()} to get variables names)}
 
@@ -44,7 +44,7 @@ the \code{.obs} file should be named \code{banana.obs}. For intercrops, the name
 the principal and "a" for the associated plant.
 If \code{usm_name} is not specified (or equal to \code{NULL}), the
 function reads the files from all usms in the \code{workspace}(s).
-If \code{usms_filename} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
+If \code{usms_filepath} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
 intercrops).
 }
 \examples{
