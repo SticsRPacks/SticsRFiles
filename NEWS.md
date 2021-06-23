@@ -1,3 +1,48 @@
+# SticsRFiles 0.4.0 (2021-06-22)
+
+## General changes
+
+  * DESCRIPTION / NAMESPACE: updates linked to new functions
+    
+  * Tests 
+    * updates, new ones added (get_obs, get_sim) 
+
+  * Functions:
+    * new: get_lai_forcing, check_usms_files
+    * help updates
+    * help reference site update (gen_obs function)
+
+  * Files:
+    * some useless files removed 
+    * new Stics dirs added (needed by tests)
+    * fix: example dirs names in inst
+    
+  * Tutorial: minor fix (working dir creation)
+    
+## Specific changes
+  * get_sim / get_obs / get_file / get_file_ 
+    refactoring
+    added some controls
+	now taking into account a usms file path in functions
+	fixed issues related to intercrops data loading
+	added data.frame columns detection for filtering data on dates
+
+  * functions for manipulating xml files 
+    taking into account a new kind of Stics parameter dependency (for plant and soil layers dependant parameters)
+    
+  * set_param_txt: fix for setting values for varietal parameters
+    
+  * gen_obs: fixes 
+    generating multiple files from a sheet
+    generating files from a single observed variable
+  
+  * gen_usms_xml2txt
+    now compatible with lai forcing
+    added optional argument for checking files
+    now removing files before each files generation
+
+
+
 # SticsRFiles 0.3.0 (2021-04-15)
 
 ## General changes
