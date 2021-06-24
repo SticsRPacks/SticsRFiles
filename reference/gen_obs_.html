@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a version/or the last version string of available Stics files templates in the package — get_xml_stics_version • SticsRFiles</title>
+<title>Write STICS obs data from data.frame — gen_obs_ • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get a version/or the last version string of available Stics files templates in the package — get_xml_stics_version" />
-<meta property="og:description" content="Get a version/or the last version string of available Stics files templates in the package" />
+<meta property="og:title" content="Write STICS obs data from data.frame — gen_obs_" />
+<meta property="og:description" content="Write STICS obs data from data.frame/tibble" />
 
 
 
@@ -137,44 +137,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a version/or the last version string of available Stics files templates in the package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_xml_stics_version.R'><code>R/get_xml_stics_version.R</code></a></small>
-    <div class="hidden name"><code>get_xml_stics_version.Rd</code></div>
+    <h1>Write STICS obs data from data.frame</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/gen_obs.R'><code>R/gen_obs.R</code></a></small>
+    <div class="hidden name"><code>gen_obs_.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get a version/or the last version string of available Stics files templates in the package</p>
+    <p>Write STICS obs data from data.frame/tibble</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_xml_stics_version</span><span class='op'>(</span>stics_version <span class='op'>=</span> <span class='st'>"last"</span>, xml_doc <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>gen_obs_</span><span class='op'>(</span><span class='va'>obs_table</span>, <span class='va'>file_path</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stics_version</th>
-      <td><p>A version key of a Stics version (i.e. V9.1)</p></td>
+      <th>obs_table</th>
+      <td><p>data.frame to write</p></td>
     </tr>
     <tr>
-      <th>xml_doc</th>
-      <td><p>an xmlDocument of a Stics xml file (Unused for the moment, no version String included in xml files)</p></td>
+      <th>file_path</th>
+      <td><p>Path to the file to write to</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a Stics version string</p>
+    <p>A logical value if the file generation succeeded (T) or not (F)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='co'># View available Stics files version</span></span>
-<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_stics_version</span><span class='op'>(</span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Getting observations data</span></span>
+<span class='r-in'><span class='va'>xl_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='st'>"inputs_stics_example.xlsx"</span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># View the last version</span></span>
-<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_stics_version</span><span class='op'>(</span><span class='st'>"last"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Loading and filtering data for usm "USM_2017_T1_CI"</span></span>
+<span class='r-in'><span class='va'>obs_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_params_table.html'>read_params_table</a></span><span class='op'>(</span>file_path <span class='op'>=</span> <span class='va'>xl_path</span>, sheet_name <span class='op'>=</span> <span class='st'>"Obs"</span><span class='op'>)</span> <span class='op'>%&gt;%</span></span>
+<span class='r-in'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>usm_name</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='st'>"USM_2017_T1_CI"</span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># Checking if a version exists</span></span>
-<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_stics_version</span><span class='op'>(</span><span class='st'>"V9.2"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Generating the csv file</span></span>
+<span class='r-in'><span class='fu'>gen_obs_</span><span class='op'>(</span><span class='va'>obs_df</span>, <span class='st'>"USM_2017_T1_CI.obs"</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'></span>

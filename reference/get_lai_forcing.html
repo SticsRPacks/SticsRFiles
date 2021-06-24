@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generating observation data files from a data.frame — gen_usms_obs • SticsRFiles</title>
+<title>Getting LAI forcing for each usm — get_lai_forcing • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Generating observation data files from a data.frame — gen_usms_obs" />
-<meta property="og:description" content="Generating observation data files from a data.frame" />
+<meta property="og:title" content="Getting LAI forcing for each usm — get_lai_forcing" />
+<meta property="og:description" content="Is LAI forced for usms in usms.xml" />
 
 
 
@@ -56,9 +56,6 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-
-
-<!-- dependencies from examples -->
 
 
   
@@ -140,68 +137,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generating observation data files from a data.frame</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/gen_usms_obs.R'><code>R/gen_usms_obs.R</code></a></small>
-    <div class="hidden name"><code>gen_usms_obs.Rd</code></div>
+    <h1>Getting LAI forcing for each usm</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_lai_forcing.R'><code>R/get_lai_forcing.R</code></a></small>
+    <div class="hidden name"><code>get_lai_forcing.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generating observation data files from a data.frame</p>
+    <p>Is LAI forced for usms in usms.xml</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gen_usms_obs</span><span class='op'>(</span><span class='va'>obs_table</span>, out_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>, usms_list <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_lai_forcing</span><span class='op'>(</span><span class='va'>usm_file_path</span>, usms_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>obs_table</th>
-      <td><p>The input onservations data.frame</p></td>
-    </tr>
-    <tr>
-      <th>out_path</th>
-      <td><p>A path to an optional folder where to write the .obs files</p></td>
+      <th>usm_file_path</th>
+      <td><p>Path to usms.xml file</p></td>
     </tr>
     <tr>
       <th>usms_list</th>
-      <td><p>An optional list of usms names to be used for selecting which files to generate
-from the obs_table</p></td>
+      <td><p>Usm(s) name(s) (optional, see details)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A return logical status indicating if any error when writing files (FALSE),
-TRUE when no errors.</p>
+    <p>A named numeric vector with a Boolean value (<code>TRUE = forced</code>) for each usm</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>obs_table</code> is a <code>data.frame</code> with the following format:</p><table class='table'>
-<tr><td>usm_name</td><td>ian</td><td>mo</td><td>jo</td><td>jul</td><td>densite</td><td>lai(n)</td><td>masec(n)</td><td>azomes</td><td>ammomes</td><td>resmes</td><td>AZnit(1)</td></tr>
-<tr><td>USM_2017_T1_CI</td><td>2017</td><td>9</td><td>6</td><td>249</td><td>NA</td><td>NA</td><td>0.31</td><td>27.07395</td><td>9.364425</td><td>285</td><td>15.39825</td></tr>
-<tr><td>USM_2017_T1_CI</td><td>2017</td><td>9</td><td>20</td><td>263</td><td>NA</td><td>NA</td><td>0.60</td><td>27.90000</td><td>9.800000</td><td>270</td><td>NA</td></tr>
-<tr><td>USM_2018_T1</td><td>2017</td><td>10</td><td>20</td><td>293</td><td>NA</td><td>0.1</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
-<tr><td>USM_2018_T1</td><td>2018</td><td>5</td><td>15</td><td>482</td><td>NA</td><td>1.2</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
-</table>
-
-
-<ul>
-<li><p><code>usm_name</code> column contains usms names which are used as output .obs files names</p></li>
-<li><p><code>ian</code>, <code>mo</code>, <code>jo</code> and <code>jul</code> are mandatory (year, month, day and julian date)</p></li>
-<li><p>Other columns one per variable contain observations values or NA</p></li>
-</ul>
-
-<p>@seealso <code><a href='get_var_info.html'>get_var_info</a></code> for getting variable right syntax or searching a variable name.</p>
+    <p>Use <code><a href='get_usms_list.html'>get_usms_list()</a></code> to get the list of the usm names for an usms.xml file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>xl_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='st'>"inputs_stics_example.xlsx"</span><span class='op'>)</span>
-<span class='va'>obs_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_params_table.html'>read_params_table</a></span><span class='op'>(</span>file_path <span class='op'>=</span> <span class='va'>xl_path</span>, sheet_name <span class='op'>=</span> <span class='st'>"Obs"</span><span class='op'>)</span>
-<span class='fu'>gen_usms_obs</span><span class='op'>(</span>obs_table <span class='op'>=</span> <span class='va'>obs_df</span>, out_path <span class='op'>=</span> <span class='st'>"/path/to/dest/dir"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Xml case</span></span>
+<span class='r-in'><span class='va'>xml_usms</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"xml"</span><span class='op'>)</span>,<span class='st'>"usms.xml"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_lai_forcing</span><span class='op'>(</span><span class='va'>xml_usms</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_lai_forcing</span><span class='op'>(</span><span class='va'>xml_usms</span>,<span class='st'>"wheat"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_lai_forcing</span><span class='op'>(</span><span class='va'>xml_usms</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"wheat"</span>,<span class='st'>"intercrop_pea_barley"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

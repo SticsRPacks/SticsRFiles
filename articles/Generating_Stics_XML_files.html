@@ -106,7 +106,7 @@
 <span class="co">#&gt; Learn SticsRFiles at: https://SticsRPacks.github.io/SticsRFiles</span></code></pre></div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
+<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
 <ul>
 <li><p>In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.</p></li>
 <li><p>The functions operate on data loaded as data.frames from Excel sheets or CSV files</p></li>
@@ -117,7 +117,7 @@
 </div>
 <div id="pkg-funs" class="section level1">
 <h1 class="hasAnchor">
-<a href="#pkg-funs" class="anchor"></a>Package functions to be used</h1>
+<a href="#pkg-funs" class="anchor" aria-hidden="true"></a>Package functions to be used</h1>
 <p>There is not at the moment an integrated function which is able to produce all needed parameters files. Individual functions are dedicated to each parameter file kind and may be called individually or gathered in a single script for doing all tasks at once. Use examples are given in next parts below.</p>
 <ul>
 <li>gen_usms_xml: for generating a <code>usms.xml</code> file</li>
@@ -129,10 +129,10 @@
 </div>
 <div id="download-excel-example" class="section level1">
 <h1 class="hasAnchor">
-<a href="#download-excel-example" class="anchor"></a>Getting a table file example</h1>
+<a href="#download-excel-example" class="anchor" aria-hidden="true"></a>Getting a table file example</h1>
 <div id="get-xl" class="section level2">
 <h2 class="hasAnchor">
-<a href="#get-xl" class="anchor"></a>Getting inputs <code>Excel</code> example file from the <code>SticsRFiles</code> package</h2>
+<a href="#get-xl" class="anchor" aria-hidden="true"></a>Getting inputs <code>Excel</code> example file from the <code>SticsRFiles</code> package</h2>
 <p>In the following example <code>/path/to/target/dir</code> must be replaced with a real path depending on the operating system (i.e. starting with <code>c:/</code> for windows for example)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting the file in the current directory</span>
@@ -148,7 +148,7 @@
 </div>
 <div id="get-csv" class="section level2">
 <h2 class="hasAnchor">
-<a href="#get-csv" class="anchor"></a>Getting an USMs inputs <code>CSV</code> example file from the <code>SticsRFiles</code> package</h2>
+<a href="#get-csv" class="anchor" aria-hidden="true"></a>Getting an USMs inputs <code>CSV</code> example file from the <code>SticsRFiles</code> package</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting the file in the current directory</span>
 <span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>csv_name <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span><span class="op">)</span>
@@ -164,12 +164,12 @@
 </div>
 <div id="description-of-tables-expected-content-and-use" class="section level1">
 <h1 class="hasAnchor">
-<a href="#description-of-tables-expected-content-and-use" class="anchor"></a>Description of tables expected content and use</h1>
+<a href="#description-of-tables-expected-content-and-use" class="anchor" aria-hidden="true"></a>Description of tables expected content and use</h1>
 <p>As told in the previous section, parameters data may be stored either in Excel files containing several sheets or in several equivalent individual CSV files.</p>
 <p>Sheets content and CSV files content is the same, only their use is different. But, CSV files are easily traced under verion control systems and they also can be generated programmatically with the help of functions dedicated for example to generating crop management parameters like irrigation, fertilization (interventions and doses calculations).</p>
 <div id="important-information" class="section level2">
 <h2 class="hasAnchor">
-<a href="#important-information" class="anchor"></a>Important information</h2>
+<a href="#important-information" class="anchor" aria-hidden="true"></a>Important information</h2>
 <p>The USMs data which are necessary for generating the <code>usms.xml</code> must be all provided either through an Excel sheet or a CSV file; as shown in the <a href="#usms-table-example">USMs sheet example</a>.</p>
 <p>Other data stored in Excel or CSV files must be adapted to the use cases here after:</p>
 <ul>
@@ -179,13 +179,13 @@
 </div>
 <div id="specificities-of-excel-sheets" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specificities-of-excel-sheets" class="anchor"></a>Specificities of Excel sheets</h2>
+<a href="#specificities-of-excel-sheets" class="anchor" aria-hidden="true"></a>Specificities of Excel sheets</h2>
 <p>Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters set they contain.</p>
 <p>In the example, usefull sheets for generating XML parameters files are named: <strong>USMs, Ini, Soils, Tec, Station</strong></p>
 </div>
 <div id="common-tables-specifications" class="section level2">
 <h2 class="hasAnchor">
-<a href="#common-tables-specifications" class="anchor"></a>Common tables specifications</h2>
+<a href="#common-tables-specifications" class="anchor" aria-hidden="true"></a>Common tables specifications</h2>
 <p>The <strong>first column</strong> is used for storing identifiers or files names (or prefix) and the USMs table contains identifiers of the other linked tables in columns names <strong>finit, nomsol, fstation, ftec_1, ftec_2</strong> with respect to initialization files, soil name, station files and crop management files (for main crops and optionally associated crops).</p>
 <p>The <strong>first column names</strong> of data tables are automatically detected and must contain keywords prefix to do so as listed: <strong>usm_, ini_, soil_, sta_, tec_</strong></p>
 <p>These first columns may contain either <strong>names identifiers or files names</strong> according to data type:</p>
@@ -212,14 +212,14 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="data-consistency-checks-in-tables" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-consistency-checks-in-tables" class="anchor"></a>Data consistency checks in tables</h2>
+<a href="#data-consistency-checks-in-tables" class="anchor" aria-hidden="true"></a>Data consistency checks in tables</h2>
 <p>For the moment, <em>no consistency checks</em> (between Excel sheets or CSV equivalents files) functionnalities have been included in the package in order to prevent missing generated files or misspelled file names or identifiers.</p>
 <p>So, one must take care of <strong>links between xml files names</strong> for example files names defined for usms related to names declared for example in Excel sheets <code>Tec</code>, <code>Station</code>, and so on.</p>
 <p>In future developments, checks will be included to run be run prior to files generations, for preventing errors.</p>
 </div>
 <div id="usms-table-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usms-table-example" class="anchor"></a>USMs table example</h2>
+<a href="#usms-table-example" class="anchor" aria-hidden="true"></a>USMs table example</h2>
 <p>The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).</p>
 <p>The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file.</p>
 <table class="table">
@@ -496,11 +496,11 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-the-usms-xml-file-usms-xml" class="section level1">
 <h1 class="hasAnchor">
-<a href="#generating-the-usms-xml-file-usms-xml" class="anchor"></a>Generating the <code>usms</code> XML file (<em>usms.xml</em>)</h1>
+<a href="#generating-the-usms-xml-file-usms-xml" class="anchor" aria-hidden="true"></a>Generating the <code>usms</code> XML file (<em>usms.xml</em>)</h1>
 <p>The gen_usms_xml function is working on a data.frame object that can be loaded either from an Excel file sheet or from a csv file. Here after code shows how to get data from the downloaded examples <a href="#get-xl">Excel</a> and <a href="#get-csv">CSV</a> files.</p>
 <div id="getting-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-data" class="anchor"></a>Getting data</h2>
+<a href="#getting-data" class="anchor" aria-hidden="true"></a>Getting data</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reading the Excel file</span>
@@ -517,7 +517,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-the-file" class="section level2">
 <h2 class="hasAnchor">
-<a href="#generating-the-file" class="anchor"></a>Generating the file</h2>
+<a href="#generating-the-file" class="anchor" aria-hidden="true"></a>Generating the file</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
@@ -530,7 +530,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="usms-xml-file-content" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usms-xml-file-content" class="anchor"></a><code>usms.xml</code> file content</h2>
+<a href="#usms-xml-file-content" class="anchor" aria-hidden="true"></a><code>usms.xml</code> file content</h2>
 <p>Example of the first <code>usm</code> parameters:</p>
 <pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
 #&gt; &lt;usms&gt;
@@ -562,11 +562,11 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-the-sols-xml-file-sols-xml" class="section level1">
 <h1 class="hasAnchor">
-<a href="#generating-the-sols-xml-file-sols-xml" class="anchor"></a>Generating the <code>sols</code> XML file (<em>sols.xml</em>)</h1>
+<a href="#generating-the-sols-xml-file-sols-xml" class="anchor" aria-hidden="true"></a>Generating the <code>sols</code> XML file (<em>sols.xml</em>)</h1>
 <p>As for <code>gen_usms_xml</code>, <code>gen_sols_xml</code> function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the <code>sols.xml</code> file generation section.</p>
 <div id="getting-data-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-data-1" class="anchor"></a>Getting data</h2>
+<a href="#getting-data-1" class="anchor" aria-hidden="true"></a>Getting data</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reading the Excel file</span>
@@ -580,7 +580,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-the-file-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#generating-the-file-1" class="anchor"></a>Generating the file</h2>
+<a href="#generating-the-file-1" class="anchor" aria-hidden="true"></a>Generating the file</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
@@ -593,7 +593,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="sols-xml-file-content" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sols-xml-file-content" class="anchor"></a><code>sols.xml</code> file content</h2>
+<a href="#sols-xml-file-content" class="anchor" aria-hidden="true"></a><code>sols.xml</code> file content</h2>
 <p>Example of the first <code>sol</code> parameters sub-list:</p>
 <pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 #&gt; &lt;sols&gt;
@@ -633,10 +633,10 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-multiple-crop-management-xml-files-_tec-xml" class="section level1">
 <h1 class="hasAnchor">
-<a href="#generating-multiple-crop-management-xml-files-_tec-xml" class="anchor"></a>Generating multiple crop management XML files (<em>*_tec.xml</em>)</h1>
+<a href="#generating-multiple-crop-management-xml-files-_tec-xml" class="anchor" aria-hidden="true"></a>Generating multiple crop management XML files (<em>*_tec.xml</em>)</h1>
 <div id="getting-data-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-data-2" class="anchor"></a>Getting data</h2>
+<a href="#getting-data-2" class="anchor" aria-hidden="true"></a>Getting data</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reading the Excel file</span>
@@ -650,7 +650,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-files" class="section level2">
 <h2 class="hasAnchor">
-<a href="#generating-files" class="anchor"></a>Generating files</h2>
+<a href="#generating-files" class="anchor" aria-hidden="true"></a>Generating files</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># *_tec.xml files, one for each xl_param line</span>
@@ -693,10 +693,10 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-multiple-initialization-xml-files-_ini-xml" class="section level1">
 <h1 class="hasAnchor">
-<a href="#generating-multiple-initialization-xml-files-_ini-xml" class="anchor"></a>Generating multiple initialization XML files (<em>*_ini.xml</em>)</h1>
+<a href="#generating-multiple-initialization-xml-files-_ini-xml" class="anchor" aria-hidden="true"></a>Generating multiple initialization XML files (<em>*_ini.xml</em>)</h1>
 <div id="getting-data-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-data-3" class="anchor"></a>Getting data</h2>
+<a href="#getting-data-3" class="anchor" aria-hidden="true"></a>Getting data</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reading the Excel file</span>
@@ -710,7 +710,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-files-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#generating-files-1" class="anchor"></a>Generating files</h2>
+<a href="#generating-files-1" class="anchor" aria-hidden="true"></a>Generating files</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># *_ini.xml files, one for each xl_param line</span>
@@ -719,25 +719,25 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="xml-file-content" class="section level2">
 <h2 class="hasAnchor">
-<a href="#xml-file-content" class="anchor"></a>XML file content</h2>
+<a href="#xml-file-content" class="anchor" aria-hidden="true"></a>XML file content</h2>
 <p>Example of a <code>ini</code> parameters file content sub-list:</p>
 <pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 #&gt; &lt;initialisations&gt;
 #&gt;   &lt;nbplantes&gt;1&lt;/nbplantes&gt;
 #&gt;   &lt;plante dominance="1"&gt;
 #&gt;     &lt;stade0&gt;snu&lt;/stade0&gt;
-#&gt;     &lt;lai0&gt;0.0&lt;/lai0&gt;
-#&gt;     &lt;masec0&gt;0.0&lt;/masec0&gt;
-#&gt;     &lt;QNplante0&gt;0.0&lt;/QNplante0&gt;
-#&gt;     &lt;magrain0&gt;0.0&lt;/magrain0&gt;
-#&gt;     &lt;zrac0&gt;0.0&lt;/zrac0&gt;
-#&gt;     &lt;resperenne0&gt;0.0&lt;/resperenne0&gt;
+#&gt;     &lt;lai0&gt;0&lt;/lai0&gt;
+#&gt;     &lt;masec0&gt;0&lt;/masec0&gt;
+#&gt;     &lt;QNplante0&gt;0&lt;/QNplante0&gt;
+#&gt;     &lt;magrain0&gt;0&lt;/magrain0&gt;
+#&gt;     &lt;zrac0&gt;0&lt;/zrac0&gt;
+#&gt;     &lt;resperenne0&gt;0&lt;/resperenne0&gt;
 #&gt;     &lt;densinitial&gt;
-#&gt;       &lt;horizon nh="1"&gt;0.0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="2"&gt;0.0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="3"&gt;0.0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="4"&gt;0.0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="5"&gt;0.0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="1"&gt;0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="2"&gt;0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="3"&gt;0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="4"&gt;0&lt;/horizon&gt;
+#&gt;       &lt;horizon nh="5"&gt;0&lt;/horizon&gt;
 #&gt;     &lt;/densinitial&gt;
 #&gt;   &lt;/plante&gt;
 #&gt; ...
@@ -746,10 +746,10 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-multiple-meteorological-station-xml-files-_sta-xml" class="section level1">
 <h1 class="hasAnchor">
-<a href="#generating-multiple-meteorological-station-xml-files-_sta-xml" class="anchor"></a>Generating multiple meteorological station XML files (<em>*_sta.xml</em>)</h1>
+<a href="#generating-multiple-meteorological-station-xml-files-_sta-xml" class="anchor" aria-hidden="true"></a>Generating multiple meteorological station XML files (<em>*_sta.xml</em>)</h1>
 <div id="getting-data-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-data-4" class="anchor"></a>Getting data</h2>
+<a href="#getting-data-4" class="anchor" aria-hidden="true"></a>Getting data</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Reading the Excel file</span>
@@ -763,7 +763,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="generating-files-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#generating-files-2" class="anchor"></a>Generating files</h2>
+<a href="#generating-files-2" class="anchor" aria-hidden="true"></a>Generating files</h2>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># *_sta.xml files, one for each xl_param line</span>
@@ -772,7 +772,7 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <div id="xml-file-content-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#xml-file-content-1" class="anchor"></a>XML file content</h2>
+<a href="#xml-file-content-1" class="anchor" aria-hidden="true"></a>XML file content</h2>
 <p>Example of a <code>sta</code> parameters file content sub-list:</p>
 <pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
 #&gt; &lt;fichiersta&gt;

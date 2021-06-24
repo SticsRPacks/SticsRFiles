@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write STICS obs data from data.frame — gen_obs • SticsRFiles</title>
+<title>Generating observation data files from a data.frame — gen_obs • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Write STICS obs data from data.frame — gen_obs" />
-<meta property="og:description" content="Write STICS obs data from data.frame/tibble" />
+<meta property="og:title" content="Generating observation data files from a data.frame — gen_obs" />
+<meta property="og:description" content="Generating observation data files from a data.frame" />
 
 
 
@@ -56,9 +56,6 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-
-
-<!-- dependencies from examples -->
 
 
   
@@ -140,50 +137,68 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write STICS obs data from data.frame</h1>
+    <h1>Generating observation data files from a data.frame</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/gen_obs.R'><code>R/gen_obs.R</code></a></small>
     <div class="hidden name"><code>gen_obs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Write STICS obs data from data.frame/tibble</p>
+    <p>Generating observation data files from a data.frame</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gen_obs</span><span class='op'>(</span><span class='va'>obs_table</span>, <span class='va'>file_path</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>gen_obs</span><span class='op'>(</span><span class='va'>obs_table</span>, out_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>, usms_list <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>obs_table</th>
-      <td><p>data.frame to write</p></td>
+      <td><p>The input observations data.frame</p></td>
     </tr>
     <tr>
-      <th>file_path</th>
-      <td><p>Path to the file to write to</p></td>
+      <th>out_path</th>
+      <td><p>A path to an optional folder where to write the .obs files</p></td>
+    </tr>
+    <tr>
+      <th>usms_list</th>
+      <td><p>An optional list of usms names to be used for selecting which files to generate
+from the obs_table</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical value if the file generation succeeded (T) or not (F)</p>
+    <p>A return logical status indicating if any error when writing files (FALSE),
+TRUE when no errors.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>obs_table</code> is a <code>data.frame</code> with the following format:</p><table class='table'>
+<tr><td>usm_name</td><td>ian</td><td>mo</td><td>jo</td><td>jul</td><td>densite</td><td>lai(n)</td><td>masec(n)</td><td>azomes</td><td>ammomes</td><td>resmes</td><td>AZnit(1)</td></tr>
+<tr><td>USM_2017_T1_CI</td><td>2017</td><td>9</td><td>6</td><td>249</td><td>NA</td><td>NA</td><td>0.31</td><td>27.07395</td><td>9.364425</td><td>285</td><td>15.39825</td></tr>
+<tr><td>USM_2017_T1_CI</td><td>2017</td><td>9</td><td>20</td><td>263</td><td>NA</td><td>NA</td><td>0.60</td><td>27.90000</td><td>9.800000</td><td>270</td><td>NA</td></tr>
+<tr><td>USM_2018_T1</td><td>2017</td><td>10</td><td>20</td><td>293</td><td>NA</td><td>0.1</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+<tr><td>USM_2018_T1</td><td>2018</td><td>5</td><td>15</td><td>482</td><td>NA</td><td>1.2</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
+</table>
+
+
+<ul>
+<li><p><code>usm_name</code> column contains usms names which are used as output .obs files names</p></li>
+<li><p><code>ian</code>, <code>mo</code>, <code>jo</code> and <code>jul</code> are mandatory (year, month, day and julian date)</p></li>
+<li><p>Other columns one per variable contain observations values or NA</p></li>
+</ul>
+
+<p>@seealso <code><a href='get_var_info.html'>get_var_info</a></code> for getting variable right syntax or searching a variable name.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Getting observations data</span>
-<span class='va'>xl_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='st'>"inputs_stics_example.xlsx"</span><span class='op'>)</span>
-
-<span class='co'># Loading and filtering data for usm "USM_2017_T1_CI"</span>
-<span class='va'>obs_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_params_table.html'>read_params_table</a></span><span class='op'>(</span>file_path <span class='op'>=</span> <span class='va'>xl_path</span>, sheet_name <span class='op'>=</span> <span class='st'>"Obs"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-<span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>usm_name</span> <span class='op'>%in%</span> <span class='st'>"USM_2017_T1_CI"</span><span class='op'>)</span>
-
-<span class='co'># Generating the csv file</span>
-<span class='fu'>gen_obs</span><span class='op'>(</span><span class='va'>obs_df</span>, <span class='st'>"USM_2017_T1_CI.obs"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>xl_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='st'>"inputs_stics_example.xlsx"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>obs_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_params_table.html'>read_params_table</a></span><span class='op'>(</span>file_path <span class='op'>=</span> <span class='va'>xl_path</span>, sheet_name <span class='op'>=</span> <span class='st'>"Obs"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>gen_obs</span><span class='op'>(</span>obs_table <span class='op'>=</span> <span class='va'>obs_df</span>, out_path <span class='op'>=</span> <span class='st'>"/path/to/dest/dir"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

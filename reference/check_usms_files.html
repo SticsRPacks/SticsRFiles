@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a version/or the last version string of available Stics files templates in the package — get_xml_stics_version • SticsRFiles</title>
+<title>Checking xml files existence got from usms.xml — check_usms_files • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get a version/or the last version string of available Stics files templates in the package — get_xml_stics_version" />
-<meta property="og:description" content="Get a version/or the last version string of available Stics files templates in the package" />
+<meta property="og:title" content="Checking xml files existence got from usms.xml — check_usms_files" />
+<meta property="og:description" content="Checking xml files existence got from usms.xml" />
 
 
 
@@ -137,44 +137,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a version/or the last version string of available Stics files templates in the package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_xml_stics_version.R'><code>R/get_xml_stics_version.R</code></a></small>
-    <div class="hidden name"><code>get_xml_stics_version.Rd</code></div>
+    <h1>Checking xml files existence got from usms.xml</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/check_usms_files.R'><code>R/check_usms_files.R</code></a></small>
+    <div class="hidden name"><code>check_usms_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get a version/or the last version string of available Stics files templates in the package</p>
+    <p>Checking xml files existence got from usms.xml</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_xml_stics_version</span><span class='op'>(</span>stics_version <span class='op'>=</span> <span class='st'>"last"</span>, xml_doc <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>check_usms_files</span><span class='op'>(</span>
+  <span class='va'>workspace_path</span>,
+  <span class='va'>javastics_path</span>,
+  usms_list <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file_name <span class='op'>=</span> <span class='st'>"usms.xml"</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stics_version</th>
-      <td><p>A version key of a Stics version (i.e. V9.1)</p></td>
+      <th>workspace_path</th>
+      <td><p>The path to a JavaStics-compatible workspace</p></td>
     </tr>
     <tr>
-      <th>xml_doc</th>
-      <td><p>an xmlDocument of a Stics xml file (Unused for the moment, no version String included in xml files)</p></td>
+      <th>javastics_path</th>
+      <td><p>JavaStics installation path (Optional, needed if the plant files are not in the <code>workspace_path</code>
+but rather in the JavaStics default plant folder)</p></td>
+    </tr>
+    <tr>
+      <th>usms_list</th>
+      <td><p>Vector of usms names (Optional)</p></td>
+    </tr>
+    <tr>
+      <th>file_name</th>
+      <td><p>Usms XML file name (Optional)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a Stics version string</p>
+    <p>A data.frame with files names usm row and a status (all_exist)
+indicating weither or not all listed files exist in the <code>workspace_path</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='co'># View available Stics files version</span></span>
-<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_stics_version</span><span class='op'>(</span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># View the last version</span></span>
-<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_stics_version</span><span class='op'>(</span><span class='st'>"last"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>check_usms_files</span><span class='op'>(</span>workspace_path <span class='op'>=</span> <span class='st'>"/path/to/workspace"</span>,</span>
+<span class='r-in'>javastics_path <span class='op'>=</span> <span class='st'>"/path/to/javastics"</span><span class='op'>)</span></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># Checking if a version exists</span></span>
-<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_stics_version</span><span class='op'>(</span><span class='st'>"V9.2"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>check_usms_files</span><span class='op'>(</span>workspace_path <span class='op'>=</span> <span class='st'>"/path/to/workspace"</span>,</span>
+<span class='r-in'>javastics_path <span class='op'>=</span> <span class='st'>"/path/to/javastics"</span>, usm_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"usm1"</span>, <span class='st'>"usm3"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'></span>

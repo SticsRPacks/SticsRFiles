@@ -58,9 +58,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -149,7 +146,7 @@
     <p>Converting an attributes list to a matrix</p>
     </div>
 
-    <pre class="usage"><span class='fu'>attributes_list2matrix</span><span class='op'>(</span><span class='va'>attr_list</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>attributes_list2matrix</span><span class='op'>(</span><span class='va'>attr_list</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,35 +162,35 @@
     <p>A matrix with attributes names as column names</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>xml_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"xml"</span> <span class='op'>)</span>, <span class='st'>"sols.xml"</span><span class='op'>)</span>
-<span class='va'>sols_doc</span> <span class='op'>&lt;-</span> <span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>xmldocument</span><span class='op'>(</span><span class='va'>xml_path</span><span class='op'>)</span>
-<span class='va'>node_set</span> <span class='op'>&lt;-</span> <span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>getNodeS</span><span class='op'>(</span><span class='va'>sols_doc</span>, <span class='st'>"//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]"</span><span class='op'>)</span>
-<span class='va'>attr_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>node_set</span>,<span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'>xmlAttrs</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'>#&gt; [[1]]</span>
-<span class='co'>#&gt; nom</span>
-<span class='co'>#&gt; "solcanne"</span>
-
-<span class='co'>#&gt; [[2]]</span>
-<span class='co'>#&gt; format        max        min        nom</span>
-<span class='co'>#&gt; "real"      "2.0"      "0.0" "mulchbat"</span>
-
-<span class='co'>#&gt; [[3]]</span>
-<span class='co'>#&gt; format        max        min        nom</span>
-<span class='co'>#&gt; "real"      "2.0"      "0.0" "mulchbat"</span>
-
-<span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>attributes_list2matrix</span><span class='op'>(</span><span class='va'>attr_list</span><span class='op'>)</span>
-
-<span class='co'>#&gt;      nom        format max   min</span>
-<span class='co'>#&gt; [1,] "solcanne" NA     NA    NA</span>
-<span class='co'>#&gt; [2,] "mulchbat" "real" "2.0" "0.0"</span>
-<span class='co'>#&gt; [3,] "mulchbat" "real" "2.0" "0.0"</span>
-
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>xml_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"xml"</span> <span class='op'>)</span>, <span class='st'>"sols.xml"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>sols_doc</span> <span class='op'>&lt;-</span> <span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>xmldocument</span><span class='op'>(</span><span class='va'>xml_path</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>node_set</span> <span class='op'>&lt;-</span> <span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>getNodeS</span><span class='op'>(</span><span class='va'>sols_doc</span>, <span class='st'>"//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>attr_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>sapply</a></span><span class='op'>(</span><span class='va'>node_set</span>,<span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'>xmlAttrs</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#&gt; [[1]]</span></span>
+<span class='r-in'><span class='co'>#&gt; nom</span></span>
+<span class='r-in'><span class='co'>#&gt; "solcanne"</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#&gt; [[2]]</span></span>
+<span class='r-in'><span class='co'>#&gt; format        max        min        nom</span></span>
+<span class='r-in'><span class='co'>#&gt; "real"      "2.0"      "0.0" "mulchbat"</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#&gt; [[3]]</span></span>
+<span class='r-in'><span class='co'>#&gt; format        max        min        nom</span></span>
+<span class='r-in'><span class='co'>#&gt; "real"      "2.0"      "0.0" "mulchbat"</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>attributes_list2matrix</span><span class='op'>(</span><span class='va'>attr_list</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#&gt;      nom        format max   min</span></span>
+<span class='r-in'><span class='co'>#&gt; [1,] "solcanne" NA     NA    NA</span></span>
+<span class='r-in'><span class='co'>#&gt; [2,] "mulchbat" "real" "2.0" "0.0"</span></span>
+<span class='r-in'><span class='co'>#&gt; [3,] "mulchbat" "real" "2.0" "0.0"</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

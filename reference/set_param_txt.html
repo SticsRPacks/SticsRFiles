@@ -59,9 +59,6 @@ file." />
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -151,7 +148,7 @@ file." />
 file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_param_txt</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>set_param_txt</span><span class='op'>(</span>
   dirpath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>param</span>,
   <span class='va'>value</span>,
@@ -175,7 +172,7 @@ file.</p>
 
 <span class='fu'>set_tec_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"fictec1.txt"</span>, <span class='va'>param</span>, <span class='va'>value</span>, add <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span>
 
-<span class='fu'>set_soil_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"param.sol"</span>, <span class='va'>param</span>, <span class='va'>value</span>, layer <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+<span class='fu'>set_soil_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"param.sol"</span>, <span class='va'>param</span>, <span class='va'>value</span>, layer <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,7 +214,7 @@ file.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>plant</code> parameter can be either equal to <code>1</code>, <code>2</code> for
-the associated plant in the case of intercrop, or <code><a href='https://rdrr.io/r/base/c.html'>c(1,2)</a></code> for both
+the associated plant in the case of intercrop, or <code>c(1,2)</code> for both
 Principal and associated plants.
 <code><a href='get_var_info.html'>get_var_info</a></code> is a helper function that returns all possible
 output variables.</p>
@@ -227,30 +224,30 @@ output variables.</p>
 variables required from STICS, please directly call <code>gen_varmod</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># Getting example data path</span>
-<span class='va'>path</span> <span class='op'>=</span> <span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span> <span class='op'>)</span>
-
-<span class='co'># Replace the interrow distance parameter to 0.01:</span>
-<span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"interrang"</span>, value <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span>
-
-<span class='co'># Change the value of durvieF for the current variety:</span>
-<span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, value <span class='op'>=</span> <span class='fl'>245</span><span class='op'>)</span>
-
-<span class='co'># Change the value of durvieF for another variety:</span>
-<span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, variety <span class='op'>=</span> <span class='st'>"Nefer"</span>, value <span class='op'>=</span> <span class='fl'>178</span><span class='op'>)</span>
-
-<span class='co'># Change the value of infil for a given layer:</span>
-<span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"infil"</span>, layer <span class='op'>=</span> <span class='fl'>2</span>, value <span class='op'>=</span> <span class='fl'>60</span><span class='op'>)</span>
-
-<span class='co'># If the parameter is found in several files, use the set_* functions direclty, e.g.</span>
-<span class='co'># cailloux is found in the general file ("codetycailloux") and the soil file. If we want to</span>
-<span class='co'># change its value in the soil file, we use set_soil_txt():</span>
-<span class='fu'>set_soil_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"param.sol"</span><span class='op'>)</span>, param <span class='op'>=</span> <span class='st'>"cailloux"</span>, layer <span class='op'>=</span> <span class='fl'>2</span>, value <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Getting example data path</span></span>
+<span class='r-in'><span class='va'>path</span> <span class='op'>=</span> <span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span> <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Replace the interrow distance parameter to 0.01:</span></span>
+<span class='r-in'><span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"interrang"</span>, value <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Change the value of durvieF for the current variety:</span></span>
+<span class='r-in'><span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, value <span class='op'>=</span> <span class='fl'>245</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Change the value of durvieF for another variety:</span></span>
+<span class='r-in'><span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, variety <span class='op'>=</span> <span class='st'>"Nefer"</span>, value <span class='op'>=</span> <span class='fl'>178</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Change the value of infil for a given layer:</span></span>
+<span class='r-in'><span class='fu'>set_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"infil"</span>, layer <span class='op'>=</span> <span class='fl'>2</span>, value <span class='op'>=</span> <span class='fl'>60</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># If the parameter is found in several files, use the set_* functions direclty, e.g.</span></span>
+<span class='r-in'><span class='co'># cailloux is found in the general file ("codetycailloux") and the soil file. If we want to</span></span>
+<span class='r-in'><span class='co'># change its value in the soil file, we use set_soil_txt():</span></span>
+<span class='r-in'><span class='fu'>set_soil_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"param.sol"</span><span class='op'>)</span>, param <span class='op'>=</span> <span class='st'>"cailloux"</span>, layer <span class='op'>=</span> <span class='fl'>2</span>, value <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

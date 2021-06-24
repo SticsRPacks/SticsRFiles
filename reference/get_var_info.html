@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find output variable names for STICS — get_var_info • SticsRFiles</title>
+<title>Find STICS output variable names and description — get_var_info • SticsRFiles</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Find output variable names for STICS — get_var_info" />
-<meta property="og:description" content="Helper function that return the name used as input
-for the STICS model with a partial match." />
+<meta property="og:title" content="Find STICS output variable names and description — get_var_info" />
+<meta property="og:description" content="Helper function that returns names and descriptions of STICS output variables
+from a partial name and/or descriptive keywords." />
 
 
 
@@ -57,9 +57,6 @@ for the STICS model with a partial match." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-
-
-<!-- dependencies from examples -->
 
 
   
@@ -141,29 +138,29 @@ for the STICS model with a partial match." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find output variable names for STICS</h1>
+    <h1>Find STICS output variable names and description</h1>
     <small class="dont-index">Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/R/all_out_var.R'><code>R/all_out_var.R</code></a></small>
     <div class="hidden name"><code>get_var_info.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Helper function that return the name used as input
-for the STICS model with a partial match.</p>
+    <p>Helper function that returns names and descriptions of STICS output variables
+from a partial name and/or descriptive keywords.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_var_info</span><span class='op'>(</span>var <span class='op'>=</span> <span class='cn'>NULL</span>, keyword <span class='op'>=</span> <span class='cn'>NULL</span>, version <span class='op'>=</span> <span class='st'>"last"</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_var_info</span><span class='op'>(</span>var <span class='op'>=</span> <span class='cn'>NULL</span>, keyword <span class='op'>=</span> <span class='cn'>NULL</span>, version <span class='op'>=</span> <span class='st'>"last"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>var</th>
-      <td><p>Character vector with a (partial) STICS output variable name</p></td>
+      <td><p>Character vector containing a (part of the) name of a STICS output variable.</p></td>
     </tr>
     <tr>
       <th>keyword</th>
-      <td><p>Search by keyword instead of the variable name
-(search in the name and the description fields)</p></td>
+      <td><p>Search by keyword instead of variable name
+(search in the name and description field)</p></td>
     </tr>
     <tr>
       <th>version</th>
@@ -180,18 +177,18 @@ to "last", a special code to get the last version.</p></td>
     <div class='dont-index'><p><code><a href='all_out_var.html'>all_out_var</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Find by variable name (fuzzy search):</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>::</span><span class='fu'>get_var_info</span><span class='op'>(</span><span class='st'>"lai"</span><span class='op'>)</span>
-
-<span class='co'># Find by keyword (fuzzy search in variable name and description):</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>::</span><span class='fu'>get_var_info</span><span class='op'>(</span>keyword<span class='op'>=</span> <span class='st'>"lai"</span><span class='op'>)</span>
-
-<span class='co'># Find for a particular version:</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>::</span><span class='fu'>get_var_info</span><span class='op'>(</span><span class='st'>"lai"</span>, version<span class='op'>=</span> <span class='st'>"V9.0"</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Find by variable name (fuzzy search):</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>::</span><span class='fu'>get_var_info</span><span class='op'>(</span><span class='st'>"lai"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Find by keyword (fuzzy search in variable name and description):</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>::</span><span class='fu'>get_var_info</span><span class='op'>(</span>keyword<span class='op'>=</span> <span class='st'>"lai"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Find for a particular version:</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>::</span><span class='fu'>get_var_info</span><span class='op'>(</span><span class='st'>"lai"</span>, version<span class='op'>=</span> <span class='st'>"V9.0"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -59,7 +59,6 @@ Used by get_obs() and get_sim(). Operate first computation and then call get_fil
 
 
 
-
   
 
   
@@ -149,24 +148,23 @@ Used by get_obs() and get_sim(). Operate first computation and then call get_fil
 Used by <code><a href='get_obs.html'>get_obs()</a></code> and <code><a href='get_sim.html'>get_sim()</a></code>. Operate first computation and then call <code><a href='get_file_.html'>get_file_()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_file</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_file</span><span class='op'>(</span>
   <span class='va'>workspace</span>,
   usm_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   var_list <span class='op'>=</span> <span class='cn'>NULL</span>,
-  doy_list <span class='op'>=</span> <span class='cn'>NULL</span>,
   dates_list <span class='op'>=</span> <span class='cn'>NULL</span>,
-  usms_filename <span class='op'>=</span> <span class='cn'>NULL</span>,
+  usms_filepath <span class='op'>=</span> <span class='cn'>NULL</span>,
   javastics_path <span class='op'>=</span> <span class='cn'>NULL</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sim"</span>, <span class='st'>"obs"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>workspace</th>
-      <td><p>Path of a JavaStics workspace, or a vector of (recursive call).</p></td>
+      <td><p>Path of a JavaStics workspace, or a vector of.</p></td>
     </tr>
     <tr>
       <th>usm_name</th>
@@ -177,16 +175,12 @@ Used by <code><a href='get_obs.html'>get_obs()</a></code> and <code><a href='get
       <td><p>vector of output variables names to filter (optional, see <code><a href='get_var_info.html'>get_var_info()</a></code> to get the names of the variables)</p></td>
     </tr>
     <tr>
-      <th>doy_list</th>
-      <td><p>vector of cumulative DOYs to filter (optional)</p></td>
-    </tr>
-    <tr>
       <th>dates_list</th>
       <td><p>list of dates to filter (optional, should be a POSIX date)</p></td>
     </tr>
     <tr>
-      <th>usms_filename</th>
-      <td><p>Name of the usm file (optional)</p></td>
+      <th>usms_filepath</th>
+      <td><p>Path of the usms file (optional)</p></td>
     </tr>
     <tr>
       <th>javastics_path</th>
@@ -200,16 +194,6 @@ but rather in the JavaStics default workspace). Only used to get the plants name
     <tr>
       <th>type</th>
       <td><p>The type of file to read, either "obs" or "sim".</p></td>
-    </tr>
-    <tr>
-      <th>file_name</th>
-      <td><p>The names of the files to read (optional). read from <code>usms.xml</code> file if provided, or using file names
-in the workspace directly</p></td>
-    </tr>
-    <tr>
-      <th>plant_names</th>
-      <td><p>The plants names associated to the files (optional). If not provided, read <code>usms.xml</code>, or use
-default values if not available.</p></td>
     </tr>
     </table>
 

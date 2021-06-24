@@ -58,9 +58,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -149,7 +146,7 @@
     <p>Get an xmlDocument from a Stics xml file template</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_xml_base_doc</span><span class='op'>(</span>xml_type <span class='op'>=</span> <span class='cn'>NULL</span>, stics_version <span class='op'>=</span> <span class='st'>"last"</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_xml_base_doc</span><span class='op'>(</span>xml_type <span class='op'>=</span> <span class='cn'>NULL</span>, stics_version <span class='op'>=</span> <span class='st'>"last"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,23 +166,23 @@
     <p>an xmlDocument object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Getting xml Stics files types list (i.e. keywords)</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_base_doc</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># Getting a soil document with one soil definition</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_base_doc</span><span class='op'>(</span><span class='st'>"sols"</span><span class='op'>)</span>
-
-<span class='co'># Stics version can be provided, V9.1</span>
-<span class='co'># corresponds to stics_version = "last"</span>
-<span class='co'># View available Stics files version</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'><a href='get_xml_stics_version.html'>get_xml_stics_version</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='co'># Giving Stics version</span>
-<span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_base_doc</span><span class='op'>(</span><span class='st'>"sols"</span>, stics_version <span class='op'>=</span> <span class='st'>"V9.1"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Getting xml Stics files types list (i.e. keywords)</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_base_doc</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Getting a soil document with one soil definition</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_base_doc</span><span class='op'>(</span><span class='st'>"sols"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Stics version can be provided, V9.1</span></span>
+<span class='r-in'><span class='co'># corresponds to stics_version = "last"</span></span>
+<span class='r-in'><span class='co'># View available Stics files version</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'><a href='get_xml_stics_version.html'>get_xml_stics_version</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Giving Stics version</span></span>
+<span class='r-in'><span class='fu'>SticsRFiles</span><span class='fu'>:::</span><span class='fu'>get_xml_base_doc</span><span class='op'>(</span><span class='st'>"sols"</span>, stics_version <span class='op'>=</span> <span class='st'>"V9.1"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

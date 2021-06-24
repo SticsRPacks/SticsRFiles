@@ -58,9 +58,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -149,7 +146,7 @@
     <p>Generates a param.sti file and sets code optim in new_travail.usm to force parameters values in Stics simulations (this function is typically called before <code><a href='https://rdrr.io/pkg/SticsOnR/man/run_stics.html'>SticsOnR::run_stics()</a></code>)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>force_param_values</span><span class='op'>(</span><span class='va'>workspace</span>, <span class='va'>param_values</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>force_param_values</span><span class='op'>(</span><span class='va'>workspace</span>, <span class='va'>param_values</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,10 +175,10 @@ If param_values==NA or param_values==NULL, not any parameter will be forced (all
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/SticsOnR/man/run_stics.html'>SticsOnR::run_stics()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>example_txt_dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span>file_type<span class='op'>=</span><span class='st'>"txt"</span><span class='op'>)</span>
-<span class='fu'>force_param_values</span><span class='op'>(</span><span class='va'>example_txt_dir</span>, <span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span><span class='op'>(</span>object<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>220</span>,<span class='fl'>330</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stlevamf"</span>, <span class='st'>"stamflax"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>example_txt_dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span>file_type<span class='op'>=</span><span class='st'>"txt"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>force_param_values</span><span class='op'>(</span><span class='va'>example_txt_dir</span>, <span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span><span class='op'>(</span>object<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>220</span>,<span class='fl'>330</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stlevamf"</span>, <span class='st'>"stamflax"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

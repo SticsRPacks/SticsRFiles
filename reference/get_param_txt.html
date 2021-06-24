@@ -61,9 +61,6 @@ Users would generally use the wrapper get_param_txt() instead." />
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -155,7 +152,7 @@ Generally used after calling building a usm with <code>JavaStics</code>.</p>
 Users would generally use the wrapper <code>get_param_txt()</code> instead.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>, param <span class='op'>=</span> <span class='cn'>NULL</span>, variety <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>, param <span class='op'>=</span> <span class='cn'>NULL</span>, variety <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>get_ini_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"ficini.txt"</span><span class='op'>)</span>
 
@@ -177,7 +174,7 @@ Users would generally use the wrapper <code>get_param_txt()</code> instead.</p>
 
 <span class='fu'>get_station_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"station.txt"</span><span class='op'>)</span>
 
-<span class='fu'>get_usm_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"new_travail.usm"</span><span class='op'>)</span></pre>
+<span class='fu'>get_usm_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='st'>"new_travail.usm"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -257,46 +254,46 @@ them to other functions.</p>
 <p><code>get_param_txt()</code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Read the interrow distance parameter:</span>
-
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/SticsRPacks/SticsRFiles'>SticsRFiles</a></span><span class='op'>)</span>
-<span class='va'>path</span> <span class='op'>=</span> <span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span> <span class='op'>)</span>
-<span class='fu'>get_param_txt</span><span class='op'>(</span><span class='va'>path</span>, param<span class='op'>=</span><span class='st'>'interrang'</span><span class='op'>)</span>
-
-<span class='co'># Getting varietal values:</span>
-
-<span class='co'># Get the leaf lifespan of the variety used in the usm:</span>
-<span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span><span class='op'>)</span>
-<span class='co'># Get the leaf lifespan of another variety available in the plant file:</span>
-<span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, variety <span class='op'>=</span> <span class='st'>"Furio"</span><span class='op'>)</span>
-<span class='co'># To get the values for several (or all) varieties, either put all varieties:</span>
-<span class='va'>varieties</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Pactol"</span>, <span class='st'>"Cherif"</span>, <span class='st'>"Furio"</span>, <span class='st'>"Dunia"</span>, <span class='st'>"Volga"</span>, <span class='st'>"Cecilia"</span><span class='op'>)</span>
-<span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, variety <span class='op'>=</span> <span class='va'>varieties</span><span class='op'>)</span>
-<span class='co'># Or get it from the output of the function returning all parameters:</span>
-<span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span><span class='op'>)</span><span class='op'>$</span><span class='va'>plant</span><span class='op'>$</span><span class='va'>plant1</span><span class='op'>$</span><span class='va'>durvieF</span>
-<span class='op'>}</span>
-
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Read the initialisation file (ficini.txt):</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/SticsRPacks/SticsRFiles'>SticsRFiles</a></span><span class='op'>)</span>
-<span class='va'>path</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span><span class='op'>)</span>, <span class='st'>"ficini.txt"</span><span class='op'>)</span>
-<span class='fu'>get_ini_txt</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
-
-<span class='co'># Read the tec file directly:</span>
-
-<span class='co'># First, get the parameters from the tmp file:</span>
-<span class='va'>tmp</span><span class='op'>=</span> <span class='fu'>get_tmp_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span><span class='op'>)</span>, <span class='st'>"tempoparv6.sti"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>several_fert</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>$</span><span class='va'>option_engrais_multiple</span><span class='op'>==</span><span class='fl'>1</span>,<span class='cn'>TRUE</span>,<span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>several_thin</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>$</span><span class='va'>option_thinning</span><span class='op'>==</span><span class='fl'>1</span>,<span class='cn'>TRUE</span>,<span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>is_pasture</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>$</span><span class='va'>option_pature</span><span class='op'>==</span><span class='fl'>1</span>,<span class='cn'>TRUE</span>,<span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='co'># Then, get the technical parameters:</span>
-<span class='fu'>get_tec_txt</span><span class='op'>(</span>filepath<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span><span class='op'>)</span>, <span class='st'>"fictec1.txt"</span><span class='op'>)</span>,
-several_fert <span class='op'>=</span> <span class='va'>several_fert</span>, several_thin <span class='op'>=</span> <span class='va'>several_thin</span>, is_pasture <span class='op'>=</span> <span class='va'>is_pasture</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># Read the interrow distance parameter:</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/SticsRPacks/SticsRFiles'>SticsRFiles</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>path</span> <span class='op'>=</span> <span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span> <span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_param_txt</span><span class='op'>(</span><span class='va'>path</span>, param<span class='op'>=</span><span class='st'>'interrang'</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Getting varietal values:</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Get the leaf lifespan of the variety used in the usm:</span></span>
+<span class='r-in'><span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Get the leaf lifespan of another variety available in the plant file:</span></span>
+<span class='r-in'><span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, variety <span class='op'>=</span> <span class='st'>"Furio"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># To get the values for several (or all) varieties, either put all varieties:</span></span>
+<span class='r-in'><span class='va'>varieties</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Pactol"</span>, <span class='st'>"Cherif"</span>, <span class='st'>"Furio"</span>, <span class='st'>"Dunia"</span>, <span class='st'>"Volga"</span>, <span class='st'>"Cecilia"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span>, param <span class='op'>=</span> <span class='st'>"durvieF"</span>, variety <span class='op'>=</span> <span class='va'>varieties</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Or get it from the output of the function returning all parameters:</span></span>
+<span class='r-in'><span class='fu'>get_param_txt</span><span class='op'>(</span>dirpath <span class='op'>=</span> <span class='va'>path</span><span class='op'>)</span><span class='op'>$</span><span class='va'>plant</span><span class='op'>$</span><span class='va'>plant1</span><span class='op'>$</span><span class='va'>durvieF</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Read the initialisation file (ficini.txt):</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/SticsRPacks/SticsRFiles'>SticsRFiles</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>path</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span><span class='op'>)</span>, <span class='st'>"ficini.txt"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>get_ini_txt</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Read the tec file directly:</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># First, get the parameters from the tmp file:</span></span>
+<span class='r-in'><span class='va'>tmp</span><span class='op'>=</span> <span class='fu'>get_tmp_txt</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span><span class='op'>)</span>, <span class='st'>"tempoparv6.sti"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>several_fert</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>$</span><span class='va'>option_engrais_multiple</span><span class='op'>==</span><span class='fl'>1</span>,<span class='cn'>TRUE</span>,<span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>several_thin</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>$</span><span class='va'>option_thinning</span><span class='op'>==</span><span class='fl'>1</span>,<span class='cn'>TRUE</span>,<span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>is_pasture</span><span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>$</span><span class='va'>option_pature</span><span class='op'>==</span><span class='fl'>1</span>,<span class='cn'>TRUE</span>,<span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Then, get the technical parameters:</span></span>
+<span class='r-in'><span class='fu'>get_tec_txt</span><span class='op'>(</span>filepath<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='get_examples_path.html'>get_examples_path</a></span><span class='op'>(</span> file_type <span class='op'>=</span> <span class='st'>"txt"</span><span class='op'>)</span>, <span class='st'>"fictec1.txt"</span><span class='op'>)</span>,</span>
+<span class='r-in'>several_fert <span class='op'>=</span> <span class='va'>several_fert</span>, several_thin <span class='op'>=</span> <span class='va'>several_thin</span>, is_pasture <span class='op'>=</span> <span class='va'>is_pasture</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

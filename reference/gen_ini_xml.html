@@ -58,9 +58,6 @@
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -149,13 +146,13 @@
     <p>Generate Stics ini xml file(s) from a template or an input file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gen_ini_xml</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>gen_ini_xml</span><span class='op'>(</span>
   param_table <span class='op'>=</span> <span class='cn'>NULL</span>,
   ini_in_file <span class='op'>=</span> <span class='cn'>NULL</span>,
   out_path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
   crop_tag <span class='op'>=</span> <span class='st'>"Crop"</span>,
   stics_version <span class='op'>=</span> <span class='st'>"last"</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,17 +207,17 @@ in the file, and each line denotes a separate ini file (for e.g. several USMs).<
 (as shown in the table extract above).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span>
-
-<span class='va'>xl_path</span> <span class='op'>&lt;-</span> <span class='st'>"inputs_stics_example.xlsx"</span>
-<span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='va'>xl_path</span><span class='op'>)</span>
-<span class='va'>ini_param_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='va'>xl_path</span>, sheet <span class='op'>=</span> <span class='st'>"Ini"</span><span class='op'>)</span>
-<span class='fu'>gen_ini_xml</span><span class='op'>(</span>out_path <span class='op'>=</span> <span class='st'>"/path/to/dest/dir"</span>,
-param_table <span class='op'>=</span> <span class='va'>ini_param_df</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>xl_path</span> <span class='op'>&lt;-</span> <span class='st'>"inputs_stics_example.xlsx"</span></span>
+<span class='r-in'><span class='fu'><a href='download_usm_xl.html'>download_usm_xl</a></span><span class='op'>(</span>xl_name <span class='op'>=</span> <span class='va'>xl_path</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ini_param_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='va'>xl_path</span>, sheet <span class='op'>=</span> <span class='st'>"Ini"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>gen_ini_xml</span><span class='op'>(</span>out_path <span class='op'>=</span> <span class='st'>"/path/to/dest/dir"</span>,</span>
+<span class='r-in'>param_table <span class='op'>=</span> <span class='va'>ini_param_df</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

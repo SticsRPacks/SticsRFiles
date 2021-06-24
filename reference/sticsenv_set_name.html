@@ -58,7 +58,6 @@
 
 
 
-
   
 
   
@@ -147,7 +146,7 @@
     <p>Set the name of the environment where an object is found</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sticsenv_set_name</span><span class='op'>(</span><span class='va'>name</span>, env_name <span class='op'>=</span> <span class='fu'><a href='sticsenv_name.html'>sticsenv_name</a></span><span class='op'>(</span><span class='op'>)</span>, fix_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>sticsenv_set_name</span><span class='op'>(</span><span class='va'>name</span>, env_name <span class='op'>=</span> <span class='fu'><a href='sticsenv_name.html'>sticsenv_name</a></span><span class='op'>(</span><span class='op'>)</span>, fix_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +161,7 @@
     </tr>
     <tr>
       <th>fix_name</th>
-      <td><p>Fix the name of the environment to <code>fix_name</code>, or to <code><a href='https://rdrr.io/r/base/paste.html'>paste0("R_", name)</a></code>
+      <td><p>Fix the name of the environment to <code>fix_name</code>, or to <code>paste0("R_", name)</code>
 if <code>NULL</code> (default).</p></td>
     </tr>
     </table>

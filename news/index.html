@@ -57,7 +57,6 @@
 
 
 
-
   
 
   
@@ -141,40 +140,64 @@
       <small>Source: <a href='https://github.com/SticsRPacks/SticsRFiles/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="sticsrfiles-030-2021-04-15" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.0">
-<a href="#sticsrfiles-030-2021-04-15" class="anchor"></a>SticsRFiles 0.3.0 (2021-04-15)</h1>
+    <div id="sticsrfiles-040-2021-06-22" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#sticsrfiles-040-2021-06-22" class="anchor" aria-hidden="true"></a>SticsRFiles 0.4.0 (2021-06-22)</h1>
 <div id="general-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-changes" class="anchor"></a>General changes</h2>
-<ul>
-<li>DESCRIPTION
-<ul>
-<li>Imports: lifecycle</li>
-</ul>
-</li>
-<li>Tests
-<ul>
-<li>new ones added for : gen_tec_xml, gen_ini_xml</li>
-</ul>
-</li>
-<li>Functions:
-<ul>
-<li>Now managing functions life cycle</li>
-</ul>
-</li>
-<li>Files:
-<ul>
-<li>useless XML template files have been removed</li>
-</ul>
-</li>
-</ul>
-</div>
+<a href="#general-changes" class="anchor" aria-hidden="true"></a>General changes</h2>
+<ul><li><p>DESCRIPTION / NAMESPACE: updates linked to new functions</p></li>
+<li>
+<p>Tests</p>
+<ul><li>updates, new ones added (get_obs, get_sim)</li>
+</ul></li>
+<li>
+<p>Functions:</p>
+<ul><li>new: get_lai_forcing, check_usms_files</li>
+<li>help updates</li>
+<li>help reference site update (gen_obs function)</li>
+</ul></li>
+<li>
+<p>Files:</p>
+<ul><li>some useless files removed</li>
+<li>new Stics dirs added (needed by tests)</li>
+<li>fix: example dirs names in inst</li>
+</ul></li>
+<li><p>Tutorial: minor fix for use-xml-files (working dir creation)</p></li>
+</ul></div>
 <div id="specific-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specific-changes" class="anchor"></a>Specific changes</h2>
-<ul>
-<li><p>get_sim: new function replacing get_daily_results</p></li>
+<a href="#specific-changes" class="anchor" aria-hidden="true"></a>Specific changes</h2>
+<ul><li><p>get_sim / get_obs / get_file / get_file_ refactoring added some controls now taking into account a usms file path in functions fixed issues related to intercrops data loading added data.frame columns detection for filtering data on dates</p></li>
+<li><p>functions for manipulating xml files taking into account a new kind of Stics parameter dependency (for plant and soil layers dependant parameters)</p></li>
+<li><p>set_param_txt: fix for setting values for varietal parameters</p></li>
+<li><p>gen_obs: fixes generating multiple files from a sheet generating files from a single observed variable</p></li>
+<li><p>gen_usms_xml2txt now compatible with lai forcing added optional argument for checking files now removing files before each files generation</p></li>
+</ul></div>
+</div>
+    <div id="sticsrfiles-030-2021-04-15" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#sticsrfiles-030-2021-04-15" class="anchor" aria-hidden="true"></a>SticsRFiles 0.3.0 (2021-04-15)</h1>
+<div id="general-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#general-changes-1" class="anchor" aria-hidden="true"></a>General changes</h2>
+<ul><li>DESCRIPTION
+<ul><li>Imports: lifecycle</li>
+</ul></li>
+<li>Tests
+<ul><li>new ones added for : gen_tec_xml, gen_ini_xml</li>
+</ul></li>
+<li>Functions:
+<ul><li>Now managing functions life cycle</li>
+</ul></li>
+<li>Files:
+<ul><li>useless XML template files have been removed</li>
+</ul></li>
+</ul></div>
+<div id="specific-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#specific-changes-1" class="anchor" aria-hidden="true"></a>Specific changes</h2>
+<ul><li><p>get_sim: new function replacing get_daily_results</p></li>
 <li><p>get_daily_results: has been set to deprecated (a warning is displayed)</p></li>
 <li><p>set_param_value: changed error output to warning if any parameter name does not exist</p></li>
 <li><p>gen_tec_xml: now taking into account specific parameters linked to cut crops management</p></li>
@@ -182,68 +205,50 @@
 <li><p>get_usms_list: changed error output to warning when the usms file does not exist</p></li>
 <li><p>force_param_value: now uses either parameters names including () or _ for indexed ones (for example lai(n) or lai_n)</p></li>
 <li><p>get_param_xml, set_param_xml: checks have been added for detecting parameters duplicates in tec files</p></li>
-</ul>
-</div>
+</ul></div>
 </div>
     <div id="sticsrfiles-020-2021-01-15" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#sticsrfiles-020-2021-01-15" class="anchor"></a>SticsRFiles 0.2.0 (2021-01-15)</h1>
-<div id="general-changes-1" class="section level2">
+<a href="#sticsrfiles-020-2021-01-15" class="anchor" aria-hidden="true"></a>SticsRFiles 0.2.0 (2021-01-15)</h1>
+<div id="general-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-changes-1" class="anchor"></a>General changes</h2>
-<ul>
-<li>DESCRIPTION
-<ul>
-<li>Suggests: formatR, readxl</li>
+<a href="#general-changes-2" class="anchor" aria-hidden="true"></a>General changes</h2>
+<ul><li>DESCRIPTION
+<ul><li>Suggests: formatR, readxl</li>
 <li>added missing packages: curl, tidyr, tibble</li>
 <li>license changed to License for CeCILL-C</li>
 <li>Travis configuration removed</li>
-</ul>
-</li>
+</ul></li>
 <li>README:
-<ul>
-<li>Travis badge removed</li>
+<ul><li>Travis badge removed</li>
 <li>Github Actions R-CMD-check badge added</li>
-</ul>
-</li>
+</ul></li>
 <li>Functions:
-<ul>
-<li>useless functions have been removed</li>
+<ul><li>useless functions have been removed</li>
 <li>some functions have been renamed or generalized</li>
-</ul>
-</li>
+</ul></li>
 <li>Tests
-<ul>
-<li>new ones added for : get_var_info, get_obs, get_daily_results, force_param_values</li>
+<ul><li>new ones added for : get_var_info, get_obs, get_daily_results, force_param_values</li>
 <li>test-get*: now using get_examples_path function, some fixes</li>
-</ul>
-</li>
+</ul></li>
 <li>Documentation
-<ul>
-<li>vignettes and tutorial: anchor_sections set to FALSE, fixes on warnings and errors, using paged html tables</li>
+<ul><li>vignettes and tutorial: anchor_sections set to FALSE, fixes on warnings and errors, using paged html tables</li>
 <li>functions help: content fixes and completion (parameters, examples, setting examples to dontrun, …)</li>
-</ul>
-</li>
+</ul></li>
 <li>Fixes
-<ul>
-<li>exported/unexported functions list</li>
+<ul><li>exported/unexported functions list</li>
 <li>CRAN issues for checks</li>
-</ul>
-</li>
+</ul></li>
 <li>Automatic testing:
-<ul>
-<li>Github Actions added for checks</li>
+<ul><li>Github Actions added for checks</li>
 <li>Travis checks removed</li>
 <li>SticsRTest Travis tests triggering removed</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="specific-changes-1" class="section level2">
+</ul></li>
+</ul></div>
+<div id="specific-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specific-changes-1" class="anchor"></a>Specific changes</h2>
-<ul>
-<li><p>get_obs, get_daily_results: removed useless columns from return, simplification</p></li>
+<a href="#specific-changes-2" class="anchor" aria-hidden="true"></a>Specific changes</h2>
+<ul><li><p>get_obs, get_daily_results: removed useless columns from return, simplification</p></li>
 <li><p>download_usm_xl, download_usm_csv: added verbose argument for masquing warnings/displays, added overwritting case</p></li>
 <li><p>read_params_table : new function for getting parameters tables either from csv files or excel files sheets</p></li>
 <li><p>get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for Stics version 8.5</p></li>
@@ -281,16 +286,13 @@
 <li><p>get_usms_files: taking into account 2 plant files folders (but without duplicates checks), taking into account varieties management</p></li>
 <li><p>get_usms_list: returns now a character vector of usms names</p></li>
 <li><p>get_param_xml: without parameters names in args;returned for each file, name of the XML file added to the output</p></li>
-</ul>
-</div>
+</ul></div>
 </div>
     <div id="sticsrfiles-0109004-2020-02-03" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0.9004">
-<a href="#sticsrfiles-0109004-2020-02-03" class="anchor"></a>SticsRFiles 0.1.0.9004 (2020-02-03)</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
+<a href="#sticsrfiles-0109004-2020-02-03" class="anchor" aria-hidden="true"></a>SticsRFiles 0.1.0.9004 (2020-02-03)</h1>
+<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

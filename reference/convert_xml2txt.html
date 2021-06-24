@@ -59,9 +59,6 @@ is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -151,13 +148,13 @@ is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt
 is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>convert_xml2txt</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>convert_xml2txt</span><span class='op'>(</span>
   <span class='va'>xml_file</span>,
   <span class='va'>java_dir</span>,
   plt_num <span class='op'>=</span> <span class='fl'>1</span>,
   out_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
   out_file <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,13 +184,13 @@ path of the input xml file)</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>xml_path</span> <span class='op'>&lt;-</span> <span class='st'>"/path/to/corn_plt.xml"</span>
-<span class='va'>javastics_path</span> <span class='op'>&lt;-</span> <span class='st'>"/path/to/javastics/root"</span>
-<span class='fu'>convert_xml2txt</span><span class='op'>(</span>xml_file <span class='op'>=</span> <span class='va'>xml_path</span>, java_dir <span class='op'>=</span> <span class='va'>javastics_path</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>xml_path</span> <span class='op'>&lt;-</span> <span class='st'>"/path/to/corn_plt.xml"</span></span>
+<span class='r-in'><span class='va'>javastics_path</span> <span class='op'>&lt;-</span> <span class='st'>"/path/to/javastics/root"</span></span>
+<span class='r-in'><span class='fu'>convert_xml2txt</span><span class='op'>(</span>xml_file <span class='op'>=</span> <span class='va'>xml_path</span>, java_dir <span class='op'>=</span> <span class='va'>javastics_path</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
