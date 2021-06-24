@@ -17,7 +17,7 @@
     * new Stics dirs added (needed by tests)
     * fix: example dirs names in inst
     
-  * Tutorial: minor fix (working dir creation)
+  * Tutorial: minor fix for use-xml-files (working dir creation)
     
 ## Specific changes
   * get_sim / get_obs / get_file / get_file_ 
