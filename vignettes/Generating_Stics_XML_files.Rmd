@@ -44,7 +44,7 @@ There is not at the moment an integrated function which is able to produce all n
 * gen_usms_xml: for generating a `usms.xml` file
 * gen_sols_xml: for generating a `sols.xml` file
 * gen_ini_xml: for generating simulations initialization files (`*_ini.xml`)
-* gen_tec_xml: for generating crop management files (`*_ini.xml`)
+* gen_tec_xml: for generating crop management files (`*_tec.xml`)
 * gen_sta_xml: for generating weather stations files (`*_sta.xml`)
 
 
