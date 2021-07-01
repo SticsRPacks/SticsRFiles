@@ -160,7 +160,7 @@ Controlling if the values where written:
 get_var_mod(example_txt_dir)
 ```
 
-Alternatively, the user can append a variable to the pre-existing vector of values using the `add` argument: 
+Alternatively, the user can append a variable to the pre-existing vector of values using the `append` argument: 
 
 ```{r}
 gen_varmod(workspace = example_txt_dir, var_names = c("hauteur"), append = TRUE)
