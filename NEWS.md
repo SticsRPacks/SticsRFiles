@@ -1,3 +1,13 @@
+# SticsRFiles 0.4.1 (2021-07-02)
+
+## Changes
+
+  * FIX: force_param_values() did not work for parameters which names included parenthesis
+
+  * Added dependency to dplyr >= 1.0.0 due to use of relocate function
+
+  * Typos in doc
+
 # SticsRFiles 0.4.0 (2021-06-22)
 
 ## General changes
