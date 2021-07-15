@@ -59,14 +59,10 @@ gen_ini_doc <- function(xml_doc = NULL,
 
     plante_params <- param_names[grep(crop_regex, param_names)]
 
-    if (! length(plante_params)) {
-      stop(paste0("Crop tag is not detected in columns names: ", crop_tag))
-    }
 
     other_params <- setdiff(param_names,c(plante_params, base_params))
     other_params_pref <- unique(gsub(layer_regex,"",other_params))
 
-    #plante_params <- gsub(crop_regex,"",plante_params)
     plante_params <- gsub("_[a-zA-Z0-9]*$","",plante_params)
     plante_params <- gsub("_[0-9]*$","",plante_params)
     plante_params_pref <- unique(gsub(layer_regex,"",plante_params))
@@ -106,8 +102,6 @@ gen_ini_doc <- function(xml_doc = NULL,
     )
     return(xml_docs)
   }
-
-  #print(param_table)
 
 
   # Setting base parameters

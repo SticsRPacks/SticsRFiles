@@ -35,25 +35,25 @@
 </plante>
 <sol>
 <hinit>
-<horizon nh="1"></horizon>
-<horizon nh="2"></horizon>
-<horizon nh="3"></horizon>
-<horizon nh="4"></horizon>
-<horizon nh="5"></horizon>
+<horizon nh="1">0.0</horizon>
+<horizon nh="2">0.0</horizon>
+<horizon nh="3">0.0</horizon>
+<horizon nh="4">0.0</horizon>
+<horizon nh="5">0.0</horizon>
 </hinit>
 <NO3init>
-<horizon nh="1"></horizon>
-<horizon nh="2"></horizon>
-<horizon nh="3"></horizon>
-<horizon nh="4"></horizon>
-<horizon nh="5"></horizon>
+<horizon nh="1">0.0</horizon>
+<horizon nh="2">0.0</horizon>
+<horizon nh="3">0.0</horizon>
+<horizon nh="4">0.0</horizon>
+<horizon nh="5">0.0</horizon>
 </NO3init>
 <NH4init>
-<horizon nh="1"></horizon>
-<horizon nh="2"></horizon>
-<horizon nh="3"></horizon>
-<horizon nh="4"></horizon>
-<horizon nh="5"></horizon>
+<horizon nh="1">0.0</horizon>
+<horizon nh="2">0.0</horizon>
+<horizon nh="3">0.0</horizon>
+<horizon nh="4">0.0</horizon>
+<horizon nh="5">0.0</horizon>
 </NH4init>
 </sol>
 <snow>
@@ -61,5 +61,5 @@
      <Sdry>0.0</Sdry>
      <Swet>0.0</Swet>
      <ps>0.0</ps>
-</snow>  
+</snow>
 </initialisations>
