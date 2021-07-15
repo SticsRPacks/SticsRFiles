@@ -19,7 +19,7 @@ gen_tec_doc(
 
 \item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
 
-\item{dict}{List of correspondance between given parameter names and Stics internal names.}
+\item{dict}{List of correspondence between given parameter names and Stics internal names.}
 
 \item{...}{Additional arguments}
 }

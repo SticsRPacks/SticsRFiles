@@ -3,7 +3,7 @@
 #' @param xml_doc an xmlDocument object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
-#' @param dict List of correspondance between given parameter names and Stics internal names.
+#' @param dict List of correspondence between given parameter names and Stics internal names.
 #' @param ... Additional arguments
 #'
 #' @return an invisible xmlDocument object or a list of
@@ -79,12 +79,13 @@ gen_tec_doc <- function(xml_doc = NULL,
   # temporary select for avoiding errors
   unknown_idx <- table_names %in% unknown_param
 
-  # TODO: message listing unknown parameter names !!!
-
   # Updating param names and table
   if (any(unknown_idx)) {
     table_params <- table_params[ ! unknown_idx ]
     table_names <- names(table_params)
+
+    # Message for unknown parameters
+    warning(paste(table_params[ ! unknown_idx ], collapse = ", "), ": unknown parameters !")
   }
 
   # Getting scalar and vector parameter names
@@ -100,9 +101,7 @@ gen_tec_doc <- function(xml_doc = NULL,
   }
 
   # Setting vector parameters
-  # loop over vector names
-
-  # Special case for cutting
+  # Special case for cutting:
   # treating first julfauche or tempfauche, bc other
   # sibling parameters have common names : hautcoupe,
   # lairesiduel, msresiduel, anitcoupe
@@ -113,28 +112,37 @@ gen_tec_doc <- function(xml_doc = NULL,
   if (length(fauche)) vec_names <- c(fauche, vec_names[!vec_names %in% fauche])
 
   for (par_name in vec_names) {
-
-    #print(par_name)
-
     nb_par <- get_param_number(xml_doc, par_name)
-    nb_values <- length(table_params[[par_name]])
+    param_values <- table_params[[par_name]]
+
+    # Filtering on Stics values either for inactivating an operation (999)
+    # or missing data in table_params (NA)
+    values_idx <- param_values < 999 & !is.na(param_values)
+    nb_values <- sum(values_idx)
+
+    # Not any value to set for the current parameter
+    if (nb_values == 0) next
+
+    # Filtering values
+    param_values <- param_values[values_idx]
+
 
     # If the nodes number is already matching
     # or a previous pass in the else condition
     # added needed nodes number for the parameter or set of.
-    if ( ! base::is.null(nb_values) && (nb_par == nb_values)) {
-      set_param_value(xml_doc, param_name = par_name,
-                      param_value = table_params[[par_name]])
+    #
+    if ( (nb_values > 0) && nb_par == nb_values) {
+      set_param_value(xml_doc,
+                      param_name = par_name,
+                      param_value = param_values)
     } else {
-
       if ( nb_par > 0 ) {
-        # Remove all intervention nodes
-        # in order to add new ones
-
+        # Removing all existing intervention nodes
+        # in order to add new ones and set parameters values
         xpath_node <- get_param_type(xml_doc = xml_doc,
                                      param_name = par_name)$xpath
 
-        # the parameter is a simple one as <param ...> in xml file
+        # The parameter is a simple one as <param ...> in xml file
         # directly attached to a <formalisme...> parent, so the formalisme
         # node cannot be removed. Consistency error between the
         # values detected in the parameters table and the param type
@@ -156,7 +164,6 @@ gen_tec_doc <- function(xml_doc = NULL,
         # after that
         remove_parent_from_doc(xml_doc = xml_doc,
                                param_name = par_name)
-
       }
 
       # Generating an "intervention" node containing par_name in colonne nom
@@ -170,7 +177,7 @@ gen_tec_doc <- function(xml_doc = NULL,
 
       # Getting needed nodes number and formalism or choice
       # to which they are to be attached
-      nodes_nb <- length(table_params[[par_name]])
+      nodes_nb <- length(param_values)
       par_form <- get_param_formalisms( xml_doc = xml_doc, par_name)
 
       if ( base::is.null(par_form)) {
@@ -185,7 +192,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       # Specific cases linked to options/choix
       # for getting parent path of intervention nodes to create
       #
-      # specific choix path to be calculated
+      # specific "choix" path to be calculated
       cut_idx <- c("tempfauche", "julfauche") %in% par_name
       choix <- c("calendar in degree days","calendar in days")
       if (any(cut_idx)) {
@@ -193,7 +200,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         parent_path <- get_param_type(xml_doc,"ta","choix", parent_name)$xpath
       }
 
-      # specific option calculation
+      # specific "option" calculation
       is_thin <- par_name %in% c("juleclair", "nbinfloecl")
       if (is_thin)  {
         parent_name <- "thinning"
@@ -210,9 +217,10 @@ gen_tec_doc <- function(xml_doc = NULL,
       # Setting values for all the concerned intervention nodes
       set_param_value(xml_doc = xml_doc,
                       param_name = par_name ,
-                      param_value = table_params[[par_name]])
+                      #param_value = table_params[[par_name]])
+                      param_value = param_values)
 
-      # Fixing nb_interventions
+      # Finally fixing nb_interventions
       set_param_value(xml_doc = xml_doc,
                       param_name = "nb_interventions",
                       param_value = nodes_nb,
@@ -220,10 +228,6 @@ gen_tec_doc <- function(xml_doc = NULL,
     }
 
   }
-
-  # TODO: remove useless intervention nodes, if any
-  # Nodes list for which day or temp sum == 999
-  # SticsRFiles:::getNodeS(out_tec, "//intervention[colonne[1]=999]")
 
   if (gen_error) {
     xml_doc <- NULL
