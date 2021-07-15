@@ -111,7 +111,7 @@ The function adds a `Date` column that is at the standard `POSIXct` format for c
 
 `set_param_txt()` is used to set the value of a given parameter in a USM. It has three main arguments, the directory of the USM (`dirpath`, where the text files lives), the parameter name (`param`), and the new value of the parameter. 
 
-For example to set the value of the atmospheric pressure read above to 1500: 
+For example to set the value of the atmospheric pressure read above to 1000: 
 
 ```{r}
 set_param_txt(dirpath = example_txt_dir, param='patm', value = 1000)
@@ -160,7 +160,7 @@ Controlling if the values where written:
 get_var_mod(example_txt_dir)
 ```
 
-Alternatively, the user can append a variable to the pre-existing vector of values using the `add` argument: 
+Alternatively, the user can append a variable to the pre-existing vector of values using the `append` argument: 
 
 ```{r}
 gen_varmod(workspace = example_txt_dir, var_names = c("hauteur"), append = TRUE)
