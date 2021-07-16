@@ -101,14 +101,39 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   layers_params <- grep("_[0-9]*$",in_params, value = T)
   layers_params_names <- unique(gsub("_[0-9]*$","",layers_params))
 
+
+
   for (i in 1:5) {
     for (p in layers_params_names){
+      # column name
       par <- paste0(p,"_",i)
+      #print(par)
       layer <- paste("layer",as.character(i))
+
+      # Taking into account values to be filtered 999 ou NA
+      # except for epc
+      sols_idx <- sols_param[[par]] < 999 & !is.na(sols_param[[par]])
+      #print(!any(sols_idx))
+
+      # Filtering all parameters but epc
+      if(p != "epc" & !any(sols_idx)) next
+
+      par_values <- sols_param[[par]]
+
+      # Setting epc values to 0 according to
+      # inactivating values 999 or NA in data.frame
+      if (p == "epc" & any(!sols_idx)) {
+        par_values[!sols_idx] <- 0
+        sols_idx[] <- TRUE
+      }
+
+      # Selecting parameters values according to
+      # valid values to set
+      par_values <- par_values[sols_idx]
+
+      # Setting parameters values in doc
       if (is.element(par,layers_params)) {
-        set_param_value(xml_doc_object,p,sols_param[[par]], layer)
-      } else {
-        delNodes(xml_doc_object,paste0("//tableau[@nom=\"",layer,"\"]"))
+        set_param_value(xml_doc_object,p,par_values, layer, which(sols_idx))
       }
     }
   }
@@ -124,4 +149,11 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     set_param_value(xml_doc_object,p,sols_param[[p]])
   }
 
+  # Checking values for detecting missing ones
+  final_values <- get_param_value(xml_doc_object)
+  missing_values <- unlist(lapply(final_values, function(x) any(is.na(as.numeric(x)))))
+  if (any(missing_values)) {
+    stop("Missing values for parameters: ",
+         paste(names(final_values)[missing_values], collapse = ","))
+  }
 }
