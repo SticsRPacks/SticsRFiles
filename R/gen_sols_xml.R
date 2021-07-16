@@ -57,20 +57,22 @@ gen_sols_xml <- function(sols_out_file = NULL,
 
   xml_doc <- NULL
 
+  # Fix : default output file path if not provided
+  if (base::is.null(sols_out_file) ) {
+    sols_out_file <- file.path(getwd(), "sols.xml")
+  }
+
   if (! base::is.null(sols_in_file) ) {
     xml_doc <- xmldocument(sols_in_file)
   }
-
-  # xml_doc <- gen_sols_doc(xml_doc = xml_doc,
-  #                         sols_nb = sols_nb,
-  #                         sols_param = sols_param,
-  #                         stics_version = stics_version)
 
   xml_doc <- gen_usms_sols_doc(doc_type = "sols",
                          xml_doc = xml_doc,
                          nodes_nb = sols_nb,
                          nodes_param = sols_param,
                          stics_version = stics_version)
+
+
 
   # checking if out dir exists
   out_path <- dirname(sols_out_file)
