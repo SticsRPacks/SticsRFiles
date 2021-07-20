@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>                                              
 <usms>                                                                                                                                                                            
   <usm nom="usmname">                                                                                
-    <datedebut>999</datedebut>                                                                       
-    <datefin>999</datefin>                                                                          
-    <finit>inifile</finit>                                                                   
-    <nomsol>soilname</nomsol>                                                                      
-    <fstation>stafile</fstation>                                                           
-    <fclim1>meteofile</fclim1>                                                                  
-    <fclim2>meteofile</fclim2>                                                                  
+    <datedebut></datedebut>                                                                       
+    <datefin></datefin>                                                                          
+    <finit></finit>                                                                   
+    <nomsol></nomsol>                                                                      
+    <fstation></fstation>                                                           
+    <fclim1></fclim1>                                                                  
+    <fclim2></fclim2>                                                                  
     <culturean>1</culturean>                                                                        
     <nbplantes>1</nbplantes>                                                                        
     <codesimul>0</codesimul>                                                                        
     <plante dominance="1">                                                                          
-      <fplt>plantfile</fplt>                                                             
-      <ftec>tecfile</ftec>                                                                   
+      <fplt></fplt>                                                             
+      <ftec></ftec>                                                                   
       <flai>null</flai>                                                                             
     </plante>                                                                                       
     <plante dominance="2">                                                                          

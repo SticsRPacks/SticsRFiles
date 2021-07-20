@@ -32,17 +32,17 @@
 </option>
 <option choix="2" nom="artificial drainage" nomParam="codrainage">
 <choix code="1" nom="yes">
-<param nom="profimper"></param>
-<param nom="ecartdrain"></param>
-<param nom="ksol"></param>
-<param nom="profdrain"></param>
+<param nom="profimper">-999</param>
+<param nom="ecartdrain">-999</param>
+<param nom="ksol">-999</param>
+<param nom="profdrain">-999</param>
 </choix>
 <choix code="2" nom="no" />
 </option>
 <option choix="2" nom="capillary rise" nomParam="coderemontcap">
 <choix code="1" nom="yes">
-<param nom="capiljour"></param>
-<param nom="humcapil"></param>
+<param nom="capiljour">-999</param>
+<param nom="humcapil">-999</param>
 </choix>
 <choix code="2" nom="no" />
 </option>
@@ -52,8 +52,8 @@
 </option>
 <option choix="2" nom="denitrification" nomParam="codedenit">
 <choix code="1" nom="yes">
-<param nom="profdenit"></param>
-<param nom="vpotdenit"></param>
+<param nom="profdenit">-999</param>
+<param nom="vpotdenit">-999</param>
 </choix>
 <choix code="2" nom="no" />
 </option>
@@ -78,7 +78,7 @@
 <colonne nom="epd"></colonne>
 </tableau>
 <tableau nb_colonnes="8" nom="layer 2">
-<colonne nom="epc"></colonne>
+<colonne nom="epc">0.0</colonne>
 <colonne nom="HCCF"></colonne>
 <colonne nom="HMINF"></colonne>
 <colonne nom="DAF"></colonne>
@@ -88,7 +88,7 @@
 <colonne nom="epd"></colonne>
 </tableau>
 <tableau nb_colonnes="8" nom="layer 3">
-<colonne nom="epc"></colonne>
+<colonne nom="epc">0.0</colonne>
 <colonne nom="HCCF"></colonne>
 <colonne nom="HMINF"></colonne>
 <colonne nom="DAF"></colonne>
