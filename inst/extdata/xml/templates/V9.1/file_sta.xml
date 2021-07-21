@@ -29,7 +29,7 @@
                 <param format="real" max="3.0" min="0.1" nom="gradtx">-999</param>
                 <param format="real" max="2000.0" min="0.0" nom="altinversion">-999</param>
                 <param format="real" max="3.0" min="0.1" nom="gradtninv">-999</param>
-                <param format="real" max="1.0" min="0.0" nom="cielclair">0-999</param>
+                <param format="real" max="1.0" min="0.0" nom="cielclair">-999</param>
                 <option choix="1" nom="option.adret.or.ubac" nomParam="codadret">
                     <choix code="1" nom="adret(south)"/>
                     <choix code="2" nom="ubac(north)">
