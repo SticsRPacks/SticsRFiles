@@ -69,53 +69,53 @@
 </tableau_entete>
 <tableau nb_colonnes="8" nom="layer 1">
 <colonne nom="epc">0.0</colonne>
-<colonne nom="HCCF"></colonne>
-<colonne nom="HMINF"></colonne>
-<colonne nom="DAF"></colonne>
-<colonne nom="cailloux"></colonne>
-<colonne nom="typecailloux"></colonne>
-<colonne nom="infil"></colonne>
-<colonne nom="epd"></colonne>
+<colonne nom="HCCF">0.0</colonne>
+<colonne nom="HMINF">0.0</colonne>
+<colonne nom="DAF">0.0</colonne>
+<colonne nom="cailloux">0.0</colonne>
+<colonne nom="typecailloux">0.0</colonne>
+<colonne nom="infil">0.0</colonne>
+<colonne nom="epd">0.0</colonne>
 </tableau>
 <tableau nb_colonnes="8" nom="layer 2">
 <colonne nom="epc">0.0</colonne>
-<colonne nom="HCCF"></colonne>
-<colonne nom="HMINF"></colonne>
-<colonne nom="DAF"></colonne>
-<colonne nom="cailloux"></colonne>
-<colonne nom="typecailloux"></colonne>
-<colonne nom="infil"></colonne>
-<colonne nom="epd"></colonne>
+<colonne nom="HCCF">0.0</colonne>
+<colonne nom="HMINF">0.0</colonne>
+<colonne nom="DAF">0.0</colonne>
+<colonne nom="cailloux">0.0</colonne>
+<colonne nom="typecailloux">0.0</colonne>
+<colonne nom="infil">0.0</colonne>
+<colonne nom="epd">0.0</colonne>
 </tableau>
 <tableau nb_colonnes="8" nom="layer 3">
 <colonne nom="epc">0.0</colonne>
-<colonne nom="HCCF"></colonne>
-<colonne nom="HMINF"></colonne>
-<colonne nom="DAF"></colonne>
-<colonne nom="cailloux"></colonne>
-<colonne nom="typecailloux"></colonne>
-<colonne nom="infil"></colonne>
-<colonne nom="epd"></colonne>
+<colonne nom="HCCF">0.0</colonne>
+<colonne nom="HMINF">0.0</colonne>
+<colonne nom="DAF">0.0</colonne>
+<colonne nom="cailloux">0.0</colonne>
+<colonne nom="typecailloux">0.0</colonne>
+<colonne nom="infil">0.0</colonne>
+<colonne nom="epd">0.0</colonne>
 </tableau>
 <tableau nb_colonnes="8" nom="layer 4">
 <colonne nom="epc">0.0</colonne>
-<colonne nom="HCCF"></colonne>
-<colonne nom="HMINF"></colonne>
-<colonne nom="DAF"></colonne>
-<colonne nom="cailloux"></colonne>
+<colonne nom="HCCF">0.0</colonne>
+<colonne nom="HMINF">0.0</colonne>
+<colonne nom="DAF">0.0</colonne>
+<colonne nom="cailloux">0.0</colonne>
 <colonne nom="typecailloux"></colonne>
-<colonne nom="infil"></colonne>
-<colonne nom="epd"></colonne>
+<colonne nom="infil">0.0</colonne>
+<colonne nom="epd">0.0</colonne>
 </tableau>
 <tableau nb_colonnes="8" nom="layer 5">
 <colonne nom="epc">0.0</colonne>
-<colonne nom="HCCF"></colonne>
-<colonne nom="HMINF"></colonne>
-<colonne nom="DAF"></colonne>
-<colonne nom="cailloux"></colonne>
-<colonne nom="typecailloux"></colonne>
-<colonne nom="infil"></colonne>
-<colonne nom="epd"></colonne>
+<colonne nom="HCCF">0.0</colonne>
+<colonne nom="HMINF">0.0</colonne>
+<colonne nom="DAF">0.0</colonne>
+<colonne nom="cailloux">0.0</colonne>
+<colonne nom="typecailloux">0.0</colonne>
+<colonne nom="infil">0.0</colonne>
+<colonne nom="epd">0.0</colonne>
 </tableau>
 </sol>
 </sols>
