@@ -13,7 +13,7 @@
             <choix code="2" nom="PET-Penman_calculation"/>
             <choix code="3" nom="PET-Shuttleworth-Wallace_calculation"/>
             <choix code="4" nom="PET-Priestley-Taylor_calculation">
-                <param format="real" max="2.0" min="1.0" nom="alphapt">-999</param></param>
+                <param format="real" max="2.0" min="1.0" nom="alphapt">-999</param>
             </choix>
         </option>
         <option choix="1" nom="climate change" nomParam="codeclichange">
