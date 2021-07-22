@@ -114,8 +114,8 @@ gen_usms_sols_doc <- function(doc_type,
   #
   # }
 
-  # Creating nodes for
-  add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb - 1)
+  # Creating nodes for usms or sols
+  add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = elts_nb - 1, parent_path = root_str)
 
   # Warning if nodes number > 1
   # I that case, the xml_doc cannot be considered as a template
