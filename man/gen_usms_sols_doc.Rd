@@ -9,8 +9,7 @@ gen_usms_sols_doc(
   xml_doc = NULL,
   nodes_nb = NULL,
   nodes_param = NULL,
-  stics_version = "last",
-  overwrite = F
+  stics_version = "last"
 )
 }
 \arguments{
@@ -23,8 +22,6 @@ gen_usms_sols_doc(
 \item{nodes_param}{Node parameter}
 
 \item{stics_version}{Version of the STICS model}
-
-\item{overwrite}{Overwrite the document values ?}
 }
 \value{
 An xmlDocument object

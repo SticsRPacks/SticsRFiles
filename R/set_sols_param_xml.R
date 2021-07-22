@@ -149,11 +149,4 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     set_param_value(xml_doc_object,p,sols_param[[p]])
   }
 
-  # Checking values for detecting missing ones
-  final_values <- get_param_value(xml_doc_object)
-  missing_values <- unlist(lapply(final_values, function(x) any(is.na(as.numeric(x)))))
-  if (any(missing_values)) {
-    stop("Missing values for parameters: ",
-         paste(names(final_values)[missing_values], collapse = ","))
-  }
 }

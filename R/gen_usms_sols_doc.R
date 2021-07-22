@@ -5,7 +5,6 @@
 #' @param nodes_nb The number of nodes
 #' @param nodes_param Node parameter
 #' @param stics_version Version of the STICS model
-#' @param overwrite  Overwrite the document values ?
 #'
 #' @return An xmlDocument object
 #'
@@ -28,19 +27,14 @@
 #'
 #' @keywords internal
 #'
-gen_usms_sols_doc <- function(doc_type, xml_doc = NULL,
-                        nodes_nb = NULL, nodes_param = NULL,
-                        stics_version = "last", overwrite = F) {
+gen_usms_sols_doc <- function(doc_type,
+                              xml_doc = NULL,
+                              nodes_nb = NULL,
+                              nodes_param = NULL,
+                              stics_version = "last") {
 
 
   # for usms and sols files
-
-
-  keep_existing = T
-
-  # check/get version of templates xml files
-  stics_version <- get_xml_stics_version(stics_version = stics_version)
-
 
   doc_types <- list()
   doc_types$usms <- list(root="usms",node="usm")
@@ -62,11 +56,12 @@ gen_usms_sols_doc <- function(doc_type, xml_doc = NULL,
 
   # getting a default xml template
   if ( base::is.null(xml_doc) ) {
+    # check/get version of templates xml files
+    stics_version <- get_xml_stics_version(stics_version = stics_version)
+
     # using function get_xml_base_doc
     xml_doc <- get_xml_base_doc(xml_type = doc_type,
                                 stics_version = stics_version)
-    overwrite = T
-    keep_existing = F
   }
 
   elts_nb <- NULL
@@ -76,7 +71,7 @@ gen_usms_sols_doc <- function(doc_type, xml_doc = NULL,
     return(xml_doc)
   }
 
-  # calculating nodes number
+  # Calculating nodes number
   if (! base::is.null(nodes_nb)) { elts_nb = nodes_nb }
 
   if ( "data.frame" %in% class(nodes_param) ) {
@@ -97,34 +92,59 @@ gen_usms_sols_doc <- function(doc_type, xml_doc = NULL,
     return(xml_doc)
   }
 
-  if (doc_nodes_nb < elts_nb ) overwrite = T
+  # TODO: fix it
+  # Normally this part is to be removed
+  # because this function must be working on
+  # a xml template doc containing only one
+  # node (coming a empty template to fill
+  # or a user template to overload)
 
+  #if (doc_nodes_nb < elts_nb ) overwrite = T
   # Creating doc structure from a base node
-  if ( overwrite ) {
-
+  #if ( overwrite ) {
     # Keeping only one usm node in the xml document
-    if ( doc_nodes_nb > 1) removeNodes(xml_nodes[2:doc_nodes_nb])
+  #   if ( doc_nodes_nb > 1) removeNodes(xml_nodes[2:doc_nodes_nb])
+  #
+  #   if ( keep_existing ) {
+  #     add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = (elts_nb - 1), paste0("//",root))
+  #   } else {
+  #     removeNodes(xml_nodes[1])
+  #     add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb)
+  #   }
+  #
+  # }
 
-    if ( keep_existing ) {
-      add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = (elts_nb - 1), paste0("//",root))
-    } else {
-      removeNodes(xml_nodes[1])
-      add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb)
-    }
+  # Creating nodes for
+  add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb - 1)
 
+  # Warning if nodes number > 1
+  # I that case, the xml_doc cannot be considered as a template
+  if ( doc_nodes_nb > 1) {
+    stop("Multiple elements in ", doc_type, " file, cannot be used as a template !")
   }
 
+  # Not any parameters values for overloading
+  # existing ones, returning the template content.
   if ( base::is.null(nodes_param) ) {
     return(xml_doc)
   }
 
-  # setting data according to doc_type
   switch( doc_type,
-          usms = set_usms_param_xml(xml_doc, nodes_param, overwrite = overwrite),
-          sols = set_sols_param_xml(xml_doc, nodes_param, overwrite = overwrite)
+          usms = set_usms_param_xml(xml_doc, nodes_param, overwrite = TRUE),
+          sols = set_sols_param_xml(xml_doc, nodes_param, overwrite = TRUE)
   )
 
 
+  # TODO: evaluate how to implement checks
+  # depending on parameter file kind
+  # This next block is not valid for all files kinds
+  # Checking values for detecting missing ones
+  # final_values <- get_param_value(xml_doc)
+  # missing_values <- unlist(lapply(final_values, function(x) any(is.na(as.numeric(x)))))
+  # if (any(missing_values)) {
+  #   warning("Missing values for parameters: ",
+  #           paste(names(final_values)[missing_values], collapse = ","))
+  # }
 
   return(xml_doc)
 

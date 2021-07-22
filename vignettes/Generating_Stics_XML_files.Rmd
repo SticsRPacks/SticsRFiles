@@ -345,7 +345,7 @@ gen_tec_xml(param_table = tec_param, out_path = workspace_path )
 Example of a `tec` parameters file content sub-list:
 
 ```{r show_tec_file, eval = TRUE, echo = FALSE, class.output="xml"}
-l <- readLines(con = file.path(workspace_path,"USM_2017_T1_CI_tec.xml"))
+l <- readLines(con = file.path(workspace_path,"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml"))
 cat(paste(c(l[1:30],"...",l[length(l)-1]), collapse = "\n"))
 ```
 
