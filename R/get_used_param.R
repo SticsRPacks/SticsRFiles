@@ -1,28 +1,28 @@
 get_used_param_xml <- function(file) {
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
   param <- list()
-  param$options <- get_active_options_param(xml_doc)
+  param$options <- get_options_used_param(xml_doc)
   param$base <- get_base_used_param(xml_doc)
   param
 }
 
 get_base_used_param <- function(xml_doc) {
-  name <- SticsRFiles:::getAttrsValues(xml_doc, path = "//formalisme/param",
+  name <- getAttrsValues(xml_doc, path = "//formalisme/param",
                                        attr_list = "nom")
   colnames(name) <- "name"
-  value <- SticsRFiles:::getValues(xml_doc, path = "//formalisme/param")
+  value <- getValues(xml_doc, path = "//formalisme/param")
   df <- data.frame(name=name, value=value, cultivar="none", stringsAsFactors = FALSE)
 
   # cultivar parameters
-  namev <- SticsRFiles:::getAttrsValues(xml_doc, path = "//variete/param",
+  namev <- getAttrsValues(xml_doc, path = "//variete/param",
                                        attr_list = "nom")
   parv_nb <- length(unique(namev))
-  cultivars <- as.vector(SticsRFiles:::getAttrsValues(xml_doc, path = "//variete", attr_list = "nom"))
+  cultivars <- as.vector(getAttrsValues(xml_doc, path = "//variete", attr_list = "nom"))
   #
   cultivar <- unlist(lapply(cultivars, function(x) rep(x,parv_nb)))
 
   colnames(namev) <- "name"
-  valuev <- SticsRFiles:::getValues(xml_doc, path = "//variete/param")
+  valuev <- getValues(xml_doc, path = "//variete/param")
 
   dfv <- data.frame(name=namev, value=valuev, cultivar= cultivar, stringsAsFactors = FALSE)
 
@@ -32,7 +32,7 @@ get_base_used_param <- function(xml_doc) {
 get_options_used_param <- function(xml_doc, param_list=NULL) {
 
   m_options <- unique(
-    SticsRFiles:::getAttrsValues(xml_doc, path = "//formalisme/option",
+    getAttrsValues(xml_doc, path = "//formalisme/option",
                                  attr_list = c("choix","nomParam")))
 
   if (is.null(m_options)) return()
@@ -52,12 +52,12 @@ get_options_used_param <- function(xml_doc, param_list=NULL) {
     name <- options_data$nomParam[opt]
     value <- options_data$choix[opt]
     path_param <- paste0("//option[@nomParam=","'",name,"']/choix[@code=","'",value,"']/param")
-    nodes_set <- SticsRFiles:::getNodeS(xml_doc, path = path_param)
+    nodes_set <- getNodeS(xml_doc, path = path_param)
 
 
     if (!is.null(nodes_set)) {
-      param_names <- as.vector(SticsRFiles:::getAttrsValues(xml_doc, path = path_param, "nom"))
-      param_values <- as.vector(SticsRFiles:::getValues(xml_doc, path = path_param))
+      param_names <- as.vector(getAttrsValues(xml_doc, path = path_param, "nom"))
+      param_values <- as.vector(getValues(xml_doc, path = path_param))
       param_list <- rbind( param_list, data.frame(option=name, code=value,
                                                   name=param_names, value=param_values,
                                                   cultivar="none",
@@ -70,7 +70,7 @@ get_options_used_param <- function(xml_doc, param_list=NULL) {
 
 
     m_sub_options <- unique(
-      SticsRFiles:::getAttrsValues(xml_doc, path = path_suboption,
+      getAttrsValues(xml_doc, path = path_suboption,
                                    attr_list = c("choix","nomParam")))
 
     if (is.null(m_sub_options)) next
@@ -91,12 +91,12 @@ get_options_used_param <- function(xml_doc, param_list=NULL) {
       sub_name <- sub_options_data$nomParam[sub_opt]
       sub_value <- sub_options_data$choix[sub_opt]
       sub_path_param <- paste0(path_suboption,"[@nomParam=","'",sub_name,"']/choix[@code=","'",sub_value,"']/param")
-      nodes_set <- SticsRFiles:::getNodeS(xml_doc, path = sub_path_param)
+      nodes_set <- getNodeS(xml_doc, path = sub_path_param)
 
 
       if (!is.null(nodes_set)) {
-        sub_param_names <- as.vector(SticsRFiles:::getAttrsValues(xml_doc, path = sub_path_param, "nom"))
-        sub_param_values <- as.vector(SticsRFiles:::getValues(xml_doc, path = sub_path_param))
+        sub_param_names <- as.vector(getAttrsValues(xml_doc, path = sub_path_param, "nom"))
+        sub_param_values <- as.vector(getValues(xml_doc, path = sub_path_param))
         param_list <- rbind( param_list, data.frame(option=sub_name, code=sub_value,
                                                     name=sub_param_names, value=sub_param_values,
                                                     cultivar="none",
@@ -110,12 +110,12 @@ get_options_used_param <- function(xml_doc, param_list=NULL) {
 
   # cultivar
   #
-  cultivars <- as.vector(SticsRFiles:::getAttrsValues(xml_doc, path = "//variete", attr_list = "nom"))
+  cultivars <- as.vector(getAttrsValues(xml_doc, path = "//variete", attr_list = "nom"))
 
-  m_optionsv <- unique(SticsRFiles:::getAttrsValues(xml_doc, path = "//optionv", attr_list = "nom"))
+  m_optionsv <- unique(getAttrsValues(xml_doc, path = "//optionv", attr_list = "nom"))
   optionv_data <- data.frame (nom=m_optionsv[,1], stringsAsFactors =FALSE)
 
-  m_all_options <- unique(SticsRFiles:::getAttrsValues(xml_doc, path = "//option",
+  m_all_options <- unique(getAttrsValues(xml_doc, path = "//option",
                                                        attr_list = c("choix","nomParam")))
   all_options_data <- data.frame (choix=m_all_options[,1], nomParam=m_all_options[,2], stringsAsFactors =FALSE)
 
@@ -128,12 +128,12 @@ get_options_used_param <- function(xml_doc, param_list=NULL) {
     v_name <- optionv_names[v_opt]
     v_value <- optionv_codes[v_opt]
     v_path_param <- paste0("//optionv[@nom='",v_name,"']//param[@code='",v_value,"']")
-    nodes_set <- SticsRFiles:::getNodeS(xml_doc, path = v_path_param)
+    nodes_set <- getNodeS(xml_doc, path = v_path_param)
 
 
     if (!is.null(nodes_set)) {
-      v_param_names <- as.vector(SticsRFiles:::getAttrsValues(xml_doc, path = v_path_param, "nom"))
-      v_param_values <- as.vector(SticsRFiles:::getValues(xml_doc, path = v_path_param))
+      v_param_names <- as.vector(getAttrsValues(xml_doc, path = v_path_param, "nom"))
+      v_param_values <- as.vector(getValues(xml_doc, path = v_path_param))
       param_list <- rbind( param_list, data.frame(option=v_name, code=v_value,
                                                   name=v_param_names, value=v_param_values,
                                                   cultivar=cultivars,
