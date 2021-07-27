@@ -105,7 +105,8 @@ gen_ini_doc <- function(xml_doc = NULL,
 
   # Filtering parameters not to be set
   # i.e. : 999 or NA
-  par_idx <- !grepl(pattern = "^999",param_table) & !is.na(param_table)
+  par_idx <- as.vector(!grepl(pattern = "^999",param_table) & !is.na(param_table))
+
   # exiting not any parameters values to set
   if (!any(par_idx)) return(invisible(xml_doc))
 

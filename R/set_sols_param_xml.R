@@ -114,7 +114,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
       # Taking into account values to be filtered 999 or NA
       # except for epc
-      sols_idx <- !grepl(pattern = "^999",par_values) & !is.na(par_values)
+      sols_idx <- as.vector(!grepl(pattern = "^999",par_values) & !is.na(par_values))
 
       # Filtering all parameters
       if(!any(sols_idx)) next
