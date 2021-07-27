@@ -123,6 +123,7 @@ Collate:
     'get_sim.R'
     'get_soils_list.R'
     'get_stics_versions_compat.R'
+    'get_used_param.R'
     'get_usms_files.R'
     'get_usms_list.R'
     'get_values_by_param.R'
