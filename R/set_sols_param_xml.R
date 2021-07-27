@@ -59,6 +59,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   check_param_names(param_names = in_params[ - col_id],
                     ref_names = get_param_names(xml_object = xml_doc_object))
 
+  # TODO: evaluate if this use case is relevant !
   # checking soils based on names if overwrite == FALSE
   if ( ! overwrite ) {
     # getting soils names
@@ -109,23 +110,14 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
       par <- paste0(p,"_",i)
       #print(par)
       layer <- paste("layer",as.character(i))
-
-      # Taking into account values to be filtered 999 ou NA
-      # except for epc
-      sols_idx <- sols_param[[par]] < 999 & !is.na(sols_param[[par]])
-      #print(!any(sols_idx))
-
-      # Filtering all parameters but epc
-      if(p != "epc" & !any(sols_idx)) next
-
       par_values <- sols_param[[par]]
 
-      # Setting epc values to 0 according to
-      # inactivating values 999 or NA in data.frame
-      if (p == "epc" & any(!sols_idx)) {
-        par_values[!sols_idx] <- 0
-        sols_idx[] <- TRUE
-      }
+      # Taking into account values to be filtered 999 or NA
+      # except for epc
+      sols_idx <- !grepl(pattern = "^999",param_values) & !is.na(par_values)
+
+      # Filtering all parameters
+      if(!any(sols_idx)) next
 
       # Selecting parameters values according to
       # valid values to set
@@ -138,15 +130,18 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     }
   }
 
-  # Treating other params, simple and options
+  # Treating other params (simple ones and options ones)
   other_params <- setdiff(in_params, c(layers_params,sol_col))
 
+  # No other parameters than layer dependent ones to set
   if ( ! length(other_params) ) return(xml_doc_object)
 
-  # setting param values
+  # Setting param values
   for (p in other_params) {
     #print(p)
     set_param_value(xml_doc_object,p,sols_param[[p]])
   }
 
+  # final doc return
+  return(xml_doc_object)
 }

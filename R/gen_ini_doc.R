@@ -76,9 +76,8 @@ gen_ini_doc <- function(xml_doc = NULL,
     plante_params_pref <- params_desc$plante_params_pref
     other_params_pref <- params_desc$other_params_pref
     base_params <- params_desc$base_params
-    param_names <- params_desc$param_names
+    #param_names <- params_desc$param_names
   }
-
 
   # Checking parameter names from param_table against xml ones
   if (check_names) {
@@ -104,11 +103,26 @@ gen_ini_doc <- function(xml_doc = NULL,
   }
 
 
+  # Filtering parameters not to be set
+  # i.e. : 999 or NA
+  par_idx <- !grepl(pattern = "^999",param_table) & !is.na(param_table)
+  # exiting not any parameters values to set
+  if (!any(par_idx)) return(invisible(xml_doc))
+
+  # Filtering columns
+  param_table <- param_table[, par_idx]
+
+  # Getting resulting param names
+  param_names <- names(param_table)
+
+
   # Setting base parameters
   for (p in base_params) {
-    set_param_value(xml_doc = xml_doc,
-                    param_name = p,
-                    param_value = param_table[[p]])
+    if (is.element(p, param_names)) {
+      set_param_value(xml_doc = xml_doc,
+                      param_name = p,
+                      param_value = param_table[[p]])
+    }
   }
 
   # Setting plant number in xml_doc
