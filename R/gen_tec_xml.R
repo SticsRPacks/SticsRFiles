@@ -4,6 +4,7 @@
 #' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
 #' @param stics_version the stics version to use (optional, default to last). Only used if tec_in_file= NULL, see details.
+#' @param na_values value to use as missing value in param_table (optional, default : NA)
 # @param dict List of correspondance between given parameter names and internal names.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
@@ -47,7 +48,8 @@
 gen_tec_xml <- function(param_table = NULL,
                         tec_in_file = NULL,
                         out_path = getwd(),
-                        stics_version = "last") { #,
+                        stics_version = "last",
+                        na_values = NA) { #,
   #dict = NULL) {
 
 
@@ -70,7 +72,8 @@ gen_tec_xml <- function(param_table = NULL,
   # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(xml_doc = xml_doc,
                           param_table = param_table[ , - col_id],
-                          stics_version = stics_version) #,
+                          stics_version = stics_version,
+                          na_values = na_values) #,
   #dict = dict)
 
 

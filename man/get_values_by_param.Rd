@@ -5,7 +5,12 @@
 \title{Extract a named list of parameters values or a list of
 from data.frame row(s), for all parameters columns or a selection}
 \usage{
-get_values_by_param(params_table, param_name = NULL, lines_id = NULL)
+get_values_by_param(
+  params_table,
+  param_name = NULL,
+  lines_id = NULL,
+  na_values = NA
+)
 }
 \arguments{
 \item{params_table}{a table (df, tibble) with parameters names
@@ -15,6 +20,8 @@ or not for scalar parameters}
 \item{param_name}{Optional arameter(s) name(s) vector}
 
 \item{lines_id}{Optional data.frame lines numerical identifiers}
+
+\item{na_values}{value to use as missing value in param_table (optional, default : NA)}
 }
 \value{
 a named list of parameters values, with sorted values for multiple

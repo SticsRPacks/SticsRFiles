@@ -6,6 +6,7 @@
 #' @param lines_id table lines identifiers to select
 #' @param stopping logical value for stopping if any unknown parameters (if TRUE)
 #' @param dict List of names correspondence between short names (tags) and real parameters names
+#' @param na_values value to use as missing value in param_table (optional, default : NA)
 #'
 #' @return a named list (with param names as list names) of data.frame/tibble
 #'
@@ -28,7 +29,8 @@ get_params_from_table <- function(params_table,
                                   xml_doc,
                                   lines_id = NULL,
                                   stopping = FALSE,
-                                  dict = NULL) {
+                                  dict = NULL,
+                                  na_values = NA) {
 
   # TODO: doing a merge with get_values_from_table
   .= NULL

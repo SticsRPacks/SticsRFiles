@@ -4,7 +4,8 @@
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
 #' @param dict List of correspondence between given parameter names and Stics internal names.
-#' @param ... Additional arguments
+#' @param ... Additional arguments (for example, coming from a call from gen_tec_xml
+#'  using a na_values argument)
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
@@ -32,7 +33,11 @@ gen_tec_doc <- function(xml_doc = NULL,
   # Fix first time
   sort = TRUE
   dot_args= list(...)
-  if ("sort" %in% names(dot_args)) sort = dot_args$sort
+  dot_args_names <- names(dot_args)
+  if ("sort" %in% dot_args_names) sort = dot_args$sort
+
+  na_values <- NA
+  if ("na_values" %in% dot_args_names) na_values <- dot_args$na_values
 
   # check/get version
   stics_version <- get_xml_stics_version(stics_version = stics_version,
@@ -57,7 +62,8 @@ gen_tec_doc <- function(xml_doc = NULL,
                                                                            stringsAsFactors = F ),
                                                stics_version = stics_version,
                                                dict = dict,
-                                               sort = FALSE))
+                                               sort = FALSE,
+                                               na_values = na_values))
     return(xml_docs)
   }
 
@@ -68,8 +74,7 @@ gen_tec_doc <- function(xml_doc = NULL,
   table_params <- get_params_from_table(params_table = param_table, xml_doc = xml_doc, dict = dict)
   table_names <- names(table_params)
 
-
-  # checking parameters names
+  # Checking parameters names
   # doc param names
   doc_params <- get_params_from_doc(xml_doc)
 
@@ -115,22 +120,11 @@ gen_tec_doc <- function(xml_doc = NULL,
     nb_par <- get_param_number(xml_doc, par_name)
     param_values <- table_params[[par_name]]
 
-    # Filtering on Stics values either for inactivating an operation (999)
-    # or missing data in table_params (NA)
-    values_idx <- param_values < 999 & !is.na(param_values)
-    nb_values <- sum(values_idx)
-
-    # Not any value to set for the current parameter
-    if (nb_values == 0) next
-
-    # Filtering values
-    param_values <- param_values[values_idx]
-
-
     # If the nodes number is already matching
     # or a previous pass in the else condition
     # added needed nodes number for the parameter or set of.
     #
+    nb_values <- length(param_values)
     if ( (nb_values > 0) && nb_par == nb_values) {
       set_param_value(xml_doc,
                       param_name = par_name,

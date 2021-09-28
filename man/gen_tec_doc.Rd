@@ -21,7 +21,8 @@ gen_tec_doc(
 
 \item{dict}{List of correspondence between given parameter names and Stics internal names.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments (for example, coming from a call from gen_tec_xml
+using a na_values argument)}
 }
 \value{
 an invisible xmlDocument object or a list of
