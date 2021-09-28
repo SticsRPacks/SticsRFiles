@@ -103,7 +103,7 @@
 <colonne nom="HMINF">0.0</colonne>
 <colonne nom="DAF">0.0</colonne>
 <colonne nom="cailloux">0.0</colonne>
-<colonne nom="typecailloux"></colonne>
+<colonne nom="typecailloux">0.0</colonne>
 <colonne nom="infil">0.0</colonne>
 <colonne nom="epd">0.0</colonne>
 </tableau>
