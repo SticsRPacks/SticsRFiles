@@ -128,7 +128,7 @@ gen_obs_= function(obs_table, file_path){
   }
 
   # Removing unwanted columns !
-  date_plt_idx <- grep("date|plant|usm",tolower(colnames(obs_table)))
+  date_plt_idx <- grep("date|^plant$|usm",tolower(colnames(obs_table)))
   if ( length(date_plt_idx)) {
     obs_table= obs_table[,-date_plt_idx]
   }

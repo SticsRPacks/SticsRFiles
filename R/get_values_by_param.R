@@ -5,6 +5,7 @@
 #' or not for scalar parameters
 #' @param param_name Optional arameter(s) name(s) vector
 #' @param lines_id Optional data.frame lines numerical identifiers
+#' @param na_values value to use as missing value in param_table (optional, default : NA)
 #'
 #' @return a named list of parameters values, with sorted values for multiple
 #' parameter values (indexed with suffixes _1, _2, ...)
@@ -20,7 +21,10 @@
 #'
 #' @keywords internal
 #'
-get_values_by_param <- function(params_table, param_name = NULL, lines_id = NULL) {
+get_values_by_param <- function(params_table,
+                                param_name = NULL,
+                                lines_id = NULL,
+                                na_values = NA) {
 
   table_names <- names(params_table)
 
@@ -66,6 +70,28 @@ get_values_by_param <- function(params_table, param_name = NULL, lines_id = NULL
 
   # converting from data.frame to vector
   par_values <- unlist(params_table[,param_names])
+  # removing whitespaces
+  par_values <- trimws(par_values)
+
+  # Filtering NA or other missing value repr from na_values!!!!
+  if (is.na(na_values)) {
+    filt_idx <- !is.na(par_values)
+  } else {
+    filt_idx <- !grepl(pattern = na_values, par_values)
+  }
+  if (length(filt_idx)) {
+    par_values <- par_values[filt_idx]
+  }
+  if (length(filt_idx)) param_names <- param_names[filt_idx]
+
+  # if the values are empty
+  if (!length(par_values)) return()
+
+  # /!\
+  # TODO: add fix for 999 onstead of 999.0 !!!
+
+
+  # Else
   names(par_values) <- param_names
   par_table <- list(par_values)
   names(par_table) <- param_name

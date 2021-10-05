@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<initialisations version="10.0">
+  <nbplantes>1</nbplantes>
+  <plante dominance="1">
+    <stade0>snu</stade0>
+    <lai0>0.0</lai0>
+    <magrain0>0.0</magrain0>
+    <zrac0>0.0</zrac0>
+    <option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
+      <choix code="1" nom="yes">
+        <maperenne0>0</maperenne0>
+        <QNperenne0>0</QNperenne0>
+        <masecnp0>0</masecnp0>
+        <QNplantenp0>0</QNplantenp0>
+      </choix>
+      <choix code="2" nom="no">
+        <masec0>0.0</masec0>
+        <QNplante0>0.0</QNplante0>
+        <resperenne0>0.0</resperenne0>
+      </choix>
+    </option>
+    <densinitial>
+      <horizon nh="1">0.0</horizon>
+      <horizon nh="2">0.0</horizon>
+      <horizon nh="3">0.0</horizon>
+      <horizon nh="4">0.0</horizon>
+      <horizon nh="5">0.0</horizon>
+    </densinitial>
+  </plante>
+  <plante dominance="2">
+    <stade0/>
+    <lai0/>
+    <magrain0/>
+    <zrac0/>
+    <option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
+      <choix code="1" nom="yes">
+        <maperenne0>0</maperenne0>
+        <QNperenne0>0</QNperenne0>
+        <masecnp0>0</masecnp0>
+        <QNplantenp0>0</QNplantenp0>
+      </choix>
+      <choix code="2" nom="no">
+        <masec0></masec0>
+        <QNplante0></QNplante0>
+        <resperenne0></resperenne0>
+      </choix>
+    </option>
+    <densinitial>
+      <horizon nh="1"/>
+      <horizon nh="2"/>
+      <horizon nh="3"/>
+      <horizon nh="4"/>
+      <horizon nh="5"/>
+    </densinitial>
+  </plante>
+  <sol>
+    <hinit>
+      <horizon nh="1">23.5</horizon>
+      <horizon nh="2">21.6</horizon>
+      <horizon nh="3">23.9</horizon>
+      <horizon nh="4">27.6</horizon>
+      <horizon nh="5">0.0</horizon>
+    </hinit>
+    <NO3init>
+      <horizon nh="1">32.0</horizon>
+      <horizon nh="2">12.0</horizon>
+      <horizon nh="3">9.0</horizon>
+      <horizon nh="4">0.0</horizon>
+      <horizon nh="5">0.0</horizon>
+    </NO3init>
+    <NH4init>
+      <horizon nh="1">0.0</horizon>
+      <horizon nh="2">0.0</horizon>
+      <horizon nh="3">0.0</horizon>
+      <horizon nh="4">0.0</horizon>
+      <horizon nh="5">0.0</horizon>
+    </NH4init>
+  </sol>
+</initialisations>
+

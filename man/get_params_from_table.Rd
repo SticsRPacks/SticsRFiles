@@ -10,7 +10,8 @@ get_params_from_table(
   xml_doc,
   lines_id = NULL,
   stopping = FALSE,
-  dict = NULL
+  dict = NULL,
+  na_values = NA
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ get_params_from_table(
 \item{stopping}{logical value for stopping if any unknown parameters (if TRUE)}
 
 \item{dict}{List of names correspondence between short names (tags) and real parameters names}
+
+\item{na_values}{value to use as missing value in param_table (optional, default : NA)}
 }
 \value{
 a named list (with param names as list names) of data.frame/tibble
