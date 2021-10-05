@@ -77,25 +77,49 @@ check_usms_files <- function(workspace_path,
   }
 
   # fix: for intercrop used as sole crop, if nbplantes == 1, set file to "null"
-  usms_files[usms_files$nbplantes == 1,"fplt2"] <- "null"
+  usms_files[usms_files$nbplantes == 1,c("fplt2","ftec2", "flai2")] <- "null"
 
 
 
 
   # Checking all files existence
   all_init_exist <- file.exists(file.path(workspace_path, usms_files$finit))
+  if (!all(all_init_exist)) {
+    warning(paste("Ini file(s)",paste(unique(usms_files$finit[!all_init_exist]), collapse = ","),
+                  "not found in", workspace_path))
+  }
 
   all_sta_exist <- file.exists(file.path(workspace_path, usms_files$fstation))
+  if (!all(all_sta_exist)) {
+    warning(paste("Station file(s)",paste(unique(usms_files$fstation[!all_sta_exist]), collapse = ","),
+                  "not found in", workspace_path))
+  }
 
   fclim1_exist <- file.exists(file.path(workspace_path, c(usms_files$fclim1)))
+  if (!all(fclim1_exist)) {
+    warning(paste("Climate file(s)",paste(unique(usms_files$fclim1[!fclim1_exist]), collapse = ","),
+                  "not found in", workspace_path))
+  }
   fclim2_exist <- file.exists(file.path(workspace_path, c(usms_files$fclim2)))
+  if (!all(fclim2_exist)) {
+    warning(paste("Climate file(s)",paste(unique(usms_files$fclim2[!fclim2_exist]), collapse = ","),
+                  "not found in", workspace_path))
+  }
 
   all_fclim_exist <- fclim1_exist & fclim2_exist
 
   ftec1_exist <- file.exists(file.path(workspace_path, usms_files$ftec1))
   ftec1_exist[usms_files$ftec1=="null"] <- TRUE
+  if (!all(ftec1_exist)) {
+    warning(paste("Tec file(s)",paste(unique(usms_files$ftec1[!ftec1_exist]), collapse = ","),
+                  "not found in", workspace_path))
+  }
   ftec2_exist <- file.exists(file.path(workspace_path, usms_files$ftec2))
   ftec2_exist[usms_files$ftec2=="null"] <- TRUE
+  if (!all(ftec2_exist)) {
+    warning(paste("Tec file(s)",paste(unique(usms_files$ftec2[!ftec2_exist]), collapse = ","),
+                  "not found in", workspace_path))
+  }
   all_ftec_exist <- ftec1_exist & ftec2_exist
 
   # specific checking for fplt
@@ -103,10 +127,27 @@ check_usms_files <- function(workspace_path,
   fplt1_exist <- file.exists(file.path(file.path(javastics_path, "plant"), usms_files$fplt1)) |
     file.exists(file.path(file.path(workspace_path, "plant"), usms_files$fplt1))
   fplt1_exist[usms_files$fplt1=="null"] <- TRUE
+  if (!all(fplt1_exist)) {
+    warning(paste("Plant file(s)",paste(unique(usms_files$fplt1[!fplt1_exist]), collapse = ","),
+                  "not found in", workspace_path,
+                  ". \nPlease note that with SticsRpacks, plant folder (that contains plant files)",
+                  "can be located either inside the workspace or in the JavaStics path.\n",
+                  "Check that your plant files exist in one of these."))
+  }
 
   fplt2_exist <- file.exists(file.path(file.path(javastics_path, "plant"), usms_files$fplt2)) |
     file.exists(file.path(file.path(workspace_path, "plant"), usms_files$fplt2))
   fplt2_exist[usms_files$fplt2=="null"] <- TRUE
+  if (!all(fplt2_exist)) {
+    warning(paste("Plant file(s)",paste(unique(usms_files$fplt2[!fplt2_exist]), collapse = ","),
+                  "not found in", workspace_path,
+                  ". Please note that with SticsRpacks, plant folder (that contains plant files)",
+                  "can be located either inside the workspace or in the JavaStics path.\n",
+                  "Check that your plant files exist in one of these."))
+  }
+
+
+
 
   all_fplt_exist <- fplt1_exist & fplt2_exist
 
