@@ -106,15 +106,31 @@ gen_tec_doc <- function(xml_doc = NULL,
   }
 
   # Setting vector parameters
+  #
   # Special case for cutting:
   # treating first julfauche or tempfauche, bc other
   # sibling parameters have common names : hautcoupe,
   # lairesiduel, msresiduel, anitcoupe
-  # otherwise parameters might be set in the wrong "choix" block !
-  fauche <- intersect(c("tempfauche", "julfauche","hautcoupe",
-                        "lairesiduel", "msresiduel","anitcoupe"),
-                      vec_names)
-  if (length(fauche)) vec_names <- c(fauche, vec_names[!vec_names %in% fauche])
+  #
+  # Choice between tempfauche and julfauche
+  # 1-Checking if "codemodfauche" exists in table_params
+  # 2- Getting the right mode fauche parameter name
+  # 3- Excluding the other one from names vector
+  if ("codemodfauche" %in% table_names) {
+    code <- table_params[["codemodfauche"]]
+    modfauche <- NULL
+    rmmodfauche <- NULL
+    if (code == "2") {modfauche <- "julfauche";rmmodfauche <- "tempfauche"}
+    if (code == "3") {modfauche <- "tempfauche";rmmodfauche <- "julfauche"}
+    vec_names <- setdiff(vec_names, rmmodfauche)
+  }
+
+  # Case of thinning: removing parameters
+  # if codeclaircie is set to 1
+  if ("codeclaircie" %in% table_names) {
+    if (table_params[["codeclaircie"]] == "1")
+      vec_names <- setdiff(vec_names, c("juleclair", "nbinfloecl"))
+  }
 
   for (par_name in vec_names) {
     nb_par <- get_param_number(xml_doc, par_name)
@@ -198,7 +214,8 @@ gen_tec_doc <- function(xml_doc = NULL,
       is_thin <- par_name %in% c("juleclair", "nbinfloecl")
       if (is_thin)  {
         parent_name <- "thinning"
-        parent_path <- get_param_type(xml_doc, "ta", "option", parent_name)$xpath
+        #parent_path <- get_param_type(xml_doc, "ta", "option", parent_name)$xpath
+        parent_path <- get_param_type(xml_doc, "ta", "choix", parent_name)$xpath
       }
       #-------------------------------------------------------------------------
 

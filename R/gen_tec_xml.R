@@ -47,6 +47,7 @@
 # TODO: refactor with gen_sta_file, gen_ini_file : same code
 gen_tec_xml <- function(param_table = NULL,
                         tec_in_file = NULL,
+                        #tec_names = NULL,
                         out_path = getwd(),
                         stics_version = "last",
                         na_values = NA) { #,
@@ -68,6 +69,14 @@ gen_tec_xml <- function(param_table = NULL,
     stop("The column for identifying tec names has not been found !")
   }
   tec_col <- param_names[ col_id  ]
+
+  # Pending -------------------------------------------------------------
+  # Filtering on tec_names vector arg
+  # if (!is.null(tec_names)) {
+  #   param_table <- param_table[param_table[[tec_col]] %in% tec_names, ]
+  # }
+  #----------------------------------------------------------------------
+
 
   # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(xml_doc = xml_doc,
