@@ -196,6 +196,7 @@ get_file_ <- function(workspace = getwd(),
   # If no files found, and usms name are given,
   # trying to find sub-directories named with usms names
   if (!length(workspace_files) && !is.null(usm_name)) {
+    usm_name <- sort(usm_name)
     workspace <- file.path(workspace, usm_name)
     workspace_files <- as.list(list.files(pattern = file_pattern, path = workspace))
   }
