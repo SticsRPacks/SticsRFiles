@@ -1,3 +1,22 @@
+# SticsRFiles 0.4.2 (2021-10-07)
+
+* Prepared templates for STICS V10.
+
+* FIXES:
+
+  * Bugs fixed for generation of soil, ini and tec XML files from excel files.
+
+  * Fixed reading of observation and simulation results files in case of USM selection (arg. usm_name)
+
+  * tec file of associated plant no more searched in case of a single plant in gen_usms_xml2txt
+
+* DOC:
+
+  * Completed doc for generation of XML files from excel files.
+
+  * Updated general doc.
+
+
 # SticsRFiles 0.4.1 (2021-07-02)
 
 ## Changes
