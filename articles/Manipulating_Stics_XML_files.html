@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span>
-<span class="co">#&gt; Learn SticsRFiles at: https://SticsRPacks.github.io/SticsRFiles</span></code></pre></div>
+<span class="co">#&gt; Learn SticsRFiles at: <span style="color: #0000BB; font-weight: bold; text-decoration: underline;">https://SticsRPacks.github.io/SticsRFiles</span></span></code></pre></div>
 <pre><code>#&gt; V9.2</code></pre>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
@@ -386,15 +386,15 @@ In the above file extract for crop management parameters, each set of parameters
 <span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">param_names</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span>
 <span class="co">#&gt;   name        file           min   max formalism</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 densinitial file_ini.xml    NA    NA none     </span>
-<span class="co">#&gt; 2 hinit       file_ini.xml    NA    NA none     </span>
-<span class="co">#&gt; 3 lai0        file_ini.xml    NA    NA none     </span>
-<span class="co">#&gt; 4 magrain0    file_ini.xml    NA    NA none     </span>
-<span class="co">#&gt; 5 masec0      file_ini.xml    NA    NA none     </span>
-<span class="co">#&gt; 6 nbplantes   file_ini.xml    NA    NA none</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> densinitial file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> hinit       file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> lai0        file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> magrain0    file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> masec0      file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> nbplantes   file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none</span></code></pre></div>
 <p>The full parameters data.frame content is presented in the above paged table.</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -409,22 +409,22 @@ In the above file extract for crop management parameters, each set of parameters
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"albedo"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 5</span>
-<span class="co">#&gt;   name              file          min   max formalism                           </span>
-<span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                               </span>
-<span class="co">#&gt; 1 albedomulchplast… file_tec.x…  0.05   0.8 special techniques                  </span>
-<span class="co">#&gt; 2 albedomulchresid… param_gen.…  0.05   0.8 Typology of pebbles fertilisers and…</span>
-<span class="co">#&gt; 3 albedo            sols.xml     0.05   0.6 none</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span>
+<span class="co">#&gt;   name                 file            min   max formalism                      </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> albedomulchplastique file_tec.xml   0.05   0.8 special techniques             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> albedomulchresidus   param_gen.xml  0.05   0.8 Typology of pebbles fertiliser…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> albedo               sols.xml       0.05   0.6 none</span>
 
 <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>parameter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"albedo"</span>, <span class="st">"latitude"</span>, <span class="st">"humcapil"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 x 5</span>
-<span class="co">#&gt;   name              file           min   max formalism                          </span>
-<span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                              </span>
-<span class="co">#&gt; 1 latitude          file_sta.xml -9e+1  90   Weather station                    </span>
-<span class="co">#&gt; 2 albedomulchplast… file_tec.xml  5e-2   0.8 special techniques                 </span>
-<span class="co">#&gt; 3 albedomulchresid… param_gen.x…  5e-2   0.8 Typology of pebbles fertilisers an…</span>
-<span class="co">#&gt; 4 albedo            sols.xml      5e-2   0.6 none                               </span>
-<span class="co">#&gt; 5 humcapil          sols.xml     NA     NA   none</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span>
+<span class="co">#&gt;   name                 file             min   max formalism                     </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> latitude             file_sta.xml  -<span style="color: #BB0000;">90</span>     90   Weather station               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> albedomulchplastique file_tec.xml    0.05   0.8 special techniques            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> albedomulchresidus   param_gen.xml   0.05   0.8 Typology of pebbles fertilise…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> albedo               sols.xml        0.05   0.6 none                          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> humcapil             sols.xml       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   none</span></code></pre></div>
 </div>
 <div id="getting-parameters-information-using-partial-names-matching" class="section level3">
 <h3 class="hasAnchor">
@@ -433,18 +433,18 @@ In the above file extract for crop management parameters, each set of parameters
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"hum"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 9 x 5</span>
-<span class="co">#&gt;   name          file           min   max formalism                              </span>
-<span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                                  </span>
-<span class="co">#&gt; 1 profhumrecol… file_tec.xml   0   100   soil modification by techniques (compa…</span>
-<span class="co">#&gt; 2 profhumsemoir file_tec.xml   0   100   soil modification by techniques (compa…</span>
-<span class="co">#&gt; 3 prophumtassr… param_gen.x…   0.8   1.8 Soil hydrology and compaction          </span>
-<span class="co">#&gt; 4 prophumtasss… param_gen.x…   0.8   1.8 Soil hydrology and compaction          </span>
-<span class="co">#&gt; 5 psihumin      param_gen.x…  -5    -0.1 Soil hydrology and compaction          </span>
-<span class="co">#&gt; 6 codetesthumN  param_newfo…   1     2   Fertilisation driving                  </span>
-<span class="co">#&gt; 7 humirac_deci… param_newfo…   0     1   Moisture test for sowing decision      </span>
-<span class="co">#&gt; 8 humcapil      sols.xml      NA    NA   none                                   </span>
-<span class="co">#&gt; 9 profhum       sols.xml      10   150   none</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 5</span></span>
+<span class="co">#&gt;   name              file                min   max formalism                     </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> profhumrecolteuse file_tec.xml        0   100   soil modification by techniqu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> profhumsemoir     file_tec.xml        0   100   soil modification by techniqu…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> prophumtassrec    param_gen.xml       0.8   1.8 Soil hydrology and compaction </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> prophumtasssem    param_gen.xml       0.8   1.8 Soil hydrology and compaction </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> psihumin          param_gen.xml      -<span style="color: #BB0000;">5</span>    -<span style="color: #BB0000;">0.1</span> Soil hydrology and compaction </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> codetesthumN      param_newform.xml   1     2   Fertilisation driving         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> humirac_decisemis param_newform.xml   0     1   Moisture test for sowing deci…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> humcapil          sols.xml           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   none                          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> profhum           sols.xml           10   150   none</span>
 
 
 <span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>parameter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"al"</span>, <span class="st">"hum"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -466,34 +466,34 @@ In the above file extract for crop management parameters, each set of parameters
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 29 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 29 × 5</span></span>
 <span class="co">#&gt;    name        file           min   max formalism      </span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          </span>
-<span class="co">#&gt;  1 afpf        file_plt.xml  0.01     1 yield formation</span>
-<span class="co">#&gt;  2 allocfrmax  file_plt.xml  0.05     1 yield formation</span>
-<span class="co">#&gt;  3 bfpf        file_plt.xml  0       30 yield formation</span>
-<span class="co">#&gt;  4 cfpf        file_plt.xml  0.1    100 yield formation</span>
-<span class="co">#&gt;  5 cgrain      file_plt.xml  0.01     1 yield formation</span>
-<span class="co">#&gt;  6 cgrainv0    file_plt.xml  0    15000 yield formation</span>
-<span class="co">#&gt;  7 codcalinflo file_plt.xml  1        2 yield formation</span>
-<span class="co">#&gt;  8 codeir      file_plt.xml  1        2 yield formation</span>
-<span class="co">#&gt;  9 codetremp   file_plt.xml  1        2 yield formation</span>
-<span class="co">#&gt; 10 dfpf        file_plt.xml  0.01     5 yield formation</span>
-<span class="co">#&gt; # … with 19 more rows</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> afpf        file_plt.xml  0.01     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> allocfrmax  file_plt.xml  0.05     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> bfpf        file_plt.xml  0       30 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> cfpf        file_plt.xml  0.1    100 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> cgrain      file_plt.xml  0.01     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> cgrainv0    file_plt.xml  0    <span style="text-decoration: underline;">15</span>000 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> codcalinflo file_plt.xml  1        2 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> codeir      file_plt.xml  1        2 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> codetremp   file_plt.xml  1        2 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> dfpf        file_plt.xml  0.01     5 yield formation</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 19 more rows</span></span>
 
 
 <span class="va">param_formalisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yield"</span>, <span class="st">"leaves"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">param_formalisms</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span>
 <span class="co">#&gt;   name       file           min   max formalism      </span>
-<span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          </span>
-<span class="co">#&gt; 1 abscission file_plt.xml  0      100 leaves         </span>
-<span class="co">#&gt; 2 afpf       file_plt.xml  0.01     1 yield formation</span>
-<span class="co">#&gt; 3 allocfrmax file_plt.xml  0.05     1 yield formation</span>
-<span class="co">#&gt; 4 alphaphot  file_plt.xml  0     1000 leaves         </span>
-<span class="co">#&gt; 5 bdens      file_plt.xml  1      200 leaves         </span>
-<span class="co">#&gt; 6 bfpf       file_plt.xml  0       30 yield formation</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> abscission file_plt.xml  0      100 leaves         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> afpf       file_plt.xml  0.01     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> allocfrmax file_plt.xml  0.05     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alphaphot  file_plt.xml  0     <span style="text-decoration: underline;">1</span>000 leaves         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> bdens      file_plt.xml  1      200 leaves         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> bfpf       file_plt.xml  0       30 yield formation</span></code></pre></div>
 The found parameters data.frame content is presented in the above paged table.
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -508,20 +508,20 @@ The found parameters data.frame content is presented in the above paged table.
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span>, parameter <span class="op">=</span> <span class="st">"grain"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 36 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 36 × 5</span></span>
 <span class="co">#&gt;    name        file           min   max formalism      </span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          </span>
-<span class="co">#&gt;  1 magrain0    file_ini.xml NA       NA none           </span>
-<span class="co">#&gt;  2 afpf        file_plt.xml  0.01     1 yield formation</span>
-<span class="co">#&gt;  3 allocfrmax  file_plt.xml  0.05     1 yield formation</span>
-<span class="co">#&gt;  4 bfpf        file_plt.xml  0       30 yield formation</span>
-<span class="co">#&gt;  5 cfpf        file_plt.xml  0.1    100 yield formation</span>
-<span class="co">#&gt;  6 cgrain      file_plt.xml  0.01     1 yield formation</span>
-<span class="co">#&gt;  7 cgrainv0    file_plt.xml  0    15000 yield formation</span>
-<span class="co">#&gt;  8 codcalinflo file_plt.xml  1        2 yield formation</span>
-<span class="co">#&gt;  9 codeir      file_plt.xml  1        2 yield formation</span>
-<span class="co">#&gt; 10 codetremp   file_plt.xml  1        2 yield formation</span>
-<span class="co">#&gt; # … with 26 more rows</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> magrain0    file_ini.xml <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span> none           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> afpf        file_plt.xml  0.01     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> allocfrmax  file_plt.xml  0.05     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> bfpf        file_plt.xml  0       30 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> cfpf        file_plt.xml  0.1    100 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> cgrain      file_plt.xml  0.01     1 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> cgrainv0    file_plt.xml  0    <span style="text-decoration: underline;">15</span>000 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> codcalinflo file_plt.xml  1        2 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> codeir      file_plt.xml  1        2 yield formation</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> codetremp   file_plt.xml  1        2 yield formation</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 26 more rows</span></span>
 
 
 <span class="va">param_formalisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span>, parameter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inflo"</span>, <span class="st">"lai"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -540,28 +540,28 @@ The found parameters data.frame content is presented in the above paged table.
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"plant"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 19 x 5</span>
-<span class="co">#&gt;    name        file           min    max formalism                              </span>
-<span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                                  </span>
-<span class="co">#&gt;  1 nbplantes   file_ini.x… NA      NA    none                                   </span>
-<span class="co">#&gt;  2 QNplante0   file_ini.x… NA      NA    none                                   </span>
-<span class="co">#&gt;  3 codemonocot file_plt.x…  1       2    plant name and group                   </span>
-<span class="co">#&gt;  4 codeplante  file_plt.x… NA      NA    plant name and group                   </span>
-<span class="co">#&gt;  5 laiplantule file_plt.x…  0       8    emergence and starting                 </span>
-<span class="co">#&gt;  6 masecplant… file_plt.x…  0.002   4    emergence and starting                 </span>
-<span class="co">#&gt;  7 nbfeuilpla… file_plt.x…  0      10    emergence and starting                 </span>
-<span class="co">#&gt;  8 zracplantu… file_plt.x…  0     200    emergence and starting                 </span>
-<span class="co">#&gt;  9 beta        param_gen.…  1       2    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 10 codefxn     param_gen.…  1       3    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 11 codesymbio… param_gen.…  1       2    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 12 concrr      param_gen.…  0       3    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 13 difN        param_gen.…  0.01    0.1  Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 14 irrlev      param_gen.…  0      50    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 15 lvopt       param_gen.…  0.2     1    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 16 plNmin      param_gen.…  5      30    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 17 QNpltminINN param_gen.…  0      50    Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 18 rayon       param_gen.…  0.005   0.07 Water absorption and nitrogen content …</span>
-<span class="co">#&gt; 19 nbplantes   usms.xml    NA      NA    none</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 5</span></span>
+<span class="co">#&gt;    name          file             min    max formalism                          </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> nbplantes     file_ini.xml  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    none                               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> QNplante0     file_ini.xml  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    none                               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> codemonocot   file_plt.xml   1       2    plant name and group               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> codeplante    file_plt.xml  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    plant name and group               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> laiplantule   file_plt.xml   0       8    emergence and starting             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> masecplantule file_plt.xml   0.002   4    emergence and starting             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> nbfeuilplant  file_plt.xml   0      10    emergence and starting             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> zracplantule  file_plt.xml   0     200    emergence and starting             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> beta          param_gen.xml  1       2    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> codefxn       param_gen.xml  1       3    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> codesymbiose  param_gen.xml  1       2    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> concrr        param_gen.xml  0       3    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> difN          param_gen.xml  0.01    0.1  Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> irrlev        param_gen.xml  0      50    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> lvopt         param_gen.xml  0.2     1    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> plNmin        param_gen.xml  5      30    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> QNpltminINN   param_gen.xml  0      50    Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> rayon         param_gen.xml  0.005   0.07 Water absorption and nitrogen cont…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> nbplantes     usms.xml      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>    none</span>
 
 
 <span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plant"</span>, <span class="st">"leave"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -1143,7 +1143,7 @@ The found parameters data.frame content is presented in the above paged table.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

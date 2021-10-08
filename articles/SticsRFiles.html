@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
       </span>
     </div>
 
@@ -104,56 +104,290 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h2>
 <p>The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model.</p>
-<p>The executable of the STICS model uses text files with standard names and format as inputs that describe one single unit of simulation (USM), e.g. one crop for one year.</p>
-<p>XML files are not used directly by the STICS executable, but only by the JavaSTICS GUI instead.</p>
-<p>The JavaSTICS GUI is used to easily build input text files for the STICS executable according to the user’s choices. The XML files have the benefit to store more information than the text files: they not only store the parameter values but also their description, the maximum and minimum boundary values, all existing formalisms along with the different choices allowed, and more importantly they allow for the management of several USMs in a same folder, and can help make successive USMs.</p>
-<p>Hence, SticsRFiles can be used to manage the XML input files (get and set parameter values, build the text files), the input text files (get and set parameter values) and the outputs from the model execution.</p>
-<p>Advanced functionnalities also include:</p>
+<p>This article presents the design of the package and its basic features, <em>i.e.</em> the main functions to deal with the XML files. For a complete introduction to SticsRPacks (managing files, running simulations, plotting, optimization…), see the tutorial from the <a href="https://sticsrpacks.github.io/SticsRPacks/" class="external-link">SticsRPacks</a> package.</p>
+</div>
+<div id="concepts" class="section level2">
+<h2 class="hasAnchor">
+<a href="#concepts" class="anchor" aria-hidden="true"></a>Concepts</h2>
+<div id="input-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#input-files" class="anchor" aria-hidden="true"></a>Input files</h3>
+<div id="text-files" class="section level4">
+<h4 class="hasAnchor">
+<a href="#text-files" class="anchor" aria-hidden="true"></a>Text files</h4>
+<p>The executable of the STICS model reads text files with standard names and format to import the inputs describing a single unit of simulation (USM), <em>e.g.</em> one crop for one year.</p>
+<p>Here’s a typical list of the input files for the STICS executable (without the optional files):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">workspace</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>│</span>
+<span id="cb1-3"><a href="#cb1-3"></a>├── 📜<span class="ex">climat.txt</span>               <span class="co"># The meteorological data for the USM</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>├── 📜<span class="ex">ficini.txt</span>               <span class="co"># The initialization</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>├── 📜<span class="ex">ficplt1.txt</span>              <span class="co"># Parameters for the plant to be simulated</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>├── 📜<span class="ex">fictec1.txt</span>              <span class="co"># The management applied to the soil and crop</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>├── 📜<span class="ex">new_travail.usm</span>          <span class="co"># The general configuration parameters for the USM</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>├── 📜<span class="ex">param.sol</span>                <span class="co"># Soil parameters</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>├── 📜<span class="ex">station.txt</span>              <span class="co"># The site parameters (*e.g.* altitude, latitude)</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>├── 📜<span class="ex">tempopar.sti</span>             <span class="co"># More general parameters not in the other files</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>├── 📜<span class="ex">tempoparv6.sti</span>           <span class="co"># Parameters for the custom versions of STICS</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>└── 📜<span class="ex">var.mod</span>                  <span class="co"># Variables to write in the outputs</span></span></code></pre></div>
+<p>Because these files only describe one USM at a time and can be tedious to explore and parameterize, we usually don’t interact with them directly, but through another program: JavaSTICS.</p>
+</div>
+<div id="xml-files" class="section level4">
+<h4 class="hasAnchor">
+<a href="#xml-files" class="anchor" aria-hidden="true"></a>XML files</h4>
+<p>JavaSTICS is a graphical user interface used to easily create input text files for the STICS executable according to the user’s choices, and for managing STICS simulations. JavaSTICS saves the parameter values and options choices in XML files.</p>
+<p>The XML files store more information than the text files: not only do they store the parameter values but also their description, maximum and minimum boundary values, all existing formalisms, the different choices allowed, and more importantly they allow for the management of several USMs in the same folder (called workspace), and can help make successive USMs.</p>
+<p>It is important to note that only JavaSTICS interact with the XML files, <strong>not</strong> the STICS executable. The STICS input text files are then automatically created by JavaSTICS when running a simulation, just before calling the STICS executable.</p>
+</div>
+</div>
+<div id="sticsrfiles" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sticsrfiles" class="anchor" aria-hidden="true"></a>SticsRFiles</h3>
+<p>SticsRFiles is an R package that uses JavaSTICS from the command line to manage the XML and the text files. We can generate XML or text files, get and set parameter values, import simulations outputs, and manage observation files.</p>
+<p>Advanced features also include:</p>
 <ul>
 <li>The generation of XML input files from templates included in the package, and<br>
 </li>
 <li>The production of XML input files using a mailing process from XML templates and Excel sheets containing multiple simulations contexts</li>
 </ul>
-<p>The goal of this article is to help new comers getting started with the basic functionalities of the package, i.e. the main functions to deal with the XML files.</p>
-<!-- * `get_param_names_xml()`: get parameter names from xml files;  
-* `get_param_xml()`: get parameter values from xml files;
-* `set_param_xml()`: set parameter values from xml files;
-* `gen_obs()`: generate observation files from a `data.frame`
--->
 </div>
-<div id="example-data" class="section level2">
+</div>
+<div id="short-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-data" class="anchor" aria-hidden="true"></a>Example data</h2>
-<p>All the example data used in this article is available from the <a href="https://github.com/SticsRPacks/data" class="external-link"><code>data</code> repository</a> in the <code>SticsRPacks</code> organisation.</p>
-<p>SticsRFiles provides a function to download it from the command line:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<a href="#short-example" class="anchor" aria-hidden="true"></a>Short example</h2>
+<p>Here’s a simple example usage of SticsRFiles using an example workspace.</p>
+<div id="example-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-data" class="anchor" aria-hidden="true"></a>Example data</h3>
+<p>All the example data used in this article are available from the <a href="https://github.com/SticsRPacks/data" class="external-link"><code>data</code> repository</a> in the <code>SticsRPacks</code> organization.</p>
+<p>SticsRFiles provides a function to download it from the command line. Please execute the following command in R:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span>
-<span class="va">example_data</span><span class="op">=</span> <span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/download_data.html">download_data</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>By default the example data is downloaded in a temporary folder.</p>
+<span class="va">example_data</span> <span class="op">=</span> <span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/download_data.html">download_data</a></span><span class="op">(</span>example_dirs <span class="op">=</span> <span class="st">"study_case_1"</span>, <span class="st">"V9.0"</span><span class="op">)</span></code></pre></div>
+<p>The example data is downloaded by default in a temporary folder.</p>
+<p>For the sake of readability, we’ll declare the workspace path and the path to the plant file here. But remember the functions can be applied to any XML files or workspaces.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">workspace</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">example_data</span>, <span class="st">"XmlFiles"</span><span class="op">)</span>
+<span class="va">plant_file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">workspace</span>, <span class="st">"plant"</span>, <span class="st">"maisopti_plt.xml"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="functions-examples-for-using-xml-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#functions-examples-for-using-xml-files" class="anchor" aria-hidden="true"></a>Functions examples for using XML files</h2>
+<div id="example-useage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-useage" class="anchor" aria-hidden="true"></a>Example useage</h3>
+<div id="find-a-stics-variable" class="section level4">
+<h4 class="hasAnchor">
+<a href="#find-a-stics-variable" class="anchor" aria-hidden="true"></a>Find a STICS variable</h4>
+<p><code><a href="../reference/get_var_info.html">get_var_info()</a></code> helps to get any STICS variable name by doing a fuzzy search. For example to get all variables with <code>lai</code> in their names, you would do:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/get_var_info.html">get_var_info</a></span><span class="op">(</span><span class="st">"lai"</span><span class="op">)</span>
+<span class="co">#&gt;              name</span>
+<span class="co">#&gt; 4       albedolai</span>
+<span class="co">#&gt; 216        exolai</span>
+<span class="co">#&gt; 304        innlai</span>
+<span class="co">#&gt; 318        lai(n)</span>
+<span class="co">#&gt; 319 lai_mx_av_cut</span>
+<span class="co">#&gt; 320        laimax</span>
+<span class="co">#&gt; 321     laisen(n)</span>
+<span class="co">#&gt; 588         splai</span>
+<span class="co">#&gt; 650       ulai(n)</span>
+<span class="co">#&gt;                                                           definition</span>
+<span class="co">#&gt; 4                   albedo of the crop including soil and vegetation</span>
+<span class="co">#&gt; 216              reduction factor on leaf growth due to water excess</span>
+<span class="co">#&gt; 304 reduction factor on leaf growth due to NNI (nitrogen deficiency)</span>
+<span class="co">#&gt; 318                                          leaf area index (table)</span>
+<span class="co">#&gt; 319            LAI before cut (for cut crops , for others = lai(n) )</span>
+<span class="co">#&gt; 320                                          maximum leaf area index</span>
+<span class="co">#&gt; 321                      leaf area index of senescent leaves (table)</span>
+<span class="co">#&gt; 588                source to sink ratio of assimilates in the leaves</span>
+<span class="co">#&gt; 650                                relative development unit for LAI</span>
+<span class="co">#&gt;            unit type</span>
+<span class="co">#&gt; 4            SD   sc</span>
+<span class="co">#&gt; 216         0-1    p</span>
+<span class="co">#&gt; 304 innmin to 1    p</span>
+<span class="co">#&gt; 318      m2.m-2    p</span>
+<span class="co">#&gt; 319          SD    p</span>
+<span class="co">#&gt; 320      m2.m-2    p</span>
+<span class="co">#&gt; 321      m2.m-2    p</span>
+<span class="co">#&gt; 588          SD    p</span>
+<span class="co">#&gt; 650         0-3    p</span></code></pre></div>
+<p>Sometimes it is also usefull to search in the variable definition instead of its name. To do so, you can use the <code>keyword</code> argument like so:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/get_var_info.html">get_var_info</a></span><span class="op">(</span>keyword<span class="op">=</span> <span class="st">"lai"</span><span class="op">)</span>
+<span class="co">#&gt;                   name</span>
+<span class="co">#&gt; 4            albedolai</span>
+<span class="co">#&gt; 157 diftemp1intercoupe</span>
+<span class="co">#&gt; 158 diftemp2intercoupe</span>
+<span class="co">#&gt; 216             exolai</span>
+<span class="co">#&gt; 300     inn1intercoupe</span>
+<span class="co">#&gt; 302     inn2intercoupe</span>
+<span class="co">#&gt; 304             innlai</span>
+<span class="co">#&gt; 318             lai(n)</span>
+<span class="co">#&gt; 319      lai_mx_av_cut</span>
+<span class="co">#&gt; 320             laimax</span>
+<span class="co">#&gt; 321          laisen(n)</span>
+<span class="co">#&gt; 325               leai</span>
+<span class="co">#&gt; 588              splai</span>
+<span class="co">#&gt; 590     str1intercoupe</span>
+<span class="co">#&gt; 591     str2intercoupe</span>
+<span class="co">#&gt; 592     stu1intercoupe</span>
+<span class="co">#&gt; 593     stu2intercoupe</span>
+<span class="co">#&gt; 646           tustress</span>
+<span class="co">#&gt; 650            ulai(n)</span>
+<span class="co">#&gt;                                                                                                         definition</span>
+<span class="co">#&gt; 4                                                                 albedo of the crop including soil and vegetation</span>
+<span class="co">#&gt; 157        mean difference between crop and air temperatures during the vegetative phase (emergence - maximum LAI)</span>
+<span class="co">#&gt; 158       mean difference between crop and air temperatures during the reproductive phase (maximum LAI - maturity)</span>
+<span class="co">#&gt; 216                                                            reduction factor on leaf growth due to water excess</span>
+<span class="co">#&gt; 300                               average NNI during the cut (cut crop vegetative phase: emergence to maximum LAI)</span>
+<span class="co">#&gt; 302                             average NNI during the cut (cut crop reproductive phase: maximum LAI  to maturity)</span>
+<span class="co">#&gt; 304                                               reduction factor on leaf growth due to NNI (nitrogen deficiency)</span>
+<span class="co">#&gt; 318                                                                                        leaf area index (table)</span>
+<span class="co">#&gt; 319                                                          LAI before cut (for cut crops , for others = lai(n) )</span>
+<span class="co">#&gt; 320                                                                                        maximum leaf area index</span>
+<span class="co">#&gt; 321                                                                    leaf area index of senescent leaves (table)</span>
+<span class="co">#&gt; 325                                                                                 Leaf+ear area index = lai +eai</span>
+<span class="co">#&gt; 588                                                              source to sink ratio of assimilates in the leaves</span>
+<span class="co">#&gt; 590      average stomatal water stress index during the vegetative phase (emergence - maximum LAI) of forage crops</span>
+<span class="co">#&gt; 591    average stomatal water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops</span>
+<span class="co">#&gt; 592   average turgescence water stress index during the vegetative phase (emergence - maximum LAI) of forage crops</span>
+<span class="co">#&gt; 593 average turgescence water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops</span>
+<span class="co">#&gt; 646                      reduction factor on leaf growth due to the effective water stress  (= min(turfac,innlai))</span>
+<span class="co">#&gt; 650                                                                              relative development unit for LAI</span>
+<span class="co">#&gt;            unit type</span>
+<span class="co">#&gt; 4            SD   sc</span>
+<span class="co">#&gt; 157     degreeC    p</span>
+<span class="co">#&gt; 158     degreeC    p</span>
+<span class="co">#&gt; 216         0-1    p</span>
+<span class="co">#&gt; 300         0-2    p</span>
+<span class="co">#&gt; 302         0-2    p</span>
+<span class="co">#&gt; 304 innmin to 1    p</span>
+<span class="co">#&gt; 318      m2.m-2    p</span>
+<span class="co">#&gt; 319          SD    p</span>
+<span class="co">#&gt; 320      m2.m-2    p</span>
+<span class="co">#&gt; 321      m2.m-2    p</span>
+<span class="co">#&gt; 325      m2.m-2    p</span>
+<span class="co">#&gt; 588          SD    p</span>
+<span class="co">#&gt; 590         0-1    p</span>
+<span class="co">#&gt; 591         0-1    p</span>
+<span class="co">#&gt; 592         0-1    p</span>
+<span class="co">#&gt; 593         0-1    p</span>
+<span class="co">#&gt; 646         0-1   sc</span>
+<span class="co">#&gt; 650         0-3    p</span></code></pre></div>
 </div>
-<div id="get-parameter-names" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-parameter-names" class="anchor" aria-hidden="true"></a>Get parameter names</h2>
-<p><code><a href="../reference/get_param_names_xml.html">get_param_names_xml()</a></code>: get parameter names from xml files</p>
+<div id="get-parameter-names" class="section level4">
+<h4 class="hasAnchor">
+<a href="#get-parameter-names" class="anchor" aria-hidden="true"></a>Get parameter names</h4>
+<p><code><a href="../reference/get_param_info.html">get_param_info()</a></code> is used to get parameter names from XML files:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"lai"</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 5</span></span>
+<span class="co">#&gt;    name         file               min   max formalism             </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> lai0         file_ini.xml <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>   none                  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> codelaitr    file_plt.xml  1          2   leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> codlainet    file_plt.xml  1          2   cultivar parameters   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> dlaimax      file_plt.xml  0.000<span style="text-decoration: underline;">005</span>   0.5 leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> dlaimaxbrut  file_plt.xml  0.000<span style="text-decoration: underline;">005</span>   0.5 leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> dlaimin      file_plt.xml  0.01       1   leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> laicomp      file_plt.xml  0          1   leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> laiplantule  file_plt.xml  0          8   emergence and starting</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> pentlaimax   file_plt.xml  0         10   leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> splaimax     file_plt.xml  0.7        2   yield formation       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> splaimin     file_plt.xml  0.01       1   yield formation       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> udlaimax     file_plt.xml  1          3   leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span> vlaimax      file_plt.xml  1.5        2.5 leaves                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span> cielclair    file_sta.xml  0          1   climate               </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">15</span> codeclaircie file_tec.xml  1          2   special techniques    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">16</span> juleclair    file_tec.xml  1        731   special techniques    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">17</span> laidebeff    file_tec.xml  1         10   special techniques    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">18</span> laieffeuil   file_tec.xml  0.05      10   special techniques    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">19</span> flai         usms.xml     <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>   none</span></code></pre></div>
+<p>We can also read the parameters inside a particular XML file. This helps users of custom or old versions of JavaSTICS still get the parameters:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>file_path <span class="op">=</span> <span class="va">plant_file</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 257 × 5</span></span>
+<span class="co">#&gt;    name       file                min    max formalism                          </span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> abscission maisopti_plt.xml   0     100   leaves                             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> adens      maisopti_plt.xml  -<span style="color: #BB0000;">2</span>       0   cultivar parameters                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> adfol      maisopti_plt.xml -<span style="color: #BB0000;">10</span>      10   radiation interception             </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> adil       maisopti_plt.xml   1       7   nitrogen                           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> adilmax    maisopti_plt.xml   3      10   nitrogen                           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> afpf       maisopti_plt.xml   0.01    1   yield formation                    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> afruitpot  maisopti_plt.xml   0.5    20   cultivar parameters                </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> allocfrmax maisopti_plt.xml   0.05    0.3 yield formation                    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> alphaco2   maisopti_plt.xml   1       2   effect of atmospheric CO2 concentr…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> alphaphot  maisopti_plt.xml   0    <span style="text-decoration: underline;">1</span>000   leaves                             </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 247 more rows</span></span></code></pre></div>
 </div>
-<div id="get-parameter-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-parameter-values" class="anchor" aria-hidden="true"></a>Get parameter values</h2>
-<p><code><a href="../reference/get_param_xml.html">get_param_xml()</a></code>: get parameter values from xml files</p>
+<div id="get-parameter-values" class="section level4">
+<h4 class="hasAnchor">
+<a href="#get-parameter-values" class="anchor" aria-hidden="true"></a>Get parameter values</h4>
+<p><code><a href="../reference/get_param_xml.html">get_param_xml()</a></code> is used to get the values of a parameter in an XML file. For example if we want to get <code>dlaimax</code>, we would do:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dlaimax</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">plant_file</span>, <span class="st">"dlaimax"</span><span class="op">)</span>
+<span class="va">dlaimax</span>
+<span class="co">#&gt; $maisopti_plt.xml</span>
+<span class="co">#&gt; $maisopti_plt.xml$dlaimax</span>
+<span class="co">#&gt; [1] 0.00321</span></code></pre></div>
+<p>But this function is way more powerfull than just that. You can also get the values for all parameters in a given formalism (<code>formalisme</code> in French, yes some variables are still written in French in STICS). To do so, use the <code>select</code> argument like so:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">values</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">plant_file</span>, select <span class="op">=</span> <span class="st">"formalisme"</span>, value <span class="op">=</span> <span class="st">"radiation interception"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="co"># For pretty-printing</span>
+<span class="co">#&gt; maisopti_plt.xml.codetransrad        maisopti_plt.xml.extin </span>
+<span class="co">#&gt;                           1.0                           0.7 </span>
+<span class="co">#&gt;        maisopti_plt.xml.ktrou        maisopti_plt.xml.forme </span>
+<span class="co">#&gt;                           1.0                           1.0 </span>
+<span class="co">#&gt;     maisopti_plt.xml.rapforme        maisopti_plt.xml.adfol </span>
+<span class="co">#&gt;                           4.0                           1.0 </span>
+<span class="co">#&gt;      maisopti_plt.xml.dfolbas     maisopti_plt.xml.dfolhaut </span>
+<span class="co">#&gt;                           5.0                           5.0</span></code></pre></div>
 </div>
-<div id="set-parameter-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#set-parameter-values" class="anchor" aria-hidden="true"></a>Set parameter values</h2>
-<p><code><a href="../reference/set_param_xml.html">set_param_xml()</a></code>: set parameter values from xml files</p>
+<div id="set-parameter-values" class="section level4">
+<h4 class="hasAnchor">
+<a href="#set-parameter-values" class="anchor" aria-hidden="true"></a>Set parameter values</h4>
+<p>We can also change the value of a parameter programmatically using <code><a href="../reference/set_param_xml.html">set_param_xml()</a></code>. It is used similarly to <code><a href="../reference/get_param_xml.html">get_param_xml()</a></code>. For example if we want to increase <code>dlaimax</code> by 30%:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/set_param_xml.html">set_param_xml</a></span><span class="op">(</span><span class="va">plant_file</span>, <span class="st">"dlaimax"</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">dlaimax</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.3</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Don’t forget to use the <code>overwrite</code> argument and set it to <code>TRUE</code>. It is <code>FALSE</code> by default to avoid any mishandling.</p>
 </div>
-<div id="generate-observations-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#generate-observations-files" class="anchor" aria-hidden="true"></a>Generate observations files</h2>
-<p><code><a href="../reference/gen_obs.html">gen_obs()</a></code>: generate observation files from a <code>data.frame</code></p>
+<div id="generate-observations-files" class="section level4">
+<h4 class="hasAnchor">
+<a href="#generate-observations-files" class="anchor" aria-hidden="true"></a>Generate observations files</h4>
+<p>We can generate observation files from a <code>data.frame</code> using <code><a href="../reference/gen_obs.html">gen_obs()</a></code>.</p>
+<p>Lets create some dummy <code>data.frame</code> first:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">obs_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>usm_name <span class="op">=</span> <span class="st">"Test"</span>, ian <span class="op">=</span> <span class="fl">2021</span>, mo <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, jo <span class="op">=</span> <span class="fl">1</span>, `masec(n)` <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+<p>Then we can write the data to a file using <code><a href="../reference/gen_obs.html">gen_obs()</a></code>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/gen_obs.html">gen_obs</a></span><span class="op">(</span>obs_table <span class="op">=</span> <span class="va">obs_df</span>, out_path <span class="op">=</span> <span class="st">"/path/to/dest/dir"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="read-observations-files" class="section level4">
+<h4 class="hasAnchor">
+<a href="#read-observations-files" class="anchor" aria-hidden="true"></a>Read observations files</h4>
+<p>We can read the observation files in a workspace using <code><a href="../reference/get_obs.html">get_obs()</a></code>. Note that all observation files should be named after the USM they are linked to. See the help page for more details, <em>e.g.</em> about intercrops.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">obs</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_obs.html">get_obs</a></span><span class="op">(</span><span class="va">workspace</span><span class="op">)</span>
+<span class="co">#&gt; [1] "bo96iN+.obs"</span>
+<span class="co">#&gt; [1] "bou00t1.obs"</span>
+<span class="co">#&gt; [1] "bou00t3.obs"</span>
+<span class="co">#&gt; [1] "bou99t1.obs"</span>
+<span class="co">#&gt; [1] "bou99t3.obs"</span>
+<span class="co">#&gt; [1] "lu96iN+.obs"</span>
+<span class="co">#&gt; [1] "lu96iN6.obs"</span>
+<span class="co">#&gt; [1] "lu97iN+.obs"</span></code></pre></div>
+</div>
+<div id="read-simulation-files" class="section level4">
+<h4 class="hasAnchor">
+<a href="#read-simulation-files" class="anchor" aria-hidden="true"></a>Read simulation files</h4>
+<p>Likewise, we can read the observation files in a workspace using <code><a href="../reference/get_sim.html">get_sim()</a></code>:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sim</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sim.html">get_sim</a></span><span class="op">(</span><span class="va">workspace</span><span class="op">)</span>
+<span class="co">#&gt; Warning in get_file_(workspace = x, usm_name = usm_name, usms_filepath =</span>
+<span class="co">#&gt; usms_path, : Not any sim file detected in workspace/private/var/folders/</span>
+<span class="co">#&gt; 24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpi60wqU/data-master/study_case_1/V9.0/</span>
+<span class="co">#&gt; XmlFiles</span></code></pre></div>
+<p>But as there aren’t any simulations yet in the workspace, the function will return an error. To make a simulation, head to <a href="https://sticsrpacks.github.io/SticsOnR/" class="external-link">SticsOnR</a>. Then to plot both observations and simulations, you can use <a href="https://sticsrpacks.github.io/CroPlotR/" class="external-link">CroPlotR</a>.</p>
+</div>
+</div>
 </div>
   </div>
 
@@ -174,7 +408,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

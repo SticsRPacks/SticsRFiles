@@ -1,13 +1,13 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9001
-pkgdown_sha: 51268b0d9cb0588d7a6404a2b8ef4ee19c435e89
+pkgdown: 1.9000.9000.9000
+pkgdown_sha: 31939caeb87846bc75e0cb5eccc0d610405c4580
 articles:
   Generating_Stics_XML_files: Generating_Stics_XML_files.html
   Generating_Stics_text_files: Generating_Stics_text_files.html
   Manipulating_Stics_XML_files: Manipulating_Stics_XML_files.html
   Manipulating_Stics_text_files: Manipulating_Stics_text_files.html
   SticsRFiles: SticsRFiles.html
-last_built: 2021-07-02T07:44Z
+last_built: 2021-10-08T13:49Z
 urls:
   reference: |-
     https://sticsrpacks.github.io/SticsRFiles/
