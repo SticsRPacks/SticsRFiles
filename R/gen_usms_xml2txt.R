@@ -137,8 +137,10 @@ gen_usms_xml2txt <- function(javastics_path,
 
     # We increment the usm_index if we just treated plant 2 or if the dominance
     # of the next i is 1 (case were we only have lai file for plant 1)
-    if(dominance[i] == 2 | dominance[i + 1] == 1){
-      usm_index = usm_index + 1
+    if(i < length(lai_file_path)){
+      if(dominance[i] == 2 | dominance[i + 1] == 1){
+        usm_index = usm_index + 1
+      }
     }
   }
 
