@@ -52,23 +52,28 @@ check_usms_files <- function(workspace_path,
   par_list <- c("nbplantes", "finit", "fstation", "fclim1", "fclim2", "fplt", "ftec", "flai")
 
   param_usms <- get_param_xml(file.path(workspace_path,"usms.xml"))$usms.xml[par_list]
-
-  id_plt_1 <- seq(1,to = usms_nb*2, by = 2)
-  id_plt_2 <- seq(2,to = usms_nb*2, by = 2)
+  id_plt = sequence(param_usms$nbplantes)
 
   usms_files <- data.frame(usm = usms_full_list,
-                           nbplantes = param_usms$nbplantes,
-                           finit = param_usms$finit,
-                           fstation = param_usms$fstation,
-                           fclim1 = param_usms$fclim1,
-                           fclim2 = param_usms$fclim2,
-                           fplt1 = param_usms$fplt[id_plt_1],
-                           fplt2 = param_usms$fplt[id_plt_2],
-                           ftec1 = param_usms$ftec[id_plt_1],
-                           ftec2 = param_usms$ftec[id_plt_2],
-                           flai1 = param_usms$flai[id_plt_1],
-                           flai2 = param_usms$flai[id_plt_2],
-                           stringsAsFactors = FALSE)
+                         nbplantes = param_usms$nbplantes,
+                         finit = param_usms$finit,
+                         fstation = param_usms$fstation,
+                         fclim1 = param_usms$fclim1,
+                         fclim2 = param_usms$fclim2,
+                         fplt1 = param_usms$fplt[id_plt == 1],
+                         ftec1 = param_usms$ftec[id_plt == 1],
+                         flai1 = param_usms$flai[id_plt == 1],
+                         stringsAsFactors = FALSE)
+
+  if(length(param_usms$fplt[id_plt == 2]) > 0){
+    usms_files$fplt2 = param_usms$fplt[id_plt == 2]
+  }
+  if(length(param_usms$ftec[id_plt == 2]) > 0){
+    usms_files$ftec2 = param_usms$ftec[id_plt == 2]
+  }
+  if(length(param_usms$flai[id_plt == 2]) > 0){
+    usms_files$flai2 = param_usms$flai[id_plt == 2]
+  }
 
   # Filtering usms
   if (!is.null(usms_list)) {
