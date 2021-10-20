@@ -53,6 +53,9 @@ check_usms_files <- function(workspace_path,
 
   param_usms <- get_param_xml(file.path(workspace_path,"usms.xml"))$usms.xml[par_list]
   id_plt = sequence(param_usms$nbplantes)
+  param_usms$fplt = param_usms$fplt[param_usms$fplt != "null"]
+  param_usms$ftec = param_usms$ftec[param_usms$ftec != "null"]
+  param_usms$flai = param_usms$flai[param_usms$flai != "null"]
 
   usms_files <- data.frame(usm = usms_full_list,
                          nbplantes = param_usms$nbplantes,
