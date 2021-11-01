@@ -7,7 +7,7 @@
 download_usm_xl(
   xl_name = NULL,
   dest_dir = getwd(),
-  version_name = "last",
+  version_name = "latest",
   overwrite = FALSE,
   verbose = FALSE,
   ...
@@ -19,7 +19,7 @@ download_usm_xl(
 \item{dest_dir}{Directory path where to copy the Excel file
 (optional, default: current directory)}
 
-\item{version_name}{An optional version string (default: last version returned by get_stics_versions_compat())}
+\item{version_name}{An optional version string (default: latest version returned by get_stics_versions_compat())}
 
 \item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
 

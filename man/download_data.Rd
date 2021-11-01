@@ -12,8 +12,8 @@ download_data(dir = tempdir(), example_dirs = NULL, version_name = NULL)
 \item{example_dirs}{List of use case directories names (optional)}
 
 \item{version_name}{An optional version string
-within those given by get_stics_versions_compat()$versions_list, or "last"
-for getting the last version (default : NULL)}
+within those given by get_stics_versions_compat()$versions_list, or "latest"
+for getting the latest version (default : NULL)}
 }
 \value{
 The path to the folder where data have been downloaded

@@ -9,7 +9,7 @@ gen_ini_doc(
   param_table = NULL,
   crop_tag = "Crop",
   params_desc = NULL,
-  stics_version = "last",
+  stics_version = "latest",
   check_names = TRUE
 )
 }
@@ -23,7 +23,7 @@ gen_ini_doc(
 
 \item{params_desc}{a list decribing crop parameters and others}
 
-\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
+\item{stics_version}{the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.}
 
 \item{check_names}{logical for checking names of param_table columns or not}
 }

@@ -27,7 +27,7 @@
 #' @export
 #'
 gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod",
-                       version= "last", force= FALSE){
+                       version= "latest", force= FALSE){
   # Checking if workspace exists
   if(!dir.exists(workspace)){
     stop(paste(workspace,": directory does not exist !"))

@@ -4,12 +4,12 @@
 \alias{get_examples_path}
 \title{Getting examples files path attached to a STICS version for a given file type}
 \usage{
-get_examples_path(file_type, version_name = "last")
+get_examples_path(file_type, version_name = "latest")
 }
 \arguments{
 \item{file_type}{A file type string among files types ("csv", "obs", "sti", "txt", "xml")}
 
-\item{version_name}{An optional version string (default: last version returned by get_stics_versions_compat())}
+\item{version_name}{An optional version string (default: latest version returned by get_stics_versions_compat())}
 }
 \value{
 A directory path for examples files for given file type and STICS version or

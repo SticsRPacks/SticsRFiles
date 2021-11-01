@@ -4,7 +4,7 @@
 \alias{check_version_compat}
 \title{Checking the validity of a given version code}
 \usage{
-check_version_compat(version_name = "last")
+check_version_compat(version_name = "latest")
 }
 \arguments{
 \item{version}{An optional version name as listed in

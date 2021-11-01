@@ -10,8 +10,8 @@
 #' in parameters data (i.e.: parameters names, formalisms description,
 #' file names or part to which parameters are attached to)
 #'
-#' @param version Optional, Stics version (default value, "last")
-#' Only the 2 last are referenced: V9.0, V9.1
+#' @param version Optional, Stics version (default value, "latest")
+#' Only the 2 latest are referenced: V9.0, V9.1
 #'
 #' @details parameter and formalism may be both set or only one of them, but
 #' none of them can be if keyword argument is used.
@@ -44,7 +44,7 @@ get_param_info <- function(parameter = NULL,
                            file_path = NULL,
                            formalism = NULL,
                            keyword = NULL,
-                           version = "last") {
+                           version = "latest") {
 
   # Defining compatible cases
   # param and/or formalism may be not NULL
@@ -116,8 +116,8 @@ get_param_info <- function(parameter = NULL,
 #'
 #' @param file_path Optional, xml file path or a vector of
 #'
-#' @param version Optional, Stics version (default value, "last")
-#' Only the 2 last are referenced: V9.0, V9.1
+#' @param version Optional, Stics version (default value, "latest")
+#' Only the 2 latest are referenced: V9.0, V9.1
 #' @param kind Kind of information to be retrieved for parameters
 #' among "parameter", "formalism" or "all" for both of them
 #'
@@ -153,7 +153,7 @@ get_param_info <- function(parameter = NULL,
 #'
 get_param_data_df <- function(parameter = NULL,
                               file_path = NULL,
-                              version = "last",
+                              version = "latest",
                               kind = "all",
                               exact = FALSE) {
 

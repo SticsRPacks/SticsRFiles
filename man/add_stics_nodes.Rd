@@ -8,7 +8,7 @@ add_stics_nodes(
   xml_doc,
   formalism_name = NULL,
   nodes_nb = 1,
-  stics_version = "last"
+  stics_version = "latest"
 )
 }
 \arguments{

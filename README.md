@@ -77,7 +77,7 @@ devtools::install_github("SticsRPacks/SticsRPacks")
 remotes::install_github("SticsRPacks/SticsRPacks")
 ```
 
-The package will install the packages for you at the last release
+The package will install the packages for you at the latest release
 version.
 
 ### Or, install directly

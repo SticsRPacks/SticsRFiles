@@ -4,7 +4,7 @@
 #' @param usms_nb number of usms to create (optional)
 #' @param usms_param a table (df, tibble) containing parameters to use (see details)
 #' @param usms_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
-#' @param stics_version the stics version to use (optional, default to last). Only used if usms_in_file= NULL, see details.
+#' @param stics_version the stics version to use (optional, default to latest). Only used if usms_in_file= NULL, see details.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
@@ -51,7 +51,7 @@ gen_usms_xml <- function(usms_out_file = NULL,
                          usms_nb = NULL,
                          usms_param = NULL,
                          usms_in_file = NULL,
-                         stics_version ="last") {
+                         stics_version ="latest") {
 
 
   xml_doc <- NULL

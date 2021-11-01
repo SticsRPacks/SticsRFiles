@@ -4,7 +4,7 @@
 \alias{get_var_info}
 \title{Find STICS output variable names and description}
 \usage{
-get_var_info(var = NULL, keyword = NULL, version = "last")
+get_var_info(var = NULL, keyword = NULL, version = "latest")
 }
 \arguments{
 \item{var}{Character vector containing a (part of the) name of a STICS output variable.}
@@ -13,7 +13,7 @@ get_var_info(var = NULL, keyword = NULL, version = "last")
 (search in the name and description field)}
 
 \item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
-to "last", a special code to get the last version.}
+to "latest", a special code to get the latest version.}
 }
 \description{
 Helper function that returns names and descriptions of STICS output variables

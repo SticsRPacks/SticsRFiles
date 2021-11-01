@@ -7,7 +7,7 @@
 gen_tec_doc(
   xml_doc = NULL,
   param_table = NULL,
-  stics_version = "last",
+  stics_version = "latest",
   dict = NULL,
   ...
 )
@@ -17,7 +17,7 @@ gen_tec_doc(
 
 \item{param_table}{a table (df, tibble) containing parameters to use}
 
-\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
+\item{stics_version}{the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.}
 
 \item{dict}{List of correspondence between given parameter names and Stics internal names.}
 

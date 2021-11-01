@@ -8,7 +8,7 @@ gen_sta_xml(
   param_table = NULL,
   sta_in_file = NULL,
   out_path = getwd(),
-  stics_version = "last"
+  stics_version = "latest"
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ gen_sta_xml(
 
 \item{out_path}{path to an optional folder where to write the output file(s)}
 
-\item{stics_version}{the stics version to use (optional, default to last). Only used if sta_in_file= NULL, see details.}
+\item{stics_version}{the stics version to use (optional, default to latest). Only used if sta_in_file= NULL, see details.}
 }
 \value{
 an invisible xmlDocument object or a list of

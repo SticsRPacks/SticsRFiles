@@ -7,7 +7,7 @@
 gen_sta_doc(
   xml_doc = NULL,
   param_table = NULL,
-  stics_version = "last",
+  stics_version = "latest",
   check_names = TRUE
 )
 }
@@ -16,7 +16,7 @@ gen_sta_doc(
 
 \item{param_table}{a table (df, tibble) containing parameters to use (optional)}
 
-\item{stics_version}{the stics files version to use (optional, default to last). Only used if xml_doc = NULL.}
+\item{stics_version}{the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.}
 
 \item{check_names}{logical for checking names of param_table columns or not}
 }

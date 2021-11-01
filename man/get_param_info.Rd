@@ -9,7 +9,7 @@ get_param_info(
   file_path = NULL,
   formalism = NULL,
   keyword = NULL,
-  version = "last"
+  version = "latest"
 )
 }
 \arguments{
@@ -23,8 +23,8 @@ get_param_info(
 in parameters data (i.e.: parameters names, formalisms description,
 file names or part to which parameters are attached to)}
 
-\item{version}{Optional, Stics version (default value, "last")
-Only the 2 last are referenced: V9.0, V9.1}
+\item{version}{Optional, Stics version (default value, "latest")
+Only the 2 latest are referenced: V9.0, V9.1}
 }
 \value{
 A data.frame containing parameters names,

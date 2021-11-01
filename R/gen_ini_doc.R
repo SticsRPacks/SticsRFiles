@@ -5,7 +5,7 @@
 #' @param crop_tag a crop identifier for crop parameters
 #' (for example like "crop" used for in a parameter suffix : param_crop1, param_crop2)
 #' @param params_desc a list decribing crop parameters and others
-#' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
+#' @param stics_version the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
 #'
 #' @return an invisible xmlDocument object or a list of
@@ -26,7 +26,7 @@ gen_ini_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         crop_tag = "Crop",
                         params_desc = NULL,
-                        stics_version ="last",
+                        stics_version ="latest",
                         check_names = TRUE) {
 
 

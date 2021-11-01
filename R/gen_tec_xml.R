@@ -3,7 +3,7 @@
 #' @param param_table a table (df, tibble) containing parameters to use (see details)
 #' @param tec_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
-#' @param stics_version the stics version to use (optional, default to last). Only used if tec_in_file= NULL, see details.
+#' @param stics_version the stics version to use (optional, default to latest). Only used if tec_in_file= NULL, see details.
 #' @param na_values value to use as missing value in param_table (optional, default : NA)
 # @param dict List of correspondance between given parameter names and internal names.
 #'
@@ -49,7 +49,7 @@ gen_tec_xml <- function(param_table = NULL,
                         tec_in_file = NULL,
                         #tec_names = NULL,
                         out_path = getwd(),
-                        stics_version = "last",
+                        stics_version = "latest",
                         na_values = NA) { #,
   #dict = NULL) {
 

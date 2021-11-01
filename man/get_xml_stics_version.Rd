@@ -2,9 +2,9 @@
 % Please edit documentation in R/get_xml_stics_version.R
 \name{get_xml_stics_version}
 \alias{get_xml_stics_version}
-\title{Get a version/or the last version string of available Stics files templates in the package}
+\title{Get a version/or the latest version string of available Stics files templates in the package}
 \usage{
-get_xml_stics_version(stics_version = "last", xml_doc = NULL)
+get_xml_stics_version(stics_version = "latest", xml_doc = NULL)
 }
 \arguments{
 \item{stics_version}{A version key of a Stics version (i.e. V9.1)}
@@ -15,15 +15,15 @@ get_xml_stics_version(stics_version = "last", xml_doc = NULL)
 a Stics version string
 }
 \description{
-Get a version/or the last version string of available Stics files templates in the package
+Get a version/or the latest version string of available Stics files templates in the package
 }
 \examples{
 \dontrun{
 # View available Stics files version
 SticsRFiles:::get_xml_stics_version()
 
-# View the last version
-SticsRFiles:::get_xml_stics_version("last")
+# View the latest version
+SticsRFiles:::get_xml_stics_version("latest")
 
 # Checking if a version exists
 SticsRFiles:::get_xml_stics_version("V9.2")

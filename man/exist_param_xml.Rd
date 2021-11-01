@@ -10,7 +10,7 @@ exist_param_xml(parameter, version = NULL)
 \item{parameter}{Parameter name or a vector of}
 
 \item{version}{Optional, Stics version.
-Only the 2 last are referenced: V9.0, V9.1 (default value)}
+Only the 2 latest are referenced: V9.0, V9.1 (default value)}
 }
 \value{
 A logical vector of existing parameters

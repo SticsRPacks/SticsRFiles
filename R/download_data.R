@@ -6,8 +6,8 @@
 #' @param dir The directory where to download the data
 #' @param example_dirs List of use case directories names (optional)
 #' @param version_name An optional version string
-#' within those given by get_stics_versions_compat()$versions_list, or "last"
-#' for getting the last version (default : NULL)
+#' within those given by get_stics_versions_compat()$versions_list, or "latest"
+#' for getting the latest version (default : NULL)
 #'
 #' @return The path to the folder where data have been downloaded
 #'
@@ -29,9 +29,9 @@
 #' }
 download_data= function(dir = tempdir(), example_dirs = NULL, version_name = NULL){
 
-  # setting version value from input for version == "last"
-  if (is.null(version_name) || version_name == "last"){
-    version_name <- get_stics_versions_compat()$last_version
+  # setting version value from input for version == "latest"
+  if (is.null(version_name) || version_name == "latest"){
+    version_name <- get_stics_versions_compat()$latest_version
   }
 
 

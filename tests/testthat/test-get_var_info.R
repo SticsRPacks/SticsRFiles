@@ -1,6 +1,6 @@
 context("searching variables information")
 
-# fixing version to last standard one
+# fixing version to latest standard one
 stics_version <- "V9.1"
 
 # creating an empty df

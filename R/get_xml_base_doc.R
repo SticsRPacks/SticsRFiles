@@ -14,7 +14,7 @@
 #' SticsRFiles:::get_xml_base_doc("sols")
 #'
 #' # Stics version can be provided, V9.1
-#' # corresponds to stics_version = "last"
+#' # corresponds to stics_version = "latest"
 #' # View available Stics files version
 #' SticsRFiles:::get_xml_stics_version()
 #' # Giving Stics version
@@ -25,7 +25,7 @@
 #' @keywords internal
 #'
 get_xml_base_doc <- function(xml_type = NULL,
-                             stics_version = "last") {
+                             stics_version = "latest") {
 
   # types list
   types <- c("sols","usms","ini","tec","sta")

@@ -4,7 +4,7 @@
 #' with this package.
 #'
 #' @return A named list with the STICS versions compatible with this package
-#' ($versions_list), and the last version in use ($last_version).
+#' ($versions_list), and the latest version in use ($latest_version).
 #'
 #' @examples
 #' \dontrun{
@@ -13,7 +13,7 @@
 #' #> $versions_list
 #' #> [1] "V8.5" "V9.0" "V9.1"
 #' #>
-#' #> $last_version
+#' #> $latest_version
 #' #> [1] "V9.1"
 #'}
 #'
@@ -29,11 +29,11 @@ get_stics_versions_compat <- function() {
   versions_names <- ver_info$versions
   num_versions <- as.numeric(gsub(pattern = "^[V]","",versions_names))
 
-  # Getting the last version string
-  last_version <- versions_names[ num_versions == max(num_versions) ]
+  # Getting the latest version string
+  latest_version <- versions_names[ num_versions == max(num_versions) ]
 
-  # List of versions strings ans last version string
-  versions <- list(versions_list = versions_names, last_version = last_version )
+  # List of versions strings ans latest version string
+  versions <- list(versions_list = versions_names, latest_version = latest_version )
 
   return(versions)
 }
@@ -59,10 +59,10 @@ get_stics_versions_compat <- function() {
 #' [1] "V8.5"
 #'
 #' }
-check_version_compat <- function(version_name = "last") {
+check_version_compat <- function(version_name = "latest") {
 
   versions <- get_stics_versions_compat()
-  if (version_name == "last") return(versions$last_version)
+  if (version_name == "latest") return(versions$latest_version)
 
   if ( version_name %in% versions$versions_list) return(version_name)
 

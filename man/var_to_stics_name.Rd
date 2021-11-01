@@ -4,7 +4,7 @@
 \alias{var_to_stics_name}
 \title{Variable name to stics variable name}
 \usage{
-var_to_stics_name(var, version = "last")
+var_to_stics_name(var, version = "latest")
 }
 \arguments{
 \item{var}{Vector of variable names}

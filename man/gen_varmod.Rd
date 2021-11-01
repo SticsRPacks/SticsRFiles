@@ -9,7 +9,7 @@ gen_varmod(
   var_names,
   append = FALSE,
   file_name = "var.mod",
-  version = "last",
+  version = "latest",
   force = FALSE
 )
 }

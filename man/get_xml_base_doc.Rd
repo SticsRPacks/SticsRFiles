@@ -4,7 +4,7 @@
 \alias{get_xml_base_doc}
 \title{Get an xmlDocument from a Stics xml file template}
 \usage{
-get_xml_base_doc(xml_type = NULL, stics_version = "last")
+get_xml_base_doc(xml_type = NULL, stics_version = "latest")
 }
 \arguments{
 \item{xml_type}{xml file type (see types returned when calling get_xml_base_doc())}
@@ -26,7 +26,7 @@ SticsRFiles:::get_xml_base_doc()
 SticsRFiles:::get_xml_base_doc("sols")
 
 # Stics version can be provided, V9.1
-# corresponds to stics_version = "last"
+# corresponds to stics_version = "latest"
 # View available Stics files version
 SticsRFiles:::get_xml_stics_version()
 # Giving Stics version

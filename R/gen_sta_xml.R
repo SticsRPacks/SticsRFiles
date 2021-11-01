@@ -3,7 +3,7 @@
 #' @param param_table a table (df, tibble) containing parameters to use (see details)
 #' @param sta_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
 #' @param out_path path to an optional folder where to write the output file(s)
-#' @param stics_version the stics version to use (optional, default to last). Only used if sta_in_file= NULL, see details.
+#' @param stics_version the stics version to use (optional, default to latest). Only used if sta_in_file= NULL, see details.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
@@ -38,7 +38,7 @@
 gen_sta_xml <- function(param_table = NULL,
                         sta_in_file = NULL,
                         out_path = getwd(),
-                        stics_version ="last") {
+                        stics_version ="latest") {
 
   xml_doc <- NULL
 

@@ -21,14 +21,14 @@
 #'
 #' @keywords internal
 add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
-                            stics_version = "last" ) {
+                            stics_version = "latest" ) {
 
 
   # Getting nodes types that may be added to xml_doc
   node_types <- get_xml_base_node()
 
 
-  # Getting the file tag correponding to the file type
+  # Getting the file tag corresponding to the file type
   # among usms, sols, tec
   files_tags <- c("usms", "sols", "tec")
   file_tag <- files_tags[c(is_stics_usms(xml_doc),

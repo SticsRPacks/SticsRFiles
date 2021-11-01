@@ -4,7 +4,7 @@
 \alias{get_xml_base_node}
 \title{Get an xmlDocument node (set of parameters) from a Stics xml node file template}
 \usage{
-get_xml_base_node(file_tag, form_name = NULL, stics_version = "last")
+get_xml_base_node(file_tag, form_name = NULL, stics_version = "latest")
 }
 \arguments{
 \item{file_tag}{file tag among "usms","sols", "tec"}

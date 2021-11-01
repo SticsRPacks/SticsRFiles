@@ -2,7 +2,7 @@
 #'
 #' @param parameter Parameter name or a vector of
 #' @param version Optional, Stics version.
-#' Only the 2 last are referenced: V9.0, V9.1 (default value)
+#' Only the 2 latest are referenced: V9.0, V9.1 (default value)
 #'
 #' @return A logical vector of existing parameters
 #'

@@ -4,7 +4,7 @@
 \alias{get_xml_doc_example}
 \title{Get an xmlDocument from a Stics xml file example}
 \usage{
-get_xml_doc_example(xml_name = NULL, stics_version = "last")
+get_xml_doc_example(xml_name = NULL, stics_version = "latest")
 }
 \arguments{
 \item{xml_name}{xml file name (see file names by calling get_xml_doc_example())}

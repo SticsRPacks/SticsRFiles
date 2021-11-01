@@ -4,7 +4,7 @@
 #' @param sols_nb number of soils to create (optional)
 #' @param sols_param a table (df, tibble) containing parameters to use (see details)
 #' @param sols_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
-#' @param stics_version the stics version to use (optional, default to last). Only used if sols_in_file= NULL, see details.
+#' @param stics_version the stics version to use (optional, default to latest). Only used if sols_in_file= NULL, see details.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
@@ -53,7 +53,7 @@ gen_sols_xml <- function(sols_out_file = NULL,
                          sols_nb = NULL,
                          sols_param = NULL,
                          sols_in_file = NULL,
-                         stics_version ="last") {
+                         stics_version ="latest") {
 
   xml_doc <- NULL
 

@@ -2,7 +2,7 @@
 #'
 #' @param xml_doc an xmlDocument object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
-#' @param stics_version the stics files version to use (optional, default to last). Only used if xml_doc = NULL.
+#' @param stics_version the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.
 #' @param dict List of correspondence between given parameter names and Stics internal names.
 #' @param ... Additional arguments (for example, coming from a call from gen_tec_xml
 #'  using a na_values argument)
@@ -25,7 +25,7 @@
 #'
 gen_tec_doc <- function(xml_doc = NULL,
                         param_table = NULL,
-                        stics_version = "last",
+                        stics_version = "latest",
                         dict = NULL,
                         ...) {
 

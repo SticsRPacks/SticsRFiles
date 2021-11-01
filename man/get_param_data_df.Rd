@@ -7,7 +7,7 @@
 get_param_data_df(
   parameter = NULL,
   file_path = NULL,
-  version = "last",
+  version = "latest",
   kind = "all",
   exact = FALSE
 )
@@ -17,8 +17,8 @@ get_param_data_df(
 
 \item{file_path}{Optional, xml file path or a vector of}
 
-\item{version}{Optional, Stics version (default value, "last")
-Only the 2 last are referenced: V9.0, V9.1}
+\item{version}{Optional, Stics version (default value, "latest")
+Only the 2 latest are referenced: V9.0, V9.1}
 
 \item{kind}{Kind of information to be retrieved for parameters
 among "parameter", "formalism" or "all" for both of them}

@@ -1,7 +1,7 @@
 #' Getting examples files path attached to a STICS version for a given file type
 #'
 #' @param file_type A file type string among files types ("csv", "obs", "sti", "txt", "xml")
-#' @param version_name An optional version string (default: last version returned by get_stics_versions_compat())
+#' @param version_name An optional version string (default: latest version returned by get_stics_versions_compat())
 #'
 #' @return A directory path for examples files for given file type and STICS version or
 #' NULL if missing file_type (types list is displayed)
@@ -21,7 +21,7 @@
 #' [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V8.5"
 #'
 #' }
-get_examples_path <- function(file_type, version_name = "last") {
+get_examples_path <- function(file_type, version_name = "latest") {
 
   # Getting files types list
   example_types <- get_examples_types()
@@ -55,7 +55,7 @@ get_examples_path <- function(file_type, version_name = "last") {
 }
 
 # TODO: evaluate if usefull ?
-list_examples_files <- function(file_type, version_name = "last", full_names = TRUE) {
+list_examples_files <- function(file_type, version_name = "latest", full_names = TRUE) {
 
   examples_path <- get_examples_path(file_type = file_type, version_name = version_name)
 

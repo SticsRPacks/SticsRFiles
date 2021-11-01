@@ -157,7 +157,7 @@
 
 * get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for Stics version 8.5
 
-* Manipulating_Stics_XML_files.Rmd: using XML file for the last model version for displaying files fragments as examples
+* Manipulating_Stics_XML_files.Rmd: using XML file for the latest model version for displaying files fragments as examples
 
 * get_stics_versions_compat, manage_stics_versions.R: added NA management in data
 

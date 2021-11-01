@@ -8,7 +8,7 @@ gen_tec_xml(
   param_table = NULL,
   tec_in_file = NULL,
   out_path = getwd(),
-  stics_version = "last",
+  stics_version = "latest",
   na_values = NA
 )
 }
@@ -19,7 +19,7 @@ gen_tec_xml(
 
 \item{out_path}{path to an optional folder where to write the output file(s)}
 
-\item{stics_version}{the stics version to use (optional, default to last). Only used if tec_in_file= NULL, see details.}
+\item{stics_version}{the stics version to use (optional, default to latest). Only used if tec_in_file= NULL, see details.}
 
 \item{na_values}{value to use as missing value in param_table (optional, default : NA)}
 }

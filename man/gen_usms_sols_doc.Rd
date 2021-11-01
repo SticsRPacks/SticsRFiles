@@ -9,7 +9,7 @@ gen_usms_sols_doc(
   xml_doc = NULL,
   nodes_nb = NULL,
   nodes_param = NULL,
-  stics_version = "last"
+  stics_version = "latest"
 )
 }
 \arguments{

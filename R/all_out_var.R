@@ -5,7 +5,7 @@
 #' from the STICS model.
 #'
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
-#' to "last", a special code to get the last version.
+#' to "latest", a special code to get the latest version.
 #'
 #' @seealso `get_var_info()`, `gen_varmod()`, and `get_stics_versions_compat()`
 #'
@@ -15,7 +15,7 @@
 #' }
 #' @keywords internal
 #'
-all_out_var <- function(version = "last"){
+all_out_var <- function(version = "latest"){
 
   # Checking and getting the right version
   version <- check_version_compat( version_name = version)
@@ -42,7 +42,7 @@ all_out_var <- function(version = "last"){
 #' @param keyword Search by keyword instead of variable name
 #' (search in the name and description field)
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
-#' to "last", a special code to get the last version.
+#' to "latest", a special code to get the latest version.
 #'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
@@ -62,7 +62,7 @@ all_out_var <- function(version = "last"){
 #'
 #' @export
 #'
-get_var_info <- function(var=NULL,keyword=NULL,version= "last"){
+get_var_info <- function(var=NULL,keyword=NULL,version= "latest"){
   all_vars <- all_out_var(version)
   if(!is.null(var)){
     var= var_to_col_names(var)
@@ -94,7 +94,7 @@ get_var_info <- function(var=NULL,keyword=NULL,version= "last"){
 #' \dontrun{
 #' is_stics_var(c("lai(n)",'masec(n)',"truc"))
 #' }
-is_stics_var= function(var,version= "last"){
+is_stics_var= function(var,version= "latest"){
   all_vars <- all_out_var(version)
   var_parsed= var_to_col_names(var)
   vars_names_parsed= var_to_col_names(all_vars$name)
