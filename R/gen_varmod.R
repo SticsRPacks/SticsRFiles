@@ -9,9 +9,9 @@
 #' STICS variable (default: FALSE).
 #'
 #' @details Variable names can be found using `get_var_info()`. They are
-#' checked before writting. If any variable names does not exist,
-#' the function will still write the variables that exist,
-#' `force= TRUE` may be used to write also variables that does not exist.
+#' checked before writing. If any variable name does not exist,
+#' it will not be written by default, but the function will still write the variables that exist.
+#' `force= TRUE` may however be used to write variables that do not exist.
 #'
 #' @return Nothing. Writes to a file.
 #'
