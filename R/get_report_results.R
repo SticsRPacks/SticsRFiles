@@ -11,7 +11,7 @@
 #'
 #' @details The data may be filtered using `usm_name` vector of usm names and
 #' and/or `var_list` vector of variables names. In the returned data.frame, variables
-#' names respect the same syntax as in the get_daily_results output.
+#' names respect the same syntax as in the get_sim output.
 #'
 #' @return A data.frame
 #'
