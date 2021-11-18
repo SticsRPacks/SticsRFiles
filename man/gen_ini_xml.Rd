@@ -33,6 +33,7 @@ Generate Stics ini xml file(s) from a template or an input file
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
+
 \code{param_table} is a \code{data.frame} with the following format:\tabular{lrlrrr}{
    Ini_name \tab nbplantes \tab stade0_Crop1 \tab lai0_Crop1 \tab masec0_Crop1 \tab QNplante0_Crop1 \cr
    USM_2017_T1_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
