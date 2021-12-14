@@ -34,7 +34,7 @@ Please see \code{get_stics_versions_compat()} for the full list of stics version
 argument \code{stics_version}.
 \code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Tec_name \tab julres_1 \tab coderes_1 \tab qres_1 \tab Crespc_1 \tab CsurNres_1 \cr
-   USM_2017_T1_CI_tec.xml \tab 999 \tab 1 \tab 9 \tab 42 \tab 90 \cr
+   USM_2017_T1_CI_tec.xml \tab NA \tab 1 \tab 9 \tab 42 \tab 90 \cr
    BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml \tab 110 \tab 1 \tab 9 \tab 42 \tab 90 \cr
    BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml \tab 73 \tab 1 \tab 9 \tab 42 \tab 90 \cr
    AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \tab 9 \tab 42 \tab 90 \cr
