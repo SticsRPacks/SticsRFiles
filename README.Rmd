@@ -98,12 +98,20 @@ Normaly, all the package dependencies will be installed for CRAN packages.
 
 * A description of functions for generating text input files from XML one of usms parameters is available [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html).
 
+## Getting help
+
+If you have any question or suggestion or if you want to report a bug, please do it via the GitHub [issues](https://github.com/SticsRPacks/SticsRFiles/issues).
+
+Thanks for that, this would greatly help us to improve this package.
+
+## Citation
+
+If you have used this package for a study that led to a publication or
+report, please cite us. You can either use the citation tool from Github if you used the last version, or use `citation("SticsRFiles")` from R otherwise.
+
 ## Code of conduct
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 The package is under intensive development, so you can fill an issue or request us a feature [here](https://github.com/SticsRPacks/SticsRFiles/issues) at any time. 
 
-## Authors and acknowledgments
-
-The SticsRFiles package is developed by Patrice Lecharpentier, Rémi Vezy and the [SticsRFiles Team](https://github.com/orgs/SticsRPacks/teams/sticsrfiles).

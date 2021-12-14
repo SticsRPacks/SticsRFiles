@@ -32,6 +32,7 @@ Generate Stics usms xml file from a template or an input file
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
+
 \code{usms_param} is a \code{data.frame} with the following format:\tabular{lrrlll}{
    usm_name \tab datedebut \tab datefin \tab finit \tab nomsol \tab fstation \cr
    USM_2017_T1_CI \tab 199 \tab 263 \tab USM_2017_T1_ini.xml \tab USM_T1 \tab climatex_sta.xml \cr

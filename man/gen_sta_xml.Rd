@@ -29,6 +29,7 @@ Generate Stics sta xml file(s) from a template or an input file
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
+
 \code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Sta_name \tab zr \tab NH3ref \tab latitude \tab patm \tab aclim \cr
    climatex_sta.xml \tab 2.5 \tab 0 \tab 49 \tab 1000 \tab 20 \cr

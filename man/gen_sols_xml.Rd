@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sols_xml.R
 \name{gen_sols_xml}
 \alias{gen_sols_xml}
-\title{Generate Stics a sols xml file from a template or an input file}
+\title{Generate Stics sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
   sols_out_file = NULL,
@@ -27,11 +27,12 @@ gen_sols_xml(
 an invisible xmlDocument object
 }
 \description{
-Generate Stics a sols xml file from a template or an input file
+Generate Stics sols xml file from a template or an input file
 }
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
+
 \code{sols_param} is a \code{data.frame} with the following format:\tabular{lrrrrrrr}{
    Soil_name \tab argi \tab norg \tab calc \tab pH \tab albedo \tab q0 \tab epc_1 \cr
    USM_T1 \tab 20.35000 \tab 0.100 \tab 0.52 \tab 8.23 \tab 0.22 \tab 9.630 \tab 30 \cr

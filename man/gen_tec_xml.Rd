@@ -32,6 +32,7 @@ Generate Stics tec xml file(s) from a template or an input file
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
+
 \code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Tec_name \tab julres_1 \tab coderes_1 \tab qres_1 \tab Crespc_1 \tab CsurNres_1 \cr
    USM_2017_T1_CI_tec.xml \tab NA \tab 1 \tab 9 \tab 42 \tab 90 \cr

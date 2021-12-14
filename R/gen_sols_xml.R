@@ -1,4 +1,4 @@
-#' @title Generate Stics a sols xml file from a template or an input file
+#' @title Generate Stics sols xml file from a template or an input file
 #'
 #' @param sols_out_file file path of the output sols xml file (optional)
 #' @param sols_nb number of soils to create (optional)
@@ -8,6 +8,7 @@
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
+#'
 #'  `sols_param` is a `data.frame` with the following format:
 #'
 #'  |Soil_name |     argi|  norg|  calc|   pH| albedo|     q0| epc_1|

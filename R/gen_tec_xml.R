@@ -9,6 +9,7 @@
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
+#'
 #'  `param_table` is a `data.frame` with the following format:
 #'
 #' |Tec_name                                         | julres_1| coderes_1| qres_1| Crespc_1| CsurNres_1|
