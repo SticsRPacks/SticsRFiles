@@ -33,7 +33,7 @@ command line), or with an R JavaStics interface provided by the
 [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
 
 If you want to be notified when a new release of this package is made,
-you can tick the Releases box in the “Watch / Unwatch =\> Custom” menu
+you can tick the Releases box in the “Watch / Unwatch =&gt; Custom” menu
 at the top right of [this
 page](https://github.com/SticsRPacks/SticsRFiles).
 
@@ -45,16 +45,16 @@ page](https://github.com/SticsRPacks/SticsRFiles).
 
 ## Installation
 
------
+------------------------------------------------------------------------
 
 ***Warning:*** *If during the installation process, packages updates are
 suggested.*
 
-  - First, abort the installation.
-  - Second, update the installed packages, except the `XML` package.
-  - Finally, install the SticsRFiles package.
+-   First, abort the installation.
+-   Second, update the installed packages, except the `XML` package.
+-   Finally, install the SticsRFiles package.
 
------
+------------------------------------------------------------------------
 
 ### Recommended installation: `SticsRPacks`
 
@@ -68,9 +68,7 @@ package:
 devtools::install_github("SticsRPacks/SticsRPacks")
 ```
 
-  - With `remotes`
-
-<!-- end list -->
+-   With `remotes`
 
 ``` r
 # install.packages("remotes")
@@ -82,17 +80,13 @@ version.
 
 ### Or, install directly
 
-  - With `devtools`
-
-<!-- end list -->
+-   With `devtools`
 
 ``` r
 devtools::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
-  - With `remotes`
-
-<!-- end list -->
+-   With `remotes`
 
 ``` r
 # install.packages("remotes")
@@ -106,24 +100,39 @@ packages.
 
 ### Files manipulations
 
-  - A description of how to use the functions for manipulating XML input
+-   A description of how to use the functions for manipulating XML input
     files is detailed
     [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html)
 
-  - A description of how to use the functions for manipulating text
+-   A description of how to use the functions for manipulating text
     input files is available
     [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files).
 
 ### Files generation
 
-  - A description of usefull functions for generating XML input files
+-   A description of usefull functions for generating XML input files
     from usms parameters data stored in Excel files sheets or CSV files
     is available
     [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html).
 
-  - A description of functions for generating text input files from XML
+-   A description of functions for generating text input files from XML
     one of usms parameters is available
     [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html).
+
+## Getting help
+
+If you have any question or suggestion or if you want to report a bug,
+please do it via the GitHub
+[issues](https://github.com/SticsRPacks/SticsRFiles/issues).
+
+Thanks for that, this would greatly help us to improve this package.
+
+## Citation
+
+If you have used this package for a study that led to a publication or
+report, please cite us. You can either use the citation tool from Github
+if you used the last version, or use `citation("SticsRFiles")` from R
+otherwise.
 
 ## Code of conduct
 
@@ -134,9 +143,3 @@ to abide by its terms.
 The package is under intensive development, so you can fill an issue or
 request us a feature
 [here](https://github.com/SticsRPacks/SticsRFiles/issues) at any time.
-
-## Authors and acknowledgments
-
-The SticsRFiles package is developed by Patrice Lecharpentier, Rémi Vezy
-and the [SticsRFiles
-Team](https://github.com/orgs/SticsRPacks/teams/sticsrfiles).

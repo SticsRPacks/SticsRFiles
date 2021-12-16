@@ -2,11 +2,11 @@
 #'
 #' @param file_path Excel or csv file path
 #' @param sheet_name Name of an Excel sheet (useless for csv files)
-#' @param num_na Replacement value for numerical NA values
-#' @param char_na Replacement value for character NA values
+#' @param num_na Replacement value for numerical NA values (default: NA)
+#' @param char_na Replacement value for character NA values (default: "")
 #'
 #' @details After data are loaded, numerical and string NA values are
-#' replaced repectively with num_na or str_na
+#' replaced respectively with num_na or char_na
 #'
 #' @return A tibble of parameters
 #' @export
@@ -23,7 +23,7 @@
 #'
 #'
 read_params_table <- function(file_path, sheet_name = NULL,
-                              num_na = 999,
+                              num_na = "NA",
                               char_na = "") {
 
   # files extension list
@@ -93,7 +93,7 @@ rep_character_na <- function(in_df, replacement = "") {
 }
 
 
-rep_numeric_na <- function(in_df, replacement = 999) {
+rep_numeric_na <- function(in_df, replacement = as.numeric(NA)) {
 
   replace_na(in_df, replacement = replacement)
 
