@@ -127,7 +127,20 @@ get_versions_info <- function(version_name = NULL, location = "install") {
   return()
 }
 
-
+#' Getting version number from the version string
+#'
+#' @param version string (i.e. "VX.Y", or "vX.Y")
+#'
+#' @return version number
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' SticsRFiles:::get_version_num()
+#' }
+get_version_num <- function(version) {
+  as.numeric(gsub(pattern = "^[V | v]","",version))
+}
 
 
 #' Getting the csv file name storing versions information
