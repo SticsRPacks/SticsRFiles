@@ -136,7 +136,7 @@
                         <param format="real" max="1.0" min="0.05" nom="h2ograinmin">-999</param>
                     </choix>
                     <choix code="2" nom="maximum">
-                        <param format="real" max="1.0" min="0.05" nom="h2ograinmax"></param>
+                        <param format="real" max="1.0" min="0.05" nom="h2ograinmax">-999</param>
                     </choix>
                 </option>
             </choix>
