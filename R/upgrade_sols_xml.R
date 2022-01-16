@@ -1,0 +1,102 @@
+#' Upgrading a sols.xml file to a newer version
+#'
+#' @param file Path of a sols.xml file
+#' @param out_dir Output directory path of the generated file
+#' @param stics_version Name of the Stics version (VX.Y format)
+#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param check_version Perform version consistency with in stics_version input
+#' with the file version and finally checking if the upgrade is possible
+#' allowed to the target_version. If TRUE, param_gen_file is mandatory.
+#' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
+#' @param overwrite logical (optional),
+#' TRUE for overwriting file if it exists, FALSE otherwise
+#'
+#' @export
+#'
+#' @details See SticsRFiles::get_stics_versions_compat() for listing versions
+#'
+#' @examples
+#' upgrade_sols_xml(file = "/path/to/sols.xml",
+#'                  out_dir = "/path/to/an/output/directory")
+#'
+upgrade_sols_xml <- function(file,
+                             out_dir,
+                             stics_version = "V9.2",
+                             target_version = "V10.0",
+                             check_version = TRUE,
+                             param_gen_file = NULL,
+                             overwrite = FALSE) {
+
+
+  # hecking output directory
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
+
+  # checking version
+  if (check_version) {
+
+    if(is.null(param_gen_file)) stop("param_gen_file must be provided! ")
+
+    min_version <- get_version_num("V9.1")
+
+    # extracting or detecting the Stics version corresponding to the xml file
+    # based on param_gen.xml file content
+    file_version <- check_xml_file_version(file,
+                                           stics_version,
+                                           param_gen_file = param_gen_file)
+
+    if (!file_version) {
+      stop("The input version ",stics_version,
+           " does not match file version ",
+           attr(file_version,"version")," \n",file )
+    }
+
+    # Compatibility checks between version and update to target_version
+    ver_num <- get_version_num(stics_version)
+    if (ver_num < min_version) stop("Files from the version ", stics_version,
+                                    " cannot be converted to the version ", target_version)
+
+
+    # for checking only once when multiple files are treated !
+    check_version <- FALSE
+  }
+
+
+  # Loading the old doc
+  old_doc <- xmldocument(file = file)
+
+  # Setting file stics version
+  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+
+  # Checking if layer @nom are up to date (old @nom = horizon)
+  tableau_noms <-  unlist(getNodeS(old_doc, "//tableau/@nom"))
+
+  if (any(grep(pattern = "horizon",tableau_noms))) {
+    new_names <- unlist(lapply(tableau_noms, function(x) gsub(pattern = "horizon(.*)",x, replacement = "layer\\1")))
+    setAttrValues(old_doc, "//tableau", "nom", new_names)
+  }
+
+  # Nodes to add
+  new_node <- xmlParseString('<param format="real" max="1.0" min="0.0" nom="finert">0.65000</param>',
+                             addFinalizer = TRUE)
+  #new_node <- xmlParseString('<param nom="finert">0.65000</param>',
+  #                           addFinalizer = TRUE)
+
+  prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
+
+  # added for compatibility with old misspelled parameters
+  if (is.null(prev_sibling))
+    prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
+
+  for (n in seq_along(prev_sibling)) {
+    addSibling(prev_sibling[[n]], xmlClone(new_node))
+  }
+
+  # writing sols.xml file
+  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite)
+
+  free(old_doc@content)
+  invisible(gc(verbose = FALSE))
+
+}

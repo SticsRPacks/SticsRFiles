@@ -130,16 +130,46 @@ get_versions_info <- function(version_name = NULL, location = "install") {
 #' Getting version number from the version string
 #'
 #' @param version string (i.e. "VX.Y", or "vX.Y")
-#'
-#' @return version number
+#' @param numeric logical, TRUE for numerical output format,
+#' FALSE for character output format
+#' @return version number (numeric or character)
 #' @keywords internal
 #'
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_version_num()
 #' }
-get_version_num <- function(version) {
-  as.numeric(gsub(pattern = "^[V | v]","",version))
+get_version_num <- function(version, numeric = TRUE) {
+
+  if (is.numeric(version) && numeric) return(version)
+
+  char_version <- gsub(pattern = "^[V | v]","",version)
+
+  if (!numeric) return(char_version)
+
+  as.numeric(char_version)
+}
+
+
+#' Getting version string from the version number
+#'
+#' @param version numeric (i.e. X.Y)
+#'
+#' @return version string
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' SticsRFiles:::get_version_string()
+#' }
+get_version_string <- function(version) {
+
+  pattern <- "^[V | v]"
+
+  if (is.character(version) & grepl(pattern = pattern, x = version))
+    return(toupper(version))
+
+  paste0("V",as.character(version))
 }
 
 

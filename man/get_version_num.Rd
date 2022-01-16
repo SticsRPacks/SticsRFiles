@@ -4,13 +4,16 @@
 \alias{get_version_num}
 \title{Getting version number from the version string}
 \usage{
-get_version_num(version)
+get_version_num(version, numeric = TRUE)
 }
 \arguments{
 \item{version}{string (i.e. "VX.Y", or "vX.Y")}
+
+\item{numeric}{logical, TRUE for numerical output format,
+FALSE for character output format}
 }
 \value{
-version number
+version number (numeric or character)
 }
 \description{
 Getting version number from the version string
