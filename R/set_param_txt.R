@@ -242,7 +242,7 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
   # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
   params= readLines(filepath)
-  param_= paste0(param,"$")
+  param_= paste0("^",param,"$")
   switch(type,
          set_usm_txt = {
            ref= get_usm_txt(filepath)
@@ -262,8 +262,8 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
          },
          set_plant_txt= {
            ref_index= grep(param_,params)+1
-           if(!is.null(variety) & length(ref_index>1)){
-             if (length(ref_index<=variety)) {
+           if(!is.null(variety) & length(ref_index)>1){
+             if (length(ref_index)<=variety) {
                ref_index= ref_index[variety]
              } else {
                stop("Variety number set in the tec file is superior to the number of varieties defined in the plant file.")
