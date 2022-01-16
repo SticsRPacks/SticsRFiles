@@ -18,10 +18,11 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
+#' \dontrun{
 #' upgrade_sta_xml(file = "/path/to/_sta.xml",
 #'                 param_gen_file = "/path/to/param_gen.xml"
 #'                 out_dir = "/path/to/directory")
-#'
+#' }
 upgrade_sta_xml <- function(file,
                             param_gen_file,
                             out_dir,

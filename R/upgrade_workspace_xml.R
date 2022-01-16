@@ -15,10 +15,11 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
+#' \dontrun{
 #' upgrade_workspace_xml(workspace = "/path/to/javastics/workspace",
 #'                       javastics = "/path/to/javastics/directory",
 #'                       out_dir = "/path/to/an/output/directory")
-#'
+#' }
 upgrade_workspace_xml <- function(workspace,
                                   javastics,
                                   out_dir,

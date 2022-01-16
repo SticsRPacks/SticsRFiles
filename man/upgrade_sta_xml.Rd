@@ -43,8 +43,9 @@ Upgrading _sta.xml file(s) to a newer version
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
+\dontrun{
 upgrade_sta_xml(file = "/path/to/_sta.xml",
                 param_gen_file = "/path/to/param_gen.xml"
                 out_dir = "/path/to/directory")
-
+}
 }

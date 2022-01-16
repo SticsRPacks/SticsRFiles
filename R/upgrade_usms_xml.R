@@ -18,10 +18,11 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
+#' \dontrun{
 #' upgrade_usms_xml(file = "/path/to/usms.xml",
 #'                  out_dir = "/path/to/directory",
 #'                  obs_dir = "/path/to/obs/directory")
-#'
+#' }
 upgrade_usms_xml <- function(file,
                              out_dir,
                              obs_dir = NULL,

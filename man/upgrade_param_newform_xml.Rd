@@ -11,8 +11,7 @@ upgrade_param_newform_xml(
   target_version = "V10.0",
   check_version = TRUE,
   param_gen_file = NULL,
-  overwrite = FALSE,
-  codemineral = FALSE
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -26,8 +25,9 @@ upgrade_param_newform_xml(
 
 \item{check_version}{Perform version consistency with in stics_version input
 with the file version and finally checking if the upgrade is possible
-allowed to the target_version. If TRUE, param_gen_file is mandatory.
-#' @param param_gen_file Path of the param_gen.xml file corresponding
+allowed to the target_version. If TRUE, param_gen_file is mandatory.}
+
+\item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
 
 \item{overwrite}{logical (optional),
@@ -40,7 +40,8 @@ Upgrading a param_newform.xml file to a newer version
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
+\dontrun{
 upgrade_param_newform_xml(file = "/path/to/param_newform.xml",
                           out_dir = "/path/to/directory")
-
+}
 }

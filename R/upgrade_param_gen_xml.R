@@ -15,9 +15,10 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
+#' \dontrun{
 #' upgrade_param_gen_xml(file = "/path/to/param_gen.xml",
 #'                       out_dir = "/path/to/directory")
-#'
+#' }
 upgrade_param_gen_xml <- function(file,
                                   out_dir,
                                   stics_version = "V9.2",

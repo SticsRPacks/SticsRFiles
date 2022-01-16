@@ -40,7 +40,8 @@ Upgrading a sols.xml file to a newer version
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
+\dontrun{
 upgrade_sols_xml(file = "/path/to/sols.xml",
                  out_dir = "/path/to/an/output/directory")
-
+}
 }

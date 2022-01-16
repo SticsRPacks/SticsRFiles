@@ -20,10 +20,11 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
+#' \dontrun{
 #' upgrade_tec_xml(file = "/path/to/_tec.xml",
 #'                 param_newform_file = "/path/to/param_newform.xml"
 #'                 out_dir = "/path/to/directory")
-#'
+#' }
 upgrade_tec_xml <- function(file,
                             param_newform_file,
                             out_dir,
