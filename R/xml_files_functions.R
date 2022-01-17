@@ -119,9 +119,12 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
   }
 
   # Global detection of the version based for the moment on the param_gen.xml file content
-  if (xml_root_name!= "fichierpar" && is.null(param_gen_file))
-    stop("The Stics version corresponding to the XML file was not detected.\n",
-         "The param_gen.xml path must be provided as second input!")
+  if (xml_root_name!= "fichierpar" && is.null(param_gen_file)) {
+    # stop("The Stics version corresponding to the XML file was not detected.\n",
+    #      "The param_gen.xml path must be provided as second input!")
+    warning("The Stics version corresponding to the XML file was not detected.\n")
+    return()
+  }
 
   # Getting specific parameters attached to versions from param_gen file
   if (xml_root_name == "fichierpar") {
@@ -160,9 +163,14 @@ check_xml_file_version <- function(xml_file_or_doc, version, param_gen_file = NU
   #xml_version <- get_xml_stics_version(xml_file_or_doc, param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(xml_file_or_doc, param_gen_file = param_gen_file)
 
-  if ( ! version %in% xml_version) return(FALSE)
-
   r <- TRUE
+
+  if(is.null(xml_version)) {
+    return(FALSE)
+  }
+
+  if ( ! version %in% xml_version) r <- FALSE
+
   attr(r,"version") <- xml_version
   return(r)
 
@@ -261,7 +269,7 @@ get_xml_doc <- function(xml_file_or_doc) {
 write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 
   if (file.exists(file) & !overwrite) {
-    warning("File already exists, consider setting overwrite to TRUE")
+    warning(file, ": \nalready exists, consider setting overwrite to TRUE")
     invisible()
   }
 

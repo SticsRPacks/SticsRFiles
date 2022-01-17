@@ -29,16 +29,16 @@ upgrade_param_newform_xml <- function(file,
                                       param_gen_file = NULL,
                                       overwrite = FALSE#,
                                       #codemineral = FALSE
-                                      ) {
+) {
 
+  # TODO: eliminate when option will be reactivated later.
+  codemineral <- FALSE
 
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
 
   if (check_version) {
-
-    if(is.null(param_gen_file)) stop("param_gen_file must be provided! ")
 
     min_version <- get_version_num("V9.1")
 
@@ -48,6 +48,9 @@ upgrade_param_newform_xml <- function(file,
                                            stics_version,
                                            param_gen_file = param_gen_file)
 
+    if(!file_version && is.null(param_gen_file))
+      stop("param_gen_file must be provided! ")
+
     if (!file_version) {
       stop("The input version ",stics_version,
            " does not match file version ",
@@ -56,8 +59,9 @@ upgrade_param_newform_xml <- function(file,
 
     # Compatibility checks between version and update to target_version
     ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version) stop("Files from the version ", stics_version,
-                                    " cannot be converted to the version ", target_version)
+    if (ver_num < min_version)
+      stop("Files from the version ", stics_version,
+           " cannot be converted to the version ", target_version)
   }
 
 

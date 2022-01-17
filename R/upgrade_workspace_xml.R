@@ -35,8 +35,10 @@ upgrade_workspace_xml <- function(workspace,
 
   # For testing if files are upgradable
   check_version <- FALSE
+  verbose <- TRUE
   args <- list(...)
   if ("check_version" %in% names(args)) check_version <- args$check_version
+  if ("verbose" %in% names(args)) verbose <- args$verbose
 
   min_version <- get_version_num("V9.1")
 
@@ -78,6 +80,13 @@ upgrade_workspace_xml <- function(workspace,
     stop(javastics, " : the directory does nor exist or is not a JavaStics one !")
 
 
+  if(verbose) {
+    print(paste("Upgrading files from version", stics_version, "to",
+                target_version))
+    print(paste("From: ", workspace))
+    print(paste("To: ", out_dir))
+  }
+
   # Searching for general parameter files (workspace ou JavaStics)
   # in the workspace to be converted, or in JavaStics config directory
   # Getting param_gen.xml path, already done at the beginning !
@@ -97,6 +106,9 @@ upgrade_workspace_xml <- function(workspace,
   if(is.null(par_new)) stop("param_newform.xml: file not found in\n",
                             workspace, " or ", javastics, "directory! ")
 
+  if(verbose)
+    print("param_gen.xml")
+
   # Converting param_newform.xml
   upgrade_param_newform_xml(file = par_new,
                             out_dir = file.path(out_dir),
@@ -105,6 +117,8 @@ upgrade_workspace_xml <- function(workspace,
                             check_version = check_version,
                             param_gen_file = par_gen,
                             overwrite = overwrite)
+  if(verbose)
+    print("param_new_form.xml")
 
 
   # Converting usms.xml file
@@ -119,7 +133,8 @@ upgrade_workspace_xml <- function(workspace,
                    param_gen_file = par_gen,
                    overwrite = overwrite)
 
-
+  if(verbose)
+    print("usms.xml")
 
   # Converting sols.xml file
   sols <- file.path(workspace, "sols.xml")
@@ -132,7 +147,8 @@ upgrade_workspace_xml <- function(workspace,
                    param_gen_file = par_gen,
                    overwrite = overwrite)
 
-
+  if(verbose)
+    print("sols.xml")
 
   # Converting station files (*_sta.xml)
   sta_files <- get_in_files(in_dir_or_files = workspace, kind = "sta")
@@ -146,6 +162,8 @@ upgrade_workspace_xml <- function(workspace,
                   overwrite = overwrite,
                   check_dir = FALSE)
 
+  if(verbose)
+    print("*_sta.xml")
 
   # Converting initialisation files (*_ini.xml)
   ini_files <- get_in_files(in_dir_or_files = workspace, kind = "ini")
@@ -159,6 +177,8 @@ upgrade_workspace_xml <- function(workspace,
                   overwrite = overwrite,
                   check_dir = FALSE)
 
+  if(verbose)
+    print("*_ini.xml")
 
   # Converting crop management files (*_tec.xml)
   tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
@@ -173,10 +193,15 @@ upgrade_workspace_xml <- function(workspace,
                   overwrite = overwrite,
                   check_dir = FALSE)
 
+  if(verbose)
+    print("*_tec.xml")
 
   # Copying *.mod files (for model outputs)
   stat <- file.copy(from = list.files(path = workspace, full.names = TRUE, pattern = "*.mod"),
                     to = out_dir, overwrite = overwrite)
+
+  if(verbose)
+    print("Copying *.mod files.")
 
   # TODO: see how to manage variables names checks in *.mod files
   # Probably, the new JavaStics path may be added as a new function argument
@@ -191,6 +216,8 @@ upgrade_workspace_xml <- function(workspace,
   stat <- file.copy(from = list.files(path = workspace, full.names = TRUE, pattern = "*.obs"),
                     to = out_dir, overwrite = overwrite)
 
+  if(verbose)
+    print("Copying *.obs files.")
 
   # Copying weather data files
   # Note: for the moment, all files with a numerical extension
@@ -199,6 +226,11 @@ upgrade_workspace_xml <- function(workspace,
   # in the usms.xml file.
   stat <- file.copy(from = list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]"),
                     to = out_dir, overwrite = overwrite)
+
+  if(verbose)
+    print("Copying weather files.")
+
+
 
 }
 

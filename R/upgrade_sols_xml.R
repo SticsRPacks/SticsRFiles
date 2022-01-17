@@ -37,8 +37,6 @@ upgrade_sols_xml <- function(file,
   # checking version
   if (check_version) {
 
-    if(is.null(param_gen_file)) stop("param_gen_file must be provided! ")
-
     min_version <- get_version_num("V9.1")
 
     # extracting or detecting the Stics version corresponding to the xml file
@@ -46,6 +44,9 @@ upgrade_sols_xml <- function(file,
     file_version <- check_xml_file_version(file,
                                            stics_version,
                                            param_gen_file = param_gen_file)
+
+    if(!file_version && is.null(param_gen_file))
+      stop("param_gen_file must be provided! ")
 
     if (!file_version) {
       stop("The input version ",stics_version,
@@ -55,8 +56,9 @@ upgrade_sols_xml <- function(file,
 
     # Compatibility checks between version and update to target_version
     ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version) stop("Files from the version ", stics_version,
-                                    " cannot be converted to the version ", target_version)
+    if (ver_num < min_version)
+      stop("Files from the version ", stics_version,
+           " cannot be converted to the version ", target_version)
 
 
     # for checking only once when multiple files are treated !
