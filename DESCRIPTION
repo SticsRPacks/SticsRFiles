@@ -154,6 +154,7 @@ Collate:
     'upgrade_ini_xml.R'
     'upgrade_param_gen_xml.R'
     'upgrade_param_newform_xml.R'
+    'upgrade_plt_xml.R'
     'upgrade_sols_xml.R'
     'upgrade_sta_xml.R'
     'upgrade_tec_xml.R'
