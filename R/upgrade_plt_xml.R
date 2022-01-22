@@ -3,6 +3,8 @@
 #' @param file Path of an initialisation (*_plt.xml) file or a vector of
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
+#' @param param_newform_file Path of the param_newform.xml file corresponding
+#' to the file version
 #' @param out_dir Output directory path of the generated files
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
@@ -20,10 +22,13 @@
 #' @examples
 #' \dontrun{
 #' upgrade_plt_xml(file = "/path/to/_plt.xml",
+#'                 param_gen_file = "/path/to/param_gen.xml",
+#'                 param_newform_file = "/path/to/param_newform.xml"
 #'                 out_dir = "/path/to/directory")
 #' }
 upgrade_plt_xml <- function(file,
                             param_gen_file,
+                            param_newform_file,
                             out_dir,
                             stics_version = "V9.2",
                             target_version = "V10.0",
@@ -79,6 +84,8 @@ upgrade_plt_xml <- function(file,
   if (length(file) > 1 ) {
     lapply(file, function(x) upgrade_plt_xml(file = x,
                                              out_dir = out_dir,
+                                             param_gen_file = param_gen_file,
+                                             param_newform_file = param_newform_file,
                                              stics_version = stics_version,
                                              target_version = target_version,
                                              check_version = check_version,
@@ -96,6 +103,9 @@ upgrade_plt_xml <- function(file,
 
   # Setting file stics version
   SticsRFiles:::set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+
+
+
 
   #--------------------------------------------------------------------------------------------------------
   # Getting patameters to set to varietal ones
@@ -149,7 +159,7 @@ upgrade_plt_xml <- function(file,
 
   # ------------------------
   # TODO: add codedisrac
-  new_nodes <- xmlParseString(
+  new_node <- xmlParseString(
     '<option choix="2" nom="Standard root distribution" nomParam="codedisrac">
     <choix code="1" nom="yes">
     <param format="real" max="0.01" min="0.00001" nom="kdisrac">0.00158</param>
@@ -159,15 +169,9 @@ upgrade_plt_xml <- function(file,
     </option>',
     addFinalizer = TRUE)
   # before sibling <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
+  prev_sibling <- SticsRFiles:::getNodeS(old_doc, '//option[@nomParam="codazorac"]')[[1]]
+  addSibling(prev_sibling, new_node, after = FALSE)
   # ----------------------------------------------------------
-
-  # Changing oui to yes, non to no
-  nodes_to_change <- SticsRFiles:::getNodeS(old_doc, path="//choix[@nom='oui']")
-  if (!is.null(nodes_to_change))
-    setAttrValues(old_doc, path="//choix[@nom='oui']", attr_name="nom", values_list = "yes")
-  nodes_to_change <- SticsRFiles:::getNodeS(old_doc, path="//choix[@nom='non']")
-  if (!is.null(nodes_to_change))
-    setAttrValues(old_doc, path="//choix[@nom='non']", attr_name="nom", values_list = "no")
 
 
   # Changing varietal Structure
@@ -269,14 +273,13 @@ upgrade_plt_xml <- function(file,
 </formalismev>',
     addFinalizer = TRUE)
 
-  # Get variete nodes number
 
-  # adding var nodes under variete nodes
+  # adding var nodes under each "variete" node
   var_par_nodes <- SticsRFiles:::getNodeS(old_doc, path="//variete")
   lapply(var_par_nodes, function(x) addChildren(x, kids = xmlChildren(xmlClone(var_nodes))))
 
-  # TODO: check syntax error !!!!!!!!!!
-  # Set values of all kepts parameters to new nodes
+  #
+  # Set values of all kept parameter values (removed nodes or moved) to new nodes
   # param_values_varietal
   SticsRFiles:::set_param_value(old_doc, param_names_varietal, param_values_varietal)
   SticsRFiles:::set_param_value(old_doc, param_names_keep, param_values_keep)
@@ -284,8 +287,9 @@ upgrade_plt_xml <- function(file,
 
 
   # ----------------------------------------------------------------------------------------
-  # NEW NODES
-  # codemortalracine:  =>
+  # Adding new nodes
+  #
+  # codemortalracine
   # after <option choix="1" nom="driving temperature" nomParam="codetemprac">
   new_node  <- xmlParseString(
     '<option choix="2" nom="calculation of the root death at cutting date for grasslands" nomParam="codemortalracine">
@@ -300,7 +304,7 @@ upgrade_plt_xml <- function(file,
   addSibling(prev_sibling, xmlClone(new_node))
 
 
-  # code_WangEngel : =>
+  # code_WangEngel
   # after <choix code="1" nom="daily temperatures">
   new_node  <- xmlParseString(
     '<option choix="2" nom=" Wang et Engel (1998)" nomParam="code_WangEngel">
@@ -392,24 +396,52 @@ upgrade_plt_xml <- function(file,
     </option>',
     addFinalizer = TRUE)
 
-  prev_sibling <- SticsRFiles:::getNodeS(old_doc, "//option[@nomParam='codtrophrac']")[[1]]
-
   par_node <- SticsRFiles:::getNodeS(old_doc,"//choix[@nom='true density']")[[1]]
 
-  #addSibling(prec_sibling, after = FALSE, kids = unlist(xmlChildren(new_nodes)))
   addChildren(par_node, kids = unlist(xmlChildren(new_nodes)))
+
+
+  # -----------------------------------------------------------
+  # Update param values
+  #
+  # from param_gen.xml
+  # khaut, rayon
+  param_gen_values <- SticsRFiles:::get_param_xml(xml_file = param_gen_file,
+                                                  param_name = c("rayon", "khaut"))[[1]]
+  SticsRFiles:::set_param_value(old_doc, param_name = c("rayon", "khaut"), param_value = param_gen_values)
+
+
+  # from param_newform.xml
+  #
+  # coefracoupe(1), coefracoupe(2) -> coefracoupe
+  param_newform_values <- SticsRFiles:::get_param_xml(xml_file = param_newform_file,
+                                                  param_name = c("coefracoupe(1)", "coefracoupe(2)"))[[1]]
+  if (length(unique(unlist(param_newform_values))) > 1) stop("Multiple values of coefracoupe in param_gen.xml file")
+  SticsRFiles:::set_param_value(old_doc, param_name = "coefracoupe", param_value = param_newform_values[[1]])
+
+
+  # Updating other values than nodes values (i.e. nodes attributes values)
+  # TODO
+  # Changing param min / max attributes values
+  # hautbase => 0.1
+
+
+  # Changing options' "choix",  "nom" attribute values
+  #
+  # oui to yes, non to no
+  nodes_to_change <- SticsRFiles:::getNodeS(old_doc, path="//choix[@nom='oui']")
+  if (!is.null(nodes_to_change))
+    setAttrValues(old_doc, path="//choix[@nom='oui']", attr_name="nom", values_list = "yes")
+  nodes_to_change <- SticsRFiles:::getNodeS(old_doc, path="//choix[@nom='non']")
+  if (!is.null(nodes_to_change))
+    setAttrValues(old_doc, path="//choix[@nom='non']", attr_name="nom", values_list = "no")
+
 
 
 
   # Writing to file _plt.xml
   out_plt <- file.path(out_dir, basename(file))
   SticsRFiles:::write_xml_file(old_doc, out_plt, overwrite)
-
-
-  # set_param_xml(out_plt,
-  #               param_name = rm_names,
-  #               old_values,
-  #               overwrite = TRUE)
 
 
 
