@@ -89,7 +89,6 @@ upgrade_plt_xml <- function(file,
                                              stics_version = stics_version,
                                              target_version = target_version,
                                              check_version = check_version,
-                                             param_gen_file = param_gen_file,
                                              overwrite = overwrite,
                                              check_dir = check_dir)
     )
@@ -141,7 +140,8 @@ upgrade_plt_xml <- function(file,
     '<option choix="2" nom="effect of decreasing photoperiod on biomass allocation" nomParam="codephot_part">
     <choix code="1" nom="yes"/>
     <choix code="2" nom="no"/>
-    </option>')
+    </option>',
+    addFinalizer = TRUE)
 
   parent_node <- SticsRFiles:::getNodeS(old_doc, '//option[@nomParam="codephot"]/choix[@code="1"]')[[1]]
   addChildren(parent_node, xmlClone(new_node))
@@ -154,11 +154,22 @@ upgrade_plt_xml <- function(file,
   addSibling(prev_sibling, node_to_move)
 
   # ---------------------------------------------------
-  # TODO: see irmax to move and irazomax to add !!!!!!
+  # moving param irmax, and adding irazomax param
   # --------------------------------------------------------
+  # <param format="real" max="1.0" min="0.2" nom="irmax">0.53000</param>
+  node_to_move <- SticsRFiles:::getNodeS(old_doc, path="//param[@nom='irmax']")[[1]]
+  par_node <- SticsRFiles:::getNodeS(old_doc, path="//option[@nomParam='codeir']/choix[@code='1']")[[1]]
+
+  addChildren(par_node, node_to_move)
+
+  # <param format="real" max="1.0" min="0.01" nom="irazomax">0.566</param>
+  new_node <- xmlParseString('<param format="real" max="1.0" min="0.01" nom="irazomax">0.566</param>',
+                             addFinalizer = TRUE)
+  prev_sibling <- SticsRFiles:::getNodeS(old_doc, path="//param[@nom='cgrainv0']")[[1]]
+  addSibling(prev_sibling, new_node)
 
   # ------------------------
-  # TODO: add codedisrac
+  # add codedisrac option
   new_node <- xmlParseString(
     '<option choix="2" nom="Standard root distribution" nomParam="codedisrac">
     <choix code="1" nom="yes">
@@ -415,7 +426,7 @@ upgrade_plt_xml <- function(file,
   #
   # coefracoupe(1), coefracoupe(2) -> coefracoupe
   param_newform_values <- SticsRFiles:::get_param_xml(xml_file = param_newform_file,
-                                                  param_name = c("coefracoupe(1)", "coefracoupe(2)"))[[1]]
+                                                      param_name = c("coefracoupe(1)", "coefracoupe(2)"))[[1]]
   if (length(unique(unlist(param_newform_values))) > 1) stop("Multiple values of coefracoupe in param_gen.xml file")
   SticsRFiles:::set_param_value(old_doc, param_name = "coefracoupe", param_value = param_newform_values[[1]])
 
@@ -447,10 +458,6 @@ upgrade_plt_xml <- function(file,
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))
-
-
-
-  return()
 
 
 

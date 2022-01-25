@@ -270,10 +270,11 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 
   if (file.exists(file) & !overwrite) {
     warning(file, ": \nalready exists, consider setting overwrite to TRUE")
-    invisible()
+    return(invisible(FALSE))
   }
 
   saveXmlDoc(xml_doc, file)
+  return(TRUE)
 }
 
 # TODO: to be evaluated later, usefull ?

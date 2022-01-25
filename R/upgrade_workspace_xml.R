@@ -6,6 +6,8 @@
 #' @param out_dir Output directory of the generated files
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to  (VX.Y format)
+#' @param plant logical (optional), TRUE for upgrading plant files if a "plant"
+#' sub-directory of workspace exists, FALSE otherwise
 #' @param overwrite logical (optional),
 #' TRUE for overwriting files if they exist, FALSE otherwise
 #' @param ... Additional input arguments
@@ -25,6 +27,7 @@ upgrade_workspace_xml <- function(workspace,
                                   out_dir,
                                   stics_version = "V9.2",
                                   target_version = "V10.0",
+                                  plant = FALSE,
                                   overwrite = FALSE,
                                   ...) {
 
@@ -70,7 +73,7 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the workspace dir to be converted
   if (!dir.exists(workspace) || !file.exists(file.path(workspace, "usms.xml")))
-    stop(workspace, ": the directory does not exist or is not a javaStics workspace !")
+    stop(workspace, ": the directory does not exist or is not a JavaStics workspace !")
 
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
@@ -78,6 +81,13 @@ upgrade_workspace_xml <- function(workspace,
   # Testing the JavaStics dir
   if (!dir.exists(javastics) || !file.exists(file.path(javastics, "JavaStics.exe")))
     stop(javastics, " : the directory does nor exist or is not a JavaStics one !")
+
+  # Testing if a plant directory exists in the workspace
+  plant_path <- NULL
+  if(plant) {
+    tmp_path <- file.path(workspace, "plant")
+    if(dir.exists(tmp_path)) plant_path <- tmp_path
+  }
 
 
   if(verbose) {
@@ -87,12 +97,6 @@ upgrade_workspace_xml <- function(workspace,
     print(paste("To: ", out_dir))
   }
 
-  # Searching for general parameter files (workspace ou JavaStics)
-  # in the workspace to be converted, or in JavaStics config directory
-  # Getting param_gen.xml path, already done at the beginning !
-  # par_gen <- get_param_gen_file(type = "param_gen.xml", workspace, javastics )
-  # if(is.null(par_gen)) stop("param_gen.xml: file not found in\n",
-  #                           workspace, " or ", javastics, "directory! ")
   # Converting param_gen.xml
   upgrade_param_gen_xml(file = par_gen,
                         out_dir = out_dir,
@@ -231,6 +235,32 @@ upgrade_workspace_xml <- function(workspace,
     print("Copying weather files.")
 
 
+
+  # Upgrading plant files
+  # if a plant sub directory is detected in workspace
+  plant_path <- file.path(workspace, "plant")
+  if (!dir.exists(plant_path)) return()
+
+  plant_files <- get_in_files(in_dir_or_files = plant_path, kind = "plt")
+
+  if(length(plant_files) == 0) return()
+
+  if(verbose)
+    print("*_plt.xml")
+
+  # For creating a sub-directory in workspace for upgraded plant files
+  plant_out_dir <- file.path(out_dir,"plant")
+  if (!dir.exists(plant_out_dir)) dir.create(plant_out_dir)
+
+  upgrade_plt_xml(file = plant_files,
+                  out_dir = plant_out_dir,
+                  param_gen_file = par_gen,
+                  param_newform_file = par_new,
+                  stics_version = stics_version,
+                  target_version = target_version,
+                  check_version = check_version,
+                  overwrite = overwrite,
+                  check_dir = FALSE)
 
 }
 

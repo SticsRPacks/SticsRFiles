@@ -11,6 +11,7 @@ upgrade_workspace_xml(
   out_dir,
   stics_version = "V9.2",
   target_version = "V10.0",
+  plant = FALSE,
   overwrite = FALSE,
   ...
 )
@@ -25,6 +26,9 @@ upgrade_workspace_xml(
 \item{stics_version}{Name of the Stics version (VX.Y format)}
 
 \item{target_version}{Name of the Stics version to upgrade files to  (VX.Y format)}
+
+\item{plant}{logical (optional), TRUE for upgrading plant files if a "plant"
+sub-directory of workspace exists, FALSE otherwise}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting files if they exist, FALSE otherwise}
