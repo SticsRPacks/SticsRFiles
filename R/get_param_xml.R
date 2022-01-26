@@ -2,7 +2,9 @@
 #'
 #' @description Extracting parameter values for a list of xml files and parameters
 #'
-#' @param xml_file An xml file, or a vector/list of
+#' @param file Vector of the xml file paths from which parameters values must be extracted
+#' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
+#'   longer supported, use `file` instead.
 #' @param param Vector of parameter names. Optional, if not provided, the
 #' function returns information for all parameters.
 #' @param param_name `r lifecycle::badge("deprecated")` `param_name` is no
@@ -19,20 +21,19 @@
 #' @examples
 #' \dontrun{
 #' # Soil file
-#' xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
+#' file = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 #'
 #' # For all soils
-#' get_param_xml(xml_path)
-#' get_param_xml(xml_path, "argi")
-#' get_param_xml(xml_path, c("argi", "norg"))
+#' get_param_xml(file)
+#' get_param_xml(file, "argi")
+#' get_param_xml(file, c("argi", "norg"))
 #'
 #' # For one soil selection
-#' get_param_xml(xml_path, "argi",
-#' select = "sol", select_value = "solcanne")
+#' get_param_xml(file, "argi", select = "sol", select_value = "solcanne")
 #'
 #' # For soils and parameters vectors
 #' # scalar parameters per soil
-#' get_param_xml(xml_path, c("argi", "norg"),
+#' get_param_xml(file, c("argi", "norg"),
 #' select = "sol", select_value = c("solcanne", "solbanane"))
 #'
 #' $sols.xml
@@ -43,7 +44,7 @@
 #' [1] 0.27 0.20
 #'
 #' # vector parameters per soil (5 values, one per soil layer)
-#' get_param_xml(xml_path, c("epc", "HCCF"),
+#' get_param_xml(file, c("epc", "HCCF"),
 #' select = "sol", select_value = c("solcanne", "solbanane"))
 #'
 #' $sols.xml
@@ -54,29 +55,37 @@
 #' [1] 46.8 46.4 48.5 50.1 50.1 41.0 41.0 41.0 42.0 42.0
 #'
 #' # Crop management file
-#' xml_path = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+#' file = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
 #'
-#' get_param_xml(xml_path)
+#' get_param_xml(file)
 #'
 #' # Getting parameters for irrigation (date and quantity)
-#' get_param_xml(xml_path, c("julapI_or_sum_upvt", "amount"))
+#' get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 #'
 #'
 #' # Getting all parameters for a given formalism: "irrigation"
-#' get_param_xml(xml_path, select = "formalisme", select_value = "irrigation")
+#' get_param_xml(file, select = "formalisme", select_value = "irrigation")
 #'
 #' }
 #' @export
-get_param_xml <- function(xml_file,
+get_param_xml <- function(file,
                           param=NULL,
                           select = NULL,
                           select_value = NULL,
+                          xml_file = lifecycle::deprecated(),
                           param_name = lifecycle::deprecated(),
                           value = lifecycle::deprecated(),
                           ...) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
-  if (lifecycle::is_present(param_name)) {
+  # Managing parameter names changes between versions:
+  if (lifecycle::is_present(xml_file)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_xml(xml_file)", "get_param_xml(file)")
+  } else {
+    xml_file <- file # to remove when we update inside the function
+  }
+
+    if (lifecycle::is_present(param_name)) {
     lifecycle::deprecate_warn("0.5.0", "get_param_xml(param_name)", "get_param_xml(param)")
   } else {
     param_name <- param # to remove when we update inside the function
