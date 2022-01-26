@@ -38,7 +38,7 @@
 #' select = "sol", value = "solcanne", overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", "argi",
-#' select = "sol", value = "solcanne")
+#' select = "sol", select_value = "solcanne")
 #'
 #'
 #' # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
@@ -46,14 +46,14 @@
 #' select = "sol", value = "solcanne", overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", c("argi", "norg"),
-#' select = "sol", value = "solcanne")
+#' select = "sol", select_value = "solcanne")
 #'
 #'
 #' # For vector parameters per soil (5 values, one per soil layer)
 #' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"),
 #' param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
 #'
-#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"))
+#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"))
 #'
 #'
 #' # Crop management file

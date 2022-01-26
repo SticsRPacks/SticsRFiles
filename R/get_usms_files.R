@@ -112,10 +112,10 @@ get_usms_files <- function(workspace_path,
   # Loop over usms names
   for(i in 1:usms_nb){
     usm_name <- usms_list[i]
-    usm_files <- unlist(get_param_xml(xml_file = usms_xml_path,
-                                      param_name = file_type,
+    usm_files <- unlist(get_param_xml(file = usms_xml_path,
+                                      param = file_type,
                                       select = "usm",
-                                      value = usm_name), use.names = F)
+                                      select_value = usm_name), use.names = F)
 
     # For selecting plant files regarding plants number
     plants_sel <- 1:get_plants_nb(usm_file_path = usms_xml_path,usms_list = usm_name)
@@ -126,10 +126,10 @@ get_usms_files <- function(workspace_path,
 
 
     # filtering tec files selection
-    tec_files <- unlist(get_param_xml(xml_file = usms_xml_path,
-                                      param_name = "ftec",
+    tec_files <- unlist(get_param_xml(file = usms_xml_path,
+                                      param = "ftec",
                                       select = "usm",
-                                      value = usm_name)[[1]], use.names = FALSE)
+                                      select_value = usm_name)[[1]], use.names = FALSE)
 
     tec_files_to_rm <- tec_files[tec_files != "null"][setdiff(1:2, plants_sel)]
     # removing useless tec files
@@ -148,10 +148,10 @@ get_usms_files <- function(workspace_path,
     plt_files_path <- NULL
 
     if(check_plt){
-      plt_files <- unlist(get_param_xml(xml_file = usms_xml_path,
-                                        param_name = "fplt",
+      plt_files <- unlist(get_param_xml(file = usms_xml_path,
+                                        param = "fplt",
                                         select = "usm",
-                                        value = usm_name)[[1]], use.names = FALSE)
+                                        select_value = usm_name)[[1]], use.names = FALSE)
 
 
       plt_files <- plt_files[plt_files != "null"][plants_sel]
