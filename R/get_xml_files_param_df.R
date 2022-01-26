@@ -122,7 +122,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   }
 
   # for one name
-  # param_values <- get_param_xml(file_path, param_names = param_names, select_value = select, value = name)[[1]]
+  # param_values <- get_param_xml(file_path, param_names = param_names, select_value = select, select_value = name)[[1]]
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
   # Checking if only one parameter, param_values == numerical vector
