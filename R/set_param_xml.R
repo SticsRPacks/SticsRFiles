@@ -9,10 +9,12 @@
 #' @param out_path an xml file path (optional, default: xml_file)
 #' @param select node name or attribute name to use for selection
 #' (optional, default to no selection)
-#' @param value value used for select (optional)
+#' @param select_value Vector of values used for select (see examples). Optional, should be provided only if select is provided.
 #' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
-#' @param param_value old_param `r lifecycle::badge("deprecated")` `param_value` is no
+#' @param param_value `r lifecycle::badge("deprecated")` `param_value` is no
 #'   longer supported, use values instead.
+#' @param value `r lifecycle::badge("deprecated")` `value` is no
+#'   longer supported, use select_value instead.
 #' @param... Pass further arguments to `set_param_value()`.
 #'
 #' @return A logical value TRUE for operation success, FALSE otherwise
@@ -37,25 +39,25 @@
 #'
 #' # Setting a specific value to "argi" for "solcanne" soil
 #' set_param_xml("sols.xml", "argi",56,
-#' select = "sol", value = "solcanne", overwrite = TRUE)
+#' select = "sol", select_value = "solcanne", overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", "argi",
-#' select = "sol", value = "solcanne")
+#' select = "sol", select_value = "solcanne")
 #'
 #'
 #' # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
 #' set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-#' select = "sol", value = "solcanne", overwrite = TRUE)
+#' select = "sol", select_value = "solcanne", overwrite = TRUE)
 #'
 #' get_param_xml("sols.xml", c("argi", "norg"),
-#' select = "sol", value = "solcanne")
+#' select = "sol", select_value = "solcanne")
 #'
 #'
 #' # For vector parameters per soil (5 values, one per soil layer)
-#' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"),
+#' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"),
 #' param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
 #'
-#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"))
+#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"))
 #'
 #'
 #' # Crop management file
@@ -75,9 +77,10 @@ set_param_xml <- function(xml_file,
                           values,
                           out_path = NULL,
                           select = NULL,
-                          value = NULL,
+                          select_value = NULL,
                           overwrite = FALSE,
                           param_value = lifecycle::deprecated(),
+                          value = lifecycle::deprecated(),
                           ...){
 
   # ... argument for passing : ids, show_xpath to get_param_value
@@ -85,6 +88,11 @@ set_param_xml <- function(xml_file,
     lifecycle::deprecate_warn("0.5.0", "set_param_xml(param_value)", "set_param_xml(values)")
   } else {
     param_value <- values # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(value)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_xml(value)", "set_param_xml(select_value)")
+  } else {
+    value <- select_value # to remove when we update inside the function
   }
 
 
