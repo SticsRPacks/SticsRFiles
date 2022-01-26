@@ -16,19 +16,19 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model. 
+The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model.
 
 This article presents the design of the package and its basic features, *i.e.* the main functions to deal with the XML files. For a complete introduction to SticsRPacks (managing files, running simulations, plotting, optimization...), see the tutorial from the [SticsRPacks](https://sticsrpacks.github.io/SticsRPacks/) package.
 
 ## Concepts
 
-### Input files 
+### Input files
 
 #### Text files
 
 The executable of the STICS model reads text files with standard names and format to import the inputs describing a single unit of simulation (USM), *e.g.* one crop for one year.
 
-Here's a typical list of the input files for the STICS executable (without the optional files): 
+Here's a typical list of the input files for the STICS executable (without the optional files):
 
 ```bash
 workspace
@@ -45,25 +45,25 @@ workspace
 └── 📜var.mod                  # Variables to write in the outputs
 ```
 
-Because these files only describe one USM at a time and can be tedious to explore and parameterize, we usually don't interact with them directly, but through another program: JavaSTICS. 
+Because these files only describe one USM at a time and can be tedious to explore and parameterize, we usually don't interact with them directly, but through another program: JavaSTICS.
 
 
 #### XML files
 
-JavaSTICS is a graphical user interface used to easily create input text files for the STICS executable according to the user's choices, and for managing STICS simulations. JavaSTICS saves the parameter values and options choices in XML files. 
+JavaSTICS is a graphical user interface used to easily create input text files for the STICS executable according to the user's choices, and for managing STICS simulations. JavaSTICS saves the parameter values and options choices in XML files.
 
 The XML files store more information than the text files: not only do they store the parameter values but also their description, maximum and minimum boundary values, all existing formalisms, the different choices allowed, and more importantly they allow for the management of several USMs in the same folder (called workspace), and can help make successive USMs.
 
-It is important to note that only JavaSTICS interact with the XML files, **not** the STICS executable. The STICS input text files are then automatically created by JavaSTICS when running a simulation, just before calling the STICS executable. 
+It is important to note that only JavaSTICS interact with the XML files, **not** the STICS executable. The STICS input text files are then automatically created by JavaSTICS when running a simulation, just before calling the STICS executable.
 
 ### SticsRFiles
 
-SticsRFiles is an R package that uses JavaSTICS from the command line to manage the XML and the text files. We can generate XML or text files, get and set parameter values, import simulations outputs, and manage observation files. 
+SticsRFiles is an R package that uses JavaSTICS from the command line to manage the XML and the text files. We can generate XML or text files, get and set parameter values, import simulations outputs, and manage observation files.
 
 Advanced features also include:
 
-* The generation of XML input files from templates included in the package, and   
-* The production of XML input files using a mailing process from XML templates and Excel sheets containing multiple simulations contexts 
+* The generation of XML input files from templates included in the package, and
+* The production of XML input files using a mailing process from XML templates and Excel sheets containing multiple simulations contexts
 
 ## Short example
 
@@ -71,9 +71,9 @@ Here's a simple example usage of SticsRFiles using an example workspace.
 
 ### Example data
 
-All the example data used in this article are available from the [`data` repository](https://github.com/SticsRPacks/data) in the `SticsRPacks` organization.  
+All the example data used in this article are available from the [`data` repository](https://github.com/SticsRPacks/data) in the `SticsRPacks` organization.
 
-SticsRFiles provides a function to download it from the command line. Please execute the following command in R: 
+SticsRFiles provides a function to download it from the command line. Please execute the following command in R:
 
 ```{r include=FALSE}
 library(SticsRFiles)
@@ -85,7 +85,7 @@ library(SticsRFiles)
 example_data = SticsRFiles::download_data(example_dirs = "study_case_1", "V9.0")
 ```
 
-The example data is downloaded by default in a temporary folder. 
+The example data is downloaded by default in a temporary folder.
 
 For the sake of readability, we'll declare the workspace path and the path to the plant file here. But remember the functions can be applied to any XML files or workspaces.
 
@@ -137,7 +137,7 @@ dlaimax
 But this function is way more powerfull than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
 
 ```{r}
-values = get_param_xml(plant_file, select = "formalisme", value = "radiation interception")
+values = get_param_xml(plant_file, select = "formalisme", select_value = "radiation interception")
 unlist(values) # For pretty-printing
 ```
 
@@ -184,4 +184,3 @@ sim = get_sim(workspace)
 ```
 
 But as there aren't any simulations yet in the workspace, the function will return an error. To make a simulation, head to [SticsOnR](https://sticsrpacks.github.io/SticsOnR/). Then to plot both observations and simulations, you can use [CroPlotR](https://sticsrpacks.github.io/CroPlotR/).
-

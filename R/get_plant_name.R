@@ -66,7 +66,7 @@ get_plant_name= function(workspace,
   nb_plant= get_plants_nb(usms_path)[usms]
 
   # Getting plant files (fplt) for a set of usm
-  plant_files <- get_param_xml(xml_file = usms_path, param = "fplt", select = "usm", value = usms)
+  plant_files <- get_param_xml(xml_file = usms_path, param = "fplt", select = "usm", select_value = usms)
   plant_files <- plant_files[[usms_filename]]$fplt
 
   # Getting plant list:

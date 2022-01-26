@@ -6,9 +6,12 @@
 #' @param param Vector of parameter names. Optional, if not provided, the
 #' function returns information for all parameters.
 #' @param param_name `r lifecycle::badge("deprecated")` `param_name` is no
-#'   longer supported, use param instead.
+#'   longer supported, use `param` instead.
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
-#' @param value value used for select (optional)
+#' @param select_value Vector of values used for select (see examples). Optional,
+#'  should be provided only if select is provided.
+#' @param value `r lifecycle::badge("deprecated")` `value` is no
+#'   longer supported, use `select_value` instead.
 #' @param ... Pass further arguments to `get_param_value()`
 #'
 #' @return A list of parameter values for each xml_file (a list of list)
@@ -25,12 +28,12 @@
 #'
 #' # For one soil selection
 #' get_param_xml(xml_path, "argi",
-#' select = "sol", value = "solcanne")
+#' select = "sol", select_value = "solcanne")
 #'
 #' # For soils and parameters vectors
 #' # scalar parameters per soil
 #' get_param_xml(xml_path, c("argi", "norg"),
-#' select = "sol", value = c("solcanne", "solbanane"))
+#' select = "sol", select_value = c("solcanne", "solbanane"))
 #'
 #' $sols.xml
 #' $sols.xml$argi
@@ -41,7 +44,7 @@
 #'
 #' # vector parameters per soil (5 values, one per soil layer)
 #' get_param_xml(xml_path, c("epc", "HCCF"),
-#' select = "sol", value = c("solcanne", "solbanane"))
+#' select = "sol", select_value = c("solcanne", "solbanane"))
 #'
 #' $sols.xml
 #' $sols.xml$epc
@@ -60,15 +63,16 @@
 #'
 #'
 #' # Getting all parameters for a given formalism: "irrigation"
-#' get_param_xml(xml_path, select = "formalisme", value = "irrigation")
+#' get_param_xml(xml_path, select = "formalisme", select_value = "irrigation")
 #'
 #' }
 #' @export
 get_param_xml <- function(xml_file,
                           param=NULL,
                           select = NULL,
-                          value = NULL,
+                          select_value = NULL,
                           param_name = lifecycle::deprecated(),
+                          value = lifecycle::deprecated(),
                           ...) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
@@ -76,6 +80,12 @@ get_param_xml <- function(xml_file,
     lifecycle::deprecate_warn("0.5.0", "get_param_xml(param_name)", "get_param_xml(param)")
   } else {
     param_name <- param # to remove when we update inside the function
+  }
+
+  if (lifecycle::is_present(value)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_xml(value)", "get_param_xml(select_value)")
+  } else {
+    value <- select_value # to remove when we update inside the function
   }
 
   xml_docs <- lapply(xml_file,xmldocument)

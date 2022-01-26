@@ -14,12 +14,12 @@ tec_xml <- file.path(out_dir, tec_param[4,]$Tec_name)
 
 
 # For residues
-xml_res_vec <- unlist(get_param_xml(xml_file = tec_xml, select = "formalisme", value = "supply of organic residus")[[1]])
+xml_res_vec <- unlist(get_param_xml(xml_file = tec_xml, select = "formalisme", select_value = "supply of organic residus")[[1]])
 
 xl_res_vec <- select(tec_param[4,], starts_with(names(xml_res_vec)))
 
 # For irrigation
-xml_irr_values <- get_param_xml(xml_file = tec_xml, select = "formalisme", value = "irrigation")[[1]]
+xml_irr_values <- get_param_xml(xml_file = tec_xml, select = "formalisme", select_value = "irrigation")[[1]]
 # renaming param according to table
 names(xml_irr_values)[7] <- "julapI"
 names(xml_irr_values)[8] <- "doseI"
@@ -28,7 +28,7 @@ xl_irr_values <- select(tec_param[4,], starts_with(sort(names(xml_irr_values))))
 xml_irr_values <- unlist(xml_irr_values[sort(names(xml_irr_values))], use.names = FALSE)
 
 # For N supply
-xml_fert_values <- get_param_xml(xml_file = tec_xml, select = "formalisme", value = "fertilisation")[[1]]
+xml_fert_values <- get_param_xml(xml_file = tec_xml, select = "formalisme", select_value = "fertilisation")[[1]]
 # renaming param according to table (TODO: use param dict)
 names(xml_fert_values)[6] <- "julapN"
 names(xml_fert_values)[7] <- "doseN"

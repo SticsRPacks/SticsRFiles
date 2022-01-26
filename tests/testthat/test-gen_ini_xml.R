@@ -14,12 +14,12 @@ ini_xml <- file.path(out_dir, ini_param[1,]$Ini_name)
 
 
 # For plante 1
-xml_plt1_values <- unlist(get_param_xml(xml_file = ini_xml,select = "plante", value = 1)[[1]])
+xml_plt1_values <- unlist(get_param_xml(xml_file = ini_xml, select = "plante", select_value = 1)[[1]])
 
 xl_plt1_values <- select(ini_param[1,], ends_with("Crop1"))
 
 # For plant 2
-xml_plt2_values <- unlist(get_param_xml(xml_file = ini_xml,select = "plante", value = 2)[[1]])
+xml_plt2_values <- unlist(get_param_xml(xml_file = ini_xml, select = "plante", select_value = 2)[[1]])
 
 xl_plt2_values <- select(ini_param[1,], ends_with("Crop2"))
 

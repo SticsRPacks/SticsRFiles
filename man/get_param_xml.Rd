@@ -8,8 +8,9 @@ get_param_xml(
   xml_file,
   param = NULL,
   select = NULL,
-  value = NULL,
+  select_value = NULL,
   param_name = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
   ...
 )
 }
@@ -21,10 +22,14 @@ function returns information for all parameters.}
 
 \item{select}{node name or attribute name to use for selection (optional, default to no selection)}
 
-\item{value}{value used for select (optional)}
+\item{select_value}{Vector of values used for select (see examples). Optional,
+should be provided only if select is provided.}
 
 \item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
-longer supported, use param instead.}
+longer supported, use \code{param} instead.}
+
+\item{value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{value} is no
+longer supported, use \code{select_value} instead.}
 
 \item{...}{Pass further arguments to \code{get_param_value()}}
 }
@@ -46,12 +51,12 @@ get_param_xml(xml_path, c("argi", "norg"))
 
 # For one soil selection
 get_param_xml(xml_path, "argi",
-select = "sol", value = "solcanne")
+select = "sol", select_value = "solcanne")
 
 # For soils and parameters vectors
 # scalar parameters per soil
 get_param_xml(xml_path, c("argi", "norg"),
-select = "sol", value = c("solcanne", "solbanane"))
+select = "sol", select_value = c("solcanne", "solbanane"))
 
 $sols.xml
 $sols.xml$argi
@@ -62,7 +67,7 @@ $sols.xml$norg
 
 # vector parameters per soil (5 values, one per soil layer)
 get_param_xml(xml_path, c("epc", "HCCF"),
-select = "sol", value = c("solcanne", "solbanane"))
+select = "sol", select_value = c("solcanne", "solbanane"))
 
 $sols.xml
 $sols.xml$epc
@@ -81,7 +86,7 @@ get_param_xml(xml_path, c("julapI_or_sum_upvt", "amount"))
 
 
 # Getting all parameters for a given formalism: "irrigation"
-get_param_xml(xml_path, select = "formalisme", value = "irrigation")
+get_param_xml(xml_path, select = "formalisme", select_value = "irrigation")
 
 }
 }
