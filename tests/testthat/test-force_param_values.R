@@ -2,7 +2,7 @@ library(SticsRFiles)
 
 
 example_txt_dir <- get_examples_path(file_type="txt")
-res <- force_param_values(example_txt_dir, param_values = setNames(object=c(220,330), c("stlevamf", "stamflax")))
+res <- force_param_values(example_txt_dir, values = setNames(object=c(220,330), c("stlevamf", "stamflax")))
 df_paramsti <- read.table(file=file.path(example_txt_dir,"param.sti"),stringsAsFactors = FALSE)
 
 test_that("standard case", {
@@ -14,7 +14,7 @@ test_that("standard case", {
 
 
 
-res <- force_param_values(example_txt_dir, param_values=NA)
+res <- force_param_values(example_txt_dir, values=NA)
 
 test_that("param_values == NA", {
   expect_equal(get_param_txt(dirpath = example_txt_dir, param = "codeoptim"),c(usm.codeoptim="0"))
@@ -24,7 +24,7 @@ test_that("param_values == NA", {
 
 
 
-res <- force_param_values(example_txt_dir, param_values = setNames(object=c(220,NA), c("stlevamf", "stamflax")))
+res <- force_param_values(example_txt_dir, values = setNames(object=c(220,NA), c("stlevamf", "stamflax")))
 df_paramsti <- read.table(file=file.path(example_txt_dir,"param.sti"),stringsAsFactors = FALSE)
 
 test_that("One NA in param_values", {

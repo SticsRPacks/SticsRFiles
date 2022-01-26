@@ -1,7 +1,9 @@
 #' @title Generates files to force parameters values in Stics simulations
 #' @description Generates a param.sti file and sets code optim in new_travail.usm to force parameters values in Stics simulations (this function is typically called before `SticsOnR::run_stics()`)
-#' @param workspace Stics workspace path
-#' @param param_values named vector of parameter values to force. See Details for more information.
+#' @param workspace Path of the workspace containing the Stics (txt) input files.
+#' @param values named vector of parameter values to force. See Details for more information.
+#' @param param_values old_param `r lifecycle::badge("deprecated")` `old_param` is no
+#'   longer supported, use new_param instead.
 #'
 #' @details This function operates on Stics text input files. Do not use it before calling `gen_usms_xml2txt()`, otherwise param.sti and new_travail.usm files will be overwritten.
 #'
@@ -21,7 +23,14 @@
 #' @export
 #'
 force_param_values <- function(workspace,
-                               param_values) {
+                               values,
+                               param_values = lifecycle::deprecated()) {
+
+  if (lifecycle::is_present(param_values)) {
+    lifecycle::deprecate_warn("0.5.0", "force_param_values(param_values)", "force_param_values(values)")
+  } else {
+    param_values <- values # to remove when we update inside the function
+  }
 
   if (is.null(param_values) || all(is.na(param_values))) {
     # remove param.sti in case of previous run using it ...
