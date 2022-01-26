@@ -37,6 +37,10 @@ upgrade_plt_xml <- function(file,
                             ...) {
 
 
+  # 2022-01-25
+  # TODO
+  # see TODO haubase
+
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -435,6 +439,7 @@ upgrade_plt_xml <- function(file,
   # TODO
   # Changing param min / max attributes values
   # hautbase => 0.1
+  # <param format="real" max="2.0" min="0.0" nom="hautbase">0</param>
 
 
   # Changing options' "choix",  "nom" attribute values
