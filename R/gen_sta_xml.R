@@ -27,7 +27,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' xl_path <- download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+#' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sta_param_df <- read_params_table(file_path = xl_path, sheet_name = "Station")
 #' gen_sta_xml(out_path = "/path/to/dest/dir", param_table = sta_param_df)
 #'

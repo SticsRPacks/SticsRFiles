@@ -13,10 +13,10 @@
 #'
 #' @examples
 #'
-#' usm_xl_file <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx",
+#' usm_xl_file <-  download_usm_xl(file = "inputs_stics_example.xlsx",
 #' verbose = FALSE)
 #' read_params_table(usm_xl_file, sheet = "USMs")
-#' usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv",
+#' usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv",
 #' verbose = FALSE)
 #' read_params_table(file_path = usm_csv_file)
 #'

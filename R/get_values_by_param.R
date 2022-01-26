@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
 #' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
 #' tec_param_df <- read_excel(xl_path, sheet = "Tec")
 #' SticsRFiles:::get_values_by_param(params_table = tec_param_df)

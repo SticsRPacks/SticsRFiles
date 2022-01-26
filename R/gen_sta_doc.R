@@ -12,7 +12,7 @@
 #' library(readxl)
 #'
 #' xl_path <- "inputs_stics_example.xlsx"
-#' download_usm_xl(xl_name = xl_path)
+#' download_usm_xl(file = xl_path)
 #' sta_param_df <- readxl::read_excel(xl_path, sheet = "Station")
 #' sta_doc <- SticsRFiles:::gen_sta_doc(param_table = sta_param_df)
 #' }

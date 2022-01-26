@@ -64,7 +64,7 @@ usm_xl_file <- download_usm_xl()
 # Getting the file in a specic directory
 xl_dir <- "/path/to/xl/dir" # or something like C:/path/to/xl/dir" for Windows  
 
-usm_xl_file <- download_usm_xl(dest_dir = xl_dir)
+usm_xl_file <- download_usm_xl(out_dir = xl_dir)
 
 #> [1] "inputs_stics_example.xlsx  has been copied in directory  
 #> "/path/to/xl/dir
@@ -72,7 +72,7 @@ usm_xl_file <- download_usm_xl(dest_dir = xl_dir)
 ```
 
 ```{r, eval=TRUE, echo = FALSE, results='hide'}
-usm_xl_file <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir = workspace_path)
+usm_xl_file <-  download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = workspace_path)
 ```
 
 
@@ -82,19 +82,19 @@ usm_xl_file <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx", dest_dir 
 
 ```{r eval=FALSE}
 # Getting the file in the current directory
-usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv")
+usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv")
 
 # Getting the file in a specific directory
 csv_dir  <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows  
 
-usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv", dest_dir = csv_dir )
+usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", out_dir = csv_dir )
 
 #> [1] inputs_stics_example_USMs.csv  has been copied in directory    
 #> "/path/to/csv/dir
 ```
 
 ```{r, eval=TRUE, echo = FALSE, results='hide'}
-usm_csv_file <- download_usm_csv(csv_name = "inputs_stics_example_USMs.csv", dest_dir = workspace_path)
+usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", out_dir = workspace_path)
 ```
 
 
