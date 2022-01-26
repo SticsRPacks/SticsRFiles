@@ -21,7 +21,8 @@
 #' none of them can be if keyword argument is used.
 #'
 #' @return A data.frame containing parameters names,
-#' their file name origin, their bounds and the formalism they belong to.
+#' their file name origin, their bounds and the formalism they belong to. The
+#' data.frame has the model version as attribute.
 #'
 #' @export
 #'
@@ -40,6 +41,9 @@
 #'
 #' get_param_info( keyword = "tec" )
 #'
+#' # Get the model version afterward:
+#' params = get_param_info(param = "albedo")
+#' attr(params, "version")
 #' }
 #'
 #'
