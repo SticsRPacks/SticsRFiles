@@ -418,7 +418,7 @@ upgrade_plt_xml <- function(file,
   # from param_gen.xml
   # khaut, rayon
   param_gen_values <- SticsRFiles:::get_param_xml(xml_file = param_gen_file,
-                                                  param_name = c("rayon", "khaut"))[[1]]
+                                                  param = c("rayon", "khaut"))[[1]]
   SticsRFiles:::set_param_value(old_doc, param_name = c("rayon", "khaut"), param_value = param_gen_values)
 
 
@@ -426,7 +426,7 @@ upgrade_plt_xml <- function(file,
   #
   # coefracoupe(1), coefracoupe(2) -> coefracoupe
   param_newform_values <- SticsRFiles:::get_param_xml(xml_file = param_newform_file,
-                                                      param_name = c("coefracoupe(1)", "coefracoupe(2)"))[[1]]
+                                                      param = c("coefracoupe(1)", "coefracoupe(2)"))[[1]]
   if (length(unique(unlist(param_newform_values))) > 1) stop("Multiple values of coefracoupe in param_gen.xml file")
   SticsRFiles:::set_param_value(old_doc, param_name = "coefracoupe", param_value = param_newform_values[[1]])
 

@@ -3,7 +3,10 @@
 #' @description Extracting parameter values for a list of xml files and parameters
 #'
 #' @param xml_file An xml file, or a vector/list of
-#' @param param_name parameter names vector (i.e.: parameter name or option code, optional)
+#' @param param Vector of parameter names. Optional, if not provided, the
+#' function returns information for all parameters.
+#' @param param_name `r lifecycle::badge("deprecated")` `param_name` is no
+#'   longer supported, use param instead.
 #' @param select node name or attribute name to use for selection (optional, default to no selection)
 #' @param value value used for select (optional)
 #' @param ... Pass further arguments to `get_param_value()`
@@ -62,12 +65,18 @@
 #' }
 #' @export
 get_param_xml <- function(xml_file,
-                          param_name=NULL,
+                          param=NULL,
                           select = NULL,
                           value = NULL,
+                          param_name = lifecycle::deprecated(),
                           ...) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
+  if (lifecycle::is_present(param_name)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_xml(param_name)", "get_param_xml(param)")
+  } else {
+    param_name <- param # to remove when we update inside the function
+  }
 
   xml_docs <- lapply(xml_file,xmldocument)
 

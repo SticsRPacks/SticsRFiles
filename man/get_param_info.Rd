@@ -33,7 +33,8 @@ longer supported, use \code{param} instead.}
 }
 \value{
 A data.frame containing parameters names,
-their file name origin, their bounds and the formalism they belong to.
+their file name origin, their bounds and the formalism they belong to. The
+data.frame has the model version as attribute.
 }
 \description{
 Finding parameters information using partial search words
@@ -44,22 +45,22 @@ none of them can be if keyword argument is used.
 }
 \examples{
 
-get_param_info(parameter = "albedo")
 get_param_info(param = "albedo")
 
 \dontrun{
+get_param_info(param = "albedo", file_path ="/path/to/file.xml")
 
+get_param_info(param = "albedo", formalism = "special")
 
-get_param_info(parameter = "albedo", file_path ="/path/to/file.xml")
+get_param_info(param = "albedo", version = "V9.0")
 
-get_param_info(parameter = "albedo", formalism = "special")
-
-get_param_info(parameter = "albedo", version = "V9.0")
-
-get_param_info(parameter = c("alb", "lat"))
+get_param_info(param = c("alb", "lat"))
 
 get_param_info( keyword = "tec" )
 
+# Get the model version afterward:
+params = get_param_info(param = "albedo")
+attr(params, "version")
 }
 
 

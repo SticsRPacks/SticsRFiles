@@ -113,7 +113,7 @@ get_usms_files <- function(workspace_path,
   for(i in 1:usms_nb){
     usm_name <- usms_list[i]
     usm_files <- unlist(get_param_xml(xml_file = usms_xml_path,
-                                      param_name = file_type,
+                                      param = file_type,
                                       select = "usm",
                                       value = usm_name), use.names = F)
 
@@ -127,7 +127,7 @@ get_usms_files <- function(workspace_path,
 
     # filtering tec files selection
     tec_files <- unlist(get_param_xml(xml_file = usms_xml_path,
-                                      param_name = "ftec",
+                                      param = "ftec",
                                       select = "usm",
                                       value = usm_name)[[1]], use.names = FALSE)
 
@@ -149,7 +149,7 @@ get_usms_files <- function(workspace_path,
 
     if(check_plt){
       plt_files <- unlist(get_param_xml(xml_file = usms_xml_path,
-                                        param_name = "fplt",
+                                        param = "fplt",
                                         select = "usm",
                                         value = usm_name)[[1]], use.names = FALSE)
 

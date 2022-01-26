@@ -4,16 +4,27 @@
 \alias{get_param_xml}
 \title{Getting parameter values from xml files}
 \usage{
-get_param_xml(xml_file, param_name = NULL, select = NULL, value = NULL, ...)
+get_param_xml(
+  xml_file,
+  param = NULL,
+  select = NULL,
+  value = NULL,
+  param_name = lifecycle::deprecated(),
+  ...
+)
 }
 \arguments{
 \item{xml_file}{An xml file, or a vector/list of}
 
-\item{param_name}{parameter names vector (i.e.: parameter name or option code, optional)}
+\item{param}{Vector of parameter names. Optional, if not provided, the
+function returns information for all parameters.}
 
 \item{select}{node name or attribute name to use for selection (optional, default to no selection)}
 
 \item{value}{value used for select (optional)}
+
+\item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
+longer supported, use param instead.}
 
 \item{...}{Pass further arguments to \code{get_param_value()}}
 }

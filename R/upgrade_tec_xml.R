@@ -370,7 +370,7 @@ upgrade_tec_xml <- function(file,
   # code_auto_profres, resk, resz
 
   old_val <- get_param_xml(param_newform_file,
-                           param_name = c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
+                           param = c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
                                           "code_auto_profres(1)","resk(1)", "resz(1)", "P_codedate_irrigauto", "datedeb_irrigauto",
                                           "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"))[[basename(param_newform_file)]]
 

@@ -104,7 +104,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
   # Getting usm or sol names vector
   names_list <- NULL
-  if (!base::is.null(select)) names_list <- get_param_xml(file_path, param_name = select)[[1]][[select]]
+  if (!base::is.null(select)) names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
 
   # Getting all usm or sol names from the file
   select_name <- FALSE
@@ -123,7 +123,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
   # for one name
   # param_values <- get_param_xml(file_path, param_names = param_names, select = select, value = name)[[1]]
-  param_values <- get_param_xml(file_path, param_name = param_names)[[1]]
+  param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
@@ -194,5 +194,3 @@ df_wider <- function(df, convert_type = TRUE, stringAsFactors = FALSE) {
 
   return(df)
 }
-
-

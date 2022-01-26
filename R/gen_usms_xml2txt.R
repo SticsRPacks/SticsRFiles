@@ -111,14 +111,14 @@ gen_usms_xml2txt <- function(javastics_path,
   lai_file_path =
     file.path(workspace_path,
               get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
-                            param_name = "flai")[[1]]$flai)
+                            param = "flai")[[1]]$flai)
 
   dominance = get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
-                            param_name = "dominance")[[1]]$dominance
+                            param = "dominance")[[1]]$dominance
 
 
   nbplantes = get_param_xml(xml_file = file.path(workspace_path,"usms.xml"),
-                            param_name = "nbplantes")[[1]]$nbplantes
+                            param = "nbplantes")[[1]]$nbplantes
 
   flai_usms = vector(mode = "list", length = length(full_usms_list))
   names(flai_usms) = full_usms_list
