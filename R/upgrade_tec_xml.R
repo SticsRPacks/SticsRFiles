@@ -382,7 +382,7 @@ upgrade_tec_xml <- function(file,
   #                                              "code_auto_profres","resk", "resz", "codedate_irrigauto",
   #                                              "datedeb_irrigauto",
   #                                              "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"),
-  #                               param_value = old_val)
+  #                               values = old_val)
 
 
 

@@ -3,14 +3,20 @@
 #' @description Setting parameter values for a parameter or a vector of and
 #' with a parameters values vector
 #'
-#' @param xml_file an xml file path
-#' @param param_name parameter names vector, i.e.: parameter name or option code
+#' @param file Path of the xml file to modify
+#' @param param Vector of parameter names.
 #' @param values A vector or a list of parameter(s) values (see details).
-#' @param out_path an xml file path (optional, default: xml_file)
+#' @param save_as Output xml file (!!! Also used for out dir in gen_usms_xml)
 #' @param select node name or attribute name to use for selection
 #' (optional, default to no selection)
 #' @param select_value Vector of values used for select (see examples). Optional, should be provided only if select is provided.
 #' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
+#' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
+#'   longer supported, use file instead.
+#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
+#'   longer supported, use save_as instead.
+#' @param param_name `r lifecycle::badge("deprecated")` `param_name` is no
+#'   longer supported, use param instead.
 #' @param param_value `r lifecycle::badge("deprecated")` `param_value` is no
 #'   longer supported, use values instead.
 #' @param value `r lifecycle::badge("deprecated")` `value` is no
@@ -72,18 +78,35 @@
 #' }
 #'
 #' @export
-set_param_xml <- function(xml_file,
-                          param_name,
+set_param_xml <- function(file,
+                          param,
                           values,
                           out_path = NULL,
                           select = NULL,
                           select_value = NULL,
                           overwrite = FALSE,
+                          xml_file = lifecycle::deprecated(),
+                          param_name = lifecycle::deprecated(),
                           param_value = lifecycle::deprecated(),
                           value = lifecycle::deprecated(),
                           ...){
 
   # ... argument for passing : ids, show_xpath to get_param_value
+  if (lifecycle::is_present(xml_file)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_xml(xml_file)", "set_param_xml(file)")
+  } else {
+    xml_file <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(out_path)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_xml(out_path)", "set_param_xml(save_as)")
+  } else {
+    out_path <- save_as # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(param_name)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_xml(param_name)", "set_param_xml(param)")
+  } else {
+    param_name <- param # to remove when we update inside the function
+  }
   if (lifecycle::is_present(param_value)) {
     lifecycle::deprecate_warn("0.5.0", "set_param_xml(param_value)", "set_param_xml(values)")
   } else {
