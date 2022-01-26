@@ -122,7 +122,7 @@ get_param_info(param = "lai")
 We can also read the parameters inside a particular XML file. This helps users of custom or old versions of JavaSTICS still get the parameters:
 
 ```{r}
-get_param_info(file_path = plant_file)
+get_param_info(file = plant_file)
 ```
 
 #### Get parameter values

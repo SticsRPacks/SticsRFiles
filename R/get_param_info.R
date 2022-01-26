@@ -6,7 +6,10 @@
 #' @param parameter `r lifecycle::badge("deprecated")` `parameter` is no
 #'   longer supported, use `param` instead.
 #'
-#' @param file_path Optional, xml file path or a vector of
+#' @param file Vector of xml file paths. Optional, if not provided, the function
+#' searches information in all standard XML files.
+#' @param file_path `r lifecycle::badge("deprecated")` `file_path` is no
+#'   longer supported, use `file` instead.
 #'
 #' @param formalism Optional, formalism name or partial name, or a vector of
 #'
@@ -31,7 +34,7 @@
 #' get_param_info(param = "albedo")
 #'
 #' \dontrun{
-#' get_param_info(param = "albedo", file_path ="/path/to/file.xml")
+#' get_param_info(param = "albedo", file ="/path/to/file.xml")
 #'
 #' get_param_info(param = "albedo", formalism = "special")
 #'
@@ -39,7 +42,7 @@
 #'
 #' get_param_info(param = c("alb", "lat"))
 #'
-#' get_param_info( keyword = "tec" )
+#' get_param_info(keyword = "tec" )
 #'
 #' # Get the model version afterward:
 #' params = get_param_info(param = "albedo")
@@ -49,11 +52,19 @@
 #'
 #'
 get_param_info <- function(param = NULL,
-                           file_path = NULL,
+                           file = NULL,
                            formalism = NULL,
                            keyword = NULL,
                            version = "latest",
+                           file_path=  lifecycle::deprecated(),
                            parameter = lifecycle::deprecated()) {
+
+  # Managing the parameter name changes from 0.5.0 and onward:
+  if (lifecycle::is_present(file_path)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_info(file_path)", "get_param_info(file)")
+  }else{
+    file_path <- file # to remove when we update inside the function
+  }
 
   if (lifecycle::is_present(parameter)) {
     lifecycle::deprecate_warn("0.5.0", "get_param_info(parameter)", "get_param_info(param)")
