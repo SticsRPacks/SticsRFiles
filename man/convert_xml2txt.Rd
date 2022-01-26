@@ -5,24 +5,39 @@
 \title{Transforming a Stics xml file into a text file}
 \usage{
 convert_xml2txt(
-  xml_file,
-  java_dir,
-  plt_num = 1,
+  file,
+  javastics,
+  plant_id = 1,
   out_dir = NULL,
-  out_file = NULL
+  save_as = NULL,
+  xml_file = lifecycle::deprecated(),
+  java_dir = lifecycle::deprecated(),
+  plt_num = lifecycle::deprecated(),
+  out_file = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{xml_file}{File path of the input xml file}
+\item{file}{Path (including name) of the xml file to convert}
 
-\item{java_dir}{Root directory of the JavaStics installation}
+\item{javastics}{Path of JavaStics}
 
-\item{plt_num}{The plant identifier (main crop: 1 ; associated crop: 2)}
+\item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2)}
 
-\item{out_dir}{Output directory of the generated file (optional, default:
-path of the input xml file)}
+\item{out_dir}{Path of the directory where to generate the file. Optional, set to the path of the input xml file by default}
 
-\item{out_file}{Name of the output file (optional, default: fixed name for Stics)}
+\item{save_as}{Name of the output file (optional, default: fixed name for Stics)}
+
+\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
+longer supported, use \code{file} instead.}
+
+\item{java_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{java_dir} is no
+longer supported, use \code{javastics} instead.}
+
+\item{plt_num}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plt_num} is no
+longer supported, use \code{plant_id} instead.}
+
+\item{out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_file} is no
+longer supported, use \code{save_as} instead.}
 }
 \description{
 The input file according to his type (ini,plant,tec,station,soil,par)
