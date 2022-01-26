@@ -5,18 +5,20 @@
 #'
 #' @param xml_file an xml file path
 #' @param param_name parameter names vector, i.e.: parameter name or option code
-#' @param param_value A vector or a list of parameter(s) values (see details).
+#' @param values A vector or a list of parameter(s) values (see details).
 #' @param out_path an xml file path (optional, default: xml_file)
 #' @param select node name or attribute name to use for selection
 #' (optional, default to no selection)
 #' @param value value used for select (optional)
 #' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
+#' @param param_value old_param `r lifecycle::badge("deprecated")` `param_value` is no
+#'   longer supported, use values instead.
 #' @param... Pass further arguments to `set_param_value()`.
 #'
 #' @return A logical value TRUE for operation success, FALSE otherwise
 #'
 #' @details It is possible to give several values for a parameter by passing a vector of values.
-#' For example, for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
+#' For example, for two parameters with two values each: value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
 #'
@@ -70,15 +72,20 @@
 #' @export
 set_param_xml <- function(xml_file,
                           param_name,
-                          param_value,
+                          values,
                           out_path = NULL,
                           select = NULL,
                           value = NULL,
                           overwrite = FALSE,
+                          param_value = lifecycle::deprecated(),
                           ...){
 
   # ... argument for passing : ids, show_xpath to get_param_value
-
+  if (lifecycle::is_present(param_value)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_xml(param_value)", "set_param_xml(values)")
+  } else {
+    param_value <- values # to remove when we update inside the function
+  }
 
 
   # Setting output file path
