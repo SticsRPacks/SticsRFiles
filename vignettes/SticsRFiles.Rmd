@@ -77,7 +77,7 @@ SticsRFiles provides a function to download it from the command line. Please exe
 
 ```{r include=FALSE}
 library(SticsRFiles)
-example_data = SticsRFiles::download_data(dir = tempdir(), example_dirs = "study_case_1", "V9.0")
+example_data = SticsRFiles::download_data(out_dir = tempdir(), example_dirs = "study_case_1", "V9.0")
 ```
 
 ```{r eval=FALSE}

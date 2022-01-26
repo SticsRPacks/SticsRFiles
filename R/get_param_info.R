@@ -56,7 +56,7 @@ get_param_info <- function(param = NULL,
                            formalism = NULL,
                            keyword = NULL,
                            version = "latest",
-                           file_path=  lifecycle::deprecated(),
+                           file_path = lifecycle::deprecated(),
                            parameter = lifecycle::deprecated()) {
 
   # Managing the parameter name changes from 0.5.0 and onward:

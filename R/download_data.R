@@ -3,11 +3,14 @@
 #' @description Download locally the example data from the [data repository](https://github.com/SticsRPacks/data)
 #' in the SticsRPacks organisation.
 #'
-#' @param dir The directory where to download the data
+#' @param out_dir Path of the directory where to download the data
+#' @param dir `r lifecycle::badge("deprecated")` `dir` is no
+#'   longer supported, use `out_dir` instead.
 #' @param example_dirs List of use case directories names (optional)
-#' @param version_name An optional version string
-#' within those given by get_stics_versions_compat()$versions_list, or "latest"
-#' for getting the latest version (default : NULL)
+#' @param stics_version Name of the Stics version. Optional, by default the
+#' latest version returned by get_stics_versions_compat() is used.
+#' @param version_name `r lifecycle::badge("deprecated")` `file_path` is no
+#'   longer supported, use `file` instead.
 #'
 #' @return The path to the folder where data have been downloaded
 #'
@@ -23,11 +26,28 @@
 #' download_data(example_dirs = "study_case_1")
 #'
 #' # Getting data for a given example : study_case_1 and a given version
-#' download_data(example_dirs = "study_case_1", version_name = "V9.0")
+#' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
 #'
 #' }
-download_data= function(dir = tempdir(), example_dirs = NULL, version_name = NULL){
+download_data= function(out_dir = tempdir(), example_dirs = NULL,
+                        stics_version = "latest",
+                        dir = lifecycle::deprecated(),
+                        version_name = lifecycle::deprecated()){
+
+  # Managing the parameter name changes from 0.5.0 and onward:
+  if (lifecycle::is_present(dir)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_info(dir)", "get_param_info(out_dir)")
+  }else{
+    dir <- out_dir # to remove when we update inside the function
+  }
+
+  # Managing the parameter name changes from 0.5.0 and onward:
+  if (lifecycle::is_present(version_name)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_info(version_name)", "get_param_info(stics_version)")
+  }else{
+    version_name <- stics_version # to remove when we update inside the function
+  }
 
   # setting version value from input for version == "latest"
   if (is.null(version_name) || version_name == "latest"){
