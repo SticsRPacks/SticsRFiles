@@ -95,7 +95,7 @@ plant_file = file.path(workspace, "plant", "maisopti_plt.xml")
 ```
 
 
-### Example useage
+### Example usage
 
 #### Find a STICS variable
 
@@ -105,7 +105,7 @@ plant_file = file.path(workspace, "plant", "maisopti_plt.xml")
 SticsRFiles::get_var_info("lai")
 ```
 
-Sometimes it is also usefull to search in the variable definition instead of its name. To do so, you can use the `keyword` argument like so:
+Sometimes it is also useful to search in the variable definition instead of its name. To do so, you can use the `keyword` argument like so:
 
 ```{r}
 SticsRFiles::get_var_info(keyword= "lai")

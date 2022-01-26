@@ -245,7 +245,7 @@ Information about `bounds` or `formalism`, may be missing according to parameter
 ### Getting all STICS parameters information
 
 
-Using the `get_param_info` function whithout any argument, or with specifying the desired `Stics` version, allows to get a table containing all input parameters.
+Using the `get_param_info` function without any argument, or with specifying the desired `Stics` version, allows to get a table containing all input parameters.
 
 In the above code block, an extract of the returned information table is shown:
 ```{r}
