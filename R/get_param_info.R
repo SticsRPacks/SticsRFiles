@@ -1,6 +1,10 @@
 #' Finding parameters information using partial search words
 #'
-#' @param parameter Optional, parameter name or partial name, or a vector of
+#' @param param Vector of parameter names (or partial names). Optional, if not
+#' provided, the function returns information for all parameters
+#'
+#' @param parameter `r lifecycle::badge("deprecated")` `parameter` is no
+#'   longer supported, use `param` instead.
 #'
 #' @param file_path Optional, xml file path or a vector of
 #'
@@ -22,17 +26,17 @@
 #' @export
 #'
 #' @examples
+#'
+#' get_param_info(param = "albedo")
+#'
 #' \dontrun{
+#' get_param_info(param = "albedo", file_path ="/path/to/file.xml")
 #'
-#' get_param_info(parameter = "albedo")
+#' get_param_info(param = "albedo", formalism = "special")
 #'
-#' get_param_info(parameter = "albedo", file_path ="/path/to/file.xml")
+#' get_param_info(param = "albedo", version = "V9.0")
 #'
-#' get_param_info(parameter = "albedo", formalism = "special")
-#'
-#' get_param_info(parameter = "albedo", version = "V9.0")
-#'
-#' get_param_info(parameter = c("alb", "lat"))
+#' get_param_info(param = c("alb", "lat"))
 #'
 #' get_param_info( keyword = "tec" )
 #'
@@ -40,11 +44,18 @@
 #'
 #'
 #'
-get_param_info <- function(parameter = NULL,
+get_param_info <- function(param = NULL,
                            file_path = NULL,
                            formalism = NULL,
                            keyword = NULL,
-                           version = "latest") {
+                           version = "latest",
+                           parameter = lifecycle::deprecated()) {
+
+  if (lifecycle::is_present(parameter)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_info(parameter)", "get_param_info(param)")
+  }else{
+    parameter <- param # to remove when we update inside the function
+  }
 
   # Defining compatible cases
   # param and/or formalism may be not NULL

@@ -5,15 +5,17 @@
 \title{Finding parameters information using partial search words}
 \usage{
 get_param_info(
-  parameter = NULL,
+  param = NULL,
   file_path = NULL,
   formalism = NULL,
   keyword = NULL,
-  version = "latest"
+  version = "latest",
+  parameter = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{parameter}{Optional, parameter name or partial name, or a vector of}
+\item{param}{Vector of parameter names (or partial names). Optional, if not
+provided, the function returns information for all parameters}
 
 \item{file_path}{Optional, xml file path or a vector of}
 
@@ -25,6 +27,9 @@ file names or part to which parameters are attached to)}
 
 \item{version}{Optional, Stics version (default value, "latest")
 Only the 2 latest are referenced: V9.0, V9.1}
+
+\item{parameter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{parameter} is no
+longer supported, use \code{param} instead.}
 }
 \value{
 A data.frame containing parameters names,
@@ -38,9 +43,12 @@ parameter and formalism may be both set or only one of them, but
 none of them can be if keyword argument is used.
 }
 \examples{
-\dontrun{
 
 get_param_info(parameter = "albedo")
+get_param_info(param = "albedo")
+
+\dontrun{
+
 
 get_param_info(parameter = "albedo", file_path ="/path/to/file.xml")
 

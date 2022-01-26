@@ -270,9 +270,9 @@ If parameters names are known and are given with the right syntax, information c
 
 ```{r, results="markup"}
 
-get_param_info(parameter = "albedo")
+get_param_info(param = "albedo")
 
-get_param_info(parameter = c("albedo", "latitude", "humcapil"))
+get_param_info(param = c("albedo", "latitude", "humcapil"))
 
 ```
 
@@ -282,10 +282,10 @@ A search with uncomplete names may be done as follows
 
 ```{r}
 
-get_param_info( parameter = "hum")
+get_param_info(param = "hum")
 
 
-param_names <- get_param_info(parameter = c("al","hum"))
+param_names <- get_param_info(param = c("al","hum"))
 
 ```
 
@@ -325,10 +325,10 @@ Parameters may be found combining search in formalisms and parameter names:
 
 ```{r, warning=FALSE}
 
-get_param_info(formalism = "yield", parameter = "grain")
+get_param_info(formalism = "yield", param = "grain")
 
 
-param_formalisms <- get_param_info(formalism = "yield", parameter = c("inflo","lai"))
+param_formalisms <- get_param_info(formalism = "yield", param = c("inflo","lai"))
 
 
 ```
