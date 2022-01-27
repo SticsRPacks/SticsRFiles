@@ -1,12 +1,16 @@
 #' @title Generating observation data files from a data.frame
 #'
-#' @param obs_table The input observations data.frame
-#' @param out_path A path to an optional folder where to write the .obs files
+#' @param df A data frame containing the values of the observations to use (see Details).
+#' @param out_path Path of the directory where to generate the file(s).
 #' @param usms_list An optional list of usms names to be used for selecting which files to generate
 #' from the obs_table
+#' @param obs_table `r lifecycle::badge("deprecated")` `obs_table` is no
+#'   longer supported, use `df` instead.
+#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
+#'   longer supported, use `out_dir` instead.
 #'
 #' @details
-#'  `obs_table` is a `data.frame` with the following format:
+#'  `df` is a `data.frame` with the following format:
 #'
 #'
 #' |usm_name       |  ian| mo| jo| jul|densite | lai(n)| masec(n)|   azomes|  ammomes| resmes| AZnit(1)|
@@ -30,15 +34,28 @@
 #'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs")
-#' gen_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
+#' gen_obs(df = obs_df, out_dir = "/path/to/dest/dir")
 #'
 #' }
 #'
 #' @export
 #'
-gen_obs <- function(obs_table, out_path = getwd(), usms_list = NULL) {
+gen_obs <- function(df,
+                    out_dir = getwd(),
+                    usms_list = NULL,
+                    obs_table = lifecycle::deprecated(),
+                    out_path = lifecycle::deprecated()) {
 
-
+  if (lifecycle::is_present(obs_table)) {
+    lifecycle::deprecate_warn("1.0.0", "gen_obs(obs_table)", "gen_obs(df)")
+  } else {
+    obs_table <- df # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(out_path)) {
+    lifecycle::deprecate_warn("1.0.0", "gen_obs(out_path)", "gen_obs(out_dir)")
+  } else {
+    out_path <- out_dir # to remove when we update inside the function
+  }
   # Checking if out_path exists
   if ( ! dir.exists(out_path) ) {
     warning(paste("The directory does not exist",out_path ))

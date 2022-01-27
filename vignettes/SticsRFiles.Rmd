@@ -164,7 +164,7 @@ obs_df = data.frame(usm_name = "Test", ian = 2021, mo = 3:10, jo = 1, `masec(n)`
 Then we can write the data to a file using `gen_obs()`:
 
 ```{r eval=FALSE}
-gen_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
+gen_obs(df = obs_df, out_dir = "/path/to/dest/dir")
 ```
 
 #### Read observations files
