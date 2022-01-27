@@ -72,40 +72,51 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   tec= plant= setNames(vector(mode = "list", length = ini$nbplantes),
                        paste0("plant",1:ini$nbplantes))
 
+  varieties=vector("list", ini$nbplantes)
+  if (is.null(variety)) {
+    variety=vector("list", ini$nbplantes)
+  } else if (length(variety)==1) {
+    variety=lapply(1:ini$nbplantes,function(x) variety)
+  } else {
+    variety=list(variety)
+  }
   for(i in seq_len(ini$nbplantes)){
     tec[paste0("plant",i)]=
       list(get_tec_txt(filepath = file.path(dirpath,paste0("fictec",i,".txt")),
                        several_fert = several_fert, several_thin = several_thin,
                        is_pasture = is_pasture))
 
-    varieties= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",i,".txt")))$codevar
+    varieties[[i]]= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",i,".txt")))$codevar
     tec_variety <- tec[[paste0("plant",i)]]$variete
 
     plant[paste0("plant",i)]=
       list(get_plant_txt(file.path(dirpath,paste0("ficplt",i,".txt")),
                          variety=
-                           if(is.null(variety)){
+                           if(is.null(variety[[i]])){
                              if(!is.null(param)){
-                               varieties[tec_variety]
+                               varieties[[i]][tec_variety]
                              }else{
                                NULL
                              }
                            }else{
                              #variety
-                             if(is.character(variety)){
-                               variety= match(variety,varieties)
+                             if(is.character(variety[[i]])){
+                               variety[[i]]= match(variety[[i]],varieties[[i]])
                                if(any(is.na(variety))) {
                                  cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
                                  return()
                                }
-                               varieties[variety]
+                               varieties[[i]][variety[[i]]]
+                             } else {
+                               varieties[[i]][variety[[i]]]
                              }
                            }
       ))
-  }
 
-  # Fixes the current variety
-  if (is.null(variety)) variety <- tec_variety
+    # Fixes the current variety
+    if (is.null(variety[[i]])) variety[[i]] <- tec_variety
+
+  }
 
   parameters= list(usm= usm, ini= ini, general= general, tec= tec,
                    plant= plant, soil= soil, station= station,
@@ -120,7 +131,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   # For escaping braces and catching the right name
   param <- gsub(pattern = "\\(", x=param, replacement="\\\\(\\1")
   param <- gsub(pattern = "\\)", x=param, replacement="\\\\)\\1")
-  parameters= parameters[grep(paste0(param,"[\\(\\)0-9]{0,}$"),names(parameters))]
+  parameters= parameters[grep(paste0("\\.",param,"[\\(\\)0-9]{0,}$"),names(parameters))]
 
   if(length(parameters)==0){
     stop(param," parameter not found")
@@ -136,11 +147,14 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
 
   if (any(idx_plant_to_fix)) {
-    variety_names <- varieties[variety]
+    variety_names <- sapply(1:length(varieties), function(i) {varieties[[i]][variety[[i]]]})
     if(length(variety_names) == 1) variety_names <- rep(variety_names, length(idx_plant_to_fix))
-    names(parameters)[idx_plant_to_fix]= paste0(gsub("[1-999]","",names(parameters)),
-                                          ".",
-                                          variety_names[idx_plant_to_fix])
+    # names(parameters)[idx_plant_to_fix]= paste0(gsub("[1-999]","",names(parameters)[idx_plant_to_fix]),
+    #                                       ".",
+    #                                       variety_names[idx_plant_to_fix])
+    names(parameters)[idx_plant_to_fix]= paste0(names(parameters)[idx_plant_to_fix],
+                                                ".",
+                                                variety_names[idx_plant_to_fix])
   }
 
   # TO BE FIXED if it makes sense ?
