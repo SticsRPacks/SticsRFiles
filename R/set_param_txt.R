@@ -9,7 +9,8 @@
 #' @param value    New parameter value
 #' @param plant    Plant index. Optional, only for plant or technical parameters
 #' @param add      Boolean. Append input to existing file (add to the list)
-#' @param variety  Integer. The plant variety to set the parameter value.
+#' @param variety  The plant variety to set the parameter value, either the name of the variety
+#' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
 #'
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
@@ -17,6 +18,9 @@
 #'          Principal and associated plants.
 #'          \code{\link{get_var_info}} is a helper function that returns all possible
 #'          output variables.
+#'          If the \code{variety} is not given and if \code{param} is a varietal parameter,
+#'          the function will modify the value of \code{param} for the simulated variety, as given
+#'          in the technical file.
 #'
 #' @note \code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
 #'       variables required from STICS, please directly call \code{gen_varmod}.
