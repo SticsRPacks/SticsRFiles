@@ -1,12 +1,19 @@
 #' @title Transforming a Stics xml file into a text file
 #' @description The input file according to his type (ini,plant,tec,station,soil,par)
 #' is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
-#' @param xml_file File path of the input xml file
-#' @param java_dir Root directory of the JavaStics installation
-#' @param plt_num The plant identifier (main crop: 1 ; associated crop: 2)
-#' @param out_dir Output directory of the generated file (optional, default:
-#' path of the input xml file)
-#' @param out_file Name of the output file (optional, default: fixed name for Stics)
+#' @param file Path (including name) of the xml file to convert
+#' @param javastics Path of JavaStics
+#' @param plant_id The plant identifier (main crop: 1 ; associated crop: 2)
+#' @param out_dir Path of the directory where to generate the file. Optional, set to the path of the input xml file by default
+#' @param save_as Name of the output file (optional, default: fixed name for Stics)
+#' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
+#'   longer supported, use `file` instead.
+#' @param java_dir `r lifecycle::badge("deprecated")` `java_dir` is no
+#'   longer supported, use `javastics` instead.
+#' @param out_file `r lifecycle::badge("deprecated")` `out_file` is no
+#'   longer supported, use `save_as` instead.
+#' @param plt_num `r lifecycle::badge("deprecated")` `plt_num` is no
+#'   longer supported, use `plant_id` instead.
 #'
 #' @examples
 #'\dontrun{
@@ -17,7 +24,29 @@
 #'
 #' @export
 #'
-convert_xml2txt <- function(xml_file, java_dir, plt_num = 1,out_dir = NULL, out_file = NULL) {
+convert_xml2txt <- function(file, javastics, plant_id = 1,out_dir = NULL, save_as = NULL,
+                            xml_file=lifecycle::deprecated(), java_dir=lifecycle::deprecated(),
+                            plt_num=lifecycle::deprecated(), out_file=lifecycle::deprecated()) {
+  if (lifecycle::is_present(xml_file)) {
+    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(xml_file)", "convert_xml2txt(file)")
+  } else {
+    xml_file <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(java_dir)) {
+    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(java_dir)", "convert_xml2txt(javastics)")
+  } else {
+    java_dir <- javastics # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(plt_num)) {
+    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(plt_num)", "convert_xml2txt(plant_id)")
+  } else {
+    plt_num <- plant_id # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(out_file)) {
+    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(out_file)", "convert_xml2txt(save_as)")
+  } else {
+    out_file <- save_as # to remove when we update inside the function
+  }
 
   # Defining which xsl file to use according to the input xml file
   xsl_files <- c("ini2txt.xsl","sol2txt.xsl","xml2txt.xsl","xml2txt.xsl",

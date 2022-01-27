@@ -13,40 +13,39 @@ test_that("getting all param from an usm", {
                  "climcanj.1999",0,1,0))
 
 
-  expect_equal(get_param_xml(xml_path,"fplt", select = "plante", value = "1")$usms.xml$fplt[1],
+  expect_equal(get_param_xml(xml_path,"fplt", select = "plante", select_value = "1")$usms.xml$fplt[1],
                "proto_sugarcane_plt.xml")
 
 
-  expect_equal(get_param_xml(xml_path, "ftec", select = "plante", value = "1")$usms.xml$ftec[1],
+  expect_equal(get_param_xml(xml_path, "ftec", select = "plante", select_value = "1")$usms.xml$ftec[1],
                "canne_tec.xml")
 
 
-  expect_equal(get_param_xml(xml_path, "flai", select = "plante", value = "1")$usms.xml$flai[1],
+  expect_equal(get_param_xml(xml_path, "flai", select = "plante", select_value = "1")$usms.xml$flai[1],
                "null")
 
 
   expect_equal(unname(unlist(get_param_xml(xml_path,c("datedebut","datefin","finit","nomsol",
                                                       "fstation","fclim1","fclim2","culturean",
                                                       "nbplantes","codesimul"),
-                                           select = "usm",value = "potato")$usms.xml)),
+                                           select = "usm", select_value = "potato")$usms.xml)),
                c(91,250,"patate_ini.xml","solpatate","climpdtj_sta.xml","climpdtj.1997",
                  "climpdtj.1997",1,1,0))
 
 
 
-  expect_equal(get_param_xml(xml_path,"fplt", select = "plante", value = "1")$usms.xml$fplt[2],
+  expect_equal(get_param_xml(xml_path,"fplt", select = "plante", select_value = "1")$usms.xml$fplt[2],
                "proto_potato_plt.xml")
 
 
 
-  expect_equal(get_param_xml(xml_path, "ftec", select = "plante", value = "1")$usms.xml$ftec[2],
+  expect_equal(get_param_xml(xml_path, "ftec", select = "plante", select_value = "1")$usms.xml$ftec[2],
                "patate_tec.xml")
 
 
 
-  expect_equal(get_param_xml(xml_path, "flai", select = "plante", value = "1")$usms.xml$flai[2],
+  expect_equal(get_param_xml(xml_path, "flai", select = "plante", select_value = "1")$usms.xml$flai[2],
                "null")
 
 
 })
-

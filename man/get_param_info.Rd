@@ -5,17 +5,21 @@
 \title{Finding parameters information using partial search words}
 \usage{
 get_param_info(
-  parameter = NULL,
-  file_path = NULL,
+  param = NULL,
+  file = NULL,
   formalism = NULL,
   keyword = NULL,
-  version = "latest"
+  version = "latest",
+  file_path = lifecycle::deprecated(),
+  parameter = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{parameter}{Optional, parameter name or partial name, or a vector of}
+\item{param}{Vector of parameter names (or partial names). Optional, if not
+provided, the function returns information for all parameters}
 
-\item{file_path}{Optional, xml file path or a vector of}
+\item{file}{Vector of xml file paths. Optional, if not provided, the function
+searches information in all standard XML files.}
 
 \item{formalism}{Optional, formalism name or partial name, or a vector of}
 
@@ -25,10 +29,17 @@ file names or part to which parameters are attached to)}
 
 \item{version}{Optional, Stics version (default value, "latest")
 Only the 2 latest are referenced: V9.0, V9.1}
+
+\item{file_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_path} is no
+longer supported, use \code{file} instead.}
+
+\item{parameter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{parameter} is no
+longer supported, use \code{param} instead.}
 }
 \value{
 A data.frame containing parameters names,
-their file name origin, their bounds and the formalism they belong to.
+their file name origin, their bounds and the formalism they belong to. The
+data.frame has the model version as attribute.
 }
 \description{
 Finding parameters information using partial search words
@@ -38,20 +49,23 @@ parameter and formalism may be both set or only one of them, but
 none of them can be if keyword argument is used.
 }
 \examples{
+
+get_param_info(param = "albedo")
+
 \dontrun{
+get_param_info(param = "albedo", file ="/path/to/file.xml")
 
-get_param_info(parameter = "albedo")
+get_param_info(param = "albedo", formalism = "special")
 
-get_param_info(parameter = "albedo", file_path ="/path/to/file.xml")
+get_param_info(param = "albedo", version = "V9.0")
 
-get_param_info(parameter = "albedo", formalism = "special")
+get_param_info(param = c("alb", "lat"))
 
-get_param_info(parameter = "albedo", version = "V9.0")
+get_param_info(keyword = "tec" )
 
-get_param_info(parameter = c("alb", "lat"))
-
-get_param_info( keyword = "tec" )
-
+# Get the model version afterward:
+params = get_param_info(param = "albedo")
+attr(params, "version")
 }
 
 

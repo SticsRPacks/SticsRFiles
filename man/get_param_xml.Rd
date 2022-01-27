@@ -4,16 +4,36 @@
 \alias{get_param_xml}
 \title{Getting parameter values from xml files}
 \usage{
-get_param_xml(xml_file, param_name = NULL, select = NULL, value = NULL, ...)
+get_param_xml(
+  file,
+  param = NULL,
+  select = NULL,
+  select_value = NULL,
+  xml_file = lifecycle::deprecated(),
+  param_name = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
+  ...
+)
 }
 \arguments{
-\item{xml_file}{An xml file, or a vector/list of}
+\item{file}{Vector of the xml file paths from which parameters values must be extracted}
 
-\item{param_name}{parameter names vector (i.e.: parameter name or option code, optional)}
+\item{param}{Vector of parameter names. Optional, if not provided, the
+function returns information for all parameters.}
 
 \item{select}{node name or attribute name to use for selection (optional, default to no selection)}
 
-\item{value}{value used for select (optional)}
+\item{select_value}{Vector of values used for select (see examples). Optional,
+should be provided only if select is provided.}
+
+\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
+longer supported, use \code{file} instead.}
+
+\item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
+longer supported, use \code{param} instead.}
+
+\item{value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{value} is no
+longer supported, use \code{select_value} instead.}
 
 \item{...}{Pass further arguments to \code{get_param_value()}}
 }
@@ -26,21 +46,20 @@ Extracting parameter values for a list of xml files and parameters
 \examples{
 \dontrun{
 # Soil file
-xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
+file = file.path(get_examples_path( file_type = "xml"),"sols.xml")
 
 # For all soils
-get_param_xml(xml_path)
-get_param_xml(xml_path, "argi")
-get_param_xml(xml_path, c("argi", "norg"))
+get_param_xml(file)
+get_param_xml(file, "argi")
+get_param_xml(file, c("argi", "norg"))
 
 # For one soil selection
-get_param_xml(xml_path, "argi",
-select = "sol", value = "solcanne")
+get_param_xml(file, "argi", select = "sol", select_value = "solcanne")
 
 # For soils and parameters vectors
 # scalar parameters per soil
-get_param_xml(xml_path, c("argi", "norg"),
-select = "sol", value = c("solcanne", "solbanane"))
+get_param_xml(file, c("argi", "norg"),
+select = "sol", select_value = c("solcanne", "solbanane"))
 
 $sols.xml
 $sols.xml$argi
@@ -50,8 +69,8 @@ $sols.xml$norg
 [1] 0.27 0.20
 
 # vector parameters per soil (5 values, one per soil layer)
-get_param_xml(xml_path, c("epc", "HCCF"),
-select = "sol", value = c("solcanne", "solbanane"))
+get_param_xml(file, c("epc", "HCCF"),
+select = "sol", select_value = c("solcanne", "solbanane"))
 
 $sols.xml
 $sols.xml$epc
@@ -61,16 +80,16 @@ $sols.xml$HCCF
 [1] 46.8 46.4 48.5 50.1 50.1 41.0 41.0 41.0 42.0 42.0
 
 # Crop management file
-xml_path = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+file = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
 
-get_param_xml(xml_path)
+get_param_xml(file)
 
 # Getting parameters for irrigation (date and quantity)
-get_param_xml(xml_path, c("julapI_or_sum_upvt", "amount"))
+get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 
 
 # Getting all parameters for a given formalism: "irrigation"
-get_param_xml(xml_path, select = "formalisme", value = "irrigation")
+get_param_xml(file, select = "formalisme", select_value = "irrigation")
 
 }
 }

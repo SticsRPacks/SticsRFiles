@@ -6,33 +6,62 @@
 \usage{
 get_sim(
   workspace,
-  usm_name = NULL,
-  var_list = NULL,
-  dates_list = NULL,
-  usms_filepath = NULL,
-  javastics_path = NULL,
-  verbose = TRUE
+  usm = NULL,
+  var = NULL,
+  dates = NULL,
+  usms_file = NULL,
+  javastics = NULL,
+  verbose = TRUE,
+  usm_name = lifecycle::deprecated(),
+  var_list = lifecycle::deprecated(),
+  dates_list = lifecycle::deprecated(),
+  usms_filepath = lifecycle::deprecated(),
+  javastics_path = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace with the \code{mod_s*.sti} files, or a vector of (recursive call).}
+\item{workspace}{Vector of path(s) of directory(ies) containing the Stics
+output files to read (mod_s*.sti file) or path of a single directory
+containing one sub-folder per USM (named as the USM names),
+each of them containing the corresponding Stics output file to read.
+In the second case, the argument \code{usm} must also be provided.}
 
-\item{usm_name}{Vector of usms to read (optional, used to filter usms)}
+\item{usm}{Vector of USM names. Optional, if not provided, the function returns the results for all USMs.}
 
-\item{var_list}{(optional) vector of output variables names to filter (see \code{get_var_info()} to get variables names)}
+\item{var}{Vector of variable names for which results have to be provided.
+Optional, all variables considered by default. See \code{get_var_info()}
+to get the list of Stics variables names.}
 
-\item{dates_list}{(optional) list of dates to filter (POSIX date)}
+\item{dates}{list of dates to filter (POSIX date)}
 
-\item{usms_filepath}{(optional) usms file path (\emph{e.g.} "usms.xml"). Used to get the real plant name in the Plant column.}
+\item{usms_file}{Path of a USM xml file. Optional, if provided, the plant
+names are added in the Plant column (see details).}
 
-\item{javastics_path}{(optional) JavaStics installation path Needed if the plant files are not in the \code{workspace}
-but rather in the JavaStics default workspace. Only used to get the plants names.}
+\item{javastics}{Path of JavaStics. Optional, should be provided in addition
+to usms_file to get the plant codes if the plant files used are not
+in the workspace but in the JavaStics distribution (see Details).}
 
-\item{verbose}{(optional) Logical value, \code{TRUE} to display infos on error, \code{FALSE} otherwise (default)}
+\item{verbose}{Logical value for displaying or not information while running}
+
+\item{usm_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_name} is no
+longer supported, use \code{usm} instead.}
+
+\item{var_list}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{var_list} is no
+longer supported, use \code{var} instead.}
+
+\item{dates_list}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dates_list} is no
+longer supported, use \code{dates} instead.}
+
+\item{usms_filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_filepath} is no
+longer supported, use \code{usms_file} instead.}
+
+\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
+longer supported, use \code{javastics} instead.}
 }
 \value{
-A list, where each element is a \code{data.frame}s of simulation results for the given usm. The list is named
-after the USM name. Intercrops are returned in a single \code{data.frame}, and are identified
+A list, where each element is a \code{data.frame}s of simulation results
+for the given usm. The list is named after the USM name.
+Intercrops are returned in a single \code{data.frame}, and are identified
 using either the "Plant" or "Dominance" columns.
 }
 \description{
@@ -40,10 +69,11 @@ Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
 possible selection on variable names, cumulative DOY and dates
 }
 \details{
-If \code{usm_name} is not specified (or equal to \code{NULL}), the
-function reads the files from all usms in the \code{workspace}(s).
-If \code{usms_filepath} is not specified, the plants are named "plant_1" by default (+ "plant_2" for
-intercrops).
+If \code{usm} is not specified (or equal to \code{NULL}), the
+function reads the files from all usms in the \code{workspace}(s)
+If \code{usms_file} If usms_file is provided the plant names are either the plant
+code (as specified in the plant file), if the plant file is found,
+or the name of the plant file, if the plant file is not found.
 }
 \examples{
 \dontrun{

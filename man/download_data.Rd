@@ -4,16 +4,27 @@
 \alias{download_data}
 \title{Download example USMs}
 \usage{
-download_data(dir = tempdir(), example_dirs = NULL, version_name = NULL)
+download_data(
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest",
+  dir = lifecycle::deprecated(),
+  version_name = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{dir}{The directory where to download the data}
+\item{out_dir}{Path of the directory where to download the data}
 
 \item{example_dirs}{List of use case directories names (optional)}
 
-\item{version_name}{An optional version string
-within those given by get_stics_versions_compat()$versions_list, or "latest"
-for getting the latest version (default : NULL)}
+\item{stics_version}{Name of the Stics version. Optional, by default the
+latest version returned by get_stics_versions_compat() is used.}
+
+\item{dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dir} is no
+longer supported, use \code{out_dir} instead.}
+
+\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_path} is no
+longer supported, use \code{file} instead.}
 }
 \value{
 The path to the folder where data have been downloaded
@@ -31,7 +42,7 @@ download_data()
 download_data(example_dirs = "study_case_1")
 
 # Getting data for a given example : study_case_1 and a given version
-download_data(example_dirs = "study_case_1", version_name = "V9.0")
+download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 
 
 }

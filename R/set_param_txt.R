@@ -242,7 +242,7 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
   # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
   params= readLines(filepath)
-  param_= paste0("^",param,"$")
+  param_= paste0("^:{0,1}",param,"$")
   switch(type,
          set_usm_txt = {
            ref= get_usm_txt(filepath)
