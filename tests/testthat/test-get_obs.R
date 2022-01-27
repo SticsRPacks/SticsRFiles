@@ -13,13 +13,13 @@ Meas_banana <- get_obs(path_mixed, "banana")
 
 # Get more information using the usms.xml file:
 
-Meas_mixed2 <- get_obs(workspace = path_mixed, usms_filepath = file.path(path_mixed,"usms.xml"))
+Meas_mixed2 <- get_obs(workspace = path_mixed, usms_file = file.path(path_mixed,"usms.xml"))
 
 # Using a usms.xml from outside the repo:
 usms_path <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
 usms = get_usms_list(usm_path = usms_path)
 
-Meas_mixed3 <- get_obs(workspace = path_mixed, usms_filepath = usms_path)
+Meas_mixed3 <- get_obs(workspace = path_mixed, usms_file = usms_path)
 
 
 # This is not true anymore, it returns NULL because of the case were we have the
@@ -74,7 +74,7 @@ test_that("reading mixed usms with usms_filename to usms.xml outside of folder",
 test_that("reading mixed usms with usms_filename to usms.xml outside of folder, and usms in different folders", {
   path = file.path(get_examples_path(file_type = "obs"),"usms_outside")
   paths = list.dirs(path)[-1]
-  Meas_2 <- get_obs(workspace = paths, usms_filepath = file.path(path,"usms.xml"))
+  Meas_2 <- get_obs(workspace = paths, usms_file = file.path(path,"usms.xml"))
 
   expect_length(Meas_mixed3,2) # NB: only two because intecrop usms absent from this usms.xml
   expect_equal(Meas_mixed$banana$lai_n, Meas_mixed3$banana$lai_n)
@@ -109,7 +109,7 @@ test_that("get obs with intercrops", {
 })
 
 test_that("get obs with intercrops, giving usms.xml file", {
-  outputs= get_obs(workspace = example_IC, usms_filepath = file.path(example_IC,"usms.xml"))
+  outputs= get_obs(workspace = example_IC, usms_file = file.path(example_IC,"usms.xml"))
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(all(names(outputs) %in%
@@ -123,7 +123,7 @@ test_that("get obs with intercrops, giving usms.xml file", {
 })
 
 test_that("get obs with intercrops, giving usms.xml file as absolute path", {
-  outputs= get_obs(workspace = example_IC, usms_filepath = file.path(example_IC,"usms.xml"))
+  outputs= get_obs(workspace = example_IC, usms_file = file.path(example_IC,"usms.xml"))
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(all(names(outputs) %in%
