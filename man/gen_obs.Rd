@@ -41,7 +41,7 @@ Generating observation data files from a data.frame
 \examples{
 \dontrun{
 
-xl_path <- download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs")
 gen_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
 

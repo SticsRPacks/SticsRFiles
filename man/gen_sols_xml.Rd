@@ -60,7 +60,7 @@ The first column name must contain the keyword Soil or soil or SOIL as a prefix 
 \examples{
 \dontrun{
 
-xl_path <- download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 sols_param_df <- read_params_table(file_path = xl_path, sheet_name = "Soils")
 gen_sols_xml(sols_out_file = "sols.xml", sols_param = sols_param_df)
 

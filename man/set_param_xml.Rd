@@ -5,33 +5,52 @@
 \title{Setting parameter values into xml files}
 \usage{
 set_param_xml(
-  xml_file,
-  param_name,
-  param_value,
+  file,
+  param,
+  values,
   out_path = NULL,
   select = NULL,
-  value = NULL,
+  select_value = NULL,
   overwrite = FALSE,
+  xml_file = lifecycle::deprecated(),
+  param_name = lifecycle::deprecated(),
+  param_value = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
   ...
 )
 }
 \arguments{
-\item{xml_file}{an xml file path}
+\item{file}{Path of the xml file to modify}
 
-\item{param_name}{parameter names vector, i.e.: parameter name or option code}
+\item{param}{Vector of parameter names.}
 
-\item{param_value}{A vector or a list of parameter(s) values (see details).}
+\item{values}{A vector or a list of parameter(s) values (see details).}
 
-\item{out_path}{an xml file path (optional, default: xml_file)}
+\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
+longer supported, use save_as instead.}
 
 \item{select}{node name or attribute name to use for selection
 (optional, default to no selection)}
 
-\item{value}{value used for select (optional)}
+\item{select_value}{Vector of values used for select (see examples). Optional, should be provided only if select is provided.}
 
 \item{overwrite}{Logical TRUE for overwriting the output file, FALSE otherwise (default)}
 
+\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
+longer supported, use file instead.}
+
+\item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
+longer supported, use param instead.}
+
+\item{param_value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_value} is no
+longer supported, use values instead.}
+
+\item{value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{value} is no
+longer supported, use select_value instead.}
+
 \item{...}{Pass further arguments to \code{set_param_value()}.}
+
+\item{save_as}{Output xml file (!!! Also used for out dir in gen_usms_xml)}
 }
 \value{
 A logical value TRUE for operation success, FALSE otherwise
@@ -42,7 +61,7 @@ with a parameters values vector
 }
 \details{
 It is possible to give several values for a parameter by passing a vector of values.
-For example, for two parameters with two values each: param_value= list(c(1,2), c(2.3,4.5))
+For example, for two parameters with two values each: value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
 
@@ -61,7 +80,7 @@ get_param_xml("sols.xml", "argi")
 
 # Setting a specific value to "argi" for "solcanne" soil
 set_param_xml("sols.xml", "argi",56,
-select = "sol", value = "solcanne", overwrite = TRUE)
+select = "sol", select_value = "solcanne", overwrite = TRUE)
 
 get_param_xml("sols.xml", "argi",
 select = "sol", select_value = "solcanne")
@@ -69,14 +88,14 @@ select = "sol", select_value = "solcanne")
 
 # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
 set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-select = "sol", value = "solcanne", overwrite = TRUE)
+select = "sol", select_value = "solcanne", overwrite = TRUE)
 
 get_param_xml("sols.xml", c("argi", "norg"),
 select = "sol", select_value = "solcanne")
 
 
 # For vector parameters per soil (5 values, one per soil layer)
-set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", value = c("solcanne", "solbanane"),
+set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"),
 param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
 
 get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"))

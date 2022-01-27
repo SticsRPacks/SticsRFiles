@@ -375,14 +375,14 @@ rmarkdown::paged_table(ini_param)
 <!-- Only for the show -->
 ```{r gen_ini_files, eval = FALSE}
 # *_ini.xml files, one for each xl_param line
-gen_ini_xml(param_table = ini_param, out_path = workspace_path )
+gen_ini_xml(param_df = ini_param, out_dir = workspace_path )
 ```
 
 <!-- active chunk to be run -->
 ```{r eval_gen_ini_files, eval = TRUE, echo = FALSE}
 
 # *_ini.xml files, one for each xl_param line
-gen_ini_xml(param_table = ini_param, out_path = workspace_path )
+gen_ini_xml(param_df = ini_param, out_dir = workspace_path )
 ```
 ## XML file content
 

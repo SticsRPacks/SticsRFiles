@@ -1,16 +1,21 @@
 #' @title Generate Stics ini xml file(s) from a template or an input file
 #'
-#' @param param_table a table (df, tibble) containing parameters to use (see details)
-#' @param ini_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
-#' @param out_path path to an optional folder where to write the output file(s)
+#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
+#' @param file Path of an ini xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version (see `stics_version` argument)
+#' @param out_dir Path of the directory where to generate the file(s).
 #' @param crop_tag identifier for the crop parameters names related to the main crop, or the associated crop if any
 #' (example: Crop is used in the param_table example in the details section below)
-#' @param stics_version the stics version to use (optional, default to latest). Only used if ini_in_file= NULL, see details.
+#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided to use a standard template depending on the stics version. By default the latest version returned by `get_stics_versions_compat()` is used.
+#' @param ini_in_file `r lifecycle::badge("deprecated")` `ini_in_file` is no
+#'   longer supported, use `file` instead.
+#' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
+#'   longer supported, use `param_df` instead.
+#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
+#'   longer supported, use `out_dir` instead.
 #'
-#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
-#' argument `stics_version`.
+#' @details
 #'
-#'  `param_table` is a `data.frame` with the following format:
+#'  `param_df` is a `data.frame` with the following format:
 #'
 #'
 #'  |Ini_name            | nbplantes|stade0_Crop1 | lai0_Crop1| masec0_Crop1| QNplante0_Crop1|
@@ -41,18 +46,37 @@
 #' xl_path <- "inputs_stics_example.xlsx"
 #' download_usm_xl(file = xl_path)
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
-#' gen_ini_xml(out_path = "/path/to/dest/dir",
+#' gen_ini_xml(out_dir = "/path/to/dest/dir",
 #' param_table = ini_param_df)
 #' }
 #'
 #' @export
 #'
 # TODO: refactor with gen_sta_file, gen_tec_file : same code
-gen_ini_xml <- function(param_table = NULL,
-                        ini_in_file = NULL,
-                        out_path = getwd(),
+gen_ini_xml <- function(param_df = NULL,
+                        file = NULL,
+                        out_dir = getwd(),
                         crop_tag = "Crop",
-                        stics_version ="latest") {
+                        stics_version ="latest",
+                        ini_in_file = lifecycle::deprecated(),
+                        param_table = lifecycle::deprecated(),
+                        out_path = lifecycle::deprecated()) {
+
+  if (lifecycle::is_present(ini_in_file)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(ini_in_file)", "gen_ini_xml(file)")
+  } else {
+    ini_in_file <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(param_table)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(param_table)", "gen_ini_xml(param_df)")
+  } else {
+    param_table <- param_df # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(out_path)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(out_path)", "gen_ini_xml(out_dir)")
+  } else {
+    out_path <- out_dir # to remove when we update inside the function
+  }
 
   xml_doc <- NULL
 

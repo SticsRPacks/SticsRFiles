@@ -58,7 +58,7 @@ The first column name must contain the keyword tec or Tec or TEC as a prefix to 
 \examples{
 \dontrun{
 
-xl_path <-  download_usm_xl(xl_name = "inputs_stics_example.xlsx")
+xl_path <-  download_usm_xl(file = "inputs_stics_example.xlsx")
 tec_param_df <- read_params_table(file_path = xl_path, sheet_name = "Tec")
 gen_tec_xml(out_path = "/path/to/dest/dir", param_table = tec_param_df)
 

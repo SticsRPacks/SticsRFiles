@@ -8,7 +8,7 @@ ini_param <- read_params_table(file_path = xl_path, sheet_name = "Ini")
 out_dir <- file.path(tempdir(), "gen_xml")
 if(!dir.exists(out_dir)) dir.create(out_dir)
 
-gen_ini_xml(param_table = ini_param[1, ], out_path = out_dir)
+gen_ini_xml(param_df = ini_param[1, ], out_dir = out_dir)
 
 ini_xml <- file.path(out_dir, ini_param[1,]$Ini_name)
 

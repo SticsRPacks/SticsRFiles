@@ -4,12 +4,15 @@
 \alias{force_param_values}
 \title{Generates files to force parameters values in Stics simulations}
 \usage{
-force_param_values(workspace, param_values)
+force_param_values(workspace, values, param_values = lifecycle::deprecated())
 }
 \arguments{
-\item{workspace}{Stics workspace path}
+\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
 
-\item{param_values}{named vector of parameter values to force. See Details for more information.}
+\item{values}{named vector of parameter values to force. See Details for more information.}
+
+\item{param_values}{old_param \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{old_param} is no
+longer supported, use new_param instead.}
 }
 \value{
 A logical status TRUE if successfull, FALSE otherwise

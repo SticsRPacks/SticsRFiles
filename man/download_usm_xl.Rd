@@ -5,26 +5,37 @@
 \title{Downloading an Excel usms data file example into a directory}
 \usage{
 download_usm_xl(
-  xl_name = NULL,
-  dest_dir = getwd(),
-  version_name = "latest",
+  file = NULL,
+  out_dir = getwd(),
+  stics_version = "latest",
   overwrite = FALSE,
   verbose = FALSE,
+  xl_name = lifecycle::deprecated(),
+  version_name = lifecycle::deprecated(),
+  dest_dir = lifecycle::deprecated(),
   ...
 )
 }
 \arguments{
-\item{xl_name}{Name of an Excel file (optional, not used for the moment)}
+\item{file}{Name of an Excel file (optional, not used for the moment)}
 
-\item{dest_dir}{Directory path where to copy the Excel file
+\item{out_dir}{Directory path where to copy the Excel file
 (optional, default: current directory)}
 
-\item{version_name}{An optional version string (default: latest version returned by get_stics_versions_compat())}
+\item{stics_version}{Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.}
 
 \item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
 
-\item{verbose}{Optional, logical, TRUE for displaying messsages/ warnings,
-FALSE otherwise (default)}
+\item{verbose}{Logical value for displaying information while running}
+
+\item{xl_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xl_name} is no
+longer supported, use file instead.}
+
+\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no
+longer supported, use stics_version instead.}
+
+\item{dest_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dest_dir} is no
+longer supported, use out_dir instead.}
 
 \item{...}{Additional arguments to be passed}
 }
@@ -41,7 +52,7 @@ these functions: \code{\link{gen_usms_xml}}, \code{\link{gen_sols_xml}}, \code{\
 \examples{
 \dontrun{
 download_usm_xl()
-download_usm_xl(dest_dir = "/path/to/destination/dir")
+download_usm_xl(out_dir = "/path/to/destination/dir")
 }
 
 }

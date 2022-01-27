@@ -5,24 +5,36 @@
 \title{Generate Stics ini xml file(s) from a template or an input file}
 \usage{
 gen_ini_xml(
-  param_table = NULL,
-  ini_in_file = NULL,
-  out_path = getwd(),
+  param_df = NULL,
+  file = NULL,
+  out_dir = getwd(),
   crop_tag = "Crop",
-  stics_version = "latest"
+  stics_version = "latest",
+  ini_in_file = lifecycle::deprecated(),
+  param_table = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{param_table}{a table (df, tibble) containing parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
 
-\item{ini_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
+\item{file}{Path of an ini xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version (see \code{stics_version} argument)}
 
-\item{out_path}{path to an optional folder where to write the output file(s)}
+\item{out_dir}{Path of the directory where to generate the file(s).}
 
 \item{crop_tag}{identifier for the crop parameters names related to the main crop, or the associated crop if any
 (example: Crop is used in the param_table example in the details section below)}
 
-\item{stics_version}{the stics version to use (optional, default to latest). Only used if ini_in_file= NULL, see details.}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided to use a standard template depending on the stics version. By default the latest version returned by \code{get_stics_versions_compat()} is used.}
+
+\item{ini_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{ini_in_file} is no
+longer supported, use \code{file} instead.}
+
+\item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
+longer supported, use \code{param_df} instead.}
+
+\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
+longer supported, use \code{out_dir} instead.}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -31,10 +43,7 @@ an invisible xmlDocument object or a list of
 Generate Stics ini xml file(s) from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
-argument \code{stics_version}.
-
-\code{param_table} is a \code{data.frame} with the following format:\tabular{lrlrrr}{
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrlrrr}{
    Ini_name \tab nbplantes \tab stade0_Crop1 \tab lai0_Crop1 \tab masec0_Crop1 \tab QNplante0_Crop1 \cr
    USM_2017_T1_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
    Vill09_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
@@ -58,9 +67,9 @@ The first column name must contain the keyword ini or Ini or INI as a prefix to 
 library(readxl)
 
 xl_path <- "inputs_stics_example.xlsx"
-download_usm_xl(xl_name = xl_path)
+download_usm_xl(file = xl_path)
 ini_param_df <- read_excel(xl_path, sheet = "Ini")
-gen_ini_xml(out_path = "/path/to/dest/dir",
+gen_ini_xml(out_dir = "/path/to/dest/dir",
 param_table = ini_param_df)
 }
 
