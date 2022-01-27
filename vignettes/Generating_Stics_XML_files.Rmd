@@ -154,7 +154,7 @@ in some cases used parameters names in tables may be different from real paramet
 Here is the actual **correspendance table** of `keywords` to be used in parameters tables in replacement of real names:
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
-l <- SticsRFiles:::get_params_dict()
+l <- get_params_dict()
 df <- data.frame(keyword=names(l), realname=unlist(l, use.names = FALSE),
                  stringsAsFactors = FALSE)
 rmarkdown::paged_table(df)
