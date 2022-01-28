@@ -4,7 +4,7 @@ context("Getting and Setting values from txt files")
 
 path <- get_examples_path("txt")
 # Copy example to test in tempdir since the files will be modified by set_param
-file.copy(from=file.path(path,list.files(path)), to=tempdir())
+file.copy(from=file.path(path,list.files(path)), to=tempdir(), overwrite = TRUE)
 path <- tempdir()
 
 tmp1 <- get_param_txt(dirpath = path, param = "stlevamf")
@@ -57,7 +57,7 @@ test_that ("Set and get of a varietal parameter for a unique plant for a given v
 # Now let's work on intercrops ...
 path <- file.path(get_examples_path("txt"),"intercrop_pea_barley")
 # Copy example to test in tempdir since the files will be modified by set_param
-file.copy(from=file.path(path,list.files(path)), to=tempdir())
+file.copy(from=file.path(path,list.files(path)), to=tempdir(), overwrite = TRUE)
 path <- tempdir()
 
 # Get and modify the non-varietal parameter "forme" for the simulated variety
@@ -66,7 +66,6 @@ plant <- 2
 set_param_txt(dirpath = path, param = "forme",
               value=as.numeric(tmp[plant])+1, plant=plant)
 tmp2 <- get_param_txt(dirpath = path, param = "forme")
-(as.numeric(tmp[plant])+1)==as.numeric(tmp2[plant])
 test_that ("Set and get of a non-varietal parameter for an intercrop for the simulated variety", {
   expect_equal(as.numeric(tmp[plant])+1,as.numeric(tmp2[plant]))
 })
