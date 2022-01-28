@@ -3425,7 +3425,7 @@
 <sol nom="soltimothy">
     <param format="real" max="60.0" min="0.0" nom="argi">17.0</param>
         <param format="real" max="0.5" min="0.05" nom="norg">0.1500</param>
-        <param format="real" max="150.0" min="10.0" nom="profhum">15.0000</param>
+        <param format="real" max="60.0" min="10.0" nom="profhum">15.0000</param>
         <param format="real" max="100.0" min="0.0" nom="calc">1.0000</param>
         <param format="real" max="9.0" min="4.0" nom="pH">6.5000</param>
         <param format="real" max="0.5" min="0.0" nom="concseuil">0.0100</param>
@@ -3543,7 +3543,7 @@
 <sol nom="soil_turmeric">
     <param format="real" max="60.0" min="0.0" nom="argi">15.0</param>
         <param format="real" max="0.5" min="0.05" nom="norg">0.0800</param>
-        <param format="real" max="150.0" min="10.0" nom="profhum">35.0000</param>
+        <param format="real" max="60.0" min="10.0" nom="profhum">35.0000</param>
         <param format="real" max="100.0" min="0.0" nom="calc">0.0000</param>
         <param format="real" max="9.0" min="4.0" nom="pH">7.0000</param>
         <param format="real" max="0.5" min="0.0" nom="concseuil">0.0000</param>
@@ -3554,7 +3554,7 @@
         <param format="real" max="100.0" min="5.0" nom="pluiebat">50.0000</param>
         <param format="real" max="2.0" min="0.0" nom="mulchbat">0.5000</param>
         <param format="real" max="150.0" min="10.0" nom="zesx">60.0000</param>
-        <param format="real" max="4.0" min="0.5" nom="cfes">5.0000</param>
+        <param format="real" max="10.0" min="-10.0" nom="cfes">5.0000</param>
         <param format="real" max="0.2" min="0.01" nom="z0solnu">0.0100</param>
         <param format="real" max="20.0" min="8.0" nom="CsurNsol">0.0000</param>
         <param format="real" max="5.0" min="0.0" nom="penterui">0.3300</param>
@@ -3661,7 +3661,7 @@
     <sol nom="A13_SC">
 		<param format="real" max="60.0" min="0.0" nom="argi">26</param>
         <param format="real" max="0.5" min="0.05" nom="norg">0.088</param>
-        <param format="real" max="150.0" min="10.0" nom="profhum">25</param>
+        <param format="real" max="60.0" min="10.0" nom="profhum">25</param>
         <param format="real" max="100.0" min="0.0" nom="calc">1.67</param>
         <param format="real" max="9.0" min="4.0" nom="pH">7.86</param>
         <param format="real" max="0.5" min="0.0" nom="concseuil">0.001</param>
@@ -3725,7 +3725,7 @@
             <colonne nom="infil"/>
             <colonne nom="epd"/>
         </tableau_entete>
-        <tableau nb_colonnes="8" nom="horizon 1">
+        <tableau nb_colonnes="8" nom="layer 1">
             <colonne nom="epc">10</colonne>
             <colonne nom="HCCF">20</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3735,7 +3735,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 2">
+        <tableau nb_colonnes="8" nom="layer 2">
             <colonne nom="epc">20</colonne>
             <colonne nom="HCCF">20</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3745,7 +3745,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 3">
+        <tableau nb_colonnes="8" nom="layer 3">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">17.0</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3755,7 +3755,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 4">
+        <tableau nb_colonnes="8" nom="layer 4">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">17.0</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3765,7 +3765,7 @@
             <colonne nom="infil">30</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 5">
+        <tableau nb_colonnes="8" nom="layer 5">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">17</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3779,7 +3779,7 @@
     <sol nom="A12RA_SC">
 		<param format="real" max="60.0" min="0.0" nom="argi">28.2 </param>
         <param format="real" max="0.5" min="0.05" nom="norg">0.088</param>
-        <param format="real" max="150.0" min="10.0" nom="profhum">25</param>
+        <param format="real" max="60.0" min="10.0" nom="profhum">25</param>
         <param format="real" max="100.0" min="0.0" nom="calc">11.1</param>
         <param format="real" max="9.0" min="4.0" nom="pH">7.84</param>
         <param format="real" max="0.5" min="0.0" nom="concseuil">0.0001</param>
@@ -3843,7 +3843,7 @@
             <colonne nom="infil"/>
             <colonne nom="epd"/>
         </tableau_entete>
-        <tableau nb_colonnes="8" nom="horizon 1">
+        <tableau nb_colonnes="8" nom="layer 1">
             <colonne nom="epc">10</colonne>
             <colonne nom="HCCF">21.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3853,7 +3853,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 2">
+        <tableau nb_colonnes="8" nom="layer 2">
             <colonne nom="epc">20</colonne>
             <colonne nom="HCCF">21.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3863,7 +3863,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 3">
+        <tableau nb_colonnes="8" nom="layer 3">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">19.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3873,7 +3873,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 4">
+        <tableau nb_colonnes="8" nom="layer 4">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">19.5</colonne>
             <colonne nom="HMINF">10</colonne>
@@ -3883,7 +3883,7 @@
             <colonne nom="infil">15</colonne>
             <colonne nom="epd">15</colonne>
         </tableau>
-        <tableau nb_colonnes="8" nom="horizon 5">
+        <tableau nb_colonnes="8" nom="layer 5">
             <colonne nom="epc">30</colonne>
             <colonne nom="HCCF">21.5</colonne>
             <colonne nom="HMINF">12</colonne>
@@ -3897,7 +3897,7 @@
 	<sol nom="soil_rice">
 <param format="real" max="60.0" min="0.0" nom="argi">20.0</param>
 <param format="real" max="0.5" min="0.05" nom="norg">0.1000</param>
-<param format="real" max="150.0" min="10.0" nom="profhum">20.0000</param>
+<param format="real" max="60.0" min="10.0" nom="profhum">20.0000</param>
 <param format="real" max="100.0" min="0.0" nom="calc">32.5000</param>
 <param format="real" max="9.0" min="4.0" nom="pH">5.0000</param>
 <param format="real" max="0.5" min="0.0" nom="concseuil">0.0000</param>
@@ -3908,7 +3908,7 @@
 <param format="real" max="100.0" min="5.0" nom="pluiebat">50.0000</param>
 <param format="real" max="2.0" min="0.0" nom="mulchbat">0.5000</param>
 <param format="real" max="150.0" min="10.0" nom="zesx">60.0000</param>
-<param format="real" max="4.0" min="0.5" nom="cfes">5.0000</param>
+<param format="real" max="10.0" min="-10.0" nom="cfes">5.0000</param>
 <param format="real" max="0.2" min="0.01" nom="z0solnu">0.0100</param>
 <param format="real" max="20.0" min="8.0" nom="CsurNsol">0.0000</param>
 <param format="real" max="5.0" min="0.0" nom="penterui">0.3300</param>

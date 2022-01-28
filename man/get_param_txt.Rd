@@ -13,48 +13,60 @@
 \title{Read STICS input parameters from text files}
 \usage{
 get_param_txt(
-  dirpath = getwd(),
+  workspace = getwd(),
   param = NULL,
   variety = NULL,
   exact = FALSE,
+  dirpath = lifecycle::deprecated(),
   ...
 )
 
-get_ini_txt(filepath = "ficini.txt")
+get_ini_txt(file = "ficini.txt", filepath = lifecycle::deprecated())
 
-get_general_txt(filepath = "tempopar.sti")
+get_general_txt(file = "tempopar.sti", filepath = lifecycle::deprecated())
 
-get_tmp_txt(filepath = "tempoparv6.sti")
+get_tmp_txt(file = "tempoparv6.sti", filepath = lifecycle::deprecated())
 
-get_plant_txt(filepath = "ficplt1.txt", variety = NULL)
+get_plant_txt(
+  file = "ficplt1.txt",
+  variety = NULL,
+  filepath = lifecycle::deprecated()
+)
 
 get_tec_txt(
-  filepath = "fictec1.txt",
+  file = "fictec1.txt",
   several_fert,
   several_thin,
   is_pasture,
+  filepath = lifecycle::deprecated(),
   ...
 )
 
-get_soil_txt(filepath = "param.sol")
+get_soil_txt(file = "param.sol", filepath = lifecycle::deprecated())
 
-get_station_txt(filepath = "station.txt")
+get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
 
-get_usm_txt(filepath = "new_travail.usm")
+get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
 }
 \arguments{
-\item{dirpath}{USM directory path}
+\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
 
-\item{param}{Parameter name or partial name. Optional, if not provided, the function
-returns an object with all parameters}
+\item{param}{Vector of parameter names. Optional, if not provided,
+the function returns an object with all parameters.}
 
 \item{variety}{Integer. The plant variety to get the parameter from.}
 
 \item{exact}{Boolean indicating if the function must return results only for exact match.}
 
+\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
+longer supported, use \code{workspace} instead.}
+
 \item{...}{Further arguments to pass (for future-proofing only)}
 
-\item{filepath}{File path}
+\item{file}{File path}
+
+\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
+longer supported, use \code{file} instead.}
 
 \item{several_fert}{Is there several fertilization in the USM ? See details.}
 
@@ -115,14 +127,14 @@ get_param_txt(path, param='interrang')
 # Getting varietal values:
 
 # Get the leaf lifespan of the variety used in the usm:
-get_param_txt(dirpath = path, param = "durvieF")
+get_param_txt(workspace = path, param = "durvieF")
 # Get the leaf lifespan of another variety available in the plant file:
-get_param_txt(dirpath = path, param = "durvieF", variety = "Furio")
+get_param_txt(workspace = path, param = "durvieF", variety = "Furio")
 # To get the values for several (or all) varieties, either put all varieties:
 varieties= c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
-get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
+get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 # Or get it from the output of the function returning all parameters:
-get_param_txt(dirpath = path)$plant$plant1$durvieF
+get_param_txt(workspace = path)$plant$plant1$durvieF
 }
 
 \dontrun{
@@ -134,13 +146,13 @@ get_ini_txt(path)
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp= get_tmp_txt(filepath = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
+tmp= get_tmp_txt(file = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
 several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
 several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
 is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
 
 # Then, get the technical parameters:
-get_tec_txt(filepath= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
+get_tec_txt(file= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
 several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 }
 
