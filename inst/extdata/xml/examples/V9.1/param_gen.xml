@@ -245,7 +245,7 @@
             </choix>
             <choix code="9" nom="Pebbles from Magneraud">
             <param format="real" max="5.0" min="0.5" nom="masvolcx">1.50000</param>
-                <param format="real" max="5.0" min="0.0" nom="hcccx">26.00000</param>
+                <param format="real" max="50.0" min="0.0" nom="hcccx">26.00000</param>
             </choix>
             <choix code="10" nom="Other pebbles">
             <param format="real" max="5.0" min="0.5" nom="masvolcx">0.00000</param>

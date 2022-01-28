@@ -3453,7 +3453,7 @@
   <sol nom="soltimothy">
     <param format="real" max="60.0" min="0.0" nom="argi">17.0</param>
     <param format="real" max="0.5" min="0.05" nom="norg">0.1500</param>
-    <param format="real" max="150.0" min="10.0" nom="profhum">15.0000</param>
+    <param format="real" max="60.0" min="10.0" nom="profhum">15.0000</param>
     <param format="real" max="100.0" min="0.0" nom="calc">1.0000</param>
     <param format="real" max="9.0" min="4.0" nom="pH">6.5000</param>
     <param format="real" max="0.5" min="0.0" nom="concseuil">0.0100</param>
@@ -3572,7 +3572,7 @@
   <sol nom="soil_turmeric">
     <param format="real" max="60.0" min="0.0" nom="argi">15.0</param>
     <param format="real" max="0.5" min="0.05" nom="norg">0.0800</param>
-    <param format="real" max="150.0" min="10.0" nom="profhum">35.0000</param>
+    <param format="real" max="60.0" min="10.0" nom="profhum">35.0000</param>
     <param format="real" max="100.0" min="0.0" nom="calc">0.0000</param>
     <param format="real" max="9.0" min="4.0" nom="pH">7.0000</param>
     <param format="real" max="0.5" min="0.0" nom="concseuil">0.0000</param>
@@ -3691,7 +3691,7 @@
   <sol nom="A13_SC">
     <param format="real" max="60.0" min="0.0" nom="argi">26</param>
     <param format="real" max="0.5" min="0.05" nom="norg">0.088</param>
-    <param format="real" max="150.0" min="10.0" nom="profhum">25</param>
+    <param format="real" max="60.0" min="10.0" nom="profhum">25</param>
     <param format="real" max="100.0" min="0.0" nom="calc">1.67</param>
     <param format="real" max="9.0" min="4.0" nom="pH">7.86</param>
     <param format="real" max="0.5" min="0.0" nom="concseuil">0.001</param>
@@ -3810,7 +3810,7 @@
   <sol nom="A12RA_SC">
     <param format="real" max="60.0" min="0.0" nom="argi">28.2 </param>
     <param format="real" max="0.5" min="0.05" nom="norg">0.088</param>
-    <param format="real" max="150.0" min="10.0" nom="profhum">25</param>
+    <param format="real" max="60.0" min="10.0" nom="profhum">25</param>
     <param format="real" max="100.0" min="0.0" nom="calc">11.1</param>
     <param format="real" max="9.0" min="4.0" nom="pH">7.84</param>
     <param format="real" max="0.5" min="0.0" nom="concseuil">0.0001</param>
@@ -3929,7 +3929,7 @@
   <sol nom="soil_rice">
     <param format="real" max="60.0" min="0.0" nom="argi">20.0</param>
     <param format="real" max="0.5" min="0.05" nom="norg">0.1000</param>
-    <param format="real" max="150.0" min="10.0" nom="profhum">20.0000</param>
+    <param format="real" max="60.0" min="10.0" nom="profhum">20.0000</param>
     <param format="real" max="100.0" min="0.0" nom="calc">32.5000</param>
     <param format="real" max="9.0" min="4.0" nom="pH">5.0000</param>
     <param format="real" max="0.5" min="0.0" nom="concseuil">0.0000</param>
