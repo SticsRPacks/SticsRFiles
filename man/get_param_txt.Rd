@@ -12,7 +12,13 @@
 \alias{get_usm_txt}
 \title{Read STICS input parameters from text files}
 \usage{
-get_param_txt(dirpath = getwd(), param = NULL, variety = NULL, ...)
+get_param_txt(
+  dirpath = getwd(),
+  param = NULL,
+  variety = NULL,
+  exact = FALSE,
+  ...
+)
 
 get_ini_txt(file = "ficini.txt", filepath = lifecycle::deprecated())
 
@@ -44,10 +50,12 @@ get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
 \arguments{
 \item{dirpath}{USM directory path}
 
-\item{param}{Parameter name. Optional, if not provided, the function
-return an object with all parameters}
+\item{param}{Parameter name or partial name. Optional, if not provided, the function
+returns an object with all parameters}
 
 \item{variety}{Integer. The plant variety to get the parameter from.}
+
+\item{exact}{Boolean indicating if the function must return results only for exact match.}
 
 \item{...}{Further arguments to pass (for future-proofing only)}
 

@@ -504,7 +504,7 @@ In the following examples, the original file is always overwritten. Before and a
 
 
 ## Scalar parameters
-* For one parameter and one occurence
+* For one parameter and one occurrence
 ```{r}
 
 

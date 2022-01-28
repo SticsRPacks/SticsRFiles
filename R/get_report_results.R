@@ -1,13 +1,14 @@
 
 #' Extracting data from the Stics report file
 #'
-#' @param workspace Stics or JavaStics workspace path containing the
-#' report file
+#' @param workspace Path of the directory containing the Stics report file to read.
 #' @param file_name A report file name among "mod_rapport.sti" (default),
 #' "mod_rapportA.sti", "mod_rapportP.sti"
-#' @param usm_name usm name(s) to filter
+#' @param usm Vector of USM names. Optional, if not provided, the function returns the results for all USMs.
 #' @param var_list vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
+#' @param usm_name `r lifecycle::badge("deprecated")` `usm_name` is no
+#'   longer supported, use `usm` instead.
 #'
 #' @details The data may be filtered using `usm_name` vector of usm names and
 #' and/or `var_list` vector of variables names. In the returned data.frame, variables
@@ -22,11 +23,11 @@
 #' path <- get_examples_path(file_type = "sti")
 #' get_report_results(workspace = path)
 #'
-#' get_report_results(workspace = path, usm_name = c("DurumWheat", "grass") )
+#' get_report_results(workspace = path, usm = c("DurumWheat", "grass") )
 #'
 #' get_report_results(workspace = path, var_list = c("masec(n)", "QNplante") )
 #'
-#' get_report_results(workspace = path, usm_name = c("DurumWheat", "grass") )
+#' get_report_results(workspace = path, usm = c("DurumWheat", "grass") )
 #'
 #' get_report_results(workspace = path)
 #'
@@ -37,9 +38,16 @@
 #'
 get_report_results <- function(workspace,
                                file_name = "mod_rapport.sti",
-                               usm_name = NULL,
-                               var_list = NULL
+                               usm = NULL,
+                               var_list = NULL,
+                               usm_name  = lifecycle::deprecated()
 ) {
+
+  if (lifecycle::is_present(usm_name)) {
+    lifecycle::deprecate_warn("0.5.0", "get_report_results(usm_name)", "get_report_results(usm)")
+  } else {
+    usm_name <- usm # to remove when we update inside the function
+  }
 
   files_name <- c("mod_rapport.sti", "mod_rapportA.sti", "mod_rapportP.sti")
   usm_col <- "P_usm"

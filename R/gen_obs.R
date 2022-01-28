@@ -1,7 +1,7 @@
 #' @title Generating observation data files from a data.frame
 #'
 #' @param df A data frame containing the values of the observations to use (see Details).
-#' @param out_path Path of the directory where to generate the file(s).
+#' @param out_dir Path of the directory where to generate the file(s).
 #' @param usms_list An optional list of usms names to be used for selecting which files to generate
 #' from the obs_table
 #' @param obs_table `r lifecycle::badge("deprecated")` `obs_table` is no
