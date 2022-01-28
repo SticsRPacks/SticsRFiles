@@ -12,7 +12,7 @@ test_that("single param option value ", {
 test_that("multiple param option value", {
   val <- unlist(get_param_xml(xml_path,c("stade0","lai0","masec0","QNplante0",
                                          "magrain0","zrac0","resperenne0"),
-                              select ="plante",value = 1 ), use.names = FALSE)
+                              select ="plante",select_value = 1 ), use.names = FALSE)
 
   expect_equal(val, c("snu","0","0","0","0","0","0"))
 })
@@ -20,7 +20,7 @@ test_that("multiple param option value", {
 
 test_that("multiple param option value 2", {
   val <- unlist(get_param_xml(xml_path,"densinitial", select ="plante",
-                              value = 1 ))
+                              select_value = 1 ))
   expect_equivalent(val, c(0,0,0,0,0))
 })
 

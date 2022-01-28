@@ -8,7 +8,7 @@ test_that("getting all param from an usm", {
   expect_equal(unname(unlist(get_param_xml(xml_path,c("datedebut","datefin","finit","nomsol",
                                                       "fstation","fclim1","fclim2","culturean",
                                                       "nbplantes","codesimul"),
-                                           select = "usm",value = "SugarCane")$usms.xml)),
+                                           select = "usm",select_value = "SugarCane")$usms.xml)),
                c(286,650,"canne_ini.xml","solcanne","climcanj_sta.xml","climcanj.1998",
                  "climcanj.1999",0,1,0))
 
