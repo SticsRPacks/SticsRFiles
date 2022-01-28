@@ -59,7 +59,8 @@ longer supported, use \code{check} instead.}
 A list with named elements:
 usms_path : created directories paths (for storing Stics input files),
 files : generated files list (in JavaStics workspace origin),
-copy_status : logical value vector, indicating if all files have been generated for each usm
+copy_status : logical value vector, indicating if all files have been
+generated for each usm
 obs_copy_status : logical value vector, indicating if observaion files have been
 successfully copied in usms directories
 }
@@ -77,14 +78,14 @@ javastics <- "/path/to/javastics"
 workspace <- "/path/to/workspace"
 
 # For all usms
-gen_usms_xml2txt(javastics, javastics_workspace)
+gen_usms_xml2txt(javastics, workspace)
 
 # For an usms list
-usm_list <- c("usm1", "usm2")
-gen_usms_xml2txt(javastics, workspace, usm_list)
+usm <- c("usm1", "usm2")
+gen_usms_xml2txt(javastics, workspace, usm)
 
 # For one usm
-gen_usms_xml2txt(javastics, workspace, dir_per_usm_flag=F, "usm1")
+gen_usms_xml2txt(javastics, workspace, dir_per_usm_flag = FALSE, "usm1")
 
 }
 
