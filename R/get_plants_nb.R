@@ -31,7 +31,7 @@
 get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::deprecated()){
 
   if (lifecycle::is_present(usm_file_path)) {
-    lifecycle::deprecate_warn("1.0.0", "add_two(usm_file_path)", "add_two(usms_file)")
+    lifecycle::deprecate_warn("1.0.0", "get_plants_nb(usm_file_path)", "get_plants_nb(usms_file)")
   } else {
     usm_file_path <- usms_file # to remove when we update inside the function
   }
