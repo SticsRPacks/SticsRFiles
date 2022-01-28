@@ -24,7 +24,7 @@ Write STICS obs data from data.frame/tibble
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 
 # Loading and filtering data for usm "USM_2017_T1_CI"
-obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs") \%>\%
+obs_df <- read_params_table(file = xl_path, sheet_name = "Obs") \%>\%
 dplyr::filter(usm_name \%in\% "USM_2017_T1_CI")
 
 # Generating the csv file
