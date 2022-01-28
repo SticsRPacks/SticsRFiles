@@ -4,15 +4,25 @@
 \alias{gen_obs}
 \title{Generating observation data files from a data.frame}
 \usage{
-gen_obs(obs_table, out_path = getwd(), usms_list = NULL)
+gen_obs(
+  df,
+  out_dir = getwd(),
+  usms_list = NULL,
+  obs_table = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{obs_table}{The input observations data.frame}
-
-\item{out_path}{A path to an optional folder where to write the .obs files}
+\item{df}{A data frame containing the values of the observations to use (see Details).}
 
 \item{usms_list}{An optional list of usms names to be used for selecting which files to generate
 from the obs_table}
+
+\item{obs_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{obs_table} is no
+longer supported, use \code{df} instead.}
+
+\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
+longer supported, use \code{out_dir} instead.}
 }
 \value{
 A return logical status indicating if any error when writing files (FALSE),
@@ -22,7 +32,7 @@ TRUE when no errors.
 Generating observation data files from a data.frame
 }
 \details{
-\code{obs_table} is a \code{data.frame} with the following format:\tabular{lrrrrlrrrrrr}{
+\code{df} is a \code{data.frame} with the following format:\tabular{lrrrrlrrrrrr}{
    usm_name \tab ian \tab mo \tab jo \tab jul \tab densite \tab lai(n) \tab masec(n) \tab azomes \tab ammomes \tab resmes \tab AZnit(1) \cr
    USM_2017_T1_CI \tab 2017 \tab 9 \tab 6 \tab 249 \tab NA \tab NA \tab 0.31 \tab 27.07395 \tab 9.364425 \tab 285 \tab 15.39825 \cr
    USM_2017_T1_CI \tab 2017 \tab 9 \tab 20 \tab 263 \tab NA \tab NA \tab 0.60 \tab 27.90000 \tab 9.800000 \tab 270 \tab NA \cr
@@ -43,7 +53,7 @@ Generating observation data files from a data.frame
 
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 obs_df <- read_params_table(file_path = xl_path, sheet_name = "Obs")
-gen_obs(obs_table = obs_df, out_path = "/path/to/dest/dir")
+gen_obs(df = obs_df, out_dir = "/path/to/dest/dir")
 
 }
 
