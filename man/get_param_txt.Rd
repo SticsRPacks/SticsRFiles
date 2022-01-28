@@ -14,27 +14,32 @@
 \usage{
 get_param_txt(dirpath = getwd(), param = NULL, variety = NULL, ...)
 
-get_ini_txt(filepath = "ficini.txt")
+get_ini_txt(file = "ficini.txt", filepath = lifecycle::deprecated())
 
-get_general_txt(filepath = "tempopar.sti")
+get_general_txt(file = "tempopar.sti", filepath = lifecycle::deprecated())
 
-get_tmp_txt(filepath = "tempoparv6.sti")
+get_tmp_txt(file = "tempoparv6.sti", filepath = lifecycle::deprecated())
 
-get_plant_txt(filepath = "ficplt1.txt", variety = NULL)
+get_plant_txt(
+  file = "ficplt1.txt",
+  variety = NULL,
+  filepath = lifecycle::deprecated()
+)
 
 get_tec_txt(
-  filepath = "fictec1.txt",
+  file = "fictec1.txt",
   several_fert,
   several_thin,
   is_pasture,
+  filepath = lifecycle::deprecated(),
   ...
 )
 
-get_soil_txt(filepath = "param.sol")
+get_soil_txt(file = "param.sol", filepath = lifecycle::deprecated())
 
-get_station_txt(filepath = "station.txt")
+get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
 
-get_usm_txt(filepath = "new_travail.usm")
+get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
 }
 \arguments{
 \item{dirpath}{USM directory path}
@@ -46,7 +51,7 @@ return an object with all parameters}
 
 \item{...}{Further arguments to pass (for future-proofing only)}
 
-\item{filepath}{File path}
+\item{file}{File path}
 
 \item{several_fert}{Is there several fertilization in the USM ? See details.}
 
@@ -126,13 +131,13 @@ get_ini_txt(path)
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp= get_tmp_txt(filepath = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
+tmp= get_tmp_txt(file = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
 several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
 several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
 is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
 
 # Then, get the technical parameters:
-get_tec_txt(filepath= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
+get_tec_txt(file= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
 several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 }
 

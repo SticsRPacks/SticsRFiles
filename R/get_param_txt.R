@@ -82,11 +82,11 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   }
   for(i in seq_len(ini$nbplantes)){
     tec[paste0("plant",i)]=
-      list(get_tec_txt(filepath = file.path(dirpath,paste0("fictec",i,".txt")),
+      list(get_tec_txt(file = file.path(dirpath,paste0("fictec",i,".txt")),
                        several_fert = several_fert, several_thin = several_thin,
                        is_pasture = is_pasture))
 
-    varieties[[i]]= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",i,".txt")))$codevar
+    varieties[[i]]= get_plant_txt(file = file.path(dirpath,paste0("ficplt",i,".txt")))$codevar
     tec_variety <- tec[[paste0("plant",i)]]$variete
 
     plant[paste0("plant",i)]=
@@ -176,7 +176,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 #' @description Read a specific STICS model input parameter file.
 #' Users would generally use the wrapper `get_param_txt()` instead.
 #'
-#' @param filepath     File path
+#' @param file     File path
 #' @param several_fert Is there several fertilization in the USM ? See details.
 #' @param several_thin Is there several thinning in the USM ? See details.
 #' @param is_pasture   Is the plant a pasture ? See details.
@@ -212,19 +212,29 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
 #' # Read the tec file directly:
 #'
 #' # First, get the parameters from the tmp file:
-#' tmp= get_tmp_txt(filepath = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
+#' tmp= get_tmp_txt(file = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
 #' several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
 #' several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
 #' is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
 #'
 #' # Then, get the technical parameters:
-#' get_tec_txt(filepath= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
+#' get_tec_txt(file= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
 #' several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
 #'}
 #'
 #' @rdname get_param_txt
 #' @export
-get_ini_txt= function(filepath="ficini.txt"){
+get_ini_txt= function(file="ficini.txt",
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   params= get_txt_generic(filepath, names = FALSE)
   ini= list(nbplantes= params[1])
   ini= character_to_numeric_list(ini)
@@ -234,20 +244,53 @@ get_ini_txt= function(filepath="ficini.txt"){
 
 #' @rdname get_param_txt
 #' @export
-get_general_txt= function(filepath="tempopar.sti"){
+get_general_txt= function(file="tempopar.sti",
+                          filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   c(nbresidus= 21, get_txt_generic(filepath))
 }
 
 
 #' @rdname get_param_txt
 #' @export
-get_tmp_txt= function(filepath="tempoparv6.sti"){
+get_tmp_txt= function(file="tempoparv6.sti",
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   get_txt_generic(filepath)
 }
 
 #' @rdname get_param_txt
 #' @export
-get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
+get_plant_txt= function(file="ficplt1.txt", variety= NULL,
+                        filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+
+
+
   x= get_txt_generic(filepath)
 
   index_codevar= which(names(x)=="codevar")
@@ -273,7 +316,21 @@ get_plant_txt= function(filepath="ficplt1.txt", variety= NULL){
 
 #' @rdname get_param_txt
 #' @export
-get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pasture,...){
+get_tec_txt= function(file="fictec1.txt",
+                      several_fert,several_thin,
+                      is_pasture,
+                      filepath = lifecycle::deprecated(),
+                      ...){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+
 
   dot_args= list(...) # Future-proofing the function. We can add arguments now without
   # breaking it. I think for example to a "version argument" because the tec file is not
@@ -578,7 +635,19 @@ get_tec_txt= function(filepath="fictec1.txt",several_fert,several_thin,is_pastur
 
 #' @rdname get_param_txt
 #' @export
-get_soil_txt= function(filepath= "param.sol"){
+get_soil_txt= function(file= "param.sol",
+                       filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+
+
 
   params= readLines(filepath,warn=F)
   soil= vector(mode='list', length = 0)
@@ -621,14 +690,33 @@ get_soil_txt= function(filepath= "param.sol"){
 
 #' @rdname get_param_txt
 #' @export
-get_station_txt= function(filepath="station.txt"){
-  get_txt_generic(filepath)
+get_station_txt= function(file = "station.txt",
+                          filepath = lifecycle::deprecated()){
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+  get_txt_generic(file = filepath)
 }
 
 
 #' @rdname get_param_txt
 #' @export
-get_usm_txt= function(filepath="new_travail.usm"){
+get_usm_txt= function(file="new_travail.usm",
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(filepath)",
+                              "get_station_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   get_txt_generic(filepath)
 }
 
@@ -637,8 +725,11 @@ get_usm_txt= function(filepath="new_travail.usm"){
 #'
 #' @description Generic function to read STICS parameter files
 #'
-#' @param filepath The path to the parameter file
+#' @param file Path (including name) of the file to read
 #' @param names    Boolean, read the parameter names ?
+#'
+#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
+#'   longer supported, use `file` instead.
 #'
 #' @return A named (if names=TRUE) list of parameter values
 #' @keywords internal
@@ -649,8 +740,10 @@ get_usm_txt= function(filepath="new_travail.usm"){
 #' get_txt_generic(path)
 #' }
 #'
-get_txt_generic= function(filepath, names=TRUE){
-  params= readLines(filepath)
+get_txt_generic= function(file,
+                          names=TRUE){
+
+  params= readLines(file)
 
   x= as.list(params[!seq_along(params)%%2])
   if(names){
