@@ -65,6 +65,16 @@ upgrade_param_gen_xml <- function(file,
              path = paste0("//param[@nom='",x,"']")))
   lapply(rm_nodes, function(x) removeNodes(x))
 
+
+  # Nodes to change
+  # <param format="real" max="20.0" min="1.0" nom="k_desat">3.0</param>
+  # k_desat to kdesat
+  nodes_to_change <- getNodeS(old_doc, path="//param[@nom='k_desat']")
+  if (!is.null(nodes_to_change))
+    setAttrValues(old_doc, path="//param[@nom='k_desat']", attr_name="nom", values_list = "kdesat")
+
+
+
   # Nodes to add
   new_node <- xmlParseString(
     '<param format="real" max="1.0" min="0.0" nom="GMIN1">0.0007</param>
