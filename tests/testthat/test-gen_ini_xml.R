@@ -3,7 +3,7 @@ library(dplyr)
 # options(warn=-1)
 xl_path= file.path(get_examples_path("xl"), "inputs_stics_example.xlsx")
 
-ini_param <- read_params_table(file_path = xl_path, sheet_name = "Ini")
+ini_param <- read_params_table(file = xl_path, sheet_name = "Ini")
 
 out_dir <- file.path(tempdir(), "gen_xml")
 if(!dir.exists(out_dir)) dir.create(out_dir)
