@@ -37,14 +37,14 @@ download_data= function(out_dir = tempdir(), example_dirs = NULL,
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(dir)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_info(dir)", "get_param_info(out_dir)")
+    lifecycle::deprecate_warn("0.5.0", "download_data(dir)", "download_data(out_dir)")
   }else{
     dir <- out_dir # to remove when we update inside the function
   }
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_info(version_name)", "get_param_info(stics_version)")
+    lifecycle::deprecate_warn("0.5.0", "download_data(version_name)", "download_data(stics_version)")
   }else{
     version_name <- stics_version # to remove when we update inside the function
   }

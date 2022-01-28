@@ -5,23 +5,39 @@
 \title{Generate Stics sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
-  sols_out_file = NULL,
-  sols_nb = NULL,
-  sols_param = NULL,
-  sols_in_file = NULL,
-  stics_version = "latest"
+  file = file.path(getwd(), "sols.xml"),
+  param_df = NULL,
+  template = NULL,
+  stics_version = "latest",
+  sols_in_file = lifecycle::deprecated(),
+  sols_param = lifecycle::deprecated(),
+  sols_out_file = lifecycle::deprecated(),
+  sols_nb = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{sols_out_file}{file path of the output sols xml file (optional)}
+\item{file}{Path (including name) of the sols file to generate.}
 
-\item{sols_nb}{number of soils to create (optional)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
 
-\item{sols_param}{a table (df, tibble) containing parameters to use (see details)}
+\item{template}{Path of a soil xml file to be used as a template. Optional,
+if not provided, the function will use a standard template depending on the stics version.}
 
-\item{sols_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file}
+argument is not provided. In this case the function uses a standard template
+associated to the stics version.}
 
-\item{stics_version}{the stics version to use (optional, default to latest). Only used if sols_in_file= NULL, see details.}
+\item{sols_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_in_file} is no
+longer supported, use \code{template} instead.}
+
+\item{sols_param}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_param} is no
+longer supported, use \code{param_df} instead.}
+
+\item{sols_out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_out_file} is no
+longer supported, use \code{file} instead.}
+
+\item{sols_nb}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_nb} is no
+longer supported, it is now computed in the function.}
 }
 \value{
 an invisible xmlDocument object
@@ -33,7 +49,7 @@ Generate Stics sols xml file from a template or an input file
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
 
-\code{sols_param} is a \code{data.frame} with the following format:\tabular{lrrrrrrr}{
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrrrr}{
    Soil_name \tab argi \tab norg \tab calc \tab pH \tab albedo \tab q0 \tab epc_1 \cr
    USM_T1 \tab 20.35000 \tab 0.100 \tab 0.52 \tab 8.23 \tab 0.22 \tab 9.630 \tab 30 \cr
    LF1 \tab 17.00000 \tab 1.900 \tab 0.00 \tab 6.70 \tab 0.22 \tab 9.360 \tab 30 \cr
@@ -56,13 +72,15 @@ columns give the parameter values to put in the sols.xml file for each soil row.
 
 The first column name must contain the keyword Soil or soil or SOIL as a prefix to be detected
 (as shown in the table extract above).
+
+If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
 \dontrun{
 
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 sols_param_df <- read_params_table(file_path = xl_path, sheet_name = "Soils")
-gen_sols_xml(sols_out_file = "sols.xml", sols_param = sols_param_df)
+gen_sols_xml(file = "sols.xml", param_df = sols_param_df)
 
 }
 

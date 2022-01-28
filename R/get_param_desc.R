@@ -18,7 +18,7 @@ get_param_desc <- function(file_path = NULL,
   # file_path <- file.path(file_path,"config", "inputs.csv"), otherwise
   # check if the file exists in the dir
   if (base::is.null(file_path)) {
-    file_path <- file.path(get_examples_path( file_type = "csv", version_name = version),"inputs.csv")
+    file_path <- file.path(get_examples_path( file_type = "csv", stics_version = version),"inputs.csv")
   }
 
 
@@ -53,4 +53,3 @@ get_param_desc <- function(file_path = NULL,
 
 
 }
-

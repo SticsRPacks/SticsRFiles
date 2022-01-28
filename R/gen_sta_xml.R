@@ -3,7 +3,7 @@
 #' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
 #' @param file Path of a sta xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.
 #' @param out_dir Path of the directory where to generate the file(s).
-#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided to use a standard template depending on the stics version. By default the latest version returned by `get_stics_versions_compat()` is used.
+#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided. In this case the function uses a standard template associated to the stics version.
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
 #'   longer supported, use `param_df` instead.
 #' @param sta_in_file `r lifecycle::badge("deprecated")` `sta_in_file` is no
@@ -11,7 +11,8 @@
 #' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
 #'   longer supported, use `out_dir` instead.
 #'
-#' @details
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'
@@ -26,6 +27,8 @@
 #'
 #' The first column name must contain the keyword sta or Sta or STA as a prefix to be detected
 #' (as shown in the table extract above).
+#'
+#' If not given (the default, `NULL`), the function returns the template as is.
 #'
 #' @return an invisible xmlDocument object or a list of
 #'

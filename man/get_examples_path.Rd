@@ -4,12 +4,20 @@
 \alias{get_examples_path}
 \title{Getting examples files path attached to a STICS version for a given file type}
 \usage{
-get_examples_path(file_type, version_name = "latest")
+get_examples_path(
+  file_type,
+  stics_version = "latest",
+  version_name = lifecycle::deprecated()
+)
 }
 \arguments{
 \item{file_type}{A file type string among files types ("csv", "obs", "sti", "txt", "xml")}
 
-\item{version_name}{An optional version string (default: latest version returned by get_stics_versions_compat())}
+\item{stics_version}{Name of the Stics version. Optional, by default the latest version
+returned by \code{get_stics_versions_compat()} is used.}
+
+\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no
+longer supported, use \code{stics_version} instead.}
 }
 \value{
 A directory path for examples files for given file type and STICS version or
@@ -26,7 +34,7 @@ get_examples_path( file_type = "csv" )
 
 [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V9.1"
 
-get_examples_path( file_type = "csv", version_name = "V8.5")
+get_examples_path( file_type = "csv", stics_version = "V8.5")
 
 [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V8.5"
 

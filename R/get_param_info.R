@@ -17,8 +17,12 @@
 #' in parameters data (i.e.: parameters names, formalisms description,
 #' file names or part to which parameters are attached to)
 #'
-#' @param version Optional, Stics version (default value, "latest")
-#' Only the 2 latest are referenced: V9.0, V9.1
+#' @param stics_version Name of the Stics version. Optional, can be used to search
+#' parameters information relative to a specific Stics version. By default the
+#' latest version returned by `get_stics_versions_compat()` is used.
+#'
+#' @param version `r lifecycle::badge("deprecated")` `version` is no
+#'   longer supported, use `stics_version` instead.
 #'
 #' @details parameter and formalism may be both set or only one of them, but
 #' none of them can be if keyword argument is used.
@@ -38,7 +42,7 @@
 #'
 #' get_param_info(param = "albedo", formalism = "special")
 #'
-#' get_param_info(param = "albedo", version = "V9.0")
+#' get_param_info(param = "albedo", stics_version = "V9.0")
 #'
 #' get_param_info(param = c("alb", "lat"))
 #'
@@ -55,9 +59,10 @@ get_param_info <- function(param = NULL,
                            file = NULL,
                            formalism = NULL,
                            keyword = NULL,
-                           version = "latest",
+                           stics_version = "latest",
                            file_path = lifecycle::deprecated(),
-                           parameter = lifecycle::deprecated()) {
+                           parameter = lifecycle::deprecated(),
+                           version = lifecycle::deprecated()) {
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(file_path)) {
@@ -70,6 +75,12 @@ get_param_info <- function(param = NULL,
     lifecycle::deprecate_warn("0.5.0", "get_param_info(parameter)", "get_param_info(param)")
   }else{
     parameter <- param # to remove when we update inside the function
+  }
+
+  if (lifecycle::is_present(version)) {
+    lifecycle::deprecate_warn("0.5.0", "get_param_info(version)", "get_param_info(stics_version)")
+  }else{
+    version <- stics_version # to remove when we update inside the function
   }
 
   # Defining compatible cases
@@ -198,7 +209,7 @@ get_param_data_df <- function(parameter = NULL,
     version <- get_xml_stics_version(version)
 
     # Getting XML examples files dir from the package
-    xml_dir <- get_examples_path( file_type = "xml", version_name = version)
+    xml_dir <- get_examples_path( file_type = "xml", stics_version = version)
 
     # Getting the XML files list
     files_list <- list.files(path = xml_dir,
@@ -282,4 +293,3 @@ form_list2df <- function(formalism_list) {
   # returning the tibble
   dplyr::as_tibble(dplyr::bind_rows(out))
 }
-

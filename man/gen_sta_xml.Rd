@@ -21,7 +21,7 @@ gen_sta_xml(
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided to use a standard template depending on the stics version. By default the latest version returned by \code{get_stics_versions_compat()} is used.}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
 
 \item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
 longer supported, use \code{param_df} instead.}
@@ -39,6 +39,9 @@ an invisible xmlDocument object or a list of
 Generate Stics sta xml file(s) from a template or an input file
 }
 \details{
+Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+argument \code{stics_version}.
+
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Sta_name \tab zr \tab NH3ref \tab latitude \tab patm \tab aclim \cr
    climatex_sta.xml \tab 2.5 \tab 0 \tab 49 \tab 1000 \tab 20 \cr
@@ -52,6 +55,8 @@ in the file, and each line denotes a separate sta file (for e.g. several USMs).
 
 The first column name must contain the keyword sta or Sta or STA as a prefix to be detected
 (as shown in the table extract above).
+
+If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
 \dontrun{

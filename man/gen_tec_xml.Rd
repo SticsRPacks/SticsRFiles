@@ -22,7 +22,7 @@ gen_tec_xml(
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided to use a standard template depending on the stics version. By default the latest version returned by \code{get_stics_versions_compat()} is used.}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
 
 \item{na_values}{value to use as missing value in param_table (optional, default : NA)}
 
@@ -42,7 +42,10 @@ an invisible xmlDocument object or a list of
 Generate Stics tec xml file(s) from a template or an input file
 }
 \details{
-\code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
+Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+argument \code{stics_version}.
+
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Tec_name \tab julres_1 \tab coderes_1 \tab qres_1 \tab Crespc_1 \tab CsurNres_1 \cr
    USM_2017_T1_CI_tec.xml \tab NA \tab 1 \tab 9 \tab 42 \tab 90 \cr
    BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml \tab 110 \tab 1 \tab 9 \tab 42 \tab 90 \cr
@@ -63,6 +66,8 @@ in the file, and each line denotes a separate tec file (for e.g. several USMs).
 
 The first column name must contain the keyword tec or Tec or TEC as a prefix to be detected
 (as shown in the table extract above).
+
+If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
 \dontrun{

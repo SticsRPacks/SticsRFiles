@@ -22,7 +22,7 @@ gen_usms_xml(
 
 \item{template}{Path of an USM xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided to use a standard template depending on the stics version. By default the latest version returned by \code{get_stics_versions_compat()} is used.}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
 
 \item{usms_out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_out_file} is no
 longer supported, use \code{file} instead.}
@@ -43,6 +43,9 @@ an invisible xmlDocument object
 Generate Stics usms xml file from a template or an input file
 }
 \details{
+Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+argument \code{stics_version}.
+
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrrlll}{
    usm_name \tab datedebut \tab datefin \tab finit \tab nomsol \tab fstation \cr
    USM_2017_T1_CI \tab 199 \tab 263 \tab USM_2017_T1_ini.xml \tab USM_T1 \tab climatex_sta.xml \cr
@@ -65,6 +68,8 @@ columns give the parameter values to put in the usms.xml file for each usm row.
 
 The first column name must contain the keyword Usm or usm or USM as a prefix to be detected
 (as shown in the table extract above).
+
+If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
 \dontrun{

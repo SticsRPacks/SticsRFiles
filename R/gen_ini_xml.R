@@ -5,7 +5,7 @@
 #' @param out_dir Path of the directory where to generate the file(s).
 #' @param crop_tag identifier for the crop parameters names related to the main crop, or the associated crop if any
 #' (example: Crop is used in the param_table example in the details section below)
-#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided to use a standard template depending on the stics version. By default the latest version returned by `get_stics_versions_compat()` is used.
+#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided. In this case the function uses a standard template associated to the stics version.
 #' @param ini_in_file `r lifecycle::badge("deprecated")` `ini_in_file` is no
 #'   longer supported, use `file` instead.
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
@@ -13,7 +13,8 @@
 #' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
 #'   longer supported, use `out_dir` instead.
 #'
-#' @details
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'
@@ -36,6 +37,7 @@
 #' The first column name must contain the keyword ini or Ini or INI as a prefix to be detected
 #' (as shown in the table extract above).
 #'
+#' If not given (the default, `NULL`), the function returns the template as is.
 #'
 #' @return an invisible xmlDocument object or a list of
 #'
