@@ -49,7 +49,8 @@ set_soil_txt(filepath = "param.sol", param, value, layer = NULL)
 
 \item{plant}{Plant index. Optional, only for plant or technical parameters}
 
-\item{variety}{Integer. The plant variety to set the parameter value.}
+\item{variety}{The plant variety to set the parameter value, either the name of the variety
+(\code{codevar} parameter in the plant file) or the index (\code{variete} parameter in the technical file). (optional, see details)}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
@@ -65,6 +66,9 @@ the associated plant in the case of intercrop, or \code{c(1,2)} for both
 Principal and associated plants.
 \code{\link{get_var_info}} is a helper function that returns all possible
 output variables.
+If the \code{variety} is not given and if \code{param} is a varietal parameter,
+the function will modify the value of \code{param} for the simulated variety, as given
+in the technical file.
 }
 \note{
 \code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
