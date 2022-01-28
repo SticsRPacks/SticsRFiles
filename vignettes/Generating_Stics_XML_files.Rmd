@@ -231,7 +231,7 @@ rmarkdown::paged_table(xl_param)
 out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new usms.xml file, for all xl_param lines
-gen_usms_xml(usms_out_file = out_file, usms_param = usms_param)
+gen_usms_xml(file = out_file, param_df = usms_param)
 ```
 
 <!-- active chunk to be run -->
@@ -239,7 +239,7 @@ gen_usms_xml(usms_out_file = out_file, usms_param = usms_param)
 out_file <- file.path(workspace_path,"usms.xml")
 
 # Generating a new usms.xml file, for all xl_param lines
-gen_usms_xml(usms_out_file = out_file, usms_param = xl_param)
+gen_usms_xml(file = out_file, param_df = xl_param)
 ```
 
 ## `usms.xml` file content
