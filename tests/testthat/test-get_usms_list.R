@@ -1,5 +1,5 @@
 library(SticsRFiles)
-options(warn=-1)
+# options(warn=-1)
 xml_usms= file.path(get_examples_path("xml"),"usms.xml")
 usms_names <- get_usms_list(usm_path = xml_usms)
 
