@@ -15,6 +15,8 @@ gen_obs(
 \arguments{
 \item{df}{A data frame containing the values of the observations to use (see Details).}
 
+\item{out_dir}{Path of the directory where to generate the file(s).}
+
 \item{usms_list}{An optional list of usms names to be used for selecting which files to generate
 from the obs_table}
 

@@ -55,7 +55,7 @@
 #' @export
 set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NULL,layer=NULL){
   param= gsub("P_","",param)
-  param_val= get_param_txt(dirpath = dirpath, param = param)
+  param_val= get_param_txt(dirpath = dirpath, param = param, exact=TRUE)
 
   file_type=
     lapply(strsplit(names(param_val),"\\."), function(x){x[1]})%>%
@@ -100,7 +100,7 @@ set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NU
            tmp= lapply(plant, function(x){
              if(is.null(variety)){
                variety=
-                 get_param_txt(dirpath = dirpath, param = "variete")[plant]%>%
+                 get_param_txt(dirpath = dirpath, param = "variete", exact=TRUE)[plant]%>%
                  as.numeric()
              }else{
                if(is.character(variety)){
