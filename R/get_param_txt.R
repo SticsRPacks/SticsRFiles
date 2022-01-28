@@ -148,15 +148,17 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL, exact=FALSE,
 
   param_names <- gsub(pattern = ".*\\.(.*[0-9]{0,})", replacement = "\\1", x = param_names )
 
-  idx_to_fix <- param_names %in% param
-  idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
+  # idx_to_fix <- param_names %in% param
+  # idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
+  idx_plant_to_fix <- grepl("^plant", names(parameters))
 
   if (any(idx_plant_to_fix)) {
     variety_names <- sapply(1:length(varieties), function(i) {varieties[[i]][variety[[i]]]})
-    if(length(variety_names) == 1) variety_names <- rep(variety_names, length(idx_plant_to_fix))
-    # names(parameters)[idx_plant_to_fix]= paste0(gsub("[1-999]","",names(parameters)[idx_plant_to_fix]),
-    #                                       ".",
-    #                                       variety_names[idx_plant_to_fix])
+    if(length(variety_names) == 1) {
+      variety_names <- rep(variety_names, length(idx_plant_to_fix))
+    } else {
+      variety_names <- rep(variety_names, each=length(idx_plant_to_fix)/length(variety_names))
+    }
     names(parameters)[idx_plant_to_fix]= paste0(names(parameters)[idx_plant_to_fix],
                                                 ".",
                                                 variety_names[idx_plant_to_fix])
