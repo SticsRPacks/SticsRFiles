@@ -163,7 +163,7 @@ gen_usms_xml2txt <- function(javastics,
   }
 
   # Retrieving usm names list from the usms.xml file
-  full_usms_list = get_usms_list(usm_path = file.path(workspace_path,"usms.xml"))
+  full_usms_list = get_usms_list(file = file.path(workspace_path,"usms.xml"))
 
   # Do some usms have lai forcing? If so, read it accordingly:
   lai_forcing = get_lai_forcing_xml(file.path(workspace_path,"usms.xml"))

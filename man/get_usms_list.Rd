@@ -4,12 +4,23 @@
 \alias{get_usms_list}
 \title{Getting usms names list for an usms.xml file}
 \usage{
-get_usms_list(usm_path, name = NULL)
+get_usms_list(
+  file,
+  usm = NULL,
+  usm_path = lifecycle::deprecated(),
+  name = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{usm_path}{usm file path (e.g. "usms.xml")}
+\item{file}{Path (including name) of the USM xml file}
 
-\item{name}{A vector of usm name(s) or partial name(s), optional}
+\item{usm}{Vector of USM names (or partial names). Optional, if not provided, the function returns the names of all the USMs included in the given file.}
+
+\item{usm_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_path} is no
+longer supported, use \code{file} instead.}
+
+\item{name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{name} is no
+longer supported, use \code{usm} instead.}
 }
 \value{
 A vector of usm names
@@ -20,8 +31,8 @@ Extracting a usm names list from an usms.xml file
 \examples{
 path = get_examples_path( file_type = "xml")
 
-usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"))
+usms_list <- get_usms_list(file = file.path(path, "usms.xml"))
 
-usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"), name = c("usm1", "usm2"))
+usms_list <- get_usms_list(file = file.path(path, "usms.xml"), usm = c("usm1", "usm2"))
 
 }

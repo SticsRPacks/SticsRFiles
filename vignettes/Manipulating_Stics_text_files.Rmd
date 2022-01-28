@@ -85,7 +85,7 @@ The `get_param_txt()` function is a wrapper around other lower-level functions t
 * get_soil_txt() for the `param.sol` file;
 * get_station_txt() for the `station.txt` file;
 * get_usm_txt() for the `new_travail.usm` file;
-* get_var_mod() for the `var.mod` file;
+* get_varmod() for the `var.mod` file;
 
 All these functions are exported for convenience, but `get_param_txt()` is easier to use.
 
@@ -157,14 +157,14 @@ gen_varmod(workspace = example_txt_dir, var_names = c("lai(n)","masec(n)"))
 Controlling if the values where written:
 
 ```{r}
-get_var_mod(example_txt_dir)
+get_varmod(example_txt_dir)
 ```
 
 Alternatively, the user can append a variable to the pre-existing vector of values using the `append` argument:
 
 ```{r}
 gen_varmod(workspace = example_txt_dir, var_names = c("hauteur"), append = TRUE)
-get_var_mod(example_txt_dir)
+get_varmod(example_txt_dir)
 ```
 
 To get the possible output variables from the model, the user can use the `get_var_info()` function that provide a fuzzy search:

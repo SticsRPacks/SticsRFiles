@@ -1,24 +1,38 @@
 #' @title Getting usms names list for an usms.xml file
 #'
 #' @description Extracting a usm names list from an usms.xml file
-#' @param usm_path usm file path (e.g. "usms.xml")
-#' @param name A vector of usm name(s) or partial name(s), optional
+#' @param usm Vector of USM names (or partial names). Optional, if not provided, the function returns the names of all the USMs included in the given file.
+#' @param file Path (including name) of the USM xml file
+#' @param usm_path `r lifecycle::badge("deprecated")` `usm_path` is no
+#'   longer supported, use `file` instead.
+#' @param name `r lifecycle::badge("deprecated")` `name` is no
+#'   longer supported, use `usm` instead.
 #'
 #' @return A vector of usm names
 #'
 #' @examples
 #' path = get_examples_path( file_type = "xml")
 #'
-#' usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"))
+#' usms_list <- get_usms_list(file = file.path(path, "usms.xml"))
 #'
-#' usms_list <- get_usms_list(usm_path = file.path(path, "usms.xml"), name = c("usm1", "usm2"))
+#' usms_list <- get_usms_list(file = file.path(path, "usms.xml"), usm = c("usm1", "usm2"))
 #'
 #' @export
 #'
-get_usms_list <- function(usm_path, name = NULL){
+get_usms_list <- function(file, usm = NULL, usm_path = lifecycle::deprecated(), name = lifecycle::deprecated() ){
 
   # TODO: add select key: i.e. get all usms names
   # with the same soil, plant 1,...
+  if (lifecycle::is_present(usm_path)) {
+    lifecycle::deprecate_warn("0.5.0", "get_usms_list(usm_path)", "get_usms_list(file)")
+  } else {
+    usm_path <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(name)) {
+    lifecycle::deprecate_warn("0.5.0", "get_usms_list(name)", "get_usms_list(usm)")
+  } else {
+    name <- usm # to remove when we update inside the function
+  }
 
   # Detecting file type
   if ( !is_usms_xml(usm_path) ) {
