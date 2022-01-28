@@ -330,7 +330,7 @@ get_file_from_usms <- function(workspace,
                                verbose = TRUE) {
 
   # Getting usms names from the usms.xml file
-  usms <- get_usms_list(usm_path = file.path(usms_path))
+  usms <- get_usms_list(file = file.path(usms_path))
 
   # Filtering USMs if required:
   if (!is.null(usm_name)){

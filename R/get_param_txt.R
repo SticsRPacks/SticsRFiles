@@ -63,7 +63,7 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL, exact=FALSE,
   soil= get_soil_txt(file.path(dirpath,"param.sol"))
   station= get_station_txt(file.path(dirpath,"station.txt"))
   usm= get_usm_txt(file.path(dirpath,"new_travail.usm"))
-  #output= get_var_mod(dirpath)
+  #output= get_varmod(dirpath)
   tmp= get_tmp_txt(file.path(dirpath,"tempoparv6.sti"))
 
   several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)

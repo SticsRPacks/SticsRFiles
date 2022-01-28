@@ -33,7 +33,7 @@ check_usms_files <- function(workspace_path,
   # TODO: add file type to filter: ftec, fplt,...
 
   # Getting usms_list
-  usms_full_list <- get_usms_list(usm_path = file.path(workspace_path, file_name))
+  usms_full_list <- get_usms_list(file = file.path(workspace_path, file_name))
 
   # Getting the full list or a subset
   if(is.null(usms_list)){
