@@ -5,24 +5,35 @@
 \title{Getting existing xml files path list per usm from an usms.xml file}
 \usage{
 get_usms_files(
-  workspace_path,
+  workspace,
   usms_list = NULL,
-  file_name = "usms.xml",
+  usms_file = "usms.xml",
   file_type = NULL,
-  javastics_path = NULL
+  javastics = NULL,
+  workspace_path = lifecycle::deprecated(),
+  file_name = lifecycle::deprecated(),
+  javastics_path = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{workspace_path}{The path to a JavaStics-compatible workspace}
+\item{workspace}{Path of a JavaStics workspace (i.e. containing the Stics XML input files)}
 
 \item{usms_list}{Vector of usms names (Optional)}
 
-\item{file_name}{Usms XML file name (Optional)}
+\item{usms_file}{Path (including name) of a USM XML file.}
 
 \item{file_type}{Vector of file(s) type to get (if not given, all types are returned, see details)}
 
-\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace_path}
-but rather in the JavaStics default workspace)}
+\item{javastics}{Path of JavaStics. Optional, only needed if the plant files are not in the workspace (in this case the plant files used are those included in the JavaStics distribution)}
+
+\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path} is no
+longer supported, use \code{workspace} instead.}
+
+\item{file_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_name} is no
+longer supported, use \code{usms_file} instead.}
+
+\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
+longer supported, use \code{javastics} instead.}
 }
 \value{
 A named list with existing files path in each usm element
@@ -38,13 +49,13 @@ The possible values of file types are: "fplt", "finit", "fclim1",
 
 \dontrun{
 
-get_usms_files(workspace_path = "/path/to/workspace",
-javastics_path = "/path/to/javastics")
+get_usms_files(workspace = "/path/to/workspace",
+javastics = "/path/to/javastics")
 
-get_usms_files(workspace_path = "/path/to/workspace",
-javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3"))
+get_usms_files(workspace = "/path/to/workspace",
+javastics = "/path/to/javastics", usm_list = c("usm1", "usm3"))
 
-get_usms_files(workspace_path = "/path/to/workspace",
+get_usms_files(workspace = "/path/to/workspace",
 file_type = c("finit", "ftec" ))
 
 
