@@ -1,16 +1,25 @@
 #' @title Generate Stics sols xml file from a template or an input file
 #'
-#' @param sols_out_file file path of the output sols xml file (optional)
+#' @param file Path (including name) of the sols file to generate.
+#' @param sols_out_file `r lifecycle::badge("deprecated")` `sols_out_file` is no
+#'   longer supported, use `file` instead.
 #' @param sols_nb `r lifecycle::badge("deprecated")` `sols_nb` is no
 #'   longer supported, it is now computed in the function.
-#' @param sols_param a table (df, tibble) containing parameters to use (see details)
-#' @param sols_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
-#' @param stics_version the stics version to use (optional, default to latest). Only used if sols_in_file= NULL, see details.
+#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
+#' @param sols_param `r lifecycle::badge("deprecated")` `sols_param` is no
+#'   longer supported, use `param_df` instead.
+#' @param template Path of a soil xml file to be used as a template. Optional,
+#' if not provided, the function will use a standard template depending on the stics version.
+#' @param sols_in_file `r lifecycle::badge("deprecated")` `sols_in_file` is no
+#'   longer supported, use `template` instead.
+#' @param stics_version Name of the Stics version. Optional, used if the `file`
+#' argument is not provided. In this case the function uses a standard template
+#' associated to the stics version.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
 #'
-#'  `sols_param` is a `data.frame` with the following format:
+#'  `param_df` is a `data.frame` with the following format:
 #'
 #'  |Soil_name |     argi|  norg|  calc|   pH| albedo|     q0| epc_1|
 #'  |:---------|--------:|-----:|-----:|----:|------:|------:|-----:|
@@ -35,6 +44,7 @@
 #' The first column name must contain the keyword Soil or soil or SOIL as a prefix to be detected
 #' (as shown in the table extract above).
 #'
+#' If not given (the default, `NULL`), the function returns the template as is.
 #'
 #' @return an invisible xmlDocument object
 #'
@@ -43,7 +53,7 @@
 #'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sols_param_df <- read_params_table(file_path = xl_path, sheet_name = "Soils")
-#' gen_sols_xml(sols_out_file = "sols.xml", sols_param = sols_param_df)
+#' gen_sols_xml(file = "sols.xml", param_df = sols_param_df)
 #'
 #' }
 #'
@@ -51,14 +61,41 @@
 #'
 #'
 #'
-gen_sols_xml <- function(sols_out_file = NULL,
-                         sols_param = NULL,
-                         sols_in_file = NULL,
+gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
+                         param_df = NULL,
+                         template = NULL,
                          stics_version ="latest",
+                         sols_in_file = lifecycle::deprecated(),
+                         sols_param = lifecycle::deprecated(),
+                         sols_out_file = lifecycle::deprecated(),
                          sols_nb = lifecycle::deprecated()) {
 
+  if (lifecycle::is_present(sols_in_file)) {
+    lifecycle::deprecate_warn("0.5.0",
+                              "gen_sols_xml(sols_in_file)",
+                              "gen_sols_xml(template)")
+  } else {
+    sols_in_file <- template
+  }
+
+  if (lifecycle::is_present(sols_param)) {
+    lifecycle::deprecate_warn("0.5.0",
+                              "gen_sols_xml(sols_param)",
+                              "gen_sols_xml(param_df)")
+  } else {
+    sols_param <- param_df
+  }
+
+  if (lifecycle::is_present(sols_out_file)) {
+    lifecycle::deprecate_warn("0.5.0",
+                              "gen_sols_xml(sols_out_file)",
+                              "gen_sols_xml(file)")
+  } else {
+    sols_out_file <- file
+  }
+
   if (lifecycle::is_present(sols_nb)) {
-    lifecycle::deprecate_warn("0.5.0", "add_two(na.rm)",
+    lifecycle::deprecate_warn("0.5.0", "gen_sols_xml(sols_nb)",
                               details = "It is now directly computed in the function.")
   } else {
     sols_nb <- nrow(sols_param)
@@ -76,10 +113,10 @@ gen_sols_xml <- function(sols_out_file = NULL,
   }
 
   xml_doc <- gen_usms_sols_doc(doc_type = "sols",
-                         xml_doc = xml_doc,
-                         nodes_nb = sols_nb,
-                         nodes_param = sols_param,
-                         stics_version = stics_version)
+                               xml_doc = xml_doc,
+                               nodes_nb = sols_nb,
+                               nodes_param = sols_param,
+                               stics_version = stics_version)
 
 
 
