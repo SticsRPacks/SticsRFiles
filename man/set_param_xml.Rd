@@ -8,7 +8,7 @@ set_param_xml(
   file,
   param,
   values,
-  save_as,
+  save_as = NULL,
   select = NULL,
   select_value = NULL,
   overwrite = FALSE,
@@ -21,13 +21,13 @@ set_param_xml(
 )
 }
 \arguments{
-\item{file}{Path of the xml file to modify}
+\item{file}{Path (including name) of the xml file to modify}
 
 \item{param}{Vector of parameter names.}
 
 \item{values}{A vector or a list of parameter(s) values (see details).}
 
-\item{save_as}{Output xml file (!!! Also used for out dir in gen_usms_xml)}
+\item{save_as}{Path (including name) of the xml file to generate. Optional, if NULL \code{file} is overwritten.}
 
 \item{select}{node name or attribute name to use for selection
 (optional, default to no selection)}

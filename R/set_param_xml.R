@@ -3,10 +3,10 @@
 #' @description Setting parameter values for a parameter or a vector of and
 #' with a parameters values vector
 #'
-#' @param file Path of the xml file to modify
+#' @param file Path (including name) of the xml file to modify
 #' @param param Vector of parameter names.
 #' @param values A vector or a list of parameter(s) values (see details).
-#' @param save_as Output xml file (!!! Also used for out dir in gen_usms_xml)
+#' @param save_as Path (including name) of the xml file to generate. Optional, if NULL `file` is overwritten.
 #' @param select node name or attribute name to use for selection
 #' (optional, default to no selection)
 #' @param select_value Vector of values used for select (see examples). Optional, should be provided only if select is provided.
@@ -81,7 +81,7 @@
 set_param_xml <- function(file,
                           param,
                           values,
-                          save_as,
+                          save_as = NULL,
                           select = NULL,
                           select_value = NULL,
                           overwrite = FALSE,
