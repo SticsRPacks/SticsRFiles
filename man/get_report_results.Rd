@@ -7,21 +7,24 @@
 get_report_results(
   workspace,
   file_name = "mod_rapport.sti",
-  usm_name = NULL,
-  var_list = NULL
+  usm = NULL,
+  var_list = NULL,
+  usm_name = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{workspace}{Stics or JavaStics workspace path containing the
-report file}
+\item{workspace}{Path of the directory containing the Stics report file to read.}
 
 \item{file_name}{A report file name among "mod_rapport.sti" (default),
 "mod_rapportA.sti", "mod_rapportP.sti"}
 
-\item{usm_name}{usm name(s) to filter}
+\item{usm}{Vector of USM names. Optional, if not provided, the function returns the results for all USMs.}
 
 \item{var_list}{vector of output variables names to filter
 (optional, see \code{get_var_info()} to get the names of the variables)}
+
+\item{usm_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_name} is no
+longer supported, use \code{usm} instead.}
 }
 \value{
 A data.frame
@@ -39,11 +42,11 @@ names respect the same syntax as in the get_sim output.
 path <- get_examples_path(file_type = "sti")
 get_report_results(workspace = path)
 
-get_report_results(workspace = path, usm_name = c("DurumWheat", "grass") )
+get_report_results(workspace = path, usm = c("DurumWheat", "grass") )
 
 get_report_results(workspace = path, var_list = c("masec(n)", "QNplante") )
 
-get_report_results(workspace = path, usm_name = c("DurumWheat", "grass") )
+get_report_results(workspace = path, usm = c("DurumWheat", "grass") )
 
 get_report_results(workspace = path)
 

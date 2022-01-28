@@ -2,8 +2,10 @@
 #'
 #' @description Extracting plant number from usms.xml or new_travail.usm file data
 #'
-#' @param usm_file_path Path of usms.xml or new_travail.usm file
+#' @param usms_file Path (including name) of a USM xml file or of a new_travail.usm file
 #' @param usms_list Usm(s) name(s) (optional, see details)
+#' @param usm_file_path `r lifecycle::badge("deprecated")` `usm_file_path` is no
+#'   longer supported, use `usms_file` instead.
 #'
 #' @details Use `get_usms_list()` to get the list of the usm names for an usms.xml file.
 #'
@@ -26,8 +28,13 @@
 #'
 #' @export
 #'
-get_plants_nb <- function(usm_file_path, usms_list=c()){
+get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::deprecated()){
 
+  if (lifecycle::is_present(usm_file_path)) {
+    lifecycle::deprecate_warn("1.0.0", "add_two(usm_file_path)", "add_two(usms_file)")
+  } else {
+    usm_file_path <- usms_file # to remove when we update inside the function
+  }
   usm <- grepl(pattern = "\\.usm$", x = usm_file_path)
   usms <- grepl(pattern = "\\.xml$", x = usm_file_path)
 

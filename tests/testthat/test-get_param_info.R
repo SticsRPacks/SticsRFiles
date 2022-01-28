@@ -26,8 +26,8 @@ test_that("regex name", {
 
 
 test_that("different stics versions", {
-  v9.0 <- get_param_info("vitircarbT", version = "V9.0")
-  v9.2 <- get_param_info("vitircarbT", version = "V9.2")
+  v9.0 <- get_param_info("vitircarbT", stics_version = "V9.0")
+  v9.2 <- get_param_info("vitircarbT", stics_version = "V9.2")
 
   testthat::expect_equal(attr(v9.0, "version"), "V9.0")
   testthat::expect_equal(attr(v9.2, "version"), "V9.2")
@@ -36,5 +36,3 @@ test_that("different stics versions", {
   attr(v9.0, "version") = attr(v9.2, "version")
   testthat::expect_equal(v9.0, v9.2)
 })
-
-

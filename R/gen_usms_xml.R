@@ -1,15 +1,22 @@
 #' @title Generate Stics usms xml file from a template or an input file
 #'
-#' @param usms_out_file file path of the output usms xml file (optional)
-#' @param usms_nb number of usms to create (optional)
-#' @param usms_param a table (df, tibble) containing parameters to use (see details)
-#' @param usms_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
-#' @param stics_version the stics version to use (optional, default to latest). Only used if usms_in_file= NULL, see details.
+#' @param file Path (including name) of the usms file to generate. Optional, set to `file.path(getwd(), "usms.xml")`by default.
+#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
+#' @param template Path of an USM xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.
+#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided. In this case the function uses a standard template associated to the stics version.
+#' @param usms_out_file `r lifecycle::badge("deprecated")` `usms_out_file` is no
+#'   longer supported, use `file` instead.
+#' @param usms_nb `r lifecycle::badge("deprecated")` `usms_nb` is no
+#'   longer supported, use `NA` instead.
+#' @param usms_param `r lifecycle::badge("deprecated")` `usms_param` is no
+#'   longer supported, use `param_df` instead.
+#' @param usms_in_file `r lifecycle::badge("deprecated")` `usms_in_file` is no
+#'   longer supported, use `template` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
 #' argument `stics_version`.
 #'
-#'  `usms_param` is a `data.frame` with the following format:
+#'  `param_df` is a `data.frame` with the following format:
 #'
 #'  |usm_name                                  | datedebut| datefin|finit               |nomsol |fstation         |
 #'  |:----------------------------------------|---------:|-------:|:-------------------|:------|:----------------|
@@ -33,6 +40,7 @@
 #' The first column name must contain the keyword Usm or usm or USM as a prefix to be detected
 #' (as shown in the table extract above).
 #'
+#' If not given (the default, `NULL`), the function returns the template as is.
 #'
 #' @return an invisible xmlDocument object
 #'
@@ -48,12 +56,39 @@
 #' @export
 #'
 
-gen_usms_xml <- function(usms_out_file = NULL,
-                         usms_nb = NULL,
-                         usms_param = NULL,
-                         usms_in_file = NULL,
-                         stics_version ="latest") {
+gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
+                         param_df = NULL,
+                         template = NULL,
+                         stics_version ="latest",
+                         usms_out_file = lifecycle::deprecated(),
+                         usms_nb = lifecycle::deprecated(),
+                         usms_param = lifecycle::deprecated(),
+                         usms_in_file = lifecycle::deprecated()) {
 
+  if (lifecycle::is_present(usms_out_file)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_out_file)", "gen_usms_xml(file)")
+  } else {
+    usms_out_file <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(usms_param)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_param)", "gen_usms_xml(param_df)")
+  } else {
+    usms_param <- param_df # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(usms_in_file)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_in_file)", "gen_usms_xml(template)")
+  } else {
+    usms_in_file <- template # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(usms_nb)) {
+    lifecycle::deprecate_warn("0.5.0",
+                              "gen_usms_xml(usms_nb)",
+                              details = "It is now directly computed in the function."
+                              )
+
+  } else {
+    usms_nb <- nrow(param_df) # to remove when we update inside the function
+  }
 
   xml_doc <- NULL
 

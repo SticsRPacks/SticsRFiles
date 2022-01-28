@@ -1,12 +1,17 @@
 #' @title Generating a var.mod type file
 #' @description Generating a daily variable list file from variables names
-#' @param workspace Stics or JavaStics workspace path
-#' @param var_names vector of variables names (see details)
-#' @param append    Boolean (default: FALSE). Append to existing file ?
-#' @param file_name file name to generate (default value: "var.mod")
-#' @param version   The version of the STICS model used (used to check variable names)
+#' @param workspace Path of the directory containing the Stics var.mod file to modify
+#' @param var vector of variables names (see details)
+#' @param append if TRUE, `var` data are appended to `file_name`
+#' @param file_name file name to generate (without path, default value: "var.mod")
+#' @param stics_version   Name of the Stics version (used to check variable names)
 #' @param force     Force variables writing even if they are not a
 #' STICS variable (default: FALSE).
+#'
+#' @param var_names `r lifecycle::badge("deprecated")` `var_names` is no
+#'   longer supported, use `var` instead.
+#' @param version `r lifecycle::badge("deprecated")` `version` is no
+#'   longer supported, use `stics_version` instead.
 #'
 #' @details Variable names can be found using `get_var_info()`. They are
 #' checked before writing. If any variable name does not exist,
@@ -26,8 +31,33 @@
 #'
 #' @export
 #'
-gen_varmod <- function(workspace, var_names, append=FALSE, file_name ="var.mod",
-                       version= "latest", force= FALSE){
+gen_varmod <- function(workspace,
+                       var,
+                       append = FALSE,
+                       file_name ="var.mod",
+                       stics_version = "latest",
+                       force = FALSE,
+                       var_names = lifecycle::deprecated(),
+                       version = lifecycle::deprecated()){
+
+
+  # var_names
+  if (lifecycle::is_present(var_names)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_varmod(var_names)",
+                              "gen_varmod(var)")
+  } else {
+    var_names <- var # to remove when we update inside the function
+  }
+  # version
+  if (lifecycle::is_present(version)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_varmod(version)",
+                              "gen_varmod(stics_version)")
+  } else {
+    version <- stics_version # to remove when we update inside the function
+  }
+
+
+
   # Checking if workspace exists
   if(!dir.exists(workspace)){
     stop(paste(workspace,": directory does not exist !"))

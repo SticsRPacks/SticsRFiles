@@ -6,26 +6,34 @@
 \usage{
 gen_varmod(
   workspace,
-  var_names,
+  var,
   append = FALSE,
   file_name = "var.mod",
-  version = "latest",
-  force = FALSE
+  stics_version = "latest",
+  force = FALSE,
+  var_names = lifecycle::deprecated(),
+  version = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{workspace}{Stics or JavaStics workspace path}
+\item{workspace}{Path of the directory containing the Stics var.mod file to modify}
 
-\item{var_names}{vector of variables names (see details)}
+\item{var}{vector of variables names (see details)}
 
-\item{append}{Boolean (default: FALSE). Append to existing file ?}
+\item{append}{if TRUE, \code{var} data are appended to \code{file_name}}
 
-\item{file_name}{file name to generate (default value: "var.mod")}
+\item{file_name}{file name to generate (without path, default value: "var.mod")}
 
-\item{version}{The version of the STICS model used (used to check variable names)}
+\item{stics_version}{Name of the Stics version (used to check variable names)}
 
 \item{force}{Force variables writing even if they are not a
 STICS variable (default: FALSE).}
+
+\item{var_names}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{var_names} is no
+longer supported, use \code{var} instead.}
+
+\item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
+longer supported, use \code{stics_version} instead.}
 }
 \value{
 Nothing. Writes to a file.

@@ -62,11 +62,11 @@ In the following example `/path/to/target/dir` must be replaced with a real path
 usm_xl_file <- download_usm_xl()
 
 # Getting the file in a specic directory
-xl_dir <- "/path/to/xl/dir" # or something like C:/path/to/xl/dir" for Windows  
+xl_dir <- "/path/to/xl/dir" # or something like C:/path/to/xl/dir" for Windows
 
 usm_xl_file <- download_usm_xl(out_dir = xl_dir)
 
-#> [1] "inputs_stics_example.xlsx  has been copied in directory  
+#> [1] "inputs_stics_example.xlsx  has been copied in directory
 #> "/path/to/xl/dir
 
 ```
@@ -85,11 +85,11 @@ usm_xl_file <-  download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = w
 usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv")
 
 # Getting the file in a specific directory
-csv_dir  <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows  
+csv_dir  <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows
 
 usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", out_dir = csv_dir )
 
-#> [1] inputs_stics_example_USMs.csv  has been copied in directory    
+#> [1] inputs_stics_example_USMs.csv  has been copied in directory
 #> "/path/to/csv/dir
 ```
 
@@ -144,11 +144,11 @@ These first columns may contain either **names identifiers or files names** acco
 
 Other columns of tables are named with **parameters names** according to the fololowing rules:
 
-* Scalar parameters    
+* Scalar parameters
 used parameter names must match the exact parameter names (checking it syntax with the help of the `get_param_info` function)
-* Vector parameters    
+* Vector parameters
 used parameter names must also match real parameter names with adding a suffix indicating their index; for example jultrav_1, jultrav_2, and so on…
-* Exceptions    
+* Exceptions
 in some cases used parameters names in tables may be different from real parameter names
 
 Here is the actual **correspendance table** of `keywords` to be used in parameters tables in replacement of real names:
@@ -173,20 +173,20 @@ So, one must take care of **links between xml files names** for example files na
 
 In future developments, checks will be included to run be run prior to files generations, for preventing errors.
 
-  
+
 ## USMs table example {#usms-table-example}
 
 The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).
 
-The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file. 
+The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file.
 
-  
+
 ```{r, eval = TRUE, echo = FALSE}
 library(readxl)
 xl_param <- read_params_table(usm_xl_file, sheet = "USMs")
 knitr::kable(xl_param)
 ```
-  
+
 
 # Generating the `usms` XML file (*usms.xml*)
 
@@ -199,7 +199,7 @@ The gen_usms_xml function is working on a data.frame object that can be loaded e
 ```{r read_xl_file_usms, eval = FALSE}
 # Reading the Excel file
 usms_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
-# Or 
+# Or
 # Reading the CSV file
 usms_param <- read_params_table(usm_csv_file)
 ```
@@ -220,9 +220,9 @@ xl_param <- read_params_table(usm_xl_file,sheet_name = "USMs")
 
 rmarkdown::paged_table(xl_param)
 ```
-  
-## Generating the file  
-  
+
+## Generating the file
+
 
 <!-- Only for the show -->
 ```{r gen_usms_file, eval = FALSE}
@@ -231,7 +231,7 @@ rmarkdown::paged_table(xl_param)
 out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new usms.xml file, for all xl_param lines
-gen_usms_xml(usms_out_file = out_file, usms_param = usms_param)
+gen_usms_xml(file = out_file, param_df = usms_param)
 ```
 
 <!-- active chunk to be run -->
@@ -239,7 +239,7 @@ gen_usms_xml(usms_out_file = out_file, usms_param = usms_param)
 out_file <- file.path(workspace_path,"usms.xml")
 
 # Generating a new usms.xml file, for all xl_param lines
-gen_usms_xml(usms_out_file = out_file, usms_param = xl_param)
+gen_usms_xml(file = out_file, param_df = xl_param)
 ```
 
 ## `usms.xml` file content
@@ -285,7 +285,7 @@ rmarkdown::paged_table(soils_param)
 out_file <- "/path/to/file/sols.xml" # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new sols.xml file, for all xl_param lines
-gen_sols_xml(sols_out_file = out_file, sols_param = soils_param)
+gen_sols_xml(file = out_file, param_df = soils_param)
 ```
 
 <!-- active chunk to be run -->
@@ -293,7 +293,7 @@ gen_sols_xml(sols_out_file = out_file, sols_param = soils_param)
 out_file <- file.path(workspace_path,"sols.xml")
 
 # Generating a new sols.xml file, for all xl_param lines
-gen_sols_xml(sols_out_file = out_file, sols_param = soils_param)
+gen_sols_xml(file = out_file, param_df = soils_param)
 ```
 
 ## `sols.xml` file content
@@ -440,4 +440,3 @@ Example of a `sta` parameters file content sub-list:
 l <- readLines(con = file.path(workspace_path,"climatex_sta.xml"))
 cat(paste(c(l[1:41],"...",l[length(l)-1]), collapse = "\n"))
 ```
-

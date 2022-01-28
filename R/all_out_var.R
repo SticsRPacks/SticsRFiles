@@ -21,7 +21,7 @@ all_out_var <- function(version = "latest"){
   version <- check_version_compat( version_name = version)
 
   var_df <- utils::read.csv2(
-    file.path(get_examples_path( file_type = "csv", version_name = version ), "outputs.csv"),
+    file.path(get_examples_path( file_type = "csv", stics_version = version ), "outputs.csv"),
     header = FALSE,
     stringsAsFactors = FALSE)[,1:4]
 
@@ -106,6 +106,3 @@ is_stics_var= function(var,version= "latest"){
   }
   return(var_found)
 }
-
-
-

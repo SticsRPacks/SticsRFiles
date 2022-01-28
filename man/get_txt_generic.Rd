@@ -19,7 +19,7 @@ Generic function to read STICS parameter files
 }
 \examples{
 \dontrun{
-path <- file.path(get_examples_path(file_type = "txt", version_name = "V8.5"), "station.txt")
+path <- file.path(get_examples_path(file_type = "txt", stics_version = "V8.5"), "station.txt")
 get_txt_generic(path)
 }
 

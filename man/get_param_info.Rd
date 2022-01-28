@@ -9,9 +9,10 @@ get_param_info(
   file = NULL,
   formalism = NULL,
   keyword = NULL,
-  version = "latest",
+  stics_version = "latest",
   file_path = lifecycle::deprecated(),
-  parameter = lifecycle::deprecated()
+  parameter = lifecycle::deprecated(),
+  version = lifecycle::deprecated()
 )
 }
 \arguments{
@@ -27,14 +28,18 @@ searches information in all standard XML files.}
 in parameters data (i.e.: parameters names, formalisms description,
 file names or part to which parameters are attached to)}
 
-\item{version}{Optional, Stics version (default value, "latest")
-Only the 2 latest are referenced: V9.0, V9.1}
+\item{stics_version}{Name of the Stics version. Optional, can be used to search
+parameters information relative to a specific Stics version. By default the
+latest version returned by \code{get_stics_versions_compat()} is used.}
 
 \item{file_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_path} is no
 longer supported, use \code{file} instead.}
 
 \item{parameter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{parameter} is no
 longer supported, use \code{param} instead.}
+
+\item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
+longer supported, use \code{stics_version} instead.}
 }
 \value{
 A data.frame containing parameters names,
@@ -57,7 +62,7 @@ get_param_info(param = "albedo", file ="/path/to/file.xml")
 
 get_param_info(param = "albedo", formalism = "special")
 
-get_param_info(param = "albedo", version = "V9.0")
+get_param_info(param = "albedo", stics_version = "V9.0")
 
 get_param_info(param = c("alb", "lat"))
 

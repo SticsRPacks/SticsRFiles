@@ -2,10 +2,16 @@
 #'
 #' @description Read the meteorology input for STICS ("climat.txt")
 #'
-#' @param dirpath  Directory path
-#' @param filename The meteorology file name (default to \code{climat.txt}).
+#' @param workspace Path of the workspace containing the Stics climate file to read
+#' @param file_name The meteorology file name (default to \code{climat.txt}).
 #' @param preserve Logical, `TRUE`` for keeping the stics columns related to date (year,
 #' month, day, julian), or only keep the date as a `POSIXct` otherwise. Default to `TRUE`.
+#'
+#' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
+#'   longer supported, use `workspace` instead.
+#' @param filename `r lifecycle::badge("deprecated")` `filename` is no
+#'   longer supported, use `file_name` instead.
+#'
 #'
 #' @note The time-related variables are summarised into one POSIXct column named
 #'       `Date`.
@@ -22,9 +28,29 @@
 #'
 #' @export
 #'
-get_climate_txt= function(dirpath=getwd(),
-                          filename="climat.txt",
-                          preserve = TRUE){
+get_climate_txt= function(workspace = getwd(),
+                          file_name = "climat.txt",
+                          preserve = TRUE,
+                          dirpath = lifecycle::deprecated(),
+                          filename = lifecycle::deprecated()){
+
+  # Managing deprecated arguments
+  # dirpath
+  if (lifecycle::is_present(dirpath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_climate_txt(dirpath)",
+                              "get_climate_txt(workspace)")
+  } else {
+    dirpath <- workspace # to remove when we update inside the function
+  }
+  # filename
+  if (lifecycle::is_present(filename)) {
+    lifecycle::deprecate_warn("0.5.0", "get_climate_txt(filename)",
+                              "get_climate_txt(file_name)")
+  } else {
+    filename <- file_name # to remove when we update inside the function
+  }
+
+
 
   file_path <- file.path(dirpath,filename)
 

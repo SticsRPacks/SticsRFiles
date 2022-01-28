@@ -75,7 +75,7 @@
     xl_name <- xl_patt
   }
 
-  xl_dir <- get_examples_path( file_type = "xl", version_name = version_name)
+  xl_dir <- get_examples_path( file_type = "xl", stics_version = version_name)
 
   files_list <- list.files(xl_dir,pattern = xl_name)
 

@@ -5,23 +5,36 @@
 \title{Generate Stics usms xml file from a template or an input file}
 \usage{
 gen_usms_xml(
-  usms_out_file = NULL,
-  usms_nb = NULL,
-  usms_param = NULL,
-  usms_in_file = NULL,
-  stics_version = "latest"
+  file = file.path(getwd(), "usms.xml"),
+  param_df = NULL,
+  template = NULL,
+  stics_version = "latest",
+  usms_out_file = lifecycle::deprecated(),
+  usms_nb = lifecycle::deprecated(),
+  usms_param = lifecycle::deprecated(),
+  usms_in_file = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{usms_out_file}{file path of the output usms xml file (optional)}
+\item{file}{Path (including name) of the usms file to generate. Optional, set to \code{file.path(getwd(), "usms.xml")}by default.}
 
-\item{usms_nb}{number of usms to create (optional)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
 
-\item{usms_param}{a table (df, tibble) containing parameters to use (see details)}
+\item{template}{Path of an USM xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.}
 
-\item{usms_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
 
-\item{stics_version}{the stics version to use (optional, default to latest). Only used if usms_in_file= NULL, see details.}
+\item{usms_out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_out_file} is no
+longer supported, use \code{file} instead.}
+
+\item{usms_nb}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_nb} is no
+longer supported, use \code{NA} instead.}
+
+\item{usms_param}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_param} is no
+longer supported, use \code{param_df} instead.}
+
+\item{usms_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_in_file} is no
+longer supported, use \code{template} instead.}
 }
 \value{
 an invisible xmlDocument object
@@ -33,7 +46,7 @@ Generate Stics usms xml file from a template or an input file
 Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
 argument \code{stics_version}.
 
-\code{usms_param} is a \code{data.frame} with the following format:\tabular{lrrlll}{
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrrlll}{
    usm_name \tab datedebut \tab datefin \tab finit \tab nomsol \tab fstation \cr
    USM_2017_T1_CI \tab 199 \tab 263 \tab USM_2017_T1_ini.xml \tab USM_T1 \tab climatex_sta.xml \cr
    USM_2018_T1 \tab 264 \tab 570 \tab USM_2017_T1_ini.xml \tab USM_T1 \tab climatex_sta.xml \cr
@@ -55,6 +68,8 @@ columns give the parameter values to put in the usms.xml file for each usm row.
 
 The first column name must contain the keyword Usm or usm or USM as a prefix to be detected
 (as shown in the table extract above).
+
+If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
 \dontrun{

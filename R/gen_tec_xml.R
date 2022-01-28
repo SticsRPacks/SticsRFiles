@@ -3,7 +3,7 @@
 #' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
 #' @param file Path of a tec xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.
 #' @param out_dir Path of the directory where to generate the file(s).
-#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided to use a standard template depending on the stics version. By default the latest version returned by `get_stics_versions_compat()` is used.
+#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided. In this case the function uses a standard template associated to the stics version.
 #' @param na_values value to use as missing value in param_table (optional, default : NA)
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
 #'   longer supported, use `param_df` instead.
@@ -13,9 +13,10 @@
 #'   longer supported, use `out_dir` instead.
 # @param dict List of correspondance between given parameter names and internal names.
 #'
-#' @details
+#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' argument `stics_version`.
 #'
-#'  `param_table` is a `data.frame` with the following format:
+#'  `param_df` is a `data.frame` with the following format:
 #'
 #' |Tec_name                                         | julres_1| coderes_1| qres_1| Crespc_1| CsurNres_1|
 #' |:------------------------------------------------|--------:|---------:|------:|--------:|----------:|
@@ -36,6 +37,8 @@
 #'
 #' The first column name must contain the keyword tec or Tec or TEC as a prefix to be detected
 #' (as shown in the table extract above).
+#'
+#' If not given (the default, `NULL`), the function returns the template as is.
 #'
 #' @return an invisible xmlDocument object or a list of
 #'

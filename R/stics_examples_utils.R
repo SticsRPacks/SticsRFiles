@@ -1,7 +1,10 @@
 #' Getting examples files path attached to a STICS version for a given file type
 #'
 #' @param file_type A file type string among files types ("csv", "obs", "sti", "txt", "xml")
-#' @param version_name An optional version string (default: latest version returned by get_stics_versions_compat())
+#' @param stics_version Name of the Stics version. Optional, by default the latest version
+#' returned by `get_stics_versions_compat()` is used.
+#' @param version_name `r lifecycle::badge("deprecated")` `version_name` is no
+#'   longer supported, use `stics_version` instead.
 #'
 #' @return A directory path for examples files for given file type and STICS version or
 #' NULL if missing file_type (types list is displayed)
@@ -16,12 +19,20 @@
 #'
 #' [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V9.1"
 #'
-#' get_examples_path( file_type = "csv", version_name = "V8.5")
+#' get_examples_path( file_type = "csv", stics_version = "V8.5")
 #'
 #' [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V8.5"
 #'
 #' }
-get_examples_path <- function(file_type, version_name = "latest") {
+get_examples_path <- function(file_type, stics_version = "latest",
+                              version_name =  lifecycle::deprecated()) {
+
+  if (lifecycle::is_present(version_name)) {
+    lifecycle::deprecate_warn("0.5.0", "get_examples_path(version_name)",
+                              "get_examples_path(stics_version)")
+  } else {
+    version_name <- stics_version # to remove when we update inside the function
+  }
 
   # Getting files types list
   example_types <- get_examples_types()
@@ -57,7 +68,7 @@ get_examples_path <- function(file_type, version_name = "latest") {
 # TODO: evaluate if usefull ?
 list_examples_files <- function(file_type, version_name = "latest", full_names = TRUE) {
 
-  examples_path <- get_examples_path(file_type = file_type, version_name = version_name)
+  examples_path <- get_examples_path(file_type = file_type, stics_version = version_name)
 
 
   files_list <- list.files(pattern = "\\.[a-zA-Z]+$", path = examples_path, full.names = full_names)
