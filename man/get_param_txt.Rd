@@ -13,10 +13,11 @@
 \title{Read STICS input parameters from text files}
 \usage{
 get_param_txt(
-  dirpath = getwd(),
+  workspace = getwd(),
   param = NULL,
   variety = NULL,
   exact = FALSE,
+  dirpath = lifecycle::deprecated(),
   ...
 )
 
@@ -48,18 +49,24 @@ get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
 get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
 }
 \arguments{
-\item{dirpath}{USM directory path}
+\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
 
-\item{param}{Parameter name or partial name. Optional, if not provided, the function
-returns an object with all parameters}
+\item{param}{Vector of parameter names. Optional, if not provided,
+the function returns an object with all parameters.}
 
 \item{variety}{Integer. The plant variety to get the parameter from.}
 
 \item{exact}{Boolean indicating if the function must return results only for exact match.}
 
+\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
+longer supported, use \code{workspace} instead.}
+
 \item{...}{Further arguments to pass (for future-proofing only)}
 
 \item{file}{File path}
+
+\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
+longer supported, use \code{file} instead.}
 
 \item{several_fert}{Is there several fertilization in the USM ? See details.}
 
@@ -120,14 +127,14 @@ get_param_txt(path, param='interrang')
 # Getting varietal values:
 
 # Get the leaf lifespan of the variety used in the usm:
-get_param_txt(dirpath = path, param = "durvieF")
+get_param_txt(workspace = path, param = "durvieF")
 # Get the leaf lifespan of another variety available in the plant file:
-get_param_txt(dirpath = path, param = "durvieF", variety = "Furio")
+get_param_txt(workspace = path, param = "durvieF", variety = "Furio")
 # To get the values for several (or all) varieties, either put all varieties:
 varieties= c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
-get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
+get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 # Or get it from the output of the function returning all parameters:
-get_param_txt(dirpath = path)$plant$plant1$durvieF
+get_param_txt(workspace = path)$plant$plant1$durvieF
 }
 
 \dontrun{

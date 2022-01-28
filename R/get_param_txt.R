@@ -3,11 +3,13 @@
 #' @description Read STICS model input parameters from a usm in text format (STICS input)
 #' Generally used after calling building a usm with `JavaStics`.
 #'
-#' @param dirpath      USM directory path
-#' @param param        Parameter name or partial name. Optional, if not provided, the function
-#'                     returns an object with all parameters
+#' @param workspace      Path of the workspace containing the Stics (txt) input files.
+#' @param param        Vector of parameter names. Optional, if not provided,
+#' the function returns an object with all parameters.
 #' @param variety      Either the variety name or index for plant parameters (optional, see details).
 #' @param exact        Boolean indicating if the function must return results only for exact match.
+#' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
+#'   longer supported, use `workspace` instead.
 #' @param ...          Further arguments to pass (for future-proofing only).
 #'
 #' @details If the `variety` is not given and a `param` is asked, the function will return the values
@@ -41,18 +43,31 @@
 #' # Getting varietal values:
 #'
 #' # Get the leaf lifespan of the variety used in the usm:
-#' get_param_txt(dirpath = path, param = "durvieF")
+#' get_param_txt(workspace = path, param = "durvieF")
 #' # Get the leaf lifespan of another variety available in the plant file:
-#' get_param_txt(dirpath = path, param = "durvieF", variety = "Furio")
+#' get_param_txt(workspace = path, param = "durvieF", variety = "Furio")
 #' # To get the values for several (or all) varieties, either put all varieties:
 #' varieties= c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
-#' get_param_txt(dirpath = path, param = "durvieF", variety = varieties)
+#' get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 #' # Or get it from the output of the function returning all parameters:
-#' get_param_txt(dirpath = path)$plant$plant1$durvieF
+#' get_param_txt(workspace = path)$plant$plant1$durvieF
 #' }
 #'
 #' @export
-get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL, exact=FALSE, ...){
+get_param_txt= function(workspace = getwd(),
+                        param = NULL,
+                        variety = NULL,
+                        exact = FALSE,
+                        dirpath = lifecycle::deprecated(),
+                        ...){
+
+  # filepath
+  if (lifecycle::is_present(dirpath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_station_txt(dirpath)",
+                              "get_station_txt(workspace)")
+  } else {
+    dirpath <- workspace # to remove when we update inside the function
+  }
 
   dot_args= list(...) # Future-proof the function. We can add arguments now without
   # breaking it. I think for example to a "version argument" because the tec file is not
@@ -181,11 +196,14 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL, exact=FALSE,
 #' @description Read a specific STICS model input parameter file.
 #' Users would generally use the wrapper `get_param_txt()` instead.
 #'
-#' @param file     File path
+#' @param file File path
 #' @param several_fert Is there several fertilization in the USM ? See details.
 #' @param several_thin Is there several thinning in the USM ? See details.
 #' @param is_pasture   Is the plant a pasture ? See details.
 #' @param variety      Integer. The plant variety to get the parameter from.
+#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
+#'   longer supported, use `file` instead.
+#'
 #' @param ...          Further arguments to pass (for future-proofing only)
 #'
 #' @details `several_fert`, `several_thin` and `is_pasture` are read from the tmp
