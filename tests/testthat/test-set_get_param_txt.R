@@ -26,10 +26,10 @@ test_that ("variety argument can be a vector of characters", {
 })
 
 # Get and modify the non-varietal parameter "forme" (another parameter has a similar name : rapforme ...)
-tmp <- get_param_txt(dirpath = path, param = "forme")
+tmp <- get_param_txt(dirpath = path, param = "forme", exact=TRUE)
 set_param_txt(dirpath = path, param = "forme",
               value=as.numeric(tmp)+1)
-tmp2 <- get_param_txt(dirpath = path, param = "forme")
+tmp2 <- get_param_txt(dirpath = path, param = "forme", exact=TRUE)
 test_that ("Set and get of a non-varietal parameter for a unique plant", {
   expect_equal(length(tmp),1)
   expect_equal(as.numeric(tmp)+1,as.numeric(tmp2))
@@ -61,11 +61,11 @@ file.copy(from=file.path(path,list.files(path)), to=tempdir(), overwrite = TRUE)
 path <- tempdir()
 
 # Get and modify the non-varietal parameter "forme" for the simulated variety
-tmp <- get_param_txt(dirpath = path, param = "forme")
+tmp <- get_param_txt(dirpath = path, param = "forme", exact=TRUE)
 plant <- 2
 set_param_txt(dirpath = path, param = "forme",
               value=as.numeric(tmp[plant])+1, plant=plant)
-tmp2 <- get_param_txt(dirpath = path, param = "forme")
+tmp2 <- get_param_txt(dirpath = path, param = "forme", exact=TRUE)
 test_that ("Set and get of a non-varietal parameter for an intercrop for the simulated variety", {
   expect_equal(as.numeric(tmp[plant])+1,as.numeric(tmp2[plant]))
 })

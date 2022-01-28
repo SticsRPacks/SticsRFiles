@@ -4,9 +4,10 @@
 #' Generally used after calling building a usm with `JavaStics`.
 #'
 #' @param dirpath      USM directory path
-#' @param param        Parameter name. Optional, if not provided, the function
-#'                     return an object with all parameters
+#' @param param        Parameter name or partial name. Optional, if not provided, the function
+#'                     returns an object with all parameters
 #' @param variety      Either the variety name or index for plant parameters (optional, see details).
+#' @param exact        Boolean indicating if the function must return results only for exact match.
 #' @param ...          Further arguments to pass (for future-proofing only).
 #'
 #' @details If the `variety` is not given and a `param` is asked, the function will return the values
@@ -51,7 +52,7 @@
 #' }
 #'
 #' @export
-get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
+get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL, exact=FALSE, ...){
 
   dot_args= list(...) # Future-proof the function. We can add arguments now without
   # breaking it. I think for example to a "version argument" because the tec file is not
@@ -131,7 +132,11 @@ get_param_txt= function(dirpath= getwd(),param= NULL,variety= NULL,...){
   # For escaping braces and catching the right name
   param <- gsub(pattern = "\\(", x=param, replacement="\\\\(\\1")
   param <- gsub(pattern = "\\)", x=param, replacement="\\\\)\\1")
-  parameters= parameters[grep(paste0("\\.",param,"[\\(\\)0-9]{0,}$"),names(parameters))]
+  if (exact) {
+    parameters= parameters[grep(paste0("\\.",param,"[\\(\\)0-9]{0,}$"),names(parameters))]
+  } else {
+    parameters= parameters[grep(paste0(param,"[\\(\\)0-9]{0,}$"),names(parameters))]
+  }
 
   if(length(parameters)==0){
     stop(param," parameter not found")
