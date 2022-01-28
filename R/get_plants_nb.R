@@ -46,7 +46,7 @@ get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::de
   if (usm){
     return(get_plants_nb_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
   }else{
-    return(get_plants_nb_xml(usm_xml_path = usm_file_path, usms_list = usms_list))
+    return(get_plants_nb_xml(usms_file = usm_file_path, usms_list = usms_list))
   }
   stop("Couldn't read the number of plants")
 }
@@ -56,8 +56,11 @@ get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::de
 #'
 #' @description Extracting plant number from usms.xml file data
 #'
-#' @param usm_xml_path Path of usms.xml file
+#' @param usms_file Path of usms.xml file
 #' @param usms_list Usms selection list inside usms from usms.xml file (optional, see details)
+#'
+#' @param usm_xml_path `r lifecycle::badge("deprecated")` `usm_xml_path` is no
+#'   longer supported, use `usms_file` instead.
 #'
 #' @details Use `get_usms_list()` to get the list of the usm names.
 #'
@@ -66,15 +69,25 @@ get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::de
 #' @examples
 #' \dontrun{
 
-#' xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
-#' get_plants_nb(xml_usms)
-#' get_plants_nb(xml_usms,"wheat")
-#' get_plants_nb(xml_usms,c("wheat","intercrop_pea_barley"))
+#' usms_file <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+#' get_plants_nb(usms_file)
+#' get_plants_nb(usms_file,"wheat")
+#' get_plants_nb(usms_file,c("wheat","intercrop_pea_barley"))
 #' }
 #'
 #' @keywords internal
 #'
-get_plants_nb_xml <- function(usm_xml_path, usms_list=c()){
+get_plants_nb_xml <- function(usms_file,
+                              usms_list=c(),
+                              usm_xml_path = lifecycle::deprecated()){
+
+  # usm_xml_path
+  if (lifecycle::is_present(usm_xml_path)) {
+    lifecycle::deprecate_warn("0.5.0", "get_plants_nb_xml(usm_xml_path)",
+                              "get_plants_nb_xml(usms_file)")
+  } else {
+    usm_xml_path <- usms_file # to remove when we update inside the function
+  }
 
   # Loading xml file as xmlDocument object
   xml_usms=xmldocument(usm_xml_path)

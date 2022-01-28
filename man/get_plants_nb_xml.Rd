@@ -4,12 +4,19 @@
 \alias{get_plants_nb_xml}
 \title{Getting plants number per usm, all or selected from a given list}
 \usage{
-get_plants_nb_xml(usm_xml_path, usms_list = c())
+get_plants_nb_xml(
+  usms_file,
+  usms_list = c(),
+  usm_xml_path = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{usm_xml_path}{Path of usms.xml file}
+\item{usms_file}{Path of usms.xml file}
 
 \item{usms_list}{Usms selection list inside usms from usms.xml file (optional, see details)}
+
+\item{usm_xml_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_xml_path} is no
+longer supported, use \code{usms_file} instead.}
 }
 \value{
 A names numeric vector of plants number per usm
@@ -22,10 +29,10 @@ Use \code{get_usms_list()} to get the list of the usm names.
 }
 \examples{
 \dontrun{
-xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
-get_plants_nb(xml_usms)
-get_plants_nb(xml_usms,"wheat")
-get_plants_nb(xml_usms,c("wheat","intercrop_pea_barley"))
+usms_file <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+get_plants_nb(usms_file)
+get_plants_nb(usms_file,"wheat")
+get_plants_nb(usms_file,c("wheat","intercrop_pea_barley"))
 }
 
 }
