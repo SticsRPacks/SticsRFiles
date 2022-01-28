@@ -96,7 +96,7 @@ get_param_bounds <- function(xml_doc,
   #print(xpath)
 
   # Fixing bounds values
-  bounds_values <- list(fix_bounds(bounds_values, bounds_name))
+  bounds_values <- list(fix_bounds(bounds_values, bounds_name, param_name))
   names(bounds_values) <- param_name
 
   # For returning a data.frame
@@ -112,9 +112,9 @@ get_param_bounds <- function(xml_doc,
 
 }
 
-fix_bounds <- function(values, bounds_name) {
+fix_bounds <- function(values, bounds_name, param_name) {
 
-  values <- fix_dup_bounds(values, bounds_name)
+  values <- fix_dup_bounds(values, bounds_name, param_name)
 
   values <- fix_missing_bounds(values, bounds_name)
 
@@ -158,7 +158,7 @@ fix_missing_bounds <- function(values, bounds_name) {
 }
 
 
-fix_dup_bounds <- function(values, bounds_name) {
+fix_dup_bounds <- function(values, bounds_name, param_name) {
 
 
   # Fixing duplicates
@@ -178,9 +178,9 @@ fix_dup_bounds <- function(values, bounds_name) {
   }
 
   if (any(duplicates)) {
-    warning(paste("Found duplicate values in bound(s) \n",
+    warning(paste("Found different values in bound(s) \n",
                   paste(bounds_name[duplicates], collapse = ", "),
-                  "\n","They have been replaced with min or max values !\n",
+                  "\nfor parameter",param_name,"\nA single value has been selected.\n",
                   paste(sprintf("%s: %s",bounds_name[duplicates],
                         as.character(values[duplicates])), collapse = "\n")))
   }
