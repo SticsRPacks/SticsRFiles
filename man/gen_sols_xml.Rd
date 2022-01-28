@@ -6,22 +6,23 @@
 \usage{
 gen_sols_xml(
   sols_out_file = NULL,
-  sols_nb = NULL,
   sols_param = NULL,
   sols_in_file = NULL,
-  stics_version = "latest"
+  stics_version = "latest",
+  sols_nb = lifecycle::deprecated()
 )
 }
 \arguments{
 \item{sols_out_file}{file path of the output sols xml file (optional)}
-
-\item{sols_nb}{number of soils to create (optional)}
 
 \item{sols_param}{a table (df, tibble) containing parameters to use (see details)}
 
 \item{sols_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
 
 \item{stics_version}{the stics version to use (optional, default to latest). Only used if sols_in_file= NULL, see details.}
+
+\item{sols_nb}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_nb} is no
+longer supported, it is now computed in the function.}
 }
 \value{
 an invisible xmlDocument object
