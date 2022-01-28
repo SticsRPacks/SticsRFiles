@@ -118,7 +118,7 @@ get_usms_files <- function(workspace_path,
                                       select_value = usm_name), use.names = F)
 
     # For selecting plant files regarding plants number
-    plants_sel <- 1:get_plants_nb(usm_file_path = usms_xml_path,usms_list = usm_name)
+    plants_sel <- 1:get_plants_nb(usms_file = usms_xml_path,usms_list = usm_name)
 
     # Getting all usms xml files, except plant files
     usm_files <- unique(usm_files[usm_files != "null"])
