@@ -5,11 +5,11 @@
 #'
 #' @param workspace  Path of the workspace containing the Stics (txt) input files.
 #' @param file Path to the parameter file
-#' @param param    Parameter name
+#' @param param    Vector of parameter names.
 #' @param value    New parameter value
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
 #' Only used for plant or technical parameters.
-#' @param add      Boolean. Append input to existing file (add to the list)
+#' @param append      Boolean. Append input to existing file
 #' @param variety  The plant variety to set the parameter value, either the name of the variety
 #' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
@@ -17,6 +17,8 @@
 #'   longer supported, use `workspace` instead.
 #' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
 #'   longer supported, use `file` instead.
+#' @param add `r lifecycle::badge("deprecated")` `add` is no
+#'   longer supported, use `append` instead.
 #' @param plant `r lifecycle::badge("deprecated")` `plant` is no
 #'   longer supported, use `plant_id` instead.
 #'
@@ -63,11 +65,12 @@
 set_param_txt= function(workspace = getwd(),
                         param,
                         value,
-                        add = FALSE,
+                        append = FALSE,
                         plant_id = 1,
                         variety = NULL,
                         layer = NULL,
                         dirpath = lifecycle::deprecated(),
+                        add = lifecycle::deprecated(),
                         plant = lifecycle::deprecated()){
 
   # dirpath
@@ -76,6 +79,14 @@ set_param_txt= function(workspace = getwd(),
                               "set_param_txt(workspace)")
   } else {
     dirpath <- workspace # to remove when we update inside the function
+  }
+
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_txt(add)",
+                              "set_param_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
   # plant
@@ -102,32 +113,32 @@ set_param_txt= function(workspace = getwd(),
   switch(file_type,
          ini= {
            set_ini_txt(file = file.path(dirpath,"ficini.txt"),
-                   param = param, value = value, add= add)
+                       param = param, value = value, add= add)
          },
          general= {
            set_general_txt(file = file.path(dirpath,"tempopar.sti"),
-                       param = param, value = value, add= add)
+                           param = param, value = value, append= add)
          },
          tmp= {
            set_tmp_txt(file = file.path(dirpath,"tempoparV6.sti"),
-                   param = param, value = value, add= add)
+                       param = param, value = value, append= add)
          },
          soil= {
            set_soil_txt(file = file.path(dirpath,"param.sol"),
-                    param = param, value = value, layer= layer)
+                        param = param, value = value, layer= layer)
          },
          usm= {
            set_usm_txt(file = file.path(dirpath,"new_travail.usm"),
-                   param = param, value = value)
+                       param = param, value = value)
          },
          station= {
            set_station_txt(file = file.path(dirpath,"station.txt"),
-                       param = param, value = value, add= add)
+                           param = param, value = value, append= add)
          },
          tec= {
            tmp= lapply(plant, function(x){
              set_tec_txt(file = file.path(dirpath,paste0("fictec",x,".txt")),
-                     param = param, value = value, add= add)
+                         param = param, value = value, append= add)
            })
          },
          plant= {
@@ -147,7 +158,7 @@ set_param_txt= function(workspace = getwd(),
                }
              }
              set_plant_txt(file = file.path(dirpath,paste0("ficplt",x,".txt")),
-                       param = param, value = value, add= add, variety = variety)
+                           param = param, value = value, append= add, variety = variety)
            })
          },
          stop("Parameter not found")
@@ -160,15 +171,23 @@ set_param_txt= function(workspace = getwd(),
 set_usm_txt= function(file = "new_travail.usm",
                       param,
                       value,
-                      add = F,
-                      filepath = lifecycle::deprecated()){
+                      append = FALSE,
+                      filepath = lifecycle::deprecated(),
+                      add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_usm_txt(filepath)",
+                              "set_usm_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
+  }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_usm_txt(add)",
+                              "set_usm_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
   set_file_txt(filepath,param,value,add)
@@ -179,15 +198,23 @@ set_usm_txt= function(file = "new_travail.usm",
 set_station_txt= function(file = "station.txt",
                           param,
                           value,
-                          add = F,
-                          filepath = lifecycle::deprecated()){
+                          append = FALSE,
+                          filepath = lifecycle::deprecated(),
+                          add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_station_txt(filepath)",
+                              "set_station_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
+  }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_txt(add)",
+                              "set_param_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
   set_file_txt(filepath,param,value,add)
@@ -199,15 +226,23 @@ set_station_txt= function(file = "station.txt",
 set_ini_txt= function(file = "ficini.txt",
                       param,
                       value,
-                      add = F,
-                      filepath = lifecycle::deprecated()){
+                      append = FALSE,
+                      filepath = lifecycle::deprecated(),
+                      add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_ini_txt(filepath)",
+                              "set_ini_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
+  }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_ini_txt(add)",
+                              "set_ini_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
   set_file_txt(filepath,param,value,add)
@@ -219,15 +254,23 @@ set_ini_txt= function(file = "ficini.txt",
 set_general_txt= function(file = "tempopar.sti",
                           param,
                           value,
-                          add = F,
-                          filepath = lifecycle::deprecated()){
+                          append = FALSE,
+                          filepath = lifecycle::deprecated(),
+                          add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_general_txt(filepath)",
+                              "set_general_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
+  }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_general_txt(add)",
+                              "set_general_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
 
@@ -239,15 +282,23 @@ set_general_txt= function(file = "tempopar.sti",
 set_tmp_txt= function(file = "tempoparv6.sti",
                       param,
                       value,
-                      add = F,
-                      filepath = lifecycle::deprecated()){
+                      append = FALSE,
+                      filepath = lifecycle::deprecated(),
+                      add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_tmp_txt(filepath)",
+                              "set_tmp_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
+  }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_tmp_txt(add)",
+                              "set_tmp_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
 
@@ -259,17 +310,26 @@ set_tmp_txt= function(file = "tempoparv6.sti",
 set_plant_txt= function(file = "ficplt1.txt",
                         param,
                         value,
-                        add = F,
+                        append = FALSE,
                         variety= NULL,
-                        filepath = lifecycle::deprecated()){
+                        filepath = lifecycle::deprecated(),
+                        add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_plant_txt(filepath)",
+                              "set_plant_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
   }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_plant_txt(add)",
+                              "set_plant_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
+  }
+
   set_file_txt(filepath,param,value,add,variety)
 }
 
@@ -278,15 +338,23 @@ set_plant_txt= function(file = "ficplt1.txt",
 set_tec_txt= function(file = "fictec1.txt",
                       param,
                       value,
-                      add = F,
-                      filepath = lifecycle::deprecated()){
+                      append = FALSE,
+                      filepath = lifecycle::deprecated(),
+                      add = lifecycle::deprecated()){
 
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+                              "set_tec_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
+  }
+  # add
+  if (lifecycle::is_present(add)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_txt(add)",
+                              "set_tec_txt(append)")
+  } else {
+    add <- append # to remove when we update inside the function
   }
 
   set_file_txt(filepath,param,value,add)
@@ -302,12 +370,11 @@ set_soil_txt= function(file = "param.sol",
 
   # filepath
   if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
-                              "get_ini_txt(file)")
+    lifecycle::deprecate_warn("0.5.0", "set_soil_txt(filepath)",
+                              "set_soil_txt(file)")
   } else {
     filepath <- file # to remove when we update inside the function
   }
-
 
   param= gsub("P_","",param)
   ref= get_soil_txt(filepath)
@@ -370,7 +437,7 @@ set_soil_txt= function(file = "param.sol",
 #' @param file Path to the parameter file
 #' @param param    Parameter name
 #' @param value    New parameter value
-#' @param add      Boolean. Append input to existing file (add to the list)
+#' @param append      Boolean. Append input to existing file
 #'
 #' @details The function uses `base::sys.call()` to know from which function
 #'          of the \code{set_*} family it is called, so it won't work properly if called
@@ -385,7 +452,7 @@ set_soil_txt= function(file = "param.sol",
 set_file_txt= function(file,
                        param,
                        value,
-                       add,
+                       append,
                        variety= NULL){
 
   param= gsub("P_","",param)
@@ -427,7 +494,7 @@ set_file_txt= function(file,
   )
 
   if(!length(ref_index)>0){
-    if(add){
+    if(append){
       value= paste(value, collapse = " ")
       params= c(params,param,value)
       ref_index= grep(param_,params)+1
@@ -435,7 +502,7 @@ set_file_txt= function(file,
       stop(paste(param,"parameter not found in:\n",file))
     }
   }else{
-    if(add){
+    if(append){
       stop(paste("Parameter",param,"already present in the file, try to replace its value",
                  "instead of adding the parameter"))
     }

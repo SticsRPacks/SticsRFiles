@@ -16,11 +16,12 @@ set_param_txt(
   workspace = getwd(),
   param,
   value,
-  add = FALSE,
+  append = FALSE,
   plant_id = 1,
   variety = NULL,
   layer = NULL,
   dirpath = lifecycle::deprecated(),
+  add = lifecycle::deprecated(),
   plant = lifecycle::deprecated()
 )
 
@@ -28,57 +29,64 @@ set_usm_txt(
   file = "new_travail.usm",
   param,
   value,
-  add = F,
-  filepath = lifecycle::deprecated()
+  append = FALSE,
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_station_txt(
   file = "station.txt",
   param,
   value,
-  add = F,
-  filepath = lifecycle::deprecated()
+  append = FALSE,
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_ini_txt(
   file = "ficini.txt",
   param,
   value,
-  add = F,
-  filepath = lifecycle::deprecated()
+  append = FALSE,
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_general_txt(
   file = "tempopar.sti",
   param,
   value,
-  add = F,
-  filepath = lifecycle::deprecated()
+  append = FALSE,
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_tmp_txt(
   file = "tempoparv6.sti",
   param,
   value,
-  add = F,
-  filepath = lifecycle::deprecated()
+  append = FALSE,
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_plant_txt(
   file = "ficplt1.txt",
   param,
   value,
-  add = F,
+  append = FALSE,
   variety = NULL,
-  filepath = lifecycle::deprecated()
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_tec_txt(
   file = "fictec1.txt",
   param,
   value,
-  add = F,
-  filepath = lifecycle::deprecated()
+  append = FALSE,
+  filepath = lifecycle::deprecated(),
+  add = lifecycle::deprecated()
 )
 
 set_soil_txt(
@@ -92,11 +100,11 @@ set_soil_txt(
 \arguments{
 \item{workspace}{Path of the workspace containing the Stics (txt) input files.}
 
-\item{param}{Parameter name}
+\item{param}{Vector of parameter names.}
 
 \item{value}{New parameter value}
 
-\item{add}{Boolean. Append input to existing file (add to the list)}
+\item{append}{Boolean. Append input to existing file}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
 Only used for plant or technical parameters.}
@@ -108,6 +116,9 @@ Only used for plant or technical parameters.}
 
 \item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
 longer supported, use \code{workspace} instead.}
+
+\item{add}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{add} is no
+longer supported, use \code{append} instead.}
 
 \item{plant}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plant} is no
 longer supported, use \code{plant_id} instead.}

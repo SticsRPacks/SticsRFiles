@@ -4,7 +4,7 @@
 \alias{set_file_txt}
 \title{Internal function to set some STICS input file parameters}
 \usage{
-set_file_txt(file, param, value, add, variety = NULL)
+set_file_txt(file, param, value, append, variety = NULL)
 }
 \arguments{
 \item{file}{Path to the parameter file}
@@ -13,7 +13,7 @@ set_file_txt(file, param, value, add, variety = NULL)
 
 \item{value}{New parameter value}
 
-\item{add}{Boolean. Append input to existing file (add to the list)}
+\item{append}{Boolean. Append input to existing file}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input
