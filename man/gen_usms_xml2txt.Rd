@@ -6,33 +6,54 @@
 content}
 \usage{
 gen_usms_xml2txt(
-  javastics_path,
-  workspace_path = NULL,
-  target_path = NULL,
-  usms_list = c(),
+  javastics,
+  workspace = NULL,
+  out_dir = NULL,
+  usm = c(),
   verbose = TRUE,
   dir_per_usm_flag = TRUE,
-  check_files = TRUE
+  check = TRUE,
+  javastics_path = lifecycle::deprecated(),
+  workspace_path = lifecycle::deprecated(),
+  target_path = lifecycle::deprecated(),
+  usms_list = lifecycle::deprecated(),
+  check_files = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{javastics_path}{Path of JavaStics installation directory}
+\item{javastics}{Path of JavaStics.}
 
-\item{workspace_path}{Path of a JavaStics workspace (Optional), if not
-provided the current workspace stored in JavaStics preferences will be used.}
+\item{workspace}{Path of a JavaStics workspace
+(i.e. containing the Stics XML input files). Optional, if not provided
+the current workspace stored in JavaStics preferences will be used.}
 
-\item{target_path}{The path of the directory where to create usms directories (Optional),
+\item{out_dir}{The path of the directory where to create usms directories (Optional),
 if not provided the JavaStics workspace will be used as root}
 
-\item{usms_list}{List of usms to generate (Optional). If not provided, all
+\item{usm}{List of usms to generate (Optional). If not provided, all
 usms contained in workspace_path/usms.xml file will be generated.}
 
-\item{verbose}{Logical value for displaying information  while running (TRUE) ot not (FALSE)}
+\item{verbose}{Logical value for displaying information while running}
 
 \item{dir_per_usm_flag}{logical, TRUE if one want to create one directory per USM,
 FALSE if USM files are generated in the target_path (only useful for usms_list of size one)}
 
-\item{check_files}{Logical, TRUE to check if usms files exist, FALSE otherwise}
+\item{check}{Logical, TRUE to check if usms files exist, FALSE otherwise}
+
+\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
+longer supported, use \code{javastics} instead.}
+
+\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path} is no
+longer supported, use \code{workspace} instead.}
+
+\item{target_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{target_path} is no
+longer supported, use \code{out_dir} instead.}
+
+\item{usms_list}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_list} is no
+longer supported, use \code{usm} instead.}
+
+\item{check_files}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{check_files} is no
+longer supported, use \code{check} instead.}
 }
 \value{
 A list with named elements:
@@ -53,17 +74,17 @@ or in a subdirectory.
 \examples{
 \dontrun{
 javastics <- "/path/to/javastics"
-javastics_workspace <- "/path/to/workspace"
+workspace <- "/path/to/workspace"
 
 # For all usms
 gen_usms_xml2txt(javastics, javastics_workspace)
 
 # For an usms list
 usm_list <- c("usm1", "usm2")
-gen_usms_xml2txt(javastics, javastics_workspace, usm_list)
+gen_usms_xml2txt(javastics, workspace, usm_list)
 
 # For one usm
-gen_usms_xml2txt(javastics, javastics_workspace, dir_per_usm_flag=F, "usm1")
+gen_usms_xml2txt(javastics, workspace, dir_per_usm_flag=F, "usm1")
 
 }
 
