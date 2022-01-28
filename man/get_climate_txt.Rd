@@ -4,14 +4,26 @@
 \alias{get_climate_txt}
 \title{Read STICS input meteo file}
 \usage{
-get_climate_txt(dirpath = getwd(), filename = "climat.txt", preserve = TRUE)
+get_climate_txt(
+  workspace = getwd(),
+  file_name = "climat.txt",
+  preserve = TRUE,
+  dirpath = lifecycle::deprecated(),
+  filename = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{dirpath}{Directory path}
+\item{workspace}{Path of the workspace containing the Stics climate file to read}
 
-\item{filename}{The meteorology file name (default to \code{climat.txt}).}
+\item{file_name}{The meteorology file name (default to \code{climat.txt}).}
 
 \item{preserve}{Logical, \verb{TRUE`` for keeping the stics columns related to date (year, month, day, julian), or only keep the date as a }POSIXct\verb{otherwise. Default to}TRUE`.}
+
+\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
+longer supported, use \code{workspace} instead.}
+
+\item{filename}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filename} is no
+longer supported, use \code{file_name} instead.}
 }
 \value{
 A data.frame of the input meteorological variables used as input for the
