@@ -81,15 +81,14 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
     usms_in_file <- template # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_nb)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_nb)", "gen_usms_xml(NA)")
+    lifecycle::deprecate_warn("0.5.0",
+                              "gen_usms_xml(usms_nb)",
+                              details = "It is now directly computed in the function."
+                              )
+
   } else {
     usms_nb <- nrow(param_df) # to remove when we update inside the function
   }
-
-  #' @param usms_nb `r lifecycle::badge("deprecated")` `usms_nb` is no
-  #'   longer supported, use `NA` instead.
-
-
 
   xml_doc <- NULL
 
