@@ -8,11 +8,12 @@ set_param_xml(
   file,
   param,
   values,
-  out_path = NULL,
+  save_as,
   select = NULL,
   select_value = NULL,
   overwrite = FALSE,
   xml_file = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated(),
   param_name = lifecycle::deprecated(),
   param_value = lifecycle::deprecated(),
   value = lifecycle::deprecated(),
@@ -26,8 +27,7 @@ set_param_xml(
 
 \item{values}{A vector or a list of parameter(s) values (see details).}
 
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use save_as instead.}
+\item{save_as}{Output xml file (!!! Also used for out dir in gen_usms_xml)}
 
 \item{select}{node name or attribute name to use for selection
 (optional, default to no selection)}
@@ -39,6 +39,9 @@ longer supported, use save_as instead.}
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use file instead.}
 
+\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
+longer supported, use save_as instead.}
+
 \item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
 longer supported, use param instead.}
 
@@ -49,8 +52,6 @@ longer supported, use values instead.}
 longer supported, use select_value instead.}
 
 \item{...}{Pass further arguments to \code{set_param_value()}.}
-
-\item{save_as}{Output xml file (!!! Also used for out dir in gen_usms_xml)}
 }
 \value{
 A logical value TRUE for operation success, FALSE otherwise
