@@ -1,5 +1,5 @@
 library(SticsRFiles)
-options(warn=-1)
+# options(warn=-1)
 xml_dir <- get_examples_path("xml")
 xml_plt= file.path(xml_dir,"file_plt.xml")
 xml_sols= file.path(xml_dir,"sols.xml")
