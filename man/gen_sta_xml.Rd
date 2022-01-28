@@ -5,20 +5,32 @@
 \title{Generate Stics sta xml file(s) from a template or an input file}
 \usage{
 gen_sta_xml(
-  param_table = NULL,
-  sta_in_file = NULL,
-  out_path = getwd(),
-  stics_version = "latest"
+  param_df = NULL,
+  file = NULL,
+  out_dir = getwd(),
+  stics_version = "latest",
+  param_table = lifecycle::deprecated(),
+  sta_in_file = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{param_table}{a table (df, tibble) containing parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
 
-\item{sta_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
+\item{file}{Path of a sta xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.}
 
-\item{out_path}{path to an optional folder where to write the output file(s)}
+\item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{the stics version to use (optional, default to latest). Only used if sta_in_file= NULL, see details.}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided to use a standard template depending on the stics version. By default the latest version returned by \code{get_stics_versions_compat()} is used.}
+
+\item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
+longer supported, use \code{param_df} instead.}
+
+\item{sta_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sta_in_file} is no
+longer supported, use \code{file} instead.}
+
+\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
+longer supported, use \code{out_dir} instead.}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -27,10 +39,7 @@ an invisible xmlDocument object or a list of
 Generate Stics sta xml file(s) from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
-argument \code{stics_version}.
-
-\code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Sta_name \tab zr \tab NH3ref \tab latitude \tab patm \tab aclim \cr
    climatex_sta.xml \tab 2.5 \tab 0 \tab 49 \tab 1000 \tab 20 \cr
    climatex2_sta.xml \tab 2.8 \tab 0 \tab 49 \tab 1000 \tab 20 \cr
@@ -49,7 +58,7 @@ The first column name must contain the keyword sta or Sta or STA as a prefix to 
 
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 sta_param_df <- read_params_table(file_path = xl_path, sheet_name = "Station")
-gen_sta_xml(out_path = "/path/to/dest/dir", param_table = sta_param_df)
+gen_sta_xml(out_dir = "/path/to/dest/dir", param_df = sta_param_df)
 
 }
 

@@ -5,23 +5,35 @@
 \title{Generate Stics tec xml file(s) from a template or an input file}
 \usage{
 gen_tec_xml(
-  param_table = NULL,
-  tec_in_file = NULL,
-  out_path = getwd(),
+  param_df = NULL,
+  file = NULL,
+  out_dir = getwd(),
   stics_version = "latest",
-  na_values = NA
+  na_values = NA,
+  param_table = lifecycle::deprecated(),
+  tec_in_file = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{param_table}{a table (df, tibble) containing parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
 
-\item{tec_in_file}{file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)}
+\item{file}{Path of a tec xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.}
 
-\item{out_path}{path to an optional folder where to write the output file(s)}
+\item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{the stics version to use (optional, default to latest). Only used if tec_in_file= NULL, see details.}
+\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided to use a standard template depending on the stics version. By default the latest version returned by \code{get_stics_versions_compat()} is used.}
 
 \item{na_values}{value to use as missing value in param_table (optional, default : NA)}
+
+\item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
+longer supported, use \code{param_df} instead.}
+
+\item{tec_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{tec_in_file} is no
+longer supported, use \code{file} instead.}
+
+\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
+longer supported, use \code{out_dir} instead.}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -30,9 +42,6 @@ an invisible xmlDocument object or a list of
 Generate Stics tec xml file(s) from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
-argument \code{stics_version}.
-
 \code{param_table} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Tec_name \tab julres_1 \tab coderes_1 \tab qres_1 \tab Crespc_1 \tab CsurNres_1 \cr
    USM_2017_T1_CI_tec.xml \tab NA \tab 1 \tab 9 \tab 42 \tab 90 \cr
@@ -60,7 +69,7 @@ The first column name must contain the keyword tec or Tec or TEC as a prefix to 
 
 xl_path <-  download_usm_xl(file = "inputs_stics_example.xlsx")
 tec_param_df <- read_params_table(file_path = xl_path, sheet_name = "Tec")
-gen_tec_xml(out_path = "/path/to/dest/dir", param_table = tec_param_df)
+gen_tec_xml(out_dir = "/path/to/dest/dir", param_df = tec_param_df)
 
 }
 
