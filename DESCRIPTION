@@ -127,7 +127,7 @@ Collate:
     'get_usms_files.R'
     'get_usms_list.R'
     'get_values_by_param.R'
-    'get_var_mod.R'
+    'get_varmod.R'
     'get_xml_base_doc.R'
     'get_xml_base_node.R'
     'get_xml_doc_example.R'
