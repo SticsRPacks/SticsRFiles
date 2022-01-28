@@ -614,11 +614,7 @@ set_param_xml(sols, param = c("argi", "pH"), values = list(50,8), select = "sol"
               select_value = "solcanne", overwrite = T )
 
 # Controlling written values
-<<<<<<< HEAD
-get_param_xml(sols,param_name = c("argi", "pH") , select = "sol",
-=======
 get_param_xml(sols, param = c("argi", "pH") , select = "sol",
->>>>>>> 37b85efac1d2e149f04e7acdfa2a8f7fe1b7a87c
               select_value = "solcanne")
 ```
 
@@ -629,22 +625,14 @@ get_param_xml(sols, param = c("argi", "pH") , select = "sol",
 ## For all soil layers
 
 # Initial values
-<<<<<<< HEAD
-get_param_xml(sols, param_name = c("epc", "infil"), select = "sol",
-=======
 get_param_xml(sols, param = c("epc", "infil"), select = "sol",
->>>>>>> 37b85efac1d2e149f04e7acdfa2a8f7fe1b7a87c
               select_value = "solcanne" )
 
 # Setting new values
 set_param_xml(sols, param = c("epc", "infil"), values = list(18:22,48:52), select = "sol", select_value = "solcanne", overwrite = T )
 
 # Controlling written values
-<<<<<<< HEAD
-get_param_xml(sols, param_name = c("epc", "infil"), select = "sol",
-=======
 get_param_xml(sols, param = c("epc", "infil"), select = "sol",
->>>>>>> 37b85efac1d2e149f04e7acdfa2a8f7fe1b7a87c
               select_value = "solcanne" )
 ```
 

@@ -1,14 +1,19 @@
 #' @title Generate Stics sta xml file(s) from a template or an input file
 #'
-#' @param param_table a table (df, tibble) containing parameters to use (see details)
-#' @param sta_in_file file path to an XML file (optional, if not povided, uses a template from the package corresponding to stics_version)
-#' @param out_path path to an optional folder where to write the output file(s)
-#' @param stics_version the stics version to use (optional, default to latest). Only used if sta_in_file= NULL, see details.
+#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
+#' @param file Path of a sta xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.
+#' @param out_dir Path of the directory where to generate the file(s).
+#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided to use a standard template depending on the stics version. By default the latest version returned by `get_stics_versions_compat()` is used.
+#' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
+#'   longer supported, use `param_df` instead.
+#' @param sta_in_file `r lifecycle::badge("deprecated")` `sta_in_file` is no
+#'   longer supported, use `file` instead.
+#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
+#'   longer supported, use `out_dir` instead.
 #'
-#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
-#' argument `stics_version`.
+#' @details
 #'
-#'  `param_table` is a `data.frame` with the following format:
+#'  `param_df` is a `data.frame` with the following format:
 #'
 #'  |Sta_name         |  zr| NH3ref| latitude| patm| aclim|
 #'  |:----------------|---:|------:|--------:|----:|-----:|
@@ -29,17 +34,37 @@
 #'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sta_param_df <- read_params_table(file_path = xl_path, sheet_name = "Station")
-#' gen_sta_xml(out_path = "/path/to/dest/dir", param_table = sta_param_df)
+#' gen_sta_xml(out_dir = "/path/to/dest/dir", param_df = sta_param_df)
 #'
 #'}
 #'
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_xml <- function(param_table = NULL,
-                        sta_in_file = NULL,
-                        out_path = getwd(),
-                        stics_version ="latest") {
+gen_sta_xml <- function(param_df = NULL,
+                        file = NULL,
+                        out_dir = getwd(),
+                        stics_version ="latest",
+                        param_table = lifecycle::deprecated(),
+                        sta_in_file = lifecycle::deprecated(),
+                        out_path = lifecycle::deprecated()) {
+
+  if (lifecycle::is_present(param_table)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(param_table)", "gen_sta_xml(param_df)")
+  } else {
+    param_table <- param_df # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(sta_in_file)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(sta_in_file)", "gen_sta_xml(file)")
+  } else {
+    sta_in_file <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(out_path)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(out_path)", "gen_sta_xml(out_dir)")
+  } else {
+    out_path <- out_dir # to remove when we update inside the function
+  }
+
 
   xml_doc <- NULL
 

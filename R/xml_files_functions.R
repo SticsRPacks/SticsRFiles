@@ -191,6 +191,17 @@ get_xml_doc <- function(xml_file_or_doc) {
 
 }
 
+
+node_exist <- function(xml_file_or_doc, xpath) {
+  xml_doc <-  get_xml_doc(xml_file_or_doc)
+
+  nodes <- getNodeS(xml_doc, xpath)
+
+  if (is.null(nodes)) return(FALSE)
+
+  unlist(lapply(nodes, function(x) !is.null(x)))
+}
+
 # TODO: compare with SticsRFiles existing functions
 # and evaluate if following func are useful or not
 # get_nodes <- function(xml_doc, what, elt_name) {
