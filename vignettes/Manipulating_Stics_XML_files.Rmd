@@ -145,12 +145,12 @@ standard distribution (some of them have been renamed).
 In xml_dir, we store the directory path of the XML files available in the SticsRFiles installation directory.
 
 ```{r set_xml_dir, echo = FALSE}
-xml_dir <- get_examples_path( file_type = "xml", version_name = version_name)
+xml_dir <- get_examples_path( file_type = "xml", stics_version = version_name)
 
 ```
 
 ```{r, eval=FALSE}
-xml_dir <- get_examples_path( file_type = "xml", version_name = version_name)
+xml_dir <- get_examples_path( file_type = "xml", stics_version = version_name)
 
 # For linux
 #> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1"

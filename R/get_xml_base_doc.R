@@ -49,7 +49,7 @@ get_xml_base_doc <- function(xml_type = NULL,
   pref <- files_pref[idx]
 
   # getting a default xmldocument object template
-  tmpl_file <- file.path(get_examples_path( file_type = "xml_tmpl", version_name = stics_version),
+  tmpl_file <- file.path(get_examples_path( file_type = "xml_tmpl", stics_version = stics_version),
                          paste0(pref,"_",xml_type,".xml"))
   xml_doc_object <- xmldocument(tmpl_file)
 

@@ -198,7 +198,7 @@ get_param_data_df <- function(parameter = NULL,
     version <- get_xml_stics_version(version)
 
     # Getting XML examples files dir from the package
-    xml_dir <- get_examples_path( file_type = "xml", version_name = version)
+    xml_dir <- get_examples_path( file_type = "xml", stics_version = version)
 
     # Getting the XML files list
     files_list <- list.files(path = xml_dir,
@@ -282,4 +282,3 @@ form_list2df <- function(formalism_list) {
   # returning the tibble
   dplyr::as_tibble(dplyr::bind_rows(out))
 }
-

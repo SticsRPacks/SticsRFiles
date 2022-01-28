@@ -35,7 +35,7 @@ get_xml_doc_example <- function(xml_name = NULL,
   }
 
   # getting a default xmldocument object template
-  xml_file <- file.path(get_examples_path( file_type = "xml", version_name = stics_version),xml_name)
+  xml_file <- file.path(get_examples_path( file_type = "xml", stics_version = stics_version),xml_name)
   xml_doc_object <- xmldocument(xml_file)
 
   return(xml_doc_object)
