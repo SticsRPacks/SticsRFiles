@@ -9,39 +9,53 @@
 #' or in a subdirectory.
 #'
 #'
-#' @param javastics_path Path of JavaStics installation directory
-#' @param workspace_path Path of a JavaStics workspace (Optional), if not
-#' provided the current workspace stored in JavaStics preferences will be used.
-#' @param target_path The path of the directory where to create usms directories (Optional),
+#' @param javastics Path of JavaStics.
+#' @param workspace Path of a JavaStics workspace
+#' (i.e. containing the Stics XML input files). Optional, if not provided
+#' the current workspace stored in JavaStics preferences will be used.
+#' @param out_dir The path of the directory where to create usms directories (Optional),
 #' if not provided the JavaStics workspace will be used as root
-#' @param usms_list List of usms to generate (Optional). If not provided, all
+#' @param usm List of usms to generate (Optional). If not provided, all
 #' usms contained in workspace_path/usms.xml file will be generated.
-#' @param verbose Logical value for displaying information  while running (TRUE) ot not (FALSE)
+#' @param verbose Logical value for displaying information while running
 #' @param dir_per_usm_flag logical, TRUE if one want to create one directory per USM,
 #' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
-#' @param check_files Logical, TRUE to check if usms files exist, FALSE otherwise
+#' @param check Logical, TRUE to check if usms files exist, FALSE otherwise
+#'
+#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path` is no
+#'   longer supported, use `javastics` instead.
+#' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path` is no
+#'   longer supported, use `workspace` instead.
+#' @param target_path `r lifecycle::badge("deprecated")` `target_path` is no
+#'   longer supported, use `out_dir` instead.
+#' @param usms_list `r lifecycle::badge("deprecated")` `usms_list` is no
+#'   longer supported, use `usm` instead.
+#' @param check_files `r lifecycle::badge("deprecated")` `check_files` is no
+#'   longer supported, use `check` instead.
+#'
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing Stics input files),
 #' files : generated files list (in JavaStics workspace origin),
-#' copy_status : logical value vector, indicating if all files have been generated for each usm
+#' copy_status : logical value vector, indicating if all files have been
+#' generated for each usm
 #' obs_copy_status : logical value vector, indicating if observaion files have been
 #' successfully copied in usms directories
 #'
 #' @examples
 #' \dontrun{
 #' javastics <- "/path/to/javastics"
-#' javastics_workspace <- "/path/to/workspace"
+#' workspace <- "/path/to/workspace"
 #'
 #' # For all usms
-#' gen_usms_xml2txt(javastics, javastics_workspace)
+#' gen_usms_xml2txt(javastics, workspace)
 #'
 #' # For an usms list
-#' usm_list <- c("usm1", "usm2")
-#' gen_usms_xml2txt(javastics, javastics_workspace, usm_list)
+#' usm <- c("usm1", "usm2")
+#' gen_usms_xml2txt(javastics, workspace, usm)
 #'
 #' # For one usm
-#' gen_usms_xml2txt(javastics, javastics_workspace, dir_per_usm_flag=F, "usm1")
+#' gen_usms_xml2txt(javastics, workspace, dir_per_usm_flag = FALSE, "usm1")
 #'
 #' }
 #'
@@ -49,13 +63,58 @@
 #'
 #'
 
-gen_usms_xml2txt <- function(javastics_path,
-                             workspace_path = NULL,
-                             target_path = NULL,
-                             usms_list = c(),
+gen_usms_xml2txt <- function(javastics,
+                             workspace = NULL,
+                             out_dir = NULL,
+                             usm = c(),
                              verbose = TRUE,
-                             dir_per_usm_flag=TRUE,
-                             check_files = TRUE) {
+                             dir_per_usm_flag = TRUE,
+                             check = TRUE,
+                             javastics_path = lifecycle::deprecated(),
+                             workspace_path = lifecycle::deprecated(),
+                             target_path = lifecycle::deprecated(),
+                             usms_list = lifecycle::deprecated(),
+                             check_files = lifecycle::deprecated()) {
+
+
+
+  # javastics_path
+  if (lifecycle::is_present(javastics_path)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml2txt(javastics_path)",
+                              "gen_usms_xml2txt(javastics)")
+  } else {
+    javastics_path <- javastics # to remove when we update inside the function
+  }
+  # workspace_path
+  if (lifecycle::is_present(workspace_path)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml2txt(workspace_path)",
+                              "gen_usms_xml2txt(workspace)")
+  } else {
+    workspace_path <- workspace # to remove when we update inside the function
+  }
+  # target_path
+  if (lifecycle::is_present(target_path)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml2txt(target_path)",
+                              "gen_usms_xml2txt(out_dir)")
+  } else {
+    target_path <- out_dir # to remove when we update inside the function
+  }
+  # usms_list
+  if (lifecycle::is_present(usms_list)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml2txt(usms_list)",
+                              "gen_usms_xml2txt(usm)")
+  } else {
+    usms_list <- usm # to remove when we update inside the function
+  }
+
+  # check_files
+  if (lifecycle::is_present(check_files)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml2txt(check_files)",
+                              "gen_usms_xml2txt(check)")
+  } else {
+    check_files <- check # to remove when we update inside the function
+  }
+
   # overwrite = FALSE,parallelized = FALSE, exec_time = FALSE) {
 
 
