@@ -78,7 +78,7 @@ get_param_txt= function(workspace = getwd(),
   soil= get_soil_txt(file.path(dirpath,"param.sol"))
   station= get_station_txt(file.path(dirpath,"station.txt"))
   usm= get_usm_txt(file.path(dirpath,"new_travail.usm"))
-  #output= get_var_mod(dirpath)
+  #output= get_varmod(dirpath)
   tmp= get_tmp_txt(file.path(dirpath,"tempoparv6.sti"))
 
   several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
@@ -163,15 +163,17 @@ get_param_txt= function(workspace = getwd(),
 
   param_names <- gsub(pattern = ".*\\.(.*[0-9]{0,})", replacement = "\\1", x = param_names )
 
-  idx_to_fix <- param_names %in% param
-  idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
+  # idx_to_fix <- param_names %in% param
+  # idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
+  idx_plant_to_fix <- grepl("^plant", names(parameters))
 
   if (any(idx_plant_to_fix)) {
     variety_names <- sapply(1:length(varieties), function(i) {varieties[[i]][variety[[i]]]})
-    if(length(variety_names) == 1) variety_names <- rep(variety_names, length(idx_plant_to_fix))
-    # names(parameters)[idx_plant_to_fix]= paste0(gsub("[1-999]","",names(parameters)[idx_plant_to_fix]),
-    #                                       ".",
-    #                                       variety_names[idx_plant_to_fix])
+    if(length(variety_names) == 1) {
+      variety_names <- rep(variety_names, length(idx_plant_to_fix))
+    } else {
+      variety_names <- rep(variety_names, each=length(idx_plant_to_fix)/length(variety_names))
+    }
     names(parameters)[idx_plant_to_fix]= paste0(names(parameters)[idx_plant_to_fix],
                                                 ".",
                                                 variety_names[idx_plant_to_fix])

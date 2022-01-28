@@ -1,5 +1,5 @@
 library(SticsRFiles)
-options(warn=-1)
+# options(warn=-1)
 xml_path= file.path(get_examples_path("xml"), "param_newform.xml")
 context("Getting newform param values")
 

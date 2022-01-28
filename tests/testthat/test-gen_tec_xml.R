@@ -1,6 +1,6 @@
 library(SticsRFiles)
 library(dplyr)
-options(warn=-1)
+# options(warn=-1)
 xl_path= file.path(get_examples_path("xl"), "inputs_stics_example.xlsx")
 
 tec_param <- read_params_table(file_path = xl_path, sheet_name = "Tec")

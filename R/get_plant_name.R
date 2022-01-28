@@ -46,7 +46,7 @@ get_plant_name= function(workspace,
   usms_filename <- basename(usms_path)
 
   # getting usms names from the usms.xml file:
-  usms= get_usms_list(usm_path = usms_path)
+  usms= get_usms_list(file = usms_path)
 
   # Filtering USMs if required:
   if(!is.null(usm_name)){

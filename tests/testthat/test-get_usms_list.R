@@ -1,7 +1,7 @@
 library(SticsRFiles)
-options(warn=-1)
+# options(warn=-1)
 xml_usms= file.path(get_examples_path("xml"),"usms.xml")
-usms_names <- get_usms_list(usm_path = xml_usms)
+usms_names <- get_usms_list(file = xml_usms)
 
 # Testing returned type for one or several files
 context("Getting returned type")
@@ -31,7 +31,7 @@ test_that("name, one file", {
 context("getting usms names with partial match search")
 
 test_that("with or without success", {
-  expect_equal(get_usms_list(usm_path = xml_usms, name = "to"),c("potato", "tomato", "proto_rice"))
-  expect_equal(get_usms_list(usm_path = xml_usms, name = "zzz"), character(0))
+  expect_equal(get_usms_list(file = xml_usms, name = "to"),c("potato", "tomato", "proto_rice"))
+  expect_equal(get_usms_list(file = xml_usms, name = "zzz"), character(0))
 })
 

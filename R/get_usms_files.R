@@ -115,7 +115,7 @@ get_usms_files <- function(workspace,
   }
 
   # Getting usms_list
-  usms_full_list <- get_usms_list(usm_path = usms_xml_path)
+  usms_full_list <- get_usms_list(file = usms_xml_path)
 
   # Getting the full list or a subset
   if(is.null(usms_list)){
