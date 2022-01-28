@@ -11,7 +11,8 @@ gen_varmod(
   file_name = "var.mod",
   stics_version = "latest",
   force = FALSE,
-  var_names = lifecycle::deprecated()
+  var_names = lifecycle::deprecated(),
+  version = lifecycle::deprecated()
 )
 }
 \arguments{
