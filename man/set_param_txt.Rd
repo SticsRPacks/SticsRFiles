@@ -13,33 +13,84 @@
 \title{Set (replace) STICS input file parameters}
 \usage{
 set_param_txt(
-  dirpath = getwd(),
+  workspace = getwd(),
   param,
   value,
   add = FALSE,
-  plant = 1,
+  plant_id = 1,
   variety = NULL,
-  layer = NULL
+  layer = NULL,
+  dirpath = lifecycle::deprecated(),
+  plant = lifecycle::deprecated()
 )
 
-set_usm_txt(filepath = "new_travail.usm", param, value, add = F)
+set_usm_txt(
+  file = "new_travail.usm",
+  param,
+  value,
+  add = F,
+  filepath = lifecycle::deprecated()
+)
 
-set_station_txt(filepath = "station.txt", param, value, add = F)
+set_station_txt(
+  file = "station.txt",
+  param,
+  value,
+  add = F,
+  filepath = lifecycle::deprecated()
+)
 
-set_ini_txt(filepath = "ficini.txt", param, value, add = F)
+set_ini_txt(
+  file = "ficini.txt",
+  param,
+  value,
+  add = F,
+  filepath = lifecycle::deprecated()
+)
 
-set_general_txt(filepath = "tempopar.sti", param, value, add = F)
+set_general_txt(
+  file = "tempopar.sti",
+  param,
+  value,
+  add = F,
+  filepath = lifecycle::deprecated()
+)
 
-set_tmp_txt(filepath = "tempoparv6.sti", param, value, add = F)
+set_tmp_txt(
+  file = "tempoparv6.sti",
+  param,
+  value,
+  add = F,
+  filepath = lifecycle::deprecated()
+)
 
-set_plant_txt(filepath = "ficplt1.txt", param, value, add = F, variety = NULL)
+set_plant_txt(
+  file = "ficplt1.txt",
+  param,
+  value,
+  add = F,
+  variety = NULL,
+  filepath = lifecycle::deprecated()
+)
 
-set_tec_txt(filepath = "fictec1.txt", param, value, add = F)
+set_tec_txt(
+  file = "fictec1.txt",
+  param,
+  value,
+  add = F,
+  filepath = lifecycle::deprecated()
+)
 
-set_soil_txt(filepath = "param.sol", param, value, layer = NULL)
+set_soil_txt(
+  file = "param.sol",
+  param,
+  value,
+  layer = NULL,
+  filepath = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{dirpath}{USM directory path}
+\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
 
 \item{param}{Parameter name}
 
@@ -47,14 +98,24 @@ set_soil_txt(filepath = "param.sol", param, value, layer = NULL)
 
 \item{add}{Boolean. Append input to existing file (add to the list)}
 
-\item{plant}{Plant index. Optional, only for plant or technical parameters}
+\item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
+Only used for plant or technical parameters.}
 
 \item{variety}{The plant variety to set the parameter value, either the name of the variety
 (\code{codevar} parameter in the plant file) or the index (\code{variete} parameter in the technical file). (optional, see details)}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
-\item{filepath}{Path to the parameter file}
+\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
+longer supported, use \code{workspace} instead.}
+
+\item{plant}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plant} is no
+longer supported, use \code{plant_id} instead.}
+
+\item{file}{Path to the parameter file}
+
+\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
+longer supported, use \code{file} instead.}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input
@@ -81,21 +142,21 @@ variables required from STICS, please directly call \code{gen_varmod}.
 path = get_examples_path( file_type = "txt" )
 
 # Replace the interrow distance parameter to 0.01:
-set_param_txt(dirpath = path, param = "interrang", value = 0.01)
+set_param_txt(workspace = path, param = "interrang", value = 0.01)
 
 # Change the value of durvieF for the current variety:
-set_param_txt(dirpath = path, param = "durvieF", value = 245)
+set_param_txt(workspace = path, param = "durvieF", value = 245)
 
 # Change the value of durvieF for another variety:
-set_param_txt(dirpath = path, param = "durvieF", variety = "Nefer", value = 178)
+set_param_txt(workspace = path, param = "durvieF", variety = "Nefer", value = 178)
 
 # Change the value of infil for a given layer:
-set_param_txt(dirpath = path, param = "infil", layer = 2, value = 60)
+set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 
 # If the parameter is found in several files, use the set_* functions direclty, e.g.
 # cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
 # change its value in the soil file, we use set_soil_txt():
-set_soil_txt(filepath = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
+set_soil_txt(file = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
 }
 
 }

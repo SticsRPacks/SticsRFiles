@@ -47,31 +47,31 @@ example_txt_dir <- get_examples_path( file_type = "txt", stics_version = "V9.0")
 
 ## Getting parameter value
 
-`get_param_txt()` helps to get the value of a given parameter in a USM. It has two arguments, the directory of the USM (`dirpath`, where the text files lives), and the parameter name (`param`).
+`get_param_txt()` helps to get the value of a given parameter in a USM. It has two arguments, the directory of the USM (`workspace`, where the text files lives), and the parameter name (`param`).
 
 For example to get the value of the atmospheric pressure:
 
 ```{r}
-get_param_txt(dirpath = example_txt_dir, param='patm')
+get_param_txt(workspace = example_txt_dir, param='patm')
 ```
 
 The function returns a vector with all the values found for the parameter (here "1000") named according to the file where it found the parameter value (here "station"), along with the parameter name as found in the file. The function performs a fuzzy search, so the name of the parameter can be only partially given, e.g.:
 
 ```{r}
-get_param_txt(dirpath = example_txt_dir, param='atm')
+get_param_txt(workspace = example_txt_dir, param='atm')
 ```
 
 Note that the function does not require the user to know in which file the parameter is because it search the parameter in all files. So if it finds several parameter with the same given name, it will return all:
 
 ```{r}
-get_param_txt(dirpath = example_txt_dir, param='a')
+get_param_txt(workspace = example_txt_dir, param='a')
 ```
 Here we see another peculiarity: the name associated to the value has more information for the plant file, e.g. " plant.plant1.P_Nmeta" instead of " plant.P_Nmeta". This is because a USM can potentially have two plant files if it is an intercrop, so the function returns the plant file index where the parameter was found.
 
 It is the same case for the tec file:
 
 ```{r}
-get_param_txt(dirpath = example_txt_dir, param='interrang')
+get_param_txt(workspace = example_txt_dir, param='interrang')
 ```
 
 
@@ -94,12 +94,12 @@ All these functions are exported for convenience, but `get_param_txt()` is easie
 The `get_climate_txt()` function helps to get the data from the `climat.txt` file, and is used as:
 
 ```{r eval=FALSE}
-get_climate_txt(dirpath = example_txt_dir)
+get_climate_txt(workspace = example_txt_dir)
 ```
 
 ```{r echo=FALSE}
 library(dplyr)
-get_climate_txt(dirpath = example_txt_dir) %>%
+get_climate_txt(workspace = example_txt_dir) %>%
   rmarkdown::paged_table()
 ```
 
@@ -109,23 +109,23 @@ The function adds a `Date` column that is at the standard `POSIXct` format for c
 
 ## Setting parameter value
 
-`set_param_txt()` is used to set the value of a given parameter in a USM. It has three main arguments, the directory of the USM (`dirpath`, where the text files lives), the parameter name (`param`), and the new value of the parameter.
+`set_param_txt()` is used to set the value of a given parameter in a USM. It has three main arguments, the directory of the USM (`workspace`, where the text files lives), the parameter name (`param`), and the new value of the parameter.
 
 For example to set the value of the atmospheric pressure read above to 1000:
 
 ```{r}
-set_param_txt(dirpath = example_txt_dir, param='patm', value = 1000)
+set_param_txt(workspace = example_txt_dir, param='patm', value = 1000)
 ```
 
 Now we can check that the value is changed:
 
 ```{r}
-get_param_txt(dirpath = example_txt_dir, param='patm')
+get_param_txt(workspace = example_txt_dir, param='patm')
 ```
 
 ```{r include=FALSE}
 # resetting the value:
-set_param_txt(dirpath = example_txt_dir, param='patm', value = 1000)
+set_param_txt(workspace = example_txt_dir, param='patm', value = 1000)
 ```
 
 There are two more arguments to the function:
@@ -151,7 +151,7 @@ All these functions are exported for convenience, but `set_param_txt()` is easie
 The `gen_varmod()` function is used to set the required output variables in the `var.mod` file. For example if the user need the LAI and the dry mass:
 
 ```{r}
-gen_varmod(workspace = example_txt_dir, var_names = c("lai(n)","masec(n)"))
+gen_varmod(workspace = example_txt_dir, var = c("lai(n)","masec(n)"))
 ```
 
 Controlling if the values where written:
@@ -163,7 +163,7 @@ get_varmod(example_txt_dir)
 Alternatively, the user can append a variable to the pre-existing vector of values using the `append` argument:
 
 ```{r}
-gen_varmod(workspace = example_txt_dir, var_names = c("hauteur"), append = TRUE)
+gen_varmod(workspace = example_txt_dir, var = c("hauteur"), append = TRUE)
 get_varmod(example_txt_dir)
 ```
 

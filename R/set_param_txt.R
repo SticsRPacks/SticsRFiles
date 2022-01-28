@@ -3,15 +3,22 @@
 #' @description Replace or set an input parameter from a pre-existing STICS input
 #'              file.
 #'
-#' @param dirpath  USM directory path
-#' @param filepath Path to the parameter file
+#' @param workspace  Path of the workspace containing the Stics (txt) input files.
+#' @param file Path to the parameter file
 #' @param param    Parameter name
 #' @param value    New parameter value
-#' @param plant    Plant index. Optional, only for plant or technical parameters
+#' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
+#' Only used for plant or technical parameters.
 #' @param add      Boolean. Append input to existing file (add to the list)
 #' @param variety  The plant variety to set the parameter value, either the name of the variety
 #' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
+#' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
+#'   longer supported, use `workspace` instead.
+#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
+#'   longer supported, use `file` instead.
+#' @param plant `r lifecycle::badge("deprecated")` `plant` is no
+#'   longer supported, use `plant_id` instead.
 #'
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 #'          the associated plant in the case of intercrop, or \code{c(1,2)} for both
@@ -35,27 +42,54 @@
 #' path = get_examples_path( file_type = "txt" )
 #'
 #' # Replace the interrow distance parameter to 0.01:
-#' set_param_txt(dirpath = path, param = "interrang", value = 0.01)
+#' set_param_txt(workspace = path, param = "interrang", value = 0.01)
 #'
 #' # Change the value of durvieF for the current variety:
-#' set_param_txt(dirpath = path, param = "durvieF", value = 245)
+#' set_param_txt(workspace = path, param = "durvieF", value = 245)
 #'
 #' # Change the value of durvieF for another variety:
-#' set_param_txt(dirpath = path, param = "durvieF", variety = "Nefer", value = 178)
+#' set_param_txt(workspace = path, param = "durvieF", variety = "Nefer", value = 178)
 #'
 #' # Change the value of infil for a given layer:
-#' set_param_txt(dirpath = path, param = "infil", layer = 2, value = 60)
+#' set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 #'
 #' # If the parameter is found in several files, use the set_* functions direclty, e.g.
 #' # cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
 #' # change its value in the soil file, we use set_soil_txt():
-#' set_soil_txt(filepath = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
+#' set_soil_txt(file = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
 #'}
 #'
 #' @export
-set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NULL,layer=NULL){
+set_param_txt= function(workspace = getwd(),
+                        param,
+                        value,
+                        add = FALSE,
+                        plant_id = 1,
+                        variety = NULL,
+                        layer = NULL,
+                        dirpath = lifecycle::deprecated(),
+                        plant = lifecycle::deprecated()){
+
+  # dirpath
+  if (lifecycle::is_present(dirpath)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_txt(dirpath)",
+                              "set_param_txt(workspace)")
+  } else {
+    dirpath <- workspace # to remove when we update inside the function
+  }
+
+  # plant
+  if (lifecycle::is_present(plant)) {
+    lifecycle::deprecate_warn("0.5.0", "set_param_txt(plant)",
+                              "set_param_txt(plant_id)")
+  } else {
+    plant <- plant_id # to remove when we update inside the function
+  }
+
+
+
   param= gsub("P_","",param)
-  param_val= get_param_txt(dirpath = dirpath, param = param, exact=TRUE)
+  param_val= get_param_txt(workspace = dirpath, param = param, exact=TRUE)
 
   file_type=
     lapply(strsplit(names(param_val),"\\."), function(x){x[1]})%>%
@@ -67,32 +101,32 @@ set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NU
   }
   switch(file_type,
          ini= {
-           set_ini_txt(filepath = file.path(dirpath,"ficini.txt"),
+           set_ini_txt(file = file.path(dirpath,"ficini.txt"),
                    param = param, value = value, add= add)
          },
          general= {
-           set_general_txt(filepath = file.path(dirpath,"tempopar.sti"),
+           set_general_txt(file = file.path(dirpath,"tempopar.sti"),
                        param = param, value = value, add= add)
          },
          tmp= {
-           set_tmp_txt(filepath = file.path(dirpath,"tempoparV6.sti"),
+           set_tmp_txt(file = file.path(dirpath,"tempoparV6.sti"),
                    param = param, value = value, add= add)
          },
          soil= {
-           set_soil_txt(filepath = file.path(dirpath,"param.sol"),
+           set_soil_txt(file = file.path(dirpath,"param.sol"),
                     param = param, value = value, layer= layer)
          },
          usm= {
-           set_usm_txt(filepath = file.path(dirpath,"new_travail.usm"),
+           set_usm_txt(file = file.path(dirpath,"new_travail.usm"),
                    param = param, value = value)
          },
          station= {
-           set_station_txt(filepath = file.path(dirpath,"station.txt"),
+           set_station_txt(file = file.path(dirpath,"station.txt"),
                        param = param, value = value, add= add)
          },
          tec= {
            tmp= lapply(plant, function(x){
-             set_tec_txt(filepath = file.path(dirpath,paste0("fictec",x,".txt")),
+             set_tec_txt(file = file.path(dirpath,paste0("fictec",x,".txt")),
                      param = param, value = value, add= add)
            })
          },
@@ -100,11 +134,11 @@ set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NU
            tmp= lapply(plant, function(x){
              if(is.null(variety)){
                variety=
-                 get_param_txt(dirpath = dirpath, param = "variete", exact=TRUE)[plant]%>%
+                 get_param_txt(workspace = dirpath, param = "variete", exact=TRUE)[plant]%>%
                  as.numeric()
              }else{
                if(is.character(variety)){
-                 varieties= get_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")))$codevar
+                 varieties= get_plant_txt(file = file.path(dirpath,paste0("ficplt",x,".txt")))$codevar
                  variety= match(variety,varieties)
                  if(is.na(variety)){
                    cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
@@ -112,7 +146,7 @@ set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NU
                  }
                }
              }
-             set_plant_txt(filepath = file.path(dirpath,paste0("ficplt",x,".txt")),
+             set_plant_txt(file = file.path(dirpath,paste0("ficplt",x,".txt")),
                        param = param, value = value, add= add, variety = variety)
            })
          },
@@ -123,51 +157,158 @@ set_param_txt= function(dirpath=getwd(),param,value,add=FALSE,plant=1,variety=NU
 
 #' @rdname set_param_txt
 #' @export
-set_usm_txt= function(filepath="new_travail.usm",param,value,add=F){
+set_usm_txt= function(file = "new_travail.usm",
+                      param,
+                      value,
+                      add = F,
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   set_file_txt(filepath,param,value,add)
 }
 
 #' @rdname set_param_txt
 #' @export
-set_station_txt= function(filepath="station.txt",param,value,add=F){
+set_station_txt= function(file = "station.txt",
+                          param,
+                          value,
+                          add = F,
+                          filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   set_file_txt(filepath,param,value,add)
 }
 
 
 #' @rdname set_param_txt
 #' @export
-set_ini_txt= function(filepath= "ficini.txt",param,value,add=F){
+set_ini_txt= function(file = "ficini.txt",
+                      param,
+                      value,
+                      add = F,
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   set_file_txt(filepath,param,value,add)
 }
 
 
 #' @rdname set_param_txt
 #' @export
-set_general_txt= function(filepath= "tempopar.sti",param,value,add=F){
+set_general_txt= function(file = "tempopar.sti",
+                          param,
+                          value,
+                          add = F,
+                          filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+
   set_file_txt(filepath,param,value,add)
 }
 
 #' @rdname set_param_txt
 #' @export
-set_tmp_txt= function(filepath= "tempoparv6.sti",param,value,add=F){
+set_tmp_txt= function(file = "tempoparv6.sti",
+                      param,
+                      value,
+                      add = F,
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+
   set_file_txt(filepath,param,value,add)
 }
 
 #' @rdname set_param_txt
 #' @export
-set_plant_txt= function(filepath="ficplt1.txt",param,value,add=F,variety= NULL){
+set_plant_txt= function(file = "ficplt1.txt",
+                        param,
+                        value,
+                        add = F,
+                        variety= NULL,
+                        filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
   set_file_txt(filepath,param,value,add,variety)
 }
 
 #' @rdname set_param_txt
 #' @export
-set_tec_txt= function(filepath="fictec1.txt",param,value,add=F){
+set_tec_txt= function(file = "fictec1.txt",
+                      param,
+                      value,
+                      add = F,
+                      filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
   set_file_txt(filepath,param,value,add)
 }
 
 #' @rdname set_param_txt
 #' @export
-set_soil_txt= function(filepath="param.sol",param,value,layer=NULL){
+set_soil_txt= function(file = "param.sol",
+                       param,
+                       value,
+                       layer=NULL,
+                       filepath = lifecycle::deprecated()){
+
+  # filepath
+  if (lifecycle::is_present(filepath)) {
+    lifecycle::deprecate_warn("0.5.0", "get_ini_txt(filepath)",
+                              "get_ini_txt(file)")
+  } else {
+    filepath <- file # to remove when we update inside the function
+  }
+
+
   param= gsub("P_","",param)
   ref= get_soil_txt(filepath)
   param= paste0("^",param,"$")
@@ -226,7 +367,7 @@ set_soil_txt= function(filepath="param.sol",param,value,layer=NULL){
 #'              file. This function is called by some of the generic \code{set_*}
 #'              functions under the hood.
 #'
-#' @param filepath Path to the parameter file
+#' @param file Path to the parameter file
 #' @param param    Parameter name
 #' @param value    New parameter value
 #' @param add      Boolean. Append input to existing file (add to the list)
@@ -241,15 +382,20 @@ set_soil_txt= function(filepath="param.sol",param,value,layer=NULL){
 #'
 #' @keywords internal
 #'
-set_file_txt= function(filepath,param,value,add,variety= NULL){
+set_file_txt= function(file,
+                       param,
+                       value,
+                       add,
+                       variety= NULL){
+
   param= gsub("P_","",param)
   # access the function name from which set_file_txt was called
   type= strsplit(deparse(sys.call(-1)),split = "\\(")[[1]][1]
-  params= readLines(filepath)
+  params= readLines(file)
   param_= paste0("^:{0,1}",param,"$")
   switch(type,
          set_usm_txt = {
-           ref= get_usm_txt(filepath)
+           ref= get_usm_txt(file)
            if(grep(param_,names(ref))<grep("fplt",names(ref))){
              ref_index= grep(param_,names(ref))*2
            }else{
@@ -257,11 +403,11 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
            }
          },
          set_station_txt= {
-           ref= get_station_txt(filepath)
+           ref= get_station_txt(file)
            ref_index= grep(param_,names(ref))*2
          },
          set_ini_txt= {
-           ref= get_ini_txt(filepath)
+           ref= get_ini_txt(file)
            ref_index= grep(param_,names(ref))*2
          },
          set_plant_txt= {
@@ -286,7 +432,7 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
       params= c(params,param,value)
       ref_index= grep(param_,params)+1
     }else{
-      stop(paste(param,"parameter not found in:\n",filepath))
+      stop(paste(param,"parameter not found in:\n",file))
     }
   }else{
     if(add){
@@ -301,5 +447,5 @@ set_file_txt= function(filepath,param,value,add,variety= NULL){
                "\ninput:\n",paste(value,collapse= ", ")))
   }
   params[ref_index]= format(value, scientific=F)
-  writeLines(params,filepath)
+  writeLines(params,file)
 }

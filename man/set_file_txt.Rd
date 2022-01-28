@@ -4,10 +4,10 @@
 \alias{set_file_txt}
 \title{Internal function to set some STICS input file parameters}
 \usage{
-set_file_txt(filepath, param, value, add, variety = NULL)
+set_file_txt(file, param, value, add, variety = NULL)
 }
 \arguments{
-\item{filepath}{Path to the parameter file}
+\item{file}{Path to the parameter file}
 
 \item{param}{Parameter name}
 
