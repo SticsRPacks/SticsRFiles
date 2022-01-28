@@ -10,9 +10,6 @@ get_txt_generic(file, names = TRUE)
 \item{file}{Path (including name) of the file to read}
 
 \item{names}{Boolean, read the parameter names ?}
-
-\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
-longer supported, use \code{file} instead.}
 }
 \value{
 A named (if names=TRUE) list of parameter values
