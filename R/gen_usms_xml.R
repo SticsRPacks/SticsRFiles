@@ -48,7 +48,7 @@
 #' \dontrun{
 #'
 #' xl_path <-  download_usm_xl(file = "inputs_stics_example.xlsx")
-#' usms_param_df <- read_params_table(file_path = xl_path, sheet_name = "USMs")
+#' usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
 #' gen_usms_xml(usms_out_file = "usms.xml", usms_param = usms_param_df)
 #'
 #' }

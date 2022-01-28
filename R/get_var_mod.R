@@ -14,7 +14,34 @@
 #'
 #' @seealso `gen_varmod`
 #' @examples
-#' get_var_mod(get_examples_path( file_type = "txt" ))
+#' get_varmod(get_examples_path( file_type = "txt" ))
+#'
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function was deprecated to homogenised writing process
+#'
+#'
+#' @examples
+#'  \dontrun{
+#' get_var_mod(workspace,usms_file)
+#' # ->
+#' get_varmod(workspace,usms_file)
+#' }
+#'
+#' @keywords internal
+#'
+#' @export
+get_var_mod <- function(...) {
+
+  lifecycle::deprecate_warn(
+    "0.5.0",
+    "get_var_mod()",
+    "get_varmod()")
+  get_varmod(...)
+}
+#' @export
 #'
 get_varmod= function(workspace,usms_file="var.mod", file_name = lifecycle::deprecated()){
 
