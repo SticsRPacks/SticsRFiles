@@ -4,7 +4,7 @@
 \alias{get_var_info}
 \title{Find STICS output variable names and description}
 \usage{
-get_var_info(var = NULL, keyword = NULL, version = "latest")
+get_var_info(var = NULL, keyword = NULL, stics_version = "latest")
 }
 \arguments{
 \item{var}{Vector of variable names (or partial names).
@@ -13,8 +13,12 @@ Optional, if not provided, the function returns information for all variables.}
 \item{keyword}{Search by keyword instead of variable name
 (search in the name and description field)}
 
-\item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
-to "latest", a special code to get the latest version.}
+\item{stics_version}{Name of the Stics version. Optional, can be used to search
+parameters information relative to a specific Stics version. By default the
+latest version returned by \code{get_stics_versions_compat()} is used.}
+
+\item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
+longer supported, use \code{stics_version} instead.}
 }
 \description{
 Helper function that returns names and descriptions of STICS output variables
@@ -32,7 +36,7 @@ SticsRFiles::get_var_info("lai")
 SticsRFiles::get_var_info(keyword= "lai")
 
 # Find for a particular version:
-SticsRFiles::get_var_info("lai", version= "V9.0")
+SticsRFiles::get_var_info("lai", stics_version= "V9.0")
 }
 
 }

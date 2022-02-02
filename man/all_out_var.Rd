@@ -4,11 +4,12 @@
 \alias{all_out_var}
 \title{Return all possible STICS outputs for var.mod}
 \usage{
-all_out_var(version = "latest")
+all_out_var(stics_version = "latest")
 }
 \arguments{
-\item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
-to "latest", a special code to get the latest version.}
+\item{stics_version}{Name of the Stics version. Optional, can be used to search
+parameters information relative to a specific Stics version. By default the
+latest version returned by \code{get_stics_versions_compat()} is used.}
 }
 \description{
 Helper function to print the list of all possible variables to set as output

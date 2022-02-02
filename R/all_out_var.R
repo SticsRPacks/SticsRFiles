@@ -4,8 +4,9 @@
 #' @description Helper function to print the list of all possible variables to set as output
 #' from the STICS model.
 #'
-#' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
-#' to "latest", a special code to get the latest version.
+#' @param stics_version Name of the Stics version. Optional, can be used to search
+#' parameters information relative to a specific Stics version. By default the
+#' latest version returned by `get_stics_versions_compat()` is used.
 #'
 #' @seealso `get_var_info()`, `gen_varmod()`, and `get_stics_versions_compat()`
 #'
@@ -15,10 +16,10 @@
 #' }
 #' @keywords internal
 #'
-all_out_var <- function(version = "latest"){
+all_out_var <- function(stics_version = "latest"){
 
   # Checking and getting the right version
-  version <- check_version_compat( version_name = version)
+  version <- check_version_compat( version_name = stics_version)
 
   var_df <- utils::read.csv2(
     file.path(get_examples_path( file_type = "csv", stics_version = version ), "outputs.csv"),
@@ -42,8 +43,12 @@ all_out_var <- function(version = "latest"){
 #' Optional, if not provided, the function returns information for all variables.
 #' @param keyword Search by keyword instead of variable name
 #' (search in the name and description field)
-#' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
-#' to "latest", a special code to get the latest version.
+#' @param stics_version Name of the Stics version. Optional, can be used to search
+#' parameters information relative to a specific Stics version. By default the
+#' latest version returned by `get_stics_versions_compat()` is used.
+#'
+#' @param version `r lifecycle::badge("deprecated")` `version` is no
+#'   longer supported, use `stics_version` instead.
 #'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
@@ -58,12 +63,23 @@ all_out_var <- function(version = "latest"){
 #' SticsRFiles::get_var_info(keyword= "lai")
 #'
 #' # Find for a particular version:
-#' SticsRFiles::get_var_info("lai", version= "V9.0")
+#' SticsRFiles::get_var_info("lai", stics_version= "V9.0")
 #' }
 #'
 #' @export
 #'
-get_var_info <- function(var=NULL,keyword=NULL,version= "latest"){
+get_var_info <- function(var = NULL,
+                         keyword = NULL,
+                         stics_version= "latest"){
+
+  if (lifecycle::is_present(version)) {
+    lifecycle::deprecate_warn("0.5.0", "get_var_info(version)",
+                              "get_var_info(stics_version)")
+  }else{
+    version <- stics_version # to remove when we update inside the function
+  }
+
+
   all_vars <- all_out_var(version)
   if(!is.null(var)){
     var= var_to_col_names(var)
@@ -83,7 +99,12 @@ get_var_info <- function(var=NULL,keyword=NULL,version= "latest"){
 #' @description Tells if one or more variable names are valid STICS output variables.
 #'
 #' @param var     A vector of variable names
-#' @param version The version of the model
+#' @param stics_version Name of the Stics version. Optional, can be used to search
+#' parameters information relative to a specific Stics version. By default the
+#' latest version returned by `get_stics_versions_compat()` is used.
+#'
+#' @param version `r lifecycle::badge("deprecated")` `version` is no
+#'   longer supported, use `stics_version` instead.
 #'
 #' @return A boolean vector: `TRUE` if the variable exist, `FALSE` if it doesn't
 #'
@@ -95,7 +116,16 @@ get_var_info <- function(var=NULL,keyword=NULL,version= "latest"){
 #' \dontrun{
 #' is_stics_var(c("lai(n)",'masec(n)',"truc"))
 #' }
-is_stics_var= function(var,version= "latest"){
+is_stics_var= function(var, stics_version= "latest"){
+
+
+  if (lifecycle::is_present(version)) {
+    lifecycle::deprecate_warn("0.5.0", "is_stics_var(version)",
+                              "is_stics_var(stics_version)")
+  }else{
+    version <- stics_version # to remove when we update inside the function
+  }
+
   all_vars <- all_out_var(version)
   var_parsed= var_to_col_names(var)
   vars_names_parsed= var_to_col_names(all_vars$name)
