@@ -7,7 +7,8 @@
 get_var_info(var = NULL, keyword = NULL, version = "latest")
 }
 \arguments{
-\item{var}{Character vector containing a (part of the) name of a STICS output variable.}
+\item{var}{Vector of variable names (or partial names).
+Optional, if not provided, the function returns information for all variables.}
 
 \item{keyword}{Search by keyword instead of variable name
 (search in the name and description field)}

@@ -38,7 +38,8 @@ all_out_var <- function(version = "latest"){
 #' @description Helper function that returns names and descriptions of STICS output variables
 #' from a partial name and/or descriptive keywords.
 #'
-#' @param var Character vector containing a (part of the) name of a STICS output variable.
+#' @param var Vector of variable names (or partial names).
+#' Optional, if not provided, the function returns information for all variables.
 #' @param keyword Search by keyword instead of variable name
 #' (search in the name and description field)
 #' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
