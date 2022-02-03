@@ -1,8 +1,11 @@
 #' @title Getting usms names list for an usms.xml file
 #'
 #' @description Extracting a usm names list from an usms.xml file
-#' @param usm Vector of USM names (or partial names). Optional, if not provided, the function returns the names of all the USMs included in the given file.
+#'
 #' @param file Path (including name) of the USM xml file
+#' @param usm Vector of USM names (or partial names).
+#' Optional, if not provided, the function returns the names of all the USMs
+#' included in the given file.
 #' @param usm_path `r lifecycle::badge("deprecated")` `usm_path` is no
 #'   longer supported, use `file` instead.
 #' @param name `r lifecycle::badge("deprecated")` `name` is no
@@ -19,17 +22,22 @@
 #'
 #' @export
 #'
-get_usms_list <- function(file, usm = NULL, usm_path = lifecycle::deprecated(), name = lifecycle::deprecated() ){
+get_usms_list <- function(file,
+                          usm = NULL,
+                          usm_path = lifecycle::deprecated(),
+                          name = lifecycle::deprecated() ){
 
   # TODO: add select key: i.e. get all usms names
   # with the same soil, plant 1,...
   if (lifecycle::is_present(usm_path)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_list(usm_path)", "get_usms_list(file)")
+    lifecycle::deprecate_warn("0.5.0", "get_usms_list(usm_path)",
+                              "get_usms_list(file)")
   } else {
     usm_path <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_list(name)", "get_usms_list(usm)")
+    lifecycle::deprecate_warn("0.5.0", "get_usms_list(name)",
+                              "get_usms_list(usm)")
   } else {
     name <- usm # to remove when we update inside the function
   }
@@ -39,7 +47,9 @@ get_usms_list <- function(file, usm = NULL, usm_path = lifecycle::deprecated(), 
     stop("The file does not exist or is not a usms file")
   }
 
-  return(find_usms_soils_names(file_path = usm_path, xml_name = "usm", name = name))
+  return(find_usms_soils_names(file_path = usm_path,
+                               xml_name = "usm",
+                               name = name))
 
 }
 

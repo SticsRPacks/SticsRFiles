@@ -27,7 +27,7 @@ test_that ("variety argument can be a vector of characters", {
 
 # Get and modify the non-varietal parameter "forme" (another parameter has a similar name : rapforme ...)
 tmp <- get_param_txt(workspace = path, param = "forme", exact=TRUE)
-set_param_txt(dirpath = path, param = "forme",
+set_param_txt(workspace = path, param = "forme",
               value=as.numeric(tmp)+1)
 tmp2 <- get_param_txt(workspace = path, param = "forme", exact=TRUE)
 test_that ("Set and get of a non-varietal parameter for a unique plant", {
@@ -37,7 +37,7 @@ test_that ("Set and get of a non-varietal parameter for a unique plant", {
 
 # Get and modify the varietal parameter "stlevamf" for the simulated variety
 tmp <- get_param_txt(workspace = path, param = "stlevamf")
-set_param_txt(dirpath = path, param = "stlevamf",
+set_param_txt(workspace = path, param = "stlevamf",
               value=as.numeric(tmp)+1)
 tmp2 <- get_param_txt(workspace = path, param = "stlevamf")
 test_that ("Set and get of a varietal parameter for a unique plant for the simulated variety", {
@@ -46,7 +46,7 @@ test_that ("Set and get of a varietal parameter for a unique plant for the simul
 
 # Get and modify the varietal parameter "stlevamf" for a given variety
 tmp <- get_param_txt(workspace = path, param = "stlevamf", variety=4)
-set_param_txt(dirpath = path, param = "stlevamf",
+set_param_txt(workspace = path, param = "stlevamf",
               value=as.numeric(tmp)+1, variety=4)
 tmp2 <- get_param_txt(workspace = path, param = "stlevamf", variety=4)
 test_that ("Set and get of a varietal parameter for a unique plant for a given variety", {
@@ -63,8 +63,8 @@ path <- tempdir()
 # Get and modify the non-varietal parameter "forme" for the simulated variety
 tmp <- get_param_txt(workspace = path, param = "forme", exact=TRUE)
 plant <- 2
-set_param_txt(dirpath = path, param = "forme",
-              value=as.numeric(tmp[plant])+1, plant=plant)
+set_param_txt(workspace = path, param = "forme",
+              value=as.numeric(tmp[plant])+1, plant_id=plant)
 tmp2 <- get_param_txt(workspace = path, param = "forme", exact=TRUE)
 test_that ("Set and get of a non-varietal parameter for an intercrop for the simulated variety", {
   expect_equal(as.numeric(tmp[plant])+1,as.numeric(tmp2[plant]))
@@ -74,7 +74,7 @@ test_that ("Set and get of a non-varietal parameter for an intercrop for the sim
 tmp <- get_param_txt(workspace = path, param = "stlevamf")
 plant <- 2
 set_param_txt(dirpath = path, param = "stlevamf",
-              value=as.numeric(tmp[plant])+1, plant=2)
+              value=as.numeric(tmp[plant])+1, plant_id=2)
 tmp2 <- get_param_txt(workspace = path, param = "stlevamf")
 test_that ("Set and get of a varietal parameter for an intercrop for the simulated variety", {
   expect_equal(as.numeric(tmp[plant])+1,as.numeric(tmp2[plant]))

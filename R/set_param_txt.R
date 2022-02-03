@@ -4,19 +4,16 @@
 #'              file.
 #'
 #' @param workspace  Path of the workspace containing the Stics (txt) input files.
-#' @param file Path to the parameter file
 #' @param param    Vector of parameter names.
 #' @param value    New parameter value
+#' @param append      Boolean. Append input to existing file
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
 #' Only used for plant or technical parameters.
-#' @param append      Boolean. Append input to existing file
 #' @param variety  The plant variety to set the parameter value, either the name of the variety
 #' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
 #' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
 #'   longer supported, use `workspace` instead.
-#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
-#'   longer supported, use `file` instead.
 #' @param add `r lifecycle::badge("deprecated")` `add` is no
 #'   longer supported, use `append` instead.
 #' @param plant `r lifecycle::badge("deprecated")` `plant` is no

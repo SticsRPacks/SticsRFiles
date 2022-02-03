@@ -14,7 +14,9 @@ get_usms_list(
 \arguments{
 \item{file}{Path (including name) of the USM xml file}
 
-\item{usm}{Vector of USM names (or partial names). Optional, if not provided, the function returns the names of all the USMs included in the given file.}
+\item{usm}{Vector of USM names (or partial names).
+Optional, if not provided, the function returns the names of all the USMs
+included in the given file.}
 
 \item{usm_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_path} is no
 longer supported, use \code{file} instead.}
