@@ -19,17 +19,17 @@
 all_out_var <- function(stics_version = "latest"){
 
   # Checking and getting the right version
-  version <- check_version_compat( version_name = stics_version)
+  version <- check_version_compat( stics_version = stics_version)
 
   var_df <- utils::read.csv2(
-    file.path(get_examples_path( file_type = "csv", stics_version = version ), "outputs.csv"),
+    file.path(get_examples_path( file_type = "csv", stics_version = stics_version ), "outputs.csv"),
     header = FALSE,
     stringsAsFactors = FALSE)[,1:4]
 
   names(var_df) <- c("name", "definition", "unit", "type")
 
   # Adding a version  attribute
-  attr(x = var_df, which = "version") <- version
+  attr(x = var_df, which = "version") <- stics_version
   return(var_df)
 }
 
@@ -72,7 +72,11 @@ get_var_info <- function(var = NULL,
                          keyword = NULL,
                          stics_version= "latest"){
 
-  if (lifecycle::is_present(version)) {
+  # added a second condition because
+  # if version is not given as an arg.
+  # version always exist and giving detailed information
+  # about R version and platform (see ?version)
+  if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn("0.5.0", "get_var_info(version)",
                               "get_var_info(stics_version)")
   }else{
@@ -119,7 +123,11 @@ get_var_info <- function(var = NULL,
 is_stics_var= function(var, stics_version= "latest"){
 
 
-  if (lifecycle::is_present(version)) {
+  # added a second condition because
+  # if version is not given as an arg.
+  # version always exist and giving detailed information
+  # about R version and platform (see ?version)
+  if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn("0.5.0", "is_stics_var(version)",
                               "is_stics_var(stics_version)")
   }else{

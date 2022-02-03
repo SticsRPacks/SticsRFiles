@@ -56,7 +56,7 @@ download_data= function(out_dir = tempdir(), example_dirs = NULL,
 
 
   # Getting path string(s) from examples data file
-  dirs_str <- get_referenced_dirs(dirs = example_dirs, version_name = version_name)
+  dirs_str <- get_referenced_dirs(dirs = example_dirs, stics_version = version_name)
 
   # Not any examples_dirs not found in example data file
   if (base::is.null(dirs_str)) stop("Error: no available data for ",example_dirs)
@@ -84,7 +84,7 @@ download_data= function(out_dir = tempdir(), example_dirs = NULL,
 #' Getting valid directories string for download from SticsRpacks data repository
 #'
 #' @param dirs Directories names of the referenced use cases (optional), starting with "study_case_"
-#' @param version_name An optional version string
+#' @param stics_version An optional version string
 #' within those given by get_stics_versions_compat()$versions_list
 #'
 #' @return Vector of referenced directories string (as "study_case_1/V9.0")
@@ -106,11 +106,11 @@ download_data= function(out_dir = tempdir(), example_dirs = NULL,
 #'
 #' }
 #'
-get_referenced_dirs <- function(dirs = NULL, version_name = NULL) {
+get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
 
   # Loading csv file with data information
-  ver_data <- get_versions_info(version_name = version_name)
-  if (base::is.null(ver_data)) stop("No examples data referenced for version: ",version_name)
+  ver_data <- get_versions_info(stics_version = stics_version)
+  if (base::is.null(ver_data)) stop("No examples data referenced for version: ",stics_version)
 
   dirs_names <- grep(pattern = "^study_case", x = names(ver_data), value = TRUE)
   if (base::is.null(dirs)) dirs <- dirs_names
@@ -125,7 +125,7 @@ get_referenced_dirs <- function(dirs = NULL, version_name = NULL) {
   }
 
   # Only dirs, returned if no specified version
-  if(base::is.null(version_name)) return(dirs)
+  if(base::is.null(stics_version)) return(dirs)
 
   # Getting data according to version and dirs
   version_data <- ver_data %>% dplyr::select(dplyr::any_of(dirs))

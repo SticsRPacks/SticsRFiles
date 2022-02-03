@@ -4,12 +4,17 @@
 \alias{get_param_desc}
 \title{get param desc}
 \usage{
-get_param_desc(file_path = NULL, version = "latest", name = NULL, kind = FALSE)
+get_param_desc(
+  file_path = NULL,
+  stics_version = "latest",
+  name = NULL,
+  kind = FALSE
+)
 }
 \arguments{
 \item{file_path}{csv file path}
 
-\item{version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
+\item{stics_version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
 to "latest", a special code to get the latest version.}
 
 \item{name}{a name vector for selecting loaded content using name column matching}

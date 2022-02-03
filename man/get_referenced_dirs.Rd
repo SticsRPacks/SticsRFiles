@@ -4,12 +4,12 @@
 \alias{get_referenced_dirs}
 \title{Getting valid directories string for download from SticsRpacks data repository}
 \usage{
-get_referenced_dirs(dirs = NULL, version_name = NULL)
+get_referenced_dirs(dirs = NULL, stics_version = NULL)
 }
 \arguments{
 \item{dirs}{Directories names of the referenced use cases (optional), starting with "study_case_"}
 
-\item{version_name}{An optional version string
+\item{stics_version}{An optional version string
 within those given by get_stics_versions_compat()$versions_list}
 }
 \value{

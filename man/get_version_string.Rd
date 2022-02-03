@@ -4,10 +4,10 @@
 \alias{get_version_string}
 \title{Getting version string from the version number}
 \usage{
-get_version_string(version)
+get_version_string(stics_version)
 }
 \arguments{
-\item{version}{numeric (i.e. X.Y)}
+\item{stics_version}{numeric (i.e. X.Y)}
 }
 \value{
 version string

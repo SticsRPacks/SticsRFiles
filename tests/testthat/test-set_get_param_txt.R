@@ -73,7 +73,7 @@ test_that ("Set and get of a non-varietal parameter for an intercrop for the sim
 # Get and modify the varietal parameter "stlevamf" for the simulated variety
 tmp <- get_param_txt(workspace = path, param = "stlevamf")
 plant <- 2
-set_param_txt(dirpath = path, param = "stlevamf",
+set_param_txt(workspace = path, param = "stlevamf",
               value=as.numeric(tmp[plant])+1, plant_id=2)
 tmp2 <- get_param_txt(workspace = path, param = "stlevamf")
 test_that ("Set and get of a varietal parameter for an intercrop for the simulated variety", {

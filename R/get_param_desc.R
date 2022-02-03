@@ -1,7 +1,7 @@
 #' get param desc
 #'
 #' @param file_path csv file path
-#' @param version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
+#' @param stics_version The stics version. See `get_stics_versions_compat()` to get all compatible versions. Default
 #' to "latest", a special code to get the latest version.
 #' @param name a name vector for selecting loaded content using name column matching
 #' @param kind a name vector for selecting loaded content using kind column matching
@@ -9,7 +9,7 @@
 #' @keywords internal
 #'
 get_param_desc <- function(file_path = NULL,
-                           version = "latest",
+                           stics_version = "latest",
                            name = NULL,
                            kind = FALSE) {
 
@@ -18,7 +18,7 @@ get_param_desc <- function(file_path = NULL,
   # file_path <- file.path(file_path,"config", "inputs.csv"), otherwise
   # check if the file exists in the dir
   if (base::is.null(file_path)) {
-    file_path <- file.path(get_examples_path( file_type = "csv", stics_version = version),"inputs.csv")
+    file_path <- file.path(get_examples_path( file_type = "csv", stics_version = stics_version),"inputs.csv")
   }
 
 
@@ -46,8 +46,8 @@ get_param_desc <- function(file_path = NULL,
 
 
   # Adding a version  attribute
-  version <- check_version_compat(version_name = version)
-  attr(x = param_df, which = "version") <- version
+  stics_version <- check_version_compat(stics_version = stics_version)
+  attr(x = param_df, which = "version") <- stics_version
 
   return(param_df)
 

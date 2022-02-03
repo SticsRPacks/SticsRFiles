@@ -41,7 +41,7 @@ get_stics_versions_compat <- function() {
 
 #' Checking the validity of a given version code
 #'
-#' @param version An optional version name as listed in
+#' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
 #'
 #' @return A valid version string
@@ -59,20 +59,20 @@ get_stics_versions_compat <- function() {
 #' [1] "V8.5"
 #'
 #' }
-check_version_compat <- function(version_name = "latest") {
+check_version_compat <- function(stics_version = "latest") {
 
   versions <- get_stics_versions_compat()
-  if (version_name == "latest") return(versions$latest_version)
+  if (stics_version == "latest") return(versions$latest_version)
 
-  if ( version_name %in% versions$versions_list) return(version_name)
+  if ( stics_version %in% versions$versions_list) return(stics_version)
 
-  stop(version_name,": is an unknown version!")
+  stop(stics_version,": is an unknown version!")
 }
 
 
 #' Getting versions data (versions strings and examples files directories list)
 #'
-#' @param version_name Optional version string (i.e. "VX.Y")
+#' @param stics_version Optional version string (i.e. "VX.Y")
 #'
 #' @param versions_dir Optional, either an `extdata` directory path
 #' of the installed SticsRFiles library (default) or of the package project
@@ -91,18 +91,18 @@ check_version_compat <- function(version_name = "latest") {
 #' 2     V9.0   V9.0 V9.0 BASE BASE V9.0 examples/V9.0 templates/V9.0 BASE
 #' 3     V9.1   V9.1 V9.1 BASE BASE V9.1 examples/V9.1 templates/V9.1 BASE
 #'
-#' get_versions_info( version_name = "V8.5")
+#' get_versions_info( stics_version = "V8.5")
 #'
 #' versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
 #' 1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
 #'
 #'
-#' get_versions_info(version_name = "V8.5",
+#' get_versions_info(stics_version = "V8.5",
 #'                   versions_dir = "path/to/SticsRFilesproject/inst/extdata")
 #'
 #'
 #'}
-get_versions_info <- function(version_name = NULL, location = "install") {
+get_versions_info <- function(stics_version = NULL, location = "install") {
 
   # Getting available versions info from a file
   ver_file <- get_versions_file_path(location = location)
@@ -116,11 +116,11 @@ get_versions_info <- function(version_name = NULL, location = "install") {
   ver_info[ver_info[]==""]=NA
 
   # Returning the full data.frame for all versions
-  if (base::is.null(version_name)) return(ver_info)
+  if (base::is.null(stics_version)) return(ver_info)
 
   # Selecting data according to the desired version
-  if (version_name %in% ver_info$versions) {
-    return(ver_info[ver_info$versions == version_name,])
+  if (stics_version %in% ver_info$versions) {
+    return(ver_info[ver_info$versions == stics_version,])
   }
 
   # Nothing to return for unknown version
@@ -129,7 +129,7 @@ get_versions_info <- function(version_name = NULL, location = "install") {
 
 #' Getting version number from the version string
 #'
-#' @param version string (i.e. "VX.Y", or "vX.Y")
+#' @param stics_version string (i.e. "VX.Y", or "vX.Y")
 #' @param numeric logical, TRUE for numerical output format,
 #' FALSE for character output format
 #' @return version number (numeric or character)
@@ -139,11 +139,11 @@ get_versions_info <- function(version_name = NULL, location = "install") {
 #' \dontrun{
 #' SticsRFiles:::get_version_num()
 #' }
-get_version_num <- function(version, numeric = TRUE) {
+get_version_num <- function(stics_version, numeric = TRUE) {
 
-  if (is.numeric(version) && numeric) return(version)
+  if (is.numeric(stics_version) && numeric) return(stics_version)
 
-  char_version <- gsub(pattern = "^[V | v]","",version)
+  char_version <- gsub(pattern = "^[V | v]","",stics_version)
 
   if (!numeric) return(char_version)
 
@@ -153,7 +153,7 @@ get_version_num <- function(version, numeric = TRUE) {
 
 #' Getting version string from the version number
 #'
-#' @param version numeric (i.e. X.Y)
+#' @param stics_version numeric (i.e. X.Y)
 #'
 #' @return version string
 #' @keywords internal
@@ -162,14 +162,14 @@ get_version_num <- function(version, numeric = TRUE) {
 #' \dontrun{
 #' SticsRFiles:::get_version_string()
 #' }
-get_version_string <- function(version) {
+get_version_string <- function(stics_version) {
 
   pattern <- "^[V | v]"
 
-  if (is.character(version) & grepl(pattern = pattern, x = version))
-    return(toupper(version))
+  if (is.character(stics_version) & grepl(pattern = pattern, x = stics_version))
+    return(toupper(stics_version))
 
-  paste0("V",as.character(version))
+  paste0("V",as.character(stics_version))
 }
 
 

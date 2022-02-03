@@ -4,10 +4,10 @@
 \alias{check_version_compat}
 \title{Checking the validity of a given version code}
 \usage{
-check_version_compat(version_name = "latest")
+check_version_compat(stics_version = "latest")
 }
 \arguments{
-\item{version}{An optional version name as listed in
+\item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}
 }
 \value{

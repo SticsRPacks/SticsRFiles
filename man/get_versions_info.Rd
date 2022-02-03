@@ -4,10 +4,10 @@
 \alias{get_versions_info}
 \title{Getting versions data (versions strings and examples files directories list)}
 \usage{
-get_versions_info(version_name = NULL, location = "install")
+get_versions_info(stics_version = NULL, location = "install")
 }
 \arguments{
-\item{version_name}{Optional version string (i.e. "VX.Y")}
+\item{stics_version}{Optional version string (i.e. "VX.Y")}
 
 \item{versions_dir}{Optional, either an \code{extdata} directory path
 of the installed SticsRFiles library (default) or of the package project}
@@ -28,13 +28,13 @@ versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
 2     V9.0   V9.0 V9.0 BASE BASE V9.0 examples/V9.0 templates/V9.0 BASE
 3     V9.1   V9.1 V9.1 BASE BASE V9.1 examples/V9.1 templates/V9.1 BASE
 
-get_versions_info( version_name = "V8.5")
+get_versions_info( stics_version = "V8.5")
 
 versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
 1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
 
 
-get_versions_info(version_name = "V8.5",
+get_versions_info(stics_version = "V8.5",
                   versions_dir = "path/to/SticsRFilesproject/inst/extdata")
 
 

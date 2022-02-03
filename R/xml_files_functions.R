@@ -51,27 +51,27 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
   return()
 }
 
-to_xml_version <- function(version) {
+to_xml_version <- function(stics_version) {
 
   err <- FALSE
 
-  if (is.numeric(version)) version <- as.character(version)
+  if (is.numeric(stics_version)) stics_version <- as.character(stics_version)
 
-  if (!grepl(pattern = "\\.", x = version)) version <- paste0(version,".0")
+  if (!grepl(pattern = "\\.", x = stics_version)) stics_version <- paste0(stics_version,".0")
 
-  numbers <- grepl(pattern = "[0-9]", version)
+  numbers <- grepl(pattern = "[0-9]", stics_version)
 
   # no numbers in version
   if (!numbers) err <- TRUE
 
-  char_no_v <- grepl(pattern = "[a-u w-z A-U W-Z]", version)
+  char_no_v <- grepl(pattern = "[a-u w-z A-U W-Z]", stics_version)
 
   # Wrong character in version
   if(char_no_v) err <- TRUE
 
   # No dot in version
 
-  if (grepl(pattern = "\\.$", x = version)) err <- TRUE
+  if (grepl(pattern = "\\.$", x = stics_version)) err <- TRUE
 
 
   if (err){
@@ -79,7 +79,7 @@ to_xml_version <- function(version) {
     return()
   }
 
-  as.character(get_version_num(version = version, numeric = FALSE))
+  as.character(get_version_num(stics_version = stics_version, numeric = FALSE))
 }
 
 
@@ -159,7 +159,7 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
 
 # TODO: see *xml_file_version functions ...
 #check_xml_stics_version <- function(xml_file_or_doc, version, param_gen_file = NULL) {
-check_xml_file_version <- function(xml_file_or_doc, version, param_gen_file = NULL) {
+check_xml_file_version <- function(xml_file_or_doc, stics_version, param_gen_file = NULL) {
   #xml_version <- get_xml_stics_version(xml_file_or_doc, param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(xml_file_or_doc, param_gen_file = param_gen_file)
 
@@ -169,7 +169,7 @@ check_xml_file_version <- function(xml_file_or_doc, version, param_gen_file = NU
     return(FALSE)
   }
 
-  if ( ! version %in% xml_version) r <- FALSE
+  if ( ! stics_version %in% xml_version) r <- FALSE
 
   attr(r,"version") <- xml_version
   return(r)
@@ -289,7 +289,7 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 }
 
 # TODO: to be evaluated later, usefull ?
-# check_update_from_to_versions <- function(version, target_version = "V10.0") {
+# check_update_from_to_versions <- function(stics_version, target_version = "V10.0") {
 #
 #   # TODO: to define for getting compat for a list of versions !
 #   # v <- list("8.5","9.0",c("9.1","9.2))
@@ -301,7 +301,7 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 #   # version taken into account in SticsRFiles
 #
 #   # Compatibility checks between version and update to target_version
-#   check_version_compat(version)
+#   check_version_compat(stics_version)
 #
 #   # check about the target version
 #   # TODO: add check to test if version exists as for version (see upon call)
@@ -317,8 +317,8 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 #   #compat_versions <- get_version_num(compat_versions)
 #
 #   # TODO: add list of compatible versions
-#   #ver_num <- get_version_num(version)
-#   if (!version %in% compat_versions) stop("Files from the version ", version,
+#   #ver_num <- get_version_num(stics_version)
+#   if (!stics_version %in% compat_versions) stop("Files from the version ", stics_version,
 #                                           " cannot be converted to the version ", target_version)
 #
 #   # TODO: change from_tag to "9_1-2" if 9.1 and 9.2 are compatible !

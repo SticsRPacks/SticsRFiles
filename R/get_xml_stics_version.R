@@ -36,6 +36,6 @@ get_xml_stics_version <- function(stics_version = "latest", xml_doc = NULL) {
   }
 
   # Getting version from compat csv file
-  return(check_version_compat(version_name = stics_version))
+  return(check_version_compat(stics_version = stics_version))
 
 }
