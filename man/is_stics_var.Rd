@@ -4,7 +4,7 @@
 \alias{is_stics_var}
 \title{Search if a STICS variable exist}
 \usage{
-is_stics_var(var, stics_version = "latest")
+is_stics_var(var, stics_version = "latest", version = lifecycle::deprecated())
 }
 \arguments{
 \item{var}{A vector of variable names}

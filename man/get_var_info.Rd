@@ -4,7 +4,12 @@
 \alias{get_var_info}
 \title{Find STICS output variable names and description}
 \usage{
-get_var_info(var = NULL, keyword = NULL, stics_version = "latest")
+get_var_info(
+  var = NULL,
+  keyword = NULL,
+  stics_version = "latest",
+  version = lifecycle::deprecated()
+)
 }
 \arguments{
 \item{var}{Vector of variable names (or partial names).

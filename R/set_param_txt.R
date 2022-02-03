@@ -19,6 +19,12 @@
 #' @param plant `r lifecycle::badge("deprecated")` `plant` is no
 #'   longer supported, use `plant_id` instead.
 #'
+#'
+#' @param file Path (including name) of the file to modify
+#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
+#'   longer supported, use `file` instead.
+#'
+#'
 #' @details The \code{plant} parameter can be either equal to \code{1}, \code{2} for
 #'          the associated plant in the case of intercrop, or \code{c(1,2)} for both
 #'          Principal and associated plants.
@@ -31,8 +37,7 @@
 #' @note \code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
 #'       variables required from STICS, please directly call \code{gen_varmod}.
 #'
-#'
-#' @importFrom magrittr "%>%"
+#' @export
 #'
 #' @examples
 #'\dontrun{
@@ -58,7 +63,7 @@
 #' set_soil_txt(file = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
 #'}
 #'
-#' @export
+#'
 set_param_txt= function(workspace = getwd(),
                         param,
                         value,

@@ -122,6 +122,11 @@ longer supported, use \code{append} instead.}
 
 \item{plant}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plant} is no
 longer supported, use \code{plant_id} instead.}
+
+\item{file}{Path (including name) of the file to modify}
+
+\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
+longer supported, use \code{file} instead.}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input
@@ -164,5 +169,6 @@ set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 # change its value in the soil file, we use set_soil_txt():
 set_soil_txt(file = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
 }
+
 
 }

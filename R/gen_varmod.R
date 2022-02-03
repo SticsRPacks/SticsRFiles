@@ -49,7 +49,11 @@ gen_varmod <- function(workspace,
     var_names <- var # to remove when we update inside the function
   }
   # version
-  if (lifecycle::is_present(version)) {
+  # added a second condition because
+  # if version is not given as an arg.
+  # version always exist and giving detailed information
+  # about R version and platform (see ?version)
+  if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn("0.5.0", "gen_varmod(version)",
                               "gen_varmod(stics_version)")
   } else {

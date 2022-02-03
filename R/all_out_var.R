@@ -70,7 +70,8 @@ all_out_var <- function(stics_version = "latest"){
 #'
 get_var_info <- function(var = NULL,
                          keyword = NULL,
-                         stics_version= "latest"){
+                         stics_version= "latest",
+                         version = lifecycle::deprecated()){
 
   # added a second condition because
   # if version is not given as an arg.
@@ -120,7 +121,9 @@ get_var_info <- function(var = NULL,
 #' \dontrun{
 #' is_stics_var(c("lai(n)",'masec(n)',"truc"))
 #' }
-is_stics_var= function(var, stics_version= "latest"){
+is_stics_var= function(var,
+                       stics_version= "latest",
+                       version = lifecycle::deprecated()){
 
 
   # added a second condition because

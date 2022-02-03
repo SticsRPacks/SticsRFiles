@@ -6,11 +6,14 @@
 #' @param file Path (including name) of the xml file to modify
 #' @param param Vector of parameter names.
 #' @param values A vector or a list of parameter(s) values (see details).
-#' @param save_as Path (including name) of the xml file to generate. Optional, if NULL `file` is overwritten.
+#' @param save_as Path (including name) of the xml file to generate.
+#' Optional, if NULL `file` is overwritten.
 #' @param select node name or attribute name to use for selection
 #' (optional, default to no selection)
-#' @param select_value Vector of values used for select (see examples). Optional, should be provided only if select is provided.
-#' @param overwrite Logical TRUE for overwriting the output file, FALSE otherwise (default)
+#' @param select_value Vector of values used for select (see examples).
+#' Optional, should be provided only if select is provided.
+#' @param overwrite Logical TRUE for overwriting the output file,
+#' FALSE otherwise (default)
 #' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
 #'   longer supported, use file instead.
 #' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
@@ -25,8 +28,9 @@
 #'
 #' @return A logical value TRUE for operation success, FALSE otherwise
 #'
-#' @details It is possible to give several values for a parameter by passing a vector of values.
-#' For example, for two parameters with two values each: value= list(c(1,2), c(2.3,4.5))
+#' @details It is possible to give several values for a parameter by passing
+#' a vector of values. For example, for two parameters with two values each:
+#' value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
 #'
@@ -51,7 +55,8 @@
 #' select = "sol", select_value = "solcanne")
 #'
 #'
-#' # Setting a specific values to 2 parameters "argi" and "norg" for "solcanne" soil
+#' # Setting a specific values to 2 parameters "argi" and
+#' "norg" for "solcanne" soil
 #' set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
 #' select = "sol", select_value = "solcanne", overwrite = TRUE)
 #'
@@ -60,10 +65,12 @@
 #'
 #'
 #' # For vector parameters per soil (5 values, one per soil layer)
-#' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"),
+#' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol",
+#' select_value = c("solcanne", "solbanane"),
 #' param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
 #'
-#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol", select_value = c("solcanne", "solbanane"))
+#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol",
+#' select_value = c("solcanne", "solbanane"))
 #'
 #'
 #' # Crop management file
