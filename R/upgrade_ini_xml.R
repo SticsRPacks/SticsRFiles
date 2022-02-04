@@ -119,7 +119,7 @@ upgrade_ini_xml <- function(file,
 	<choix code="2" nom="no">
 		<masec0>0</masec0>
 		<QNplante0>0</QNplante0>
-		<resperenne0>0</resperenne0>
+		<restemp0>0</restemp0>
 	</choix>
  </option>',
     addFinalizer = TRUE)
