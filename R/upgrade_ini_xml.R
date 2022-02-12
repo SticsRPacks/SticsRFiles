@@ -107,7 +107,8 @@ upgrade_ini_xml <- function(file,
   lapply(rm_nodes, function(x) removeNodes(x))
 
 
-  # Getting new option node
+  # Adding new option node
+  # including old nodes masec0,QNplante0,restemp0 (previously named resperennes0)
   new_node <- xmlParseString(
     '<option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
 	<choix code="1" nom="yes">
@@ -131,21 +132,40 @@ upgrade_ini_xml <- function(file,
   # Adding new node
   lapply(prev_sibling, function(x) addSibling(x, xmlClone(new_node)))
 
-  # Error ...
-  # In set_param_value(xml_doc, param_name = param_name[p], param_value = param_value[[p]],  :
-  #                      Parameters names and list of values are no of the same length !
-  # Restoring values for masec0, QNplante0, resperenne0 from old ones
-  #set_param_value(old_doc, param_name = rm_names, param_value = old_values)
+  # setting values for restructured nodes
+  # resperennes0 became restemp0
+  rm_names <- c("masec0","QNplante0", "restemp0")
+  set_param_value(old_doc, param_name = as.list(rm_names), param_value = old_values)
+
+
+  # Adding snow node
+  new_node <- xmlParseString(
+    '<snow>
+    <SDepth>0.0</SDepth>
+    <Sdry>0.0</Sdry>
+    <Swet>0.0</Swet>
+    <ps>0.0</ps>
+    </snow>',
+    addFinalizer = TRUE)
+
+  parent_node <- SticsRFiles:::getNodeS(old_doc, path="//initialisations")[[1]]
+
+  addChildren(parent_node, xmlClone(new_node))
+
+
+  # Renaming soil parameters
+  # hinit, NO3init, NH4init => hinitf, NO3initf, NH4initf
+  current_node <- SticsRFiles:::getNodeS(old_doc, path="//hinit")[[1]]
+  xmlName(current_node) <- "hinitf"
+  current_node <- SticsRFiles:::getNodeS(old_doc, path="//NO3init")[[1]]
+  xmlName(current_node) <- "NO3initf"
+  current_node <- SticsRFiles:::getNodeS(old_doc, path="//NH4init")[[1]]
+  xmlName(current_node) <- "NH4initf"
+
 
   # Writing to file _ini.xml
   out_ini <- file.path(out_dir, basename(file))
   write_xml_file(old_doc, out_ini, overwrite)
-
-
-  set_param_xml(out_ini,
-                param_name = rm_names,
-                old_values,
-                overwrite = TRUE)
 
 
 
