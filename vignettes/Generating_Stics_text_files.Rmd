@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo = TRUE, eval = TRUE}
 library(SticsRFiles)
-library(SticsOnR)
 ```
 
 
