@@ -139,7 +139,7 @@ gen_usms_xml2txt <- function(javastics,
 
 
   # checking javastics path
-  SticsOnR:::check_java_path(javastics_path)
+  check_java_path(javastics_path)
   start_wd= getwd()
   on.exit(setwd(start_wd))
 
@@ -147,7 +147,7 @@ gen_usms_xml2txt <- function(javastics,
 
 
   # Checking and getting JavaStics workspace path
-  workspace_path <- SticsOnR:::check_java_workspace(javastics_path,workspace_path)
+  workspace_path <- check_java_workspace(javastics_path,workspace_path)
   if (base::is.null(workspace_path)) {
     return()
   }

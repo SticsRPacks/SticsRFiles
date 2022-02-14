@@ -148,18 +148,18 @@ upgrade_ini_xml <- function(file,
     </snow>',
     addFinalizer = TRUE)
 
-  parent_node <- SticsRFiles:::getNodeS(old_doc, path="//initialisations")[[1]]
+  parent_node <- getNodeS(old_doc, path="//initialisations")[[1]]
 
   addChildren(parent_node, xmlClone(new_node))
 
 
   # Renaming soil parameters
   # hinit, NO3init, NH4init => hinitf, NO3initf, NH4initf
-  current_node <- SticsRFiles:::getNodeS(old_doc, path="//hinit")[[1]]
+  current_node <- getNodeS(old_doc, path="//hinit")[[1]]
   xmlName(current_node) <- "hinitf"
-  current_node <- SticsRFiles:::getNodeS(old_doc, path="//NO3init")[[1]]
+  current_node <- getNodeS(old_doc, path="//NO3init")[[1]]
   xmlName(current_node) <- "NO3initf"
-  current_node <- SticsRFiles:::getNodeS(old_doc, path="//NH4init")[[1]]
+  current_node <- getNodeS(old_doc, path="//NH4init")[[1]]
   xmlName(current_node) <- "NH4initf"
 
 
