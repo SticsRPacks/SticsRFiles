@@ -45,7 +45,6 @@ Imports:
     tools,
     lifecycle
 Suggests:
-    SticsOnR,
     knitr,
     covr,
     testthat,
