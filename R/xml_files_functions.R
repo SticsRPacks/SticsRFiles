@@ -34,7 +34,10 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
 
   par_file <- file.path(workspace_dir, type)
 
-  if (file.exists(par_file)) return(par_file)
+  if (file.exists(par_file)) {
+    attr(par_file, "where") <- "workspace"
+    return(par_file)
+  }
 
   if (is.null(javastics_dir)) {
     warning("JavaStics path must be given as input argument\n",
@@ -44,7 +47,10 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
 
   par_file <- file.path(javastics_dir, "config", type)
 
-  if (file.exists(par_file)) return(par_file)
+  if (file.exists(par_file)) {
+    attr(par_file, "where") <- "javastics"
+    return(par_file)
+  }
 
   warning(type, " has not been found in ",javastics_dir)
 
