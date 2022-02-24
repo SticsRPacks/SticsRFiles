@@ -71,7 +71,9 @@ upgrade_param_gen_xml <- function(file,
   # k_desat to kdesat
   nodes_to_change <- getNodeS(old_doc, path="//param[@nom='k_desat']")
   if (!is.null(nodes_to_change))
-    setAttrValues(old_doc, path="//param[@nom='k_desat']", attr_name="nom", values_list = "kdesat")
+    setAttrValues(old_doc, path="//param[@nom='k_desat']",
+                  attr_name="nom",
+                  values_list = "kdesat")
 
 
 
@@ -97,6 +99,36 @@ upgrade_param_gen_xml <- function(file,
     prev_sibling <- new
   }
 
+  # TODO: evaluate if necessary
+  # # changing options values, formalisms names
+  # # codesnow
+  # setAttrValues(old_doc, path = "//option[@nomParam='codesnow']",
+  #               attr_name = "choix",
+  #               values_list = "2")
+  #
+  # # code_pdenit
+  # setAttrValues(old_doc, path = "//option[@nomParam='code_pdenit']",
+  #               attr_name = "choix",
+  #               values_list = "1")
+  #
+  # # <choix code="2" nom="Intermediate crop on surface">
+  # sel_nodes <- SticsRFiles:::getNodeS(old_doc, path="//choix[starts-with(@nom,'Intermediate')]")
+  # if (! is.null(sel_nodes)) {
+  #   lapply(sel_nodes, function(x)
+  #   {
+  #     f <- xmlAttrs(sel_nodes[[1]])[["nom"]]
+  #     xmlAttrs(sel_nodes[[1]])[["nom"]] <- gsub("Intermediate","Cover",f)
+  #   })
+  # }
+  #
+  # # <choix code="2" nom="Intermediate crop on surface">
+  # sel_nodes <- SticsRFiles:::getNodeS(old_doc, path="//choix[@nom='Others.2 ploughed in')]")
+  # if (! is.null(sel_nodes)) {
+  #   lapply(sel_nodes, function(x)
+  #   {
+  #     xmlAttrs(sel_nodes[[1]])[["nom"]] <- "Dead rhizomes in soil"
+  #   })
+  # }
 
   # Writing to file param_gen.xml
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite )
