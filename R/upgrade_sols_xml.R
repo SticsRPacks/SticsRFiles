@@ -89,8 +89,13 @@ upgrade_sols_xml <- function(file,
   prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
 
   # added for compatibility with old misspelled parameters
-  if (is.null(prev_sibling))
-    prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
+  if (is.null(prev_sibling)) {
+    prev_sibling <- getNodeS(old_doc, "//param[@nom='csurNsol']")
+    # updating nom attribute content
+    setAttrValues(old_doc, path="//param[@nom='csurNsol']",
+                  attr_name="nom",
+                  values_list = "CsurNsol")
+  }
 
   for (n in seq_along(prev_sibling)) {
     addSibling(prev_sibling[[n]], xmlClone(new_node))

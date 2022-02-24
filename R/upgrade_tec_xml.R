@@ -369,38 +369,29 @@ upgrade_tec_xml <- function(file,
   # <option choix="1" nom="Automatic calculation of the depht of residues incorporation in fucntion of proftrav" nomParam="code_auto_profres">
   # code_auto_profres, resk, resz
 
+  param_names <- c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
+                   "code_auto_profres(1)","resk(1)", "resz(1)", "P_codedate_irrigauto", "datedeb_irrigauto",
+                   "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto")
   old_val <- get_param_xml(param_newform_file,
-                           param = c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
-                                          "code_auto_profres(1)","resk(1)", "resz(1)", "P_codedate_irrigauto", "datedeb_irrigauto",
-                                          "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"))[[basename(param_newform_file)]]
-
-
-  # ERROR ????: using set_param_xml instead after writing new file
-  # set_param_value(old_doc,
-  #                               param_name = c("codetempfauche", "nbj_pr_apres_semis",
-  #                                              "eau_mini_decisemis", "humirac_decisemis",
-  #                                              "code_auto_profres","resk", "resz", "codedate_irrigauto",
-  #                                              "datedeb_irrigauto",
-  #                                              "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"),
-  #                               values = old_val)
-
-
-
-
+                           param = param_names)[[basename(param_newform_file)]]
 
   # writing to file _tec.xml
   out_tec <- file.path(out_dir, basename(file))
   write_xml_file(old_doc, out_tec, overwrite)
 
   # setting new values
-  set_param_xml(out_tec,
-                param_name = c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
-                               "code_auto_profres","resk", "resz", "codedate_irrigauto", "datedeb_irrigauto",
-                               "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"),
-                old_val,
+  set_param_xml(file = out_tec,
+                param = param_names,
+                values = old_val,
                 overwrite = overwrite)
 
-
+  # error !!:
+  # set_param_value(old_doc, c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
+  #                            "code_auto_profres","resk", "resz", "codedate_irrigauto", "datedeb_irrigauto",
+  #                            "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"),
+  #                 old_val)
+  #
+  # write_xml_file(old_doc, out_tec, overwrite)
 
 
   free(old_doc@content)
