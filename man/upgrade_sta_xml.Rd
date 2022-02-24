@@ -18,7 +18,7 @@ upgrade_sta_xml(
 \arguments{
 \item{file}{Path of a station (*_sta.xml) file or a vector of}
 
-\item{out_dir}{Output directory path of the generated files
+\item{out_dir}{Output directory path of the generated files}
 
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
