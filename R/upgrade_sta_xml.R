@@ -2,7 +2,7 @@
 #'
 #' @param file Path of a station (*_sta.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
-#' #' @param param_gen_file Path of the param_gen.xml file corresponding
+#' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
