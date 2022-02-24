@@ -29,6 +29,19 @@ reference:
       - gen_tec_xml
       - gen_usms_xml
 
+  - title: "Upgrade JavaStics XML files from version 9.2 or (9.1) to 10.0"
+    desc: Functions for upgrading parameter files
+    contents:
+      - upgrade_param_gen_xml
+      - upgrade_param_newform_xml
+      - upgrade_usms_xml
+      - upgrade_plt_xml
+      - upgrade_sols_xml
+      - upgrade_ini_xml
+      - upgrade_tec_xml
+      - upgrade_sta_xml
+      - upgrade_workspace_xml
+
   - title: "Set values in JavaStics Input files (XML format)"
     contents:
       - set_param_xml
