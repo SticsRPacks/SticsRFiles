@@ -1,9 +1,9 @@
 #' Upgrading _sta.xml file(s) to a newer version
 #'
 #' @param file Path of a station (*_sta.xml) file or a vector of
-#' @param param_gen_file Path of the param_gen.xml file corresponding
-#' to the file version
 #' @param out_dir Output directory path of the generated files
+#' #' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
@@ -20,12 +20,12 @@
 #' @examples
 #' \dontrun{
 #' upgrade_sta_xml(file = "/path/to/_sta.xml",
-#'                 param_gen_file = "/path/to/param_gen.xml"
-#'                 out_dir = "/path/to/directory")
+#'                 out_dir = "/path/to/directory",
+#'                 param_gen_file = "/path/to/param_gen.xml")
 #' }
 upgrade_sta_xml <- function(file,
-                            param_gen_file,
                             out_dir,
+                            param_gen_file,
                             stics_version = "V9.2",
                             target_version = "V10.0",
                             check_version = TRUE,
@@ -110,6 +110,32 @@ upgrade_sta_xml <- function(file,
 
   # Setting concrr value
   set_param_value(old_doc,param_name = "concrr", param_value = concrr)
+
+  # Adding snow formalism new node
+  new_node <- xmlParseString(
+    '<formalisme nom="Climate with snow">
+    <option choix="3" nom="Select snow model" nomParam="codemodlsnow">
+    <choix code="1" nom="1-Unused"/>
+    <choix code="2" nom="2-Unused"/>
+    <choix code="3" nom="3-My only choice">
+    <param format="real" max="1.2" min="0.3" nom="tsmax">-2.</param>
+    <param format="real" max="100.0" min="0.01" nom="trmax">1.</param>
+    <param format="real" max="100.0" min="0.0" nom="DKmax">1.50000</param>
+    <param format="real" max="1.0" min="0.0010" nom="Kmin">2.</param>
+    <param format="real" max="0.01" min="0.0" nom="Tmf">0.5</param>
+    <param format="real" max="1.0" min="0.0010" nom="SWrf">0.01</param>
+    <param format="real" max="1.0" min="0.0010" nom="Pns">100.</param>
+    <param format="real" max="1.0" min="0.0010" nom="E">0.02</param>
+    <param format="real" max="1.0" min="0.0010" nom="prof">10.</param>
+    <param format="real" max="1.0" min="0.0010" nom="tminseuil">-0.5</param>
+    <param format="real" max="1.0" min="0.0010" nom="tmaxseuil">0.</param>
+    </choix>
+    </option>
+    </formalisme>',
+    addFinalizer = TRUE)
+
+  par_node <- SticsRFiles:::getNodeS(old_doc, path="/fichiersta")[[1]]
+  addChildren(par_node, xmlClone(new_node))
 
   # Writing to file _sta.xml
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite )
