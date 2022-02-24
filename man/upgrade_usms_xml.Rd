@@ -7,11 +7,11 @@
 upgrade_usms_xml(
   file,
   out_dir,
+  param_gen_file,
   obs_dir = NULL,
-  stics_version = "9.2",
-  target_version = "10.0",
+  stics_version = "V9.2",
+  target_version = "V10.0",
   check_version = TRUE,
-  param_gen_file = NULL,
   overwrite = FALSE
 )
 }
@@ -19,6 +19,9 @@ upgrade_usms_xml(
 \item{file}{Path of a usms.xml file}
 
 \item{out_dir}{Output directory path of the generated file}
+
+\item{param_gen_file}{Path of the param_gen.xml file corresponding
+to the file version}
 
 \item{obs_dir}{Directory path of the observation data files}
 
@@ -29,9 +32,6 @@ upgrade_usms_xml(
 \item{check_version}{Perform version consistency with in stics_version input
 with the file version and finally checking if the upgrade is possible
 allowed to the target_version. If TRUE, param_gen_file is mandatory.}
-
-\item{param_gen_file}{Path of the param_gen.xml file corresponding
-to the file version}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
@@ -46,6 +46,7 @@ See SticsRFiles::get_stics_versions_compat() for listing versions
 \dontrun{
 upgrade_usms_xml(file = "/path/to/usms.xml",
                  out_dir = "/path/to/directory",
+                 param_gen_file = "/path/to/param_gen.xml"
                  obs_dir = "/path/to/obs/directory")
 }
 }

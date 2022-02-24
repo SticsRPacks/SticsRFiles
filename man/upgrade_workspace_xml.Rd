@@ -40,7 +40,13 @@ Upgrading XML files of a JavaStics workspace directory
 to a newer Stics version format
 }
 \details{
-See SticsRFiles::get_stics_versions_compat() for listing versions
+\itemize{
+\item See SticsRFiles::get_stics_versions_compat() for listing versions
+\item If general parameters files exist in \code{workspace}, they are also upgraded.
+In that case, residues parameters values are kept and might not be adapted
+to the target model version.
+\item Wheather data and observations files are fully copied to \code{out_dir}
+}
 }
 \examples{
 \dontrun{

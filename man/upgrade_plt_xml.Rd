@@ -6,9 +6,9 @@
 \usage{
 upgrade_plt_xml(
   file,
-  param_gen_file,
-  param_newform_file,
   out_dir,
+  param_newform_file,
+  param_gen_file,
   stics_version = "V9.2",
   target_version = "V10.0",
   check_version = TRUE,
@@ -19,13 +19,13 @@ upgrade_plt_xml(
 \arguments{
 \item{file}{Path of an initialisation (*_plt.xml) file or a vector of}
 
-\item{param_gen_file}{Path of the param_gen.xml file corresponding
-to the file version}
+\item{out_dir}{Output directory path of the generated files}
 
 \item{param_newform_file}{Path of the param_newform.xml file corresponding
 to the file version}
 
-\item{out_dir}{Output directory path of the generated files}
+\item{param_gen_file}{Path of the param_gen.xml file corresponding
+to the file version}
 
 \item{stics_version}{Name of the Stics version (VX.Y format)}
 

@@ -6,8 +6,8 @@
 \usage{
 upgrade_sta_xml(
   file,
-  param_gen_file,
   out_dir,
+  param_gen_file,
   stics_version = "V9.2",
   target_version = "V10.0",
   check_version = TRUE,
@@ -18,10 +18,9 @@ upgrade_sta_xml(
 \arguments{
 \item{file}{Path of a station (*_sta.xml) file or a vector of}
 
-\item{param_gen_file}{Path of the param_gen.xml file corresponding
+\item{out_dir}{Output directory path of the generated files
+#' @param param_gen_file Path of the param_gen.xml file corresponding
 to the file version}
-
-\item{out_dir}{Output directory path of the generated files}
 
 \item{stics_version}{Name of the Stics version (VX.Y format)}
 
@@ -45,7 +44,7 @@ See SticsRFiles::get_stics_versions_compat() for listing versions
 \examples{
 \dontrun{
 upgrade_sta_xml(file = "/path/to/_sta.xml",
-                param_gen_file = "/path/to/param_gen.xml"
-                out_dir = "/path/to/directory")
+                out_dir = "/path/to/directory",
+                param_gen_file = "/path/to/param_gen.xml")
 }
 }
