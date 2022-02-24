@@ -2,13 +2,14 @@
 #'
 #' @param file Path of a param_newform.xml file
 #' @param out_dir Output directory path of the generated file
+#' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
-#' @param param_gen_file Path of the param_gen.xml file corresponding
-#' to the file version
+
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #'
@@ -19,14 +20,16 @@
 #' @examples
 #' \dontrun{
 #' upgrade_param_newform_xml(file = "/path/to/param_newform.xml",
-#'                           out_dir = "/path/to/directory")
+#'                           out_dir = "/path/to/directory",
+#'                           param_gen_file = "/path/to/param_gen.xml")
 #' }
 upgrade_param_newform_xml <- function(file,
                                       out_dir,
+                                      param_gen_file,
                                       stics_version = "V9.2",
                                       target_version = "V10.0",
                                       check_version = TRUE,
-                                      param_gen_file = NULL,
+
                                       overwrite = FALSE#,
                                       #codemineral = FALSE
 ) {

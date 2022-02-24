@@ -1,16 +1,16 @@
 #' Upgrading _tec.xml file(s) to a newer version
 #'
 #' @param file Path of a crop management (*_tec.xml) file or a vector of
+#' @param out_dir Output directory path of the generated files
 #' @param param_newform_file Path of the param_newform.xml file corresponding
 #' to the file version
-#' @param out_dir Output directory path of the generated files
+#' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
-#' @param param_gen_file Path of the param_gen.xml file corresponding
-#' to the file version
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #' @param ... Additional input arguments
@@ -22,16 +22,17 @@
 #' @examples
 #' \dontrun{
 #' upgrade_tec_xml(file = "/path/to/_tec.xml",
-#'                 param_newform_file = "/path/to/param_newform.xml"
-#'                 out_dir = "/path/to/directory")
+#'                 out_dir = "/path/to/directory",
+#'                 param_newform_file = "/path/to/param_newform.xml",
+#'                 param_gen_file = "/path/to/param_gen.xml")
 #' }
 upgrade_tec_xml <- function(file,
-                            param_newform_file,
                             out_dir,
-                            stics_version = "9.2",
-                            target_version = "10.0",
+                            param_newform_file,
+                            param_gen_file,
+                            stics_version = "V9.2",
+                            target_version = "V10.0",
                             check_version = TRUE,
-                            param_gen_file = NULL,
                             overwrite = FALSE,
                             ...) {
 
@@ -52,7 +53,7 @@ upgrade_tec_xml <- function(file,
 
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file[1],
+    file_version <- check_xml_file_version(file,
                                            stics_version,
                                            param_gen_file = param_gen_file)
 
@@ -380,10 +381,13 @@ upgrade_tec_xml <- function(file,
   write_xml_file(old_doc, out_tec, overwrite)
 
   # setting new values
+  param_names <- c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
+                   "code_auto_profres","resk", "resz", "codedate_irrigauto", "datedeb_irrigauto",
+                   "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto")
   set_param_xml(file = out_tec,
                 param = param_names,
                 values = old_val,
-                overwrite = overwrite)
+                overwrite = TRUE)
 
   # error !!:
   # set_param_value(old_doc, c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",

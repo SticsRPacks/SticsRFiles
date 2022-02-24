@@ -1,11 +1,11 @@
 #' Upgrading _plt.xml file(s) to a newer version
 #'
 #' @param file Path of an initialisation (*_plt.xml) file or a vector of
-#' @param param_gen_file Path of the param_gen.xml file corresponding
-#' to the file version
+#' @param out_dir Output directory path of the generated files
 #' @param param_newform_file Path of the param_newform.xml file corresponding
 #' to the file version
-#' @param out_dir Output directory path of the generated files
+#' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
 #' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
@@ -27,9 +27,9 @@
 #'                 out_dir = "/path/to/directory")
 #' }
 upgrade_plt_xml <- function(file,
-                            param_gen_file,
-                            param_newform_file,
                             out_dir,
+                            param_newform_file,
+                            param_gen_file,
                             stics_version = "V9.2",
                             target_version = "V10.0",
                             check_version = TRUE,
