@@ -98,18 +98,6 @@ upgrade_param_gen_xml <- function(file,
   }
 
 
-  # new_doc <- xmldocument(file = "newparam_gen.xml")
-  # res_val <- get_param_value(xml_doc = new_doc,parent_name = "option",
-  #                                          parent_sel_attr = "Type of residues for decomposition parameters")
-  # res_par <- names(res_val)
-  #
-  # set_param_value(xml_doc = old_doc,
-  #                               param_name = res_par,
-  #                               param_value = res_val,
-  #                               select = "option",
-  #                               value = "Type of residues for decomposition parameters")
-
-
   # Writing to file param_gen.xml
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite )
 

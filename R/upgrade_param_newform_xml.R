@@ -88,6 +88,14 @@ upgrade_param_newform_xml <- function(file,
                   "option for several thinning ",
                   "option for several fertilizer type ")
 
+
+
+  # TODO: when code_stock_BM and code_depth_mixed_humus will be removed
+  # from file, add formalisms to be removed to the form_names vector
+  # "residue incorporation", "evaluation options"
+
+
+
   nodes_to_rm <- lapply(form_names, function(x)
     getNodeS(docObj = old_doc,
              path = paste0("//formalisme[@nom='",x,"']")))
