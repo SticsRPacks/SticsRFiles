@@ -72,7 +72,7 @@ usm_xl_file <- download_usm_xl(out_dir = xl_dir)
 ```
 
 ```{r, eval=TRUE, echo = FALSE, results='hide'}
-usm_xl_file <-  download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = workspace_path)
+usm_xl_file <- download_usm_xl(file = "inputs_stics_example.xlsx", out_dir = workspace_path)
 ```
 
 
