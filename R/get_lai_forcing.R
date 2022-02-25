@@ -86,7 +86,7 @@ get_lai_forcing_txt <- function(usm_txt_path, usm_name = NULL) {
   if (length(usm_name) > 1) stop("Only one usm name may be given !")
 
   # Getting usm parameters
-  usm_data <- SticsRFiles::get_usm_txt(filepath = usm_txt_path)
+  usm_data <- get_usm_txt(filepath = usm_txt_path)
 
   # Checking usm name
   if (!base::is.null(usm_name) && usm_data$nom != usm_name) stop(usm_name, ": wrong usm name")

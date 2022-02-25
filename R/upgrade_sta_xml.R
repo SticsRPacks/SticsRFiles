@@ -134,7 +134,7 @@ upgrade_sta_xml <- function(file,
     </formalisme>',
     addFinalizer = TRUE)
 
-  par_node <- SticsRFiles:::getNodeS(old_doc, path="/fichiersta")[[1]]
+  par_node <- getNodeS(old_doc, path="/fichiersta")[[1]]
   addChildren(par_node, xmlClone(new_node))
 
   # Writing to file _sta.xml
