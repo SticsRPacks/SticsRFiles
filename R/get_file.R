@@ -257,6 +257,15 @@ get_file_ <- function(workspace = getwd(),
     })
   }
 
+  # to be sure that file_name and workspace are in the same order ...
+  # this may not be the case if usms_filepath is not given and if some USMs are named ****a or ****p,
+  # but are not intercrop USMs
+  if (length(workspace)>1) {
+    tmp <- sapply(stringr::str_split(workspace,pattern = "/"),function(x) x[length(x)])
+    idx <- sapply(tmp, function(x) grep(x,names(file_name)))
+    file_name <- file_name[idx]
+  }
+
   # Getting sim/obs data list
   sim_list <- mapply(function(dirpath,filename,p_name){
     get_file_one(dirpath, filename, p_name,verbose, dates_list,var_list)
