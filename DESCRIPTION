@@ -3,15 +3,15 @@ Title: Read And Modify STICS Input/Output Files
 Date: 2021-10-08
 Version: 0.4.2
 Authors@R: 
-    c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
+    c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inrae.fr"),
       person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
       person(given = "SticsRPacks", role = c("aut","cph")),
-      person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")),
-      person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")),
-      person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
-      person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")),
-      person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")),
-      person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev"))
+      person(given = "Julie", family = "Constantin", email = "julie.constantin@inrae.fr", role = c("rev")),
+      person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inrae.fr", role = c("rev")),
+      person(given = "Marie", family = "Launay", email = "marie.launay@inrae.fr", role = c("rev")),
+      person(given = "Alain", family = "Mollier", email = "alain.mollier@inrae.fr", role = c("rev")),
+      person(given = "Christine", family = "Le Bas", email = "christine.lebas@inrae.fr", role = c("rev")),
+      person(given = "Joel", family = "Leonard", email = "joel.leonard@inrae.fr", role = c("rev"))
       )
 Description: The goal of SticsRFiles is to perform manipulations of the Stics model files.
 URL: https://github.com/SticsRPacks/SticsRFiles
