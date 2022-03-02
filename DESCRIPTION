@@ -148,6 +148,7 @@ Collate:
     'replace_txt_param_value.R'
     'set_codeoptim.R'
     'set_file_executable.R'
+    'set_java_workspace.R'
     'set_param_txt.R'
     'set_param_value.R'
     'set_param_xml.R'

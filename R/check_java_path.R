@@ -2,7 +2,7 @@
 #'
 #' @description Checking if directory exists and if it contains JavaStics jar files
 #' @details Rising an exception for each checking step !
-#' @param javastics_path JavaStics installation root folder
+#' @param javastics JavaStics installation root folder
 #'
 #' @examples
 #'\dontrun{
@@ -11,18 +11,18 @@
 #'
 #' @keywords internal
 
-check_java_path <- function(javastics_path){
+check_java_path <- function(javastics){
 
 
 
-  if (!file.exists(javastics_path)) {
-    stop("The JavasStics folder doesn't exist : ",javastics_path)
+  if (!file.exists(javastics)) {
+    stop("The JavasStics folder doesn't exist : ",javastics)
   }
 
   # checking if it's a JavaStics root directory
-  if (!file.exists(file.path(javastics_path,"JavaStics.exe")) &&
-      !file.exists(file.path(javastics_path,"JavaStics.jar"))) {
-    stop("This directory is not a JavaStics one: ",javastics_path)
+  if (!file.exists(file.path(javastics,"JavaStics.exe")) &&
+      !file.exists(file.path(javastics,"JavaStics.jar"))) {
+    stop("This directory is not a JavaStics one: ",javastics)
   }
 
 }

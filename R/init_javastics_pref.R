@@ -2,8 +2,8 @@
 #'
 #' @description Initialize the JavaStics `preferences.xml` file.
 #'
-#' @param javastics_path JavaStics installation folder
-#' @param overwrite      Boolean. Overwrite the existing preference file ?
+#' @param javastics JavaStics installation folder
+#' @param overwrite Boolean. Overwrite the existing preference file ?
 #'
 #' @return `TRUE` if the file was created, `FALSE` otherwise.
 #'
@@ -12,12 +12,13 @@
 #' init_javastics_pref("path/to/javastics")
 #' }
 #'
-#' @export
-init_javastics_pref <- function(javastics_path,overwrite = FALSE){
+#' @keywords internal
+# @export
+init_javastics_pref <- function(javastics, overwrite = FALSE){
 
-  check_java_path(javastics_path)
+  check_java_path(javastics)
 
-  config_pref= file.path(javastics_path,"config","preferences.xml")
+  config_pref= file.path(javastics,"config","preferences.xml")
 
   if(file.exists(config_pref)&&overwrite==FALSE){
     cli::cli_alert_danger(paste0("Preference file already exists, try with {.code overwrite= TRUE}"))

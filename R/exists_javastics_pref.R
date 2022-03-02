@@ -2,7 +2,7 @@
 #'
 #' @description Testing if preferences.xml file exist in JavaSTICS installation folder
 #'
-#' @param javastics_path JavaStics installation folder
+#' @param javastics JavaStics installation folder
 #'
 #' @examples
 #' \dontrun{
@@ -12,10 +12,10 @@
 #' @return logical value, TRUE if file exists, FALSE otherwise
 #'
 #' @keywords internal
-exists_javastics_pref <- function(javastics_path){
+exists_javastics_pref <- function(javastics){
   # checking javastics path
-  check_java_path(javastics_path)
+  check_java_path(javastics)
 
   # Returning if file exists
-  return(file.exists(file.path(javastics_path,"config","preferences.xml")))
+  return(file.exists(file.path(javastics,"config","preferences.xml")))
 }

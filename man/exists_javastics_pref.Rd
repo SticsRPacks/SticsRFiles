@@ -4,10 +4,10 @@
 \alias{exists_javastics_pref}
 \title{Evaluate if model preferences have been set}
 \usage{
-exists_javastics_pref(javastics_path)
+exists_javastics_pref(javastics)
 }
 \arguments{
-\item{javastics_path}{JavaStics installation folder}
+\item{javastics}{JavaStics installation folder}
 }
 \value{
 logical value, TRUE if file exists, FALSE otherwise

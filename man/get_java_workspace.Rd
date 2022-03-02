@@ -4,10 +4,10 @@
 \alias{get_java_workspace}
 \title{Getting current workspace in JavaStics preferences configuration}
 \usage{
-get_java_workspace(javastics_path)
+get_java_workspace(javastics)
 }
 \arguments{
-\item{javastics_path}{JavaStics installation root folder}
+\item{javastics}{JavaStics installation root folder}
 }
 \description{
 Getting current JavaStics working directory,

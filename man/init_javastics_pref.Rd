@@ -4,10 +4,10 @@
 \alias{init_javastics_pref}
 \title{Initialize JavaStics preferences}
 \usage{
-init_javastics_pref(javastics_path, overwrite = FALSE)
+init_javastics_pref(javastics, overwrite = FALSE)
 }
 \arguments{
-\item{javastics_path}{JavaStics installation folder}
+\item{javastics}{JavaStics installation folder}
 
 \item{overwrite}{Boolean. Overwrite the existing preference file ?}
 }
@@ -23,3 +23,4 @@ init_javastics_pref("path/to/javastics")
 }
 
 }
+\keyword{internal}

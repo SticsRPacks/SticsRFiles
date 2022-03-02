@@ -3,7 +3,7 @@
 #' @description Getting current JavaStics working directory,
 #' if not any setting to `example` directory
 #'
-#' @param javastics_path JavaStics installation root folder
+#' @param javastics JavaStics installation root folder
 #'
 #' @examples
 #' \dontrun{
@@ -14,21 +14,21 @@
 #'
 #@export
 
-get_java_workspace <- function(javastics_path){
+get_java_workspace <- function(javastics){
 
 
   # checking javastics path
-  check_java_path(javastics_path)
+  check_java_path(javastics)
 
   # if no preference have been set yet
-  if(!exists_javastics_pref(javastics_path)){
-    init_javastics_pref(javastics_path)
+  if(!exists_javastics_pref(javastics)){
+    init_javastics_pref(javastics)
   }
 
-  xml_path=file.path(javastics_path,"config","preferences.xml")
+  xml_path=file.path(javastics,"config","preferences.xml")
 
-  xml_pref= SticsRFiles ::: xmldocument(xml_path)
-  current_wd= SticsRFiles ::: getValues(xml_pref,'//entry[@key="workingDirectory.current"]')
+  xml_pref= xmldocument(xml_path)
+  current_wd= getValues(xml_pref,'//entry[@key="workingDirectory.current"]')
 
   if(base::is.null(current_wd)) stop("JavaStics working directory hasn't been set (use set_java_wd to do so)!")
 

@@ -4,10 +4,10 @@
 \alias{check_java_path}
 \title{Checking JavaStics directory content}
 \usage{
-check_java_path(javastics_path)
+check_java_path(javastics)
 }
 \arguments{
-\item{javastics_path}{JavaStics installation root folder}
+\item{javastics}{JavaStics installation root folder}
 }
 \description{
 Checking if directory exists and if it contains JavaStics jar files

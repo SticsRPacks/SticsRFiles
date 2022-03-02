@@ -5,33 +5,33 @@
 #' or validating an external absolute path. And also checking if the path is a
 #' valid JavaStics workspace
 #'
-#' @param javastics_path Path of JavaStics installation directory
-#' @param javastics_workspace_path An absolute or relative path (to JavaStics path)
+#' @param javastics Path of JavaStics installation directory
+#' @param workspace An absolute or relative path (to JavaStics path)
 #' of a workspace (Optional)
 #'
 #' @return An absolute javastics workspace path
 #'
 #' @keywords internal
 
-check_java_workspace <- function(javastics_path, javastics_workspace_path = NULL) {
+check_java_workspace <- function(javastics, workspace = NULL) {
 
   # Ensure that the user working directory is unchanged after the function has run
   current_wd= getwd()
   on.exit(setwd(current_wd))
 
-  setwd(javastics_path)
+  setwd(javastics)
 
   ws <- NULL
 
-  if (! base :: is.null(javastics_workspace_path)){
-    if(dirname(javastics_workspace_path) == "."){
+  if (! base :: is.null(workspace)){
+    if(dirname(workspace) == "."){
       # relative path to javastics path
-      ws=file.path(javastics_path,javastics_workspace_path)
+      ws=file.path(javastics,workspace)
     } else {
-      ws=javastics_workspace_path
+      ws=workspace
     }
   } else {
-    tt<-try(ws <- get_java_workspace(javastics_path),silent=TRUE)
+    tt<-try(ws <- get_java_workspace(javastics),silent=TRUE)
     if (methods :: is(tt,"try-error")) {
       warning("No workspace directory has been set, use set_java_wd to do so, or \n give it as input of the function !")
       return()
