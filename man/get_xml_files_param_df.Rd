@@ -74,19 +74,18 @@ all other columns names correspond to parameter names, with indices as suffix
 for multiple values
 }
 \examples{
-
 \dontrun{
 dir_path <- get_examples_path("xml")
-get_xml_files_param_df(file_path = file.path(dir_path,"sols.xml"))
+get_xml_files_param_df(file_path = file.path(dir_path, "sols.xml"))
 
-get_xml_files_param_df(file_path = file.path(dir_path,"sols.xml"),
-select = "sol", c("solcanne", "solble"))
+get_xml_files_param_df(
+  file_path = file.path(dir_path, "sols.xml"),
+  select = "sol", c("solcanne", "solble")
+)
 
-files_list <- file.path(dir_path, c("sols.xml", "usms.xml", "param_gen.xml" ))
+files_list <- file.path(dir_path, c("sols.xml", "usms.xml", "param_gen.xml"))
 get_xml_files_param_df(file_path = files_list)
-
 }
-
 
 }
 \keyword{internal}

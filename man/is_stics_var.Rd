@@ -24,7 +24,7 @@ Tells if one or more variable names are valid STICS output variables.
 }
 \examples{
 \dontrun{
-is_stics_var(c("lai(n)",'masec(n)',"truc"))
+is_stics_var(c("lai(n)", "masec(n)", "truc"))
 }
 }
 \seealso{

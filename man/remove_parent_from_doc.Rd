@@ -19,16 +19,17 @@ Remove a parent node from an XML file.
 \examples{
 \dontrun{
 
-xml_path <- file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 tec_doc <- SticsRFiles:::xmldocument(xml_path)
 
 # removing all the parent nodes the parameter belongs to
 SticsRFiles:::remove_parent_from_doc(tec_doc, param_name = "julapI_or_sum_upvt")
 
 # removing some of the parent nodes the parameter belongs to
-SticsRFiles:::remove_parent_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
-nodes_ids = c(1,3))
-
+SticsRFiles:::remove_parent_from_doc(tec_doc,
+  param_name = "julapI_or_sum_upvt",
+  nodes_ids = c(1, 3)
+)
 }
 
 }

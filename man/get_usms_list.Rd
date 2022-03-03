@@ -31,10 +31,9 @@ A vector of usm names
 Extracting a usm names list from an usms.xml file
 }
 \examples{
-path = get_examples_path( file_type = "xml")
+path <- get_examples_path(file_type = "xml")
 
 usms_list <- get_usms_list(file = file.path(path, "usms.xml"))
 
 usms_list <- get_usms_list(file = file.path(path, "usms.xml"), usm = c("usm1", "usm2"))
-
 }

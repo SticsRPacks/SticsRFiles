@@ -43,7 +43,5 @@ download_data(example_dirs = "study_case_1")
 
 # Getting data for a given example : study_case_1 and a given version
 download_data(example_dirs = "study_case_1", stics_version = "V9.0")
-
-
 }
 }

@@ -29,15 +29,17 @@ indicating weither or not all listed files exist in the \code{workspace_path}
 Checking xml files existence got from usms.xml
 }
 \examples{
-
 \dontrun{
 
-check_usms_files(workspace_path = "/path/to/workspace",
-javastics_path = "/path/to/javastics")
+check_usms_files(
+  workspace_path = "/path/to/workspace",
+  javastics_path = "/path/to/javastics"
+)
 
-check_usms_files(workspace_path = "/path/to/workspace",
-javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3"))
-
+check_usms_files(
+  workspace_path = "/path/to/workspace",
+  javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3")
+)
 }
 
 }

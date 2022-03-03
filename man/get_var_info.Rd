@@ -38,10 +38,10 @@ The function understand \code{\link[base]{regex}} as input.
 SticsRFiles::get_var_info("lai")
 
 # Find by keyword (fuzzy search in variable name and description):
-SticsRFiles::get_var_info(keyword= "lai")
+SticsRFiles::get_var_info(keyword = "lai")
 
 # Find for a particular version:
-SticsRFiles::get_var_info("lai", stics_version= "V9.0")
+SticsRFiles::get_var_info("lai", stics_version = "V9.0")
 }
 
 }

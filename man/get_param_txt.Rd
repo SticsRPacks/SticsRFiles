@@ -118,11 +118,10 @@ The functions are compatible with intercrops. Users generally only use
 }
 \examples{
 # Read the interrow distance parameter:
-
 \dontrun{
 library(SticsRFiles)
-path = get_examples_path( file_type = "txt" )
-get_param_txt(path, param='interrang')
+path <- get_examples_path(file_type = "txt")
+get_param_txt(path, param = "interrang")
 
 # Getting varietal values:
 
@@ -131,7 +130,7 @@ get_param_txt(workspace = path, param = "durvieF")
 # Get the leaf lifespan of another variety available in the plant file:
 get_param_txt(workspace = path, param = "durvieF", variety = "Furio")
 # To get the values for several (or all) varieties, either put all varieties:
-varieties= c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
+varieties <- c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
 get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 # Or get it from the output of the function returning all parameters:
 get_param_txt(workspace = path)$plant$plant1$durvieF
@@ -140,20 +139,22 @@ get_param_txt(workspace = path)$plant$plant1$durvieF
 \dontrun{
 # Read the initialisation file (ficini.txt):
 library(SticsRFiles)
-path = file.path(get_examples_path( file_type = "txt"), "ficini.txt")
+path <- file.path(get_examples_path(file_type = "txt"), "ficini.txt")
 get_ini_txt(path)
 
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp= get_tmp_txt(file = file.path(get_examples_path( file_type = "txt"), "tempoparv6.sti"))
-several_fert= ifelse(tmp$option_engrais_multiple==1,TRUE,FALSE)
-several_thin= ifelse(tmp$option_thinning==1,TRUE,FALSE)
-is_pasture= ifelse(tmp$option_pature==1,TRUE,FALSE)
+tmp <- get_tmp_txt(file = file.path(get_examples_path(file_type = "txt"), "tempoparv6.sti"))
+several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
+several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
+is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
 
 # Then, get the technical parameters:
-get_tec_txt(file= file.path(get_examples_path( file_type = "txt"), "fictec1.txt"),
-several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture)
+get_tec_txt(
+  file = file.path(get_examples_path(file_type = "txt"), "fictec1.txt"),
+  several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture
+)
 }
 
 }

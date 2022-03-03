@@ -22,9 +22,7 @@ Change value of codeoptim in the new_travail.usm file
 
 ws <- "path/to/stics/workspace"
 SticsRFiles:::set_codoptim(workspace = ws, value = 0)
-
 }
-
 
 }
 \keyword{internal}

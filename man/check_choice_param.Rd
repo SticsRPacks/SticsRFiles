@@ -21,7 +21,7 @@ Checking if any parameter appear in 2 option choices
 }
 \examples{
 \dontrun{
-  check_choice_param( xml_doc = xml_doc, param_name = param_name)
+check_choice_param(xml_doc = xml_doc, param_name = param_name)
 }
 
 }

@@ -30,6 +30,5 @@ SticsRFiles:::find_names(names, "lai")
 SticsRFiles:::find_names(names, "lai", exact = TRUE)
 
 #> [1] "lai"
-
 }
 \keyword{internal}

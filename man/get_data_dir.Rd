@@ -22,7 +22,6 @@ Getting package or library data path
 SticsRFiles:::get_data_dir()
 
 SticsRFiles:::get_data_dir(location = "package")
-
 }
 }
 \keyword{internal}

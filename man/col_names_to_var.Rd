@@ -17,9 +17,7 @@ Change the \code{varname.n.} or \code{varname_n} by \code{varname(n)}
 other names are unchanged (i.e.: varname, varname(n), ...)
 }
 \examples{
-col_names <- c("var1","var2_n","var3.1.")
+col_names <- c("var1", "var2_n", "var3.1.")
 valid_names <- SticsRFiles:::col_names_to_var(col_names)
-
-
 }
 \keyword{internal}

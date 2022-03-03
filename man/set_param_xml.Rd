@@ -69,12 +69,11 @@ a vector of values. For example, for two parameters with two values each:
 value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
-
 \dontrun{
 
 # Soil file
 
-file.copy(file.path(get_examples_path( file_type = "xml"),"sols.xml"), getwd())
+file.copy(file.path(get_examples_path(file_type = "xml"), "sols.xml"), getwd())
 
 # For scalar parameters per soil
 
@@ -84,40 +83,48 @@ set_param_xml("sols.xml", "argi", 50, overwrite = TRUE)
 get_param_xml("sols.xml", "argi")
 
 # Setting a specific value to "argi" for "solcanne" soil
-set_param_xml("sols.xml", "argi",56,
-select = "sol", select_value = "solcanne", overwrite = TRUE)
+set_param_xml("sols.xml", "argi", 56,
+  select = "sol", select_value = "solcanne", overwrite = TRUE
+)
 
 get_param_xml("sols.xml", "argi",
-select = "sol", select_value = "solcanne")
+  select = "sol", select_value = "solcanne"
+)
 
 
 # Setting a specific values to 2 parameters "argi" and
-"norg" for "solcanne" soil
-set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-select = "sol", select_value = "solcanne", overwrite = TRUE)
+# "norg" for "solcanne" soil
+set_param_xml("sols.xml", c("argi", "norg"), list(100, 150),
+  select = "sol", select_value = "solcanne", overwrite = TRUE
+)
 
 get_param_xml("sols.xml", c("argi", "norg"),
-select = "sol", select_value = "solcanne")
+  select = "sol", select_value = "solcanne"
+)
 
 
 # For vector parameters per soil (5 values, one per soil layer)
-set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol",
-select_value = c("solcanne", "solbanane"),
-param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
+set_param_xml("sols.xml", c("epc", "HCCF"),
+  select = "sol",
+  select_value = c("solcanne", "solbanane"),
+  param_value = list(c(20:24, 10:14), c(50:54, 40:44)), overwrite = TRUE
+)
 
-get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol",
-select_value = c("solcanne", "solbanane"))
+get_param_xml("sols.xml", c("epc", "HCCF"),
+  select = "sol",
+  select_value = c("solcanne", "solbanane")
+)
 
 
 # Crop management file
-file.copy(file.path(get_examples_path( file_type = "xml"),"file_tec.xml"), getwd())
+file.copy(file.path(get_examples_path(file_type = "xml"), "file_tec.xml"), getwd())
 
 # Modifying irrigations parameters
 set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
-param_value = list(200:215,20:35), overwrite = TRUE)
+  param_value = list(200:215, 20:35), overwrite = TRUE
+)
 
 get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
-
 }
 
 }

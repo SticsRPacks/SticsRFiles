@@ -14,7 +14,7 @@ Clean stics environment
 }
 \examples{
 \dontrun{
- stics_clean()
+stics_clean()
 }
 }
 \keyword{internal}

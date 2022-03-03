@@ -74,8 +74,10 @@ library(readxl)
 xl_path <- "inputs_stics_example.xlsx"
 download_usm_xl(file = xl_path)
 ini_param_df <- read_excel(xl_path, sheet = "Ini")
-gen_ini_xml(out_dir = "/path/to/dest/dir",
-param_table = ini_param_df)
+gen_ini_xml(
+  out_dir = "/path/to/dest/dir",
+  param_table = ini_param_df
+)
 }
 
 }

@@ -18,10 +18,10 @@ Converting an attributes list to a matrix
 \examples{
 \dontrun{
 
-xml_path <- file.path(get_examples_path( file_type = "xml" ), "sols.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
 node_set <- SticsRFiles:::getNodeS(sols_doc, "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
-attr_list <- sapply(node_set,function(x) xmlAttrs(x))
+attr_list <- sapply(node_set, function(x) xmlAttrs(x))
 
 #> [[1]]
 #> nom
@@ -41,7 +41,6 @@ SticsRFiles:::attributes_list2matrix(attr_list)
 #> [1,] "solcanne" NA     NA    NA
 #> [2,] "mulchbat" "real" "2.0" "0.0"
 #> [3,] "mulchbat" "real" "2.0" "0.0"
-
 }
 
 }

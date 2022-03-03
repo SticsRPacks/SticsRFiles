@@ -82,7 +82,7 @@ by default (+ "plant_2" for intercrops).
 }
 \examples{
 \dontrun{
-path <- file.path(get_examples_path(file_type = "obs"),"mixed")
+path <- file.path(get_examples_path(file_type = "obs"), "mixed")
 
 # Get observations for all usms, but only banana has observations:
 Meas <- get_obs(path)

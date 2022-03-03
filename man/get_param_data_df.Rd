@@ -42,19 +42,19 @@ all the existing parameters
 
 get_param_data_df(parameter = "albedo")
 
-get_param_data_df(parameter = "albedo", file_path ="/path/to/file.xml")
+get_param_data_df(parameter = "albedo", file_path = "/path/to/file.xml")
 
-get_param_data_df(parameter = "albedo", kind = "formalism)
+get_param_data_df(parameter = "albedo", kind = "formalism")
 
 get_param_data_df(parameter = "albedo", version = "V9.0")
 
 get_param_data_df(parameter = c("albedo", "latitude", "humcapil"))
 
-get_param_data_df(parameter = c("albedo", "latitude", "humcapil"),
-kind = "formalism)
-
+get_param_data_df(
+  parameter = c("albedo", "latitude", "humcapil"),
+  kind = "formalism"
+)
 }
-
 
 }
 \keyword{internal}

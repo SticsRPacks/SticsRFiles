@@ -27,16 +27,10 @@ NULL if missing file_type (types list is displayed)
 Getting examples files path attached to a STICS version for a given file type
 }
 \examples{
-
 \dontrun{
 
-get_examples_path( file_type = "csv" )
+get_examples_path(file_type = "csv")
 
-[1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V9.1"
-
-get_examples_path( file_type = "csv", stics_version = "V8.5")
-
-[1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V8.5"
-
+get_examples_path(file_type = "csv", stics_version = "V8.5")
 }
 }

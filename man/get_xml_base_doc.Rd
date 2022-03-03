@@ -31,7 +31,6 @@ SticsRFiles:::get_xml_base_doc("sols")
 SticsRFiles:::get_xml_stics_version()
 # Giving Stics version
 SticsRFiles:::get_xml_base_doc("sols", stics_version = "V9.1")
-
 }
 
 }

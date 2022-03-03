@@ -32,7 +32,7 @@ Get the plant name (and file name) for each usm in a workspace
 }
 \examples{
 \dontrun{
-path <- get_examples_path( file_type = "xml")
+path <- get_examples_path(file_type = "xml")
 
 # Get plant names for all usms (no javastics path, so only the file name is returned):
 get_plant_name(path)
@@ -42,7 +42,6 @@ get_plant_name(path, "banana")
 # Get plant names for banana with a javastics path, so the plant name is returned:
 get_plant_name(path)
 # NB: if the plant folder is in the workspace, no need to provide javastics_path
-
 }
 
 }

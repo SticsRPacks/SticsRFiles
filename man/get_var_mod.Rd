@@ -12,10 +12,10 @@ get_var_mod(...)
 This function was deprecated to homogenised writing process
 }
 \examples{
- \dontrun{
-get_var_mod(workspace,usms_file)
+\dontrun{
+get_var_mod(workspace, usms_file)
 # ->
-get_varmod(workspace,usms_file)
+get_varmod(workspace, usms_file)
 }
 
 }

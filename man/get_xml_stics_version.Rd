@@ -27,7 +27,6 @@ SticsRFiles:::get_xml_stics_version("latest")
 
 # Checking if a version exists
 SticsRFiles:::get_xml_stics_version("V9.2")
-
 }
 
 }

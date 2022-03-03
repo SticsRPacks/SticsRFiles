@@ -18,7 +18,7 @@ and if it fails, return as character.
 }
 \examples{
 \dontrun{
-test= list(a= "2", b="toto")
+test <- list(a = "2", b = "toto")
 character_to_numeric_list(test)
 }
 

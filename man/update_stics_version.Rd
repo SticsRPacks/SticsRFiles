@@ -35,12 +35,15 @@ Updating csv files for a given version
 }
 \examples{
 \dontrun{
-SticsRFiles::update_stics_version(version_name = "V10.0",
- url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10")
+SticsRFiles::update_stics_version(
+  version_name = "V10.0",
+  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10"
+)
 
-SticsRFiles::update_stics_version(version_name = "V10.0",
- url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
- location = "package")
-
+SticsRFiles::update_stics_version(
+  version_name = "V10.0",
+  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+  location = "package"
+)
 }
 }

@@ -18,18 +18,16 @@ A logical value if the file generation succeeded (T) or not (F)
 Write STICS obs data from data.frame/tibble
 }
 \examples{
-
 \dontrun{
 # Getting observations data
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 
 # Loading and filtering data for usm "USM_2017_T1_CI"
 obs_df <- read_params_table(file = xl_path, sheet_name = "Obs") \%>\%
-dplyr::filter(usm_name \%in\% "USM_2017_T1_CI")
+  dplyr::filter(usm_name \%in\% "USM_2017_T1_CI")
 
 # Generating the csv file
 gen_obs_(obs_df, "USM_2017_T1_CI.obs")
-
 }
 
 }

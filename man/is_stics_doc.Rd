@@ -46,11 +46,10 @@ Test if an XML document is a STICS document.
 }
 \examples{
 \dontrun{
-xml_path = file.path(get_examples_path( file_type = "xml"), "sols.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
 SticsRFiles:::is_stics_doc(sols_doc)
 }
-
 
 }
 \keyword{internal}

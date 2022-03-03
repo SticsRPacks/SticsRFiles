@@ -21,22 +21,23 @@ Add node to an xmlDocument object
 \examples{
 \dontrun{
 
-tec_xml <- file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+tec_xml <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 tec_doc <- SticsRFiles:::xmldocument(tec_xml)
 
 # Getting a new irrigation operation node
 irrigation_node <- SticsRFiles:::get_xml_base_node("tec", "irrigation")
-parent_path <- SticsRFiles:::get_param_type(tec_doc,"ta","formalisme","irrigation")$xpath
+parent_path <- SticsRFiles:::get_param_type(tec_doc, "ta", "formalisme", "irrigation")$xpath
 
 # Adding one irrigation operation
-SticsRFiles:::add_node_to_doc(xml_doc = tec_doc, new_node = irrigation_node,
-nodes_nb = 1, parent_path = parent_path)
+SticsRFiles:::add_node_to_doc(
+  xml_doc = tec_doc, new_node = irrigation_node,
+  nodes_nb = 1, parent_path = parent_path
+)
 
 # Checking irrigations operations number
 irrigations_nb <- length(SticsRFiles:::get_param_value(tec_doc, "julapI_or_sum_upvt"))
 # Fixing it in nb_interventions attribute
-SticsRFiles:::set_param_value(tec_doc, "nb_interventions",  irrigations_nb, "irrigation"  )
-
+SticsRFiles:::set_param_value(tec_doc, "nb_interventions", irrigations_nb, "irrigation")
 }
 
 }

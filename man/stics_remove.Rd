@@ -14,7 +14,7 @@ Remove objects listed in a stics environment.
 }
 \examples{
 \dontrun{
- stics_remove()
+stics_remove()
 }
 }
 \keyword{internal}

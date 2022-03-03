@@ -24,8 +24,8 @@ and parameters values vectors
 }
 \examples{
 \dontrun{
-gen_paramsti(".", c("par1","par2"), c(1,2))
-gen_paramsti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
+gen_paramsti(".", c("par1", "par2"), c(1, 2))
+gen_paramsti("/path/to/stics/workspace", c("par1", "par2"), c(1, 2))
 }
 
 }

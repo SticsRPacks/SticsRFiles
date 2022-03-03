@@ -18,17 +18,19 @@ Setting a usm param value(s) in an usms xmlDocument
 }
 \examples{
 \dontrun{
-xml_path = file.path(get_examples_path( file_type = "xml" ),"usms.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 usms_doc <- SticsRFiles:::xmldocument(xml_path)
 
-xl_path <- file.path(get_examples_path( file_type = "xml" ),"inputs_stics_example.xlsx")
+xl_path <- file.path(get_examples_path(file_type = "xml"), "inputs_stics_example.xlsx")
 usms_df <- read_excel(xl_path, sheet = "USMs")
 
 # For updating an existing xml doc (using existing usms names)
 # Creating a fake existing_doc
-existing_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = 3)
-SticsRFiles:::set_param_value(existing_doc, param_name = "usm",
-param_value = usms_df$usm_nom[c(3,1,5)])
+existing_doc <- SticsRFiles:::gen_xml_doc("usms", nodes_nb = 3)
+SticsRFiles:::set_param_value(existing_doc,
+  param_name = "usm",
+  param_value = usms_df$usm_nom[c(3, 1, 5)]
+)
 
 SticsRFiles:::set_usms_param_xml(existing_doc, usms_df)
 
@@ -36,12 +38,10 @@ SticsRFiles:::set_usms_param_xml(existing_doc, usms_df)
 # For a new xml doc
 # In that case: usms_df must contain all the usms parameters !
 usms_nb <- dim(usms_df)[1]
-new_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = usms_nb)
+new_doc <- SticsRFiles:::gen_xml_doc("usms", nodes_nb = usms_nb)
 
-SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = T)
-
+SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = TRUE)
 }
-
 
 }
 \keyword{internal}

@@ -24,11 +24,10 @@ Use \code{get_usms_list()} to get the list of the usm names for an usms.xml file
 \dontrun{
 
 # Xml case
-xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 get_lai_forcing(xml_usms)
-get_lai_forcing(xml_usms,"wheat")
-get_lai_forcing(xml_usms,c("wheat","intercrop_pea_barley"))
-
+get_lai_forcing(xml_usms, "wheat")
+get_lai_forcing(xml_usms, c("wheat", "intercrop_pea_barley"))
 }
 
 }

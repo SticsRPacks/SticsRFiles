@@ -56,9 +56,8 @@ none of them can be if keyword argument is used.
 \examples{
 
 get_param_info(param = "albedo")
-
 \dontrun{
-get_param_info(param = "albedo", file ="/path/to/file.xml")
+get_param_info(param = "albedo", file = "/path/to/file.xml")
 
 get_param_info(param = "albedo", formalism = "special")
 
@@ -66,13 +65,11 @@ get_param_info(param = "albedo", stics_version = "V9.0")
 
 get_param_info(param = c("alb", "lat"))
 
-get_param_info(keyword = "tec" )
+get_param_info(keyword = "tec")
 
 # Get the model version afterward:
-params = get_param_info(param = "albedo")
+params <- get_param_info(param = "albedo")
 attr(params, "version")
 }
-
-
 
 }

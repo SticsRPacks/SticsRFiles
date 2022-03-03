@@ -17,7 +17,7 @@ from the STICS model.
 }
 \examples{
 \dontrun{
- all_out_var()
+all_out_var()
 }
 }
 \seealso{

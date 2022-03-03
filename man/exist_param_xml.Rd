@@ -28,9 +28,7 @@ exist_param_xml(parameter = "albedo", version = "V9.0")
 exist_param_xml(parameter = c("albedo", "latitude", "humcapil"))
 
 exist_param_xml(parameter = c("albedo", "latitude", "humcapi"))
-
 }
-
 
 }
 \keyword{internal}

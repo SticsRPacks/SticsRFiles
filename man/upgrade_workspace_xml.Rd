@@ -50,8 +50,10 @@ to the target model version.
 }
 \examples{
 \dontrun{
-upgrade_workspace_xml(workspace = "/path/to/javastics/workspace",
-                      javastics = "/path/to/javastics/directory",
-                      out_dir = "/path/to/an/output/directory")
+upgrade_workspace_xml(
+  workspace = "/path/to/javastics/workspace",
+  javastics = "/path/to/javastics/directory",
+  out_dir = "/path/to/an/output/directory"
+)
 }
 }

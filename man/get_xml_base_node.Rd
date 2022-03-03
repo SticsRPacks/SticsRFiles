@@ -28,8 +28,7 @@ SticsRFiles:::get_xml_base_node("sols")
 # Formalism labels can be retrieved using
 SticsRFiles:::get_xml_base_node()$form_names$tec
 
-SticsRFiles:::get_xml_base_node("tec","irrigation")
-
+SticsRFiles:::get_xml_base_node("tec", "irrigation")
 }
 
 }

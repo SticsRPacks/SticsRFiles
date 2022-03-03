@@ -27,10 +27,9 @@ SticsRFiles:::get_referenced_dirs()
 SticsRFiles:::get_referenced_dirs("study_case_1")
 
 # Getting dirs for a use case and a version
-SticsRFiles:::get_referenced_dirs("study_case_1", "V9.0" )
+SticsRFiles:::get_referenced_dirs("study_case_1", "V9.0")
 
-SticsRFiles:::get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0" )
-
+SticsRFiles:::get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0")
 }
 
 }

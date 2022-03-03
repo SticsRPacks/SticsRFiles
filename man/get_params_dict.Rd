@@ -31,7 +31,6 @@ get_params_dict(in_dict)
 in_dict <- list(name1 = "amount", name2 = "julapI_or_sum_upvt")
 
 get_params_dict(in_dict)
-
 }
 }
 \keyword{internal}

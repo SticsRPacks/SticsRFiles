@@ -78,7 +78,7 @@ or the name of the plant file, if the plant file is not found.
 \examples{
 \dontrun{
 path <- get_examples_path(file_type = "sti")
-get_sim(path,"banana")
+get_sim(path, "banana")
 }
 
 }

@@ -42,17 +42,15 @@ names respect the same syntax as in the get_sim output.
 path <- get_examples_path(file_type = "sti")
 get_report_results(workspace = path)
 
-get_report_results(workspace = path, usm = c("DurumWheat", "grass") )
+get_report_results(workspace = path, usm = c("DurumWheat", "grass"))
 
-get_report_results(workspace = path, var_list = c("masec(n)", "QNplante") )
+get_report_results(workspace = path, var_list = c("masec(n)", "QNplante"))
 
-get_report_results(workspace = path, usm = c("DurumWheat", "grass") )
+get_report_results(workspace = path, usm = c("DurumWheat", "grass"))
 
 get_report_results(workspace = path)
 
 get_report_results(workspace = path, file_name = "mod_rapportA.sti")
-
-
 }
 
 }

@@ -24,14 +24,13 @@ Get the "formalisme" node "@nom" attribute value of a
 \examples{
 \dontrun{
 
-xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
+xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 
 sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 
-par_form <- SticsRFiles:::get_param_formalisms(sta_doc,"zr")
+par_form <- SticsRFiles:::get_param_formalisms(sta_doc, "zr")
 
-par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc,c("zr","altistation"))
-
+par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc, c("zr", "altistation"))
 }
 
 }

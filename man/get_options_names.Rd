@@ -21,12 +21,11 @@ names if provided in options_names
 \examples{
 \dontrun{
 
-xml_path = file.path(get_examples_path( file_type = "xml"),"file_plt.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 
 SticsRFiles:::get_options_names(xml_path)
 
 SticsRFiles:::get_options_names(xml_path, c("codemonocot", "codlainet"))
-
 }
 
 }

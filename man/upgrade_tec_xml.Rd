@@ -48,9 +48,11 @@ See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
 \dontrun{
-upgrade_tec_xml(file = "/path/to/_tec.xml",
-                out_dir = "/path/to/directory",
-                param_newform_file = "/path/to/param_newform.xml",
-                param_gen_file = "/path/to/param_gen.xml")
+upgrade_tec_xml(
+  file = "/path/to/_tec.xml",
+  out_dir = "/path/to/directory",
+  param_newform_file = "/path/to/param_newform.xml",
+  param_gen_file = "/path/to/param_gen.xml"
+)
 }
 }

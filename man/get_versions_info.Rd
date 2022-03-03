@@ -23,21 +23,13 @@ Getting versions data (versions strings and examples files directories list)
 
 SticsRFiles:::get_versions_info()
 
-versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
-1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
-2     V9.0   V9.0 V9.0 BASE BASE V9.0 examples/V9.0 templates/V9.0 BASE
-3     V9.1   V9.1 V9.1 BASE BASE V9.1 examples/V9.1 templates/V9.1 BASE
-
-get_versions_info( stics_version = "V8.5")
-
-versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
-1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
+get_versions_info(stics_version = "V8.5")
 
 
-get_versions_info(stics_version = "V8.5",
-                  versions_dir = "path/to/SticsRFilesproject/inst/extdata")
-
-
+get_versions_info(
+  stics_version = "V8.5",
+  versions_dir = "path/to/SticsRFilesproject/inst/extdata"
+)
 }
 }
 \keyword{internal}

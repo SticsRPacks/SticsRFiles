@@ -44,8 +44,10 @@ See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
 \dontrun{
-upgrade_ini_xml(file = "/path/to/_ini.xml",
-                out_dir = "/path/to/directory",
-                param_gen_file = "/path/to/param_gen.xml")
+upgrade_ini_xml(
+  file = "/path/to/_ini.xml",
+  out_dir = "/path/to/directory",
+  param_gen_file = "/path/to/param_gen.xml"
+)
 }
 }

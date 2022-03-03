@@ -34,10 +34,8 @@ tries to read the number of species from the input files.
 \examples{
 \dontrun{
 
-obs_table = SticsRFiles:::get_obs_txt()
-
+obs_table <- SticsRFiles:::get_obs_txt()
 }
-
 
 }
 \keyword{internal}

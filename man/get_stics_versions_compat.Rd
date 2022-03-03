@@ -17,12 +17,6 @@ with this package.
 \examples{
 \dontrun{
 SticsRFiles::get_stics_versions_compat()
-
-#> $versions_list
-#> [1] "V8.5" "V9.0" "V9.1"
-#>
-#> $latest_version
-#> [1] "V9.1"
 }
 
 }

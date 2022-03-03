@@ -46,7 +46,6 @@ param_names <- get_param_names_xml(xml_file)
 param_names <- get_param_names_xml(xml_files_list)
 
 param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"))
-
 }
 
 }

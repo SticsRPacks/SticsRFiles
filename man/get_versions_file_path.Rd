@@ -22,7 +22,6 @@ Getting versions information csv file path according to its location
 SticsRFiles:::get_versions_file_path()
 
 SticsRFiles:::get_versions_file_path(location = "package")
-
 }
 }
 \keyword{internal}

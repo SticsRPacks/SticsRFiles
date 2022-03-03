@@ -40,13 +40,16 @@ Adding a new version in the SticsRFiles library or package
 }
 \examples{
 \dontrun{
-SticsRFiles:::add_stics_version(version_name = "V10.0",
- url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10")
+SticsRFiles:::add_stics_version(
+  version_name = "V10.0",
+  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10"
+)
 
-SticsRFiles:::add_stics_version(version_name = "V10.0",
- url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
- location = "package")
-
+SticsRFiles:::add_stics_version(
+  version_name = "V10.0",
+  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+  location = "package"
+)
 }
 }
 \keyword{internal}

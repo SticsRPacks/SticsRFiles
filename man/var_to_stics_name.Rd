@@ -20,7 +20,7 @@ Convert a variable name into a stics-compatible variable name. E.g.
 }
 \examples{
 \dontrun{
-var_to_stics_name(c("lai_n","masec_n"))
+var_to_stics_name(c("lai_n", "masec_n"))
 }
 
 }

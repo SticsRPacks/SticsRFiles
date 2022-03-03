@@ -33,7 +33,7 @@ The file given as the \code{file_path} is either a "usms" file type to get all t
 or a soil file type ("sols") to get all soil types available in a soil file.
 }
 \examples{
-path = get_examples_path( file_type = "xml" )
+path <- get_examples_path(file_type = "xml")
 
 # Read from a usms file (soils used in a USM):
 soil_list <- get_soils_list(file = file.path(path, "usms.xml"))
@@ -42,5 +42,4 @@ soil_list <- get_soils_list(file = file.path(path, "usms.xml"))
 soil_list <- get_soils_list(file = file.path(path, "sols.xml"))
 
 soil_list <- get_soils_list(file = file.path(path, "usms.xml"), soil = c("solcanne", "sole"))
-
 }

@@ -21,14 +21,13 @@ Get the number of a (or alist of) Stics xml parameter(s) occurence from a reques
 }
 \examples{
 \dontrun{
-xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 
 usms_doc <- SticsRFiles:::xmldocument(xml_usms)
 
-par_nb <- SticsRFiles:::get_param_number(usms_doc,"usm")
+par_nb <- SticsRFiles:::get_param_number(usms_doc, "usm")
 
-par_nb_vec <- SticsRFiles:::get_param_number(usms_doc,c("usm","fplt"))
-
+par_nb_vec <- SticsRFiles:::get_param_number(usms_doc, c("usm", "fplt"))
 }
 
 }

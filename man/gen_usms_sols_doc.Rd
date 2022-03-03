@@ -40,10 +40,10 @@ xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms", node_nb = 3)
 # and a data.frame contaning usms parameters values
 existing_doc <- SticsRFiles:::xmldocument("/path/to/usms.xml")
 
-out_xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms",
-xml_doc = existing_doc, nodes_param = param_data_frame)
-
-
+out_xml_doc <- SticsRFiles:::gen_xml_doc(
+  doc_type = "usms",
+  xml_doc = existing_doc, nodes_param = param_data_frame
+)
 }
 
 }

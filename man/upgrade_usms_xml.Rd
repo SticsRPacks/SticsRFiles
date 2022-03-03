@@ -44,9 +44,11 @@ See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
 \dontrun{
-upgrade_usms_xml(file = "/path/to/usms.xml",
-                 out_dir = "/path/to/directory",
-                 param_gen_file = "/path/to/param_gen.xml"
-                 obs_dir = "/path/to/obs/directory")
+upgrade_usms_xml(
+  file = "/path/to/usms.xml",
+  out_dir = "/path/to/directory",
+  param_gen_file = "/path/to/param_gen.xml",
+  obs_dir = "/path/to/obs/directory"
+)
 }
 }

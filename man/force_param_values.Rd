@@ -29,9 +29,8 @@ param_values can contain NA. In this case, the corresponding parameter(s) will n
 If param_values==NA or param_values==NULL, not any parameter will be forced (all default values used).
 }
 \examples{
-example_txt_dir <- get_examples_path(file_type="txt")
-force_param_values(example_txt_dir, setNames(object=c(220,330), c("stlevamf", "stamflax")))
-
+example_txt_dir <- get_examples_path(file_type = "txt")
+force_param_values(example_txt_dir, setNames(object = c(220, 330), c("stlevamf", "stamflax")))
 }
 \seealso{
 \code{SticsOnR::run_stics()}

@@ -24,7 +24,6 @@ SticsRFiles:::get_xml_doc_example()
 
 # Loading an usms.xml file
 usm_doc <- SticsRFiles:::get_xml_doc_example("usms.xml")
-
 }
 
 }

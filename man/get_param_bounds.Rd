@@ -32,17 +32,16 @@ or a vector of parameters from an xmlDocument class object.
 }
 \examples{
 \dontrun{
-xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
+xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 
 sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 
-par_bounds <- SticsRFiles:::get_param_bounds(sta_doc,"zr")
+par_bounds <- SticsRFiles:::get_param_bounds(sta_doc, "zr")
 
-par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"))
+par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"))
 
 
-SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"),"min")
-
+SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"), "min")
 }
 
 }

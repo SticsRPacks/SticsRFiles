@@ -33,9 +33,10 @@ Removing a version and data from the SticsRFiles library or package
 \dontrun{
 SticsRFiles:::remove_stics_version(version_name = "V10.0")
 
-SticsRFiles:::remove_stics_version(version_name = "V10.0",
-                                   location = "package")
-
+SticsRFiles:::remove_stics_version(
+  version_name = "V10.0",
+  location = "package"
+)
 }
 }
 \keyword{internal}

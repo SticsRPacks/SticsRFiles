@@ -29,10 +29,11 @@ Use \code{get_usms_list()} to get the list of the usm names.
 }
 \examples{
 \dontrun{
-usms_file <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+
+usms_file <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 get_plants_nb(usms_file)
-get_plants_nb(usms_file,"wheat")
-get_plants_nb(usms_file,c("wheat","intercrop_pea_barley"))
+get_plants_nb(usms_file, "wheat")
+get_plants_nb(usms_file, c("wheat", "intercrop_pea_barley"))
 }
 
 }

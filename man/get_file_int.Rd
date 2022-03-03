@@ -24,7 +24,7 @@ it only reads and pre-formats the file without any clever tests for intercrops o
 }
 \examples{
 \dontrun{
-path <- file.path(get_examples_path( file_type = "obs"))
+path <- file.path(get_examples_path(file_type = "obs"))
 get_file_int(path, "banana.obs")
 }
 }

@@ -20,12 +20,6 @@ Checking the validity of a given version code
 \dontrun{
 
 SticsRFiles:::check_version_compat()
-
-[1] "V9.1"
-
-check_version_compat(version = "V8.5")
-[1] "V8.5"
-
 }
 }
 \keyword{internal}

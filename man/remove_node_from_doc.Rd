@@ -30,20 +30,23 @@ Remove a node from an xmlDocument instance
 \examples{
 \dontrun{
 
-xml_path = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 tec_doc <- SticsRFiles:::xmldocument(xml_path)
 
 # removing a single parameter
 SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "jultrav")
 
 # removing all the parent nodes the parameter belongs to
-SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
- remove_parent = TRUE)
+SticsRFiles:::remove_node_from_doc(tec_doc,
+  param_name = "julapI_or_sum_upvt",
+  remove_parent = TRUE
+)
 
 # removing some of the parent nodes the parameter belongs to
-SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
- remove_parent = TRUE, nodes_ids = c(1,3))
-
+SticsRFiles:::remove_node_from_doc(tec_doc,
+  param_name = "julapI_or_sum_upvt",
+  remove_parent = TRUE, nodes_ids = c(1, 3)
+)
 }
 
 }

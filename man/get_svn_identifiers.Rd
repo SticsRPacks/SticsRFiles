@@ -15,13 +15,6 @@ Getting read only account identifiers for the Stics subversion repository
 \examples{
 \dontrun{
 SticsRFiles:::get_svn_identifiers()
-
-$username
-[1] "sticsread"
-
-$password
-[1] "sticsread2020"
-
 }
 }
 \keyword{internal}

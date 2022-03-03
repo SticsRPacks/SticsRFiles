@@ -32,8 +32,8 @@ Generate html help from functions Rd help files
 }
 \examples{
 \dontrun{
-  static_help("SticsRFiles")
-  static_help(pkg = "SticsRFiles", out_dir = "/path/to/out/dir")
+static_help("SticsRFiles")
+static_help(pkg = "SticsRFiles", out_dir = "/path/to/out/dir")
 }
 }
 \keyword{internal}

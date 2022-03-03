@@ -49,11 +49,11 @@ it will not be written by default, but the function will still write the variabl
 }
 \examples{
 \dontrun{
- gen_varmod(".", c("lai(n)","hauteur"))
- gen_varmod("/path/to/stics/workspace", c("lai(n)","hauteur"))
- # Add a variable to the others:
- gen_varmod(".", "masec(n)", append = TRUE)
- # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
+gen_varmod(".", c("lai(n)", "hauteur"))
+gen_varmod("/path/to/stics/workspace", c("lai(n)", "hauteur"))
+# Add a variable to the others:
+gen_varmod(".", "masec(n)", append = TRUE)
+# NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
 }
 
 }

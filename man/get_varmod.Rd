@@ -18,9 +18,7 @@ The variables that will be returned by STICS
 Get the STICS output variables (from var.mod file)
 }
 \examples{
-get_varmod(get_examples_path( file_type = "txt" ))
-
-
+get_varmod(get_examples_path(file_type = "txt"))
 }
 \seealso{
 \code{gen_varmod}

@@ -36,7 +36,7 @@ Setting parameter value in a xmlDocument object
 }
 \examples{
 \dontrun{
-xml_path = file.path(get_examples_path( file_type = "xml"),"sols.xml")
+xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
 SticsRFiles:::get_param_value(sols_doc, "argi")
 
@@ -47,10 +47,10 @@ SticsRFiles:::get_param_value(sols_doc, "argi")
 
 
 # setting specific values for some soils
-SticsRFiles:::set_param_value(sols_doc, "argi", c(30,35),
-parent_name = "sol", parent_sel_attr = c("solcanne","solbanane"))
+SticsRFiles:::set_param_value(sols_doc, "argi", c(30, 35),
+  parent_name = "sol", parent_sel_attr = c("solcanne", "solbanane")
+)
 SticsRFiles:::get_param_value(sols_doc, "argi")
-
 
 }
 

@@ -26,14 +26,16 @@ at the end in the case of associated crops.
 \examples{
 \dontrun{
 parse_mixed_file(list("banana.obs", "IC_banana_sorghuma.obs", "IC_banana_sorghump.obs"),
-                  type = "obs")
+  type = "obs"
+)
 
 # Simulations with usm names starting with "a", with or without intercropping:
-file_names = list("mod_sauzevilleSC_Wheat_Wheat_2005-2006_N0.sti",
-"mod_saIC_Wheat_Wheat_2005-2006_N0.sti", "mod_spIC_Wheat_Wheat_2005-2006_N0.sti")
+file_names <- list(
+  "mod_sauzevilleSC_Wheat_Wheat_2005-2006_N0.sti",
+  "mod_saIC_Wheat_Wheat_2005-2006_N0.sti", "mod_spIC_Wheat_Wheat_2005-2006_N0.sti"
+)
 
 parse_mixed_file(file_names, type = "sim")
-
 }
 
 }

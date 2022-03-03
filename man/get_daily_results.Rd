@@ -13,10 +13,10 @@ This function was deprecated because we realised that it's
 a special case of the \code{\link[=get_sim]{get_sim()}}
 }
 \examples{
- \dontrun{
-get_daily_results(path,"banana")
+\dontrun{
+get_daily_results(path, "banana")
 # ->
-get_sim(path,"banana")
+get_sim(path, "banana")
 }
 
 }

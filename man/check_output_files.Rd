@@ -21,7 +21,7 @@ This function checks if the model outputs files are correctly produced
 \examples{
 \dontrun{
 check_output_files("/home/username/Work/SticsInputsDir")
-check_output_files("/home/username/Work/SticsInputsRootDir","usmDir")
+check_output_files("/home/username/Work/SticsInputsRootDir", "usmDir")
 }
 
 }
