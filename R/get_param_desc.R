@@ -25,7 +25,7 @@ get_param_desc <- function(file_path = NULL,
 
   if (!file.exists(file_path)) stop(paste("Unknown file:", file_path))
 
-  param_df <- utils::read.csv2(file_path, header = FALSE, stringsAsFactors = F, strip.white = T)
+  param_df <- utils::read.csv2(file_path, header = FALSE, stringsAsFactors = FALSE, strip.white = TRUE)
 
   param_df <- param_df[, 1:8]
   colnames(param_df) <- c("name", "definition", "unit", "kind", "dim", "type", "min", "max")

@@ -9,7 +9,7 @@
 #' @slot ext A file extension
 #' @slot con A file connexion
 #' @slot content A file content
-#' @slot warn Logical, to display (T) or not (F) warnings (default)
+#' @slot warn Logical, to display (TRUE) or not (FALSE) warnings (default)
 #'
 setClass(
   "fileDocument",

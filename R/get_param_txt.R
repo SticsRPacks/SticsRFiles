@@ -700,7 +700,7 @@ get_soil_txt <- function(file = "param.sol",
 
 
 
-  params <- readLines(filepath, warn = F)
+  params <- readLines(filepath, warn = FALSE)
   soil <- vector(mode = "list", length = 0)
 
   index <- 1

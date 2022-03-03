@@ -126,7 +126,7 @@ gen_obs <- function(df,
 #' gen_obs_(obs_df, "USM_2017_T1_CI.obs")
 #' }
 #'
-#' @return A logical value if the file generation succeeded (T) or not (F)
+#' @return A logical value if the file generation succeeded (TRUE) or not (FALSE)
 #'
 #' @keywords internal
 #'
@@ -176,7 +176,7 @@ gen_obs_ <- function(obs_table, file_path) {
   # Back to Stics variables names syntax !
   colnames(obs_table) <- col_names_to_var(colnames(obs_table))
 
-  ret <- try(utils::write.table(obs_table, file_path, sep = ";", na = "-999.99", row.names = F, quote = F))
+  ret <- try(utils::write.table(obs_table, file_path, sep = ";", na = "-999.99", row.names = FALSE, quote = FALSE))
 
   # Checking if any error writing the file
   if (methods::is(ret, "try-error")) {

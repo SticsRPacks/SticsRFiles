@@ -40,14 +40,14 @@ get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
         get_usm_txt(filepath = file.path(dirpath, "new_travail.usm"))$nbplantes %>%
         as.numeric()
       if (nbplants > 1) {
-        mixed <- T
+        mixed <- TRUE
       } else {
-        mixed <- F
+        mixed <- FALSE
       }
     } else {
       if (length(list.files(dirpath) %>% .[grep("\\.obs$", .)]) == 1) {
         # If there is only one .obs file, the value of mixed doesn't matter
-        mixed <- F
+        mixed <- FALSE
       } else {
         stop(
           "mixed= NULL, there are several .obs files, and new_travail.usm",

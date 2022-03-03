@@ -103,7 +103,7 @@ gen_usms_sols_doc <- function(doc_type,
   # node (coming a empty template to fill
   # or a user template to overload)
 
-  # if (doc_nodes_nb < elts_nb ) overwrite = T
+  # if (doc_nodes_nb < elts_nb ) overwrite = TRUE
   # Creating doc structure from a base node
   # if ( overwrite ) {
   # Keeping only one usm node in the xml document

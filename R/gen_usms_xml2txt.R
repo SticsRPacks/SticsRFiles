@@ -301,7 +301,7 @@ gen_usms_xml2txt <- function(javastics,
   files_path <- file.path(workspace_path, files_list)
 
   # Fixing files linked to associated crops
-  mandatory_files <- c(rep(T, 9), F, F)
+  mandatory_files <- c(rep(TRUE, 9), FALSE, FALSE)
 
   # outputs definition files
   out_files_def <- c("var.mod", "rap.mod", "prof.mod")
@@ -353,13 +353,13 @@ gen_usms_xml2txt <- function(javastics,
     # Copying files to the usm directory
     copy_status <- all(file.copy(
       from = files_path[file.exists(files_path)],
-      to = usm_path, overwrite = T
+      to = usm_path, overwrite = TRUE
     ))
 
     # Copying default files for outputs definition
     out_copy_status <- all(file.copy(
       from = out_files_path,
-      to = usm_path, overwrite = T
+      to = usm_path, overwrite = TRUE
     ))
 
     # Copying observation files
@@ -367,7 +367,7 @@ gen_usms_xml2txt <- function(javastics,
     if (file.exists(obs_path)) {
       obs_copy_status[i] <- file.copy(
         from = obs_path,
-        to = usm_path, overwrite = T
+        to = usm_path, overwrite = TRUE
       )
     } else {
       if (verbose) cli::cli_alert_warning("Obs file not found for USM {.val {usm_name}}: {.file {obs_path}}")
@@ -379,7 +379,7 @@ gen_usms_xml2txt <- function(javastics,
         if (file.exists(x)) {
           lai_copy_status[i] <- file.copy(
             from = x,
-            to = usm_path, overwrite = T
+            to = usm_path, overwrite = TRUE
           )
         } else {
           if (verbose) cli::cli_alert_warning("LAI file not found for USM {.val {usm_name}}: {.file {lai_file_path[i]}}")

@@ -67,7 +67,7 @@ get_param_bounds <- function(xml_doc,
     if (df_out) {
       bounds_list <- dplyr::bind_rows(bounds_list)
     } else {
-      bounds_list <- unlist(bounds_list, recursive = F)
+      bounds_list <- unlist(bounds_list, recursive = FALSE)
     }
 
     return(bounds_list)

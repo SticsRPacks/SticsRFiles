@@ -63,7 +63,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         gen_tec_doc(
           xml_doc = cloneXmlDoc(xml_doc),
           param_table = as.data.frame(t(x),
-            stringsAsFactors = F
+            stringsAsFactors = FALSE
           ),
           stics_version = stics_version,
           dict = dict,
@@ -105,14 +105,14 @@ gen_tec_doc <- function(xml_doc = NULL,
   vec_idx <- unlist(lapply(
     table_params,
     function(x) length(grep(pattern = "_[0-9]*$", names(x))) > 0
-  ), use.names = F)
+  ), use.names = FALSE)
 
   scal_names <- table_names[!vec_idx]
   vec_names <- table_names[vec_idx]
 
   # Setting scalar parameters values
   for (scal_name in scal_names) {
-    set_param_value(xml_doc, scal_name, table_params[[scal_name]]) # , show_xpath = T)
+    set_param_value(xml_doc, scal_name, table_params[[scal_name]])
   }
 
   # Setting vector parameters

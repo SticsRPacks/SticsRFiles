@@ -63,7 +63,7 @@ get_climate_txt <- function(workspace = getwd(),
     return()
   }
 
-  meteo_data <- data.table::fread(file_path, data.table = F)
+  meteo_data <- data.table::fread(file_path, data.table = FALSE)
   colnames(meteo_data) <- c(
     "station", "year", "month", "day", "julian", "ttmin", "ttmax",
     "ttrg", "ttetp", "ttrr", "ttvent", "ttpm", "ttco2"
