@@ -42,7 +42,7 @@ License: file LICENSE
 URL: https://github.com/SticsRPacks/SticsRFiles
 BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.60)
 Imports: 
     cli,
     crayon,
