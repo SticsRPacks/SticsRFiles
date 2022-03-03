@@ -28,7 +28,7 @@
 #' soils_nb <- dim(sols_df)[1]
 #' new_doc <- SticsRFiles:::gen_xml_doc("sols",nodes_nb = soils_nb)
 #'
-#' SticsRFiles:::set_sols_param_xml(new_doc, sols_df, overwrite = T)
+#' SticsRFiles:::set_sols_param_xml(new_doc, sols_df, overwrite = TRUE)
 #'
 #' }
 #'
@@ -99,7 +99,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   # select epc_1 to epc_5 in df and as.vector to
   # set_sols_param(xml_doc_object, "epc", epc_vec)
 
-  layers_params <- grep("_[0-9]*$",in_params, value = T)
+  layers_params <- grep("_[0-9]*$",in_params, value = TRUE)
   layers_params_names <- unique(gsub("_[0-9]*$","",layers_params))
 
 

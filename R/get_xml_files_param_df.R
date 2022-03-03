@@ -164,7 +164,7 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
                         type = type_col,
                         param = param,
                         id = id,
-                        value = unlist(param_values, use.names = F),
+                        value = unlist(param_values, use.names = FALSE),
                         stringsAsFactors = FALSE)
 
   if (select_name) {

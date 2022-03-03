@@ -72,10 +72,10 @@ get_plant_name= function(workspace,
   # Getting plant list:
   if(length(plant_files) == 2*length(usms)){
     # If plante dominance="1" and plante dominance="2" are declared, put each one in a column:
-    plant_list <- unlist(apply(matrix(plant_files, ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+    plant_list <- unlist(apply(matrix(plant_files, ncol = 2, byrow = TRUE), MARGIN = 1, list), recursive = FALSE)
   }else if(length(plant_files) == length(usms)){
     # If plante dominance="2" is not declared, repeat plante dominance="1" twice to get the same data structure:
-    plant_list <- unlist(apply(matrix(c(plant_files,plant_files), ncol = 2, byrow = T), MARGIN = 1, list), recursive = FALSE)
+    plant_list <- unlist(apply(matrix(c(plant_files,plant_files), ncol = 2, byrow = TRUE), MARGIN = 1, list), recursive = FALSE)
   }else{
     stop('plante dominance="2" should always be declared in usms.xml even for sole crops (use null as values).')
   }

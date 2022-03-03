@@ -139,7 +139,7 @@ get_usms_files <- function(workspace,
     usm_files <- unlist(get_param_xml(file = usms_xml_path,
                                       param = file_type,
                                       select = "usm",
-                                      select_value = usm_name), use.names = F)
+                                      select_value = usm_name), use.names = FALSE)
 
     # For selecting plant files regarding plants number
     plants_sel <- 1:get_plants_nb(usms_file = usms_xml_path,usms_list = usm_name)

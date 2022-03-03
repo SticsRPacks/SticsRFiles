@@ -46,7 +46,7 @@ get_values_by_param <- function(params_table,
 
     # Applying to each line of the data.frame
     out_list <- apply(params_table, 1,
-                      function(x) get_values_by_param(as.data.frame(t(x), stringsAsFactors = F ),
+                      function(x) get_values_by_param(as.data.frame(t(x), stringsAsFactors = FALSE),
                                                                       param_name = param_name))
     return(out_list)
   }

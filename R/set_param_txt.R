@@ -396,9 +396,9 @@ set_soil_txt= function(file = "param.sol",
   }
 
   if(!is.null(layer)){
-    ref[[grep(param,names(ref))]][layer]= format(value, scientific=F)
+    ref[[grep(param,names(ref))]][layer]= format(value, scientific=FALSE)
   }else{
-    ref[[grep(param,names(ref))]]= format(value, scientific=F)
+    ref[[grep(param,names(ref))]]= format(value, scientific=FALSE)
   }
 
 
@@ -413,19 +413,19 @@ set_soil_txt= function(file = "param.sol",
   write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$codecailloux,ref$codemacropor,
               ref$codefente,ref$codrainage,ref$coderemontcap,
               ref$codenitrif,ref$codedenit),
-        filepath,append = T)
+        filepath,append = TRUE)
 
   write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$profimper,ref$ecartdrain,ref$ksol,
               ref$profdrain,ref$capiljour,ref$humcapil,
               ref$profdenit,ref$vpotdenit),
-        filepath,append = T)
+        filepath,append = TRUE)
 
   for(icou in 1:5){
     write(paste(" "," "," ",ref$numsol[1]," "," "," ",ref$epc[icou],ref$hccf[icou],
                 ref$hminf[icou],ref$DAF[icou],ref$cailloux[icou],
                 ref$typecailloux[icou],ref$infil[icou],
                 ref$epd[icou]),
-          filepath,append = T)
+          filepath,append = TRUE)
   }
 }
 
@@ -515,6 +515,6 @@ set_file_txt= function(file,
                "Original values:\n",paste(params[ref_index],collapse= ", "),
                "\ninput:\n",paste(value,collapse= ", ")))
   }
-  params[ref_index]= format(value, scientific=F)
+  params[ref_index]= format(value, scientific=FALSE)
   writeLines(params,file)
 }

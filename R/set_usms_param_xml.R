@@ -26,7 +26,7 @@
 #' usms_nb <- dim(usms_df)[1]
 #' new_doc <- SticsRFiles:::gen_xml_doc("usms",nodes_nb = usms_nb)
 #'
-#' SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = T)
+#' SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = TRUE)
 #'
 #' }
 #'
@@ -102,7 +102,7 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
   # data.frame
 
   # Getting param names linked to plante node
-  plante_params <- grep("_[0-9]*$",in_params, value = T)
+  plante_params <- grep("_[0-9]*$",in_params, value = TRUE)
   plante_params_pref <- unique(gsub("_[0-9]*$","",plante_params))
 
   fix_plant_params <- length(plante_params) != 0

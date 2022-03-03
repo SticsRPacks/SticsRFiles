@@ -365,7 +365,7 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
 
 
   # getting variable names
-  splitted_names <- strsplit(name, split = "$", fixed = T)
+  splitted_names <- strsplit(name, split = "$", fixed = TRUE)
   list_idx <- unlist(lapply(splitted_names, function(x) length(x) >1))
 
   list_var_names <- NULL

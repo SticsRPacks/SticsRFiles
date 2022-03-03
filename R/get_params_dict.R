@@ -133,16 +133,17 @@ check_dict <- function(in_dict) { #, javastics_dir, file_name = "inputs.csv") {
   # to be able to check param names in XML files !!!
   # params_file <- base::file.path(javastics_dir, "config", file_name)$V1
   #
-  # stics_int_names <- read.table(params_file , header = F, strip.white = T, sep = ";", stringsAsFactors = F)$V1
+  # stics_int_names <- read.table(params_file , header = FALSE, strip.white = TRUE,
+  # sep = ";", stringsAsFactors = FALSE)$V1
   #
-  # in_names <- names(in_dict, use.names = F)
+  # in_names <- names(in_dict, use.names = FALSE)
 
   # checks if fields values are unique
   #in_names <- names(in_dict)
 
   if (base::is.null(in_dict)) return(TRUE)
 
-  in_values <- unlist(in_dict, use.names = F)
+  in_values <- unlist(in_dict, use.names = FALSE)
   #uniq_names <- length(in_names) != length(unique(in_names))
   uniq_values <- length(in_values) == length(unique(in_values))
   checked <- uniq_values

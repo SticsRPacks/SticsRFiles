@@ -63,7 +63,7 @@ get_params_from_table <- function(params_table,
 
   # checking if all params from xl table exist in xml doc file
   tbl_par_names <- names(param_values)
-  doc_par_names <- unlist(get_params_from_doc(xml_doc), use.names = F)
+  doc_par_names <- unlist(get_params_from_doc(xml_doc), use.names = FALSE)
 
   unknown_params <- setdiff(tbl_par_names, doc_par_names)
 
