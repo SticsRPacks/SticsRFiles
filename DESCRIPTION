@@ -2,55 +2,82 @@ Package: SticsRFiles
 Title: Read And Modify STICS Input/Output Files
 Version: 0.4.2
 Authors@R: 
-    c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inrae.fr"),
-      person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
-      person(given = "SticsRPacks", role = c("aut","cph")),
-      person(given = "Julie", family = "Constantin", email = "julie.constantin@inrae.fr", role = c("rev")),
-      person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inrae.fr", role = c("rev")),
-      person(given = "Marie", family = "Launay", email = "marie.launay@inrae.fr", role = c("rev")),
-      person(given = "Alain", family = "Mollier", email = "alain.mollier@inrae.fr", role = c("rev")),
-      person(given = "Christine", family = "Le Bas", email = "christine.lebas@inrae.fr", role = c("rev")),
-      person(given = "Joel", family = "Leonard", email = "joel.leonard@inrae.fr", role = c("rev"))
-      )
-Description: The goal of SticsRFiles is to perform manipulations of the Stics model files.
+    c(person(given = "Patrice",
+             family = "Lecharpentier",
+             role = c("aut", "cre"),
+             email = "patrice.lecharpentier@inrae.fr"),
+      person(given = "Remi",
+             family = "Vezy",
+             role = "aut",
+             email = "remi.vezy@cirad.fr"),
+      person(given = "SticsRPacks",
+             role = c("aut", "cph")),
+      person(given = "Julie",
+             family = "Constantin",
+             role = "rev",
+             email = "julie.constantin@inrae.fr"),
+      person(given = "Dominique",
+             family = "Ripoche",
+             role = "rev",
+             email = "dominique.ripoche@inrae.fr"),
+      person(given = "Marie",
+             family = "Launay",
+             role = "rev",
+             email = "marie.launay@inrae.fr"),
+      person(given = "Alain",
+             family = "Mollier",
+             role = "rev",
+             email = "alain.mollier@inrae.fr"),
+      person(given = "Christine",
+             family = "Le Bas",
+             role = "rev",
+             email = "christine.lebas@inrae.fr"),
+      person(given = "Joel",
+             family = "Leonard",
+             role = "rev",
+             email = "joel.leonard@inrae.fr"))
+Description: The goal of SticsRFiles is to perform manipulations of the
+    Stics model files.
+License: file LICENSE
 URL: https://github.com/SticsRPacks/SticsRFiles
 BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
-License: file LICENSE
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.2
-VignetteBuilder: knitr
-ByteCompile: true
-Roxygen: list(markdown = TRUE)
-Depends: R (>= 2.10)
+Depends: 
+    R (>= 2.10)
 Imports: 
-    XML,
-    data.table,
-    magrittr,
-    rstudioapi,
+    cli,
     crayon,
-    xml2,
-    utils,
+    curl,
+    data.table,
+    dplyr (>= 1.0.0),
+    lifecycle,
     lubridate,
+    magrittr,
     methods,
     rlang,
+    rstudioapi,
     stringr,
-    xslt,
-    dplyr (>= 1.0.0),
-    cli,
     tibble,
     tidyr,
-    curl,
     tools,
-    lifecycle
+    utils,
+    XML,
+    xml2,
+    xslt
 Suggests:
-    knitr,
     covr,
-    testthat,
-    rmarkdown,
+    formatR,
+    knitr,
     learnr,
     readxl,
-    formatR
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
