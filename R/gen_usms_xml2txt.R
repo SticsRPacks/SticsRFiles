@@ -21,6 +21,7 @@
 #' @param dir_per_usm_flag logical, TRUE if one want to create one directory per USM,
 #' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
 #' @param check Logical, TRUE to check if usms files exist, FALSE otherwise
+#' @param java_cmd The java virtual machine command name or executable path
 #'
 #' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path` is no
 #'   longer supported, use `javastics` instead.
@@ -69,6 +70,7 @@ gen_usms_xml2txt <- function(javastics,
                              verbose = TRUE,
                              dir_per_usm_flag = TRUE,
                              check = TRUE,
+                             java_cmd = "java",
                              javastics_path = lifecycle::deprecated(),
                              workspace_path = lifecycle::deprecated(),
                              target_path = lifecycle::deprecated(),
@@ -252,15 +254,24 @@ gen_usms_xml2txt <- function(javastics,
 
   # Command string without usm name
   # according to OS type
-  jexe <- "JavaSticsCmd.exe"
+  # jexe <- "JavaSticsCmd.exe"
+  #
+  # if (tolower(Sys.info()["sysname"]) == "windows") {
+  #   cmd <- jexe
+  #   cmd_args <- paste0(' --generate-txt "', workspace_path, '"')
+  # } else {
+  #   cmd <- "java"
+  #   cmd_args <- paste0("-jar ", jexe, ' --generate-txt "', workspace_path, '"')
+  # }
 
-  if (tolower(Sys.info()["sysname"]) == "windows") {
-    cmd <- jexe
-    cmd_args <- paste0(' --generate-txt "', workspace_path, '"')
-  } else {
-    cmd <- "java"
-    cmd_args <- paste0("-jar ", jexe, ' --generate-txt "', workspace_path, '"')
-  }
+  # Replacing previous bloc with a function call
+  cmd_list <- get_javastics_cmd(javastics_path,
+                                java_cmd = java_cmd,
+                                type = "generate",
+                                workspace = workspace_path)
+  cmd_args <- cmd_list$cmd_generate
+  cmd <- cmd_list$command
+
 
   usms_number <- length(usms_list)
 

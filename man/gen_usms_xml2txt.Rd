@@ -13,6 +13,7 @@ gen_usms_xml2txt(
   verbose = TRUE,
   dir_per_usm_flag = TRUE,
   check = TRUE,
+  java_cmd = "java",
   javastics_path = lifecycle::deprecated(),
   workspace_path = lifecycle::deprecated(),
   target_path = lifecycle::deprecated(),
@@ -39,6 +40,8 @@ usms contained in workspace_path/usms.xml file will be generated.}
 FALSE if USM files are generated in the target_path (only useful for usms_list of size one)}
 
 \item{check}{Logical, TRUE to check if usms files exist, FALSE otherwise}
+
+\item{java_cmd}{The java virtual machine command name or executable path}
 
 \item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
 longer supported, use \code{javastics} instead.}
