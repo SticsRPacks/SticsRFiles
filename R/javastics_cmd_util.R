@@ -62,11 +62,10 @@ get_javastics_cmd <- function(javastics,
   # detecting JavaStics command exe name from javastics path
   javastics_cmd <- get_javasticscmd_exe(javastics)
 
-  check_java_version(javastics_cmd = javastics_cmd, java_cmd = java_cmd)
 
   # Base command string, without workspace
   if (user_os() != "win") {
-    check_java_version(java_cmd = java_cmd, javastics_cmd = javastics_cmd)
+    check_java_version(javastics_cmd = javastics_cmd, java_cmd = java_cmd)
     command <- java_cmd
     generate <- paste0('-jar ',javastics_cmd,' --generate-txt') #"',ws,'"')
     run <- paste0('-jar ',javastics_cmd,' --run') #"',ws,'"')
