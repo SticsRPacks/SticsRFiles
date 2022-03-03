@@ -95,7 +95,7 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
   } else {
     # setting usms names
     set_param_value(xml_doc_object, "usm", usms_param[[usm_col]])
-    usms_xml_idx <- 1:length(usms_param[[usm_col]])
+    usms_xml_idx <- seq_len(usms_param[[usm_col]])
   }
 
   # Managing parameter values replacement from usms_param

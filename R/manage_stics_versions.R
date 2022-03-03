@@ -65,7 +65,7 @@ download_csv_files <- function(branch_url,
   # local files_path
   file_path <- vector(mode = "list", length = length(file_url))
 
-  for (f in 1:length(file_url)) {
+  for (f in seq_len(file_url)) {
     dest_file <- file.path(dest_dir, file_name[f])
 
     if (file.exists(dest_file) && !overwrite) {
