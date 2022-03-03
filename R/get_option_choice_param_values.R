@@ -13,15 +13,14 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path = file.path(get_examples_path( file_type = "xml"),"file_plt.xml")
+#' xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 #'
-#' get_option_choice_param_values(xml_path,"codetemp","2")
-#'
-#'}
+#' get_option_choice_param_values(xml_path, "codetemp", "2")
+#' }
 #'
 #' @keywords internal
 #'
-get_option_choice_param_values <- function(xml_file_path, option_param_name, choice_name_or_code){
+get_option_choice_param_values <- function(xml_file_path, option_param_name, choice_name_or_code) {
 
   # TODO: see if choice_name_or_code could be optional, to give
   # param values for all choices ??
@@ -30,17 +29,17 @@ get_option_choice_param_values <- function(xml_file_path, option_param_name, cho
   # is.na(choice_name_or_code)
   # true : choice name
   # false : choice code
-  if (is.na(as.numeric(choice_name_or_code))){
-    xpath=paste0('//option[@nomParam="',option_param_name,'"]/choix[@nom="',choice_name_or_code,'"]/param')
+  if (is.na(as.numeric(choice_name_or_code))) {
+    xpath <- paste0('//option[@nomParam="', option_param_name, '"]/choix[@nom="', choice_name_or_code, '"]/param')
   } else {
-    xpath=paste0('//option[@nomParam="',option_param_name,'"]/choix[@code="',choice_name_or_code,'"]/param')
+    xpath <- paste0('//option[@nomParam="', option_param_name, '"]/choix[@code="', choice_name_or_code, '"]/param')
   }
 
 
-  param_list=list()
-  xml_param=xmldocument(xml_file_path)
+  param_list <- list()
+  xml_param <- xmldocument(xml_file_path)
 
-  param_list$values=getValues(xml_param,xpath)
-  param_list$names=getAttrsValues(xml_param,xpath,"nom")
+  param_list$values <- getValues(xml_param, xpath)
+  param_list$names <- getAttrsValues(xml_param, xpath, "nom")
   return(param_list)
 }

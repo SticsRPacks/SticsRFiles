@@ -7,21 +7,21 @@
 #'
 #'
 #' @examples
-#'  \dontrun{
-#' get_var_mod(workspace,usms_file)
+#' \dontrun{
+#' get_var_mod(workspace, usms_file)
 #' # ->
-#' get_varmod(workspace,usms_file)
+#' get_varmod(workspace, usms_file)
 #' }
 #'
 #' @keywords internal
 #'
 #' @export
 get_var_mod <- function(...) {
-
   lifecycle::deprecate_warn(
     "0.5.0",
     "get_var_mod()",
-    "get_varmod()")
+    "get_varmod()"
+  )
   get_varmod(...)
 }
 
@@ -38,17 +38,13 @@ get_var_mod <- function(...) {
 #'
 #' @seealso `gen_varmod`
 #' @examples
-#' get_varmod(get_examples_path( file_type = "txt" ))
-#'
-#'
+#' get_varmod(get_examples_path(file_type = "txt"))
 get_varmod <- function(workspace,
-                       file_name = "var.mod"){
-
-
+                       file_name = "var.mod") {
   file_path <- file.path(workspace, file_name)
 
-  if(!file.exists(file_path)){
-    stop(paste(file_path,": does not exist !"))
+  if (!file.exists(file_path)) {
+    stop(paste(file_path, ": does not exist !"))
   }
 
   readLines(file_path)

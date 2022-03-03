@@ -9,35 +9,34 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::compute_doy_cumul(c(350,360,10,20,30),c(1990,1990,1991,1991,1991))
-#'}
+#' SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(1990, 1990, 1991, 1991, 1991))
+#' }
 #'
-#
+#' #
 #' @keywords internal
 #'
 compute_doy_cumul <- function(doys_vec, years_vec) {
-
-  if (!all(c(class(doys_vec),class(years_vec)) %in% c("numeric","integer"))) {
+  if (!all(c(class(doys_vec), class(years_vec)) %in% c("numeric", "integer"))) {
     stop("Vectors are not all numeric/integer ones, aborting !")
   }
 
   # verify vectors length
-  if ( ! length(doys_vec) == length(years_vec) ) {
+  if (!length(doys_vec) == length(years_vec)) {
     stop("Vectors are not of same dimensions, aborting !")
   }
 
   # check if doys_vec contains days of year
-  if( ! max(doys_vec) < 367 ) {
+  if (!max(doys_vec) < 367) {
     stop("Vector of julian date (doy) contains value(s) over 366, aborting !")
   }
 
   # checking iof years are contiguous
-  u_years = unique(years_vec)
+  u_years <- unique(years_vec)
 
   nb_years <- length(u_years)
 
   # nothing to do for one year !
-  if ( nb_years == 1) {
+  if (nb_years == 1) {
     return(doys_vec)
   }
 
@@ -48,15 +47,14 @@ compute_doy_cumul <- function(doys_vec, years_vec) {
   }
 
   # years not contiguous
-  if ( u_years[2] != u_years[1] + 1 ) {
+  if (u_years[2] != u_years[1] + 1) {
     warning("The 2 years are not continuous, aborting !")
     return(NULL)
   }
 
   cum_vec <- doys_vec
-  cum_vec[ years_vec == u_years[2] ] <-
-  cum_vec[ years_vec == u_years[2] ]+ 365 + leap_year(u_years[1])
+  cum_vec[years_vec == u_years[2]] <-
+    cum_vec[years_vec == u_years[2]] + 365 + leap_year(u_years[1])
 
   return(cum_vec)
-
 }

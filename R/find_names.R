@@ -18,19 +18,22 @@
 #' SticsRFiles:::find_names(names, "lai", exact = TRUE)
 #'
 #' #> [1] "lai"
-#'
 find_names <- function(names, name, exact = FALSE) {
-
   patt_str <- "x"
   if (exact) patt_str <- "^x$"
 
   names <- unique(
-    unlist(lapply(name,
-                  function(x)
-                    grep(x = names,
-                         pattern = gsub(pattern = "x",replacement = x, x = patt_str),
-                         value = TRUE))))
+    unlist(lapply(
+      name,
+      function(x) {
+        grep(
+          x = names,
+          pattern = gsub(pattern = "x", replacement = x, x = patt_str),
+          value = TRUE
+        )
+      }
+    ))
+  )
 
   return(names)
-
 }

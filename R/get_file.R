@@ -22,28 +22,27 @@
 #'
 #' @keywords internal
 #'
-get_file = function(workspace,
-                    usm_name = NULL,
-                    var_list = NULL,
-                    dates_list = NULL,
-                    usms_filepath = NULL,
-                    javastics_path = NULL,
-                    verbose = TRUE,
-                    type = c("sim","obs")){
-
-  type = match.arg(type, c("sim","obs"), several.ok = FALSE)
+get_file <- function(workspace,
+                     usm_name = NULL,
+                     var_list = NULL,
+                     dates_list = NULL,
+                     usms_filepath = NULL,
+                     javastics_path = NULL,
+                     verbose = TRUE,
+                     type = c("sim", "obs")) {
+  type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
   usms_path <- NULL
 
   # Try absolute path here (if it is, read the file only once, and pass its content)
   if (!is.null(usms_filepath)) {
     usms_path <- normalizePath(usms_filepath, mustWork = FALSE)
-  # For the moment searching the usms.xml file in the workspace dir
-  # is inactivated, before doing tests on performances.
-  # TODO: test and uncomment else condition !
-  # } else {
-  #   usms_path <-
-  #     normalizePath(file.path(workspace, "usms.xml"), mustWork = FALSE)
+    # For the moment searching the usms.xml file in the workspace dir
+    # is inactivated, before doing tests on performances.
+    # TODO: test and uncomment else condition !
+    # } else {
+    #   usms_path <-
+    #     normalizePath(file.path(workspace, "usms.xml"), mustWork = FALSE)
   }
 
   # Not keeping usms_filepath if does not exist
@@ -53,15 +52,17 @@ get_file = function(workspace,
   }
 
   # Extracting data for a vector of workspace
-  res = unlist(lapply(workspace,function(x){
-    get_file_(workspace = x,
-              usm_name = usm_name,
-              usms_filepath = usms_path,
-              var_list = var_list,
-              dates_list = dates_list,
-              javastics_path = javastics_path,
-              verbose = verbose,
-              type = type )
+  res <- unlist(lapply(workspace, function(x) {
+    get_file_(
+      workspace = x,
+      usm_name = usm_name,
+      usms_filepath = usms_path,
+      var_list = var_list,
+      dates_list = dates_list,
+      javastics_path = javastics_path,
+      verbose = verbose,
+      type = type
+    )
   }), recursive = FALSE)
 
   # Manage duplicated list names ?
@@ -74,7 +75,7 @@ get_file = function(workspace,
   return(res)
 
 
-  #if (!is.null(usms_filepath)) {
+  # if (!is.null(usms_filepath)) {
   # if(type == "sim"){
   #   file_pattern = "^mod_s"
   # }else{
@@ -122,7 +123,7 @@ get_file = function(workspace,
   #             type = type, several = several)
   # },sim_name,workspace,plant_names)
   # names(res) = names(sim_name)
-  #}else{
+  # }else{
   # res = unlist(lapply(workspace,function(x){
   #   get_file_(workspace = x,
   #             usm_name = usm_name,
@@ -133,9 +134,9 @@ get_file = function(workspace,
   #             verbose = verbose, type = type,
   #             several = TRUE)
   # }), recursive = FALSE)
-  #}
+  # }
 
-  #res
+  # res
 }
 
 #' Read STICS observation or simulation files (.obs or mod_s)
@@ -171,24 +172,24 @@ get_file = function(workspace,
 get_file_ <- function(workspace = getwd(),
                       usm_name = NULL,
                       usms_filepath = NULL,
-                      var_list=NULL,
-                      dates_list=NULL,
+                      var_list = NULL,
+                      dates_list = NULL,
                       javastics_path = NULL,
                       verbose = TRUE,
-                      #file_name = NULL,
-                      #plant_names = NULL,
-                      type = c("sim","obs")) {#,
-                      #several){
+                      # file_name = NULL,
+                      # plant_names = NULL,
+                      type = c("sim", "obs")) { # ,
+  # several){
 
 
   # TODO: add checking dates_list format, or apply
   # dates_list <- as.POSIXct(dates_list, tz="UTC", format = "%Y-%m-%d")
 
-  type = match.arg(type, c("sim","obs"), several.ok = FALSE)
-  if(type == "sim"){
-    file_pattern = "^mod_s"
-  }else{
-    file_pattern = "\\.obs$"
+  type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
+  if (type == "sim") {
+    file_pattern <- "^mod_s"
+  } else {
+    file_pattern <- "\\.obs$"
   }
 
   # Getting files list from workspace vector
@@ -202,28 +203,32 @@ get_file_ <- function(workspace = getwd(),
   }
 
   # No sim/obs file found
-  if(!length(workspace_files)) {
+  if (!length(workspace_files)) {
     warning("Not any ", type, " file detected in workspace", workspace)
     return()
   }
 
 
   # No usms file path is given
-  if(!is.null(usms_filepath) ){
+  if (!is.null(usms_filepath)) {
 
     # In the get_file_from_usms the usms are filtered against
     # usm_name
-    file_name <- get_file_from_usms(workspace = workspace,
-                                    usms_path = usms_filepath,
-                                    type = type,
-                                    usm_name = usm_name)
+    file_name <- get_file_from_usms(
+      workspace = workspace,
+      usms_path = usms_filepath,
+      type = type,
+      usm_name = usm_name
+    )
 
     # Filtering existing files in file_name list
     exist_files <- unlist(lapply(file_name, function(x) all(x %in% workspace_files)))
-    file_name = file_name[exist_files]
+    file_name <- file_name[exist_files]
 
     # Exiting: not any existing files
-    if (!length(file_name)) return()
+    if (!length(file_name)) {
+      return()
+    }
 
     # Getting plant names, if javastics_path or workspace path contains
     # a plant directory, otherwise setting plant name to plant file name as a default.
@@ -233,25 +238,27 @@ get_file_ <- function(workspace = getwd(),
 
   # The user did not provide any usms file path, so using the names of the .sti files
   # as information.
-  if(is.null(usms_filepath) ) {
+  if (is.null(usms_filepath)) {
 
     # Getting sim/obs files list from directory
-    file_name = parse_mixed_file(file_names = as.list(workspace_files), type = type)
-    usms = names(file_name)
+    file_name <- parse_mixed_file(file_names = as.list(workspace_files), type = type)
+    usms <- names(file_name)
 
     # Selecting using usm_name
-    if(!is.null(usm_name)) {
+    if (!is.null(usm_name)) {
       usms <- intersect(usms, usm_name)
       # Not any matching names
-      if (!length(usms)) return()
+      if (!length(usms)) {
+        return()
+      }
       file_name <- file_name[usms]
     }
 
     # Calculating plant ids
-    plant_names = lapply(file_name, function(x){
-      if(length(x)>1){
+    plant_names <- lapply(file_name, function(x) {
+      if (length(x) > 1) {
         c("plant_1", "plant_2")
-      }else{
+      } else {
         c("plant_1")
       }
     })
@@ -260,17 +267,19 @@ get_file_ <- function(workspace = getwd(),
   # to be sure that file_name and workspace are in the same order ...
   # this may not be the case if usms_filepath is not given and if some USMs are named ****a or ****p,
   # but are not intercrop USMs
-  if (length(workspace)>1) {
-    tmp <- sapply(stringr::str_split(workspace,pattern = "/"),function(x) x[length(x)])
-    idx <- sapply(tmp, function(x) grep(x,names(file_name)))
+  if (length(workspace) > 1) {
+    tmp <- sapply(stringr::str_split(workspace, pattern = "/"), function(x) x[length(x)])
+    idx <- sapply(tmp, function(x) grep(x, names(file_name)))
     file_name <- file_name[idx]
   }
 
   # Getting sim/obs data list
-  sim_list <- mapply(function(dirpath,filename,p_name){
-    get_file_one(dirpath, filename, p_name,verbose, dates_list,var_list)
-  },dirpath = workspace, filename = file_name, p_name = plant_names,
-  SIMPLIFY = FALSE, USE.NAMES = FALSE)
+  sim_list <- mapply(function(dirpath, filename, p_name) {
+    get_file_one(dirpath, filename, p_name, verbose, dates_list, var_list)
+  },
+  dirpath = workspace, filename = file_name, p_name = plant_names,
+  SIMPLIFY = FALSE, USE.NAMES = FALSE
+  )
 
   names(sim_list) <- names(file_name)
 
@@ -294,47 +303,49 @@ get_file_ <- function(workspace = getwd(),
 #' @return the obs or simulation output
 #' @keywords internal
 #'
-get_file_one = function(dirpath, filename, p_name,
-                        verbose, dates_list, var_list){
-  out =
+get_file_one <- function(dirpath, filename, p_name,
+                         verbose, dates_list, var_list) {
+  out <-
     get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
-    dplyr::select_if(function(x){any(!is.na(x))})
+    dplyr::select_if(function(x) {
+      any(!is.na(x))
+    })
 
   # Filtering
   # Filtering Date on dates_list (format Posixct)
-  if(!is.null(dates_list) & "Date" %in% names(out)){
+  if (!is.null(dates_list) & "Date" %in% names(out)) {
     out <-
-      out%>%
+      out %>%
       dplyr::filter(.data$Date %in% dates_list)
   }
 
   # selecting variables columns
-  if(!is.null(var_list)){
+  if (!is.null(var_list)) {
     # Managing output columns according to out content
     out_cols <- var_to_col_names(var_list)
-    time_idx <- names(out) %in% c("ian", "mo","jo", "jul")
+    time_idx <- names(out) %in% c("ian", "mo", "jo", "jul")
     time_elts <- names(out)[time_idx]
     out_cols <- c(time_elts, out_cols)
-    if("cum_jul" %in% names(out)) out_cols <- c("cum_jul", out_cols)
+    if ("cum_jul" %in% names(out)) out_cols <- c("cum_jul", out_cols)
     if ("Date" %in% names(out)) out_cols <- c("Date", out_cols)
     if ("Plant" %in% names(out)) out_cols <- c(out_cols, "Plant")
     out <-
-      out%>%
+      out %>%
       dplyr::select(dplyr::one_of(out_cols))
   }
 
 
 
-  if(length(p_name) > 1){
-    out$Dominance = "Principal"
-    out$Dominance[out$Plant == p_name[2]] = "Associated"
+  if (length(p_name) > 1) {
+    out$Dominance <- "Principal"
+    out$Dominance[out$Plant == p_name[2]] <- "Associated"
   }
   out
 }
 
 get_file_from_usms <- function(workspace,
                                usms_path,
-                               type = c("sim","obs"),
+                               type = c("sim", "obs"),
                                usm_name = NULL,
                                verbose = TRUE) {
 
@@ -342,16 +353,16 @@ get_file_from_usms <- function(workspace,
   usms <- get_usms_list(file = file.path(usms_path))
 
   # Filtering USMs if required:
-  if (!is.null(usm_name)){
+  if (!is.null(usm_name)) {
     usm_exist <- usm_name %in% usms
 
     # Some provided usms are not available:
-    if (!all(usm_exist)){
-      if (verbose){
+    if (!all(usm_exist)) {
+      if (verbose) {
         cli::cli_alert_danger("The usm{?s} {.val {usm_name[!usm_exist]}} d{?oes/o} not exist in the workspace!")
         cli::cli_alert_info("Usm{?s} found in the workspace: {.val {usms}}")
       }
-      stop(usm_name,": do(es) not match usms")
+      stop(usm_name, ": do(es) not match usms")
     }
     usms <- usm_name
   }
@@ -362,20 +373,24 @@ get_file_from_usms <- function(workspace,
   file_name <- vector(mode = "list", length = length(usms))
   names(file_name) <- usms
 
-  if(type == "sim"){
-    file_name[!mixed] <- paste0("mod_s",usms[!mixed],".sti")
-    file_name[mixed] <- lapply(usms[mixed], function(x){paste0("mod_s",c("p","a"),x,".sti")})
-  }else{
-    file_name[!mixed] <- paste0(usms[!mixed],".obs")
-    file_name[mixed] <- lapply(usms[mixed], function(x){paste0(x,c("p","a"),".obs")})
+  if (type == "sim") {
+    file_name[!mixed] <- paste0("mod_s", usms[!mixed], ".sti")
+    file_name[mixed] <- lapply(usms[mixed], function(x) {
+      paste0("mod_s", c("p", "a"), x, ".sti")
+    })
+  } else {
+    file_name[!mixed] <- paste0(usms[!mixed], ".obs")
+    file_name[mixed] <- lapply(usms[mixed], function(x) {
+      paste0(x, c("p", "a"), ".obs")
+    })
   }
 
   # Filtering with all files exist
   # files_exist <- unlist(lapply(file_name, function(x) all(file.exists(file.path(workspace,x)))))
   # Using now possible multiple workspaces
-  files_exist  <- mapply(function(dirpath,filename){
+  files_exist <- mapply(function(dirpath, filename) {
     all(file.exists(file.path(dirpath, filename)))
-  },dirpath = workspace, filename = file_name)
+  }, dirpath = workspace, filename = file_name)
 
   file_name <- file_name[files_exist]
 
@@ -401,54 +416,55 @@ get_file_from_usms <- function(workspace,
 #' @examples
 #' \dontrun{
 #' parse_mixed_file(list("banana.obs", "IC_banana_sorghuma.obs", "IC_banana_sorghump.obs"),
-#'                   type = "obs")
+#'   type = "obs"
+#' )
 #'
 #' # Simulations with usm names starting with "a", with or without intercropping:
-#' file_names = list("mod_sauzevilleSC_Wheat_Wheat_2005-2006_N0.sti",
-#' "mod_saIC_Wheat_Wheat_2005-2006_N0.sti", "mod_spIC_Wheat_Wheat_2005-2006_N0.sti")
+#' file_names <- list(
+#'   "mod_sauzevilleSC_Wheat_Wheat_2005-2006_N0.sti",
+#'   "mod_saIC_Wheat_Wheat_2005-2006_N0.sti", "mod_spIC_Wheat_Wheat_2005-2006_N0.sti"
+#' )
 #'
 #' parse_mixed_file(file_names, type = "sim")
-#'
 #' }
 #'
-parse_mixed_file = function(file_names, type = c("sim","obs")){
+parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
+  type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
-  type = match.arg(type, c("sim","obs"), several.ok = FALSE)
-
-  if(type == "sim"){
-    usm_pattern = "^(mod_s)|(\\.sti)$"
-    mixed_pattern = "^(mod_s(a|p))|(\\.sti)$"
-    associated_pattern = "^mod_sa"
-  }else{
-    usm_pattern = "\\.obs$"
-    mixed_pattern = "((a|p)\\.obs)$"
-    associated_pattern = "a.obs$"
+  if (type == "sim") {
+    usm_pattern <- "^(mod_s)|(\\.sti)$"
+    mixed_pattern <- "^(mod_s(a|p))|(\\.sti)$"
+    associated_pattern <- "^mod_sa"
+  } else {
+    usm_pattern <- "\\.obs$"
+    mixed_pattern <- "((a|p)\\.obs)$"
+    associated_pattern <- "a.obs$"
   }
 
-  usm_names= gsub(pattern = usm_pattern, replacement = "",x = file_names)
-  names(file_names) = usm_names
+  usm_names <- gsub(pattern = usm_pattern, replacement = "", x = file_names)
+  names(file_names) <- usm_names
 
-  is_potential_mixed = grepl(mixed_pattern,file_names)
-  usm_name_potential_mixed = gsub(pattern = mixed_pattern, replacement = "",x = file_names)
-  potential_mixed = usm_name_potential_mixed[is_potential_mixed]
+  is_potential_mixed <- grepl(mixed_pattern, file_names)
+  usm_name_potential_mixed <- gsub(pattern = mixed_pattern, replacement = "", x = file_names)
+  potential_mixed <- usm_name_potential_mixed[is_potential_mixed]
 
-  file_names2 = file_names
+  file_names2 <- file_names
 
-  mixed_and_not_duplicated = seq_along(file_names)[is_potential_mixed][!duplicated(potential_mixed)]
+  mixed_and_not_duplicated <- seq_along(file_names)[is_potential_mixed][!duplicated(potential_mixed)]
 
-  for(i in mixed_and_not_duplicated){
-    mixed = which(usm_name_potential_mixed[i] == usm_name_potential_mixed & is_potential_mixed)
+  for (i in mixed_and_not_duplicated) {
+    mixed <- which(usm_name_potential_mixed[i] == usm_name_potential_mixed & is_potential_mixed)
     # [!duplicated(potential_mixed)]
-    if(length(mixed) > 1){
-      mixed_names = unlist(file_names[mixed])
-      associated_index = grep(associated_pattern,mixed_names)
-      file_names2[[i]] = c(mixed_names[-associated_index], mixed_names[associated_index])
-      names(file_names2)[i] = usm_name_potential_mixed[i]
-    }else{
+    if (length(mixed) > 1) {
+      mixed_names <- unlist(file_names[mixed])
+      associated_index <- grep(associated_pattern, mixed_names)
+      file_names2[[i]] <- c(mixed_names[-associated_index], mixed_names[associated_index])
+      names(file_names2)[i] <- usm_name_potential_mixed[i]
+    } else {
       # Here we thougth it was mixed, but it really is not because we did not found another
       # associated file with the same name modulo "a" or "p"
-      names(file_names2)[i] = gsub(pattern = usm_pattern, replacement = "",x = file_names2[i])
+      names(file_names2)[i] <- gsub(pattern = usm_pattern, replacement = "", x = file_names2[i])
     }
   }
-  file_names2[c(which(!is_potential_mixed),mixed_and_not_duplicated)]
+  file_names2[c(which(!is_potential_mixed), mixed_and_not_duplicated)]
 }

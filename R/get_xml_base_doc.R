@@ -19,7 +19,6 @@
 #' SticsRFiles:::get_xml_stics_version()
 #' # Giving Stics version
 #' SticsRFiles:::get_xml_base_doc("sols", stics_version = "V9.1")
-#'
 #' }
 #'
 #' @keywords internal
@@ -28,16 +27,16 @@ get_xml_base_doc <- function(xml_type = NULL,
                              stics_version = "latest") {
 
   # types list
-  types <- c("sols","usms","ini","tec","sta")
+  types <- c("sols", "usms", "ini", "tec", "sta")
   # returning types if no args
-  if (! nargs()) {
+  if (!nargs()) {
     return(types)
   }
 
   # index for getting files_pref value
   idx <- types %in% xml_type
   # checking the xml_type
-  if (! any(idx)) {
+  if (!any(idx)) {
     stop("Unknown xml type for getting an xml template xmlDocument !")
   }
 
@@ -45,14 +44,15 @@ get_xml_base_doc <- function(xml_type = NULL,
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
   # getting files prefix
-  files_pref <- c("one","one","file","file","file")
+  files_pref <- c("one", "one", "file", "file", "file")
   pref <- files_pref[idx]
 
   # getting a default xmldocument object template
-  tmpl_file <- file.path(get_examples_path( file_type = "xml_tmpl", stics_version = stics_version),
-                         paste0(pref,"_",xml_type,".xml"))
+  tmpl_file <- file.path(
+    get_examples_path(file_type = "xml_tmpl", stics_version = stics_version),
+    paste0(pref, "_", xml_type, ".xml")
+  )
   xml_doc_object <- xmldocument(tmpl_file)
 
   return(xml_doc_object)
-
 }

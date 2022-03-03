@@ -9,13 +9,7 @@
 #' @examples
 #' \dontrun{
 #' SticsRFiles::get_stics_versions_compat()
-#'
-#' #> $versions_list
-#' #> [1] "V8.5" "V9.0" "V9.1"
-#' #>
-#' #> $latest_version
-#' #> [1] "V9.1"
-#'}
+#' }
 #'
 #' @export
 #'
@@ -27,13 +21,13 @@ get_stics_versions_compat <- function() {
   # Getting versions list
   ver_info <- get_versions_info()
   versions_names <- ver_info$versions
-  num_versions <- as.numeric(gsub(pattern = "^[V]","",versions_names))
+  num_versions <- as.numeric(gsub(pattern = "^[V]", "", versions_names))
 
   # Getting the latest version string
-  latest_version <- versions_names[ num_versions == max(num_versions) ]
+  latest_version <- versions_names[num_versions == max(num_versions)]
 
   # List of versions strings ans latest version string
-  versions <- list(versions_list = versions_names, latest_version = latest_version )
+  versions <- list(versions_list = versions_names, latest_version = latest_version)
 
   return(versions)
 }
@@ -52,21 +46,18 @@ get_stics_versions_compat <- function() {
 #' \dontrun{
 #'
 #' SticsRFiles:::check_version_compat()
-#'
-#' [1] "V9.1"
-#'
-#' check_version_compat(version = "V8.5")
-#' [1] "V8.5"
-#'
 #' }
 check_version_compat <- function(stics_version = "latest") {
-
   versions <- get_stics_versions_compat()
-  if (stics_version == "latest") return(versions$latest_version)
+  if (stics_version == "latest") {
+    return(versions$latest_version)
+  }
 
-  if ( stics_version %in% versions$versions_list) return(stics_version)
+  if (stics_version %in% versions$versions_list) {
+    return(stics_version)
+  }
 
-  stop(stics_version,": is an unknown version!")
+  stop(stics_version, ": is an unknown version!")
 }
 
 
@@ -86,41 +77,39 @@ check_version_compat <- function(stics_version = "latest") {
 #'
 #' SticsRFiles:::get_versions_info()
 #'
-#' versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
-#' 1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
-#' 2     V9.0   V9.0 V9.0 BASE BASE V9.0 examples/V9.0 templates/V9.0 BASE
-#' 3     V9.1   V9.1 V9.1 BASE BASE V9.1 examples/V9.1 templates/V9.1 BASE
-#'
-#' get_versions_info( stics_version = "V8.5")
-#'
-#' versions compat  csv  obs  sti  txt           xml       xml_tmpl   xl
-#' 1     V8.5   V8.5 V8.5 BASE BASE V8.5 examples/V8.5 templates/V8.5 BASE
+#' get_versions_info(stics_version = "V8.5")
 #'
 #'
-#' get_versions_info(stics_version = "V8.5",
-#'                   versions_dir = "path/to/SticsRFilesproject/inst/extdata")
-#'
-#'
-#'}
+#' get_versions_info(
+#'   stics_version = "V8.5",
+#'   versions_dir = "path/to/SticsRFilesproject/inst/extdata"
+#' )
+#' }
 get_versions_info <- function(stics_version = NULL, location = "install") {
 
   # Getting available versions info from a file
   ver_file <- get_versions_file_path(location = location)
 
-  if (!file.exists(ver_file)) return()
+  if (!file.exists(ver_file)) {
+    return()
+  }
 
-  ver_info <- utils::read.csv2(file = ver_file, stringsAsFactors = FALSE,
-                               colClasses = "character")
+  ver_info <- utils::read.csv2(
+    file = ver_file, stringsAsFactors = FALSE,
+    colClasses = "character"
+  )
 
   # Set NA where no information is given
-  ver_info[ver_info[]==""]=NA
+  ver_info[ver_info[] == ""] <- NA
 
   # Returning the full data.frame for all versions
-  if (base::is.null(stics_version)) return(ver_info)
+  if (base::is.null(stics_version)) {
+    return(ver_info)
+  }
 
   # Selecting data according to the desired version
   if (stics_version %in% ver_info$versions) {
-    return(ver_info[ver_info$versions == stics_version,])
+    return(ver_info[ver_info$versions == stics_version, ])
   }
 
   # Nothing to return for unknown version
@@ -140,12 +129,15 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 #' SticsRFiles:::get_version_num()
 #' }
 get_version_num <- function(stics_version, numeric = TRUE) {
+  if (is.numeric(stics_version) && numeric) {
+    return(stics_version)
+  }
 
-  if (is.numeric(stics_version) && numeric) return(stics_version)
+  char_version <- gsub(pattern = "^[V | v]", "", stics_version)
 
-  char_version <- gsub(pattern = "^[V | v]","",stics_version)
-
-  if (!numeric) return(char_version)
+  if (!numeric) {
+    return(char_version)
+  }
 
   as.numeric(char_version)
 }
@@ -163,13 +155,13 @@ get_version_num <- function(stics_version, numeric = TRUE) {
 #' SticsRFiles:::get_version_string()
 #' }
 get_version_string <- function(stics_version) {
-
   pattern <- "^[V | v]"
 
-  if (is.character(stics_version) & grepl(pattern = pattern, x = stics_version))
+  if (is.character(stics_version) & grepl(pattern = pattern, x = stics_version)) {
     return(toupper(stics_version))
+  }
 
-  paste0("V",as.character(stics_version))
+  paste0("V", as.character(stics_version))
 }
 
 
@@ -183,8 +175,5 @@ get_version_string <- function(stics_version) {
 #' SticsRFiles:::get_versions_file_name()
 #' }
 get_versions_file_name <- function() {
-
   return("stics_versions_info.csv")
-
 }
-

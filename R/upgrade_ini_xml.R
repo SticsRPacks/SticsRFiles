@@ -19,9 +19,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' upgrade_ini_xml(file = "/path/to/_ini.xml",
-#'                 out_dir = "/path/to/directory",
-#'                 param_gen_file = "/path/to/param_gen.xml")
+#' upgrade_ini_xml(
+#'   file = "/path/to/_ini.xml",
+#'   out_dir = "/path/to/directory",
+#'   param_gen_file = "/path/to/param_gen.xml"
+#' )
 #' }
 upgrade_ini_xml <- function(file,
                             out_dir,
@@ -45,30 +47,36 @@ upgrade_ini_xml <- function(file,
 
   # checking version
   if (check_version) {
-
     min_version <- get_version_num("V9.1")
 
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file[1],
-                                           stics_version,
-                                           param_gen_file = param_gen_file)
+      stics_version,
+      param_gen_file = param_gen_file
+    )
 
 
-    if(!file_version && is.null(param_gen_file))
+    if (!file_version && is.null(param_gen_file)) {
       stop("param_gen_file must be provided! ")
+    }
 
     if (!file_version) {
-      stop("The input version ",stics_version,
-           " does not match file version ",
-           attr(file_version,"version")," \n",file[1] )
+      stop(
+        "The input version ", stics_version,
+        " does not match file version ",
+        attr(file_version, "version"), " \n", file[1]
+      )
     }
 
     # Compatibility checks between version and update to target_version
     ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version)
-      stop("Files from the version ", stics_version,
-           " cannot be converted to the version ", target_version)
+    if (ver_num < min_version) {
+      stop(
+        "Files from the version ", stics_version,
+        " cannot be converted to the version ", target_version
+      )
+    }
 
 
     # for checking only once when multiple files are treated !
@@ -77,16 +85,19 @@ upgrade_ini_xml <- function(file,
 
 
   # Treating a files list
-  if (length(file) > 1 ) {
-    lapply(file, function(x) upgrade_ini_xml(file = x,
-                                             out_dir = out_dir,
-                                             stics_version = stics_version,
-                                             target_version = target_version,
-                                             check_version = check_version,
-                                             param_gen_file = param_gen_file,
-                                             overwrite = overwrite,
-                                             check_dir = check_dir)
-    )
+  if (length(file) > 1) {
+    lapply(file, function(x) {
+      upgrade_ini_xml(
+        file = x,
+        out_dir = out_dir,
+        stics_version = stics_version,
+        target_version = target_version,
+        check_version = check_version,
+        param_gen_file = param_gen_file,
+        overwrite = overwrite,
+        check_dir = check_dir
+      )
+    })
     return(invisible())
   }
 
@@ -98,13 +109,16 @@ upgrade_ini_xml <- function(file,
   set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
 
   # Keeping old values
-  rm_names <- c("masec0","QNplante0", "resperenne0")
+  rm_names <- c("masec0", "QNplante0", "resperenne0")
   old_values <- get_param_value(old_doc, rm_names)
 
   # Removing useless nodes
-  rm_nodes <- unlist(lapply(rm_names, function(x)
-    unlist(getNodeS(docObj = old_doc,
-                    path = paste0("//",x)))))
+  rm_nodes <- unlist(lapply(rm_names, function(x) {
+    unlist(getNodeS(
+      docObj = old_doc,
+      path = paste0("//", x)
+    ))
+  }))
   lapply(rm_nodes, function(x) removeNodes(x))
 
 
@@ -124,7 +138,8 @@ upgrade_ini_xml <- function(file,
 		<restemp0>0</restemp0>
 	</choix>
  </option>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
 
   # Getting zrac0 node
@@ -135,32 +150,33 @@ upgrade_ini_xml <- function(file,
 
   # setting values for restructured nodes
   # resperennes0 became restemp0
-  rm_names <- c("masec0","QNplante0", "restemp0")
+  rm_names <- c("masec0", "QNplante0", "restemp0")
   set_param_value(old_doc, param_name = as.list(rm_names), param_value = old_values)
 
 
   # Adding snow node
   new_node <- xmlParseString(
-    '<snow>
+    "<snow>
     <SDepth>0.0</SDepth>
     <Sdry>0.0</Sdry>
     <Swet>0.0</Swet>
     <ps>0.0</ps>
-    </snow>',
-    addFinalizer = TRUE)
+    </snow>",
+    addFinalizer = TRUE
+  )
 
-  parent_node <- getNodeS(old_doc, path="//initialisations")[[1]]
+  parent_node <- getNodeS(old_doc, path = "//initialisations")[[1]]
 
   addChildren(parent_node, xmlClone(new_node))
 
 
   # Renaming soil parameters
   # hinit, NO3init, NH4init => hinitf, NO3initf, NH4initf
-  current_node <- getNodeS(old_doc, path="//hinit")[[1]]
+  current_node <- getNodeS(old_doc, path = "//hinit")[[1]]
   xmlName(current_node) <- "Hinitf"
-  current_node <- getNodeS(old_doc, path="//NO3init")[[1]]
+  current_node <- getNodeS(old_doc, path = "//NO3init")[[1]]
   xmlName(current_node) <- "NO3initf"
-  current_node <- getNodeS(old_doc, path="//NH4init")[[1]]
+  current_node <- getNodeS(old_doc, path = "//NH4init")[[1]]
   xmlName(current_node) <- "NH4initf"
 
 
@@ -172,5 +188,4 @@ upgrade_ini_xml <- function(file,
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))
-
 }

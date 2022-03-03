@@ -30,15 +30,18 @@ get_param_bounds_xml <- function(xml_file,
                                  param_name,
                                  bounds_name = NULL,
                                  output = "data.frame") {
-
-
-  if (length(xml_file) > 1 ) {
-
-    param_bounds <- lapply(xml_file,
-                           function(x) get_param_bounds_xml(x,
-                                                            param_name,
-                                                            bounds_name,
-                                                            output))
+  if (length(xml_file) > 1) {
+    param_bounds <- lapply(
+      xml_file,
+      function(x) {
+        get_param_bounds_xml(
+          x,
+          param_name,
+          bounds_name,
+          output
+        )
+      }
+    )
     return(param_bounds)
   }
 
@@ -47,5 +50,4 @@ get_param_bounds_xml <- function(xml_file,
   param_bounds <- get_param_bounds(xml_doc, param_name, bounds_name, output)
 
   return(param_bounds)
-
 }

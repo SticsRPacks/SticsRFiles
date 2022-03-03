@@ -19,9 +19,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' upgrade_sta_xml(file = "/path/to/_sta.xml",
-#'                 out_dir = "/path/to/directory",
-#'                 param_gen_file = "/path/to/param_gen.xml")
+#' upgrade_sta_xml(
+#'   file = "/path/to/_sta.xml",
+#'   out_dir = "/path/to/directory",
+#'   param_gen_file = "/path/to/param_gen.xml"
+#' )
 #' }
 upgrade_sta_xml <- function(file,
                             out_dir,
@@ -44,25 +46,31 @@ upgrade_sta_xml <- function(file,
 
   # checking version
   if (check_version) {
-
     min_version <- get_version_num("V9.1")
 
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file[1],
-                                           stics_version,
-                                           param_gen_file = param_gen_file)
+      stics_version,
+      param_gen_file = param_gen_file
+    )
 
     if (!file_version) {
-      stop("The input version ",stics_version,
-           " does not match file version ",
-           attr(file_version,"version")," \n",file[1])
+      stop(
+        "The input version ", stics_version,
+        " does not match file version ",
+        attr(file_version, "version"), " \n", file[1]
+      )
     }
 
     # Compatibility checks between version and update to target_version
     ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version) stop("Files from the version ", stics_version,
-                                    " cannot be converted to the version ", target_version)
+    if (ver_num < min_version) {
+      stop(
+        "Files from the version ", stics_version,
+        " cannot be converted to the version ", target_version
+      )
+    }
 
 
     # for checking only once when multiple files are treated !
@@ -70,16 +78,19 @@ upgrade_sta_xml <- function(file,
   }
 
   # Treating a files list
-  if (length(file) > 1 ) {
-    lapply(file, function(x) upgrade_sta_xml(file = x,
-                                             param_gen_file = param_gen_file,
-                                             out_dir = out_dir,
-                                             stics_version = stics_version,
-                                             target_version = target_version,
-                                             check_version = check_version,
-                                             overwrite = overwrite,
-                                             check_dir = check_dir)
-    )
+  if (length(file) > 1) {
+    lapply(file, function(x) {
+      upgrade_sta_xml(
+        file = x,
+        param_gen_file = param_gen_file,
+        out_dir = out_dir,
+        stics_version = stics_version,
+        target_version = target_version,
+        check_version = check_version,
+        overwrite = overwrite,
+        check_dir = check_dir
+      )
+    })
     return(invisible())
   }
 
@@ -102,14 +113,15 @@ upgrade_sta_xml <- function(file,
   # Getting new parameter
   concrr_node <- xmlParseString(
     '<param format="real" max="3.0" min="0.0" nom="concrr">0.02000</param>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
   # Getting the preceeding sibling node
   prev_sibling <- getNodeS(old_doc, "//*[@nom='NH3ref']")[[1]]
   addSibling(node = prev_sibling, xmlClone(concrr_node), after = TRUE)
 
   # Setting concrr value
-  set_param_value(old_doc,param_name = "concrr", param_value = concrr)
+  set_param_value(old_doc, param_name = "concrr", param_value = concrr)
 
   # Adding snow formalism new node
   new_node <- xmlParseString(
@@ -132,13 +144,14 @@ upgrade_sta_xml <- function(file,
     </choix>
     </option>
     </formalisme>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
-  par_node <- getNodeS(old_doc, path="/fichiersta")[[1]]
+  par_node <- getNodeS(old_doc, path = "/fichiersta")[[1]]
   addChildren(par_node, xmlClone(new_node))
 
   # Writing to file _sta.xml
-  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite )
+  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite)
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))

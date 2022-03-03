@@ -15,7 +15,7 @@
 #' @return A vector of soil names
 #'
 #' @examples
-#' path = get_examples_path( file_type = "xml" )
+#' path <- get_examples_path(file_type = "xml")
 #'
 #' # Read from a usms file (soils used in a USM):
 #' soil_list <- get_soils_list(file = file.path(path, "usms.xml"))
@@ -24,11 +24,9 @@
 #' soil_list <- get_soils_list(file = file.path(path, "sols.xml"))
 #'
 #' soil_list <- get_soils_list(file = file.path(path, "usms.xml"), soil = c("solcanne", "sole"))
-#'
 #' @export
 #'
-get_soils_list <- function(file, soil = NULL, file_path = lifecycle::deprecated(), name = lifecycle::deprecated()){
-
+get_soils_list <- function(file, soil = NULL, file_path = lifecycle::deprecated(), name = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
     lifecycle::deprecate_warn("0.5.0", "get_soils_list(file_path)", "get_soils_list(file)")
   } else {
@@ -43,9 +41,9 @@ get_soils_list <- function(file, soil = NULL, file_path = lifecycle::deprecated(
   xml_name <- NULL
 
   # Detecting file type
-  if ( is_usms_xml(file_path)) xml_name <- "nomsol"
+  if (is_usms_xml(file_path)) xml_name <- "nomsol"
 
-  if ( is_sols_xml(file_path)) xml_name <- "sol"
+  if (is_sols_xml(file_path)) xml_name <- "sol"
 
   if (base::is.null(xml_name)) {
     stop("The file must be either a usm (usms) or a soil (sols) file")
@@ -53,8 +51,3 @@ get_soils_list <- function(file, soil = NULL, file_path = lifecycle::deprecated(
 
   return(find_usms_soils_names(file_path = file_path, xml_name = xml_name, name = name))
 }
-
-
-
-
-

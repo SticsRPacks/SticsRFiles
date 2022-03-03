@@ -6,13 +6,6 @@
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_svn_identifiers()
-#'
-#' $username
-#' [1] "sticsread"
-#'
-#' $password
-#' [1] "sticsread2020"
-#'
 #' }
 get_svn_identifiers <- function() {
 
@@ -21,7 +14,7 @@ get_svn_identifiers <- function() {
 
   # windows : encrypted !!
 
-  return(list(username="sticsread", password="sticsread2020"))
+  return(list(username = "sticsread", password = "sticsread2020"))
 }
 
 
@@ -43,18 +36,18 @@ get_svn_identifiers <- function() {
 #' \dontrun{
 #' SticsRFiles:::download_csv_files(
 #'   branch_url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
-#'   dest_dir = system.file("extdata", package = "SticsRFiles"))
+#'   dest_dir = system.file("extdata", package = "SticsRFiles")
+#' )
 #' }
 download_csv_files <- function(branch_url,
-                          dest_dir,
-                          file_name = "all",
-                          ids = get_svn_identifiers(),
-                          overwrite = FALSE,
-                          verbose = TRUE) {
-
+                               dest_dir,
+                               file_name = "all",
+                               ids = get_svn_identifiers(),
+                               overwrite = FALSE,
+                               verbose = TRUE) {
   files_list <- c("inputs.csv", "outputs.csv")
 
-  if (length(file_name) == 1 && file_name =="all") {
+  if (length(file_name) == 1 && file_name == "all") {
     file_name <- files_list
   }
 
@@ -67,7 +60,7 @@ download_csv_files <- function(branch_url,
   curl::handle_setopt(h, password = ids$password)
 
   # Setting the files url and download
-  file_url <- paste0(branch_url, "/doc/", file_name )
+  file_url <- paste0(branch_url, "/doc/", file_name)
 
   # local files_path
   file_path <- vector(mode = "list", length = length(file_url))
@@ -75,16 +68,21 @@ download_csv_files <- function(branch_url,
   for (f in 1:length(file_url)) {
     dest_file <- file.path(dest_dir, file_name[f])
 
-    if (file.exists(dest_file) && !overwrite ) {
-      warning("File ", dest_file,
-              "already exists",
-              "(consider set overwrite to TRUE for passing through)!")
+    if (file.exists(dest_file) && !overwrite) {
+      warning(
+        "File ", dest_file,
+        "already exists",
+        "(consider set overwrite to TRUE for passing through)!"
+      )
     }
 
-    file_path[[f]] <- try(curl::curl_download(file_url[f],
-                                              handle = h,
-                                              destfile = dest_file),
-                          TRUE)
+    file_path[[f]] <- try(
+      curl::curl_download(file_url[f],
+        handle = h,
+        destfile = dest_file
+      ),
+      TRUE
+    )
   }
 
   err_idx <- unlist(lapply(file_path, function(x) class(x) == "try-error"))
@@ -118,13 +116,16 @@ download_csv_files <- function(branch_url,
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::add_stics_version(version_name = "V10.0",
-#'  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10")
+#' SticsRFiles:::add_stics_version(
+#'   version_name = "V10.0",
+#'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10"
+#' )
 #'
-#' SticsRFiles:::add_stics_version(version_name = "V10.0",
-#'  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
-#'  location = "package")
-#'
+#' SticsRFiles:::add_stics_version(
+#'   version_name = "V10.0",
+#'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+#'   location = "package"
+#' )
 #' }
 add_stics_version <- function(version_name,
                               url,
@@ -163,11 +164,13 @@ add_stics_version <- function(version_name,
 
 
   # Writing data updated with new version information (about csv files location)
-  set_versions_info(version_name = version_name,
-                    #versions_dir = dest_dir,
-                    location = location,
-                    overwrite = overwrite,
-                    verbose = verbose)
+  set_versions_info(
+    version_name = version_name,
+    # versions_dir = dest_dir,
+    location = location,
+    overwrite = overwrite,
+    verbose = verbose
+  )
 
   if (verbose) cat(paste0(version_name, " successfully set in SticsRFiles ", location, ".\n"))
 }
@@ -192,9 +195,10 @@ add_stics_version <- function(version_name,
 #' \dontrun{
 #' SticsRFiles:::remove_stics_version(version_name = "V10.0")
 #'
-#' SticsRFiles:::remove_stics_version(version_name = "V10.0",
-#'                                    location = "package")
-#'
+#' SticsRFiles:::remove_stics_version(
+#'   version_name = "V10.0",
+#'   location = "package"
+#' )
 #' }
 remove_stics_version <- function(version_name,
                                  delete_files = TRUE,
@@ -210,29 +214,34 @@ remove_stics_version <- function(version_name,
   ret_rm <- TRUE
 
   # if version  exists in csv files
-  if (any(version_idx) ) {
-
-    versions_info <- versions_info[!version_idx,]
+  if (any(version_idx)) {
+    versions_info <- versions_info[!version_idx, ]
 
     versions_info_file <- get_versions_file_path(location = location)
 
-    utils::write.csv2(x = versions_info,
-                      quote = FALSE,
-                      file = versions_info_file,
-                      row.names = FALSE)
+    utils::write.csv2(
+      x = versions_info,
+      quote = FALSE,
+      file = versions_info_file,
+      row.names = FALSE
+    )
     ret_write <- TRUE
   }
 
-  if (!delete_files) return(invisible(ret_write & TRUE))
+  if (!delete_files) {
+    return(invisible(ret_write & TRUE))
+  }
 
   # Trying to delete files
   files_dir <- file.path(get_data_dir(location = location), "csv", version_name)
 
-  if (! dir.exists(files_dir)) return(invisible(ret_write & TRUE))
+  if (!dir.exists(files_dir)) {
+    return(invisible(ret_write & TRUE))
+  }
 
   ret_rm <- unlink(x = files_dir, recursive = TRUE)
 
-  invisible(ret_write & ret_rm==0)
+  invisible(ret_write & ret_rm == 0)
 }
 
 
@@ -250,17 +259,15 @@ remove_stics_version <- function(version_name,
 #' SticsRFiles:::get_data_dir()
 #'
 #' SticsRFiles:::get_data_dir(location = "package")
-#'
 #' }
-get_data_dir <- function( location = "install") {
+get_data_dir <- function(location = "install") {
+  if (location == "install") dest_dir <- system.file("extdata", package = "SticsRFiles")
 
-  if ( location == "install") dest_dir <- system.file("extdata", package = "SticsRFiles")
-
-  if (location == "package" )  {
+  if (location == "package") {
     proj_dir <- rstudioapi::getActiveProject()
-    pkg <- gsub(pattern = "\\.Rproj$",x = list.files(pattern = "\\.Rproj$",proj_dir), replacement = "")
-    if (base::is.null(proj_dir) || pkg != "SticsRFiles" ) stop("Load the project SticsRFiles before proceeding !")
-    dest_dir <- file.path(proj_dir,"inst", "extdata")
+    pkg <- gsub(pattern = "\\.Rproj$", x = list.files(pattern = "\\.Rproj$", proj_dir), replacement = "")
+    if (base::is.null(proj_dir) || pkg != "SticsRFiles") stop("Load the project SticsRFiles before proceeding !")
+    dest_dir <- file.path(proj_dir, "inst", "extdata")
   }
 
   return(dest_dir)
@@ -282,11 +289,9 @@ get_data_dir <- function( location = "install") {
 #' SticsRFiles:::get_versions_file_path()
 #'
 #' SticsRFiles:::get_versions_file_path(location = "package")
-#'
 #' }
 get_versions_file_path <- function(location = "install") {
-
-  file.path(get_data_dir(location = location),"versions", get_versions_file_name())
+  file.path(get_data_dir(location = location), "versions", get_versions_file_name())
 }
 
 
@@ -307,27 +312,31 @@ get_versions_file_path <- function(location = "install") {
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles::update_stics_version(version_name = "V10.0",
-#'  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10")
+#' SticsRFiles::update_stics_version(
+#'   version_name = "V10.0",
+#'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10"
+#' )
 #'
-#' SticsRFiles::update_stics_version(version_name = "V10.0",
-#'  url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
-#'  location = "package")
-#'
+#' SticsRFiles::update_stics_version(
+#'   version_name = "V10.0",
+#'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+#'   location = "package"
+#' )
 #' }
-update_stics_version <-function(version_name,
-                                url,
-                                file_name = "all",
-                                location = "install",
-                                verbose = FALSE) {
+update_stics_version <- function(version_name,
+                                 url,
+                                 file_name = "all",
+                                 location = "install",
+                                 verbose = FALSE) {
 
   # Forcing csv files overwriting
   add_stics_version(version_name,
-                    url,
-                    file_name = file_name,
-                    location = location,
-                    overwrite = TRUE,
-                    verbose = verbose)
+    url,
+    file_name = file_name,
+    location = location,
+    overwrite = TRUE,
+    verbose = verbose
+  )
 }
 
 
@@ -373,41 +382,45 @@ set_versions_info <- function(version_name,
   # if version_name does not exist
   version_idx <- versions_info$versions %in% version_name
 
-  if (! any(version_idx) ) {
+  if (!any(version_idx)) {
     versions_info <- dplyr::bind_rows(versions_info, version_info)
     versions_info[is.na(versions_info)] <- ""
   } else {
     write_file <- write_file & overwrite
     if (!write_file) {
-      if (verbose) warning(version_name," already exists in ",versions_info_file,
-              ", it is safer updating it by hand of set overwrite to TRUE !")
+      if (verbose) {
+        warning(
+          version_name, " already exists in ", versions_info_file,
+          ", it is safer updating it by hand of set overwrite to TRUE !"
+        )
+      }
 
       return(invisible(versions_info))
-
     } else {
       # replacing data for this version
-      versions_info[version_idx,] <- version_info
+      versions_info[version_idx, ] <- version_info
     }
-
   }
 
   # Sorting rows against the version number
   # extracted from the versions column
   # Just in case if an older version than existing ones
   # is added
-  ord_idx <- order(as.numeric(gsub(pattern = "V([0-9\\.*])",
-                                   versions_info$versions,
-                                   replacement = "\\1"))
-                   )
+  ord_idx <- order(as.numeric(gsub(
+    pattern = "V([0-9\\.*])",
+    versions_info$versions,
+    replacement = "\\1"
+  )))
   versions_info <- versions_info[ord_idx, ]
 
   # Writing the csv file in the appriopriate folder
   if (write_file) {
-    utils::write.csv2(x = versions_info,
-                      quote = FALSE,
-                      file = versions_info_file,
-                      row.names = FALSE)
-
+    utils::write.csv2(
+      x = versions_info,
+      quote = FALSE,
+      file = versions_info_file,
+      row.names = FALSE
+    )
   }
 
   return(invisible(versions_info))
@@ -428,25 +441,19 @@ set_versions_info <- function(version_name,
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_versions_info(version_name = "V10.0")
-#'
-#'>
-#'>  versions   csv obs sti txt xml xml_tmpl xl study_case_1
-#'   1    V10.0 V10.0
-#'
 #' }
 get_version_info_tmpl <- function(version_name) {
-
-  data.frame( versions = version_name,
-              csv = version_name,
-              obs ="",
-              sti = "",
-              txt = "",
-              xml = "",
-              xml_tmpl ="",
-              xl = "",
-              study_case_1 = "",
-              study_case_intercrop = "",
-              stringsAsFactors = FALSE
+  data.frame(
+    versions = version_name,
+    csv = version_name,
+    obs = "",
+    sti = "",
+    txt = "",
+    xml = "",
+    xml_tmpl = "",
+    xl = "",
+    study_case_1 = "",
+    study_case_intercrop = "",
+    stringsAsFactors = FALSE
   )
 }
-

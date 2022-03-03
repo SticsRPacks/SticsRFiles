@@ -12,37 +12,42 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+#' xml_path <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 #' tec_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
 #' # removing a single parameter
 #' SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "jultrav")
 #'
 #' # removing all the parent nodes the parameter belongs to
-#' SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
-#'  remove_parent = TRUE)
+#' SticsRFiles:::remove_node_from_doc(tec_doc,
+#'   param_name = "julapI_or_sum_upvt",
+#'   remove_parent = TRUE
+#' )
 #'
 #' # removing some of the parent nodes the parameter belongs to
-#' SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "julapI_or_sum_upvt",
-#'  remove_parent = TRUE, nodes_ids = c(1,3))
-#'
+#' SticsRFiles:::remove_node_from_doc(tec_doc,
+#'   param_name = "julapI_or_sum_upvt",
+#'   remove_parent = TRUE, nodes_ids = c(1, 3)
+#' )
 #' }
 #'
 #' @keywords internal
 #'
-remove_node_from_doc <- function( xml_doc, param_name ,
-                                  parent_name = NULL,
-                                  remove_parent = FALSE,
-                                  nodes_ids = NULL ) {
+remove_node_from_doc <- function(xml_doc, param_name,
+                                 parent_name = NULL,
+                                 remove_parent = FALSE,
+                                 nodes_ids = NULL) {
 
   # Getting the node xpath
-  xpath_node <- get_param_type(xml_doc = xml_doc,
-                               param_name = param_name,
-                               parent_name = parent_name)$xpath
+  xpath_node <- get_param_type(
+    xml_doc = xml_doc,
+    param_name = param_name,
+    parent_name = parent_name
+  )$xpath
 
   # if the type does not exist
-  if (base::is.null(xpath_node)){
-    print(paste("Unknown parameter in xml doc: ",param_name))
+  if (base::is.null(xpath_node)) {
+    print(paste("Unknown parameter in xml doc: ", param_name))
     return(invisible())
   }
 
@@ -50,27 +55,27 @@ remove_node_from_doc <- function( xml_doc, param_name ,
   if (remove_parent) {
     # getting the nodes for parent nodes
     # to which the param_name belongs (I.e. "intervention", for example)
-    xml_nodes <- lapply(getNodeS(xml_doc,xpath_node),xmlParent)
+    xml_nodes <- lapply(getNodeS(xml_doc, xpath_node), xmlParent)
   } else {
     # Getting nodes in all others cases
     xml_nodes <- getNodeS(xml_doc, xpath_node)
   }
 
-  if (base::is.null(xml_nodes)){
+  if (base::is.null(xml_nodes)) {
     print("No nodes to remove from xml doc !")
     return(invisible())
   }
 
   nodes_nb <- length(xml_nodes)
   # Calculating indices if no nodes_ids
-  if (base::is.null(nodes_ids) ) {
+  if (base::is.null(nodes_ids)) {
     nodes_ids <- 1:nodes_nb
   }
 
 
   # Returning the input object
   # ids out of range !
-  if ( !max(nodes_ids) <= nodes_nb) {
+  if (!max(nodes_ids) <= nodes_nb) {
     warning("No nodes removed from the xml document, ids out of range !")
     return(xml_doc)
   }
@@ -79,5 +84,4 @@ remove_node_from_doc <- function( xml_doc, param_name ,
   removeNodes(xml_nodes[nodes_ids])
 
   return(invisible(xml_doc))
-
 }

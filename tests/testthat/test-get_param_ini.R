@@ -1,37 +1,40 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_path= file.path(get_examples_path("xml"), "file_ini.xml")
+xml_path <- file.path(get_examples_path("xml"), "file_ini.xml")
 context("Getting initialisation param values")
 
 test_that("single param option value ", {
-  expect_equivalent(unlist(get_param_xml(xml_path,"nbplantes")),1)
+  expect_equivalent(unlist(get_param_xml(xml_path, "nbplantes")), 1)
 })
 
 
 # unlist with different types produces a character vector
 test_that("multiple param option value", {
-  val <- unlist(get_param_xml(xml_path,c("stade0","lai0","masec0","QNplante0",
-                                         "magrain0","zrac0","resperenne0"),
-                              select ="plante",select_value = 1 ), use.names = FALSE)
+  val <- unlist(get_param_xml(xml_path, c(
+    "stade0", "lai0", "masec0", "QNplante0",
+    "magrain0", "zrac0", "resperenne0"
+  ),
+  select = "plante", select_value = 1
+  ), use.names = FALSE)
 
-  expect_equal(val, c("snu","0","0","0","0","0","0"))
+  expect_equal(val, c("snu", "0", "0", "0", "0", "0", "0"))
 })
 
 
 test_that("multiple param option value 2", {
-  val <- unlist(get_param_xml(xml_path,"densinitial", select ="plante",
-                              select_value = 1 ))
-  expect_equivalent(val, c(0,0,0,0,0))
+  val <- unlist(get_param_xml(xml_path, "densinitial",
+    select = "plante",
+    select_value = 1
+  ))
+  expect_equivalent(val, c(0, 0, 0, 0, 0))
 })
 
 test_that("multiple values from single node", {
-  val <- unlist(get_param_xml(xml_path,"hinit"))
-  expect_equivalent(val, c(23.5,21.6,23.9,27.6,0))
+  val <- unlist(get_param_xml(xml_path, "hinit"))
+  expect_equivalent(val, c(23.5, 21.6, 23.9, 27.6, 0))
 })
 
 test_that("multiple values from multiple nodes", {
-  val <- unlist(get_param_xml(xml_path,c("hinit","NO3init","NH4init")), use.names = FALSE)
-  expect_equal(val,c(c(23.5,21.6,23.9,27.6,0),c(32,12,9,0,0),c(0,0,0,0,0)))
+  val <- unlist(get_param_xml(xml_path, c("hinit", "NO3init", "NH4init")), use.names = FALSE)
+  expect_equal(val, c(c(23.5, 21.6, 23.9, 27.6, 0), c(32, 12, 9, 0, 0), c(0, 0, 0, 0, 0)))
 })
-
-

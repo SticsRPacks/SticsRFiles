@@ -13,29 +13,32 @@
 #' \dontrun{
 #'
 #' # Xml case
-#' xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+#' xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' get_lai_forcing(xml_usms)
-#' get_lai_forcing(xml_usms,"wheat")
-#' get_lai_forcing(xml_usms,c("wheat","intercrop_pea_barley"))
-#'
+#' get_lai_forcing(xml_usms, "wheat")
+#' get_lai_forcing(xml_usms, c("wheat", "intercrop_pea_barley"))
 #' }
 #'
 #' @export
 #'
-get_lai_forcing <- function(usm_file_path, usms_list = c()){
-
+get_lai_forcing <- function(usm_file_path, usms_list = c()) {
   usm <- grepl(pattern = "\\.usm$", x = usm_file_path)
   usms <- grepl(pattern = "\\.xml$", x = usm_file_path)
 
   # Neither .usm nor .xml
-  if (! (usm | usms) ) return()
+  if (!(usm | usms)) {
+    return()
+  }
 
   if (!base::file.exists(usm_file_path)) stop(usm_file_path, " does not exist")
 
-  if (usm) return(get_lai_forcing_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
+  if (usm) {
+    return(get_lai_forcing_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
+  }
 
-  if (usms) return(get_lai_forcing_xml(usm_xml_path = usm_file_path, usms_list = usms_list))
-
+  if (usms) {
+    return(get_lai_forcing_xml(usm_xml_path = usm_file_path, usms_list = usms_list))
+  }
 }
 
 
@@ -55,21 +58,21 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()){
 #'
 #' @keywords internal
 #'
-get_lai_forcing_xml <- function(usm_xml_path, usms_list=c()){
+get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 
   # Loading xml file as xmlDocument object
-  xml_usms = xmldocument(usm_xml_path)
+  xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm
-  lai_forced = as.logical(as.numeric(getValues(xml_usms,'//codesimul')))
+  lai_forced <- as.logical(as.numeric(getValues(xml_usms, "//codesimul")))
 
   # Xml usms names
-  usm_names <- getAttrs(xml_usms,'//usm')
+  usm_names <- getAttrs(xml_usms, "//usm")
   names(lai_forced) <- usm_names
 
   # Filtering using usms_list if needed
-  if(length(usms_list) != 0){
-    lai_forced = lai_forced[usm_names %in% usms_list]
+  if (length(usms_list) != 0) {
+    lai_forced <- lai_forced[usm_names %in% usms_list]
   }
 
   return(lai_forced)
@@ -79,8 +82,9 @@ get_lai_forcing_xml <- function(usm_xml_path, usms_list=c()){
 
 
 get_lai_forcing_txt <- function(usm_txt_path, usm_name = NULL) {
-
-  if (base::basename(usm_txt_path) != "new_travail.usm") return()
+  if (base::basename(usm_txt_path) != "new_travail.usm") {
+    return()
+  }
 
 
   if (length(usm_name) > 1) stop("Only one usm name may be given !")
@@ -97,6 +101,3 @@ get_lai_forcing_txt <- function(usm_txt_path, usm_name = NULL) {
 
   return(lai_forced)
 }
-
-
-

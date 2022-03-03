@@ -8,7 +8,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' tec_xml <- file.path(get_examples_path( file_type = "xml" ), "file_tec.xml")
+#' tec_xml <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 #' tec_doc <- SticsRFiles:::xmldocument(tec_xml)
 #'
 #' # Adding one irrigation operation
@@ -16,12 +16,11 @@
 #'
 #' # Adding three irrigation operations
 #' SticsRFiles:::add_stics_nodes(tec_doc, "irrigation", nodes_nb = 3)
-#'
 #' }
 #'
 #' @keywords internal
 add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
-                            stics_version = "latest" ) {
+                            stics_version = "latest") {
 
 
   # Getting nodes types that may be added to xml_doc
@@ -31,11 +30,13 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   # Getting the file tag corresponding to the file type
   # among usms, sols, tec
   files_tags <- c("usms", "sols", "tec")
-  file_tag <- files_tags[c(is_stics_usms(xml_doc),
-                           is_stics_sols(xml_doc),
-                           is_stics_tec(xml_doc))]
+  file_tag <- files_tags[c(
+    is_stics_usms(xml_doc),
+    is_stics_sols(xml_doc),
+    is_stics_tec(xml_doc)
+  )]
 
-  if ( length(file_tag) < 1 ) {
+  if (length(file_tag) < 1) {
     stop("The xml document is of wrong type")
   }
 
@@ -50,35 +51,37 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
     # Case : tec
     form_idx <- which(node_types$form_names[[file_tag]] == formalism_name)
 
-    if ( ! length(form_idx) ) {
-      stop(paste("Unkown formalism name",formalism_name))
+    if (!length(form_idx)) {
+      stop(paste("Unkown formalism name", formalism_name))
     }
 
     if (formalism_name == "special techniques") {
       stop("Special cutting techniques are not implemented !")
     }
 
-    parent_path <- get_param_type(xml_doc, parent_name,
-                                  "formalisme", formalism_name)$xpath
-
+    parent_path <- get_param_type(
+      xml_doc, parent_name,
+      "formalisme", formalism_name
+    )$xpath
   } else {
     # Case usms, sols
-    parent_path = paste0("//",parent_name)
+    parent_path <- paste0("//", parent_name)
   }
 
   # Getting a copy of the new node to add
-  new_node <- get_xml_base_node(file_tag = file_tag,
-                                form_name = formalism_name,
-                                stics_version = stics_version)
+  new_node <- get_xml_base_node(
+    file_tag = file_tag,
+    form_name = formalism_name,
+    stics_version = stics_version
+  )
 
   # Adding new_node nodes_nb times
   add_node_to_doc(xml_doc, new_node, nodes_nb = nodes_nb, parent_path = parent_path)
 
   # Updating if needed interventions_nb
-  if (XML::xmlName(new_node) =="intervention") {
+  if (XML::xmlName(new_node) == "intervention") {
     nb_interventions <-
       as.numeric(getAttrsValues(xml_doc, parent_path, "nb_interventions")) + nodes_nb
-    setAttrValues(xml_doc,parent_path, "nb_interventions", nb_interventions)
+    setAttrValues(xml_doc, parent_path, "nb_interventions", nb_interventions)
   }
-
 }

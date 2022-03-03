@@ -35,7 +35,6 @@
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' obs_df <- read_params_table(file = xl_path, sheet_name = "Obs")
 #' gen_obs(df = obs_df, out_dir = "/path/to/dest/dir")
-#'
 #' }
 #'
 #' @export
@@ -45,7 +44,6 @@ gen_obs <- function(df,
                     usms_list = NULL,
                     obs_table = lifecycle::deprecated(),
                     out_path = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(obs_table)) {
     lifecycle::deprecate_warn("1.0.0", "gen_obs(obs_table)", "gen_obs(df)")
   } else {
@@ -57,14 +55,14 @@ gen_obs <- function(df,
     out_path <- out_dir # to remove when we update inside the function
   }
   # Checking if out_path exists
-  if ( ! dir.exists(out_path) ) {
-    warning(paste("The directory does not exist",out_path ))
+  if (!dir.exists(out_path)) {
+    warning(paste("The directory does not exist", out_path))
     return(invisible(FALSE))
   }
 
   # Finding usm names column
-  usm_idx <- grep("usm",tolower(colnames(obs_table)))
-  if ( length(usm_idx) > 1 ) {
+  usm_idx <- grep("usm", tolower(colnames(obs_table)))
+  if (length(usm_idx) > 1) {
     stop("Multiple usms names columns !")
   }
 
@@ -88,20 +86,20 @@ gen_obs <- function(df,
     out_file_path <- file.path(out_path, paste0(usm_name_tmp, ".obs"))
 
     # Selecting data for the current usm, eliminating all NA values columns
-    usm_df <- obs_table %>% dplyr::filter(obs_table[[usm_idx]] %in% usm_name_tmp) %>%
-      dplyr::select_if(~!all(is.na(.)))
+    usm_df <- obs_table %>%
+      dplyr::filter(obs_table[[usm_idx]] %in% usm_name_tmp) %>%
+      dplyr::select_if(~ !all(is.na(.)))
 
     # Writing the file and
     # storing file path when writing error
-    if (! gen_obs_(usm_df, out_file_path) ) {
+    if (!gen_obs_(usm_df, out_file_path)) {
       bad_files[i] <- out_file_path
     }
-
   }
 
   # if any error while writing files
-  if ( !all(bad_files == "") ) {
-    warning(paste("The file has not been generated:",bad_files))
+  if (!all(bad_files == "")) {
+    warning(paste("The file has not been generated:", bad_files))
     return(invisible(FALSE))
   }
 
@@ -116,52 +114,50 @@ gen_obs <- function(df,
 #' @param file_path Path to the file to write to
 #'
 #' @examples
-#'
 #' \dontrun{
 #' # Getting observations data
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #'
 #' # Loading and filtering data for usm "USM_2017_T1_CI"
 #' obs_df <- read_params_table(file = xl_path, sheet_name = "Obs") %>%
-#' dplyr::filter(usm_name %in% "USM_2017_T1_CI")
+#'   dplyr::filter(usm_name %in% "USM_2017_T1_CI")
 #'
 #' # Generating the csv file
 #' gen_obs_(obs_df, "USM_2017_T1_CI.obs")
-#'
 #' }
 #'
 #' @return A logical value if the file generation succeeded (T) or not (F)
 #'
 #' @keywords internal
 #'
-gen_obs_= function(obs_table, file_path){
+gen_obs_ <- function(obs_table, file_path) {
 
 
   # Checking file path
   dir_name <- dirname(file_path)
-  if (! dir.exists(dir_name)) {
-    warning(paste("Directory does not exist:",dir_name))
+  if (!dir.exists(dir_name)) {
+    warning(paste("Directory does not exist:", dir_name))
     return(invisible(FALSE))
   }
 
   # Removing unwanted columns !
-  date_plt_idx <- grep("date|^plant$|usm",tolower(colnames(obs_table)))
-  if ( length(date_plt_idx)) {
-    obs_table= obs_table[,-date_plt_idx]
+  date_plt_idx <- grep("date|^plant$|usm", tolower(colnames(obs_table)))
+  if (length(date_plt_idx)) {
+    obs_table <- obs_table[, -date_plt_idx]
   }
 
   # Checking date columns & variables columns
   patt_str <- "^ian$|^mo$|^jo$|^jul$"
-  obs_var_df <- obs_table[,-grep(patt_str, colnames(obs_table)), drop=FALSE]
-  obs_date_df <- obs_table[,grep(patt_str, colnames(obs_table)), drop=FALSE]
+  obs_var_df <- obs_table[, -grep(patt_str, colnames(obs_table)), drop = FALSE]
+  obs_date_df <- obs_table[, grep(patt_str, colnames(obs_table)), drop = FALSE]
 
-  if (! dim(obs_var_df)[2] || dim(obs_date_df)[2] < 4){
+  if (!dim(obs_var_df)[2] || dim(obs_date_df)[2] < 4) {
     warning("Missing columns for dates, or no observation variables values to write !")
     return(invisible(FALSE))
   }
 
   # Ordering date components columns in a data.frame
-  obs_table= data.frame(obs_date_df, obs_var_df)
+  obs_table <- data.frame(obs_date_df, obs_var_df)
 
   # TODO: see what is the purpose of _sd ending tag !
   # Linked to associated plants ???
@@ -180,7 +176,7 @@ gen_obs_= function(obs_table, file_path){
   # Back to Stics variables names syntax !
   colnames(obs_table) <- col_names_to_var(colnames(obs_table))
 
-  ret <- try(utils::write.table(obs_table,file_path,sep=";",na="-999.99",row.names= F, quote=F))
+  ret <- try(utils::write.table(obs_table, file_path, sep = ";", na = "-999.99", row.names = F, quote = F))
 
   # Checking if any error writing the file
   if (methods::is(ret, "try-error")) {
@@ -189,4 +185,3 @@ gen_obs_= function(obs_table, file_path){
 
   return(invisible(TRUE))
 }
-

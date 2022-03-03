@@ -11,31 +11,29 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_path = file.path(get_examples_path( file_type = "xml"),"file_plt.xml")
+#' xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 #'
 #' SticsRFiles:::get_options_names(xml_path)
 #'
 #' SticsRFiles:::get_options_names(xml_path, c("codemonocot", "codlainet"))
-#'
 #' }
 #'
 #' @keywords internal
 #'
-get_options_names <- function(xml_file_path, option_names = NULL){
+get_options_names <- function(xml_file_path, option_names = NULL) {
 
   # Loading xml file
-  xml_param=xmldocument(xml_file_path)
+  xml_param <- xmldocument(xml_file_path)
 
   # Getting all options names
-  param_names=getAttrsValues(xml_param, '//option', "nomParam")
+  param_names <- getAttrsValues(xml_param, "//option", "nomParam")
 
   # Checking if given names exist in param_names
-  if (! base::is.null(option_names)) {
+  if (!base::is.null(option_names)) {
     is_element <- lapply(option_names, function(x) is.element(x, param_names))
     param_names <- option_names
     attr(param_names, "exists") <- unlist(is_element)
   }
 
   return(param_names)
-
 }

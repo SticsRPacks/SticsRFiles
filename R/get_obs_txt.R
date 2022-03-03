@@ -25,30 +25,34 @@
 #' @importFrom data.table fread rbindlist
 #'
 #' @examples
-#'\dontrun{
+#' \dontrun{
 #'
-#' obs_table = SticsRFiles:::get_obs_txt()
-#'
+#' obs_table <- SticsRFiles:::get_obs_txt()
 #' }
-#'
 #'
 #' @keywords internal
 #'
-get_obs_txt= function(dirpath=getwd(), filename=NULL, mixed= NULL){
-  .=NULL # to avoid CRAN note for pipe
-  if(is.null(mixed)){
-    if(file.exists(file.path(dirpath,"new_travail.usm"))){
-      nbplants=
-        get_usm_txt(filepath = file.path(dirpath,"new_travail.usm"))$nbplantes%>%
-        as.numeric
-      if(nbplants>1){mixed= T}else{mixed= F}
-    }else{
-      if(length(list.files(dirpath)%>%.[grep("\\.obs$",.)])==1){
+get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
+  . <- NULL # to avoid CRAN note for pipe
+  if (is.null(mixed)) {
+    if (file.exists(file.path(dirpath, "new_travail.usm"))) {
+      nbplants <-
+        get_usm_txt(filepath = file.path(dirpath, "new_travail.usm"))$nbplantes %>%
+        as.numeric()
+      if (nbplants > 1) {
+        mixed <- T
+      } else {
+        mixed <- F
+      }
+    } else {
+      if (length(list.files(dirpath) %>% .[grep("\\.obs$", .)]) == 1) {
         # If there is only one .obs file, the value of mixed doesn't matter
-        mixed=F
-      }else{
-        stop("mixed= NULL, there are several .obs files, and new_travail.usm",
-             " cannot be found, please set the mixed parameter")
+        mixed <- F
+      } else {
+        stop(
+          "mixed= NULL, there are several .obs files, and new_travail.usm",
+          " cannot be found, please set the mixed parameter"
+        )
       }
     }
   }
@@ -56,45 +60,70 @@ get_obs_txt= function(dirpath=getwd(), filename=NULL, mixed= NULL){
   # If no filename is given, trying to:
   # (1) use the mod_s* names or
   # (2) use the *.obs file if there is only one
-  if(is.null(filename)){
-    if(mixed){
-      plant_name=
-        list.files(dirpath)%>%.[grep("mod_sp",.)]%>%gsub("mod_sp","",.)%>%
-        strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}
-      plant_name=
-        list.files(dirpath)%>%.[grep("mod_sa",.)]%>%gsub("mod_sa","",.)%>%
-        strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}%>%c(plant_name,.)
-    }else{
-      plant_name=
-        list.files(dirpath)%>%.[grep("mod_s",.)]%>%gsub("mod_s","",.)%>%
-        strsplit(.,"\\.")%>%{if(length(.)>0){.[[1]]%>%.[1]}}
+  if (is.null(filename)) {
+    if (mixed) {
+      plant_name <-
+        list.files(dirpath) %>%
+        .[grep("mod_sp", .)] %>%
+        gsub("mod_sp", "", .) %>%
+        strsplit(., "\\.") %>%
+        {
+          if (length(.) > 0) {
+            .[[1]] %>% .[1]
+          }
+        }
+      plant_name <-
+        list.files(dirpath) %>%
+        .[grep("mod_sa", .)] %>%
+        gsub("mod_sa", "", .) %>%
+        strsplit(., "\\.") %>%
+        {
+          if (length(.) > 0) {
+            .[[1]] %>% .[1]
+          }
+        } %>%
+        c(plant_name, .)
+    } else {
+      plant_name <-
+        list.files(dirpath) %>%
+        .[grep("mod_s", .)] %>%
+        gsub("mod_s", "", .) %>%
+        strsplit(., "\\.") %>%
+        {
+          if (length(.) > 0) {
+            .[[1]] %>% .[1]
+          }
+        }
     }
 
     # If the *.obs names are the same used for mod_s* files, read them accordingly...
-    if(all(file.exists(file.path(dirpath,paste0(plant_name,".obs"))))){
-      obs_table= get_file_int(dirpath,paste0(plant_name,".obs"))
-      warning("Observation file names read from matching mod_s* file names.\nmod_s* names:",
-              plant_name, "\n*.obs:",paste0(plant_name,".obs"))
-    }else{
+    if (all(file.exists(file.path(dirpath, paste0(plant_name, ".obs"))))) {
+      obs_table <- get_file_int(dirpath, paste0(plant_name, ".obs"))
+      warning(
+        "Observation file names read from matching mod_s* file names.\nmod_s* names:",
+        plant_name, "\n*.obs:", paste0(plant_name, ".obs")
+      )
+    } else {
       # ...else try to read a single *.obs file (multiple .obs file are not allowed)
-      obs_files= list.files(dirpath)%>%.[grep("\\.obs$",.)]
-      if(length(obs_files)==1){
-        obs_table= get_file_int(dirpath,obs_files)
-        warning("Observation file guessed from the only '.obs' file in dirpath",
-                plant_name, "\n*.obs:",paste0(plant_name,".obs"))
-      }else{
-        warning("\nObservation file names do not match mod_s* file names and several *.obs ",
-                "file names are present. Please provide the *.obs file names using the ",
-                "filename parameter")
-        obs_table= NULL
+      obs_files <- list.files(dirpath) %>% .[grep("\\.obs$", .)]
+      if (length(obs_files) == 1) {
+        obs_table <- get_file_int(dirpath, obs_files)
+        warning(
+          "Observation file guessed from the only '.obs' file in dirpath",
+          plant_name, "\n*.obs:", paste0(plant_name, ".obs")
+        )
+      } else {
+        warning(
+          "\nObservation file names do not match mod_s* file names and several *.obs ",
+          "file names are present. Please provide the *.obs file names using the ",
+          "filename parameter"
+        )
+        obs_table <- NULL
       }
     }
-  }else{
-    obs_table= get_file_int(dirpath,filename)
+  } else {
+    obs_table <- get_file_int(dirpath, filename)
   }
 
   return(obs_table)
 }
-
-
-

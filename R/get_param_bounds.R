@@ -15,17 +15,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
+#' xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 #'
 #' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 #'
-#' par_bounds <- SticsRFiles:::get_param_bounds(sta_doc,"zr")
+#' par_bounds <- SticsRFiles:::get_param_bounds(sta_doc, "zr")
 #'
-#' par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"))
+#' par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"))
 #'
 #'
-#' SticsRFiles:::get_param_bounds(sta_doc,c("zr","altistation"),"min")
-#'
+#' SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"), "min")
 #' }
 #'
 #' @keywords internal
@@ -36,10 +35,8 @@ get_param_bounds <- function(xml_doc,
                              param_name,
                              bounds_name = NULL,
                              output = "data.frame") {
-
-
   output_formats <- c("list", "data.frame")
-  def_names <- c("min","max")
+  def_names <- c("min", "max")
 
   df_out <- output == "data.frame"
 
@@ -48,24 +45,29 @@ get_param_bounds <- function(xml_doc,
 
   if (base::is.null(bounds_name)) {
     bounds_name <- def_names
-  } else if ( ! all(is.element(bounds_name,def_names )) ) {
+  } else if (!all(is.element(bounds_name, def_names))) {
     stop("Names are not consitent with file bound names")
   }
 
-  if ( length(param_name) > 1) {
-
-    bounds_list <- lapply(as.list(param_name),
-                          function(x) get_param_bounds(xml_doc = xml_doc,
-                                                       x,
-                                                       bounds_name = bounds_name,
-                                                       output = output))
+  if (length(param_name) > 1) {
+    bounds_list <- lapply(
+      as.list(param_name),
+      function(x) {
+        get_param_bounds(
+          xml_doc = xml_doc,
+          x,
+          bounds_name = bounds_name,
+          output = output
+        )
+      }
+    )
 
 
 
     if (df_out) {
       bounds_list <- dplyr::bind_rows(bounds_list)
     } else {
-      bounds_list <- unlist(bounds_list,recursive = F )
+      bounds_list <- unlist(bounds_list, recursive = F)
     }
 
     return(bounds_list)
@@ -74,26 +76,31 @@ get_param_bounds <- function(xml_doc,
   param_type <- get_param_type(xml_doc, param_name)
   exist_param <- !base::is.null(param_type$xpath)
 
-  if (! exist_param ) return(NULL)
+  if (!exist_param) {
+    return(NULL)
+  }
 
   xpath <- param_type$xpath
 
   # for an option parameter, getting
-  if ( param_type$type =="option") {
-    xpath <- paste0(xpath,"/choix")
+  if (param_type$type == "option") {
+    xpath <- paste0(xpath, "/choix")
     tmp_values <- as.numeric(getAttrsValues(xml_doc, xpath, "code"))
-    bounds_values <- c(min(tmp_values),
-                       max(tmp_values))[def_names == bounds_name]
-
+    bounds_values <- c(
+      min(tmp_values),
+      max(tmp_values)
+    )[def_names == bounds_name]
   } else {
     # for all other parameters ?
     # Adding unique for repeated parameters : for exmaple in sols.xml
-    bounds_values <- lapply(bounds_name,
-                            function(x) as.numeric(getAttrsValues(xml_doc, xpath, x)))
+    bounds_values <- lapply(
+      bounds_name,
+      function(x) as.numeric(getAttrsValues(xml_doc, xpath, x))
+    )
   }
 
 
-  #print(xpath)
+  # print(xpath)
 
   # Fixing bounds values
   bounds_values <- list(fix_bounds(bounds_values, bounds_name, param_name))
@@ -102,23 +109,23 @@ get_param_bounds <- function(xml_doc,
   # For returning a data.frame
   if (df_out) {
     bounds_values <- t(as.data.frame(bounds_values))
-    bounds_values <- data.frame(name = param_name,
-                                bounds_values,
-                                stringsAsFactors = FALSE)
+    bounds_values <- data.frame(
+      name = param_name,
+      bounds_values,
+      stringsAsFactors = FALSE
+    )
     rownames(bounds_values) <- NULL
   }
 
   return(bounds_values)
-
 }
 
 fix_bounds <- function(values, bounds_name, param_name) {
-
   values <- fix_dup_bounds(values, bounds_name, param_name)
 
   values <- fix_missing_bounds(values, bounds_name)
 
-  #if (all(base::is.na(values))) return(values)
+  # if (all(base::is.na(values))) return(values)
 
 
 
@@ -145,7 +152,7 @@ fix_missing_bounds <- function(values, bounds_name) {
   # Fixing missing values
   val <- unlist(values)
 
-  if ( ! base::is.null(val) && length(val) != 0 ) {
+  if (!base::is.null(val) && length(val) != 0) {
     values <- as.numeric(val)
   } else {
     values <- c(NA, NA)[1:length(bounds_name)]
@@ -154,7 +161,6 @@ fix_missing_bounds <- function(values, bounds_name) {
   names(values) <- bounds_name
 
   return(values)
-
 }
 
 
@@ -163,11 +169,13 @@ fix_dup_bounds <- function(values, bounds_name, param_name) {
 
   # Fixing duplicates
   values <- lapply(values, unique)
-  duplicates <- unlist(lapply(values, function(x) length(x) > 1 ))
+  duplicates <- unlist(lapply(values, function(x) length(x) > 1))
 
-  if (! any(duplicates)) return(values)
+  if (!any(duplicates)) {
+    return(values)
+  }
 
-  for (i in 1:length(duplicates)){
+  for (i in 1:length(duplicates)) {
     if (duplicates[i] && bounds_name[i] == "min") {
       values[[i]] <- min(values[[i]])
     }
@@ -178,14 +186,16 @@ fix_dup_bounds <- function(values, bounds_name, param_name) {
   }
 
   if (any(duplicates)) {
-    warning(paste("Found different values in bound(s) \n",
-                  paste(bounds_name[duplicates], collapse = ", "),
-                  "\nfor parameter",param_name,"\nA single value has been selected.\n",
-                  paste(sprintf("%s: %s",bounds_name[duplicates],
-                        as.character(values[duplicates])), collapse = "\n")))
+    warning(paste(
+      "Found different values in bound(s) \n",
+      paste(bounds_name[duplicates], collapse = ", "),
+      "\nfor parameter", param_name, "\nA single value has been selected.\n",
+      paste(sprintf(
+        "%s: %s", bounds_name[duplicates],
+        as.character(values[duplicates])
+      ), collapse = "\n")
+    ))
   }
 
   return(values)
 }
-
-

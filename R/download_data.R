@@ -27,30 +27,28 @@
 #'
 #' # Getting data for a given example : study_case_1 and a given version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
-#'
-#'
 #' }
-download_data= function(out_dir = tempdir(), example_dirs = NULL,
-                        stics_version = "latest",
-                        dir = lifecycle::deprecated(),
-                        version_name = lifecycle::deprecated()){
+download_data <- function(out_dir = tempdir(), example_dirs = NULL,
+                          stics_version = "latest",
+                          dir = lifecycle::deprecated(),
+                          version_name = lifecycle::deprecated()) {
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(dir)) {
     lifecycle::deprecate_warn("0.5.0", "download_data(dir)", "download_data(out_dir)")
-  }else{
+  } else {
     dir <- out_dir # to remove when we update inside the function
   }
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(version_name)) {
     lifecycle::deprecate_warn("0.5.0", "download_data(version_name)", "download_data(stics_version)")
-  }else{
+  } else {
     version_name <- stics_version # to remove when we update inside the function
   }
 
   # setting version value from input for version == "latest"
-  if (is.null(version_name) || version_name == "latest"){
+  if (is.null(version_name) || version_name == "latest") {
     version_name <- get_stics_versions_compat()$latest_version
   }
 
@@ -59,25 +57,27 @@ download_data= function(out_dir = tempdir(), example_dirs = NULL,
   dirs_str <- get_referenced_dirs(dirs = example_dirs, stics_version = version_name)
 
   # Not any examples_dirs not found in example data file
-  if (base::is.null(dirs_str)) stop("Error: no available data for ",example_dirs)
+  if (base::is.null(dirs_str)) stop("Error: no available data for ", example_dirs)
 
-  data_dir = normalizePath(dir, winslash = "/", mustWork = FALSE)
-  data_dir_zip = normalizePath(file.path(data_dir,"master.zip"), winslash = "/", mustWork = FALSE)
+  data_dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
+  data_dir_zip <- normalizePath(file.path(data_dir, "master.zip"), winslash = "/", mustWork = FALSE)
   utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip", data_dir_zip)
-  df_name = utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
+  df_name <- utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
 
   # Creating files list to extract from dirs strings
-  arch_files <- unlist(lapply(dirs_str,
-                              function(x) grep(pattern = x, x = df_name$Name, value = TRUE)))
+  arch_files <- unlist(lapply(
+    dirs_str,
+    function(x) grep(pattern = x, x = df_name$Name, value = TRUE)
+  ))
 
   # No data corresponding to example_dirs request in the archive !
-  if (! length(arch_files)) stop("No downloadable data for example(s), version: ",example_dirs,",", version_name)
+  if (!length(arch_files)) stop("No downloadable data for example(s), version: ", example_dirs, ",", version_name)
 
   # Finally extracting data
   utils::unzip(data_dir_zip, exdir = data_dir, files = arch_files)
   unlink(data_dir_zip)
 
-  normalizePath(file.path(data_dir,arch_files[1]), winslash = "/")
+  normalizePath(file.path(data_dir, arch_files[1]), winslash = "/")
 }
 
 
@@ -100,24 +100,25 @@ download_data= function(out_dir = tempdir(), example_dirs = NULL,
 #' SticsRFiles:::get_referenced_dirs("study_case_1")
 #'
 #' # Getting dirs for a use case and a version
-#' SticsRFiles:::get_referenced_dirs("study_case_1", "V9.0" )
+#' SticsRFiles:::get_referenced_dirs("study_case_1", "V9.0")
 #'
-#' SticsRFiles:::get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0" )
-#'
+#' SticsRFiles:::get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0")
 #' }
 #'
 get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
 
   # Loading csv file with data information
   ver_data <- get_versions_info(stics_version = stics_version)
-  if (base::is.null(ver_data)) stop("No examples data referenced for version: ",stics_version)
+  if (base::is.null(ver_data)) stop("No examples data referenced for version: ", stics_version)
 
   dirs_names <- grep(pattern = "^study_case", x = names(ver_data), value = TRUE)
   if (base::is.null(dirs)) dirs <- dirs_names
-  dirs_idx <-  dirs_names %in% dirs
+  dirs_idx <- dirs_names %in% dirs
 
   # Not any existing use case dir found
-  if(!any(dirs_idx)) return()
+  if (!any(dirs_idx)) {
+    return()
+  }
 
   # Filtering existing dirs in examples data
   if (!all(dirs_idx)) {
@@ -125,15 +126,16 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
   }
 
   # Only dirs, returned if no specified version
-  if(base::is.null(stics_version)) return(dirs)
+  if (base::is.null(stics_version)) {
+    return(dirs)
+  }
 
   # Getting data according to version and dirs
   version_data <- ver_data %>% dplyr::select(dplyr::any_of(dirs))
 
   # Compiling referenced dirs/version strings, for existing version
   is_na <- base::is.na(version_data)
-  dirs_str <- sprintf("%s/%s", names(version_data)[!is_na],version_data[!is_na])
+  dirs_str <- sprintf("%s/%s", names(version_data)[!is_na], version_data[!is_na])
 
   return(dirs_str)
-
 }

@@ -10,8 +10,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' gen_paramsti(".", c("par1","par2"), c(1,2))
-#' gen_paramsti("/path/to/stics/workspace", c("par1","par2"), c(1,2))
+#' gen_paramsti(".", c("par1", "par2"), c(1, 2))
+#' gen_paramsti("/path/to/stics/workspace", c("par1", "par2"), c(1, 2))
 #' }
 #'
 #' @keywords internal
@@ -22,8 +22,8 @@ gen_paramsti <- function(workspace,
                          file_name = "param.sti") {
 
   # Checking if workspace exists
-  if (! dir.exists(workspace)) {
-    stop(paste(workspace,": directory does not exist !"))
+  if (!dir.exists(workspace)) {
+    stop(paste(workspace, ": directory does not exist !"))
   }
 
   # Full file path & removing file if exists
@@ -43,19 +43,21 @@ gen_paramsti <- function(workspace,
 
   # Writing file content
   con <- file(file_path, method = "w+")
-  w <- try(write(paste0(nb_par,"\n",
-                        paste0(sprintf("%s\n%f",par_names,par_values), collapse="\n")),
-                 con))
+  w <- try(write(
+    paste0(
+      nb_par, "\n",
+      paste0(sprintf("%s\n%f", par_names, par_values), collapse = "\n")
+    ),
+    con
+  ))
 
   close(con)
 
   # Checking if any error writing the file
-  if (methods::is(w,"try-error")) {
+  if (methods::is(w, "try-error")) {
     return(invisible(FALSE))
   }
 
   # Returning file creation status
   return(invisible(TRUE))
-
-
 }

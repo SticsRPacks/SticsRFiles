@@ -9,25 +9,23 @@
 #'
 #'
 #' @examples
-#' var_names <- c("var1","var2(n)" ,"var2.n.")
+#' var_names <- c("var1", "var2(n)", "var2.n.")
 #' valid_names <- SticsRFiles:::var_to_col_names(var_names)
-#'
 #' @keywords internal
 #'
 var_to_col_names <- function(var_vec) {
-  .= NULL
+  . <- NULL
   # Case: varname(n)
   var_vec <-
-    gsub("\\(","_",var_vec) %>%
-    gsub("\\)","",.)
+    gsub("\\(", "_", var_vec) %>%
+    gsub("\\)", "", .)
 
   # Case: varname.n.
   var_vec <-
-    gsub("\\.","_",var_vec) %>%
-    gsub("_$","",.)
+    gsub("\\.", "_", var_vec) %>%
+    gsub("_$", "", .)
 
   return(var_vec)
-
 }
 
 
@@ -47,16 +45,16 @@ var_to_col_names <- function(var_vec) {
 #'
 #' @examples
 #' \dontrun{
-#' var_to_stics_name(c("lai_n","masec_n"))
+#' var_to_stics_name(c("lai_n", "masec_n"))
 #' }
 #'
-var_to_stics_name= function(var,version="latest"){
-  var_exist= is_stics_var(var,version)
-  if(any(!var_exist)){
+var_to_stics_name <- function(var, version = "latest") {
+  var_exist <- is_stics_var(var, version)
+  if (any(!var_exist)) {
     stop()
   }
   all_vars <- all_out_var(version)
-  var_parsed= var_to_col_names(var)
-  vars_names_parsed= var_to_col_names(all_vars$name)
-  as.character(all_vars$name[match(var_parsed,vars_names_parsed)])
+  var_parsed <- var_to_col_names(var)
+  vars_names_parsed <- var_to_col_names(all_vars$name)
+  as.character(all_vars$name[match(var_parsed, vars_names_parsed)])
 }

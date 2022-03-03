@@ -19,7 +19,6 @@
 #'
 #' # Checking if a version exists
 #' SticsRFiles:::get_xml_stics_version("V9.2")
-#'
 #' }
 #'
 #' @keywords internal
@@ -30,12 +29,11 @@ get_xml_stics_version <- function(stics_version = "latest", xml_doc = NULL) {
   # it matches with, only used to avoid checking the version
   # this is a custom case, whatever its content ...
 
-  if (! base::is.null( xml_doc)) {
+  if (!base::is.null(xml_doc)) {
     # to be fixed when the doc will contain the version
-    #return("custom")
+    # return("custom")
   }
 
   # Getting version from compat csv file
   return(check_version_compat(stics_version = stics_version))
-
 }

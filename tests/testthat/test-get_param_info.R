@@ -5,22 +5,23 @@ test_that("unknown name (should returs NULL)", {
 })
 
 test_that("fuzzy name", {
-  lai_params =
+  lai_params <-
     c(
-      'lai0', 'codelaitr', 'codlainet', 'dlaimax', 'dlaimaxbrut', 'dlaimin',
-      'laicomp', 'laiplantule', 'pentlaimax', 'splaimax', 'splaimin', 'udlaimax',
-      'vlaimax', 'cielclair', 'codeclaircie', 'juleclair', 'laidebeff', 'laieffeuil',
-      'flai'
+      "lai0", "codelaitr", "codlainet", "dlaimax", "dlaimaxbrut", "dlaimin",
+      "laicomp", "laiplantule", "pentlaimax", "splaimax", "splaimin", "udlaimax",
+      "vlaimax", "cielclair", "codeclaircie", "juleclair", "laidebeff", "laieffeuil",
+      "flai"
     )
   testthat::expect_equal(get_param_info("lai")$name, lai_params)
 })
 
 test_that("regex name", {
-  testthat::expect_equal(get_param_info("^lai")$name,
-                        c(
-                          "lai0", "laicomp", "laiplantule", "laidebeff",
-                          "laieffeuil"
-                        )
+  testthat::expect_equal(
+    get_param_info("^lai")$name,
+    c(
+      "lai0", "laicomp", "laiplantule", "laidebeff",
+      "laieffeuil"
+    )
   )
 })
 
@@ -33,6 +34,6 @@ test_that("different stics versions", {
   testthat::expect_equal(attr(v9.2, "version"), "V9.2")
 
   # Set both versions to the same value for comparison:
-  attr(v9.0, "version") = attr(v9.2, "version")
+  attr(v9.0, "version") <- attr(v9.2, "version")
   testthat::expect_equal(v9.0, v9.2)
 })

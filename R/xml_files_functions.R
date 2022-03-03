@@ -1,16 +1,17 @@
 get_in_files <- function(in_dir_or_files, kind) {
-
-  files_patterns <- list(ini="_ini", sta="_sta",
-                         plt="_plt", tec="_tec",
-                         gen="_gen", newform="_newform",
-                         sols="^sols", usms="^usms", obs="\\.obs$")
+  files_patterns <- list(
+    ini = "_ini", sta = "_sta",
+    plt = "_plt", tec = "_tec",
+    gen = "_gen", newform = "_newform",
+    sols = "^sols", usms = "^usms", obs = "\\.obs$"
+  )
 
   if (!kind %in% names(files_patterns)) stop("file kind error: ", kind)
 
   if (kind == "obs") {
     file_pattern <- files_patterns[[kind]]
   } else {
-    file_pattern <- paste0(files_patterns[[kind]],"\\.xml$")
+    file_pattern <- paste0(files_patterns[[kind]], "\\.xml$")
   }
 
   if (dir.exists(in_dir_or_files)) {
@@ -31,7 +32,6 @@ get_in_files <- function(in_dir_or_files, kind) {
 get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
                                workspace_dir,
                                javastics_dir = NULL) {
-
   par_file <- file.path(workspace_dir, type)
 
   if (file.exists(par_file)) {
@@ -40,8 +40,10 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
   }
 
   if (is.null(javastics_dir)) {
-    warning("JavaStics path must be given as input argument\n",
-            type, " has not been found in ",workspace_dir)
+    warning(
+      "JavaStics path must be given as input argument\n",
+      type, " has not been found in ", workspace_dir
+    )
     return()
   }
 
@@ -52,18 +54,17 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
     return(par_file)
   }
 
-  warning(type, " has not been found in ",javastics_dir)
+  warning(type, " has not been found in ", javastics_dir)
 
   return()
 }
 
 to_xml_version <- function(stics_version) {
-
   err <- FALSE
 
   if (is.numeric(stics_version)) stics_version <- as.character(stics_version)
 
-  if (!grepl(pattern = "\\.", x = stics_version)) stics_version <- paste0(stics_version,".0")
+  if (!grepl(pattern = "\\.", x = stics_version)) stics_version <- paste0(stics_version, ".0")
 
   numbers <- grepl(pattern = "[0-9]", stics_version)
 
@@ -73,14 +74,14 @@ to_xml_version <- function(stics_version) {
   char_no_v <- grepl(pattern = "[a-u w-z A-U W-Z]", stics_version)
 
   # Wrong character in version
-  if(char_no_v) err <- TRUE
+  if (char_no_v) err <- TRUE
 
   # No dot in version
 
   if (grepl(pattern = "\\.$", x = stics_version)) err <- TRUE
 
 
-  if (err){
+  if (err) {
     warning("Version must be X.Y, or VX.Y, or vX.Y")
     return()
   }
@@ -89,21 +90,23 @@ to_xml_version <- function(stics_version) {
 }
 
 
-#set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0", overwrite = FALSE) {
-set_xml_file_version <- function(xml_file_or_doc, new_version="V10.0", overwrite = FALSE) {
+# set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0", overwrite = FALSE) {
+set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0", overwrite = FALSE) {
   # Getting xmlDocument object
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
   # Adding version to detect if the file have been previously updated to 10.0
   ver <- to_xml_version(new_version)
   names(ver) <- "version"
-  root_path <- paste0("/",xmlName(xmlRoot(xml_doc@content)))
+  root_path <- paste0("/", xmlName(xmlRoot(xml_doc@content)))
   att <- getAttrs(xml_doc, path = root_path)
 
   # Checking file version
-  if (!is.null(att) && att[,"version"] == new_version && !overwrite) {
-    stop(paste("The version has already been updated to Stics version",
-               new_version))
+  if (!is.null(att) && att[, "version"] == new_version && !overwrite) {
+    stop(paste(
+      "The version has already been updated to Stics version",
+      new_version
+    ))
   }
 
   addAttrs(xml_doc, path = root_path, named_vector = ver)
@@ -111,21 +114,20 @@ set_xml_file_version <- function(xml_file_or_doc, new_version="V10.0", overwrite
 
 # TODO : see existing get_xml_stics_version, to be merged or replaced with
 # this one and see waht  to do in gen_*_doc functions using templates ...
-#get_xml_stics_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
-get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
-
+# get_xml_stics_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
+get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   xml_doc <- get_xml_doc(xml_file_or_doc)
   xml_root_name <- xmlName(xmlRoot(xml_doc@content))
 
-  att <- getAttrs(xml_doc, path = paste0("/",xml_root_name))
+  att <- getAttrs(xml_doc, path = paste0("/", xml_root_name))
 
   if ("version" %in% colnames(att)) {
-    version_string <- get_version_string(att[,"version"])
+    version_string <- get_version_string(att[, "version"])
     return(version_string)
   }
 
   # Global detection of the version based for the moment on the param_gen.xml file content
-  if (xml_root_name!= "fichierpar" && is.null(param_gen_file)) {
+  if (xml_root_name != "fichierpar" && is.null(param_gen_file)) {
     # stop("The Stics version corresponding to the XML file was not detected.\n",
     #      "The param_gen.xml path must be provided as second input!")
     warning("The Stics version corresponding to the XML file was not detected.\n")
@@ -140,70 +142,80 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
   }
   # Using markers of versions
   codesnow <- get_param_value(param_gen_doc,
-                              param_name = "codesnow")
+    param_name = "codesnow"
+  )
   tmin_mineralisation <- get_param_value(param_gen_doc,
-                                         param_name = "tmin_mineralisation")
+    param_name = "tmin_mineralisation"
+  )
 
   # Vector of existence in the doc
   is_null <- c(is.null(codesnow), is.null(tmin_mineralisation))
 
   # none of them exist
-  if (all(is_null)) return("V8.5")
+  if (all(is_null)) {
+    return("V8.5")
+  }
 
   # only codesnow exists
-  if (!is_null[1] && is_null[2]) return("V9.0")
+  if (!is_null[1] && is_null[2]) {
+    return("V9.0")
+  }
 
   # both exist
   # How to make a distinction between 9.1 and 9.2 ?
   # using the stics exe ???
   # For the moment returning a vector of versions !!!
-  if (all(!is_null)) return(c("V9.1","V9.2"))
+  if (all(!is_null)) {
+    return(c("V9.1", "V9.2"))
+  }
 
   warning("Unknown version !")
   return()
 }
 
 # TODO: see *xml_file_version functions ...
-#check_xml_stics_version <- function(xml_file_or_doc, version, param_gen_file = NULL) {
+# check_xml_stics_version <- function(xml_file_or_doc, version, param_gen_file = NULL) {
 check_xml_file_version <- function(xml_file_or_doc, stics_version, param_gen_file = NULL) {
-  #xml_version <- get_xml_stics_version(xml_file_or_doc, param_gen_file = param_gen_file)
+  # xml_version <- get_xml_stics_version(xml_file_or_doc, param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(xml_file_or_doc, param_gen_file = param_gen_file)
 
   r <- TRUE
 
-  if(is.null(xml_version)) {
+  if (is.null(xml_version)) {
     return(FALSE)
   }
 
-  if ( ! stics_version %in% xml_version) r <- FALSE
+  if (!stics_version %in% xml_version) r <- FALSE
 
-  attr(r,"version") <- xml_version
+  attr(r, "version") <- xml_version
   return(r)
-
 }
 
 get_xml_doc <- function(xml_file_or_doc) {
-
-  type_id <-  c("character", "xmlDocument") %in% class(xml_file_or_doc)
+  type_id <- c("character", "xmlDocument") %in% class(xml_file_or_doc)
 
   if (!any(type_id)) stop("xml_file_or_doc: not a valid input, must be a file path or an xmlDocument object!")
 
   if (type_id[1] && !file.exists(xml_file_or_doc)) stop(xml_file_or_doc, ": does not exist!")
 
-  if (type_id[1]) return(xmldocument(xml_file_or_doc))
+  if (type_id[1]) {
+    return(xmldocument(xml_file_or_doc))
+  }
 
-  if (type_id[2]) return(xml_file_or_doc)
-
-
+  if (type_id[2]) {
+    return(xml_file_or_doc)
+  }
 }
 
 
 node_exist <- function(xml_file_or_doc, xpath) {
-  xml_doc <-  get_xml_doc(xml_file_or_doc)
+  xml_doc <- get_xml_doc(xml_file_or_doc)
 
   nodes <- getNodeS(xml_doc, xpath)
 
-  if (is.null(nodes)) return(FALSE)
+  if (is.null(nodes)) {
+    return(FALSE)
+  }
 
   unlist(lapply(nodes, function(x) !is.null(x)))
 }
@@ -284,7 +296,6 @@ node_exist <- function(xml_file_or_doc, xpath) {
 # }
 
 write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
-
   if (file.exists(file) & !overwrite) {
     warning(file, ": \nalready exists, consider setting overwrite to TRUE")
     return(invisible(FALSE))
@@ -338,7 +349,3 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 #
 #
 # }
-
-
-
-

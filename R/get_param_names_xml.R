@@ -30,7 +30,6 @@
 #' param_names <- get_param_names_xml(xml_files_list)
 #'
 #' param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"))
-#'
 #' }
 #'
 #' @keywords internal
@@ -39,13 +38,11 @@
 #'
 #'
 get_param_names_xml <- function(xml_file,
-                                name=NULL,
+                                name = NULL,
                                 bounds = TRUE,
-                                output="data.frame",
+                                output = "data.frame",
                                 combine = TRUE,
                                 exact = FALSE) {
-
-
   output_formats <- c("list", "data.frame")
 
   # Switch for transformations to data.frame format
@@ -53,21 +50,28 @@ get_param_names_xml <- function(xml_file,
   df_comb <- df_out & combine
 
   # Recusring when multiple files in xml_file
-  if ( length(xml_file) > 1 ) {
-
-    param_names <- lapply(xml_file,
-                          function(x) get_param_names_xml(xml_file = x,
-                                                          name = name,
-                                                          bounds = bounds,
-                                                          output = output,
-                                                          combine = combine,
-                                                          exact = exact))
+  if (length(xml_file) > 1) {
+    param_names <- lapply(
+      xml_file,
+      function(x) {
+        get_param_names_xml(
+          xml_file = x,
+          name = name,
+          bounds = bounds,
+          output = output,
+          combine = combine,
+          exact = exact
+        )
+      }
+    )
 
     # Empty param_names list
-    if (length(param_names) == 0 ) return(NULL)
+    if (length(param_names) == 0) {
+      return(NULL)
+    }
 
     # Filtering NULL elements
-    param_names <- param_names[! unlist(lapply(param_names, base::is.null))]
+    param_names <- param_names[!unlist(lapply(param_names, base::is.null))]
 
     # To a named list
     if (!df_out) param_names <- unlist(param_names, recursive = FALSE)
@@ -92,28 +96,32 @@ get_param_names_xml <- function(xml_file,
   }
 
   # No parameters names found
-  if (! length(param_names) ) return(NULL)
+  if (!length(param_names)) {
+    return(NULL)
+  }
 
 
   # Getting optional bounds
   if (bounds) {
-    param_bounds <- get_param_bounds(xml_doc = xml_doc,
-                                     param_name = param_names,
-                                     output = output)
+    param_bounds <- get_param_bounds(
+      xml_doc = xml_doc,
+      param_name = param_names,
+      output = output
+    )
   }
 
   # Transforming list to data.frame (default behaviour)
   if (df_out) {
-
-    param_names <- data.frame(name = unlist(param_names),
-                              file = base::basename(xml_file),
-                              stringsAsFactors = FALSE)
+    param_names <- data.frame(
+      name = unlist(param_names),
+      file = base::basename(xml_file),
+      stringsAsFactors = FALSE
+    )
 
     if (bounds) {
       param_names <- merge(param_names, param_bounds)
     }
   } else {
-
     if (bounds) {
       param_names <- list(list(file = base::basename(xml_file), name = param_bounds))
     } else {
@@ -124,6 +132,4 @@ get_param_names_xml <- function(xml_file,
   }
 
   return(dplyr::as_tibble(param_names))
-
 }
-

@@ -16,38 +16,37 @@
 check_java_workspace <- function(javastics, workspace = NULL) {
 
   # Ensure that the user working directory is unchanged after the function has run
-  current_wd= getwd()
+  current_wd <- getwd()
   on.exit(setwd(current_wd))
 
   setwd(javastics)
 
   ws <- NULL
 
-  if (! base :: is.null(workspace)){
-    if(dirname(workspace) == "."){
+  if (!base::is.null(workspace)) {
+    if (dirname(workspace) == ".") {
       # relative path to javastics path
-      ws=file.path(javastics,workspace)
+      ws <- file.path(javastics, workspace)
     } else {
-      ws=workspace
+      ws <- workspace
     }
   } else {
-    tt<-try(ws <- get_java_workspace(javastics),silent=TRUE)
-    if (methods :: is(tt,"try-error")) {
+    tt <- try(ws <- get_java_workspace(javastics), silent = TRUE)
+    if (methods::is(tt, "try-error")) {
       warning("No workspace directory has been set, use set_java_wd to do so, or \n give it as input of the function !")
       return()
     }
   }
 
   if (base::is.null(ws) || !dir.exists(ws)) {
-    warning(paste("The given directory does not exist or JavaStics working directory is not set :\n",ws))
+    warning(paste("The given directory does not exist or JavaStics working directory is not set :\n", ws))
     return()
   }
 
   # checking if it's a workspace directory: searching usms.xml
-  if (!file.exists(file.path(ws,"usms.xml"))) {
-    warning("This directory is not a JavaStics workspace: ",ws)
+  if (!file.exists(file.path(ws, "usms.xml"))) {
+    warning("This directory is not a JavaStics workspace: ", ws)
     return()
   }
   return(ws)
-
 }

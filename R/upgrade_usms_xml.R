@@ -19,10 +19,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' upgrade_usms_xml(file = "/path/to/usms.xml",
-#'                  out_dir = "/path/to/directory",
-#'                  param_gen_file = "/path/to/param_gen.xml"
-#'                  obs_dir = "/path/to/obs/directory")
+#' upgrade_usms_xml(
+#'   file = "/path/to/usms.xml",
+#'   out_dir = "/path/to/directory",
+#'   param_gen_file = "/path/to/param_gen.xml",
+#'   obs_dir = "/path/to/obs/directory"
+#' )
 #' }
 upgrade_usms_xml <- function(file,
                              out_dir,
@@ -39,27 +41,33 @@ upgrade_usms_xml <- function(file,
 
   # checking version
   if (check_version) {
-
-    if(is.null(param_gen_file)) stop("param_gen_file must be provided! ")
+    if (is.null(param_gen_file)) stop("param_gen_file must be provided! ")
 
     min_version <- get_version_num("V9.1")
 
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-                                           stics_version,
-                                           param_gen_file = param_gen_file)
+      stics_version,
+      param_gen_file = param_gen_file
+    )
 
     if (!file_version) {
-      stop("The input version ",stics_version,
-           " does not match file version ",
-           attr(file_version,"version")," \n",file )
+      stop(
+        "The input version ", stics_version,
+        " does not match file version ",
+        attr(file_version, "version"), " \n", file
+      )
     }
 
     # Compatibility checks between version and update to target_version
     ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version) stop("Files from the version ", stics_version,
-                                    " cannot be converted to the version ", target_version)
+    if (ver_num < min_version) {
+      stop(
+        "Files from the version ", stics_version,
+        " cannot be converted to the version ", target_version
+      )
+    }
 
 
     # for checking only once when multiple files are treated !
@@ -82,9 +90,9 @@ upgrade_usms_xml <- function(file,
   # where to add fobs fields !!!!!
   # default behavior: no existing fobs fields
   if (is.null(obs_nodes)) {
-
-    new_node <- xmlParseString('<fobs>null</fobs>',
-                               addFinalizer = TRUE)
+    new_node <- xmlParseString("<fobs>null</fobs>",
+      addFinalizer = TRUE
+    )
 
     parent_node <- getNodeS(old_doc, "//plante")
 
@@ -97,17 +105,18 @@ upgrade_usms_xml <- function(file,
 
   # existing obs files
   # intercrops usms are not taken into account in that case
-  obs_names <- paste0(usms_names,".obs")
-  obs_exist <- file.exists(file.path(obs_dir,obs_names))
+  obs_names <- paste0(usms_names, ".obs")
+  obs_exist <- file.exists(file.path(obs_dir, obs_names))
   obs_val <- rep("null", length(usms_names))
   obs_val[obs_exist] <- obs_names[obs_exist]
 
   # Setting obs files names into fobs for existing files
   set_param_value(old_doc,
-                  param_name = "fobs",
-                  param_value = obs_val,
-                  parent_name = "plante",
-                  parent_sel_attr = "1")
+    param_name = "fobs",
+    param_value = obs_val,
+    parent_name = "plante",
+    parent_sel_attr = "1"
+  )
 
 
   # writing file
@@ -115,6 +124,4 @@ upgrade_usms_xml <- function(file,
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))
-
-
 }

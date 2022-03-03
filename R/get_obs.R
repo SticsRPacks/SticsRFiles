@@ -50,7 +50,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' path <- file.path(get_examples_path(file_type = "obs"),"mixed")
+#' path <- file.path(get_examples_path(file_type = "obs"), "mixed")
 #'
 #' # Get observations for all usms, but only banana has observations:
 #' Meas <- get_obs(path)
@@ -75,7 +75,7 @@ get_obs <- function(workspace,
                     var_list = lifecycle::deprecated(),
                     dates_list = lifecycle::deprecated(),
                     usms_filepath = lifecycle::deprecated(),
-                    javastics_path = lifecycle::deprecated()){
+                    javastics_path = lifecycle::deprecated()) {
 
 
   # Managing deprecated arguments
@@ -111,8 +111,8 @@ get_obs <- function(workspace,
   }
 
 
-  get_file(workspace, usm_name, var_list, dates_list, usms_filepath,
-           javastics_path, verbose, "obs")
-
+  get_file(
+    workspace, usm_name, var_list, dates_list, usms_filepath,
+    javastics_path, verbose, "obs"
+  )
 }
-

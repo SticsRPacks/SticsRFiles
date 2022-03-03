@@ -11,22 +11,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_path = file.path(get_examples_path( file_type = "xml"), "sols.xml")
+#' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #' SticsRFiles:::is_stics_xml(xml_path)
 #' }
-#'
 #'
 #' @keywords internal
 #'
 is_stics_xml <- function(xml_path, file_type = NULL) {
-
-  if ( dir.exists(xml_path) | !file.exists(xml_path) ) {
+  if (dir.exists(xml_path) | !file.exists(xml_path)) {
     return(FALSE)
   }
 
   xml_doc <- xmldocument(xml_path)
 
-  return(is_stics_doc(xml_doc, doc_type = file_type ))
+  return(is_stics_doc(xml_doc, doc_type = file_type))
 }
 
 #' @rdname is_stics_xml
@@ -79,7 +77,9 @@ is_newpar_xml <- function(xml_path) {
 
 get_xml_type <- function(xml_path) {
   is_xml <- is_stics_xml(xml_path)
-  if (!is_xml) return(NULL)
+  if (!is_xml) {
+    return(NULL)
+  }
 
-  return(attr(is_xml,"type"))
+  return(attr(is_xml, "type"))
 }

@@ -12,24 +12,19 @@
 #' @export
 #'
 #' @examples
-#'
 #' \dontrun{
 #'
-#' get_examples_path( file_type = "csv" )
+#' get_examples_path(file_type = "csv")
 #'
-#' [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V9.1"
-#'
-#' get_examples_path( file_type = "csv", stics_version = "V8.5")
-#'
-#' [1] "/path/to/user-R-library/SticsRFiles/extdata/csv/V8.5"
-#'
+#' get_examples_path(file_type = "csv", stics_version = "V8.5")
 #' }
 get_examples_path <- function(file_type, stics_version = "latest",
-                              version_name =  lifecycle::deprecated()) {
-
+                              version_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_examples_path(version_name)",
-                              "get_examples_path(stics_version)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_examples_path(version_name)",
+      "get_examples_path(stics_version)"
+    )
   } else {
     version_name <- stics_version # to remove when we update inside the function
   }
@@ -38,28 +33,28 @@ get_examples_path <- function(file_type, stics_version = "latest",
   example_types <- get_examples_types()
 
   # If not any arguments : displaying files types list
-  if( missing(file_type)) {
-    cat("Available files types: ", paste(get_examples_types(), collapse=","))
+  if (missing(file_type)) {
+    cat("Available files types: ", paste(get_examples_types(), collapse = ","))
     return(invisible())
   }
 
   # Checking if file_type exists
-  if (! file_type %in% example_types) stop("Unknown file_type: ", file_type)
+  if (!file_type %in% example_types) stop("Unknown file_type: ", file_type)
 
   # Validating the version string
   version_name <- check_version_compat(version_name)
 
   # Checking if files available for the given version
   ver_data <- get_versions_info(stics_version = version_name)
-  if (base::is.null(ver_data)) stop("No examples available for version: ",version_name)
+  if (base::is.null(ver_data)) stop("No examples available for version: ", version_name)
 
   # Getting files dir path for the given type
   version_dir <- ver_data[[file_type]]
-  file_str <- gsub(pattern = "(.*)_.*",x = file_type, replacement = "\\1")
+  file_str <- gsub(pattern = "(.*)_.*", x = file_type, replacement = "\\1")
   examples_path <- system.file(file.path("extdata", file_str, version_dir), package = "SticsRFiles")
 
   # Not existing type
-  if (examples_path == "" ) stop("Not any available ",file_type, " examples for version: ",version_name)
+  if (examples_path == "") stop("Not any available ", file_type, " examples for version: ", version_name)
 
   # Returning the examples files dir path for the given type
   return(examples_path)
@@ -67,14 +62,12 @@ get_examples_path <- function(file_type, stics_version = "latest",
 
 # TODO: evaluate if usefull ?
 list_examples_files <- function(file_type, version_name = "latest", full_names = TRUE) {
-
   examples_path <- get_examples_path(file_type = file_type, stics_version = version_name)
 
 
   files_list <- list.files(pattern = "\\.[a-zA-Z]+$", path = examples_path, full.names = full_names)
 
   return(files_list)
-
 }
 
 

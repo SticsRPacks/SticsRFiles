@@ -22,19 +22,22 @@
 #' the list of usms.
 #'
 #' @examples
-#'
 #' \dontrun{
 #'
-#' get_usms_files(workspace = "/path/to/workspace",
-#' javastics = "/path/to/javastics")
+#' get_usms_files(
+#'   workspace = "/path/to/workspace",
+#'   javastics = "/path/to/javastics"
+#' )
 #'
-#' get_usms_files(workspace = "/path/to/workspace",
-#' javastics = "/path/to/javastics", usm_list = c("usm1", "usm3"))
+#' get_usms_files(
+#'   workspace = "/path/to/workspace",
+#'   javastics = "/path/to/javastics", usm_list = c("usm1", "usm3")
+#' )
 #'
-#' get_usms_files(workspace = "/path/to/workspace",
-#' file_type = c("finit", "ftec" ))
-#'
-#'
+#' get_usms_files(
+#'   workspace = "/path/to/workspace",
+#'   file_type = c("finit", "ftec")
+#' )
 #' }
 #'
 get_usms_files <- function(workspace,
@@ -45,7 +48,6 @@ get_usms_files <- function(workspace,
                            workspace_path = lifecycle::deprecated(),
                            file_name = lifecycle::deprecated(),
                            javastics_path = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(workspace_path)) {
     lifecycle::deprecate_warn("0.5.0", "get_usms_files(workspace_path)", "get_usms_files(workspace)")
   } else {
@@ -63,10 +65,10 @@ get_usms_files <- function(workspace,
   }
 
   # Types definition
-  files_types <- c("fplt","finit","fclim1","fclim2","fstation", "ftec")
-  if(is.null(file_type)){
+  files_types <- c("fplt", "finit", "fclim1", "fclim2", "fstation", "ftec")
+  if (is.null(file_type)) {
     file_type <- files_types
-  }else{
+  } else {
     # Checking if type(s) exist(s)
   }
 
@@ -75,17 +77,16 @@ get_usms_files <- function(workspace,
   check_plt <- FALSE
 
   # Getting first the plant dir path from the workspace, if any
-  if("fplt" %in% file_type){
-
+  if ("fplt" %in% file_type) {
     javastics_plt_path <- NULL
     ws_plt_path <- NULL
 
-    if (! base::is.null(javastics_path) && dir.exists(file.path(javastics_path, "plant")))  {
+    if (!base::is.null(javastics_path) && dir.exists(file.path(javastics_path, "plant"))) {
       javastics_plt_path <- suppressWarnings(normalizePath(file.path(javastics_path, "plant")))
     }
 
-    if (dir.exists(file.path(workspace_path,"plant"))) {
-      ws_plt_path <- suppressWarnings(normalizePath(file.path(workspace_path,"plant")))
+    if (dir.exists(file.path(workspace_path, "plant"))) {
+      ws_plt_path <- suppressWarnings(normalizePath(file.path(workspace_path, "plant")))
     }
 
     # if(is.null(javastics_path)){
@@ -110,7 +111,7 @@ get_usms_files <- function(workspace,
   usms_xml_path <- file.path(workspace_path, file_name)
 
   # Checking usms file
-  if(!file.exists(usms_xml_path)){
+  if (!file.exists(usms_xml_path)) {
     stop(paste("Unknown path:", usms_xml_path))
   }
 
@@ -118,15 +119,17 @@ get_usms_files <- function(workspace,
   usms_full_list <- get_usms_list(file = usms_xml_path)
 
   # Getting the full list or a subset
-  if(is.null(usms_list)){
+  if (is.null(usms_list)) {
     usms_list <- usms_full_list
-  }else{
+  } else {
     # checking if usms names exist
     usm_idx <- usms_full_list %in% usms_list
-    if(!length(usms_list) == sum(usm_idx)){
+    if (!length(usms_list) == sum(usm_idx)) {
       usms_list <- usms_full_list[usm_idx]
-      warning(paste("There are missing usms in usms.xml file:\n",
-                    paste(usms_full_list[!usm_idx], collapse = ", ")))
+      warning(paste(
+        "There are missing usms in usms.xml file:\n",
+        paste(usms_full_list[!usm_idx], collapse = ", ")
+      ))
     }
   }
 
@@ -134,15 +137,17 @@ get_usms_files <- function(workspace,
   usms_files <- vector("list", usms_nb)
 
   # Loop over usms names
-  for(i in 1:usms_nb){
+  for (i in 1:usms_nb) {
     usm_name <- usms_list[i]
-    usm_files <- unlist(get_param_xml(file = usms_xml_path,
-                                      param = file_type,
-                                      select = "usm",
-                                      select_value = usm_name), use.names = FALSE)
+    usm_files <- unlist(get_param_xml(
+      file = usms_xml_path,
+      param = file_type,
+      select = "usm",
+      select_value = usm_name
+    ), use.names = FALSE)
 
     # For selecting plant files regarding plants number
-    plants_sel <- 1:get_plants_nb(usms_file = usms_xml_path,usms_list = usm_name)
+    plants_sel <- 1:get_plants_nb(usms_file = usms_xml_path, usms_list = usm_name)
 
     # Getting all usms xml files, except plant files
     usm_files <- unique(usm_files[usm_files != "null"])
@@ -150,16 +155,20 @@ get_usms_files <- function(workspace,
 
 
     # filtering tec files selection
-    tec_files <- unlist(get_param_xml(file = usms_xml_path,
-                                      param = "ftec",
-                                      select = "usm",
-                                      select_value = usm_name)[[1]], use.names = FALSE)
+    tec_files <- unlist(get_param_xml(
+      file = usms_xml_path,
+      param = "ftec",
+      select = "usm",
+      select_value = usm_name
+    )[[1]], use.names = FALSE)
 
     tec_files_to_rm <- tec_files[tec_files != "null"][setdiff(1:2, plants_sel)]
     # removing useless tec files
-    usm_files <-setdiff(usm_files, tec_files_to_rm)
-    usm_files_path <- setdiff(usm_files_path,
-                              file.path(workspace_path, tec_files_to_rm))
+    usm_files <- setdiff(usm_files, tec_files_to_rm)
+    usm_files_path <- setdiff(
+      usm_files_path,
+      file.path(workspace_path, tec_files_to_rm)
+    )
 
     # Checking if all files exist
     files_idx <- file.exists(usm_files_path)
@@ -171,11 +180,13 @@ get_usms_files <- function(workspace,
     plt_files <- NULL
     plt_files_path <- NULL
 
-    if(check_plt){
-      plt_files <- unlist(get_param_xml(file = usms_xml_path,
-                                        param = "fplt",
-                                        select = "usm",
-                                        select_value = usm_name)[[1]], use.names = FALSE)
+    if (check_plt) {
+      plt_files <- unlist(get_param_xml(
+        file = usms_xml_path,
+        param = "fplt",
+        select = "usm",
+        select_value = usm_name
+      )[[1]], use.names = FALSE)
 
 
       plt_files <- plt_files[plt_files != "null"][plants_sel]
@@ -190,8 +201,10 @@ get_usms_files <- function(workspace,
 
     #
     # Adding the files lists
-    usms_files[[i]] <- list(paths=c(usm_files_path, plt_files_path),
-                            all_exist=usm_files_all_exist & plt_files_all_exist )
+    usms_files[[i]] <- list(
+      paths = c(usm_files_path, plt_files_path),
+      all_exist = usm_files_all_exist & plt_files_all_exist
+    )
   }
 
   # Returning a named list

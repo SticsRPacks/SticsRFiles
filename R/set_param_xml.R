@@ -33,12 +33,11 @@
 #' value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
-#'
 #' \dontrun{
 #'
 #' # Soil file
 #'
-#' file.copy(file.path(get_examples_path( file_type = "xml"),"sols.xml"), getwd())
+#' file.copy(file.path(get_examples_path(file_type = "xml"), "sols.xml"), getwd())
 #'
 #' # For scalar parameters per soil
 #'
@@ -48,40 +47,48 @@
 #' get_param_xml("sols.xml", "argi")
 #'
 #' # Setting a specific value to "argi" for "solcanne" soil
-#' set_param_xml("sols.xml", "argi",56,
-#' select = "sol", select_value = "solcanne", overwrite = TRUE)
+#' set_param_xml("sols.xml", "argi", 56,
+#'   select = "sol", select_value = "solcanne", overwrite = TRUE
+#' )
 #'
 #' get_param_xml("sols.xml", "argi",
-#' select = "sol", select_value = "solcanne")
+#'   select = "sol", select_value = "solcanne"
+#' )
 #'
 #'
 #' # Setting a specific values to 2 parameters "argi" and
-#' "norg" for "solcanne" soil
-#' set_param_xml("sols.xml", c("argi", "norg"),list(100,150),
-#' select = "sol", select_value = "solcanne", overwrite = TRUE)
+#' # "norg" for "solcanne" soil
+#' set_param_xml("sols.xml", c("argi", "norg"), list(100, 150),
+#'   select = "sol", select_value = "solcanne", overwrite = TRUE
+#' )
 #'
 #' get_param_xml("sols.xml", c("argi", "norg"),
-#' select = "sol", select_value = "solcanne")
+#'   select = "sol", select_value = "solcanne"
+#' )
 #'
 #'
 #' # For vector parameters per soil (5 values, one per soil layer)
-#' set_param_xml("sols.xml", c("epc", "HCCF"),select = "sol",
-#' select_value = c("solcanne", "solbanane"),
-#' param_value = list(c(20:24,10:14),c(50:54,40:44)), overwrite = TRUE)
+#' set_param_xml("sols.xml", c("epc", "HCCF"),
+#'   select = "sol",
+#'   select_value = c("solcanne", "solbanane"),
+#'   param_value = list(c(20:24, 10:14), c(50:54, 40:44)), overwrite = TRUE
+#' )
 #'
-#' get_param_xml("sols.xml", c("epc", "HCCF"),select = "sol",
-#' select_value = c("solcanne", "solbanane"))
+#' get_param_xml("sols.xml", c("epc", "HCCF"),
+#'   select = "sol",
+#'   select_value = c("solcanne", "solbanane")
+#' )
 #'
 #'
 #' # Crop management file
-#' file.copy(file.path(get_examples_path( file_type = "xml"),"file_tec.xml"), getwd())
+#' file.copy(file.path(get_examples_path(file_type = "xml"), "file_tec.xml"), getwd())
 #'
 #' # Modifying irrigations parameters
 #' set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
-#' param_value = list(200:215,20:35), overwrite = TRUE)
+#'   param_value = list(200:215, 20:35), overwrite = TRUE
+#' )
 #'
 #' get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
-#'
 #' }
 #'
 #' @export
@@ -97,7 +104,7 @@ set_param_xml <- function(file,
                           param_name = lifecycle::deprecated(),
                           param_value = lifecycle::deprecated(),
                           value = lifecycle::deprecated(),
-                          ...){
+                          ...) {
 
   # ... argument for passing : ids, show_xpath to get_param_value
   if (lifecycle::is_present(xml_file)) {
@@ -128,7 +135,7 @@ set_param_xml <- function(file,
 
 
   # Setting output file path
-  if (base::is.null(out_path) ) {
+  if (base::is.null(out_path)) {
     out_path <- xml_file
   }
 
@@ -139,34 +146,39 @@ set_param_xml <- function(file,
   }
 
   # Ckecking if file exists and overwriting right
-  if ( base::file.exists(out_path) && !overwrite ) {
-    warning(paste("The file already exists, set overwrite argument to TRUE or delete the file: ",
-                  out_path))
+  if (base::file.exists(out_path) && !overwrite) {
+    warning(paste(
+      "The file already exists, set overwrite argument to TRUE or delete the file: ",
+      out_path
+    ))
     return(invisible(FALSE))
   }
 
 
   # For future version
   # TODO: multiple files and multiple params list and values ...ids ...?
-  #xml_doc <- lapply(xml_file, xmldocument)
+  # xml_doc <- lapply(xml_file, xmldocument)
   xml_doc <- xmldocument(xml_file)
 
 
 
   # Checking if any of param_name can be in intervention
   # nodes of 2 option choices (specific of "cut crop" in tec files)
-  check_choice_param( xml_doc = xml_doc,
-                      param_name = param_name,
-                      stop = TRUE)
+  check_choice_param(
+    xml_doc = xml_doc,
+    param_name = param_name,
+    stop = TRUE
+  )
 
 
   # Setting parameters values in the xmlDoxument object
   set_param_value(xml_doc,
-                  param_name = param_name,
-                  param_value = param_value,
-                  parent_name = select,
-                  parent_sel_attr = value,
-                  ...)
+    param_name = param_name,
+    param_value = param_value,
+    parent_name = select,
+    parent_sel_attr = value,
+    ...
+  )
 
 
   # Saving
@@ -174,6 +186,4 @@ set_param_xml <- function(file,
 
   # Output status
   return(invisible(TRUE))
-
-
 }

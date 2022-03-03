@@ -8,10 +8,10 @@
 #' @return A vector of parameters values
 #'
 #'
-#@examples
+# @examples
 #' @keywords internal
 #'
-get_name_value_file_value <- function(file_path, param_names, names_dict=NULL) {
+get_name_value_file_value <- function(file_path, param_names, names_dict = NULL) {
 
   # Case plt, station, tempopar.sti, tempoparv6.sti
 
@@ -24,25 +24,25 @@ get_name_value_file_value <- function(file_path, param_names, names_dict=NULL) {
   lines_list <- strsplit(gsub("\\s+", " ", trimws(lines_list)), " ")
 
 
-  couples_nb <- length(lines_list)/2
+  couples_nb <- length(lines_list) / 2
 
-  sel <- rep(c(TRUE,FALSE), couples_nb)
+  sel <- rep(c(TRUE, FALSE), couples_nb)
 
-  par_list <- unlist(lines_list[ sel ])
+  par_list <- unlist(lines_list[sel])
   # Getting the sub list according to
-  par_val <- lines_list[! sel ]
+  par_val <- lines_list[!sel]
 
 
-  par_val <- par_val[ par_list %in% param_names ]
+  par_val <- par_val[par_list %in% param_names]
 
   # TODO : A recuperer pour traiter le sol
   # par_val <- lapply(par_val[par_idx],function(x) unlist(strsplit(x, " ")))
 
 
-  #browser()
+  # browser()
 
   par_idx <- !is.na(lapply(par_val, as.numeric))
-  num_val <- lapply( par_val[par_idx], function(x) x <- as.numeric(x))
+  num_val <- lapply(par_val[par_idx], function(x) x <- as.numeric(x))
   par_val[par_idx] <- num_val
 
 
@@ -50,6 +50,4 @@ get_name_value_file_value <- function(file_path, param_names, names_dict=NULL) {
   names(par_val) <- param_names
 
   return(par_val)
-
-
 }

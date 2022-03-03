@@ -15,9 +15,8 @@
 #' @return A logical status TRUE if successfull, FALSE otherwise
 #'
 #' @examples
-#' example_txt_dir <- get_examples_path(file_type="txt")
-#' force_param_values(example_txt_dir, setNames(object=c(220,330), c("stlevamf", "stamflax")))
-#'
+#' example_txt_dir <- get_examples_path(file_type = "txt")
+#' force_param_values(example_txt_dir, setNames(object = c(220, 330), c("stlevamf", "stamflax")))
 #' @seealso `SticsOnR::run_stics()`
 #'
 #' @export
@@ -25,7 +24,6 @@
 force_param_values <- function(workspace,
                                values,
                                param_values = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(param_values)) {
     lifecycle::deprecate_warn("0.5.0", "force_param_values(param_values)", "force_param_values(values)")
   } else {
@@ -34,28 +32,32 @@ force_param_values <- function(workspace,
 
   if (is.null(param_values) || all(is.na(param_values))) {
     # remove param.sti in case of previous run using it ...
-    if (suppressWarnings(file.remove(file.path(workspace,
-                                               "param.sti")))) {
-      tryCatch(set_codeoptim(workspace, value=0), error=function(cond) return(FALSE))
+    if (suppressWarnings(file.remove(file.path(
+      workspace,
+      "param.sti"
+    )))) {
+      tryCatch(set_codeoptim(workspace, value = 0), error = function(cond) {
+        return(FALSE)
+      })
     }
-
   } else {
 
     # convert into vector in case a tibble is given instead of a vector
-    param_values <- setNames(as.numeric(param_values),names(param_values))
-    ind_non_na<-!is.na(param_values)
+    param_values <- setNames(as.numeric(param_values), names(param_values))
+    ind_non_na <- !is.na(param_values)
     param_values <- param_values[ind_non_na]
 
     # converting var names to Stics names
     stics_names <- col_names_to_var(names(param_values))
 
     ret <- gen_paramsti(workspace, stics_names, param_values)
-    if ( ! ret ) {
-     return(invisible(FALSE))
+    if (!ret) {
+      return(invisible(FALSE))
     }
 
-    tryCatch(set_codeoptim(workspace, value=1), error=function(cond) return(FALSE))
-
+    tryCatch(set_codeoptim(workspace, value = 1), error = function(cond) {
+      return(FALSE)
+    })
   }
 
   return(invisible(TRUE))

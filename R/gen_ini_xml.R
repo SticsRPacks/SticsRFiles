@@ -48,8 +48,10 @@
 #' xl_path <- "inputs_stics_example.xlsx"
 #' download_usm_xl(file = xl_path)
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
-#' gen_ini_xml(out_dir = "/path/to/dest/dir",
-#' param_table = ini_param_df)
+#' gen_ini_xml(
+#'   out_dir = "/path/to/dest/dir",
+#'   param_table = ini_param_df
+#' )
 #' }
 #'
 #' @export
@@ -59,11 +61,10 @@ gen_ini_xml <- function(param_df = NULL,
                         file = NULL,
                         out_dir = getwd(),
                         crop_tag = "Crop",
-                        stics_version ="latest",
+                        stics_version = "latest",
                         ini_in_file = lifecycle::deprecated(),
                         param_table = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(ini_in_file)) {
     lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(ini_in_file)", "gen_ini_xml(file)")
   } else {
@@ -82,27 +83,29 @@ gen_ini_xml <- function(param_df = NULL,
 
   xml_doc <- NULL
 
-  if (! base::is.null(ini_in_file) ) {
+  if (!base::is.null(ini_in_file)) {
     xml_doc <- xmldocument(ini_in_file)
   }
 
   # detect the ini names column
   param_names <- names(param_table)
-  col_id <- grep("^ini",tolower(param_names))
-  if (! length(col_id)) {
+  col_id <- grep("^ini", tolower(param_names))
+  if (!length(col_id)) {
     stop("The column for identifying ini names has not been found !")
   }
   # ini names or file names
-  ini_col <- param_names[ col_id ]
+  ini_col <- param_names[col_id]
 
   # generating xml documents for all table lines
   # removing ini names col
-  xml_docs <- gen_ini_doc(xml_doc = xml_doc,
-                          param_table = param_table[ , - col_id],
-                          crop_tag = crop_tag,
-                          stics_version = stics_version)
+  xml_docs <- gen_ini_doc(
+    xml_doc = xml_doc,
+    param_table = param_table[, -col_id],
+    crop_tag = crop_tag,
+    stics_version = stics_version
+  )
 
-  if ( class(xml_docs) == "xmlDocument") {
+  if (class(xml_docs) == "xmlDocument") {
     xml_docs <- list(xml_docs)
   }
 
@@ -124,20 +127,20 @@ gen_ini_xml <- function(param_df = NULL,
 
 
   # Checking if out_path exists
-  if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist",out_path ))
+  if (!dir.exists(out_path)) {
+    stop(paste("The directory does not exist", out_path))
   }
 
   # Defining output files paths
   out_name <- param_table[[ini_col]]
-  ids <- grepl("_ini.xml$",out_name)
-  if ( sum(ids) < length(out_name) ) {
-    out_name[!ids] <- paste0(param_table[[ini_col]][!ids],"_ini.xml")
+  ids <- grepl("_ini.xml$", out_name)
+  if (sum(ids) < length(out_name)) {
+    out_name[!ids] <- paste0(param_table[[ini_col]][!ids], "_ini.xml")
   }
-  ini_out_file <- file.path(out_path,out_name)
+  ini_out_file <- file.path(out_path, out_name)
 
   # Checking dimensions
-  if ( ! length(xml_docs) == length(ini_out_file) ) {
+  if (!length(xml_docs) == length(ini_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
 
@@ -148,5 +151,4 @@ gen_ini_xml <- function(param_df = NULL,
   }
 
   return(invisible(xml_docs))
-
 }

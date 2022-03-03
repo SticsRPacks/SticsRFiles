@@ -15,21 +15,19 @@
 #' \dontrun{
 #'
 #' # Xml case
-#' xml_usms <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+#' xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' get_plants_nb(xml_usms)
-#' get_plants_nb(xml_usms,"wheat")
-#' get_plants_nb(xml_usms,c("wheat","intercrop_pea_barley"))
+#' get_plants_nb(xml_usms, "wheat")
+#' get_plants_nb(xml_usms, c("wheat", "intercrop_pea_barley"))
 #'
 #' # Txt case
-#' txt_usm <- file.path(get_examples_path( file_type = "txt"),"new_travail.usm")
+#' txt_usm <- file.path(get_examples_path(file_type = "txt"), "new_travail.usm")
 #' get_plants_nb(txt_usm)
-#'
 #' }
 #'
 #' @export
 #'
-get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::deprecated()){
-
+get_plants_nb <- function(usms_file, usms_list = c(), usm_file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_file_path)) {
     lifecycle::deprecate_warn("1.0.0", "get_plants_nb(usm_file_path)", "get_plants_nb(usms_file)")
   } else {
@@ -39,13 +37,15 @@ get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::de
   usms <- grepl(pattern = "\\.xml$", x = usm_file_path)
 
   # Neither .usm nor .xml
-  if (! (usm | usms) ) return()
+  if (!(usm | usms)) {
+    return()
+  }
 
   if (!base::file.exists(usm_file_path)) stop(usm_file_path, " does not exist")
 
-  if (usm){
+  if (usm) {
     return(get_plants_nb_txt(usm_txt_path = usm_file_path, usm_name = usms_list))
-  }else{
+  } else {
     return(get_plants_nb_xml(usms_file = usm_file_path, usms_list = usms_list))
   }
   stop("Couldn't read the number of plants")
@@ -68,40 +68,42 @@ get_plants_nb <- function(usms_file, usms_list=c(),usm_file_path = lifecycle::de
 #'
 #' @examples
 #' \dontrun{
-
-#' usms_file <- file.path(get_examples_path( file_type = "xml"),"usms.xml")
+#'
+#' usms_file <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' get_plants_nb(usms_file)
-#' get_plants_nb(usms_file,"wheat")
-#' get_plants_nb(usms_file,c("wheat","intercrop_pea_barley"))
+#' get_plants_nb(usms_file, "wheat")
+#' get_plants_nb(usms_file, c("wheat", "intercrop_pea_barley"))
 #' }
 #'
 #' @keywords internal
 #'
 get_plants_nb_xml <- function(usms_file,
-                              usms_list=c(),
-                              usm_xml_path = lifecycle::deprecated()){
+                              usms_list = c(),
+                              usm_xml_path = lifecycle::deprecated()) {
 
   # usm_xml_path
   if (lifecycle::is_present(usm_xml_path)) {
-    lifecycle::deprecate_warn("0.5.0", "get_plants_nb_xml(usm_xml_path)",
-                              "get_plants_nb_xml(usms_file)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_plants_nb_xml(usm_xml_path)",
+      "get_plants_nb_xml(usms_file)"
+    )
   } else {
     usm_xml_path <- usms_file # to remove when we update inside the function
   }
 
   # Loading xml file as xmlDocument object
-  xml_usms=xmldocument(usm_xml_path)
+  xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm
-  plants_nb=as.numeric(getValues(xml_usms,'//nbplantes'))
+  plants_nb <- as.numeric(getValues(xml_usms, "//nbplantes"))
 
   # Xml usms names
-  usm_names <- getAttrs(xml_usms,'//usm')
+  usm_names <- getAttrs(xml_usms, "//usm")
   names(plants_nb) <- usm_names
 
   # Filtering using usms_list if needed
-  if ( length(usms_list)!=0 ){
-    plants_nb=plants_nb[usm_names %in% usms_list]
+  if (length(usms_list) != 0) {
+    plants_nb <- plants_nb[usm_names %in% usms_list]
   }
 
   return(plants_nb)
@@ -111,8 +113,9 @@ get_plants_nb_xml <- function(usms_file,
 
 
 get_plants_nb_txt <- function(usm_txt_path, usm_name = NULL) {
-
-  if (base::basename(usm_txt_path) != "new_travail.usm") return()
+  if (base::basename(usm_txt_path) != "new_travail.usm") {
+    return()
+  }
 
 
   if (length(usm_name) > 1) stop("Only one usm name may be given !")
@@ -127,7 +130,4 @@ get_plants_nb_txt <- function(usm_txt_path, usm_name = NULL) {
   plants_nb <- as.numeric(usm_data$nbplantes)
   names(plants_nb) <- usm_data$nom
   return(plants_nb)
-
 }
-
-

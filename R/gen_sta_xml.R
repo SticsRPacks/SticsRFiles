@@ -38,8 +38,7 @@
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sta_param_df <- read_params_table(file = xl_path, sheet_name = "Station")
 #' gen_sta_xml(out_dir = "/path/to/dest/dir", param_df = sta_param_df)
-#'
-#'}
+#' }
 #'
 #' @export
 #'
@@ -47,11 +46,10 @@
 gen_sta_xml <- function(param_df = NULL,
                         file = NULL,
                         out_dir = getwd(),
-                        stics_version ="latest",
+                        stics_version = "latest",
                         param_table = lifecycle::deprecated(),
                         sta_in_file = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(param_table)) {
     lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(param_table)", "gen_sta_xml(param_df)")
   } else {
@@ -71,26 +69,28 @@ gen_sta_xml <- function(param_df = NULL,
 
   xml_doc <- NULL
 
-  if (! base::is.null(sta_in_file) ) {
+  if (!base::is.null(sta_in_file)) {
     xml_doc <- xmldocument(sta_in_file)
   }
 
 
   # detecting sta names column
   param_names <- names(param_table)
-  col_id <- grep("^sta",tolower(param_names))
-  if (! length(col_id)) {
+  col_id <- grep("^sta", tolower(param_names))
+  if (!length(col_id)) {
     stop("The column for identifying sta names has not been found !")
   }
-  sta_col <- param_names[ col_id  ]
+  sta_col <- param_names[col_id]
 
 
-  xml_docs <- gen_sta_doc(xml_doc = xml_doc,
-                          param_table = param_table[ , - col_id],
-                          stics_version = stics_version)
+  xml_docs <- gen_sta_doc(
+    xml_doc = xml_doc,
+    param_table = param_table[, -col_id],
+    stics_version = stics_version
+  )
 
 
-  if ( class(xml_docs) == "xmlDocument") {
+  if (class(xml_docs) == "xmlDocument") {
     xml_docs <- list(xml_docs)
   }
 
@@ -113,20 +113,20 @@ gen_sta_xml <- function(param_df = NULL,
 
 
   # checking if out_path exists
-  if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist",out_path ))
+  if (!dir.exists(out_path)) {
+    stop(paste("The directory does not exist", out_path))
   }
 
   # defining output files paths
   out_name <- param_table[[sta_col]]
-  ids <- grepl("_sta.xml$",out_name)
+  ids <- grepl("_sta.xml$", out_name)
   if (sum(ids) < length(out_name)) {
-    out_name[!ids] <- paste0(param_table[[sta_col]][!ids],"_sta.xml")
+    out_name[!ids] <- paste0(param_table[[sta_col]][!ids], "_sta.xml")
   }
-  sta_out_file <- file.path(out_path,out_name)
+  sta_out_file <- file.path(out_path, out_name)
 
   # checking dimensions
-  if ( ! length(xml_docs) == length(sta_out_file) ) {
+  if (!length(xml_docs) == length(sta_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
 
@@ -137,5 +137,4 @@ gen_sta_xml <- function(param_df = NULL,
   }
 
   return(invisible(xml_docs))
-
 }

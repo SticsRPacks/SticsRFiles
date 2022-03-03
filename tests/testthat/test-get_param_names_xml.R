@@ -1,14 +1,14 @@
 library(SticsRFiles)
 # options(warn=-1)
 xml_dir <- get_examples_path("xml")
-xml_plt= file.path(xml_dir,"file_plt.xml")
-xml_sols= file.path(xml_dir,"sols.xml")
-xml_ini= file.path(xml_dir,"file_ini.xml")
-xml_sta=file.path(xml_dir,"file_sta.xml")
-xml_tec=file.path(xml_dir,"file_tec.xml")
-xml_usms=file.path(xml_dir,"usms.xml")
-xml_gen=file.path(xml_dir,"param_gen.xml")
-xml_new=file.path(xml_dir,"param_newform.xml")
+xml_plt <- file.path(xml_dir, "file_plt.xml")
+xml_sols <- file.path(xml_dir, "sols.xml")
+xml_ini <- file.path(xml_dir, "file_ini.xml")
+xml_sta <- file.path(xml_dir, "file_sta.xml")
+xml_tec <- file.path(xml_dir, "file_tec.xml")
+xml_usms <- file.path(xml_dir, "usms.xml")
+xml_gen <- file.path(xml_dir, "param_gen.xml")
+xml_new <- file.path(xml_dir, "param_newform.xml")
 # ----------------------------------------------------------
 
 context("Getting plt param names")
@@ -161,6 +161,3 @@ test_that("option param name", {
   expect_true("SigmaDisTalle(1)" %in% param_names)
   expect_true(all(c("SigmaDisTalle(1)", "ratiolN") %in% param_names))
 })
-
-
-

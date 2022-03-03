@@ -12,11 +12,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' xml_path = file.path(get_examples_path( file_type = "xml"), "sols.xml")
+#' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
 #' SticsRFiles:::is_stics_doc(sols_doc)
 #' }
-#'
 #'
 #' @keywords internal
 #'
@@ -27,21 +26,25 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   # because they may change with versions ?
 
   if (base::is.null(doc_types)) {
-    doc_types <- c("initialisations","usms", "sols", "fichiertec",
-                   "fichiersta", "fichierplt", "fichierpar",
-                   "fichierparamgen" )
-    #files_types <- c("ini", "usm", "sol", "tec", "sta", "plt", "par", "newpar")
+    doc_types <- c(
+      "initialisations", "usms", "sols", "fichiertec",
+      "fichiersta", "fichierplt", "fichierpar",
+      "fichierparamgen"
+    )
+    # files_types <- c("ini", "usm", "sol", "tec", "sta", "plt", "par", "newpar")
   }
 
-  if (! nargs() ) {
+  if (!nargs()) {
     return(doc_types)
   }
 
   # not an xmlDocument
-  if (! is.xmlDocument(xml_doc) ) { return(FALSE) }
+  if (!is.xmlDocument(xml_doc)) {
+    return(FALSE)
+  }
 
-  if (!base::is.null(doc_type) && ! (doc_type %in% doc_types)) {
-    warning(paste0("Not any tag name \"",doc_type,"\" for stics xml document!"))
+  if (!base::is.null(doc_type) && !(doc_type %in% doc_types)) {
+    warning(paste0("Not any tag name \"", doc_type, "\" for stics xml document!"))
     return(FALSE)
   }
 
@@ -50,21 +53,20 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   # doc types
   root_name <- xmlName(XML::xmlRoot(xml_doc@content))
 
-  if (!base::is.null(doc_type) && ! doc_type == root_name ) {
+  if (!base::is.null(doc_type) && !doc_type == root_name) {
     return(FALSE)
   }
 
   type_idx <- doc_types %in% root_name
 
-  if (! any(type_idx) ) {
+  if (!any(type_idx)) {
     return(FALSE)
   }
 
   ret <- TRUE
-  #attr(ret, "type") <- files_types[type_idx]
+  # attr(ret, "type") <- files_types[type_idx]
   attr(ret, "type") <- root_name
   return(ret)
-
 }
 
 

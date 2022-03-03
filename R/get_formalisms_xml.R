@@ -11,22 +11,21 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
+#' xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 #'
 #' par_form <- get_formalisms_xml(xml_sta, "zr")
 #'
-#' par_form_list <- get_formalisms_xml(xml_sta, c("zr","altistation"))
+#' par_form_list <- get_formalisms_xml(xml_sta, c("zr", "altistation"))
 #'
 #' par_form_list <- get_formalisms_xml(xml_sta)
-#'
 #' }
 #'
 #' @keywords internal
 #'
 #'
 get_formalisms_xml <- function(xml_file,
-                              par_name=NULL,
-                              by_form = TRUE) {
+                               par_name = NULL,
+                               by_form = TRUE) {
 
 
   # Just in case to be sure that xml files are different
@@ -37,13 +36,13 @@ get_formalisms_xml <- function(xml_file,
   doc_nb <- length(xml_doc)
 
   # If only one element
-  if(doc_nb == 1) xml_doc <- xml_doc[[1]]
+  if (doc_nb == 1) xml_doc <- xml_doc[[1]]
 
   # Getting the parameters formalism list by file
   form_list <- get_param_formalisms(xml_doc, par_name)
 
   # if only one element
-  if(doc_nb== 1) form_list <- list(form_list)
+  if (doc_nb == 1) form_list <- list(form_list)
 
   # Naming with xml files names
   names(form_list) <- base::basename(xml_file)
@@ -54,7 +53,6 @@ get_formalisms_xml <- function(xml_file,
   }
 
   return(form_list)
-
 }
 
 
@@ -83,5 +81,4 @@ param_by_form <- function(form_list) {
   names(out_l) <- files_names
 
   return(out_l)
-
 }

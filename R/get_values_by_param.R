@@ -13,10 +13,9 @@
 #' @examples
 #' \dontrun{
 #' download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' tec_param_df <- read_excel(xl_path, sheet = "Tec")
 #' SticsRFiles:::get_values_by_param(params_table = tec_param_df)
-#'
 #' }
 #'
 #' @keywords internal
@@ -25,13 +24,12 @@ get_values_by_param <- function(params_table,
                                 param_name = NULL,
                                 lines_id = NULL,
                                 na_values = NA) {
-
   table_names <- names(params_table)
 
   # Getting the parameter names vector, if not given
   if ((base::is.null(param_name))) {
-    #param_name <- unique(gsub(pattern = "_[0-9]*$", "",x = names(params_table)))
-    param_name <- unique(gsub(pattern = "(.*)_[0-9]+$",x = table_names, replacement = "\\1"))
+    # param_name <- unique(gsub(pattern = "_[0-9]*$", "",x = names(params_table)))
+    param_name <- unique(gsub(pattern = "(.*)_[0-9]+$", x = table_names, replacement = "\\1"))
     # param_name <- unique(unlist(lapply(strsplit(table_names, split = "_"), function(x) x[1])))
   }
 
@@ -39,37 +37,44 @@ get_values_by_param <- function(params_table,
   if (nrow(params_table) > 1) {
     # Lines selection, if any id
     if (!base::is.null(lines_id) &&
-        base::is.numeric(lines_id)
-        && max(lines_id) <= nrow(params_table)) {
-      params_table <- params_table[lines_id,]
+      base::is.numeric(lines_id) &&
+      max(lines_id) <= nrow(params_table)) {
+      params_table <- params_table[lines_id, ]
     }
 
     # Applying to each line of the data.frame
-    out_list <- apply(params_table, 1,
-                      function(x) get_values_by_param(as.data.frame(t(x), stringsAsFactors = FALSE),
-                                                                      param_name = param_name))
+    out_list <- apply(
+      params_table, 1,
+      function(x) {
+        get_values_by_param(as.data.frame(t(x), stringsAsFactors = FALSE),
+          param_name = param_name
+        )
+      }
+    )
     return(out_list)
   }
 
   # Applying to a vector of param names
   if (length(param_name) > 1) {
-    out_table <- lapply( param_name,
-                         function(x) get_values_by_param(params_table, x))
+    out_table <- lapply(
+      param_name,
+      function(x) get_values_by_param(params_table, x)
+    )
     out_table <- unlist(out_table, recursive = FALSE)
     return(out_table)
   }
 
-  par_pattern <- paste0("(^",param_name,"$|","^",param_name,"_)")
+  par_pattern <- paste0("(^", param_name, "$|", "^", param_name, "_)")
   param_names <- grep(pattern = par_pattern, x = names(params_table), value = TRUE)
 
   # Sorting parameters names against a numeric suffix, if any
   if (length(grep(pattern = "_[0-9]", x = param_names))) {
-    sorted_par_id <- sort(as.numeric(gsub(pattern = paste0(param_name,"_([0-9]+)"), replacement = "\\1", x = param_names)))
-    param_names <- unlist(lapply(as.character(sorted_par_id), function(x) paste(param_name,x,sep = "_")))
+    sorted_par_id <- sort(as.numeric(gsub(pattern = paste0(param_name, "_([0-9]+)"), replacement = "\\1", x = param_names)))
+    param_names <- unlist(lapply(as.character(sorted_par_id), function(x) paste(param_name, x, sep = "_")))
   }
 
   # converting from data.frame to vector
-  par_values <- unlist(params_table[,param_names])
+  par_values <- unlist(params_table[, param_names])
   # removing whitespaces
   par_values <- trimws(par_values)
 
@@ -85,7 +90,9 @@ get_values_by_param <- function(params_table,
   if (length(filt_idx)) param_names <- param_names[filt_idx]
 
   # if the values are empty
-  if (!length(par_values)) return()
+  if (!length(par_values)) {
+    return()
+  }
 
   # /!\
   # TODO: add fix for 999 onstead of 999.0 !!!
@@ -96,5 +103,4 @@ get_values_by_param <- function(params_table,
   par_table <- list(par_values)
   names(par_table) <- param_name
   return(par_table)
-
 }

@@ -47,10 +47,9 @@
 #' @examples
 #' \dontrun{
 #'
-#' xl_path <-  download_usm_xl(file = "inputs_stics_example.xlsx")
+#' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
 #' gen_usms_xml(usms_out_file = "usms.xml", usms_param = usms_param_df)
-#'
 #' }
 #'
 #' @export
@@ -59,12 +58,11 @@
 gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
                          param_df = NULL,
                          template = NULL,
-                         stics_version ="latest",
+                         stics_version = "latest",
                          usms_out_file = lifecycle::deprecated(),
                          usms_nb = lifecycle::deprecated(),
                          usms_param = lifecycle::deprecated(),
                          usms_in_file = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(usms_out_file)) {
     lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_out_file)", "gen_usms_xml(file)")
   } else {
@@ -82,10 +80,9 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
   }
   if (lifecycle::is_present(usms_nb)) {
     lifecycle::deprecate_warn("0.5.0",
-                              "gen_usms_xml(usms_nb)",
-                              details = "It is now directly computed in the function."
-                              )
-
+      "gen_usms_xml(usms_nb)",
+      details = "It is now directly computed in the function."
+    )
   } else {
     usms_nb <- nrow(param_df) # to remove when we update inside the function
   }
@@ -93,37 +90,39 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
   xml_doc <- NULL
 
   # Fix : default output file path if not provided
-  if (base::is.null(usms_out_file) ) {
+  if (base::is.null(usms_out_file)) {
     usms_out_file <- file.path(getwd(), "usms.xml")
   }
 
   # If a template file is provided
-  if (! base::is.null(usms_in_file) ) {
+  if (!base::is.null(usms_in_file)) {
     xml_doc <- xmldocument(usms_in_file)
   }
 
-  vars <- c("flai_1", "fplt_2","ftec_2", "flai_2")
+  vars <- c("flai_1", "fplt_2", "ftec_2", "flai_2")
   vars_idx <- vars %in% names(usms_param)
 
   # replacing NA or "", with "null", if any vars name in usms_param names
-  if (! base::is.null(usms_param) && any(vars_idx)) {
+  if (!base::is.null(usms_param) && any(vars_idx)) {
     for (v in vars[vars_idx]) {
-      rep_idx <- is.na(usms_param[[v]]) | nchar(usms_param[[v]])==0
+      rep_idx <- is.na(usms_param[[v]]) | nchar(usms_param[[v]]) == 0
       usms_param[[v]][rep_idx] <- "null"
     }
   }
 
   # Common switch function for sols.xml and usms.xml files
-  xml_doc <- gen_usms_sols_doc(doc_type = "usms",
-                         xml_doc,
-                         nodes_nb = usms_nb,
-                         nodes_param = usms_param,
-                         stics_version = stics_version)
+  xml_doc <- gen_usms_sols_doc(
+    doc_type = "usms",
+    xml_doc,
+    nodes_nb = usms_nb,
+    nodes_param = usms_param,
+    stics_version = stics_version
+  )
 
   # hecking if out dir exists
   out_path <- dirname(usms_out_file)
-  if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist: ",out_path))
+  if (!dir.exists(out_path)) {
+    stop(paste("The directory does not exist: ", out_path))
   }
 
 
@@ -134,5 +133,4 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
 
 
   return(invisible(xml_doc))
-
 }

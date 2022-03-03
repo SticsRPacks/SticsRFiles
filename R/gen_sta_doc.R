@@ -21,20 +21,20 @@
 #'
 gen_sta_doc <- function(xml_doc = NULL,
                         param_table = NULL,
-                        stics_version ="latest",
+                        stics_version = "latest",
                         check_names = TRUE) {
 
 
   # check/get version
-  stics_version <- get_xml_stics_version(stics_version = stics_version,xml_doc = xml_doc)
+  stics_version <- get_xml_stics_version(stics_version = stics_version, xml_doc = xml_doc)
 
   # getting a default xml template
-  if ( base::is.null(xml_doc) ) {
+  if (base::is.null(xml_doc)) {
     xml_doc <- get_xml_base_doc("sta", stics_version = stics_version)
   }
 
   # Nothing to do
-  if ( base::is.null(param_table) ) {
+  if (base::is.null(param_table)) {
     return(xml_doc)
   }
 
@@ -42,8 +42,10 @@ gen_sta_doc <- function(xml_doc = NULL,
 
   # Checking parameter names from param_table against xml ones
   if (check_names) {
-    check_param_names(param_names = in_params,
-                      ref_names = get_param_names(xml_object = xml_doc))
+    check_param_names(
+      param_names = in_params,
+      ref_names = get_param_names(xml_object = xml_doc)
+    )
   }
 
 
@@ -51,22 +53,27 @@ gen_sta_doc <- function(xml_doc = NULL,
   # managing several doc generation based upon the lines number in param_table
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
-    xml_docs <- apply(param_table,1,
-                      function(x) gen_sta_doc(xml_doc = cloneXmlDoc(xml_doc),
-                                              param_table = as.data.frame(t(x)),
-                                              stics_version = stics_version,
-                                              check_names = FALSE))
+    xml_docs <- apply(
+      param_table, 1,
+      function(x) {
+        gen_sta_doc(
+          xml_doc = cloneXmlDoc(xml_doc),
+          param_table = as.data.frame(t(x)),
+          stics_version = stics_version,
+          check_names = FALSE
+        )
+      }
+    )
     return(xml_docs)
   }
 
-  #print(stics_version)
+  # print(stics_version)
 
 
   for (p in in_params) {
-    set_param_value(xml_doc,p, param_table[[p]])
+    set_param_value(xml_doc, p, param_table[[p]])
   }
 
 
   return(invisible(xml_doc))
-
 }

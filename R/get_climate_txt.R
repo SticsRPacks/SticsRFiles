@@ -23,60 +23,67 @@
 #'
 #' @examples
 #' library(SticsRFiles)
-#' path <- get_examples_path( file_type = "txt")
+#' path <- get_examples_path(file_type = "txt")
 #' Meteo <- get_climate_txt(path)
-#'
 #' @export
 #'
-get_climate_txt= function(workspace = getwd(),
-                          file_name = "climat.txt",
-                          preserve = TRUE,
-                          dirpath = lifecycle::deprecated(),
-                          filename = lifecycle::deprecated()){
+get_climate_txt <- function(workspace = getwd(),
+                            file_name = "climat.txt",
+                            preserve = TRUE,
+                            dirpath = lifecycle::deprecated(),
+                            filename = lifecycle::deprecated()) {
 
   # Managing deprecated arguments
   # dirpath
   if (lifecycle::is_present(dirpath)) {
-    lifecycle::deprecate_warn("0.5.0", "get_climate_txt(dirpath)",
-                              "get_climate_txt(workspace)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_climate_txt(dirpath)",
+      "get_climate_txt(workspace)"
+    )
   } else {
     dirpath <- workspace # to remove when we update inside the function
   }
   # filename
   if (lifecycle::is_present(filename)) {
-    lifecycle::deprecate_warn("0.5.0", "get_climate_txt(filename)",
-                              "get_climate_txt(file_name)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_climate_txt(filename)",
+      "get_climate_txt(file_name)"
+    )
   } else {
     filename <- file_name # to remove when we update inside the function
   }
 
 
 
-  file_path <- file.path(dirpath,filename)
+  file_path <- file.path(dirpath, filename)
 
   # Checking file
-  if (! file.exists(file_path)) {
-    warning("File does not exist: ",file_path)
+  if (!file.exists(file_path)) {
+    warning("File does not exist: ", file_path)
     return()
   }
 
-  meteo_data= data.table::fread(file_path, data.table = F)
-  colnames(meteo_data)= c("station","year","month","day","julian","ttmin","ttmax",
-                          "ttrg","ttetp","ttrr","ttvent","ttpm","ttco2")
-  Date= data.frame(Date=as.POSIXct(x = paste(meteo_data$year,meteo_data$month,meteo_data$day, sep="-"),
-                                   format = "%Y-%m-%d", tz="UTC"))
+  meteo_data <- data.table::fread(file_path, data.table = F)
+  colnames(meteo_data) <- c(
+    "station", "year", "month", "day", "julian", "ttmin", "ttmax",
+    "ttrg", "ttetp", "ttrr", "ttvent", "ttpm", "ttco2"
+  )
+  Date <- data.frame(Date = as.POSIXct(
+    x = paste(meteo_data$year, meteo_data$month, meteo_data$day, sep = "-"),
+    format = "%Y-%m-%d", tz = "UTC"
+  ))
 
   # For removing original date components columns
-  if (! preserve ) {
-    col_idx <- grep("year|month|day|julian",colnames(meteo_data))
-    if (length(col_idx)) meteo_data <- meteo_data[,-col_idx]
+  if (!preserve) {
+    col_idx <- grep("year|month|day|julian", colnames(meteo_data))
+    if (length(col_idx)) meteo_data <- meteo_data[, -col_idx]
   }
 
   # Adding Date to data.frame
-  meteo_data= cbind(Date, meteo_data)
+  meteo_data <- cbind(Date, meteo_data)
 
   # Adding file path as attribute
-  attr(meteo_data, "file")= file_path
+  attr(meteo_data, "file") <- file_path
 
   return(meteo_data)
 }

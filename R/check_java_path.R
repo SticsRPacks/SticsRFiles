@@ -5,24 +5,20 @@
 #' @param javastics JavaStics installation root folder
 #'
 #' @examples
-#'\dontrun{
-#'check_java_path("/home/plecharpent/Work/JavaSTICS-v131-stics-v841")
-#'}
+#' \dontrun{
+#' check_java_path("/home/plecharpent/Work/JavaSTICS-v131-stics-v841")
+#' }
 #'
 #' @keywords internal
 
-check_java_path <- function(javastics){
-
-
-
+check_java_path <- function(javastics) {
   if (!file.exists(javastics)) {
-    stop("The JavasStics folder doesn't exist : ",javastics)
+    stop("The JavasStics folder doesn't exist : ", javastics)
   }
 
   # checking if it's a JavaStics root directory
-  if (!file.exists(file.path(javastics,"JavaStics.exe")) &&
-      !file.exists(file.path(javastics,"JavaStics.jar"))) {
-    stop("This directory is not a JavaStics one: ",javastics)
+  if (!file.exists(file.path(javastics, "JavaStics.exe")) &&
+    !file.exists(file.path(javastics, "JavaStics.jar"))) {
+    stop("This directory is not a JavaStics one: ", javastics)
   }
-
 }

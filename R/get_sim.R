@@ -7,10 +7,10 @@
 #' a special case of the [get_sim()]
 #'
 #' @examples
-#'  \dontrun{
-#' get_daily_results(path,"banana")
+#' \dontrun{
+#' get_daily_results(path, "banana")
 #' # ->
-#' get_sim(path,"banana")
+#' get_sim(path, "banana")
 #' }
 #'
 #' @keywords internal
@@ -19,12 +19,12 @@
 
 
 get_daily_results <- function(...) {
-
   lifecycle::deprecate_warn(
     "0.5.0",
     "get_daily_results()",
-    "get_sim()") #,
-    #details = "This function is a special case of get_sim(); use it instead.")
+    "get_sim()"
+  ) # ,
+  # details = "This function is a special case of get_sim(); use it instead.")
   get_sim(...)
 }
 
@@ -78,7 +78,7 @@ get_daily_results <- function(...) {
 #' @examples
 #' \dontrun{
 #' path <- get_examples_path(file_type = "sti")
-#' get_sim(path,"banana")
+#' get_sim(path, "banana")
 #' }
 #'
 #' @export
@@ -94,7 +94,7 @@ get_sim <- function(workspace,
                     var_list = lifecycle::deprecated(),
                     dates_list = lifecycle::deprecated(),
                     usms_filepath = lifecycle::deprecated(),
-                    javastics_path = lifecycle::deprecated()){
+                    javastics_path = lifecycle::deprecated()) {
 
 
   # Managing deprecated arguments
@@ -132,8 +132,10 @@ get_sim <- function(workspace,
 
 
 
-  res <- get_file(workspace, usm_name, var_list, dates_list, usms_filepath,
-                 javastics_path, verbose, "sim")
+  res <- get_file(
+    workspace, usm_name, var_list, dates_list, usms_filepath,
+    javastics_path, verbose, "sim"
+  )
 
   # Testing if results list is not empty
   # otherwise, setting "cropr_simulation" class attribute will fail

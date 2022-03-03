@@ -14,43 +14,47 @@
 #' @return A vector of usm names
 #'
 #' @examples
-#' path = get_examples_path( file_type = "xml")
+#' path <- get_examples_path(file_type = "xml")
 #'
 #' usms_list <- get_usms_list(file = file.path(path, "usms.xml"))
 #'
 #' usms_list <- get_usms_list(file = file.path(path, "usms.xml"), usm = c("usm1", "usm2"))
-#'
 #' @export
 #'
 get_usms_list <- function(file,
                           usm = NULL,
                           usm_path = lifecycle::deprecated(),
-                          name = lifecycle::deprecated() ){
+                          name = lifecycle::deprecated()) {
 
   # TODO: add select key: i.e. get all usms names
   # with the same soil, plant 1,...
   if (lifecycle::is_present(usm_path)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_list(usm_path)",
-                              "get_usms_list(file)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_usms_list(usm_path)",
+      "get_usms_list(file)"
+    )
   } else {
     usm_path <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_list(name)",
-                              "get_usms_list(usm)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_usms_list(name)",
+      "get_usms_list(usm)"
+    )
   } else {
     name <- usm # to remove when we update inside the function
   }
 
   # Detecting file type
-  if ( !is_usms_xml(usm_path) ) {
+  if (!is_usms_xml(usm_path)) {
     stop("The file does not exist or is not a usms file")
   }
 
-  return(find_usms_soils_names(file_path = usm_path,
-                               xml_name = "usm",
-                               name = name))
-
+  return(find_usms_soils_names(
+    file_path = usm_path,
+    xml_name = "usm",
+    name = name
+  ))
 }
 
 
@@ -60,10 +64,14 @@ find_usms_soils_names <- function(file_path, xml_name, name = NULL) {
   names_list <- get_param_xml(file_path, xml_name)[[1]][[xml_name]]
 
   # Not any names, (may be useless bcause xml file already checked!)
-  if(is.null(names_list)) return(names_list)
+  if (is.null(names_list)) {
+    return(names_list)
+  }
 
   # Filter names list with partial match
-  if (base::is.null(name)) return(names_list)
+  if (base::is.null(name)) {
+    return(names_list)
+  }
 
   # Filter usms/soils list with partial match
   return(find_names(names_list, name))

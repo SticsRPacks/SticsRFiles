@@ -16,8 +16,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' upgrade_param_gen_xml(file = "/path/to/param_gen.xml",
-#'                       out_dir = "/path/to/directory")
+#' upgrade_param_gen_xml(
+#'   file = "/path/to/param_gen.xml",
+#'   out_dir = "/path/to/directory"
+#' )
 #' }
 upgrade_param_gen_xml <- function(file,
                                   out_dir,
@@ -39,15 +41,21 @@ upgrade_param_gen_xml <- function(file,
     file_version <- check_xml_file_version(file, stics_version)
 
     if (!file_version) {
-      stop("The input version ",stics_version,
-           " does not match file version ",
-           attr(file_version,"version")," \n",file )
+      stop(
+        "The input version ", stics_version,
+        " does not match file version ",
+        attr(file_version, "version"), " \n", file
+      )
     }
 
     # Compatibility checks between version and update to target_version
     ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version) stop("Files from the version ", stics_version,
-                                    " cannot be converted to the version ", target_version)
+    if (ver_num < min_version) {
+      stop(
+        "Files from the version ", stics_version,
+        " cannot be converted to the version ", target_version
+      )
+    }
   }
 
 
@@ -58,22 +66,28 @@ upgrade_param_gen_xml <- function(file,
   set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
 
   # Nodes to remove
-  rm_names <- c("FINERT","FMIN1", "FMIN2", "FMIN3", "khaut", "rayon", "concrr" )
+  rm_names <- c("FINERT", "FMIN1", "FMIN2", "FMIN3", "khaut", "rayon", "concrr")
 
-  rm_nodes <- lapply(rm_names, function(x)
-    getNodeS(docObj = old_doc,
-             path = paste0("//param[@nom='",x,"']")))
+  rm_nodes <- lapply(rm_names, function(x) {
+    getNodeS(
+      docObj = old_doc,
+      path = paste0("//param[@nom='", x, "']")
+    )
+  })
   lapply(rm_nodes, function(x) removeNodes(x))
 
 
   # Nodes to change
   # <param format="real" max="20.0" min="1.0" nom="k_desat">3.0</param>
   # k_desat to kdesat
-  nodes_to_change <- getNodeS(old_doc, path="//param[@nom='k_desat']")
-  if (!is.null(nodes_to_change))
-    setAttrValues(old_doc, path="//param[@nom='k_desat']",
-                  attr_name="nom",
-                  values_list = "kdesat")
+  nodes_to_change <- getNodeS(old_doc, path = "//param[@nom='k_desat']")
+  if (!is.null(nodes_to_change)) {
+    setAttrValues(old_doc,
+      path = "//param[@nom='k_desat']",
+      attr_name = "nom",
+      values_list = "kdesat"
+    )
+  }
 
 
 
@@ -86,7 +100,8 @@ upgrade_param_gen_xml <- function(file,
 <param format="real" max="11.0" min="3.0" nom="GMIN5">8.50000</param>
 <param format="real" max="1.0" min="0.0" nom="GMIN6">0.06000</param>
 <param format="real" max="35.0" min="5.0" nom="GMIN7">11.00000</param>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
 
   new_nodes <- getNodeSet(new_node, path = "//param")
@@ -131,9 +146,8 @@ upgrade_param_gen_xml <- function(file,
   # }
 
   # Writing to file param_gen.xml
-  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite )
+  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite)
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))
-
 }

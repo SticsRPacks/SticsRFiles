@@ -8,14 +8,15 @@
 #'
 #' @keywords internal
 #'
-#@examples
+# @examples
 merge_nodesets <- function(ns1, ns2) {
-
   new_ns <- ns1
   nodes_nb1 <- length(ns1)
   nodes_nb2 <- length(ns2)
 
-  if (! nodes_nb2) return(ns1)
+  if (!nodes_nb2) {
+    return(ns1)
+  }
 
   for (i in 1:nodes_nb2) {
     new_ns[[nodes_nb1 + i]] <- ns2[[i]]

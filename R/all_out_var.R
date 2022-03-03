@@ -12,19 +12,20 @@
 #'
 #' @examples
 #' \dontrun{
-#'  all_out_var()
+#' all_out_var()
 #' }
 #' @keywords internal
 #'
-all_out_var <- function(stics_version = "latest"){
+all_out_var <- function(stics_version = "latest") {
 
   # Checking and getting the right version
-  version <- check_version_compat( stics_version = stics_version)
+  version <- check_version_compat(stics_version = stics_version)
 
   var_df <- utils::read.csv2(
-    file.path(get_examples_path( file_type = "csv", stics_version = stics_version ), "outputs.csv"),
+    file.path(get_examples_path(file_type = "csv", stics_version = stics_version), "outputs.csv"),
     header = FALSE,
-    stringsAsFactors = FALSE)[,1:4]
+    stringsAsFactors = FALSE
+  )[, 1:4]
 
   names(var_df) <- c("name", "definition", "unit", "type")
 
@@ -60,41 +61,43 @@ all_out_var <- function(stics_version = "latest"){
 #' SticsRFiles::get_var_info("lai")
 #'
 #' # Find by keyword (fuzzy search in variable name and description):
-#' SticsRFiles::get_var_info(keyword= "lai")
+#' SticsRFiles::get_var_info(keyword = "lai")
 #'
 #' # Find for a particular version:
-#' SticsRFiles::get_var_info("lai", stics_version= "V9.0")
+#' SticsRFiles::get_var_info("lai", stics_version = "V9.0")
 #' }
 #'
 #' @export
 #'
 get_var_info <- function(var = NULL,
                          keyword = NULL,
-                         stics_version= "latest",
-                         version = lifecycle::deprecated()){
+                         stics_version = "latest",
+                         version = lifecycle::deprecated()) {
 
   # added a second condition because
   # if version is not given as an arg.
   # version always exist and giving detailed information
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
-    lifecycle::deprecate_warn("0.5.0", "get_var_info(version)",
-                              "get_var_info(stics_version)")
-  }else{
+    lifecycle::deprecate_warn(
+      "0.5.0", "get_var_info(version)",
+      "get_var_info(stics_version)"
+    )
+  } else {
     version <- stics_version # to remove when we update inside the function
   }
 
 
   all_vars <- all_out_var(version)
-  if(!is.null(var)){
-    var= var_to_col_names(var)
-    vars_names_parsed= var_to_col_names(all_vars$name)
-    all_vars[grep(var, vars_names_parsed,ignore.case = TRUE),]
-  }else if(!is.null(keyword)){
-    idx <- grepl(keyword, all_vars$definition,ignore.case = TRUE)
-    idx <- idx | grepl(keyword, all_vars$name,ignore.case = TRUE)
-    all_vars[idx,]
-  }else{
+  if (!is.null(var)) {
+    var <- var_to_col_names(var)
+    vars_names_parsed <- var_to_col_names(all_vars$name)
+    all_vars[grep(var, vars_names_parsed, ignore.case = TRUE), ]
+  } else if (!is.null(keyword)) {
+    idx <- grepl(keyword, all_vars$definition, ignore.case = TRUE)
+    idx <- idx | grepl(keyword, all_vars$name, ignore.case = TRUE)
+    all_vars[idx, ]
+  } else {
     all_vars
   }
 }
@@ -119,11 +122,11 @@ get_var_info <- function(var = NULL,
 #'
 #' @examples
 #' \dontrun{
-#' is_stics_var(c("lai(n)",'masec(n)',"truc"))
+#' is_stics_var(c("lai(n)", "masec(n)", "truc"))
 #' }
-is_stics_var= function(var,
-                       stics_version= "latest",
-                       version = lifecycle::deprecated()){
+is_stics_var <- function(var,
+                         stics_version = "latest",
+                         version = lifecycle::deprecated()) {
 
 
   # added a second condition because
@@ -131,19 +134,21 @@ is_stics_var= function(var,
   # version always exist and giving detailed information
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
-    lifecycle::deprecate_warn("0.5.0", "is_stics_var(version)",
-                              "is_stics_var(stics_version)")
-  }else{
+    lifecycle::deprecate_warn(
+      "0.5.0", "is_stics_var(version)",
+      "is_stics_var(stics_version)"
+    )
+  } else {
     version <- stics_version # to remove when we update inside the function
   }
 
   all_vars <- all_out_var(version)
-  var_parsed= var_to_col_names(var)
-  vars_names_parsed= var_to_col_names(all_vars$name)
+  var_parsed <- var_to_col_names(var)
+  vars_names_parsed <- var_to_col_names(all_vars$name)
 
-  index_var= match(var_parsed,vars_names_parsed)
-  var_found= !is.na(index_var)
-  if(any(!var_found)){
+  index_var <- match(var_parsed, vars_names_parsed)
+  var_found <- !is.na(index_var)
+  if (any(!var_found)) {
     cli::cli_alert_warning("Variable{?s} {.var {var_parsed[!var_found]}} not found. Try {.code get_var_info()}.")
   }
   return(var_found)

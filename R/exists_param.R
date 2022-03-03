@@ -10,24 +10,21 @@
 #' @return A vector of logical values
 #'
 #' @examples
-#' xml_sols <- file.path(get_examples_path( file_type = "xml"),"sols.xml")
+#' xml_sols <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #'
 #' xml_doc <- SticsRFiles:::xmldocument(xml_sols)
 #'
 #' SticsRFiles:::exists_param(xml_doc, "cfes")
-#' SticsRFiles:::exists_param(xml_doc, c("cfes","mulchbat"))
-#'
+#' SticsRFiles:::exists_param(xml_doc, c("cfes", "mulchbat"))
 #' @keywords internal
 #'
-exists_param <- function(xml_doc_object,param_name, ...) {
-
-  nb <- get_param_number(xml_doc_object,param_name, ...)
+exists_param <- function(xml_doc_object, param_name, ...) {
+  nb <- get_param_number(xml_doc_object, param_name, ...)
 
   if (is.list(nb)) {
-    ex <- unlist(lapply(nb,as.logical))
+    ex <- unlist(lapply(nb, as.logical))
     return(ex)
   }
 
   return(as.logical(nb))
-
 }

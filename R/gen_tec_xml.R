@@ -45,57 +45,55 @@
 #' @examples
 #' \dontrun{
 #'
-#' xl_path <-  download_usm_xl(file = "inputs_stics_example.xlsx")
+#' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' tec_param_df <- read_params_table(file = xl_path, sheet_name = "Tec")
 #' gen_tec_xml(out_dir = "/path/to/dest/dir", param_df = tec_param_df)
-#'
-#'}
+#' }
 #'
 #' @export
 #'
 # TODO: refactor with gen_sta_file, gen_ini_file : same code
 gen_tec_xml <- function(param_df = NULL,
                         file = NULL,
-                        #tec_names = NULL,
+                        # tec_names = NULL,
                         out_dir = getwd(),
                         stics_version = "latest",
-                        na_values = NA,#) { #,  #dict = NULL) {
+                        na_values = NA, # ) { #,  #dict = NULL) {
                         param_table = lifecycle::deprecated(),
                         tec_in_file = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
-
-    if (lifecycle::is_present(param_table)) {
-      lifecycle::deprecate_warn("0.5.0", "gen_tec_xml(param_table)", "gen_tec_xml(param_df)")
-    } else {
-      param_table <- param_df # to remove when we update inside the function
-    }
-    if (lifecycle::is_present(tec_in_file)) {
-      lifecycle::deprecate_warn("0.5.0", "gen_tec_xml(tec_in_file)", "gen_tec_xml(file)")
-    } else {
-      tec_in_file <- file # to remove when we update inside the function
-    }
-    if (lifecycle::is_present(out_path)) {
-      lifecycle::deprecate_warn("0.5.0", "gen_tec_xml(out_path)", "gen_tec_xml(out_dir)")
-    } else {
-      out_path <- out_dir # to remove when we update inside the function
-    }
+  if (lifecycle::is_present(param_table)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_tec_xml(param_table)", "gen_tec_xml(param_df)")
+  } else {
+    param_table <- param_df # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(tec_in_file)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_tec_xml(tec_in_file)", "gen_tec_xml(file)")
+  } else {
+    tec_in_file <- file # to remove when we update inside the function
+  }
+  if (lifecycle::is_present(out_path)) {
+    lifecycle::deprecate_warn("0.5.0", "gen_tec_xml(out_path)", "gen_tec_xml(out_dir)")
+  } else {
+    out_path <- out_dir # to remove when we update inside the function
+  }
 
 
 
   xml_doc <- NULL
 
-  if (! base::is.null(tec_in_file) ) {
+  if (!base::is.null(tec_in_file)) {
     xml_doc <- xmldocument(tec_in_file)
   }
 
 
   # detecting tec names column
   param_names <- names(param_table)
-  col_id <- grep("^tec",tolower(param_names))
-  if (! length(col_id)) {
+  col_id <- grep("^tec", tolower(param_names))
+  if (!length(col_id)) {
     stop("The column for identifying tec names has not been found !")
   }
-  tec_col <- param_names[ col_id  ]
+  tec_col <- param_names[col_id]
 
   # Pending -------------------------------------------------------------
   # Filtering on tec_names vector arg
@@ -106,14 +104,16 @@ gen_tec_xml <- function(param_df = NULL,
 
 
   # Removing for the moment the dict argument
-  xml_docs <- gen_tec_doc(xml_doc = xml_doc,
-                          param_table = param_table[ , - col_id],
-                          stics_version = stics_version,
-                          na_values = na_values) #,
-  #dict = dict)
+  xml_docs <- gen_tec_doc(
+    xml_doc = xml_doc,
+    param_table = param_table[, -col_id],
+    stics_version = stics_version,
+    na_values = na_values
+  ) # ,
+  # dict = dict)
 
 
-  if ( class(xml_docs) == "xmlDocument") {
+  if (class(xml_docs) == "xmlDocument") {
     xml_docs <- list(xml_docs)
   }
 
@@ -137,27 +137,27 @@ gen_tec_xml <- function(param_df = NULL,
 
 
   # checking if out_path exists
-  if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist",out_path ))
+  if (!dir.exists(out_path)) {
+    stop(paste("The directory does not exist", out_path))
   }
 
   # defining output files paths
   out_name <- param_table[[tec_col]]
-  ids <- grepl("_tec.xml$",out_name)
-  if ( sum(ids) < length(out_name) ) {
-    out_name[!ids] <- paste0(param_table[[tec_col]][!ids],"_tec.xml")
+  ids <- grepl("_tec.xml$", out_name)
+  if (sum(ids) < length(out_name)) {
+    out_name[!ids] <- paste0(param_table[[tec_col]][!ids], "_tec.xml")
   }
-  tec_out_file <- file.path(out_path,out_name)
+  tec_out_file <- file.path(out_path, out_name)
 
 
 
   # checking dimensions
-  if ( ! length(xml_docs) == length(tec_out_file) ) {
+  if (!length(xml_docs) == length(tec_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
 
   # selecting output files names
-  tec_out_file <- tec_out_file[! out_idx]
+  tec_out_file <- tec_out_file[!out_idx]
 
   # saving files
   # TODO: vectorize the saveXmlDoc method of the xmlDocument class
@@ -166,5 +166,4 @@ gen_tec_xml <- function(param_df = NULL,
   }
 
   return(invisible(xml_docs))
-
 }

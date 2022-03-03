@@ -11,14 +11,13 @@
 #' @examples
 #' \dontrun{
 #'
-#' xml_sta <- file.path(get_examples_path( file_type = "xml"),"file_sta.xml")
+#' xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 #'
 #' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 #'
-#' par_form <- SticsRFiles:::get_param_formalisms(sta_doc,"zr")
+#' par_form <- SticsRFiles:::get_param_formalisms(sta_doc, "zr")
 #'
-#' par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc,c("zr","altistation"))
-#'
+#' par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc, c("zr", "altistation"))
 #' }
 #'
 #' @keywords internal
@@ -27,12 +26,17 @@
 get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 
   # For multiple documents
-  if ( length(xml_doc) > 1 ) {
-
-    names <- lapply(xml_doc,
-                    function(x) get_param_formalisms(xml_doc = x,
-                                                    name = name,
-                                                    form_only = form_only))
+  if (length(xml_doc) > 1) {
+    names <- lapply(
+      xml_doc,
+      function(x) {
+        get_param_formalisms(
+          xml_doc = x,
+          name = name,
+          form_only = form_only
+        )
+      }
+    )
 
 
     return(names)
@@ -47,47 +51,53 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 
   # recursive call for a parameter name list
   if (length(name) > 1) {
-    form_list <- lapply(name, function(x) get_param_formalisms(xml_doc,
-                                                              x,
-                                                              form_only = form_only))
+    form_list <- lapply(name, function(x) {
+      get_param_formalisms(xml_doc,
+        x,
+        form_only = form_only
+      )
+    })
     # if no formalism
     if (all(unlist(lapply(form_list, base::is.null)))) {
       form_list <- list(NA)
       return(form_list)
     }
 
-    if (form_only)  form_list <- unique(unlist(form_list, use.names = FALSE))
+    if (form_only) form_list <- unique(unlist(form_list, use.names = FALSE))
 
     return(form_list)
   }
 
   # case : param name as value of @nom attribute
-  x_path <- paste0("//*[@nom=\"",name,"\"]//ancestor::formalisme")
+  x_path <- paste0("//*[@nom=\"", name, "\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
-  if (! base::is.null(values) && ! values == "none") return(values)
+  if (!base::is.null(values) && !values == "none") {
+    return(values)
+  }
 
 
   # case : param name as value of @nomParam attribute
-  x_path <- paste0("//*[@nomParam=\"",name,"\"]//ancestor::formalisme")
+  x_path <- paste0("//*[@nomParam=\"", name, "\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
-  if (! base::is.null(values) && ! values == "none") return(values)
+  if (!base::is.null(values) && !values == "none") {
+    return(values)
+  }
 
 
   return(values)
-
 }
 
 
 param_formalism_elt <- function(xml_doc, xpath, name) {
 
   # Formatting a parameter formalism list unit
-  values <- getAttrsValues(xml_doc,xpath,"nom")
+  values <- getAttrsValues(xml_doc, xpath, "nom")
 
   param_values <- get_param_value(xml_doc = xml_doc, param_name = name)
 
   if (base::is.null(values)) {
     # Fix: parameter exists but no formalism
-    if (! base::is.null(param_values)) {
+    if (!base::is.null(param_values)) {
       values <- matrix("none")
       names(values) <- name
     }
@@ -100,5 +110,4 @@ param_formalism_elt <- function(xml_doc, xpath, name) {
   names(values) <- name
 
   return(values)
-
 }

@@ -18,7 +18,7 @@ get_param_desc <- function(file_path = NULL,
   # file_path <- file.path(file_path,"config", "inputs.csv"), otherwise
   # check if the file exists in the dir
   if (base::is.null(file_path)) {
-    file_path <- file.path(get_examples_path( file_type = "csv", stics_version = stics_version),"inputs.csv")
+    file_path <- file.path(get_examples_path(file_type = "csv", stics_version = stics_version), "inputs.csv")
   }
 
 
@@ -27,13 +27,13 @@ get_param_desc <- function(file_path = NULL,
 
   param_df <- utils::read.csv2(file_path, header = FALSE, stringsAsFactors = F, strip.white = T)
 
-  param_df <- param_df[,1:8]
+  param_df <- param_df[, 1:8]
   colnames(param_df) <- c("name", "definition", "unit", "kind", "dim", "type", "min", "max")
 
 
   if (!base::is.null(name)) {
     idx <- grep(pattern = name, x = param_df$name)
-    param_df <- param_df[idx,]
+    param_df <- param_df[idx, ]
   }
 
   par_src <- unique(param_df$kind)
@@ -50,6 +50,4 @@ get_param_desc <- function(file_path = NULL,
   attr(x = param_df, which = "version") <- stics_version
 
   return(param_df)
-
-
 }

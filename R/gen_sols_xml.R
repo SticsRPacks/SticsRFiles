@@ -54,7 +54,6 @@
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
 #' gen_sols_xml(file = "sols.xml", param_df = sols_param_df)
-#'
 #' }
 #'
 #' @export
@@ -64,39 +63,45 @@
 gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
                          param_df = NULL,
                          template = NULL,
-                         stics_version ="latest",
+                         stics_version = "latest",
                          sols_in_file = lifecycle::deprecated(),
                          sols_param = lifecycle::deprecated(),
                          sols_out_file = lifecycle::deprecated(),
                          sols_nb = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(sols_in_file)) {
-    lifecycle::deprecate_warn("0.5.0",
-                              "gen_sols_xml(sols_in_file)",
-                              "gen_sols_xml(template)")
+    lifecycle::deprecate_warn(
+      "0.5.0",
+      "gen_sols_xml(sols_in_file)",
+      "gen_sols_xml(template)"
+    )
   } else {
     sols_in_file <- template
   }
 
   if (lifecycle::is_present(sols_param)) {
-    lifecycle::deprecate_warn("0.5.0",
-                              "gen_sols_xml(sols_param)",
-                              "gen_sols_xml(param_df)")
+    lifecycle::deprecate_warn(
+      "0.5.0",
+      "gen_sols_xml(sols_param)",
+      "gen_sols_xml(param_df)"
+    )
   } else {
     sols_param <- param_df
   }
 
   if (lifecycle::is_present(sols_out_file)) {
-    lifecycle::deprecate_warn("0.5.0",
-                              "gen_sols_xml(sols_out_file)",
-                              "gen_sols_xml(file)")
+    lifecycle::deprecate_warn(
+      "0.5.0",
+      "gen_sols_xml(sols_out_file)",
+      "gen_sols_xml(file)"
+    )
   } else {
     sols_out_file <- file
   }
 
   if (lifecycle::is_present(sols_nb)) {
     lifecycle::deprecate_warn("0.5.0", "gen_sols_xml(sols_nb)",
-                              details = "It is now directly computed in the function.")
+      details = "It is now directly computed in the function."
+    )
   } else {
     sols_nb <- nrow(sols_param)
   }
@@ -104,26 +109,28 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
   xml_doc <- NULL
 
   # Fix : default output file path if not provided
-  if (base::is.null(sols_out_file) ) {
+  if (base::is.null(sols_out_file)) {
     sols_out_file <- file.path(getwd(), "sols.xml")
   }
 
-  if (! base::is.null(sols_in_file) ) {
+  if (!base::is.null(sols_in_file)) {
     xml_doc <- xmldocument(sols_in_file)
   }
 
-  xml_doc <- gen_usms_sols_doc(doc_type = "sols",
-                               xml_doc = xml_doc,
-                               nodes_nb = sols_nb,
-                               nodes_param = sols_param,
-                               stics_version = stics_version)
+  xml_doc <- gen_usms_sols_doc(
+    doc_type = "sols",
+    xml_doc = xml_doc,
+    nodes_nb = sols_nb,
+    nodes_param = sols_param,
+    stics_version = stics_version
+  )
 
 
 
   # checking if out dir exists
   out_path <- dirname(sols_out_file)
-  if ( ! dir.exists(out_path) ) {
-    stop(paste("The directory does not exist: ",out_path))
+  if (!dir.exists(out_path)) {
+    stop(paste("The directory does not exist: ", out_path))
   }
 
   # for getting onlye the xml doc in return
@@ -132,5 +139,4 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
   }
 
   return(invisible(xml_doc))
-
 }

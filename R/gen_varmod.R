@@ -22,11 +22,11 @@
 #'
 #' @examples
 #' \dontrun{
-#'  gen_varmod(".", c("lai(n)","hauteur"))
-#'  gen_varmod("/path/to/stics/workspace", c("lai(n)","hauteur"))
-#'  # Add a variable to the others:
-#'  gen_varmod(".", "masec(n)", append = TRUE)
-#'  # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
+#' gen_varmod(".", c("lai(n)", "hauteur"))
+#' gen_varmod("/path/to/stics/workspace", c("lai(n)", "hauteur"))
+#' # Add a variable to the others:
+#' gen_varmod(".", "masec(n)", append = TRUE)
+#' # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
 #' }
 #'
 #' @export
@@ -34,17 +34,19 @@
 gen_varmod <- function(workspace,
                        var,
                        append = FALSE,
-                       file_name ="var.mod",
+                       file_name = "var.mod",
                        stics_version = "latest",
                        force = FALSE,
                        var_names = lifecycle::deprecated(),
-                       version = lifecycle::deprecated()){
+                       version = lifecycle::deprecated()) {
 
 
   # var_names
   if (lifecycle::is_present(var_names)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_varmod(var_names)",
-                              "gen_varmod(var)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "gen_varmod(var_names)",
+      "gen_varmod(var)"
+    )
   } else {
     var_names <- var # to remove when we update inside the function
   }
@@ -54,8 +56,10 @@ gen_varmod <- function(workspace,
   # version always exist and giving detailed information
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
-    lifecycle::deprecate_warn("0.5.0", "gen_varmod(version)",
-                              "gen_varmod(stics_version)")
+    lifecycle::deprecate_warn(
+      "0.5.0", "gen_varmod(version)",
+      "gen_varmod(stics_version)"
+    )
   } else {
     version <- stics_version # to remove when we update inside the function
   }
@@ -63,8 +67,8 @@ gen_varmod <- function(workspace,
 
 
   # Checking if workspace exists
-  if(!dir.exists(workspace)){
-    stop(paste(workspace,": directory does not exist !"))
+  if (!dir.exists(workspace)) {
+    stop(paste(workspace, ": directory does not exist !"))
   }
 
   file_path <- file.path(workspace, file_name)
@@ -79,33 +83,33 @@ gen_varmod <- function(workspace,
   var_names <- unique(var_names)
 
   # Check if the variable exist:
-  var_exist= is_stics_var(var_names,version)
+  var_exist <- is_stics_var(var_names, version)
 
 
-  if(any(!var_exist)&&isFALSE(force)){
-    var_names= var_names[var_exist]
+  if (any(!var_exist) && isFALSE(force)) {
+    var_names <- var_names[var_exist]
   }
 
   if (!length(var_names)) warning("Not any variable name to add to the var.mod file!")
 
-  if(isTRUE(force)){
-    var_names[var_exist]= var_to_stics_name(var_names[var_exist])
-  }else{
-    var_names= var_to_stics_name(var_names)
+  if (isTRUE(force)) {
+    var_names[var_exist] <- var_to_stics_name(var_names[var_exist])
+  } else {
+    var_names <- var_to_stics_name(var_names)
   }
 
   # Add possibility to append a variable to var.mod.
-  if(isTRUE(append)){
-    vars= readLines(file_path)
-    commonvars= var_names%in%vars
-    if(any(commonvars)){
+  if (isTRUE(append)) {
+    vars <- readLines(file_path)
+    commonvars <- var_names %in% vars
+    if (any(commonvars)) {
       cli::cli_alert_warning("Variable{?s} {.var {var_names[commonvars]}} already in {.code var.mod}. Not repeating it.")
     }
-    var_names= var_names[!commonvars]
-    if(length(var_names)==0){
+    var_names <- var_names[!commonvars]
+    if (length(var_names) == 0) {
       invisible()
     }
   }
 
-  cat(var_names,file= file_path, sep="\n", append=append)
+  cat(var_names, file = file_path, sep = "\n", append = append)
 }

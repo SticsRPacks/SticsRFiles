@@ -21,7 +21,7 @@
 #' @examples
 #' \dontrun{
 #' # Soil file
-#' file = file.path(get_examples_path( file_type = "xml"),"sols.xml")
+#' file <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #'
 #' # For all soils
 #' get_param_xml(file)
@@ -34,42 +34,28 @@
 #' # For soils and parameters vectors
 #' # scalar parameters per soil
 #' get_param_xml(file, c("argi", "norg"),
-#' select = "sol", select_value = c("solcanne", "solbanane"))
-#'
-#' $sols.xml
-#' $sols.xml$argi
-#' [1] 30.2 70.0
-#'
-#' $sols.xml$norg
-#' [1] 0.27 0.20
+#'   select = "sol", select_value = c("solcanne", "solbanane")
+#' )
 #'
 #' # vector parameters per soil (5 values, one per soil layer)
 #' get_param_xml(file, c("epc", "HCCF"),
-#' select = "sol", select_value = c("solcanne", "solbanane"))
-#'
-#' $sols.xml
-#' $sols.xml$epc
-#' [1] 20 20 20 20 20 10 10 10 10 40
-#'
-#' $sols.xml$HCCF
-#' [1] 46.8 46.4 48.5 50.1 50.1 41.0 41.0 41.0 42.0 42.0
+#'   select = "sol", select_value = c("solcanne", "solbanane")
+#' )
 #'
 #' # Crop management file
-#' file = file.path(get_examples_path( file_type = "xml"),"file_tec.xml")
+#' file <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 #'
 #' get_param_xml(file)
 #'
 #' # Getting parameters for irrigation (date and quantity)
 #' get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 #'
-#'
 #' # Getting all parameters for a given formalism: "irrigation"
 #' get_param_xml(file, select = "formalisme", select_value = "irrigation")
-#'
 #' }
 #' @export
 get_param_xml <- function(file,
-                          param=NULL,
+                          param = NULL,
                           select = NULL,
                           select_value = NULL,
                           xml_file = lifecycle::deprecated(),
@@ -85,7 +71,7 @@ get_param_xml <- function(file,
     xml_file <- file # to remove when we update inside the function
   }
 
-    if (lifecycle::is_present(param_name)) {
+  if (lifecycle::is_present(param_name)) {
     lifecycle::deprecate_warn("0.5.0", "get_param_xml(param_name)", "get_param_xml(param)")
   } else {
     param_name <- param # to remove when we update inside the function
@@ -97,23 +83,31 @@ get_param_xml <- function(file,
     value <- select_value # to remove when we update inside the function
   }
 
-  xml_docs <- lapply(xml_file,xmldocument)
+  xml_docs <- lapply(xml_file, xmldocument)
 
   # Checking if any param duplicates in tec files, for 'cut crop' choices
-  lapply(xml_docs,
-         function(x) check_choice_param(xml_doc = x,
-                      param_name = param_name))
+  lapply(
+    xml_docs,
+    function(x) {
+      check_choice_param(
+        xml_doc = x,
+        param_name = param_name
+      )
+    }
+  )
 
-  values <- get_param_value(xml_doc = xml_docs,
-                            param_name = param_name,
-                            parent_name = select,
-                            parent_sel_attr = value,
-                            ...)
-  xml_names= lapply(xml_file, basename)%>%unlist()
+  values <- get_param_value(
+    xml_doc = xml_docs,
+    param_name = param_name,
+    parent_name = select,
+    parent_sel_attr = value,
+    ...
+  )
+  xml_names <- lapply(xml_file, basename) %>% unlist()
 
   # If there are duplicated names in xml_file:
-  is_duplicated_name= xml_names%>%duplicated()
-  xml_names[is_duplicated_name]= paste0("xml_",which(is_duplicated_name==TRUE),"_",xml_names[is_duplicated_name])
+  is_duplicated_name <- xml_names %>% duplicated()
+  xml_names[is_duplicated_name] <- paste0("xml_", which(is_duplicated_name == TRUE), "_", xml_names[is_duplicated_name])
 
   names(values) <- xml_names
 

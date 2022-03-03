@@ -14,12 +14,11 @@
 #' \dontrun{
 #'
 #' download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
-#' xl_path <- file.path("/path/to/dest/dir","inputs_stics_example.xlsx")
+#' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' xml_path <- "path/to/ini/xml"
 #' ini_doc <- SticsRFiles:::xmldocument(xml_path)
 #' get_params_from_table(ini_param_df, ini_doc)
-#'
 #' }
 #'
 #' @keywords internal
@@ -33,16 +32,18 @@ get_params_from_table <- function(params_table,
                                   na_values = NA) {
 
   # TODO: doing a merge with get_values_from_table
-  .= NULL
+  . <- NULL
 
   if (base::is.null(dict)) {
-    dict <- list(julapI="julapI_or_sum_upvt",doseI="amount",
-                 julapN="julapN_or_sum_upvt",doseN="absolute_value/%")
+    dict <- list(
+      julapI = "julapI_or_sum_upvt", doseI = "amount",
+      julapN = "julapN_or_sum_upvt", doseN = "absolute_value/%"
+    )
   }
 
   # TODO : perhaps add checking of dict list content !!!
 
-  if ( ! nargs() ) {
+  if (!nargs()) {
     return(dict)
   }
 
@@ -51,8 +52,10 @@ get_params_from_table <- function(params_table,
   # with values of corresponding field in dico
   for (key in names(dict)) {
     params_table <- params_table %>%
-      dplyr::rename_at(dplyr::vars(dplyr::starts_with(key)),
-                       list(~ stringr::str_replace(.,key,dict[[key]])))
+      dplyr::rename_at(
+        dplyr::vars(dplyr::starts_with(key)),
+        list(~ stringr::str_replace(., key, dict[[key]]))
+      )
   }
 
 
@@ -67,22 +70,22 @@ get_params_from_table <- function(params_table,
 
   unknown_params <- setdiff(tbl_par_names, doc_par_names)
 
-  if ( length(unknown_params) ) {
-    message_str <- sprintf("\n%s\n%s\n\n%s\n\n%s\n\n","Unknown parameters found in table: ",
-                           paste(unknown_params, collapse = ", "),
-                           "Verify parameters names in xml files or",
-                           "check substitution names in list returned by get_params_from_table()")
-    if ( stopping) {
+  if (length(unknown_params)) {
+    message_str <- sprintf(
+      "\n%s\n%s\n\n%s\n\n%s\n\n", "Unknown parameters found in table: ",
+      paste(unknown_params, collapse = ", "),
+      "Verify parameters names in xml files or",
+      "check substitution names in list returned by get_params_from_table()"
+    )
+    if (stopping) {
       stop(message_str)
     } else {
       cat(message_str)
     }
 
     # removing unknown param columns
-    param_values[! names(param_values) %in% unknown_params]
+    param_values[!names(param_values) %in% unknown_params]
   }
 
   return(param_values)
-
-
 }
