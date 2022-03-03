@@ -38,7 +38,7 @@ get_options_choices <- function(xml_file_path, options_names = NULL) {
   xml_param <- xmldocument(xml_file_path)
 
   # Getting for each option, choices name and code
-  for (n in seq_len(names_vec)) {
+  for (n in seq_along(names_vec)) {
     xpath <- paste0('//option[@nomParam="', names_vec[n], '"]/choix')
     options_choices[[n]] <- getAttrsValues(xml_param, xpath, "code")
     names(options_choices[[n]]) <- getAttrsValues(xml_param, xpath, "nom")

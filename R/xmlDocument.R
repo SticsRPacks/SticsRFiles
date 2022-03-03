@@ -124,7 +124,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj, path) 
 
   if (is.character(attr_list) & !is.matrix(attr_list)) {
     new_list <- vector(mode = "list", length(attr_list))
-    for (i in seq_len(attr_list)) {
+    for (i in seq_along(attr_list)) {
       new_list[[i]] <- attr_list[i]
     }
     attr_list <- new_list
@@ -408,7 +408,7 @@ setMethod("addNodes", signature(docObj = "xmlDocument"), function(docObj, nodes_
   }
   # for a node set
   if (class(nodes_to_add)[[1]] == "XMLNodeSet") {
-    for (n in seq_len(nodes_to_add)) {
+    for (n in seq_along(nodes_to_add)) {
       addChildren(pnode, nodes_to_add[[n]])
     }
     # for a single node

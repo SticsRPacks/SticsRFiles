@@ -155,7 +155,7 @@ fix_missing_bounds <- function(values, bounds_name) {
   if (!base::is.null(val) && length(val) != 0) {
     values <- as.numeric(val)
   } else {
-    values <- c(NA, NA)[seq_len(bounds_name)]
+    values <- c(NA, NA)[seq_along(bounds_name)]
   }
 
   names(values) <- bounds_name
@@ -175,7 +175,7 @@ fix_dup_bounds <- function(values, bounds_name, param_name) {
     return(values)
   }
 
-  for (i in seq_len(duplicates)) {
+  for (i in seq_along(duplicates)) {
     if (duplicates[i] && bounds_name[i] == "min") {
       values[[i]] <- min(values[[i]])
     }
