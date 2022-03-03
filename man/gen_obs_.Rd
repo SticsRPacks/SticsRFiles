@@ -12,7 +12,7 @@ gen_obs_(obs_table, file_path)
 \item{file_path}{Path to the file to write to}
 }
 \value{
-A logical value if the file generation succeeded (T) or not (F)
+A logical value if the file generation succeeded (TRUE) or not (FALSE)
 }
 \description{
 Write STICS obs data from data.frame/tibble
