@@ -15,6 +15,7 @@ get_svn_identifiers <- function() {
   # windows : encrypted !!
 
   return(list(username = "sticsread", password = "sticsread2020"))
+
 }
 
 
@@ -58,6 +59,8 @@ download_csv_files <- function(branch_url,
   curl::handle_setopt(h, username = ids$username)
 
   curl::handle_setopt(h, password = ids$password)
+
+  curl::handle_setopt(h, ssl_verifypeer = 0)
 
   # Setting the files url and download
   file_url <- paste0(branch_url, "/doc/", file_name)
