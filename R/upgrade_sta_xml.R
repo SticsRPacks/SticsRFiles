@@ -130,17 +130,17 @@ upgrade_sta_xml <- function(file,
     <choix code="1" nom="1-Unused"/>
     <choix code="2" nom="2-Unused"/>
     <choix code="3" nom="3-My only choice">
-    <param format="real" max="1.2" min="0.3" nom="tsmax">-2.</param>
-    <param format="real" max="100.0" min="0.01" nom="trmax">1.</param>
-    <param format="real" max="100.0" min="0.0" nom="DKmax">1.50000</param>
-    <param format="real" max="1.0" min="0.0010" nom="Kmin">2.</param>
-    <param format="real" max="0.01" min="0.0" nom="Tmf">0.5</param>
-    <param format="real" max="1.0" min="0.0010" nom="SWrf">0.01</param>
-    <param format="real" max="1.0" min="0.0010" nom="Pns">100.</param>
-    <param format="real" max="1.0" min="0.0010" nom="E">0.02</param>
-    <param format="real" max="1.0" min="0.0010" nom="prof">10.</param>
-    <param format="real" max="1.0" min="0.0010" nom="tminseuil">-0.5</param>
-    <param format="real" max="1.0" min="0.0010" nom="tmaxseuil">0.</param>
+    <param format="real" max="-0.5" min="-3" nom="tsmax">-2</param>
+    <param format="real" max="1.5" min="0.5" nom="trmax">1</param>
+    <param format="real" max="2" min="1" nom="DKmax">1.50000</param>
+    <param format="real" max="2.5" min="1.5" nom="Kmin">2</param>
+    <param format="real" max="1" min="0" nom="Tmf">0.5</param>
+    <param format="real" max="0.01" min="0" nom="SWrf">0.01</param>
+    <param format="real" max="200" min="10" nom="Pns">100</param>
+    <param format="real" max="0.05" min="0" nom="E">0.02</param>
+    <param format="real" max="15" min="5" nom="prof">10</param>
+    <param format="real" max="0" min="-1" nom="tminseuil">-0.5</param>
+    <param format="real" max="0.5" min="-0.5" nom="tmaxseuil">0</param>
     </choix>
     </option>
     </formalisme>',
