@@ -4,13 +4,15 @@
 \alias{get_javasticscmd_exe}
 \title{Get JavaSTICS command line executable name}
 \usage{
-get_javasticscmd_exe(javastics)
+get_javasticscmd_exe(javastics, verbose = TRUE)
 }
 \arguments{
 \item{javastics}{JavaSTICS installation root folder}
+
+\item{verbose}{Logical value (optional), TRUE to display run infos, FALSE otherwise (default)}
 }
 \value{
-An executable name
+An executable name, with attached command option string as attribute
 }
 \description{
 From a JavaSTICS path, searching for the JavaSTICS command

@@ -3,11 +3,12 @@
 #' @description From a JavaSTICS path, searching for the JavaSTICS command
 #'
 #' @param javastics JavaSTICS installation root folder
+#' @param verbose Logical value (optional), TRUE to display run infos, FALSE otherwise (default)
 #'
 #' @details If JavaStics version < 1.5, returns `JavaSticsCmd.exe`
 #' otherwise, returns `JavaStics.exe`
 #'
-#' @return An executable name
+#' @return An executable name, with attached command option string as attribute
 #'
 #' @examples
 #' \dontrun{
@@ -15,16 +16,30 @@
 #' }
 #'
 #' @keywords internal
-get_javasticscmd_exe <- function(javastics) {
+get_javasticscmd_exe <- function(javastics, verbose = TRUE) {
 
   if (!dir.exists(javastics))
     stop("Error, directory does not exist: ", javastics)
 
-  if (file.exists(file.path(javastics,"JavaSticsCmd.exe"))) return("JavaSticsCmd.exe")
+  javastics_cmd <- NULL
+  option <- ""
+  prev_cmd <- "JavaSticsCmd.exe"
 
-  if (file.exists(file.path(javastics,"JavaStics.exe"))) return("JavaStics.exe")
+  if (file.exists(file.path(javastics,prev_cmd))) {
+    javastics_cmd <- prev_cmd
+  } else {
+    javastics_cmd <- "JavaStics.exe"
+    if (verbose) option <- " --verbose"
+  }
 
-  stop("Error, no JavaSTICS command line found in", javastics)
+  if (is.null(javastics_cmd))
+    stop("Error, no JavaSTICS command line found in", javastics)
+
+  javastics_cmd <- paste0(javastics_cmd, option)
+
+  return(javastics_cmd)
+
+
 }
 
 
@@ -39,6 +54,7 @@ get_javasticscmd_exe <- function(javastics) {
 #' @param type keywords for filtering in the returned list what kind of command
 #' to be generated (default both: "generate" and "run")
 #' @param workspace A JavaStics workspace path (optional)
+#' @param verbose Logical value (optional), TRUE to display run infos, FALSE otherwise (default)
 #'
 #' @details According to a JavaStics version (i.e. javastics path content) and
 #' the OS type, the function builds command line strings used from system2
@@ -57,11 +73,11 @@ get_javasticscmd_exe <- function(javastics) {
 get_javastics_cmd <- function(javastics,
                               java_cmd = "java",
                               type = c("generate", "run"),
-                              workspace = NULL) {
+                              workspace = NULL,
+                              verbose = TRUE) {
 
   # detecting JavaStics command exe name from javastics path
-  javastics_cmd <- get_javasticscmd_exe(javastics)
-
+  javastics_cmd <- get_javasticscmd_exe(javastics, verbose = verbose)
 
   # Base command string, without workspace
   if (user_os() != "win") {
@@ -74,7 +90,6 @@ get_javastics_cmd <- function(javastics,
     generate <- paste0(' --generate-txt') #"',ws,'"')
     run <- paste0(' --run') #"',ws,'"')
   }
-
 
   # adding workspace name if provided
   if (!is.null(workspace)) {
