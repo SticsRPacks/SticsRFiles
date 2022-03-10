@@ -3,7 +3,6 @@
 #' @description From a JavaSTICS path, searching for the JavaSTICS command
 #'
 #' @param javastics JavaSTICS installation root folder
-#' @param verbose Logical value (optional), TRUE to display run infos, FALSE otherwise (default)
 #'
 #' @details If JavaStics version < 1.5, returns `JavaSticsCmd.exe`
 #' otherwise, returns `JavaStics.exe`
@@ -16,7 +15,7 @@
 #' }
 #'
 #' @keywords internal
-get_javasticscmd_exe <- function(javastics, verbose = TRUE) {
+get_javasticscmd_exe <- function(javastics) {
 
   if (!dir.exists(javastics))
     stop("Error, directory does not exist: ", javastics)
@@ -29,7 +28,6 @@ get_javasticscmd_exe <- function(javastics, verbose = TRUE) {
     javastics_cmd <- prev_cmd
   } else {
     javastics_cmd <- "JavaStics.exe"
-    if (verbose) option <- " --verbose"
   }
 
   if (is.null(javastics_cmd))
@@ -77,18 +75,22 @@ get_javastics_cmd <- function(javastics,
                               verbose = TRUE) {
 
   # detecting JavaStics command exe name from javastics path
-  javastics_cmd <- get_javasticscmd_exe(javastics, verbose = verbose)
+  javastics_cmd <- get_javasticscmd_exe(javastics)
+
+  # verbose
+  verbose_cmd <- ""
+  if (verbose) verbose_cmd <- ' --verbose'
 
   # Base command string, without workspace
   if (user_os() != "win") {
     check_java_version(javastics_cmd = javastics_cmd, java_cmd = java_cmd)
     command <- java_cmd
-    generate <- paste0('-jar ',javastics_cmd,' --generate-txt') #"',ws,'"')
-    run <- paste0('-jar ',javastics_cmd,' --run') #"',ws,'"')
+    generate <- paste0('-jar ',javastics_cmd,' --generate-txt', verbose_cmd)
+    run <- paste0('-jar ',javastics_cmd,' --run', verbose_cmd)
   } else {
     command <- javastics_cmd
-    generate <- paste0(' --generate-txt') #"',ws,'"')
-    run <- paste0(' --run') #"',ws,'"')
+    generate <- paste0(' --generate-txt',verbose_cmd)
+    run <- paste0(' --run', verbose_cmd)
   }
 
   # adding workspace name if provided
