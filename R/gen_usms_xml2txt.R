@@ -97,6 +97,9 @@ gen_usms_xml2txt <- function(javastics,
   } else {
     workspace_path <- workspace # to remove when we update inside the function
   }
+   if (grepl("\ ",workspace_path)) {
+    stop("Space into workspace is not supported. Please copy the content of workspace folder in a path without space.")
+  }
   # target_path
   if (lifecycle::is_present(target_path)) {
     lifecycle::deprecate_warn(
