@@ -269,8 +269,12 @@ get_file_ <- function(workspace = getwd(),
   # but are not intercrop USMs
   if (length(workspace) > 1) {
     tmp <- sapply(stringr::str_split(workspace, pattern = "/"), function(x) x[length(x)])
-    idx <- sapply(tmp, function(x) grep(x, names(file_name)))
-    file_name <- file_name[idx]
+    idx <- sapply(tmp, function(x) grep(x, names(file_name)), simplify = FALSE)
+    to_remove <- which(sapply(idx,function(x) (length(x)==0)))
+    if (length(to_remove) > 0) {
+      workspace <- workspace[-which(sapply(idx,function(x) (length(x)==0)))]
+    }
+    file_name <- file_name[unlist(idx)]
   }
 
   # Getting sim/obs data list

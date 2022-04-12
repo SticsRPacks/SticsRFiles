@@ -45,6 +45,10 @@ force_param_values <- function(workspace,
     # convert into vector in case a tibble is given instead of a vector
     param_values <- setNames(as.numeric(param_values), names(param_values))
     ind_non_na <- !is.na(param_values)
+    if (!all(ind_non_na)) {
+        warning(paste("Parameter(s)",paste(names(param_values[!ind_non_na]),collapse = ","),
+                      "will not be forced (maybe their values are not numeric? In that case please use set_param_*** functions)."))
+    }
     param_values <- param_values[ind_non_na]
 
     # converting var names to Stics names
