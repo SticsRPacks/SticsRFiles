@@ -97,16 +97,10 @@ upgrade_param_newform_xml <- function(file,
     "automatic irrigations (associated with the options of automatic irrigation in tec file)",
     "calculation of the root death at cutting date for grasslands",
     "option for several thinning ",
-    "option for several fertilizer type "
+    "option for several fertilizer type ",
+    # useless, options now removed
+    "residue incorporation"
   )
-
-
-
-  # TODO: when code_stock_BM and code_depth_mixed_humus will be removed
-  # from file, add formalisms to be removed to the form_names vector
-  # "residue incorporation", "evaluation options"
-
-
 
   nodes_to_rm <- lapply(form_names, function(x) {
     getNodeS(
@@ -114,6 +108,7 @@ upgrade_param_newform_xml <- function(file,
       path = paste0("//formalisme[@nom='", x, "']")
     )
   })
+
   lapply(nodes_to_rm, function(x) if (!is.null(x)) removeNodes(x))
   # removeNodes(nodes_to_rm)
   # TODO: reactivate or substitute func call (see comment in xml_files_functions)
@@ -122,9 +117,11 @@ upgrade_param_newform_xml <- function(file,
 
   # options to be removed
   opt_names <- c(
-    "New mineralization of soil organic matter ",
-    "depht of residue incorporation plant 1 ",
-    "depht of residue incorporation plant 2 "
+    "New mineralization of soil organic matter "#,
+    # Useless now
+    # options now removed while removing the "residue incorporation" formalism
+    #"depht of residue incorporation plant 1 ",
+    #"depht of residue incorporation plant 2 "
   )
 
   nodes_to_rm <- lapply(opt_names, function(x) {
@@ -143,23 +140,24 @@ upgrade_param_newform_xml <- function(file,
 
   # formalisms to add
   #
+  # Useless, option now removed in the model
   # "evaluation options"
   # Getting new formalism
-  new_node <- xmlParseString(
-    '<formalisme nom="evaluation options">
-    <option choix="1" nom="stock initialisation " nomParam="code_stock_BM">
-       <choix code="1" nom="9.1 version"/>
-       <choix code="2" nom="BM perenne version"/>
-    </option>
-    </formalisme>',
-    addFinalizer = TRUE
-  )
-
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
-    path = "//formalisme[@nom='residue incorporation']"
-  )[[1]]
-  addSibling(prev_sibling, xmlClone(new_node))
+  # new_node <- xmlParseString(
+  #   '<formalisme nom="evaluation options">
+  #   <option choix="1" nom="stock initialisation " nomParam="code_stock_BM">
+  #      <choix code="1" nom="9.1 version"/>
+  #      <choix code="2" nom="BM perenne version"/>
+  #   </option>
+  #   </formalisme>',
+  #   addFinalizer = TRUE
+  # )
+  #
+  # prev_sibling <- getNodeS(
+  #   docObj = old_doc,
+  #   path = "//formalisme[@nom='residue incorporation']"
+  # )[[1]]
+  # addSibling(prev_sibling, xmlClone(new_node))
 
 
   # roots
@@ -225,20 +223,21 @@ upgrade_param_newform_xml <- function(file,
   }
 
 
-  # humus
-  new_node <- xmlParseString(
-    '<option choix="1" nom="depth of humus division " nomParam="code_depth_mixed_humus">
-  <choix code="1" nom="old calculation proftrav1 to proftrav2"/>
-  <choix code="2" nom="new calculation 1 to proftrav2"/>
-</option>',
-    addFinalizer = TRUE
-  )
-
-  parent_node <- getNodeS(
-    docObj = old_doc,
-    path = "//formalisme[@nom='residue incorporation']"
-  )[[1]]
-  addChildren(parent_node, xmlClone(new_node))
+  # Useless, option now removed in the model
+#   # humus
+#   new_node <- xmlParseString(
+#     '<option choix="1" nom="depth of humus division " nomParam="code_depth_mixed_humus">
+#   <choix code="1" nom="old calculation proftrav1 to proftrav2"/>
+#   <choix code="2" nom="new calculation 1 to proftrav2"/>
+# </option>',
+#     addFinalizer = TRUE
+#   )
+#
+#   parent_node <- getNodeS(
+#     docObj = old_doc,
+#     path = "//formalisme[@nom='residue incorporation']"
+#   )[[1]]
+#   addChildren(parent_node, xmlClone(new_node))
 
 
   # formalism modifications
@@ -287,7 +286,7 @@ upgrade_param_newform_xml <- function(file,
 
   prev_sibling <- getNodeS(
     docObj = old_doc,
-    path = "//formalisme[@nom='evaluation options']"
+    path = "//formalisme[@nom='New Roots']"
   )[[1]]
   addSibling(prev_sibling, xmlClone(new_node))
   # ---------------------------------------------------------------------------
