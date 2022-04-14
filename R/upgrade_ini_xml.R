@@ -52,8 +52,8 @@ upgrade_ini_xml <- function(file,
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file[1],
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
 
@@ -154,21 +154,36 @@ upgrade_ini_xml <- function(file,
   set_param_value(old_doc, param_name = as.list(rm_names), param_value = old_values)
 
 
-  # Adding snow node
-  new_node <- xmlParseString(
-    "<snow>
-    <SDepth>0.0</SDepth>
-    <Sdry>0.0</Sdry>
-    <Swet>0.0</Swet>
-    <ps>0.0</ps>
+  if (is.null(SticsRFiles:::getNodeS(old_doc, "//snow"))) {
+    # Adding snow node
+    new_node <- xmlParseString(
+      "<snow>
+    <Sdepth0>0.0</Sdepth0>
+    <Sdry0>0.0</Sdry0>
+    <Swet0>0.0</Swet0>
+    <ps0>0.0</ps0>
     </snow>",
-    addFinalizer = TRUE
-  )
+      addFinalizer = TRUE
+    )
 
-  parent_node <- getNodeS(old_doc, path = "//initialisations")[[1]]
+    parent_node <- getNodeS(old_doc, path = "//initialisations")[[1]]
 
-  addChildren(parent_node, xmlClone(new_node))
-
+    addChildren(parent_node, xmlClone(new_node))
+  } else {
+    # checking names an renaming them !
+    old_names <- c("SDepth", "Sdry", "Swet", "ps")
+    new_names <- c("Sdepth0", "Sdry0", "Swet0", "ps0")
+    n <- SticsRFiles:::getNodeS(ini_doc,
+                                c(sprintf("//%s",old_names)))
+    if (!is.null(n)){
+      nodes_idx <- unlist(lapply(n, xmlName)) %in% old_names
+      n <- n[nodes_idx]
+      new_names <- new_names[nodes_idx]
+      for (i in 1:length(n)) {
+        xmlName(n[[i]]) <- new_names[i]
+      }
+    }
+  }
 
   # Renaming soil parameters
   # hinit, NO3init, NH4init => hinitf, NO3initf, NH4initf
