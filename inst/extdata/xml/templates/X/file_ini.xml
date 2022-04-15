@@ -77,10 +77,10 @@
 </NH4init>
 </sol>
 <snow>
-     <Sdepth0>0.0</Sdepth>
-     <Sdry0>0.0</Sdry>
-     <Swet0>0.0</Swet>
-     <ps0>0.0</ps>
+     <Sdepth0>0.0</Sdepth0>
+     <Sdry0>0.0</Sdry0>
+     <Swet0>0.0</Swet0>
+     <ps0>0.0</ps0>
 </snow>
 </initialisations>
 
