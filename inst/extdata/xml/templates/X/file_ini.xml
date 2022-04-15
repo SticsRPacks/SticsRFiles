@@ -16,7 +16,7 @@
       <choix code="2" nom="no">
         <masec0>0.0</masec0>
         <QNplante0>0.0</QNplante0>
-        <resperenne0>0.0</resperenne0>
+        <restemp0>0.0</restemp0>
       </choix>
     </option>
     <densinitial>
@@ -77,10 +77,10 @@
 </NH4init>
 </sol>
 <snow>
-     <SDepth>0.0</SDepth>
-     <Sdry>0.0</Sdry>
-     <Swet>0.0</Swet>
-     <ps>0.0</ps>
+     <Sdepth0>0.0</Sdepth>
+     <Sdry0>0.0</Sdry>
+     <Swet0>0.0</Swet>
+     <ps0>0.0</ps>
 </snow>
 </initialisations>
 
