@@ -98,6 +98,7 @@ get_javastics_cmd <- function(javastics,
 
   # adding workspace name if provided
   if (!is.null(workspace)) {
+    workspace = paste0('"',workspace,'"')
     generate <- paste(generate,workspace)
     run <- paste(run, workspace)
   }
