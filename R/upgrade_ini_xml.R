@@ -154,7 +154,7 @@ upgrade_ini_xml <- function(file,
   set_param_value(old_doc, param_name = as.list(rm_names), param_value = old_values)
 
 
-  if (is.null(SticsRFiles:::getNodeS(old_doc, "//snow"))) {
+  if (is.null(getNodeS(old_doc, "//snow"))) {
     # Adding snow node
     new_node <- xmlParseString(
       "<snow>
@@ -173,8 +173,8 @@ upgrade_ini_xml <- function(file,
     # checking names an renaming them !
     old_names <- c("SDepth", "Sdry", "Swet", "ps")
     new_names <- c("Sdepth0", "Sdry0", "Swet0", "ps0")
-    n <- SticsRFiles:::getNodeS(ini_doc,
-                                c(sprintf("//%s",old_names)))
+    n <- getNodeS(old_doc,c(sprintf("//%s",old_names)))
+
     if (!is.null(n)){
       nodes_idx <- unlist(lapply(n, xmlName)) %in% old_names
       n <- n[nodes_idx]
