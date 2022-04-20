@@ -2,7 +2,7 @@
 % Please edit documentation in R/javastics_cmd_util.R
 \name{get_javastics_cmd}
 \alias{get_javastics_cmd}
-\title{Get JavaSTICS command line string}
+\title{Get JavaSTICS command line strings}
 \usage{
 get_javastics_cmd(
   javastics,

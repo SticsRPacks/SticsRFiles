@@ -1,50 +1,4 @@
-#' @title Get JavaSTICS command line executable name
-#'
-#' @description From a JavaSTICS path, searching for the JavaSTICS command
-#'
-#' @param javastics JavaSTICS installation root folder
-#' @param verbose Logical value (optional), TRUE to display run infos, FALSE otherwise (default)
-#'
-#' @details If JavaStics version < 1.5, returns `JavaSticsCmd.exe`
-#' otherwise, returns `JavaStics.exe`
-#'
-#' @return A list with elements javastics_cmd (executable name),
-#' and verbose_cmd (string for activating verbose mode, only for JavaSTICS >= 1.5)
-#'
-#' @examples
-#' \dontrun{
-#'  get_javasticscmd_exe("path/to/JavaSTICS")
-#' }
-#'
-#' @keywords internal
-get_javasticscmd_exe <- function(javastics, verbose = TRUE) {
-
-  if (!dir.exists(javastics))
-    stop("Error, directory does not exist: ", javastics)
-
-  javastics_cmd <- NULL
-  prev_cmd <- "JavaSticsCmd.exe"
-  verbose_cmd <- ""
-
-  if (file.exists(file.path(javastics,prev_cmd))) {
-    javastics_cmd <- prev_cmd
-  } else {
-    javastics_cmd <- "JavaStics.exe"
-    if (verbose) verbose_cmd <- " --verbose"
-  }
-
-  if (is.null(javastics_cmd))
-    stop("Error, no JavaSTICS command line found in", javastics)
-
-  cmd <- list(javastics_cmd = javastics_cmd, verbose_cmd = verbose_cmd)
-
-  return(cmd)
-
-
-}
-
-
-#' @title Get JavaSTICS command line string
+#' @title Get JavaSTICS command line strings
 #'
 #' @description From a JavaSTICS path, constructing command lines for
 #' files generation from XML and/or running simulation through
@@ -71,6 +25,7 @@ get_javasticscmd_exe <- function(javastics, verbose = TRUE) {
 #' }
 #'
 #' @keywords internal
+#'
 get_javastics_cmd <- function(javastics,
                               java_cmd = "java",
                               type = c("generate", "run"),
@@ -78,15 +33,15 @@ get_javastics_cmd <- function(javastics,
                               verbose = TRUE) {
 
   # detecting JavaStics command exe name from javastics path
-  cmd <- get_javasticscmd_exe(javastics, verbose = verbose)
-
+  javastics_cmd <- file.path(javastics, "JavaSticsCmd.exe")
+  cmd <- check_javastics_cmd(javastics_cmd = javastics_cmd,
+                                           java_cmd = java_cmd,
+                                           verbose = TRUE)
   javastics_cmd <- cmd$javastics_cmd
   verbose_cmd <- cmd$verbose_cmd
 
-
   # Base command string, without workspace
-  if (user_os() != "win") {
-    check_java_version(javastics_cmd = javastics_cmd, java_cmd = java_cmd)
+  if (!is_windows()) {
     command <- java_cmd
     generate <- paste0("-jar ",javastics_cmd, verbose_cmd," --generate-txt")
     run <- paste0("-jar ",javastics_cmd, verbose_cmd, " --run")
@@ -112,35 +67,108 @@ get_javastics_cmd <- function(javastics,
 }
 
 #' @title Checking if the java virtual machine is compatible with the given
-#' JavaStics command executable
+#' JavaStics command executable, and command line options
 #'
 #' @description For Unix like systems, the system java virtual machine is
-#' detected and consistency for JavaStics executable used is checked
+#' detected and consistency for JavaStics executable used is checked.
+#' Command line verbosity option is detected for JavaStics command line for all
+#' systems.
 #'
-#' @param javastics_cmd JavaSTICS command line executable name
+#' @param javastics_cmd path to JavaStics command line executable
 #' @param java_cmd Name or path of the java virtual machine executable
 #'
 #' @details Errors are raised if the JavaStics executable cannot be run with the
-#' given java virtual machine.
+#' given java virtual machine for unix like systems.
 #'
+#' @return A named list with the JavaStics command line path,
+#' the java path and the verbose string option (according to JavaStics command
+#'  line version, and the "verbose" argument value)
 #'
 #' @examples
 #' \dontrun{
-#'  check_java_version(javastics_cmd = "JavaStics.exe")
+#'  check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe")
+#'  check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe",
+#'                      java_cmd = "/path/to/java")
 #' }
 #'
 #' @keywords internal
-check_java_version <- function(javastics_cmd = "JavaSticsCmd.exe",
-                               java_cmd="java") {
+#'
+check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
+                                java_cmd="java",
+                                verbose = TRUE) {
 
-  # Making difference between a command and an alias to the command
-  # does not function for the moment, from R (from a linux bash )
-  # So, java_cmd may contain a java executable path
-  java_path <- system2("which", java_cmd, stdout = TRUE, stderr = TRUE)
+  if (is_windows()) {
+    help_test <- system2(javastics_cmd,
+                         c("--help"),
+                         stdout = TRUE, stderr = TRUE)
+  } else {
+    help_test <- system2(java_cmd,
+                         c("-jar", javastics_cmd, "--help"),
+                         stdout = TRUE, stderr = TRUE)
+  }
+
+  # detecting invalid option for given JavaStics command line
+  help_status <- !length(grep(pattern = "Invalid option entered", help_test)) > 0
+
+  if (!is_windows()) {
+    ver <- get_java_version(java_cmd = java_cmd)
+
+    status <- attr(help_test, "status")
+
+    if (!is.null(status) && status > 0)
+      stop("The given or default java version ",ver, " is not usable with that version of
+            JavaSTICS, use at least java version 11 !")
+
+    if (is.null(status) &&
+        !help_status &&
+        ver > 1.8)
+      stop("The given or default java version ", ver, " is not usable with that version of
+            JavaSTICS, use at most java version 1.8 !")
+  }
+
+  verbose_cmd <- ""
+  if (help_status && verbose) verbose_cmd <- " --verbose"
+
+  list(javastics_cmd = javastics_cmd,
+       java_cmd = java_cmd,
+       verbose_cmd = verbose_cmd)
+
+}
+
+
+
+#' @title Getting the java virtual machine version
+#'
+#' @description For Unix like systems, the system java virtual machine needs to
+#' be detected for compatibility checking
+#'
+#' @param java_cmd Name or path of the java virtual machine executable
+#'
+#' @return A numerical version, with a string version as "version" attribute
+#'
+#' @examples
+#' \dontrun{
+#'  get_java_version(java_cmd = "java")
+#'  get_java_version(java_cmd = "/path/to/java")
+#' }
+#'
+#' @keywords internal
+#'
+get_java_version <- function(java_cmd = "java") {
+
+  # java_cmd must contain a java executable path, if not known in the system
+  # environment
+  if (!is_windows()) {
+    java_path <- system2("which", java_cmd, stdout = TRUE, stderr = TRUE)
+  } else {
+    # for Windows: splitting command if java_cmd is a full path
+    if (!basename(java_cmd) == java_cmd) java_cmd <- c("/R", dirname(java_cmd), basename(java_cmd))
+
+    java_path <- system2("where", java_cmd, stdout = TRUE, stderr = TRUE)
+  }
+
   if(!length(java_path)) {
-    #alias <- system2("alias", java_cmd, stdout = TRUE, stderr = TRUE)
-    # getting from alias java path, may be later if
-    stop("java not found !")
+    stop(paste(java_cmd, "not found !"))
   }
 
   # Getting version string
@@ -148,16 +176,10 @@ check_java_version <- function(javastics_cmd = "JavaSticsCmd.exe",
 
   version_str <- gsub("[\"a-z\ ]", x = java_version[1], replacement = "")
 
-  ver <- as.numeric(substr(1,3,x = version_str))
+  version_num <- as.numeric(substr(1,3,x = version_str))
 
-  if (javastics_cmd == "JavaStics.exe" && ver < 11)
-    warning("The installed java version is not usable with that version of
-            JavaSTICS, use at least java 11")
+  attr(x = version_num, which = "version") <- version_str
 
-  if (javastics_cmd == "JavaSticsCmd.exe" && ver > 1.8)
-    warning("The installed java version is not usable with that version of
-            JavaSTICS, use at most java 1.8")
-
-  return(invisible(version_str))
+  return(version_num)
 
 }
