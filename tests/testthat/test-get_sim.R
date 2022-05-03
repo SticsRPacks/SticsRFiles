@@ -14,7 +14,6 @@ test_that("get output without usm argument", {
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(is.data.frame(outputs$banana))
-  expect_true(is.null(outputs$proto_rice))
 })
 
 # Testing without the usms.xml file
