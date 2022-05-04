@@ -30,11 +30,11 @@
     </ta>
   </formalisme>
   <formalisme nom="sowing">
-  	<param format="integer" max="731" min="1" nom="iplt0"></param>
-        <param format="real" max="10.0" min="0.0" nom="profsem"></param>
-        <param format="real" max="2000.0" min="0.05" nom="densitesem"></param>
-        <param format="integer" max="200" min="1" nom="variete"></param>
-        <option choix="2" nom="planting structure (if radiative transfer)" nomParam="codetradtec">
+    <param format="integer" max="731" min="1" nom="iplt0"></param>
+    <param format="real" max="10.0" min="0.0" nom="profsem"></param>
+    <param format="real" max="2000.0" min="0.05" nom="densitesem"></param>
+    <param format="integer" max="200" min="1" nom="variete"></param>
+    <option choix="2" nom="planting structure (if radiative transfer)" nomParam="codetradtec">
       <choix code="1" nom="yes">
                 <param format="real" max="10.0" min="0.0" nom="interrang">-999</param>
                 <param format="real" max="6.28" min="0.0" nom="orientrang">-999</param>
@@ -72,9 +72,9 @@
     <param format="real" max="1.0" min="0.2" nom="effirr">1.00000</param>
     <option choix="2" nom="automatic calculation of irrigations" nomParam="codecalirrig">
       <choix code="1" nom="yes">
-         <param format="real" max="1.0" min="0.2" nom="ratiol">-999</param>
-         <param format="real" max="500.0" min="10.0" nom="dosimx">-999</param>
-         <param format="real" max="500.0" min="0.0" nom="doseirrigmin">-999</param>
+        <param format="real" max="1.0" min="0.2" nom="ratiol">-999</param>
+        <param format="real" max="500.0" min="10.0" nom="dosimx">-999</param>
+        <param format="real" max="500.0" min="0.0" nom="doseirrigmin">-999</param>
         <option choix="3" nom="dates to drive automatic irrigations" nomParam="codedate_irrigauto">
           <choix code="1" nom="dates">
             <param format="integer" max="731" min="0.0" nom="datedeb_irrigauto">-999</param>
