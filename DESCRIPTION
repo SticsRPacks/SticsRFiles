@@ -1,6 +1,7 @@
 Package: SticsRFiles
 Title: Read And Modify STICS Input/Output Files
 Version: 0.4.2
+Date: 2021-10-08
 Authors@R: 
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inrae.fr", comment = c(ORCID = "0000-0002-4044-4322")),
       person(given = "Remi", family = "Vezy", role = "aut", email = "remi.vezy@cirad.fr", comment = c(ORCID = "0000-0002-0808-1461")),
@@ -19,7 +20,8 @@ Authors@R:
 Description: The goal of SticsRFiles is to perform manipulations of the
     Stics model files.
 License: file LICENSE
-URL: https://github.com/SticsRPacks/SticsRFiles
+URL: https://github.com/SticsRPacks/SticsRFiles,
+ https://doi.org/10.5281/zenodo.4443206
 BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
 Depends: 
     R (>= 3.6.0)
