@@ -13,5 +13,5 @@ man/figures
 ^tmp$
 ^inputs_stics_example.xlsx$
 ^inputs_stics_example_USMs.csv$
-CITATION.cff
+^CITATION.cff$
 ^\.github$
