@@ -16,7 +16,7 @@
       <choix code="2" nom="no">
         <masec0>0.0</masec0>
         <QNplante0>0.0</QNplante0>
-        <resperenne0>0.0</resperenne0>
+        <restemp0>0.0</restemp0>
       </choix>
     </option>
     <densinitial>
@@ -40,9 +40,9 @@
         <QNplantenp0>0</QNplantenp0>
       </choix>
       <choix code="2" nom="no">
-        <masec0></masec0>
-        <QNplante0></QNplante0>
-        <resperenne0></resperenne0>
+        <masec0/>
+        <QNplante0/>
+        <restemp0/>
       </choix>
     </option>
     <densinitial>
@@ -54,27 +54,33 @@
     </densinitial>
   </plante>
   <sol>
-    <hinit>
+    <Hinitf>
       <horizon nh="1">23.5</horizon>
       <horizon nh="2">21.6</horizon>
       <horizon nh="3">23.9</horizon>
       <horizon nh="4">27.6</horizon>
       <horizon nh="5">0.0</horizon>
-    </hinit>
-    <NO3init>
+    </Hinitf>
+    <NO3initf>
       <horizon nh="1">32.0</horizon>
       <horizon nh="2">12.0</horizon>
       <horizon nh="3">9.0</horizon>
       <horizon nh="4">0.0</horizon>
       <horizon nh="5">0.0</horizon>
-    </NO3init>
-    <NH4init>
+    </NO3initf>
+    <NH4initf>
       <horizon nh="1">0.0</horizon>
       <horizon nh="2">0.0</horizon>
       <horizon nh="3">0.0</horizon>
       <horizon nh="4">0.0</horizon>
       <horizon nh="5">0.0</horizon>
-    </NH4init>
+    </NH4initf>
   </sol>
+  <snow>
+    <Sdepth0>0.0</Sdepth0>
+    <Sdry0>0.0</Sdry0>
+    <Swet0>0.0</Swet0>
+    <ps0>0.0</ps0>
+  </snow>
 </initialisations>
 

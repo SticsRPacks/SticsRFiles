@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<usms version="10.0">
+  <usm nom="maize">
+    <datedebut>112</datedebut>
+    <datefin>360</datefin>
+    <finit>mais_ini.xml</finit>
+    <nomsol>solmais</nomsol>
+    <fstation>climaisj_sta.xml</fstation>
+    <fclim1>climaisj.1996</fclim1>
+    <fclim2>climaisj.1996</fclim2>
+    <culturean>1</culturean>
+    <nbplantes>1</nbplantes>
+    <codesimul>0</codesimul>
+    <plante dominance="1">
+      <fplt>corn_plt.xml</fplt>
+      <ftec>Mais_tec.xml</ftec>
+      <flai>mais.lai</flai>
+      <fobs>maize.obs</fobs>
+    </plante>
+    <plante dominance="2">
+      <fplt>null</fplt>
+      <ftec>null</ftec>
+      <flai>null</flai>
+      <fobs>null</fobs>
+    </plante>
+  </usm>
+</usms>
+

@@ -55,7 +55,7 @@
         <choix code="1" nom="yes"/>
             <choix code="2" nom="no"/>
         </option>
-        <option choix="1" nom="Snow activation" nomParam="codesnow">
+        <option choix="2" nom="Snow activation" nomParam="codesnow">
         <choix code="1" nom="yes"/>
             <choix code="2" nom="no"/>
         </option>
@@ -136,7 +136,7 @@
         <param format="real" max="60.0" min="0.0" nom="tdenitopt_gauss">47</param>
         <param format="real" max="40.0" min="10.0" nom="scale_tdenitopt">25</param>
         <param format="real" max="500.0" min="10.0" nom="Kd">148</param>
-        <param format="real" max="20.0" min="1.0" nom="k_desat">3.0</param>
+        <param format="real" max="20.0" min="1.0" nom="kdesat">3.0</param>
         <option choix="1" nom="Nitrification rate dependence on NH4" nomParam="code_vnit">
             <choix code="1" nom="Linear">
             <param format="real" max="1.0" min="0.1" nom="fnx">0.80</param>
@@ -245,7 +245,7 @@
             </choix>
             <choix code="9" nom="Pebbles from Magneraud">
             <param format="real" max="5.0" min="0.5" nom="masvolcx">1.50000</param>
-                <param format="real" max="50.0" min="0.0" nom="hcccx">26.00000</param>
+                <param format="real" max="5.0" min="0.0" nom="hcccx">26.00000</param>
             </choix>
             <choix code="10" nom="Other pebbles">
             <param format="real" max="5.0" min="0.5" nom="masvolcx">0.00000</param>
@@ -322,7 +322,7 @@
                 <param format="real" max="0.8" min="0.05" nom="albedomulchresidus">0.10000</param>
                 <param format="real" max="5.0" min="0.0" nom="Qmulchdec">1.00000</param>
             </choix>
-            <choix code="2" nom="Intermediate crop on surface">
+            <choix code="2" nom="Cover crop on surface">
             <param format="real" max="1.0" min="0.0" nom="CroCo">1.00000</param>
                 <param format="real" max="1000.0" min="0.0" nom="akres">0.00000</param>
                 <param format="real" max="1000.0" min="-5.0" nom="bkres">0.60000</param>
@@ -512,7 +512,7 @@
                 <param format="real" max="0.8" min="0.05" nom="albedomulchresidus">0.00000</param>
                 <param format="real" max="5.0" min="0.0" nom="Qmulchdec">0.00000</param>
             </choix>
-            <choix code="12" nom="Intermediate crop ploughed in">
+            <choix code="12" nom="Cover crop ploughed in">
             <param format="real" max="1.0" min="0.0" nom="CroCo">1.00000</param>
                 <param format="real" max="1000.0" min="0.0" nom="akres">0.09800</param>
                 <param format="real" max="1000.0" min="-5.0" nom="bkres">0.76000</param>
@@ -664,19 +664,19 @@
                 <param format="real" max="0.8" min="0.05" nom="albedomulchresidus">0.00000</param>
                 <param format="real" max="5.0" min="0.0" nom="Qmulchdec">0.00000</param>
             </choix>
-            <choix code="20" nom="Others.2 ploughed in">
-            <param format="real" max="1.0" min="0.0" nom="CroCo">0.00000</param>
-                <param format="real" max="1000.0" min="0.0" nom="akres">0.00000</param>
-                <param format="real" max="1000.0" min="-5.0" nom="bkres">0.00000</param>
-                <param format="real" max="500.0" min="0.0" nom="awb">0.00000</param>
-                <param format="real" max="0.0" min="-2500.0" nom="bwb">0.00000</param>
-                <param format="real" max="60.0" min="5.0" nom="cwb">0.00000</param>
-                <param format="real" max="500.0" min="0.0" nom="ahres">0.00000</param>
-                <param format="real" max="10000.0" min="0.0" nom="bhres">0.00000</param>
-                <param format="real" max="250.0" min="0.0" nom="kbio">0.00000</param>
-                <param format="real" max="0.7" min="0.3" nom="yres">0.00000</param>
-                <param format="real" max="200.0" min="3.0" nom="CNresmin">0.00000</param>
-                <param format="real" max="200.0" min="3.0" nom="CNresmax">0.00000</param>
+            <choix code="20" nom="Dead rhizomes in soil">
+            <param format="real" max="1.0" min="0.0" nom="CroCo">1.00000</param>
+                <param format="real" max="1000.0" min="0.0" nom="akres">0.030000</param>
+                <param format="real" max="1000.0" min="-5.0" nom="bkres">1.13000</param>
+                <param format="real" max="500.0" min="0.0" nom="awb">15.20000</param>
+                <param format="real" max="0.0" min="-2500.0" nom="bwb">-80.00000</param>
+                <param format="real" max="60.0" min="5.0" nom="cwb">7.80000</param>
+                <param format="real" max="500.0" min="0.0" nom="ahres">0.91000</param>
+                <param format="real" max="10000.0" min="0.0" nom="bhres">25.90000</param>
+                <param format="real" max="250.0" min="0.0" nom="kbio">0.007600</param>
+                <param format="real" max="0.7" min="0.3" nom="yres">0.62000</param>
+                <param format="real" max="200.0" min="3.0" nom="CNresmin">8.00000</param>
+                <param format="real" max="200.0" min="3.0" nom="CNresmax">100.00000</param>
                 <param format="real" max="5.0" min="0.0" nom="qmulchruis0">0.00000</param>
                 <param format="real" max="5.0" min="0.05" nom="mouillabilmulch">0.00000</param>
                 <param format="real" max="150.0" min="0.0" nom="kcouvmlch">0.00000</param>
@@ -685,13 +685,13 @@
             </choix>
             <choix code="21" nom="Dead roots in soil">
             <param format="real" max="1.0" min="0.0" nom="CroCo">1.00000</param>
-                <param format="real" max="1000.0" min="0.0" nom="akres">0.09800</param>
-                <param format="real" max="1000.0" min="-5.0" nom="bkres">0.76000</param>
-                <param format="real" max="500.0" min="0.0" nom="awb">15.40000</param>
-                <param format="real" max="0.0" min="-2500.0" nom="bwb">-76.00000</param>
+                <param format="real" max="1000.0" min="0.0" nom="akres">0.030000</param>
+                <param format="real" max="1000.0" min="-5.0" nom="bkres">1.13000</param>
+                <param format="real" max="500.0" min="0.0" nom="awb">15.20000</param>
+                <param format="real" max="0.0" min="-2500.0" nom="bwb">-80.00000</param>
                 <param format="real" max="60.0" min="5.0" nom="cwb">7.80000</param>
-                <param format="real" max="500.0" min="0.0" nom="ahres">0.73000</param>
-                <param format="real" max="10000.0" min="0.0" nom="bhres">10.20000</param>
+                <param format="real" max="500.0" min="0.0" nom="ahres">0.91000</param>
+                <param format="real" max="10000.0" min="0.0" nom="bhres">25.90000</param>
                 <param format="real" max="250.0" min="0.0" nom="kbio">0.007600</param>
                 <param format="real" max="0.7" min="0.3" nom="yres">0.62000</param>
                 <param format="real" max="200.0" min="3.0" nom="CNresmin">8.00000</param>
