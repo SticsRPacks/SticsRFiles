@@ -37,12 +37,12 @@ Imports:
     methods,
     rlang,
     rstudioapi,
+    sticky,
     stringr,
     tibble,
     tidyr,
     tools,
     utils,
-    vctrs,
     XML,
     xml2,
     xslt
