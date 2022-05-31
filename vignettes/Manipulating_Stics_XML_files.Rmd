@@ -24,8 +24,7 @@ library(SticsRFiles)
 ```
 
 ```{r echo=FALSE}
-version_name = params$version
-cat(version_name)
+stics_version = params$version
 ```
 
 ```{r setup, results="hide", echo=FALSE}
@@ -35,6 +34,7 @@ xml_loc_dir <- file.path(xml_root,"XML")
 if(!dir.exists(xml_loc_dir)) dir.create(xml_loc_dir)
 
 ```
+
 
 ```{r rm_files, results='hide', echo=FALSE}
 files_list <- list.files(path = xml_loc_dir, pattern = "\\.xml$", full.names = TRUE)
@@ -62,6 +62,9 @@ For example, getting soil parameters for a list of soils is possible, as getting
 Queries inspecting elements downwards are not available yet; as for example, getting soil names/parameters using a criterion like `argi` values > 20.
 
 Exploring files content for files sets are also possible, but not replacing parameters values.
+
+This document has been generated using the latest Stics version **`r stics_version`**.
+
 
 # Understanding what are parameters in Stics XML files
 
@@ -131,12 +134,12 @@ standard distribution (some of them have been renamed).
 In xml_dir, we store the directory path of the XML files available in the SticsRFiles installation directory.
 
 ```{r set_xml_dir, echo = FALSE}
-xml_dir <- get_examples_path( file_type = "xml", stics_version = version_name)
+xml_dir <- get_examples_path( file_type = "xml", stics_version = stics_version)
 
 ```
 
 ```{r, eval=FALSE}
-xml_dir <- get_examples_path( file_type = "xml", stics_version = version_name)
+xml_dir <- get_examples_path( file_type = "xml", stics_version = stics_version)
 
 # For linux
 #> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml/examples/V9.1"
@@ -204,7 +207,7 @@ file.copy(from = xml_files,to = xml_loc_dir)
 
 ## Searching parameters names from files
 
-The `get_param_info` function only take names or names substring of parameters or a list of. The search is performed in an XML files list (see files list in [correspondence table](#examples-files) ) stored internally in the SticsRFiles library with respect to the model version (`r version_name` as default one).
+The `get_param_info` function only take names or names substring of parameters or a list of. The search is performed in an XML files list (see files list in [correspondence table](#examples-files) ) stored internally in the SticsRFiles library with respect to the model version (`r stics_version` as default one).
 
 In that case, no need to care of which XML file(s) may contain the searched parameter(s).
 
@@ -374,7 +377,7 @@ get_param_xml(par_gen, param = "tnitopt" )
 
 # Using a conditional selection
 get_param_xml(sols, param = "argi", select = "sol",
-              value = "solcanne")
+              select_value = "solcanne")
 
 ```
 
@@ -383,6 +386,7 @@ get_param_xml(sols, param = "argi", select = "sol",
 ```{r}
 
 # For all soils
+
 get_param_xml(sols, param = "argi" )
 ```
 
@@ -400,7 +404,7 @@ get_param_xml(sols, param = c("argi", "pH") )
 
 # For one soil
 get_param_xml(sols, param = c("argi", "pH") , select = "sol",
-              value = "solcanne")
+              select_value = "solcanne")
 ```
 
 ## Vector parameters extraction
@@ -536,12 +540,13 @@ For passing several parameters values (for one or more parameters) or single val
 ```{r}
 
 ## For all soils
+soils_number <- length(get_soils_list(sols))
 
 # Initial values
 get_param_xml(sols, param = "argi")
 
 # One value per occurence
-set_param_xml(sols, param = "argi", values = list(1:33), overwrite = TRUE)
+set_param_xml(sols, param = "argi", values = list(1:soils_number), overwrite = TRUE)
 
 # Controlling written values
 get_param_xml(sols, param = "argi")
@@ -560,12 +565,14 @@ get_param_xml(sols, param = "argi")
 ```{r}
 
 ## For all soils
-
+soils_number <- length(get_soils_list(sols))
+  
 # Initial values
-get_param_xml(sols, param = c("argi", "pH"))
 
 # Setting one value per parameters occurence
-set_param_xml(sols, param = list("argi", "pH"), values = list(1:33,33:1), overwrite = TRUE)
+set_param_xml(sols, param = list("argi", "pH"),
+              values = list(1:soils_number, soils_number:1),
+              overwrite = TRUE)
 
 # Controlling written values
 get_param_xml(sols, param = c("argi", "pH"))

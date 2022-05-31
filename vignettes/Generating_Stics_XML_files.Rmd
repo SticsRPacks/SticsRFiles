@@ -5,13 +5,16 @@ vignette: >
   %\VignetteIndexEntry{Generating Stics XML files from tabulated data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+params:
+  stics_version: !r get_stics_versions_compat()$latest_version
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = FALSE
+  eval = FALSE,
+  stics_version = params$stics_version
 )
 ```
 
@@ -21,12 +24,13 @@ library(SticsRFiles)
 
 
 ```{r, echo = FALSE, eval = TRUE}
+stics_version = params$version
 workspace_path <- tempdir()
 ```
 
 # Introduction
 
-* In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.
+* In this part information are focusing on functionalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.
 
 * The functions operate on data loaded as data.frames from Excel sheets or CSV files
 
@@ -35,6 +39,9 @@ workspace_path <- tempdir()
 * Observations data files generation have been included even if they are not in XML format.
 
 * The generation of wheather files files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
+
+
+This document has been generated using the latest Stics version **`r stics_version`**.
 
 
 # Package functions to be used {#pkg-funs}
@@ -151,7 +158,7 @@ used parameter names must also match real parameter names with adding a suffix i
 * Exceptions
 in some cases used parameters names in tables may be different from real parameter names
 
-Here is the actual **correspendance table** of `keywords` to be used in parameters tables in replacement of real names:
+Here is the actual **correspondence table** of `keywords` to be used in parameters tables (i.e excel files for example) in replacement of real names in XML files:
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
 l <- get_params_dict()
