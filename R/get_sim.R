@@ -81,8 +81,6 @@ get_daily_results <- function(...) {
 #' get_sim(path, "banana")
 #' }
 #'
-#' @importFrom sticky sticky
-#'
 #' @export
 #'
 get_sim <- function(workspace,
@@ -143,7 +141,6 @@ get_sim <- function(workspace,
   # otherwise, setting "cropr_simulation" class attribute will fail
   # if (length(res) > 0) res = new_list_of(res, class = "cropr_simulation")
   if (length(res) > 0) {
-    res <- sticky(res)
     attr(res, "class") <- "cropr_simulation"
   }
   res
