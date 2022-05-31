@@ -173,9 +173,9 @@ download_usm_csv <- function(file = NULL,
 
 
   download_usm_xl(
-    xl_name = csv_name,
-    dest_dir = dest_dir,
-    version_name = version_name,
+    file = csv_name,
+    out_dir = dest_dir,
+    stics_version = version_name,
     overwrite = overwrite,
     verbose = verbose,
     type = "csv"
