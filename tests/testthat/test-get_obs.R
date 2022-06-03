@@ -1,6 +1,6 @@
 context("reading observations")
 
-path <- file.path(get_examples_path(file_type = "obs"), "simple_example")
+path <- file.path(get_examples_path(file_type = "obs", stics_version = "V9.2"), "simple_example")
 
 path_mixed <- file.path(get_examples_path(file_type = "obs"), "mixed")
 
@@ -16,11 +16,10 @@ Meas_banana <- get_obs(path_mixed, "banana")
 Meas_mixed2 <- get_obs(workspace = path_mixed, usms_file = file.path(path_mixed, "usms.xml"))
 
 # Using a usms.xml from outside the repo:
-usms_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
+usms_path <- file.path(get_examples_path(file_type = "xml", stics_version = "V9.2"), "usms.xml")
 usms <- get_usms_list(file = usms_path)
 
 Meas_mixed3 <- get_obs(workspace = path_mixed, usms_file = usms_path)
-
 
 # This is not true anymore, it returns NULL because of the case were we have the
 # usms.xml file outside of the folder and it references other usms too.

@@ -1,7 +1,7 @@
 library(SticsRFiles)
 
 
-example_txt_dir <- get_examples_path(file_type = "txt")
+example_txt_dir <- get_examples_path(file_type = "txt", stics_version = "V9.2")
 res <- force_param_values(example_txt_dir, values = setNames(object = c(220, 330), c("stlevamf", "stamflax")))
 df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), stringsAsFactors = FALSE)
 

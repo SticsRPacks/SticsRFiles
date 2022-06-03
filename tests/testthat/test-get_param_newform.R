@@ -1,6 +1,6 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_path <- file.path(get_examples_path("xml"), "param_newform.xml")
+xml_path <- file.path(get_examples_path("xml", stics_version = "V9.2"), "param_newform.xml")
 context("Getting newform param values")
 
 test_that("get option parameters from option node", {

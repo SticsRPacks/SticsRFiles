@@ -1,6 +1,6 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_path <- file.path(get_examples_path("xml"), "file_ini.xml")
+xml_path <- file.path(get_examples_path("xml", stics_version = "V9.2"), "file_ini.xml")
 context("Getting initialisation param values")
 
 test_that("single param option value ", {
@@ -38,3 +38,4 @@ test_that("multiple values from multiple nodes", {
   val <- unlist(get_param_xml(xml_path, c("hinit", "NO3init", "NH4init")), use.names = FALSE)
   expect_equal(val, c(c(23.5, 21.6, 23.9, 27.6, 0), c(32, 12, 9, 0, 0), c(0, 0, 0, 0, 0)))
 })
+

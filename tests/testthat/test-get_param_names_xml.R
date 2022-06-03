@@ -1,6 +1,6 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_dir <- get_examples_path("xml")
+xml_dir <- get_examples_path("xml", stics_version = "V9.2")
 xml_plt <- file.path(xml_dir, "file_plt.xml")
 xml_sols <- file.path(xml_dir, "sols.xml")
 xml_ini <- file.path(xml_dir, "file_ini.xml")

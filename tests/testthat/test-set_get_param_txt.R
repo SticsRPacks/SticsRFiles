@@ -2,7 +2,7 @@ library(SticsRFiles)
 
 context("Getting and Setting values from txt files")
 
-path <- get_examples_path("txt")
+path <- get_examples_path("txt", stics_version = "V9.2")
 # Copy example to test in tempdir since the files will be modified by set_param
 file.copy(from = file.path(path, list.files(path)), to = tempdir(), overwrite = TRUE)
 path <- tempdir()

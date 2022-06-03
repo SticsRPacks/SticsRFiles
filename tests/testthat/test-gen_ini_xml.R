@@ -1,7 +1,7 @@
 library(SticsRFiles)
 library(dplyr)
 # options(warn=-1)
-xl_path <- file.path(get_examples_path("xl"), "inputs_stics_example.xlsx")
+xl_path <- file.path(get_examples_path("xl", stics_version = "V9.2"), "inputs_stics_example.xlsx")
 
 ini_param <- read_params_table(file = xl_path, sheet_name = "Ini")
 
