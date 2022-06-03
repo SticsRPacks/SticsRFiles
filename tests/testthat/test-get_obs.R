@@ -89,7 +89,7 @@ test_that("reading empty usms returns a 0 row data", {
 })
 
 
-example_IC <- download_data(example_dirs = "study_case_intercrop")
+example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = "V9.2")
 
 test_that("get obs with intercrops", {
   outputs <- get_obs(workspace = example_IC)
@@ -152,3 +152,4 @@ test_that("get obs with intercrops, giving usms.xml file as absolute path", {
     c("Principal", "Associated")
   )
 })
+

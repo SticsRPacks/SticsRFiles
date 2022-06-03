@@ -8,7 +8,7 @@ ini_param <- read_params_table(file = xl_path, sheet_name = "Ini")
 out_dir <- file.path(tempdir(), "gen_xml")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 
-gen_ini_xml(param_df = ini_param[1, ], out_dir = out_dir)
+gen_ini_xml(param_df = ini_param[1, ], out_dir = out_dir, stics_version = "V9.2")
 
 ini_xml <- file.path(out_dir, ini_param[1, ]$Ini_name)
 
@@ -53,3 +53,4 @@ test_that("Testing values for soil parameters", {
   expect_true(all(xml_NO3init_values == xl_NO3init_values))
   expect_true(all(xml_NH4init_values == xl_NH4init_values))
 })
+

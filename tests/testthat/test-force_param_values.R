@@ -24,7 +24,7 @@ test_that("param_values == NA", {
 
 
 
-res <- force_param_values(example_txt_dir, values = setNames(object = c(220, NA), c("stlevamf", "stamflax")))
+res <- suppressWarnings(force_param_values(example_txt_dir, values = setNames(object = c(220, NA), c("stlevamf", "stamflax"))))
 df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), stringsAsFactors = FALSE)
 
 test_that("One NA in param_values", {

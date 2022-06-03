@@ -61,7 +61,7 @@ test_that("Set and get of a varietal parameter for a unique plant for a given va
 
 
 # Now let's work on intercrops ...
-path <- file.path(get_examples_path("txt"), "intercrop_pea_barley")
+path <- file.path(get_examples_path("txt", stics_version = "V9.2"), "intercrop_pea_barley")
 # Copy example to test in tempdir since the files will be modified by set_param
 file.copy(from = file.path(path, list.files(path)), to = tempdir(), overwrite = TRUE)
 path <- tempdir()
@@ -89,3 +89,4 @@ tmp2 <- get_param_txt(workspace = path, param = "stlevamf")
 test_that("Set and get of a varietal parameter for an intercrop for the simulated variety", {
   expect_equal(as.numeric(tmp[plant]) + 1, as.numeric(tmp2[plant]))
 })
+

@@ -12,7 +12,7 @@ test_that("fuzzy name", {
       "vlaimax", "cielclair", "codeclaircie", "juleclair", "laidebeff", "laieffeuil",
       "flai"
     )
-  testthat::expect_equal(get_param_info("lai")$name, lai_params)
+  testthat::expect_equal(get_param_info("lai", stics_version = "V9.2")$name, lai_params)
 })
 
 test_that("regex name", {
