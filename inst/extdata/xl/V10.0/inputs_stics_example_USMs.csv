@@ -1,0 +1,13 @@
+usm_name;datedebut;datefin;finit;nomsol;fstation;fclim1;fclim2;culturean;nbplantes;codesimul;fplt_1;ftec_1;flai_1;fobs_1;fplt_2;ftec_2;flai_2;fobs_2
+USM_2017_T1_CI;199;263;USM_2017_T1_ini.xml;USM_T1;climatex_sta.xml;climatex.2017;climatex.2017;1;1;0;rapeseed_plt.xml;USM_2017_T1_CI_tec.xml;;USM_2017_T1_CI.obs;;;;
+USM_2018_T1;264;570;USM_2017_T1_ini.xml;USM_T1;climatex_sta.xml;climatex.2017;climatex.2018;2;1;0;wheat_plt.xml;USM_2018_T1_tec.xml;;USM_2018_T1.obs;;;;
+BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q;199;263;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2017;2;1;0;proto_potato_plt.xml;BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml;;;;;;
+BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q;264;570;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2018;2;1;0;proto_potato_plt.xml;BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml;;;;;;
+AGA_ARB_13_IRR_220-0-0_37K_ARB13_C;199;263;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2017;2;1;0;proto_potato_plt.xml;AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml;;;;;;
+AGA_ARB_13_SEC_220-0-0_37K_ARB13_C;264;570;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2018;2;1;0;proto_potato_plt.xml;AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml;;;;;;
+FRA_ARB_11_SEC_220-0-0_38K_E;199;263;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2017;2;1;0;proto_potato_plt.xml;FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml;;;;;;
+MAG_ARB_09_SEC_220-0-0_38K_E;264;570;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2018;2;1;0;proto_potato_plt.xml;MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml;;;;;;
+MAG_ARV_12_IRR_220-0-0_36K_ARV12_C;199;263;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2017;2;1;0;proto_potato_plt.xml;MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml;;;;;;
+MAG_ARV_12_SEC_220-0-0_36K_ARV12_C;264;570;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2018;2;1;0;proto_potato_plt.xml;MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml;;;;;;
+FRA_ARB_12_SEC_220-0-0_31K_ARB12_C;199;263;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2017;2;1;0;proto_potato_plt.xml;FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml;;;;;;
+FRA_ARB_13_SEC_220-0-0_37K_ARB13_C;264;570;Vill11_ini.xml;LF1;climatex_sta.xml;climatex.2017;climatex.2018;2;1;0;proto_potato_plt.xml;FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml;;;;;;
