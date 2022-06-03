@@ -18,13 +18,13 @@ Authors@R:
       person(given = "Joel", family = "Leonard", role = "rev")
 	  )
 Description: The purpose of SticsRFiles is to provide functions for 
-manipulations of STICS input and output files. These files are either standard 
-JavaStics XML files or more directly the text files used by the model 
-executable. The most basic functionality is to read and write parameter names 
-and values through XML queries, or text files IO. More advanced functionalities
-include the generation of input XML from XML templates and spreadsheets with as 
-many simulations contexts as needed, or the generation of the input text files 
-from the XML input files for distributed computing.
+  manipulations of STICS input and output files. These files are either standard 
+  JavaStics XML files or more directly the text files used by the model 
+  executable. The most basic functionality is to read and write parameter names 
+  and values through XML queries, or text files IO. More advanced functionalities
+  include the generation of input XML from XML templates and spreadsheets with as 
+  many simulations contexts as needed, or the generation of the input text files 
+  from the XML input files for distributed computing.
 License: file LICENSE
 URL: https://github.com/SticsRPacks/SticsRFiles,
  https://doi.org/10.5281/zenodo.4443206
