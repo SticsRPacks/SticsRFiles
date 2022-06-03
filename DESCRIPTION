@@ -87,6 +87,7 @@ Collate:
     'exists_javastics_pref.R'
     'exists_param.R'
     'expand_stics_names.R'
+    'extract.R'
     'global.R'
     'fileDocument.R'
     'find_names.R'
