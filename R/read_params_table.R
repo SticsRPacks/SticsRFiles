@@ -22,7 +22,8 @@
 #' read_params_table(usm_xl_file, sheet = "USMs")
 #' usm_csv_file <- download_usm_csv(
 #'   file = "inputs_stics_example_USMs.csv",
-#'   verbose = FALSE
+#'   verbose = FALSE,
+#'   stics_version = "V9.2"
 #' )
 #' read_params_table(file = usm_csv_file)
 read_params_table <- function(file, sheet_name = NULL,
@@ -67,7 +68,8 @@ read_params_table <- function(file, sheet_name = NULL,
   }
 
   # Reading file according to its format
-  switch(file_ext,
+  switch(
+    file_ext,
     csv = {
       out_table <- utils::read.csv2(
         file = file_path,

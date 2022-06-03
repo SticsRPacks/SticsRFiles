@@ -8,7 +8,7 @@
 #'
 #' @param file Name of an Excel file (optional, not used for the moment)
 #' @param out_dir Directory path where to copy the Excel file
-#'  (optional, default: current directory)
+#'  (optional, default: `tempdir()`)
 #' @param stics_version Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.
 #' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
 #' @param verbose Logical value for displaying information while running
@@ -32,7 +32,7 @@
 #'
 
 download_usm_xl <- function(file = NULL,
-                            out_dir = getwd(),
+                            out_dir = tempdir(),
                             stics_version = "latest",
                             overwrite = FALSE,
                             verbose = FALSE,
@@ -127,7 +127,7 @@ download_usm_xl <- function(file = NULL,
 #' \code{\link{gen_usms_xml}}
 #'
 #' @param file Name of a csv file (optional, not used for the moment)
-#' @param out_dir Directory path where to copy the csvfile
+#' @param out_dir Directory path where to copy the csv file (default: `tempdir()`)
 #' @param stics_version Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.
 #' @param overwrite Optional logical, TRUE for overwriting files, FALSE otherwise (default)
 #' @param verbose Logical value for displaying information while running
@@ -148,7 +148,7 @@ download_usm_xl <- function(file = NULL,
 #'
 
 download_usm_csv <- function(file = NULL,
-                             out_dir = getwd(),
+                             out_dir = tempdir(),
                              stics_version = "latest",
                              overwrite = FALSE,
                              verbose = FALSE,
