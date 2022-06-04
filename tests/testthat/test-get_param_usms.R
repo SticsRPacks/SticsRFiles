@@ -1,6 +1,6 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_path <- file.path(get_examples_path("xml"), "usms.xml")
+xml_path <- file.path(get_examples_path("xml", stics_version = "V9.2"), "usms.xml")
 context("Getting usms param values")
 
 test_that("getting all param from an usm", {

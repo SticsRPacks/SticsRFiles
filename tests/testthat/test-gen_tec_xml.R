@@ -8,7 +8,7 @@ tec_param <- read_params_table(file = xl_path, sheet_name = "Tec")
 out_dir <- file.path(tempdir(), "gen_xml")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 
-gen_tec_xml(param_df = tec_param[4, ], out_dir = out_dir)
+gen_tec_xml(param_df = tec_param[4, ], out_dir = out_dir, stics_version = "V9.2")
 
 tec_xml <- file.path(out_dir, tec_param[4, ]$Tec_name)
 

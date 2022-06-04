@@ -6,7 +6,7 @@
 \usage{
 download_usm_xl(
   file = NULL,
-  out_dir = getwd(),
+  out_dir = tempdir(),
   stics_version = "latest",
   overwrite = FALSE,
   verbose = FALSE,
@@ -20,7 +20,7 @@ download_usm_xl(
 \item{file}{Name of an Excel file (optional, not used for the moment)}
 
 \item{out_dir}{Directory path where to copy the Excel file
-(optional, default: current directory)}
+(optional, default: \code{tempdir()})}
 
 \item{stics_version}{Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.}
 

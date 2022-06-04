@@ -18,3 +18,4 @@ test_that("getting values from choice param", {
     c(5, 30, 35, 58)
   )
 })
+

@@ -114,7 +114,7 @@ unlink(file.path(path, "wheat"))
 
 
 # Testing intercropping usms  ------------------------------------
-example_IC <- download_data(example_dirs = "study_case_intercrop")
+example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = "V9.2")
 
 test_that("get simulations with intercrops", {
   outputs <- get_sim(workspace = example_IC)
@@ -162,3 +162,4 @@ test_that("get simulations with intercrops, giving usms.xml file", {
   expect_equal(unique(outputs$`SC_Pea_2005-2006_N0`$Plant), "poi")
   expect_null(outputs$`SC_Pea_2005-2006_N0`$Dominance)
 })
+

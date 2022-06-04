@@ -6,7 +6,7 @@
 \usage{
 download_usm_csv(
   file = NULL,
-  out_dir = getwd(),
+  out_dir = tempdir(),
   stics_version = "latest",
   overwrite = FALSE,
   verbose = FALSE,
@@ -18,7 +18,7 @@ download_usm_csv(
 \arguments{
 \item{file}{Name of a csv file (optional, not used for the moment)}
 
-\item{out_dir}{Directory path where to copy the csvfile}
+\item{out_dir}{Directory path where to copy the csv file (default: \code{tempdir()})}
 
 \item{stics_version}{Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.}
 
