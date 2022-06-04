@@ -246,8 +246,8 @@ set_station_txt <- function(file = "station.txt",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_param_txt(add)",
-      "set_param_txt(append)"
+      "0.5.0", "set_station_txt(add)",
+      "set_station_txt(append)"
     )
   } else {
     add <- append # to remove when we update inside the function
@@ -397,7 +397,7 @@ set_tec_txt <- function(file = "fictec1.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_ini_txt(filepath)",
+      "0.5.0", "set_tec_txt(filepath)",
       "set_tec_txt(file)"
     )
   } else {
@@ -406,7 +406,7 @@ set_tec_txt <- function(file = "fictec1.txt",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_param_txt(add)",
+      "0.5.0", "set_tec_txt(add)",
       "set_tec_txt(append)"
     )
   } else {
