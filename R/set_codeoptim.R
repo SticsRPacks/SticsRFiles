@@ -27,6 +27,11 @@ set_codeoptim <- function(workspace, value = 1, file_name = "new_travail.usm") {
   lines <- readLines(file_path)
 
   idx <- grep("codeoptim", lines) + 1
+
+  if (length(idx)==0) {
+    stop(paste("codeoptim not found in", file_path))
+  }
+
   lines[idx] <- as.character(value)
 
   writeLines(lines, file_path)
