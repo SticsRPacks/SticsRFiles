@@ -26,7 +26,17 @@ set_codeoptim <- function(workspace, value = 1, file_name = "new_travail.usm") {
 
   lines <- readLines(file_path)
 
-  idx <- grep("codeoptim", lines) + 1
+  idx1 <- grep("codeoptim", lines) + 1
+  idx2 <- grep("codoptim", lines) + 1  # for compat with STICS V10 ...
+
+  if (length(idx1)>0) {
+    idx <- idx1
+  } else if (length(idx2)>0) {
+    idx <- idx2
+  } else {
+    stop(paste("Neither codeoptim nor codoptim found in", file_path))
+  }
+
   lines[idx] <- as.character(value)
 
   writeLines(lines, file_path)
