@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>                                              
+<usms version="10.0">                                                                                                                                                    
+  <usm nom="banana">                                                                                
+    <datedebut>30</datedebut>                                                                       
+    <datefin>300</datefin>                                                                          
+    <finit>banane_ini.xml</finit>                                                                   
+    <nomsol>solbanane</nomsol>                                                                      
+    <fstation>climbanj_sta.xml</fstation>                                                           
+    <fclim1>climbanj.1996</fclim1>                                                                  
+    <fclim2>climbanj.1996</fclim2>                                                                  
+    <culturean>1</culturean>                                                                        
+    <nbplantes>1</nbplantes>                                                                        
+    <codesimul>0</codesimul>                                                                        
+    <plante dominance="1">                                                                          
+      <fplt>proto_banana_plt.xml</fplt>                                                             
+      <ftec>banane_tec.xml</ftec>                                                                   
+      <flai>null</flai>
+      <fobs>banane.obs</fobs>                                                                             
+    </plante>                                                                                       
+    <plante dominance="2">                                                                          
+      <fplt>null</fplt>                                                                             
+      <ftec>null</ftec>                                                                             
+      <flai>null</flai>
+      <fobs>null</fobs>                                                                             
+    </plante>                                                                                       
+  </usm>                                                                                                                                                                           
+</usms>
