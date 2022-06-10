@@ -100,8 +100,16 @@ upgrade_usms_xml <- function(file,
   }
 
 
+  # TODO: use following to get usms with no fobs field
+  # usms_with_fobs <- SticsRFiles:::getAttrsValues(
+  #   docObj = old_doc,path = "//usm[plante[@dominance='1']/fobs]",
+  #   attr_list = "nom")
+
   # Usms names
   usms_names <- getAttrsValues(old_doc, "//usm", "nom")
+
+  # usm names to use
+  # usm_names <- setdiff(usms_names, usms_with_fobs)
 
   # existing obs files
   # intercrops usms are not taken into account in that case
