@@ -1,14 +1,19 @@
 library(SticsRFiles)
 library(dplyr)
 # options(warn=-1)
-xl_path <- file.path(get_examples_path("xl"), "inputs_stics_example.xlsx")
+
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
+
+
+xl_path <- file.path(get_examples_path("xl", stics_version = stics_version), "inputs_stics_example.xlsx")
 
 tec_param <- read_params_table(file = xl_path, sheet_name = "Tec")
 
 out_dir <- file.path(tempdir(), "gen_xml")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 
-gen_tec_xml(param_df = tec_param[4, ], out_dir = out_dir, stics_version = "V9.2")
+gen_tec_xml(param_df = tec_param[4, ], out_dir = out_dir, stics_version = stics_version)
 
 tec_xml <- file.path(out_dir, tec_param[4, ]$Tec_name)
 
@@ -43,3 +48,4 @@ test_that("Testing values for interventions", {
   expect_true(all(xml_irr_values == xml_irr_values))
   expect_true(all(as.character(xml_fert_values) == xml_fert_values))
 })
+
