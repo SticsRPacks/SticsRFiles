@@ -4,10 +4,11 @@
 \alias{get_version_num}
 \title{Getting version number from the version string}
 \usage{
-get_version_num(stics_version, numeric = TRUE)
+get_version_num(stics_version = "latest", numeric = TRUE)
 }
 \arguments{
-\item{stics_version}{string (i.e. "VX.Y", or "vX.Y")}
+\item{stics_version}{An optional version name as listed in
+get_stics_versions_compat() return}
 
 \item{numeric}{logical, TRUE for numerical output format,
 FALSE for character output format}

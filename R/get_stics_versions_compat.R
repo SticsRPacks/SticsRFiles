@@ -118,7 +118,8 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 
 #' Getting version number from the version string
 #'
-#' @param stics_version string (i.e. "VX.Y", or "vX.Y")
+#' @param stics_version An optional version name as listed in
+#' get_stics_versions_compat() return
 #' @param numeric logical, TRUE for numerical output format,
 #' FALSE for character output format
 #' @return version number (numeric or character)
@@ -128,9 +129,13 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 #' \dontrun{
 #' SticsRFiles:::get_version_num()
 #' }
-get_version_num <- function(stics_version, numeric = TRUE) {
+get_version_num <- function(stics_version = "latest", numeric = TRUE) {
   if (is.numeric(stics_version) && numeric) {
     return(stics_version)
+  }
+
+  if (stics_version == "latest") {
+    stics_version <- get_stics_versions_compat()$latest_version
   }
 
   char_version <- gsub(pattern = "^[V | v]", "", stics_version)
@@ -141,7 +146,6 @@ get_version_num <- function(stics_version, numeric = TRUE) {
 
   as.numeric(char_version)
 }
-
 
 #' Getting version string from the version number
 #'

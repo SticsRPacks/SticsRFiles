@@ -6,7 +6,7 @@ library(dplyr)
 #stics_version <- "V10.0"
 stics_version <- get_stics_versions_compat()$latest_version
 
-if (SticsRFiles:::get_version_num(stics_version) >= 10) stics_version <- "V10.0"
+if (SticsRFiles:::get_version_num() >= 10) stics_version <- "V10.0"
 parnames <- list()
 parnames$hinit$`V10.0` <- "Hinitf"
 parnames$hinit$`V9.2` <- "hinit"
