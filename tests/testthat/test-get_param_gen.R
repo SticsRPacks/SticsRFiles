@@ -1,6 +1,10 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_path <- file.path(get_examples_path("xml"), "param_gen.xml")
+
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
+
+xml_path <- file.path(get_examples_path("xml", stics_version = stics_version), "param_gen.xml")
 context("Getting gen param values")
 
 test_that("all values from a single node", {
