@@ -347,11 +347,15 @@
     <option choix="1" nom="thinning" nomParam="codeclaircie">
       <choix code="1" nom="no"/>
       <choix code="2" nom="yes">
-        <ta nb_interventions="0" nom="thinning management">
+        <ta nb_interventions="1" nom="thinning management">
           <ta_entete nb_colonnes="2">
             <colonne nom="juleclair"/>
             <colonne nom="nbinfloecl"/>
           </ta_entete>
+	        <intervention nb_colonnes="2">
+            <colonne nom="juleclair">0</colonne>
+            <colonne nom="nbinfloecl">0.00000</colonne>
+          </intervention>
         </ta>
       </choix>
     </option>
