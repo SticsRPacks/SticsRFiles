@@ -1,6 +1,10 @@
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
+
+
 context("reading observations")
 
-path <- file.path(get_examples_path(file_type = "obs", stics_version = "V9.2"), "simple_example")
+path <- file.path(get_examples_path(file_type = "obs", stics_version = stics_version), "simple_example")
 
 path_mixed <- file.path(get_examples_path(file_type = "obs"), "mixed")
 
@@ -16,7 +20,7 @@ Meas_banana <- get_obs(path_mixed, "banana")
 Meas_mixed2 <- get_obs(workspace = path_mixed, usms_file = file.path(path_mixed, "usms.xml"))
 
 # Using a usms.xml from outside the repo:
-usms_path <- file.path(get_examples_path(file_type = "xml", stics_version = "V9.2"), "usms.xml")
+usms_path <- file.path(get_examples_path(file_type = "xml", stics_version = stics_version), "usms.xml")
 usms <- get_usms_list(file = usms_path)
 
 Meas_mixed3 <- get_obs(workspace = path_mixed, usms_file = usms_path)
@@ -89,7 +93,7 @@ test_that("reading empty usms returns a 0 row data", {
 })
 
 
-example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = "V9.2")
+example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = stics_version)
 
 test_that("get obs with intercrops", {
   outputs <- get_obs(workspace = example_IC)
