@@ -1,8 +1,8 @@
 library(SticsRFiles)
 
 
-#stics_version <- "V9.2"
-stics_version <- get_stics_versions_compat()$latest_version
+stics_version <- "V9.2"
+#stics_version <- get_stics_versions_compat()$latest_version
 
 
 example_txt_dir <- get_examples_path(file_type = "txt", stics_version = stics_version)
