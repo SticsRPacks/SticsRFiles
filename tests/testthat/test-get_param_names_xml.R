@@ -1,8 +1,10 @@
 library(SticsRFiles)
 # options(warn=-1)
 
-stics_version <- get_stics_versions_compat()$latest_version
-version_num <- SticsRFiles:::get_version_num()
+
+stics_version <- "V9.2"
+#stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num(stics_version = stics_version)
 
 xml_dir <- get_examples_path("xml", stics_version = stics_version)
 xml_plt <- file.path(xml_dir, "file_plt.xml")
