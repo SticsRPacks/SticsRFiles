@@ -1,6 +1,10 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_dir <- get_examples_path("xml", stics_version = "V9.2")
+
+stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num()
+
+xml_dir <- get_examples_path("xml", stics_version = stics_version)
 xml_plt <- file.path(xml_dir, "file_plt.xml")
 xml_sols <- file.path(xml_dir, "sols.xml")
 xml_ini <- file.path(xml_dir, "file_ini.xml")
@@ -60,9 +64,11 @@ test_that("node name", {
   expect_true(all(c("nbplantes", "lai0") %in% param_names))
 })
 
+no3 <- "NO3init"
+if (version_num >= 10) no3 <- "NO3initf"
 test_that("parent node name", {
   expect_true("densinitial" %in% param_names)
-  expect_true(all(c("densinitial", "NO3init") %in% param_names))
+  expect_true(all(c("densinitial", no3) %in% param_names))
 })
 
 # ----------------------------------------------------------
@@ -147,17 +153,20 @@ test_that("option param name", {
 context("Getting param_new param names")
 param_names <- unlist(get_param_names_xml(xml_new)[[1]])
 
-test_that("option name", {
-  expect_true("codetempfauche" %in% param_names)
-  expect_true(all(c("codetempfauche", "codecalferti") %in% param_names))
-})
+if (version_num < 10) {
 
-test_that("param name", {
-  expect_true("nbj_pr_apres_semis" %in% param_names)
-  expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle") %in% param_names))
-})
+  test_that("option name", {
+    expect_true("codetempfauche" %in% param_names)
+    expect_true(all(c("codetempfauche", "codecalferti") %in% param_names))
+  })
 
-test_that("option param name", {
-  expect_true("SigmaDisTalle(1)" %in% param_names)
-  expect_true(all(c("SigmaDisTalle(1)", "ratiolN") %in% param_names))
-})
+  test_that("param name", {
+    expect_true("nbj_pr_apres_semis" %in% param_names)
+    expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle") %in% param_names))
+  })
+
+  test_that("option param name", {
+    expect_true("SigmaDisTalle(1)" %in% param_names)
+    expect_true(all(c("SigmaDisTalle(1)", "ratiolN") %in% param_names))
+  })
+}
