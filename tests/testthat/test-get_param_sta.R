@@ -1,6 +1,11 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_path <- file.path(get_examples_path("xml", stics_version = "V9.2"), "file_sta.xml")
+
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num()
+
+xml_path <- file.path(get_examples_path("xml", stics_version = stics_version), "file_sta.xml")
 context("Getting station param values")
 
 test_that("single value from single node", {

@@ -1,6 +1,11 @@
+
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num()
+
 context("get model outputs")
 
-path <- get_examples_path(file_type = "sti")
+path <- get_examples_path(file_type = "sti", stics_version = stics_version)
 
 # Testing with a JavaStics workspace like
 test_that("output is always list", {
@@ -114,7 +119,7 @@ unlink(file.path(path, "wheat"))
 
 
 # Testing intercropping usms  ------------------------------------
-example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = "V9.2")
+example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = stics_version)
 
 test_that("get simulations with intercrops", {
   outputs <- get_sim(workspace = example_IC)

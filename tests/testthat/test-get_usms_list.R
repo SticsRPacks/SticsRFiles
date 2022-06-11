@@ -1,6 +1,11 @@
 library(SticsRFiles)
 # options(warn=-1)
-xml_usms <- file.path(get_examples_path("xml", stics_version = "V9.2"), "usms.xml")
+
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num()
+
+xml_usms <- file.path(get_examples_path("xml", stics_version = stics_version), "usms.xml")
 usms_names <- get_usms_list(file = xml_usms)
 
 # Testing returned type for one or several files
