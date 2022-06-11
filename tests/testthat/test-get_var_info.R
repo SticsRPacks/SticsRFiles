@@ -1,7 +1,11 @@
+library(SticsRFiles)
 context("searching variables information")
 
 # fixing version to latest standard one
 stics_version <- "V9.1"
+#stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num()
+
 
 # creating an empty df
 empty_df <- data.frame(
