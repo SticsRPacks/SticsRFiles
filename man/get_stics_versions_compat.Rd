@@ -2,13 +2,18 @@
 % Please edit documentation in R/get_stics_versions_compat.R
 \name{get_stics_versions_compat}
 \alias{get_stics_versions_compat}
-\title{Get the compatible Stics versions list}
+\title{Get the compatible Stics versions}
 \usage{
-get_stics_versions_compat()
+get_stics_versions_compat(version_index = NULL)
+}
+\arguments{
+\item{version_index}{Absolute positive index, or negative relative index from
+latest version}
 }
 \value{
 A named list with the STICS versions compatible with this package
-($versions_list), and the latest version in use ($latest_version).
+($versions_list), and the latest version in use ($latest_version) or
+an existing version selected using version_index.
 }
 \description{
 Get the versions of stics that are fully compatible
@@ -16,7 +21,16 @@ with this package.
 }
 \examples{
 \dontrun{
+
+Getting the complete versions list
 SticsRFiles::get_stics_versions_compat()
+
+Getting the first version
+SticsRFiles::get_stics_versions_compat(1)
+
+Getting the previous version of the latest one
+SticsRFiles::get_stics_versions_compat(-1)
+
 }
 
 }

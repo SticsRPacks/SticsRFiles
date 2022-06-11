@@ -1,14 +1,27 @@
-#' Get the compatible Stics versions list
+#' Get the compatible Stics versions
 #'
 #' @description Get the versions of stics that are fully compatible
 #' with this package.
 #'
+#' @param version_index Absolute positive index, or negative relative index from
+#' latest version
+#'
 #' @return A named list with the STICS versions compatible with this package
-#' ($versions_list), and the latest version in use ($latest_version).
+#' ($versions_list), and the latest version in use ($latest_version) or
+#' an existing version selected using version_index.
 #'
 #' @examples
 #' \dontrun{
+#'
+#' Getting the complete versions list
 #' SticsRFiles::get_stics_versions_compat()
+#'
+#' Getting the first version
+#' SticsRFiles::get_stics_versions_compat(1)
+#'
+#' Getting the previous version of the latest one
+#' SticsRFiles::get_stics_versions_compat(-1)
+#'
 #' }
 #'
 #' @export
@@ -16,7 +29,7 @@
 #'
 # TODO: may be in stics_versions_utils get_stics_versions_compat
 # & new function check version
-get_stics_versions_compat <- function() {
+get_stics_versions_compat <- function(version_index = NULL) {
 
   # Getting versions list
   ver_info <- get_versions_info()
@@ -29,7 +42,35 @@ get_stics_versions_compat <- function() {
   # List of versions strings ans latest version string
   versions <- list(versions_list = versions_names, latest_version = latest_version)
 
-  return(versions)
+  if(is.null(version_index))
+    return(versions)
+
+  # getting relative backwards versions
+  nb_versions <- length(versions$versions_list)
+
+
+  if(version_index < 0) {
+    if(version_index >= -nb_versions+1){
+      return(versions$versions_list[nb_versions + version_index])
+    } else {
+      return(invisible())
+    }
+  }
+
+  # or absolute rank number
+  if(version_index > 0) {
+    if(version_index <= nb_versions) {
+      return(versions$versions_list[version_index])
+    } else {
+      return(invisible())
+    }
+
+  }
+
+
+
+
+
 }
 
 
@@ -52,6 +93,7 @@ check_version_compat <- function(stics_version = "latest") {
   if (stics_version == "latest") {
     return(versions$latest_version)
   }
+
 
   if (stics_version %in% versions$versions_list) {
     return(stics_version)
