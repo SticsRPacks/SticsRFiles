@@ -75,7 +75,7 @@ containing "lai"
 
 parameters names adapted according to version >= 10.0
 
-## <u>test-get_param_names_xml.R</u> TO FIX !
+## <u>test-get_param_names_xml.R</u> OK
 
 * functions:
   * **get_param_names_xml**
@@ -96,16 +96,15 @@ A single value has been selected.
  min: -10
 max: 10
 
-> TODO: how to avoid this bcse these warnings will be considered as errors in checks
+* how to avoid this bcse these warnings will be considered as errors in checks
+> For the moment : added bounds = FALSE when calling get_param_names_xml
+for soil and param_gen
+**TODO: fix bounds in files !**
 
-* to be treated: last tests
-
-  * getting param names and checking if vectors of names are found in param names
-depending on version : here specifically in param new form.
-
-  * Done: conditioning test execution on version num relatively to < 10
-
-  * **TODO: add tests for > 10**
+* to be treated: OK
+  * Done: 
+    * conditioning test execution on version num relatively to < 10
+    * added tests adapted to > 10 
 
 
 
@@ -149,7 +148,8 @@ parameters names adapted according to version >= 10.0
     * columns index are defined according to version < 9.2 and >= 9.2
     * minor changes in test: on last and previous version, a variable name changed
 
-## <u>test-keepattr.R</u> Nothing to do with version
+## <u>test-keepattr.R</u> OK
+Nothing to do with version
 
 
 

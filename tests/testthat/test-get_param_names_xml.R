@@ -2,8 +2,8 @@ library(SticsRFiles)
 # options(warn=-1)
 
 
-stics_version <- "V9.2"
-#stics_version <- get_stics_versions_compat()$latest_version
+#stics_version <- "V9.2"
+stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num(stics_version = stics_version)
 
 xml_dir <- get_examples_path("xml", stics_version = stics_version)
@@ -35,7 +35,7 @@ test_that("param name", {
 
 context("Getting sol param names")
 
-param_names <- unlist(get_param_names_xml(xml_sols)[[1]])
+param_names <- unlist(get_param_names_xml(xml_sols, bounds = FALSE)[[1]])
 
 test_that("option name", {
   expect_true("codecailloux" %in% param_names)
@@ -133,7 +133,7 @@ test_that("node name", {
 
 # ----------------------------------------------------------
 context("Getting param_gen param names")
-param_names <- unlist(get_param_names_xml(xml_gen)[[1]])
+param_names <- unlist(get_param_names_xml(xml_gen, bounds = FALSE)[[1]])
 
 test_that("option name", {
   expect_true("codeh2oact" %in% param_names)
@@ -171,4 +171,23 @@ if (version_num < 10) {
     expect_true("SigmaDisTalle(1)" %in% param_names)
     expect_true(all(c("SigmaDisTalle(1)", "ratiolN") %in% param_names))
   })
+} else {
+  test_that("option name", {
+    expect_true("codeNmindec" %in% param_names)
+    expect_true(all(c("codeNmindec", "codecalferti") %in% param_names))
+  })
+
+  # test_that("param name", {
+  #   expect_true("nbj_pr_apres_semis" %in% param_names)
+  #   expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle") %in% param_names))
+  # })
+
+  test_that("option param name", {
+    expect_true("rapNmindec" %in% param_names)
+    expect_true(all(c("rapNmindec", "ratiolN") %in% param_names))
+  })
 }
+
+
+
+
