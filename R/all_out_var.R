@@ -21,11 +21,17 @@ all_out_var <- function(stics_version = "latest") {
   # Checking and getting the right version
   version <- check_version_compat(stics_version = stics_version)
 
+  if(get_version_num(stics_version = stics_version) < 9.2) {
+    cols_idx <- 1:4
+  } else {
+    cols_idx <- c(1:3,5)
+  }
+
   var_df <- utils::read.csv2(
     file.path(get_examples_path(file_type = "csv", stics_version = stics_version), "outputs.csv"),
     header = FALSE,
     stringsAsFactors = FALSE
-  )[, 1:4]
+  )[, cols_idx]
 
   names(var_df) <- c("name", "definition", "unit", "type")
 

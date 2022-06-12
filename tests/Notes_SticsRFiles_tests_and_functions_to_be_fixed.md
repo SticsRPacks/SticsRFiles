@@ -137,13 +137,17 @@ parameters names adapted according to version >= 10.0
 ## <u>test-get_usms_list.R</u> OK
 
 
-## <u>test-get_var_info.R</u> failing using V10.0
+## <u>test-get_var_info.R</u> OK
 
 * functions:
-  * **get_var_info**: TO FIX    
-    Apparently  is not loading the correct columns of the outputs.csv file between the 9.1 and the following versions 9.2 and 10.0   
-  * to be fixed it before mofifying the test file
-
+  * **get_var_info**: Fixed   
+    Not loading the correct columns of the outputs.csv file between the 9.1 and the following versions 9.2 and 10.0   
+    The content of the file has changed between 9.1 and > 9.2
+    9.1: name, definition, unit, type
+    > 9.2: name, definition, unit, origin, type, daily vec., var indice
+  * Fix:
+    * columns index are defined according to version < 9.2 and >= 9.2
+    * minor changes in test: on last and previous version, a variable name changed
 
 ## <u>test-keepattr.R</u> Nothing to do with version
 

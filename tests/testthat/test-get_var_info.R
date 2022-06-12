@@ -2,9 +2,10 @@ library(SticsRFiles)
 context("searching variables information")
 
 # fixing version to latest standard one
-stics_version <- "V9.1"
-#stics_version <- get_stics_versions_compat()$latest_version
+#stics_version <- "V9.1"
+stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
+stics_prev_version <- get_stics_versions_compat(-1)
 
 
 # creating an empty df
@@ -18,8 +19,8 @@ empty_df <- data.frame(
 
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
-  empty_df_var <- get_var_info("myunknownvariable", stics_version = "V9.1")
-  empty_df_keyword <- get_var_info(keyword = "myunknownvariable", stics_version = "V9.1")
+  empty_df_var <- get_var_info("myunknownvariable", stics_version = stics_version)
+  empty_df_keyword <- get_var_info(keyword = "myunknownvariable", stics_version = stics_version)
 
   # Don't function, as expect_equal
   # Error message
@@ -62,27 +63,28 @@ test_that("giving an existing partial variable name in var arg or keyword", {
 })
 
 var_etmetr_df <- data.frame(
-  name = "etm_etr1moy",
-  definition = "etm/etr ratio on the vegetative phase",
-  unit = "0-1",
+  name = "cep2",
+  definition = "cumulative transpiration over the cropping season of plants 1 and 2",
+  unit = "mm",
   type = "real",
   stringsAsFactors = FALSE
 )
 
-# Testing with different versions
+# Testing with different versions: last , previous
 # Testing result for searching a variable name using etm_etr1moy
 # or etm as keyword testing returned df dim
 test_that("giving different versions", {
-  existing_var_df <- get_var_info("etm_etr1moy", stics_version = "V9.1")
-  missing_var_df <- get_var_info("etm_etr1moy", stics_version = "V8.5")
+  existing_var_df <- get_var_info("cep2", stics_version = stics_version)
+  missing_var_df <- get_var_info("cep2", stics_version = stics_prev_version)
 
   testthat::expect_true(dplyr::all_equal(missing_var_df, empty_df))
   testthat::expect_true(dplyr::all_equal(existing_var_df, var_etmetr_df))
 
-  var_df_9_1 <- get_var_info("etm", stics_version = "V9.1")
-  var_df_8_5 <- get_var_info("etm", stics_version = "V8.5")
+  var_df_last <- get_var_info("etm", stics_version = stics_version)
+  var_df_prev_last <- get_var_info("etm", stics_version = stics_prev_version)
 
-  all_eq <- dplyr::all_equal(var_df_9_1, var_df_8_5)
+  all_eq <- dplyr::all_equal(var_df_last, var_df_prev_last)
+
   if (is.character(all_eq)) all_eq <- FALSE
 
   testthat::expect_false(all_eq)
