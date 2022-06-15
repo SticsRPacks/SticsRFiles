@@ -5,19 +5,19 @@
 \title{Getting parameters information using partial search words}
 \usage{
 get_param_data_df(
-  parameter = NULL,
-  file_path = NULL,
-  version = "latest",
+  param = NULL,
+  file = NULL,
+  stics_version = "latest",
   kind = "all",
   exact = FALSE
 )
 }
 \arguments{
-\item{parameter}{Optional name or partial name or a vector of}
+\item{param}{Optional name or partial name or a vector of}
 
-\item{file_path}{Optional, xml file path or a vector of}
+\item{file}{Optional, xml file path or a vector of}
 
-\item{version}{Optional, Stics version (default value, "latest")
+\item{stics_version}{Optional, Stics version (default value, "latest")
 Only the 2 latest are referenced: V9.0, V9.1}
 
 \item{kind}{Kind of information to be retrieved for parameters
@@ -40,18 +40,18 @@ all the existing parameters
 \examples{
 \dontrun{
 
-get_param_data_df(parameter = "albedo")
+get_param_data_df(param = "albedo")
 
-get_param_data_df(parameter = "albedo", file_path = "/path/to/file.xml")
+get_param_data_df(param = "albedo", file = "/path/to/file.xml")
 
-get_param_data_df(parameter = "albedo", kind = "formalism")
+get_param_data_df(param = "albedo", kind = "formalism")
 
-get_param_data_df(parameter = "albedo", version = "V9.0")
+get_param_data_df(param = "albedo", stics_version = "V9.0")
 
-get_param_data_df(parameter = c("albedo", "latitude", "humcapil"))
+get_param_data_df(param = c("albedo", "latitude", "humcapil"))
 
 get_param_data_df(
-  parameter = c("albedo", "latitude", "humcapil"),
+  param = c("albedo", "latitude", "humcapil"),
   kind = "formalism"
 )
 }

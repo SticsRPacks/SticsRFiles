@@ -98,14 +98,14 @@ get_param_info <- function(param = NULL,
   # or all other cases
   if (par_use & !form_use) {
     param_data_df <- suppressWarnings(get_param_data_df(
-      file_path = file_path,
-      parameter = parameter,
-      version = version,
+      file = file_path,
+      param = parameter,
+      stics_version = version,
     ))
   } else {
     param_data_df <- suppressWarnings(get_param_data_df(
-      file_path = file_path,
-      version = version
+      file = file_path,
+      stics_version = version
     ))
   }
 
@@ -150,11 +150,11 @@ get_param_info <- function(param = NULL,
 
 #' Getting parameters information using partial search words
 #'
-#' @param parameter Optional name or partial name or a vector of
+#' @param param Optional name or partial name or a vector of
 #'
-#' @param file_path Optional, xml file path or a vector of
+#' @param file Optional, xml file path or a vector of
 #'
-#' @param version Optional, Stics version (default value, "latest")
+#' @param stics_version Optional, Stics version (default value, "latest")
 #' Only the 2 latest are referenced: V9.0, V9.1
 #' @param kind Kind of information to be retrieved for parameters
 #' among "parameter", "formalism" or "all" for both of them
@@ -173,25 +173,25 @@ get_param_info <- function(param = NULL,
 #' @examples
 #' \dontrun{
 #'
-#' get_param_data_df(parameter = "albedo")
+#' get_param_data_df(param = "albedo")
 #'
-#' get_param_data_df(parameter = "albedo", file_path = "/path/to/file.xml")
+#' get_param_data_df(param = "albedo", file = "/path/to/file.xml")
 #'
-#' get_param_data_df(parameter = "albedo", kind = "formalism")
+#' get_param_data_df(param = "albedo", kind = "formalism")
 #'
-#' get_param_data_df(parameter = "albedo", version = "V9.0")
+#' get_param_data_df(param = "albedo", stics_version = "V9.0")
 #'
-#' get_param_data_df(parameter = c("albedo", "latitude", "humcapil"))
+#' get_param_data_df(param = c("albedo", "latitude", "humcapil"))
 #'
 #' get_param_data_df(
-#'   parameter = c("albedo", "latitude", "humcapil"),
+#'   param = c("albedo", "latitude", "humcapil"),
 #'   kind = "formalism"
 #' )
 #' }
 #'
-get_param_data_df <- function(parameter = NULL,
-                              file_path = NULL,
-                              version = "latest",
+get_param_data_df <- function(param = NULL,
+                              file = NULL,
+                              stics_version = "latest",
                               kind = "all",
                               exact = FALSE) {
   kinds <- c("parameter", "formalism", "all")
@@ -202,14 +202,14 @@ get_param_data_df <- function(parameter = NULL,
   }
 
   # Just in case
-  parameter <- unique(parameter)
+  param <- unique(param)
 
-  if (base::is.null(file_path)) {
+  if (base::is.null(file)) {
     # Check Stics version
-    version <- get_xml_stics_version(version)
+    stics_version <- get_xml_stics_version(stics_version)
 
     # Getting XML examples files dir from the package
-    xml_dir <- get_examples_path(file_type = "xml", stics_version = version)
+    xml_dir <- get_examples_path(file_type = "xml", stics_version = stics_version)
 
     # Getting the XML files list
     files_list <- list.files(
@@ -223,19 +223,19 @@ get_param_data_df <- function(parameter = NULL,
       stop("Examples XML files not found in the package !")
     }
   } else {
-    files_list <- file_path
+    files_list <- file
   }
 
   # Getting parameters names bounds and file
   param_names <- suppressWarnings(get_param_names_xml(
     xml_file = files_list,
-    name = parameter,
+    name = param,
     exact = exact
   ))
 
   # Not any parameters found
   if (all(dim(param_names) == 0)) {
-    warning(paste("Not any parameter found for Stics version: ", version))
+    warning(paste("Not any parameter found for Stics version: ", stics_version))
     return(invisible())
   }
 
