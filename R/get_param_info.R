@@ -266,7 +266,7 @@ get_param_data_df <- function(param = NULL,
   param_df <- suppressMessages(dplyr::left_join(param_names, param_formalism))
 
   # Adding a version  attribute
-  attr(x = param_df, which = "version") <- version
+  attr(x = param_df, which = "version") <- stics_version
   return(param_df)
 }
 
