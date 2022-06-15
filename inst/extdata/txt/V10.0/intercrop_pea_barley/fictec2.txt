@@ -1,6 +1,6 @@
 nbinterventions
 1
-opp1
+julres coderes qres Crespc CsurNres Nminres eaures 
 70 1 2.33 42.00 80.00 0.00 0.00 
 code_auto_profres
 1
@@ -10,7 +10,7 @@ resz
 5
 nbinterventions
 1
-opp1
+jultrav profres proftrav 
 70 0.00 20.00 
 iplt0
 77
