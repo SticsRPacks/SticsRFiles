@@ -8,6 +8,8 @@
 #' the function returns an object with all parameters.
 #' @param variety      Either the variety name or index for plant parameters (optional, see details).
 #' @param exact        Boolean indicating if the function must return results only for exact match.
+#' @param stics_version An optional version name as listed in
+#' get_stics_versions_compat() return
 #' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
 #'   longer supported, use `workspace` instead.
 #' @param ...          Further arguments to pass (for future-proofing only).
@@ -20,7 +22,8 @@
 #' @note Users would generally use `get_param_txt` to identify parameters names and values and pass
 #' them to other functions.
 #'
-#' @return A parameter value, or if `param= NULL` a list of all parameters:
+#' @return A list of parameters value(s),
+#' or if `param= NULL` a list of all parameters:
 #'         \item{ini}{Initialization parameters}
 #'         \item{general}{General parameters}
 #'         \item{tec}{Technical parameters}
@@ -57,6 +60,7 @@ get_param_txt <- function(workspace = getwd(),
                           param = NULL,
                           variety = NULL,
                           exact = FALSE,
+                          stics_version = "latest",
                           dirpath = lifecycle::deprecated(),
                           ...) {
 
@@ -74,17 +78,27 @@ get_param_txt <- function(workspace = getwd(),
   # breaking it. I think for example to a "version argument" because the tec file is not
   # generic.
 
+  stics_version <- check_version_compat(stics_version = stics_version)
+
   ini <- get_ini_txt(file.path(dirpath, "ficini.txt"))
   general <- get_general_txt(file.path(dirpath, "tempopar.sti"))
-  soil <- get_soil_txt(file.path(dirpath, "param.sol"))
+  soil <- get_soil_txt(file.path(dirpath, "param.sol"), stics_version = stics_version)
   station <- get_station_txt(file.path(dirpath, "station.txt"))
   usm <- get_usm_txt(file.path(dirpath, "new_travail.usm"))
   # output= get_varmod(dirpath)
   tmp <- get_tmp_txt(file.path(dirpath, "tempoparv6.sti"))
 
-  several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
-  several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
-  is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
+
+  # add tests on option_* name existence in tmp
+  # NOT IN V10
+  several_fert = several_thin = is_pasture = NULL
+  tmp_names <- names(tmp)
+  several_fert <- ifelse("option_engrais_multiple" %in% tmp_names &&
+                           tmp$option_engrais_multiple == 1, TRUE, FALSE)
+  several_thin <- ifelse("option_thinning" %in% tmp_names &&
+                           tmp$option_thinning == 1, TRUE, FALSE)
+  is_pasture <- ifelse("option_pature" %in% tmp_names &&
+                         tmp$option_pature == 1, TRUE, FALSE)
 
   tec <- plant <- setNames(
     vector(mode = "list", length = ini$nbplantes),
@@ -112,26 +126,26 @@ get_param_txt <- function(workspace = getwd(),
 
     plant[paste0("plant", i)] <-
       list(get_plant_txt(file.path(dirpath, paste0("ficplt", i, ".txt")),
-        variety =
-          if (is.null(variety[[i]])) {
-            if (!is.null(param)) {
-              varieties[[i]][tec_variety]
-            } else {
-              NULL
-            }
-          } else {
-            # variety
-            if (is.character(variety[[i]])) {
-              variety[[i]] <- match(variety[[i]], varieties[[i]])
-              if (any(is.na(variety))) {
-                cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
-                return()
-              }
-              varieties[[i]][variety[[i]]]
-            } else {
-              varieties[[i]][variety[[i]]]
-            }
-          }
+                         variety =
+                           if (is.null(variety[[i]])) {
+                             if (!is.null(param)) {
+                               varieties[[i]][tec_variety]
+                             } else {
+                               NULL
+                             }
+                           } else {
+                             # variety
+                             if (is.character(variety[[i]])) {
+                               variety[[i]] <- match(variety[[i]], varieties[[i]])
+                               if (any(is.na(variety))) {
+                                 cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+                                 return()
+                               }
+                               varieties[[i]][variety[[i]]]
+                             } else {
+                               varieties[[i]][variety[[i]]]
+                             }
+                           }
       ))
 
     # Fixes the current variety
@@ -150,16 +164,28 @@ get_param_txt <- function(workspace = getwd(),
     return(parameters)
   }
 
-  parameters <- unlist(parameters)
+  #parameters <- unlist(parameters)
+  parameters_fields <- names(unlist(parameters))
   # Fixes parameters names including indices (?)
   # For escaping braces and catching the right name
   param <- gsub(pattern = "\\(", x = param, replacement = "\\\\(\\1")
   param <- gsub(pattern = "\\)", x = param, replacement = "\\\\)\\1")
+
+
+  # TODO: revise regex pattern for param name search
   if (exact) {
-    parameters <- parameters[grep(paste0("\\.", param, "[\\(\\)0-9]{0,}$"), names(parameters))]
+    idx <- unlist(lapply(param, function(x) grep(paste0("\\.",x , "[\\(\\)0-9]{0,}$"), parameters_fields)))
+    parameters_fields <- parameters_fields[idx]
+    #parameters <- parameters[grep(paste0("\\.", param, "[\\(\\)0-9]{0,}$"), names(parameters))]
   } else {
-    parameters <- parameters[grep(paste0(param, "[\\(\\)0-9]{0,}$"), names(parameters))]
+    #parameters <- parameters[grep(paste0(param, "[\\(\\)0-9]{0,}$"), names(parameters))]
+    idx <- unlist(lapply(param, function(x) grep(paste0(x , "[\\(\\)0-9]{0,}$"), parameters_fields)))
+    parameters_fields <- parameters_fields[idx]
   }
+
+  parameters_fields <- unlist(lapply(parameters_fields,
+                                     function(x) gsub(pattern = "\\.", x, replacement = "$"))
+  )
 
   if (length(parameters) == 0) {
     stop(param, " parameter not found")
@@ -167,29 +193,52 @@ get_param_txt <- function(workspace = getwd(),
 
 
   # Removing ending numbers
-  param_names <- gsub(pattern = "[0-9]{0,}$", replacement = "", x = names(parameters))
+  #param_names <- gsub(pattern = "[0-9]{0,}$", replacement = "", x = names(parameters))
+  parameters_fields <- gsub(pattern = "[0-9]{0,}$",
+                            replacement = "",
+                            x = parameters_fields)
 
-  param_names <- gsub(pattern = ".*\\.(.*[0-9]{0,})", replacement = "\\1", x = param_names)
+  #param_names <- gsub(pattern = ".*\\.(.*[0-9]{0,})", replacement = "\\1", x = param_names)
+  parameters_fields <- unique(gsub(pattern = ".*\\.(.*[0-9]{0,})",
+                                   replacement = "\\1",
+                                   x = parameters_fields))
+
+  #parameters <- eval(parse(text = paste0("list(parameters$", parameters_fields,")")))
+  parameters <- unlist(lapply(parameters_fields, function(x)
+    eval(parse(text = paste0("list(parameters$", x,")")))), recursive = FALSE)
+
+  # Not any parameter found
+  if(is.null(parameters)) return(list())
+
+  names(parameters) <- parameters_fields
 
   # idx_to_fix <- param_names %in% param
   # idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
   idx_plant_to_fix <- grepl("^plant", names(parameters))
 
-  if (any(idx_plant_to_fix)) {
-    variety_names <- sapply(1:length(varieties), function(i) {
-      varieties[[i]][variety[[i]]]
-    })
-    if (length(variety_names) == 1) {
-      variety_names <- rep(variety_names, length(idx_plant_to_fix))
-    } else {
-      variety_names <- rep(variety_names, each = length(idx_plant_to_fix) / length(variety_names))
-    }
-    names(parameters)[idx_plant_to_fix] <- paste0(
-      names(parameters)[idx_plant_to_fix],
-      ".",
-      variety_names[idx_plant_to_fix]
-    )
-  }
+  idx_idx <- unlist(lapply(parameters[idx_plant_to_fix], function(x) length(x) > 0),
+                    use.names = FALSE)
+
+  idx_plant_to_fix <- idx_plant_to_fix[idx_idx]
+
+  #variet_names <- paste("var",as.character(1:length(varieties)))
+  #lapply(parameters[idx_plant_to_fix], function(x)  names(x) <- variet_names)
+
+  # if (any(idx_plant_to_fix)) {
+  # variety_names <- sapply(1:length(varieties), function(i) {
+  #   varieties[[i]][variety[[i]]]
+  # })
+  #   if (length(variety_names) == 1) {
+  #     variety_names <- rep(variety_names, length(idx_plant_to_fix))
+  #   } else {
+  #     variety_names <- rep(variety_names, each = length(idx_plant_to_fix) / length(variety_names))
+  #   }
+  #   names(parameters)[idx_plant_to_fix] <- paste0(
+  #     names(parameters)[idx_plant_to_fix],
+  #     ".",
+  #     variety_names[idx_plant_to_fix]
+  #   )
+  # }
 
   # TO BE FIXED if it makes sense ?
   # idx_tec_to_fix <- idx_to_fix & grepl("^tec", names(parameters))
@@ -200,7 +249,19 @@ get_param_txt <- function(workspace = getwd(),
   #                                               varieties[tec_variety][idx_tec_to_fix])
   # }
 
+  if (any(idx_plant_to_fix)) {
+    variety_names <- lapply(1:length(varieties), function(i) {
+      varieties[[i]][variety[[i]]]
+    })
 
+    for (n in 1:length(variety_names)) {
+      var_names <- variety_names[[n]]
+      for (z in 1:length(parameters[idx_plant_to_fix])){
+        if (length(parameters[idx_plant_to_fix][[z]]) == length(var_names))
+          names(parameters[idx_plant_to_fix][[z]]) <- var_names
+      }
+    }
+  }
   return(parameters)
 }
 
@@ -361,11 +422,15 @@ get_plant_txt <- function(file = "ficplt1.txt", variety = NULL,
 }
 
 
+
+
 #' @rdname get_param_txt
 #' @export
 get_tec_txt <- function(file = "fictec1.txt",
-                        several_fert, several_thin,
-                        is_pasture,
+                        stics_version = "last",
+                        several_fert = NULL,
+                        several_thin = NULL,
+                        is_pasture = NULL,
                         filepath = lifecycle::deprecated(),
                         ...) {
 
@@ -385,21 +450,49 @@ get_tec_txt <- function(file = "fictec1.txt",
   # breaking it. I think for example to a "version argument" because the tec file is not
   # generic.
 
-  params <- readLines(filepath)
+  par_lines <- readLines(filepath)
   itk <- vector(mode = "list", length = 0)
-  values <- params[!seq_along(params) %% 2]
+  ids_val <- !seq_along(par_lines) %% 2
+  params <- par_lines[!ids_val]
+  values <- par_lines[ids_val]
 
-  index <- 1
-  val <- function() {
-    index <<- index + 1
-    return(values[index - 1])
+  assign(x = "index",value = 1, envir = .GlobalEnv)
+  assign(x = "params",value = params, envir = .GlobalEnv)
+  assign(x = "values",value = values, envir = .GlobalEnv)
+
+  #index <- 1
+  # parname <- function(idx = NULL) {
+  #   if (!is.null(idx)) {
+  #     loc_idx <- index + idx
+  #   } else {
+  #     loc_idx <- index
+  #   }
+  #   if(loc_idx <= 0 ||loc_idx > length(params)) return()
+  #   unlist(lapply(X = params[loc_idx], FUN = function(x){strsplit(trimws(x), split = " ")}))
+  # }
+  #
+  # val <- function() {
+  #   if(index == length(values)) return()
+  #   index <<- index + 1
+  #   val_txt <- unlist(strsplit(trimws(values[index - 1]), split = " "))
+  #   val_num <- as.numeric(val_txt)
+  #   if (is.na(val_num)) return(val_txt)
+  #   return(val_num)
+  # }
+
+
+  # Early return here for version >= 10.0
+  # get_tec_txt_ is not fully generic for the moment!
+  if(length(grep(pattern = "opp1", x = params)) == 0) {
+    return(get_tec_txt_())
   }
 
-  itk$nbjres <- as.numeric(val())
+  # Treatment for Stics version < V10.0
+  itk$nbjres <- val()
 
   if (itk$nbjres > 0) {
     for (i in 1:itk$nbjres) {
-      vec <- strsplit(x = val(), split = " ")[[1]]
+      vec <- val()
       itk$julres <- c(itk$julres, vec[1])
       itk$coderes <- c(itk$coderes, vec[2])
       itk$qres <- c(itk$qres, vec[3])
@@ -409,148 +502,83 @@ get_tec_txt <- function(file = "fictec1.txt",
       itk$eaures <- c(itk$eaures, vec[7])
     }
   }
-  itk$nbjtrav <- as.numeric(val())
+  itk$nbjtrav <- val()
   if (itk$nbjtrav > 0) {
     for (i in 1:itk$nbjtrav) {
-      vec <- strsplit(x = val(), split = " ")[[1]]
+      vec <- val()
       itk$jultrav <- c(itk$jultrav, vec[1])
       itk$profres <- c(itk$profres, vec[2])
       itk$proftrav <- c(itk$proftrav, vec[3])
     }
   }
 
-  itk$iplt0 <- val()
-  itk$profsem <- val()
-  itk$densitesem <- val()
-  itk$variete <- val()
-  itk$codetradtec <- val()
-  itk$interrang <- val()
-  itk$orientrang <- val()
-  itk$codedecisemis <- val()
-  itk$nbjmaxapressemis <- val()
-  itk$nbjseuiltempref <- val()
-  itk$codestade <- val()
-  itk$ilev <- val()
-  itk$iamf <- val()
-  itk$ilax <- val()
-  itk$isen <- val()
-  itk$ilan <- val()
-  itk$iflo <- val()
-  itk$idrp <- val()
-  itk$imat <- val()
-  itk$irec <- val()
-  itk$irecbutoir <- val()
-  itk$effirr <- val()
-  itk$codecalirrig <- val()
-  itk$ratiol <- val()
-  itk$dosimx <- val()
-  itk$doseirrigmin <- val()
-  itk$codedateappH2O <- as.numeric(val())
-  itk$nap <- as.numeric(val())
+  for (i in 1:27) itk[[parname(-1)]] <- val()
+
+  itk$nap <- val()
 
   if (itk$nap > 0) {
     for (i in 1:itk$nap) {
+      vec <- val()
       if (itk$codedateappH2O != 1) {
-        vec <- strsplit(x = val(), split = " ")[[1]]
         itk$julapI <- c(itk$julapI, vec[1])
-        itk$doseI <- c(itk$doseI, vec[2])
       } else {
-        vec <- strsplit(x = val(), split = " ")[[1]]
         itk$upvttapI <- c(itk$upvttapI, vec[1])
-        itk$doseI <- c(itk$doseI, vec[2])
       }
+      itk$doseI <- c(itk$doseI, vec[2])
     }
   }
 
-  itk$codlocirrig <- val()
-  itk$locirrig <- val()
-  itk$profmes <- val()
+  for (i in 1:3) itk[[parname(-1)]] <- val()
 
-  if (!several_fert) {
+  if (!is.null(several_fert) && !several_fert) {
     itk$engrais <- val()
   } else {
-    # val()
+    val()
   }
 
-  itk$concirr <- val()
-  itk$codedateappN <- as.numeric(val())
-  itk$codefracappN <- as.numeric(val())
-  itk$Qtot_N <- val()
-  itk$napN <- as.numeric(val())
+
+
+  for (i in 1:4) itk[[parname(-1)]] <- val()
+  itk$napN <- val()
 
   if (itk$napN > 0) {
     for (i in 1:itk$napN) {
+      vec <- val()
       if (itk$codedateappN != 1) {
         if (itk$codefracappN == 1) {
-          if (several_fert) {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$julapN <- c(itk$julapN, vec[1])
-            itk$doseN <- c(itk$doseN, vec[2])
+          if (!is.null(several_fert) && several_fert) {
             itk$engrais <- c(itk$engrais, vec[3])
-          } else {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$julapN <- c(itk$julapN, vec[1])
-            itk$doseN <- c(itk$doseN, vec[2])
           }
+          itk$julapN <- c(itk$julapN, vec[1])
+          itk$doseN <- c(itk$doseN, vec[2])
         } else {
-          if (several_fert) {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$julapN <- c(itk$julapN, vec[1])
-            itk$fracN <- c(itk$fracN, vec[2])
+          if (!is.null(several_fert) && several_fert) {
             itk$engrais <- c(itk$engrais, vec[3])
-          } else {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$julapN <- c(itk$julapN, vec[1])
-            itk$fracN <- c(itk$fracN, vec[2])
           }
+          itk$julapN <- c(itk$julapN, vec[1])
+          itk$fracN <- c(itk$fracN, vec[2])
+
         }
       } else {
         if (itk$codefracappN == 1) {
-          if (several_fert) {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$upvttapN <- c(itk$upvttapN, vec[1])
-            itk$doseN <- c(itk$doseN, vec[2])
+          if (!is.null(several_fert) && several_fert) {
             itk$engrais <- c(itk$engrais, vec[3])
-          } else {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$upvttapN <- c(itk$upvttapN, vec[1])
-            itk$doseN <- c(itk$doseN, vec[2])
           }
+          itk$upvttapN <- c(itk$upvttapN, vec[1])
+          itk$doseN <- c(itk$doseN, vec[2])
         } else {
-          if (several_fert) {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$upvttapN <- c(itk$upvttapN, vec[1])
-            itk$fracN <- c(itk$fracN, vec[2])
+          if (!is.null(several_fert) &&  several_fert) {
             itk$engrais <- c(itk$engrais, vec[3])
-          } else {
-            vec <- strsplit(x = val(), split = " ")[[1]]
-            itk$upvttapN <- c(itk$upvttapN, vec[1])
-            itk$fracN <- c(itk$fracN, vec[2])
           }
+          itk$upvttapN <- c(itk$upvttapN, vec[1])
+          itk$fracN <- c(itk$fracN, vec[2])
         }
       }
     }
   }
 
-  itk$codlocferti <- val()
-  itk$locferti <- val()
-  itk$ressuite <- val()
-  itk$codcueille <- val()
-  itk$nbcueille <- val()
-  itk$cadencerec <- val()
-  itk$codrecolte <- val()
-  itk$codeaumin <- val()
-  itk$h2ograinmin <- val()
-  itk$h2ograinmax <- val()
-  itk$sucrerec <- val()
-  itk$CNgrainrec <- val()
-  itk$huilerec <- val()
-  itk$coderecolteassoc <- val()
-  itk$codedecirecolte <- val()
-  itk$nbjmaxapresrecolte <- val()
-  itk$codefauche <- val()
-  itk$mscoupemini <- val()
-  itk$codemodfauche <- as.numeric(val())
+
+  for (i in 1:19) itk[[parname(-1)]] <- val()
 
   if (itk$codemodfauche == 1) {
     itk$lecfauche <- FALSE
@@ -558,133 +586,165 @@ get_tec_txt <- function(file = "fictec1.txt",
     itk$lecfauche <- TRUE
   }
 
-  itk$hautcoupedefaut <- val()
-  itk$stadecoupedf <- val()
-  nbcoupe2 <- as.numeric(val())
+
+  for (i in 1:2) itk[[parname(-1)]] <- val()
+  nbcoupe2 <- val()
 
   if (itk$codemodfauche == 2) {
     for (i in 1:nbcoupe2) {
+      vec <- val()
       if (is_pasture) {
-        vec <- strsplit(x = val(), split = " ")[[1]]
-        itk$julfauche <- c(itk$julfauche, vec[1])
-        itk$hautcoupe <- c(itk$hautcoupe, vec[2])
-        itk$lairesiduel <- c(itk$lairesiduel, vec[3])
-        itk$msresiduel <- c(itk$msresiduel, vec[4])
-        itk$anitcoupe <- c(itk$anitcoupe, vec[5])
         itk$restit <- c(itk$restit, vec[6])
         itk$mscoupemini <- c(itk$mscoupemini, vec[7])
-      } else {
-        vec <- strsplit(x = val(), split = " ")[[1]]
-        itk$julfauche <- c(itk$julfauche, vec[1])
-        itk$hautcoupe <- c(itk$hautcoupe, vec[2])
-        itk$lairesiduel <- c(itk$lairesiduel, vec[3])
-        itk$msresiduel <- c(itk$msresiduel, vec[4])
-        itk$anitcoupe <- c(itk$anitcoupe, vec[5])
       }
+      itk$julfauche <- c(itk$julfauche, vec[1])
+      itk$hautcoupe <- c(itk$hautcoupe, vec[2])
+      itk$lairesiduel <- c(itk$lairesiduel, vec[3])
+      itk$msresiduel <- c(itk$msresiduel, vec[4])
+      itk$anitcoupe <- c(itk$anitcoupe, vec[5])
     }
     itk$nbcoupe <- nbcoupe2
-  } else {
-    for (i in 1:nbcoupe2) {
-      # val()
-    }
   }
+  # } else {
+  #   for (i in 1:nbcoupe2) {
+  #     # val()
+  #   }
+  # }
 
-  nbcoupe3 <- as.numeric(val())
+  nbcoupe3 <- val()
 
   if (itk$codemodfauche == 3) {
     for (i in 1:nbcoupe3) {
+      vec <- val()
       if (is_pasture) {
-        vec <- strsplit(x = val(), split = " ")[[1]]
-        itk$tempfauche <- c(itk$tempfauche, vec[1])
-        itk$hautcoupe <- c(itk$hautcoupe, vec[2])
-        itk$lairesiduel <- c(itk$lairesiduel, vec[3])
-        itk$msresiduel <- c(itk$msresiduel, vec[4])
-        itk$anitcoupe <- c(itk$anitcoupe, vec[5])
         itk$restit <- c(itk$restit, vec[6])
         itk$mscoupemini <- c(itk$mscoupemini, vec[7])
-      } else {
-        vec <- strsplit(x = val(), split = " ")[[1]]
-        itk$tempfauche <- c(itk$tempfauche, vec[1])
-        itk$hautcoupe <- c(itk$hautcoupe, vec[2])
-        itk$lairesiduel <- c(itk$lairesiduel, vec[3])
-        itk$msresiduel <- c(itk$msresiduel, vec[4])
-        itk$anitcoupe <- c(itk$anitcoupe, vec[5])
       }
+
+      itk$tempfauche <- c(itk$tempfauche, vec[1])
+      itk$hautcoupe <- c(itk$hautcoupe, vec[2])
+      itk$lairesiduel <- c(itk$lairesiduel, vec[3])
+      itk$msresiduel <- c(itk$msresiduel, vec[4])
+      itk$anitcoupe <- c(itk$anitcoupe, vec[5])
     }
     itk$nbcoupe <- nbcoupe3
-  } else {
-    for (i in 1:nbcoupe3) {
-      # val()
-    }
   }
+  # } else {
+  #   for (i in 1:nbcoupe3) {
+  #     # val()
+  #   }
+  #}
 
-  itk$codepaillage <- val()
-  itk$couvermulchplastique <- val()
-  itk$albedomulchplastique <- val()
-  itk$codrognage <- val()
-  itk$largrogne <- val()
-  itk$hautrogne <- val()
-  itk$biorognem <- val()
-  itk$codcalrogne <- val()
-  itk$julrogne <- val()
-  itk$margerogne <- val()
-  itk$codeclaircie <- val()
 
-  if (several_thin) {
-    itk$nb_eclair <- as.numeric(val())
+  for (i in 1:11) itk[[parname(-1)]] <- val()
+
+  if (!is.null(several_thin) && several_thin) {
+    itk$nb_eclair <- val()
     for (i in 1:itk$nb_eclair) {
-      vec <- strsplit(x = val(), split = " ")[[1]]
+      vec <- val()
       itk$juleclair <- c(itk$juleclair, vec[1])
       itk$nbinfloecl <- c(itk$nbinfloecl, vec[2])
     }
   } else {
-    # vec= strsplit(x = val(),split = " ")[[1]]
     itk$nb_eclair <- 1
     itk$juleclair <- val()
     itk$nbinfloecl <- val()
   }
 
-  itk$codeffeuil <- val()
-  itk$codhauteff <- val()
-  itk$codcaleffeuil <- val()
-  itk$laidebeff <- val()
-  itk$effeuil <- val()
-  itk$juleffeuil <- val()
-  itk$laieffeuil <- val()
-  itk$codetaille <- val()
-  itk$jultaille <- val()
-  itk$codepalissage <- val()
-  itk$hautmaxtec <- val()
-  itk$largtec <- val()
-  itk$codabri <- val()
-  itk$transplastic <- val()
-  itk$surfouvre1 <- val()
-  itk$julouvre2 <- val()
-  itk$surfouvre2 <- val()
-  itk$julouvre3 <- val()
-  itk$surfouvre3 <- val()
-  itk$codeDST <- val()
-  itk$dachisel <- val()
-  itk$dalabour <- val()
-  itk$rugochisel <- val()
-  itk$rugolabour <- val()
-  itk$codeDSTtass <- val()
-  itk$profhumsemoir <- val()
-  itk$dasemis <- val()
-  itk$profhumrecolteuse <- val()
-  itk$darecolte <- val()
-  itk$codeDSTnbcouche <- val()
 
-  # Transform into numeric:
-  itk_out <- character_to_numeric_list(itk)
+  for (i in 1:30) itk[[parname(-1)]] <- val()
 
-  return(itk_out)
+  assign(x = "index",value = 1, envir = .GlobalEnv)
+
+
+  return(itk)
+}
+
+parname <- function(idx = NULL) {
+  if (!is.null(idx)) {
+    loc_idx <- index + idx
+  } else {
+    loc_idx <- index
+  }
+  if(loc_idx <= 0 ||loc_idx > length(params)) return()
+  unlist(lapply(X = params[loc_idx], FUN = function(x){strsplit(trimws(x), split = " ")}))
+}
+
+val <- function() {
+  if(index == length(values)) return()
+  index <<- index + 1
+  val_txt <- unlist(strsplit(trimws(values[index - 1]), split = " "))
+  val_num <- suppressWarnings(as.numeric(val_txt))
+  if (any(is.na(val_num))) return(val_txt)
+  return(val_num)
+}
+
+#'
+# @examples
+get_tec_txt_ <- function() {
+
+  itk <- list()
+  num_op <- 0
+  nb_interventions <- 0
+  intervention_type <- c("nbjres", "nbjtrav", "nap", "napN",
+                         "nbcoupe", "nbcoupe", "nb_eclair" )
+
+  v <- list()
+  # assign(x = "index",value = 1, envir = .GlobalEnv)
+  # assign(x = "params",value = params, envir = .GlobalEnv)
+  # assign(x = "values",value = values, envir = .GlobalEnv)
+  multi <- FALSE
+
+  while(TRUE) {
+    param <- parname()
+    value <- val()
+
+    if (is.null(value)) break
+
+    # Single parameter
+    if(length(param) == 1) {
+      if(param == "nbinterventions"){
+        num_op <- num_op + 1
+        param <- intervention_type[num_op]
+        itk[[param]] <- value
+        nb_interventions <- value
+        if (value > 1) multi <- TRUE
+      } else {
+        itk[[param]] <- value
+      }
+      next
+    }
+
+    # multiple parameters
+    if(all(param == parname(-2))) {
+      value <- as.data.frame(as.list(value),
+                             stringsAsFactors = FALSE)
+      names(value) <- param
+      v <- rbind(v, value)
+
+      if (dim(v)[1] == nb_interventions) {
+        itk <- c(itk, as.list(v))
+        multi <- FALSE
+      }
+      next
+    } else {
+      v <- as.data.frame(as.list(value),
+                         stringsAsFactors = FALSE)
+      names(v) <- param
+    }
+
+    if (!multi)
+      itk <- c(itk, as.list(v))
+
+  }
+  return(itk)
 }
 
 
 #' @rdname get_param_txt
 #' @export
 get_soil_txt <- function(file = "param.sol",
+                         stics_version,
                          filepath = lifecycle::deprecated()) {
 
   # filepath
@@ -697,6 +757,7 @@ get_soil_txt <- function(file = "param.sol",
     filepath <- file # to remove when we update inside the function
   }
 
+  stics_version <- check_version_compat(stics_version = stics_version)
 
 
 
@@ -713,11 +774,22 @@ get_soil_txt <- function(file = "param.sol",
 
   soil$nbcouchessol_max <- 1000
 
-  soil[c(
-    "numsol", "typsol", "argi", "Norg", "profhum", "calc", "pH",
-    "concseuil", "albedo", "q0", "ruisolnu", "obstarac", "pluiebat",
-    "mulchbat", "zesx", "cfes", "z0solnu", "CsurNsol", "penterui"
-  )] <- val()
+  if (get_version_num(stics_version = stics_version) < 10) {
+    par_vec <- c(
+      "numsol", "typsol", "argi", "Norg", "profhum", "calc", "pH",
+      "concseuil", "albedo", "q0", "ruisolnu", "obstarac", "pluiebat",
+      "mulchbat", "zesx", "cfes", "z0solnu", "CsurNsol", "penterui"
+    )
+  } else {
+    par_vec <- c(
+      "numsol", "typsol", "argi", "Norg", "profhum", "calc", "pH",
+      "concseuil", "albedo", "q0", "ruisolnu", "obstarac", "pluiebat",
+      "mulchbat", "zesx", "cfes", "z0solnu", "CsurNsol", "finert", "penterui"
+    )
+  }
+
+  soil[par_vec] <- val()
+
 
   soil[c(
     "numsol", "codecailloux", "codemacropor", "codefente",

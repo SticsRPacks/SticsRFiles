@@ -12,6 +12,8 @@
 #' @param variety  The plant variety to set the parameter value, either the name of the variety
 #' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
+#' @param stics_version An optional version name as listed in
+#' get_stics_versions_compat() return
 #' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
 #'   longer supported, use `workspace` instead.
 #' @param add `r lifecycle::badge("deprecated")` `add` is no
@@ -70,6 +72,7 @@ set_param_txt <- function(workspace = getwd(),
                           plant_id = 1,
                           variety = NULL,
                           layer = NULL,
+                          stics_version = "latest",
                           dirpath = lifecycle::deprecated(),
                           add = lifecycle::deprecated(),
                           plant = lifecycle::deprecated()) {
@@ -104,13 +107,15 @@ set_param_txt <- function(workspace = getwd(),
     plant <- plant_id # to remove when we update inside the function
   }
 
+  stics_version <- check_version_compat(stics_version = stics_version)
 
 
   param <- gsub("P_", "", param)
-  param_val <- get_param_txt(workspace = dirpath, param = param, exact = TRUE)
+  param_val <- get_param_txt(workspace = dirpath, param = param, exact = TRUE, stics_version = stics_version)
 
   file_type <-
-    lapply(strsplit(names(param_val), "\\."), function(x) {
+    #lapply(strsplit(names(param_val), "\\."), function(x) {
+    lapply(strsplit(names(param_val), "\\$"), function(x) {
       x[1]
     }) %>%
     unlist() %>%
@@ -123,73 +128,76 @@ set_param_txt <- function(workspace = getwd(),
     )
   }
   switch(file_type,
-    ini = {
-      set_ini_txt(
-        file = file.path(dirpath, "ficini.txt"),
-        param = param, value = value, add = add
-      )
-    },
-    general = {
-      set_general_txt(
-        file = file.path(dirpath, "tempopar.sti"),
-        param = param, value = value, append = add
-      )
-    },
-    tmp = {
-      set_tmp_txt(
-        file = file.path(dirpath, "tempoparV6.sti"),
-        param = param, value = value, append = add
-      )
-    },
-    soil = {
-      set_soil_txt(
-        file = file.path(dirpath, "param.sol"),
-        param = param, value = value, layer = layer
-      )
-    },
-    usm = {
-      set_usm_txt(
-        file = file.path(dirpath, "new_travail.usm"),
-        param = param, value = value
-      )
-    },
-    station = {
-      set_station_txt(
-        file = file.path(dirpath, "station.txt"),
-        param = param, value = value, append = add
-      )
-    },
-    tec = {
-      tmp <- lapply(plant, function(x) {
-        set_tec_txt(
-          file = file.path(dirpath, paste0("fictec", x, ".txt")),
-          param = param, value = value, append = add
-        )
-      })
-    },
-    plant = {
-      tmp <- lapply(plant, function(x) {
-        if (is.null(variety)) {
-          variety <-
-            get_param_txt(workspace = dirpath, param = "variete", exact = TRUE)[plant] %>%
-            as.numeric()
-        } else {
-          if (is.character(variety)) {
-            varieties <- get_plant_txt(file = file.path(dirpath, paste0("ficplt", x, ".txt")))$codevar
-            variety <- match(variety, varieties)
-            if (is.na(variety)) {
-              cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
-              return()
-            }
-          }
-        }
-        set_plant_txt(
-          file = file.path(dirpath, paste0("ficplt", x, ".txt")),
-          param = param, value = value, append = add, variety = variety
-        )
-      })
-    },
-    stop("Parameter not found")
+         ini = {
+           set_ini_txt(
+             file = file.path(dirpath, "ficini.txt"),
+             param = param, value = value, add = add
+           )
+         },
+         general = {
+           set_general_txt(
+             file = file.path(dirpath, "tempopar.sti"),
+             param = param, value = value, append = add
+           )
+         },
+         tmp = {
+           set_tmp_txt(
+             file = file.path(dirpath, "tempoparV6.sti"),
+             param = param, value = value, append = add
+           )
+         },
+         soil = {
+           set_soil_txt(
+             file = file.path(dirpath, "param.sol"),
+             param = param,
+             value = value,
+             layer = layer,
+             stics_version = stics_version
+           )
+         },
+         usm = {
+           set_usm_txt(
+             file = file.path(dirpath, "new_travail.usm"),
+             param = param, value = value
+           )
+         },
+         station = {
+           set_station_txt(
+             file = file.path(dirpath, "station.txt"),
+             param = param, value = value, append = add
+           )
+         },
+         tec = {
+           tmp <- lapply(plant, function(x) {
+             set_tec_txt(
+               file = file.path(dirpath, paste0("fictec", x, ".txt")),
+               param = param, value = value, append = add
+             )
+           })
+         },
+         plant = {
+           tmp <- lapply(plant, function(x) {
+             if (is.null(variety)) {
+               variety <-
+                 get_param_txt(workspace = dirpath, param = "variete", exact = TRUE, stics_version = stics_version)[plant] %>%
+                 as.numeric()
+             } else {
+               if (is.character(variety)) {
+                 varieties <- get_plant_txt(file = file.path(dirpath, paste0("ficplt", x, ".txt")))$codevar
+                 variety <- match(variety, varieties)
+                 if (is.na(variety)) {
+                   cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+                   return()
+                 }
+               }
+             }
+             set_plant_txt(
+               file = file.path(dirpath, paste0("ficplt", x, ".txt")),
+               param = param, value = value, append = add, variety = variety
+             )
+           })
+         },
+         stop("Parameter not found")
   )
 }
 
@@ -422,6 +430,7 @@ set_soil_txt <- function(file = "param.sol",
                          param,
                          value,
                          layer = NULL,
+                         stics_version,
                          filepath = lifecycle::deprecated()) {
 
   # filepath
@@ -435,7 +444,7 @@ set_soil_txt <- function(file = "param.sol",
   }
 
   param <- gsub("P_", "", param)
-  ref <- get_soil_txt(filepath)
+  ref <- get_soil_txt(filepath,stics_version = stics_version)
   param <- paste0("^", param, "$")
 
   if (!is.null(layer)) {
@@ -460,17 +469,28 @@ set_soil_txt <- function(file = "param.sol",
   }
 
 
-  writeLines(
-    paste(
+
+  if (get_version_num(stics_version = stics_version) < 10) {
+    line <- paste(
       " ", " ", " ", ref$numsol[1], " ", " ", " ", ref$typsol,
       ref$argi, ref$Norg, ref$profhum, ref$calc,
       ref$pH, ref$concseuil, ref$albedo, ref$q0,
       ref$ruisolnu, ref$obstarac, ref$pluiebat,
       ref$mulchbat, ref$zesx, ref$cfes,
       ref$z0solnu, ref$CsurNsol, ref$penterui
-    ),
-    filepath
-  )
+    )
+  } else {
+    line <- paste(
+      " ", " ", " ", ref$numsol[1], " ", " ", " ", ref$typsol,
+      ref$argi, ref$Norg, ref$profhum, ref$calc,
+      ref$pH, ref$concseuil, ref$albedo, ref$q0,
+      ref$ruisolnu, ref$obstarac, ref$pluiebat,
+      ref$mulchbat, ref$zesx, ref$cfes,
+      ref$z0solnu, ref$CsurNsol, ref$finert, ref$penterui
+    )
+  }
+
+  writeLines(line,filepath)
 
   write(paste(
     " ", " ", " ", ref$numsol[1], " ", " ", " ", ref$codecailloux, ref$codemacropor,
@@ -536,36 +556,36 @@ set_file_txt <- function(file,
   params <- readLines(file)
   param_ <- paste0("^:{0,1}", param, "$")
   switch(type,
-    set_usm_txt = {
-      ref <- get_usm_txt(file)
-      if (grep(param_, names(ref)) < grep("fplt", names(ref))) {
-        ref_index <- grep(param_, names(ref)) * 2
-      } else {
-        ref_index <- grep(param_, params) + 1
-      }
-    },
-    set_station_txt = {
-      ref <- get_station_txt(file)
-      ref_index <- grep(param_, names(ref)) * 2
-    },
-    set_ini_txt = {
-      ref <- get_ini_txt(file)
-      ref_index <- grep(param_, names(ref)) * 2
-    },
-    set_plant_txt = {
-      ref_index <- grep(param_, params) + 1
-      if (!is.null(variety) & length(ref_index) > 1) {
-        if (length(ref_index) >= variety) {
-          ref_index <- ref_index[variety]
-        } else {
-          stop("Variety number set in the tec file is superior to the number of varieties defined in the plant file.")
-        }
-      }
-    },
-    # Default here
-    {
-      ref_index <- grep(param_, params) + 1
-    }
+         set_usm_txt = {
+           ref <- get_usm_txt(file)
+           if (grep(param_, names(ref)) < grep("fplt", names(ref))) {
+             ref_index <- grep(param_, names(ref)) * 2
+           } else {
+             ref_index <- grep(param_, params) + 1
+           }
+         },
+         set_station_txt = {
+           ref <- get_station_txt(file)
+           ref_index <- grep(param_, names(ref)) * 2
+         },
+         set_ini_txt = {
+           ref <- get_ini_txt(file)
+           ref_index <- grep(param_, names(ref)) * 2
+         },
+         set_plant_txt = {
+           ref_index <- grep(param_, params) + 1
+           if (!is.null(variety) & length(ref_index) > 1) {
+             if (length(ref_index) >= variety) {
+               ref_index <- ref_index[variety]
+             } else {
+               stop("Variety number set in the tec file is superior to the number of varieties defined in the plant file.")
+             }
+           }
+         },
+         # Default here
+         {
+           ref_index <- grep(param_, params) + 1
+         }
   )
 
   if (!length(ref_index) > 0) {

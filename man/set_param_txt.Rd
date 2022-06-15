@@ -20,6 +20,7 @@ set_param_txt(
   plant_id = 1,
   variety = NULL,
   layer = NULL,
+  stics_version = "latest",
   dirpath = lifecycle::deprecated(),
   add = lifecycle::deprecated(),
   plant = lifecycle::deprecated()
@@ -94,6 +95,7 @@ set_soil_txt(
   param,
   value,
   layer = NULL,
+  stics_version,
   filepath = lifecycle::deprecated()
 )
 }
@@ -113,6 +115,9 @@ Only used for plant or technical parameters.}
 (\code{codevar} parameter in the plant file) or the index (\code{variete} parameter in the technical file). (optional, see details)}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
+
+\item{stics_version}{An optional version name as listed in
+get_stics_versions_compat() return}
 
 \item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
 longer supported, use \code{workspace} instead.}
