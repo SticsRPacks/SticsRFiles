@@ -420,7 +420,7 @@ get_ini_txt <- function(file = "ficini.txt",
 
   }
 
-  ini <- character_to_numeric_list_new(ini)
+  ini <- character_to_numeric_list(ini)
 
   return(ini)
 }
