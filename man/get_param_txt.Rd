@@ -22,7 +22,11 @@ get_param_txt(
   ...
 )
 
-get_ini_txt(file = "ficini.txt", filepath = lifecycle::deprecated())
+get_ini_txt(
+  file = "ficini.txt",
+  stics_version,
+  filepath = lifecycle::deprecated()
+)
 
 get_general_txt(file = "tempopar.sti", filepath = lifecycle::deprecated())
 
@@ -36,7 +40,7 @@ get_plant_txt(
 
 get_tec_txt(
   file = "fictec1.txt",
-  stics_version = "last",
+  stics_version = "latest",
   several_fert = NULL,
   several_thin = NULL,
   is_pasture = NULL,

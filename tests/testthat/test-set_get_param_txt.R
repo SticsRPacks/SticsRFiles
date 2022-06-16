@@ -1,7 +1,6 @@
 library(SticsRFiles)
 
 #stics_version <- "V9.2"
-#stics_version <- "V10.0"
 stics_version <- get_stics_versions_compat()$latest_version
 
 context("Getting and Setting values from txt files")

@@ -80,7 +80,7 @@ get_param_txt <- function(workspace = getwd(),
 
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  ini <- get_ini_txt(file.path(dirpath, "ficini.txt"))
+  ini <- get_ini_txt(file.path(dirpath, "ficini.txt"), stics_version = stics_version)
   general <- get_general_txt(file.path(dirpath, "tempopar.sti"))
   soil <- get_soil_txt(file.path(dirpath, "param.sol"), stics_version = stics_version)
   station <- get_station_txt(file.path(dirpath, "station.txt"))
@@ -215,6 +215,7 @@ get_param_txt <- function(workspace = getwd(),
   # idx_to_fix <- param_names %in% param
   # idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
   idx_plant_to_fix <- grepl("^plant", names(parameters))
+  #idx_plant_to_fix <- grep("^plant", names(parameters))
 
   idx_idx <- unlist(lapply(parameters[idx_plant_to_fix], function(x) length(x) > 0),
                     use.names = FALSE)
@@ -249,17 +250,19 @@ get_param_txt <- function(workspace = getwd(),
   #                                               varieties[tec_variety][idx_tec_to_fix])
   # }
 
-  if (any(idx_plant_to_fix)) {
+  # Not adapted for the moment to multiple parameters
+  # TODO: to be fixed.
+  # add a loop over parameters names !
+  if (any(idx_plant_to_fix) &&
+      (length(parameters[idx_plant_to_fix]) == length(varieties))) {
     variety_names <- lapply(1:length(varieties), function(i) {
       varieties[[i]][variety[[i]]]
     })
 
     for (n in 1:length(variety_names)) {
       var_names <- variety_names[[n]]
-      for (z in 1:length(parameters[idx_plant_to_fix])){
-        if (length(parameters[idx_plant_to_fix][[z]]) == length(var_names))
-          names(parameters[idx_plant_to_fix][[z]]) <- var_names
-      }
+      if (length(parameters[idx_plant_to_fix][[n]]) == length(var_names))
+        names(parameters[idx_plant_to_fix][[n]]) <- var_names
     }
   }
   return(parameters)
@@ -325,6 +328,7 @@ get_param_txt <- function(workspace = getwd(),
 #' @rdname get_param_txt
 #' @export
 get_ini_txt <- function(file = "ficini.txt",
+                        stics_version,
                         filepath = lifecycle::deprecated()) {
 
   # filepath
@@ -337,9 +341,86 @@ get_ini_txt <- function(file = "ficini.txt",
     filepath <- file # to remove when we update inside the function
   }
 
-  params <- get_txt_generic(filepath, names = FALSE)
-  ini <- list(nbplantes = params[1])
-  ini <- character_to_numeric_list(ini)
+  stics_version <- check_version_compat(stics_version = stics_version)
+
+
+  #params <- get_txt_generic(filepath, names = FALSE)
+  params <- readLines(filepath)
+  ini <- list()
+  # ini <- list(nbplantes = params[1])
+  # ini <- character_to_numeric_list(ini)
+
+  ini$nbplantes = params[[2]]
+  ini$plant <- list()
+
+
+  if (get_version_num(stics_version = stics_version) < 10) {
+
+    ini$plant$plant1 <- list(stade0 = params[[4]],
+                             lai0 = params[[5]],
+                             masec0 = params[[6]],
+                             QNplante0 = params[[7]],
+                             magrain0 = params[[8]],
+                             zrac0 = params[[9]],
+                             resperenne0 = params[[10]],
+                             densinitial = params[[12]])
+
+    ini$plant$plant2 <- list(stade0 = params[[14]],
+                             lai0 = params[[15]],
+                             masec0 = params[[16]],
+                             QNplante0 = params[[17]],
+                             magrain0 = params[[18]],
+                             zrac0 = params[[19]],
+                             resperenne0 = params[[20]],
+                             densinitial = params[[22]])
+
+    ini$hinit <- params[[24]]
+    ini$NO3init <- params[[26]]
+    ini$NH4init <- params[[28]]
+
+  } else {
+
+    ini$plant$plant1 <- list(stade0 = params[[4]],
+                             lai0 = params[[5]],
+                             magrain0 = params[[6]],
+                             zrac0 = params[[7]],
+                             code_acti_reserve = params[[9]],
+                             maperenne0 = params[[10]],
+                             QNperenne0 = params[[11]],
+                             masecnp0 = params[[12]],
+                             QNplantenp0 = params[[13]],
+                             masec0 = params[[14]],
+                             QNplante0 = params[[15]],
+                             restemp0 = params[[16]],
+                             densinitial = params[[18]]
+    )
+
+    ini$plant$plant2 <- list(stade0 = params[[20]],
+                             lai0 = params[[21]],
+                             magrain0 = params[[22]],
+                             zrac0 = params[[23]],
+                             code_acti_reserve = params[[25]],
+                             maperenne0 = params[[26]],
+                             QNperenne0 = params[[27]],
+                             masecnp0 = params[[28]],
+                             QNplantenp0 = params[[29]],
+                             masec0 = params[[30]],
+                             QNplante0 = params[[31]],
+                             restemp0 = params[[32]],
+                             densinitial = params[[34]]
+    )
+
+    ini$hinit <- params[[36]]
+    ini$NO3init <- params[[38]]
+    ini$NH4init <- params[[40]]
+    ini$Sdepth0 <- params[[43]]
+    ini$Sdry0 <- params[[43]]
+    ini$Swet0 <- params[[43]]
+    ini$ps0 <- params[[43]]
+
+  }
+
+  ini <- character_to_numeric_list_new(ini)
 
   return(ini)
 }
@@ -427,7 +508,7 @@ get_plant_txt <- function(file = "ficplt1.txt", variety = NULL,
 #' @rdname get_param_txt
 #' @export
 get_tec_txt <- function(file = "fictec1.txt",
-                        stics_version = "last",
+                        stics_version = "latest",
                         several_fert = NULL,
                         several_thin = NULL,
                         is_pasture = NULL,
@@ -449,6 +530,8 @@ get_tec_txt <- function(file = "fictec1.txt",
   dot_args <- list(...) # Future-proofing the function. We can add arguments now without
   # breaking it. I think for example to a "version argument" because the tec file is not
   # generic.
+
+  stics_version <- check_version_compat(stics_version = stics_version)
 
   par_lines <- readLines(filepath)
   itk <- vector(mode = "list", length = 0)
@@ -483,9 +566,9 @@ get_tec_txt <- function(file = "fictec1.txt",
 
   # Early return here for version >= 10.0
   # get_tec_txt_ is not fully generic for the moment!
-  if(length(grep(pattern = "opp1", x = params)) == 0) {
+  if (get_version_num(stics_version = stics_version) >= 10)
     return(get_tec_txt_())
-  }
+
 
   # Treatment for Stics version < V10.0
   itk$nbjres <- val()
@@ -772,7 +855,7 @@ get_soil_txt <- function(file = "param.sol",
     return(vec)
   }
 
-  soil$nbcouchessol_max <- 1000
+  soil$nbcouchessol_max <- "1000"
 
   if (get_version_num(stics_version = stics_version) < 10) {
     par_vec <- c(
@@ -901,7 +984,7 @@ get_txt_generic <- function(file,
 #' @description Tries to convert the values in a list into numeric values,
 #' and if it fails, return as character.
 #'
-#' @param z A list with potential numeric values written a characters
+#' @param x A list with potential numeric values written a characters
 #'
 #' @return A list with numeric values when possible
 #'
@@ -914,12 +997,33 @@ get_txt_generic <- function(file,
 #' }
 #'
 character_to_numeric_list <- function(x) {
-  lapply(x, function(z) {
-    y <- suppressWarnings(as.numeric(z))
-    if (any(is.na(y))) {
-      z
-    } else {
-      y
-    }
-  })
+  # lapply(x, function(z) {
+  #   y <- suppressWarnings(as.numeric(z))
+  #   if (any(is.na(y))) {
+  #     z
+  #   } else {
+  #     y
+  #   }
+  # })
+  lapply(x,char2num)
 }
+
+
+char2num <- function(x) {
+
+  if(!all(is.character(x))) return()
+
+  x_trim <- trimws(x)
+
+  if(any(x_trim == "")) return(x)
+
+  if(!all(grepl(pattern = "[0-9]", x = x)) ||
+     any(grepl(pattern = "[a-zA-Z]", x = x))) return(x)
+
+
+  as.numeric(unlist(strsplit(x_trim, split = " ")))
+}
+
+
+
+

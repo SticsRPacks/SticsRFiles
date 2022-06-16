@@ -7,7 +7,7 @@
 character_to_numeric_list(x)
 }
 \arguments{
-\item{z}{A list with potential numeric values written a characters}
+\item{x}{A list with potential numeric values written a characters}
 }
 \value{
 A list with numeric values when possible
