@@ -896,8 +896,13 @@ get_soil_txt <- function(file = "param.sol",
   )] <-
     lapply(vec, unlist)
 
+
+
   # Transform into numeric:
   soil <- character_to_numeric_list(soil)
+
+  # removing duplicates
+  soil$numsol <- unique(soil$numsol)
 
   return(soil)
 }
@@ -1005,7 +1010,7 @@ character_to_numeric_list <- function(x) {
   #     y
   #   }
   # })
-  lapply(x,char2num)
+  rapply(x,char2num, how = "replace")
 }
 
 
