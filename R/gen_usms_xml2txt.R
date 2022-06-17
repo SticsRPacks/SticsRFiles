@@ -362,7 +362,10 @@ gen_usms_xml2txt <- function(javastics,
     # TODO: evaluate if return might be done here !
     # If only one usm, for exiting the loop if target_path
     # is the workspace path, no need to copy files
-    if (!dir_per_usm_flag && target_path == workspace_path) next
+    if (!dir_per_usm_flag && target_path == workspace_path) {
+      global_copy_status[i] <- TRUE
+      next
+    }
 
     # Copying files to the usm directory
     copy_status <- all(file.copy(
