@@ -415,9 +415,9 @@ get_ini_txt <- function(file = "ficini.txt",
                              densinitial = params[[34]]
     )
 
-    ini$hinit <- params[[36]]
-    ini$NO3init <- params[[38]]
-    ini$NH4init <- params[[40]]
+    ini$Hinitf <- params[[36]]
+    ini$NO3initf <- params[[38]]
+    ini$NH4initf <- params[[40]]
     ini$Sdepth0 <- params[[43]]
     ini$Sdry0 <- params[[43]]
     ini$Swet0 <- params[[43]]
