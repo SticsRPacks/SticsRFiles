@@ -18,7 +18,9 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 ```{r}
 library(SticsRFiles)
 ```
-
+```{r echo=FALSE}
+stics_version = get_stics_versions_compat()$latest_version
+```
 
 ------
 
@@ -38,16 +40,22 @@ Using this package, it is possible to:
 
 To run a STICS simulation on these input files, please refer to the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html).
 
-Some example data is available from the package and can be retreived using:
+Some example data are available from the package and can be retrieved using the following function call for the Stics version `r stics_version`:
 
 ```{r}
-example_txt_dir <- get_examples_path( file_type = "txt", stics_version = "V9.0")
+example_txt_dir <- get_examples_path( file_type = "txt")
+```
+The `example_txt_dir` directory is: `r example_txt_dir`. By default, the latest Stics version is taken into account. 
+For getting an example directory for another version, an additional argument must be given `stics_version` according to an existing version included in the package. The version list can be retrieved using:
+
+```{r}
+get_stics_versions_compat()$versions_list
 ```
 
 
 ## Getting parameter value
 
-`get_param_txt()` helps to get the value of a given parameter in a USM. It has two arguments, the directory of the USM (`workspace`, where the text files lives), and the parameter name (`param`).
+`get_param_txt()` helps to get the value of a given parameter in a USM. It has two arguments, the directory of the USM (`workspace`, where the text files lives), and the parameter name (`param`). An additional optional argument, is to be used if one want to get parameters for another Stics version than the latest one, as for getting the example dirtectory: `stics_version` 
 
 For example to get the value of the atmospheric pressure:
 
@@ -55,7 +63,7 @@ For example to get the value of the atmospheric pressure:
 get_param_txt(workspace = example_txt_dir, param='patm')
 ```
 
-The function returns a vector with all the values found for the parameter (here "1000") named according to the file where it found the parameter value (here "station"), along with the parameter name as found in the file. The function performs a fuzzy search, so the name of the parameter can be only partially given, e.g.:
+The function returns a named list according to the file where it found the parameter value (here "station") containing all the values found for the `patm` parameter (here 1000), along with the parameter name as found in the file. The function performs a fuzzy search, so here after the name of the parameter is only partially given, e.g.: `atm`
 
 ```{r}
 get_param_txt(workspace = example_txt_dir, param='atm')
@@ -66,7 +74,7 @@ Note that the function does not require the user to know in which file the param
 ```{r}
 get_param_txt(workspace = example_txt_dir, param='a')
 ```
-Here we see another peculiarity: the name associated to the value has more information for the plant file, e.g. " plant.plant1.P_Nmeta" instead of " plant.P_Nmeta". This is because a USM can potentially have two plant files if it is an intercrop, so the function returns the plant file index where the parameter was found.
+Here we see another peculiarity: the name associated to the value has more information for the plant file, e.g. " `plant$plant1$P_Nmeta`" instead of "`plant$P_Nmeta`". This is because a USM can potentially have two plant files if it is an intercrop, so the function returns the plant file index where the parameter was found.
 
 It is the same case for the tec file:
 
@@ -111,10 +119,14 @@ The function adds a `Date` column that is at the standard `POSIXct` format for c
 
 `set_param_txt()` is used to set the value of a given parameter in a USM. It has three main arguments, the directory of the USM (`workspace`, where the text files lives), the parameter name (`param`), and the new value of the parameter.
 
-For example to set the value of the atmospheric pressure read above to 1000:
 
+The actual value of of the atmospheric pressure read above is:
 ```{r}
-set_param_txt(workspace = example_txt_dir, param='patm', value = 1000)
+get_param_txt(workspace = example_txt_dir, param='patm')
+```
+To set a new value of `patm` to 900:
+```{r}
+set_param_txt(workspace = example_txt_dir, param='patm', value = 900)
 ```
 
 Now we can check that the value is changed:

@@ -5,8 +5,6 @@ vignette: >
   %\VignetteIndexEntry{Manipulating Stics XML files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-params:
-  version: !r SticsRFiles:::get_stics_versions_compat()$latest_version
 ---
 
 
@@ -22,9 +20,8 @@ knitr::opts_chunk$set(
 ```{r}
 library(SticsRFiles)
 ```
-
 ```{r echo=FALSE}
-stics_version = params$version
+stics_version = get_stics_versions_compat()$latest_version
 ```
 
 ```{r setup, results="hide", echo=FALSE}
