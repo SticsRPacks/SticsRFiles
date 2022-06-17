@@ -193,17 +193,25 @@ get_param_txt <- function(workspace = getwd(),
 
 
   # Removing ending numbers
-  #param_names <- gsub(pattern = "[0-9]{0,}$", replacement = "", x = names(parameters))
-  parameters_fields <- gsub(pattern = "[0-9]{0,}$",
+  # numbers between 1 an 9
+  # parameters_fields <- gsub(pattern = "[0-9]{0,}$",
+  #                           replacement = "",
+  #                           x = parameters_fields)
+  # for removing numbers with 2 digits 10, 20,...
+  # and preserving parameters ending with 0 (i.e. masecnp0)
+  parameters_fields <- gsub(pattern = "[1-9]{1}[0-9]{0,1}$",
                             replacement = "",
                             x = parameters_fields)
 
-  #param_names <- gsub(pattern = ".*\\.(.*[0-9]{0,})", replacement = "\\1", x = param_names)
-  parameters_fields <- unique(gsub(pattern = ".*\\.(.*[0-9]{0,})",
+  # parameters_fields <- unique(gsub(pattern = ".*\\.(.*[0-9]{0,})",
+  #                                  replacement = "\\1",
+  #                                  x = parameters_fields))
+
+  parameters_fields <- unique(gsub(pattern = ".*\\.(.*[1-9]{0,})",
                                    replacement = "\\1",
                                    x = parameters_fields))
 
-  #parameters <- eval(parse(text = paste0("list(parameters$", parameters_fields,")")))
+
   parameters <- unlist(lapply(parameters_fields, function(x)
     eval(parse(text = paste0("list(parameters$", x,")")))), recursive = FALSE)
 
@@ -212,10 +220,7 @@ get_param_txt <- function(workspace = getwd(),
 
   names(parameters) <- parameters_fields
 
-  # idx_to_fix <- param_names %in% param
-  # idx_plant_to_fix <- idx_to_fix & grepl("^plant", names(parameters))
   idx_plant_to_fix <- grepl("^plant", names(parameters))
-  #idx_plant_to_fix <- grep("^plant", names(parameters))
 
   idx_idx <- unlist(lapply(parameters[idx_plant_to_fix], function(x) length(x) > 0),
                     use.names = FALSE)
