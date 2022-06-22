@@ -23,7 +23,7 @@
 #' them to other functions.
 #'
 #' @return A list of parameters value(s),
-#' or if `param= NULL` a list of all parameters:
+#' or if `param = NULL` a list of all parameters:
 #'         \item{ini}{Initialization parameters}
 #'         \item{general}{General parameters}
 #'         \item{tec}{Technical parameters}
@@ -74,9 +74,7 @@ get_param_txt <- function(workspace = getwd(),
     dirpath <- workspace # to remove when we update inside the function
   }
 
-  dot_args <- list(...) # Future-proof the function. We can add arguments now without
-  # breaking it. I think for example to a "version argument" because the tec file is not
-  # generic.
+  dot_args <- list(...)
 
   stics_version <- check_version_compat(stics_version = stics_version)
 
@@ -159,118 +157,41 @@ get_param_txt <- function(workspace = getwd(),
     tmp = tmp
   )
 
-  # Returning the parameters list
+  # Returning the parameters full list
   if (is.null(param)) {
     return(parameters)
   }
 
-  #parameters <- unlist(parameters)
-  parameters_fields <- names(unlist(parameters))
-  # Fixes parameters names including indices (?)
-  # For escaping braces and catching the right name
-  param <- gsub(pattern = "\\(", x = param, replacement = "\\\\(\\1")
-  param <- gsub(pattern = "\\)", x = param, replacement = "\\\\)\\1")
+  # Extracting a sublist of desired parameters, with respect to the original
+  # full list structure
+  parameters <- filter_param(parameters, param = param)
 
 
-  # TODO: revise regex pattern for param name search
-  if (exact) {
-    idx <- unlist(lapply(param, function(x) grep(paste0("\\.",x , "[\\(\\)0-9]{0,}$"), parameters_fields)))
-    parameters_fields <- parameters_fields[idx]
-    #parameters <- parameters[grep(paste0("\\.", param, "[\\(\\)0-9]{0,}$"), names(parameters))]
-  } else {
-    #parameters <- parameters[grep(paste0(param, "[\\(\\)0-9]{0,}$"), names(parameters))]
-    idx <- unlist(lapply(param, function(x) grep(paste0(x , "[\\(\\)0-9]{0,}$"), parameters_fields)))
-    parameters_fields <- parameters_fields[idx]
-  }
-
-  parameters_fields <- unlist(lapply(parameters_fields,
-                                     function(x) gsub(pattern = "\\.", x, replacement = "$"))
-  )
-
-  if (length(parameters) == 0) {
-    stop(param, " parameter not found")
-  }
+  return(parameters)
+}
 
 
-  # Removing ending numbers
-  # numbers between 1 an 9
-  # parameters_fields <- gsub(pattern = "[0-9]{0,}$",
-  #                           replacement = "",
-  #                           x = parameters_fields)
-  # for removing numbers with 2 digits 10, 20,...
-  # and preserving parameters ending with 0 (i.e. masecnp0)
-  parameters_fields <- gsub(pattern = "[1-9]{1}[0-9]{0,1}$",
-                            replacement = "",
-                            x = parameters_fields)
 
-  # parameters_fields <- unique(gsub(pattern = ".*\\.(.*[0-9]{0,})",
-  #                                  replacement = "\\1",
-  #                                  x = parameters_fields))
+filter_param <- function(in_list, param = NULL) {
 
-  parameters_fields <- unique(gsub(pattern = ".*\\.(.*[1-9]{0,})",
-                                   replacement = "\\1",
-                                   x = parameters_fields))
+  out_list = list()
+  name <- names(in_list)
+  for (i in 1:length(name)) {
+    n <- name[[i]]
+    if (is.list(in_list[[n]])) {
+      tmp <- filter_param(in_list[[n]], param = param)
+      if(length(tmp) > 0) out_list[[n]] <- tmp
+    }
 
+    # For identity return
+    if(is.null(param)) out_list[[n]] <- in_list[[n]]
 
-  parameters <- unlist(lapply(parameters_fields, function(x)
-    eval(parse(text = paste0("list(parameters$", x,")")))), recursive = FALSE)
-
-  # Not any parameter found
-  if(is.null(parameters)) return(list())
-
-  names(parameters) <- parameters_fields
-
-  idx_plant_to_fix <- grepl("^plant", names(parameters))
-
-  idx_idx <- unlist(lapply(parameters[idx_plant_to_fix], function(x) length(x) > 0),
-                    use.names = FALSE)
-
-  idx_plant_to_fix <- idx_plant_to_fix[idx_idx]
-
-  #variet_names <- paste("var",as.character(1:length(varieties)))
-  #lapply(parameters[idx_plant_to_fix], function(x)  names(x) <- variet_names)
-
-  # if (any(idx_plant_to_fix)) {
-  # variety_names <- sapply(1:length(varieties), function(i) {
-  #   varieties[[i]][variety[[i]]]
-  # })
-  #   if (length(variety_names) == 1) {
-  #     variety_names <- rep(variety_names, length(idx_plant_to_fix))
-  #   } else {
-  #     variety_names <- rep(variety_names, each = length(idx_plant_to_fix) / length(variety_names))
-  #   }
-  #   names(parameters)[idx_plant_to_fix] <- paste0(
-  #     names(parameters)[idx_plant_to_fix],
-  #     ".",
-  #     variety_names[idx_plant_to_fix]
-  #   )
-  # }
-
-  # TO BE FIXED if it makes sense ?
-  # idx_tec_to_fix <- idx_to_fix & grepl("^tec", names(parameters))
-  #
-  # if (any(idx_tec_to_fix)) {
-  #   names(parameters)[idx_tec_to_fix]= paste0(gsub("[1-999]","",names(parameters)),
-  #                                               ".",
-  #                                               varieties[tec_variety][idx_tec_to_fix])
-  # }
-
-  # Not adapted for the moment to multiple parameters
-  # TODO: to be fixed.
-  # add a loop over parameters names !
-  if (any(idx_plant_to_fix) &&
-      (length(parameters[idx_plant_to_fix]) == length(varieties))) {
-    variety_names <- lapply(1:length(varieties), function(i) {
-      varieties[[i]][variety[[i]]]
-    })
-
-    for (n in 1:length(variety_names)) {
-      var_names <- variety_names[[n]]
-      if (length(parameters[idx_plant_to_fix][[n]]) == length(var_names))
-        names(parameters[idx_plant_to_fix][[n]]) <- var_names
+    # Filtering using param vector
+    if(n %in% param) {
+      out_list[[n]] <- in_list[[n]]
     }
   }
-  return(parameters)
+  out_list
 }
 
 
@@ -502,6 +423,14 @@ get_plant_txt <- function(file = "ficplt1.txt", variety = NULL,
     x_2 <- lapply(x_2, function(x) {
       x[variety]
     })
+  } else {
+    variety <- 1:length(varieties)
+  }
+
+  # Setting variety names to vectors
+  # skipping "codevar" containing varieties names
+  for (i in 2:length(x_2)) {
+    names(x_2[[i]]) <- varieties[variety]
   }
 
   c(x_1, x_2)

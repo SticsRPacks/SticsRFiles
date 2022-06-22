@@ -89,7 +89,7 @@ longer supported, use \code{file} instead.}
 }
 \value{
 A list of parameters value(s),
-or if \code{param= NULL} a list of all parameters:
+or if \code{param = NULL} a list of all parameters:
 \item{ini}{Initialization parameters}
 \item{general}{General parameters}
 \item{tec}{Technical parameters}
