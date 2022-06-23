@@ -179,8 +179,7 @@ set_param_txt <- function(workspace = getwd(),
            tmp <- lapply(plant, function(x) {
              if (is.null(variety)) {
                variety <-
-                 get_param_txt(workspace = dirpath, param = "variete", exact = TRUE, stics_version = stics_version)[plant] %>%
-                 as.numeric()
+                 unlist(get_param_txt(workspace = dirpath, param = "variete", exact = TRUE, stics_version = stics_version))[plant]
              } else {
                if (is.character(variety)) {
                  varieties <- get_plant_txt(file = file.path(dirpath, paste0("ficplt", x, ".txt")))$codevar
@@ -271,6 +270,7 @@ set_ini_txt <- function(file = "ficini.txt",
                         param,
                         value,
                         append = FALSE,
+                        stics_version = "latest",
                         filepath = lifecycle::deprecated(),
                         add = lifecycle::deprecated()) {
 
@@ -293,7 +293,7 @@ set_ini_txt <- function(file = "ficini.txt",
     add <- append # to remove when we update inside the function
   }
 
-  set_file_txt(filepath, param, value, add)
+  set_file_txt(filepath, param, value, add, stics_version = stics_version)
 }
 
 
@@ -430,7 +430,7 @@ set_soil_txt <- function(file = "param.sol",
                          param,
                          value,
                          layer = NULL,
-                         stics_version,
+                         stics_version = "latest",
                          filepath = lifecycle::deprecated()) {
 
   # filepath
@@ -534,6 +534,9 @@ set_soil_txt <- function(file = "param.sol",
 #' @param param    Parameter name
 #' @param value    New parameter value
 #' @param append      Boolean. Append input to existing file
+#' @param variety  The plant variety to set the parameter value, either the name of the variety
+#' @param stics_version An optional version name as listed in
+#' get_stics_versions_compat() return
 #'
 #' @details The function uses `base::sys.call()` to know from which function
 #'          of the \code{set_*} family it is called, so it won't work properly if called
@@ -549,8 +552,12 @@ set_file_txt <- function(file,
                          param,
                          value,
                          append,
-                         variety = NULL) {
+                         variety = NULL,
+                         stics_version = "latest") {
   param <- gsub("P_", "", param)
+
+  stics_version <- check_version_compat(stics_version = stics_version)
+
   # access the function name from which set_file_txt was called
   type <- strsplit(deparse(sys.call(-1)), split = "\\(")[[1]][1]
   params <- readLines(file)
@@ -569,7 +576,7 @@ set_file_txt <- function(file,
            ref_index <- grep(param_, names(ref)) * 2
          },
          set_ini_txt = {
-           ref <- get_ini_txt(file)
+           ref <- get_ini_txt(file, stics_version = stics_version)
            ref_index <- grep(param_, names(ref)) * 2
          },
          set_plant_txt = {

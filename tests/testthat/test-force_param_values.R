@@ -17,7 +17,7 @@ df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), string
 
 # to be compatible with both STICS V10.0 (codoptim) and previous version (codeoptim)
 # we search all parameters including the pattern "optim" and then handle both cases in the test
-optim_params <- get_param_txt(workspace = example_txt_dir, param = "optim", stics_version = stics_version)
+optim_params <- unlist(get_param_txt(workspace = example_txt_dir, param = "optim", stics_version = stics_version))
 
 test_that("standard case", {
   expect_equal(optim_params[[grep(codoptim, names(optim_params))]], 1)
@@ -32,7 +32,7 @@ res <- force_param_values(example_txt_dir, values = NA)
 
 test_that("param_values == NA", {
   expect_equal(
-    get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version)[[1]],
+    unlist(get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version), use.names = FALSE),
     0)
   expect_false(file.exists(file.path(example_txt_dir, "param.sti")))
   expect_true(res)
@@ -46,7 +46,7 @@ df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), string
 
 test_that("One NA in param_values", {
   expect_equal(
-    get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version)[[1]],
+    unlist(get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version), use.names = FALSE),
     1)
   expect_equal(df_paramsti[c(2), ], c("stlevamf"))
   expect_equal(as.numeric(df_paramsti[c(1, 3), ]), c(1, 220))

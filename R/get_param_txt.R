@@ -163,8 +163,8 @@ get_param_txt <- function(workspace = getwd(),
   }
 
   # Extracting a sublist of desired parameters, with respect to the original
-  # full list structure
-  parameters <- filter_param(parameters, param = param)
+  # full list structure, with or wothout exact search
+  parameters <- filter_param(parameters, param = param, exact = exact)
 
 
   return(parameters)
@@ -172,25 +172,34 @@ get_param_txt <- function(workspace = getwd(),
 
 
 
-filter_param <- function(in_list, param = NULL) {
+filter_param <- function(in_list, param = NULL, exact = FALSE) {
 
   out_list = list()
-  name <- names(in_list)
-  for (i in 1:length(name)) {
-    n <- name[[i]]
-    if (is.list(in_list[[n]])) {
-      tmp <- filter_param(in_list[[n]], param = param)
-      if(length(tmp) > 0) out_list[[n]] <- tmp
+  names_vec <- names(in_list)
+  for (i in 1:length(names_vec)) {
+    name <- names_vec[[i]]
+    if (is.list(in_list[[name]])) {
+      tmp <- filter_param(in_list[[name]], param = param, exact = exact)
+      if(length(tmp) > 0) out_list[[name]] <- tmp
+      next
     }
 
     # For identity return
-    if(is.null(param)) out_list[[n]] <- in_list[[n]]
+    if(is.null(param)) out_list[[name]] <- in_list[[name]]
 
     # Filtering using param vector
-    if(n %in% param) {
-      out_list[[n]] <- in_list[[n]]
+    # Exact names or partial names search
+    if(exact){
+      idx <- param %in% name
+    } else {
+      idx <- unlist(lapply(param, function(x) grepl(pattern = x, x = name)))
+    }
+
+    if(any(idx)) {
+      out_list[[name]] <- in_list[[name]]
     }
   }
+
   out_list
 }
 

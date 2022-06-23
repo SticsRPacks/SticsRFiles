@@ -55,12 +55,18 @@ get_stics_versions_compat()$versions_list
 
 ## Getting parameter value
 
-`get_param_txt()` helps to get the value of a given parameter in a USM. It has two arguments, the directory of the USM (`workspace`, where the text files lives), and the parameter name (`param`). An additional optional argument, is to be used if one want to get parameters for another Stics version than the latest one, as for getting the example dirtectory: `stics_version` 
+`get_param_txt()` helps to get the value of a given parameter in a USM. It has two main arguments, the directory of the USM (`workspace`, where the text files lives), and the parameter names (`param`) to be searched. But, if `param` is not used, the returned named list contains all the STICS parameters for a given USM.
+
+Additional arguments can be set for specific extractions:
+
+* `variety` is for getting parameters for a cultivar or a vector of
+* `exact` may be used for indicating that the parameter(s) name(s) given by `param` must be matching exactly parameters names in files
+* `stics_version` is to be used if one want to get parameters for another STICS version than the latest one (default), as for getting the example directory
 
 For example to get the value of the atmospheric pressure:
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='patm')
+get_param_txt(workspace = example_txt_dir, param = 'patm')
 ```
 
 The function returns a named list according to the file where it found the parameter value (here "station") containing all the values found for the `patm` parameter (here 1000), along with the parameter name as found in the file. The function performs a fuzzy search, so here after the name of the parameter is only partially given, e.g.: `atm`
@@ -69,11 +75,13 @@ The function returns a named list according to the file where it found the param
 get_param_txt(workspace = example_txt_dir, param='atm')
 ```
 
-Note that the function does not require the user to know in which file the parameter is because it search the parameter in all files. So if it finds several parameter with the same given name, it will return all:
+Note that the function does not require the user to know in which file the parameter is because it search the parameter in all files. So if it finds several parameter with the same given name, it will return all. The next example shows how to get parameters from the soil file containing the letter "a":
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='a')
+get_param_txt(workspace = example_txt_dir, param='a')$soil
 ```
+For an exact search of parameters, a specific argument `exact` must be set to **TRUE** (the default value is **FALSE** if not provided). 
+
 Here we see another peculiarity: the name associated to the value has more information for the plant file, e.g. " `plant$plant1$P_Nmeta`" instead of "`plant$P_Nmeta`". This is because a USM can potentially have two plant files if it is an intercrop, so the function returns the plant file index where the parameter was found.
 
 It is the same case for the tec file:

@@ -4,7 +4,14 @@
 \alias{set_file_txt}
 \title{Internal function to set some STICS input file parameters}
 \usage{
-set_file_txt(file, param, value, append, variety = NULL)
+set_file_txt(
+  file,
+  param,
+  value,
+  append,
+  variety = NULL,
+  stics_version = "latest"
+)
 }
 \arguments{
 \item{file}{Path to the parameter file}
@@ -14,6 +21,11 @@ set_file_txt(file, param, value, append, variety = NULL)
 \item{value}{New parameter value}
 
 \item{append}{Boolean. Append input to existing file}
+
+\item{variety}{The plant variety to set the parameter value, either the name of the variety}
+
+\item{stics_version}{An optional version name as listed in
+get_stics_versions_compat() return}
 }
 \description{
 Replace or set an input parameter from a pre-existing STICS input

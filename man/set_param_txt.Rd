@@ -49,6 +49,7 @@ set_ini_txt(
   param,
   value,
   append = FALSE,
+  stics_version = "latest",
   filepath = lifecycle::deprecated(),
   add = lifecycle::deprecated()
 )
@@ -95,7 +96,7 @@ set_soil_txt(
   param,
   value,
   layer = NULL,
-  stics_version,
+  stics_version = "latest",
   filepath = lifecycle::deprecated()
 )
 }
