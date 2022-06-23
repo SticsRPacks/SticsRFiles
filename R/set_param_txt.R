@@ -589,6 +589,32 @@ set_file_txt <- function(file,
              }
            }
          },
+         set_tec_txt = {
+           ref <- get_tec_txt(file, stics_version = stics_version)
+           # add treatment for getting lines
+           # add index on the line for the parameters when several (interventions)
+           # question: replacing existing individual values and
+           # modifying interventions plan (i.e. reduce irrigations nb )
+
+           # get sublist from ref, change values and
+           # transform to text and replace using lines index !
+           idx_lines <- grep(param, params)
+
+           # Getting par names on one line
+           line_param <- unlist(strsplit(params[idx_lines[1]], split = " "))
+
+           lines_values <- ref[line_param]
+
+           # replacing values
+           lines_values[[param]] <- value
+
+           df_lines_values <- as.data.frame(lapply(lines_values, as.character), stringsAsFactors = FALSE)
+
+           # Values of parameters to replace in params at idx_lines + 1
+           value <- apply(df_lines_values,1,function(x) paste(x, collapse = " "))
+
+           ref_index <- idx_lines + 1
+         },
          # Default here
          {
            ref_index <- grep(param_, params) + 1
