@@ -10,8 +10,12 @@ if (SticsRFiles:::get_version_num(stics_version = stics_version) < 10) {
   codoptim <- "codoptim"
 }
 
+path <- get_examples_path(file_type = "txt", stics_version = stics_version)
+# Copy example to test in tempdir since the files will be modified by set_param
+file.copy(from = file.path(path, list.files(path)), to = tempdir(), overwrite = TRUE)
+example_txt_dir <- tempdir()
 
-example_txt_dir <- get_examples_path(file_type = "txt", stics_version = stics_version)
+#example_txt_dir <- get_examples_path(file_type = "txt", stics_version = stics_version)
 res <- force_param_values(example_txt_dir, values = setNames(object = c(220, 330), c("stlevamf", "stamflax")))
 df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), stringsAsFactors = FALSE)
 
