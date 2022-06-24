@@ -234,7 +234,7 @@ get_param_data_df <- function(param = NULL,
   ))
 
   # Not any parameters found
-  if (all(dim(param_names) == 0)) {
+  if (dim(param_names)[1] < 1) {
     warning(paste("Not any parameter found for Stics version: ", stics_version))
     return(invisible())
   }
