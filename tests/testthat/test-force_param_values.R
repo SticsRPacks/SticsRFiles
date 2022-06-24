@@ -4,12 +4,6 @@ library(SticsRFiles)
 #stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 
-if (SticsRFiles:::get_version_num(stics_version = stics_version) < 10) {
-  codoptim <- "codeoptim"
-} else {
-  codoptim <- "codoptim"
-}
-
 path <- get_examples_path(file_type = "txt", stics_version = stics_version)
 # Copy example to test in tempdir since the files will be modified by set_param
 file.copy(from = file.path(path, list.files(path)), to = tempdir(), overwrite = TRUE)
@@ -21,7 +15,10 @@ df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), string
 
 # to be compatible with both STICS V10.0 (codoptim) and previous version (codeoptim)
 # we search all parameters including the pattern "optim" and then handle both cases in the test
-optim_params <- unlist(get_param_txt(workspace = example_txt_dir, param = "optim", stics_version = stics_version))
+optim_params <- get_param_txt(workspace = example_txt_dir, param = "optim", stics_version = stics_version)$usm
+# getting the parameter name
+codoptim <- names(optim_params)
+optim_params <- unlist(optim_params)
 
 test_that("standard case", {
   expect_equal(optim_params[[grep(codoptim, names(optim_params))]], 1)
