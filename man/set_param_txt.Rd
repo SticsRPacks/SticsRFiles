@@ -17,7 +17,7 @@ set_param_txt(
   param,
   value,
   append = FALSE,
-  plant_id = 1,
+  plant_id = NULL,
   variety = NULL,
   layer = NULL,
   stics_version = "latest",
@@ -49,6 +49,8 @@ set_ini_txt(
   param,
   value,
   append = FALSE,
+  plant_id = 1,
+  layer = NULL,
   stics_version = "latest",
   filepath = lifecycle::deprecated(),
   add = lifecycle::deprecated()
@@ -110,7 +112,7 @@ set_soil_txt(
 \item{append}{Boolean. Append input to existing file}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
-Only used for plant or technical parameters.}
+Only used for plant, technical or initialisation parameters.}
 
 \item{variety}{The plant variety to set the parameter value, either the name of the variety
 (\code{codevar} parameter in the plant file) or the index (\code{variete} parameter in the technical file). (optional, see details)}

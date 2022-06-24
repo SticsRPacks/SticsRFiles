@@ -9,7 +9,9 @@ set_file_txt(
   param,
   value,
   append,
+  plant_id = NULL,
   variety = NULL,
+  layer = NULL,
   stics_version = "latest"
 )
 }
@@ -22,7 +24,11 @@ set_file_txt(
 
 \item{append}{Boolean. Append input to existing file}
 
+\item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).}
+
 \item{variety}{The plant variety to set the parameter value, either the name of the variety}
+
+\item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
 \item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}

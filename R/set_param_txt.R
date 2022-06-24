@@ -8,7 +8,7 @@
 #' @param value    New parameter value
 #' @param append      Boolean. Append input to existing file
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
-#' Only used for plant or technical parameters.
+#' Only used for plant, technical or initialisation parameters.
 #' @param variety  The plant variety to set the parameter value, either the name of the variety
 #' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
@@ -69,7 +69,7 @@ set_param_txt <- function(workspace = getwd(),
                           param,
                           value,
                           append = FALSE,
-                          plant_id = 1,
+                          plant_id = NULL,
                           variety = NULL,
                           layer = NULL,
                           stics_version = "latest",
@@ -131,7 +131,9 @@ set_param_txt <- function(workspace = getwd(),
          ini = {
            set_ini_txt(
              file = file.path(dirpath, "ficini.txt"),
-             param = param, value = value, add = add
+             param = param, value = value, append = add,
+             plant_id = plant, layer = layer,
+             stics_version = stics_version
            )
          },
          general = {
@@ -176,6 +178,9 @@ set_param_txt <- function(workspace = getwd(),
            })
          },
          plant = {
+           # default : 1 plant
+           if(is.null(plant)) plant <- 1
+
            tmp <- lapply(plant, function(x) {
              if (is.null(variety)) {
                variety <-
@@ -270,6 +275,8 @@ set_ini_txt <- function(file = "ficini.txt",
                         param,
                         value,
                         append = FALSE,
+                        plant_id = 1,
+                        layer = NULL,
                         stics_version = "latest",
                         filepath = lifecycle::deprecated(),
                         add = lifecycle::deprecated()) {
@@ -293,7 +300,8 @@ set_ini_txt <- function(file = "ficini.txt",
     add <- append # to remove when we update inside the function
   }
 
-  set_file_txt(filepath, param, value, add, stics_version = stics_version)
+  set_file_txt(filepath, param, value, add, plant_id = plant_id,
+               layer = layer, stics_version = stics_version)
 }
 
 
@@ -390,7 +398,7 @@ set_plant_txt <- function(file = "ficplt1.txt",
     add <- append # to remove when we update inside the function
   }
 
-  set_file_txt(filepath, param, value, add, variety)
+  set_file_txt(filepath, param, value, add, variety = variety)
 }
 
 #' @rdname set_param_txt
@@ -534,7 +542,9 @@ set_soil_txt <- function(file = "param.sol",
 #' @param param    Parameter name
 #' @param value    New parameter value
 #' @param append      Boolean. Append input to existing file
+#' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
 #' @param variety  The plant variety to set the parameter value, either the name of the variety
+#' @param layer    The soil layer if any (only concerns soil-related parameters)
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
 #'
@@ -552,7 +562,9 @@ set_file_txt <- function(file,
                          param,
                          value,
                          append,
+                         plant_id = NULL,
                          variety = NULL,
+                         layer = NULL,
                          stics_version = "latest") {
   param <- gsub("P_", "", param)
 
@@ -577,7 +589,31 @@ set_file_txt <- function(file,
          },
          set_ini_txt = {
            ref <- get_ini_txt(file, stics_version = stics_version)
-           ref_index <- grep(param_, names(ref)) * 2
+
+           # fix plant id if param is attached to a plant
+           if(is.null(plant_id) &&
+              (param %in% names(ref$plant$plant1)))
+             plant_id <- 1
+
+           # changing param value in ref
+           if(is.null(plant_id)){
+             if(is.null(layer)) {
+               ref[[param]] <- value
+             } else {
+               ref[[param]][layer] <- value
+             }
+           } else {
+             if(is.null(layer)) {
+               ref$plant[[paste0("plant", plant_id)]][[param]] <- value
+             } else {
+               ref$plant[[paste0("plant", plant_id)]][[param]][layer] <- value
+             }
+           }
+
+           value <- list_to_character_vector(ref)
+
+           # rows index according to version
+           ref_index <- get_ini_val_idx(stics_version)
          },
          set_plant_txt = {
            ref_index <- grep(param_, params) + 1
@@ -596,7 +632,7 @@ set_file_txt <- function(file,
            # question: replacing existing individual values and
            # modifying interventions plan (i.e. reduce irrigations nb )
 
-           # get sublist from ref, change values and
+           # getting sublist from ref, change values and
            # transform to text and replace using lines index !
            idx_lines <- grep(param, params)
 
@@ -647,4 +683,40 @@ set_file_txt <- function(file,
   }
   params[ref_index] <- format(value, scientific = FALSE)
   writeLines(params, file)
+}
+
+
+
+get_ini_val_idx <- function(stics_version){
+
+  if (get_version_num(stics_version = stics_version) < 10){
+    idx <- c(
+      2,
+      4:10,
+      12,
+      14:20,
+      22,
+      24,
+      26,
+      28
+    )
+  } else {
+    idx <- c(
+      2,
+      4:7,
+      9:16,
+      18,
+      20:23,
+      25:32,
+      34,
+      36,
+      38,
+      40,
+      43,
+      45,
+      47,
+      49
+    )
+  }
+  idx
 }

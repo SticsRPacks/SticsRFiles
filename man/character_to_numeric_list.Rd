@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_txt.R
 \name{character_to_numeric_list}
 \alias{character_to_numeric_list}
-\title{Character list to numeric}
+\title{Character list to numeric list}
 \usage{
 character_to_numeric_list(x)
 }

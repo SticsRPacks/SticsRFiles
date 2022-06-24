@@ -927,7 +927,7 @@ get_txt_generic <- function(file,
 
 
 
-#' Character list to numeric
+#' Character list to numeric list
 #'
 #' @description Tries to convert the values in a list into numeric values,
 #' and if it fails, return as character.
@@ -972,6 +972,10 @@ char2num <- function(x) {
   as.numeric(unlist(strsplit(x_trim, split = " ")))
 }
 
+list_to_character_vector <- function(x) {
 
+  rapply(x, f = function(y) paste(as.character(y), collapse = " "))
+
+}
 
 
