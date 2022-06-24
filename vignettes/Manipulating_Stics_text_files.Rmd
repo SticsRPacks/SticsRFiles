@@ -91,6 +91,19 @@ get_param_txt(workspace = example_txt_dir, param='interrang')
 ```
 
 
+A particular search in plant parameters for specific varieties, can be done using the `variety` argument:
+
+* either using names,
+```{r}
+get_param_txt(workspace = example_txt_dir, param = "stlevamf", variety = c("Pactol", "Cecilia", "clarica"))
+```
+* or using varieties indexes in plant file,
+```{r}
+get_param_txt(workspace = example_txt_dir, param = "stlevamf", variety = c(1,2,5))
+```
+
+
+
 The `get_param_txt()` function is a wrapper around other lower-level functions that reads the parameter values in a given file:
 
 * get_ini_txt() for the `ficini.txt` file;
@@ -148,10 +161,40 @@ get_param_txt(workspace = example_txt_dir, param='patm')
 set_param_txt(workspace = example_txt_dir, param='patm', value = 1000)
 ```
 
-There are two more arguments to the function:
+There are four more arguments to the function:
 
-* `plant`: This is used for intercropping when there are two plant and tec files. The user can then choose to which plant the value will be changed.
-* `add`: instead of changing the value of a parameter that already exist in the files, a parameter can be added to the file using this argument. This is used mainly by developpers that added a parameter to the model and need to programatically add it to the input files.
+* `append`: instead of changing the value of a parameter that already exist in the files, a parameter can be added to the file using this argument. This is used mainly by developpers that added a parameter to the model and need to programatically add it to the input files.
+
+* `plant_id`: This is used for intercropping when there are two plant and tec files. The user can then choose to which plant the value will be changed.
+
+* `variety`: This optional argument may be used for replacing varietal parameter values either giving a name (`codevar` in the plant file) or an index of the variety specified in the technical file (`variete`)
+
+* `layer`: This may be used for replacing specific parameters values, for specific soil layers either for the soil characteristics (soil file: `param.sol`), or roots density and mineral elements concentration at the simulation start (initialisation file: `ficini.txt`). 
+
+* `stics_version`: At last, the model version can be specified through that argument, because files content may vary according to the version. 
+
+
+Specific replacements may be performed combining additional arguments as `plant_id`, `layer`:
+
+* The initial values of `densinitial` are:
+```{r}
+get_param_txt(workspace = example_txt_dir, param = "densinitial")
+```
+* The values for the plant 1 and layers 1 and 4 are replaced as follows:
+
+```{r}
+set_param_txt(workspace = example_txt_dir, 
+              param = "densinitial",
+              plant_id = 1,
+              layer = c(1,4),
+              value = c(0.5,0.1))
+```
+
+* The final values in the file are:
+```{r}
+get_param_txt(workspace = example_txt_dir, param = "densinitial")
+```
+
 
 Note that as for `get_param_txt()`, `set_param_txt()` finds automatically the file where the parameter is. It is also a wrapper around lower-level functions that set the parameter values in a given file:
 

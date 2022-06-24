@@ -9,8 +9,8 @@
 #' @param append      Boolean. Append input to existing file
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
 #' Only used for plant, technical or initialisation parameters.
-#' @param variety  The plant variety to set the parameter value, either the name of the variety
-#' (`codevar` parameter in the plant file) or the index (`variete` parameter in the technical file). (optional, see details)
+#' #' @param variety The plant variety to set the parameter value, either the variety
+#' name (`codevar` in the plant file) or the index (`variete` in the technical file).
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
@@ -111,7 +111,10 @@ set_param_txt <- function(workspace = getwd(),
 
 
   param <- gsub("P_", "", param)
-  param_val <- get_param_txt(workspace = dirpath, param = param, exact = TRUE, stics_version = stics_version)
+  param_val <- get_param_txt(workspace = dirpath,
+                             param = param,
+                             exact = TRUE,
+                             stics_version = stics_version)
 
   file_type <-
     #lapply(strsplit(names(param_val), "\\."), function(x) {
@@ -543,7 +546,8 @@ set_soil_txt <- function(file = "param.sol",
 #' @param value    New parameter value
 #' @param append      Boolean. Append input to existing file
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
-#' @param variety  The plant variety to set the parameter value, either the name of the variety
+#' @param variety The plant variety to set the parameter value, either the variety
+#' name (`codevar` in the plant file) or the index (`variete` in the technical file).
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return

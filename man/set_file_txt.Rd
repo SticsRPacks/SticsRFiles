@@ -26,7 +26,8 @@ set_file_txt(
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).}
 
-\item{variety}{The plant variety to set the parameter value, either the name of the variety}
+\item{variety}{The plant variety to set the parameter value, either the variety
+name (\code{codevar} in the plant file) or the index (\code{variete} in the technical file).}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
 

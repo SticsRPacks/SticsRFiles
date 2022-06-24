@@ -112,10 +112,9 @@ set_soil_txt(
 \item{append}{Boolean. Append input to existing file}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
-Only used for plant, technical or initialisation parameters.}
-
-\item{variety}{The plant variety to set the parameter value, either the name of the variety
-(\code{codevar} parameter in the plant file) or the index (\code{variete} parameter in the technical file). (optional, see details)}
+Only used for plant, technical or initialisation parameters.
+#' @param variety The plant variety to set the parameter value, either the variety
+name (\code{codevar} in the plant file) or the index (\code{variete} in the technical file).}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
