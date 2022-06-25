@@ -9,7 +9,7 @@
 #' @param append      Boolean. Append input to existing file
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
 #' Only used for plant, technical or initialisation parameters.
-#' #' @param variety The plant variety to set the parameter value, either the variety
+#' @param variety The plant variety to set the parameter value, either the variety
 #' name (`codevar` in the plant file) or the index (`variete` in the technical file).
 #' @param layer    The soil layer if any (only concerns soil-related parameters)
 #' @param stics_version An optional version name as listed in
