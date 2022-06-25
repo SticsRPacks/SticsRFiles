@@ -214,11 +214,11 @@ usms_param <- read_params_table(usm_csv_file)
 library(readxl)
 
 # Reading the Excel file
-xl_param <- read_params_table(usm_xl_file,sheet_name = "USMs")
+xl_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
 
 # xl_param <- read_excel(usm_xl_file,sheet = "USMs",col_types = c(rep("guess",13),rep("text", 4) ), na="NA")
 
-xl_param <- read_params_table(usm_xl_file,sheet_name = "USMs")
+xl_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
 
 #xl_param[is.na(xl_param)] <- ""
 
@@ -240,7 +240,7 @@ gen_usms_xml(file = out_file, param_df = usms_param)
 
 <!-- active chunk to be run -->
 ```{r eval_gen_usms_file, eval = TRUE, echo = FALSE}
-out_file <- file.path(workspace_path,"usms.xml")
+out_file <- file.path(workspace_path, "usms.xml")
 
 # Generating a new usms.xml file, for all xl_param lines
 gen_usms_xml(file = out_file, param_df = xl_param)
@@ -275,7 +275,7 @@ soils_param <- read_params_table(usm_xl_file, sheet_name = "Soils")
 library(readxl)
 
 # Reading the Excel file
-soils_param <- read_params_table(usm_xl_file,sheet_name = "Soils")
+soils_param <- read_params_table(usm_xl_file, sheet_name = "Soils")
 
 rmarkdown::paged_table(soils_param)
 ```
@@ -326,7 +326,7 @@ tec_param <- read_params_table(usm_xl_file, sheet_name = "Tec")
 library(readxl)
 
 # Reading the Excel file
-tec_param <- read_params_table(usm_xl_file,sheet_name = "Tec")
+tec_param <- read_params_table(usm_xl_file, sheet_name = "Tec")
 
 rmarkdown::paged_table(tec_param)
 ```
