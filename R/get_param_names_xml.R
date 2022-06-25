@@ -119,7 +119,7 @@ get_param_names_xml <- function(xml_file,
     )
 
     if (bounds) {
-      param_names <- merge(param_names, param_bounds)
+      param_names <- merge(param_names, param_bounds, by = "name", all.x = TRUE)
     }
   } else {
     if (bounds) {

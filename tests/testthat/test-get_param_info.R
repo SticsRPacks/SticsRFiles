@@ -14,7 +14,7 @@ test_that("fuzzy name", {
       "lai0", "codelaitr", "codlainet", "dlaimax", "dlaimaxbrut", "dlaimin",
       "laicomp", "laiplantule", "pentlaimax", "splaimax", "splaimin", "udlaimax",
       "vlaimax", "cielclair", "codeclaircie", "juleclair", "laidebeff", "laieffeuil",
-      "flai"
+      "lairesiduel", "flai"
     )
   } else {
     lai_params <-
@@ -22,7 +22,7 @@ test_that("fuzzy name", {
         "lai0", "codelaitr", "codlainet", "dlaimax", "dlaimaxbrut", "dlaimin",
         "inilai", "laicomp", "laiplantule", "pentlaimax", "splaimax", "splaimin", "udlaimax",
         "vlaimax", "cielclair", "codeclaircie", "juleclair", "laidebeff", "laieffeuil",
-        "flai"
+        "lairesiduel", "flai"
       )
   }
   testthat::expect_equal(get_param_info("lai", stics_version = stics_version)$name, lai_params)
@@ -33,7 +33,7 @@ test_that("regex name", {
     get_param_info("^lai")$name,
     c(
       "lai0", "laicomp", "laiplantule", "laidebeff",
-      "laieffeuil"
+      "laieffeuil", "lairesiduel"
     )
   )
 })
@@ -51,5 +51,7 @@ test_that("different stics versions", {
   # Set both versions to the same value for comparison:
   attr(v9.0, "version") <- attr(v9.2, "version")
   testthat::expect_equal(v9.0, v9.2)
+  # breaking, parameter moved to cultivar parameters since V9.2
+  testthat::expect_false(identical(vlast, v9.2))
 })
 
