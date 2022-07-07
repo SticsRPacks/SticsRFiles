@@ -13,6 +13,18 @@ url: https://sticsrpacks.github.io/SticsRFiles/
       )
 
 reference:
+  - title: "Upgrade XML files (9.2) to STICS version 10.0 format"
+    contents:
+      - upgrade_workspace_xml
+      - upgrade_usms_xml
+      - upgrade_sols_xml
+      - upgrade_sta_xml
+      - upgrade_ini_xml
+      - upgrade_plt_xml
+      - upgrade_tec_xml
+      - upgrade_param_gen_xml
+      - upgrade_param_newform_xml
+
   - title: "Find information on parameters and variables"
     contents:
       - get_param_info
