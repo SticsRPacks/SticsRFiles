@@ -1,10 +1,12 @@
 ---
-title: "Manipulating Stics XML files"
+title: "Manipulating STICS XML files"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Manipulating Stics XML files}
+  %\VignetteIndexEntry{Manipulating STICS XML files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+params:
+  javastics: "/home/plecharpent/tmp/TEST_UPDATE_XML_V9_V10/JavaSTICS-1.41-stics-9.2"
 ---
 
 
@@ -46,9 +48,9 @@ if (length(files_list))  {
 
 The purpose of this document is to provide starting information about:
 
-* how parameters are defined/structured in Stics XML files
+* how parameters are defined/structured in STICS XML files
 * how to find information about parameters among an XML files set
-* how to use functions for extracting data from XML Stics input files
+* how to use functions for extracting data from XML STICS input files
 * how to use functions for replacing data into them
 
 Simple reproducible use cases based on 3 essential functions **get_param_info**, **get_param_xml** and **set_param_xml** are described in this document.
@@ -60,16 +62,16 @@ Queries inspecting elements downwards are not available yet; as for example, get
 
 Exploring files content for files sets are also possible, but not replacing parameters values.
 
-This document has been generated using the latest Stics version **`r stics_version`**.
+This document has been generated using the latest STICS version **`r stics_version`**.
 
 
-# Understanding what are parameters in Stics XML files
+# Understanding what are parameters in STICS XML files
 
 ## XML files structures describing parameters
 
 XML files are self documented files and hierarchically structured. Syntaxic rules are based on what we call nodes (i.e. nodes names, similar to html tags) and attributes (nodes attributes values).
 
-Stics XML files are filled with different kinds of parameters description
+STICS XML files are filled with different kinds of parameters description
 structures according to their type/role in the model formalisms.
 
 As we can see in the above XML file extract from a general parameter file:
@@ -175,7 +177,7 @@ dt <- data.frame(files = files_list, groups=legend )
 
 ```
 
-The correponding files types to file names is given in the above table:
+The corresponding files types to file names is given in the above table:
 
 ``` {r, echo = FALSE}
 knitr::kable(dt) #, caption = "Correspondence between XML example files names and parameters groups")
@@ -226,7 +228,7 @@ Information about `bounds` or `formalism`, may be missing according to parameter
 
 ### Getting all STICS parameters information
 
-Using the `get_param_info` function without any argument, or with specifying the desired `Stics` version, allows to get a table containing all input parameters.
+Using the `get_param_info` function without any argument, or with specifying the desired `STICS` version, allows to get a table containing all input parameters.
 
 In the above code block, an extract of the returned information table is shown:
 
@@ -353,13 +355,13 @@ The result of the function call is a named list (with files names), and each ele
 
 For usms or soils parameter, a conditional selection may be used to filter parameter values respectively through a list of usms or soils.
 
-Among Stics parameters files types, XML structure may be different, and they can contain either one/several occurrence(s) of parameters with scalar values (soils or usms description), or one/several occurrence(s) of parameters with vector values (along soil depth, crop management operations,...).
+Among STICS parameters files types, XML structure may be different, and they can contain either one/several occurrence(s) of parameters with scalar values (soils or usms description), or one/several occurrence(s) of parameters with vector values (along soil depth, crop management operations,...).
 
 So parameters values extraction with the `get_param_xml` requires different input arguments combination to do so.
 
 ## Scalar parameters extraction
 
-* For one parameter and one occurence
+* For one parameter and one occurrence
 
 ```{r}
 # Fixing files paths
@@ -674,3 +676,91 @@ set_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"), values = list(204:
 # Controlling written values
 get_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"))
 ```
+
+
+# Upgrading STICS XML files format (Version 9.2) to STICS Version 10.0.0 format
+
+The XML files structure has changed between STICS version 9.2 and the latest version 10.0.0 and a trnsformation is mandatory.    
+
+So, to avoid difficulties and errors when XML files are modified manually, functionalities have been developed to do so automatically.
+
+One can either transform a complete workspace directory at once or each kind of file individually.
+
+
+```{r, include = FALSE, eval=FALSE}
+example_data = SticsRFiles::download_data(out_dir = tempdir(), example_dirs = "study_case_1", "V9.2")
+workspace = file.path(example_data, "XmlFiles")
+out_dir <- file.path(tempdir(),"XmlFiles_V10.0")
+if (!dir.exists(out_dir)) dir.create(out_dir)
+javastics <- "/home/plecharpent/tmp/TEST_UPDATE_XML_V9_V10/JavaSTICS-1.41-stics-9.2"
+upgrade_workspace_xml(workspace = workspace, javastics = javastics, out_dir = out_dir, overwrite = TRUE)
+```
+
+## Upgrading a whole workspace
+
+```{r, eval = FALSE, results='markup'}
+workspace <- "/path/to/workspace/dir/V9.2"
+out_dir <- "/path/to/out/dir/V10.0"
+javastics <- "/path/to/JavaSTICS-1.41-stics-9.2"
+upgrade_workspace_xml(workspace = workspace, javastics = javastics, out_dir = out_dir)
+```
+
+<pre style="font-size:11px;">
+# Upgrading files from version V9.2 to V10.0    
+# From:  /path/to/workspace/dir/V9.2   
+# To:  /path/to/out/dir/V10.0    
+# -----------------------------------   
+# param_gen.xml   
+# param_new_form.xml   
+# usms.xml   
+# sols.xml   
+# *_sta.xml   
+# *_ini.xml   
+# *_tec.xml   
+# Copying *.mod files.   
+# Copying *.obs files.   
+# Copying weather files.   
+# *_plt.xml    
+# -----------------------------------   
+# Files upgrade and copy is complete.   
+</pre>
+
+## Upgrading a specific file kind
+
+For each kind of file, a specific function is to be used for upgrading its format. Each function
+
+* **`usms.xml`** : upgrade_usms_xml
+* **`*_ini.xml`** files: upgrade_ini_xml
+* **`param_gen.xml`**: upgrade_param_gen_xml
+* **`param_newform.xml`**: upgrade_param_newform_xml
+* **`*_plt.xml`** files: upgrade_plt_xml
+* **`sols.xml`**: upgrade_sols_xml
+* **`*_sta.xml`** files: upgrade_sta_xml
+* **`*_tec.xml`** files: upgrade_tec_xml
+
+The input arguments of these functions may vary, refer to functions help for details
+about their use.
+
+For example, the **`usms.xml`** file is to be upgraded as follows:
+
+```{r, include = FALSE, eval=FALSE}
+usms_path = file.path(example_data, "XmlFiles", "usms.xml")
+out_dir <- file.path(tempdir(),"XmlFiles_V10.0")
+param_gen_path <- file.path(javastics, "config", "param_gen.xml")
+upgrade_usms_xml(file = usms_path, param_gen_file = param_gen_path, out_dir = out_dir, overwrite = TRUE)
+```
+
+```{r, eval = FALSE}
+usms_path <- "/path/to/workspace/dir/V9.2/usms.xml"
+out_dir <- "/path/to/out/dir/V10.0"
+param_gen_path <- "/path/to/JavaSTICS-1.41-stics-9.2/config/param_gen.xml"
+upgrade_usms_xml(file = usms_path, param_gen_file = param_gen_path, out_dir = out_dir)
+```
+
+
+
+
+
+
+
+
