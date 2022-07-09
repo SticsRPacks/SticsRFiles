@@ -190,7 +190,7 @@ Likewise, we can read the observation files in a workspace using `get_sim()`:
 sim = get_sim(workspace)
 #> Warning in get_file_(workspace = x, usm_name = usm_name, usms_filepath =
 #> usms_path, : Not any sim file detected in workspace/tmp/RtmpjkDYAq/data-master/
-#> study_case_1/V9.0/XmlFiles
+#> study_case_1/V10.0/XmlFiles
 ```
 
 But as there aren't any simulations yet in the workspace, the function will return an error. To make a simulation, head to [SticsOnR](https://sticsrpacks.github.io/SticsOnR/). Then to plot both observations and simulations, you can use [CroPlotR](https://sticsrpacks.github.io/CroPlotR/).
