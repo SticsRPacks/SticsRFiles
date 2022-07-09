@@ -77,12 +77,12 @@ SticsRFiles provides a function to download it from the command line. Please exe
 
 ```{r include=FALSE}
 library(SticsRFiles)
-example_data = SticsRFiles::download_data(out_dir = tempdir(), example_dirs = "study_case_1", "V9.0")
+example_data = SticsRFiles::download_data(out_dir = tempdir(), example_dirs = "study_case_1", "V10.0")
 ```
 
 ```{r eval=FALSE}
 library(SticsRFiles)
-example_data = SticsRFiles::download_data(example_dirs = "study_case_1", "V9.0")
+example_data = SticsRFiles::download_data(example_dirs = "study_case_1", "V10.0")
 ```
 
 The example data is downloaded by default in a temporary folder.
@@ -151,6 +151,13 @@ set_param_xml(plant_file, "dlaimax", unlist(dlaimax) * 1.3, overwrite = TRUE)
 
 Don't forget to use the `overwrite` argument and set it to `TRUE`. It is `FALSE` by default to avoid any mishandling.
 
+New values written in the file can be checked:
+
+```{r}
+dlaimax = get_param_xml(plant_file, "dlaimax")
+dlaimax
+```
+
 #### Generate observations files
 
 We can generate observation files from a `data.frame` using `gen_obs()`.
@@ -179,8 +186,11 @@ obs = get_obs(workspace)
 
 Likewise, we can read the observation files in a workspace using `get_sim()`:
 
-```{r}
+```{r, eval=FALSE}
 sim = get_sim(workspace)
+#> Warning in get_file_(workspace = x, usm_name = usm_name, usms_filepath =
+#> usms_path, : Not any sim file detected in workspace/tmp/RtmpjkDYAq/data-master/
+#> study_case_1/V9.0/XmlFiles
 ```
 
 But as there aren't any simulations yet in the workspace, the function will return an error. To make a simulation, head to [SticsOnR](https://sticsrpacks.github.io/SticsOnR/). Then to plot both observations and simulations, you can use [CroPlotR](https://sticsrpacks.github.io/CroPlotR/).
