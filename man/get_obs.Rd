@@ -60,10 +60,13 @@ longer supported, use \code{usms_file} instead.}
 longer supported, use \code{javastics} instead.}
 }
 \value{
-A list, where each element is a \code{data.frame}s of observations
+A list, where each element is a \code{data.frame} of observations
 for the given usm. The list is named after the USM name.
+
 Intercrops are returned in a single \code{data.frame}, and are identified
 using either the "Plant" or "Dominance" columns.
+
+See Details section for more information about the "Plant" column.
 }
 \description{
 Read STICS observation files from a JavaStics workspace and
@@ -77,6 +80,12 @@ and "a" for the associated plant.
 
 If \code{usm} is not specified (or equal to \code{NULL}), the
 function reads the files from all usms in the \code{workspace}(s).
+
+If \code{usms_file} is provided and if the associated plant file is found,
+the plant names in the "Plant" column of the generated \code{data.frame} are either
+the plant code (as specified in the plant file) or the name of the plant file,
+if the plant file is not found.
+
 If \code{usms_file} is not specified, the plants are named "plant_1"
 by default (+ "plant_2" for intercrops).
 }

@@ -64,16 +64,23 @@ get_daily_results <- function(...) {
 #'
 #' @details
 #' If `usm` is not specified (or equal to `NULL`), the
-#' function reads the files from all usms in the `workspace`(s)
-
-#' If `usms_file` If usms_file is provided the plant names are either the plant
-#'  code (as specified in the plant file), if the plant file is found,
-#'  or the name of the plant file, if the plant file is not found.
+#' function reads the files from all usms in the `workspace`(s).
 #'
-#' @return A list, where each element is a `data.frame`s of simulation results
+#' If `usms_file` is provided and if the associated plant file is found,
+#' the plant names in the "Plant" column of the generated `data.frame` are either
+#' the plant code (as specified in the plant file) or the name of the plant file,
+#' if the plant file is not found.
+#'
+#' If `usms_file` is not specified, the plants are named "plant_1" by default
+#' (+ "plant_2" for intercrops).
+#'
+#' @return A list, where each element is a `data.frame` of simulation results
 #' for the given usm. The list is named after the USM name.
+#'
 #' Intercrops are returned in a single `data.frame`, and are identified
 #' using either the "Plant" or "Dominance" columns.
+#'
+#' See Details section for more information about the "Plant" column.
 #'
 #' @examples
 #' \dontrun{
