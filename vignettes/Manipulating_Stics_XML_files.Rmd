@@ -5,8 +5,8 @@ vignette: >
   %\VignetteIndexEntry{Manipulating STICS XML files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-params:
-  javastics: "/home/plecharpent/tmp/TEST_UPDATE_XML_V9_V10/JavaSTICS-1.41-stics-9.2"
+#params:
+#  javastics: "/home/plecharpent/tmp/TEST_UPDATE_XML_V9_V10/JavaSTICS-1.41-stics-9.2"
 ---
 
 
