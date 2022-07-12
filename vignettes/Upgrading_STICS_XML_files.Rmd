@@ -2,7 +2,7 @@
 title: "Upgrading STICS XML files"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Manipulating STICS XML files}
+  %\VignetteIndexEntry{Upgrading STICS XML files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
