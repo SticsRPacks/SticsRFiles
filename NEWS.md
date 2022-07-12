@@ -1,3 +1,46 @@
+# SticsRFiles ?.?.? (2022-07-??)
+
+Global changes essentially linked to functions adaptation to the new STICS version 10.0 
+and taking also into account the evolutions of the JavaSTICS 1.5 software, 
+either on XML/text files format or Java version prerequisites (linux).
+
+* DATA:
+  New files for STICS 10.0
+    * XML example files added
+    * Data set of text parameters files 
+    * XL file example for generating XML files
+  
+* FUNCTIONS:
+  * Some functions have been moved from the SticsOnR package into SticsRFiles
+  * New set of functions for upgrading either each kind of XML file or a whole workspace 
+  * Improvement of functions dedicated to java/JavaStics command line use, added checks
+  * Homogenization of arguments names in functions
+  
+
+* FIXES:
+  * XML files parameters extracting for _tec.xml files
+  * Functions STICS for getting and setting parameters input text files:
+    * For taking into account all parameters.
+    * Exact/fuzzy search in filter_param for extracting a named list, taking into 
+    account special characters 
+    * Get function now returning a subset of a full list of list of parameters
+  * Reading STICS daily outputs: taking into account NA or missing values 
+  * Whitespaces in dir/file path
+  
+
+* DOC:
+  * New vignette on XML files upgrading functions from STICS version 9.2 to 10.0 format
+  * Adaptation of the vignettes to the 10.0 STICS version
+  * SticsRFiles tutorial moved into SticsRPacks tutorial
+
+
+* TESTS:
+  * Adaptation of existing tests to STICS 10.0
+  * New tests for XML files generation
+  
+  
+  
+
 # SticsRFiles 0.4.2 (2021-10-07)
 
 * Prepared templates for STICS V10.
@@ -15,6 +58,8 @@
   * Completed doc for generation of XML files from excel files.
 
   * Updated general doc.
+
+
 
 
 # SticsRFiles 0.4.1 (2021-07-02)
