@@ -4,13 +4,13 @@
 \alias{exist_param_xml}
 \title{Checking existing parameters names in XML files}
 \usage{
-exist_param_xml(param, stics_version = NULL)
+exist_param_xml(param, stics_version = "latest")
 }
 \arguments{
 \item{param}{Parameter name or a vector of}
 
-\item{stics_version}{Optional, Stics version.
-Only the 2 latest are referenced: V9.0, V9.1 (default value)}
+\item{stics_version}{An optional version name as listed in
+get_stics_versions_compat() return}
 }
 \value{
 A logical vector of existing parameters

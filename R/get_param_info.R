@@ -114,7 +114,7 @@ get_param_info <- function(param = NULL,
   # or filtering done in the previous step
   # when generating param_data_df
   if (!any(c(par_use, form_use, keyword_use)) |
-    (par_use & !form_use)) {
+      (par_use & !form_use)) {
     return(param_data_df)
   }
 
@@ -154,8 +154,8 @@ get_param_info <- function(param = NULL,
 #'
 #' @param file Optional, xml file path or a vector of
 #'
-#' @param stics_version Optional, Stics version (default value, "latest")
-#' Only the 2 latest are referenced: V9.0, V9.1
+#' @param stics_version An optional version name as listed in
+#' get_stics_versions_compat() return
 #' @param kind Kind of information to be retrieved for parameters
 #' among "parameter", "formalism" or "all" for both of them
 #'
@@ -187,13 +187,20 @@ get_param_info <- function(param = NULL,
 #'   param = c("albedo", "latitude", "humcapil"),
 #'   kind = "formalism"
 #' )
-#' }
+#'
+#' get_param_data_df( file = "/path/to/javastics/config/inputs.csv")
+#'
+#' get_param_data_df( param = "albedo",
+#'    file = "/path/to/javastics/config/inputs.csv")
+#'
+#'}
 #'
 get_param_data_df <- function(param = NULL,
                               file = NULL,
                               stics_version = "latest",
                               kind = "all",
                               exact = FALSE) {
+
   kinds <- c("parameter", "formalism", "all")
 
   # Checking kind
@@ -226,6 +233,22 @@ get_param_data_df <- function(param = NULL,
     files_list <- file
   }
 
+  # getting parameters from an inputs.csv file
+  if( length(files_list) == 1 && grepl( pattern = "inputs.csv", x = files_list)) {
+    param_names <- utils::read.csv2(
+      file,
+      header = FALSE,
+      stringsAsFactors = FALSE
+    )[c(1,4,5,7:8)]
+    names(param_names) <- c("name", "file", "dim", "min", "max")
+
+    if(is.null(param)) return(param_names)
+
+    par_idx <- param_names$name %in% param
+
+    return(param_names[par_idx, ])
+  }
+
   # Getting parameters names bounds and file
   param_names <- suppressWarnings(get_param_names_xml(
     xml_file = files_list,
@@ -243,9 +266,6 @@ get_param_data_df <- function(param = NULL,
   if (kind == "parameter") {
     return(param_names)
   }
-
-  # Getting parameter formalism information
-  # files_list <- file.path(xml_dir, unique(param_names$file))
 
   # Some parameters names may be found in several files (i.e.: nbplantes)
   uniq_param_names <- unique(param_names$name)

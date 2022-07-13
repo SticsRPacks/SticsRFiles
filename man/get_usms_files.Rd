@@ -24,7 +24,8 @@ get_usms_files(
 
 \item{file_type}{Vector of file(s) type to get (if not given, all types are returned, see details)}
 
-\item{javastics}{Path of JavaStics. Optional, only needed if the plant files are not in the workspace (in this case the plant files used are those included in the JavaStics distribution)}
+\item{javastics}{Path of JavaStics. Optional, only needed if the plant files are not in the workspace
+(in this case the plant files used are those included in the JavaStics distribution)}
 
 \item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path} is no
 longer supported, use \code{workspace} instead.}

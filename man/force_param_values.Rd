@@ -4,12 +4,19 @@
 \alias{force_param_values}
 \title{Generates files to force parameters values in Stics simulations}
 \usage{
-force_param_values(workspace, values, param_values = lifecycle::deprecated())
+force_param_values(
+  workspace,
+  values,
+  javastics,
+  param_values = lifecycle::deprecated()
+)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the Stics (txt) input files.}
 
 \item{values}{named vector of parameter values to force. See Details for more information.}
+
+\item{javastics}{Path of JavaStics.}
 
 \item{param_values}{old_param \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{old_param} is no
 longer supported, use new_param instead.}
@@ -29,8 +36,13 @@ param_values can contain NA. In this case, the corresponding parameter(s) will n
 If param_values==NA or param_values==NULL, not any parameter will be forced (all default values used).
 }
 \examples{
+\dontrun{
 example_txt_dir <- get_examples_path(file_type = "txt")
-force_param_values(example_txt_dir, setNames(object = c(220, 330), c("stlevamf", "stamflax")))
+force_param_values(example_txt_dir,
+    setNames(object = c(220, 330), c("stlevamf", "stamflax")),
+    javastics = "/path/to/javastics")
+}
+
 }
 \seealso{
 \code{SticsOnR::run_stics()}

@@ -17,8 +17,8 @@ get_param_data_df(
 
 \item{file}{Optional, xml file path or a vector of}
 
-\item{stics_version}{Optional, Stics version (default value, "latest")
-Only the 2 latest are referenced: V9.0, V9.1}
+\item{stics_version}{An optional version name as listed in
+get_stics_versions_compat() return}
 
 \item{kind}{Kind of information to be retrieved for parameters
 among "parameter", "formalism" or "all" for both of them}
@@ -54,6 +54,12 @@ get_param_data_df(
   param = c("albedo", "latitude", "humcapil"),
   kind = "formalism"
 )
+
+get_param_data_df( file = "/path/to/javastics/config/inputs.csv")
+
+get_param_data_df( param = "albedo",
+   file = "/path/to/javastics/config/inputs.csv")
+
 }
 
 }

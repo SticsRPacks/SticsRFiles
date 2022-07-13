@@ -4,7 +4,8 @@
 #' @param usms_list Vector of usms names (Optional)
 #' @param usms_file Path (including name) of a USM XML file.
 #' @param file_type Vector of file(s) type to get (if not given, all types are returned, see details)
-#' @param javastics Path of JavaStics. Optional, only needed if the plant files are not in the workspace (in this case the plant files used are those included in the JavaStics distribution)
+#' @param javastics Path of JavaStics. Optional, only needed if the plant files are not in the workspace
+#' (in this case the plant files used are those included in the JavaStics distribution)
 #' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path` is no
 #'   longer supported, use `workspace` instead.
 #' @param file_name `r lifecycle::badge("deprecated")` `file_name` is no

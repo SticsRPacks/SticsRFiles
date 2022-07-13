@@ -1,8 +1,12 @@
 library(SticsRFiles)
-
+library(SticsRTests)
 
 #stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
+
+javastics <- file.path(system.file("stics", package = "SticsRTests"), stics_version)
+
+
 
 path <- get_examples_path(file_type = "txt", stics_version = stics_version)
 # Copy example to test in tempdir since the files will be modified by set_param
@@ -10,7 +14,9 @@ file.copy(from = file.path(path, list.files(path)), to = tempdir(), overwrite = 
 example_txt_dir <- tempdir()
 
 #example_txt_dir <- get_examples_path(file_type = "txt", stics_version = stics_version)
-res <- force_param_values(example_txt_dir, values = setNames(object = c(220, 330), c("stlevamf", "stamflax")))
+res <- force_param_values(example_txt_dir,
+                          values = setNames(object = c(220, 330), c("stlevamf", "stamflax")),
+                          javastics = javastics)
 df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), stringsAsFactors = FALSE)
 
 # to be compatible with both STICS V10.0 (codoptim) and previous version (codeoptim)
@@ -29,7 +35,9 @@ test_that("standard case", {
 
 
 
-res <- force_param_values(example_txt_dir, values = NA)
+res <- force_param_values(example_txt_dir,
+                          values = NA,
+                          javastics = javastics)
 
 test_that("param_values == NA", {
   expect_equal(
@@ -41,8 +49,11 @@ test_that("param_values == NA", {
 
 
 
-res <- suppressWarnings(force_param_values(example_txt_dir, values = setNames(object = c(220, NA),
-                                                                              c("stlevamf", "stamflax"))))
+res <- suppressWarnings(force_param_values(example_txt_dir,
+                                           values = setNames(object = c(220, NA),
+                                                                              c("stlevamf", "stamflax")),
+                                           javastics = javastics))
+
 df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), stringsAsFactors = FALSE)
 
 test_that("One NA in param_values", {
