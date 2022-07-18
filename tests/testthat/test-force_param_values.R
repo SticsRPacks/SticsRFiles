@@ -1,27 +1,27 @@
-library(SticsRFiles)
-library(SticsRTests)
+#library(SticsRFiles)
+#library(SticsRTests)
 
 #stics_version <- "V9.2"
-stics_version <- get_stics_versions_compat()$latest_version
+stics_version <- SticsRFiles::get_stics_versions_compat()$latest_version
 
 javastics <- file.path(system.file("stics", package = "SticsRTests"), stics_version)
 
 
 
-path <- get_examples_path(file_type = "txt", stics_version = stics_version)
+path <- SticsRFiles::get_examples_path(file_type = "txt", stics_version = stics_version)
 # Copy example to test in tempdir since the files will be modified by set_param
 file.copy(from = file.path(path, list.files(path)), to = tempdir(), overwrite = TRUE)
 example_txt_dir <- tempdir()
 
 #example_txt_dir <- get_examples_path(file_type = "txt", stics_version = stics_version)
-res <- force_param_values(example_txt_dir,
+res <- SticsRFiles::force_param_values(example_txt_dir,
                           values = setNames(object = c(220, 330), c("stlevamf", "stamflax")),
                           javastics = javastics)
 df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), stringsAsFactors = FALSE)
 
 # to be compatible with both STICS V10.0 (codoptim) and previous version (codeoptim)
 # we search all parameters including the pattern "optim" and then handle both cases in the test
-optim_params <- get_param_txt(workspace = example_txt_dir, param = "optim", stics_version = stics_version)$usm
+optim_params <- SticsRFiles::get_param_txt(workspace = example_txt_dir, param = "optim", stics_version = stics_version)$usm
 # getting the parameter name
 codoptim <- names(optim_params)
 optim_params <- unlist(optim_params)
@@ -35,13 +35,14 @@ test_that("standard case", {
 
 
 
-res <- force_param_values(example_txt_dir,
+res <- SticsRFiles::force_param_values(example_txt_dir,
                           values = NA,
                           javastics = javastics)
 
 test_that("param_values == NA", {
   expect_equal(
-    unlist(get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version), use.names = FALSE),
+    unlist(SticsRFiles::get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version),
+           use.names = FALSE),
     0)
   expect_false(file.exists(file.path(example_txt_dir, "param.sti")))
   expect_true(res)
@@ -49,7 +50,7 @@ test_that("param_values == NA", {
 
 
 
-res <- suppressWarnings(force_param_values(example_txt_dir,
+res <- suppressWarnings(SticsRFiles::force_param_values(example_txt_dir,
                                            values = setNames(object = c(220, NA),
                                                                               c("stlevamf", "stamflax")),
                                            javastics = javastics))
@@ -58,7 +59,7 @@ df_paramsti <- read.table(file = file.path(example_txt_dir, "param.sti"), string
 
 test_that("One NA in param_values", {
   expect_equal(
-    unlist(get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version), use.names = FALSE),
+    unlist(SticsRFiles::get_param_txt(workspace = example_txt_dir, param = codoptim, stics_version = stics_version), use.names = FALSE),
     1)
   expect_equal(df_paramsti[c(2), ], c("stlevamf"))
   expect_equal(as.numeric(df_paramsti[c(1, 3), ]), c(1, 220))
