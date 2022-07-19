@@ -84,7 +84,7 @@ get_plants_nb_xml <- function(usms_file,
   # usm_xml_path
   if (lifecycle::is_present(usm_xml_path)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_plants_nb_xml(usm_xml_path)",
+      "1.0.0", "get_plants_nb_xml(usm_xml_path)",
       "get_plants_nb_xml(usms_file)"
     )
   } else {

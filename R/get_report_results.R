@@ -40,7 +40,7 @@ get_report_results <- function(workspace,
                                var_list = NULL,
                                usm_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_report_results(usm_name)", "get_report_results(usm)")
+    lifecycle::deprecate_warn("1.0.0", "get_report_results(usm_name)", "get_report_results(usm)")
   } else {
     usm_name <- usm # to remove when we update inside the function
   }

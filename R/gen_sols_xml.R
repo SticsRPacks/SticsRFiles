@@ -70,7 +70,7 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
                          sols_nb = lifecycle::deprecated()) {
   if (lifecycle::is_present(sols_in_file)) {
     lifecycle::deprecate_warn(
-      "0.5.0",
+      "1.0.0",
       "gen_sols_xml(sols_in_file)",
       "gen_sols_xml(template)"
     )
@@ -80,7 +80,7 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
 
   if (lifecycle::is_present(sols_param)) {
     lifecycle::deprecate_warn(
-      "0.5.0",
+      "1.0.0",
       "gen_sols_xml(sols_param)",
       "gen_sols_xml(param_df)"
     )
@@ -90,7 +90,7 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
 
   if (lifecycle::is_present(sols_out_file)) {
     lifecycle::deprecate_warn(
-      "0.5.0",
+      "1.0.0",
       "gen_sols_xml(sols_out_file)",
       "gen_sols_xml(file)"
     )
@@ -99,7 +99,7 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
   }
 
   if (lifecycle::is_present(sols_nb)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_sols_xml(sols_nb)",
+    lifecycle::deprecate_warn("1.0.0", "gen_sols_xml(sols_nb)",
       details = "It is now directly computed in the function."
     )
   } else {

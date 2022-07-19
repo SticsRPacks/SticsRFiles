@@ -67,7 +67,7 @@ get_param_txt <- function(workspace = getwd(),
   # dirpath
   if (lifecycle::is_present(dirpath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_param_txt(dirpath)",
+      "1.0.0", "get_param_txt(dirpath)",
       "get_param_txt(workspace)"
     )
   } else {
@@ -269,7 +269,7 @@ get_ini_txt <- function(file = "ficini.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_ini_txt(filepath)",
+      "1.0.0", "get_ini_txt(filepath)",
       "get_ini_txt(file)"
     )
   } else {
@@ -368,7 +368,7 @@ get_general_txt <- function(file = "tempopar.sti",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_general_txt(filepath)",
+      "1.0.0", "get_general_txt(filepath)",
       "get_general_txt(file)"
     )
   } else {
@@ -387,7 +387,7 @@ get_tmp_txt <- function(file = "tempoparv6.sti",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_tmp_txt(filepath)",
+      "1.0.0", "get_tmp_txt(filepath)",
       "get_tmp_txt(file)"
     )
   } else {
@@ -405,7 +405,7 @@ get_plant_txt <- function(file = "ficplt1.txt", variety = NULL,
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_plant_txt(filepath)",
+      "1.0.0", "get_plant_txt(filepath)",
       "get_plant_txt(file)"
     )
   } else {
@@ -461,7 +461,7 @@ get_tec_txt <- function(file = "fictec1.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_tec_txt(filepath)",
+      "1.0.0", "get_tec_txt(filepath)",
       "get_tec_txt(file)"
     )
   } else {
@@ -776,7 +776,7 @@ get_soil_txt <- function(file = "param.sol",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_soil_txt(filepath)",
+      "1.0.0", "get_soil_txt(filepath)",
       "get_soil_txt(file)"
     )
   } else {
@@ -857,7 +857,7 @@ get_station_txt <- function(file = "station.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_station_txt(filepath)",
+      "1.0.0", "get_station_txt(filepath)",
       "get_station_txt(file)"
     )
   } else {
@@ -876,7 +876,7 @@ get_usm_txt <- function(file = "new_travail.usm",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_usm_txt(filepath)",
+      "1.0.0", "get_usm_txt(filepath)",
       "get_usm_txt(file)"
     )
   } else {

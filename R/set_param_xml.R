@@ -108,27 +108,27 @@ set_param_xml <- function(file,
 
   # ... argument for passing : ids, show_xpath to get_param_value
   if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn("0.5.0", "set_param_xml(xml_file)", "set_param_xml(file)")
+    lifecycle::deprecate_warn("1.0.0", "set_param_xml(xml_file)", "set_param_xml(file)")
   } else {
     xml_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("0.5.0", "set_param_xml(out_path)", "set_param_xml(save_as)")
+    lifecycle::deprecate_warn("1.0.0", "set_param_xml(out_path)", "set_param_xml(save_as)")
   } else {
     out_path <- save_as # to remove when we update inside the function
   }
   if (lifecycle::is_present(param_name)) {
-    lifecycle::deprecate_warn("0.5.0", "set_param_xml(param_name)", "set_param_xml(param)")
+    lifecycle::deprecate_warn("1.0.0", "set_param_xml(param_name)", "set_param_xml(param)")
   } else {
     param_name <- param # to remove when we update inside the function
   }
   if (lifecycle::is_present(param_value)) {
-    lifecycle::deprecate_warn("0.5.0", "set_param_xml(param_value)", "set_param_xml(values)")
+    lifecycle::deprecate_warn("1.0.0", "set_param_xml(param_value)", "set_param_xml(values)")
   } else {
     param_value <- values # to remove when we update inside the function
   }
   if (lifecycle::is_present(value)) {
-    lifecycle::deprecate_warn("0.5.0", "set_param_xml(value)", "set_param_xml(select_value)")
+    lifecycle::deprecate_warn("1.0.0", "set_param_xml(value)", "set_param_xml(select_value)")
   } else {
     value <- select_value # to remove when we update inside the function
   }

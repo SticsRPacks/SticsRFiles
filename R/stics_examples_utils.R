@@ -22,7 +22,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
                               version_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(version_name)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_examples_path(version_name)",
+      "1.0.0", "get_examples_path(version_name)",
       "get_examples_path(stics_version)"
     )
   } else {

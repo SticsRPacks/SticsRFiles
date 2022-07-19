@@ -28,22 +28,22 @@ convert_xml2txt <- function(file, javastics, plant_id = 1, out_dir = NULL, save_
                             xml_file = lifecycle::deprecated(), java_dir = lifecycle::deprecated(),
                             plt_num = lifecycle::deprecated(), out_file = lifecycle::deprecated()) {
   if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(xml_file)", "convert_xml2txt(file)")
+    lifecycle::deprecate_warn("1.0.0", "convert_xml2txt(xml_file)", "convert_xml2txt(file)")
   } else {
     xml_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(java_dir)) {
-    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(java_dir)", "convert_xml2txt(javastics)")
+    lifecycle::deprecate_warn("1.0.0", "convert_xml2txt(java_dir)", "convert_xml2txt(javastics)")
   } else {
     java_dir <- javastics # to remove when we update inside the function
   }
   if (lifecycle::is_present(plt_num)) {
-    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(plt_num)", "convert_xml2txt(plant_id)")
+    lifecycle::deprecate_warn("1.0.0", "convert_xml2txt(plt_num)", "convert_xml2txt(plant_id)")
   } else {
     plt_num <- plant_id # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_file)) {
-    lifecycle::deprecate_warn("0.5.0", "convert_xml2txt(out_file)", "convert_xml2txt(save_as)")
+    lifecycle::deprecate_warn("1.0.0", "convert_xml2txt(out_file)", "convert_xml2txt(save_as)")
   } else {
     out_file <- save_as # to remove when we update inside the function
   }

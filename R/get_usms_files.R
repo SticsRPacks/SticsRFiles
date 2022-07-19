@@ -50,17 +50,17 @@ get_usms_files <- function(workspace,
                            file_name = lifecycle::deprecated(),
                            javastics_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(workspace_path)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_files(workspace_path)", "get_usms_files(workspace)")
+    lifecycle::deprecate_warn("1.0.0", "get_usms_files(workspace_path)", "get_usms_files(workspace)")
   } else {
     workspace_path <- workspace # to remove when we update inside the function
   }
   if (lifecycle::is_present(file_name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_files(file_name)", "get_usms_files(usms_file)")
+    lifecycle::deprecate_warn("1.0.0", "get_usms_files(file_name)", "get_usms_files(usms_file)")
   } else {
     file_name <- usms_file # to remove when we update inside the function
   }
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("0.5.0", "get_usms_files(javastics_path)", "get_usms_files(javastics)")
+    lifecycle::deprecate_warn("1.0.0", "get_usms_files(javastics_path)", "get_usms_files(javastics)")
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }

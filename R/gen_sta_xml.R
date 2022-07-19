@@ -51,17 +51,17 @@ gen_sta_xml <- function(param_df = NULL,
                         sta_in_file = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(param_table)", "gen_sta_xml(param_df)")
+    lifecycle::deprecate_warn("1.0.0", "gen_sta_xml(param_table)", "gen_sta_xml(param_df)")
   } else {
     param_table <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(sta_in_file)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(sta_in_file)", "gen_sta_xml(file)")
+    lifecycle::deprecate_warn("1.0.0", "gen_sta_xml(sta_in_file)", "gen_sta_xml(file)")
   } else {
     sta_in_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_sta_xml(out_path)", "gen_sta_xml(out_dir)")
+    lifecycle::deprecate_warn("1.0.0", "gen_sta_xml(out_path)", "gen_sta_xml(out_dir)")
   } else {
     out_path <- out_dir # to remove when we update inside the function
   }

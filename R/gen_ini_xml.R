@@ -66,17 +66,17 @@ gen_ini_xml <- function(param_df = NULL,
                         param_table = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(ini_in_file)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(ini_in_file)", "gen_ini_xml(file)")
+    lifecycle::deprecate_warn("1.0.0", "gen_ini_xml(ini_in_file)", "gen_ini_xml(file)")
   } else {
     ini_in_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(param_table)", "gen_ini_xml(param_df)")
+    lifecycle::deprecate_warn("1.0.0", "gen_ini_xml(param_table)", "gen_ini_xml(param_df)")
   } else {
     param_table <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_ini_xml(out_path)", "gen_ini_xml(out_dir)")
+    lifecycle::deprecate_warn("1.0.0", "gen_ini_xml(out_path)", "gen_ini_xml(out_dir)")
   } else {
     out_path <- out_dir # to remove when we update inside the function
   }

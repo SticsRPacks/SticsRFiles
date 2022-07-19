@@ -66,19 +66,19 @@ get_param_xml <- function(file,
 
   # Managing parameter names changes between versions:
   if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_xml(xml_file)", "get_param_xml(file)")
+    lifecycle::deprecate_warn("1.0.0", "get_param_xml(xml_file)", "get_param_xml(file)")
   } else {
     xml_file <- file # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(param_name)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_xml(param_name)", "get_param_xml(param)")
+    lifecycle::deprecate_warn("1.0.0", "get_param_xml(param_name)", "get_param_xml(param)")
   } else {
     param_name <- param # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(value)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_xml(value)", "get_param_xml(select_value)")
+    lifecycle::deprecate_warn("1.0.0", "get_param_xml(value)", "get_param_xml(select_value)")
   } else {
     value <- select_value # to remove when we update inside the function
   }

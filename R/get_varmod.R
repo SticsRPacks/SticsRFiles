@@ -18,7 +18,7 @@
 #' @export
 get_var_mod <- function(...) {
   lifecycle::deprecate_warn(
-    "0.5.0",
+    "1.0.0",
     "get_var_mod()",
     "get_varmod()"
   )

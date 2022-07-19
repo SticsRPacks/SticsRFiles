@@ -64,22 +64,22 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
                          usms_param = lifecycle::deprecated(),
                          usms_in_file = lifecycle::deprecated()) {
   if (lifecycle::is_present(usms_out_file)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_out_file)", "gen_usms_xml(file)")
+    lifecycle::deprecate_warn("1.0.0", "gen_usms_xml(usms_out_file)", "gen_usms_xml(file)")
   } else {
     usms_out_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_param)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_param)", "gen_usms_xml(param_df)")
+    lifecycle::deprecate_warn("1.0.0", "gen_usms_xml(usms_param)", "gen_usms_xml(param_df)")
   } else {
     usms_param <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_in_file)) {
-    lifecycle::deprecate_warn("0.5.0", "gen_usms_xml(usms_in_file)", "gen_usms_xml(template)")
+    lifecycle::deprecate_warn("1.0.0", "gen_usms_xml(usms_in_file)", "gen_usms_xml(template)")
   } else {
     usms_in_file <- template # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_nb)) {
-    lifecycle::deprecate_warn("0.5.0",
+    lifecycle::deprecate_warn("1.0.0",
       "gen_usms_xml(usms_nb)",
       details = "It is now directly computed in the function."
     )

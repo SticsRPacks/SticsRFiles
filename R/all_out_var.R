@@ -86,7 +86,7 @@ get_var_info <- function(var = NULL,
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_var_info(version)",
+      "1.0.0", "get_var_info(version)",
       "get_var_info(stics_version)"
     )
   } else {
@@ -141,7 +141,7 @@ is_stics_var <- function(var,
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn(
-      "0.5.0", "is_stics_var(version)",
+      "1.0.0", "is_stics_var(version)",
       "is_stics_var(stics_version)"
     )
   } else {

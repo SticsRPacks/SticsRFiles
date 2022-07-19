@@ -32,7 +32,7 @@ force_param_values <- function(workspace,
                                javastics,
                                param_values = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_values)) {
-    lifecycle::deprecate_warn("0.5.0", "force_param_values(param_values)", "force_param_values(values)")
+    lifecycle::deprecate_warn("1.0.0", "force_param_values(param_values)", "force_param_values(values)")
   } else {
     param_values <- values # to remove when we update inside the function
   }

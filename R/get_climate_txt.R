@@ -37,7 +37,7 @@ get_climate_txt <- function(workspace = getwd(),
   # dirpath
   if (lifecycle::is_present(dirpath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_climate_txt(dirpath)",
+      "1.0.0", "get_climate_txt(dirpath)",
       "get_climate_txt(workspace)"
     )
   } else {
@@ -46,7 +46,7 @@ get_climate_txt <- function(workspace = getwd(),
   # filename
   if (lifecycle::is_present(filename)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "get_climate_txt(filename)",
+      "1.0.0", "get_climate_txt(filename)",
       "get_climate_txt(file_name)"
     )
   } else {

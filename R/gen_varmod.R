@@ -44,7 +44,7 @@ gen_varmod <- function(workspace,
   # var_names
   if (lifecycle::is_present(var_names)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_varmod(var_names)",
+      "1.0.0", "gen_varmod(var_names)",
       "gen_varmod(var)"
     )
   } else {
@@ -57,7 +57,7 @@ gen_varmod <- function(workspace,
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_varmod(version)",
+      "1.0.0", "gen_varmod(version)",
       "gen_varmod(stics_version)"
     )
   } else {

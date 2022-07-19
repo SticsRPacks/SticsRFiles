@@ -63,19 +63,19 @@ get_param_info <- function(param = NULL,
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(file_path)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_info(file_path)", "get_param_info(file)")
+    lifecycle::deprecate_warn("1.0.0", "get_param_info(file_path)", "get_param_info(file)")
   } else {
     file_path <- file # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(parameter)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_info(parameter)", "get_param_info(param)")
+    lifecycle::deprecate_warn("1.0.0", "get_param_info(parameter)", "get_param_info(param)")
   } else {
     parameter <- param # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(version)) {
-    lifecycle::deprecate_warn("0.5.0", "get_param_info(version)", "get_param_info(stics_version)")
+    lifecycle::deprecate_warn("1.0.0", "get_param_info(version)", "get_param_info(stics_version)")
   } else {
     version <- stics_version # to remove when we update inside the function
   }

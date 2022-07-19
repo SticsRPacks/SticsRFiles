@@ -80,7 +80,7 @@ set_param_txt <- function(workspace = getwd(),
   # dirpath
   if (lifecycle::is_present(dirpath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_param_txt(dirpath)",
+      "1.0.0", "set_param_txt(dirpath)",
       "set_param_txt(workspace)"
     )
   } else {
@@ -90,7 +90,7 @@ set_param_txt <- function(workspace = getwd(),
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_param_txt(add)",
+      "1.0.0", "set_param_txt(add)",
       "set_param_txt(append)"
     )
   } else {
@@ -100,7 +100,7 @@ set_param_txt <- function(workspace = getwd(),
   # plant
   if (lifecycle::is_present(plant)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_param_txt(plant)",
+      "1.0.0", "set_param_txt(plant)",
       "set_param_txt(plant_id)"
     )
   } else {
@@ -221,7 +221,7 @@ set_usm_txt <- function(file = "new_travail.usm",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_usm_txt(filepath)",
+      "1.0.0", "set_usm_txt(filepath)",
       "set_usm_txt(file)"
     )
   } else {
@@ -230,7 +230,7 @@ set_usm_txt <- function(file = "new_travail.usm",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_usm_txt(add)",
+      "1.0.0", "set_usm_txt(add)",
       "set_usm_txt(append)"
     )
   } else {
@@ -252,7 +252,7 @@ set_station_txt <- function(file = "station.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_station_txt(filepath)",
+      "1.0.0", "set_station_txt(filepath)",
       "set_station_txt(file)"
     )
   } else {
@@ -261,7 +261,7 @@ set_station_txt <- function(file = "station.txt",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_station_txt(add)",
+      "1.0.0", "set_station_txt(add)",
       "set_station_txt(append)"
     )
   } else {
@@ -287,7 +287,7 @@ set_ini_txt <- function(file = "ficini.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_ini_txt(filepath)",
+      "1.0.0", "set_ini_txt(filepath)",
       "set_ini_txt(file)"
     )
   } else {
@@ -296,7 +296,7 @@ set_ini_txt <- function(file = "ficini.txt",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_ini_txt(add)",
+      "1.0.0", "set_ini_txt(add)",
       "set_ini_txt(append)"
     )
   } else {
@@ -320,7 +320,7 @@ set_general_txt <- function(file = "tempopar.sti",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_general_txt(filepath)",
+      "1.0.0", "set_general_txt(filepath)",
       "set_general_txt(file)"
     )
   } else {
@@ -329,7 +329,7 @@ set_general_txt <- function(file = "tempopar.sti",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_general_txt(add)",
+      "1.0.0", "set_general_txt(add)",
       "set_general_txt(append)"
     )
   } else {
@@ -352,7 +352,7 @@ set_tmp_txt <- function(file = "tempoparv6.sti",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_tmp_txt(filepath)",
+      "1.0.0", "set_tmp_txt(filepath)",
       "set_tmp_txt(file)"
     )
   } else {
@@ -361,7 +361,7 @@ set_tmp_txt <- function(file = "tempoparv6.sti",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_tmp_txt(add)",
+      "1.0.0", "set_tmp_txt(add)",
       "set_tmp_txt(append)"
     )
   } else {
@@ -385,7 +385,7 @@ set_plant_txt <- function(file = "ficplt1.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_plant_txt(filepath)",
+      "1.0.0", "set_plant_txt(filepath)",
       "set_plant_txt(file)"
     )
   } else {
@@ -394,7 +394,7 @@ set_plant_txt <- function(file = "ficplt1.txt",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_plant_txt(add)",
+      "1.0.0", "set_plant_txt(add)",
       "set_plant_txt(append)"
     )
   } else {
@@ -416,7 +416,7 @@ set_tec_txt <- function(file = "fictec1.txt",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_tec_txt(filepath)",
+      "1.0.0", "set_tec_txt(filepath)",
       "set_tec_txt(file)"
     )
   } else {
@@ -425,7 +425,7 @@ set_tec_txt <- function(file = "fictec1.txt",
   # add
   if (lifecycle::is_present(add)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_tec_txt(add)",
+      "1.0.0", "set_tec_txt(add)",
       "set_tec_txt(append)"
     )
   } else {
@@ -447,7 +447,7 @@ set_soil_txt <- function(file = "param.sol",
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "set_soil_txt(filepath)",
+      "1.0.0", "set_soil_txt(filepath)",
       "set_soil_txt(file)"
     )
   } else {

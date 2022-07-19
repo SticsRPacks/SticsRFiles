@@ -31,7 +31,7 @@ read_params_table <- function(file, sheet_name = NULL,
                               char_na = "",
                               file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
-    lifecycle::deprecate_warn("0.5.0", "read_params_table(file_path)", "read_params_table(file)")
+    lifecycle::deprecate_warn("1.0.0", "read_params_table(file_path)", "read_params_table(file)")
   } else {
     file_path <- file # to remove when we update inside the function
   }

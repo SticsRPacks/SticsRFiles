@@ -82,7 +82,7 @@ gen_usms_xml2txt <- function(javastics,
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_usms_xml2txt(javastics_path)",
+      "1.0.0", "gen_usms_xml2txt(javastics_path)",
       "gen_usms_xml2txt(javastics)"
     )
   } else {
@@ -91,7 +91,7 @@ gen_usms_xml2txt <- function(javastics,
   # workspace_path
   if (lifecycle::is_present(workspace_path)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_usms_xml2txt(workspace_path)",
+      "1.0.0", "gen_usms_xml2txt(workspace_path)",
       "gen_usms_xml2txt(workspace)"
     )
   } else {
@@ -103,7 +103,7 @@ gen_usms_xml2txt <- function(javastics,
   # target_path
   if (lifecycle::is_present(target_path)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_usms_xml2txt(target_path)",
+      "1.0.0", "gen_usms_xml2txt(target_path)",
       "gen_usms_xml2txt(out_dir)"
     )
   } else {
@@ -112,7 +112,7 @@ gen_usms_xml2txt <- function(javastics,
   # usms_list
   if (lifecycle::is_present(usms_list)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_usms_xml2txt(usms_list)",
+      "1.0.0", "gen_usms_xml2txt(usms_list)",
       "gen_usms_xml2txt(usm)"
     )
   } else {
@@ -122,7 +122,7 @@ gen_usms_xml2txt <- function(javastics,
   # check_files
   if (lifecycle::is_present(check_files)) {
     lifecycle::deprecate_warn(
-      "0.5.0", "gen_usms_xml2txt(check_files)",
+      "1.0.0", "gen_usms_xml2txt(check_files)",
       "gen_usms_xml2txt(check)"
     )
   } else {
