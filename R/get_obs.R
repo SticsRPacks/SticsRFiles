@@ -68,7 +68,7 @@
 #'
 #'
 #' # Get observations with real plant names when plant folder is not in the workspace:
-#' get_obs(path, "banana", javastics = "path/to/javastics")
+#' get_obs(path, "banana", javastics = "/path/to/JavaSTICS/folder")
 #' }
 #'
 #' @export

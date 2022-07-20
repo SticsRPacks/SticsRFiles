@@ -6,7 +6,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' exists_pref <- exists_javastics_pref("path/to/JavaSTICS-v131-stics-v841")
+#' exists_pref <- exists_javastics_pref("/path/to/JavaSTICS/folder")
 #' }
 #'
 #' @return logical value, TRUE if file exists, FALSE otherwise

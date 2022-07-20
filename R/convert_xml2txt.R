@@ -18,7 +18,7 @@
 #' @examples
 #' \dontrun{
 #' xml_path <- "/path/to/corn_plt.xml"
-#' javastics_path <- "/path/to/javastics/root"
+#' javastics_path <- "/path/to/JavaSTICS/folder"
 #' convert_xml2txt(xml_file = xml_path, java_dir = javastics_path)
 #' }
 #'

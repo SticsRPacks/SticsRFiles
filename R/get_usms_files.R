@@ -27,12 +27,12 @@
 #'
 #' get_usms_files(
 #'   workspace = "/path/to/workspace",
-#'   javastics = "/path/to/javastics"
+#'   javastics = "/path/to/JavaSTICS/folder"
 #' )
 #'
 #' get_usms_files(
 #'   workspace = "/path/to/workspace",
-#'   javastics = "/path/to/javastics", usm_list = c("usm1", "usm3")
+#'   javastics = "/path/to/JavaSTICS/folder", usm_list = c("usm1", "usm3")
 #' )
 #'
 #' get_usms_files(

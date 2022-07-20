@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_java_wd("/path/to/JavaStics/directory")
+#' get_java_wd("/path/to/JavaSTICS/folder")
 #' }
 #'
 #' @keywords internal

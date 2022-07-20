@@ -6,7 +6,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' check_java_path("/home/plecharpent/Work/JavaSTICS-v131-stics-v841")
+#' check_java_path("/path/to/JavaSTICS/folder")
 #' }
 #'
 #' @keywords internal

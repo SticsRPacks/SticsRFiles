@@ -56,10 +56,10 @@ exist_param_xml <- function(param,
 #' \dontrun{
 #'
 #' exist_param_csv(param = "albedo",
-#'    javastics= "/path/to/javastics")
+#'    javastics= "/path/to/JavaSTICS/folder")
 #'
 #' exist_param_csv(param = c("albedo", "latitude"),
-#'    javastics = "/path/to/javastics")
+#'    javastics = "/path/to/JavaSTICS/folder")
 #'}
 #'
 exist_param_csv <- function(param,

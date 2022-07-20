@@ -20,7 +20,7 @@
 #' example_txt_dir <- get_examples_path(file_type = "txt")
 #' force_param_values(example_txt_dir,
 #'     setNames(object = c(220, 330), c("stlevamf", "stamflax")),
-#'     javastics = "/path/to/javastics")
+#'     javastics = "/path/to/JavaSTICS/folder")
 #' }
 #'
 #' @seealso `SticsOnR::run_stics()`

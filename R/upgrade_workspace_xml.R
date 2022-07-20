@@ -24,8 +24,8 @@
 #' @examples
 #' \dontrun{
 #' upgrade_workspace_xml(
-#'   workspace = "/path/to/javastics/workspace",
-#'   javastics = "/path/to/javastics/directory",
+#'   workspace = "/path/to/JavaSTICS/workspace",
+#'   javastics = "/path/to/JavaSTICS/folder",
 #'   out_dir = "/path/to/an/output/directory"
 #' )
 #' }

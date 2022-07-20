@@ -9,7 +9,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' csv_file <- "/path/to/javastics/dir/config/inputs.csv"
+#' csv_file <- "/path/to/JavaSTICS/folder/config/inputs.csv"
 #' out_csv_file <- "/path/to/out/dir/config/inputs_xpanded.csv"
 #'
 #' SticsRFiles:::expand_stics_names(csv_file, out_csv_file)
