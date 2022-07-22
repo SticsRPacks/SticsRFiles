@@ -40,7 +40,7 @@ calls. Commands may be filtered using type argument.
 }
 \examples{
 \dontrun{
- get_javastics_cmd(javastics = "path/to/JavaSTICS",
+ get_javastics_cmd(javastics = "/path/to/JavaSTICS/folder",
    ,               workspace = "path/to/workspace")
 }
 

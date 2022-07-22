@@ -33,12 +33,12 @@ Checking xml files existence got from usms.xml
 
 check_usms_files(
   workspace_path = "/path/to/workspace",
-  javastics_path = "/path/to/javastics"
+  javastics_path = "/path/to/JavaSTICS/folder"
 )
 
 check_usms_files(
   workspace_path = "/path/to/workspace",
-  javastics_path = "/path/to/javastics", usm_list = c("usm1", "usm3")
+  javastics_path = "/path/to/JavaSTICS/folder", usm_list = c("usm1", "usm3")
 )
 }
 

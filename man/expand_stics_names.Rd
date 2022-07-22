@@ -21,7 +21,7 @@ with indices (i.e. par(1), par(2),...regarding to parameter/variable dimensions)
 \examples{
 \dontrun{
 
-csv_file <- "/path/to/javastics/dir/config/inputs.csv"
+csv_file <- "/path/to/JavaSTICS/folder/config/inputs.csv"
 out_csv_file <- "/path/to/out/dir/config/inputs_xpanded.csv"
 
 SticsRFiles:::expand_stics_names(csv_file, out_csv_file)

@@ -77,7 +77,7 @@ or in a subdirectory.
 }
 \examples{
 \dontrun{
-javastics <- "/path/to/javastics"
+javastics <- "/path/to/JavaSTICS/folder"
 workspace <- "/path/to/workspace"
 
 # For all usms

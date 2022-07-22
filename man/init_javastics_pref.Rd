@@ -19,7 +19,7 @@ Initialize the JavaStics \code{preferences.xml} file.
 }
 \examples{
 \dontrun{
-init_javastics_pref("path/to/javastics")
+init_javastics_pref("/path/to/JavaSTICS/folder")
 }
 
 }

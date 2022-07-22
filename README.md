@@ -33,8 +33,8 @@ command line), or with an R JavaStics interface provided by the
 [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
 
 If you want to be notified when a new release of this package is made,
-you can tick the Releases box in the “Watch / Unwatch =&gt; Custom” menu
-at the top right of [this
+you can tick the Releases box in the “Watch / Unwatch => Custom” menu at
+the top right of [this
 page](https://github.com/SticsRPacks/SticsRFiles).
 
 ## Prerequisites and technical tips
