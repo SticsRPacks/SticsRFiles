@@ -155,7 +155,6 @@ Collate:
     'is_stics_doc.R'
     'is_stics_xml.R'
     'javastics_cmd_util.R'
-    'manage_stics_versions.R'
     'merge_nodesets.R'
     'read_params_table.R'
     'remove_node_from_doc.R'

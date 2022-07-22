@@ -83,7 +83,8 @@ reference:
       - get_param_txt
       - get_plants_nb
       - get_climate_txt
-      - get_var_mod
+      - get_varmod
+      - get_lai_forcing
 
   - title: "Get values in Stics Output files"
     contents:
@@ -109,3 +110,7 @@ reference:
     desc: Miscellaneous helper functions
     contents:
       - get_stics_versions_compat
+      - is_unix
+      - is_windows
+      - is_windows
+      - [.cropr_simulation
