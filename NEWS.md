@@ -1,4 +1,4 @@
-# SticsRFiles 1.0.0 (2022-07-??)
+# SticsRFiles 1.0.0 (2022-07-22)
 
 The main changes are mainly related to the adaptation to the new versions 10.0 of STICS  
 and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to fixes.
