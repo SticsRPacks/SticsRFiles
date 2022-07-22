@@ -110,7 +110,7 @@ reference:
     desc: Miscellaneous helper functions
     contents:
       - get_stics_versions_compat
+      - is_mac
       - is_unix
       - is_windows
-      - is_windows
-      - [.cropr_simulation
+      - sub-.cropr_simulation
