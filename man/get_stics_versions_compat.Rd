@@ -21,13 +21,13 @@ with this package.
 }
 \examples{
 
-Getting the complete versions list
+# Getting the complete versions list
 get_stics_versions_compat()
 
-Getting the first version
+# Getting the first version
 get_stics_versions_compat(1)
 
-Getting the previous version of the latest one
+# Getting the previous version of the latest one
 get_stics_versions_compat(-1)
 
 
