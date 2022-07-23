@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -41,17 +41,20 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,12 +69,40 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/NEWS.md"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="sticsrfiles-042-2021-10-07" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.2">
-<a href="#sticsrfiles-042-2021-10-07" class="anchor" aria-hidden="true"></a>SticsRFiles 0.4.2 (2021-10-07)</h1>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="sticsrfiles-100-2022-07-22">SticsRFiles 1.0.0 (2022-07-22)<a class="anchor" aria-label="anchor" href="#sticsrfiles-100-2022-07-22"></a></h2>
+<p>The main changes are mainly related to the adaptation to the new versions 10.0 of STICS<br>
+and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to fixes.</p>
+<ul><li>FUNCTIONS:<ul><li>New set of functions for upgrading XML files of STICS version 9.2 to STICS version 10.0 (either each kind of XML file or a whole workspace)</li>
+<li>Homogenization of arguments names in functions</li>
+<li>Some functions have been moved from the SticsOnR package into SticsRFiles</li>
+<li>Improvement of functions dedicated to java/JavaStics command line use, added checks</li>
+</ul></li>
+<li>FIXES:<ul><li>Extraction of vectorized parameters from _tec.xml and _ini.xml files</li>
+<li>Functions for getting and setting parameters values in STICS input text files:<ul><li>parameters of _ini.txt files now taken into account</li>
+<li>taking into account special characters in parameter names ("_“,”(“,”)")</li>
+<li>get function now returning result in an homogenized format (list of parameters) whatever is the value of argument param</li>
+</ul></li>
+<li>Reading STICS daily outputs: NA or missing values now handled</li>
+<li>Whitespaces now taken into account in dir/file path</li>
+</ul></li>
+<li>DOC:<ul><li>New vignette on functions for upgrading XML files of STICS version 9.2 to version 10.0 format</li>
+<li>Adaptation of the vignettes to STICS version 10.0</li>
+<li>SticsRFiles tutorial moved into SticsRPacks tutorial</li>
+</ul></li>
+<li>DATA: New files for STICS 10.0<ul><li>XML example files added</li>
+<li>Data set of text parameters files</li>
+<li>XL file example for generating XML files</li>
+</ul></li>
+<li>TESTS:<ul><li>Adaptation of existing tests to STICS 10.0</li>
+<li>New tests for XML files generation</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.2" id="sticsrfiles-042-2021-10-07">SticsRFiles 0.4.2 (2021-10-07)<a class="anchor" aria-label="anchor" href="#sticsrfiles-042-2021-10-07"></a></h2>
 <ul><li><p>Prepared templates for STICS V10.</p></li>
 <li>
 <p>FIXES:</p>
@@ -85,28 +116,23 @@
 <li><p>Updated general doc.</p></li>
 </ul></li>
 </ul></div>
-    <div id="sticsrfiles-041-2021-07-02" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.1">
-<a href="#sticsrfiles-041-2021-07-02" class="anchor" aria-hidden="true"></a>SticsRFiles 0.4.1 (2021-07-02)</h1>
-<div id="changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#changes" class="anchor" aria-hidden="true"></a>Changes</h2>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.1" id="sticsrfiles-041-2021-07-02">SticsRFiles 0.4.1 (2021-07-02)<a class="anchor" aria-label="anchor" href="#sticsrfiles-041-2021-07-02"></a></h2>
+<div class="section level3">
+<h3 id="changes-0-4-1">Changes<a class="anchor" aria-label="anchor" href="#changes-0-4-1"></a></h3>
 <ul><li><p>FIX: force_param_values() did not work for parameters which names included parenthesis</p></li>
 <li><p>Added dependency to dplyr &gt;= 1.0.0 due to use of relocate function</p></li>
 <li><p>Typos in doc</p></li>
 </ul></div>
 </div>
-    <div id="sticsrfiles-040-2021-06-22" class="section level1">
-<h1 class="page-header" data-toc-text="0.4.0">
-<a href="#sticsrfiles-040-2021-06-22" class="anchor" aria-hidden="true"></a>SticsRFiles 0.4.0 (2021-06-22)</h1>
-<div id="general-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-changes" class="anchor" aria-hidden="true"></a>General changes</h2>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.0" id="sticsrfiles-040-2021-06-22">SticsRFiles 0.4.0 (2021-06-22)<a class="anchor" aria-label="anchor" href="#sticsrfiles-040-2021-06-22"></a></h2>
+<div class="section level3">
+<h3 id="general-changes-0-4-0">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-4-0"></a></h3>
 <ul><li><p>DESCRIPTION / NAMESPACE: updates linked to new functions</p></li>
 <li>
 <p>Tests</p>
-<ul><li>updates, new ones added (get_obs, get_sim)</li>
-</ul></li>
+<ul><li>updates, new ones added (get_obs, get_sim)</li></ul></li>
 <li>
 <p>Functions:</p>
 <ul><li>new: get_lai_forcing, check_usms_files</li>
@@ -121,9 +147,8 @@
 </ul></li>
 <li><p>Tutorial: minor fix for use-xml-files (working dir creation)</p></li>
 </ul></div>
-<div id="specific-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specific-changes" class="anchor" aria-hidden="true"></a>Specific changes</h2>
+<div class="section level3">
+<h3 id="specific-changes-0-4-0">Specific changes<a class="anchor" aria-label="anchor" href="#specific-changes-0-4-0"></a></h3>
 <ul><li><p>get_sim / get_obs / get_file / get_file_ refactoring added some controls now taking into account a usms file path in functions fixed issues related to intercrops data loading added data.frame columns detection for filtering data on dates</p></li>
 <li><p>functions for manipulating xml files taking into account a new kind of Stics parameter dependency (for plant and soil layers dependant parameters)</p></li>
 <li><p>set_param_txt: fix for setting values for varietal parameters</p></li>
@@ -131,28 +156,17 @@
 <li><p>gen_usms_xml2txt now compatible with lai forcing added optional argument for checking files now removing files before each files generation</p></li>
 </ul></div>
 </div>
-    <div id="sticsrfiles-030-2021-04-15" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.0">
-<a href="#sticsrfiles-030-2021-04-15" class="anchor" aria-hidden="true"></a>SticsRFiles 0.3.0 (2021-04-15)</h1>
-<div id="general-changes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-changes-1" class="anchor" aria-hidden="true"></a>General changes</h2>
-<ul><li>DESCRIPTION
-<ul><li>Imports: lifecycle</li>
-</ul></li>
-<li>Tests
-<ul><li>new ones added for : gen_tec_xml, gen_ini_xml</li>
-</ul></li>
-<li>Functions:
-<ul><li>Now managing functions life cycle</li>
-</ul></li>
-<li>Files:
-<ul><li>useless XML template files have been removed</li>
-</ul></li>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.0" id="sticsrfiles-030-2021-04-15">SticsRFiles 0.3.0 (2021-04-15)<a class="anchor" aria-label="anchor" href="#sticsrfiles-030-2021-04-15"></a></h2>
+<div class="section level3">
+<h3 id="general-changes-0-3-0">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-3-0"></a></h3>
+<ul><li>DESCRIPTION<ul><li>Imports: lifecycle</li></ul></li>
+<li>Tests<ul><li>new ones added for : gen_tec_xml, gen_ini_xml</li></ul></li>
+<li>Functions:<ul><li>Now managing functions life cycle</li></ul></li>
+<li>Files:<ul><li>useless XML template files have been removed</li></ul></li>
 </ul></div>
-<div id="specific-changes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specific-changes-1" class="anchor" aria-hidden="true"></a>Specific changes</h2>
+<div class="section level3">
+<h3 id="specific-changes-0-3-0">Specific changes<a class="anchor" aria-label="anchor" href="#specific-changes-0-3-0"></a></h3>
 <ul><li><p>get_sim: new function replacing get_daily_results</p></li>
 <li><p>get_daily_results: has been set to deprecated (a warning is displayed)</p></li>
 <li><p>set_param_value: changed error output to warning if any parameter name does not exist</p></li>
@@ -163,52 +177,42 @@
 <li><p>get_param_xml, set_param_xml: checks have been added for detecting parameters duplicates in tec files</p></li>
 </ul></div>
 </div>
-    <div id="sticsrfiles-020-2021-01-15" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#sticsrfiles-020-2021-01-15" class="anchor" aria-hidden="true"></a>SticsRFiles 0.2.0 (2021-01-15)</h1>
-<div id="general-changes-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-changes-2" class="anchor" aria-hidden="true"></a>General changes</h2>
-<ul><li>DESCRIPTION
-<ul><li>Suggests: formatR, readxl</li>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.2.0" id="sticsrfiles-020-2021-01-15">SticsRFiles 0.2.0 (2021-01-15)<a class="anchor" aria-label="anchor" href="#sticsrfiles-020-2021-01-15"></a></h2>
+<div class="section level3">
+<h3 id="general-changes-0-2-0">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-2-0"></a></h3>
+<ul><li>DESCRIPTION<ul><li>Suggests: formatR, readxl</li>
 <li>added missing packages: curl, tidyr, tibble</li>
 <li>license changed to License for CeCILL-C</li>
 <li>Travis configuration removed</li>
 </ul></li>
-<li>README:
-<ul><li>Travis badge removed</li>
+<li>README:<ul><li>Travis badge removed</li>
 <li>Github Actions R-CMD-check badge added</li>
 </ul></li>
-<li>Functions:
-<ul><li>useless functions have been removed</li>
+<li>Functions:<ul><li>useless functions have been removed</li>
 <li>some functions have been renamed or generalized</li>
 </ul></li>
-<li>Tests
-<ul><li>new ones added for : get_var_info, get_obs, get_daily_results, force_param_values</li>
+<li>Tests<ul><li>new ones added for : get_var_info, get_obs, get_daily_results, force_param_values</li>
 <li>test-get*: now using get_examples_path function, some fixes</li>
 </ul></li>
-<li>Documentation
-<ul><li>vignettes and tutorial: anchor_sections set to FALSE, fixes on warnings and errors, using paged html tables</li>
+<li>Documentation<ul><li>vignettes and tutorial: anchor_sections set to FALSE, fixes on warnings and errors, using paged html tables</li>
 <li>functions help: content fixes and completion (parameters, examples, setting examples to dontrun, …)</li>
 </ul></li>
-<li>Fixes
-<ul><li>exported/unexported functions list</li>
+<li>Fixes<ul><li>exported/unexported functions list</li>
 <li>CRAN issues for checks</li>
 </ul></li>
-<li>Automatic testing:
-<ul><li>Github Actions added for checks</li>
+<li>Automatic testing:<ul><li>Github Actions added for checks</li>
 <li>Travis checks removed</li>
 <li>SticsRTest Travis tests triggering removed</li>
 </ul></li>
 </ul></div>
-<div id="specific-changes-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specific-changes-2" class="anchor" aria-hidden="true"></a>Specific changes</h2>
+<div class="section level3">
+<h3 id="specific-changes-0-2-0">Specific changes<a class="anchor" aria-label="anchor" href="#specific-changes-0-2-0"></a></h3>
 <ul><li><p>get_obs, get_daily_results: removed useless columns from return, simplification</p></li>
 <li><p>download_usm_xl, download_usm_csv: added verbose argument for masquing warnings/displays, added overwritting case</p></li>
 <li><p>read_params_table : new function for getting parameters tables either from csv files or excel files sheets</p></li>
 <li><p>get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for Stics version 8.5</p></li>
-<li><p>Manipulating_Stics_XML_files.Rmd: using XML file for the last model version for displaying files fragments as examples</p></li>
+<li><p>Manipulating_Stics_XML_files.Rmd: using XML file for the latest model version for displaying files fragments as examples</p></li>
 <li><p>get_stics_versions_compat, manage_stics_versions.R: added NA management in data</p></li>
 <li><p>get_file: added plant names in output (for obs and daily data), fixed issue and tests added for intercropping case</p></li>
 <li><p>get_daily_results: renamed class attribute to cropr_simulation, use of tibble::as_tibble(), mixed calculation using get_plants_nb, always returns a list, added optional usm_name arg, uses now get_plant_name instead, added javastics_path argument if plant files are located in it, dual variables name syntax (i.e. lai_n or lai(n) for example), taking into account intercrops management</p></li>
@@ -244,11 +248,9 @@
 <li><p>get_param_xml: without parameters names in args;returned for each file, name of the XML file added to the output</p></li>
 </ul></div>
 </div>
-    <div id="sticsrfiles-0109004-2020-02-03" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0.9004">
-<a href="#sticsrfiles-0109004-2020-02-03" class="anchor" aria-hidden="true"></a>SticsRFiles 0.1.0.9004 (2020-02-03)</h1>
-<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.0.9004" id="sticsrfiles-0109004-2020-02-03">SticsRFiles 0.1.0.9004 (2020-02-03)<a class="anchor" aria-label="anchor" href="#sticsrfiles-0109004-2020-02-03"></a></h2>
+<ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -259,11 +261,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

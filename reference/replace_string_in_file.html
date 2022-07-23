@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -41,17 +41,20 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Replacing a string in a file</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/replace_string_in_file.R"><code>R/replace_string_in_file.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/replace_string_in_file.R" class="external-link"><code>R/replace_string_in_file.R</code></a></small>
     <div class="hidden name"><code>replace_string_in_file.Rd</code></div>
     </div>
 
@@ -74,23 +77,35 @@
     <p>Replacing occurrences of a string by another one, in place or creating a new file</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">replace_string_in_file</span><span class="op">(</span>
-  <span class="va">file_path</span>,
-  <span class="va">target_string</span>,
-  <span class="va">replace_string</span>,
-  new_file_path <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">replace_string_in_file</span><span class="op">(</span></span>
+<span>  <span class="va">file_path</span>,</span>
+<span>  <span class="va">target_string</span>,</span>
+<span>  <span class="va">replace_string</span>,</span>
+<span>  new_file_path <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file_path</th>
-      <td><p>The path to the file</p></td>
-    </tr><tr><th>target_string</th>
-      <td><p>The target string to replace</p></td>
-    </tr><tr><th>replace_string</th>
-      <td><p>The replacing string</p></td>
-    </tr><tr><th>new_file_path</th>
-      <td><p>The newly-created file path</p></td>
-    </tr></table></div>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>file_path</dt>
+<dd><p>The path to the file</p></dd>
+
+
+<dt>target_string</dt>
+<dd><p>The target string to replace</p></dd>
+
+
+<dt>replace_string</dt>
+<dd><p>The replacing string</p></dd>
+
+
+<dt>new_file_path</dt>
+<dd><p>The newly-created file path</p></dd>
+
+</dl></div>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
     </nav></div>
@@ -98,11 +113,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

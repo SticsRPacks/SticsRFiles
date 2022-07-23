@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -41,17 +41,20 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extracting a data.frame of parameters values for an xml file or a set of (whatever the xml file kind)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_xml_files_param_df.R"><code>R/get_xml_files_param_df.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/get_xml_files_param_df.R" class="external-link"><code>R/get_xml_files_param_df.R</code></a></small>
     <div class="hidden name"><code>get_xml_files_param_df.Rd</code></div>
     </div>
 
@@ -74,58 +77,76 @@
     <p>Extracting a data.frame of parameters values for an xml file or a set of (whatever the xml file kind)</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">get_xml_files_param_df</span><span class="op">(</span>
-  <span class="va">file_path</span>,
-  select <span class="op">=</span> <span class="cn">NULL</span>,
-  name <span class="op">=</span> <span class="cn">NULL</span>,
-  param_names <span class="op">=</span> <span class="cn">NULL</span>,
-  wide_shape <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_xml_files_param_df</span><span class="op">(</span></span>
+<span>  <span class="va">file_path</span>,</span>
+<span>  select <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  param_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  wide_shape <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file_path</th>
-      <td><p>A file path or a vector of</p></td>
-    </tr><tr><th>select</th>
-      <td><p>node name or attribute name to use for selection (optional, default to no selection)</p></td>
-    </tr><tr><th>name</th>
-      <td><p>value used for select (optional)</p></td>
-    </tr><tr><th>param_names</th>
-      <td><p>vector of parameters names (optional)</p></td>
-    </tr><tr><th>wide_shape</th>
-      <td><p>Optional logical for keeping the long data.frame format FALSE, default)
-or converting it to a wider format one (TRUE)</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>file_path</dt>
+<dd><p>A file path or a vector of</p></dd>
 
-    <p>A data.frame with name, type, param, id and value columns</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+<dt>select</dt>
+<dd><p>node name or attribute name to use for selection (optional, default to no selection)</p></dd>
+
+
+<dt>name</dt>
+<dd><p>value used for select (optional)</p></dd>
+
+
+<dt>param_names</dt>
+<dd><p>vector of parameters names (optional)</p></dd>
+
+
+<dt>wide_shape</dt>
+<dd><p>Optional logical for keeping the long data.frame format FALSE, default)
+or converting it to a wider format one (TRUE)</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>A data.frame with name, type, param, id and value columns</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
     <p>An extract of an example of data.frame for the 2 formats</p><ul><li><p>Default one</p></li>
-</ul><table class="table"><tr><td>name</td><td>type</td><td>param</td><td>id</td><td>value</td></tr><tr><td>SugarCane</td><td>usms</td><td>datedebut</td><td>NA</td><td>286</td></tr><tr><td>SugarCane</td><td>usms</td><td>datefin</td><td>NA</td><td>650</td></tr><tr><td>SugarCane</td><td>usms</td><td>finit</td><td>NA</td><td>canne_ini.xml</td></tr><tr><td>SugarCane</td><td>usms</td><td>nomsol</td><td>NA</td><td>solcanne</td></tr><tr><td>SugarCane</td><td>usms</td><td>fstation</td><td>NA</td><td>climcanj_sta.xml</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>17</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>18</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>19</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>20</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>21</td><td>0</td></tr></table><p>name: a file name or an usm or soil name
+</ul><table class="table table"><tr><td>name</td><td>type</td><td>param</td><td>id</td><td>value</td></tr><tr><td>SugarCane</td><td>usms</td><td>datedebut</td><td>NA</td><td>286</td></tr><tr><td>SugarCane</td><td>usms</td><td>datefin</td><td>NA</td><td>650</td></tr><tr><td>SugarCane</td><td>usms</td><td>finit</td><td>NA</td><td>canne_ini.xml</td></tr><tr><td>SugarCane</td><td>usms</td><td>nomsol</td><td>NA</td><td>solcanne</td></tr><tr><td>SugarCane</td><td>usms</td><td>fstation</td><td>NA</td><td>climcanj_sta.xml</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>17</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>18</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>19</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>20</td><td>0</td></tr><tr><td>param_gen.xml</td><td>fichierpar</td><td>Qmulchdec</td><td>21</td><td>0</td></tr></table><p>name: a file name or an usm or soil name
 type: type of file
 param: param name
 id: NA for scalar, integer id for vectors parameters
 value: parameter value</p><ul><li><p>wide format</p></li>
-</ul><table class="table"><tr><td>name</td><td>type</td><td>datedebut</td><td>datefin</td><td>finit</td><td>nomsol</td><td>fstation</td><td>fclim1</td><td>fclim2</td></tr><tr><td>SugarCane</td><td>usms</td><td>286</td><td>650</td><td>canne_ini.xml</td><td>solcanne</td><td>climcanj_sta.xml</td><td>climcanj.1998</td><td>climcanj.1999</td></tr><tr><td>potato</td><td>usms</td><td>91</td><td>250</td><td>patate_ini.xml</td><td>solpatate</td><td>climpdtj_sta.xml</td><td>climpdtj.1997</td><td>climpdtj.1997</td></tr><tr><td>banana</td><td>usms</td><td>30</td><td>300</td><td>banane_ini.xml</td><td>solbanane</td><td>climbanj_sta.xml</td><td>climbanj.1996</td><td>climbanj.1996</td></tr><tr><td>sorghum</td><td>usms</td><td>112</td><td>360</td><td>sorgho_ini.xml</td><td>solsorgho</td><td>climsorj_sta.xml</td><td>climsorj.1996</td><td>climsorj.1996</td></tr><tr><td>barley</td><td>usms</td><td>88</td><td>196</td><td>orge_ini.xml</td><td>solorge</td><td>climorgj_sta.xml</td><td>climorgj.2002</td><td>climorgj.2002</td></tr></table><p>name: a file name or an usm or soil name
+</ul><table class="table table"><tr><td>name</td><td>type</td><td>datedebut</td><td>datefin</td><td>finit</td><td>nomsol</td><td>fstation</td><td>fclim1</td><td>fclim2</td></tr><tr><td>SugarCane</td><td>usms</td><td>286</td><td>650</td><td>canne_ini.xml</td><td>solcanne</td><td>climcanj_sta.xml</td><td>climcanj.1998</td><td>climcanj.1999</td></tr><tr><td>potato</td><td>usms</td><td>91</td><td>250</td><td>patate_ini.xml</td><td>solpatate</td><td>climpdtj_sta.xml</td><td>climpdtj.1997</td><td>climpdtj.1997</td></tr><tr><td>banana</td><td>usms</td><td>30</td><td>300</td><td>banane_ini.xml</td><td>solbanane</td><td>climbanj_sta.xml</td><td>climbanj.1996</td><td>climbanj.1996</td></tr><tr><td>sorghum</td><td>usms</td><td>112</td><td>360</td><td>sorgho_ini.xml</td><td>solsorgho</td><td>climsorj_sta.xml</td><td>climsorj.1996</td><td>climsorj.1996</td></tr><tr><td>barley</td><td>usms</td><td>88</td><td>196</td><td>orge_ini.xml</td><td>solorge</td><td>climorgj_sta.xml</td><td>climorgj.2002</td><td>climorgj.2002</td></tr></table><p>name: a file name or an usm or soil name
 type: type of file
 all other columns names correspond to parameter names, with indices as suffix
 for multiple values</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">dir_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span><span class="st">"xml"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_xml_files_param_df</span><span class="op">(</span>file_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>,<span class="st">"sols.xml"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_xml_files_param_df</span><span class="op">(</span>file_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>,<span class="st">"sols.xml"</span><span class="op">)</span>,</span>
-<span class="r-in">select <span class="op">=</span> <span class="st">"sol"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"solcanne"</span>, <span class="st">"solble"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">files_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sols.xml"</span>, <span class="st">"usms.xml"</span>, <span class="st">"param_gen.xml"</span> <span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_xml_files_param_df</span><span class="op">(</span>file_path <span class="op">=</span> <span class="va">files_list</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">dir_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span><span class="st">"xml"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_xml_files_param_df</span><span class="op">(</span>file_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>, <span class="st">"sols.xml"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_xml_files_param_df</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  file_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>, <span class="st">"sols.xml"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  select <span class="op">=</span> <span class="st">"sol"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solcanne"</span>, <span class="st">"solble"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">files_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sols.xml"</span>, <span class="st">"usms.xml"</span>, <span class="st">"param_gen.xml"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_xml_files_param_df</span><span class="op">(</span>file_path <span class="op">=</span> <span class="va">files_list</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -134,11 +155,11 @@ for multiple values</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

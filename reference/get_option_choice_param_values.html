@@ -18,7 +18,7 @@ defined in a option choice node (as param nodes)"><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ defined in a option choice node (as param nodes)"><!-- mathjax --><script src="h
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -42,17 +42,20 @@ defined in a option choice node (as param nodes)"><!-- mathjax --><script src="h
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -67,7 +70,7 @@ defined in a option choice node (as param nodes)"><!-- mathjax --><script src="h
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Getting parameter values from an xml parameter file for an option choice</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_option_choice_param_values.R"><code>R/get_option_choice_param_values.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/get_option_choice_param_values.R" class="external-link"><code>R/get_option_choice_param_values.R</code></a></small>
     <div class="hidden name"><code>get_option_choice_param_values.Rd</code></div>
     </div>
 
@@ -76,34 +79,47 @@ defined in a option choice node (as param nodes)"><!-- mathjax --><script src="h
 defined in a option choice node (as <em>param</em> nodes)</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">get_option_choice_param_values</span><span class="op">(</span>
-  <span class="va">xml_file_path</span>,
-  <span class="va">option_param_name</span>,
-  <span class="va">choice_name_or_code</span>
-<span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_option_choice_param_values</span><span class="op">(</span></span>
+<span>  <span class="va">xml_file_path</span>,</span>
+<span>  <span class="va">option_param_name</span>,</span>
+<span>  <span class="va">choice_name_or_code</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>xml_file_path</th>
-      <td><p>path of xml parameter file</p></td>
-    </tr><tr><th>option_param_name</th>
-      <td><p>name of the option</p></td>
-    </tr><tr><th>choice_name_or_code</th>
-      <td><p>name or code of the option choice desired</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>xml_file_path</dt>
+<dd><p>path of xml parameter file</p></dd>
 
-    <p>A list containing a vector of strings of parameters values ($values)
+
+<dt>option_param_name</dt>
+<dd><p>name of the option</p></dd>
+
+
+<dt>choice_name_or_code</dt>
+<dd><p>name or code of the option choice desired</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>A list containing a vector of strings of parameters values ($values)
 and a vector of strings of parameters names ($names)</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">xml_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span> file_type <span class="op">=</span> <span class="st">"xml"</span><span class="op">)</span>,<span class="st">"file_plt.xml"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_option_choice_param_values</span><span class="op">(</span><span class="va">xml_path</span>,<span class="st">"codetemp"</span>,<span class="st">"2"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">xml_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span>file_type <span class="op">=</span> <span class="st">"xml"</span><span class="op">)</span>, <span class="st">"file_plt.xml"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_option_choice_param_values</span><span class="op">(</span><span class="va">xml_path</span>, <span class="st">"codetemp"</span>, <span class="st">"2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -112,11 +128,11 @@ and a vector of strings of parameters names ($names)</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

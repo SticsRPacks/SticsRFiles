@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -41,17 +41,20 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Finding parameters information using partial search words</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_param_info.R"><code>R/get_param_info.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/get_param_info.R" class="external-link"><code>R/get_param_info.R</code></a></small>
     <div class="hidden name"><code>get_param_info.Rd</code></div>
     </div>
 
@@ -74,57 +77,104 @@
     <p>Finding parameters information using partial search words</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">get_param_info</span><span class="op">(</span>
-  parameter <span class="op">=</span> <span class="cn">NULL</span>,
-  file_path <span class="op">=</span> <span class="cn">NULL</span>,
-  formalism <span class="op">=</span> <span class="cn">NULL</span>,
-  keyword <span class="op">=</span> <span class="cn">NULL</span>,
-  version <span class="op">=</span> <span class="st">"last"</span>
-<span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_param_info</span><span class="op">(</span></span>
+<span>  param <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  formalism <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  keyword <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
+<span>  file_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  parameter <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  version <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>parameter</th>
-      <td><p>Optional, parameter name or partial name, or a vector of</p></td>
-    </tr><tr><th>file_path</th>
-      <td><p>Optional, xml file path or a vector of</p></td>
-    </tr><tr><th>formalism</th>
-      <td><p>Optional, formalism name or partial name, or a vector of</p></td>
-    </tr><tr><th>keyword</th>
-      <td><p>Optional, strings or a vector of to be used for searching
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>param</dt>
+<dd><p>Vector of parameter names (or partial names). Optional, if not
+provided, the function returns information for all parameters</p></dd>
+
+
+<dt>file</dt>
+<dd><p>Vector of xml file paths. Optional, if not provided, the function
+searches information in all standard XML files.</p></dd>
+
+
+<dt>formalism</dt>
+<dd><p>Optional, formalism name or partial name, or a vector of</p></dd>
+
+
+<dt>keyword</dt>
+<dd><p>Optional, strings or a vector of to be used for searching
 in parameters data (i.e.: parameters names, formalisms description,
-file names or part to which parameters are attached to)</p></td>
-    </tr><tr><th>version</th>
-      <td><p>Optional, Stics version (default value, "last")
-Only the 2 last are referenced: V9.0, V9.1</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+file names or part to which parameters are attached to)</p></dd>
 
-    <p>A data.frame containing parameters names,
-their file name origin, their bounds and the formalism they belong to.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+<dt>stics_version</dt>
+<dd><p>Name of the Stics version. Optional, can be used to search
+parameters information relative to a specific Stics version. By default the
+latest version returned by <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> is used.</p></dd>
+
+
+<dt>file_path</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>file_path</code> is no
+longer supported, use <code>file</code> instead.</p></dd>
+
+
+<dt>parameter</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>parameter</code> is no
+longer supported, use <code>param</code> instead.</p></dd>
+
+
+<dt>version</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>version</code> is no
+longer supported, use <code>stics_version</code> instead.</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>A data.frame containing parameters names,
+their file name origin, their bounds and the formalism they belong to. The
+data.frame has the model version as attribute.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
     <p>parameter and formalism may be both set or only one of them, but
 none of them can be if keyword argument is used.</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_param_info</span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"albedo"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_param_info</span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"albedo"</span>, file_path <span class="op">=</span><span class="st">"/path/to/file.xml"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_param_info</span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"albedo"</span>, formalism <span class="op">=</span> <span class="st">"special"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_param_info</span><span class="op">(</span>parameter <span class="op">=</span> <span class="st">"albedo"</span>, version <span class="op">=</span> <span class="st">"V9.0"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_param_info</span><span class="op">(</span>parameter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alb"</span>, <span class="st">"lat"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_param_info</span><span class="op">(</span> keyword <span class="op">=</span> <span class="st">"tec"</span> <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name                 file            min   max formalism                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> albedomulchplastique file_tec.xml   0.05   0.8 special techniques             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> albedomulchresidus   param_gen.xml  0.05   0.8 Typology of pebbles fertiliser…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> albedo               sols.xml       0.05   0.6 none                           </span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span>, file <span class="op">=</span> <span class="st">"/path/to/file.xml"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span>, formalism <span class="op">=</span> <span class="st">"special"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span>, stics_version <span class="op">=</span> <span class="st">"V9.0"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alb"</span>, <span class="st">"lat"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"tec"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get the model version afterward:</span></span></span>
+<span class="r-in"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"version"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -133,11 +183,11 @@ none of them can be if keyword argument is used.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

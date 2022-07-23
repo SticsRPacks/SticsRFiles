@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -41,17 +41,20 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Replace stics env name</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/stics_environment.R"><code>R/stics_environment.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/stics_environment.R" class="external-link"><code>R/stics_environment.R</code></a></small>
     <div class="hidden name"><code>sticsenv_set_name.Rd</code></div>
     </div>
 
@@ -74,19 +77,31 @@
     <p>Set the name of the environment where an object is found</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">sticsenv_set_name</span><span class="op">(</span><span class="va">name</span>, env_name <span class="op">=</span> <span class="fu"><a href="sticsenv_name.html">sticsenv_name</a></span><span class="op">(</span><span class="op">)</span>, fix_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sticsenv_set_name</span><span class="op">(</span><span class="va">name</span>, env_name <span class="op">=</span> <span class="fu"><a href="sticsenv_name.html">sticsenv_name</a></span><span class="op">(</span><span class="op">)</span>, fix_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>name</th>
-      <td><p>The name of an object potentially found in a stics environment</p></td>
-    </tr><tr><th>env_name</th>
-      <td><p>The name of the stics environment</p></td>
-    </tr><tr><th>fix_name</th>
-      <td><p>Fix the name of the environment to <code>fix_name</code>, or to <code>paste0("R_", name)</code>
-if <code>NULL</code> (default).</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>name</dt>
+<dd><p>The name of an object potentially found in a stics environment</p></dd>
 
-    <p>The new environment</p>
+
+<dt>env_name</dt>
+<dd><p>The name of the stics environment</p></dd>
+
+
+<dt>fix_name</dt>
+<dd><p>Fix the name of the environment to <code>fix_name</code>, or to <code>paste0("R_", name)</code>
+if <code>NULL</code> (default).</p></dd>
+
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>The new environment</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -96,11 +111,11 @@ if <code>NULL</code> (default).</p></td>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -41,17 +41,20 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>get param desc</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_param_desc.R"><code>R/get_param_desc.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/get_param_desc.R" class="external-link"><code>R/get_param_desc.R</code></a></small>
     <div class="hidden name"><code>get_param_desc.Rd</code></div>
     </div>
 
@@ -74,19 +77,36 @@
     <p>get param desc</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">get_param_desc</span><span class="op">(</span>file_path <span class="op">=</span> <span class="cn">NULL</span>, version <span class="op">=</span> <span class="st">"last"</span>, name <span class="op">=</span> <span class="cn">NULL</span>, kind <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_param_desc</span><span class="op">(</span></span>
+<span>  file_path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  kind <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>file_path</th>
-      <td><p>csv file path</p></td>
-    </tr><tr><th>version</th>
-      <td><p>The stics version. See <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> to get all compatible versions. Default
-to "last", a special code to get the last version.</p></td>
-    </tr><tr><th>name</th>
-      <td><p>a name vector for selecting loaded content using name column matching</p></td>
-    </tr><tr><th>kind</th>
-      <td><p>a name vector for selecting loaded content using kind column matching</p></td>
-    </tr></table></div>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>file_path</dt>
+<dd><p>csv file path</p></dd>
+
+
+<dt>stics_version</dt>
+<dd><p>The stics version. See <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> to get all compatible versions. Default
+to "latest", a special code to get the latest version.</p></dd>
+
+
+<dt>name</dt>
+<dd><p>a name vector for selecting loaded content using name column matching</p></dd>
+
+
+<dt>kind</dt>
+<dd><p>a name vector for selecting loaded content using kind column matching</p></dd>
+
+</dl></div>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
     </nav></div>
@@ -94,11 +114,11 @@ to "last", a special code to get the last version.</p></td>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

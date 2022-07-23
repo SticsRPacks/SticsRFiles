@@ -18,7 +18,7 @@ from a partial name and/or descriptive keywords."><!-- mathjax --><script src="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ from a partial name and/or descriptive keywords."><!-- mathjax --><script src="h
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -42,17 +42,20 @@ from a partial name and/or descriptive keywords."><!-- mathjax --><script src="h
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -67,7 +70,7 @@ from a partial name and/or descriptive keywords."><!-- mathjax --><script src="h
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Find STICS output variable names and description</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/all_out_var.R"><code>R/all_out_var.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/all_out_var.R" class="external-link"><code>R/all_out_var.R</code></a></small>
     <div class="hidden name"><code>get_var_info.Rd</code></div>
     </div>
 
@@ -76,37 +79,62 @@ from a partial name and/or descriptive keywords."><!-- mathjax --><script src="h
 from a partial name and/or descriptive keywords.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">get_var_info</span><span class="op">(</span>var <span class="op">=</span> <span class="cn">NULL</span>, keyword <span class="op">=</span> <span class="cn">NULL</span>, version <span class="op">=</span> <span class="st">"last"</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_var_info</span><span class="op">(</span></span>
+<span>  var <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  keyword <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
+<span>  version <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>var</th>
-      <td><p>Character vector containing a (part of the) name of a STICS output variable.</p></td>
-    </tr><tr><th>keyword</th>
-      <td><p>Search by keyword instead of variable name
-(search in the name and description field)</p></td>
-    </tr><tr><th>version</th>
-      <td><p>The stics version. See <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> to get all compatible versions. Default
-to "last", a special code to get the last version.</p></td>
-    </tr></table><h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>var</dt>
+<dd><p>Vector of variable names (or partial names).
+Optional, if not provided, the function returns information for all variables.</p></dd>
 
-    <p>The function understand <code><a href="https://rdrr.io/r/base/regex.html">regex</a></code> as input.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+<dt>keyword</dt>
+<dd><p>Search by keyword instead of variable name
+(search in the name and description field)</p></dd>
+
+
+<dt>stics_version</dt>
+<dd><p>Name of the Stics version. Optional, can be used to search
+parameters information relative to a specific Stics version. By default the
+latest version returned by <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> is used.</p></dd>
+
+
+<dt>version</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>version</code> is no
+longer supported, use <code>stics_version</code> instead.</p></dd>
+
+</dl></div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>The function understand <code><a href="https://rdrr.io/r/base/regex.html" class="external-link">regex</a></code> as input.</p>
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="all_out_var.html">all_out_var</a></code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Find by variable name (fuzzy search):</span></span>
-<span class="r-in"><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu">get_var_info</span><span class="op">(</span><span class="st">"lai"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Find by keyword (fuzzy search in variable name and description):</span></span>
-<span class="r-in"><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu">get_var_info</span><span class="op">(</span>keyword<span class="op">=</span> <span class="st">"lai"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Find for a particular version:</span></span>
-<span class="r-in"><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu">get_var_info</span><span class="op">(</span><span class="st">"lai"</span>, version<span class="op">=</span> <span class="st">"V9.0"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Find by variable name (fuzzy search):</span></span></span>
+<span class="r-in"><span><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu">get_var_info</span><span class="op">(</span><span class="st">"lai"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Find by keyword (fuzzy search in variable name and description):</span></span></span>
+<span class="r-in"><span><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu">get_var_info</span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"lai"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Find for a particular version:</span></span></span>
+<span class="r-in"><span><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu">get_var_info</span><span class="op">(</span><span class="st">"lai"</span>, stics_version <span class="op">=</span> <span class="st">"V9.0"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -115,11 +143,11 @@ to "last", a special code to get the last version.</p></td>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

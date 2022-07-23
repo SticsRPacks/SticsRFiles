@@ -20,7 +20,7 @@ given as argument"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -32,7 +32,7 @@ given as argument"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -44,17 +44,20 @@ given as argument"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/SticsRPacks/SticsRFiles/">
+  <a href="https://github.com/SticsRPacks/SticsRFiles/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -70,7 +73,7 @@ given as argument"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
     <div class="page-header">
     <h1>Getting an intern dictionnary or merging it with a given dictionnary
 given as argument</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/R/get_params_dict.R"><code>R/get_params_dict.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/R/get_params_dict.R" class="external-link"><code>R/get_params_dict.R</code></a></small>
     <div class="hidden name"><code>get_params_dict.Rd</code></div>
     </div>
 
@@ -79,32 +82,41 @@ given as argument</h1>
 given as argument</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">get_params_dict</span><span class="op">(</span>in_dict <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_params_dict</span><span class="op">(</span>in_dict <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>in_dict</th>
-      <td><p>a named list with parameters names as values</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>in_dict</dt>
+<dd><p>a named list with parameters names as values</p></dd>
 
-    <p>A named list with XML parameters names</p>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Getting internal dictionnary default content</span></span>
-<span class="r-in"><span class="co"># get_param_dict()</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Giving a new dictionnary</span></span>
-<span class="r-in"><span class="va">in_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name1 <span class="op">=</span> <span class="st">"param_name1"</span>, name2 <span class="op">=</span> <span class="st">"param_name2"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_params_dict</span><span class="op">(</span><span class="va">in_dict</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Giving a new dictionnary with common values with the internal one</span></span>
-<span class="r-in"><span class="va">in_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>name1 <span class="op">=</span> <span class="st">"amount"</span>, name2 <span class="op">=</span> <span class="st">"julapI_or_sum_upvt"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_params_dict</span><span class="op">(</span><span class="va">in_dict</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
+<p>A named list with XML parameters names</p>
+    </div>
+
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Getting internal dictionnary default content</span></span></span>
+<span class="r-in"><span><span class="co"># get_param_dict()</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Giving a new dictionnary</span></span></span>
+<span class="r-in"><span><span class="va">in_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name1 <span class="op">=</span> <span class="st">"param_name1"</span>, name2 <span class="op">=</span> <span class="st">"param_name2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_params_dict</span><span class="op">(</span><span class="va">in_dict</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Giving a new dictionnary with common values with the internal one</span></span></span>
+<span class="r-in"><span><span class="va">in_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name1 <span class="op">=</span> <span class="st">"amount"</span>, name2 <span class="op">=</span> <span class="st">"julapI_or_sum_upvt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_params_dict</span><span class="op">(</span><span class="va">in_dict</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -113,11 +125,11 @@ given as argument</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

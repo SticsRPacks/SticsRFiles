@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -59,10 +59,13 @@
       <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating Stics XML files</a>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+    </li>
+    <li>
+      <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
     </li>
   </ul>
 </li>
@@ -94,7 +97,7 @@
       <h1 data-toc-skip>Generating Stics XML files from tabulated data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/master/vignettes/Generating_Stics_XML_files.Rmd" class="external-link"><code>vignettes/Generating_Stics_XML_files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/vignettes/Generating_Stics_XML_files.Rmd" class="external-link"><code>vignettes/Generating_Stics_XML_files.Rmd</code></a></small>
       <div class="hidden name"><code>Generating_Stics_XML_files.Rmd</code></div>
 
     </div>
@@ -102,22 +105,23 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span>
-<span class="co">#&gt; Learn SticsRFiles at: <span style="color: #0000BB; font-weight: bold; text-decoration: underline;">https://SticsRPacks.github.io/SticsRFiles</span></span></code></pre></div>
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Learn SticsRFiles at: <span style="color: #0000BB; font-weight: bold; text-decoration: underline;">https://SticsRPacks.github.io/SticsRFiles</span></span></span></code></pre>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <ul>
-<li><p>In this part information are focusing on functionnalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.</p></li>
+<li><p>In this part information are focusing on functionalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.</p></li>
 <li><p>The functions operate on data loaded as data.frames from Excel sheets or CSV files</p></li>
 <li><p>Specialized functions for producing XML files are taking into account: <strong>initialization files</strong>, <strong>stations files</strong>, <strong>crop management files</strong>, <strong>usms file</strong> and <strong>soils files</strong>. General parameters files generation are not available, but will be eventually included in future developments.</p></li>
 <li><p>Observations data files generation have been included even if they are not in XML format.</p></li>
 <li><p>The generation of wheather files files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.</p></li>
 </ul>
+<p>This document has been generated using the latest STICS version <strong>V10.0</strong>.</p>
 </div>
-<div id="pkg-funs" class="section level1">
-<h1 class="hasAnchor">
-<a href="#pkg-funs" class="anchor" aria-hidden="true"></a>Package functions to be used</h1>
+<div class="section level2">
+<h2 id="pkg-funs">Package functions to be used<a class="anchor" aria-label="anchor" href="#pkg-funs"></a>
+</h2>
 <p>There is not at the moment an integrated function which is able to produce all needed parameters files. Individual functions are dedicated to each parameter file kind and may be called individually or gathered in a single script for doing all tasks at once. Use examples are given in next parts below.</p>
 <ul>
 <li>gen_usms_xml: for generating a <code>usms.xml</code> file</li>
@@ -127,49 +131,49 @@
 <li>gen_sta_xml: for generating weather stations files (<code>*_sta.xml</code>)</li>
 </ul>
 </div>
-<div id="download-excel-example" class="section level1">
-<h1 class="hasAnchor">
-<a href="#download-excel-example" class="anchor" aria-hidden="true"></a>Getting a table file example</h1>
-<div id="get-xl" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-xl" class="anchor" aria-hidden="true"></a>Getting inputs <code>Excel</code> example file from the <code>SticsRFiles</code> package</h2>
+<div class="section level2">
+<h2 id="download-excel-example">Getting a table file example<a class="anchor" aria-label="anchor" href="#download-excel-example"></a>
+</h2>
+<div class="section level3">
+<h3 id="get-xl">Getting inputs <code>Excel</code> example file from the <code>SticsRFiles</code> package<a class="anchor" aria-label="anchor" href="#get-xl"></a>
+</h3>
 <p>In the following example <code>/path/to/target/dir</code> must be replaced with a real path depending on the operating system (i.e. starting with <code>c:/</code> for windows for example)</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Getting the file in the current directory</span>
-<span class="va">usm_xl_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># Getting the file in a specic directory</span>
-<span class="va">xl_dir</span> <span class="op">&lt;-</span> <span class="st">"/path/to/xl/dir"</span> <span class="co"># or something like C:/path/to/xl/dir" for Windows  </span>
-
-<span class="va">usm_xl_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span>dest_dir <span class="op">=</span> <span class="va">xl_dir</span><span class="op">)</span>
-
-<span class="co">#&gt; [1] "inputs_stics_example.xlsx  has been copied in directory  </span>
-<span class="co">#&gt; "/path/to/xl/dir</span></code></pre></div>
-</div>
-<div id="get-csv" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-csv" class="anchor" aria-hidden="true"></a>Getting an USMs inputs <code>CSV</code> example file from the <code>SticsRFiles</code> package</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Getting the file in the current directory</span>
-<span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>csv_name <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span><span class="op">)</span>
-
-<span class="co"># Getting the file in a specific directory</span>
-<span class="va">csv_dir</span>  <span class="op">&lt;-</span> <span class="st">"/path/to/csv/dir"</span> <span class="co"># or something like C:/path/to/xl/dir" for Windows  </span>
-
-<span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>csv_name <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span>, dest_dir <span class="op">=</span> <span class="va">csv_dir</span> <span class="op">)</span>
-
-<span class="co">#&gt; [1] inputs_stics_example_USMs.csv  has been copied in directory    </span>
-<span class="co">#&gt; "/path/to/csv/dir</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Getting the file in the current directory</span></span>
+<span><span class="va">usm_xl_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Getting the file in a specic directory</span></span>
+<span><span class="va">xl_dir</span> <span class="op">&lt;-</span> <span class="st">"/path/to/xl/dir"</span> <span class="co"># or something like C:/path/to/xl/dir" for Windows</span></span>
+<span></span>
+<span><span class="va">usm_xl_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span>out_dir <span class="op">=</span> <span class="va">xl_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; [1] "inputs_stics_example.xlsx  has been copied in directory</span></span>
+<span><span class="co">#&gt; "/path/to/xl/dir</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="get-csv">Getting an USMs inputs <code>CSV</code> example file from the <code>SticsRFiles</code> package<a class="anchor" aria-label="anchor" href="#get-csv"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Getting the file in the current directory</span></span>
+<span><span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Getting the file in a specific directory</span></span>
+<span><span class="va">csv_dir</span>  <span class="op">&lt;-</span> <span class="st">"/path/to/csv/dir"</span> <span class="co"># or something like C:/path/to/xl/dir" for Windows</span></span>
+<span></span>
+<span><span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span>, out_dir <span class="op">=</span> <span class="va">csv_dir</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; [1] inputs_stics_example_USMs.csv  has been copied in directory</span></span>
+<span><span class="co">#&gt; "/path/to/csv/dir</span></span></code></pre></div>
 </div>
 </div>
-<div id="description-of-tables-expected-content-and-use" class="section level1">
-<h1 class="hasAnchor">
-<a href="#description-of-tables-expected-content-and-use" class="anchor" aria-hidden="true"></a>Description of tables expected content and use</h1>
+<div class="section level2">
+<h2 id="description-of-tables-expected-content-and-use">Description of tables expected content and use<a class="anchor" aria-label="anchor" href="#description-of-tables-expected-content-and-use"></a>
+</h2>
 <p>As told in the previous section, parameters data may be stored either in Excel files containing several sheets or in several equivalent individual CSV files.</p>
 <p>Sheets content and CSV files content is the same, only their use is different. But, CSV files are easily traced under verion control systems and they also can be generated programmatically with the help of functions dedicated for example to generating crop management parameters like irrigation, fertilization (interventions and doses calculations).</p>
-<div id="important-information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#important-information" class="anchor" aria-hidden="true"></a>Important information</h2>
+<div class="section level3">
+<h3 id="important-information">Important information<a class="anchor" aria-label="anchor" href="#important-information"></a>
+</h3>
 <p>The USMs data which are necessary for generating the <code>usms.xml</code> must be all provided either through an Excel sheet or a CSV file; as shown in the <a href="#usms-table-example">USMs sheet example</a>.</p>
 <p>Other data stored in Excel or CSV files must be adapted to the use cases here after:</p>
 <ul>
@@ -177,15 +181,15 @@
 <li><p>For generating files with a common set of parameter values and only a part of them must be overloaded with values coming from parameters tables, one <strong>must give an existing</strong> file as a template for files generation to functions <code>gen_*_xml</code> (listed <a href="#pkg-funs">here</a>).</p></li>
 </ul>
 </div>
-<div id="specificities-of-excel-sheets" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specificities-of-excel-sheets" class="anchor" aria-hidden="true"></a>Specificities of Excel sheets</h2>
+<div class="section level3">
+<h3 id="specificities-of-excel-sheets">Specificities of Excel sheets<a class="anchor" aria-label="anchor" href="#specificities-of-excel-sheets"></a>
+</h3>
 <p>Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters set they contain.</p>
 <p>In the example, usefull sheets for generating XML parameters files are named: <strong>USMs, Ini, Soils, Tec, Station</strong></p>
 </div>
-<div id="common-tables-specifications" class="section level2">
-<h2 class="hasAnchor">
-<a href="#common-tables-specifications" class="anchor" aria-hidden="true"></a>Common tables specifications</h2>
+<div class="section level3">
+<h3 id="common-tables-specifications">Common tables specifications<a class="anchor" aria-label="anchor" href="#common-tables-specifications"></a>
+</h3>
 <p>The <strong>first column</strong> is used for storing identifiers or files names (or prefix) and the USMs table contains identifiers of the other linked tables in columns names <strong>finit, nomsol, fstation, ftec_1, ftec_2</strong> with respect to initialization files, soil name, station files and crop management files (for main crops and optionally associated crops).</p>
 <p>The <strong>first column names</strong> of data tables are automatically detected and must contain keywords prefix to do so as listed: <strong>usm_, ini_, soil_, sta_, tec_</strong></p>
 <p>These first columns may contain either <strong>names identifiers or files names</strong> according to data type:</p>
@@ -195,14 +199,11 @@
 </ul>
 <p>Other columns of tables are named with <strong>parameters names</strong> according to the fololowing rules:</p>
 <ul>
-<li>Scalar parameters<br>
-used parameter names must match the exact parameter names (checking it syntax with the help of the <code>get_param_info</code> function)</li>
-<li>Vector parameters<br>
-used parameter names must also match real parameter names with adding a suffix indicating their index; for example jultrav_1, jultrav_2, and so on…</li>
-<li>Exceptions<br>
-in some cases used parameters names in tables may be different from real parameter names</li>
+<li>Scalar parameters used parameter names must match the exact parameter names (checking it syntax with the help of the <code>get_param_info</code> function)</li>
+<li>Vector parameters used parameter names must also match real parameter names with adding a suffix indicating their index; for example jultrav_1, jultrav_2, and so on…</li>
+<li>Exceptions in some cases used parameters names in tables may be different from real parameter names</li>
 </ul>
-<p>Here is the actual <strong>correspendance table</strong> of <code>keywords</code> to be used in parameters tables in replacement of real names:</p>
+<p>Here is the actual <strong>correspondence table</strong> of <code>keywords</code> to be used in parameters tables (i.e excel files for example) in replacement of real names in XML files:</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["keyword"],"name":[1],"type":["chr"],"align":["left"]},{"label":["realname"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"doseN","2":"absolute_value/%"},{"1":"doseI","2":"amount"},{"1":"codcueille","2":"codceuille"},{"1":"code_auto_profres_1","2":"code_auto_profres(1)"},{"1":"code_auto_profres_2","2":"code_auto_profres(2)"},{"1":"codedyntalle_1","2":"codedyntalle(1)"},{"1":"codedyntalle_2","2":"codedyntalle(2)"},{"1":"codemontaison_1","2":"codemontaison(1)"},{"1":"codemontaison_2","2":"codemontaison(2)"},{"1":"coefracoupe_1","2":"coefracoupe(1)"},{"1":"coefracoupe_2","2":"coefracoupe(2)"},{"1":"CsurNsol0","2":"csurNsol"},{"1":"ficinit","2":"finit"},{"1":"Hinitf","2":"hinit"},{"1":"julapI","2":"julapI_or_sum_upvt"},{"1":"julapN","2":"julapN_or_sum_upvt"},{"1":"kdesat","2":"k_desat"},{"1":"maxtalle_1","2":"MaxTalle(1)"},{"1":"maxtalle_2","2":"MaxTalle(2)"},{"1":"nbcueille","2":"nbceuille"},{"1":"NH4initf","2":"NH4init"},{"1":"NO3initf","2":"NO3init"},{"1":"codedate_irrigauto","2":"P_codedate_irrigauto"},{"1":"pH0","2":"pH"},{"1":"Pns","2":"ps"},{"1":"resk_1","2":"resk(1)"},{"1":"resk_2","2":"resk(2)"},{"1":"resplmax_1","2":"resplmax(1)"},{"1":"resplmax_2","2":"resplmax(2)"},{"1":"resz_1","2":"resz(1)"},{"1":"resz_2","2":"resz(2)"},{"1":"seuilLAIapex_1","2":"SeuilLAIapex(1)"},{"1":"seuilLAIapex_2","2":"SeuilLAIapex(2)"},{"1":"seuilmortalle_1","2":"SeuilMorTalle(1)"},{"1":"seuilmortalle_2","2":"SeuilMorTalle(2)"},{"1":"seuilreconspeupl_1","2":"SeuilReconsPeupl(1)"},{"1":"seuilreconspeupl_2","2":"SeuilReconsPeupl(2)"},{"1":"sigmadistalle_1","2":"SigmaDisTalle(1)"},{"1":"sigmadistalle_2","2":"SigmaDisTalle(2)"},{"1":"surfapex_1","2":"SurfApex(1)"},{"1":"surfapex_2","2":"SurfApex(2)"},{"1":"tigefeuilcoupe_1","2":"tigefeuilcoupe(1)"},{"1":"tigefeuilcoupe_2","2":"tigefeuilcoupe(2)"},{"1":"vitreconspeupl_1","2":"VitReconsPeupl(1)"},{"1":"vitreconspeupl_2","2":"VitReconsPeupl(2)"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -210,33 +211,35 @@ in some cases used parameters names in tables may be different from real paramet
 </div>
 <p>As an example, looking in the Tec sheet of the previously downloaded Excel file, irrigation parameters for setting days and amount of water supplied, are respectively named julapI_1, julapI_2,… and doseI_1, doseI_2,… instead of using <strong>absolute_value/%</strong> and <strong>amount</strong>.</p>
 </div>
-<div id="data-consistency-checks-in-tables" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-consistency-checks-in-tables" class="anchor" aria-hidden="true"></a>Data consistency checks in tables</h2>
+<div class="section level3">
+<h3 id="data-consistency-checks-in-tables">Data consistency checks in tables<a class="anchor" aria-label="anchor" href="#data-consistency-checks-in-tables"></a>
+</h3>
 <p>For the moment, <em>no consistency checks</em> (between Excel sheets or CSV equivalents files) functionnalities have been included in the package in order to prevent missing generated files or misspelled file names or identifiers.</p>
 <p>So, one must take care of <strong>links between xml files names</strong> for example files names defined for usms related to names declared for example in Excel sheets <code>Tec</code>, <code>Station</code>, and so on.</p>
 <p>In future developments, checks will be included to run be run prior to files generations, for preventing errors.</p>
 </div>
-<div id="usms-table-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usms-table-example" class="anchor" aria-hidden="true"></a>USMs table example</h2>
+<div class="section level3">
+<h3 id="usms-table-example">USMs table example<a class="anchor" aria-label="anchor" href="#usms-table-example"></a>
+</h3>
 <p>The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).</p>
 <p>The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file.</p>
 <table class="table">
 <colgroup>
-<col width="15%">
+<col width="13%">
 <col width="3%">
-<col width="3%">
+<col width="2%">
 <col width="7%">
 <col width="2%">
 <col width="6%">
-<col width="5%">
-<col width="5%">
+<col width="4%">
+<col width="4%">
 <col width="3%">
 <col width="3%">
 <col width="3%">
-<col width="8%">
-<col width="18%">
+<col width="7%">
+<col width="16%">
+<col width="2%">
+<col width="6%">
 <col width="2%">
 <col width="2%">
 <col width="2%">
@@ -257,9 +260,11 @@ in some cases used parameters names in tables may be different from real paramet
 <th align="left">fplt_1</th>
 <th align="left">ftec_1</th>
 <th align="left">flai_1</th>
+<th align="left">fobs_1</th>
 <th align="left">fplt_2</th>
 <th align="left">ftec_2</th>
 <th align="left">flai_2</th>
+<th align="left">fobs_2</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -276,6 +281,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="right">0</td>
 <td align="left">rapeseed_plt.xml</td>
 <td align="left">USM_2017_T1_CI_tec.xml</td>
+<td align="left"></td>
+<td align="left">USM_2017_T1_CI.obs</td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -295,6 +302,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="right">0</td>
 <td align="left">wheat_plt.xml</td>
 <td align="left">USM_2018_T1_tec.xml</td>
+<td align="left"></td>
+<td align="left">USM_2018_T1.obs</td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -318,6 +327,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q</td>
@@ -333,6 +344,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="right">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -356,6 +369,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">AGA_ARB_13_SEC_220-0-0_37K_ARB13_C</td>
@@ -371,6 +386,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="right">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -394,6 +411,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">MAG_ARB_09_SEC_220-0-0_38K_E</td>
@@ -409,6 +428,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="right">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -432,6 +453,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">MAG_ARV_12_SEC_220-0-0_36K_ARV12_C</td>
@@ -447,6 +470,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="right">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -470,6 +495,8 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">FRA_ARB_13_SEC_220-0-0_37K_ARB13_C</td>
@@ -489,334 +516,338 @@ in some cases used parameters names in tables may be different from real paramet
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="generating-the-usms-xml-file-usms-xml" class="section level1">
-<h1 class="hasAnchor">
-<a href="#generating-the-usms-xml-file-usms-xml" class="anchor" aria-hidden="true"></a>Generating the <code>usms</code> XML file (<em>usms.xml</em>)</h1>
+<div class="section level2">
+<h2 id="generating-the-usms-xml-file-usms-xml">Generating the <code>usms</code> XML file (<em>usms.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-the-usms-xml-file-usms-xml"></a>
+</h2>
 <p>The gen_usms_xml function is working on a data.frame object that can be loaded either from an Excel file sheet or from a csv file. Here after code shows how to get data from the downloaded examples <a href="#get-xl">Excel</a> and <a href="#get-csv">CSV</a> files.</p>
-<div id="getting-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-data" class="anchor" aria-hidden="true"></a>Getting data</h2>
-<!-- Only for the show -->
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Reading the Excel file</span>
-<span class="va">usms_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"USMs"</span><span class="op">)</span>
-<span class="co"># Or </span>
-<span class="co"># Reading the CSV file</span>
-<span class="va">usms_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_csv_file</span><span class="op">)</span></code></pre></div>
-<!-- active chunk to be run -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["usm_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["datedebut"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["datefin"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["finit"],"name":[4],"type":["chr"],"align":["left"]},{"label":["nomsol"],"name":[5],"type":["chr"],"align":["left"]},{"label":["fstation"],"name":[6],"type":["chr"],"align":["left"]},{"label":["fclim1"],"name":[7],"type":["chr"],"align":["left"]},{"label":["fclim2"],"name":[8],"type":["chr"],"align":["left"]},{"label":["culturean"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["nbplantes"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["codesimul"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["fplt_1"],"name":[12],"type":["chr"],"align":["left"]},{"label":["ftec_1"],"name":[13],"type":["chr"],"align":["left"]},{"label":["flai_1"],"name":[14],"type":["chr"],"align":["left"]},{"label":["fplt_2"],"name":[15],"type":["chr"],"align":["left"]},{"label":["ftec_2"],"name":[16],"type":["chr"],"align":["left"]},{"label":["flai_2"],"name":[17],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_2017_T1_CI","2":"199","3":"263","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"1","10":"1","11":"0","12":"rapeseed_plt.xml","13":"USM_2017_T1_CI_tec.xml","14":"","15":"","16":"","17":""},{"1":"USM_2018_T1","2":"264","3":"570","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"wheat_plt.xml","13":"USM_2018_T1_tec.xml","14":"","15":"","16":"","17":""},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","14":"","15":"","16":"","17":""},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","14":"","15":"","16":"","17":""},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":""},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":""},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","14":"","15":"","16":"","17":""},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","14":"","15":"","16":"","17":""},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","14":"","15":"","16":"","17":""},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","14":"","15":"","16":"","17":""},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","14":"","15":"","16":"","17":""},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-<div id="generating-the-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#generating-the-file" class="anchor" aria-hidden="true"></a>Generating the file</h2>
+<div class="section level3">
+<h3 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
+</h3>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># Output file path</span>
-<span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/usms.xml"</span> <span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span>
-
-<span class="co"># Generating a new usms.xml file, for all xl_param lines</span>
-<span class="fu"><a href="../reference/gen_usms_xml.html">gen_usms_xml</a></span><span class="op">(</span>usms_out_file <span class="op">=</span> <span class="va">out_file</span>, usms_param <span class="op">=</span> <span class="va">usms_param</span><span class="op">)</span></code></pre></div>
-<!-- active chunk to be run -->
-</div>
-<div id="usms-xml-file-content" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usms-xml-file-content" class="anchor" aria-hidden="true"></a><code>usms.xml</code> file content</h2>
-<p>Example of the first <code>usm</code> parameters:</p>
-<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
-#&gt; &lt;usms&gt;
-#&gt;   &lt;usm nom="USM_2017_T1_CI"&gt;
-#&gt;     &lt;datedebut&gt;199&lt;/datedebut&gt;
-#&gt;     &lt;datefin&gt;263&lt;/datefin&gt;
-#&gt;     &lt;finit&gt;USM_2017_T1_ini.xml&lt;/finit&gt;
-#&gt;     &lt;nomsol&gt;USM_T1&lt;/nomsol&gt;
-#&gt;     &lt;fstation&gt;climatex_sta.xml&lt;/fstation&gt;
-#&gt;     &lt;fclim1&gt;climatex.2017&lt;/fclim1&gt;
-#&gt;     &lt;fclim2&gt;climatex.2017&lt;/fclim2&gt;
-#&gt;     &lt;culturean&gt;1&lt;/culturean&gt;
-#&gt;     &lt;nbplantes&gt;1&lt;/nbplantes&gt;
-#&gt;     &lt;codesimul&gt;0&lt;/codesimul&gt;
-#&gt;     &lt;plante dominance="1"&gt;
-#&gt;       &lt;fplt&gt;rapeseed_plt.xml&lt;/fplt&gt;
-#&gt;       &lt;ftec&gt;USM_2017_T1_CI_tec.xml&lt;/ftec&gt;
-#&gt;       &lt;flai&gt;null&lt;/flai&gt;
-#&gt;     &lt;/plante&gt;
-#&gt;     &lt;plante dominance="2"&gt;
-#&gt;       &lt;fplt&gt;null&lt;/fplt&gt;
-#&gt;       &lt;ftec&gt;null&lt;/ftec&gt;
-#&gt;       &lt;flai&gt;null&lt;/flai&gt;
-#&gt;     &lt;/plante&gt;
-#&gt;   &lt;/usm&gt;
-#&gt; ...
-#&gt; &lt;/usms&gt;</code></pre>
-</div>
-</div>
-<div id="generating-the-sols-xml-file-sols-xml" class="section level1">
-<h1 class="hasAnchor">
-<a href="#generating-the-sols-xml-file-sols-xml" class="anchor" aria-hidden="true"></a>Generating the <code>sols</code> XML file (<em>sols.xml</em>)</h1>
-<p>As for <code>gen_usms_xml</code>, <code>gen_sols_xml</code> function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the <code>sols.xml</code> file generation section.</p>
-<div id="getting-data-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-data-1" class="anchor" aria-hidden="true"></a>Getting data</h2>
-<!-- Only for the show -->
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Reading the Excel file</span>
-<span class="va">soils_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Soils"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
+<span><span class="va">usms_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"USMs"</span><span class="op">)</span></span>
+<span><span class="co"># Or</span></span>
+<span><span class="co"># Reading the CSV file</span></span>
+<span><span class="va">usms_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_csv_file</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Soil_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["argi"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["norg"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["profhum"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["calc"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["pH"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["concseuil"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["albedo"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["q0"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["ruisolnu"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["obstarac"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["pluiebat"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["mulchbat"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["zesx"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["cfes"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["z0solnu"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["CsurNsol"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["penterui"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["codecailloux"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["codemacropor"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["codefente"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["codrainage"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["profimper"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["ecartdrain"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["ksol"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["profdrain"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["coderemontcap"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["capiljour"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["humcapil"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["codenitrif"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["codedenit"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["profdenit"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["vpotdenit"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["epc_1"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["HCCF_1"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["HMINF_1"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["DAF_1"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["typecailloux_1"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["cailloux_1"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["infil_1"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["epd_1"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["epc_2"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["HCCF_2"],"name":[43],"type":["dbl"],"align":["right"]},{"label":["HMINF_2"],"name":[44],"type":["dbl"],"align":["right"]},{"label":["DAF_2"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["typecailloux_2"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["cailloux_2"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["infil_2"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["epd_2"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["epc_3"],"name":[50],"type":["dbl"],"align":["right"]},{"label":["HCCF_3"],"name":[51],"type":["dbl"],"align":["right"]},{"label":["HMINF_3"],"name":[52],"type":["dbl"],"align":["right"]},{"label":["DAF_3"],"name":[53],"type":["dbl"],"align":["right"]},{"label":["typecailloux_3"],"name":[54],"type":["dbl"],"align":["right"]},{"label":["cailloux_3"],"name":[55],"type":["dbl"],"align":["right"]},{"label":["infil_3"],"name":[56],"type":["dbl"],"align":["right"]},{"label":["epd_3"],"name":[57],"type":["dbl"],"align":["right"]},{"label":["epc_4"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["HCCF_4"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["HMINF_4"],"name":[60],"type":["dbl"],"align":["right"]},{"label":["DAF_4"],"name":[61],"type":["dbl"],"align":["right"]},{"label":["typecailloux_4"],"name":[62],"type":["dbl"],"align":["right"]},{"label":["cailloux_4"],"name":[63],"type":["dbl"],"align":["right"]},{"label":["infil_4"],"name":[64],"type":["dbl"],"align":["right"]},{"label":["epd_4"],"name":[65],"type":["dbl"],"align":["right"]},{"label":["epc_5"],"name":[66],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_T1","2":"20.35000","3":"0.100","4":"40","5":"0.52","6":"8.23","7":"0.20","8":"0.22","9":"9.630","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"1","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"23.75000","36":"10.69000","37":"1.378","38":"1","39":"0","40":"50","41":"10","42":"30","43":"23.75000","44":"10.69000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"22.20000","52":"9.99000","53":"1.556","54":"1","55":"0","56":"50","57":"10","58":"30","59":"22.28000","60":"10.02000","61":"1.588","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"LF1","2":"17.00000","3":"1.900","4":"31","5":"0.00","6":"6.70","7":"0.00","8":"0.22","9":"9.360","10":"0","11":"155","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"23.75642","36":"8.71690","37":"1.384","38":"1","39":"0","40":"50","41":"10","42":"15","43":"22.07603","44":"10.23300","45":"1.600","46":"1","47":"0","48":"50","49":"10","50":"35","51":"21.91055","52":"11.60350","53":"1.610","54":"1","55":"0","56":"50","57":"10","58":"50","59":"22.11954","60":"10.78948","61":"1.590","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"LF2","2":"17.00000","3":"1.800","4":"27","5":"0.00","6":"6.70","7":"0.00","8":"0.22","9":"9.360","10":"0","11":"120","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"23.55866","36":"8.63507","37":"1.388","38":"1","39":"0","40":"50","41":"10","42":"15","43":"22.07603","44":"10.23300","45":"1.600","46":"1","47":"0","48":"50","49":"10","50":"35","51":"21.91055","52":"11.60350","53":"1.610","54":"1","55":"0","56":"50","57":"10","58":"50","59":"22.11954","60":"10.78948","61":"1.590","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"LAP","2":"22.00000","3":"2.000","4":"27","5":"0.00","6":"6.50","7":"0.00","8":"0.22","9":"9.760","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"25","35":"23.99720","36":"10.51450","37":"1.379","38":"1","39":"0","40":"50","41":"10","42":"25","43":"21.44407","44":"9.60248","45":"1.610","46":"1","47":"0","48":"50","49":"10","50":"20","51":"21.52376","52":"10.33508","53":"1.610","54":"1","55":"0","56":"50","57":"10","58":"80","59":"21.46918","60":"10.34594","61":"1.610","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"LAS","2":"24.05000","3":"2.500","4":"40","5":"30.00","6":"8.00","7":"0.00","8":"0.22","9":"9.928","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"1","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"24.46466","36":"12.33346","37":"1.357","38":"1","39":"0","40":"50","41":"10","42":"65","43":"22.42365","44":"11.97536","45":"1.519","46":"1","47":"0","48":"50","49":"10","50":"55","51":"20.77105","52":"11.76273","53":"1.574","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"LA0","2":"30.00675","3":"2.300","4":"30","5":"0.50","6":"7.50","7":"0.00","8":"0.22","9":"10.400","10":"0","11":"150","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"24.72421","36":"13.70100","37":"1.365","38":"1","39":"0","40":"50","41":"10","42":"50","43":"27.81205","44":"22.04558","45":"1.411","46":"1","47":"0","48":"50","49":"10","50":"50","51":"19.74820","52":"13.42940","53":"1.636","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"LC0","2":"22.38750","3":"2.000","4":"50","5":"10.00","6":"7.90","7":"0.20","8":"0.22","9":"9.792","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"25","35":"24.74253","36":"10.79102","37":"1.379","38":"1","39":"0","40":"50","41":"10","42":"15","43":"22.29392","44":"8.76972","45":"1.586","46":"1","47":"0","48":"50","49":"10","50":"110","51":"22.04337","52":"8.03415","53":"1.601","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"Vill09","2":"25.00000","3":"0.101","4":"35","5":"0.40","6":"7.90","7":"0.00","8":"0.22","9":"10.000","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"0.00000","36":"0.00000","37":"1.400","38":"1","39":"0","40":"50","41":"10","42":"30","43":"0.00000","44":"0.00000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"0.00000","52":"0.00000","53":"1.500","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"Vill10","2":"14.30000","3":"0.099","4":"50","5":"1.50","6":"8.20","7":"0.00","8":"0.22","9":"9.144","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"1","21":"1","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"15","30":"2","31":"2","32":"20","33":"2","34":"30","35":"0.00000","36":"0.00000","37":"1.400","38":"1","39":"0","40":"50","41":"10","42":"30","43":"0.00000","44":"0.00000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"0.00000","52":"0.00000","53":"1.500","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"Vill11","2":"11.80000","3":"0.100","4":"30","5":"0.00","6":"7.30","7":"0.05","8":"0.22","9":"8.944","10":"0","11":"90","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"0.00000","36":"0.00000","37":"1.400","38":"1","39":"0","40":"50","41":"10","42":"30","43":"0.00000","44":"0.00000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"0.00000","52":"0.00000","53":"1.500","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"Vill12","2":"14.30000","3":"0.091","4":"30","5":"0.60","6":"8.30","7":"0.01","8":"0.22","9":"9.144","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"0.00000","36":"0.00000","37":"1.400","38":"1","39":"0","40":"50","41":"10","42":"30","43":"0.00000","44":"0.00000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"0.00000","52":"0.00000","53":"1.500","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"Vill13","2":"16.80000","3":"0.088","4":"27","5":"0.20","6":"7.80","7":"0.00","8":"0.22","9":"9.344","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"0.00000","36":"0.00000","37":"1.400","38":"1","39":"0","40":"50","41":"10","42":"30","43":"0.00000","44":"0.00000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"0.00000","52":"0.00000","53":"1.500","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"},{"1":"Vill14","2":"15.10000","3":"0.095","4":"22","5":"1.30","6":"7.90","7":"0.00","8":"0.22","9":"9.208","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.33","19":"2","20":"2","21":"2","22":"2","23":"10","24":"0","25":"0","26":"0","27":"2","28":"1","29":"10","30":"2","31":"2","32":"20","33":"2","34":"30","35":"0.00000","36":"0.00000","37":"1.400","38":"1","39":"0","40":"50","41":"10","42":"30","43":"0.00000","44":"0.00000","45":"1.500","46":"1","47":"0","48":"50","49":"10","50":"30","51":"0.00000","52":"0.00000","53":"1.500","54":"1","55":"0","56":"50","57":"10","58":"0","59":"0.00000","60":"0.00000","61":"0.000","62":"1","63":"0","64":"50","65":"10","66":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["usm_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["datedebut"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["datefin"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["finit"],"name":[4],"type":["chr"],"align":["left"]},{"label":["nomsol"],"name":[5],"type":["chr"],"align":["left"]},{"label":["fstation"],"name":[6],"type":["chr"],"align":["left"]},{"label":["fclim1"],"name":[7],"type":["chr"],"align":["left"]},{"label":["fclim2"],"name":[8],"type":["chr"],"align":["left"]},{"label":["culturean"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["nbplantes"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["codesimul"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["fplt_1"],"name":[12],"type":["chr"],"align":["left"]},{"label":["ftec_1"],"name":[13],"type":["chr"],"align":["left"]},{"label":["flai_1"],"name":[14],"type":["chr"],"align":["left"]},{"label":["fobs_1"],"name":[15],"type":["chr"],"align":["left"]},{"label":["fplt_2"],"name":[16],"type":["chr"],"align":["left"]},{"label":["ftec_2"],"name":[17],"type":["chr"],"align":["left"]},{"label":["flai_2"],"name":[18],"type":["chr"],"align":["left"]},{"label":["fobs_2"],"name":[19],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_2017_T1_CI","2":"199","3":"263","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"1","10":"1","11":"0","12":"rapeseed_plt.xml","13":"USM_2017_T1_CI_tec.xml","14":"","15":"USM_2017_T1_CI.obs","16":"","17":"","18":"","19":""},{"1":"USM_2018_T1","2":"264","3":"570","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"wheat_plt.xml","13":"USM_2018_T1_tec.xml","14":"","15":"USM_2018_T1.obs","16":"","17":"","18":"","19":""},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
-<div id="generating-the-file-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#generating-the-file-1" class="anchor" aria-hidden="true"></a>Generating the file</h2>
+<div class="section level3">
+<h3 id="generating-the-file">Generating the file<a class="anchor" aria-label="anchor" href="#generating-the-file"></a>
+</h3>
+<!-- Only for the show -->
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Output file path</span></span>
+<span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/usms.xml"</span> <span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span></span>
+<span></span>
+<span><span class="co"># Generating a new usms.xml file, for all xl_param lines</span></span>
+<span><span class="fu"><a href="../reference/gen_usms_xml.html">gen_usms_xml</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">out_file</span>, param_df <span class="op">=</span> <span class="va">usms_param</span><span class="op">)</span></span></code></pre></div>
+<!-- active chunk to be run -->
+</div>
+<div class="section level3">
+<h3 id="usms-xml-file-content">
+<code>usms.xml</code> file content<a class="anchor" aria-label="anchor" href="#usms-xml-file-content"></a>
+</h3>
+<p>Example of the first <code>usm</code> parameters:</p>
+<pre><code><span><span class="co">#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span>
+<span><span class="co">#&gt; &lt;usms version="10.0"&gt;</span></span>
+<span><span class="co">#&gt;   &lt;usm nom="USM_2017_T1_CI"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;datedebut&gt;199&lt;/datedebut&gt;</span></span>
+<span><span class="co">#&gt;     &lt;datefin&gt;263&lt;/datefin&gt;</span></span>
+<span><span class="co">#&gt;     &lt;finit&gt;USM_2017_T1_ini.xml&lt;/finit&gt;</span></span>
+<span><span class="co">#&gt;     &lt;nomsol&gt;USM_T1&lt;/nomsol&gt;</span></span>
+<span><span class="co">#&gt;     &lt;fstation&gt;climatex_sta.xml&lt;/fstation&gt;</span></span>
+<span><span class="co">#&gt;     &lt;fclim1&gt;climatex.2017&lt;/fclim1&gt;</span></span>
+<span><span class="co">#&gt;     &lt;fclim2&gt;climatex.2017&lt;/fclim2&gt;</span></span>
+<span><span class="co">#&gt;     &lt;culturean&gt;1&lt;/culturean&gt;</span></span>
+<span><span class="co">#&gt;     &lt;nbplantes&gt;1&lt;/nbplantes&gt;</span></span>
+<span><span class="co">#&gt;     &lt;codesimul&gt;0&lt;/codesimul&gt;</span></span>
+<span><span class="co">#&gt;     &lt;plante dominance="1"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;fplt&gt;rapeseed_plt.xml&lt;/fplt&gt;</span></span>
+<span><span class="co">#&gt;       &lt;ftec&gt;USM_2017_T1_CI_tec.xml&lt;/ftec&gt;</span></span>
+<span><span class="co">#&gt;       &lt;flai&gt;null&lt;/flai&gt;</span></span>
+<span><span class="co">#&gt;       &lt;fobs&gt;USM_2017_T1_CI.obs&lt;/fobs&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/plante&gt;</span></span>
+<span><span class="co">#&gt;     &lt;plante dominance="2"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;fplt&gt;null&lt;/fplt&gt;</span></span>
+<span><span class="co">#&gt;       &lt;ftec&gt;null&lt;/ftec&gt;</span></span>
+<span><span class="co">#&gt;       &lt;flai&gt;null&lt;/flai&gt;</span></span>
+<span><span class="co">#&gt;       &lt;fobs&gt;&lt;/fobs&gt;</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span><span class="co">#&gt; &lt;/usms&gt;</span></span></code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2 id="generating-the-sols-xml-file-sols-xml">Generating the <code>sols</code> XML file (<em>sols.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-the-sols-xml-file-sols-xml"></a>
+</h2>
+<p>As for <code>gen_usms_xml</code>, <code>gen_sols_xml</code> function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the <code>sols.xml</code> file generation section.</p>
+<div class="section level3">
+<h3 id="getting-data-1">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-1"></a>
+</h3>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># Output file path</span>
-<span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/sols.xml"</span> <span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span>
-
-<span class="co"># Generating a new sols.xml file, for all xl_param lines</span>
-<span class="fu"><a href="../reference/gen_sols_xml.html">gen_sols_xml</a></span><span class="op">(</span>sols_out_file <span class="op">=</span> <span class="va">out_file</span>, sols_param <span class="op">=</span> <span class="va">soils_param</span><span class="op">)</span></code></pre></div>
-<!-- active chunk to be run -->
-</div>
-<div id="sols-xml-file-content" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sols-xml-file-content" class="anchor" aria-hidden="true"></a><code>sols.xml</code> file content</h2>
-<p>Example of the first <code>sol</code> parameters sub-list:</p>
-<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-#&gt; &lt;sols&gt;
-#&gt;   &lt;sol nom="USM_T1"&gt;
-#&gt;     &lt;param format="real" max="60.0" min="0.0" nom="argi"&gt;20.35&lt;/param&gt;
-#&gt;     &lt;param format="real" max="0.5" min="0.05" nom="norg"&gt;0.1&lt;/param&gt;
-#&gt;     &lt;param format="real" max="60.0" min="10.0" nom="profhum"&gt;40&lt;/param&gt;
-#&gt;     &lt;param format="real" max="100.0" min="0.0" nom="calc"&gt;0.52&lt;/param&gt;
-#&gt;     &lt;param format="real" max="9.0" min="4.0" nom="pH"&gt;8.23&lt;/param&gt;
-#&gt;     &lt;param format="real" max="0.5" min="0.0" nom="concseuil"&gt;0.2&lt;/param&gt;
-#&gt;     &lt;param format="real" max="0.6" min="0.05" nom="albedo"&gt;0.22&lt;/param&gt;
-#&gt;     &lt;param format="real" max="50.0" min="0.0" nom="q0"&gt;9.63&lt;/param&gt;
-#&gt;     &lt;param format="real" max="1.0" min="0.0" nom="ruisolnu"&gt;0&lt;/param&gt;
-#&gt;     &lt;param format="real" max="1000.0" min="10.0" nom="obstarac"&gt;200&lt;/param&gt;
-#&gt;     &lt;param format="real" max="100.0" min="5.0" nom="pluiebat"&gt;50&lt;/param&gt;
-#&gt;     &lt;param format="real" max="2.0" min="0.0" nom="mulchbat"&gt;0.5&lt;/param&gt;
-#&gt;     &lt;param format="real" max="150.0" min="10.0" nom="zesx"&gt;60&lt;/param&gt;
-#&gt;     &lt;param format="real" max="10.0" min="-10.0" nom="cfes"&gt;5&lt;/param&gt;
-#&gt;     &lt;param format="real" max="0.2" min="0.01" nom="z0solnu"&gt;0.01&lt;/param&gt;
-#&gt;     &lt;param format="real" max="20.0" min="8.0" nom="CsurNsol"&gt;0&lt;/param&gt;
-#&gt;     &lt;param format="real" max="5.0" min="0.0" nom="penterui"&gt;0.33&lt;/param&gt;
-#&gt;     &lt;option choix="2" nom="pebbles" nomParam="codecailloux"&gt;
-#&gt;       &lt;choix code="1" nom="yes"/&gt;
-#&gt;       &lt;choix code="2" nom="no"/&gt;
-#&gt;     &lt;/option&gt;
-#&gt;     &lt;option choix="1" nom="macroporosity" nomParam="codemacropor"&gt;
-#&gt;       &lt;choix code="1" nom="yes"/&gt;
-#&gt;       &lt;choix code="2" nom="no"/&gt;
-#&gt;     &lt;/option&gt;
-#&gt;     &lt;option choix="2" nom="cracks (case of swelling clay soils)" nomParam="codefente"&gt;
-#&gt;       &lt;choix code="1" nom="yes"/&gt;
-#&gt; ...
-#&gt;     &lt;tableau nb_colonnes="8" nom="layer 5"&gt;
-#&gt; ...
-#&gt; &lt;/sols&gt;</code></pre>
-</div>
-</div>
-<div id="generating-multiple-crop-management-xml-files-_tec-xml" class="section level1">
-<h1 class="hasAnchor">
-<a href="#generating-multiple-crop-management-xml-files-_tec-xml" class="anchor" aria-hidden="true"></a>Generating multiple crop management XML files (<em>*_tec.xml</em>)</h1>
-<div id="getting-data-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-data-2" class="anchor" aria-hidden="true"></a>Getting data</h2>
-<!-- Only for the show -->
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Reading the Excel file</span>
-<span class="va">tec_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Tec"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
+<span><span class="va">soils_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Soils"</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Tec_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["julres_1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["coderes_1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["qres_1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Crespc_1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["CsurNres_1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Nminres_1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["eaures_1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["jultrav_1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["profres_1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["proftrav_1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["iplt0"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["profsem"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densitesem"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["variete"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["codestade"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["ilev"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["iamf"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ilax"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["isen"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["ilan"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["iflo"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["idrp"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["imat"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["irec"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["irecbutoir"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["effirr"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["codecalirrig"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["codedateappH2O"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["julapI_1"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["doseI_1"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["julapI_2"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["doseI_2"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["julapI_3"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["doseI_3"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["julapI_4"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["doseI_4"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["julapI_5"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["doseI_5"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["julapI_6"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["doseI_6"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["julapI_7"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["doseI_7"],"name":[43],"type":["dbl"],"align":["right"]},{"label":["julapI_8"],"name":[44],"type":["dbl"],"align":["right"]},{"label":["doseI_8"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["julapI_9"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["doseI_9"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["julapI_10"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["doseI_10"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["julapI_11"],"name":[50],"type":["dbl"],"align":["right"]},{"label":["doseI_11"],"name":[51],"type":["dbl"],"align":["right"]},{"label":["julapI_12"],"name":[52],"type":["dbl"],"align":["right"]},{"label":["doseI_12"],"name":[53],"type":["dbl"],"align":["right"]},{"label":["julapI_13"],"name":[54],"type":["dbl"],"align":["right"]},{"label":["doseI_13"],"name":[55],"type":["dbl"],"align":["right"]},{"label":["julapI_14"],"name":[56],"type":["dbl"],"align":["right"]},{"label":["doseI_14"],"name":[57],"type":["dbl"],"align":["right"]},{"label":["julapI_15"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["doseI_15"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["julapI_16"],"name":[60],"type":["dbl"],"align":["right"]},{"label":["doseI_16"],"name":[61],"type":["dbl"],"align":["right"]},{"label":["julapI_17"],"name":[62],"type":["dbl"],"align":["right"]},{"label":["doseI_17"],"name":[63],"type":["dbl"],"align":["right"]},{"label":["julapI_18"],"name":[64],"type":["dbl"],"align":["right"]},{"label":["doseI_18"],"name":[65],"type":["dbl"],"align":["right"]},{"label":["julapI_19"],"name":[66],"type":["dbl"],"align":["right"]},{"label":["doseI_19"],"name":[67],"type":["dbl"],"align":["right"]},{"label":["julapI_20"],"name":[68],"type":["dbl"],"align":["right"]},{"label":["doseI_20"],"name":[69],"type":["dbl"],"align":["right"]},{"label":["julapI_21"],"name":[70],"type":["dbl"],"align":["right"]},{"label":["doseI_21"],"name":[71],"type":["dbl"],"align":["right"]},{"label":["julapI_22"],"name":[72],"type":["dbl"],"align":["right"]},{"label":["doseI_22"],"name":[73],"type":["dbl"],"align":["right"]},{"label":["julapI_23"],"name":[74],"type":["dbl"],"align":["right"]},{"label":["doseI_23"],"name":[75],"type":["dbl"],"align":["right"]},{"label":["julapI_24"],"name":[76],"type":["dbl"],"align":["right"]},{"label":["doseI_24"],"name":[77],"type":["dbl"],"align":["right"]},{"label":["julapI_25"],"name":[78],"type":["dbl"],"align":["right"]},{"label":["doseI_25"],"name":[79],"type":["dbl"],"align":["right"]},{"label":["codlocirrig"],"name":[80],"type":["dbl"],"align":["right"]},{"label":["locirrig"],"name":[81],"type":["dbl"],"align":["right"]},{"label":["profmes"],"name":[82],"type":["dbl"],"align":["right"]},{"label":["concirr"],"name":[83],"type":["dbl"],"align":["right"]},{"label":["codedateappN"],"name":[84],"type":["dbl"],"align":["right"]},{"label":["codefracappN"],"name":[85],"type":["dbl"],"align":["right"]},{"label":["Qtot_N"],"name":[86],"type":["dbl"],"align":["right"]},{"label":["engrais"],"name":[87],"type":["dbl"],"align":["right"]},{"label":["julapN_1"],"name":[88],"type":["dbl"],"align":["right"]},{"label":["doseN_1"],"name":[89],"type":["dbl"],"align":["right"]},{"label":["julapN_2"],"name":[90],"type":["dbl"],"align":["right"]},{"label":["doseN_2"],"name":[91],"type":["dbl"],"align":["right"]},{"label":["julapN_3"],"name":[92],"type":["dbl"],"align":["right"]},{"label":["doseN_3"],"name":[93],"type":["dbl"],"align":["right"]},{"label":["julapN_4"],"name":[94],"type":["dbl"],"align":["right"]},{"label":["doseN_4"],"name":[95],"type":["dbl"],"align":["right"]},{"label":["codlocferti"],"name":[96],"type":["dbl"],"align":["right"]},{"label":["locferti"],"name":[97],"type":["dbl"],"align":["right"]},{"label":["ressuite"],"name":[98],"type":["chr"],"align":["left"]},{"label":["codceuille"],"name":[99],"type":["dbl"],"align":["right"]},{"label":["nbceuille"],"name":[100],"type":["dbl"],"align":["right"]},{"label":["cadencerec"],"name":[101],"type":["dbl"],"align":["right"]},{"label":["codrecolte"],"name":[102],"type":["dbl"],"align":["right"]},{"label":["nbjmaxapresrecolte"],"name":[103],"type":["dbl"],"align":["right"]},{"label":["codeffeuil"],"name":[104],"type":["dbl"],"align":["right"]},{"label":["codhauteff"],"name":[105],"type":["dbl"],"align":["right"]},{"label":["codcaleffeuil"],"name":[106],"type":["dbl"],"align":["right"]},{"label":["laidebeff"],"name":[107],"type":["dbl"],"align":["right"]},{"label":["effeuil"],"name":[108],"type":["dbl"],"align":["right"]},{"label":["juleffeuil"],"name":[109],"type":["dbl"],"align":["right"]},{"label":["laieffeuil"],"name":[110],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_CI_tec.xml","2":"999","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"999","10":"999","11":"999","12":"199","13":"15","14":"100.000000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1.00","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"0","87":"1","88":"999","89":"1","90":"999","91":"2","92":"999","93":"3","94":"999","95":"4","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"USM_2018_T1_tec.xml","2":"999","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"999","10":"999","11":"999","12":"199","13":"15","14":"100.000000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1.00","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"0","87":"1","88":"999","89":"1","90":"999","91":"2","92":"999","93":"3","94":"999","95":"4","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","2":"110","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"110","10":"5","11":"30","12":"143","13":"15","14":"3.454873","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"266","26":"999","27":"0.75","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","2":"73","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"73","10":"5","11":"30","12":"103","13":"15","14":"3.336699","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"254","26":"999","27":"0.75","28":"2","29":"2","30":"156","31":"25.0","32":"164","33":"25.0","34":"172","35":"25","36":"180","37":"25","38":"185","39":"25","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"182","31":"23.5","32":"182","33":"23.5","34":"188","35":"20","36":"193","37":"30","38":"193","39":"30","40":"199","41":"30","42":"203","43":"34","44":"203","45":"34","46":"216","47":"35","48":"225","49":"17","50":"225","51":"17","52":"244","53":"20","54":"0","55":"0","56":"0","57":"0","58":"0","59":"0","60":"0","61":"0","62":"0","63":"0","64":"0","65":"0","66":"0","67":"0","68":"0","69":"0","70":"0","71":"0","72":"0","73":"0","74":"0","75":"0","76":"0","77":"0","78":"0","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","2":"70","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"70","10":"5","11":"30","12":"100","13":"15","14":"3.850000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"0.75","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","2":"81","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"81","10":"5","11":"30","12":"111","13":"15","14":"3.850000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"248","26":"999","27":"0.75","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.680000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"203","31":"20.0","32":"223","33":"20.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.680000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","2":"92","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"92","10":"5","11":"30","12":"122","13":"15","14":"3.185000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"1.00","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"0","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"0","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"1.00","28":"2","29":"2","30":"999","31":"0.0","32":"999","33":"0.0","34":"999","35":"0","36":"999","37":"0","38":"999","39":"0","40":"999","41":"0","42":"999","43":"0","44":"999","45":"0","46":"999","47":"0","48":"999","49":"0","50":"999","51":"0","52":"999","53":"0","54":"999","55":"0","56":"999","57":"0","58":"999","59":"0","60":"999","61":"0","62":"999","63":"0","64":"999","65":"0","66":"999","67":"0","68":"999","69":"0","70":"999","71":"0","72":"999","73":"0","74":"999","75":"0","76":"999","77":"0","78":"999","79":"0","80":"1","81":"0","82":"120","83":"0","84":"2","85":"1","86":"220","87":"1","88":"143","89":"220","90":"999","91":"0","92":"999","93":"0","94":"999","95":"0","96":"2","97":"15","98":"straw+roots","99":"1","100":"1","101":"7","102":"1","103":"15","104":"1","105":"1","106":"1","107":"0","108":"0","109":"999","110":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Soil_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["argi"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["norg"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["profhum"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["calc"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["pH"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["concseuil"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["albedo"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["q0"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["ruisolnu"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["obstarac"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["pluiebat"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["mulchbat"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["zesx"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["cfes"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["z0solnu"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["CsurNsol"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["finert"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["penterui"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["codecailloux"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["codemacropor"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["codefente"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["codrainage"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["profimper"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["ecartdrain"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["ksol"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["profdrain"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["coderemontcap"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["capiljour"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["humcapil"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["codenitrif"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["codedenit"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["profdenit"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["vpotdenit"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["epc_1"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["HCCF_1"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["HMINF_1"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["DAF_1"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["typecailloux_1"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["cailloux_1"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["infil_1"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["epd_1"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["epc_2"],"name":[43],"type":["dbl"],"align":["right"]},{"label":["HCCF_2"],"name":[44],"type":["dbl"],"align":["right"]},{"label":["HMINF_2"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["DAF_2"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["typecailloux_2"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["cailloux_2"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["infil_2"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["epd_2"],"name":[50],"type":["dbl"],"align":["right"]},{"label":["epc_3"],"name":[51],"type":["dbl"],"align":["right"]},{"label":["HCCF_3"],"name":[52],"type":["dbl"],"align":["right"]},{"label":["HMINF_3"],"name":[53],"type":["dbl"],"align":["right"]},{"label":["DAF_3"],"name":[54],"type":["dbl"],"align":["right"]},{"label":["typecailloux_3"],"name":[55],"type":["dbl"],"align":["right"]},{"label":["cailloux_3"],"name":[56],"type":["dbl"],"align":["right"]},{"label":["infil_3"],"name":[57],"type":["dbl"],"align":["right"]},{"label":["epd_3"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["epc_4"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["HCCF_4"],"name":[60],"type":["dbl"],"align":["right"]},{"label":["HMINF_4"],"name":[61],"type":["dbl"],"align":["right"]},{"label":["DAF_4"],"name":[62],"type":["dbl"],"align":["right"]},{"label":["typecailloux_4"],"name":[63],"type":["dbl"],"align":["right"]},{"label":["cailloux_4"],"name":[64],"type":["dbl"],"align":["right"]},{"label":["infil_4"],"name":[65],"type":["dbl"],"align":["right"]},{"label":["epd_4"],"name":[66],"type":["dbl"],"align":["right"]},{"label":["epc_5"],"name":[67],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_T1","2":"20.35000","3":"0.100","4":"40","5":"0.52","6":"8.23","7":"0.20","8":"0.22","9":"9.630","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"1","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.75000","37":"10.69000","38":"1.378","39":"1","40":"0","41":"50","42":"10","43":"30","44":"23.75000","45":"10.69000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"22.20000","53":"9.99000","54":"1.556","55":"1","56":"0","57":"50","58":"10","59":"30","60":"22.28000","61":"10.02000","62":"1.588","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LF1","2":"17.00000","3":"1.900","4":"31","5":"0.00","6":"6.70","7":"0.00","8":"0.22","9":"9.360","10":"0","11":"155","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.75642","37":"8.71690","38":"1.384","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.07603","45":"10.23300","46":"1.600","47":"1","48":"0","49":"50","50":"10","51":"35","52":"21.91055","53":"11.60350","54":"1.610","55":"1","56":"0","57":"50","58":"10","59":"50","60":"22.11954","61":"10.78948","62":"1.590","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LF2","2":"17.00000","3":"1.800","4":"27","5":"0.00","6":"6.70","7":"0.00","8":"0.22","9":"9.360","10":"0","11":"120","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.55866","37":"8.63507","38":"1.388","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.07603","45":"10.23300","46":"1.600","47":"1","48":"0","49":"50","50":"10","51":"35","52":"21.91055","53":"11.60350","54":"1.610","55":"1","56":"0","57":"50","58":"10","59":"50","60":"22.11954","61":"10.78948","62":"1.590","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LAP","2":"22.00000","3":"2.000","4":"27","5":"0.00","6":"6.50","7":"0.00","8":"0.22","9":"9.760","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"25","36":"23.99720","37":"10.51450","38":"1.379","39":"1","40":"0","41":"50","42":"10","43":"25","44":"21.44407","45":"9.60248","46":"1.610","47":"1","48":"0","49":"50","50":"10","51":"20","52":"21.52376","53":"10.33508","54":"1.610","55":"1","56":"0","57":"50","58":"10","59":"80","60":"21.46918","61":"10.34594","62":"1.610","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LAS","2":"24.05000","3":"2.500","4":"40","5":"30.00","6":"8.00","7":"0.00","8":"0.22","9":"9.928","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"1","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"24.46466","37":"12.33346","38":"1.357","39":"1","40":"0","41":"50","42":"10","43":"65","44":"22.42365","45":"11.97536","46":"1.519","47":"1","48":"0","49":"50","50":"10","51":"55","52":"20.77105","53":"11.76273","54":"1.574","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LA0","2":"30.00675","3":"2.300","4":"30","5":"0.50","6":"7.50","7":"0.00","8":"0.22","9":"10.400","10":"0","11":"150","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"24.72421","37":"13.70100","38":"1.365","39":"1","40":"0","41":"50","42":"10","43":"50","44":"27.81205","45":"22.04558","46":"1.411","47":"1","48":"0","49":"50","50":"10","51":"50","52":"19.74820","53":"13.42940","54":"1.636","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LC0","2":"22.38750","3":"2.000","4":"50","5":"10.00","6":"7.90","7":"0.20","8":"0.22","9":"9.792","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"25","36":"24.74253","37":"10.79102","38":"1.379","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.29392","45":"8.76972","46":"1.586","47":"1","48":"0","49":"50","50":"10","51":"110","52":"22.04337","53":"8.03415","54":"1.601","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill09","2":"25.00000","3":"0.101","4":"35","5":"0.40","6":"7.90","7":"0.00","8":"0.22","9":"10.000","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill10","2":"14.30000","3":"0.099","4":"50","5":"1.50","6":"8.20","7":"0.00","8":"0.22","9":"9.144","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"1","22":"1","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"15","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill11","2":"11.80000","3":"0.100","4":"30","5":"0.00","6":"7.30","7":"0.05","8":"0.22","9":"8.944","10":"0","11":"90","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill12","2":"14.30000","3":"0.091","4":"30","5":"0.60","6":"8.30","7":"0.01","8":"0.22","9":"9.144","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill13","2":"16.80000","3":"0.088","4":"27","5":"0.20","6":"7.80","7":"0.00","8":"0.22","9":"9.344","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill14","2":"15.10000","3":"0.095","4":"22","5":"1.30","6":"7.90","7":"0.00","8":"0.22","9":"9.208","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
-<div id="generating-files" class="section level2">
-<h2 class="hasAnchor">
-<a href="#generating-files" class="anchor" aria-hidden="true"></a>Generating files</h2>
+<div class="section level3">
+<h3 id="generating-the-file-1">Generating the file<a class="anchor" aria-label="anchor" href="#generating-the-file-1"></a>
+</h3>
+<!-- Only for the show -->
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Output file path</span></span>
+<span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/sols.xml"</span> <span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span></span>
+<span></span>
+<span><span class="co"># Generating a new sols.xml file, for all xl_param lines</span></span>
+<span><span class="fu"><a href="../reference/gen_sols_xml.html">gen_sols_xml</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">out_file</span>, param_df <span class="op">=</span> <span class="va">soils_param</span><span class="op">)</span></span></code></pre></div>
+<!-- active chunk to be run -->
+</div>
+<div class="section level3">
+<h3 id="sols-xml-file-content">
+<code>sols.xml</code> file content<a class="anchor" aria-label="anchor" href="#sols-xml-file-content"></a>
+</h3>
+<p>Example of the first <code>sol</code> parameters sub-list:</p>
+<pre><code><span><span class="co">#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span><span class="co">#&gt; &lt;sols version="10.0"&gt;</span></span>
+<span><span class="co">#&gt;   &lt;sol nom="USM_T1"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="60.0" min="0.0" nom="argi"&gt;20.35&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="0.5" min="0.05" nom="norg"&gt;0.1&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="60.0" min="10.0" nom="profhum"&gt;40&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="100.0" min="0.0" nom="calc"&gt;0.52&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="9.0" min="4.0" nom="pH"&gt;8.23&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="0.5" min="0.0" nom="concseuil"&gt;0.2&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="0.6" min="0.05" nom="albedo"&gt;0.22&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="50.0" min="0.0" nom="q0"&gt;9.63&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="1.0" min="0.0" nom="ruisolnu"&gt;0&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="1000.0" min="10.0" nom="obstarac"&gt;200&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="100.0" min="5.0" nom="pluiebat"&gt;50&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="2.0" min="0.0" nom="mulchbat"&gt;0.5&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="150.0" min="10.0" nom="zesx"&gt;60&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="10.0" min="-10.0" nom="cfes"&gt;5&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="0.2" min="0.01" nom="z0solnu"&gt;0.01&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="20.0" min="8.0" nom="CsurNsol"&gt;0&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param nom="finert"&gt;0.65&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="5.0" min="0.0" nom="penterui"&gt;0.33&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="2" nom="pebbles" nomParam="codecailloux"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="yes"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="2" nom="no"/&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/option&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="1" nom="macroporosity" nomParam="codemacropor"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="yes"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="2" nom="no"/&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/option&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="2" nom="cracks (case of swelling clay soils)" nomParam="codefente"&gt;</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span><span class="co">#&gt;     &lt;/tableau&gt;</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span><span class="co">#&gt; &lt;/sols&gt;</span></span></code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2 id="generating-multiple-crop-management-xml-files-_tec-xml">Generating multiple crop management XML files (<em>*_tec.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-crop-management-xml-files-_tec-xml"></a>
+</h2>
+<div class="section level3">
+<h3 id="getting-data-2">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-2"></a>
+</h3>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># *_tec.xml files, one for each xl_param line</span>
-<span class="fu"><a href="../reference/gen_tec_xml.html">gen_tec_xml</a></span><span class="op">(</span>param_table <span class="op">=</span> <span class="va">tec_param</span>, out_path <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
+<span><span class="va">tec_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Tec"</span><span class="op">)</span></span></code></pre></div>
+<!-- active chunk to be run -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Tec_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["julres_1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["coderes_1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["qres_1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Crespc_1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["CsurNres_1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Nminres_1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["eaures_1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["jultrav_1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["profres_1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["proftrav_1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["iplt0"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["profsem"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densitesem"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["variete"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["codestade"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["ilev"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["iamf"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ilax"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["isen"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["ilan"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["iflo"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["idrp"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["imat"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["irec"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["irecbutoir"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["effirr"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["codecalirrig"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["codedateappH2O"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["julapI_1"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["doseI_1"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["julapI_2"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["doseI_2"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["julapI_3"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["doseI_3"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["julapI_4"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["doseI_4"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["julapI_5"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["doseI_5"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["julapI_6"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["doseI_6"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["julapI_7"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["doseI_7"],"name":[43],"type":["dbl"],"align":["right"]},{"label":["julapI_8"],"name":[44],"type":["dbl"],"align":["right"]},{"label":["doseI_8"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["julapI_9"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["doseI_9"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["julapI_10"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["doseI_10"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["julapI_11"],"name":[50],"type":["dbl"],"align":["right"]},{"label":["doseI_11"],"name":[51],"type":["dbl"],"align":["right"]},{"label":["julapI_12"],"name":[52],"type":["dbl"],"align":["right"]},{"label":["doseI_12"],"name":[53],"type":["dbl"],"align":["right"]},{"label":["codlocirrig"],"name":[54],"type":["dbl"],"align":["right"]},{"label":["locirrig"],"name":[55],"type":["dbl"],"align":["right"]},{"label":["profmes"],"name":[56],"type":["dbl"],"align":["right"]},{"label":["concirr"],"name":[57],"type":["dbl"],"align":["right"]},{"label":["codedateappN"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["codefracappN"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["Qtot_N"],"name":[60],"type":["dbl"],"align":["right"]},{"label":["engrais_1"],"name":[61],"type":["dbl"],"align":["right"]},{"label":["julapN_1"],"name":[62],"type":["dbl"],"align":["right"]},{"label":["doseN_1"],"name":[63],"type":["dbl"],"align":["right"]},{"label":["codlocferti"],"name":[64],"type":["dbl"],"align":["right"]},{"label":["locferti"],"name":[65],"type":["dbl"],"align":["right"]},{"label":["ressuite"],"name":[66],"type":["chr"],"align":["left"]},{"label":["codceuille"],"name":[67],"type":["dbl"],"align":["right"]},{"label":["nbceuille"],"name":[68],"type":["dbl"],"align":["right"]},{"label":["cadencerec"],"name":[69],"type":["dbl"],"align":["right"]},{"label":["codrecolte"],"name":[70],"type":["dbl"],"align":["right"]},{"label":["nbjmaxapresrecolte"],"name":[71],"type":["dbl"],"align":["right"]},{"label":["codeffeuil"],"name":[72],"type":["dbl"],"align":["right"]},{"label":["codhauteff"],"name":[73],"type":["dbl"],"align":["right"]},{"label":["codcaleffeuil"],"name":[74],"type":["dbl"],"align":["right"]},{"label":["laidebeff"],"name":[75],"type":["dbl"],"align":["right"]},{"label":["effeuil"],"name":[76],"type":["dbl"],"align":["right"]},{"label":["juleffeuil"],"name":[77],"type":["chr"],"align":["left"]},{"label":["laieffeuil"],"name":[78],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_CI_tec.xml","2":"52","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"NA","10":"NA","11":"NA","12":"199","13":"15","14":"100.000000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"NA","61":"NA","62":"NA","63":"NA","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"USM_2018_T1_tec.xml","2":"74","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"NA","10":"NA","11":"NA","12":"199","13":"15","14":"100.000000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"NA","61":"NA","62":"NA","63":"NA","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","2":"110","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"110","10":"5","11":"30","12":"143","13":"15","14":"3.454873","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"266","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","2":"73","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"73","10":"5","11":"30","12":"103","13":"15","14":"3.336699","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"254","26":"999","27":"0.75","28":"2","29":"2","30":"156","31":"25.0","32":"164","33":"25.0","34":"172","35":"25","36":"180","37":"25","38":"185","39":"25","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"182","31":"23.5","32":"182","33":"23.5","34":"188","35":"20","36":"193","37":"30","38":"193","39":"30","40":"199","41":"30","42":"203","43":"34","44":"203","45":"34","46":"216","47":"35","48":"225","49":"17","50":"225","51":"17","52":"244","53":"20","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","2":"70","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"70","10":"5","11":"30","12":"100","13":"15","14":"3.850000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","2":"81","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"81","10":"5","11":"30","12":"111","13":"15","14":"3.850000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"248","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.680000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"203","31":"20.0","32":"223","33":"20.0","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.680000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","2":"92","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"92","10":"5","11":"30","12":"122","13":"15","14":"3.185000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"0","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"0","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="section level3">
+<h3 id="generating-files">Generating files<a class="anchor" aria-label="anchor" href="#generating-files"></a>
+</h3>
+<!-- Only for the show -->
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># *_tec.xml files, one for each xl_param line</span></span>
+<span><span class="fu"><a href="../reference/gen_tec_xml.html">gen_tec_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">tec_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 <p>Example of a <code>tec</code> parameters file content sub-list:</p>
-<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
-#&gt; &lt;fichiertec&gt;
-#&gt;   &lt;formalisme nom="supply of organic residus"&gt;
-#&gt;     &lt;ta nb_interventions="1" nom="interventions"&gt;
-#&gt;       &lt;ta_entete nb_colonnes="7"&gt;
-#&gt;         &lt;colonne nom="julres"/&gt;
-#&gt;         &lt;colonne nom="coderes"/&gt;
-#&gt;         &lt;colonne nom="qres"/&gt;
-#&gt;         &lt;colonne nom="Crespc"/&gt;
-#&gt;         &lt;colonne nom="CsurNres"/&gt;
-#&gt;         &lt;colonne nom="Nminres"/&gt;
-#&gt;         &lt;colonne nom="eaures"/&gt;
-#&gt;       &lt;/ta_entete&gt;
-#&gt;       &lt;intervention nb_colonnes="7"&gt;
-#&gt;         &lt;colonne nom="julres"&gt;110&lt;/colonne&gt;
-#&gt;         &lt;colonne nom="coderes"&gt;1&lt;/colonne&gt;
-#&gt;         &lt;colonne nom="qres"&gt;9&lt;/colonne&gt;
-#&gt;         &lt;colonne nom="Crespc"&gt;42&lt;/colonne&gt;
-#&gt;         &lt;colonne nom="CsurNres"&gt;90&lt;/colonne&gt;
-#&gt;         &lt;colonne nom="Nminres"&gt;0&lt;/colonne&gt;
-#&gt;         &lt;colonne nom="eaures"&gt;7&lt;/colonne&gt;
-#&gt;       &lt;/intervention&gt;
-#&gt;     &lt;/ta&gt;
-#&gt;   &lt;/formalisme&gt;
-#&gt;   &lt;formalisme nom="soil tillage"&gt;
-#&gt;     &lt;ta nb_interventions="1" nom="interventions"&gt;
-#&gt;       &lt;ta_entete nb_colonnes="3"&gt;
-#&gt;         &lt;colonne nom="jultrav"/&gt;
-#&gt;         &lt;colonne nom="profres"/&gt;
-#&gt;         &lt;colonne nom="proftrav"/&gt;
-#&gt; ...
-#&gt; &lt;/fichiertec&gt;</code></pre>
+<pre><code><span><span class="co">#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span>
+<span><span class="co">#&gt; &lt;fichiertec version="10.0"&gt;</span></span>
+<span><span class="co">#&gt;   &lt;formalisme nom="supply of organic residus"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;ta nb_interventions="1" nom="interventions"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;ta_entete nb_colonnes="7"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="julres"/&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="coderes"/&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="qres"/&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="Crespc"/&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="CsurNres"/&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="Nminres"/&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="eaures"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;/ta_entete&gt;</span></span>
+<span><span class="co">#&gt;       &lt;intervention nb_colonnes="7"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="julres"&gt;110&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="coderes"&gt;1&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="qres"&gt;9&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="Crespc"&gt;42&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="CsurNres"&gt;90&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="Nminres"&gt;0&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;         &lt;colonne nom="eaures"&gt;7&lt;/colonne&gt;</span></span>
+<span><span class="co">#&gt;       &lt;/intervention&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/ta&gt;</span></span>
+<span><span class="co">#&gt;   &lt;/formalisme&gt;</span></span>
+<span><span class="co">#&gt;   &lt;formalisme nom="soil tillage"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="2" nom="Automatic calculation of the depth of residues incorporation in function of proftrav" nomParam="code_auto_profres"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="yes"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="0.0" min="1.0" nom="resk"&gt;-999&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="0.0" min="10.0" nom="resz"&gt;-999&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;       &lt;/choix&gt;</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span><span class="co">#&gt; &lt;/fichiertec&gt;</span></span></code></pre>
 </div>
 </div>
-<div id="generating-multiple-initialization-xml-files-_ini-xml" class="section level1">
-<h1 class="hasAnchor">
-<a href="#generating-multiple-initialization-xml-files-_ini-xml" class="anchor" aria-hidden="true"></a>Generating multiple initialization XML files (<em>*_ini.xml</em>)</h1>
-<div id="getting-data-3" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-data-3" class="anchor" aria-hidden="true"></a>Getting data</h2>
-<!-- Only for the show -->
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Reading the Excel file</span>
-<span class="va">ini_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Ini"</span><span class="op">)</span></code></pre></div>
-<!-- active chunk to be run -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Ini_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["stade0_Crop1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["lai0_Crop1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["masec0_Crop1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["QNplante0_Crop1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["magrain0_Crop1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["zrac0_Crop1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["resperenne0_Crop1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["densinitial_1_Crop1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["densinitial_2_Crop1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["densinitial_3_Crop1"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["densinitial_4_Crop1"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densinitial_5_Crop1"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["hinit_1"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["hinit_2"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["hinit_3"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["hinit_4"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["hinit_5"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["NO3init_1"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["NO3init_2"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["NO3init_3"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["NO3init_4"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["NO3init_5"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["NH4init_1"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["NH4init_2"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["NH4init_3"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["NH4init_4"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["NH4init_5"],"name":[29],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"12.24982","16":"11.40512","17":"12.40357","18":"14.07414","19":"12.57361","20":"43.322","21":"6.1706","22":"2.0362","23":"1.1692","24":"2.031","25":"2.5564","26":"2.1078","27":"1.3432","28":"1.0428","29":"1.0587"},{"1":"Vill09_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"20.50000","16":"20.40000","17":"21.20000","18":"0.00000","19":"0.00000","20":"38.100","21":"27.1000","22":"23.8000","23":"0.0000","24":"0.000","25":"1.8000","26":"1.8000","27":"0.7000","28":"0.0000","29":"0.0000"},{"1":"Vill10_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"26.00000","16":"21.70000","17":"22.40000","18":"0.00000","19":"0.00000","20":"3.800","21":"13.3000","22":"11.0000","23":"0.0000","24":"0.000","25":"4.9000","26":"1.3000","27":"0.7000","28":"0.0000","29":"0.0000"},{"1":"Vill11_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0.00000","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"20.000","21":"20.0000","22":"15.0000","23":"0.0000","24":"0.000","25":"10.0000","26":"10.0000","27":"4.0000","28":"0.0000","29":"0.0000"},{"1":"Vill12_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"25.10000","16":"22.90000","17":"22.40000","18":"0.00000","19":"0.00000","20":"22.000","21":"12.2000","22":"8.4000","23":"0.0000","24":"0.000","25":"2.5000","26":"1.9000","27":"1.5000","28":"0.0000","29":"0.0000"},{"1":"Vill13_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"21.00000","16":"19.50000","17":"20.00000","18":"0.00000","19":"0.00000","20":"46.200","21":"55.5000","22":"26.8000","23":"0.0000","24":"0.000","25":"35.5000","26":"50.3000","27":"16.5000","28":"0.0000","29":"0.0000"},{"1":"Vill14_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"22.70000","16":"21.10000","17":"21.60000","18":"0.00000","19":"0.00000","20":"23.100","21":"22.3000","22":"12.9000","23":"0.0000","24":"0.000","25":"11.7000","26":"4.0000","27":"1.5000","28":"0.0000","29":"0.0000"},{"1":"Standard_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0.00000","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"20.000","21":"20.0000","22":"15.0000","23":"0.0000","24":"0.000","25":"10.0000","26":"10.0000","27":"4.0000","28":"0.0000","29":"0.0000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-<div id="generating-files-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#generating-files-1" class="anchor" aria-hidden="true"></a>Generating files</h2>
+<div class="section level2">
+<h2 id="generating-multiple-initialization-xml-files-_ini-xml">Generating multiple initialization XML files (<em>*_ini.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-initialization-xml-files-_ini-xml"></a>
+</h2>
+<div class="section level3">
+<h3 id="getting-data-3">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-3"></a>
+</h3>
 <!-- Only for the show -->
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># *_ini.xml files, one for each xl_param line</span>
-<span class="fu"><a href="../reference/gen_ini_xml.html">gen_ini_xml</a></span><span class="op">(</span>param_table <span class="op">=</span> <span class="va">ini_param</span>, out_path <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></code></pre></div>
-<!-- active chunk to be run -->
-</div>
-<div id="xml-file-content" class="section level2">
-<h2 class="hasAnchor">
-<a href="#xml-file-content" class="anchor" aria-hidden="true"></a>XML file content</h2>
-<p>Example of a <code>ini</code> parameters file content sub-list:</p>
-<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-#&gt; &lt;initialisations&gt;
-#&gt;   &lt;nbplantes&gt;1&lt;/nbplantes&gt;
-#&gt;   &lt;plante dominance="1"&gt;
-#&gt;     &lt;stade0&gt;snu&lt;/stade0&gt;
-#&gt;     &lt;lai0&gt;0&lt;/lai0&gt;
-#&gt;     &lt;masec0&gt;0&lt;/masec0&gt;
-#&gt;     &lt;QNplante0&gt;0&lt;/QNplante0&gt;
-#&gt;     &lt;magrain0&gt;0&lt;/magrain0&gt;
-#&gt;     &lt;zrac0&gt;0&lt;/zrac0&gt;
-#&gt;     &lt;resperenne0&gt;0&lt;/resperenne0&gt;
-#&gt;     &lt;densinitial&gt;
-#&gt;       &lt;horizon nh="1"&gt;0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="2"&gt;0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="3"&gt;0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="4"&gt;0&lt;/horizon&gt;
-#&gt;       &lt;horizon nh="5"&gt;0&lt;/horizon&gt;
-#&gt;     &lt;/densinitial&gt;
-#&gt;   &lt;/plante&gt;
-#&gt; ...
-#&gt; &lt;/initialisations&gt;</code></pre>
-</div>
-</div>
-<div id="generating-multiple-meteorological-station-xml-files-_sta-xml" class="section level1">
-<h1 class="hasAnchor">
-<a href="#generating-multiple-meteorological-station-xml-files-_sta-xml" class="anchor" aria-hidden="true"></a>Generating multiple meteorological station XML files (<em>*_sta.xml</em>)</h1>
-<div id="getting-data-4" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-data-4" class="anchor" aria-hidden="true"></a>Getting data</h2>
-<!-- Only for the show -->
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Reading the Excel file</span>
-<span class="va">sta_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Station"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
+<span><span class="va">ini_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Ini"</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Sta_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["zr"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NH3ref"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["latitude"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["patm"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["aclim"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["codeetp"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["alphapt"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["codeclichange"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["codaltitude"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["altistation"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["altisimul"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["gradtn"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["gradtx"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["altinversion"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["gradtninv"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["cielclair"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["codadret"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ombragetx"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["ra"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["albveg"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["aangst"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["bangst"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["corecTrosee"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["codecaltemp"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["codernet"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["coefdevil"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["aks"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["bks"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["cvent"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["phiv0"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["coefrnet"],"name":[32],"type":["dbl"],"align":["right"]}],"data":[{"1":"climatex_sta.xml","2":"2.5","3":"0","4":"49","5":"1000","6":"20","7":"1","8":"1.25","9":"1","10":"1","11":"440","12":"800","13":"-0.5","14":"-0.55","15":"500","16":"1.3","17":"0.8","18":"1","19":"-1.4","20":"50","21":"0.23","22":"0.18","23":"0.62","24":"1","25":"1","26":"2","27":"0.7","28":"6","29":"0.5","30":"0.16","31":"0.004","32":"0.59"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Ini_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["stade0_Crop1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["lai0_Crop1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["masec0_Crop1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["QNplante0_Crop1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["magrain0_Crop1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["zrac0_Crop1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["restemp0_Crop1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["densinitial_1_Crop1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["densinitial_2_Crop1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["densinitial_3_Crop1"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["densinitial_4_Crop1"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densinitial_5_Crop1"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["Hinitf_1"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Hinitf_2"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["Hinitf_3"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Hinitf_4"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Hinitf_5"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["NO3initf_1"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["NO3initf_2"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["NO3initf_3"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["NO3initf_4"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["NO3initf_5"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["NH4initf_1"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["NH4initf_2"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["NH4initf_3"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["NH4initf_4"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["NH4initf_5"],"name":[29],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"12.24982","16":"11.40512","17":"12.40357","18":"14.07414","19":"12.57361","20":"43.322","21":"6.1706","22":"2.0362","23":"1.1692","24":"2.031","25":"2.5564","26":"2.1078","27":"1.3432","28":"1.0428","29":"1.0587"},{"1":"Vill09_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"20.50000","16":"20.40000","17":"21.20000","18":"0.00000","19":"0.00000","20":"38.100","21":"27.1000","22":"23.8000","23":"0.0000","24":"0.000","25":"1.8000","26":"1.8000","27":"0.7000","28":"0.0000","29":"0.0000"},{"1":"Vill10_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"26.00000","16":"21.70000","17":"22.40000","18":"0.00000","19":"0.00000","20":"3.800","21":"13.3000","22":"11.0000","23":"0.0000","24":"0.000","25":"4.9000","26":"1.3000","27":"0.7000","28":"0.0000","29":"0.0000"},{"1":"Vill11_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0.00000","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"20.000","21":"20.0000","22":"15.0000","23":"0.0000","24":"0.000","25":"10.0000","26":"10.0000","27":"4.0000","28":"0.0000","29":"0.0000"},{"1":"Vill12_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"25.10000","16":"22.90000","17":"22.40000","18":"0.00000","19":"0.00000","20":"22.000","21":"12.2000","22":"8.4000","23":"0.0000","24":"0.000","25":"2.5000","26":"1.9000","27":"1.5000","28":"0.0000","29":"0.0000"},{"1":"Vill13_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"21.00000","16":"19.50000","17":"20.00000","18":"0.00000","19":"0.00000","20":"46.200","21":"55.5000","22":"26.8000","23":"0.0000","24":"0.000","25":"35.5000","26":"50.3000","27":"16.5000","28":"0.0000","29":"0.0000"},{"1":"Vill14_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"22.70000","16":"21.10000","17":"21.60000","18":"0.00000","19":"0.00000","20":"23.100","21":"22.3000","22":"12.9000","23":"0.0000","24":"0.000","25":"11.7000","26":"4.0000","27":"1.5000","28":"0.0000","29":"0.0000"},{"1":"Standard_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0.00000","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"20.000","21":"20.0000","22":"15.0000","23":"0.0000","24":"0.000","25":"10.0000","26":"10.0000","27":"4.0000","28":"0.0000","29":"0.0000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
-<div id="generating-files-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#generating-files-2" class="anchor" aria-hidden="true"></a>Generating files</h2>
+<div class="section level3">
+<h3 id="generating-files-1">Generating files<a class="anchor" aria-label="anchor" href="#generating-files-1"></a>
+</h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># *_sta.xml files, one for each xl_param line</span>
-<span class="fu"><a href="../reference/gen_sta_xml.html">gen_sta_xml</a></span><span class="op">(</span>param_table <span class="op">=</span> <span class="va">sta_param</span>, out_path <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># *_ini.xml files, one for each xl_param line</span></span>
+<span><span class="fu"><a href="../reference/gen_ini_xml.html">gen_ini_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">ini_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 </div>
-<div id="xml-file-content-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#xml-file-content-1" class="anchor" aria-hidden="true"></a>XML file content</h2>
+<div class="section level3">
+<h3 id="xml-file-content">XML file content<a class="anchor" aria-label="anchor" href="#xml-file-content"></a>
+</h3>
+<p>Example of a <code>ini</code> parameters file content sub-list:</p>
+<pre><code><span><span class="co">#&gt; &lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span><span class="co">#&gt; &lt;initialisations version="10.0"&gt;</span></span>
+<span><span class="co">#&gt;   &lt;nbplantes&gt;1&lt;/nbplantes&gt;</span></span>
+<span><span class="co">#&gt;   &lt;plante dominance="1"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;stade0&gt;snu&lt;/stade0&gt;</span></span>
+<span><span class="co">#&gt;     &lt;lai0&gt;0&lt;/lai0&gt;</span></span>
+<span><span class="co">#&gt;     &lt;magrain0&gt;0&lt;/magrain0&gt;</span></span>
+<span><span class="co">#&gt;     &lt;zrac0&gt;0&lt;/zrac0&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="yes"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;maperenne0&gt;0&lt;/maperenne0&gt;</span></span>
+<span><span class="co">#&gt;         &lt;QNperenne0&gt;0&lt;/QNperenne0&gt;</span></span>
+<span><span class="co">#&gt;         &lt;masecnp0&gt;0&lt;/masecnp0&gt;</span></span>
+<span><span class="co">#&gt;         &lt;QNplantenp0&gt;0&lt;/QNplantenp0&gt;</span></span>
+<span><span class="co">#&gt;       &lt;/choix&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="2" nom="no"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;masec0&gt;0&lt;/masec0&gt;</span></span>
+<span><span class="co">#&gt;         &lt;QNplante0&gt;0&lt;/QNplante0&gt;</span></span>
+<span><span class="co">#&gt;         &lt;restemp0&gt;0&lt;/restemp0&gt;</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span><span class="co">#&gt; &lt;/initialisations&gt;</span></span></code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2 id="generating-multiple-meteorological-station-xml-files-_sta-xml">Generating multiple meteorological station XML files (<em>*_sta.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-meteorological-station-xml-files-_sta-xml"></a>
+</h2>
+<div class="section level3">
+<h3 id="getting-data-4">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-4"></a>
+</h3>
+<!-- Only for the show -->
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
+<span><span class="va">sta_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Station"</span><span class="op">)</span></span></code></pre></div>
+<!-- active chunk to be run -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Sta_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["zr"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NH3ref"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["latitude"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["patm"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["aclim"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["codeetp"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["alphapt"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["codeclichange"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["codaltitude"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["altistation"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["altisimul"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["gradtn"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["gradtx"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["altinversion"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["gradtninv"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["cielclair"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["codadret"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ombragetx"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["ra"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["albveg"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["aangst"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["bangst"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["corecTrosee"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["codecaltemp"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["codernet"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["coefdevil"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["aks"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["bks"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["cvent"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["phiv0"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["coefrnet"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["tsmax"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["trmax"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["DKmax"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["Kmin"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["Tmf"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["SWrf"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["Pns"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["E"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["prof"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["tminseuil"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["tmaxseuil"],"name":[43],"type":["dbl"],"align":["right"]}],"data":[{"1":"climatex_sta.xml","2":"2.5","3":"0","4":"49","5":"1000","6":"20","7":"1","8":"1.25","9":"1","10":"1","11":"440","12":"800","13":"-0.5","14":"-0.55","15":"500","16":"1.3","17":"0.8","18":"1","19":"-1.4","20":"50","21":"0.23","22":"0.18","23":"0.62","24":"1","25":"1","26":"2","27":"0.7","28":"6","29":"0.5","30":"0.16","31":"0.004","32":"0.59","33":"-1.99","34":"1","35":"1.49","36":"2","37":"0.49","38":"0.01","39":"99.9","40":"0.02","41":"9.99","42":"-0.6","43":"0.1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="section level3">
+<h3 id="generating-files-2">Generating files<a class="anchor" aria-label="anchor" href="#generating-files-2"></a>
+</h3>
+<!-- Only for the show -->
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># *_sta.xml files, one for each xl_param line</span></span>
+<span><span class="fu"><a href="../reference/gen_sta_xml.html">gen_sta_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">sta_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></span></code></pre></div>
+<!-- active chunk to be run -->
+</div>
+<div class="section level3">
+<h3 id="xml-file-content-1">XML file content<a class="anchor" aria-label="anchor" href="#xml-file-content-1"></a>
+</h3>
 <p>Example of a <code>sta</code> parameters file content sub-list:</p>
-<pre><code>#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
-#&gt; &lt;fichiersta&gt;
-#&gt;   &lt;formalisme nom="Weather station"&gt;
-#&gt;     &lt;param format="real" max="10.0" min="2.0" nom="zr"&gt;2.5&lt;/param&gt;
-#&gt;     &lt;param format="real" max="10.0" min="0.0" nom="NH3ref"&gt;0&lt;/param&gt;
-#&gt;     &lt;param format="real" max="90.0" min="-90.0" nom="latitude"&gt;49&lt;/param&gt;
-#&gt;     &lt;param format="real" max="1200.0" min="800.0" nom="patm"&gt;1000&lt;/param&gt;
-#&gt;     &lt;param format="real" max="25.0" min="4.0" nom="aclim"&gt;20&lt;/param&gt;
-#&gt;   &lt;/formalisme&gt;
-#&gt;   &lt;formalisme nom="climate"&gt;
-#&gt;     &lt;option choix="1" nom="reading OR calculation of PET" nomParam="codeetp"&gt;
-#&gt;       &lt;choix code="1" nom="PET-Penman_reading"/&gt;
-#&gt;       &lt;choix code="2" nom="PET-Penman_calculation"/&gt;
-#&gt;       &lt;choix code="3" nom="PET-Shuttleworth-Wallace_calculation"/&gt;
-#&gt;       &lt;choix code="4" nom="PET-Priestley-Taylor_calculation"&gt;
-#&gt;         &lt;param format="real" max="2.0" min="1.0" nom="alphapt"&gt;1.25&lt;/param&gt;
-#&gt;       &lt;/choix&gt;
-#&gt;     &lt;/option&gt;
-#&gt;     &lt;option choix="1" nom="climate change" nomParam="codeclichange"&gt;
-#&gt;       &lt;choix code="1" nom="no"/&gt;
-#&gt;       &lt;choix code="2" nom="yes"/&gt;
-#&gt;     &lt;/option&gt;
-#&gt;     &lt;option choix="1" nom="climate in altitude" nomParam="codaltitude"&gt;
-#&gt;       &lt;choix code="1" nom="no"/&gt;
-#&gt;       &lt;choix code="2" nom="yes"&gt;
-#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altistation"&gt;440&lt;/param&gt;
-#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altisimul"&gt;800&lt;/param&gt;
-#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtn"&gt;-0.5&lt;/param&gt;
-#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtx"&gt;-0.55&lt;/param&gt;
-#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altinversion"&gt;500&lt;/param&gt;
-#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtninv"&gt;1.3&lt;/param&gt;
-#&gt;         &lt;param format="real" max="1.0" min="0.0" nom="cielclair"&gt;0.8&lt;/param&gt;
-#&gt;         &lt;option choix="1" nom="option.adret.or.ubac" nomParam="codadret"&gt;
-#&gt;           &lt;choix code="1" nom="adret(south)"/&gt;
-#&gt;           &lt;choix code="2" nom="ubac(north)"&gt;
-#&gt;             &lt;param format="real" max="5.0" min="-5.0" nom="ombragetx"&gt;-1.4&lt;/param&gt;
-#&gt;           &lt;/choix&gt;
-#&gt;         &lt;/option&gt;
-#&gt;       &lt;/choix&gt;
-#&gt;     &lt;/option&gt;
-#&gt;   &lt;/formalisme&gt;
-#&gt; ...
-#&gt; &lt;/fichiersta&gt;</code></pre>
+<pre><code><span><span class="co">#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span>
+<span><span class="co">#&gt; &lt;fichiersta version="10.0"&gt;</span></span>
+<span><span class="co">#&gt;   &lt;formalisme nom="Weather station"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="10.0" min="2.0" nom="zr"&gt;2.5&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="10.0" min="0.0" nom="NH3ref"&gt;0&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="3.0" min="0.0" nom="concrr"/&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="90.0" min="-90.0" nom="latitude"&gt;49&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="1200.0" min="800.0" nom="patm"&gt;1000&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;     &lt;param format="real" max="25.0" min="4.0" nom="aclim"&gt;20&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;   &lt;/formalisme&gt;</span></span>
+<span><span class="co">#&gt;   &lt;formalisme nom="climate"&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="1" nom="reading OR calculation of PET" nomParam="codeetp"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="PET-Penman_reading"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="2" nom="PET-Penman_calculation"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="3" nom="PET-Shuttleworth-Wallace_calculation"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="4" nom="PET-Priestley-Taylor_calculation"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="2.0" min="1.0" nom="alphapt"&gt;1.25&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;       &lt;/choix&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/option&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="1" nom="climate change" nomParam="codeclichange"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="no"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="2" nom="yes"/&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/option&gt;</span></span>
+<span><span class="co">#&gt;     &lt;option choix="1" nom="climate in altitude" nomParam="codaltitude"&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="1" nom="no"/&gt;</span></span>
+<span><span class="co">#&gt;       &lt;choix code="2" nom="yes"&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altistation"&gt;440&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altisimul"&gt;800&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtn"&gt;-0.5&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtx"&gt;-0.55&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="2000.0" min="0.0" nom="altinversion"&gt;500&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="3.0" min="0.1" nom="gradtninv"&gt;1.3&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;param format="real" max="1.0" min="0.0" nom="cielclair"&gt;0.8&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;         &lt;option choix="1" nom="option.adret.or.ubac" nomParam="codadret"&gt;</span></span>
+<span><span class="co">#&gt;           &lt;choix code="1" nom="adret(south)"/&gt;</span></span>
+<span><span class="co">#&gt;           &lt;choix code="2" nom="ubac(north)"&gt;</span></span>
+<span><span class="co">#&gt;             &lt;param format="real" max="5.0" min="-5.0" nom="ombragetx"&gt;-1.4&lt;/param&gt;</span></span>
+<span><span class="co">#&gt;           &lt;/choix&gt;</span></span>
+<span><span class="co">#&gt;         &lt;/option&gt;</span></span>
+<span><span class="co">#&gt;       &lt;/choix&gt;</span></span>
+<span><span class="co">#&gt;     &lt;/option&gt;</span></span>
+<span><span class="co">#&gt; ...</span></span>
+<span><span class="co">#&gt; &lt;/fichiersta&gt;</span></span></code></pre>
 </div>
 </div>
   </div>
@@ -833,12 +864,12 @@ in some cases used parameters names in tables may be different from real paramet
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Patrice Lecharpentier, Remi Vezy, SticsRPacks.</p>
+<p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>
