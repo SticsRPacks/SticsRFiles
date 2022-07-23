@@ -1,33 +1,5 @@
 #' Get desired STICS outputs
 #'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' This function was deprecated to homogenised writing process
-#'
-#'
-#' @examples
-#' \dontrun{
-#' get_var_mod(workspace, usms_file)
-#' # ->
-#' get_varmod(workspace, usms_file)
-#' }
-#'
-#' @keywords internal
-#'
-#' @export
-get_var_mod <- function(...) {
-  lifecycle::deprecate_warn(
-    "1.0.0",
-    "get_var_mod()",
-    "get_varmod()"
-  )
-  get_varmod(...)
-}
-
-
-#' Get desired STICS outputs
-#'
 #' @description Get the STICS output variables (from var.mod file)
 #'
 #' @param workspace Path of the directory containing the Stics var.mod file
