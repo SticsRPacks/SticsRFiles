@@ -11,24 +11,22 @@
 #' an existing version selected using version_index.
 #'
 #' @examples
-#' \dontrun{
+# \dontrun{
 #'
 #' Getting the complete versions list
-#' SticsRFiles::get_stics_versions_compat()
+#' get_stics_versions_compat()
 #'
 #' Getting the first version
-#' SticsRFiles::get_stics_versions_compat(1)
+#' get_stics_versions_compat(1)
 #'
 #' Getting the previous version of the latest one
-#' SticsRFiles::get_stics_versions_compat(-1)
+#' get_stics_versions_compat(-1)
 #'
-#' }
+# }
 #'
 #' @export
 #'
 #'
-# TODO: may be in stics_versions_utils get_stics_versions_compat
-# & new function check version
 get_stics_versions_compat <- function(version_index = NULL) {
 
   # Getting versions list
