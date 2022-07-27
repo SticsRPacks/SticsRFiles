@@ -129,6 +129,9 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   # param_values <- get_param_xml(file_path, param_names = param_names, select_value = select, select_value = name)[[1]]
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
+  # Fixing parameters with no values with NA
+  param_values <- lapply(param_values, function(x) {if(length(x) == 0) return(NA);x })
+
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
     param_values <- list(param_values)
