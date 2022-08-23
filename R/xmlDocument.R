@@ -206,9 +206,9 @@ setMethod("getAttrsNames", signature(docObj = "xmlDocument"), function(docObj, p
 
 
 # getAttrsValues
-setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj, path,
-                                                                        attr_list = character(length = 0),
-                                                                        nodes_ids = NULL) {
+setMethod("getAttrsValues", signature(docObj = "xmlDocument"),
+          function(docObj, path, attr_list = character(length = 0),
+                   nodes_ids = NULL) {
   # browser()
   sel_values <- NULL
 
@@ -235,7 +235,8 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj, 
   if (!any(sel)) {
     # not any given attr_list names exist in path
     if (docObj@warn) {
-      warning(paste("Not any given attribute name exist in ", path, "aborting !"))
+      warning(paste("Not any given attribute name exist in ", path,
+                    "aborting !"))
       return()
     }
   }
@@ -273,7 +274,8 @@ setMethod("getAttrsValues", signature(docObj = "xmlDocument"), function(docObj, 
 
 
 # factoriser avec getAttrs!! + getNode(docObj,path,kind)
-setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj, path, nodes_ids = NULL) {
+setMethod("getValues", signature(docObj = "xmlDocument"),
+          function(docObj, path, nodes_ids = NULL) {
   node_set <- getNodeS(docObj, path)
 
   # getting nodes number
@@ -302,7 +304,8 @@ setMethod("getValues", signature(docObj = "xmlDocument"), function(docObj, path,
 
 
 # addAttrs
-setMethod("addAttrs", signature(docObj = "xmlDocument"), function(docObj, path, named_vector) {
+setMethod("addAttrs", signature(docObj = "xmlDocument"),
+          function(docObj, path, named_vector) {
   # add not base::is.null node_set !!!!
   if (!base::is.null(names(named_vector))) {
     node_set <- getNodeS(docObj, path)
@@ -314,7 +317,8 @@ setMethod("addAttrs", signature(docObj = "xmlDocument"), function(docObj, path, 
 # delete attributes
 # delAttrs
 # TODO: to remove all attrs !!!!!!!!!
-setMethod("removeAttrs", signature(docObj = "xmlDocument"), function(docObj, path, attr_names) {
+setMethod("removeAttrs", signature(docObj = "xmlDocument"),
+          function(docObj, path, attr_names) {
   # add not base::is.null node_set !!!!
   if (!base::is.null(attr_names)) {
     node_set <- getNodeS(docObj, path)
@@ -329,8 +333,8 @@ setMethod("removeAttrs", signature(docObj = "xmlDocument"), function(docObj, pat
 # Setters
 #
 # TODO : same code as setValues,
-setMethod("setAttrValues", signature(docObj = "xmlDocument"), function(docObj, path, attr_name,
-                                                                       values_list, nodes_ids = NULL) {
+setMethod("setAttrValues", signature(docObj = "xmlDocument"),
+          function(docObj, path, attr_name, values_list, nodes_ids = NULL) {
   node_set <- getNodeS(docObj, path)
   if (base::is.null(node_set)) {
     return(invisible())
@@ -393,7 +397,8 @@ setMethod(
 # insert after ?????
 
 # addNodes
-setMethod("addNodes", signature(docObj = "xmlDocument"), function(docObj, nodes_to_add, parent_path = NULL) {
+setMethod("addNodes", signature(docObj = "xmlDocument"),
+          function(docObj, nodes_to_add, parent_path = NULL) {
   # parent node is root node
   if (base::is.null(parent_path)) {
     pnode <- xmlRoot(docObj@content)
@@ -419,7 +424,8 @@ setMethod("addNodes", signature(docObj = "xmlDocument"), function(docObj, nodes_
 
 
 # removeNodes
-setMethod("delNodes", signature(docObj = "xmlDocument"), function(docObj, path) {
+setMethod("delNodes", signature(docObj = "xmlDocument"),
+          function(docObj, path) {
   node_set <- getNodeS(docObj, path)
 
   if (base::is.null(node_set)) {
@@ -461,7 +467,8 @@ setMethod("is.xmlDocument", signature(docObj = "ANY"), function(docObj) {
 
 
 # save method
-setMethod("saveXmlDoc", signature(docObj = "xmlDocument"), function(docObj, xml_path) {
+setMethod("saveXmlDoc", signature(docObj = "xmlDocument"),
+          function(docObj, xml_path) {
   if (isLoaded(docObj)) {
     write(saveXML(docObj@content), xml_path)
   }

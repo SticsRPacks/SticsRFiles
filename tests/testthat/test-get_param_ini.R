@@ -49,10 +49,10 @@ test_that("multiple param option value 2", {
 })
 
 hinit <- "hinit"
-init_par <- c("hinit","NO3init", "NH4init")
+init_par <- c("hinit", "NO3init", "NH4init")
 if (version_num >= 10) {
   hinit <- "Hinitf"
-  init_par <- c("Hinitf","NO3initf", "NH4initf")
+  init_par <- c("Hinitf", "NO3initf", "NH4initf")
 }
 
 test_that("multiple values from single node", {

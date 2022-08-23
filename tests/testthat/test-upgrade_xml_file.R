@@ -67,7 +67,7 @@ for (file_path in list.files(out_path, full.names = TRUE)) {
   target_path <- get_examples_path("xml", stics_version = stics_to_version)
   target_xml <- SticsRFiles:::xmldocument(file.path(target_path, file_name))
 
-  test_that(paste(file_name ,"XML documents match"), {
+  test_that(paste(file_name , "XML documents match"), {
     expect_equal(out_xml@content, target_xml@content)
   })
 

@@ -54,7 +54,8 @@ test_that(" single column name value", {
   expect_equivalent(get_param_xml(xml_path, "epc")[[1]]$epc[2], 20)
 })
 
-test_that("multiple option choice value and param name's value from choice list", {
+test_that(
+  "multiple option choice value and param name's value from choice list", {
   expect_equivalent(unname(unlist(lapply(
     get_param_xml(xml_path, c("codefente", "profimper"))[[1]],
     function(x) x[[1]][1]
