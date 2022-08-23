@@ -4,7 +4,9 @@ stics_version <- get_stics_versions_compat()$latest_version
 
 context("reading observations")
 
-path <- file.path(get_examples_path(file_type = "obs", stics_version = stics_version), "simple_example")
+path <- file.path(get_examples_path(file_type = "obs",
+                                    stics_version = stics_version),
+                  "simple_example")
 
 path_mixed <- file.path(get_examples_path(file_type = "obs"), "mixed")
 
@@ -17,10 +19,13 @@ Meas_banana <- get_obs(path_mixed, "banana")
 
 # Get more information using the usms.xml file:
 
-Meas_mixed2 <- get_obs(workspace = path_mixed, usms_file = file.path(path_mixed, "usms.xml"))
+Meas_mixed2 <- get_obs(workspace = path_mixed,
+                       usms_file = file.path(path_mixed, "usms.xml"))
 
 # Using a usms.xml from outside the repo:
-usms_path <- file.path(get_examples_path(file_type = "xml", stics_version = stics_version), "usms.xml")
+usms_path <- file.path(get_examples_path(file_type = "xml",
+                                         stics_version = stics_version),
+                       "usms.xml")
 usms <- get_usms_list(file = usms_path)
 
 Meas_mixed3 <- get_obs(workspace = path_mixed, usms_file = usms_path)
@@ -69,8 +74,8 @@ test_that("reading mixed usms with usms_filename to usms.xml", {
                Meas_mixed2$IC_banana_sorghum$lai_n)
 })
 
-test_that("reading mixed usms with usms_filename to usms.xml outside of folder",
-          {
+test_that(
+  "reading mixed usms with usms_filename to usms.xml outside of folder", {
   expect_length(Meas_mixed3, 2)
             # NB: only two because intecrop usms absent from this usms.xml
   expect_equal(Meas_mixed$banana$lai_n, Meas_mixed3$banana$lai_n)
@@ -166,4 +171,3 @@ test_that("get obs with intercrops, giving usms.xml file as absolute path", {
     c("Principal", "Associated")
   )
 })
-

@@ -19,7 +19,7 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 library(SticsRFiles)
 ```
 ```{r echo=FALSE}
-stics_version = get_stics_versions_compat()$latest_version
+stics_version <- get_stics_versions_compat()$latest_version
 ```
 
 ------
@@ -43,7 +43,7 @@ To run a STICS simulation on these input files, please refer to the [`run_stics(
 Some example data are available from the package and can be retrieved using the following function call for the Stics version `r stics_version`:
 
 ```{r}
-example_txt_dir <- get_examples_path( file_type = "txt")
+example_txt_dir <- get_examples_path(file_type = "txt")
 ```
 The `example_txt_dir` directory is: `r example_txt_dir`. By default, the latest Stics version is taken into account. 
 For getting an example directory for another version, an additional argument must be given `stics_version` according to an existing version included in the package. The version list can be retrieved using:
@@ -66,19 +66,19 @@ Additional arguments can be set for specific extractions:
 For example to get the value of the atmospheric pressure:
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = 'patm')
+get_param_txt(workspace = example_txt_dir, param = "patm")
 ```
 
 The function returns a named list according to the file where it found the parameter value (here "station") containing all the values found for the `patm` parameter (here 1000), along with the parameter name as found in the file. The function performs a fuzzy search, so here after the name of the parameter is only partially given, e.g.: `atm`
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='atm')
+get_param_txt(workspace = example_txt_dir, param = "atm")
 ```
 
 Note that the function does not require the user to know in which file the parameter is because it search the parameter in all files. So if it finds several parameter with the same given name, it will return all. The next example shows how to get parameters from the soil file containing the letter "a":
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='a')$soil
+get_param_txt(workspace = example_txt_dir, param = "a")$soil
 ```
 For an exact search of parameters, a specific argument `exact` must be set to **TRUE** (the default value is **FALSE** if not provided). 
 
@@ -87,7 +87,7 @@ Here we see another peculiarity: the name associated to the value has more infor
 It is the same case for the tec file:
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='interrang')
+get_param_txt(workspace = example_txt_dir, param = "interrang")
 ```
 
 
@@ -95,11 +95,13 @@ A particular search in plant parameters for specific varieties, can be done usin
 
 * either using names,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf", variety = c("Pactol", "Cecilia", "clarica"))
+get_param_txt(workspace = example_txt_dir, param = "stlevamf", 
+              variety = c("Pactol", "Cecilia", "clarica"))
 ```
 * or using varieties indexes in plant file,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf", variety = c(1,2,5))
+get_param_txt(workspace = example_txt_dir, param = "stlevamf", 
+              variety = c(1,2,5))
 ```
 
 
@@ -143,22 +145,22 @@ The function adds a `Date` column that is at the standard `POSIXct` format for c
 
 The actual value of of the atmospheric pressure read above is:
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='patm')
+get_param_txt(workspace = example_txt_dir, param = "patm")
 ```
 To set a new value of `patm` to 900:
 ```{r}
-set_param_txt(workspace = example_txt_dir, param='patm', value = 900)
+set_param_txt(workspace = example_txt_dir, param = "patm", value = 900)
 ```
 
 Now we can check that the value is changed:
 
 ```{r}
-get_param_txt(workspace = example_txt_dir, param='patm')
+get_param_txt(workspace = example_txt_dir, param = "patm")
 ```
 
 ```{r include=FALSE}
 # resetting the value:
-set_param_txt(workspace = example_txt_dir, param='patm', value = 1000)
+set_param_txt(workspace = example_txt_dir, param = "patm", value = 1000)
 ```
 
 There are four more arguments to the function:
@@ -183,11 +185,11 @@ get_param_txt(workspace = example_txt_dir, param = "densinitial")
 * The values for the plant 1 and layers 1 and 4 are replaced as follows:
 
 ```{r}
-set_param_txt(workspace = example_txt_dir, 
+set_param_txt(workspace = example_txt_dir,
               param = "densinitial",
               plant_id = 1,
-              layer = c(1,4),
-              value = c(0.5,0.1))
+              layer = c(1, 4),
+              value = c(0.5, 0.1))
 ```
 
 * The final values in the file are:
@@ -214,7 +216,7 @@ All these functions are exported for convenience, but `set_param_txt()` is easie
 The `gen_varmod()` function is used to set the required output variables in the `var.mod` file. For example if the user need the LAI and the dry mass:
 
 ```{r}
-gen_varmod(workspace = example_txt_dir, var = c("lai(n)","masec(n)"))
+gen_varmod(workspace = example_txt_dir, var = c("lai(n)", "masec(n)"))
 ```
 
 Controlling if the values where written:
