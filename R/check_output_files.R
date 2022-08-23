@@ -1,12 +1,15 @@
 #' @title Checking model outputs files
 #'
-#' @description This function checks if the model outputs files are correctly produced
+#' @description This function checks if the model outputs files are correctly
+#' produced
 #'
 #' @param run_dir Directory name or path (absolute) of a working directory,
 #'  or root directory of working directories
-#' @param usm_name Usm name, to be set if it is the name of a sub-directory of the given argument run_dir
+#' @param usm_name Usm name, to be set if it is the name of a sub-directory of
+#' the given argument run_dir
 #'
-#' @return A list with fields $error (logical, TRUE if any missing file, FALSE otherwise), $missing (missing files vector)
+#' @return A list with fields $error (logical, TRUE if any missing file, FALSE
+#' otherwise), $missing (missing files vector)
 #'
 #' @examples
 #' \dontrun{

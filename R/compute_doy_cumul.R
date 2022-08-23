@@ -2,14 +2,16 @@
 #' @description For a vector of days of year and a vector of corresponding year
 #' for each one, calculation of cumulative days of years
 #' @param doys_vec vector of days of year
-#' @param years_vec vector of years corresponding to each day of year from doys_vec
+#' @param years_vec vector of years corresponding to each day of year from
+#' doys_vec
 #' @return A vector of cumulative days of year over a 2 years period
 #'
 #' @importFrom lubridate leap_year
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(1990, 1990, 1991, 1991, 1991))
+#' SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(1990, 1990, 1991,
+#'  1991, 1991))
 #' }
 #'
 #' #
@@ -42,7 +44,8 @@ compute_doy_cumul <- function(doys_vec, years_vec) {
 
   # over 2 years
   if (length(u_years) > 2) {
-    warning("Years number is greater than 2, aborting (treatment for 2 years only) !")
+    warning("Years number is greater than 2,
+            aborting (treatment for 2 years only) !")
     return(NULL)
   }
 

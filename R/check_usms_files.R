@@ -1,7 +1,8 @@
 #' Checking xml files existence got from usms.xml
 #'
 #' @param workspace_path The path to a JavaStics-compatible workspace
-#' @param javastics_path JavaStics installation path (Optional, needed if the plant files are not in the `workspace_path`
+#' @param javastics_path JavaStics installation path (Optional, needed if the
+#'  plant files are not in the `workspace_path`
 #' but rather in the JavaStics default plant folder)
 #' @param usms_list Vector of usms names (Optional)
 #' @param file_name Usms XML file name (Optional)
@@ -53,9 +54,11 @@ check_usms_files <- function(workspace_path,
   }
 
   usms_nb <- length(usms_full_list)
-  par_list <- c("nbplantes", "finit", "fstation", "fclim1", "fclim2", "fplt", "ftec", "flai")
+  par_list <- c("nbplantes", "finit", "fstation", "fclim1", "fclim2", "fplt",
+                "ftec", "flai")
 
-  param_usms <- get_param_xml(file.path(workspace_path, "usms.xml"))$usms.xml[par_list]
+  param_usms <- get_param_xml(
+    file.path(workspace_path, "usms.xml"))$usms.xml[par_list]
   id_plt <- sequence(param_usms$nbplantes)
   param_usms$fplt <- param_usms$fplt[param_usms$fplt != "null"]
   param_usms$ftec <- param_usms$ftec[param_usms$ftec != "null"]
@@ -100,7 +103,8 @@ check_usms_files <- function(workspace_path,
   all_init_exist <- file.exists(file.path(workspace_path, usms_files$finit))
   if (!all(all_init_exist)) {
     warning(paste(
-      "Ini file(s)", paste(unique(usms_files$finit[!all_init_exist]), collapse = ","),
+      "Ini file(s)", paste(unique(usms_files$finit[!all_init_exist]),
+                           collapse = ","),
       "not found in", workspace_path
     ))
   }
@@ -108,7 +112,8 @@ check_usms_files <- function(workspace_path,
   all_sta_exist <- file.exists(file.path(workspace_path, usms_files$fstation))
   if (!all(all_sta_exist)) {
     warning(paste(
-      "Station file(s)", paste(unique(usms_files$fstation[!all_sta_exist]), collapse = ","),
+      "Station file(s)", paste(unique(usms_files$fstation[!all_sta_exist]),
+                               collapse = ","),
       "not found in", workspace_path
     ))
   }
@@ -116,14 +121,16 @@ check_usms_files <- function(workspace_path,
   fclim1_exist <- file.exists(file.path(workspace_path, c(usms_files$fclim1)))
   if (!all(fclim1_exist)) {
     warning(paste(
-      "Climate file(s)", paste(unique(usms_files$fclim1[!fclim1_exist]), collapse = ","),
+      "Climate file(s)", paste(unique(usms_files$fclim1[!fclim1_exist]),
+                               collapse = ","),
       "not found in", workspace_path
     ))
   }
   fclim2_exist <- file.exists(file.path(workspace_path, c(usms_files$fclim2)))
   if (!all(fclim2_exist)) {
     warning(paste(
-      "Climate file(s)", paste(unique(usms_files$fclim2[!fclim2_exist]), collapse = ","),
+      "Climate file(s)", paste(unique(usms_files$fclim2[!fclim2_exist]),
+                               collapse = ","),
       "not found in", workspace_path
     ))
   }
@@ -134,7 +141,8 @@ check_usms_files <- function(workspace_path,
   ftec1_exist[usms_files$ftec1 == "null"] <- TRUE
   if (!all(ftec1_exist)) {
     warning(paste(
-      "Tec file(s)", paste(unique(usms_files$ftec1[!ftec1_exist]), collapse = ","),
+      "Tec file(s)", paste(unique(usms_files$ftec1[!ftec1_exist]),
+                           collapse = ","),
       "not found in", workspace_path
     ))
   }
@@ -142,7 +150,8 @@ check_usms_files <- function(workspace_path,
   ftec2_exist[usms_files$ftec2 == "null"] <- TRUE
   if (!all(ftec2_exist)) {
     warning(paste(
-      "Tec file(s)", paste(unique(usms_files$ftec2[!ftec2_exist]), collapse = ","),
+      "Tec file(s)", paste(unique(usms_files$ftec2[!ftec2_exist]),
+                           collapse = ","),
       "not found in", workspace_path
     ))
   }
@@ -150,12 +159,14 @@ check_usms_files <- function(workspace_path,
 
   # specific checking for fplt
 
-  fplt1_exist <- file.exists(file.path(file.path(javastics_path, "plant"), usms_files$fplt1)) |
+  fplt1_exist <- file.exists(file.path(file.path(javastics_path, "plant"),
+                                       usms_files$fplt1)) |
     file.exists(file.path(file.path(workspace_path, "plant"), usms_files$fplt1))
   fplt1_exist[usms_files$fplt1 == "null"] <- TRUE
   if (!all(fplt1_exist)) {
     warning(paste(
-      "Plant file(s)", paste(unique(usms_files$fplt1[!fplt1_exist]), collapse = ","),
+      "Plant file(s)", paste(unique(usms_files$fplt1[!fplt1_exist]),
+                             collapse = ","),
       "not found in", workspace_path,
       ". \nPlease note that with SticsRpacks, plant folder (that contains plant files)",
       "can be located either inside the workspace or in the JavaStics path.\n",
@@ -163,12 +174,14 @@ check_usms_files <- function(workspace_path,
     ))
   }
 
-  fplt2_exist <- file.exists(file.path(file.path(javastics_path, "plant"), usms_files$fplt2)) |
+  fplt2_exist <- file.exists(file.path(file.path(javastics_path, "plant"),
+                                       usms_files$fplt2)) |
     file.exists(file.path(file.path(workspace_path, "plant"), usms_files$fplt2))
   fplt2_exist[usms_files$fplt2 == "null"] <- TRUE
   if (!all(fplt2_exist)) {
     warning(paste(
-      "Plant file(s)", paste(unique(usms_files$fplt2[!fplt2_exist]), collapse = ","),
+      "Plant file(s)", paste(unique(usms_files$fplt2[!fplt2_exist]),
+                             collapse = ","),
       "not found in", workspace_path,
       ". Please note that with SticsRpacks, plant folder (that contains plant files)",
       "can be located either inside the workspace or in the JavaStics path.\n",
@@ -181,7 +194,8 @@ check_usms_files <- function(workspace_path,
 
   all_fplt_exist <- fplt1_exist & fplt2_exist
 
-  all_exist <- all_sta_exist & all_fclim_exist & all_ftec_exist & all_fplt_exist & all_init_exist
+  all_exist <- all_sta_exist & all_fclim_exist & all_ftec_exist &
+    all_fplt_exist & all_init_exist
 
   # Adding files existence status
   usms_files <- dplyr::mutate(usms_files, all_exist = all_exist)

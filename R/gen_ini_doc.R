@@ -1,11 +1,14 @@
 #' @title Generatefrom a template a Stics ini xmlDocument
 #'
 #' @param xml_doc an optional xmlDocument object (created from an ini file)
-#' @param param_table a table (df, tibble) containing parameters to use (optional)
+#' @param param_table a table (df, tibble) containing parameters to use
+#' (optional)
 #' @param crop_tag a crop identifier for crop parameters
-#' (for example like "crop" used for in a parameter suffix : param_crop1, param_crop2)
+#' (for example like "crop" used for in a parameter suffix :
+#' param_crop1, param_crop2)
 #' @param params_desc a list decribing crop parameters and others
-#' @param stics_version the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.
+#' @param stics_version the stics files version to use (optional,
+#' default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
 #'
 #' @return an invisible xmlDocument object or a list of
@@ -31,7 +34,8 @@ gen_ini_doc <- function(xml_doc = NULL,
 
 
   # check/get version
-  stics_version <- get_xml_stics_version(stics_version = stics_version, xml_doc = xml_doc)
+  stics_version <- get_xml_stics_version(stics_version = stics_version,
+                                         xml_doc = xml_doc)
 
   # getting a default xml template
   if (base::is.null(xml_doc)) {
@@ -113,7 +117,8 @@ gen_ini_doc <- function(xml_doc = NULL,
 
   # Filtering parameters not to be set
   # i.e. : 999 or NA
-  par_idx <- as.vector(!grepl(pattern = "^999", param_table) & !is.na(param_table))
+  par_idx <- as.vector(!grepl(pattern = "^999", param_table) &
+                         !is.na(param_table))
 
   # exiting not any parameters values to set
   if (!any(par_idx)) {

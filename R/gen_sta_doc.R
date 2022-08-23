@@ -1,8 +1,10 @@
 #' @title Generatefrom a template a Stics sta xmlDocument
 #'
 #' @param xml_doc an optional xmlDocument object (created from an sta file)
-#' @param param_table a table (df, tibble) containing parameters to use (optional)
-#' @param stics_version the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.
+#' @param param_table a table (df, tibble) containing parameters to use
+#' (optional)
+#' @param stics_version the stics files version to use
+#' (optional, default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
 #' @return an invisible xmlDocument object or a list of
 #'
@@ -26,7 +28,8 @@ gen_sta_doc <- function(xml_doc = NULL,
 
 
   # check/get version
-  stics_version <- get_xml_stics_version(stics_version = stics_version, xml_doc = xml_doc)
+  stics_version <- get_xml_stics_version(stics_version = stics_version,
+                                         xml_doc = xml_doc)
 
   # getting a default xml template
   if (base::is.null(xml_doc)) {

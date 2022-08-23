@@ -47,7 +47,8 @@ attributes_list2matrix <- function(attr_list) {
 
   # Filling the matrix
   for (l in seq_along(attr_list)) {
-    col_idx <- sapply(names(attr_list[[l]]), function(x) which(is.element(col_names, x)))
+    col_idx <- sapply(names(attr_list[[l]]),
+                      function(x) which(is.element(col_names, x)))
     attr_mat[l, col_idx] <- attr_list[[l]]
   }
 

@@ -76,7 +76,8 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   )
 
   # Adding new_node nodes_nb times
-  add_node_to_doc(xml_doc, new_node, nodes_nb = nodes_nb, parent_path = parent_path)
+  add_node_to_doc(xml_doc, new_node, nodes_nb = nodes_nb,
+                  parent_path = parent_path)
 
   # Updating if needed interventions_nb
   if (XML::xmlName(new_node) == "intervention") {

@@ -13,9 +13,12 @@
 #'
 setClass(
   "fileDocument",
-  representation(type = "character", name = "character", dir = "character", ext = "character", con = "ANY", content = "ANY", warn = "logical"),
+  representation(type = "character", name = "character", dir = "character",
+                 ext = "character", con = "ANY", content = "ANY",
+                 warn = "logical"),
   prototype(
-    type = character(length = 0), name = character(length = 0), dir = character(length = 0), ext = character(length = 0),
+    type = character(length = 0), name = character(length = 0),
+    dir = character(length = 0), ext = character(length = 0),
     con = NULL, content = "", warn = FALSE
   )
 ) # ,
@@ -33,20 +36,23 @@ setClass(
 # })
 
 # constructor
-setMethod("filedocument", signature(file = "character", type = "character"), function(file = character(length = 0), type = character(length = 0)) {
+setMethod("filedocument", signature(file = "character", type = "character"),
+          function(file = character(length = 0), type = character(length = 0)) {
   # print(file)
   return(methods::new("fileDocument", file, type))
 })
 
 
 # file only
-setMethod("filedocument", signature(file = "character", type = "missing"), function(file = character(length = 0), type = character(length = 0)) {
+setMethod("filedocument", signature(file = "character", type = "missing"),
+          function(file = character(length = 0), type = character(length = 0)) {
   # print(file)
   return(methods::new("fileDocument", file))
 })
 
 
-setMethod("initialize", "fileDocument", function(.Object, file = character(length = 0),
+setMethod("initialize", "fileDocument", function(.Object,
+                                                 file = character(length = 0),
                                                  type = character(length = 0)) {
   # print("fileDocument initialization")
   if (missing(file)) {
@@ -75,30 +81,35 @@ setMethod("initialize", "fileDocument", function(.Object, file = character(lengt
 # replace
 
 # set
-setReplaceMethod("setWarn", signature(docObj = "fileDocument"), function(docObj, value) {
+setReplaceMethod("setWarn", signature(docObj = "fileDocument"),
+                 function(docObj, value) {
   docObj@warn <- value
   return(docObj)
 })
 
 
-setReplaceMethod("setName", signature(docObj = "fileDocument"), function(docObj, value) {
+setReplaceMethod("setName", signature(docObj = "fileDocument"),
+                 function(docObj, value) {
   docObj@name <- value
   return(docObj)
 })
 
-setReplaceMethod("setDir", signature(docObj = "fileDocument"), function(docObj, value) {
+setReplaceMethod("setDir", signature(docObj = "fileDocument"),
+                 function(docObj, value) {
   docObj@dir <- normalizePath(value)
   return(docObj)
 })
 
-setReplaceMethod("setExt", signature(docObj = "fileDocument"), function(docObj, value) {
+setReplaceMethod("setExt", signature(docObj = "fileDocument"),
+                 function(docObj, value) {
   docObj@ext <- value
   # add reconstruct file name !!!!!!!!!
   return(docObj)
 })
 
 # set
-setMethod("setName", signature(docObj = "fileDocument"), function(docObj, value) {
+setMethod("setName", signature(docObj = "fileDocument"),
+          function(docObj, value) {
   docObj@name <- value
   return(docObj)
 })
@@ -189,7 +200,8 @@ setMethod("move", signature(docObj = "fileDocument"), function(docObj, toFile) {
 })
 
 #
-setMethod("rename", signature(docObj = "fileDocument"), function(docObj, toFile) {
+setMethod("rename", signature(docObj = "fileDocument"),
+          function(docObj, toFile) {
   move(docObj, toFile)
 })
 
@@ -205,7 +217,8 @@ setMethod("delete", signature(docObj = "fileDocument"), function(docObj) {
 
 
 
-# Methods with a static like behaviour TODO: see to extract these apart from this class ???
+# Methods with a static like behaviour TODO: see to extract these apart
+# from this class ???
 
 #
 setMethod("infos", signature(docObj = "ANY"), function(docObj, type) {
@@ -251,7 +264,8 @@ setMethod("isempty", signature(docObj = "ANY"), function(docObj) {
   return(ret)
 })
 
-# setGeneric('getClass', function(docObj) standardGeneric('getClass')) setMethod('getClass',signature(docObj='ANY'),
+# setGeneric('getClass', function(docObj) standardGeneric('getClass'))
+# setMethod('getClass',signature(docObj='ANY'),
 # function(docObj){ return(class(docObj)[[1]]) } )
 
 #

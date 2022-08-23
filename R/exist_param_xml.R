@@ -110,7 +110,8 @@ exist_param_csv <- function(param,
 
   # replacing underscores with ()
   conv_param <- col_names_to_var(param)
-  idx_conv_param <- unlist(lapply(conv_param, function(x) any(par_names %in% x)))
+  idx_conv_param <- unlist(lapply(conv_param,
+                                  function(x) any(par_names %in% x)))
 
   # dimensioning existence vector
   exist_status <- rep(FALSE, length(param))

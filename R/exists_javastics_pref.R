@@ -1,6 +1,7 @@
 #' @title Evaluate if model preferences have been set
 #'
-#' @description Testing if preferences.xml file exist in JavaSTICS installation folder
+#' @description Testing if preferences.xml file exist in JavaSTICS
+#' installation folder
 #'
 #' @param javastics JavaStics installation folder
 #'

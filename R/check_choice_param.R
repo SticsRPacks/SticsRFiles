@@ -69,7 +69,8 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
       )
     )
   if (all(choice_specif_par %in% interv_par_names)) {
-    par_list <- intersect(interv_par_names, setdiff(param_name, choice_specif_par))
+    par_list <- intersect(interv_par_names,
+                          setdiff(param_name, choice_specif_par))
     message <- sprintf(
       "%s%s%s%s", "Impossible to get/set values for parameters: ",
       paste(par_list, collapse = ", "),
