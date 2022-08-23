@@ -204,9 +204,9 @@ upgrade_plt_xml <- function(file,
   addChildren(parent_node, node_to_move)
 
   # Recalculating irazomax
-  irmax <- unlist(get_param_value(old_doc, param = "irmax"))
-  vitircarb <- unlist(get_param_value(old_doc, param = "vitircarb"))
-  vitirazo <-  unlist(get_param_value(old_doc, param = "vitirazo"))
+  irmax <- unlist(get_param_value(old_doc, "irmax"))
+  vitircarb <- unlist(get_param_value(old_doc, "vitircarb"))
+  vitirazo <-  unlist(get_param_value(old_doc, "vitirazo"))
   irazomax <- min(1., irmax / vitircarb * vitirazo)
   if (irazomax < 0) irazomax <- 1
 
