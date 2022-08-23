@@ -44,7 +44,6 @@ Imports:
     dplyr (>= 1.0.0),
     lifecycle,
     lubridate,
-    magrittr,
     methods,
     rlang,
     rstudioapi,
