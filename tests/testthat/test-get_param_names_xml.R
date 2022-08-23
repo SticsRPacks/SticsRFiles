@@ -164,7 +164,8 @@ if (version_num < 10) {
 
   test_that("param name", {
     expect_true("nbj_pr_apres_semis" %in% param_names)
-    expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle") %in% param_names))
+    expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle")
+                    %in% param_names))
   })
 
   test_that("option param name", {
@@ -179,7 +180,8 @@ if (version_num < 10) {
 
   # test_that("param name", {
   #   expect_true("nbj_pr_apres_semis" %in% param_names)
-  #   expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle") %in% param_names))
+  #   expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle")
+  #                      %in% param_names))
   # })
 
   test_that("option param name", {
@@ -187,7 +189,3 @@ if (version_num < 10) {
     expect_true(all(c("rapNmindec", "ratiolN") %in% param_names))
   })
 }
-
-
-
-

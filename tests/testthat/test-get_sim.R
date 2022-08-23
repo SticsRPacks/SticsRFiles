@@ -44,7 +44,8 @@ path1 <- file.path(path, "workspace1")
 path2 <- file.path(path, "workspace2")
 paths <- c(path1, path2)
 
-test_that("get output for 2 workspaces without usm argument, without usms.xml", {
+test_that("get output for 2 workspaces without usm argument, without usms.xml",
+          {
   files_nb <- length(list.files(paths))
   outputs <- get_sim(workspace = paths)
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -62,7 +63,8 @@ test_that("get output for 2 workspaces with usm argument, without usms.xml", {
 
 test_that("get output for 2 workspaces without usm argument, with usms.xml", {
   files_nb <- length(list.files(paths))
-  outputs <- get_sim(workspace = paths, usms_file = file.path(path, "usms_example.xml"))
+  outputs <- get_sim(workspace = paths,
+                     usms_file = file.path(path, "usms_example.xml"))
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(all(unlist(lapply(outputs, is.data.frame))))
 })
@@ -106,9 +108,11 @@ if (file.exists(file.path(path, "usms.xml.ori"))) {
 test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
   # if (!dir.exists(file.path(path,"banana"))) dir.create(file.path(path,"banana"))
   # file.copy(file.path(path,"mod_sbanana.sti"), file.path(path,"banana"))
-  outputs <- get_sim(path3, "banana", usms_file = file.path(path, "usms_example.xml"))
+  outputs <- get_sim(path3, "banana",
+                     usms_file = file.path(path, "usms_example.xml"))
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  outputs <- get_sim(path3, usm = c("banana", "wheat"), usms_file = file.path(path, "usms_example.xml"))
+  outputs <- get_sim(path3, usm = c("banana", "wheat"),
+                     usms_file = file.path(path, "usms_example.xml"))
   expect_true(is.list(outputs) && !is.data.frame(outputs))
 
   # unlink(file.path(path,"banana"))
@@ -119,7 +123,8 @@ unlink(file.path(path, "wheat"))
 
 
 # Testing intercropping usms  ------------------------------------
-example_IC <- download_data(example_dirs = "study_case_intercrop", stics_version = stics_version)
+example_IC <- download_data(example_dirs = "study_case_intercrop",
+                            stics_version = stics_version)
 
 test_that("get simulations with intercrops", {
   outputs <- get_sim(workspace = example_IC)
@@ -167,4 +172,3 @@ test_that("get simulations with intercrops, giving usms.xml file", {
   expect_equal(unique(outputs$`SC_Pea_2005-2006_N0`$Plant), "poi")
   expect_null(outputs$`SC_Pea_2005-2006_N0`$Dominance)
 })
-

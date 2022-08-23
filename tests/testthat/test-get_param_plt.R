@@ -5,7 +5,8 @@ library(SticsRFiles)
 stics_version <- SticsRFiles:::get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
-xml_path <- file.path(get_examples_path("xml", stics_version = stics_version), "file_plt.xml")
+xml_path <- file.path(get_examples_path("xml", stics_version = stics_version),
+                      "file_plt.xml")
 context("Getting param values")
 
 
@@ -39,4 +40,3 @@ test_that("a param option value and a param value, and order", {
   names(r) <- NULL
   expect_equal(r, c(-999, 1))
 })
-

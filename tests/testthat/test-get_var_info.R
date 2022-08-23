@@ -19,12 +19,15 @@ empty_df <- data.frame(
 
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
-  empty_df_var <- get_var_info("myunknownvariable", stics_version = stics_version)
-  empty_df_keyword <- get_var_info(keyword = "myunknownvariable", stics_version = stics_version)
+  empty_df_var <- get_var_info("myunknownvariable",
+                               stics_version = stics_version)
+  empty_df_keyword <- get_var_info(keyword = "myunknownvariable",
+                                   stics_version = stics_version)
 
   # Don't function, as expect_equal
   # Error message
-  # Error in matrix(if (is.null(value)) logical() else value, nrow = nr, dimnames = list(rn,  :
+  # Error in matrix(if (is.null(value)) logical() else value, nrow = nr,
+  # dimnames = list(rn,  :
   #   la longueur de 'dimnames' [2] n'est pas égale à l'étendue du tableau
   # testthat::expect_identical(empty_df_var, empty_df)
   # testthat::expect_identical(empty_df_keyword, empty_df)
@@ -47,7 +50,8 @@ keyword_lai_df <- data.frame(
   name = c("albedolai", "diftemp1intercoupe"),
   definition = c(
     "albedo of the crop including soil and vegetation",
-    "mean difference between crop and air temperatures during the vegetative phase (emergence - maximum LAI)"
+    "mean difference between crop and air temperatures during the vegetative
+    phase (emergence - maximum LAI)"
   ),
   unit = c("SD", "degreeC"),
   type = c("real", "real"),
@@ -57,14 +61,16 @@ keyword_lai_df <- data.frame(
 # Testing result for searching a variable name using lai
 test_that("giving an existing partial variable name in var arg or keyword", {
   var_df <- get_var_info("lai", stics_version = stics_version)[1:2, ]
-  keyword_df <- get_var_info(keyword = "lai", stics_version = stics_version)[1:2, ]
+  keyword_df <- get_var_info(keyword = "lai",
+                             stics_version = stics_version)[1:2, ]
   testthat::expect_true(dplyr::all_equal(var_df, var_lai_df))
   testthat::expect_true(dplyr::all_equal(keyword_df, keyword_lai_df))
 })
 
 var_etmetr_df <- data.frame(
   name = "cep2",
-  definition = "cumulative transpiration over the cropping season of plants 1 and 2",
+  definition = "cumulative transpiration over the cropping season of plants
+  1 and 2",
   unit = "mm",
   type = "real",
   stringsAsFactors = FALSE

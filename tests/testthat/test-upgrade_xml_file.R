@@ -8,7 +8,8 @@ context("Upgrading xml files to latest version")
 path_from <- get_examples_path("xml", stics_version = stics_from_version)
 
 # Copy example to test in tempdir since the files will be modified by set_param
-file.copy(from = file.path(path_from, list.files(path_from)), to = tempdir(), overwrite = TRUE)
+file.copy(from = file.path(path_from, list.files(path_from)), to = tempdir(),
+          overwrite = TRUE)
 path <- tempdir()
 
 out_path <- file.path(path, "out_xml")
@@ -16,24 +17,24 @@ if (!dir.exists(out_path)) dir.create(out_path)
 
 upgrade_ini_xml(file = file.path(path, "file_ini.xml"),
                 out_dir = out_path,
-                param_gen_file = file.path(path,"param_gen.xml"),
+                param_gen_file = file.path(path, "param_gen.xml"),
                 stics_version = stics_from_version)
 
 upgrade_plt_xml(file = file.path(path, "file_plt.xml"),
                 out_dir = out_path,
-                param_newform_file = file.path(path,"param_newform.xml"),
-                param_gen_file = file.path(path,"param_gen.xml"),
+                param_newform_file = file.path(path, "param_newform.xml"),
+                param_gen_file = file.path(path, "param_gen.xml"),
                 stics_version = stics_from_version)
 
 upgrade_sta_xml(file = file.path(path, "file_sta.xml"),
                 out_dir = out_path,
-                param_gen_file = file.path(path,"param_gen.xml"),
+                param_gen_file = file.path(path, "param_gen.xml"),
                 stics_version = stics_from_version)
 
 upgrade_tec_xml(file = file.path(path, "file_tec.xml"),
                 out_dir = out_path,
-                param_newform_file = file.path(path,"param_newform.xml"),
-                param_gen_file = file.path(path,"param_gen.xml"),
+                param_newform_file = file.path(path, "param_newform.xml"),
+                param_gen_file = file.path(path, "param_gen.xml"),
                 stics_version = stics_from_version)
 
 
@@ -43,17 +44,17 @@ upgrade_param_gen_xml(file = file.path(path, "param_gen.xml"),
 
 upgrade_param_newform_xml(file = file.path(path, "param_newform.xml"),
                       out_dir = out_path,
-                      param_gen_file = file.path(path,"param_gen.xml"),
+                      param_gen_file = file.path(path, "param_gen.xml"),
                       stics_version = stics_from_version)
 
 upgrade_sols_xml(file = file.path(path, "sols.xml"),
                           out_dir = out_path,
-                          param_gen_file = file.path(path,"param_gen.xml"),
+                          param_gen_file = file.path(path, "param_gen.xml"),
                           stics_version = stics_from_version)
 
 upgrade_usms_xml(file = file.path(path, "usms.xml"),
                           out_dir = out_path,
-                          param_gen_file = file.path(path,"param_gen.xml"),
+                          param_gen_file = file.path(path, "param_gen.xml"),
                           stics_version = stics_from_version)
 
 
@@ -71,4 +72,3 @@ for (file_path in list.files(out_path, full.names = TRUE)) {
   })
 
 }
-
