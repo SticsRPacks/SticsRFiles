@@ -10,7 +10,8 @@ check_java_path(javastics)
 \item{javastics}{JavaStics installation root folder}
 }
 \description{
-Checking if directory exists and if it contains JavaStics jar files
+Checking if directory exists and if it contains JavaStics jar
+files
 }
 \details{
 Rising an exception for each checking step !

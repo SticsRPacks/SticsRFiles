@@ -16,9 +16,9 @@ of a workspace (Optional)}
 An absolute javastics workspace path
 }
 \description{
-Looking in JavaStics for a workspace path in JavasStics preferences
-or producing a full path to a workspace located in JavaStics root directory
-or validating an external absolute path. And also checking if the path is a
-valid JavaStics workspace
+Looking in JavaStics for a workspace path in JavasStics
+preferences or producing a full path to a workspace located in JavaStics root
+directory or validating an external absolute path. And also checking if the
+path is a valid JavaStics workspace
 }
 \keyword{internal}

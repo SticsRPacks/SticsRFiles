@@ -16,14 +16,17 @@ gen_ini_doc(
 \arguments{
 \item{xml_doc}{an optional xmlDocument object (created from an ini file)}
 
-\item{param_table}{a table (df, tibble) containing parameters to use (optional)}
+\item{param_table}{a table (df, tibble) containing parameters to use
+(optional)}
 
 \item{crop_tag}{a crop identifier for crop parameters
-(for example like "crop" used for in a parameter suffix : param_crop1, param_crop2)}
+(for example like "crop" used for in a parameter suffix :
+param_crop1, param_crop2)}
 
 \item{params_desc}{a list decribing crop parameters and others}
 
-\item{stics_version}{the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.}
+\item{stics_version}{the stics files version to use (optional,
+default to latest). Only used if xml_doc = NULL.}
 
 \item{check_names}{logical for checking names of param_table columns or not}
 }

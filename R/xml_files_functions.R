@@ -90,8 +90,10 @@ to_xml_version <- function(stics_version) {
 }
 
 
-# set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0", overwrite = FALSE) {
-set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0", overwrite = FALSE) {
+# set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
+# overwrite = FALSE) {
+set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
+                                 overwrite = FALSE) {
   # Getting xmlDocument object
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
@@ -126,11 +128,12 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
     return(version_string)
   }
 
-  # Global detection of the version based for the moment on the param_gen.xml file content
+  # Global detection of the version based for the moment on the
+  # param_gen.xml file content
   if (xml_root_name != "fichierpar" && is.null(param_gen_file)) {
-    # stop("The Stics version corresponding to the XML file was not detected.\n",
-    #      "The param_gen.xml path must be provided as second input!")
-    warning("The Stics version corresponding to the XML file was not detected.\n")
+  # stop("The Stics version corresponding to the XML file was not detected.\n",
+  #      "The param_gen.xml path must be provided as second input!")
+  warning("The Stics version corresponding to the XML file was not detected.\n")
     return()
   }
 
@@ -174,10 +177,14 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 }
 
 # TODO: see *xml_file_version functions ...
-# check_xml_stics_version <- function(xml_file_or_doc, version, param_gen_file = NULL) {
-check_xml_file_version <- function(xml_file_or_doc, stics_version, param_gen_file = NULL) {
-  # xml_version <- get_xml_stics_version(xml_file_or_doc, param_gen_file = param_gen_file)
-  xml_version <- get_xml_file_version(xml_file_or_doc, param_gen_file = param_gen_file)
+# check_xml_stics_version <- function(xml_file_or_doc, version,
+# param_gen_file = NULL) {
+check_xml_file_version <- function(xml_file_or_doc, stics_version,
+                                   param_gen_file = NULL) {
+  # xml_version <- get_xml_stics_version(xml_file_or_doc,
+  # param_gen_file = param_gen_file)
+  xml_version <- get_xml_file_version(xml_file_or_doc,
+                                      param_gen_file = param_gen_file)
 
   r <- TRUE
 
@@ -194,9 +201,11 @@ check_xml_file_version <- function(xml_file_or_doc, stics_version, param_gen_fil
 get_xml_doc <- function(xml_file_or_doc) {
   type_id <- c("character", "xmlDocument") %in% class(xml_file_or_doc)
 
-  if (!any(type_id)) stop("xml_file_or_doc: not a valid input, must be a file path or an xmlDocument object!")
+  if (!any(type_id)) stop("xml_file_or_doc: not a valid input,
+                          must be a file path or an xmlDocument object!")
 
-  if (type_id[1] && !file.exists(xml_file_or_doc)) stop(xml_file_or_doc, ": does not exist!")
+  if (type_id[1] && !file.exists(xml_file_or_doc)) stop(xml_file_or_doc,
+                                                        ": does not exist!")
 
   if (type_id[1]) {
     return(xmldocument(xml_file_or_doc))
@@ -306,7 +315,8 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 }
 
 # TODO: to be evaluated later, usefull ?
-# check_update_from_to_versions <- function(stics_version, target_version = "V10.0") {
+# check_update_from_to_versions <- function(stics_version,
+# target_version = "V10.0") {
 #
 #   # TODO: to define for getting compat for a list of versions !
 #   # v <- list("8.5","9.0",c("9.1","9.2))
@@ -335,8 +345,8 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 #
 #   # TODO: add list of compatible versions
 #   #ver_num <- get_version_num(stics_version)
-#   if (!stics_version %in% compat_versions) stop("Files from the version ", stics_version,
-#                                           " cannot be converted to the version ", target_version)
+#   if (!stics_version %in% compat_versions) stop("Files from the version ",
+#  stics_version, " cannot be converted to the version ", target_version)
 #
 #   # TODO: change from_tag to "9_1-2" if 9.1 and 9.2 are compatible !
 #   list(from_tag = "9_2", to_tag = "10_0")

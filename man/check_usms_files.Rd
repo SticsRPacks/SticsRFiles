@@ -14,7 +14,8 @@ check_usms_files(
 \arguments{
 \item{workspace_path}{The path to a JavaStics-compatible workspace}
 
-\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace_path}
+\item{javastics_path}{JavaStics installation path (Optional, needed if the
+plant files are not in the \code{workspace_path}
 but rather in the JavaStics default plant folder)}
 
 \item{usms_list}{Vector of usms names (Optional)}

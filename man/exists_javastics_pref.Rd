@@ -13,7 +13,8 @@ exists_javastics_pref(javastics)
 logical value, TRUE if file exists, FALSE otherwise
 }
 \description{
-Testing if preferences.xml file exist in JavaSTICS installation folder
+Testing if preferences.xml file exist in JavaSTICS
+installation folder
 }
 \examples{
 \dontrun{

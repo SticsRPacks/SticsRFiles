@@ -17,12 +17,14 @@ gen_tec_doc(
 
 \item{param_table}{a table (df, tibble) containing parameters to use}
 
-\item{stics_version}{the stics files version to use (optional, default to latest). Only used if xml_doc = NULL.}
+\item{stics_version}{the stics files version to use (optional,
+default to latest). Only used if xml_doc = NULL.}
 
-\item{dict}{List of correspondence between given parameter names and Stics internal names.}
+\item{dict}{List of correspondence between given parameter names and
+Stics internal names.}
 
-\item{...}{Additional arguments (for example, coming from a call from gen_tec_xml
-using a na_values argument)}
+\item{...}{Additional arguments (for example, coming from a call
+from gen_tec_xml using a na_values argument)}
 }
 \value{
 an invisible xmlDocument object or a list of
@@ -34,7 +36,8 @@ Generate from a template or modify a Stics tec xmlDocument
 \dontrun{
 library(readxl)
 
-download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+download_usm_xl(file = "inputs_stics_example.xlsx",
+ dest_dir = "/path/to/dest/dir")
 xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 tec_param_df <- read_excel(xl_path, sheet = "Tec")
 tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)

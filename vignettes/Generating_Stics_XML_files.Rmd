@@ -76,7 +76,8 @@ usm_xl_file <- download_usm_xl(out_dir = xl_dir)
 ```
 
 ```{r, eval=TRUE, echo = FALSE, results='hide'}
-usm_xl_file <- download_usm_xl(file = "inputs_stics_example.xlsx", out_dir = workspace_path)
+usm_xl_file <- download_usm_xl(file = "inputs_stics_example.xlsx",
+                               out_dir = workspace_path)
 ```
 
 
@@ -89,16 +90,18 @@ usm_xl_file <- download_usm_xl(file = "inputs_stics_example.xlsx", out_dir = wor
 usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv")
 
 # Getting the file in a specific directory
-csv_dir  <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows
+csv_dir <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows
 
-usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", out_dir = csv_dir )
+usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", 
+                                 out_dir = csv_dir)
 
 #> [1] inputs_stics_example_USMs.csv  has been copied in directory
 #> "/path/to/csv/dir
 ```
 
 ```{r, eval=TRUE, echo = FALSE, results='hide'}
-usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", out_dir = workspace_path)
+usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv",
+                                 out_dir = workspace_path)
 ```
 
 
@@ -159,7 +162,7 @@ Here is the actual **correspondence table** of `keywords` to be used in paramete
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
 l <- get_params_dict()
-df <- data.frame(keyword=names(l), realname=unlist(l, use.names = FALSE),
+df <- data.frame(keyword = names(l), realname = unlist(l, use.names = FALSE),
                  stringsAsFactors = FALSE)
 rmarkdown::paged_table(df)
 ```
@@ -232,7 +235,8 @@ rmarkdown::paged_table(xl_param)
 ```{r gen_usms_file, eval = FALSE}
 
 # Output file path
-out_file <- "/path/to/file/usms.xml" # or something like C:/path/to/file/usms.xml" for Windows
+out_file <- "/path/to/file/usms.xml" 
+# or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new usms.xml file, for all xl_param lines
 gen_usms_xml(file = out_file, param_df = usms_param)
@@ -252,7 +256,7 @@ Example of the first `usm` parameters:
 
 ```{r show_usms_file, eval = TRUE, echo = FALSE, class.output="xml"}
 l <- readLines(con = out_file)
-cat(paste(c(l[1:24],"...",l[length(l)-1]), collapse = "\n"))
+cat(paste(c(l[1:24], "...", l[length(l) - 1]), collapse = "\n"))
 ```
 
 
@@ -286,7 +290,8 @@ rmarkdown::paged_table(soils_param)
 ```{r gen_sols_file, eval = FALSE}
 
 # Output file path
-out_file <- "/path/to/file/sols.xml" # or something like C:/path/to/file/usms.xml" for Windows
+out_file <- "/path/to/file/sols.xml" 
+# or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new sols.xml file, for all xl_param lines
 gen_sols_xml(file = out_file, param_df = soils_param)
@@ -294,7 +299,7 @@ gen_sols_xml(file = out_file, param_df = soils_param)
 
 <!-- active chunk to be run -->
 ```{r eval_gen_sols_file, eval = TRUE, echo = FALSE}
-out_file <- file.path(workspace_path,"sols.xml")
+out_file <- file.path(workspace_path, "sols.xml")
 
 # Generating a new sols.xml file, for all xl_param lines
 gen_sols_xml(file = out_file, param_df = soils_param)
@@ -307,7 +312,7 @@ Example of the first `sol` parameters sub-list:
 
 ```{r show_sols_file, eval = TRUE, echo = FALSE, class.output="xml"}
 l <- readLines(con = out_file)
-cat(paste(c(l[1:30],"...",l[110], "...",l[length(l)-1]), collapse = "\n"))
+cat(paste(c(l[1:30], "...", l[110], "...", l[length(l) - 1]), collapse = "\n"))
 ```
 
 
@@ -336,7 +341,7 @@ rmarkdown::paged_table(tec_param)
 <!-- Only for the show -->
 ```{r gen_tec_files, eval = FALSE}
 # *_tec.xml files, one for each xl_param line
-gen_tec_xml(param_df = tec_param, out_dir = workspace_path )
+gen_tec_xml(param_df = tec_param, out_dir = workspace_path)
 ```
 
 <!-- active chunk to be run -->
@@ -349,7 +354,8 @@ gen_tec_xml(param_df = tec_param, out_dir = workspace_path)
 Example of a `tec` parameters file content sub-list:
 
 ```{r show_tec_file, eval = TRUE, echo = FALSE, class.output="xml"}
-l <- readLines(con = file.path(workspace_path,"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml"))
+l <- readLines(con = file.path(workspace_path,
+                              "BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml"))
 cat(paste(c(l[1:30],"...",l[length(l)-1]), collapse = "\n"))
 ```
 
@@ -369,7 +375,7 @@ ini_param <- read_params_table(usm_xl_file, sheet_name = "Ini")
 library(readxl)
 
 # Reading the Excel file
-ini_param <- read_params_table(usm_xl_file,sheet_name = "Ini")
+ini_param <- read_params_table(usm_xl_file, sheet_name = "Ini")
 
 rmarkdown::paged_table(ini_param)
 ```
@@ -379,22 +385,22 @@ rmarkdown::paged_table(ini_param)
 <!-- Only for the show -->
 ```{r gen_ini_files, eval = FALSE}
 # *_ini.xml files, one for each xl_param line
-gen_ini_xml(param_df = ini_param, out_dir = workspace_path )
+gen_ini_xml(param_df = ini_param, out_dir = workspace_path)
 ```
 
 <!-- active chunk to be run -->
 ```{r eval_gen_ini_files, eval = TRUE, echo = FALSE}
 
 # *_ini.xml files, one for each xl_param line
-gen_ini_xml(param_df = ini_param, out_dir = workspace_path )
+gen_ini_xml(param_df = ini_param, out_dir = workspace_path)
 ```
 ## XML file content
 
 Example of a `ini` parameters file content sub-list:
 
 ```{r show_ini_file, eval = TRUE, echo = FALSE, class.output="xml"}
-l <- readLines(con = file.path(workspace_path,"USM_2017_T1_ini.xml"))
-cat(paste(c(l[1:19],"...",l[length(l)-1]), collapse = "\n"))
+l <- readLines(con = file.path(workspace_path, "USM_2017_T1_ini.xml"))
+cat(paste(c(l[1:19], "...", l[length(l) - 1]), collapse = "\n"))
 ```
 
 
@@ -427,20 +433,20 @@ rmarkdown::paged_table(sta_param)
 <!-- Only for the show -->
 ```{r gen_sta_files, eval = FALSE}
 # *_sta.xml files, one for each xl_param line
-gen_sta_xml(param_df = sta_param, out_dir = workspace_path )
+gen_sta_xml(param_df = sta_param, out_dir = workspace_path)
 ```
 
 <!-- active chunk to be run -->
 ```{r eval_gen_sta_files, eval = TRUE, echo = FALSE}
 
 # *_sta.xml files, one for each xl_param line
-gen_sta_xml(param_df = sta_param, out_dir = workspace_path )
+gen_sta_xml(param_df = sta_param, out_dir = workspace_path)
 ```
 ## XML file content
 
 Example of a `sta` parameters file content sub-list:
 
 ```{r show_sta_file, eval = TRUE, echo = FALSE, class.output="xml"}
-l <- readLines(con = file.path(workspace_path,"climatex_sta.xml"))
-cat(paste(c(l[1:41],"...",l[length(l)-1]), collapse = "\n"))
+l <- readLines(con = file.path(workspace_path, "climatex_sta.xml"))
+cat(paste(c(l[1:41], "...", l[length(l) - 1]), collapse = "\n"))
 ```

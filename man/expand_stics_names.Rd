@@ -3,7 +3,8 @@
 \name{expand_stics_names}
 \alias{expand_stics_names}
 \title{Expand stics names from parameters/variables simple names,
-with indices (i.e. par(1), par(2),...regarding to parameter/variable dimensions)}
+with indices (i.e. par(1), par(2),...regarding to parameter/variable
+dimensions)}
 \usage{
 expand_stics_names(in_csv_file, out_csv_file, header_vec = NULL)
 }
@@ -16,7 +17,8 @@ expand_stics_names(in_csv_file, out_csv_file, header_vec = NULL)
 }
 \description{
 Expand stics names from parameters/variables simple names,
-with indices (i.e. par(1), par(2),...regarding to parameter/variable dimensions)
+with indices (i.e. par(1), par(2),...regarding to parameter/variable
+dimensions)
 }
 \examples{
 \dontrun{

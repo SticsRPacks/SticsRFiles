@@ -18,8 +18,10 @@ Path of the generated file
 }
 \description{
 Using an xslt tranformation, an xml input file is converted to
-an other file format (text, xml). The output file name may be given or calculated.
-In the latest case, the extension is defined after getting xsl method from the xsl file (xml, txt).
+an other file format (text, xml). The output file name may be given or
+calculated.
+In the latest case, the extension is defined after getting xsl method from
+the xsl file (xml, txt).
 }
 \examples{
 \dontrun{

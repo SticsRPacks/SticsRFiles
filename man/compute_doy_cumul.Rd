@@ -9,7 +9,8 @@ compute_doy_cumul(doys_vec, years_vec)
 \arguments{
 \item{doys_vec}{vector of days of year}
 
-\item{years_vec}{vector of years corresponding to each day of year from doys_vec}
+\item{years_vec}{vector of years corresponding to each day of year from
+doys_vec}
 }
 \value{
 A vector of cumulative days of year over a 2 years period
@@ -20,7 +21,8 @@ for each one, calculation of cumulative days of years
 }
 \examples{
 \dontrun{
-SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(1990, 1990, 1991, 1991, 1991))
+SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(1990, 1990, 1991,
+ 1991, 1991))
 }
 
 #

@@ -62,7 +62,8 @@ setMethod("show", "xmlDocument", function(object) {
 })
 
 # setter methods
-setReplaceMethod("setContent", signature(docObj = "xmlDocument"), function(docObj, value) {
+setReplaceMethod("setContent", signature(docObj = "xmlDocument"),
+                 function(docObj, value) {
   if (!methods::is(value, "XMLInternalDocument")) {
     stop("Input value is not a XMLInternalDocument class object")
   }
@@ -76,7 +77,8 @@ setMethod("getContent", signature(docObj = "xmlDocument"), function(docObj) {
 })
 
 
-setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj, path = NULL) {
+setMethod("getNodeS", signature(docObj = "xmlDocument"),
+          function(docObj, path = NULL) {
   node_set <- NULL
   if (!isLoaded(docObj)) {
     stop("xml file is not loaded in xmlDocument object")
@@ -84,7 +86,8 @@ setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj, path =
 
   if (base::is.null(path)) {
     # getting root node name to get corresponding node set
-    node_set <- getNodeSet(docObj@content, paste0("/", xmlName(xmlRoot(docObj@content))))
+    node_set <- getNodeSet(docObj@content,
+                           paste0("/", xmlName(xmlRoot(docObj@content))))
   } else {
     node_set <- getNodeSet(docObj@content, path[1])
     # browser("test getNodeS")
@@ -93,7 +96,8 @@ setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj, path =
     path_nb <- length(path)
     if (path_nb > 1) {
       for (i in 2:path_nb) {
-        node_set <- merge_nodesets(node_set, getNodeSet(docObj@content, path[i]))
+        node_set <- merge_nodesets(node_set,
+                                   getNodeSet(docObj@content, path[i]))
       }
     }
   }
@@ -105,7 +109,8 @@ setMethod("getNodeS", signature(docObj = "xmlDocument"), function(docObj, path =
   return(node_set)
 })
 
-setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj, path) {
+setMethod("getAttrs", signature(docObj = "xmlDocument"),
+          function(docObj, path) {
   attr_list <- NULL
   node_set <- getNodeS(docObj, path)
   #
@@ -139,7 +144,7 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj, path) 
   # # TODO: add a contition to test if rownames (dimnames[[1]]) are identical
   # # and dim()[[2]]==1
   # r_names = unique(rownames(attr_list))
-  # if (base::is.null(r_names)){
+  # if (base::is.null(r_names)) {
   #
   # }
   # if (dim(attr_list)[[2]] ==1 & length(r_names) == 1) {
@@ -164,7 +169,8 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj, path) 
     if (docObj@warn) {
       print(class(attr_list))
       warning(paste(
-        "Existing nodes with different attributes comparing to others on xpath, missing attributes ?",
+        "Existing nodes with different attributes comparing to others on xpath,
+        missing attributes ?",
         path
       ))
     }
@@ -174,7 +180,8 @@ setMethod("getAttrs", signature(docObj = "xmlDocument"), function(docObj, path) 
 })
 
 # getAttrsNames
-setMethod("getAttrsNames", signature(docObj = "xmlDocument"), function(docObj, path) {
+setMethod("getAttrsNames", signature(docObj = "xmlDocument"),
+          function(docObj, path) {
   attr_names <- NULL
   attr_list <- getAttrs(docObj, path)
 

@@ -58,7 +58,7 @@ workspace_path <- "example"
 # or an absolute path to an external folder
 # workspace_path <- "/path/to/javastics/workspace"
 
-# Specifying an output folder path 
+# Specifying an output folder path
 output_path <- "/path/to/output/folder"
 
 ```
@@ -120,7 +120,7 @@ gen_usms_xml2txt(javastics_path,
 
 ## Generating files for a subset of usms
 # Into the workspace directory
-gen_usms_xml2txt(javastics_path, 
+gen_usms_xml2txt(javastics_path,
                  workspace_path,
                  usm = c("banana", "wheat"))
 #> ℹ USM 'banana' successfully created
@@ -149,19 +149,19 @@ gen_info <- gen_usms_xml2txt(javastics_path,
 gen_info
 #> $usms_path
 #> [1] "/path/to/output/folder/banana"
-#> [2] "/path/to/output/folder/wheat" 
+#> [2] "/path/to/output/folder/wheat"
 #>
 #> $files
 #>  [1] "climat.txt"      "param.sol"       "ficini.txt"      "ficplt1.txt"
 #>  [5] "fictec1.txt"     "station.txt"     "new_travail.usm" "tempopar.sti"
 #>  [9] "tempoparv6.sti"  "ficplt2.txt"     "fictec2.txt"
-#> 
+#>
 #> $copy_status
 #> [1] TRUE TRUE
-#> 
+#>
 #> $obs_copy_status
 #> [1] TRUE TRUE
-#> 
+#>
 #> $lai_copy_status
 #> [1] FALSE FALSE
 ```
@@ -185,6 +185,4 @@ gen_usms_xml2txt(javastics_path,
                  out_dir = output_path,
                  dir_per_usm_flag = FALSE,
                  verbose = FALSE)
-
-
 ```

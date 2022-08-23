@@ -10,13 +10,16 @@ check_output_files(run_dir, usm_name = NULL)
 \item{run_dir}{Directory name or path (absolute) of a working directory,
 or root directory of working directories}
 
-\item{usm_name}{Usm name, to be set if it is the name of a sub-directory of the given argument run_dir}
+\item{usm_name}{Usm name, to be set if it is the name of a sub-directory of
+the given argument run_dir}
 }
 \value{
-A list with fields $error (logical, TRUE if any missing file, FALSE otherwise), $missing (missing files vector)
+A list with fields $error (logical, TRUE if any missing file, FALSE
+otherwise), $missing (missing files vector)
 }
 \description{
-This function checks if the model outputs files are correctly produced
+This function checks if the model outputs files are correctly
+produced
 }
 \examples{
 \dontrun{
