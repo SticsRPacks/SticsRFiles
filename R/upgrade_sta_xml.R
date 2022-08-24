@@ -151,7 +151,8 @@ upgrade_sta_xml <- function(file,
   addChildren(par_node, xmlClone(new_node))
 
   # Writing to file _sta.xml
-  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite)
+  write_xml_file(old_doc, file.path(out_dir, basename(file)),
+                 overwrite = overwrite)
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))

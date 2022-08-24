@@ -6,7 +6,8 @@
 #' to the file version
 #' @param obs_dir Directory path of the observation data files
 #' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param target_version Name of the Stics version to upgrade files
+#' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
@@ -81,7 +82,8 @@ upgrade_usms_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+  set_xml_file_version(old_doc, new_version = target_version,
+                       overwrite = overwrite)
 
   # checking if fobs exist
   obs_nodes <- getNodeS(old_doc, "//fobs")

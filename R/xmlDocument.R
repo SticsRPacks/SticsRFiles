@@ -188,11 +188,11 @@ setMethod("getAttrsNames", signature(docObj = "xmlDocument"),
 
   # print(path)
   #  print(attr_list)
-  #   if (base::is.null(attr_list)){
+  #   if (base::is.null(attr_list))  {
   #     return(attr_list)}
 
   # TODO: Normally USELESS, see getAttrs (as.matrix ...)
-  # if (!is.matrix(attr_list)){
+  # if (!is.matrix(attr_list)) {
   #  print("attrs characters ")
   #  # attr_names=unique(names(attr_list))
   #  attr_names=lapply(attr_list,function(x) names(x))

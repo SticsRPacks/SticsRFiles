@@ -32,13 +32,14 @@ var_to_col_names <- function(var_vec) {
 
 #' Variable name to stics variable name
 #'
-#' @description Convert a variable name into a stics-compatible variable name. E.g.
-#' `lai_n` into `lai(n)`.
+#' @description Convert a variable name into a stics-compatible variable name.
+#'  E.g. `lai_n` into `lai(n)`.
 #'
 #' @param var     Vector of variable names
 #' @param version Stics version.
 #'
-#' @return A vector of variable names compatible with stics (usually used for `gen_varmod()`)
+#' @return A vector of variable names compatible with stics
+#' (usually used for `gen_varmod()`)
 #' @keywords internal
 #'
 #' @seealso `gen_varmod()`

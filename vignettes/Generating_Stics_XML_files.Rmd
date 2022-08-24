@@ -235,7 +235,7 @@ rmarkdown::paged_table(xl_param)
 ```{r gen_usms_file, eval = FALSE}
 
 # Output file path
-out_file <- "/path/to/file/usms.xml" 
+out_file <- "/path/to/file/usms.xml"
 # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new usms.xml file, for all xl_param lines
@@ -290,7 +290,7 @@ rmarkdown::paged_table(soils_param)
 ```{r gen_sols_file, eval = FALSE}
 
 # Output file path
-out_file <- "/path/to/file/sols.xml" 
+out_file <- "/path/to/file/sols.xml"
 # or something like C:/path/to/file/usms.xml" for Windows
 
 # Generating a new sols.xml file, for all xl_param lines
@@ -356,7 +356,7 @@ Example of a `tec` parameters file content sub-list:
 ```{r show_tec_file, eval = TRUE, echo = FALSE, class.output="xml"}
 l <- readLines(con = file.path(workspace_path,
                               "BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml"))
-cat(paste(c(l[1:30],"...",l[length(l)-1]), collapse = "\n"))
+cat(paste(c(l[1:30], "...", l[length(l) - 1]), collapse = "\n"))
 ```
 
 

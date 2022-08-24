@@ -15,13 +15,16 @@ get_in_files <- function(in_dir_or_files, kind) {
   }
 
   if (dir.exists(in_dir_or_files)) {
-    files_list <- list.files(pattern = file_pattern, path = in_dir_or_files, full.names = TRUE)
+    files_list <- list.files(pattern = file_pattern, path = in_dir_or_files,
+                             full.names = TRUE)
   } else {
     # files path: add grep for filtering
-    files_list <- grep(pattern = file_pattern, x = in_dir_or_files, value = TRUE)
+    files_list <- grep(pattern = file_pattern, x = in_dir_or_files,
+                       value = TRUE)
     exist <- file.exists(files_list)
     if (!all(exist)) {
-      warning("Some files do not exist", paste(files_list[!exist], collapse = ", "))
+      warning("Some files do not exist", paste(files_list[!exist],
+                                               collapse = ", "))
       files_list <- files_list[exist]
     }
   }
@@ -64,8 +67,9 @@ to_xml_version <- function(stics_version) {
 
   if (is.numeric(stics_version)) stics_version <- as.character(stics_version)
 
-  if (!grepl(pattern = "\\.", x = stics_version)) stics_version <- paste0(stics_version, ".0")
-
+  if (!grepl(pattern = "\\.", x = stics_version)) {
+    stics_version <- paste0(stics_version, ".0")
+    }
   numbers <- grepl(pattern = "[0-9]", stics_version)
 
   # no numbers in version
@@ -300,7 +304,8 @@ node_exist <- function(xml_file_or_doc, xpath) {
 #
 # reindent_xml_file <- function(file, out_file, overwrite = FALSE) {
 #
-#   write_xml_file(xml_doc = get_xml_doc(file), file = out_file, overwrite = overwrite)
+#   write_xml_file(xml_doc = get_xml_doc(file), file = out_file,
+#   overwrite = overwrite)
 #
 # }
 

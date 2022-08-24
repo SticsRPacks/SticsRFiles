@@ -182,15 +182,15 @@ xml_files <- list.files(path = xml_dir, pattern = ".xml$", full.names = TRUE)
 files_list <- list.files(path = xml_dir, pattern = ".xml$")
 legend <- c("initializations", "plant", "station", "crop management",
                "general", "general (new formalisms)", "soils", "usms")
-dt <- data.frame(files = files_list, groups = legend )
+dt <- data.frame(files = files_list, groups = legend)
 
 ```
 
 The corresponding files types to file names is given in the above table:
 
 ``` {r, echo = FALSE}
-knitr::kable(dt) 
-#, caption = "Correspondence between XML example files names 
+knitr::kable(dt)
+#, caption = "Correspondence between XML example files names
 # and parameters groups")
 
 ```
@@ -203,7 +203,7 @@ knitr::kable(dt)
 # Setting a local directory path
 # xml_loc_dir <- "/path/to/local/directory"
 
-file.copy(from = file.path(xml_dir, "sols.xml"), 
+file.copy(from = file.path(xml_dir, "sols.xml"),
           to = file.path(xml_loc_dir, "sols.xml"), overwrite = TRUE)
 ```
 
@@ -324,7 +324,7 @@ Parameters may be found combining search in formalisms and parameter names:
 get_param_info(formalism = "yield", param = "grain")
 
 
-param_formalisms <- get_param_info(formalism = "yield", 
+param_formalisms <- get_param_info(formalism = "yield",
                                    param = c("inflo", "lai"))
 
 
@@ -347,7 +347,7 @@ The `keyword` argument (one or several possible strings) may be used to search i
 get_param_info(keyword = "plant")
 
 
-param_names <- get_param_info(keyword = c("plant","leave"))
+param_names <- get_param_info(keyword = c("plant", "leave"))
 
 
 ```
@@ -450,7 +450,7 @@ get_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"))
 ```{r}
 # For soil layers 1 to 3
 get_param_xml(sols, param = c("epc", "infil"), select = "sol",
-              select_value = "solcanne", ids = 1:3 )
+              select_value = "solcanne", ids = 1:3)
 ```
 
 ```{r}
@@ -559,7 +559,7 @@ soils_number <- length(get_soils_list(sols))
 get_param_xml(sols, param = "argi")
 
 # One value per occurence
-set_param_xml(sols, param = "argi", values = list(1:soils_number), 
+set_param_xml(sols, param = "argi", values = list(1:soils_number),
               overwrite = TRUE)
 
 # Controlling written values
@@ -592,7 +592,7 @@ set_param_xml(sols, param = list("argi", "pH"),
 get_param_xml(sols, param = c("argi", "pH"))
 
 # Setting the same value for all occurences
-set_param_xml(sols, param = c("argi", "pH"), values = list(50, 8), 
+set_param_xml(sols, param = c("argi", "pH"), values = list(50, 8),
               overwrite = TRUE)
 
 # Controlling written values
@@ -612,7 +612,7 @@ get_param_xml(sols, param = c("argi", "pH"), select = "sol",
               select_value = "solcanne")
 
 # Setting new values
-set_param_xml(sols, param = c("argi", "pH"), values = list(50, 8), 
+set_param_xml(sols, param = c("argi", "pH"), values = list(50, 8),
               select = "sol", select_value = "solcanne", overwrite = TRUE)
 
 # Controlling written values
@@ -629,26 +629,26 @@ get_param_xml(sols, param = c("argi", "pH"), select = "sol",
 
 # Initial values
 get_param_xml(sols, param = c("epc", "infil"), select = "sol",
-              select_value = "solcanne" )
+              select_value = "solcanne")
 
 # Setting new values
-set_param_xml(sols, param = c("epc", "infil"), values = list(18:22, 48:52), 
+set_param_xml(sols, param = c("epc", "infil"), values = list(18:22, 48:52),
               select = "sol", select_value = "solcanne", overwrite = TRUE)
 
 # Controlling written values
 get_param_xml(sols, param = c("epc", "infil"), select = "sol",
-              select_value = "solcanne" )
+              select_value = "solcanne")
 ```
 
 ```{r}
 ## For all irrigation operations
-tec <- file.path(xml_loc_dir,"file_tec.xml")
+tec <- file.path(xml_loc_dir, "file_tec.xml")
 
 # Initial values
 get_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"))
 
 # Setting new values
-set_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"), 
+set_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"),
               values = list(200:215, 20:35), overwrite = TRUE)
 
 # Controlling written values
@@ -688,7 +688,7 @@ get_param_xml(sols, param = c("epc", "infil"), select = "sol",
 get_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"))
 
 # Setting new values
-set_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"), 
+set_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"),
               values = list(204:200, 24:20), overwrite = TRUE, ids = 1:5)
 
 # Controlling written values

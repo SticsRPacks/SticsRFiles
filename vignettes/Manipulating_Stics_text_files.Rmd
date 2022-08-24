@@ -95,13 +95,13 @@ A particular search in plant parameters for specific varieties, can be done usin
 
 * either using names,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf", 
+get_param_txt(workspace = example_txt_dir, param = "stlevamf",
               variety = c("Pactol", "Cecilia", "clarica"))
 ```
 * or using varieties indexes in plant file,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf", 
-              variety = c(1,2,5))
+get_param_txt(workspace = example_txt_dir, param = "stlevamf",
+              variety = c(1, 2, 5))
 ```
 
 
