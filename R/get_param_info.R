@@ -114,7 +114,7 @@ get_param_info <- function(param = NULL,
   # or filtering done in the previous step
   # when generating param_data_df
   if (!any(c(par_use, form_use, keyword_use)) |
-      (par_use & !form_use)) {
+    (par_use & !form_use)) {
     return(param_data_df)
   }
 
@@ -188,19 +188,19 @@ get_param_info <- function(param = NULL,
 #'   kind = "formalism"
 #' )
 #'
-#' get_param_data_df( file = "/path/to/JavaSTICS/folder/config/inputs.csv")
+#' get_param_data_df(file = "/path/to/JavaSTICS/folder/config/inputs.csv")
 #'
-#' get_param_data_df( param = "albedo",
-#'    file = "/path/to/JavaSTICS/folder/config/inputs.csv")
-#'
-#'}
+#' get_param_data_df(
+#'   param = "albedo",
+#'   file = "/path/to/JavaSTICS/folder/config/inputs.csv"
+#' )
+#' }
 #'
 get_param_data_df <- function(param = NULL,
                               file = NULL,
                               stics_version = "latest",
                               kind = "all",
                               exact = FALSE) {
-
   kinds <- c("parameter", "formalism", "all")
 
   # Checking kind
@@ -234,15 +234,17 @@ get_param_data_df <- function(param = NULL,
   }
 
   # getting parameters from an inputs.csv file
-  if( length(files_list) == 1 && grepl( pattern = "inputs.csv", x = files_list)) {
+  if (length(files_list) == 1 && grepl(pattern = "inputs.csv", x = files_list)) {
     param_names <- utils::read.csv2(
       file,
       header = FALSE,
       stringsAsFactors = FALSE
-    )[c(1,4,5,7:8)]
+    )[c(1, 4, 5, 7:8)]
     names(param_names) <- c("name", "file", "dim", "min", "max")
 
-    if(is.null(param)) return(param_names)
+    if (is.null(param)) {
+      return(param_names)
+    }
 
     par_idx <- param_names$name %in% param
 

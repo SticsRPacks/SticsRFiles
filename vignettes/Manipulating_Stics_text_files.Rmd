@@ -237,3 +237,4 @@ To get the possible output variables from the model, the user can use the `get_v
 ```{r}
 get_var_info("lai")
 ```
+

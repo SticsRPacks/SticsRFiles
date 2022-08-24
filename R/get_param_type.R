@@ -25,7 +25,7 @@ get_param_type <- function(xml_doc, param_name, parent_name = NULL,
     "choix_param", "node_node", "node_option", "node_table",
     "node_param", "form_option", "node_attr", "attr", "attrname",
     "attr_attr", "choix_attr", "nodename", "attr_attr2",
-    "nodename_childs","node_table_ent"
+    "nodename_childs", "node_table_ent"
   )
 
 

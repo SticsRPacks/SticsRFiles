@@ -55,12 +55,16 @@ exist_param_xml <- function(param,
 #' @examples
 #' \dontrun{
 #'
-#' exist_param_csv(param = "albedo",
-#'    javastics= "/path/to/JavaSTICS/folder")
+#' exist_param_csv(
+#'   param = "albedo",
+#'   javastics = "/path/to/JavaSTICS/folder"
+#' )
 #'
-#' exist_param_csv(param = c("albedo", "latitude"),
-#'    javastics = "/path/to/JavaSTICS/folder")
-#'}
+#' exist_param_csv(
+#'   param = c("albedo", "latitude"),
+#'   javastics = "/path/to/JavaSTICS/folder"
+#' )
+#' }
 #'
 exist_param_csv <- function(param,
                             javastics) {
@@ -84,18 +88,18 @@ exist_param_csv <- function(param,
   read_csv <- FALSE
 
   # checking existence of csv_path
-  if(! "inputs_path" %in% names(sticsEnv)) {
+  if (!"inputs_path" %in% names(sticsEnv)) {
     sticsEnv[["inputs_path"]] <- inputs_path
     read_csv <- TRUE
   } else {
-    if ( sticsEnv[["inputs_path"]]!= inputs_path){
+    if (sticsEnv[["inputs_path"]] != inputs_path) {
       sticsEnv[["inputs_path"]] <- inputs_path
       read_csv <- TRUE
     }
   }
 
   # checking existence of par_names
-  if(read_csv) {
+  if (read_csv) {
     par_names <- get_param_data_df(
       file = inputs_path,
     )$name
@@ -110,8 +114,10 @@ exist_param_csv <- function(param,
 
   # replacing underscores with ()
   conv_param <- col_names_to_var(param)
-  idx_conv_param <- unlist(lapply(conv_param,
-                                  function(x) any(par_names %in% x)))
+  idx_conv_param <- unlist(lapply(
+    conv_param,
+    function(x) any(par_names %in% x)
+  ))
 
   # dimensioning existence vector
   exist_status <- rep(FALSE, length(param))
@@ -121,13 +127,13 @@ exist_param_csv <- function(param,
   any_conv_idx <- any(idx_conv_param)
 
   # input names
-  if(any_idx) {
+  if (any_idx) {
     exist_status[idx_param] <- TRUE
     final_names[idx_param] <- param[idx_param]
   }
 
   # rewritten names
-  if(any_conv_idx) {
+  if (any_conv_idx) {
     exist_status[idx_conv_param] <- TRUE
     final_names[idx_conv_param] <- conv_param[idx_conv_param]
   }
@@ -136,7 +142,4 @@ exist_param_csv <- function(param,
   names(exist_status) <- final_names
 
   return(exist_status)
-
 }
-
-

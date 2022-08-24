@@ -5,8 +5,11 @@ check_param_names <- function(param_names, ref_names, pattern_tag = "",
   # param_names <- unique(gsub(pattern =
   # paste0("\\_(",pattern_tag,"){0,1}[1-9]+"), x = tolower(param_names), ""))
   param_names <- unique(
-    gsub(pattern = paste0("\\_(", pattern_tag, "){0,1}[1-9]+"),
-         x = param_names, ""))
+    gsub(
+      pattern = paste0("\\_(", pattern_tag, "){0,1}[1-9]+"),
+      x = param_names, ""
+    )
+  )
 
   # diff_names <- setdiff(param_names, tolower(ref_names))
   diff_names <- setdiff(param_names, ref_names)

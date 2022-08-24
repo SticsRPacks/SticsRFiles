@@ -14,8 +14,10 @@
 #'
 #' # Getting a new irrigation operation node
 #' irrigation_node <- SticsRFiles:::get_xml_base_node("tec", "irrigation")
-#' parent_path <- SticsRFiles:::get_param_type(tec_doc, "ta", "formalisme",
-#'  "irrigation")$xpath
+#' parent_path <- SticsRFiles:::get_param_type(
+#'   tec_doc, "ta", "formalisme",
+#'   "irrigation"
+#' )$xpath
 #'
 #' # Adding one irrigation operation
 #' SticsRFiles:::add_node_to_doc(
@@ -24,11 +26,15 @@
 #' )
 #'
 #' # Checking irrigations operations number
-#' irrigations_nb <- length(SticsRFiles:::get_param_value(tec_doc,
-#' "julapI_or_sum_upvt"))
+#' irrigations_nb <- length(SticsRFiles:::get_param_value(
+#'   tec_doc,
+#'   "julapI_or_sum_upvt"
+#' ))
 #' # Fixing it in nb_interventions attribute
-#' SticsRFiles:::set_param_value(tec_doc, "nb_interventions", irrigations_nb,
-#'  "irrigation")
+#' SticsRFiles:::set_param_value(
+#'   tec_doc, "nb_interventions", irrigations_nb,
+#'   "irrigation"
+#' )
 #' }
 #'
 #' @keywords internal

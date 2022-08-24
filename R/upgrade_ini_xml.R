@@ -52,8 +52,8 @@ upgrade_ini_xml <- function(file,
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file[1],
-                                           stics_version,
-                                           param_gen_file = param_gen_file
+      stics_version,
+      param_gen_file = param_gen_file
     )
 
 
@@ -173,9 +173,9 @@ upgrade_ini_xml <- function(file,
     # checking names an renaming them !
     old_names <- c("SDepth", "Sdry", "Swet", "ps")
     new_names <- c("Sdepth0", "Sdry0", "Swet0", "ps0")
-    n <- getNodeS(old_doc,c(sprintf("//%s",old_names)))
+    n <- getNodeS(old_doc, c(sprintf("//%s", old_names)))
 
-    if (!is.null(n)){
+    if (!is.null(n)) {
       nodes_idx <- unlist(lapply(n, xmlName)) %in% old_names
       n <- n[nodes_idx]
       new_names <- new_names[nodes_idx]

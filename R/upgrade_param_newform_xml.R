@@ -117,11 +117,11 @@ upgrade_param_newform_xml <- function(file,
 
   # options to be removed
   opt_names <- c(
-    "New mineralization of soil organic matter "#,
+    "New mineralization of soil organic matter " # ,
     # Useless now
     # options now removed while removing the "residue incorporation" formalism
-    #"depht of residue incorporation plant 1 ",
-    #"depht of residue incorporation plant 2 "
+    # "depht of residue incorporation plant 1 ",
+    # "depht of residue incorporation plant 2 "
   )
 
   nodes_to_rm <- lapply(opt_names, function(x) {
@@ -224,20 +224,20 @@ upgrade_param_newform_xml <- function(file,
 
 
   # Useless, option now removed in the model
-#   # humus
-#   new_node <- xmlParseString(
-#     '<option choix="1" nom="depth of humus division " nomParam="code_depth_mixed_humus">
-#   <choix code="1" nom="old calculation proftrav1 to proftrav2"/>
-#   <choix code="2" nom="new calculation 1 to proftrav2"/>
-# </option>',
-#     addFinalizer = TRUE
-#   )
-#
-#   parent_node <- getNodeS(
-#     docObj = old_doc,
-#     path = "//formalisme[@nom='residue incorporation']"
-#   )[[1]]
-#   addChildren(parent_node, xmlClone(new_node))
+  #   # humus
+  #   new_node <- xmlParseString(
+  #     '<option choix="1" nom="depth of humus division " nomParam="code_depth_mixed_humus">
+  #   <choix code="1" nom="old calculation proftrav1 to proftrav2"/>
+  #   <choix code="2" nom="new calculation 1 to proftrav2"/>
+  # </option>',
+  #     addFinalizer = TRUE
+  #   )
+  #
+  #   parent_node <- getNodeS(
+  #     docObj = old_doc,
+  #     path = "//formalisme[@nom='residue incorporation']"
+  #   )[[1]]
+  #   addChildren(parent_node, xmlClone(new_node))
 
 
   # formalism modifications

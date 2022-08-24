@@ -1,13 +1,15 @@
 library(SticsRFiles)
 # options(warn=-1)
 
-#stics_version <- "V9.2"
+# stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
 
-xml_path <- file.path(get_examples_path("xml", stics_version = stics_version),
-                      "usms.xml")
+xml_path <- file.path(
+  get_examples_path("xml", stics_version = stics_version),
+  "usms.xml"
+)
 context("Getting usms param values")
 
 test_that("getting all param from an usm", {
@@ -27,22 +29,28 @@ test_that("getting all param from an usm", {
 
 
   expect_equal(
-    get_param_xml(xml_path, "fplt", select = "plante",
-                  select_value = "1")$usms.xml$fplt[1],
+    get_param_xml(xml_path, "fplt",
+      select = "plante",
+      select_value = "1"
+    )$usms.xml$fplt[1],
     "proto_sugarcane_plt.xml"
   )
 
 
   expect_equal(
-    get_param_xml(xml_path, "ftec", select = "plante",
-                  select_value = "1")$usms.xml$ftec[1],
+    get_param_xml(xml_path, "ftec",
+      select = "plante",
+      select_value = "1"
+    )$usms.xml$ftec[1],
     "canne_tec.xml"
   )
 
 
   expect_equal(
-    get_param_xml(xml_path, "flai", select = "plante",
-                  select_value = "1")$usms.xml$flai[1],
+    get_param_xml(xml_path, "flai",
+      select = "plante",
+      select_value = "1"
+    )$usms.xml$flai[1],
     "null"
   )
 
@@ -64,24 +72,30 @@ test_that("getting all param from an usm", {
 
 
   expect_equal(
-    get_param_xml(xml_path, "fplt", select = "plante",
-                  select_value = "1")$usms.xml$fplt[2],
+    get_param_xml(xml_path, "fplt",
+      select = "plante",
+      select_value = "1"
+    )$usms.xml$fplt[2],
     "proto_potato_plt.xml"
   )
 
 
 
   expect_equal(
-    get_param_xml(xml_path, "ftec", select = "plante",
-                  select_value = "1")$usms.xml$ftec[2],
+    get_param_xml(xml_path, "ftec",
+      select = "plante",
+      select_value = "1"
+    )$usms.xml$ftec[2],
     "patate_tec.xml"
   )
 
 
 
   expect_equal(
-    get_param_xml(xml_path, "flai", select = "plante",
-                  select_value = "1")$usms.xml$flai[2],
+    get_param_xml(xml_path, "flai",
+      select = "plante",
+      select_value = "1"
+    )$usms.xml$flai[2],
     "null"
   )
 })

@@ -13,9 +13,11 @@
 #'
 setClass(
   "fileDocument",
-  representation(type = "character", name = "character", dir = "character",
-                 ext = "character", con = "ANY", content = "ANY",
-                 warn = "logical"),
+  representation(
+    type = "character", name = "character", dir = "character",
+    ext = "character", con = "ANY", content = "ANY",
+    warn = "logical"
+  ),
   prototype(
     type = character(length = 0), name = character(length = 0),
     dir = character(length = 0), ext = character(length = 0),
@@ -36,19 +38,23 @@ setClass(
 # })
 
 # constructor
-setMethod("filedocument", signature(file = "character", type = "character"),
-          function(file = character(length = 0), type = character(length = 0)) {
-  # print(file)
-  return(methods::new("fileDocument", file, type))
-})
+setMethod(
+  "filedocument", signature(file = "character", type = "character"),
+  function(file = character(length = 0), type = character(length = 0)) {
+    # print(file)
+    return(methods::new("fileDocument", file, type))
+  }
+)
 
 
 # file only
-setMethod("filedocument", signature(file = "character", type = "missing"),
-          function(file = character(length = 0), type = character(length = 0)) {
-  # print(file)
-  return(methods::new("fileDocument", file))
-})
+setMethod(
+  "filedocument", signature(file = "character", type = "missing"),
+  function(file = character(length = 0), type = character(length = 0)) {
+    # print(file)
+    return(methods::new("fileDocument", file))
+  }
+)
 
 
 setMethod("initialize", "fileDocument", function(.Object,
@@ -81,38 +87,48 @@ setMethod("initialize", "fileDocument", function(.Object,
 # replace
 
 # set
-setReplaceMethod("setWarn", signature(docObj = "fileDocument"),
-                 function(docObj, value) {
-  docObj@warn <- value
-  return(docObj)
-})
+setReplaceMethod(
+  "setWarn", signature(docObj = "fileDocument"),
+  function(docObj, value) {
+    docObj@warn <- value
+    return(docObj)
+  }
+)
 
 
-setReplaceMethod("setName", signature(docObj = "fileDocument"),
-                 function(docObj, value) {
-  docObj@name <- value
-  return(docObj)
-})
+setReplaceMethod(
+  "setName", signature(docObj = "fileDocument"),
+  function(docObj, value) {
+    docObj@name <- value
+    return(docObj)
+  }
+)
 
-setReplaceMethod("setDir", signature(docObj = "fileDocument"),
-                 function(docObj, value) {
-  docObj@dir <- normalizePath(value)
-  return(docObj)
-})
+setReplaceMethod(
+  "setDir", signature(docObj = "fileDocument"),
+  function(docObj, value) {
+    docObj@dir <- normalizePath(value)
+    return(docObj)
+  }
+)
 
-setReplaceMethod("setExt", signature(docObj = "fileDocument"),
-                 function(docObj, value) {
-  docObj@ext <- value
-  # add reconstruct file name !!!!!!!!!
-  return(docObj)
-})
+setReplaceMethod(
+  "setExt", signature(docObj = "fileDocument"),
+  function(docObj, value) {
+    docObj@ext <- value
+    # add reconstruct file name !!!!!!!!!
+    return(docObj)
+  }
+)
 
 # set
-setMethod("setName", signature(docObj = "fileDocument"),
-          function(docObj, value) {
-  docObj@name <- value
-  return(docObj)
-})
+setMethod(
+  "setName", signature(docObj = "fileDocument"),
+  function(docObj, value) {
+    docObj@name <- value
+    return(docObj)
+  }
+)
 
 
 # getter methods
@@ -200,10 +216,12 @@ setMethod("move", signature(docObj = "fileDocument"), function(docObj, toFile) {
 })
 
 #
-setMethod("rename", signature(docObj = "fileDocument"),
-          function(docObj, toFile) {
-  move(docObj, toFile)
-})
+setMethod(
+  "rename", signature(docObj = "fileDocument"),
+  function(docObj, toFile) {
+    move(docObj, toFile)
+  }
+)
 
 #
 setMethod("delete", signature(docObj = "fileDocument"), function(docObj) {

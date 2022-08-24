@@ -15,16 +15,21 @@ get_in_files <- function(in_dir_or_files, kind) {
   }
 
   if (dir.exists(in_dir_or_files)) {
-    files_list <- list.files(pattern = file_pattern, path = in_dir_or_files,
-                             full.names = TRUE)
+    files_list <- list.files(
+      pattern = file_pattern, path = in_dir_or_files,
+      full.names = TRUE
+    )
   } else {
     # files path: add grep for filtering
-    files_list <- grep(pattern = file_pattern, x = in_dir_or_files,
-                       value = TRUE)
+    files_list <- grep(
+      pattern = file_pattern, x = in_dir_or_files,
+      value = TRUE
+    )
     exist <- file.exists(files_list)
     if (!all(exist)) {
       warning("Some files do not exist", paste(files_list[!exist],
-                                               collapse = ", "))
+        collapse = ", "
+      ))
       files_list <- files_list[exist]
     }
   }
@@ -69,7 +74,7 @@ to_xml_version <- function(stics_version) {
 
   if (!grepl(pattern = "\\.", x = stics_version)) {
     stics_version <- paste0(stics_version, ".0")
-    }
+  }
   numbers <- grepl(pattern = "[0-9]", stics_version)
 
   # no numbers in version
@@ -135,9 +140,9 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   # Global detection of the version based for the moment on the
   # param_gen.xml file content
   if (xml_root_name != "fichierpar" && is.null(param_gen_file)) {
-  # stop("The Stics version corresponding to the XML file was not detected.\n",
-  #      "The param_gen.xml path must be provided as second input!")
-  warning("The Stics version corresponding to the XML file was not detected.\n")
+    # stop("The Stics version corresponding to the XML file was not detected.\n",
+    #      "The param_gen.xml path must be provided as second input!")
+    warning("The Stics version corresponding to the XML file was not detected.\n")
     return()
   }
 
@@ -188,7 +193,8 @@ check_xml_file_version <- function(xml_file_or_doc, stics_version,
   # xml_version <- get_xml_stics_version(xml_file_or_doc,
   # param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(xml_file_or_doc,
-                                      param_gen_file = param_gen_file)
+    param_gen_file = param_gen_file
+  )
 
   r <- TRUE
 
@@ -208,8 +214,12 @@ get_xml_doc <- function(xml_file_or_doc) {
   if (!any(type_id)) stop("xml_file_or_doc: not a valid input,
                           must be a file path or an xmlDocument object!")
 
-  if (type_id[1] && !file.exists(xml_file_or_doc)) stop(xml_file_or_doc,
-                                                        ": does not exist!")
+  if (type_id[1] && !file.exists(xml_file_or_doc)) {
+    stop(
+      xml_file_or_doc,
+      ": does not exist!"
+    )
+  }
 
   if (type_id[1]) {
     return(xmldocument(xml_file_or_doc))

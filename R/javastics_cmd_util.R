@@ -20,8 +20,10 @@
 #'
 #' @examples
 #' \dontrun{
-#'  get_javastics_cmd(javastics = "/path/to/JavaSTICS/folder",
-#'    ,               workspace = "path/to/workspace")
+#' get_javastics_cmd(
+#'   javastics = "/path/to/JavaSTICS/folder", ,
+#'   workspace = "path/to/workspace"
+#' )
 #' }
 #'
 #' @keywords internal
@@ -34,17 +36,19 @@ get_javastics_cmd <- function(javastics,
 
   # detecting JavaStics command exe name from javastics path
   javastics_cmd <- file.path(javastics, "JavaSticsCmd.exe")
-  cmd <- check_javastics_cmd(javastics_cmd = javastics_cmd,
-                                           java_cmd = java_cmd,
-                                           verbose = TRUE)
+  cmd <- check_javastics_cmd(
+    javastics_cmd = javastics_cmd,
+    java_cmd = java_cmd,
+    verbose = TRUE
+  )
   javastics_cmd <- cmd$javastics_cmd
   verbose_cmd <- cmd$verbose_cmd
 
   # Base command string, without workspace
   if (!is_windows()) {
     command <- java_cmd
-    generate <- paste0("-jar ",javastics_cmd, verbose_cmd," --generate-txt")
-    run <- paste0("-jar ",javastics_cmd, verbose_cmd, " --run")
+    generate <- paste0("-jar ", javastics_cmd, verbose_cmd, " --generate-txt")
+    run <- paste0("-jar ", javastics_cmd, verbose_cmd, " --run")
   } else {
     command <- javastics_cmd
     generate <- paste0(verbose_cmd, " --generate-txt")
@@ -53,17 +57,18 @@ get_javastics_cmd <- function(javastics,
 
   # adding workspace name if provided
   if (!is.null(workspace)) {
-    workspace <- paste0('"',workspace,'"')
-    generate <- paste(generate,workspace)
+    workspace <- paste0('"', workspace, '"')
+    generate <- paste(generate, workspace)
     run <- paste(run, workspace)
   }
 
   # All strings in a named list
   # content returned conditionally to type content
-  list(command = command,
-       cmd_generate = generate,
-       cmd_run = run)[c("command", paste("cmd", type, sep = "_"))]
-
+  list(
+    command = command,
+    cmd_generate = generate,
+    cmd_run = run
+  )[c("command", paste("cmd", type, sep = "_"))]
 }
 
 #' @title Checking if the java virtual machine is compatible with the given
@@ -86,25 +91,28 @@ get_javastics_cmd <- function(javastics,
 #'
 #' @examples
 #' \dontrun{
-#'  check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe")
-#'  check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe",
-#'                      java_cmd = "/path/to/java")
+#' check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe")
+#' check_javastics_cmd(
+#'   javastics_cmd = "/path/to/JavaSticsCmd.exe",
+#'   java_cmd = "/path/to/java"
+#' )
 #' }
 #'
 #' @keywords internal
 #'
 check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
-                                java_cmd="java",
+                                java_cmd = "java",
                                 verbose = TRUE) {
-
   if (is_windows()) {
     help_test <- system2(javastics_cmd,
-                         c("--help"),
-                         stdout = TRUE, stderr = TRUE)
+      c("--help"),
+      stdout = TRUE, stderr = TRUE
+    )
   } else {
     help_test <- system2(java_cmd,
-                         c("-jar", javastics_cmd, "--help"),
-                         stdout = TRUE, stderr = TRUE)
+      c("-jar", javastics_cmd, "--help"),
+      stdout = TRUE, stderr = TRUE
+    )
   }
 
   # detecting invalid option for given JavaStics command line
@@ -115,24 +123,27 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
 
     status <- attr(help_test, "status")
 
-    if (!is.null(status) && status > 0)
-      stop("The given or default java version ",ver, " is not usable with that version of
+    if (!is.null(status) && status > 0) {
+      stop("The given or default java version ", ver, " is not usable with that version of
             JavaSTICS, use at least java version 11 !")
+    }
 
     if (is.null(status) &&
-        !help_status &&
-        ver > 1.8)
+      !help_status &&
+      ver > 1.8) {
       stop("The given or default java version ", ver, " is not usable with that version of
             JavaSTICS, use at most java version 1.8 !")
+    }
   }
 
   verbose_cmd <- ""
   if (help_status && verbose) verbose_cmd <- " --verbose"
 
-  list(javastics_cmd = javastics_cmd,
-       java_cmd = java_cmd,
-       verbose_cmd = verbose_cmd)
-
+  list(
+    javastics_cmd = javastics_cmd,
+    java_cmd = java_cmd,
+    verbose_cmd = verbose_cmd
+  )
 }
 
 
@@ -148,8 +159,8 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
 #'
 #' @examples
 #' \dontrun{
-#'  get_java_version(java_cmd = "java")
-#'  get_java_version(java_cmd = "/path/to/java")
+#' get_java_version(java_cmd = "java")
+#' get_java_version(java_cmd = "/path/to/java")
 #' }
 #'
 #' @keywords internal
@@ -167,7 +178,7 @@ get_java_version <- function(java_cmd = "java") {
     java_path <- system2("where", java_cmd, stdout = TRUE, stderr = TRUE)
   }
 
-  if(!length(java_path)) {
+  if (!length(java_path)) {
     stop(paste(java_cmd, "not found !"))
   }
 
@@ -176,10 +187,9 @@ get_java_version <- function(java_cmd = "java") {
 
   version_str <- gsub("[\"a-z\ ]", x = java_version[1], replacement = "")
 
-  version_num <- as.numeric(substr(1,3,x = version_str))
+  version_num <- as.numeric(substr(1, 3, x = version_str))
 
   attr(x = version_num, which = "version") <- version_str
 
   return(version_num)
-
 }

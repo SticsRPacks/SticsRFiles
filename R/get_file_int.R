@@ -38,10 +38,10 @@ get_file_int <- function(workspace, filename, plant_name = NULL, verbose = TRUE)
 
   out_table <- mapply(function(x, y) {
     out <- try(data.table::fread(file.path(workspace, x),
-                                 data.table = FALSE,
-                                 na.strings = c("************", "NA"),
-                                 stringsAsFactors = FALSE)
-               )
+      data.table = FALSE,
+      na.strings = c("************", "NA"),
+      stringsAsFactors = FALSE
+    ))
 
     # Removing empty extra lines (without year)
     out <- dplyr::filter(out, !is.na(.data$ian))

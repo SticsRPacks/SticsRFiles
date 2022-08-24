@@ -16,8 +16,10 @@
 #' \dontrun{
 #' library(readxl)
 #'
-#' download_usm_xl(file = "inputs_stics_example.xlsx",
-#'  dest_dir = "/path/to/dest/dir")
+#' download_usm_xl(
+#'   file = "inputs_stics_example.xlsx",
+#'   dest_dir = "/path/to/dest/dir"
+#' )
 #' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' tec_param_df <- read_excel(xl_path, sheet = "Tec")
 #' tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)
@@ -82,8 +84,10 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   # TODO : Avoid making conversion at each call !!!!!!
   # getting values of params declared in the table
-  table_params <- get_params_from_table(params_table = param_table,
-                                        xml_doc = xml_doc, dict = dict)
+  table_params <- get_params_from_table(
+    params_table = param_table,
+    xml_doc = xml_doc, dict = dict
+  )
   table_names <- names(table_params)
 
   # Checking parameters names
@@ -102,8 +106,10 @@ gen_tec_doc <- function(xml_doc = NULL,
     table_names <- names(table_params)
 
     # Message for unknown parameters
-    warning(paste(table_params[!unknown_idx], collapse = ", "),
-            ": unknown parameters !")
+    warning(
+      paste(table_params[!unknown_idx], collapse = ", "),
+      ": unknown parameters !"
+    )
   }
 
   # Getting scalar and vector parameter names
@@ -182,11 +188,15 @@ gen_tec_doc <- function(xml_doc = NULL,
         # node cannot be removed. Consistency error between the
         # values detected in the parameters table and the param type
         # in the xml file.
-        if (xmlName(xmlParent(getNodeS(xml_doc,
-                                       xpath_node)[[1]])) == "formalisme") {
+        if (xmlName(xmlParent(getNodeS(
+          xml_doc,
+          xpath_node
+        )[[1]])) == "formalisme") {
           gen_error <- TRUE
-          cat(paste("The parameter", par_name,
-                    "is unique in the original xml file, and not attached to \"intervention\"\n"))
+          cat(paste(
+            "The parameter", par_name,
+            "is unique in the original xml file, and not attached to \"intervention\"\n"
+          ))
           cat("Multiple values are present in input table, check consistency with formalism definition !\n")
           cat("The treatment for this parameter is aborted.")
           cat("\n")

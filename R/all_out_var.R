@@ -21,10 +21,10 @@ all_out_var <- function(stics_version = "latest") {
   # Checking and getting the right version
   version <- check_version_compat(stics_version = stics_version)
 
-  if(get_version_num(stics_version = stics_version) < 9.2) {
+  if (get_version_num(stics_version = stics_version) < 9.2) {
     cols_idx <- 1:4
   } else {
-    cols_idx <- c(1:3,5)
+    cols_idx <- c(1:3, 5)
   }
 
   var_df <- utils::read.csv2(

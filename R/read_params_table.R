@@ -68,8 +68,7 @@ read_params_table <- function(file, sheet_name = NULL,
   }
 
   # Reading file according to its format
-  switch(
-    file_ext,
+  switch(file_ext,
     csv = {
       out_table <- utils::read.csv2(
         file = file_path,

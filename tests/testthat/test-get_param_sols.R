@@ -1,12 +1,14 @@
 library(SticsRFiles)
 # options(warn=-1)
 
-#stics_version <- "V9.2"
+# stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
-xml_path <- file.path(get_examples_path("xml", stics_version = stics_version),
-                      "sols.xml")
+xml_path <- file.path(
+  get_examples_path("xml", stics_version = stics_version),
+  "sols.xml"
+)
 context("Getting grounds param values")
 
 res <- c(
@@ -37,16 +39,22 @@ res <- c(li1, li2)
 
 # unname(query) because result is just numbers, it doesn't have names
 test_that("multiple param option value version sols -> norg, profhum", {
-  expect_equivalent(unname(unlist(get_param_xml(xml_path,
-                                                c("norg", "profhum")))), res)
-  query <- unlist(lapply(get_param_xml(xml_path, c("norg", "profhum"))[[1]],
-                         function(x) x[[1]][1]))
+  expect_equivalent(unname(unlist(get_param_xml(
+    xml_path,
+    c("norg", "profhum")
+  ))), res)
+  query <- unlist(lapply(
+    get_param_xml(xml_path, c("norg", "profhum"))[[1]],
+    function(x) x[[1]][1]
+  ))
   expect_equivalent(unname(query), c(0.27, 40.00))
 })
 
 test_that("single option param name choice value", {
-  expect_equivalent(get_param_xml(xml_path,
-                                  "coderemontcap")[[1]]$coderemontcap[1], 2)
+  expect_equivalent(get_param_xml(
+    xml_path,
+    "coderemontcap"
+  )[[1]]$coderemontcap[1], 2)
 })
 
 
@@ -55,12 +63,14 @@ test_that(" single column name value", {
 })
 
 test_that(
-  "multiple option choice value and param name's value from choice list", {
-  expect_equivalent(unname(unlist(lapply(
-    get_param_xml(xml_path, c("codefente", "profimper"))[[1]],
-    function(x) x[[1]][1]
-  ))), c(2, 10))
-})
+  "multiple option choice value and param name's value from choice list",
+  {
+    expect_equivalent(unname(unlist(lapply(
+      get_param_xml(xml_path, c("codefente", "profimper"))[[1]],
+      function(x) x[[1]][1]
+    ))), c(2, 10))
+  }
+)
 
 test_that("triple param name's value ", {
   expect_equivalent(unname(unlist(lapply(

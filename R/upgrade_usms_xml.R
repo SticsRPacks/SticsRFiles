@@ -82,8 +82,10 @@ upgrade_usms_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version,
-                       overwrite = overwrite)
+  set_xml_file_version(old_doc,
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
   # checking if fobs exist
   obs_nodes <- getNodeS(old_doc, "//fobs")
