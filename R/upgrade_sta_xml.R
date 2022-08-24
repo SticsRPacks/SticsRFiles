@@ -152,7 +152,8 @@ upgrade_sta_xml <- function(file,
 
   # Writing to file _sta.xml
   write_xml_file(old_doc, file.path(out_dir, basename(file)),
-                 overwrite = overwrite)
+    overwrite = overwrite
+  )
 
   free(old_doc@content)
   invisible(gc(verbose = FALSE))

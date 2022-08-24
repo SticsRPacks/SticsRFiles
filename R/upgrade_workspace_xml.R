@@ -95,9 +95,11 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the workspace dir to be converted
   if (!dir.exists(workspace) ||
-      !file.exists(file.path(workspace, "usms.xml"))) {
-    stop(workspace,
-         ": the directory does not exist or is not a JavaStics workspace !")
+    !file.exists(file.path(workspace, "usms.xml"))) {
+    stop(
+      workspace,
+      ": the directory does not exist or is not a JavaStics workspace !"
+    )
   }
 
   # Just in case, creating the target directory
@@ -105,9 +107,11 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the JavaStics dir
   if (!dir.exists(javastics) ||
-      !file.exists(file.path(javastics, "JavaStics.exe"))) {
-    stop(javastics,
-         " : the directory does nor exist or is not a JavaStics one !")
+    !file.exists(file.path(javastics, "JavaStics.exe"))) {
+    stop(
+      javastics,
+      " : the directory does nor exist or is not a JavaStics one !"
+    )
   }
 
   # Testing if a plant directory exists in the workspace
@@ -145,8 +149,10 @@ upgrade_workspace_xml <- function(workspace,
 
 
   # Getting param_newform.xml path
-  par_new <- get_param_gen_file(type = "param_newform.xml",
-                                workspace, javastics)
+  par_new <- get_param_gen_file(
+    type = "param_newform.xml",
+    workspace, javastics
+  )
   if (is.null(par_new)) {
     stop(
       "param_newform.xml: file not found in\n",

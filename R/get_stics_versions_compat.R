@@ -11,7 +11,8 @@
 #' an existing version selected using version_index.
 #'
 #' @examples
-# \dontrun{
+#' #
+#' \dontrun{
 #'
 #' # Getting the complete versions list
 #' get_stics_versions_compat()
@@ -22,7 +23,8 @@
 #' # Getting the previous version of the latest one
 #' get_stics_versions_compat(-1)
 #'
-# }
+#' #
+#' }
 #'
 #' @export
 #'
@@ -40,15 +42,16 @@ get_stics_versions_compat <- function(version_index = NULL) {
   # List of versions strings ans latest version string
   versions <- list(versions_list = versions_names, latest_version = latest_version)
 
-  if(is.null(version_index))
+  if (is.null(version_index)) {
     return(versions)
+  }
 
   # getting relative backwards versions
   nb_versions <- length(versions$versions_list)
 
 
-  if(version_index < 0) {
-    if(version_index >= -nb_versions+1){
+  if (version_index < 0) {
+    if (version_index >= -nb_versions + 1) {
       return(versions$versions_list[nb_versions + version_index])
     } else {
       return(invisible())
@@ -56,19 +59,13 @@ get_stics_versions_compat <- function(version_index = NULL) {
   }
 
   # or absolute rank number
-  if(version_index > 0) {
-    if(version_index <= nb_versions) {
+  if (version_index > 0) {
+    if (version_index <= nb_versions) {
       return(versions$versions_list[version_index])
     } else {
       return(invisible())
     }
-
   }
-
-
-
-
-
 }
 
 

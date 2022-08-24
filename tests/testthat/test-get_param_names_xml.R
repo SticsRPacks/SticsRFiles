@@ -2,7 +2,7 @@ library(SticsRFiles)
 # options(warn=-1)
 
 
-#stics_version <- "V9.2"
+# stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num(stics_version = stics_version)
 
@@ -156,7 +156,6 @@ context("Getting param_new param names")
 param_names <- unlist(get_param_names_xml(xml_new)[[1]])
 
 if (version_num < 10) {
-
   test_that("option name", {
     expect_true("codetempfauche" %in% param_names)
     expect_true(all(c("codetempfauche", "codecalferti") %in% param_names))
@@ -165,7 +164,7 @@ if (version_num < 10) {
   test_that("param name", {
     expect_true("nbj_pr_apres_semis" %in% param_names)
     expect_true(all(c("nbj_pr_apres_semis", "codetranspitalle")
-                    %in% param_names))
+    %in% param_names))
   })
 
   test_that("option param name", {

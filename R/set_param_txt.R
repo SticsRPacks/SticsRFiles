@@ -111,13 +111,15 @@ set_param_txt <- function(workspace = getwd(),
 
 
   param <- gsub("P_", "", param)
-  param_val <- get_param_txt(workspace = dirpath,
-                             param = param,
-                             exact = TRUE,
-                             stics_version = stics_version)
+  param_val <- get_param_txt(
+    workspace = dirpath,
+    param = param,
+    exact = TRUE,
+    stics_version = stics_version
+  )
 
   file_type <-
-    #lapply(strsplit(names(param_val), "\\."), function(x) {
+    # lapply(strsplit(names(param_val), "\\."), function(x) {
     lapply(strsplit(names(param_val), "\\$"), function(x) {
       x[1]
     }) %>%
@@ -131,80 +133,80 @@ set_param_txt <- function(workspace = getwd(),
     )
   }
   switch(file_type,
-         ini = {
-           set_ini_txt(
-             file = file.path(dirpath, "ficini.txt"),
-             param = param, value = value, append = add,
-             plant_id = plant, layer = layer,
-             stics_version = stics_version
-           )
-         },
-         general = {
-           set_general_txt(
-             file = file.path(dirpath, "tempopar.sti"),
-             param = param, value = value, append = add
-           )
-         },
-         tmp = {
-           set_tmp_txt(
-             file = file.path(dirpath, "tempoparV6.sti"),
-             param = param, value = value, append = add
-           )
-         },
-         soil = {
-           set_soil_txt(
-             file = file.path(dirpath, "param.sol"),
-             param = param,
-             value = value,
-             layer = layer,
-             stics_version = stics_version
-           )
-         },
-         usm = {
-           set_usm_txt(
-             file = file.path(dirpath, "new_travail.usm"),
-             param = param, value = value
-           )
-         },
-         station = {
-           set_station_txt(
-             file = file.path(dirpath, "station.txt"),
-             param = param, value = value, append = add
-           )
-         },
-         tec = {
-           tmp <- lapply(plant, function(x) {
-             set_tec_txt(
-               file = file.path(dirpath, paste0("fictec", x, ".txt")),
-               param = param, value = value, append = add
-             )
-           })
-         },
-         plant = {
-           # default : 1 plant
-           if(is.null(plant)) plant <- 1
+    ini = {
+      set_ini_txt(
+        file = file.path(dirpath, "ficini.txt"),
+        param = param, value = value, append = add,
+        plant_id = plant, layer = layer,
+        stics_version = stics_version
+      )
+    },
+    general = {
+      set_general_txt(
+        file = file.path(dirpath, "tempopar.sti"),
+        param = param, value = value, append = add
+      )
+    },
+    tmp = {
+      set_tmp_txt(
+        file = file.path(dirpath, "tempoparV6.sti"),
+        param = param, value = value, append = add
+      )
+    },
+    soil = {
+      set_soil_txt(
+        file = file.path(dirpath, "param.sol"),
+        param = param,
+        value = value,
+        layer = layer,
+        stics_version = stics_version
+      )
+    },
+    usm = {
+      set_usm_txt(
+        file = file.path(dirpath, "new_travail.usm"),
+        param = param, value = value
+      )
+    },
+    station = {
+      set_station_txt(
+        file = file.path(dirpath, "station.txt"),
+        param = param, value = value, append = add
+      )
+    },
+    tec = {
+      tmp <- lapply(plant, function(x) {
+        set_tec_txt(
+          file = file.path(dirpath, paste0("fictec", x, ".txt")),
+          param = param, value = value, append = add
+        )
+      })
+    },
+    plant = {
+      # default : 1 plant
+      if (is.null(plant)) plant <- 1
 
-           tmp <- lapply(plant, function(x) {
-             if (is.null(variety)) {
-               variety <-
-                 unlist(get_param_txt(workspace = dirpath, param = "variete", exact = TRUE, stics_version = stics_version))[plant]
-             } else {
-               if (is.character(variety)) {
-                 varieties <- get_plant_txt(file = file.path(dirpath, paste0("ficplt", x, ".txt")))$codevar
-                 variety <- match(variety, varieties)
-                 if (is.na(variety)) {
-                   cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
-                   return()
-                 }
-               }
-             }
-             set_plant_txt(
-               file = file.path(dirpath, paste0("ficplt", x, ".txt")),
-               param = param, value = value, append = add, variety = variety
-             )
-           })
-         },
-         stop("Parameter not found")
+      tmp <- lapply(plant, function(x) {
+        if (is.null(variety)) {
+          variety <-
+            unlist(get_param_txt(workspace = dirpath, param = "variete", exact = TRUE, stics_version = stics_version))[plant]
+        } else {
+          if (is.character(variety)) {
+            varieties <- get_plant_txt(file = file.path(dirpath, paste0("ficplt", x, ".txt")))$codevar
+            variety <- match(variety, varieties)
+            if (is.na(variety)) {
+              cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+              return()
+            }
+          }
+        }
+        set_plant_txt(
+          file = file.path(dirpath, paste0("ficplt", x, ".txt")),
+          param = param, value = value, append = add, variety = variety
+        )
+      })
+    },
+    stop("Parameter not found")
   )
 }
 
@@ -303,8 +305,10 @@ set_ini_txt <- function(file = "ficini.txt",
     add <- append # to remove when we update inside the function
   }
 
-  set_file_txt(filepath, param, value, add, plant_id = plant_id,
-               layer = layer, stics_version = stics_version)
+  set_file_txt(filepath, param, value, add,
+    plant_id = plant_id,
+    layer = layer, stics_version = stics_version
+  )
 }
 
 
@@ -455,7 +459,7 @@ set_soil_txt <- function(file = "param.sol",
   }
 
   param <- gsub("P_", "", param)
-  ref <- get_soil_txt(filepath,stics_version = stics_version)
+  ref <- get_soil_txt(filepath, stics_version = stics_version)
   param <- paste0("^", param, "$")
 
   if (!is.null(layer)) {
@@ -501,7 +505,7 @@ set_soil_txt <- function(file = "param.sol",
     )
   }
 
-  writeLines(line,filepath)
+  writeLines(line, filepath)
 
   write(paste(
     " ", " ", " ", ref$numsol[1], " ", " ", " ", ref$codecailloux, ref$codemacropor,
@@ -579,86 +583,87 @@ set_file_txt <- function(file,
   params <- readLines(file)
   param_ <- paste0("^:{0,1}", param, "$")
   switch(type,
-         set_usm_txt = {
-           ref <- get_usm_txt(file)
-           if (grep(param_, names(ref)) < grep("fplt", names(ref))) {
-             ref_index <- grep(param_, names(ref)) * 2
-           } else {
-             ref_index <- grep(param_, params) + 1
-           }
-         },
-         set_station_txt = {
-           ref <- get_station_txt(file)
-           ref_index <- grep(param_, names(ref)) * 2
-         },
-         set_ini_txt = {
-           ref <- get_ini_txt(file, stics_version = stics_version)
+    set_usm_txt = {
+      ref <- get_usm_txt(file)
+      if (grep(param_, names(ref)) < grep("fplt", names(ref))) {
+        ref_index <- grep(param_, names(ref)) * 2
+      } else {
+        ref_index <- grep(param_, params) + 1
+      }
+    },
+    set_station_txt = {
+      ref <- get_station_txt(file)
+      ref_index <- grep(param_, names(ref)) * 2
+    },
+    set_ini_txt = {
+      ref <- get_ini_txt(file, stics_version = stics_version)
 
-           # fix plant id if param is attached to a plant
-           if(is.null(plant_id) &&
-              (param %in% names(ref$plant$plant1)))
-             plant_id <- 1
+      # fix plant id if param is attached to a plant
+      if (is.null(plant_id) &&
+        (param %in% names(ref$plant$plant1))) {
+        plant_id <- 1
+      }
 
-           # changing param value in ref
-           if(is.null(plant_id)){
-             if(is.null(layer)) {
-               ref[[param]] <- value
-             } else {
-               ref[[param]][layer] <- value
-             }
-           } else {
-             if(is.null(layer)) {
-               ref$plant[[paste0("plant", plant_id)]][[param]] <- value
-             } else {
-               ref$plant[[paste0("plant", plant_id)]][[param]][layer] <- value
-             }
-           }
+      # changing param value in ref
+      if (is.null(plant_id)) {
+        if (is.null(layer)) {
+          ref[[param]] <- value
+        } else {
+          ref[[param]][layer] <- value
+        }
+      } else {
+        if (is.null(layer)) {
+          ref$plant[[paste0("plant", plant_id)]][[param]] <- value
+        } else {
+          ref$plant[[paste0("plant", plant_id)]][[param]][layer] <- value
+        }
+      }
 
-           value <- list_to_character_vector(ref)
+      value <- list_to_character_vector(ref)
 
-           # rows index according to version
-           ref_index <- get_ini_val_idx(stics_version)
-         },
-         set_plant_txt = {
-           ref_index <- grep(param_, params) + 1
-           if (!is.null(variety) & length(ref_index) > 1) {
-             if (length(ref_index) >= variety) {
-               ref_index <- ref_index[variety]
-             } else {
-               stop("Variety number set in the tec file is superior to the number of varieties defined in the plant file.")
-             }
-           }
-         },
-         set_tec_txt = {
-           ref <- get_tec_txt(file, stics_version = stics_version)
-           # add treatment for getting lines
-           # add index on the line for the parameters when several (interventions)
-           # question: replacing existing individual values and
-           # modifying interventions plan (i.e. reduce irrigations nb )
+      # rows index according to version
+      ref_index <- get_ini_val_idx(stics_version)
+    },
+    set_plant_txt = {
+      ref_index <- grep(param_, params) + 1
+      if (!is.null(variety) & length(ref_index) > 1) {
+        if (length(ref_index) >= variety) {
+          ref_index <- ref_index[variety]
+        } else {
+          stop("Variety number set in the tec file is superior to the number of varieties defined in the plant file.")
+        }
+      }
+    },
+    set_tec_txt = {
+      ref <- get_tec_txt(file, stics_version = stics_version)
+      # add treatment for getting lines
+      # add index on the line for the parameters when several (interventions)
+      # question: replacing existing individual values and
+      # modifying interventions plan (i.e. reduce irrigations nb )
 
-           # getting sublist from ref, change values and
-           # transform to text and replace using lines index !
-           idx_lines <- grep(param, params)
+      # getting sublist from ref, change values and
+      # transform to text and replace using lines index !
+      idx_lines <- grep(param, params)
 
-           # Getting par names on one line
-           line_param <- unlist(strsplit(params[idx_lines[1]], split = " "))
+      # Getting par names on one line
+      line_param <- unlist(strsplit(params[idx_lines[1]], split = " "))
 
-           lines_values <- ref[line_param]
+      lines_values <- ref[line_param]
 
-           # replacing values
-           lines_values[[param]] <- value
+      # replacing values
+      lines_values[[param]] <- value
 
-           df_lines_values <- as.data.frame(lapply(lines_values, as.character), stringsAsFactors = FALSE)
+      df_lines_values <- as.data.frame(lapply(lines_values, as.character), stringsAsFactors = FALSE)
 
-           # Values of parameters to replace in params at idx_lines + 1
-           value <- apply(df_lines_values,1,function(x) paste(x, collapse = " "))
+      # Values of parameters to replace in params at idx_lines + 1
+      value <- apply(df_lines_values, 1, function(x) paste(x, collapse = " "))
 
-           ref_index <- idx_lines + 1
-         },
-         # Default here
-         {
-           ref_index <- grep(param_, params) + 1
-         }
+      ref_index <- idx_lines + 1
+    },
+    # Default here
+    {
+      ref_index <- grep(param_, params) + 1
+    }
   )
 
   if (!length(ref_index) > 0) {
@@ -691,9 +696,8 @@ set_file_txt <- function(file,
 
 
 
-get_ini_val_idx <- function(stics_version){
-
-  if (get_version_num(stics_version = stics_version) < 10){
+get_ini_val_idx <- function(stics_version) {
+  if (get_version_num(stics_version = stics_version) < 10) {
     idx <- c(
       2,
       4:10,

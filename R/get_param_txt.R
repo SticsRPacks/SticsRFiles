@@ -89,14 +89,14 @@ get_param_txt <- function(workspace = getwd(),
 
   # add tests on option_* name existence in tmp
   # NOT IN V10
-  several_fert = several_thin = is_pasture = NULL
+  several_fert <- several_thin <- is_pasture <- NULL
   tmp_names <- names(tmp)
   several_fert <- ifelse("option_engrais_multiple" %in% tmp_names &&
-                           tmp$option_engrais_multiple == 1, TRUE, FALSE)
+    tmp$option_engrais_multiple == 1, TRUE, FALSE)
   several_thin <- ifelse("option_thinning" %in% tmp_names &&
-                           tmp$option_thinning == 1, TRUE, FALSE)
+    tmp$option_thinning == 1, TRUE, FALSE)
   is_pasture <- ifelse("option_pature" %in% tmp_names &&
-                         tmp$option_pature == 1, TRUE, FALSE)
+    tmp$option_pature == 1, TRUE, FALSE)
 
   tec <- plant <- setNames(
     vector(mode = "list", length = ini$nbplantes),
@@ -124,26 +124,26 @@ get_param_txt <- function(workspace = getwd(),
 
     plant[paste0("plant", i)] <-
       list(get_plant_txt(file.path(dirpath, paste0("ficplt", i, ".txt")),
-                         variety =
-                           if (is.null(variety[[i]])) {
-                             if (!is.null(param)) {
-                               varieties[[i]][tec_variety]
-                             } else {
-                               NULL
-                             }
-                           } else {
-                             # variety
-                             if (is.character(variety[[i]])) {
-                               variety[[i]] <- match(variety[[i]], varieties[[i]])
-                               if (any(is.na(variety))) {
-                                 cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
-                                 return()
-                               }
-                               varieties[[i]][variety[[i]]]
-                             } else {
-                               varieties[[i]][variety[[i]]]
-                             }
-                           }
+        variety =
+          if (is.null(variety[[i]])) {
+            if (!is.null(param)) {
+              varieties[[i]][tec_variety]
+            } else {
+              NULL
+            }
+          } else {
+            # variety
+            if (is.character(variety[[i]])) {
+              variety[[i]] <- match(variety[[i]], varieties[[i]])
+              if (any(is.na(variety))) {
+                cli::cli_alert_danger("Variety not found in plant file. Possible varieties are: {.val {varieties}}")
+                return()
+              }
+              varieties[[i]][variety[[i]]]
+            } else {
+              varieties[[i]][variety[[i]]]
+            }
+          }
       ))
 
     # Fixes the current variety
@@ -173,29 +173,28 @@ get_param_txt <- function(workspace = getwd(),
 
 
 filter_param <- function(in_list, param = NULL, exact = FALSE) {
-
-  out_list = list()
+  out_list <- list()
   names_vec <- names(in_list)
   for (i in 1:length(names_vec)) {
     name <- names_vec[[i]]
     if (is.list(in_list[[name]])) {
       tmp <- filter_param(in_list[[name]], param = param, exact = exact)
-      if(length(tmp) > 0) out_list[[name]] <- tmp
+      if (length(tmp) > 0) out_list[[name]] <- tmp
       next
     }
 
     # For identity return
-    if(is.null(param)) out_list[[name]] <- in_list[[name]]
+    if (is.null(param)) out_list[[name]] <- in_list[[name]]
 
     # Filtering using param vector
     # Exact names or partial names search
-    if(exact){
+    if (exact) {
       idx <- param %in% name
     } else {
       idx <- unlist(lapply(param, function(x) grepl(pattern = x, x = name)))
     }
 
-    if(any(idx)) {
+    if (any(idx)) {
       out_list[[name]] <- in_list[[name]]
     }
   }
@@ -279,70 +278,73 @@ get_ini_txt <- function(file = "ficini.txt",
   stics_version <- check_version_compat(stics_version = stics_version)
 
 
-  #params <- get_txt_generic(filepath, names = FALSE)
+  # params <- get_txt_generic(filepath, names = FALSE)
   params <- readLines(filepath)
   ini <- list()
   # ini <- list(nbplantes = params[1])
   # ini <- character_to_numeric_list(ini)
 
-  ini$nbplantes = params[[2]]
+  ini$nbplantes <- params[[2]]
   ini$plant <- list()
 
 
   if (get_version_num(stics_version = stics_version) < 10) {
+    ini$plant$plant1 <- list(
+      stade0 = params[[4]],
+      lai0 = params[[5]],
+      masec0 = params[[6]],
+      QNplante0 = params[[7]],
+      magrain0 = params[[8]],
+      zrac0 = params[[9]],
+      resperenne0 = params[[10]],
+      densinitial = params[[12]]
+    )
 
-    ini$plant$plant1 <- list(stade0 = params[[4]],
-                             lai0 = params[[5]],
-                             masec0 = params[[6]],
-                             QNplante0 = params[[7]],
-                             magrain0 = params[[8]],
-                             zrac0 = params[[9]],
-                             resperenne0 = params[[10]],
-                             densinitial = params[[12]])
-
-    ini$plant$plant2 <- list(stade0 = params[[14]],
-                             lai0 = params[[15]],
-                             masec0 = params[[16]],
-                             QNplante0 = params[[17]],
-                             magrain0 = params[[18]],
-                             zrac0 = params[[19]],
-                             resperenne0 = params[[20]],
-                             densinitial = params[[22]])
+    ini$plant$plant2 <- list(
+      stade0 = params[[14]],
+      lai0 = params[[15]],
+      masec0 = params[[16]],
+      QNplante0 = params[[17]],
+      magrain0 = params[[18]],
+      zrac0 = params[[19]],
+      resperenne0 = params[[20]],
+      densinitial = params[[22]]
+    )
 
     ini$hinit <- params[[24]]
     ini$NO3init <- params[[26]]
     ini$NH4init <- params[[28]]
-
   } else {
-
-    ini$plant$plant1 <- list(stade0 = params[[4]],
-                             lai0 = params[[5]],
-                             magrain0 = params[[6]],
-                             zrac0 = params[[7]],
-                             code_acti_reserve = params[[9]],
-                             maperenne0 = params[[10]],
-                             QNperenne0 = params[[11]],
-                             masecnp0 = params[[12]],
-                             QNplantenp0 = params[[13]],
-                             masec0 = params[[14]],
-                             QNplante0 = params[[15]],
-                             restemp0 = params[[16]],
-                             densinitial = params[[18]]
+    ini$plant$plant1 <- list(
+      stade0 = params[[4]],
+      lai0 = params[[5]],
+      magrain0 = params[[6]],
+      zrac0 = params[[7]],
+      code_acti_reserve = params[[9]],
+      maperenne0 = params[[10]],
+      QNperenne0 = params[[11]],
+      masecnp0 = params[[12]],
+      QNplantenp0 = params[[13]],
+      masec0 = params[[14]],
+      QNplante0 = params[[15]],
+      restemp0 = params[[16]],
+      densinitial = params[[18]]
     )
 
-    ini$plant$plant2 <- list(stade0 = params[[20]],
-                             lai0 = params[[21]],
-                             magrain0 = params[[22]],
-                             zrac0 = params[[23]],
-                             code_acti_reserve = params[[25]],
-                             maperenne0 = params[[26]],
-                             QNperenne0 = params[[27]],
-                             masecnp0 = params[[28]],
-                             QNplantenp0 = params[[29]],
-                             masec0 = params[[30]],
-                             QNplante0 = params[[31]],
-                             restemp0 = params[[32]],
-                             densinitial = params[[34]]
+    ini$plant$plant2 <- list(
+      stade0 = params[[20]],
+      lai0 = params[[21]],
+      magrain0 = params[[22]],
+      zrac0 = params[[23]],
+      code_acti_reserve = params[[25]],
+      maperenne0 = params[[26]],
+      QNperenne0 = params[[27]],
+      masecnp0 = params[[28]],
+      QNplantenp0 = params[[29]],
+      masec0 = params[[30]],
+      QNplante0 = params[[31]],
+      restemp0 = params[[32]],
+      densinitial = params[[34]]
     )
 
     ini$Hinitf <- params[[36]]
@@ -352,7 +354,6 @@ get_ini_txt <- function(file = "ficini.txt",
     ini$Sdry0 <- params[[43]]
     ini$Swet0 <- params[[43]]
     ini$ps0 <- params[[43]]
-
   }
 
   ini <- character_to_numeric_list(ini)
@@ -482,11 +483,11 @@ get_tec_txt <- function(file = "fictec1.txt",
   params <- par_lines[!ids_val]
   values <- par_lines[ids_val]
 
-  assign(x = "index",value = 1, envir = .GlobalEnv)
-  assign(x = "params",value = params, envir = .GlobalEnv)
-  assign(x = "values",value = values, envir = .GlobalEnv)
+  assign(x = "index", value = 1, envir = .GlobalEnv)
+  assign(x = "params", value = params, envir = .GlobalEnv)
+  assign(x = "values", value = values, envir = .GlobalEnv)
 
-  #index <- 1
+  # index <- 1
   # parname <- function(idx = NULL) {
   #   if (!is.null(idx)) {
   #     loc_idx <- index + idx
@@ -509,8 +510,9 @@ get_tec_txt <- function(file = "fictec1.txt",
 
   # Early return here for version >= 10.0
   # get_tec_txt_ is not fully generic for the moment!
-  if (get_version_num(stics_version = stics_version) >= 10)
+  if (get_version_num(stics_version = stics_version) >= 10) {
     return(get_tec_txt_())
+  }
 
 
   # Treatment for Stics version < V10.0
@@ -583,7 +585,6 @@ get_tec_txt <- function(file = "fictec1.txt",
           }
           itk$julapN <- c(itk$julapN, vec[1])
           itk$fracN <- c(itk$fracN, vec[2])
-
         }
       } else {
         if (itk$codefracappN == 1) {
@@ -593,7 +594,7 @@ get_tec_txt <- function(file = "fictec1.txt",
           itk$upvttapN <- c(itk$upvttapN, vec[1])
           itk$doseN <- c(itk$doseN, vec[2])
         } else {
-          if (!is.null(several_fert) &&  several_fert) {
+          if (!is.null(several_fert) && several_fert) {
             itk$engrais <- c(itk$engrais, vec[3])
           }
           itk$upvttapN <- c(itk$upvttapN, vec[1])
@@ -659,7 +660,7 @@ get_tec_txt <- function(file = "fictec1.txt",
   #   for (i in 1:nbcoupe3) {
   #     # val()
   #   }
-  #}
+  # }
 
 
   for (i in 1:11) itk[[parname(-1)]] <- val()
@@ -680,7 +681,7 @@ get_tec_txt <- function(file = "fictec1.txt",
 
   for (i in 1:30) itk[[parname(-1)]] <- val()
 
-  assign(x = "index",value = 1, envir = .GlobalEnv)
+  assign(x = "index", value = 1, envir = .GlobalEnv)
 
 
   return(itk)
@@ -692,28 +693,37 @@ parname <- function(idx = NULL) {
   } else {
     loc_idx <- index
   }
-  if(loc_idx <= 0 ||loc_idx > length(params)) return()
-  unlist(lapply(X = params[loc_idx], FUN = function(x){strsplit(trimws(x), split = " ")}))
+  if (loc_idx <= 0 || loc_idx > length(params)) {
+    return()
+  }
+  unlist(lapply(X = params[loc_idx], FUN = function(x) {
+    strsplit(trimws(x), split = " ")
+  }))
 }
 
 val <- function() {
-  if(index == length(values)) return()
+  if (index == length(values)) {
+    return()
+  }
   index <<- index + 1
   val_txt <- unlist(strsplit(trimws(values[index - 1]), split = " "))
   val_num <- suppressWarnings(as.numeric(val_txt))
-  if (any(is.na(val_num))) return(val_txt)
+  if (any(is.na(val_num))) {
+    return(val_txt)
+  }
   return(val_num)
 }
 
 #'
 # @examples
 get_tec_txt_ <- function() {
-
   itk <- list()
   num_op <- 0
   nb_interventions <- 0
-  intervention_type <- c("nbjres", "nbjtrav", "nap", "napN",
-                         "nbcoupe", "nbcoupe", "nb_eclair" )
+  intervention_type <- c(
+    "nbjres", "nbjtrav", "nap", "napN",
+    "nbcoupe", "nbcoupe", "nb_eclair"
+  )
 
   v <- list()
   # assign(x = "index",value = 1, envir = .GlobalEnv)
@@ -721,15 +731,15 @@ get_tec_txt_ <- function() {
   # assign(x = "values",value = values, envir = .GlobalEnv)
   multi <- FALSE
 
-  while(TRUE) {
+  while (TRUE) {
     param <- parname()
     value <- val()
 
     if (is.null(value)) break
 
     # Single parameter
-    if(length(param) == 1) {
-      if(param == "nbinterventions"){
+    if (length(param) == 1) {
+      if (param == "nbinterventions") {
         num_op <- num_op + 1
         param <- intervention_type[num_op]
         itk[[param]] <- value
@@ -742,9 +752,10 @@ get_tec_txt_ <- function() {
     }
 
     # multiple parameters
-    if(all(param == parname(-2))) {
+    if (all(param == parname(-2))) {
       value <- as.data.frame(as.list(value),
-                             stringsAsFactors = FALSE)
+        stringsAsFactors = FALSE
+      )
       names(value) <- param
       v <- rbind(v, value)
 
@@ -755,13 +766,14 @@ get_tec_txt_ <- function() {
       next
     } else {
       v <- as.data.frame(as.list(value),
-                         stringsAsFactors = FALSE)
+        stringsAsFactors = FALSE
+      )
       names(v) <- param
     }
 
-    if (!multi)
+    if (!multi) {
       itk <- c(itk, as.list(v))
-
+    }
   }
   return(itk)
 }
@@ -953,29 +965,30 @@ character_to_numeric_list <- function(x) {
   #     y
   #   }
   # })
-  rapply(x,char2num, how = "replace")
+  rapply(x, char2num, how = "replace")
 }
 
 
 char2num <- function(x) {
-
-  if(!all(is.character(x))) return()
+  if (!all(is.character(x))) {
+    return()
+  }
 
   x_trim <- trimws(x)
 
-  if(any(x_trim == "")) return(x)
+  if (any(x_trim == "")) {
+    return(x)
+  }
 
-  if(!all(grepl(pattern = "[0-9]", x = x)) ||
-     any(grepl(pattern = "[a-zA-Z]", x = x))) return(x)
+  if (!all(grepl(pattern = "[0-9]", x = x)) ||
+    any(grepl(pattern = "[a-zA-Z]", x = x))) {
+    return(x)
+  }
 
 
   as.numeric(unlist(strsplit(x_trim, split = " ")))
 }
 
 list_to_character_vector <- function(x) {
-
   rapply(x, f = function(y) paste(as.character(y), collapse = " "))
-
 }
-
-

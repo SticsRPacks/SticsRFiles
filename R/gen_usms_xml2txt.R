@@ -97,7 +97,7 @@ gen_usms_xml2txt <- function(javastics,
   } else {
     workspace_path <- workspace # to remove when we update inside the function
   }
-   if (grepl("\ ",workspace_path)) {
+  if (grepl("\ ", workspace_path)) {
     stop("Space into workspace is not supported. Please copy the content of workspace folder in a path without space.")
   }
   # target_path
@@ -269,9 +269,10 @@ gen_usms_xml2txt <- function(javastics,
 
   # Replacing previous bloc with a function call
   cmd_list <- get_javastics_cmd(javastics_path,
-                                java_cmd = java_cmd,
-                                type = "generate",
-                                workspace = workspace_path)
+    java_cmd = java_cmd,
+    type = "generate",
+    workspace = workspace_path
+  )
   cmd_args <- cmd_list$cmd_generate
   cmd <- cmd_list$command
 

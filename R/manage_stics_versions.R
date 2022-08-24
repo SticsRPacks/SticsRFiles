@@ -15,7 +15,6 @@ get_svn_identifiers <- function() {
   # windows : encrypted !!
 
   return(list(username = "sticsread", password = "sticsread2020"))
-
 }
 
 

@@ -1,5 +1,5 @@
 
-#stics_version <- "V9.2"
+# stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
@@ -45,12 +45,14 @@ path2 <- file.path(path, "workspace2")
 paths <- c(path1, path2)
 
 test_that(
-  "get output for 2 workspaces without usm argument, without usms.xml", {
-  files_nb <- length(list.files(paths))
-  outputs <- get_sim(workspace = paths)
-  expect_true(is.list(outputs) && !is.data.frame(outputs))
-  expect_true(all(unlist(lapply(outputs, is.data.frame))))
-})
+  "get output for 2 workspaces without usm argument, without usms.xml",
+  {
+    files_nb <- length(list.files(paths))
+    outputs <- get_sim(workspace = paths)
+    expect_true(is.list(outputs) && !is.data.frame(outputs))
+    expect_true(all(unlist(lapply(outputs, is.data.frame))))
+  }
+)
 
 # if usm is given, even with one usm in each workspace
 test_that("get output for 2 workspaces with usm argument, without usms.xml", {
@@ -63,8 +65,10 @@ test_that("get output for 2 workspaces with usm argument, without usms.xml", {
 
 test_that("get output for 2 workspaces without usm argument, with usms.xml", {
   files_nb <- length(list.files(paths))
-  outputs <- get_sim(workspace = paths,
-                     usms_file = file.path(path, "usms_example.xml"))
+  outputs <- get_sim(
+    workspace = paths,
+    usms_file = file.path(path, "usms_example.xml")
+  )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(all(unlist(lapply(outputs, is.data.frame))))
 })
@@ -86,11 +90,17 @@ path3 <- file.path(path, "workspace_root")
 if (!dir.exists(path3)) dir.create(path3)
 
 # Testing usm as path sub-directories  ------------------------------------
-if (!dir.exists(file.path(path3, "banana"))) dir.create(
-  file.path(path3, "banana"))
+if (!dir.exists(file.path(path3, "banana"))) {
+  dir.create(
+    file.path(path3, "banana")
+  )
+}
 file.copy(file.path(path, "mod_sbanana.sti"), file.path(path3, "banana"))
-if (!dir.exists(file.path(path3, "wheat"))) dir.create(
-  file.path(path3, "wheat"))
+if (!dir.exists(file.path(path3, "wheat"))) {
+  dir.create(
+    file.path(path3, "wheat")
+  )
+}
 file.copy(file.path(path2, "mod_swheat.sti"), file.path(path3, "wheat"))
 
 test_that("output is always list, without usms.xml, banana, wheat sub-dir", {
@@ -109,13 +119,16 @@ if (file.exists(file.path(path, "usms.xml.ori"))) {
 
 test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
   # if (!dir.exists(file.path(path,"banana"))) dir.create(
-   # file.path(path,"banana"))
+  # file.path(path,"banana"))
   # file.copy(file.path(path,"mod_sbanana.sti"), file.path(path,"banana"))
   outputs <- get_sim(path3, "banana",
-                     usms_file = file.path(path, "usms_example.xml"))
+    usms_file = file.path(path, "usms_example.xml")
+  )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  outputs <- get_sim(path3, usm = c("banana", "wheat"),
-                     usms_file = file.path(path, "usms_example.xml"))
+  outputs <- get_sim(path3,
+    usm = c("banana", "wheat"),
+    usms_file = file.path(path, "usms_example.xml")
+  )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
 
   # unlink(file.path(path,"banana"))
@@ -126,8 +139,10 @@ unlink(file.path(path, "wheat"))
 
 
 # Testing intercropping usms  ------------------------------------
-example_IC <- download_data(example_dirs = "study_case_intercrop",
-                            stics_version = stics_version)
+example_IC <- download_data(
+  example_dirs = "study_case_intercrop",
+  stics_version = stics_version
+)
 
 test_that("get simulations with intercrops", {
   outputs <- get_sim(workspace = example_IC)

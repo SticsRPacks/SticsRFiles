@@ -2,7 +2,7 @@ library(SticsRFiles)
 context("searching variables information")
 
 # fixing version to latest standard one
-#stics_version <- "V9.1"
+# stics_version <- "V9.1"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 stics_prev_version <- get_stics_versions_compat(-1)
@@ -20,9 +20,12 @@ empty_df <- data.frame(
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
   empty_df_var <- get_var_info("myunknownvariable",
-                               stics_version = stics_version)
-  empty_df_keyword <- get_var_info(keyword = "myunknownvariable",
-                                   stics_version = stics_version)
+    stics_version = stics_version
+  )
+  empty_df_keyword <- get_var_info(
+    keyword = "myunknownvariable",
+    stics_version = stics_version
+  )
 
   # Don't function, as expect_equal
   # Error message
@@ -61,8 +64,10 @@ keyword_lai_df <- data.frame(
 # Testing result for searching a variable name using lai
 test_that("giving an existing partial variable name in var arg or keyword", {
   var_df <- get_var_info("lai", stics_version = stics_version)[1:2, ]
-  keyword_df <- get_var_info(keyword = "lai",
-                             stics_version = stics_version)[1:2, ]
+  keyword_df <- get_var_info(
+    keyword = "lai",
+    stics_version = stics_version
+  )[1:2, ]
   testthat::expect_true(dplyr::all_equal(var_df, var_lai_df))
   testthat::expect_true(dplyr::all_equal(keyword_df, keyword_lai_df))
 })

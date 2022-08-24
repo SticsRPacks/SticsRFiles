@@ -206,11 +206,11 @@ upgrade_plt_xml <- function(file,
   # Recalculating irazomax
   irmax <- unlist(get_param_value(old_doc, "irmax"))
   vitircarb <- unlist(get_param_value(old_doc, "vitircarb"))
-  vitirazo <-  unlist(get_param_value(old_doc, "vitirazo"))
+  vitirazo <- unlist(get_param_value(old_doc, "vitirazo"))
   irazomax <- min(1., irmax / vitircarb * vitirazo)
   if (irazomax < 0) irazomax <- 1
 
-  new_node <- xmlParseString(paste0('<param format="real" max="1.0" min="0.01" nom="irazomax">', round(irazomax, 3), '</param>'),
+  new_node <- xmlParseString(paste0('<param format="real" max="1.0" min="0.01" nom="irazomax">', round(irazomax, 3), "</param>"),
     addFinalizer = TRUE
   )
 

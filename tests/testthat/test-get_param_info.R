@@ -1,6 +1,6 @@
 context("searching parameter information (get_param_info)")
 
-#stics_version <- "V9.2"
+# stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 
 test_that("unknown name (should return NULL)", {
@@ -10,12 +10,12 @@ test_that("unknown name (should return NULL)", {
 test_that("fuzzy name", {
   if (SticsRFiles:::get_version_num() < 10) {
     lai_params <-
-    c(
-      "lai0", "codelaitr", "codlainet", "dlaimax", "dlaimaxbrut", "dlaimin",
-      "laicomp", "laiplantule", "pentlaimax", "splaimax", "splaimin",
-      "udlaimax", "vlaimax", "cielclair", "codeclaircie", "juleclair",
-      "laidebeff", "laieffeuil", "lairesiduel", "flai"
-    )
+      c(
+        "lai0", "codelaitr", "codlainet", "dlaimax", "dlaimaxbrut", "dlaimin",
+        "laicomp", "laiplantule", "pentlaimax", "splaimax", "splaimin",
+        "udlaimax", "vlaimax", "cielclair", "codeclaircie", "juleclair",
+        "laidebeff", "laieffeuil", "lairesiduel", "flai"
+      )
   } else {
     lai_params <-
       c(
@@ -26,7 +26,8 @@ test_that("fuzzy name", {
       )
   }
   testthat::expect_equal(get_param_info("lai",
-                              stics_version = stics_version)$name, lai_params)
+    stics_version = stics_version
+  )$name, lai_params)
 })
 
 test_that("regex name", {

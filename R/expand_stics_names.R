@@ -19,11 +19,15 @@
 #' @keywords internal
 #'
 expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
-  in_data <- utils::read.table(in_csv_file, sep = ";", stringsAsFactors = FALSE,
-                               header = FALSE)
+  in_data <- utils::read.table(in_csv_file,
+    sep = ";", stringsAsFactors = FALSE,
+    header = FALSE
+  )
   if (base::is.null(header_vec)) {
-    names(in_data) <- c("name", "def", "unit", "param", "dim", "type",
-                        "min", "max", "optim", "n")
+    names(in_data) <- c(
+      "name", "def", "unit", "param", "dim", "type",
+      "min", "max", "optim", "n"
+    )
   }
 
   # getting param names to duplicate

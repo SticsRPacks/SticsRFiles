@@ -1,13 +1,15 @@
 library(SticsRFiles)
 # options(warn=-1)
 
-#stics_version <- "V9.2"
-#stics_version <- "V10.0"
+# stics_version <- "V9.2"
+# stics_version <- "V10.0"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
-xml_path <- file.path(get_examples_path("xml", stics_version = stics_version),
-                      "file_ini.xml")
+xml_path <- file.path(
+  get_examples_path("xml", stics_version = stics_version),
+  "file_ini.xml"
+)
 context("Getting initialisation param values")
 
 test_that("single param option value ", {
@@ -31,9 +33,11 @@ if (version_num < 10) {
 result <- c("snu", "0", "0", "0", "0", "0", "0")
 test_that("multiple param option value", {
   val <- unlist(get_param_xml(xml_path, par_list,
-                              select = "plante",
-                              select_value = 1)
-                , use.names = FALSE)
+    select = "plante",
+    select_value = 1
+  ),
+  use.names = FALSE
+  )
 
 
   expect_equal(val, c("snu", "0", "0", "0", "0", "0", "0"))
@@ -42,8 +46,8 @@ test_that("multiple param option value", {
 
 test_that("multiple param option value 2", {
   val <- unlist(get_param_xml(xml_path, "densinitial",
-                              select = "plante",
-                              select_value = 1
+    select = "plante",
+    select_value = 1
   ))
   expect_equivalent(val, c(0, 0, 0, 0, 0))
 })
@@ -62,6 +66,8 @@ test_that("multiple values from single node", {
 
 test_that("multiple values from multiple nodes", {
   val <- unlist(get_param_xml(xml_path, init_par), use.names = FALSE)
-  expect_equal(val, c(c(23.5, 21.6, 23.9, 27.6, 0),
-                      c(32, 12, 9, 0, 0), c(0, 0, 0, 0, 0)))
+  expect_equal(val, c(
+    c(23.5, 21.6, 23.9, 27.6, 0),
+    c(32, 12, 9, 0, 0), c(0, 0, 0, 0, 0)
+  ))
 })

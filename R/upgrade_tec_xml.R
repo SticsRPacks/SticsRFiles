@@ -107,8 +107,10 @@ upgrade_tec_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version,
-                       overwrite = overwrite)
+  set_xml_file_version(old_doc,
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
 
   # Getting values to keep
@@ -123,13 +125,17 @@ upgrade_tec_xml <- function(file,
   # Keeping the values if any intervention node
   juleclair <- get_param_value(xml_doc = old_doc, param_name = "juleclair")
   nbinfloecl <- get_param_value(xml_doc = old_doc, param_name = "nbinfloecl")
-  codeclaircie <- get_param_value(xml_doc = old_doc,
-                                  param_name = "codeclaircie")
+  codeclaircie <- get_param_value(
+    xml_doc = old_doc,
+    param_name = "codeclaircie"
+  )
 
 
   # Getting nodes to remove or move
-  param_names <- c("irecbutoir", "ressuite", "engrais", "mscoupemini",
-                   "juleclair", "nbinfloecl")
+  param_names <- c(
+    "irecbutoir", "ressuite", "engrais", "mscoupemini",
+    "juleclair", "nbinfloecl"
+  )
 
   nodes_to_change <- lapply(param_names, function(x) {
     getNodeS(
@@ -318,14 +324,22 @@ upgrade_tec_xml <- function(file,
   if (!is.null(parent_nodes)) {
     # See if xmlClone is usefull to apply ???
     lapply(parent_nodes, function(x) addChildren(x, new_nodes))
-    set_param_value(xml_doc = old_doc, param_name = "engraiscoupe",
-                    param_value = engrais)
-    set_param_value(xml_doc = old_doc, param_name = "mscoupemini",
-                    param_value = mscoupemini)
-    set_param_value(xml_doc = old_doc, param_name = "tauxexportfauche",
-                    param_value = 1)
-    set_param_value(xml_doc = old_doc, param_name = "restit",
-                    param_value = 2)
+    set_param_value(
+      xml_doc = old_doc, param_name = "engraiscoupe",
+      param_value = engrais
+    )
+    set_param_value(
+      xml_doc = old_doc, param_name = "mscoupemini",
+      param_value = mscoupemini
+    )
+    set_param_value(
+      xml_doc = old_doc, param_name = "tauxexportfauche",
+      param_value = 1
+    )
+    set_param_value(
+      xml_doc = old_doc, param_name = "restit",
+      param_value = 2
+    )
     lapply(parent_nodes, function(x) xmlAttrs(x)["nb_colonnes"] <- "9")
   }
 
@@ -352,12 +366,18 @@ upgrade_tec_xml <- function(file,
   if (!is.null(parent_nodes)) {
     # See if xmlClone is usefull to apply ???
     lapply(parent_nodes, function(x) addChildren(x, new_nodes))
-    set_param_value(xml_doc = old_doc, param_name = "engraiscoupe",
-                    param_value = engrais)
-    set_param_value(xml_doc = old_doc, param_name = "mscoupemini",
-                    param_value = mscoupemini)
-    set_param_value(xml_doc = old_doc, param_name = "tauxexportfauche",
-                    param_value = 1)
+    set_param_value(
+      xml_doc = old_doc, param_name = "engraiscoupe",
+      param_value = engrais
+    )
+    set_param_value(
+      xml_doc = old_doc, param_name = "mscoupemini",
+      param_value = mscoupemini
+    )
+    set_param_value(
+      xml_doc = old_doc, param_name = "tauxexportfauche",
+      param_value = 1
+    )
     set_param_value(xml_doc = old_doc, param_name = "restit", param_value = 2)
     lapply(parent_nodes, function(x) xmlAttrs(x)["nb_colonnes"] <- "9")
   }
@@ -395,10 +415,14 @@ upgrade_tec_xml <- function(file,
       path = "//option[@nomParam='codeclaircie']//choix[@code='2']/ta"
     )[[1]]
     addChildren(parent_node, op_node)
-    set_param_value(xml_doc = old_doc, param_name = "juleclair",
-                    param_value = juleclair)
-    set_param_value(xml_doc = old_doc, param_name = "nbinfloecl",
-                    param_value = nbinfloecl)
+    set_param_value(
+      xml_doc = old_doc, param_name = "juleclair",
+      param_value = juleclair
+    )
+    set_param_value(
+      xml_doc = old_doc, param_name = "nbinfloecl",
+      param_value = nbinfloecl
+    )
 
     xmlAttrs(parent_node)["nb_interventions"] <- "1"
   }
