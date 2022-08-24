@@ -12,11 +12,12 @@ var_to_stics_name(var, version = "latest")
 \item{version}{Stics version.}
 }
 \value{
-A vector of variable names compatible with stics (usually used for \code{gen_varmod()})
+A vector of variable names compatible with stics
+(usually used for \code{gen_varmod()})
 }
 \description{
-Convert a variable name into a stics-compatible variable name. E.g.
-\code{lai_n} into \code{lai(n)}.
+Convert a variable name into a stics-compatible variable name.
+E.g. \code{lai_n} into \code{lai(n)}.
 }
 \examples{
 \dontrun{

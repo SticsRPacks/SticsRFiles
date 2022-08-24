@@ -423,7 +423,7 @@ upgrade_tec_xml <- function(file,
   addChildren(parent_node, xmlClone(new_node))
 
 
-  # ---------------------------------------------------------------------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Updating values with param_newform.xml ones
   #
   # codetempfauche
@@ -431,10 +431,13 @@ upgrade_tec_xml <- function(file,
   # <formalisme nom="Moisture test for sowing decision">
   # nbj_pr_apres_semis, eau_mini_decisemis, humirac_decisemis
   #
-  # <option choix="3" nom="dates to drive automatic irrigations" nomParam="P_codedate_irrigauto"> -> codedate_irrigauto
-  # datedeb_irrigauto datefin_irrigauto stage_start_irrigauto stage_end_irrigauto
+  # <option choix="3" nom="dates to drive automatic irrigations"
+  # nomParam="P_codedate_irrigauto"> -> codedate_irrigauto
+  # datedeb_irrigauto datefin_irrigauto stage_start_irrigauto
+  # stage_end_irrigauto
   #
-  # <option choix="1" nom="Automatic calculation of the depht of residues incorporation in fucntion of proftrav" nomParam="code_auto_profres">
+  # <option choix="1" nom="Automatic calculation of the depht of residues
+  # incorporation in fucntion of proftrav" nomParam="code_auto_profres">
   # code_auto_profres, resk, resz
 
   param_names <- c(
@@ -466,10 +469,10 @@ upgrade_tec_xml <- function(file,
   )
 
   # error !!:
-  # set_param_value(old_doc, c("codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis", "humirac_decisemis",
-  #                            "code_auto_profres","resk", "resz", "codedate_irrigauto", "datedeb_irrigauto",
-  #                            "datefin_irrigauto", "stage_start_irrigauto", "stage_end_irrigauto"),
-  #                 old_val)
+  # set_param_value(old_doc, c("codetempfauche", "nbj_pr_apres_semis",
+  # "eau_mini_decisemis", "humirac_decisemis", "code_auto_profres","resk",
+  # "resz", "codedate_irrigauto", "datedeb_irrigauto", "datefin_irrigauto",
+  # "stage_start_irrigauto", "stage_end_irrigauto"), old_val)
   #
   # write_xml_file(old_doc, out_tec, overwrite)
 

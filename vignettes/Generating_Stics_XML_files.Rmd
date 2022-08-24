@@ -92,7 +92,7 @@ usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv")
 # Getting the file in a specific directory
 csv_dir <- "/path/to/csv/dir" # or something like C:/path/to/xl/dir" for Windows
 
-usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv", 
+usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv",
                                  out_dir = csv_dir)
 
 #> [1] inputs_stics_example_USMs.csv  has been copied in directory
@@ -219,7 +219,8 @@ library(readxl)
 # Reading the Excel file
 xl_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
 
-# xl_param <- read_excel(usm_xl_file,sheet = "USMs",col_types = c(rep("guess",13),rep("text", 4) ), na="NA")
+# xl_param <- read_excel(usm_xl_file,sheet = "USMs",
+# col_types = c(rep("guess",13),rep("text", 4) ), na="NA")
 
 xl_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
 

@@ -25,7 +25,8 @@ upgrade_workspace_xml(
 
 \item{stics_version}{Name of the Stics version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files to  (VX.Y format)}
+\item{target_version}{Name of the Stics version to upgrade files
+to  (VX.Y format)}
 
 \item{plant}{logical (optional), TRUE for upgrading plant files if a "plant"
 sub-directory of workspace exists, FALSE otherwise}
