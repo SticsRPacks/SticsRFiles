@@ -33,9 +33,11 @@ given java virtual machine for unix like systems.
 }
 \examples{
 \dontrun{
- check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe")
- check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe",
-                     java_cmd = "/path/to/java")
+check_javastics_cmd(javastics_cmd = "/path/to/JavaSticsCmd.exe")
+check_javastics_cmd(
+  javastics_cmd = "/path/to/JavaSticsCmd.exe",
+  java_cmd = "/path/to/java"
+)
 }
 
 }

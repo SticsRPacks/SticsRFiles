@@ -21,11 +21,15 @@ Checking existing parameters names in csv input files
 \examples{
 \dontrun{
 
-exist_param_csv(param = "albedo",
-   javastics= "/path/to/JavaSTICS/folder")
+exist_param_csv(
+  param = "albedo",
+  javastics = "/path/to/JavaSTICS/folder"
+)
 
-exist_param_csv(param = c("albedo", "latitude"),
-   javastics = "/path/to/JavaSTICS/folder")
+exist_param_csv(
+  param = c("albedo", "latitude"),
+  javastics = "/path/to/JavaSTICS/folder"
+)
 }
 
 }

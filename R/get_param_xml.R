@@ -109,11 +109,9 @@ get_param_xml <- function(file,
   is_duplicated_name <- xml_names %>% duplicated()
   xml_names[is_duplicated_name] <- paste0("xml_", which(is_duplicated_name == TRUE), "_", xml_names[is_duplicated_name])
 
-  #----------------------------------------------------------------------------------------
-  # TODO : uncomment, and remove from get_xml_files_param_df
   # Fixing parameters with no values with NA
-  # param_values <- lapply(param_values, function(x) {if(length(x) == 0) return(NA);x })
-  #----------------------------------------------------------------------------------------
+  values[[1]] <- lapply(values[[1]], function(x) {if(length(x) == 0) return(NA);x })
+
 
   names(values) <- xml_names
 

@@ -18,8 +18,8 @@ be detected for compatibility checking
 }
 \examples{
 \dontrun{
- get_java_version(java_cmd = "java")
- get_java_version(java_cmd = "/path/to/java")
+get_java_version(java_cmd = "java")
+get_java_version(java_cmd = "/path/to/java")
 }
 
 }

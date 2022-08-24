@@ -55,11 +55,12 @@ get_param_data_df(
   kind = "formalism"
 )
 
-get_param_data_df( file = "/path/to/JavaSTICS/folder/config/inputs.csv")
+get_param_data_df(file = "/path/to/JavaSTICS/folder/config/inputs.csv")
 
-get_param_data_df( param = "albedo",
-   file = "/path/to/JavaSTICS/folder/config/inputs.csv")
-
+get_param_data_df(
+  param = "albedo",
+  file = "/path/to/JavaSTICS/folder/config/inputs.csv"
+)
 }
 
 }

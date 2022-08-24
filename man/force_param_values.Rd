@@ -39,8 +39,9 @@ If param_values==NA or param_values==NULL, not any parameter will be forced (all
 \dontrun{
 example_txt_dir <- get_examples_path(file_type = "txt")
 force_param_values(example_txt_dir,
-    setNames(object = c(220, 330), c("stlevamf", "stamflax")),
-    javastics = "/path/to/JavaSTICS/folder")
+  setNames(object = c(220, 330), c("stlevamf", "stamflax")),
+  javastics = "/path/to/JavaSTICS/folder"
+)
 }
 
 }

@@ -21,8 +21,10 @@ for each one, calculation of cumulative days of years
 }
 \examples{
 \dontrun{
-SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(1990, 1990, 1991,
- 1991, 1991))
+SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(
+  1990, 1990, 1991,
+  1991, 1991
+))
 }
 
 #

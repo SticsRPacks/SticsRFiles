@@ -20,6 +20,8 @@ Get the versions of stics that are fully compatible
 with this package.
 }
 \examples{
+#
+\dontrun{
 
 # Getting the complete versions list
 get_stics_versions_compat()
@@ -30,5 +32,7 @@ get_stics_versions_compat(1)
 # Getting the previous version of the latest one
 get_stics_versions_compat(-1)
 
+#
+}
 
 }
