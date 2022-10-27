@@ -1,4 +1,5 @@
-#' @title Get a set of a (or a list of) Stics xml parameter(s) values from a request
+#' @title Get a set of a (or a list of) Stics xml parameter(s)
+#' values from a request
 #' @title in an xmlDocument or a list of
 #' @title Getting parameter value for different kinds of parameters
 #'
@@ -42,10 +43,6 @@ get_param_value <- function(xml_doc,
                             ...) {
 
 
-  # TODO :
-  # For one parameter: return also a named list, not a vector to be consistent
-  # with several parameters
-
 
   # ... for getting : ids, show_xpath and mult_par arguments
   dot_args <- list(...)
@@ -53,21 +50,8 @@ get_param_value <- function(xml_doc,
 
   # Getting ids and show_xpath
   if ("ids" %in% dot_names) ids <- dot_args$ids else ids <- NULL
-  if ("show_xpath" %in% dot_names) show_xpath <- dot_args$show_xpath else show_xpath <- FALSE
-
-
-  # Getting parent informations to put them in the query
-  # parent_idx <- dot_names %in% c("ids", "show_xpath")
-  # dot_args <- dot_args[!parent_idx]
-  # parent_list <- get_param_parent(dot_args)
-  #
-  # if (length(dot_args) && base::is.null(parent_list$parent_name)){
-  #   warning(paste0("Not any possible selection using ", names(dot_args),
-  #                  " with value \"",dot_args[[names(dot_args)]],"\" ",
-  #                  "for parameter named ", param_name))
-  #   return(NULL)
-  # }
-
+  if ("show_xpath" %in% dot_names)
+    show_xpath <- dot_args$show_xpath else show_xpath <- FALSE
 
 
   # Getting param values for the same parameters for the xml documents list
@@ -85,10 +69,24 @@ get_param_value <- function(xml_doc,
   }
 
   # If no given parameters names
-  if (base::is.null(param_name)) param_name <- get_param_names(xml_doc)
+  if (base::is.null(param_name)) {
+    param_name <- get_param_names(xml_doc,
+                                  parent_name = parent_name,
+                                  parent_sel_attr = parent_sel_attr)
+
+    # testing if param_name is empty
+    if (is.null(param_name))
+      stop(paste0("Not any parameter names detected for: \n",
+                  parent_name, " = ", parent_sel_attr))
+
+  }
+
+  # If not any names given
+  if (is.null(param_name)) stop("Parameter(s) name(s) must be given !")
 
   # Setting multiple parameters names flag
-  if ("mult_par" %in% dot_names) mult_par <- dot_args$mult_par else mult_par <- FALSE
+  if ("mult_par" %in% dot_names)
+    mult_par <- dot_args$mult_par else mult_par <- FALSE
 
 
   # recursive call for a list of parameter names
@@ -135,74 +133,72 @@ get_param_value <- function(xml_doc,
 
   # TODO: see if it could be simplified with a default case !
   switch(type,
-    nodename = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    attr = {
-      # xpath=paste0('//option[@nomParam="',param_name,'"]')
-      value <- getAttrsValues(xml_doc, xpath, param_type$attr, ids)
-    },
-    attrname = {
-      # xpath=paste0('//option[@nomParam="',param_name,'"]')
-      value <- getAttrsValues(xml_doc, xpath, param_type$attr, ids)
-    },
-    param = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    option = {
-      value <- getAttrsValues(xml_doc, xpath, "choix", ids)
-    },
-    table = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    table2 = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    node_param = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    choix_param = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    node_node = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    node_option = {
-      value <- getAttrsValues(xml_doc, xpath, "choix", ids)
-    },
-    form_option = {
-      value <- getAttrsValues(xml_doc, xpath, "choix", ids)
-    },
-    node_table = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    node_table2 = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    node_attr = {
-      value <- getAttrsValues(xml_doc, xpath, "nom", ids)
-    },
-    attr_attr = {
-      value <- getValues(xml_doc, xpath, ids)
-    },
-    attr_attr2 = {
-      value <- getAttrsValues(xml_doc, xpath, param_name, ids)
-    },
-    choix_attr = {
-      value <- getAttrsValues(xml_doc, xpath, param_name, ids)
-    },
-    nodename_childs = {
-      value <- getValues(xml_doc, xpath, ids)
-    }
+         nodename = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         attr = {
+           value <- getAttrsValues(xml_doc, xpath, param_type$attr, ids)
+         },
+         attrname = {
+           value <- getAttrsValues(xml_doc, xpath, param_type$attr, ids)
+         },
+         param = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         option = {
+           value <- getAttrsValues(xml_doc, xpath, "choix", ids)
+         },
+         table = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         table2 = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         node_param = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         choix_param = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         node_node = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         node_option = {
+           value <- getAttrsValues(xml_doc, xpath, "choix", ids)
+         },
+         form_option = {
+           value <- getAttrsValues(xml_doc, xpath, "choix", ids)
+         },
+         node_table = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         node_table2 = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         node_attr = {
+           value <- getAttrsValues(xml_doc, xpath, "nom", ids)
+         },
+         attr_attr = {
+           value <- getValues(xml_doc, xpath, ids)
+         },
+         attr_attr2 = {
+           value <- getAttrsValues(xml_doc, xpath, param_name, ids)
+         },
+         choix_attr = {
+           value <- getAttrsValues(xml_doc, xpath, param_name, ids)
+         },
+         nodename_childs = {
+           value <- getValues(xml_doc, xpath, ids)
+         }
 
 
-    # TODO : add other cases for tables in ini, soil, and other specific parameters
+         # TODO : add other cases for tables in ini, soil,
+         # and other specific parameters
   )
 
 
   # Converting value to numeric if not any character in it
   # numbers may contain scientific notation e+ e-, decimal, and space
-  # nb_num <- length(grep("[^- |0-9|.|e|+]",value, invert = TRUE))
   num_value <- suppressWarnings(as.numeric(value))
   is_number <- suppressWarnings(!is.na(num_value))
 
@@ -227,18 +223,13 @@ get_param_value <- function(xml_doc,
 
 
 get_param_parent <- function(args_list) {
-  # dot_args= list(...)
   parent_name <- NULL
   parent_sel_attr <- NULL
-
-  # if (!length(dot_args)) stop("Not any args !")
 
   if (length(args_list) > 1) stop("Too much args !")
 
 
   # Argument names to be detected
-  # arg_names <- c("soil", "plant", "variete", "usm")
-  files_types <- c("sols", "ini", "plt", "usms")
   parent_names <- c("sol", "plante", "variete", "usm")
 
   parent_list <- list(
@@ -246,12 +237,9 @@ get_param_parent <- function(args_list) {
     parent_sel_attr = parent_sel_attr
   )
 
-
-  # parent_idx <- arg_names %in% names(args_list)
   parent_idx <- parent_names %in% names(args_list)
 
   if (!any(parent_idx)) {
-    # warning(paste("Unknown name for ",as.character(args_list[[1]]), "value"))
     return(parent_list)
   }
 

@@ -17,7 +17,7 @@ upgrade_plt_xml(
 )
 }
 \arguments{
-\item{file}{Path of an initialisation (*_plt.xml) file or a vector of}
+\item{file}{Path of an plant (*_plt.xml) file or a vector of}
 
 \item{out_dir}{Output directory path of the generated files}
 
@@ -31,8 +31,8 @@ to the file version}
 
 \item{target_version}{Name of the Stics version to upgrade files to (VX.Y format)}
 
-\item{check_version}{Perform version consistency with in stics_version input
-with the file version and finally checking if the upgrade is possible
+\item{check_version}{Perform version consistency between \code{stics_version}
+and the file version, for finally checking if an upgrade is possible
 allowed to the target_version. If TRUE, param_gen_file is mandatory.}
 
 \item{overwrite}{logical (optional),

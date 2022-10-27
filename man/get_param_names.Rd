@@ -7,12 +7,15 @@
 get_param_names(
   xml_object,
   param_list = c(),
+  parent_name = NULL,
+  parent_sel_attr = NULL,
   full_list = FALSE,
   root_name = NULL
 )
 }
 \arguments{
-\item{xml_object}{an xml XMLInternalElementNode or xmlDocument object}
+\item{xml_object}{an xml XML::XMLInternalElementNode
+or SticsRFiles::xmlDocument object}
 
 \item{param_list}{param names vector, only used for recursive calls}
 

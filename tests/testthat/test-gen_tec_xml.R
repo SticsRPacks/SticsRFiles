@@ -2,7 +2,7 @@ library(SticsRFiles)
 library(dplyr)
 # options(warn=-1)
 
-# stics_version <- "V9.2"
+
 stics_version <- get_stics_versions_compat()$latest_version
 
 
@@ -37,39 +37,71 @@ xml_irr_values <- get_param_xml(
   file = tec_xml, select = "formalisme",
   select_value = "irrigation"
 )[[1]]
-# renaming param according to table
-names(xml_irr_values)[7] <- "julapI"
-names(xml_irr_values)[8] <- "doseI"
 
+# renaming param according to table
+names(xml_irr_values)[names(xml_irr_values) %in% c("julapI_or_sum_upvt", "amount" )] <-c("julapI","doseI" )
+
+
+# select columns with no NA values
 xl_irr_values <- select(
   tec_param[4, ],
   starts_with(sort(names(xml_irr_values)))
+) %>%
+  select_if(~ !any(is.na(.)))
+
+
+#
+xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)", x = colnames(xl_irr_values), replacement = "\\1") ))
+
+common_names <- sort(intersect(names(xml_irr_values), xl_names))
+
+xml_irr_values <- unlist(xml_irr_values[common_names],
+                         use.names = FALSE
 )
-xml_irr_values <- unlist(xml_irr_values[sort(names(xml_irr_values))],
-  use.names = FALSE
-)
+
+xl_irr_values <- select(
+  tec_param[4, ],
+  starts_with(common_names)
+) %>%
+  select_if(~ !any(is.na(.)))
+
+
 
 # For N supply
 xml_fert_values <- get_param_xml(
   file = tec_xml, select = "formalisme",
   select_value = "fertilisation"
 )[[1]]
+
 # renaming param according to table (TODO: use param dict)
-names(xml_fert_values)[6] <- "julapN"
-names(xml_fert_values)[7] <- "doseN"
+names(xml_fert_values)[names(xml_fert_values) %in% c("julapN_or_sum_upvt", "absolute_value/%" )] <-c("julapN","doseN" )
 
 xl_fert_values <- select(
   tec_param[4, ],
   starts_with(sort(names(xml_fert_values)))
+) %>%
+  select_if(~ !any(is.na(.)))
+
+
+xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)", x = colnames(xl_fert_values), replacement = "\\1") ))
+
+common_names <- sort(intersect(names(xml_fert_values), xl_names))
+
+xml_fert_values <- unlist(xml_fert_values[common_names],
+                         use.names = FALSE
 )
-xml_fert_values <- unlist(xml_fert_values[sort(names(xml_fert_values))],
-  use.names = FALSE
-)
+
+xl_fert_values <- select(
+  tec_param[4, ],
+  starts_with(common_names)
+) %>%
+  select_if(~ !any(is.na(.)))
+
 
 context("Comparing table values vs xml tec file values")
 
 test_that("Testing values for interventions", {
   expect_true(all(xml_res_vec == xl_res_vec))
-  expect_true(all(xml_irr_values == xml_irr_values))
-  expect_true(all(as.character(xml_fert_values) == xml_fert_values))
+  expect_true(all(xml_irr_values == xl_irr_values))
+  expect_true(all(xml_fert_values == xml_fert_values))
 })

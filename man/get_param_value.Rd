@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_param_value.R
 \name{get_param_value}
 \alias{get_param_value}
-\title{Get a set of a (or a list of) Stics xml parameter(s) values from a request}
+\title{Get a set of a (or a list of) Stics xml parameter(s)
+values from a request}
 \usage{
 get_param_value(
   xml_doc,
