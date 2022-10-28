@@ -12,14 +12,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Read And Modify STICS Input/Output Files">
-<meta property="og:description" content="The purpose of SticsRFiles is to provide functions for 
-  manipulations of STICS input and output files. These files are either standard 
-  JavaStics XML files or more directly the text files used by the model 
-  executable. The most basic functionality is to read and write parameter names 
-  and values through XML queries, or text files IO. More advanced functionalities
-  include the generation of input XML from XML templates and spreadsheets with as 
-  many simulations contexts as needed, or the generation of the input text files 
-  from the XML input files for distributed computing.">
+<meta property="og:description" content="The purpose of SticsRFiles is to provide functions for
+    manipulations of STICS input and output files. These files are either
+    standard JavaStics XML files or more directly the text files used by
+    the model executable. The most basic functionality is to read and
+    write parameter names and values through XML queries, or text files
+    IO. More advanced functionalities include the generation of input XML
+    from XML templates and spreadsheets with as many simulations contexts
+    as needed, or the generation of the input text files from the XML
+    input files for distributed computing.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -40,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -102,7 +103,9 @@
 <div class="section level1">
 <div class="page-header"><h1 id="sticsrfiles">SticsRFiles<a class="anchor" aria-label="anchor" href="#sticsrfiles"></a>
 </h1></div>
-<!-- README.md is generated from README.Rmd. Please edit that file --><!-- badges: start -->
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
+
 <p><a href="https://zenodo.org/badge/latestdoi/187986787" class="external-link"><img src="https://zenodo.org/badge/187986787.svg" alt="DOI"></a> <!-- badges: end --></p>
 <p>The goal of SticsRFiles is to perform manipulations of the <a href="https://www6.paca.inrae.fr/stics_eng/" class="external-link">STICS</a> model files either on XML files (used by the JavaStics GUI) or on text files used by the model fortran executable.</p>
 <p>The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html" class="external-link">Get started page</a>.</p>
@@ -111,7 +114,9 @@
 <div class="section level2">
 <h2 id="prerequisites-and-technical-tips">Prerequisites and technical tips<a class="anchor" aria-label="anchor" href="#prerequisites-and-technical-tips"></a>
 </h2>
-<blockquote><p>Some information about software requirements and operating system constraints are given in the SticsOnR package documentation <a href="https://sticsrpacks.github.io/SticsOnR" class="external-link">here</a>.</p></blockquote>
+<blockquote>
+<p>Some information about software requirements and operating system constraints are given in the SticsOnR package documentation <a href="https://sticsrpacks.github.io/SticsOnR" class="external-link">here</a>.</p>
+</blockquote>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -131,8 +136,10 @@
 <p>The best way to install the packages from <code>SticsRPacks</code>, from which <code>SticsRFiles</code> is part of, is by installing the <code>[SticsRPacks]</code> package. The package can be installed from <a href="https://github.com/" class="external-link">GitHub</a> using either the <code>devtools</code> package, or the more lightweight <code>remotes</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></span></code></pre></div>
-<ul><li>With <code>remotes</code>
-</li></ul>
+<ul>
+<li>With <code>remotes</code>
+</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></span></code></pre></div>
@@ -141,12 +148,16 @@
 <div class="section level3">
 <h3 id="or-install-directly">Or, install directly<a class="anchor" aria-label="anchor" href="#or-install-directly"></a>
 </h3>
-<ul><li>With <code>devtools</code>
-</li></ul>
+<ul>
+<li>With <code>devtools</code>
+</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></span></code></pre></div>
-<ul><li>With <code>remotes</code>
-</li></ul>
+<ul>
+<li>With <code>remotes</code>
+</li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></span></code></pre></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -81,6 +81,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_param_names</span><span class="op">(</span></span>
 <span>  <span class="va">xml_object</span>,</span>
 <span>  param_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  parent_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parent_sel_attr <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  full_list <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  root_name <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -89,7 +91,8 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>xml_object</dt>
-<dd><p>an xml XMLInternalElementNode or xmlDocument object</p></dd>
+<dd><p>an xml XML::XMLInternalElementNode
+or SticsRFiles::xmlDocument object</p></dd>
 
 
 <dt>param_list</dt>

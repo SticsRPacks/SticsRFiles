@@ -22,7 +22,7 @@ systems."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -121,9 +121,11 @@ given java virtual machine for unix like systems.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span> <span class="fu">check_javastics_cmd</span><span class="op">(</span>javastics_cmd <span class="op">=</span> <span class="st">"/path/to/JavaSticsCmd.exe"</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="fu">check_javastics_cmd</span><span class="op">(</span>javastics_cmd <span class="op">=</span> <span class="st">"/path/to/JavaSticsCmd.exe"</span>,</span></span>
-<span class="r-in"><span>                     java_cmd <span class="op">=</span> <span class="st">"/path/to/java"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">check_javastics_cmd</span><span class="op">(</span>javastics_cmd <span class="op">=</span> <span class="st">"/path/to/JavaSticsCmd.exe"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">check_javastics_cmd</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  javastics_cmd <span class="op">=</span> <span class="st">"/path/to/JavaSticsCmd.exe"</span>,</span></span>
+<span class="r-in"><span>  java_cmd <span class="op">=</span> <span class="st">"/path/to/java"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -90,11 +90,12 @@
 
       
 
-      </header><script src="Generating_Stics_XML_files_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="Generating_Stics_XML_files_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+      </header><link href="Generating_Stics_XML_files_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="Generating_Stics_XML_files_files/pagedtable-1.1/js/pagedtable.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Generating Stics XML files from tabulated data</h1>
+      <h1 data-toc-skip>Generating Stics XML files from tabulated
+data</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/HEAD/vignettes/Generating_Stics_XML_files.Rmd" class="external-link"><code>vignettes/Generating_Stics_XML_files.Rmd</code></a></small>
@@ -111,33 +112,56 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <ul>
-<li><p>In this part information are focusing on functionalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.</p></li>
-<li><p>The functions operate on data loaded as data.frames from Excel sheets or CSV files</p></li>
-<li><p>Specialized functions for producing XML files are taking into account: <strong>initialization files</strong>, <strong>stations files</strong>, <strong>crop management files</strong>, <strong>usms file</strong> and <strong>soils files</strong>. General parameters files generation are not available, but will be eventually included in future developments.</p></li>
-<li><p>Observations data files generation have been included even if they are not in XML format.</p></li>
-<li><p>The generation of wheather files files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.</p></li>
+<li><p>In this part information are focusing on functionalities related
+to Stics XML files generation capabilities based on parameterization for
+lists of simulations (USMs) stored in tabulated data files; as Excel or
+CSV files.</p></li>
+<li><p>The functions operate on data loaded as data.frames from Excel
+sheets or CSV files</p></li>
+<li><p>Specialized functions for producing XML files are taking into
+account: <strong>initialization files</strong>, <strong>stations
+files</strong>, <strong>crop management files</strong>, <strong>usms
+file</strong> and <strong>soils files</strong>. General parameters files
+generation are not available, but will be eventually included in future
+developments.</p></li>
+<li><p>Observations data files generation have been included even if
+they are not in XML format.</p></li>
+<li><p>The generation of wheather files files is not included yet in the
+package, but will be included in a future version. One can use the tool
+provided by JavaStics GUI to perform these files generation.</p></li>
 </ul>
-<p>This document has been generated using the latest STICS version <strong>V10.0</strong>.</p>
+<p>This document has been generated using the latest STICS version
+<strong>V10.0</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="pkg-funs">Package functions to be used<a class="anchor" aria-label="anchor" href="#pkg-funs"></a>
 </h2>
-<p>There is not at the moment an integrated function which is able to produce all needed parameters files. Individual functions are dedicated to each parameter file kind and may be called individually or gathered in a single script for doing all tasks at once. Use examples are given in next parts below.</p>
+<p>There is not at the moment an integrated function which is able to
+produce all needed parameters files. Individual functions are dedicated
+to each parameter file kind and may be called individually or gathered
+in a single script for doing all tasks at once. Use examples are given
+in next parts below.</p>
 <ul>
 <li>gen_usms_xml: for generating a <code>usms.xml</code> file</li>
 <li>gen_sols_xml: for generating a <code>sols.xml</code> file</li>
-<li>gen_ini_xml: for generating simulations initialization files (<code>*_ini.xml</code>)</li>
-<li>gen_tec_xml: for generating crop management files (<code>*_tec.xml</code>)</li>
-<li>gen_sta_xml: for generating weather stations files (<code>*_sta.xml</code>)</li>
+<li>gen_ini_xml: for generating simulations initialization files
+(<code>*_ini.xml</code>)</li>
+<li>gen_tec_xml: for generating crop management files
+(<code>*_tec.xml</code>)</li>
+<li>gen_sta_xml: for generating weather stations files
+(<code>*_sta.xml</code>)</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="download-excel-example">Getting a table file example<a class="anchor" aria-label="anchor" href="#download-excel-example"></a>
 </h2>
 <div class="section level3">
-<h3 id="get-xl">Getting inputs <code>Excel</code> example file from the <code>SticsRFiles</code> package<a class="anchor" aria-label="anchor" href="#get-xl"></a>
+<h3 id="get-xl">Getting inputs <code>Excel</code> example file from the
+<code>SticsRFiles</code> package<a class="anchor" aria-label="anchor" href="#get-xl"></a>
 </h3>
-<p>In the following example <code>/path/to/target/dir</code> must be replaced with a real path depending on the operating system (i.e. starting with <code>c:/</code> for windows for example)</p>
+<p>In the following example <code>/path/to/target/dir</code> must be
+replaced with a real path depending on the operating system
+(i.e. starting with <code>c:/</code> for windows for example)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Getting the file in the current directory</span></span>
 <span><span class="va">usm_xl_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -151,16 +175,18 @@
 <span><span class="co">#&gt; "/path/to/xl/dir</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="get-csv">Getting an USMs inputs <code>CSV</code> example file from the <code>SticsRFiles</code> package<a class="anchor" aria-label="anchor" href="#get-csv"></a>
+<h3 id="get-csv">Getting an USMs inputs <code>CSV</code> example file from the
+<code>SticsRFiles</code> package<a class="anchor" aria-label="anchor" href="#get-csv"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Getting the file in the current directory</span></span>
 <span><span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Getting the file in a specific directory</span></span>
-<span><span class="va">csv_dir</span>  <span class="op">&lt;-</span> <span class="st">"/path/to/csv/dir"</span> <span class="co"># or something like C:/path/to/xl/dir" for Windows</span></span>
+<span><span class="va">csv_dir</span> <span class="op">&lt;-</span> <span class="st">"/path/to/csv/dir"</span> <span class="co"># or something like C:/path/to/xl/dir" for Windows</span></span>
 <span></span>
-<span><span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span>, out_dir <span class="op">=</span> <span class="va">csv_dir</span> <span class="op">)</span></span>
+<span><span class="va">usm_csv_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_csv.html">download_usm_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example_USMs.csv"</span>,</span>
+<span>                                 out_dir <span class="op">=</span> <span class="va">csv_dir</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#&gt; [1] inputs_stics_example_USMs.csv  has been copied in directory</span></span>
 <span><span class="co">#&gt; "/path/to/csv/dir</span></span></code></pre></div>
@@ -169,60 +195,113 @@
 <div class="section level2">
 <h2 id="description-of-tables-expected-content-and-use">Description of tables expected content and use<a class="anchor" aria-label="anchor" href="#description-of-tables-expected-content-and-use"></a>
 </h2>
-<p>As told in the previous section, parameters data may be stored either in Excel files containing several sheets or in several equivalent individual CSV files.</p>
-<p>Sheets content and CSV files content is the same, only their use is different. But, CSV files are easily traced under verion control systems and they also can be generated programmatically with the help of functions dedicated for example to generating crop management parameters like irrigation, fertilization (interventions and doses calculations).</p>
+<p>As told in the previous section, parameters data may be stored either
+in Excel files containing several sheets or in several equivalent
+individual CSV files.</p>
+<p>Sheets content and CSV files content is the same, only their use is
+different. But, CSV files are easily traced under verion control systems
+and they also can be generated programmatically with the help of
+functions dedicated for example to generating crop management parameters
+like irrigation, fertilization (interventions and doses
+calculations).</p>
 <div class="section level3">
 <h3 id="important-information">Important information<a class="anchor" aria-label="anchor" href="#important-information"></a>
 </h3>
-<p>The USMs data which are necessary for generating the <code>usms.xml</code> must be all provided either through an Excel sheet or a CSV file; as shown in the <a href="#usms-table-example">USMs sheet example</a>.</p>
-<p>Other data stored in Excel or CSV files must be adapted to the use cases here after:</p>
+<p>The USMs data which are necessary for generating the
+<code>usms.xml</code> must be all provided either through an Excel sheet
+or a CSV file; as shown in the <a href="#usms-table-example">USMs sheet
+example</a>.</p>
+<p>Other data stored in Excel or CSV files must be adapted to the use
+cases here after:</p>
 <ul>
-<li><p>For generating new files, containing parameters with differents values for each USM, tables <strong>must contain values for all the files parameters</strong>.</p></li>
-<li><p>For generating files with a common set of parameter values and only a part of them must be overloaded with values coming from parameters tables, one <strong>must give an existing</strong> file as a template for files generation to functions <code>gen_*_xml</code> (listed <a href="#pkg-funs">here</a>).</p></li>
+<li><p>For generating new files, containing parameters with differents
+values for each USM, tables <strong>must contain values for all the
+files parameters</strong>.</p></li>
+<li><p>For generating files with a common set of parameter values and
+only a part of them must be overloaded with values coming from
+parameters tables, one <strong>must give an existing</strong> file as a
+template for files generation to functions <code>gen_*_xml</code>
+(listed <a href="#pkg-funs">here</a>).</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="specificities-of-excel-sheets">Specificities of Excel sheets<a class="anchor" aria-label="anchor" href="#specificities-of-excel-sheets"></a>
 </h3>
-<p>Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters set they contain.</p>
-<p>In the example, usefull sheets for generating XML parameters files are named: <strong>USMs, Ini, Soils, Tec, Station</strong></p>
+<p>Excel sheet names are completely free, but must be meaningfull
+regarding the kind of parameters set they contain.</p>
+<p>In the example, usefull sheets for generating XML parameters files
+are named: <strong>USMs, Ini, Soils, Tec, Station</strong></p>
 </div>
 <div class="section level3">
 <h3 id="common-tables-specifications">Common tables specifications<a class="anchor" aria-label="anchor" href="#common-tables-specifications"></a>
 </h3>
-<p>The <strong>first column</strong> is used for storing identifiers or files names (or prefix) and the USMs table contains identifiers of the other linked tables in columns names <strong>finit, nomsol, fstation, ftec_1, ftec_2</strong> with respect to initialization files, soil name, station files and crop management files (for main crops and optionally associated crops).</p>
-<p>The <strong>first column names</strong> of data tables are automatically detected and must contain keywords prefix to do so as listed: <strong>usm_, ini_, soil_, sta_, tec_</strong></p>
-<p>These first columns may contain either <strong>names identifiers or files names</strong> according to data type:</p>
+<p>The <strong>first column</strong> is used for storing identifiers or
+files names (or prefix) and the USMs table contains identifiers of the
+other linked tables in columns names <strong>finit, nomsol, fstation,
+ftec_1, ftec_2</strong> with respect to initialization files, soil name,
+station files and crop management files (for main crops and optionally
+associated crops).</p>
+<p>The <strong>first column names</strong> of data tables are
+automatically detected and must contain keywords prefix to do so as
+listed: <strong>usm_, ini_, soil_, sta_, tec_</strong></p>
+<p>These first columns may contain either <strong>names identifiers or
+files names</strong> according to data type:</p>
 <ul>
 <li>USMs or soil data: usm name or soil name</li>
-<li>Initialization, station or crop management data: files names either with or without suffix and XML extension (<strong>_ini.xml, _tec.xml, or _sta.xml</strong>)</li>
+<li>Initialization, station or crop management data: files names either
+with or without suffix and XML extension (<strong>_ini.xml, _tec.xml, or
+_sta.xml</strong>)</li>
 </ul>
-<p>Other columns of tables are named with <strong>parameters names</strong> according to the fololowing rules:</p>
+<p>Other columns of tables are named with <strong>parameters
+names</strong> according to the fololowing rules:</p>
 <ul>
-<li>Scalar parameters used parameter names must match the exact parameter names (checking it syntax with the help of the <code>get_param_info</code> function)</li>
-<li>Vector parameters used parameter names must also match real parameter names with adding a suffix indicating their index; for example jultrav_1, jultrav_2, and so on…</li>
-<li>Exceptions in some cases used parameters names in tables may be different from real parameter names</li>
+<li>Scalar parameters used parameter names must match the exact
+parameter names (checking it syntax with the help of the
+<code>get_param_info</code> function)</li>
+<li>Vector parameters used parameter names must also match real
+parameter names with adding a suffix indicating their index; for example
+jultrav_1, jultrav_2, and so on…</li>
+<li>Exceptions in some cases used parameters names in tables may be
+different from real parameter names</li>
 </ul>
-<p>Here is the actual <strong>correspondence table</strong> of <code>keywords</code> to be used in parameters tables (i.e excel files for example) in replacement of real names in XML files:</p>
+<p>Here is the actual <strong>correspondence table</strong> of
+<code>keywords</code> to be used in parameters tables (i.e excel files
+for example) in replacement of real names in XML files:</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["keyword"],"name":[1],"type":["chr"],"align":["left"]},{"label":["realname"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"doseN","2":"absolute_value/%"},{"1":"doseI","2":"amount"},{"1":"codcueille","2":"codceuille"},{"1":"code_auto_profres_1","2":"code_auto_profres(1)"},{"1":"code_auto_profres_2","2":"code_auto_profres(2)"},{"1":"codedyntalle_1","2":"codedyntalle(1)"},{"1":"codedyntalle_2","2":"codedyntalle(2)"},{"1":"codemontaison_1","2":"codemontaison(1)"},{"1":"codemontaison_2","2":"codemontaison(2)"},{"1":"coefracoupe_1","2":"coefracoupe(1)"},{"1":"coefracoupe_2","2":"coefracoupe(2)"},{"1":"CsurNsol0","2":"csurNsol"},{"1":"ficinit","2":"finit"},{"1":"Hinitf","2":"hinit"},{"1":"julapI","2":"julapI_or_sum_upvt"},{"1":"julapN","2":"julapN_or_sum_upvt"},{"1":"kdesat","2":"k_desat"},{"1":"maxtalle_1","2":"MaxTalle(1)"},{"1":"maxtalle_2","2":"MaxTalle(2)"},{"1":"nbcueille","2":"nbceuille"},{"1":"NH4initf","2":"NH4init"},{"1":"NO3initf","2":"NO3init"},{"1":"codedate_irrigauto","2":"P_codedate_irrigauto"},{"1":"pH0","2":"pH"},{"1":"Pns","2":"ps"},{"1":"resk_1","2":"resk(1)"},{"1":"resk_2","2":"resk(2)"},{"1":"resplmax_1","2":"resplmax(1)"},{"1":"resplmax_2","2":"resplmax(2)"},{"1":"resz_1","2":"resz(1)"},{"1":"resz_2","2":"resz(2)"},{"1":"seuilLAIapex_1","2":"SeuilLAIapex(1)"},{"1":"seuilLAIapex_2","2":"SeuilLAIapex(2)"},{"1":"seuilmortalle_1","2":"SeuilMorTalle(1)"},{"1":"seuilmortalle_2","2":"SeuilMorTalle(2)"},{"1":"seuilreconspeupl_1","2":"SeuilReconsPeupl(1)"},{"1":"seuilreconspeupl_2","2":"SeuilReconsPeupl(2)"},{"1":"sigmadistalle_1","2":"SigmaDisTalle(1)"},{"1":"sigmadistalle_2","2":"SigmaDisTalle(2)"},{"1":"surfapex_1","2":"SurfApex(1)"},{"1":"surfapex_2","2":"SurfApex(2)"},{"1":"tigefeuilcoupe_1","2":"tigefeuilcoupe(1)"},{"1":"tigefeuilcoupe_2","2":"tigefeuilcoupe(2)"},{"1":"vitreconspeupl_1","2":"VitReconsPeupl(1)"},{"1":"vitreconspeupl_2","2":"VitReconsPeupl(2)"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>As an example, looking in the Tec sheet of the previously downloaded Excel file, irrigation parameters for setting days and amount of water supplied, are respectively named julapI_1, julapI_2,… and doseI_1, doseI_2,… instead of using <strong>absolute_value/%</strong> and <strong>amount</strong>.</p>
+<p>As an example, looking in the Tec sheet of the previously downloaded
+Excel file, irrigation parameters for setting days and amount of water
+supplied, are respectively named julapI_1, julapI_2,… and doseI_1,
+doseI_2,… instead of using <strong>absolute_value/%</strong> and
+<strong>amount</strong>.</p>
 </div>
 <div class="section level3">
 <h3 id="data-consistency-checks-in-tables">Data consistency checks in tables<a class="anchor" aria-label="anchor" href="#data-consistency-checks-in-tables"></a>
 </h3>
-<p>For the moment, <em>no consistency checks</em> (between Excel sheets or CSV equivalents files) functionnalities have been included in the package in order to prevent missing generated files or misspelled file names or identifiers.</p>
-<p>So, one must take care of <strong>links between xml files names</strong> for example files names defined for usms related to names declared for example in Excel sheets <code>Tec</code>, <code>Station</code>, and so on.</p>
-<p>In future developments, checks will be included to run be run prior to files generations, for preventing errors.</p>
+<p>For the moment, <em>no consistency checks</em> (between Excel sheets
+or CSV equivalents files) functionnalities have been included in the
+package in order to prevent missing generated files or misspelled file
+names or identifiers.</p>
+<p>So, one must take care of <strong>links between xml files
+names</strong> for example files names defined for usms related to names
+declared for example in Excel sheets <code>Tec</code>,
+<code>Station</code>, and so on.</p>
+<p>In future developments, checks will be included to run be run prior
+to files generations, for preventing errors.</p>
 </div>
 <div class="section level3">
 <h3 id="usms-table-example">USMs table example<a class="anchor" aria-label="anchor" href="#usms-table-example"></a>
 </h3>
-<p>The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).</p>
-<p>The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file.</p>
+<p>The Excel file which contains parameters values to take into account
+for Stics inputs may contain specific sheets for each kind of parameters
+groups, i.e. USMs, crop management, soil, weather station,
+initializations (except plant parameters and general parameters).</p>
+<p>The following table contains data extracted from a sheet named USMs
+containing a list of USMS parameters or from his equivalent CSV example
+file.</p>
 <table class="table">
 <colgroup>
 <col width="13%">
@@ -526,7 +605,9 @@
 <div class="section level2">
 <h2 id="generating-the-usms-xml-file-usms-xml">Generating the <code>usms</code> XML file (<em>usms.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-the-usms-xml-file-usms-xml"></a>
 </h2>
-<p>The gen_usms_xml function is working on a data.frame object that can be loaded either from an Excel file sheet or from a csv file. Here after code shows how to get data from the downloaded examples <a href="#get-xl">Excel</a> and <a href="#get-csv">CSV</a> files.</p>
+<p>The gen_usms_xml function is working on a data.frame object that can
+be loaded either from an Excel file sheet or from a csv file. Here after
+code shows how to get data from the downloaded examples <a href="#get-xl">Excel</a> and <a href="#get-csv">CSV</a> files.</p>
 <div class="section level3">
 <h3 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
 </h3>
@@ -551,7 +632,8 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Output file path</span></span>
-<span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/usms.xml"</span> <span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span></span>
+<span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/usms.xml"</span></span>
+<span><span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span></span>
 <span></span>
 <span><span class="co"># Generating a new usms.xml file, for all xl_param lines</span></span>
 <span><span class="fu"><a href="../reference/gen_usms_xml.html">gen_usms_xml</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">out_file</span>, param_df <span class="op">=</span> <span class="va">usms_param</span><span class="op">)</span></span></code></pre></div>
@@ -593,7 +675,10 @@
 <div class="section level2">
 <h2 id="generating-the-sols-xml-file-sols-xml">Generating the <code>sols</code> XML file (<em>sols.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-the-sols-xml-file-sols-xml"></a>
 </h2>
-<p>As for <code>gen_usms_xml</code>, <code>gen_sols_xml</code> function is working on a data.frame object loaded from an Excel file sheet. The following code only shows here after the <code>sols.xml</code> file generation section.</p>
+<p>As for <code>gen_usms_xml</code>, <code>gen_sols_xml</code> function
+is working on a data.frame object loaded from an Excel file sheet. The
+following code only shows here after the <code>sols.xml</code> file
+generation section.</p>
 <div class="section level3">
 <h3 id="getting-data-1">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-1"></a>
 </h3>
@@ -615,7 +700,8 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Output file path</span></span>
-<span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/sols.xml"</span> <span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span></span>
+<span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/sols.xml"</span></span>
+<span><span class="co"># or something like C:/path/to/file/usms.xml" for Windows</span></span>
 <span></span>
 <span><span class="co"># Generating a new sols.xml file, for all xl_param lines</span></span>
 <span><span class="fu"><a href="../reference/gen_sols_xml.html">gen_sols_xml</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">out_file</span>, param_df <span class="op">=</span> <span class="va">soils_param</span><span class="op">)</span></span></code></pre></div>
@@ -663,7 +749,8 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="generating-multiple-crop-management-xml-files-_tec-xml">Generating multiple crop management XML files (<em>*_tec.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-crop-management-xml-files-_tec-xml"></a>
+<h2 id="generating-multiple-crop-management-xml-files-_tec-xml">Generating multiple crop management XML files
+(<em>*_tec.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-crop-management-xml-files-_tec-xml"></a>
 </h2>
 <div class="section level3">
 <h3 id="getting-data-2">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-2"></a>
@@ -685,7 +772,7 @@
 <!-- Only for the show -->
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># *_tec.xml files, one for each xl_param line</span></span>
-<span><span class="fu"><a href="../reference/gen_tec_xml.html">gen_tec_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">tec_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/gen_tec_xml.html">gen_tec_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">tec_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 <p>Example of a <code>tec</code> parameters file content sub-list:</p>
 <pre><code><span><span class="co">#&gt; &lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span>
@@ -723,7 +810,8 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="generating-multiple-initialization-xml-files-_ini-xml">Generating multiple initialization XML files (<em>*_ini.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-initialization-xml-files-_ini-xml"></a>
+<h2 id="generating-multiple-initialization-xml-files-_ini-xml">Generating multiple initialization XML files
+(<em>*_ini.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-initialization-xml-files-_ini-xml"></a>
 </h2>
 <div class="section level3">
 <h3 id="getting-data-3">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-3"></a>
@@ -745,7 +833,7 @@
 <!-- Only for the show -->
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># *_ini.xml files, one for each xl_param line</span></span>
-<span><span class="fu"><a href="../reference/gen_ini_xml.html">gen_ini_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">ini_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/gen_ini_xml.html">gen_ini_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">ini_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 </div>
 <div class="section level3">
@@ -776,7 +864,8 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="generating-multiple-meteorological-station-xml-files-_sta-xml">Generating multiple meteorological station XML files (<em>*_sta.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-meteorological-station-xml-files-_sta-xml"></a>
+<h2 id="generating-multiple-meteorological-station-xml-files-_sta-xml">Generating multiple meteorological station XML files
+(<em>*_sta.xml</em>)<a class="anchor" aria-label="anchor" href="#generating-multiple-meteorological-station-xml-files-_sta-xml"></a>
 </h2>
 <div class="section level3">
 <h3 id="getting-data-4">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-4"></a>
@@ -798,7 +887,7 @@
 <!-- Only for the show -->
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># *_sta.xml files, one for each xl_param line</span></span>
-<span><span class="fu"><a href="../reference/gen_sta_xml.html">gen_sta_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">sta_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span> <span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/gen_sta_xml.html">gen_sta_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">sta_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 </div>
 <div class="section level3">
