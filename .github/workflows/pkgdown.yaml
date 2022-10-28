@@ -36,7 +36,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_dev("pkgdown")
           install.packages("rsconnect")
