@@ -105,7 +105,7 @@ gen_ini_xml <- function(param_df = NULL,
     stics_version = stics_version
   )
 
-  if (class(xml_docs) == "xmlDocument") {
+  if (!is.list(xml_docs) && methods::is(xml_docs, "xmlDocument")) {
     xml_docs <- list(xml_docs)
   }
 

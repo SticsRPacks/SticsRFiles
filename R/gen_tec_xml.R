@@ -113,7 +113,7 @@ gen_tec_xml <- function(param_df = NULL,
   # dict = dict)
 
 
-  if (class(xml_docs) == "xmlDocument") {
+  if (!is.list(xml_docs) && methods::is(xml_docs, "xmlDocument")) {
     xml_docs <- list(xml_docs)
   }
 

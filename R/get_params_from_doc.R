@@ -9,7 +9,7 @@
 #' @keywords internal
 #'
 get_params_from_doc <- function(xml_doc_object, type_name = NULL, unique_val = TRUE) {
-  if (!class(xml_doc_object) == "xmlDocument") {
+  if (!methods::is(xml_doc_object, "xmlDocument")) {
     stop("The document is not an xmlDocument !")
   }
 

@@ -12,7 +12,7 @@ get_params_from_doc_node <- function(xml_node, param_list = c(), unique_val = TR
 
   # for ini, usms files
 
-  if (!class(xml_node) == "XMLInternalElementNode") {
+  if (!methods::is(xml_node, "XMLInternalElementNode")) {
     stop("The document is not an xml node !")
   }
 

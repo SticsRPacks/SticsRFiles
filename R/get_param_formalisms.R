@@ -26,7 +26,7 @@
 get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 
   # For multiple documents
-  if (length(xml_doc) > 1) {
+  if (is.list(xml_doc) && length(xml_doc) > 1) {
     names <- lapply(
       xml_doc,
       function(x) {
@@ -71,7 +71,7 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
   # case : param name as value of @nom attribute
   x_path <- paste0("//*[@nom=\"", name, "\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
-  if (!base::is.null(values) && !values == "none") {
+  if (!all(base::is.null(values)) && !all(values == "none")) {
     return(values)
   }
 
@@ -79,7 +79,7 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
   # case : param name as value of @nomParam attribute
   x_path <- paste0("//*[@nomParam=\"", name, "\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
-  if (!base::is.null(values) && !values == "none") {
+  if (!all(base::is.null(values)) && !all(values == "none")) {
     return(values)
   }
 
