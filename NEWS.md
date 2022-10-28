@@ -1,3 +1,17 @@
+# SticsRFiles 1.1.0 (2022-10-28)
+
+Following the changes done in the previous release 1.0.0, related to the adaptation to the new versions 10.0 of STICS  
+and 1.5.0 of JavaSTICS.
+
+* FUNCTIONS:
+  * Completion of the upgrade function for converting plant files from STICS 9.x versions to the latest STICS version 10.0
+
+* FIXES:
+  * Getting parameters values attached to a formalism
+  * Parameters with no values are now handled (*_tec.xml files) with NA values
+  * Some fixes about use of XML objects or lists of (kind, content) in tests
+
+
 # SticsRFiles 1.0.0 (2022-07-22)
 
 The main changes are mainly related to the adaptation to the new versions 10.0 of STICS  
