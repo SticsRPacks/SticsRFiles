@@ -580,7 +580,7 @@ get_param_xml(sols, param = "argi")
 
 ## For all soils
 soils_number <- length(get_soils_list(sols))
-  
+
 # Initial values
 
 # Setting one value per parameters occurence

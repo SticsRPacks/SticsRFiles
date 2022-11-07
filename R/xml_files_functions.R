@@ -320,7 +320,7 @@ node_exist <- function(xml_file_or_doc, xpath) {
 # }
 
 write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
-  if (file.exists(file) & !overwrite) {
+  if (file.exists(file) & (!overwrite)) {
     warning(file, ": \nalready exists, consider setting overwrite to TRUE")
     return(invisible(FALSE))
   }

@@ -5,7 +5,8 @@
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param target_version Name of the Stics version to upgrade files to
+#'  (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
@@ -79,18 +80,21 @@ upgrade_sols_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+  set_xml_file_version(old_doc, new_version = target_version,
+                       overwrite = overwrite)
 
   # Checking if layer @nom are up to date (old @nom = horizon)
   tableau_noms <- unlist(getNodeS(old_doc, "//tableau/@nom"))
 
   if (any(grep(pattern = "horizon", tableau_noms))) {
-    new_names <- unlist(lapply(tableau_noms, function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")))
+    new_names <- unlist(lapply(tableau_noms,
+        function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")))
     setAttrValues(old_doc, "//tableau", "nom", new_names)
   }
 
   # Nodes to add
-  new_node <- xmlParseString('<param format="real" max="1.0" min="0.0" nom="finert">0.65000</param>',
+  new_node <- xmlParseString(
+    '<param format="real" max="1.0" min="0.0" nom="finert">0.65000</param>',
     addFinalizer = TRUE
   )
   # new_node <- xmlParseString('<param nom="finert">0.65000</param>',
