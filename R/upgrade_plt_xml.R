@@ -200,7 +200,7 @@ upgrade_plt_xml <- function(file,
 
   # Recalculating irazomax
   irazomax_calc <- calc_irazomax(
-    get_param_value(old_doc, param = "irmax")$irmax,
+    get_param_value(old_doc, "irmax")$irmax,
                                  param_values_to_varietal$vitircarb,
                                  param_values_to_varietal$vitirazo)
 
@@ -373,7 +373,7 @@ upgrade_plt_xml <- function(file,
   # Get values
   # - get variete from current file
   # - intersect names with those in loaded RData file
-  # - set values for paramaters == -999 for common varieties
+  # - set values for parameters == -999 for common varieties
   # to those loaded
   load(file.path(system.file("extdata", package = "SticsRFiles"),
                  "xml", "param", target_version, "jvc_data.RData"))
