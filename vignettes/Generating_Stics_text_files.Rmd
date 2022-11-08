@@ -40,12 +40,12 @@ chunk_eval <- params$eval
 
 In this part information are focusing on functionalities related to generation of text input files for the Stics model.
 
-Generated files will be directly usable for running the model with **SticsOnR** package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR).
+Generated files will be directly usable for running the model with **SticsOnR** package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR/).
 
 ## Converting JavaStics workspace files
 For using the model directly neither using the JavaStics graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaStics XML files to Stics text files from a JavaStics workspace. 
 
-Then, the model can be run using the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html)
+Then, the model can be run using the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/)
 
 Observation files may also be copied if they have a standard name corresponding to a usm name and a `.obs` extension. If not, they must be renamed to do so.
 

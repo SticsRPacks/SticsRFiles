@@ -10,7 +10,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![R build
 status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
+coverage](https://app.codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
 <!-- badges: end -->
@@ -30,7 +30,7 @@ using a mailing process like from XML templates and Excel sheets
 containing multiple simulations contexts. A JavaStics workspace is
 generated and directly usable from the JavaStics interface (GUI or
 command line), or with an R JavaStics interface provided by the
-[SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
+[SticsOnR](https://SticsRPacks.github.io/SticsOnR/) package.
 
 If you want to be notified when a new release of this package is made,
 you can tick the Releases box in the “Watch / Unwatch => Custom” menu at
@@ -41,7 +41,7 @@ page](https://github.com/SticsRPacks/SticsRFiles).
 
 > Some information about software requirements and operating system
 > constraints are given in the SticsOnR package documentation
-> [here](https://sticsrpacks.github.io/SticsOnR).
+> [here](https://sticsrpacks.github.io/SticsOnR/).
 
 ## Installation
 
