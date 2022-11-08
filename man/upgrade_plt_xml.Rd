@@ -29,7 +29,8 @@ to the file version}
 
 \item{stics_version}{Name of the Stics version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files to (VX.Y format)}
+\item{target_version}{Name of the Stics version to upgrade files to
+(VX.Y format)}
 
 \item{check_version}{Perform version consistency between \code{stics_version}
 and the file version, for finally checking if an upgrade is possible

@@ -77,12 +77,15 @@ SticsRFiles provides a function to download it from the command line. Please exe
 
 ```{r include=FALSE}
 library(SticsRFiles)
-example_data = SticsRFiles::download_data(out_dir = tempdir(), example_dirs = "study_case_1", "V10.0")
+example_data <- SticsRFiles::download_data(out_dir = tempdir(),
+                                           example_dirs = "study_case_1",
+                                           "V10.0")
 ```
 
 ```{r eval=FALSE}
 library(SticsRFiles)
-example_data = SticsRFiles::download_data(example_dirs = "study_case_1", "V10.0")
+example_data <- SticsRFiles::download_data(example_dirs = "study_case_1",
+                                           "V10.0")
 ```
 
 The example data is downloaded by default in a temporary folder.
@@ -90,8 +93,8 @@ The example data is downloaded by default in a temporary folder.
 For the sake of readability, we'll declare the workspace path and the path to the plant file here. But remember the functions can be applied to any XML files or workspaces.
 
 ```{r}
-workspace = file.path(example_data, "XmlFiles")
-plant_file = file.path(workspace, "plant", "maisopti_plt.xml")
+workspace <- file.path(example_data, "XmlFiles")
+plant_file <- file.path(workspace, "plant", "maisopti_plt.xml")
 ```
 
 
@@ -108,7 +111,7 @@ SticsRFiles::get_var_info("lai")
 Sometimes it is also useful to search in the variable definition instead of its name. To do so, you can use the `keyword` argument like so:
 
 ```{r}
-SticsRFiles::get_var_info(keyword= "lai")
+SticsRFiles::get_var_info(keyword = "lai")
 ```
 
 #### Get parameter names
@@ -130,14 +133,15 @@ get_param_info(file = plant_file)
 `get_param_xml()` is used to get the values of a parameter in an XML file. For example if we want to get `dlaimax`, we would do:
 
 ```{r}
-dlaimax = get_param_xml(plant_file, "dlaimax")
+dlaimax <- get_param_xml(plant_file, "dlaimax")
 dlaimax
 ```
 
 But this function is way more powerfull than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
 
 ```{r}
-values = get_param_xml(plant_file, select = "formalisme", select_value = "radiation interception")
+values <- get_param_xml(plant_file, select = "formalisme",
+                        select_value = "radiation interception")
 unlist(values) # For pretty-printing
 ```
 
@@ -154,7 +158,7 @@ Don't forget to use the `overwrite` argument and set it to `TRUE`. It is `FALSE`
 New values written in the file can be checked:
 
 ```{r}
-dlaimax = get_param_xml(plant_file, "dlaimax")
+dlaimax <- get_param_xml(plant_file, "dlaimax")
 dlaimax
 ```
 
@@ -165,7 +169,8 @@ We can generate observation files from a `data.frame` using `gen_obs()`.
 Lets create some dummy `data.frame` first:
 
 ```{r}
-obs_df = data.frame(usm_name = "Test", ian = 2021, mo = 3:10, jo = 1, `masec(n)` = 0.1 * 3:10)
+obs_df <- data.frame(usm_name = "Test", ian = 2021, mo = 3:10, jo = 1,
+                     `masec(n)` = 0.1 * 3:10)
 ```
 
 Then we can write the data to a file using `gen_obs()`:
@@ -179,7 +184,7 @@ gen_obs(df = obs_df, out_dir = "/path/to/dest/dir")
 We can read the observation files in a workspace using `get_obs()`. Note that all observation files should be named after the USM they are linked to. See the help page for more details, *e.g.* about intercrops.
 
 ```{r}
-obs = get_obs(workspace)
+obs <- get_obs(workspace)
 ```
 
 #### Read simulation files
@@ -187,9 +192,10 @@ obs = get_obs(workspace)
 Likewise, we can read the observation files in a workspace using `get_sim()`:
 
 ```{r, eval=FALSE}
-sim = get_sim(workspace)
+sim <- get_sim(workspace)
 #> Warning in get_file_(workspace = x, usm_name = usm_name, usms_filepath =
-#> usms_path, : Not any sim file detected in workspace/tmp/RtmpjkDYAq/data-master/
+#> usms_path, : Not any sim file detected in
+#> workspace/tmp/RtmpjkDYAq/data-master/
 #> study_case_1/V10.0/XmlFiles
 ```
 

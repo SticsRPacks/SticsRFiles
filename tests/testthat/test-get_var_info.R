@@ -76,7 +76,8 @@ test_that("giving an existing partial variable name in var arg or keyword", {
 
 var_etmetr_df <- data.frame(
   name = "cep2",
-  definition = "cumulative transpiration over the cropping season of plants 1 and 2",
+  definition =
+    "cumulative transpiration over the cropping season of plants 1 and 2",
   unit = "mm",
   type = "real",
   stringsAsFactors = FALSE

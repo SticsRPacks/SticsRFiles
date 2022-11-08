@@ -39,7 +39,8 @@ xml_irr_values <- get_param_xml(
 )[[1]]
 
 # renaming param according to table
-names(xml_irr_values)[names(xml_irr_values) %in% c("julapI_or_sum_upvt", "amount" )] <-c("julapI","doseI" )
+names(xml_irr_values)[names(xml_irr_values) %in%
+                    c("julapI_or_sum_upvt", "amount")] <- c("julapI", "doseI")
 
 
 # select columns with no NA values
@@ -51,7 +52,8 @@ xl_irr_values <- select(
 
 
 #
-xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)", x = colnames(xl_irr_values), replacement = "\\1") ))
+xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)",
+                             x = colnames(xl_irr_values), replacement = "\\1")))
 
 common_names <- sort(intersect(names(xml_irr_values), xl_names))
 
@@ -74,7 +76,8 @@ xml_fert_values <- get_param_xml(
 )[[1]]
 
 # renaming param according to table (TODO: use param dict)
-names(xml_fert_values)[names(xml_fert_values) %in% c("julapN_or_sum_upvt", "absolute_value/%" )] <-c("julapN","doseN" )
+names(xml_fert_values)[names(xml_fert_values) %in%
+            c("julapN_or_sum_upvt", "absolute_value/%")] <- c("julapN", "doseN")
 
 xl_fert_values <- select(
   tec_param[4, ],
@@ -83,7 +86,9 @@ xl_fert_values <- select(
   select_if(~ !any(is.na(.)))
 
 
-xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)", x = colnames(xl_fert_values), replacement = "\\1") ))
+xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)",
+                             x = colnames(xl_fert_values),
+                             replacement = "\\1")))
 
 common_names <- sort(intersect(names(xml_fert_values), xl_names))
 

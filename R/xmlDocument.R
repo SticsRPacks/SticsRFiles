@@ -178,8 +178,7 @@ setMethod(
       if (docObj@warn) {
         print(class(attr_list))
         warning(paste(
-          "Existing nodes with different attributes comparing to others on xpath,
-        missing attributes ?",
+        "Existing nodes with different attributes comparing to others on xpath, missing attributes ?",
           path
         ))
       }
