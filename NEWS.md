@@ -1,7 +1,16 @@
+# SticsRFiles 1.1.1 (2022-12-08)
+
+* FUNCTIONS
+   * Changes in plant files upgrading function according to a fix done in JavaSTICS 1.5.1 for plant files
+   (without any impact on R packages functionning)
+
+* FIXES:
+   * Little compatibility fix in STICS plant files upgrading function 
+   
+
 # SticsRFiles 1.1.0 (2022-10-28)
 
-Following the changes done in the previous release 1.0.0, related to the adaptation to the new versions 10.0 of STICS  
-and 1.5.0 of JavaSTICS.
+Following the changes done in the previous release 1.0.0, related to the adaptation to the new versions 10.0 of STICS and 1.5.0 of JavaSTICS.
 
 * FUNCTIONS:
   * Completion of the upgrade function for converting plant files from STICS 9.x versions to the latest STICS version 10.0
