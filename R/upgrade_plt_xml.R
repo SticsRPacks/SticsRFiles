@@ -314,14 +314,14 @@ upgrade_plt_xml <- function(file,
 				<param code="1" format="real" max="10000.0" min="0.0" nom="nbgrmin">6000</param>
 				<param code="1" format="real" max="1000000.0" min="0.0" nom="nbgrmax">30000</param>
 				<param code="1" format="real" max="2000.0" min="0.0" nom="stdrpmat">700</param>
-				<optionv nom="codeir">
+				<optionv code="1" nom="codeir">
 					<param code="1" format="real" max="0.02" min="0.001" nom="vitircarb">0.0107</param>
 					<param code="2" format="real" max="0.002" min="5.0E-5" nom="vitircarbT">0</param>
 				</optionv>
 				<param code="2" format="real" max="20.0" min="0.5" nom="afruitpot">.00000</param>
 				<param code="2" format="real" max="2000.0" min="10.0" nom="dureefruit">.00000</param>
 				<param code="2" format="real" max="6000.0" min="0.0" nom="stdrpnou">-999</param>
-				<optionv nom="codcalinflo">
+				<optionv code="2" nom="codcalinflo">
 					<param code="1" format="real" max="100.0" min="0.0" nom="nbinflo">-999</param>
 				    <param code="2" format="real" max="100.0" min="0.0" nom="inflomax">-999</param>
 					<param code="2" format="real" max="10.0" min="0.0" nom="pentinflores">-999</param>
