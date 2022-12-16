@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
+ 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R build status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
