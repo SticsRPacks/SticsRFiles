@@ -16,3 +16,4 @@ man/figures
 ^CITATION.cff$
 ^\.github$
 ^cran-comments\.md$
+^CITATION\.cff$
