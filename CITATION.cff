@@ -1,14 +1,20 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.2
+# CITATION file created with {cffr} R package, v0.4.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
-
+ 
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 title: 'SticsRFiles: Read And Modify STICS Input/Output Files'
-version: 1.1.1
-abstract: The goal of SticsRFiles is to perform manipulations of the Stics model files.
+version: 1.1.2
+abstract: The purpose of SticsRFiles is to provide functions for manipulations of
+  STICS input and output files. These files are either standard JavaStics XML files
+  or more directly the text files used by the model executable. The most basic functionality
+  is to read and write parameter names and values through XML queries, or text files
+  IO. More advanced functionalities include the generation of input XML from XML templates
+  and spreadsheets with as many simulations contexts as needed, or the generation
+  of the input text files from the XML input files for distributed computing.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -26,41 +32,9 @@ authors:
   given-names: Michel
   email: michel.giner@cirad.fr
   orcid: https://orcid.org/0000-0002-9310-2377
-preferred-citation:
-  type: manual
-  title: 'SticsRFiles: Read And Modify STICS Input/Output Files'
-  authors:
-  - family-names: Lecharpentier
-    given-names: Patrice
-    email: patrice.lecharpentier@inrae.fr
-    orcid: https://orcid.org/0000-0002-4044-4322
-  - family-names: Vezy
-    given-names: Remi
-    email: remi.vezy@cirad.fr
-    orcid: https://orcid.org/0000-0002-0808-1461
-  - family-names: Buis
-    given-names: Samuel
-    email: samuel.buis@inrae.fr
-    orcid: https://orcid.org/0000-0002-8676-5447
-  - family-names: Giner
-    given-names: Michel
-    email: michel.giner@cirad.fr
-    orcid: https://orcid.org/0000-0002-9310-2377
-  version: 0.4.2
-  abstract: The goal of SticsRFiles is to perform manipulations of the Stics model
-    files.
-  repository-code: https://github.com/SticsRPacks/SticsRFiles
-  url: https://doi.org/10.5281/zenodo.4443206
-  date-released: '2021-10-08'
-  contact:
-  - family-names: Lecharpentier
-    given-names: Patrice
-    email: patrice.lecharpentier@inrae.fr
-    orcid: https://orcid.org/0000-0002-4044-4322
-  year: '2021'
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2021-10-08'
+date-released: '2022-12-08'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -70,12 +44,12 @@ references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
+  url: https://www.R-project.org/
   authors:
   - name: R Core Team
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
   version: '>= 3.6.0'
@@ -83,37 +57,42 @@ references:
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
   notes: Imports
+  url: https://cli.r-lib.org
+  repository: https://CRAN.R-project.org/package=cli
   authors:
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=cli
 - type: software
   title: crayon
   abstract: 'crayon: Colored Terminal Output'
   notes: Imports
+  url: https://github.com/r-lib/crayon#readme
+  repository: https://CRAN.R-project.org/package=crayon
   authors:
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=crayon
 - type: software
   title: curl
   abstract: 'curl: A Modern and Flexible Web Client for R'
   notes: Imports
+  url: https://curl.se/libcurl/
+  repository: https://CRAN.R-project.org/package=curl
   authors:
   - family-names: Ooms
     given-names: Jeroen
     email: jeroen@berkeley.edu
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2022'
-  url: https://CRAN.R-project.org/package=curl
 - type: software
   title: data.table
   abstract: 'data.table: Extension of `data.frame`'
   notes: Imports
+  url: https://r-datatable.com
+  repository: https://CRAN.R-project.org/package=data.table
   authors:
   - family-names: Dowle
     given-names: Matt
@@ -122,11 +101,12 @@ references:
     given-names: Arun
     email: asrini@pm.me
   year: '2022'
-  url: https://CRAN.R-project.org/package=data.table
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
   notes: Imports
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -141,12 +121,13 @@ references:
     given-names: Kirill
     orcid: https://orcid.org/0000-0002-1416-3412
   year: '2022'
-  url: https://CRAN.R-project.org/package=dplyr
   version: '>= 1.0.0'
 - type: software
   title: lifecycle
   abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
   notes: Imports
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -156,11 +137,12 @@ references:
     email: hadley@rstudio.com
     orcid: https://orcid.org/0000-0003-4757-117X
   year: '2022'
-  url: https://CRAN.R-project.org/package=lifecycle
 - type: software
   title: lubridate
   abstract: 'lubridate: Make Dealing with Dates a Little Easier'
   notes: Imports
+  url: https://lubridate.tidyverse.org
+  repository: https://CRAN.R-project.org/package=lubridate
   authors:
   - family-names: Spinu
     given-names: Vitalie
@@ -170,20 +152,6 @@ references:
   - family-names: Wickham
     given-names: Hadley
   year: '2022'
-  url: https://CRAN.R-project.org/package=lubridate
-- type: software
-  title: magrittr
-  abstract: 'magrittr: A Forward-Pipe Operator for R'
-  notes: Imports
-  authors:
-  - family-names: Bache
-    given-names: Stefan Milton
-    email: stefan@stefanbache.dk
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=magrittr
 - type: software
   title: methods
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -193,13 +161,14 @@ references:
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
   notes: Imports
+  url: https://rlang.r-lib.org
+  repository: https://CRAN.R-project.org/package=rlang
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -208,11 +177,12 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=rlang
 - type: software
   title: rstudioapi
   abstract: 'rstudioapi: Safely Access the RStudio API'
   notes: Imports
+  url: https://rstudio.github.io/rstudioapi/
+  repository: https://CRAN.R-project.org/package=rstudioapi
   authors:
   - family-names: Ushey
     given-names: Kevin
@@ -227,21 +197,23 @@ references:
     given-names: Gary
     email: gary@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=rstudioapi
 - type: software
   title: stringr
   abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
   notes: Imports
+  url: https://stringr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=stringr
   authors:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=stringr
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
   notes: Imports
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
   authors:
   - family-names: Müller
     given-names: Kirill
@@ -250,11 +222,12 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=tibble
 - type: software
   title: tidyr
   abstract: 'tidyr: Tidy Messy Data'
   notes: Imports
+  url: https://tidyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=tidyr
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -262,7 +235,6 @@ references:
   - family-names: Girlich
     given-names: Maximilian
   year: '2022'
-  url: https://CRAN.R-project.org/package=tidyr
 - type: software
   title: tools
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -272,7 +244,6 @@ references:
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
 - type: software
@@ -284,40 +255,26 @@ references:
   location:
     name: Vienna, Austria
   year: '2022'
-  url: https://www.R-project.org/
   institution:
     name: R Foundation for Statistical Computing
-- type: software
-  title: vctrs
-  abstract: 'vctrs: Vector Helpers'
-  notes: Imports
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  - family-names: Henry
-    given-names: Lionel
-    email: lionel@rstudio.com
-  - family-names: Vaughan
-    given-names: Davis
-    email: davis@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=vctrs
 - type: software
   title: XML
   abstract: 'XML: Tools for Parsing and Generating XML Within R and S-Plus'
   notes: Imports
+  url: https://www.omegahat.net/RSXML/
+  repository: https://CRAN.R-project.org/package=XML
   authors:
   - family-names: Temple Lang
     given-names: Duncan
     email: duncan@r-project.org
     orcid: https://orcid.org/0000-0003-0159-1546
   year: '2022'
-  url: https://CRAN.R-project.org/package=XML
 - type: software
   title: xml2
   abstract: 'xml2: Parse XML'
   notes: Imports
+  url: https://xml2.r-lib.org/
+  repository: https://CRAN.R-project.org/package=xml2
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -327,55 +284,64 @@ references:
   - family-names: Ooms
     given-names: Jeroen
   year: '2022'
-  url: https://CRAN.R-project.org/package=xml2
 - type: software
   title: xslt
   abstract: 'xslt: Extensible Style-Sheet Language Transformations'
   notes: Imports
+  url: https://docs.ropensci.org/xslt/
+  repository: https://CRAN.R-project.org/package=xslt
   authors:
   - family-names: Ooms
     given-names: Jeroen
     email: jeroen@berkeley.edu
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2022'
-  url: https://CRAN.R-project.org/package=xslt
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
   notes: Suggests
+  url: https://covr.r-lib.org
+  repository: https://CRAN.R-project.org/package=covr
   authors:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=covr
 - type: software
   title: formatR
   abstract: 'formatR: Format R Code Automatically'
   notes: Suggests
+  url: https://github.com/yihui/formatR
+  repository: https://CRAN.R-project.org/package=formatR
   authors:
   - family-names: Xie
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
-  url: https://CRAN.R-project.org/package=formatR
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
   notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
   authors:
   - family-names: Xie
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2022'
-  url: https://CRAN.R-project.org/package=knitr
 - type: software
   title: learnr
   abstract: 'learnr: Interactive Tutorials for R'
   notes: Suggests
+  url: https://rstudio.github.io/learnr/
+  repository: https://CRAN.R-project.org/package=learnr
   authors:
+  - family-names: Aden-Buie
+    given-names: Garrick
+    email: garrick@rstudio.com
+    orcid: https://orcid.org/0000-0002-7111-0077
   - family-names: Schloerke
     given-names: Barret
     email: barret@rstudio.com
@@ -383,15 +349,13 @@ references:
   - family-names: Allaire
     given-names: JJ
     email: jj@rstudio.com
-  - family-names: Borges
-    given-names: Barbara
-    email: barbara@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=learnr
 - type: software
   title: readxl
   abstract: 'readxl: Read Excel Files'
   notes: Suggests
+  url: https://readxl.tidyverse.org
+  repository: https://CRAN.R-project.org/package=readxl
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -402,11 +366,12 @@ references:
     email: jenny@rstudio.com
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2022'
-  url: https://CRAN.R-project.org/package=readxl
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
   notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
   authors:
   - family-names: Allaire
     given-names: JJ
@@ -441,14 +406,29 @@ references:
     email: rich@rstudio.com
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2022'
-  url: https://CRAN.R-project.org/package=rmarkdown
+- type: software
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
+  url: https://docs.ropensci.org/spelling/
+  repository: https://CRAN.R-project.org/package=spelling
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2022'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
   notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
   authors:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2022'
-  url: https://CRAN.R-project.org/package=testthat
