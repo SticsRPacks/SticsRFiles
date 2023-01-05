@@ -107,12 +107,12 @@ gen_usms_sols_doc <- function(doc_type,
   # Creating doc structure from a base node
   # if ( overwrite ) {
   # Keeping only one usm node in the xml document
-  #   if ( doc_nodes_nb > 1) removeNodes(xml_nodes[2:doc_nodes_nb])
+  #   if ( doc_nodes_nb > 1) XML::removeNodes(xml_nodes[2:doc_nodes_nb])
   #
   #   if ( keep_existing ) {
   #     add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = (elts_nb - 1), paste0("//",root))
   #   } else {
-  #     removeNodes(xml_nodes[1])
+  #     XML::removeNodes(xml_nodes[1])
   #     add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb)
   #   }
   #

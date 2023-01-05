@@ -6,7 +6,6 @@
 #' doys_vec
 #' @return A vector of cumulative days of year over a 2 years period
 #'
-#' @importFrom lubridate leap_year
 #'
 #' @examples
 #' \dontrun{
@@ -59,7 +58,7 @@ compute_doy_cumul <- function(doys_vec, years_vec) {
 
   cum_vec <- doys_vec
   cum_vec[years_vec == u_years[2]] <-
-    cum_vec[years_vec == u_years[2]] + 365 + leap_year(u_years[1])
+    cum_vec[years_vec == u_years[2]] + 365 + lubridate::leap_year(u_years[1])
 
   return(cum_vec)
 }

@@ -74,7 +74,7 @@ upgrade_param_gen_xml <- function(file,
       path = paste0("//param[@nom='", x, "']")
     )
   })
-  lapply(rm_nodes, function(x) removeNodes(x))
+  lapply(rm_nodes, function(x) XML::removeNodes(x))
 
 
   # Nodes to change
@@ -92,7 +92,7 @@ upgrade_param_gen_xml <- function(file,
 
 
   # Nodes to add
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<param format="real" max="1.0" min="0.0" nom="GMIN1">0.0007</param>
 <param format="real" max="1.0" min="0.0" nom="GMIN2">0.02519</param>
 <param format="real" max="1.0" min="0.0" nom="GMIN3">0.015</param>
@@ -104,13 +104,13 @@ upgrade_param_gen_xml <- function(file,
   )
 
 
-  new_nodes <- getNodeSet(new_node, path = "//param")
+  new_nodes <- XML::getNodeSet(new_node, path = "//param")
   prev_sibling <- getNodeS(old_doc, "//param[@nom='TREFr']")[[1]]
 
   # For adding them in the right order
   for (n in seq_along(new_nodes)) {
-    new <- xmlClone(new_nodes[[n]])
-    addSibling(prev_sibling, new)
+    new <- XML::xmlClone(new_nodes[[n]])
+    XML::addSibling(prev_sibling, new)
     prev_sibling <- new
   }
 
@@ -131,8 +131,8 @@ upgrade_param_gen_xml <- function(file,
   # if (! is.null(sel_nodes)) {
   #   lapply(sel_nodes, function(x)
   #   {
-  #     f <- xmlAttrs(sel_nodes[[1]])[["nom"]]
-  #     xmlAttrs(sel_nodes[[1]])[["nom"]] <- gsub("Intermediate","Cover",f)
+  #     f <- XML::xmlAttrs(sel_nodes[[1]])[["nom"]]
+  #     XML::xmlAttrs(sel_nodes[[1]])[["nom"]] <- gsub("Intermediate","Cover",f)
   #   })
   # }
   #
@@ -141,13 +141,13 @@ upgrade_param_gen_xml <- function(file,
   # if (! is.null(sel_nodes)) {
   #   lapply(sel_nodes, function(x)
   #   {
-  #     xmlAttrs(sel_nodes[[1]])[["nom"]] <- "Dead rhizomes in soil"
+  #     XML::xmlAttrs(sel_nodes[[1]])[["nom"]] <- "Dead rhizomes in soil"
   #   })
   # }
 
   # Writing to file param_gen.xml
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

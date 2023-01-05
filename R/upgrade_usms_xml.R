@@ -94,13 +94,13 @@ upgrade_usms_xml <- function(file,
   # where to add fobs fields !!!!!
   # default behavior: no existing fobs fields
   if (is.null(obs_nodes)) {
-    new_node <- xmlParseString("<fobs>null</fobs>",
+    new_node <- XML::xmlParseString("<fobs>null</fobs>",
       addFinalizer = TRUE
     )
 
     parent_node <- getNodeS(old_doc, "//plante")
 
-    lapply(parent_node, function(x) addChildren(x, xmlClone(new_node)))
+    lapply(parent_node, function(x) XML::addChildren(x, XML::xmlClone(new_node)))
   }
 
 
@@ -134,6 +134,6 @@ upgrade_usms_xml <- function(file,
   # writing file
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

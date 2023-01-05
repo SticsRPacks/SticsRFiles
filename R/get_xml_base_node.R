@@ -98,11 +98,11 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   xml_doc <- xmldocument(xml_file)
 
   # Convert it into a string
-  base_node_txt <- saveXML(getNodeS(xml_doc, paste0("//", node))[[1]])
+  base_node_txt <- XML::saveXML(getNodeS(xml_doc, paste0("//", node))[[1]])
 
   # TODO: see if usefull to call xmlClone or not ?
   # Getting the node from a node set
-  new_node <- getNodeSet(xmlParse(base_node_txt), paste0("//", node))[[1]]
+  new_node <- XML::getNodeSet(XML::xmlParse(base_node_txt), paste0("//", node))[[1]]
 
   return(new_node)
 }

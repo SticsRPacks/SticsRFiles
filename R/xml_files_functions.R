@@ -109,7 +109,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
   # Adding version to detect if the file have been previously updated to 10.0
   ver <- to_xml_version(new_version)
   names(ver) <- "version"
-  root_path <- paste0("/", xmlName(xmlRoot(xml_doc@content)))
+  root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
   att <- getAttrs(xml_doc, path = root_path)
 
   # Checking file version
@@ -128,7 +128,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
 # get_xml_stics_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
 get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   xml_doc <- get_xml_doc(xml_file_or_doc)
-  xml_root_name <- xmlName(xmlRoot(xml_doc@content))
+  xml_root_name <- XML::xmlName(XML::xmlRoot(xml_doc@content))
 
   att <- getAttrs(xml_doc, path = paste0("/", xml_root_name))
 
@@ -280,7 +280,7 @@ node_exist <- function(xml_file_or_doc, xpath) {
 #                            what = what,
 #                            elt_name = elt_name)
 #
-#   lapply(nodes_to_rm, function(x) if (!is.null(x)) removeNodes(x))
+#   lapply(nodes_to_rm, function(x) if (!is.null(x)) XML::removeNodes(x))
 #
 # }
 #
@@ -296,8 +296,8 @@ node_exist <- function(xml_file_or_doc, xpath) {
 #
 #   if (length(new_node)==1) new_node <- list(new_node)
 #
-#   what <- unlist(lapply(new_node, xmlName))
-#   elt_name <- unlist(lapply(new_node, function(x) xmlAttrs(x)["nom"]),
+#   what <- unlist(lapply(new_node, XML::xmlName))
+#   elt_name <- unlist(lapply(new_node, function(x) XML::xmlAttrs(x)["nom"]),
 #                      use.names = FALSE)
 #
 #

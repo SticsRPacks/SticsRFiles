@@ -49,5 +49,5 @@ add_node_to_doc <- function(xml_doc, new_node, nodes_nb = 1, parent_path) {
 
   # Adding nodes_nb new_node to the xml_doc under parent node
   # after existing sibling nodes
-  replicate(nodes_nb, addNodes(xml_doc, xmlClone(new_node), parent_path))
+  replicate(nodes_nb, addNodes(xml_doc, XML::xmlClone(new_node), parent_path))
 }

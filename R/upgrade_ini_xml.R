@@ -119,12 +119,12 @@ upgrade_ini_xml <- function(file,
       path = paste0("//", x)
     ))
   }))
-  lapply(rm_nodes, function(x) removeNodes(x))
+  lapply(rm_nodes, function(x) XML::removeNodes(x))
 
 
   # Adding new option node
   # including old nodes masec0,QNplante0,restemp0 (previously named resperennes0)
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
 	<choix code="1" nom="yes">
 		<maperenne0>0</maperenne0>
@@ -146,7 +146,7 @@ upgrade_ini_xml <- function(file,
   prev_sibling <- unlist(getNodeS(old_doc, "//zrac0"))
 
   # Adding new node
-  lapply(prev_sibling, function(x) addSibling(x, xmlClone(new_node)))
+  lapply(prev_sibling, function(x) XML::addSibling(x, XML::xmlClone(new_node)))
 
   # setting values for restructured nodes
   # resperennes0 became restemp0
@@ -156,7 +156,7 @@ upgrade_ini_xml <- function(file,
 
   if (is.null(getNodeS(old_doc, "//snow"))) {
     # Adding snow node
-    new_node <- xmlParseString(
+    new_node <- XML::xmlParseString(
       "<snow>
     <Sdepth0>0.0</Sdepth0>
     <Sdry0>0.0</Sdry0>
@@ -168,7 +168,7 @@ upgrade_ini_xml <- function(file,
 
     parent_node <- getNodeS(old_doc, path = "//initialisations")[[1]]
 
-    addChildren(parent_node, xmlClone(new_node))
+    XML::addChildren(parent_node, XML::xmlClone(new_node))
   } else {
     # checking names an renaming them !
     old_names <- c("SDepth", "Sdry", "Swet", "ps")
@@ -176,11 +176,11 @@ upgrade_ini_xml <- function(file,
     n <- getNodeS(old_doc, c(sprintf("//%s", old_names)))
 
     if (!is.null(n)) {
-      nodes_idx <- unlist(lapply(n, xmlName)) %in% old_names
+      nodes_idx <- unlist(lapply(n, XML::xmlName)) %in% old_names
       n <- n[nodes_idx]
       new_names <- new_names[nodes_idx]
       for (i in 1:length(n)) {
-        xmlName(n[[i]]) <- new_names[i]
+        XML::xmlName(n[[i]]) <- new_names[i]
       }
     }
   }
@@ -188,11 +188,11 @@ upgrade_ini_xml <- function(file,
   # Renaming soil parameters
   # hinit, NO3init, NH4init => hinitf, NO3initf, NH4initf
   current_node <- getNodeS(old_doc, path = "//hinit")[[1]]
-  xmlName(current_node) <- "Hinitf"
+  XML::xmlName(current_node) <- "Hinitf"
   current_node <- getNodeS(old_doc, path = "//NO3init")[[1]]
-  xmlName(current_node) <- "NO3initf"
+  XML::xmlName(current_node) <- "NO3initf"
   current_node <- getNodeS(old_doc, path = "//NH4init")[[1]]
-  xmlName(current_node) <- "NH4initf"
+  XML::xmlName(current_node) <- "NH4initf"
 
 
   # Writing to file _ini.xml
@@ -201,6 +201,6 @@ upgrade_ini_xml <- function(file,
 
 
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

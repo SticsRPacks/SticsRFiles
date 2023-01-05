@@ -2,7 +2,7 @@
 
 * FUNCTIONS
    * Changes in plant files upgrading function according to a fix done in JavaSTICS 1.5.1 for plant files
-   (without any impact on R packages functionning)
+   (without any impact on R packages functioning)
 
 * FIXES:
    * Little compatibility fix in STICS plant files upgrading function 

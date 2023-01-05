@@ -72,8 +72,8 @@ get_param_names <- function(xml_object,
 
   # If xml_object converting input argument to an XML node
   if (base::is.element("xmlDocument", class(xml_object))) {
-    xml_node <- xmlRoot(xml_object@content)
-    root_name <- xmlName(xml_node)
+    xml_node <- XML::xmlRoot(xml_object@content)
+    root_name <- XML::xmlName(xml_node)
   } else if (base::is.element("XMLInternalElementNode", class(xml_object))) {
     xml_node <- xml_object
   }
@@ -83,18 +83,18 @@ get_param_names <- function(xml_object,
     stop("The XML object is neither an xml node nor an xml document !")
   }
 
-  node_name <- xmlName(xml_node)
+  node_name <- XML::xmlName(xml_node)
 
   # getting only one usm node or sol node
   if (node_name %in% c("sols", "usms")) {
     # if ( node_name == "usms" ) {
-    xml_node <- xmlChildren(xml_node)[[1]]
+    xml_node <- XML::xmlChildren(xml_node)[[1]]
   }
 
-  childs <- xmlChildren(xml_node)
+  childs <- XML::xmlChildren(xml_node)
   childs_names <- names(childs)
 
-  node_name <- xmlName(xml_node)
+  node_name <- XML::xmlName(xml_node)
 
 
   childs_nb <- length(childs)
@@ -129,7 +129,7 @@ get_param_names <- function(xml_object,
   }
 
   if (node_name == "colonne" &&
-      (xmlName(xmlParent(xml_node)) %in% tab_names)) {
+      (XML::xmlName(XML::xmlParent(xml_node)) %in% tab_names)) {
     attr_name <- "nom"
   }
 
@@ -146,8 +146,8 @@ get_param_names <- function(xml_object,
   if ((!is.null(parent_name) &&
        node_name != parent_name) ||
       (is.null(parent_name) &&
-       attr_name %in% names(xmlAttrs(xml_node)))) {
-    param_name <- xmlAttrs(xml_node)[attr_name]
+       attr_name %in% names(XML::xmlAttrs(xml_node)))) {
+    param_name <- XML::xmlAttrs(xml_node)[attr_name]
   }
 
   # Adding the param name to the param names list

@@ -34,7 +34,6 @@
 #'
 #' @keywords internal
 #'
-#' @importFrom dplyr bind_rows
 #'
 #'
 get_param_names_xml <- function(xml_file,

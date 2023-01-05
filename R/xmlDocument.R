@@ -89,12 +89,12 @@ setMethod(
 
     if (base::is.null(path)) {
       # getting root node name to get corresponding node set
-      node_set <- getNodeSet(
+      node_set <- XML::getNodeSet(
         docObj@content,
-        paste0("/", xmlName(xmlRoot(docObj@content)))
+        paste0("/", XML::xmlName(XML::xmlRoot(docObj@content)))
       )
     } else {
-      node_set <- getNodeSet(docObj@content, path[1])
+      node_set <- XML::getNodeSet(docObj@content, path[1])
       # browser("test getNodeS")
       # For a path vector, a loop is necessary
       # to keep results according to the path order !
@@ -103,7 +103,7 @@ setMethod(
         for (i in 2:path_nb) {
           node_set <- merge_nodesets(
             node_set,
-            getNodeSet(docObj@content, path[i])
+            XML::getNodeSet(docObj@content, path[i])
           )
         }
       }
@@ -130,7 +130,7 @@ setMethod(
 
     # tranforming attributes to matrix (if only one attribute, a character
     # vector is returned)
-    attr_list <- sapply(node_set, function(x) xmlAttrs(x))
+    attr_list <- sapply(node_set, function(x) XML::xmlAttrs(x))
     # not any attributes in nodeset
     if (base::is.null(unlist(attr_list))) {
       return()
@@ -320,7 +320,7 @@ setMethod(
     }
 
     # Getting values from the node_set
-    val_list <- unlist(lapply(node_set, function(x) xmlValue(x)))
+    val_list <- unlist(lapply(node_set, function(x) XML::xmlValue(x)))
 
     return(val_list)
   }
@@ -334,7 +334,7 @@ setMethod(
     # add not base::is.null node_set !!!!
     if (!base::is.null(names(named_vector))) {
       node_set <- getNodeS(docObj, path)
-      invisible(sapply(node_set, function(x) xmlAttrs(x) <- named_vector))
+      invisible(sapply(node_set, function(x) XML::xmlAttrs(x) <- named_vector))
     }
   }
 )
@@ -351,7 +351,7 @@ setMethod(
       node_set <- getNodeS(docObj, path)
       attr_nb <- length(attr_names)
       for (i in 1:attr_nb) {
-        sapply(node_set, function(x) removeAttributes(x, attr_names[i]))
+        sapply(node_set, function(x) XML::removeAttributes(x, attr_names[i]))
       }
     }
   }
@@ -384,7 +384,7 @@ setMethod(
     }
     for (i in 1:nodes_nb) {
       value <- values_list[[i]]
-      xmlAttrs(node_set[[i]])[[attr_name]] <- value
+      XML::xmlAttrs(node_set[[i]])[[attr_name]] <- value
     }
   }
 )
@@ -417,7 +417,7 @@ setMethod(
     }
 
     for (i in 1:nodes_nb) {
-      xmlValue(node_set[[i]]) <- values_list[[i]]
+      XML::xmlValue(node_set[[i]]) <- values_list[[i]]
     }
   }
 )
@@ -432,7 +432,7 @@ setMethod(
   function(docObj, nodes_to_add, parent_path = NULL) {
     # parent node is root node
     if (base::is.null(parent_path)) {
-      pnode <- xmlRoot(docObj@content)
+      pnode <- XML::xmlRoot(docObj@content)
       # getting parent node from given parent_path
     } else {
       node_set <- getNodeS(docObj, parent_path)
@@ -445,11 +445,11 @@ setMethod(
     # for a node set
     if (class(nodes_to_add)[[1]] == "XMLNodeSet") {
       for (n in seq_along(nodes_to_add)) {
-        addChildren(pnode, nodes_to_add[[n]])
+        XML::addChildren(pnode, nodes_to_add[[n]])
       }
       # for a single node
     } else {
-      addChildren(pnode, nodes_to_add)
+      XML::addChildren(pnode, nodes_to_add)
     }
   }
 )
@@ -465,7 +465,7 @@ setMethod(
       return()
     }
 
-    removeNodes(node_set)
+    XML::removeNodes(node_set)
   }
 )
 
@@ -477,12 +477,12 @@ setMethod(
 # removeChildren
 # removeNodes
 # nodes=getNodeS(xnode,'//param[@nom="lvmax"]')
-# removeChildren(xmlRoot(xnode@content),nodes[[1]])
+# XML::removeChildren(XML::xmlRoot(xnode@content),nodes[[1]])
 
 # other methods
 setMethod("loadContent", signature(docObj = "xmlDocument"), function(docObj) {
   # print("dans loadContent...")
-  setContent(docObj) <- xmlParse(getPath(docObj))
+  setContent(docObj) <- XML::xmlParse(getPath(docObj))
   return(docObj)
 })
 
@@ -505,7 +505,7 @@ setMethod(
   "saveXmlDoc", signature(docObj = "xmlDocument"),
   function(docObj, xml_path) {
     if (isLoaded(docObj)) {
-      write(saveXML(docObj@content), xml_path)
+      write(XML::saveXML(docObj@content), xml_path)
     }
   }
 )
@@ -516,7 +516,7 @@ setMethod("cloneXmlDoc", signature(docObj = "xmlDocument"), function(docObj) {
     return(NULL)
   }
 
-  setContent(docObj) <- xmlClone(getContent(docObj))
+  setContent(docObj) <- XML::xmlClone(getContent(docObj))
 
   return(docObj)
 })

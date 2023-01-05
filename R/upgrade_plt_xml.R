@@ -148,7 +148,7 @@ upgrade_plt_xml <- function(file,
   if (any(nodes_null)) stop("missing nodes, not a v9.1 or 9.2 _plt.xml file")
 
   # Removing nodes
-  lapply(nodes_to_rm, function(x) removeNodes(x))
+  lapply(nodes_to_rm, function(x) XML::removeNodes(x))
 
 
   # Already exist in varietal parameters
@@ -170,7 +170,7 @@ upgrade_plt_xml <- function(file,
   # General plant parameters ---------------------------------------------------
   #
   # adding codephot_part
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<option choix="2" nom="effect of decreasing photoperiod on biomass allocation" nomParam="codephot_part">
     <choix code="1" nom="yes"/>
     <choix code="2" nom="no"/>
@@ -186,25 +186,25 @@ upgrade_plt_xml <- function(file,
     "codephot_part already exists, not a v9.1 or 9.2 _plt.xml file")
 
   parent_node <- getNodeS(old_doc,
-                        '//option[@nomParam="codephot"]/choix[@code="1"]')[[1]]
-  addChildren(parent_node, xmlClone(new_node))
+                          '//option[@nomParam="codephot"]/choix[@code="1"]')[[1]]
+  XML::addChildren(parent_node, XML::xmlClone(new_node))
 
 
   # moving nbfeuilplant
   node_to_move <- getNodeS(old_doc, path = "//param[@nom='nbfeuilplant']")[[1]]
   prev_sibling <- getNodeS(old_doc, path = "//param[@nom='laiplantule']")[[1]]
 
-  addSibling(prev_sibling, node_to_move)
+  XML::addSibling(prev_sibling, node_to_move)
 
 
 
   # Recalculating irazomax
   irazomax_calc <- calc_irazomax(
     get_param_value(old_doc, "irmax")$irmax,
-                                 param_values_to_varietal$vitircarb,
-                                 param_values_to_varietal$vitirazo)
+    param_values_to_varietal$vitircarb,
+    param_values_to_varietal$vitirazo)
 
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     paste0('<param format="real" max="1.0" min="0.01" nom="irazomax">',
            irazomax_calc,
            "</param>"),
@@ -214,7 +214,7 @@ upgrade_plt_xml <- function(file,
   # adding irazomax node
   parent_node <- getNodeS(old_doc,
                           path = "//formalisme[@nom='yield formation']")[[1]]
-  addChildren(parent_node, new_node, at = 0)
+  XML::addChildren(parent_node, new_node, at = 0)
 
 
   message(old_doc@name,
@@ -228,13 +228,13 @@ upgrade_plt_xml <- function(file,
   # moving irmax
   node_to_move <- getNodeS(old_doc, path = "//param[@nom='irmax']")[[1]]
   parent_node <- getNodeS(old_doc,
-                    path = "//option[@nomParam='codeir']/choix[@code='1']")[[1]]
-  addChildren(parent_node, node_to_move)
+                          path = "//option[@nomParam='codeir']/choix[@code='1']")[[1]]
+  XML::addChildren(parent_node, node_to_move)
 
 
 
   # add codedisrac option node
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<option choix="2" nom="Standard root distribution" nomParam="codedisrac">
     <choix code="1" nom="yes">
     <param format="real" max="0.01" min="0.00001" nom="kdisrac">0.00158</param>
@@ -246,17 +246,17 @@ upgrade_plt_xml <- function(file,
   )
   # before sibling <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
   prev_sibling <- getNodeS(old_doc, '//option[@nomParam="codazorac"]')[[1]]
-  addSibling(prev_sibling, new_node, after = FALSE)
+  XML::addSibling(prev_sibling, new_node, after = FALSE)
 
 
   # Changing varietal section structure ----------------------------------------
   #
   # Remove nodes from old doc for varietal content (under variete nodes)
   nodes_to_rm <- getNodeS(old_doc, path = "//variete/*")
-  lapply(nodes_to_rm, function(x) removeNodes(x))
+  lapply(nodes_to_rm, function(x) XML::removeNodes(x))
 
   # Add under each variete node new nodes
-  var_nodes <- xmlParseString(
+  var_nodes <- XML::xmlParseString(
     '<formalismev nom="phenological stages">
 			<param format="real" max="6000.0" min="0.0" nom="stlevamf">275</param>
 			<param format="real" max="6000.0" min="0.0" nom="stamflax">375</param>
@@ -354,7 +354,9 @@ upgrade_plt_xml <- function(file,
   # adding var nodes under each "variete" node
   var_parent_nodes <- getNodeS(old_doc, path = "//variete")
   lapply(var_parent_nodes,
-         function(x) addChildren(x, kids = xmlChildren(xmlClone(var_nodes))))
+         function(x)
+           XML::addChildren(x,
+                            kids = XML::xmlChildren(XML::xmlClone(var_nodes))))
 
   #
   # Set values of all kept parameter values (removed nodes or moved) to new nodes
@@ -392,9 +394,9 @@ upgrade_plt_xml <- function(file,
 
       values_999_ids <- which(values == -999)
       if (length(values_999_ids) > 0) set_param_value(old_doc,
-                                                     param_name = "jvc",
-       param_value = jvc_data[[basename(file)]]$jvc[common_var][values_999_ids],
-                                                     ids = values_999_ids)
+                                                      param_name = "jvc",
+                                                      param_value = jvc_data[[basename(file)]]$jvc[common_var][values_999_ids],
+                                                      ids = values_999_ids)
     }
   }
 
@@ -415,7 +417,7 @@ upgrade_plt_xml <- function(file,
   #
   # codemortalracine
   # after <option choix="1" nom="driving temperature" nomParam="codetemprac">
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<option choix="2" nom="calculation of the root death at cutting date for grasslands" nomParam="codemortalracine">
 	<choix code="1" nom="function of dry matter production between two successives cut">
 		<param format="real" max="1.0" min="0.0" nom="coefracoupe">0.5</param>
@@ -426,12 +428,12 @@ upgrade_plt_xml <- function(file,
   )
 
   prev_sibling <- getNodeS(old_doc, "//*[@nomParam='codetemprac']")[[1]]
-  addSibling(prev_sibling, xmlClone(new_node))
+  XML::addSibling(prev_sibling, XML::xmlClone(new_node))
 
 
   # code_WangEngel
   # in <choix code="1" nom="daily temperatures">
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<option choix="2" nom=" Wang et Engel (1998)" nomParam="code_WangEngel">
 	<choix code="1" nom="Wang et Engel">
 		<param format="real" max="30" min="0" nom="tdoptdeb">11.7</param>
@@ -443,13 +445,13 @@ upgrade_plt_xml <- function(file,
 
   parent_node <- getNodeS(old_doc,
                           "//*[@nomParam='codegdhdeb']/choix[@code='1']")[[1]]
-  addChildren(parent_node, new_node)
+  XML::addChildren(parent_node, new_node)
 
 
   # Adding 2 option nodes
   # in <formalisme nom="partitioning of biomass in organs">
   #
-  new_nodes <- xmlParseString(
+  new_nodes <- XML::xmlParseString(
     '<option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
       <choix code="1" nom="yes">
       <param format="real" max="1.0" min="0.0" nom="propresP">0.47</param>
@@ -493,20 +495,20 @@ upgrade_plt_xml <- function(file,
     old_doc,
     "//formalisme[@nom='partitioning of biomass in organs']"
   )[[1]]
-  addChildren(parent_node, kids = unlist(xmlChildren(new_nodes)))
+  XML::addChildren(parent_node, kids = unlist(XML::xmlChildren(new_nodes)))
 
 
   # <formalisme nom="roots">
   # rayon
   #
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<param format="real" max="0.07" min="0.005" nom="rayon">0.02</param>'
   )
   prev_sibling <- getNodeS(old_doc, "//*[@nom='contrdamax']")[[1]]
-  addSibling(prev_sibling, new_node)
+  XML::addSibling(prev_sibling, new_node)
 
   # adding 2 option nodes
-  new_nodes <- xmlParseString(
+  new_nodes <- XML::xmlParseString(
     '<option choix="2" nom="Preferential allocation of biomass to roots in case of water or N stress" nomParam="code_stress_root">
     <choix code="1" nom="yes"/>
     <choix code="2" nom="no"/>
@@ -531,7 +533,7 @@ upgrade_plt_xml <- function(file,
 
   parent_node <- getNodeS(old_doc, "//choix[@nom='true density']")[[1]]
 
-  addChildren(parent_node, kids = unlist(xmlChildren(new_nodes)))
+  XML::addChildren(parent_node, kids = unlist(XML::xmlChildren(new_nodes)))
 
 
   # -----------------------------------------------------------
@@ -592,7 +594,7 @@ upgrade_plt_xml <- function(file,
 
 
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }
 

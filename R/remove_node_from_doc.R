@@ -55,7 +55,7 @@ remove_node_from_doc <- function(xml_doc, param_name,
   if (remove_parent) {
     # getting the nodes for parent nodes
     # to which the param_name belongs (I.e. "intervention", for example)
-    xml_nodes <- lapply(getNodeS(xml_doc, xpath_node), xmlParent)
+    xml_nodes <- lapply(getNodeS(xml_doc, xpath_node), XML::xmlParent)
   } else {
     # Getting nodes in all others cases
     xml_nodes <- getNodeS(xml_doc, xpath_node)
@@ -81,7 +81,7 @@ remove_node_from_doc <- function(xml_doc, param_name,
   }
 
   # Removing nodes from the document object
-  removeNodes(xml_nodes[nodes_ids])
+  XML::removeNodes(xml_nodes[nodes_ids])
 
   return(invisible(xml_doc))
 }

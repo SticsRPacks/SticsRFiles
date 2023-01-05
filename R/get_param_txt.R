@@ -33,7 +33,6 @@
 #'
 #' @seealso `gen_varmod()`,
 #'
-#' @importFrom stats setNames
 #'
 #' @examples
 #' # Read the interrow distance parameter:
@@ -98,7 +97,7 @@ get_param_txt <- function(workspace = getwd(),
   is_pasture <- ifelse("option_pature" %in% tmp_names &&
     tmp$option_pature == 1, TRUE, FALSE)
 
-  tec <- plant <- setNames(
+  tec <- plant <- stats::setNames(
     vector(mode = "list", length = ini$nbplantes),
     paste0("plant", 1:ini$nbplantes)
   )

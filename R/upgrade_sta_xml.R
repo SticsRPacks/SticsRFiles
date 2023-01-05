@@ -111,20 +111,20 @@ upgrade_sta_xml <- function(file,
 
 
   # Getting new parameter
-  concrr_node <- xmlParseString(
+  concrr_node <- XML::xmlParseString(
     '<param format="real" max="3.0" min="0.0" nom="concrr">0.02000</param>',
     addFinalizer = TRUE
   )
 
   # Getting the preceeding sibling node
   prev_sibling <- getNodeS(old_doc, "//*[@nom='NH3ref']")[[1]]
-  addSibling(node = prev_sibling, xmlClone(concrr_node), after = TRUE)
+  XML::addSibling(node = prev_sibling, XML::xmlClone(concrr_node), after = TRUE)
 
   # Setting concrr value
   set_param_value(old_doc, param_name = "concrr", param_value = concrr)
 
   # Adding snow formalism new node
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<formalisme nom="Climate with snow">
     <option choix="3" nom="Select snow model" nomParam="codemodlsnow">
     <choix code="1" nom="1-Unused"/>
@@ -148,13 +148,13 @@ upgrade_sta_xml <- function(file,
   )
 
   par_node <- getNodeS(old_doc, path = "/fichiersta")[[1]]
-  addChildren(par_node, xmlClone(new_node))
+  XML::addChildren(par_node, XML::xmlClone(new_node))
 
   # Writing to file _sta.xml
   write_xml_file(old_doc, file.path(out_dir, basename(file)),
     overwrite = overwrite
   )
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

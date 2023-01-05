@@ -19,7 +19,6 @@
 #' @return A data.frame of the input meteorological variables used as input for the
 #'         STICS model.
 #'
-#' @importFrom data.table fread
 #'
 #' @examples
 #' library(SticsRFiles)

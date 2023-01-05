@@ -188,7 +188,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         # node cannot be removed. Consistency error between the
         # values detected in the parameters table and the param type
         # in the xml file.
-        if (xmlName(xmlParent(getNodeS(
+        if (XML::xmlName(XML::xmlParent(getNodeS(
           xml_doc,
           xpath_node
         )[[1]])) == "formalisme") {
@@ -219,11 +219,11 @@ gen_tec_doc <- function(xml_doc = NULL,
       # attribute
       # Cloning "ta_entete" node, from the current xml_doc
       # renaming it and reusing it for intervention nodes creation
-      op_node <- xmlClone(getNodeS(
+      op_node <- XML::xmlClone(getNodeS(
         xml_doc,
         paste0("//ta_entete[colonne[@nom='", par_name, "']]")
       )[[1]])
-      xmlName(op_node) <- "intervention"
+      XML::xmlName(op_node) <- "intervention"
 
 
       # Getting needed nodes number and formalism or choice

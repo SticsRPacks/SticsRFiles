@@ -93,11 +93,11 @@ upgrade_sols_xml <- function(file,
   }
 
   # Nodes to add
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<param format="real" max="1.0" min="0.0" nom="finert">0.65000</param>',
     addFinalizer = TRUE
   )
-  # new_node <- xmlParseString('<param nom="finert">0.65000</param>',
+  # new_node <- XML::xmlParseString('<param nom="finert">0.65000</param>',
   #                           addFinalizer = TRUE)
 
   prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
@@ -114,12 +114,12 @@ upgrade_sols_xml <- function(file,
   }
 
   for (n in seq_along(prev_sibling)) {
-    addSibling(prev_sibling[[n]], xmlClone(new_node))
+    XML::addSibling(prev_sibling[[n]], XML::xmlClone(new_node))
   }
 
   # writing sols.xml file
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

@@ -22,7 +22,6 @@
 #'
 # @seealso \code{\link{read_output}}
 #'
-#' @importFrom data.table fread rbindlist
 #'
 #' @examples
 #' \dontrun{

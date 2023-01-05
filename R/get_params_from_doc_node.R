@@ -16,18 +16,18 @@ get_params_from_doc_node <- function(xml_node, param_list = c(), unique_val = TR
     stop("The document is not an xml node !")
   }
 
-  node_name <- xmlName(xml_node)
+  node_name <- XML::xmlName(xml_node)
 
   # getting only one usm node
   if (node_name == "usms" && unique_val) {
-    xml_node <- xmlChildren(xmlRoot(xml_node))[[1]]
+    xml_node <- XML::xmlChildren(XML::xmlRoot(xml_node))[[1]]
   }
 
-  childs <- xmlChildren(xml_node)
+  childs <- XML::xmlChildren(xml_node)
   childs_names <- names(childs)
 
   if (length(childs_names) == 1 && childs_names == "text") {
-    param_list <- c(param_list, xmlName(xml_node))
+    param_list <- c(param_list, XML::xmlName(xml_node))
   } else {
     for (n in childs_names) {
       param_list <- get_params_from_doc_node(childs[[n]], param_list)
