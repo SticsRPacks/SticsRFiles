@@ -1,6 +1,5 @@
 library(SticsRFiles)
 library(dplyr)
-# options(warn=-1)
 
 
 stics_version <- get_stics_versions_compat()$latest_version

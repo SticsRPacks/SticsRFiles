@@ -2,7 +2,6 @@ library(SticsRFiles)
 context("searching variables information")
 
 # fixing version to latest standard one
-# stics_version <- "V9.1"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 stics_prev_version <- get_stics_versions_compat(-1)
@@ -20,20 +19,13 @@ empty_df <- data.frame(
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
   empty_df_var <- get_var_info("myunknownvariable",
-    stics_version = stics_version
+                               stics_version = stics_version
   )
   empty_df_keyword <- get_var_info(
     keyword = "myunknownvariable",
     stics_version = stics_version
   )
 
-  # Don't function, as expect_equal
-  # Error message
-  # Error in matrix(if (is.null(value)) logical() else value, nrow = nr,
-  # dimnames = list(rn,  :
-  #   la longueur de 'dimnames' [2] n'est pas égale à l'étendue du tableau
-  # testthat::expect_identical(empty_df_var, empty_df)
-  # testthat::expect_identical(empty_df_keyword, empty_df)
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_var))
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_keyword))
 })
@@ -53,7 +45,8 @@ keyword_lai_df <- data.frame(
   name = c("albedolai", "diftemp1intercoupe"),
   definition = c(
     "albedo of the crop including soil and vegetation",
-    "mean difference between crop and air temperatures during the vegetative phase (emergence - maximum LAI)"
+    paste("mean difference between crop and air temperatures during",
+          "the vegetative phase (emergence - maximum LAI)")
   ),
   unit = c("SD", "degreeC"),
   type = c("real", "real"),
@@ -65,7 +58,7 @@ test_that("giving an existing partial variable name in var arg or keyword", {
   var_df <- get_var_info(
     var = "lai",
     stics_version = stics_version
-    )[1:2, ]
+  )[1:2, ]
   keyword_df <- get_var_info(
     keyword = "lai",
     stics_version = stics_version

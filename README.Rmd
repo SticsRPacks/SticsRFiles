@@ -61,7 +61,6 @@ devtools::install_github("SticsRPacks/SticsRPacks")
 * With `remotes`
 
 ```{r eval=FALSE}
-# install.packages("remotes")
 remotes::install_github("SticsRPacks/SticsRPacks")
 ```
 
@@ -78,7 +77,6 @@ devtools::install_github("SticsRPacks/SticsRFiles@*release")
 * With `remotes`
 
 ```{r eval=FALSE}
-# install.packages("remotes")
 remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 

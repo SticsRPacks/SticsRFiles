@@ -114,12 +114,6 @@ upgrade_workspace_xml <- function(workspace,
     )
   }
 
-  # Testing if a plant directory exists in the workspace
-  # plant_path <- NULL
-  if (plant) {
-    tmp_path <- file.path(workspace, "plant")
-    if (dir.exists(tmp_path)) plant_path <- tmp_path
-  }
 
   if (verbose) {
     cat(paste(

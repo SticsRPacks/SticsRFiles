@@ -1,7 +1,5 @@
 library(SticsRFiles)
-# options(warn=-1)
 
-# stics_version <- "V9.2"
 stics_version <- SticsRFiles:::get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
