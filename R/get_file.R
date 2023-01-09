@@ -320,7 +320,7 @@ get_file_one <- function(dirpath, filename, p_name,
   if (!is.null(dates_list) & "Date" %in% names(out)) {
     out <-
       out %>%
-      dplyr::filter(.data$Date %in% dates_list)
+      dplyr::filter(Date %in% dates_list)
   }
 
   # selecting variables columns
