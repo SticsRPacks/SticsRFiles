@@ -124,8 +124,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
 }
 
 # TODO : see existing get_xml_stics_version, to be merged or replaced with
-# this one and see waht  to do in gen_*_doc functions using templates ...
-# get_xml_stics_version <- function(xml_file_or_doc, param_gen_file = NULL ) {
+# this one and see what to do in gen_*_doc functions using templates ...
 get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   xml_doc <- get_xml_doc(xml_file_or_doc)
   xml_root_name <- XML::xmlName(XML::xmlRoot(xml_doc@content))
@@ -140,9 +139,7 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   # Global detection of the version based for the moment on the
   # param_gen.xml file content
   if (xml_root_name != "fichierpar" && is.null(param_gen_file)) {
-    # stop("The Stics version corresponding to the XML file was not detected.\n",
-    #      "The param_gen.xml path must be provided as second input!")
-    warning("The Stics version corresponding to the XML file was not detected.\n")
+    warning("Stics version corresponding to the XML file was not detected.\n")
     return()
   }
 
@@ -243,81 +240,6 @@ node_exist <- function(xml_file_or_doc, xpath) {
   unlist(lapply(nodes, function(x) !is.null(x)))
 }
 
-# TODO: compare with SticsRFiles existing functions
-# and evaluate if following func are useful or not
-# get_nodes <- function(xml_doc, what, elt_name) {
-#   # elt_name: name of "formalisme" or "option" or a vector of
-#   if (!what %in% c("formalisme", "option")) {
-#     warning("Unknown XML element: ", what)
-#     return()
-#   }
-#
-#   if (what == "formalisme") path_start <- "//formalisme[@nom='"
-#
-#   if (what == "option") path_start <- "//option[@nom='"
-#
-#   lapply(elt_name, function(x)
-#     getNodeS(docObj = xml_doc,
-#                            path = paste0(path_start,x,"']")))
-#
-# }
-#
-# remove_formalism <- function(xml_doc, elt_name) {
-#   remove_nodes_from_doc(xml_doc = xml_doc,
-#                         what = "formalisme",
-#                         elt_name = elt_name)
-# }
-#
-# remove_option <- function(xml_doc, elt_name) {
-#   remove_nodes_from_doc(xml_doc = xml_doc,
-#                         what = "option",
-#                         elt_name = elt_name)
-# }
-#
-# remove_nodes_from_doc <- function(xml_doc, what, elt_name) {
-#
-#   nodes_to_rm <- get_nodes(xml_doc = xml_doc,
-#                            what = what,
-#                            elt_name = elt_name)
-#
-#   lapply(nodes_to_rm, function(x) if (!is.null(x)) XML::removeNodes(x))
-#
-# }
-#
-# add_formalism_to_doc <- function() {
-#
-# }
-#
-# add_option_to_doc <- function() {
-#
-# }
-#
-# add_node_to_doc <- function(xml_doc, parent_or_sibling, new_node) {
-#
-#   if (length(new_node)==1) new_node <- list(new_node)
-#
-#   what <- unlist(lapply(new_node, XML::xmlName))
-#   elt_name <- unlist(lapply(new_node, function(x) XML::xmlAttrs(x)["nom"]),
-#                      use.names = FALSE)
-#
-#
-#   nodes_nb <- length(what)
-#   nodes_from_doc <- vector(mode="list", length = length(what) )
-#   for (i in 1:nodes_nb) {
-#     nodes_from_doc[[i]] <- get_nodes(xml_doc = xml_doc,
-#                                      what = what[i],
-#                                      elt_name = elt_name[i])[[1]][[1]]
-#   }
-#   # getting NULL nodes, which don't exist in doc
-#   nodes_from_doc <- nodes_from_doc[unlist(lapply(nodes_from_doc,is.null))]
-# }
-#
-# reindent_xml_file <- function(file, out_file, overwrite = FALSE) {
-#
-#   write_xml_file(xml_doc = get_xml_doc(file), file = out_file,
-#   overwrite = overwrite)
-#
-# }
 
 write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
   if (file.exists(file) && (!overwrite)) {
@@ -328,49 +250,3 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
   saveXmlDoc(xml_doc, file)
   return(TRUE)
 }
-
-# TODO: to be evaluated later, usefull ?
-# check_update_from_to_versions <- function(stics_version,
-# target_version = "V10.0") {
-#
-#   # TODO: to define for getting compat for a list of versions !
-#   # v <- list("8.5","9.0",c("9.1","9.2))
-#   # c <- c(FALSE,FALSE,TRUE)
-#   # list(NULL, NULL, "V10.0")
-#   # functions tag c("8_5", "9_0","9_1-2")
-#   # TODO
-#   # See for using the csv file collecting info about
-#   # version taken into account in SticsRFiles
-#
-#   # Compatibility checks between version and update to target_version
-#   check_version_compat(stics_version)
-#
-#   # check about the target version
-#   # TODO: add check to test if version exists as for version (see upon call)
-#   # for the moment checks are temporary
-#   if (get_version_num(target_version) != 10)
-#     stop(target_version, ": unknown version !")
-#
-#   # Fixed internally form the moment
-#   # to get from info mentioned in comments at function head
-#   # for getting list of versions which updates are taken into account
-#   # for the target_version.
-#   compat_versions <- "V9.2"
-#   #compat_versions <- get_version_num(compat_versions)
-#
-#   # TODO: add list of compatible versions
-#   #ver_num <- get_version_num(stics_version)
-#   if (!stics_version %in% compat_versions) stop("Files from the version ",
-#  stics_version, " cannot be converted to the version ", target_version)
-#
-#   # TODO: change from_tag to "9_1-2" if 9.1 and 9.2 are compatible !
-#   list(from_tag = "9_2", to_tag = "10_0")
-#
-#
-# }
-
-
-# filter_usms <- function() {
-#
-#
-# }

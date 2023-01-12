@@ -5,7 +5,8 @@
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param target_version Name of the Stics version to upgrade files
+#' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
@@ -52,8 +53,8 @@ upgrade_ini_xml <- function(file,
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file[1],
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
 
@@ -106,7 +107,9 @@ upgrade_ini_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+  set_xml_file_version(old_doc,
+                       new_version = target_version,
+                       overwrite = overwrite)
 
   # Keeping old values
   rm_names <- c("masec0", "QNplante0", "resperenne0")
@@ -123,10 +126,14 @@ upgrade_ini_xml <- function(file,
 
 
   # Adding new option node
-  # including old nodes masec0,QNplante0,restemp0 (previously named resperennes0)
-  new_node <- XML::xmlParseString(
-    '<option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
-	<choix code="1" nom="yes">
+  # including old nodes masec0,QNplante0,restemp0
+  # (previously named resperennes0)
+
+
+  str_1 <- paste0('<option choix="2" nom="Simulation of Nitrogen and Carbon',
+                  ' reserves" nomParam="code_acti_reserve">\n')
+  str_2 <-
+  '<choix code="1" nom="yes">
 		<maperenne0>0</maperenne0>
 		<QNperenne0>0</QNperenne0>
 		<masecnp0>0</masecnp0>
@@ -137,10 +144,11 @@ upgrade_ini_xml <- function(file,
 		<QNplante0>0</QNplante0>
 		<restemp0>0</restemp0>
 	</choix>
- </option>',
-    addFinalizer = TRUE
-  )
+ </option>'
 
+  str <- paste0(str_1, str_2)
+
+  new_node <- XML::xmlParseString(str, addFinalizer = TRUE)
 
   # Getting zrac0 node
   prev_sibling <- unlist(getNodeS(old_doc, "//zrac0"))
@@ -151,7 +159,9 @@ upgrade_ini_xml <- function(file,
   # setting values for restructured nodes
   # resperennes0 became restemp0
   rm_names <- c("masec0", "QNplante0", "restemp0")
-  set_param_value(old_doc, param_name = as.list(rm_names), param_value = old_values)
+  set_param_value(old_doc,
+                  param_name = as.list(rm_names),
+                  param_value = old_values)
 
 
   if (is.null(getNodeS(old_doc, "//snow"))) {
@@ -179,7 +189,7 @@ upgrade_ini_xml <- function(file,
       nodes_idx <- unlist(lapply(n, XML::xmlName)) %in% old_names
       n <- n[nodes_idx]
       new_names <- new_names[nodes_idx]
-      for (i in 1:length(n)) {
+      for (i in seq_along(length(n))) {
         XML::xmlName(n[[i]]) <- new_names[i]
       }
     }

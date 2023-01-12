@@ -39,10 +39,6 @@ upgrade_workspace_xml <- function(workspace,
                                   overwrite = FALSE,
                                   ...) {
 
-  # TODO: to put elsewhere for getting compat for a list of versions !
-  # v <- list("8.5","9.0",c("9.1","9.2))
-  # c <- c(FALSE,FALSE,TRUE)
-  # list(NULL, NULL, "V10.0")
 
   # For testing if files are upgradable
   check_version <- FALSE
@@ -297,10 +293,19 @@ upgrade_workspace_xml <- function(workspace,
   # (i.e. year, as .1996) are taken into account because when USM are
   # defined over 2 successive years, files are not explicitly mentioned
   # in the usms.xml file.
+
+  weather_files <-
+    list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]")
+
   stat <- file.copy(
-    from = list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]"),
+    from = weather_files,
     to = out_dir, overwrite = overwrite
   )
+
+  if (!all(stat)) {
+    warning("Error when copying file(s): ",
+            paste(weather_files[stat], collapse = ", "))
+  }
 
   if (verbose) {
     cat("Copying weather files.\n")

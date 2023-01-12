@@ -5,7 +5,8 @@
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param target_version Name of the Stics version to upgrade files
+#' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
@@ -104,7 +105,9 @@ upgrade_sta_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+  set_xml_file_version(old_doc,
+                       new_version = target_version,
+                       overwrite = overwrite)
 
   # Getting old concrr value
   concrr <- get_param_xml(param_gen_file, "concrr")$param_gen.xml$concrr

@@ -49,8 +49,8 @@ upgrade_usms_xml <- function(file,
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
     if (!file_version) {
@@ -83,8 +83,8 @@ upgrade_usms_xml <- function(file,
 
   # setting file stics version
   set_xml_file_version(old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+                       new_version = target_version,
+                       overwrite = overwrite
   )
 
   # checking if fobs exist
@@ -95,25 +95,19 @@ upgrade_usms_xml <- function(file,
   # default behavior: no existing fobs fields
   if (is.null(obs_nodes)) {
     new_node <- XML::xmlParseString("<fobs>null</fobs>",
-      addFinalizer = TRUE
+                                    addFinalizer = TRUE
     )
 
     parent_node <- getNodeS(old_doc, "//plante")
 
-    lapply(parent_node, function(x) XML::addChildren(x, XML::xmlClone(new_node)))
+    lapply(parent_node,
+           function(x) XML::addChildren(x, XML::xmlClone(new_node))
+    )
   }
 
 
-  # TODO: use following to get usms with no fobs field
-  # usms_with_fobs <- SticsRFiles:::getAttrsValues(
-  #   docObj = old_doc,path = "//usm[plante[@dominance='1']/fobs]",
-  #   attr_list = "nom")
-
   # Usms names
   usms_names <- getAttrsValues(old_doc, "//usm", "nom")
-
-  # usm names to use
-  # usm_names <- setdiff(usms_names, usms_with_fobs)
 
   # existing obs files
   # intercrops usms are not taken into account in that case
@@ -124,10 +118,10 @@ upgrade_usms_xml <- function(file,
 
   # Setting obs files names into fobs for existing files
   set_param_value(old_doc,
-    param_name = "fobs",
-    param_value = obs_val,
-    parent_name = "plante",
-    parent_sel_attr = "1"
+                  param_name = "fobs",
+                  param_value = obs_val,
+                  parent_name = "plante",
+                  parent_sel_attr = "1"
   )
 
 

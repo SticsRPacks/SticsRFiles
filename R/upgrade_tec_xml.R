@@ -56,8 +56,8 @@ upgrade_tec_xml <- function(file,
     # extracting or detecting the Stics version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
     if (!file_version && is.null(param_gen_file)) {
@@ -108,15 +108,12 @@ upgrade_tec_xml <- function(file,
 
   # Setting file stics version
   set_xml_file_version(old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+                       new_version = target_version,
+                       overwrite = overwrite
   )
 
 
   # Getting values to keep
-  # nodes to be moved ressuite et irecbutoir, no need to keep their values
-  # ressuite <- get_param_value(xml_doc = old_doc, param_name = "ressuite")
-  # irecbutoir <- get_param_value(xml_doc = old_doc, param_name = "irecbutoir")
   mscoupemini <- get_param_value(xml_doc = old_doc, param_name = "mscoupemini")
 
   # Keeping the value if any intervention node
@@ -152,7 +149,8 @@ upgrade_tec_xml <- function(file,
 
   # tillage option
   new_node <- XML::xmlParseString(
-    '<option choix="1" nom="Automatic calculation of the depth of residues incorporation in function of proftrav" nomParam="code_auto_profres">
+    '<option choix="1" nom="Automatic calculation of the depth of residues
+    incorporation in function of proftrav" nomParam="code_auto_profres">
 	<choix code="1" nom="yes">
 		<param format="real" max="0.0" min="1.0" nom="resk">0.14</param>
 		<param format="real" max="0.0" min="10.0" nom="resz">5.00000</param>
@@ -193,14 +191,19 @@ upgrade_tec_xml <- function(file,
 
   # option codedate_irrigauto
   new_node <- XML::xmlParseString(
-    '<option choix="3" nom="dates to drive automatic irrigations" nomParam="codedate_irrigauto">
+    '<option choix="3" nom="dates to drive automatic irrigations"
+    nomParam="codedate_irrigauto">
   <choix code="1" nom="dates">
-    <param format="integer" max="731" min="0.0" nom="datedeb_irrigauto">0</param>
-    <param format="integer" max="731" min="0.0" nom="datefin_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="datedeb_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="datefin_irrigauto">0</param>
   </choix>
   <choix code="2" nom="stages">
-    <param format="integer" max="731" min="0.0" nom="stage_start_irrigauto">0</param>
-    <param format="integer" max="731" min="0.0" nom="stage_end_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="stage_start_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="stage_end_irrigauto">0</param>
   </choix>
   <choix code="3" nom="no"/>
 </option>',
@@ -215,10 +218,10 @@ upgrade_tec_xml <- function(file,
   XML::addSibling(prev_sibling, new_node)
 
 
-  # intervention + engrais
+  # intervention , engrais
   # -----------------------
   new_node <- XML::xmlParseString('<colonne nom="engrais"/>',
-    addFinalizer = TRUE
+                                  addFinalizer = TRUE
   )
 
   parent_node <- getNodeS(
@@ -237,14 +240,21 @@ upgrade_tec_xml <- function(file,
     path = "//formalisme[@nom='fertilisation']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    lapply(parent_nodes, function(x) XML::addChildren(x, XML::xmlClone(new_node)))
-    set_param_value(xml_doc = old_doc, param_name = "engrais", param_value = engrais)
+    lapply(parent_nodes,
+           function(x) {
+             XML::addChildren(x, XML::xmlClone(new_node))
+           }
+    )
+    set_param_value(xml_doc = old_doc,
+                    param_name = "engrais",
+                    param_value = engrais)
     lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "3")
   }
 
-  # param + option: harvest
+  # param, option: harvest
   new_node <- XML::xmlParseString(
-    '<option choix="2" nom="automatic calculation of crop aerial residues in function of user parameterization" nomParam="code_autoressuite">
+    '<option choix="2" nom="automatic calculation of crop aerial residues
+    in function of user parameterization" nomParam="code_autoressuite">
   <choix code="1" nom="yes">
     <param format="real" max="100.0" min="0.0" nom="Stubblevegratio">0</param>
   </choix>
@@ -267,14 +277,16 @@ upgrade_tec_xml <- function(file,
   # special techniques: codefauche
   new_node <- list(
     XML::xmlParseString(
-      '<option choix="2" nom="dynamic calculation of residual lai on biomass after cutting" nomParam="code_hautfauche_dyn">
+      '<option choix="2" nom="dynamic calculation of residual lai
+      on biomass after cutting" nomParam="code_hautfauche_dyn">
   <choix code="1" nom="yes"/>
   <choix code="2" nom="no"/>
 </option>',
       addFinalizer = TRUE
     ),
     XML::xmlParseString(
-      '<option choix="1" nom="reference thermal time to compute cutting dates " nomParam="codetempfauche">
+      '<option choix="1" nom="reference thermal time to compute
+      cutting dates " nomParam="codetempfauche">
   <choix code="1" nom="in upvt"/>
   <choix code="2" nom="in udevair"/>
 </option>',
@@ -430,7 +442,8 @@ upgrade_tec_xml <- function(file,
 
   # codejourdes
   new_node <- XML::xmlParseString(
-    '<option choix="2" nom="date of plant destruction (for perennial crops only)" nomParam="codejourdes">
+    '<option choix="2" nom="date of plant destruction
+    (for perennial crops only)" nomParam="codejourdes">
   <choix code="1" nom="yes">
     <param format="integer" max="999" min="1" nom="juldes">999</param>
   </choix>
@@ -450,19 +463,6 @@ upgrade_tec_xml <- function(file,
   # ----------------------------------------------------------------------------
   # Updating values with param_newform.xml ones
   #
-  # codetempfauche
-  #
-  # <formalisme nom="Moisture test for sowing decision">
-  # nbj_pr_apres_semis, eau_mini_decisemis, humirac_decisemis
-  #
-  # <option choix="3" nom="dates to drive automatic irrigations"
-  # nomParam="P_codedate_irrigauto"> -> codedate_irrigauto
-  # datedeb_irrigauto datefin_irrigauto stage_start_irrigauto
-  # stage_end_irrigauto
-  #
-  # <option choix="1" nom="Automatic calculation of the depht of residues
-  # incorporation in fucntion of proftrav" nomParam="code_auto_profres">
-  # code_auto_profres, resk, resz
 
   param_names <- c(
     "codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis",
@@ -471,7 +471,7 @@ upgrade_tec_xml <- function(file,
     "stage_start_irrigauto", "stage_end_irrigauto"
   )
   old_val <- get_param_xml(param_newform_file,
-    param = param_names
+                           param = param_names
   )[[basename(param_newform_file)]]
 
   # writing to file _tec.xml
@@ -492,13 +492,7 @@ upgrade_tec_xml <- function(file,
     overwrite = TRUE
   )
 
-  # error !!:
-  # set_param_value(old_doc, c("codetempfauche", "nbj_pr_apres_semis",
-  # "eau_mini_decisemis", "humirac_decisemis", "code_auto_profres","resk",
-  # "resz", "codedate_irrigauto", "datedeb_irrigauto", "datefin_irrigauto",
-  # "stage_start_irrigauto", "stage_end_irrigauto"), old_val)
-  #
-  # write_xml_file(old_doc, out_tec, overwrite)
+
 
 
   XML::free(old_doc@content)

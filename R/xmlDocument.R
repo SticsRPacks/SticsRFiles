@@ -9,11 +9,9 @@ setClass("xmlDocument",
 
 # object validation
 setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
-  # methods::callNextMethod()
-  # print("calling xmlDocument validDoc")
+
   ext <- getExt(object)
-  # print(ext)
-  # print(object@content)
+
   if (length(object@name) == 0 || object@name == "") {
     return("file name is empty !")
   }
@@ -34,7 +32,6 @@ setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
 setMethod(
   "xmldocument", signature(file = "character"),
   function(file = character(length = 0)) {
-    # print(file)
     methods::new("xmlDocument", file)
   }
 )
@@ -43,11 +40,8 @@ setMethod(
   "initialize", "xmlDocument",
   function(.Object, file = character(length = 0), warn = FALSE) {
     .Object <- methods::callNextMethod(.Object, file)
-    # print('xmlDocument initialization')
-    # print(file)
     methods::validObject(.Object)
     .Object <- loadContent(.Object)
-    # .Object@warn <- warn
     return(.Object)
   }
 )
@@ -55,7 +49,6 @@ setMethod(
 
 setMethod("show", "xmlDocument", function(object) {
   methods::callNextMethod()
-  # print("show de xmlDocument")
   if (isLoaded(object)) {
     print(paste0("   content : ", class(object@content)[[1]]))
   }
@@ -95,7 +88,6 @@ setMethod(
       )
     } else {
       node_set <- XML::getNodeSet(docObj@content, path[1])
-      # browser("test getNodeS")
       # For a path vector, a loop is necessary
       # to keep results according to the path order !
       path_nb <- length(path)
@@ -143,26 +135,13 @@ setMethod(
       }
       attr_list <- new_list
     }
-    # attr_list=as.matrix(attr_list)
+
     if (is.list(attr_list)) {
       attr_list <- attributes_list2matrix(attr_list)
     } else {
       attr_list <- t(attr_list)
     }
-    # # test to detect if there's only one attribute
-    # # TODO: add a contition to test if rownames (dimnames[[1]]) are identical
-    # # and dim()[[2]]==1
-    # r_names = unique(rownames(attr_list))
-    # if (base::is.null(r_names)) {
-    #
-    # }
-    # if (dim(attr_list)[[2]] ==1 & length(r_names) == 1) {
-    #   colnames(attr_list) <- unique(rownames(attr_list))
-    #   rownames(attr_list) <- c()
-    # } else {
-    #   # transposing the matrix to have attribute names as colnames !
-    #   attr_list=t(attr_list)
-    # }
+
 
     # testing if any node has not any attribute
     any_null <- any(sapply(attr_list, function(x) base::is.null(x)))
@@ -171,7 +150,6 @@ setMethod(
       warning(paste("Existing nodes without any attributes on xpath", path))
     }
 
-    # browser("test getAttrs")
 
     # testing if all nodes have the same attributes !!
     if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
@@ -195,19 +173,6 @@ setMethod(
     attr_names <- NULL
     attr_list <- getAttrs(docObj, path)
 
-
-    # print(path)
-    #  print(attr_list)
-    #   if (base::is.null(attr_list))  {
-    #     return(attr_list)}
-
-    # TODO: Normally USELESS, see getAttrs (as.matrix ...)
-    # if (!is.matrix(attr_list)) {
-    #  print("attrs characters ")
-    #  # attr_names=unique(names(attr_list))
-    #  attr_names=lapply(attr_list,function(x) names(x))
-    # } # else {
-    # print("attrs matrix ")
     dim_names <- dimnames(attr_list)
     if (!base::is.null(dim_names[[1]])) {
       attr_names <- dim_names[[1]]
@@ -215,9 +180,7 @@ setMethod(
     } else {
       attr_names <- dim_names[[2]]
     }
-    # attr_names=unlist(attr_names)
-    # print(attr_names)
-    # }
+
     return(attr_names)
   }
 )
@@ -262,8 +225,6 @@ setMethod(
       }
     }
 
-    # browser()
-
     # getting existing names from attr_list in attr_values
     # and getting the original order in initial attr_list
     found_list <- intersect(colnames(attr_values)[sel], attr_list)
@@ -278,8 +239,6 @@ setMethod(
       sel_values <- as.matrix(sel_values)
       colnames(sel_values) <- sel_list
     }
-
-    # browser()
 
     # keeping only lines specified by nodes_ids
     if (!base::is.null(nodes_ids)) {
@@ -308,14 +267,12 @@ setMethod(
       return(invisible())
     }
 
-    # browser()
 
     if (!base::is.null(nodes_ids)) {
       if (max(nodes_ids) <= nodes_nb) {
         node_set <- node_set[nodes_ids]
       } else {
         stop("Subscript out of range, check ids !")
-        # return(invisible())
       }
     }
 
@@ -395,7 +352,7 @@ setMethod(
   "setValues", signature(docObj = "xmlDocument"),
   function(docObj, path, values_list, nodes_ids = NULL) {
     node_set <- getNodeS(docObj, path)
-    # browser("setValues")
+
     if (base::is.null(node_set)) {
       return(invisible())
     }
@@ -436,7 +393,7 @@ setMethod(
       # getting parent node from given parent_path
     } else {
       node_set <- getNodeS(docObj, parent_path)
-      # print(node_set[[1]])
+
       if (base::is.null(node_set)) {
         return()
       }
@@ -470,18 +427,9 @@ setMethod(
 )
 
 
-
-# replaceNodes ??
-
-# delNode
-# removeChildren
-# removeNodes
-# nodes=getNodeS(xnode,'//param[@nom="lvmax"]')
-# XML::removeChildren(XML::xmlRoot(xnode@content),nodes[[1]])
-
 # other methods
 setMethod("loadContent", signature(docObj = "xmlDocument"), function(docObj) {
-  # print("dans loadContent...")
+
   setContent(docObj) <- XML::xmlParse(getPath(docObj))
   return(docObj)
 })

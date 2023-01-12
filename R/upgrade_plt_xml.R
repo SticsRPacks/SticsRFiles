@@ -108,6 +108,8 @@ upgrade_plt_xml <- function(file,
     return(invisible())
   }
 
+  # local initialization, before loadinf RData
+  jvc_data <- NULL
 
   # Loading the old xml file
   old_doc <- xmldocument(file = file)
@@ -171,7 +173,8 @@ upgrade_plt_xml <- function(file,
   #
   # adding codephot_part
   new_node <- XML::xmlParseString(
-    '<option choix="2" nom="effect of decreasing photoperiod on biomass allocation" nomParam="codephot_part">
+    '<option choix="2" nom="effect of decreasing photoperiod on
+    biomass allocation" nomParam="codephot_part">
     <choix code="1" nom="yes"/>
     <choix code="2" nom="no"/>
     </option>',
@@ -185,8 +188,10 @@ upgrade_plt_xml <- function(file,
   if (node_exists) stop(
     "codephot_part already exists, not a v9.1 or 9.2 _plt.xml file")
 
-  parent_node <- getNodeS(old_doc,
-                          '//option[@nomParam="codephot"]/choix[@code="1"]')[[1]]
+  parent_node <- getNodeS(
+    old_doc,
+    '//option[@nomParam="codephot"]/choix[@code="1"]')[[1]]
+
   XML::addChildren(parent_node, XML::xmlClone(new_node))
 
 
@@ -227,8 +232,10 @@ upgrade_plt_xml <- function(file,
 
   # moving irmax
   node_to_move <- getNodeS(old_doc, path = "//param[@nom='irmax']")[[1]]
-  parent_node <- getNodeS(old_doc,
-                          path = "//option[@nomParam='codeir']/choix[@code='1']")[[1]]
+  parent_node <- getNodeS(
+    old_doc,
+    path = "//option[@nomParam='codeir']/choix[@code='1']")[[1]]
+
   XML::addChildren(parent_node, node_to_move)
 
 
@@ -244,7 +251,8 @@ upgrade_plt_xml <- function(file,
     </option>',
     addFinalizer = TRUE
   )
-  # before sibling <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
+  # before sibling
+  # <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
   prev_sibling <- getNodeS(old_doc, '//option[@nomParam="codazorac"]')[[1]]
   XML::addSibling(prev_sibling, new_node, after = FALSE)
 
@@ -265,12 +273,16 @@ upgrade_plt_xml <- function(file,
 			<param format="real" max="900.0" min="0.0" nom="stdrpdes">700</param>
 			<param format="integer" max="70" min="0" nom="jvc">55</param>
 			<optionv nom="codebfroid">
-				<param code="3" format="real" max="20000.0" min="0.0" nom="stdordebour">0</param>
+				<param code="3" format="real" max="20000.0" min="0.0"
+				nom="stdordebour">0</param>
 			</optionv>
 			<optionv nom="codephot">
-				<param code="1" format="real" max="1.0" min="0.0" nom="sensiphot">0</param>
-				<param code="1" format="real" max="24.0" min="0.0" nom="phobase">6.3</param>
-				<param code="1" format="real" max="24.0" min="0.0" nom="phosat">20</param>
+				<param code="1" format="real" max="1.0" min="0.0"
+				nom="sensiphot">0</param>
+				<param code="1" format="real" max="24.0" min="0.0"
+				nom="phobase">6.3</param>
+				<param code="1" format="real" max="24.0" min="0.0"
+				nom="phosat">20</param>
 			</optionv>
 </formalismev>
 <formalismev nom="leaves">
@@ -281,18 +293,26 @@ upgrade_plt_xml <- function(file,
 			<param format="real" max="2.0" min="0.2" nom="khaut">0.70</param>
 			<param format="real" max="500.0" min="10.0" nom="durvieF">200</param>
 			<optionv nom="codlainet">
-				<param code="1" format="real" max="6000.0" min="0.0" nom="stlaxsen">675.</param>
-				<param code="1" format="real" max="6000.0" min="0.0" nom="stsenlan">110.</param>
-				<param code="1" format="real" max="0.5" min="5.0E-6" nom="dlaimax">0.00047</param>
-				<param code="2" format="real" max="0.5" min="5.0E-6" nom="dlaimaxbrut">0.00047</param>
-				<param code="2" format="real" max="1.0" min="-2.0" nom="innsen">0.17</param>
-				<param code="2" format="real" max="1.5" min="0.5" nom="rapsenturg">0.50</param>
+				<param code="1" format="real" max="6000.0" min="0.0"
+				nom="stlaxsen">675.</param>
+				<param code="1" format="real" max="6000.0" min="0.0"
+				nom="stsenlan">110.</param>
+				<param code="1" format="real" max="0.5" min="5.0E-6"
+				nom="dlaimax">0.00047</param>
+				<param code="2" format="real" max="0.5" min="5.0E-6"
+				nom="dlaimaxbrut">0.00047</param>
+				<param code="2" format="real" max="1.0" min="-2.0"
+				nom="innsen">0.17</param>
+				<param code="2" format="real" max="1.5" min="0.5"
+				nom="rapsenturg">0.50</param>
 			</optionv>
 </formalismev>
 <formalismev nom="radiation interception">
 			<optionv nom="codetransrad">
-				<param code="1" format="real" max="1.5" min="0.1" nom="extin">0.50</param>
-				<param code="2" format="real" max="2.0" min="0.1" nom="ktrou">1.00</param>
+				<param code="1" format="real" max="1.5" min="0.1"
+				nom="extin">0.50</param>
+				<param code="2" format="real" max="2.0" min="0.1"
+				nom="ktrou">1.00</param>
 			</optionv>
 </formalismev>
 <formalismev nom="shoot biomass growth">
@@ -304,27 +324,44 @@ upgrade_plt_xml <- function(file,
 			<param format="real" max="3.0" min="0.0" nom="tigefeuil">0.50</param>
 </formalismev>
 <formalismev nom="yield formation">
-			<param format="real" max="5.0" min="0.0" nom="pgrainmaxi">0.03970</param>
-			<param format="real" max="0.01" min="0.0010" nom="vitpropsucre">0.00000</param>
-			<param format="real" max="0.01" min="0.0010" nom="vitprophuile">0.00000</param>
-			<param format="real" max="0.04" min="0.0010" nom="vitirazo">0.01450</param>
-		    <param format="real" max="0.02" min="-0.02" nom="deshydbase">0.008000</param>
+			<param format="real" max="5.0" min="0.0"
+			nom="pgrainmaxi">0.03970</param>
+			<param format="real" max="0.01" min="0.0010"
+			nom="vitpropsucre">0.00000</param>
+			<param format="real" max="0.01" min="0.0010"
+			nom="vitprophuile">0.00000</param>
+			<param format="real" max="0.04" min="0.0010"
+			nom="vitirazo">0.01450</param>
+		    <param format="real" max="0.02" min="-0.02"
+		    nom="deshydbase">0.008000</param>
 			<optionv nom="codeindetermin">
-				<param code="1" format="integer" max="40" min="5" nom="nbjgrain">30</param>
-				<param code="1" format="real" max="10000.0" min="0.0" nom="nbgrmin">6000</param>
-				<param code="1" format="real" max="1000000.0" min="0.0" nom="nbgrmax">30000</param>
-				<param code="1" format="real" max="2000.0" min="0.0" nom="stdrpmat">700</param>
+				<param code="1" format="integer" max="40" min="5"
+				nom="nbjgrain">30</param>
+				<param code="1" format="real" max="10000.0" min="0.0"
+				nom="nbgrmin">6000</param>
+				<param code="1" format="real" max="1000000.0" min="0.0"
+				nom="nbgrmax">30000</param>
+				<param code="1" format="real" max="2000.0" min="0.0"
+				nom="stdrpmat">700</param>
 				<optionv code="1" nom="codeir">
-					<param code="1" format="real" max="0.02" min="0.001" nom="vitircarb">0.0107</param>
-					<param code="2" format="real" max="0.002" min="5.0E-5" nom="vitircarbT">0</param>
+					<param code="1" format="real" max="0.02" min="0.001"
+					nom="vitircarb">0.0107</param>
+					<param code="2" format="real" max="0.002" min="5.0E-5"
+					nom="vitircarbT">0</param>
 				</optionv>
-				<param code="2" format="real" max="20.0" min="0.5" nom="afruitpot">.00000</param>
-				<param code="2" format="real" max="2000.0" min="10.0" nom="dureefruit">.00000</param>
-				<param code="2" format="real" max="6000.0" min="0.0" nom="stdrpnou">-999</param>
+				<param code="2" format="real" max="20.0" min="0.5"
+				nom="afruitpot">.00000</param>
+				<param code="2" format="real" max="2000.0" min="10.0"
+				nom="dureefruit">.00000</param>
+				<param code="2" format="real" max="6000.0" min="0.0"
+				nom="stdrpnou">-999</param>
 				<optionv code="2" nom="codcalinflo">
-					<param code="1" format="real" max="100.0" min="0.0" nom="nbinflo">-999</param>
-				    <param code="2" format="real" max="100.0" min="0.0" nom="inflomax">-999</param>
-					<param code="2" format="real" max="10.0" min="0.0" nom="pentinflores">-999</param>
+					<param code="1" format="real" max="100.0" min="0.0"
+					nom="nbinflo">-999</param>
+				    <param code="2" format="real" max="100.0" min="0.0"
+				    nom="inflomax">-999</param>
+					<param code="2" format="real" max="10.0" min="0.0"
+					nom="pentinflores">-999</param>
 				</optionv>
 			</optionv>
 </formalismev>
@@ -333,13 +370,16 @@ upgrade_plt_xml <- function(file,
 </formalismev>
 <formalismev nom="frost">
 			<optionv nom="codgellev">
-				<param code="2" format="real" max="0.0" min="-25.0" nom="tgellev10">-4.0</param>
+				<param code="2" format="real" max="0.0" min="-25.0"
+				nom="tgellev10">-4.0</param>
 			</optionv>
 			<optionv nom="codgeljuv">
-				<param code="2" format="real" max="0.0" min="-25.0" nom="tgeljuv10">-10.0</param>
+				<param code="2" format="real" max="0.0" min="-25.0"
+				nom="tgeljuv10">-10.0</param>
 			</optionv>
 			<optionv nom="codgelveg">
-				<param code="2" format="real" max="0.0" min="-25.0" nom="tgelveg10">-4.5</param>
+				<param code="2" format="real" max="0.0" min="-25.0"
+				nom="tgelveg10">-4.5</param>
 			</optionv>
 </formalismev>
 <formalismev nom="water stress">
@@ -354,12 +394,15 @@ upgrade_plt_xml <- function(file,
   # adding var nodes under each "variete" node
   var_parent_nodes <- getNodeS(old_doc, path = "//variete")
   lapply(var_parent_nodes,
-         function(x)
+         function(x) {
            XML::addChildren(x,
-                            kids = XML::xmlChildren(XML::xmlClone(var_nodes))))
+                            kids = XML::xmlChildren(XML::xmlClone(var_nodes)))
+         }
+  )
 
   #
-  # Set values of all kept parameter values (removed nodes or moved) to new nodes
+  # Set values of all kept parameter values (removed nodes or moved)
+  # to new nodes
   # param_values_to_varietal
   set_param_value(old_doc, param_names_to_varietal, param_values_to_varietal)
   set_param_value(old_doc, param_names_keep, param_values_keep)
@@ -385,7 +428,8 @@ upgrade_plt_xml <- function(file,
 
   if (basename(file) %in% names(jvc_data)) {
 
-    common_var <- jvc_data[[basename(file)]][["variete"]] %in% current_var$variete
+    common_var <-
+      jvc_data[[basename(file)]][["variete"]] %in% current_var$variete
 
     if (any(common_var)) {
       values <- get_param_value(old_doc, "jvc",
@@ -393,10 +437,13 @@ upgrade_plt_xml <- function(file,
                                 select_value = current_var[common_var])$jvc
 
       values_999_ids <- which(values == -999)
-      if (length(values_999_ids) > 0) set_param_value(old_doc,
-                                                      param_name = "jvc",
-                                                      param_value = jvc_data[[basename(file)]]$jvc[common_var][values_999_ids],
-                                                      ids = values_999_ids)
+      if (length(values_999_ids) > 0) {
+        jvc_values <- jvc_data[[basename(file)]]$jvc[common_var][values_999_ids]
+        set_param_value(old_doc,
+                        param_name = "jvc",
+                        param_value = jvc_values,
+                        ids = values_999_ids)
+      }
     }
   }
 
@@ -406,20 +453,21 @@ upgrade_plt_xml <- function(file,
   values_999_ids <- which(values == -999)
   if (length(values_999_ids) > 0)
     message(old_doc@name,
-            ": be aware that jvc is from now a mandatory parameter and its value must be fixed !\n",
+            paste0(": be aware that jvc is from now a mandatory parameter",
+                   "and its value must be fixed !\n"),
             "for all varieties: \n", current_var[values_999_ids], "\n")
 
 
 
-
-  # ----------------------------------------------------------------------------------------
   # Adding new nodes
   #
   # codemortalracine
   # after <option choix="1" nom="driving temperature" nomParam="codetemprac">
   new_node <- XML::xmlParseString(
-    '<option choix="2" nom="calculation of the root death at cutting date for grasslands" nomParam="codemortalracine">
-	<choix code="1" nom="function of dry matter production between two successives cut">
+    '<option choix="2" nom="calculation of the root death at cutting date
+    for grasslands" nomParam="codemortalracine">
+	<choix code="1" nom="function of dry matter production between
+	two successives cut">
 		<param format="real" max="1.0" min="0.0" nom="coefracoupe">0.5</param>
 	</choix>
     <choix code="2" nom="no specific root death at cutting"/>
@@ -452,7 +500,8 @@ upgrade_plt_xml <- function(file,
   # in <formalisme nom="partitioning of biomass in organs">
   #
   new_nodes <- XML::xmlParseString(
-    '<option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
+    '<option choix="2" nom="Simulation of Nitrogen and Carbon reserves"
+    nomParam="code_acti_reserve">
       <choix code="1" nom="yes">
       <param format="real" max="1.0" min="0.0" nom="propresP">0.47</param>
       <param format="real" max="1.0" min="0.0" nom="PropresPN">0.6</param>
@@ -467,24 +516,35 @@ upgrade_plt_xml <- function(file,
       <param format="real" max="100.0" min="0.0" nom="resplmax">0.66</param>
       </choix>
       </option>
-    <option choix="2" nom="Calculation of the stem elongation stage for perenial grasslands" nomParam="codemontaison">
+    <option choix="2" nom="Calculation of the stem elongation stage for
+    perenial grasslands" nomParam="codemontaison">
 		<choix code="1" nom="yes"/>
 		<choix code="2" nom="no"/>
 </option>
-<option choix="2" nom="Simulation of tiller dynamics for grasslands" nomParam="codedyntalle">
+<option choix="2" nom="Simulation of tiller dynamics for grasslands"
+nomParam="codedyntalle">
 	<choix code="1" nom="yes">
-		<option choix="1" nom="Choice of the ratio used to calculate tiller mortality" nomParam="codetranspitalle">
+		<option choix="1" nom="Choice of the ratio used to calculate
+		tiller mortality" nomParam="codetranspitalle">
 			<choix code="1" nom="et/etm"/>
 			<choix code="2" nom="ep/eop"/>
 		</option>
-			<param format="real" max="0.00001" min="0.0000025" nom="SurfApex">0.000005</param>
-			<param format="real" max="0.04" min="0.01" nom="SeuilMorTalle">0.02</param>
-			<param format="real" max="0.2" min="0.1" nom="SigmaDisTalle">0.1</param>
-			<param format="real" max="0.01" min="0.00001" nom="VitReconsPeupl">0.001</param>
-			<param format="real" max="1200" min="400" nom="SeuilReconsPeupl">800</param>
-			<param format="real" max="5000" min="3000" nom="MaxTalle">4000.0</param>
-			<param format="real" max="2.0" min="0.5" nom="SeuilLAIapex">1.0</param>
-			<param format="real" max="10.0" min="1.0" nom="tigefeuilcoupe">5.0</param>
+			<param format="real" max="0.00001" min="0.0000025"
+			nom="SurfApex">0.000005</param>
+			<param format="real" max="0.04" min="0.01"
+			nom="SeuilMorTalle">0.02</param>
+			<param format="real" max="0.2" min="0.1"
+			nom="SigmaDisTalle">0.1</param>
+			<param format="real" max="0.01" min="0.00001"
+			nom="VitReconsPeupl">0.001</param>
+			<param format="real" max="1200" min="400"
+			nom="SeuilReconsPeupl">800</param>
+			<param format="real" max="5000" min="3000"
+			nom="MaxTalle">4000.0</param>
+			<param format="real" max="2.0" min="0.5"
+			nom="SeuilLAIapex">1.0</param>
+			<param format="real" max="10.0" min="1.0"
+			nom="tigefeuilcoupe">5.0</param>
 	</choix>
 	<choix code="2" nom="no"/>
 </option>',
@@ -509,14 +569,17 @@ upgrade_plt_xml <- function(file,
 
   # adding 2 option nodes
   new_nodes <- XML::xmlParseString(
-    '<option choix="2" nom="Preferential allocation of biomass to roots in case of water or N stress" nomParam="code_stress_root">
+    '<option choix="2" nom="Preferential allocation of biomass to roots
+    in case of water or N stress" nomParam="code_stress_root">
     <choix code="1" nom="yes"/>
     <choix code="2" nom="no"/>
     </option>
-    <option choix="2" nom="rootdeposition activation" nomParam="code_rootdeposition">
+    <option choix="2" nom="rootdeposition activation"
+    nomParam="code_rootdeposition">
     <choix code="1" nom="yes">
     <param format="real" max="60.0" min="10.0" nom="parazorac">-999</param>
-    <option choix="2" nom="simulation of 2 roots classes" nomParam="code_diff_root">
+    <option choix="2" nom="simulation of 2 roots classes"
+    nomParam="code_diff_root">
     <choix code="1" nom="yes">
     <param format="real" max="4.0" min="0.0" nom="lvmax">-999</param>
     <param format="real" max="10.0" min="1.0" nom="rapdia">-999</param>
@@ -545,7 +608,9 @@ upgrade_plt_xml <- function(file,
     file = param_gen_file,
     param = c("rayon", "khaut")
   )[[1]]
-  set_param_value(old_doc, param_name = c("rayon", "khaut"), param_value = param_gen_values)
+  set_param_value(old_doc,
+                  param_name = c("rayon", "khaut"),
+                  param_value = param_gen_values)
 
 
   # from param_newform.xml
@@ -554,8 +619,11 @@ upgrade_plt_xml <- function(file,
     file = param_newform_file,
     param = c("coefracoupe(1)", "coefracoupe(2)")
   )[[1]]
-  if (length(unique(unlist(param_newform_values))) > 1) stop(
-    "Multiple values of coefracoupe in param_gen.xml file")
+
+  if (length(unique(unlist(param_newform_values))) > 1)
+    stop(
+      "Multiple values of coefracoupe in param_gen.xml file")
+
   set_param_value(old_doc, param_name = "coefracoupe",
                   param_value = param_newform_values[[1]])
 
@@ -610,7 +678,4 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
   if (is.nan(irazomax) || irazomax > 1) irazomax <- 1
 
   return(round(irazomax, digits = 3))
-
-
 }
-

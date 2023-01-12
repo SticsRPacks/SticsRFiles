@@ -20,7 +20,8 @@ upgrade_param_gen_xml(
 
 \item{stics_version}{Name of the Stics version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files to (VX.Y format)}
+\item{target_version}{Name of the Stics version to upgrade files
+to (VX.Y format)}
 
 \item{check_version}{Perform version consistency with in stics_version input
 with the file version and finally checking if the upgrade is possible

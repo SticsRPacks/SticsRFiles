@@ -15,12 +15,12 @@
 #'
 var_to_col_names <- function(var_vec) {
   . <- NULL
-  # Case: varname(n)
+  # (n)
   var_vec <-
     gsub("\\(", "_", var_vec) %>%
     gsub("\\)", "", .)
 
-  # Case: varname.n.
+  # .n.
   var_vec <-
     gsub("\\.", "_", var_vec) %>%
     gsub("_$", "", .)
