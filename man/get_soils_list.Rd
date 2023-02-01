@@ -28,7 +28,8 @@ longer supported, use \code{soil} instead.}
 A vector of soil names
 }
 \description{
-Extracts the soil names from a "usms.xml" file, or from a soil file
+Extracts the soil names from a "usms.xml" file, or from
+a soil file
 }
 \details{
 The file given as the \code{file_path} is either a "usms" file type

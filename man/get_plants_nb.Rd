@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_plants_nb.R
 \name{get_plants_nb}
 \alias{get_plants_nb}
-\title{Getting plants number per usm for all usms or selected from a usm name vector}
+\title{Getting plants number per usm for all usms or selected from a usm
+name vector}
 \usage{
 get_plants_nb(
   usms_file,
@@ -11,7 +12,8 @@ get_plants_nb(
 )
 }
 \arguments{
-\item{usms_file}{Path (including name) of a USM xml file or of a new_travail.usm file}
+\item{usms_file}{Path (including name) of a USM xml file or of a
+new_travail.usm file}
 
 \item{usms_list}{Usm(s) name(s) (optional, see details)}
 
@@ -22,10 +24,12 @@ longer supported, use \code{usms_file} instead.}
 A named numeric vector of plants number per usm
 }
 \description{
-Extracting plant number from usms.xml or new_travail.usm file data
+Extracting plant number from usms.xml or new_travail.usm
+file data
 }
 \details{
-Use \code{get_usms_list()} to get the list of the usm names for an usms.xml file.
+Use \code{get_usms_list()} to get the list of the usm names for
+an usms.xml file.
 }
 \examples{
 \dontrun{

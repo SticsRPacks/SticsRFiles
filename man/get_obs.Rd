@@ -56,8 +56,8 @@ longer supported, use \code{dates} instead.}
 \item{usms_filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_filepath} is no
 longer supported, use \code{usms_file} instead.}
 
-\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
-longer supported, use \code{javastics} instead.}
+\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path}
+is no longer supported, use \code{javastics} instead.}
 }
 \value{
 A list, where each element is a \code{data.frame} of observations
@@ -82,9 +82,9 @@ If \code{usm} is not specified (or equal to \code{NULL}), the
 function reads the files from all usms in the \code{workspace}(s).
 
 If \code{usms_file} is provided and if the associated plant file is found,
-the plant names in the "Plant" column of the generated \code{data.frame} are either
-the plant code (as specified in the plant file) or the name of the plant file,
-if the plant file is not found.
+the plant names in the "Plant" column of the generated \code{data.frame}
+are either the plant code (as specified in the plant file) or
+the name of the plant file, if the plant file is not found.
 
 If \code{usms_file} is not specified, the plants are named "plant_1"
 by default (+ "plant_2" for intercrops).
@@ -99,7 +99,8 @@ Meas <- get_obs(path)
 Meas_banana <- get_obs(path, "banana")
 
 
-# Get observations with real plant names when plant folder is not in the workspace:
+# Get observations with real plant names when plant
+# folder is not in the workspace:
 get_obs(path, "banana", javastics = "/path/to/JavaSTICS/folder")
 }
 

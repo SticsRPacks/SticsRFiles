@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_param_number.R
 \name{get_param_number}
 \alias{get_param_number}
-\title{Get the number of a (or alist of) Stics xml parameter(s) occurence from a request in an xmlDocument}
+\title{Get the number of a (or alist of) Stics xml parameter(s) occurence
+from a request in an xmlDocument}
 \usage{
 get_param_number(xml_doc_object, param_name, ...)
 }
@@ -11,13 +12,15 @@ get_param_number(xml_doc_object, param_name, ...)
 
 \item{param_name}{parameter name or a vector of names}
 
-\item{...}{other arguments that can be transmitted to get_param_value function (see doc)}
+\item{...}{other arguments that can be transmitted to get_param_value
+function (see doc)}
 }
 \value{
 a numeric vector
 }
 \description{
-Get the number of a (or alist of) Stics xml parameter(s) occurence from a request in an xmlDocument
+Get the number of a (or alist of) Stics xml parameter(s) occurence
+from a request in an xmlDocument
 }
 \examples{
 \dontrun{

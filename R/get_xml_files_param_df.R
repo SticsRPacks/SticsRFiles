@@ -121,9 +121,7 @@ get_xml_files_param_df <- function(file_path,
 
   # Getting all usm or sol names from the file
   select_name <- FALSE
-  if (is.null(name)) {
-    # name <- names_list
-  } else {
+  if (!is.null(name)) {
     # Checking names
     exist_names <- names_list %in% name
     if (sum(exist_names) < length(name)) {
@@ -217,7 +215,7 @@ get_xml_files_param_df <- function(file_path,
 
 
 
-df_wider <- function(df, convert_type = TRUE, stringAsFactors = FALSE) {
+df_wider <- function(df, convert_type = TRUE, string_as_factors = FALSE) {
   valid_id <- !is.na(df$id)
   df$param[valid_id] <-
     paste0(df$param[valid_id], "_", as.character(df$id[valid_id]))
@@ -227,7 +225,7 @@ df_wider <- function(df, convert_type = TRUE, stringAsFactors = FALSE) {
     dplyr::select(-"id") %>%
     tidyr::pivot_wider(names_from = "param", values_from = "value")
 
-  if (convert_type) df <- utils::type.convert(df, as.is = !stringAsFactors)
+  if (convert_type) df <- utils::type.convert(df, as.is = !string_as_factors)
 
   return(df)
 }

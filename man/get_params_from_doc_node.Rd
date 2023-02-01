@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_params_from_doc_node.R
 \name{get_params_from_doc_node}
 \alias{get_params_from_doc_node}
-\title{Get a list of Stics xml parameters names from nodes names in an xmlDocument}
+\title{Get a list of Stics xml parameters names from nodes names in
+an xmlDocument}
 \usage{
 get_params_from_doc_node(xml_node, param_list = c(), unique_val = TRUE)
 }
@@ -17,6 +18,7 @@ get_params_from_doc_node(xml_node, param_list = c(), unique_val = TRUE)
 a character vector of parameters names
 }
 \description{
-Get a list of Stics xml parameters names from nodes names in an xmlDocument
+Get a list of Stics xml parameters names from nodes names in
+an xmlDocument
 }
 \keyword{internal}

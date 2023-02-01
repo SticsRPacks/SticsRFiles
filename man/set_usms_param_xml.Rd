@@ -11,7 +11,8 @@ set_usms_param_xml(xml_doc_object, usms_param = NULL, overwrite = FALSE)
 
 \item{usms_param}{usms parameters (data.frame)}
 
-\item{overwrite}{replace existing usms (TRUE) or not, updating existing ones (FALSE)}
+\item{overwrite}{replace existing usms (TRUE) or not,
+updating existing ones (FALSE)}
 }
 \description{
 Setting a usm param value(s) in an usms xmlDocument
@@ -21,7 +22,8 @@ Setting a usm param value(s) in an usms xmlDocument
 xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 usms_doc <- SticsRFiles:::xmldocument(xml_path)
 
-xl_path <- file.path(get_examples_path(file_type = "xml"), "inputs_stics_example.xlsx")
+xl_path <- file.path(get_examples_path(file_type = "xml"),
+                     "inputs_stics_example.xlsx")
 usms_df <- read_excel(xl_path, sheet = "USMs")
 
 # For updating an existing xml doc (using existing usms names)

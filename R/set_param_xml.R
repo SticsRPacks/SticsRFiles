@@ -37,7 +37,8 @@
 #'
 #' # Soil file
 #'
-#' file.copy(file.path(get_examples_path(file_type = "xml"), "sols.xml"), getwd())
+#' file.copy(file.path(get_examples_path(file_type = "xml"),
+#'           "sols.xml"), getwd())
 #'
 #' # For scalar parameters per soil
 #'
@@ -81,7 +82,8 @@
 #'
 #'
 #' # Crop management file
-#' file.copy(file.path(get_examples_path(file_type = "xml"), "file_tec.xml"), getwd())
+#' file.copy(file.path(get_examples_path(file_type = "xml"),
+#'           "file_tec.xml"), getwd())
 #'
 #' # Modifying irrigations parameters
 #' set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
@@ -108,27 +110,37 @@ set_param_xml <- function(file,
 
   # ... argument for passing : ids, show_xpath to get_param_value
   if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn("1.0.0", "set_param_xml(xml_file)", "set_param_xml(file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "set_param_xml(xml_file)",
+                              "set_param_xml(file)")
   } else {
     xml_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("1.0.0", "set_param_xml(out_path)", "set_param_xml(save_as)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "set_param_xml(out_path)",
+                              "set_param_xml(save_as)")
   } else {
     out_path <- save_as # to remove when we update inside the function
   }
   if (lifecycle::is_present(param_name)) {
-    lifecycle::deprecate_warn("1.0.0", "set_param_xml(param_name)", "set_param_xml(param)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "set_param_xml(param_name)",
+                              "set_param_xml(param)")
   } else {
     param_name <- param # to remove when we update inside the function
   }
   if (lifecycle::is_present(param_value)) {
-    lifecycle::deprecate_warn("1.0.0", "set_param_xml(param_value)", "set_param_xml(values)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "set_param_xml(param_value)",
+                              "set_param_xml(values)")
   } else {
     param_value <- values # to remove when we update inside the function
   }
   if (lifecycle::is_present(value)) {
-    lifecycle::deprecate_warn("1.0.0", "set_param_xml(value)", "set_param_xml(select_value)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "set_param_xml(value)",
+                              "set_param_xml(select_value)")
   } else {
     value <- select_value # to remove when we update inside the function
   }
@@ -148,7 +160,8 @@ set_param_xml <- function(file,
   # Ckecking if file exists and overwriting right
   if (base::file.exists(out_path) && !overwrite) {
     warning(paste(
-      "The file already exists, set overwrite argument to TRUE or delete the file: ",
+      "The file already exists, ",
+      "set overwrite argument to TRUE or delete the file: ",
       out_path
     ))
     return(invisible(FALSE))
@@ -157,7 +170,6 @@ set_param_xml <- function(file,
 
   # For future version
   # TODO: multiple files and multiple params list and values ...ids ...?
-  # xml_doc <- lapply(xml_file, xmldocument)
   xml_doc <- xmldocument(xml_file)
 
 
@@ -173,11 +185,11 @@ set_param_xml <- function(file,
 
   # Setting parameters values in the xmlDoxument object
   set_param_value(xml_doc,
-    param_name = param_name,
-    param_value = param_value,
-    parent_name = select,
-    parent_sel_attr = value,
-    ...
+                  param_name = param_name,
+                  param_value = param_value,
+                  parent_name = select,
+                  parent_sel_attr = value,
+                  ...
   )
 
 

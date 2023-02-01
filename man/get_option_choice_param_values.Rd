@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_option_choice_param_values.R
 \name{get_option_choice_param_values}
 \alias{get_option_choice_param_values}
-\title{Getting parameter values from an xml parameter file for an option choice}
+\title{Getting parameter values from an xml parameter file for an
+option choice}
 \usage{
 get_option_choice_param_values(
   xml_file_path,
@@ -22,7 +23,8 @@ A list containing a vector of strings of parameters values ($values)
 and a vector of strings of parameters names ($names)
 }
 \description{
-Extracting parameter values from an xml file, correponding to parameters
+Extracting parameter values from an XML file, corresponding
+to parameters
 defined in a option choice node (as \emph{param} nodes)
 }
 \examples{

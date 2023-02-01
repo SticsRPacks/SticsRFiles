@@ -1,4 +1,5 @@
-#' @title Get a list of Stics xml parameters names from nodes names in an xmlDocument
+#' @title Get a list of Stics xml parameters names from nodes names in
+#' an xmlDocument
 #' @param xml_node an xml XMLInternalElementNode
 #'
 #' @param param_list param names vector, used for recursive calls
@@ -8,7 +9,9 @@
 #'
 #' @keywords internal
 #'
-get_params_from_doc_node <- function(xml_node, param_list = c(), unique_val = TRUE) {
+get_params_from_doc_node <- function(xml_node,
+                                     param_list = c(),
+                                     unique_val = TRUE) {
 
   # for ini, usms files
 

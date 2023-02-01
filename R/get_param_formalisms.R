@@ -17,7 +17,8 @@
 #'
 #' par_form <- SticsRFiles:::get_param_formalisms(sta_doc, "zr")
 #'
-#' par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc, c("zr", "altistation"))
+#' par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc,
+#'                                                    c("zr", "altistation"))
 #' }
 #'
 #' @keywords internal

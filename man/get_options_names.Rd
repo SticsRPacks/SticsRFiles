@@ -15,8 +15,8 @@ get_options_names(xml_file_path, option_names = NULL)
 A vector of strings of options parameter names
 }
 \description{
-Extracting options parameter name from an xml file data, and checking
-names if provided in options_names
+Extracting options parameter name from an xml file data,
+and checking names if provided in options_names
 }
 \examples{
 \dontrun{

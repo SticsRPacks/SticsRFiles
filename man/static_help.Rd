@@ -18,11 +18,13 @@ static_help(
 \item{links_level}{integer, 0: inside the given package, 1: with base and
 recommended packages, 2: other packages specified by .libPaths()}
 
-\item{topic}{Optional, selecting specific topics with their names vector (functions names)}
+\item{topic}{Optional, selecting specific topics with their
+names vector (functions names)}
 
 \item{out_dir}{Optional, where to store html functions help files}
 
-\item{overwrite}{Optional, logical TRUE for overwriting hmtl files (default), FALSE otherwise}
+\item{overwrite}{Optional, logical TRUE for overwriting hmtl files (default),
+FALSE otherwise}
 }
 \value{
 An invisible character vector of file paths

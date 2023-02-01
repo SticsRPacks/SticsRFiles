@@ -1,7 +1,7 @@
 #' @title Getting options parameter names from an xml parameter file
 #'
-#' @description Extracting options parameter name from an xml file data, and checking
-#' names if provided in options_names
+#' @description Extracting options parameter name from an xml file data,
+#' and checking names if provided in options_names
 #'
 #' @param xml_file_path path of xml parameter file
 #' @param option_names options names vector (optional)

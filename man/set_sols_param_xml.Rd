@@ -11,7 +11,8 @@ set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 
 \item{sols_param}{soils parameters (data.frame)}
 
-\item{overwrite}{replace existing soil (TRUE) or not, updating existing ones (FALSE)}
+\item{overwrite}{replace existing soil (TRUE) or not,
+updating existing ones (FALSE)}
 }
 \description{
 Setting a sol param value(s) in a sols xmlDocument
@@ -21,7 +22,8 @@ Setting a sol param value(s) in a sols xmlDocument
 xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
 
-xl_path <- file.path(get_examples_path(file_type = "xl"), "inputs_stics_example.xlsx")
+xl_path <- file.path(get_examples_path(file_type = "xl"),
+                    "inputs_stics_example.xlsx")
 sols_df <- read_excel(xl_path, sheet = "Soils")
 
 # For updating an existing xml doc (using existing soils names)

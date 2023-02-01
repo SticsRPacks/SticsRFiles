@@ -30,15 +30,16 @@ get_daily_results <- function(...) {
 
 #' Load and format Stics daily output file(s)
 #'
-#' @description Reads and format daily output file(s) (mod_s*.sti) for usm(s) with
-#'  possible selection on variable names, cumulative DOY and dates
+#' @description Reads and format daily output file(s) (mod_s*.sti) for usm(s)
+#' with possible selection on variable names, cumulative DOY and dates
 #'
 #' @param workspace Vector of path(s) of directory(ies) containing the Stics
 #' output files to read (mod_s*.sti file) or path of a single directory
 #' containing one sub-folder per USM (named as the USM names),
 #' each of them containing the corresponding Stics output file to read.
 #' In the second case, the argument `usm` must also be provided.
-#' @param usm Vector of USM names. Optional, if not provided, the function returns the results for all USMs.
+#' @param usm Vector of USM names. Optional, if not provided, the function
+#' returns the results for all USMs.
 #' @param var Vector of variable names for which results have to be provided.
 #' Optional, all variables considered by default. See `get_var_info()`
 #' to get the list of Stics variables names.
@@ -52,24 +53,24 @@ get_daily_results <- function(...) {
 #'
 #'
 #' @param usm_name `r lifecycle::badge("deprecated")` `usm_name` is no
-#'   longer supported, use `usm` instead.
+#' longer supported, use `usm` instead.
 #' @param var_list `r lifecycle::badge("deprecated")` `var_list` is no
-#'   longer supported, use `var` instead.
+#' longer supported, use `var` instead.
 #' @param dates_list `r lifecycle::badge("deprecated")` `dates_list` is no
-#'   longer supported, use `dates` instead.
-#' @param usms_filepath `r lifecycle::badge("deprecated")` `usms_filepath` is no
-#'   longer supported, use `usms_file` instead.
-#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path` is no
-#'   longer supported, use `javastics` instead.
+#' longer supported, use `dates` instead.
+#' @param usms_filepath `r lifecycle::badge("deprecated")` `usms_filepath`
+#' is no longer supported, use `usms_file` instead.
+#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
+#' is no longer supported, use `javastics` instead.
 #'
 #' @details
 #' If `usm` is not specified (or equal to `NULL`), the
 #' function reads the files from all usms in the `workspace`(s).
 #'
 #' If `usms_file` is provided and if the associated plant file is found,
-#' the plant names in the "Plant" column of the generated `data.frame` are either
-#' the plant code (as specified in the plant file) or the name of the plant file,
-#' if the plant file is not found.
+#' the plant names in the "Plant" column of the generated `data.frame`
+#' are either the plant code (as specified in the plant file) or
+#' the name of the plant file, if the plant file is not found.
 #'
 #' If `usms_file` is not specified, the plants are named "plant_1" by default
 #' (+ "plant_2" for intercrops).
@@ -107,31 +108,41 @@ get_sim <- function(workspace,
   # Managing deprecated arguments
   # usm_name
   if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn("1.0.0", "get_sim(usm_name)", "get_sim(usm)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_sim(usm_name)",
+                              "get_sim(usm)")
   } else {
     usm_name <- usm # to remove when we update inside the function
   }
   # var_list
   if (lifecycle::is_present(var_list)) {
-    lifecycle::deprecate_warn("1.0.0", "get_sim(var_list)", "get_sim(var)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_sim(var_list)",
+                              "get_sim(var)")
   } else {
     var_list <- var # to remove when we update inside the function
   }
   # dates_list
   if (lifecycle::is_present(dates_list)) {
-    lifecycle::deprecate_warn("1.0.0", "get_sim(dates_list)", "get_sim(dates)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_sim(dates_list)",
+                              "get_sim(dates)")
   } else {
     dates_list <- dates # to remove when we update inside the function
   }
   # usms_filepath
   if (lifecycle::is_present(usms_filepath)) {
-    lifecycle::deprecate_warn("1.0.0", "get_sim(usms_filepath)", "get_sim(usms_file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_sim(usms_filepath)",
+                              "get_sim(usms_file)")
   } else {
     usms_filepath <- usms_file # to remove when we update inside the function
   }
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("1.0.0", "get_sim(javastics_path)", "get_sim(javastics)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_sim(javastics_path)",
+                              "get_sim(javastics)")
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }
@@ -146,7 +157,6 @@ get_sim <- function(workspace,
 
   # Testing if results list is not empty
   # otherwise, setting "cropr_simulation" class attribute will fail
-  # if (length(res) > 0) res = new_list_of(res, class = "cropr_simulation")
   if (length(res) > 0) {
     attr(res, "class") <- "cropr_simulation"
   }

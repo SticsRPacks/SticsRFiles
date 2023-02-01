@@ -18,15 +18,16 @@
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
 #' SticsRFiles:::get_param_value(sols_doc, "argi")
 #'
-#  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0 27.0 30.7  0.1
-# [18] 27.3 25.0 10.2 25.0 28.6 36.0 29.0 10.2 21.2 22.2 13.0 17.0 15.0 26.0 28.2 20.0
+#  [1] 30.2 21.0 27.0 39.0  1.0 12.2 70.0 22.0  9.9 10.2 10.2 17.0 23.1 22.0
+# [15] 27.0 30.7 0.1 27.3 25.0 10.2 25.0 28.6 36.0 29.0 10.2 21.2 22.2 13.0
+# [29] 17.0 15.0 26.0 28.2 20.0
 #'
 #' # setting all argi parameters with the same value
 #' SticsRFiles:::set_param_value(sols_doc, "argi", 15)
 #' SticsRFiles:::get_param_value(sols_doc, "argi")
 #'
-#  [1] 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
-# [29] 15 15 15 15 15
+#  [1] 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
+# [25] 15 15 15 15 15 15 15 15 15
 #'
 #' # setting specific values for some soils
 #' SticsRFiles:::set_param_value(sols_doc, "argi", c(30, 35),
@@ -34,8 +35,8 @@
 #' )
 #' SticsRFiles:::get_param_value(sols_doc, "argi")
 #'
-#  [1] 30 15 15 15 15 15 35 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
-# [29] 15 15 15 15 15
+#  [1] 30 15 15 15 15 15 35 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
+# [25] 15 15 15 15 15 15 15 15 15
 #' }
 #'
 #' @keywords internal
@@ -116,7 +117,6 @@ set_param_value <- function(xml_doc,
   }
 
   if (!is.element(type, param_types)) {
-    # stop("Type error !")
     warning(
       "Setting values failed for parameter : ",
       param_name,
@@ -144,25 +144,18 @@ set_param_value <- function(xml_doc,
       value <- setValues(xml_doc, xpath, param_value, ids)
     },
     attr = {
-      # xpath=paste0('//option[@nomParam="',param_name,'"]')
       value <- setAttrValues(xml_doc, xpath, "nom", param_value, ids)
     },
     attrname = {
-      # xpath=paste0('//option[@nomParam="',param_name,'"]')
       value <- setAttrValues(xml_doc, xpath, param_name, param_value, ids)
     },
     param = {
-      # xpath=paste0('//param[@nom="',param_name,'"]')
-
       value <- setValues(xml_doc, xpath, param_value, ids)
     },
     option = {
-      # xpath=paste0('//option[@nomParam="',param_name,'"]')
       value <- setAttrValues(xml_doc, xpath, "choix", param_value, ids)
     },
     table = {
-      # xpath=paste0('//param[@nom="',param_name,'"]')
-
       # check number if values
       if (length(param_value) > param_type$length) {
         stop("Too many values to set !")

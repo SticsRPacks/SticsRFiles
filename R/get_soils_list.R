@@ -1,6 +1,7 @@
 #' @title Get the soil names for an usms.xml file
 #'
-#' @description Extracts the soil names from a "usms.xml" file, or from a soil file
+#' @description Extracts the soil names from a "usms.xml" file, or from
+#' a soil file
 #'
 #' @param file Either the path of an usm file or of a soil file.
 #' @param soil Vector of soil names (or partial names). Optional,

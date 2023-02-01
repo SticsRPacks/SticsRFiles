@@ -11,8 +11,8 @@ sticsenv_set_name(name, env_name = sticsenv_name(), fix_name = NULL)
 
 \item{env_name}{The name of the stics environment}
 
-\item{fix_name}{Fix the name of the environment to \code{fix_name}, or to \code{paste0("R_", name)}
-if \code{NULL} (default).}
+\item{fix_name}{Fix the name of the environment to \code{fix_name},
+or to \code{paste0("R_", name)} if \code{NULL} (default).}
 }
 \value{
 The new environment

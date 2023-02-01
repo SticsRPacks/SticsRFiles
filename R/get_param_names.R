@@ -65,8 +65,8 @@ get_param_names <- function(xml_object,
 
     xml_object <- tmp_xml_object
 
-    parent_name = NULL
-    parent_sel_attr = NULL
+    parent_name <- NULL
+    parent_sel_attr <- NULL
   }
 
 

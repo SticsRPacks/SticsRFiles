@@ -13,19 +13,23 @@ get_plant_name(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace, or a vector of (recursive call).}
+\item{workspace}{Path of a JavaStics workspace, or a vector of
+(recursive call).}
 
 \item{usms_filepath}{Path of the usms file (\code{usms.xml})}
 
 \item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
-\item{javastics_path}{JavaStics installation path (Optional, needed if the plant files are not in the \code{workspace}
-but rather in the JavaStics default workspace). Only used to get the plants names.}
+\item{javastics_path}{JavaStics installation path (Optional, needed if the
+plant files are not in the \code{workspace} but rather in the JavaStics
+default workspace). Only used to get the plants names.}
 
-\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
+\item{verbose}{Logical value (optional), TRUE to display infos on error,
+FALSE otherwise (default)}
 }
 \value{
-A list of plant names for each usm with one value for sole crop and two values for intercrop (principal, associated).
+A list of plant names for each usm with one value for sole crop
+and two values for intercrop (principal, associated).
 }
 \description{
 Get the plant name (and file name) for each usm in a workspace
@@ -34,14 +38,17 @@ Get the plant name (and file name) for each usm in a workspace
 \dontrun{
 path <- get_examples_path(file_type = "xml")
 
-# Get plant names for all usms (no javastics path, so only the file name is returned):
+# Get plant names for all usms (no javastics path, so only the file
+# name is returned):
 get_plant_name(path)
 # Get plant names only for banana:
 get_plant_name(path, "banana")
 
-# Get plant names for banana with a javastics path, so the plant name is returned:
+# Get plant names for banana with a javastics path, so the plant
+# name is returned:
 get_plant_name(path)
-# NB: if the plant folder is in the workspace, no need to provide javastics_path
+# NB: if the plant folder is in the workspace, no need to provide
+# javastics_path
 }
 
 }

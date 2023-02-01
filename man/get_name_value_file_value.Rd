@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_name_value_file_value.R
 \name{get_name_value_file_value}
 \alias{get_name_value_file_value}
-\title{Getting parameters values from a Stics text file with name/value on following lines}
+\title{Getting parameters values from a Stics text file with name/value on
+following lines}
 \usage{
 get_name_value_file_value(file_path, param_names, names_dict = NULL)
 }
@@ -11,13 +12,14 @@ get_name_value_file_value(file_path, param_names, names_dict = NULL)
 
 \item{param_names}{vector of parameters names}
 
-\item{names_dict}{List of correspondance between parameter names given and files intern
-names}
+\item{names_dict}{List of correspondance between parameter names
+given and files intern names}
 }
 \value{
 A vector of parameters values
 }
 \description{
-Getting parameters values from a Stics text file with name/value on following lines
+Getting parameters values from a Stics text file with name/value on
+following lines
 }
 \keyword{internal}

@@ -13,12 +13,14 @@ get_report_results(
 )
 }
 \arguments{
-\item{workspace}{Path of the directory containing the Stics report file to read.}
+\item{workspace}{Path of the directory containing the Stics report file
+to read.}
 
 \item{file_name}{A report file name among "mod_rapport.sti" (default),
 "mod_rapportA.sti", "mod_rapportP.sti"}
 
-\item{usm}{Vector of USM names. Optional, if not provided, the function returns the results for all USMs.}
+\item{usm}{Vector of USM names. Optional, if not provided, the function
+returns the results for all USMs.}
 
 \item{var_list}{vector of output variables names to filter
 (optional, see \code{get_var_info()} to get the names of the variables)}
@@ -34,8 +36,8 @@ Extracting data from the Stics report file
 }
 \details{
 The data may be filtered using \code{usm_name} vector of usm names and
-and/or \code{var_list} vector of variables names. In the returned data.frame, variables
-names respect the same syntax as in the get_sim output.
+and/or \code{var_list} vector of variables names. In the returned data.frame,
+variables names respect the same syntax as in the get_sim output.
 }
 \examples{
 \dontrun{

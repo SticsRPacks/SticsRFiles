@@ -1,19 +1,24 @@
-#' @title Get a list of Stics xml parameters names and values from a table (data.frame, tibble)
+#' @title Get a list of Stics xml parameters names and values from a table
+#' (data.frame, tibble)
 #' @param params_table a table (df, tibble) containing parameters to use
 #'
 #' @param param_names parameters names to select
 #' @param xml_doc an xmlDocument object (of any xml type)
 #' @param lines_id table lines identifiers to select
-#' @param stopping logical value for stopping if any unknown parameters (if TRUE)
-#' @param dict List of names correspondence between short names (tags) and real parameters names
-#' @param na_values value to use as missing value in param_table (optional, default : NA)
+#' @param stopping logical value for stopping if any unknown parameters
+#' (if TRUE)
+#' @param dict List of names correspondence between short names (tags)
+#' and real parameters names
+#' @param na_values value to use as missing value in param_table
+#' (optional, default : NA)
 #'
 #' @return a named list (with param names as list names) of data.frame/tibble
 #'
 #' @examples
 #' \dontrun{
 #'
-#' download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+#' download_usm_xl(file = "inputs_stics_example.xlsx",
+#'                 dest_dir = "/path/to/dest/dir")
 #' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' xml_path <- "path/to/ini/xml"

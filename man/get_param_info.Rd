@@ -28,9 +28,10 @@ searches information in all standard XML files.}
 in parameters data (i.e.: parameters names, formalisms description,
 file names or part to which parameters are attached to)}
 
-\item{stics_version}{Name of the Stics version. Optional, can be used to search
-parameters information relative to a specific Stics version. By default the
-latest version returned by \code{get_stics_versions_compat()} is used.}
+\item{stics_version}{Name of the Stics version. Optional,
+can be used to search parameters information relative to a specific
+Stics version. By default the latest version returned
+by \code{get_stics_versions_compat()} is used.}
 
 \item{file_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_path} is no
 longer supported, use \code{file} instead.}

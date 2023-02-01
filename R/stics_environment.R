@@ -35,10 +35,12 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
     }
 
     # creating .stics env attached to .GlobalEnv
-    local_stics <- sticsenv_create(name = sticsenv_name(), env_name = ".GlobalEnv")
+    local_stics <-
+      sticsenv_create(name = sticsenv_name(), env_name = ".GlobalEnv")
   } else {
     # getting existing .stics env
-    local_stics <- get(x = sticsenv_name(), envir = globalenv(), inherits = FALSE)
+    local_stics <-
+      get(x = sticsenv_name(), envir = globalenv(), inherits = FALSE)
   }
 
   # Returning .stics env object
@@ -49,10 +51,8 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
   # Checking a sub-env
   exists_name <- exists(name, envir = local_stics, inherits = FALSE)
 
-  # Returning .stics env object
-  # see: local_stics[[name]]
-  # if (exists_name) return(get(name, envir = local_stics, inherits = FALSE))
-  if (exists_name) {
+  if (exists_name) {  # Returning .stics env object
+
     return(local_stics[[name]])
   }
 
@@ -101,12 +101,14 @@ sticsenv_create <- function(name, env_name = ".GlobalEnv") {
 #'
 #' @param name The name of an object potentially found in a stics environment
 #' @param env_name The name of the stics environment
-#' @param fix_name Fix the name of the environment to `fix_name`, or to `paste0("R_", name)`
-#' if `NULL` (default).
+#' @param fix_name Fix the name of the environment to `fix_name`,
+#' or to `paste0("R_", name)` if `NULL` (default).
 #'
 #' @return The new environment
 #' @keywords internal
-sticsenv_set_name <- function(name, env_name = sticsenv_name(), fix_name = NULL) {
+sticsenv_set_name <- function(name,
+                              env_name = sticsenv_name(),
+                              fix_name = NULL) {
   envir <- suppressWarnings(stics_get(name = name, env_name = env_name))
 
   if (base::is.null(envir)) {
@@ -153,7 +155,9 @@ sticsenv_get_name <- function(name = NULL, env_name = sticsenv_name()) {
 #'
 #' @return A vector of all object names in the environment
 #' @keywords internal
-sticsenv_ls <- function(name = NULL, env_name = sticsenv_name(), detail = FALSE) {
+sticsenv_ls <- function(name = NULL,
+                        env_name = sticsenv_name(),
+                        detail = FALSE) {
   envir <- stics_get(name, env_name = env_name)
 
   if (base::is.null(envir)) {
@@ -392,7 +396,11 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
     # suppression elts de liste
     ret <- unlist(lapply(
       list_var_names,
-      function(x) eval(parse(text = paste0("base::is.null(", x, " <- NULL)")), envir = envir)
+      function(x) eval(parse(text = paste0("base::is.null(",
+                                           x,
+                                           " <- NULL)")
+      ),
+      envir = envir)
     ))
     ret <- all(ret)
   }
@@ -402,7 +410,6 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
   }
 
   # removing other variables or env
-  # if (any(!list_idx)) {
   if (base::is.null(rm(list = var_names, envir = envir))) {
     return(ret & TRUE)
   }

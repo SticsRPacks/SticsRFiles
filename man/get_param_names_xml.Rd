@@ -26,14 +26,16 @@ get_param_names_xml(
 TRUE, to transform a data.frame list to a unique data.frame,
 FALSE otherwise.}
 
-\item{exact}{Logical, if TRUE, the exact name is searched, FALSE otherwise for partial search}
+\item{exact}{Logical, if TRUE, the exact name is searched, FALSE otherwise
+for partial search}
 }
 \value{
-A list of parameters names data.frames or list, or a unique data.frame
-for multiple files.
+A list of parameters names data.frames or list, or a unique
+data.frame for multiple files.
 }
 \description{
-Extracting parameters names for an xml files or a vector of files.
+Extracting parameters names for an xml files or a vector
+of files.
 }
 \examples{
 \dontrun{
@@ -45,7 +47,8 @@ param_names <- get_param_names_xml(xml_file)
 
 param_names <- get_param_names_xml(xml_files_list)
 
-param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"))
+param_names <- get_param_names_xml(xml_files_list,
+                                   param_name = c("al", "albedo"))
 }
 
 }

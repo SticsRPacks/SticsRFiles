@@ -29,8 +29,8 @@
 #'   longer supported, use `dates` instead.
 #' @param usms_filepath `r lifecycle::badge("deprecated")` `usms_filepath` is no
 #'   longer supported, use `usms_file` instead.
-#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path` is no
-#'   longer supported, use `javastics` instead.
+#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
+#' is no longer supported, use `javastics` instead.
 
 #' @details **The `.obs` files names must match USMs names**, *e.g.* for a usm
 #' called "banana", the `.obs` file should be named `banana.obs`.
@@ -41,9 +41,9 @@
 #' function reads the files from all usms in the `workspace`(s).
 #'
 #' If `usms_file` is provided and if the associated plant file is found,
-#' the plant names in the "Plant" column of the generated `data.frame` are either
-#' the plant code (as specified in the plant file) or the name of the plant file,
-#' if the plant file is not found.
+#' the plant names in the "Plant" column of the generated `data.frame`
+#' are either the plant code (as specified in the plant file) or
+#' the name of the plant file, if the plant file is not found.
 #'
 #' If `usms_file` is not specified, the plants are named "plant_1"
 #' by default (+ "plant_2" for intercrops).
@@ -67,7 +67,8 @@
 #' Meas_banana <- get_obs(path, "banana")
 #'
 #'
-#' # Get observations with real plant names when plant folder is not in the workspace:
+#' # Get observations with real plant names when plant
+#' # folder is not in the workspace:
 #' get_obs(path, "banana", javastics = "/path/to/JavaSTICS/folder")
 #' }
 #'
@@ -108,13 +109,17 @@ get_obs <- function(workspace,
   }
   # usms_filepath
   if (lifecycle::is_present(usms_filepath)) {
-    lifecycle::deprecate_warn("1.0.0", "get_obs(usms_filepath)", "get_obs(usms_file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_obs(usms_filepath)",
+                              "get_obs(usms_file)")
   } else {
     usms_filepath <- usms_file # to remove when we update inside the function
   }
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("1.0.0", "get_obs(javastics_path)", "get_obs(javastics)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_obs(javastics_path)",
+                              "get_obs(javastics)")
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }

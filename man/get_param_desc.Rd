@@ -14,12 +14,15 @@ get_param_desc(
 \arguments{
 \item{file_path}{csv file path}
 
-\item{stics_version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
+\item{stics_version}{The stics version. See \code{get_stics_versions_compat()}
+to get all compatible versions. Default
 to "latest", a special code to get the latest version.}
 
-\item{name}{a name vector for selecting loaded content using name column matching}
+\item{name}{a name vector for selecting loaded content using
+name column matching}
 
-\item{kind}{a name vector for selecting loaded content using kind column matching}
+\item{kind}{a name vector for selecting loaded content using
+kind column matching}
 }
 \description{
 get param desc

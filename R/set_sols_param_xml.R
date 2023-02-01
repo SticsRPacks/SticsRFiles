@@ -2,7 +2,8 @@
 #' @param xml_doc_object an xmlDocument object (created from an xml sols file)
 #'
 #' @param sols_param soils parameters (data.frame)
-#' @param overwrite replace existing soil (TRUE) or not, updating existing ones (FALSE)
+#' @param overwrite replace existing soil (TRUE) or not,
+#' updating existing ones (FALSE)
 #'
 #'
 #' @examples
@@ -10,7 +11,8 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #' sols_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xl"), "inputs_stics_example.xlsx")
+#' xl_path <- file.path(get_examples_path(file_type = "xl"),
+#'                     "inputs_stics_example.xlsx")
 #' sols_df <- read_excel(xl_path, sheet = "Soils")
 #'
 #' # For updating an existing xml doc (using existing soils names)
@@ -83,7 +85,8 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     # Selecting data & ordering upon xml
     # order
     sols_param <- sols_param[xl_in_xml, ]
-    sols_param <- sols_param[match(xml_sols[sols_xml_idx], sols_param[[sol_col]]), ]
+    sols_param <-
+      sols_param[match(xml_sols[sols_xml_idx], sols_param[[sol_col]]), ]
   } else {
     # setting soils names
     set_param_value(xml_doc_object, "sol", sols_param[[sol_col]])
@@ -96,7 +99,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   # Treating Layers params
   # reshape them to set values for all soils
   # select epc_1 to epc_5 in df and as.vector to
-  # set_sols_param(xml_doc_object, "epc", epc_vec)
+  # set_sols_param
 
   layers_params <- grep("_[0-9]*$", in_params, value = TRUE)
   layers_params_names <- unique(gsub("_[0-9]*$", "", layers_params))
@@ -113,7 +116,9 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
       # Taking into account values to be filtered 999 or NA
       # except for epc
-      sols_idx <- as.vector(!grepl(pattern = "^999", par_values) & !is.na(par_values))
+      sols_idx <- as.vector(
+        !grepl(pattern = "^999", par_values) & !is.na(par_values)
+        )
 
       # Filtering all parameters
       if (!any(sols_idx)) next
@@ -139,7 +144,6 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
   # Setting param values
   for (p in other_params) {
-    # print(p)
     set_param_value(xml_doc_object, p, sols_param[[p]])
   }
 

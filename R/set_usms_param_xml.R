@@ -2,14 +2,16 @@
 #' @param xml_doc_object an xmlDocument object (created from an usms file)
 #'
 #' @param usms_param usms parameters (data.frame)
-#' @param overwrite replace existing usms (TRUE) or not, updating existing ones (FALSE)
+#' @param overwrite replace existing usms (TRUE) or not,
+#' updating existing ones (FALSE)
 #'
 #' @examples
 #' \dontrun{
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' usms_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xml"), "inputs_stics_example.xlsx")
+#' xl_path <- file.path(get_examples_path(file_type = "xml"),
+#'                      "inputs_stics_example.xlsx")
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
 #' # For updating an existing xml doc (using existing usms names)
@@ -35,7 +37,9 @@
 #'
 
 
-set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FALSE) {
+set_usms_param_xml <- function(xml_doc_object,
+                               usms_param = NULL,
+                               overwrite = FALSE) {
   if (!base::is.null(usms_param)) {
     if (!("data.frame" %in% class(usms_param))) {
       stop("usms_param does not belong to data.frame class/type")
@@ -91,7 +95,8 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
     # Selecting data & ordering upon xml
     # order
     usms_param <- usms_param[xl_in_xml, ]
-    usms_param <- usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]), ]
+    usms_param <-
+      usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]), ]
   } else {
     # setting usms names
     set_param_value(xml_doc_object, "usm", usms_param[[usm_col]])

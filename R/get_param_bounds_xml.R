@@ -5,7 +5,8 @@
 #'
 #' @param xml_file an xml file path or a vector of paths
 #' @param param_name a parameter name of a vector of parameters names
-#' @param bounds_name bounds name "min" or "max" (optional, default value c("min","max ))
+#' @param bounds_name bounds name "min" or "max"
+#' (optional, default value c("min","max ))
 #' @param output Output data format either "list" or "data.frame" (default)
 #'
 #' @return A list of parameters bounds values

@@ -16,13 +16,13 @@ get_param_bounds(
 
 \item{param_name}{a parameter name of a vector of parameters names}
 
-\item{bounds_name}{bounds name "min" or "max" (optional, default value c("min","max ))}
+\item{bounds_name}{bounds name "min" or "max"
+(optional, default value c("min","max ))}
 
 \item{output}{Output data format either "list" or "data.frame" (default)}
 }
 \value{
 A data.frame with the name of the parameter and min, max values or
-
 one of them. Or a named list (with parameter name) containing a named vector
 for bounds.
 }
@@ -38,7 +38,8 @@ sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 
 par_bounds <- SticsRFiles:::get_param_bounds(sta_doc, "zr")
 
-par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"))
+par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,
+                                                 c("zr", "altistation"))
 
 
 SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"), "min")
