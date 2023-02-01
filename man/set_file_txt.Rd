@@ -26,8 +26,10 @@ set_file_txt(
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).}
 
-\item{variety}{The plant variety to set the parameter value, either the variety
-name (\code{codevar} in the plant file) or the index (\code{variete} in the technical file).}
+\item{variety}{The plant variety to set the parameter value,
+either the variety
+name (\code{codevar} in the plant file) or the index
+(\code{variete} in the technical file).}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
@@ -35,14 +37,15 @@ name (\code{codevar} in the plant file) or the index (\code{variete} in the tech
 get_stics_versions_compat() return}
 }
 \description{
-Replace or set an input parameter from a pre-existing STICS input
-file. This function is called by some of the generic \code{set_*}
-functions under the hood.
+Replace or set an input parameter from a pre-existing
+STICS input file. This function is called by some of the
+generic \code{set_*} functions under the hood.
 }
 \details{
 The function uses \code{base::sys.call()} to know from which function
-of the \code{set_*} family it is called, so it won't work properly if called
-by the user directly. This is why this function is internal.
+of the \code{set_*} family it is called, so it won't work properly
+if called by the user directly. This is why this function
+is internal.
 }
 \note{
 This function is not used for \code{\link{set_soil_txt}}.

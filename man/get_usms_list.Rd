@@ -35,5 +35,7 @@ path <- get_examples_path(file_type = "xml")
 
 usms_list <- get_usms_list(file = file.path(path, "usms.xml"))
 
-usms_list <- get_usms_list(file = file.path(path, "usms.xml"), usm = c("usm1", "usm2"))
+usms_list <- get_usms_list(file = file.path(path, "usms.xml"),
+usm = c("usm1", "usm2"))
+
 }

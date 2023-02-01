@@ -14,7 +14,9 @@ get_soils_list(
 \arguments{
 \item{file}{Either the path of an usm file or of a soil file.}
 
-\item{soil}{Vector of soil names (or partial names). Optional, if not provided, the function returns the names of all the soils included in the given file.}
+\item{soil}{Vector of soil names (or partial names). Optional,
+if not provided, the function returns the names of all the soils included
+in the given file.}
 
 \item{file_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_path} is no
 longer supported, use \code{file} instead.}
@@ -29,8 +31,9 @@ A vector of soil names
 Extracts the soil names from a "usms.xml" file, or from a soil file
 }
 \details{
-The file given as the \code{file_path} is either a "usms" file type to get all the soils used in a particular USM,
-or a soil file type ("sols") to get all soil types available in a soil file.
+The file given as the \code{file_path} is either a "usms" file type
+to get all the soils used in a particular USM, or a soil file type ("sols")
+to get all soil types available in a soil file.
 }
 \examples{
 path <- get_examples_path(file_type = "xml")
@@ -41,5 +44,6 @@ soil_list <- get_soils_list(file = file.path(path, "usms.xml"))
 # Read from a soil file (all soil types available in a soil file)
 soil_list <- get_soils_list(file = file.path(path, "sols.xml"))
 
-soil_list <- get_soils_list(file = file.path(path, "usms.xml"), soil = c("solcanne", "sole"))
+soil_list <- get_soils_list(file = file.path(path, "usms.xml"),
+                            soil = c("solcanne", "sole"))
 }

@@ -22,15 +22,16 @@ set_file_executable <- function(file_path) {
 
   # if OS != windows, set chmod +x exe
   ret <- suppressWarnings(system(paste("chmod +x", file_path),
-    intern = TRUE,
-    ignore.stdout = FALSE,
-    ignore.stderr = FALSE
+                                 intern = TRUE,
+                                 ignore.stdout = FALSE,
+                                 ignore.stderr = FALSE
   ))
 
   # Checking if any errors
   status <- attr(ret, "status")
   if (!base::is.null(status) && status) {
-    warning(paste("A problem occurs when setting executable status on:", file_path))
+    warning(paste("A problem occurs when setting executable status on:",
+                  file_path))
     return(invisible(FALSE))
   }
 

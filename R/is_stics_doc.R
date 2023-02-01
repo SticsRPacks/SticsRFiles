@@ -21,8 +21,8 @@
 #'
 is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
 
-  # TODO : doc_types have been added as input arg, but not used yet, will be used
-  # when doc_types will be defined against Stics Version
+  # TODO : doc_types have been added as input arg, but not used yet,
+  # will be used when doc_types will be defined against Stics Version
   # because they may change with versions ?
 
   if (base::is.null(doc_types)) {
@@ -31,7 +31,6 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
       "fichiersta", "fichierplt", "fichierpar",
       "fichierparamgen"
     )
-    # files_types <- c("ini", "usm", "sol", "tec", "sta", "plt", "par", "newpar")
   }
 
   if (!nargs()) {
@@ -44,7 +43,9 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   }
 
   if (!base::is.null(doc_type) && !(doc_type %in% doc_types)) {
-    warning(paste0("Not any tag name \"", doc_type, "\" for stics xml document!"))
+    warning(paste0("Not any tag name \"",
+                   doc_type,
+                   "\" for stics xml document!"))
     return(FALSE)
   }
 
@@ -64,7 +65,6 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   }
 
   ret <- TRUE
-  # attr(ret, "type") <- files_types[type_idx]
   attr(ret, "type") <- root_name
   return(ret)
 }

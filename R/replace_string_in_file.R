@@ -11,7 +11,10 @@
 #'
 #' @keywords internal
 #'
-replace_string_in_file <- function(file_path, target_string, replace_string, new_file_path = NULL) {
+replace_string_in_file <- function(file_path,
+                                   target_string,
+                                   replace_string,
+                                   new_file_path = NULL) {
   if (!file.exists(file_path)) {
     warning(paste(file_path, "doesn't exist, aborting !"))
     return()
@@ -22,7 +25,15 @@ replace_string_in_file <- function(file_path, target_string, replace_string, new
     in_place <- ""
     redirect <- paste(" >", new_file_path)
   }
-  cmd <- paste0("perl -p", in_place, " -e 's/", target_string, "/", replace_string, "/g ' ", file_path, redirect)
-  # print(cmd)
+  cmd <- paste0("perl -p",
+                in_place,
+                " -e 's/",
+                target_string,
+                "/",
+                replace_string,
+                "/g ' ",
+                file_path,
+                redirect)
+
   system(cmd)
 }

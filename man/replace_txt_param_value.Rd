@@ -21,7 +21,8 @@ replace_txt_param_value(
 \item{out_file_path}{The new file path}
 }
 \description{
-Replacing one or several values in a source file corresponding to a parameter tag
-for generating one (in place or not) or several files
+Replacing one or several values in a source file
+corresponding to a parameter tag for generating one (in place or not)
+or several files
 }
 \keyword{internal}

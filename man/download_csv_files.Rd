@@ -33,8 +33,8 @@ Dowloading inputs and/or outputs csv files from a repository branch/tag
 \examples{
 \dontrun{
 SticsRFiles:::download_csv_files(
-  branch_url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
-  dest_dir = system.file("extdata", package = "SticsRFiles")
+ branch_url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+ dest_dir = system.file("extdata", package = "SticsRFiles")
 )
 }
 }

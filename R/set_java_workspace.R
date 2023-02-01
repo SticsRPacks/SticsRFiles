@@ -1,11 +1,14 @@
 #' @title Setting JavaStics workspace
 #'
-#' @description Setting a new JavaStics working directory, a relative directory to JavaStics path or an absolute one
+#' @description Setting a new JavaStics working directory, a relative directory
+#' to JavaStics path or an absolute one
 #'
-#' @details Checking if the directory is a JavaStics workspace (any usms.xml file), and if it's already registered
+#' @details Checking if the directory is a JavaStics workspace
+#' (any usms.xml file), and if it's already registered
 #' @details before setting new one
 #' @param javastics JavaStics installation root folder
-#' @param workspace JavaStics working directory (absolute,relative to javastics parh)
+#' @param workspace JavaStics working directory
+#' (absolute,relative to javastics parh)
 #'
 #' @examples
 #' \dontrun{
@@ -29,7 +32,8 @@ set_java_workspace <- function(javastics, workspace) {
 
   xml_pref <- xmldocument(xml_path)
 
-  # checking if workspace is a relative to javaStics path or an absolute one exists
+  # checking if workspace is a relative to javaStics path or
+  # an absolute one exists
   if (dirname(workspace) == ".") {
     workspace <- file.path(javastics, workspace)
   }
@@ -43,14 +47,19 @@ set_java_workspace <- function(javastics, workspace) {
   # getting current registered wd
   current_wd <- getValues(xml_pref, '//entry[@key="workingDirectory.current"]')
 
-  # entry doesn't exist, normally it could not occur because we set pref file before,
-  # but using JavaStics interface first doesn't fix a default workspace, so ...
+  # entry doesn't exist, normally it could not occur because
+  # we set pref file before, but using JavaStics interface first
+  # doesn't fix a default workspace, so ...
   if (base::is.null(current_wd)) {
-    n <- XML::xmlParseString(paste0("<entry key=\"workingDirectory.current\">", workspace, "</entry>"))
+    n <- XML::xmlParseString(
+      paste0("<entry key=\"workingDirectory.current\">", workspace, "</entry>")
+      )
     addNodes(xml_pref, n)
   } else {
     # if it's not different from the new one,
-    if (current_wd == workspace || (dirname(workspace) == javastics) && basename(workspace) == current_wd) {
+    if (current_wd == workspace ||
+        (dirname(workspace) == javastics) &&
+        basename(workspace) == current_wd) {
       return()
     }
 

@@ -40,7 +40,8 @@ get_stics_versions_compat <- function(version_index = NULL) {
   latest_version <- versions_names[num_versions == max(num_versions)]
 
   # List of versions strings ans latest version string
-  versions <- list(versions_list = versions_names, latest_version = latest_version)
+  versions <- list(versions_list = versions_names,
+                   latest_version = latest_version)
 
   if (is.null(version_index)) {
     return(versions)
@@ -198,7 +199,8 @@ get_version_num <- function(stics_version = "latest", numeric = TRUE) {
 get_version_string <- function(stics_version) {
   pattern <- "^[V | v]"
 
-  if (is.character(stics_version) & grepl(pattern = pattern, x = stics_version)) {
+  if (is.character(stics_version) &&
+      grepl(pattern = pattern, x = stics_version)) {
     return(toupper(stics_version))
   }
 

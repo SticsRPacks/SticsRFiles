@@ -31,7 +31,9 @@ read_params_table <- function(file, sheet_name = NULL,
                               char_na = "",
                               file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
-    lifecycle::deprecate_warn("1.0.0", "read_params_table(file_path)", "read_params_table(file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "read_params_table(file_path)",
+                              "read_params_table(file)")
   } else {
     file_path <- file # to remove when we update inside the function
   }
@@ -87,10 +89,10 @@ read_params_table <- function(file, sheet_name = NULL,
 
   # Replacing NA with empty string
   # Casting logical columns to character type
-  out_table %>%
+  out_table <- out_table %>%
     dplyr::mutate_if(is.logical, as.character) %>%
-    rep_character_na(char_na) -> out_table
-  # out_table[is.na(out_table)] <- char_na
+    rep_character_na(char_na)
+
   out_table <- replace_na(out_table, replacement = num_na)
 
   # Replacing numerical NA with a specific value

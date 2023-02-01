@@ -15,14 +15,16 @@ get_javastics_cmd(
 \arguments{
 \item{javastics}{JavaSTICS installation root folder}
 
-\item{java_cmd}{Name or path of the java virtual machine executable (optional)}
+\item{java_cmd}{Name or path of the java virtual machine executable
+(optional)}
 
 \item{type}{keywords for filtering in the returned list what kind of command
 to be generated (default both: "generate" and "run")}
 
 \item{workspace}{A JavaStics workspace path (optional)}
 
-\item{verbose}{Logical value (optional), TRUE to display run infos, FALSE otherwise (default)}
+\item{verbose}{Logical value (optional), TRUE to display run infos,
+FALSE otherwise (default)}
 }
 \value{
 A named list with fields : command (java command/path), cmd_generate

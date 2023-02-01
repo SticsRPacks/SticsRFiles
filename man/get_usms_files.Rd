@@ -16,25 +16,29 @@ get_usms_files(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace (i.e. containing the Stics XML input files)}
+\item{workspace}{Path of a JavaStics workspace (i.e. containing the Stics
+XML input files)}
 
 \item{usms_list}{Vector of usms names (Optional)}
 
 \item{usms_file}{Path (including name) of a USM XML file.}
 
-\item{file_type}{Vector of file(s) type to get (if not given, all types are returned, see details)}
+\item{file_type}{Vector of file(s) type to get (if not given,
+all types are returned, see details)}
 
-\item{javastics}{Path of JavaStics. Optional, only needed if the plant files are not in the workspace
-(in this case the plant files used are those included in the JavaStics distribution)}
+\item{javastics}{Path of JavaStics. Optional, only needed if the plant files
+are not in the workspace
+(in this case the plant files used are those included in the
+JavaStics distribution)}
 
-\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path} is no
-longer supported, use \code{workspace} instead.}
+\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path}
+is no longer supported, use \code{workspace} instead.}
 
 \item{file_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_name} is no
 longer supported, use \code{usms_file} instead.}
 
-\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
-longer supported, use \code{javastics} instead.}
+\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path}
+is no longer supported, use \code{javastics} instead.}
 }
 \value{
 A named list with existing files path in each usm element
@@ -67,6 +71,6 @@ get_usms_files(
 
 }
 \seealso{
-See \code{get_soils_list()} to get all soils in a usm file, and \code{get_usms_list()} to get
-the list of usms.
+See \code{get_soils_list()} to get all soils in a usm file,
+and \code{get_usms_list()} to get the list of usms.
 }

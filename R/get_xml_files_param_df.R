@@ -1,11 +1,13 @@
-#' Extracting a data.frame of parameters values for an xml file or a set of (whatever the xml file kind)
+#' Extracting a data.frame of parameters values for an xml file or a set of
+#' (whatever the xml file kind)
 #'
 #' @param file_path A file path or a vector of
-#' @param select node name or attribute name to use for selection (optional, default to no selection)
+#' @param select node name or attribute name to use for selection
+#' (optional, default to no selection)
 #' @param name value used for select (optional)
 #' @param param_names vector of parameters names (optional)
-#' @param wide_shape Optional logical for keeping the long data.frame format FALSE, default)
-#' or converting it to a wider format one (TRUE)
+#' @param wide_shape Optional logical for keeping the long data.frame
+#' format FALSE, default) or converting it to a wider format one (TRUE)
 #'
 #' @return A data.frame with name, type, param, id and value columns
 #'
@@ -37,13 +39,13 @@
 #'
 #' * wide format
 #'
-#'  |name      |type | datedebut| datefin|finit          |nomsol    |fstation         |fclim1        |fclim2        |
-#'  |:---------|:----|---------:|-------:|:--------------|:---------|:----------------|:-------------|:-------------|
-#'  |SugarCane |usms |       286|     650|canne_ini.xml  |solcanne  |climcanj_sta.xml |climcanj.1998 |climcanj.1999 |
-#'  |potato    |usms |        91|     250|patate_ini.xml |solpatate |climpdtj_sta.xml |climpdtj.1997 |climpdtj.1997 |
-#'  |banana    |usms |        30|     300|banane_ini.xml |solbanane |climbanj_sta.xml |climbanj.1996 |climbanj.1996 |
-#'  |sorghum   |usms |       112|     360|sorgho_ini.xml |solsorgho |climsorj_sta.xml |climsorj.1996 |climsorj.1996 |
-#'  |barley    |usms |        88|     196|orge_ini.xml   |solorge   |climorgj_sta.xml |climorgj.2002 |climorgj.2002 |
+#'  |name      |type | datedebut| datefin|finit          |nomsol    |
+#'  |:---------|:----|---------:|-------:|:--------------|:---------|
+#'  |SugarCane |usms |       286|     650|canne_ini.xml  |solcanne  |
+#'  |potato    |usms |        91|     250|patate_ini.xml |solpatate |
+#'  |banana    |usms |        30|     300|banane_ini.xml |solbanane |
+#'  |sorghum   |usms |       112|     360|sorgho_ini.xml |solsorgho |
+#'  |barley    |usms |        88|     196|orge_ini.xml   |solorge   |
 #'
 #' name: a file name or an usm or soil name
 #' type: type of file
@@ -66,16 +68,22 @@
 #' get_xml_files_param_df(file_path = files_list)
 #' }
 #'
-get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_names = NULL, wide_shape = FALSE) {
+get_xml_files_param_df <- function(file_path,
+                                   select = NULL,
+                                   name = NULL,
+                                   param_names = NULL,
+                                   wide_shape = FALSE) {
 
 
   # For managing a files list
   if (length(file_path) > 1) {
     files_exist <- file.exists(file_path)
 
-    if (!all(files_exist)) warning("Missing files: ", paste(file_path[!files_exist], collapse = ","))
+    if (!all(files_exist))
+      warning("Missing files: ", paste(file_path[!files_exist], collapse = ","))
 
-    if (!any(files_exist)) stop("Not any files exist !")
+    if (!any(files_exist))
+      stop("Not any files exist !")
 
     files_df <- lapply(
       file_path[files_exist],
@@ -108,7 +116,8 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
   # Getting usm or sol names vector
   names_list <- NULL
-  if (!base::is.null(select)) names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
+  if (!base::is.null(select))
+    names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
 
   # Getting all usm or sol names from the file
   select_name <- FALSE
@@ -126,7 +135,6 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
   }
 
   # for one name
-  # param_values <- get_param_xml(file_path, param_names = param_names, select_value = select, select_value = name)[[1]]
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
   # Fixing parameters with no values with NA
@@ -172,7 +180,8 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
     name_col <- unlist(lapply(values_nb, function(x) {
       l <- names_list
-      if (x > values_per_par) l <- unlist(lapply(names_list, function(y) rep(y, x / values_per_par)))
+      if (x > values_per_par)
+        l <- unlist(lapply(names_list, function(y) rep(y, x / values_per_par)))
       return(l)
     }),
     use.names = FALSE
@@ -210,7 +219,8 @@ get_xml_files_param_df <- function(file_path, select = NULL, name = NULL, param_
 
 df_wider <- function(df, convert_type = TRUE, stringAsFactors = FALSE) {
   valid_id <- !is.na(df$id)
-  df$param[valid_id] <- paste0(df$param[valid_id], "_", as.character(df$id[valid_id]))
+  df$param[valid_id] <-
+    paste0(df$param[valid_id], "_", as.character(df$id[valid_id]))
 
   # parameters wider data.frame
   df <- df %>%

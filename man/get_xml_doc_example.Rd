@@ -7,7 +7,8 @@
 get_xml_doc_example(xml_name = NULL, stics_version = "latest")
 }
 \arguments{
-\item{xml_name}{xml file name (see file names by calling get_xml_doc_example())}
+\item{xml_name}{xml file name
+(see file names by calling get_xml_doc_example())}
 
 \item{stics_version}{the stics files version to use}
 }

@@ -1,5 +1,6 @@
 #' @title Get an xmlDocument from a Stics xml file template
-#' @param xml_type xml file type (see types returned when calling get_xml_base_doc())
+#' @param xml_type xml file type (see types returned when calling
+#' get_xml_base_doc())
 #'
 #' @param stics_version the stics files version to use
 #'

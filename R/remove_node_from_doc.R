@@ -4,9 +4,10 @@
 #'
 #' @param xml_doc The XML document
 #' @param param_name The parameter name
-#' @param parent_name The name of the parent parameter (node name or attribute value of nom, nomParam)
-#' @param remove_parent Logical, indicating if the parent node must be removed (TRUE) or not
-#' (FALSE)
+#' @param parent_name The name of the parent parameter
+#' (node name or attribute value of nom, nomParam)
+#' @param remove_parent Logical, indicating if the parent node must be removed
+#' (TRUE) or not (FALSE)
 #' @param nodes_ids The node IDs to be removed (optional)
 #'
 #' @examples

@@ -20,7 +20,9 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
   config_pref <- file.path(javastics, "config", "preferences.xml")
 
   if (file.exists(config_pref) && overwrite == FALSE) {
-    cli::cli_alert_danger(paste0("Preference file already exists, try with {.code overwrite= TRUE}"))
+    cli::cli_alert_danger(
+      paste0("Preference file already exists, try with {.code overwrite= TRUE}")
+    )
     return(FALSE)
   }
 
@@ -45,10 +47,12 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
     cli::cli_alert_success("Preference file added in: {.val {config_pref}}")
     return(TRUE)
   } else {
-    cli::cli_alert_danger(paste0(
-      "Couldn't add a {.val preference.xml} file in the JavaStics installation. ",
-      "Please run {.pkg Javastics} once to create it."
-    ))
+    cli::cli_alert_danger(
+      paste0(
+        "Couldn't add a {.val preference.xml}",
+        "file in the JavaStics installation. ",
+        "Please run {.pkg Javastics} once to create it."
+      ))
     return(FALSE)
   }
 }

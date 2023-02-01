@@ -7,7 +7,8 @@
 get_xml_base_doc(xml_type = NULL, stics_version = "latest")
 }
 \arguments{
-\item{xml_type}{xml file type (see types returned when calling get_xml_base_doc())}
+\item{xml_type}{xml file type (see types returned when calling
+get_xml_base_doc())}
 
 \item{stics_version}{the stics files version to use}
 }

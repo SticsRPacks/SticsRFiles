@@ -18,7 +18,7 @@
 #' @keywords internal
 #'
 is_stics_xml <- function(xml_path, file_type = NULL) {
-  if (dir.exists(xml_path) | !file.exists(xml_path)) {
+  if (dir.exists(xml_path) || !file.exists(xml_path)) {
     return(FALSE)
   }
 

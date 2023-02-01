@@ -17,10 +17,11 @@ remove_node_from_doc(
 
 \item{param_name}{The parameter name}
 
-\item{parent_name}{The name of the parent parameter (node name or attribute value of nom, nomParam)}
+\item{parent_name}{The name of the parent parameter
+(node name or attribute value of nom, nomParam)}
 
-\item{remove_parent}{Logical, indicating if the parent node must be removed (TRUE) or not
-(FALSE)}
+\item{remove_parent}{Logical, indicating if the parent node must be removed
+(TRUE) or not (FALSE)}
 
 \item{nodes_ids}{The node IDs to be removed (optional)}
 }
