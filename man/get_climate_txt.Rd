@@ -34,7 +34,7 @@ Read the meteorology input for STICS ("climat.txt")
 }
 \note{
 The time-related variables are summarised into one POSIXct column named
-\code{Date}.
+\code{date}.
 }
 \examples{
 library(SticsRFiles)

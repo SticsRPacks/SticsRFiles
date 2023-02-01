@@ -14,7 +14,7 @@
 #'
 #'
 #' @note The time-related variables are summarised into one POSIXct column named
-#'       `Date`.
+#'       `date`.
 #'
 #' @return A data.frame of the input meteorological variables used as input for the
 #'         STICS model.
@@ -67,7 +67,7 @@ get_climate_txt <- function(workspace = getwd(),
     "station", "year", "month", "day", "julian", "ttmin", "ttmax",
     "ttrg", "ttetp", "ttrr", "ttvent", "ttpm", "ttco2"
   )
-  Date <- data.frame(Date = as.POSIXct(
+  date <- data.frame(date = as.POSIXct(
     x = paste(meteo_data$year, meteo_data$month, meteo_data$day, sep = "-"),
     format = "%Y-%m-%d", tz = "UTC"
   ))
@@ -78,8 +78,8 @@ get_climate_txt <- function(workspace = getwd(),
     if (length(col_idx)) meteo_data <- meteo_data[, -col_idx]
   }
 
-  # Adding Date to data.frame
-  meteo_data <- cbind(Date, meteo_data)
+  # Adding date to data.frame
+  meteo_data <- cbind(date, meteo_data)
 
   # Adding file path as attribute
   attr(meteo_data, "file") <- file_path
