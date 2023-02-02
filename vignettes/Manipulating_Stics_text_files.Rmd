@@ -135,7 +135,7 @@ get_climate_txt(workspace = example_txt_dir) %>%
 ```
 
 
-The function adds a `date` column that is at the standard `POSIXct` format for convenience.
+The function adds a `Date` column that is at the standard `POSIXct` format for convenience.
 
 
 ## Setting parameter value

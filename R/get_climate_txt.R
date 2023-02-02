@@ -2,10 +2,12 @@
 #'
 #' @description Read the meteorology input for STICS ("climat.txt")
 #'
-#' @param workspace Path of the workspace containing the Stics climate file to read
+#' @param workspace Path of the workspace containing the Stics
+#' climate file to read
 #' @param file_name The meteorology file name (default to \code{climat.txt}).
-#' @param preserve Logical, `TRUE`` for keeping the stics columns related to date (year,
-#' month, day, julian), or only keep the date as a `POSIXct` otherwise. Default to `TRUE`.
+#' @param preserve Logical, `TRUE`` for keeping the stics columns related
+#' to date calculation (year, month, day, julian),
+#' or only the Date column as a `POSIXct` otherwise. Default to `TRUE`.
 #'
 #' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
 #'   longer supported, use `workspace` instead.
@@ -16,8 +18,8 @@
 #' @note The time-related variables are summarised into one POSIXct column named
 #'       `date`.
 #'
-#' @return A data.frame of the input meteorological variables used as input for the
-#'         STICS model.
+#' @return A data.frame of the input meteorological variables used as input
+#'         for the STICS model.
 #'
 #'
 #' @examples
@@ -67,7 +69,7 @@ get_climate_txt <- function(workspace = getwd(),
     "station", "year", "month", "day", "julian", "ttmin", "ttmax",
     "ttrg", "ttetp", "ttrr", "ttvent", "ttpm", "ttco2"
   )
-  date <- data.frame(date = as.POSIXct(
+  date <- data.frame(Date = as.POSIXct(
     x = paste(meteo_data$year, meteo_data$month, meteo_data$day, sep = "-"),
     format = "%Y-%m-%d", tz = "UTC"
   ))

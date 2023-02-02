@@ -13,11 +13,12 @@ get_climate_txt(
 )
 }
 \arguments{
-\item{workspace}{Path of the workspace containing the Stics climate file to read}
+\item{workspace}{Path of the workspace containing the Stics
+climate file to read}
 
 \item{file_name}{The meteorology file name (default to \code{climat.txt}).}
 
-\item{preserve}{Logical, \verb{TRUE`` for keeping the stics columns related to date (year, month, day, julian), or only keep the date as a }POSIXct\verb{otherwise. Default to}TRUE`.}
+\item{preserve}{Logical, \verb{TRUE`` for keeping the stics columns related to date calculation (year, month, day, julian), or only the Date column as a }POSIXct\verb{otherwise. Default to}TRUE`.}
 
 \item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
 longer supported, use \code{workspace} instead.}
@@ -26,8 +27,8 @@ longer supported, use \code{workspace} instead.}
 longer supported, use \code{file_name} instead.}
 }
 \value{
-A data.frame of the input meteorological variables used as input for the
-STICS model.
+A data.frame of the input meteorological variables used as input
+for the STICS model.
 }
 \description{
 Read the meteorology input for STICS ("climat.txt")
