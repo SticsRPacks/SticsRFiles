@@ -37,8 +37,8 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
     return(doc_types)
   }
 
-  # not an xmlDocument
-  if (!is.xmlDocument(xml_doc)) {
+  # not an xml_document
+  if (!is.xml_document(xml_doc)) {
     return(FALSE)
   }
 

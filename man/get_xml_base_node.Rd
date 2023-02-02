@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_xml_base_node.R
 \name{get_xml_base_node}
 \alias{get_xml_base_node}
-\title{Get an xmlDocument node (set of parameters) from a Stics xml node
+\title{Get an xml_document node (set of parameters) from a Stics xml node
 file template}
 \usage{
 get_xml_base_node(file_tag, form_name = NULL, stics_version = "latest")
@@ -18,7 +18,7 @@ get_xml_base_node(file_tag, form_name = NULL, stics_version = "latest")
 An xml node of type "usm", "sol", "intervention"
 }
 \description{
-Get an xmlDocument node (set of parameters) from a Stics xml node
+Get an xml_document node (set of parameters) from a Stics xml node
 file template
 }
 \examples{

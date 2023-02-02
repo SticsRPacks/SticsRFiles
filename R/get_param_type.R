@@ -1,6 +1,6 @@
 #' @title Get a Stics xml parameter type and xpath
-#' from a request in an xmlDocument
-#' @param xml_doc an xmlDocument object (created from an xml file)
+#' from a request in an xml_document
+#' @param xml_doc an xml_document object (created from an xml file)
 #' @param param_name parameter name or a vector of names
 #' @param parent_name xml parent node name
 #' @param parent_sel_attr parent attribute value for selecting

@@ -1,5 +1,5 @@
-#' @title Setting a sol param value(s) in a sols xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from an xml sols file)
+#' @title Setting a sol param value(s) in a sols xml_document
+#' @param xml_doc_object an xml_document object (created from an xml sols file)
 #'
 #' @param sols_param soils parameters (data.frame)
 #' @param overwrite replace existing soil (TRUE) or not,
@@ -42,7 +42,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     stop("sols_param do not belong to data.frame class/type")
   }
 
-  if (!"xmlDocument" %in% class(xml_doc_object)) {
+  if (!"xml_document" %in% class(xml_doc_object)) {
     stop("xml_doc_object is not an XMLDocument object")
   }
 

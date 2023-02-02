@@ -14,7 +14,7 @@ get_param_value(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object}
+\item{xml_doc}{an xml_document object}
 
 \item{param_name}{parameter name or a vector of names (optional)}
 

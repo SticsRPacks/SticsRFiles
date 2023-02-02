@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_xml_doc_example.R
 \name{get_xml_doc_example}
 \alias{get_xml_doc_example}
-\title{Get an xmlDocument from a Stics xml file example}
+\title{Get an xml_document from a Stics xml file example}
 \usage{
 get_xml_doc_example(xml_name = NULL, stics_version = "latest")
 }
@@ -13,14 +13,14 @@ get_xml_doc_example(xml_name = NULL, stics_version = "latest")
 \item{stics_version}{the stics files version to use}
 }
 \value{
-An xmlDocument object
+An xml_document object
 }
 \description{
-Get an xmlDocument from a Stics xml file example
+Get an xml_document from a Stics xml file example
 }
 \examples{
 \dontrun{
-# Retrieving xml examples files to get xmlDocument from
+# Retrieving xml examples files to get xml_document from
 SticsRFiles:::get_xml_doc_example()
 
 # Loading an usms.xml file

@@ -3,7 +3,7 @@
 \name{get_params_from_doc_node}
 \alias{get_params_from_doc_node}
 \title{Get a list of Stics xml parameters names from nodes names in
-an xmlDocument}
+an xml_document}
 \usage{
 get_params_from_doc_node(xml_node, param_list = c(), unique_val = TRUE)
 }
@@ -19,6 +19,6 @@ a character vector of parameters names
 }
 \description{
 Get a list of Stics xml parameters names from nodes names in
-an xmlDocument
+an xml_document
 }
 \keyword{internal}

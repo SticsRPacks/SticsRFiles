@@ -1,12 +1,12 @@
-#' @title Generatefrom a template a Stics sta xmlDocument
+#' @title Generatefrom a template a Stics sta xml_document
 #'
-#' @param xml_doc an optional xmlDocument object (created from an sta file)
+#' @param xml_doc an optional xml_document object (created from an sta file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' (optional)
 #' @param stics_version the stics files version to use
 #' (optional, default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #'
 #' @examples

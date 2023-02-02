@@ -1,6 +1,6 @@
-#' @title Generate from a template or modify a Stics tec xmlDocument
+#' @title Generate from a template or modify a Stics tec xml_document
 #'
-#' @param xml_doc an xmlDocument object (created from an ini file)
+#' @param xml_doc an xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param stics_version the stics files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
@@ -9,7 +9,7 @@
 #' @param ... Additional arguments (for example, coming from a call
 #' from gen_tec_xml using a na_values argument)
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #'
 #' @examples

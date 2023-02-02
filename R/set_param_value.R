@@ -1,8 +1,8 @@
 #' @title Setting parameter value for different kinds of parameters
 #'
-#' @description Setting parameter value in a xmlDocument object
+#' @description Setting parameter value in a xml_document object
 #'
-#' @param xml_doc an xmlDocument object
+#' @param xml_doc an xml_document object
 #' @param param_name parameter name
 #' @param param_value vector of parameter values, or a list of
 #' @param parent_name parent node name or attribute name (optional)

@@ -3,7 +3,7 @@
 #' @param params_table a table (df, tibble) containing parameters to use
 #'
 #' @param param_names parameters names to select
-#' @param xml_doc an xmlDocument object (of any xml type)
+#' @param xml_doc an xml_document object (of any xml type)
 #' @param lines_id table lines identifiers to select
 #' @param stopping logical value for stopping if any unknown parameters
 #' (if TRUE)

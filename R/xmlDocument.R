@@ -1,14 +1,14 @@
 #' @keywords internal
 
 # xml class based on fileDocument class
-setClass("xmlDocument",
+setClass("xml_document",
   contains = c("file_document"),
   validity = validDoc
 )
 
 
 # object validation
-setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
+setMethod("validDoc", signature(object = "xml_document"), function(object) {
 
   ext <- getExt(object)
 
@@ -32,12 +32,12 @@ setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
 setMethod(
   "xmldocument", signature(file = "character"),
   function(file = character(length = 0)) {
-    methods::new("xmlDocument", file)
+    methods::new("xml_document", file)
   }
 )
 
 setMethod(
-  "initialize", "xmlDocument",
+  "initialize", "xml_document",
   function(.Object, file = character(length = 0), warn = FALSE) {
     .Object <- methods::callNextMethod(.Object, file)
     methods::validObject(.Object)
@@ -47,7 +47,7 @@ setMethod(
 )
 
 
-setMethod("show", "xmlDocument", function(object) {
+setMethod("show", "xml_document", function(object) {
   methods::callNextMethod()
   if (isLoaded(object)) {
     print(paste0("   content : ", class(object@content)[[1]]))
@@ -56,7 +56,7 @@ setMethod("show", "xmlDocument", function(object) {
 
 # setter methods
 setReplaceMethod(
-  "setContent", signature(doc_obj = "xmlDocument"),
+  "setContent", signature(doc_obj = "xml_document"),
   function(doc_obj, value) {
     if (!methods::is(value, "XMLInternalDocument")) {
       stop("Input value is not a XMLInternalDocument class object")
@@ -67,17 +67,17 @@ setReplaceMethod(
 )
 
 # getter methods
-setMethod("getContent", signature(doc_obj = "xmlDocument"), function(doc_obj) {
+setMethod("getContent", signature(doc_obj = "xml_document"), function(doc_obj) {
   return(doc_obj@content)
 })
 
 
 setMethod(
-  "getNodeS", signature(doc_obj = "xmlDocument"),
+  "getNodeS", signature(doc_obj = "xml_document"),
   function(doc_obj, path = NULL) {
     node_set <- NULL
     if (!isLoaded(doc_obj)) {
-      stop("xml file is not loaded in xmlDocument object")
+      stop("xml file is not loaded in xml_document object")
     }
 
     if (base::is.null(path)) {
@@ -110,7 +110,7 @@ setMethod(
 )
 
 setMethod(
-  "getAttrs", signature(doc_obj = "xmlDocument"),
+  "getAttrs", signature(doc_obj = "xml_document"),
   function(doc_obj, path) {
     attr_list <- NULL
     node_set <- getNodeS(doc_obj, path)
@@ -168,7 +168,7 @@ setMethod(
 
 # getAttrsNames
 setMethod(
-  "getAttrsNames", signature(doc_obj = "xmlDocument"),
+  "getAttrsNames", signature(doc_obj = "xml_document"),
   function(doc_obj, path) {
     attr_names <- NULL
     attr_list <- getAttrs(doc_obj, path)
@@ -188,7 +188,7 @@ setMethod(
 
 # getAttrsValues
 setMethod(
-  "getAttrsValues", signature(doc_obj = "xmlDocument"),
+  "getAttrsValues", signature(doc_obj = "xml_document"),
   function(doc_obj, path, attr_list = character(length = 0),
            nodes_ids = NULL) {
     # browser()
@@ -256,7 +256,7 @@ setMethod(
 
 # factoriser avec getAttrs!! + getNode(doc_obj,path,kind)
 setMethod(
-  "getValues", signature(doc_obj = "xmlDocument"),
+  "getValues", signature(doc_obj = "xml_document"),
   function(doc_obj, path, nodes_ids = NULL) {
     node_set <- getNodeS(doc_obj, path)
 
@@ -286,7 +286,7 @@ setMethod(
 
 # addAttrs
 setMethod(
-  "addAttrs", signature(doc_obj = "xmlDocument"),
+  "addAttrs", signature(doc_obj = "xml_document"),
   function(doc_obj, path, named_vector) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(names(named_vector))) {
@@ -301,7 +301,7 @@ setMethod(
 # delAttrs
 # TODO: to remove all attrs !!!!!!!!!
 setMethod(
-  "removeAttrs", signature(doc_obj = "xmlDocument"),
+  "removeAttrs", signature(doc_obj = "xml_document"),
   function(doc_obj, path, attr_names) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(attr_names)) {
@@ -319,7 +319,7 @@ setMethod(
 #
 # TODO : same code as setValues,
 setMethod(
-  "setAttrValues", signature(doc_obj = "xmlDocument"),
+  "setAttrValues", signature(doc_obj = "xml_document"),
   function(doc_obj, path, attr_name, values_list, nodes_ids = NULL) {
     node_set <- getNodeS(doc_obj, path)
     if (base::is.null(node_set)) {
@@ -349,7 +349,7 @@ setMethod(
 
 # setValues
 setMethod(
-  "setValues", signature(doc_obj = "xmlDocument"),
+  "setValues", signature(doc_obj = "xml_document"),
   function(doc_obj, path, values_list, nodes_ids = NULL) {
     node_set <- getNodeS(doc_obj, path)
 
@@ -385,7 +385,7 @@ setMethod(
 
 # addNodes
 setMethod(
-  "addNodes", signature(doc_obj = "xmlDocument"),
+  "addNodes", signature(doc_obj = "xml_document"),
   function(doc_obj, nodes_to_add, parent_path = NULL) {
     # parent node is root node
     if (base::is.null(parent_path)) {
@@ -414,7 +414,7 @@ setMethod(
 
 # removeNodes
 setMethod(
-  "delNodes", signature(doc_obj = "xmlDocument"),
+  "delNodes", signature(doc_obj = "xml_document"),
   function(doc_obj, path) {
     node_set <- getNodeS(doc_obj, path)
 
@@ -428,19 +428,19 @@ setMethod(
 
 
 # other methods
-setMethod("loadContent", signature(doc_obj = "xmlDocument"), function(doc_obj) {
+setMethod("loadContent", signature(doc_obj = "xml_document"), function(doc_obj) {
 
   setContent(doc_obj) <- XML::xmlParse(getPath(doc_obj))
   return(doc_obj)
 })
 
 
-setMethod("isLoaded", signature(doc_obj = "xmlDocument"), function(doc_obj) {
+setMethod("isLoaded", signature(doc_obj = "xml_document"), function(doc_obj) {
   return(methods::is(doc_obj@content, "XMLInternalDocument"))
 })
 
-setMethod("is.xmlDocument", signature(doc_obj = "ANY"), function(doc_obj) {
-  if (methods::is(doc_obj, "xmlDocument")) {
+setMethod("is.xml_document", signature(doc_obj = "ANY"), function(doc_obj) {
+  if (methods::is(doc_obj, "xml_document")) {
     return(TRUE)
   } else {
     return(FALSE)
@@ -450,7 +450,7 @@ setMethod("is.xmlDocument", signature(doc_obj = "ANY"), function(doc_obj) {
 
 # save method
 setMethod(
-  "saveXmlDoc", signature(doc_obj = "xmlDocument"),
+  "saveXmlDoc", signature(doc_obj = "xml_document"),
   function(doc_obj, xml_path) {
     if (isLoaded(doc_obj)) {
       write(XML::saveXML(doc_obj@content), xml_path)
@@ -459,7 +459,7 @@ setMethod(
 )
 
 # clone method
-setMethod("cloneXmlDoc", signature(doc_obj = "xmlDocument"), function(doc_obj) {
+setMethod("cloneXmlDoc", signature(doc_obj = "xml_document"), function(doc_obj) {
   if (!isLoaded(doc_obj)) {
     return(NULL)
   }

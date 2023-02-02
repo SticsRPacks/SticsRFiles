@@ -3,12 +3,12 @@
 \name{get_param_formalisms}
 \alias{get_param_formalisms}
 \title{Get the "formalisme" node "@nom" attribute value of a
-(or a list of) parameter(s) in an xmlDocument, of a vector of}
+(or a list of) parameter(s) in an xml_document, of a vector of}
 \usage{
 get_param_formalisms(xml_doc, name = NULL, form_only = FALSE)
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from any xml file),
+\item{xml_doc}{an xml_document object (created from any xml file),
 or a vector of}
 
 \item{name}{Optional. A parameter name or a vector of. If not given,
@@ -19,7 +19,7 @@ a list parameters formalism name
 }
 \description{
 Get the "formalisme" node "@nom" attribute value of a
-(or a list of) parameter(s) in an xmlDocument, of a vector of
+(or a list of) parameter(s) in an xml_document, of a vector of
 }
 \examples{
 \dontrun{

@@ -34,7 +34,7 @@ setGeneric("isempty", function(doc_obj) standardGeneric("isempty"))
 setGeneric("calcExt", function(doc_obj) standardGeneric("calcExt"))
 setGeneric("calcType", function(doc_obj) standardGeneric("calcType"))
 
-# defined for xmlDocument
+# defined for xml_document
 
 setGeneric("xmldocument", function(file) standardGeneric("xmldocument"))
 setGeneric("setContent<-", function(doc_obj, value) standardGeneric("setContent<-"))
@@ -44,7 +44,7 @@ setGeneric("getContent", function(doc_obj) standardGeneric("getContent"))
 setGeneric("loadContent", function(doc_obj) standardGeneric("loadContent"))
 setGeneric("isLoaded", function(doc_obj) standardGeneric("isLoaded"))
 
-setGeneric("is.xmlDocument", function(doc_obj) standardGeneric("is.xmlDocument"))
+setGeneric("is.xml_document", function(doc_obj) standardGeneric("is.xml_document"))
 
 # xml manipulations
 

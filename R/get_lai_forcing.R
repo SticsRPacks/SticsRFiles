@@ -66,7 +66,7 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
 #'
 get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 
-  # Loading xml file as xmlDocument object
+  # Loading xml file as xml_document object
   xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm

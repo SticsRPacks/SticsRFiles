@@ -42,7 +42,7 @@ longer supported, use \code{file} instead.}
 longer supported, use \code{out_dir} instead.}
 }
 \value{
-an invisible xmlDocument object or a list of
+an invisible xml_document object or a list of
 }
 \description{
 Generate Stics tec xml file(s) from a template or an input file

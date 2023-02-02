@@ -103,7 +103,7 @@ to_xml_version <- function(stics_version) {
 # overwrite = FALSE) {
 set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
                                  overwrite = FALSE) {
-  # Getting xmlDocument object
+  # Getting xml_document object
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
   # Adding version to detect if the file have been previously updated to 10.0
@@ -206,10 +206,10 @@ check_xml_file_version <- function(xml_file_or_doc, stics_version,
 }
 
 get_xml_doc <- function(xml_file_or_doc) {
-  type_id <- c("character", "xmlDocument") %in% class(xml_file_or_doc)
+  type_id <- c("character", "xml_document") %in% class(xml_file_or_doc)
 
   if (!any(type_id)) stop("xml_file_or_doc: not a valid input,
-                          must be a file path or an xmlDocument object!")
+                          must be a file path or an xml_document object!")
 
   if (type_id[1] && !file.exists(xml_file_or_doc)) {
     stop(

@@ -48,7 +48,7 @@
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #' @examples
 #' \dontrun{
@@ -120,7 +120,7 @@ gen_ini_xml <- function(param_df = NULL,
     stics_version = stics_version
   )
 
-  if (!is.list(xml_docs) && methods::is(xml_docs, "xmlDocument")) {
+  if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
 
@@ -161,7 +161,7 @@ gen_ini_xml <- function(param_df = NULL,
   }
 
   # saving files
-  # TODO: vectorize the saveXmlDoc method of the xmlDocument class
+  # TODO: vectorize the saveXmlDoc method of the xml_document class
   for (f in seq_along(xml_docs)) {
     saveXmlDoc(xml_docs[[f]], ini_out_file[[f]])
   }

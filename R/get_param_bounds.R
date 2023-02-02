@@ -1,9 +1,9 @@
-#' @title Getting parameters bounds from an xmlDocument object
+#' @title Getting parameters bounds from an xml_document object
 #'
 #' @description Extracting parameters min and/or max bounds for a parameter
-#' or a vector of parameters from an xmlDocument class object.
+#' or a vector of parameters from an xml_document class object.
 #'
-#' @param xml_doc an xmlDocument class object
+#' @param xml_doc an xml_document class object
 #' @param param_name a parameter name of a vector of parameters names
 #' @param bounds_name bounds name "min" or "max"
 #' (optional, default value c("min","max ))

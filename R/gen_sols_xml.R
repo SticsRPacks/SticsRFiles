@@ -49,7 +49,7 @@
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xmlDocument object
+#' @return an invisible xml_document object
 #'
 #' @examples
 #' \dontrun{

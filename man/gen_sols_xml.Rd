@@ -42,7 +42,7 @@ longer supported, use \code{file} instead.}
 longer supported, it is now computed in the function.}
 }
 \value{
-an invisible xmlDocument object
+an invisible xml_document object
 }
 \description{
 Generate Stics sols xml file from a template or an input file

@@ -1,5 +1,5 @@
-#' @title Setting a usm param value(s) in an usms xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from an usms file)
+#' @title Setting a usm param value(s) in an usms
+#' @param xml_doc_object an  object (created from an usms file)
 #'
 #' @param usms_param usms parameters (data.frame)
 #' @param overwrite replace existing usms (TRUE) or not,
@@ -50,7 +50,7 @@ set_usms_param_xml <- function(xml_doc_object,
     }
   }
 
-  if (!"xmlDocument" %in% class(xml_doc_object)) {
+  if (!"" %in% class(xml_doc_object)) {
     stop("xml_doc_object is not an XMLDocument object")
   }
 

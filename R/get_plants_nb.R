@@ -102,7 +102,7 @@ get_plants_nb_xml <- function(usms_file,
     usm_xml_path <- usms_file # to remove when we update inside the function
   }
 
-  # Loading xml file as xmlDocument object
+  # Loading xml file as xml_document object
   xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm

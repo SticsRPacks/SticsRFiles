@@ -3,12 +3,12 @@
 \name{get_param_number}
 \alias{get_param_number}
 \title{Get the number of a (or alist of) Stics xml parameter(s) occurence
-from a request in an xmlDocument}
+from a request in an xml_document}
 \usage{
 get_param_number(xml_doc_object, param_name, ...)
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from an xml file)}
+\item{xml_doc_object}{an xml_document object (created from an xml file)}
 
 \item{param_name}{parameter name or a vector of names}
 
@@ -20,7 +20,7 @@ a numeric vector
 }
 \description{
 Get the number of a (or alist of) Stics xml parameter(s) occurence
-from a request in an xmlDocument
+from a request in an xml_document
 }
 \examples{
 \dontrun{

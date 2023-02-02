@@ -1,6 +1,6 @@
-#' Add node to an xmlDocument object
+#' Add node to an xml_document object
 #'
-#' @param xml_doc an xmlDocument
+#' @param xml_doc an xml_document
 #' @param new_node a new node to add
 #' @param nodes_nb nodes number to add to parent node
 #' @param parent_path path of the parent node

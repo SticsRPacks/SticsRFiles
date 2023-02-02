@@ -1,4 +1,4 @@
-#' @title Generate from a template or modify a Stics sols or usms xmlDocument
+#' @title Generate from a template or modify a Stics sols or usms xml_document
 
 #' @param doc_type Document type
 #' @param xml_doc  The xml document
@@ -6,7 +6,7 @@
 #' @param nodes_param Node parameter
 #' @param stics_version Version of the STICS model
 #'
-#' @return An xmlDocument object
+#' @return An xml_document object
 #'
 #' @examples
 #' \dontrun{

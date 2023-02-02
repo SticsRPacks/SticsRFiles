@@ -1,11 +1,11 @@
 #' @title Get a set of a (or a list of) Stics xml parameter(s)
 #' values from a request
-#' @title in an xmlDocument or a list of
+#' @title in an xml_document or a list of
 #' @title Getting parameter value for different kinds of parameters
 #'
 #' @description Extracting parameter value from an xml document object
 #'
-#' @param xml_doc an xmlDocument object
+#' @param xml_doc an xml_document object
 #' @param param_name parameter name or a vector of names (optional)
 #' @param parent_name parent node name or attribute name (optional)
 #' @param parent_sel_attr parent attribute value (optional)

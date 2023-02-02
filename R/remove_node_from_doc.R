@@ -1,6 +1,6 @@
 #' Remove a node from an xml object
 #'
-#' @description Remove a node from an xmlDocument instance
+#' @description Remove a node from an xml_document instance
 #'
 #' @param xml_doc The XML document
 #' @param param_name The parameter name

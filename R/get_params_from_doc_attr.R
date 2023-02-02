@@ -1,6 +1,6 @@
 #' @title Get a list of Stics xml parameters names from nodes attributes in
-#' an xmlDocument
-#' @param xml_doc an xmlDocument object (created from an xml file)
+#' an xml_document
+#' @param xml_doc an xml_document object (created from an xml file)
 #'
 #' @param type_name type name, one of "option", "param", "colonne"
 #' @param unique_val logical, TRUE to get unique names list, FALSE otherwise

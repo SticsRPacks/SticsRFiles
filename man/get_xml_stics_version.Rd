@@ -10,7 +10,7 @@ get_xml_stics_version(stics_version = "latest", xml_doc = NULL)
 \arguments{
 \item{stics_version}{A version key of a Stics version (i.e. V9.1)}
 
-\item{xml_doc}{an xmlDocument of a Stics xml file (Unused for the moment,
+\item{xml_doc}{an xml_document of a Stics xml file (Unused for the moment,
 no version String included in xml files)}
 }
 \value{

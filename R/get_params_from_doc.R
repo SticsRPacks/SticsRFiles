@@ -1,5 +1,5 @@
-#' @title Get a list of Stics xml parameters names in an xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from an xml file)
+#' @title Get a list of Stics xml parameters names in an xml_document
+#' @param xml_doc_object an xml_document object (created from an xml file)
 #'
 #' @param type_name type name, one of "option", "param", "colonne"
 #' @param unique_val logical, TRUE to get unique names list, FALSE otherwise
@@ -11,8 +11,8 @@
 get_params_from_doc <- function(xml_doc_object,
                                 type_name = NULL,
                                 unique_val = TRUE) {
-  if (!methods::is(xml_doc_object, "xmlDocument")) {
-    stop("The document is not an xmlDocument !")
+  if (!methods::is(xml_doc_object, "xml_document")) {
+    stop("The document is not an xml_document !")
   }
 
   root_names_attr <- c("fichierparamgen", "fichierpar", "fichiertec",

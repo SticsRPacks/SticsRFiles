@@ -1,6 +1,6 @@
-#' @title Generatefrom a template a Stics ini xmlDocument
+#' @title Generatefrom a template a Stics ini xml_document
 #'
-#' @param xml_doc an optional xmlDocument object (created from an ini file)
+#' @param xml_doc an optional xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' (optional)
 #' @param crop_tag a crop identifier for crop parameters
@@ -11,7 +11,7 @@
 #' default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #' @examples
 #' \dontrun{

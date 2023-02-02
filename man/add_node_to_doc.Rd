@@ -2,12 +2,12 @@
 % Please edit documentation in R/add_node_to_doc.R
 \name{add_node_to_doc}
 \alias{add_node_to_doc}
-\title{Add node to an xmlDocument object}
+\title{Add node to an xml_document object}
 \usage{
 add_node_to_doc(xml_doc, new_node, nodes_nb = 1, parent_path)
 }
 \arguments{
-\item{xml_doc}{an xmlDocument}
+\item{xml_doc}{an xml_document}
 
 \item{new_node}{a new node to add}
 
@@ -16,7 +16,7 @@ add_node_to_doc(xml_doc, new_node, nodes_nb = 1, parent_path)
 \item{parent_path}{path of the parent node}
 }
 \description{
-Add node to an xmlDocument object
+Add node to an xml_document object
 }
 \examples{
 \dontrun{

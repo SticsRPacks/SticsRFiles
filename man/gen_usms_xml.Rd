@@ -43,7 +43,7 @@ longer supported, use \code{param_df} instead.}
 longer supported, use \code{template} instead.}
 }
 \value{
-an invisible xmlDocument object
+an invisible xml_document object
 }
 \description{
 Generate Stics usms xml file from a template or an input file

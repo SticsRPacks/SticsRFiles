@@ -2,12 +2,12 @@
 % Please edit documentation in R/set_usms_param_xml.R
 \name{set_usms_param_xml}
 \alias{set_usms_param_xml}
-\title{Setting a usm param value(s) in an usms xmlDocument}
+\title{Setting a usm param value(s) in an usms}
 \usage{
 set_usms_param_xml(xml_doc_object, usms_param = NULL, overwrite = FALSE)
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from an usms file)}
+\item{xml_doc_object}{an  object (created from an usms file)}
 
 \item{usms_param}{usms parameters (data.frame)}
 
@@ -15,7 +15,7 @@ set_usms_param_xml(xml_doc_object, usms_param = NULL, overwrite = FALSE)
 updating existing ones (FALSE)}
 }
 \description{
-Setting a usm param value(s) in an usms xmlDocument
+Setting a usm param value(s) in an usms
 }
 \examples{
 \dontrun{

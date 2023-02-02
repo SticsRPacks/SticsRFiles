@@ -1,6 +1,6 @@
 #' @title Get the "formalisme" node "@nom" attribute value of a
-#' (or a list of) parameter(s) in an xmlDocument, of a vector of
-#' @param xml_doc an xmlDocument object (created from any xml file),
+#' (or a list of) parameter(s) in an xml_document, of a vector of
+#' @param xml_doc an xml_document object (created from any xml file),
 #' or a vector of
 #' @param name Optional. A parameter name or a vector of. If not given,
 #' all parameters names are extracted.

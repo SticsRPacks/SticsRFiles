@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_names.R
 \name{get_param_names}
 \alias{get_param_names}
-\title{Get a list of Stics xml parameters names an xmlDocument or  XML node}
+\title{Get a list of Stics xml parameters names an xml_document or  XML node}
 \usage{
 get_param_names(
   xml_object,
@@ -15,7 +15,7 @@ get_param_names(
 }
 \arguments{
 \item{xml_object}{an xml XML::XMLInternalElementNode
-or SticsRFiles::xmlDocument object}
+or SticsRFiles::xml_document object}
 
 \item{param_list}{param names vector, only used for recursive calls}
 
@@ -30,7 +30,7 @@ for unique names list}
 a character vector of parameters names
 }
 \description{
-Get a list of Stics xml parameters names an xmlDocument or  XML node
+Get a list of Stics xml parameters names an xml_document or  XML node
 }
 \examples{
 \dontrun{
