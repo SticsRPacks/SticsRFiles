@@ -110,7 +110,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     for (p in layers_params_names) {
       # column name
       par <- paste0(p, "_", i)
-      # print(par)
+
       layer <- paste("layer", as.character(i))
       par_values <- sols_param[[par]]
 

@@ -187,7 +187,7 @@ get_param_txt <- function(workspace = getwd(),
 filter_param <- function(in_list, param = NULL, exact = FALSE) {
   out_list <- list()
   names_vec <- names(in_list)
-  for (i in 1:length(names_vec)) {
+  for (i in seq_along(names_vec)) {
     name <- names_vec[[i]]
     if (is.list(in_list[[name]])) {
       tmp <- filter_param(in_list[[name]], param = param, exact = exact)
@@ -447,7 +447,7 @@ get_plant_txt <- function(file = "ficplt1.txt", variety = NULL,
       x[variety]
     })
   } else {
-    variety <- seq_along(1:length(varieties))
+    variety <- seq_along(varieties)
   }
 
   # Setting variety names to vectors

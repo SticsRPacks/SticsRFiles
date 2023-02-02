@@ -28,26 +28,27 @@ gen_usms_xml2txt(
 (i.e. containing the Stics XML input files). Optional, if not provided
 the current workspace stored in JavaStics preferences will be used.}
 
-\item{out_dir}{The path of the directory where to create usms directories (Optional),
-if not provided the JavaStics workspace will be used as root}
+\item{out_dir}{The path of the directory where to create usms directories
+(Optional), if not provided the JavaStics workspace will be used as root}
 
 \item{usm}{List of usms to generate (Optional). If not provided, all
 usms contained in workspace_path/usms.xml file will be generated.}
 
 \item{verbose}{Logical value for displaying information while running}
 
-\item{dir_per_usm_flag}{logical, TRUE if one want to create one directory per USM,
-FALSE if USM files are generated in the target_path (only useful for usms_list of size one)}
+\item{dir_per_usm_flag}{logical, TRUE if one want to create one directory
+per USM, FALSE if USM files are generated in the target_path
+(only useful for usms_list of size one)}
 
 \item{check}{Logical, TRUE to check if usms files exist, FALSE otherwise}
 
 \item{java_cmd}{The java virtual machine command name or executable path}
 
-\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path} is no
-longer supported, use \code{javastics} instead.}
+\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path}
+is no longer supported, use \code{javastics} instead.}
 
-\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path} is no
-longer supported, use \code{workspace} instead.}
+\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path}
+is no longer supported, use \code{workspace} instead.}
 
 \item{target_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{target_path} is no
 longer supported, use \code{out_dir} instead.}
@@ -64,14 +65,14 @@ usms_path : created directories paths (for storing Stics input files),
 files : generated files list (in JavaStics workspace origin),
 copy_status : logical value vector, indicating if all files have been
 generated for each usm
-obs_copy_status : logical value vector, indicating if observaion files have been
-successfully copied in usms directories
+obs_copy_status : logical value vector, indicating if observation files
+have been successfully copied in usms directories
 }
 \description{
-The function creates sets of input files for one or multiple usms
-from usms data stored in a JavaStics workspace. For multiple usms, sets will
-be generated into individual folders named with usm names.. Observations
-files will be also copied if they are named \verb{[usm_name].obs}
+The function creates sets of input files for one or multiple
+usms from usms data stored in a JavaStics workspace. For multiple usms,
+sets will be generated into individual folders named with usm names.
+Observations files will be also copied if they are named \verb{[usm_name].obs}
 For one usm, files will be generated either in the workspace directory
 or in a subdirectory.
 }

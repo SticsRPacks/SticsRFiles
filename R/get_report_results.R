@@ -96,7 +96,7 @@ get_report_results <- function(workspace,
   # otherwise column are named V1 to Vncol
   if (length(h_idx)) {
     col_names <- unlist(h[1, ], use.names = FALSE)
-    df <- df[, seq_along(1:length(col_names))]
+    df <- df[, seq_along(col_names)]
     names(df) <- col_names
   } else {
     col_names <- names(df)

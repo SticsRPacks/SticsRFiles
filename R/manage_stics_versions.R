@@ -176,7 +176,6 @@ add_stics_version <- function(version_name,
   # Writing data updated with new version information (about csv files location)
   set_versions_info(
     version_name = version_name,
-    # versions_dir = dest_dir,
     location = location,
     overwrite = overwrite,
     verbose = verbose

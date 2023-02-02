@@ -16,15 +16,18 @@ gen_varmod(
 )
 }
 \arguments{
-\item{workspace}{Path of the directory containing the Stics var.mod file to modify}
+\item{workspace}{Path of the directory containing the Stics var.mod file
+to modify}
 
 \item{var}{vector of variables names (see details)}
 
 \item{append}{if TRUE, \code{var} data are appended to \code{file_name}}
 
-\item{file_name}{file name to generate (without path, default value: "var.mod")}
+\item{file_name}{file name to generate
+(without path, default value: "var.mod")}
 
-\item{stics_version}{Name of the Stics version (used to check variable names)}
+\item{stics_version}{Name of the Stics version
+(used to check variable names)}
 
 \item{force}{Force variables writing even if they are not a
 STICS variable (default: FALSE).}
@@ -44,8 +47,9 @@ Generating a daily variable list file from variables names
 \details{
 Variable names can be found using \code{get_var_info()}. They are
 checked before writing. If any variable name does not exist,
-it will not be written by default, but the function will still write the variables that exist.
-\code{force= TRUE} may however be used to write variables that do not exist.
+it will not be written by default, but the function will still write
+the variables that exist. \code{force= TRUE} may however be used to write
+variables that do not exist.
 }
 \examples{
 \dontrun{

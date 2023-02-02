@@ -29,10 +29,10 @@ static_help <- function(pkg,
   pkg_dir <- find.package(pkg)
 
   links <- tools::findHTMLlinks(pkgDir = pkg_dir, level = links_level)
-  pkgRdDB <-
+  pkg_rd_db <-
     eval(parse(text = "tools:::fetchRdDB(file.path(pkg_dir, 'help', pkg))"))
   force(links)
-  topics <- names(pkgRdDB)
+  topics <- names(pkg_rd_db)
 
   if (!base::is.null(topic)) {
     topic_idx <- topics %in% topic
@@ -45,7 +45,7 @@ static_help <- function(pkg,
     if (file.exists(f) && !overwrite) next
     p <- gsub(pattern = "\\.html$", x = basename(f), replacement = "")
 
-    tools::Rd2HTML(pkgRdDB[[p]], f,
+    tools::Rd2HTML(pkg_rd_db[[p]], f,
       package = pkg, Links = links, no_links = is.null(links)
     )
   }

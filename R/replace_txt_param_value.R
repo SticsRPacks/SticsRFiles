@@ -54,19 +54,20 @@ replace_txt_param_value <- function(file_path,
                 redir)
 
 
-  disp <- lapply(cmd, function(x) system(x, intern = TRUE))
 
   # testing if replacement is ok
   # 1- in place against a temporary file
   # 2- with one or several output files
   # diff for a file or several files
   diff_files <- lapply(new,
-                       function(x)
+                       function(x) {
                          system(paste("diff",
                                       old,
                                       x,
                                       "| wc -l"),
-                                intern = TRUE))
+                                intern = TRUE)
+                       }
+  )
 
   diff_files <- as.numeric(diff_files)
   not_replaced_files <- diff_files == 0

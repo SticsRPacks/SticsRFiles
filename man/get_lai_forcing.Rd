@@ -12,13 +12,15 @@ get_lai_forcing(usm_file_path, usms_list = c())
 \item{usms_list}{Usm(s) name(s) (optional, see details)}
 }
 \value{
-A named numeric vector with a Boolean value (\code{TRUE = forced}) for each usm
+A named numeric vector with a Boolean value (\code{TRUE = forced})
+for each usm
 }
 \description{
 Is LAI forced for usms in usms.xml
 }
 \details{
-Use \code{get_usms_list()} to get the list of the usm names for an usms.xml file.
+Use \code{get_usms_list()} to get the list of the usm names for an
+usms.xml file.
 }
 \examples{
 \dontrun{

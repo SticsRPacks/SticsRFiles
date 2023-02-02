@@ -181,7 +181,7 @@ set_param_txt <- function(workspace = getwd(),
            )
          },
          tec = {
-           tmp <- lapply(plant, function(x) {
+           lapply(plant, function(x) {
              set_tec_txt(
                file = file.path(dirpath, paste0("fictec", x, ".txt")),
                param = param, value = value, append = add
@@ -192,7 +192,7 @@ set_param_txt <- function(workspace = getwd(),
            # default : 1 plant
            if (is.null(plant)) plant <- 1
 
-           tmp <- lapply(plant, function(x) {
+           lapply(plant, function(x) {
              if (is.null(variety)) {
                variety <-
                  unlist(get_param_txt(workspace = dirpath,

@@ -121,7 +121,7 @@ get_param_info <- function(param = NULL,
   # Extract data without filtering
   # or filtering done in the previous step
   # when generating param_data_df
-  if (!any(c(par_use, form_use, keyword_use)) |
+  if (!any(c(par_use, form_use, keyword_use)) ||
     (par_use && !form_use)) {
     return(param_data_df)
   }
@@ -317,13 +317,13 @@ form_list2df <- function(formalism_list) {
 
   out <- vector("list", length(files))
 
-  for (i in seq_along(1:length(files))) {
+  for (i in seq_along(files)) {
     file <- files[i]
     forms_names <- names(formalism_list[[file]])
     out_file <- NULL
     out_form <- NULL
     out_param <- NULL
-    for (j in seq_along(1:length(forms_names))) {
+    for (j in seq_along(forms_names)) {
       form <- forms_names[[j]]
       par_names <- formalism_list[[file]][[j]]
       out_file <- c(out_file, rep(file, length(par_names)))

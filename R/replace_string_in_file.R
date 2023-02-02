@@ -1,6 +1,7 @@
 #' Replacing a string in a file
 #'
-#' @description Replacing occurrences of a string by another one, in place or creating a new file
+#' @description Replacing occurrences of a string by another one,
+#' in place or creating a new file
 #'
 #' @param file_path The path to the file
 #' @param target_string The target string to replace

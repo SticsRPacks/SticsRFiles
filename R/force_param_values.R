@@ -51,7 +51,7 @@ force_param_values <- function(workspace,
   } else {
 
     # convert into vector in case a tibble is given instead of a vector
-    param_values <- setNames(as.numeric(param_values), names(param_values))
+    param_values <- stats::setNames(as.numeric(param_values), names(param_values))
 
     # Checking parameters names
     param_names <- names(param_values)

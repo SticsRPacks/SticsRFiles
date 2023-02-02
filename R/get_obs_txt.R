@@ -17,7 +17,8 @@
 #'          the function tries to read the number of species from the
 #'          input files.
 #'
-#' @return A data.frame of the STICS-formatted observations. Return \code{NULL} if no files were found,
+#' @return A data.frame of the STICS-formatted observations.
+#'         Return is \code{NULL} if no files were found,
 #'         or more files than usable. If mixed crops (two `filename` provided),
 #'         the function binds them and add a new column called "Plant"
 #'         which corresponds to the name of each observation file.

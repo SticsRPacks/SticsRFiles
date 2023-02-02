@@ -98,8 +98,8 @@ get_plant_name <- function(workspace,
                          recursive = FALSE)
 
   } else {
-    stop('plante dominance="2" should always be declared in usms.xml',
-         ' even for sole crops (use null as values).')
+    stop("plante dominance=\"2\" should always be declared in usms.xml",
+         " even for sole crops (use null as values).")
   }
   names(plant_list) <- usms
 

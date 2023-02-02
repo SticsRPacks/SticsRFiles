@@ -16,15 +16,21 @@ gen_tec_xml(
 )
 }
 \arguments{
-\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters
+to use (see details)}
 
-\item{file}{Path of a tec xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.}
+\item{file}{Path of a tec xml file to be used as a template. Optional,
+if not provided, the function will use a standard template depending
+on the stics version.}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
+\item{stics_version}{Name of the Stics version. Optional, used if
+the \code{file} argument is not provided. In this case the function uses a
+standard template associated to the stics version.}
 
-\item{na_values}{value to use as missing value in param_table (optional, default : NA)}
+\item{na_values}{value to use as missing value in param_table
+(optional, default : NA)}
 
 \item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
 longer supported, use \code{param_df} instead.}
@@ -42,30 +48,32 @@ an invisible xmlDocument object or a list of
 Generate Stics tec xml file(s) from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+Please see \code{get_stics_versions_compat()} for the full list of
+stics versions that can be used for the
 argument \code{stics_version}.
 
-\code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
-   Tec_name \tab julres_1 \tab coderes_1 \tab qres_1 \tab Crespc_1 \tab CsurNres_1 \cr
-   USM_2017_T1_CI_tec.xml \tab NA \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml \tab 110 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml \tab 73 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml \tab 70 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml \tab 81 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml \tab 100 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml \tab 100 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml \tab 92 \tab 1 \tab 9 \tab 42 \tab 90 \cr
-   FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \tab 9 \tab 42 \tab 90 \cr
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrr}{
+   Tec_name \tab julres_1 \tab coderes_1 \cr
+   USM_2017_T1_CI_tec.xml \tab NA \tab 1 \cr
+   BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml \tab 110 \tab 1 \cr
+   BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml \tab 73 \tab 1 \cr
+   AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \cr
+   AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \cr
+   FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml \tab 70 \tab 1 \cr
+   MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml \tab 81 \tab 1 \cr
+   MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml \tab 100 \tab 1 \cr
+   MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml \tab 100 \tab 1 \cr
+   FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml \tab 92 \tab 1 \cr
+   FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml \tab 82 \tab 1 \cr
 }
 
 
-The first column gives the tec file name (to be generated), all following columns give the parameter value to put
-in the file, and each line denotes a separate tec file (for e.g. several USMs).
+The first column gives the tec file name (to be generated), all following
+columns give the parameter value to put in the file, and each line denotes a
+separate tec file (for e.g. several USMs).
 
-The first column name must contain the keyword tec or Tec or TEC as a prefix to be detected
-(as shown in the table extract above).
+The first column name must contain the keyword tec or Tec or TEC as
+a prefix to be detected (as shown in the table extract above).
 
 If not given (the default, \code{NULL}), the function returns the template as is.
 }

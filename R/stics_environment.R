@@ -233,9 +233,6 @@ stics_get <- function(name = NULL, env_name = sticsenv_name()) {
   }
 
   if (length(name) > 1) {
-    # warning("name contains not only one variable name",
-    #         "returning the first one content ! ")
-    # name <- name[1]
     out <- lapply(name, function(x) stics_get(name = x, env_name = env_name))
 
     names(out) <- name
@@ -358,7 +355,7 @@ stics_split_list <- function(name) {
 #' stics_remove()
 #' }
 stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
-  # browser()
+
   envir <- stics_get(name = env_name)
 
   if (base::is.null(name)) {
@@ -396,11 +393,10 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
     # suppression elts de liste
     ret <- unlist(lapply(
       list_var_names,
-      function(x) eval(parse(text = paste0("base::is.null(",
-                                           x,
-                                           " <- NULL)")
-      ),
-      envir = envir)
+      function(x) {
+        eval(parse(text = paste0("base::is.null(", x, " <- NULL)")),
+             envir = envir)
+      }
     ))
     ret <- all(ret)
   }

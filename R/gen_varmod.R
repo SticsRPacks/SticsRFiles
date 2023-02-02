@@ -1,10 +1,13 @@
 #' @title Generating a var.mod type file
 #' @description Generating a daily variable list file from variables names
-#' @param workspace Path of the directory containing the Stics var.mod file to modify
+#' @param workspace Path of the directory containing the Stics var.mod file
+#' to modify
 #' @param var vector of variables names (see details)
 #' @param append if TRUE, `var` data are appended to `file_name`
-#' @param file_name file name to generate (without path, default value: "var.mod")
-#' @param stics_version   Name of the Stics version (used to check variable names)
+#' @param file_name file name to generate
+#' (without path, default value: "var.mod")
+#' @param stics_version   Name of the Stics version
+#' (used to check variable names)
 #' @param force     Force variables writing even if they are not a
 #' STICS variable (default: FALSE).
 #'
@@ -15,8 +18,9 @@
 #'
 #' @details Variable names can be found using `get_var_info()`. They are
 #' checked before writing. If any variable name does not exist,
-#' it will not be written by default, but the function will still write the variables that exist.
-#' `force= TRUE` may however be used to write variables that do not exist.
+#' it will not be written by default, but the function will still write
+#' the variables that exist. `force= TRUE` may however be used to write
+#' variables that do not exist.
 #'
 #' @return Nothing. Writes to a file.
 #'
@@ -90,7 +94,8 @@ gen_varmod <- function(workspace,
     var_names <- var_names[var_exist]
   }
 
-  if (!length(var_names)) warning("Not any variable name to add to the var.mod file!")
+  if (!length(var_names))
+    warning("Not any variable name to add to the var.mod file!")
 
   if (isTRUE(force)) {
     var_names[var_exist] <- var_to_stics_name(var_names[var_exist])
@@ -103,7 +108,9 @@ gen_varmod <- function(workspace,
     vars <- readLines(file_path)
     commonvars <- var_names %in% vars
     if (any(commonvars)) {
-      cli::cli_alert_warning("Variable{?s} {.var {var_names[commonvars]}} already in {.code var.mod}. Not repeating it.")
+      cli::cli_alert_warning(paste0("Variable{?s} {.var ",
+                                    "{var_names[commonvars]}} already in",
+                                    " {.code var.mod}. Not repeating it."))
     }
     var_names <- var_names[!commonvars]
     if (length(var_names) == 0) {

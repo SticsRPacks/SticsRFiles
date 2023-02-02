@@ -37,7 +37,6 @@ get_params_from_table <- function(params_table,
                                   na_values = NA) {
 
   # TODO: doing a merge with get_values_from_table
-  . <- NULL
 
   if (base::is.null(dict)) {
     dict <- list(

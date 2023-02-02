@@ -63,7 +63,7 @@ set_usms_param_xml <- function(xml_doc_object,
   usm_col <- in_params[col_id]
 
   # default idx
-  usms_xml_idx <- 1:dim(usms_param)[1]
+  usms_xml_idx <- seq_len(dim(usms_param)[1])
 
   # Checking parameter names from param_table against xml ones
   check_param_names(

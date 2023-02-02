@@ -30,7 +30,9 @@ get_java_workspace <- function(javastics) {
   xml_pref <- xmldocument(xml_path)
   current_wd <- getValues(xml_pref, '//entry[@key="workingDirectory.current"]')
 
-  if (base::is.null(current_wd)) stop("JavaStics working directory hasn't been set (use set_java_wd to do so)!")
+  if (base::is.null(current_wd))
+    stop("JavaStics working directory hasn't been set ",
+         "(use set_java_wd to do so)!")
 
   return(current_wd)
 }

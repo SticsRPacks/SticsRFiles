@@ -1,10 +1,10 @@
 #' @title Generating one or several usms directories from a javastics workspace
 #' content
 #'
-#' @description The function creates sets of input files for one or multiple usms
-#' from usms data stored in a JavaStics workspace. For multiple usms, sets will
-#' be generated into individual folders named with usm names.. Observations
-#' files will be also copied if they are named `[usm_name].obs`
+#' @description The function creates sets of input files for one or multiple
+#' usms from usms data stored in a JavaStics workspace. For multiple usms,
+#' sets will be generated into individual folders named with usm names.
+#' Observations files will be also copied if they are named `[usm_name].obs`
 #' For one usm, files will be generated either in the workspace directory
 #' or in a subdirectory.
 #'
@@ -13,20 +13,21 @@
 #' @param workspace Path of a JavaStics workspace
 #' (i.e. containing the Stics XML input files). Optional, if not provided
 #' the current workspace stored in JavaStics preferences will be used.
-#' @param out_dir The path of the directory where to create usms directories (Optional),
-#' if not provided the JavaStics workspace will be used as root
+#' @param out_dir The path of the directory where to create usms directories
+#' (Optional), if not provided the JavaStics workspace will be used as root
 #' @param usm List of usms to generate (Optional). If not provided, all
 #' usms contained in workspace_path/usms.xml file will be generated.
 #' @param verbose Logical value for displaying information while running
-#' @param dir_per_usm_flag logical, TRUE if one want to create one directory per USM,
-#' FALSE if USM files are generated in the target_path (only useful for usms_list of size one)
+#' @param dir_per_usm_flag logical, TRUE if one want to create one directory
+#' per USM, FALSE if USM files are generated in the target_path
+#' (only useful for usms_list of size one)
 #' @param check Logical, TRUE to check if usms files exist, FALSE otherwise
 #' @param java_cmd The java virtual machine command name or executable path
 #'
-#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path` is no
-#'   longer supported, use `javastics` instead.
-#' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path` is no
-#'   longer supported, use `workspace` instead.
+#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
+#' is no longer supported, use `javastics` instead.
+#' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path`
+#' is no longer supported, use `workspace` instead.
 #' @param target_path `r lifecycle::badge("deprecated")` `target_path` is no
 #'   longer supported, use `out_dir` instead.
 #' @param usms_list `r lifecycle::badge("deprecated")` `usms_list` is no
@@ -40,8 +41,8 @@
 #' files : generated files list (in JavaStics workspace origin),
 #' copy_status : logical value vector, indicating if all files have been
 #' generated for each usm
-#' obs_copy_status : logical value vector, indicating if observaion files have been
-#' successfully copied in usms directories
+#' obs_copy_status : logical value vector, indicating if observation files
+#' have been successfully copied in usms directories
 #'
 #' @examples
 #' \dontrun{
@@ -98,7 +99,8 @@ gen_usms_xml2txt <- function(javastics,
     workspace_path <- workspace # to remove when we update inside the function
   }
   if (grepl("\ ", workspace_path)) {
-    stop("Space into workspace is not supported. Please copy the content of workspace folder in a path without space.")
+    stop(paste0("Space into workspace is not supported. Please copy ",
+                "the content of workspace folder in a path without space."))
   }
   # target_path
   if (lifecycle::is_present(target_path)) {
@@ -138,17 +140,6 @@ gen_usms_xml2txt <- function(javastics,
   #
   # TODO : for parallel work add a copy of workspace_path
   # and calculate if at the beginning of the foreach loop !
-
-  # library(doParallel)
-
-  # parallel computing management
-  # cores_nb <- 1
-  # if ( parallelized ) {
-  #   cores_nb <- 2
-  # }
-  #
-  # cl <- parallel::makeCluster(cores_nb)
-  # registerDoParallel(cl)
   #################################################################
 
 
@@ -219,7 +210,7 @@ gen_usms_xml2txt <- function(javastics,
     # We increment the usm_index if we just treated plant 2 or if the dominance
     # of the next i is 1 (case were we only have lai file for plant 1)
     if (i < length(lai_file_path)) {
-      if (dominance[i] == 2 | dominance[i + 1] == 1) {
+      if (dominance[i] == 2 || dominance[i + 1] == 1) {
         usm_index <- usm_index + 1
       }
     }
@@ -234,7 +225,8 @@ gen_usms_xml2txt <- function(javastics,
 
     # Error if any unknown usm name !
     if (!all(usms_exist)) {
-      stop("At least one usm does not exist in usms.xml file : ", usms_list[!usms_exist])
+      stop("At least one usm does not exist in usms.xml file : ",
+           usms_list[!usms_exist])
     }
   }
 
@@ -255,23 +247,11 @@ gen_usms_xml2txt <- function(javastics,
   }
 
 
-  # Command string without usm name
-  # according to OS type
-  # jexe <- "JavaSticsCmd.exe"
-  #
-  # if (tolower(Sys.info()["sysname"]) == "windows") {
-  #   cmd <- jexe
-  #   cmd_args <- paste0(' --generate-txt "', workspace_path, '"')
-  # } else {
-  #   cmd <- "java"
-  #   cmd_args <- paste0("-jar ", jexe, ' --generate-txt "', workspace_path, '"')
-  # }
-
-  # Replacing previous bloc with a function call
+  # Getting javastics cmd line
   cmd_list <- get_javastics_cmd(javastics_path,
-    java_cmd = java_cmd,
-    type = "generate",
-    workspace = workspace_path
+                                java_cmd = java_cmd,
+                                type = "generate",
+                                workspace = workspace_path
   )
   cmd_args <- cmd_list$cmd_generate
   cmd <- cmd_list$command
@@ -283,7 +263,8 @@ gen_usms_xml2txt <- function(javastics,
   # multiple usms. In that case files will be overwritten.
   # So fixing it to TRUE
   if (!dir_per_usm_flag && usms_number > 1) {
-    warning("Generating files in the JavaStics workspace is not compatible with multiple usms !")
+    warning("Generating files in the JavaStics workspace",
+            " is not compatible with multiple usms !")
     dir_per_usm_flag <- TRUE
   }
 
@@ -315,9 +296,6 @@ gen_usms_xml2txt <- function(javastics,
   # Generating source files paths
   files_path <- file.path(workspace_path, files_list)
 
-  # Fixing files linked to associated crops
-  mandatory_files <- c(rep(TRUE, 9), FALSE, FALSE)
-
   # outputs definition files
   out_files_def <- c("var.mod", "rap.mod", "prof.mod")
   out_files_path <- file.path(javastics_path, "config", out_files_def)
@@ -331,7 +309,6 @@ gen_usms_xml2txt <- function(javastics,
   exec_status <- rep(TRUE, length = usms_number)
 
   for (i in 1:usms_number) {
-    # foreach(i = 1:usms_number, .export = ".GlobalEnv") %dopar% {
 
     usm_name <- usms_list[i]
 
@@ -348,7 +325,8 @@ gen_usms_xml2txt <- function(javastics,
     exec_status[i] <- !any(grepl(pattern = "ERROR", ret))
     if (!exec_status[i]) {
       # displaying usm name
-      if (verbose) cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
+      if (verbose)
+        cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
       next
     }
 
@@ -388,7 +366,9 @@ gen_usms_xml2txt <- function(javastics,
         to = usm_path, overwrite = TRUE
       )
     } else {
-      if (verbose) cli::cli_alert_warning("Obs file not found for USM {.val {usm_name}}: {.file {obs_path}}")
+      if (verbose)
+        cli::cli_alert_warning(paste0("Obs file not found for USM","
+                                      {.val {usm_name}}: {.file {obs_path}}"))
     }
 
     # Copying lai files if lai forcing
@@ -400,7 +380,10 @@ gen_usms_xml2txt <- function(javastics,
             to = usm_path, overwrite = TRUE
           )
         } else {
-          if (verbose) cli::cli_alert_warning("LAI file not found for USM {.val {usm_name}}: {.file {lai_file_path[i]}}")
+          if (verbose)
+            cli::cli_alert_warning(paste0("LAI file not found for USM ",
+                                          "{.val {usm_name}}: {.file ",
+                                          "{lai_file_path[i]}}"))
         }
       })
     }
@@ -408,7 +391,8 @@ gen_usms_xml2txt <- function(javastics,
     global_copy_status[i] <- copy_status & out_copy_status
 
     # displaying usm name
-    if (verbose) cli::cli_alert_info("USM {.val {usm_name}} successfully created")
+    if (verbose)
+      cli::cli_alert_info("USM {.val {usm_name}} successfully created")
 
     # Storing the current usm target path
     usms_path[i] <- usm_path
@@ -418,15 +402,12 @@ gen_usms_xml2txt <- function(javastics,
   if (!all(global_copy_status)) {
     failed_usms <- usms_list[!global_copy_status]
     warning(paste(
-      "Errors occured while generating or copying files to usms directories for usms:\n",
+      "Errors occured while generating or",
+      "copying files to usms directories for usms:\n",
       paste(failed_usms, collapse = ", ")
     ))
   }
 
-  # stopping the cluster
-  # stopCluster(cl)
-  # duration <- Sys.time() - start_time
-  # print(duration)
 
 
   # Message about execution errors

@@ -11,16 +11,20 @@ get_file_int(workspace, filename, plant_name = NULL, verbose = TRUE)
 
 \item{filename}{A vector of file names}
 
-\item{plant_name}{A vector of plant names. Length of filename, or recycled if one (optional).}
+\item{plant_name}{A vector of plant names. Length of filename, or recycled
+if one (optional).}
 
-\item{verbose}{Logical value (optional), TRUE to display read file name, FALSE otherwise (default)}
+\item{verbose}{Logical value (optional), TRUE to display read file name,
+FALSE otherwise (default)}
 }
 \value{
-A \code{data.frame} of all observation or simulation files concatenated by row.
+A \code{data.frame} of all observation or simulation files concatenated
+by row.
 }
 \description{
-Read STICS observation or simulation file(s). This function is not exported because
-it only reads and pre-formats the file without any clever tests for intercrops or usms.
+Read STICS observation or simulation file(s). This function
+is not exported because it only reads and pre-formats the file without any
+clever tests for intercrops or usms.
 }
 \examples{
 \dontrun{
