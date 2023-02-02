@@ -42,8 +42,8 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
     stop("sols_param do not belong to data.frame class/type")
   }
 
-  if (!"xml_document" %in% class(xml_doc_object)) {
-    stop("xml_doc_object is not an XMLDocument object")
+  if (!is.xml_document(xml_doc_object)) {
+    stop("xml_doc_object is not an xml_document object")
   }
 
 

@@ -10,7 +10,7 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' usms_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xml"),
+#' xl_path <- file.path(get_examples_path(file_type = "xl"),
 #'                      "inputs_stics_example.xlsx")
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
@@ -50,8 +50,8 @@ set_usms_param_xml <- function(xml_doc_object,
     }
   }
 
-  if (!"" %in% class(xml_doc_object)) {
-    stop("xml_doc_object is not an XMLDocument object")
+  if (!is.xml_document(xml_doc_object)) {
+    stop("xml_doc_object is not an xml_document object")
   }
 
   # detecting usm names column
