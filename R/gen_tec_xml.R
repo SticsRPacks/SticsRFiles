@@ -62,10 +62,9 @@
 
 gen_tec_xml <- function(param_df = NULL,
                         file = NULL,
-                        # tec_names = NULL,
                         out_dir = getwd(),
                         stics_version = "latest",
-                        na_values = NA, # ) { #,  #dict = NULL) {
+                        na_values = NA,
                         param_table = lifecycle::deprecated(),
                         tec_in_file = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
@@ -171,7 +170,7 @@ gen_tec_xml <- function(param_df = NULL,
 
   # saving files
   # TODO: vectorize the saveXmlDoc method of the xmlDocument class
-  for (f in seq_along(1:length(xml_docs))) {
+  for (f in seq_along(xml_docs)) {
     saveXmlDoc(xml_docs[[f]], tec_out_file[[f]])
   }
 

@@ -15,13 +15,18 @@ gen_sta_xml(
 )
 }
 \arguments{
-\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters
+to use (see details)}
 
-\item{file}{Path of a sta xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.}
+\item{file}{Path of a sta xml file to be used as a template. Optional,
+if not provided, the function will use a standard template depending
+on the stics version.}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
+\item{stics_version}{Name of the Stics version. Optional, used if
+the \code{file} argument is not provided. In this case the function uses a
+standard template associated to the stics version.}
 
 \item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
 longer supported, use \code{param_df} instead.}
@@ -39,8 +44,8 @@ an invisible xmlDocument object or a list of
 Generate Stics sta xml file(s) from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
-argument \code{stics_version}.
+Please see \code{get_stics_versions_compat()} for the full list of
+stics versions that can be used for the argument \code{stics_version}.
 
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Sta_name \tab zr \tab NH3ref \tab latitude \tab patm \tab aclim \cr
@@ -50,11 +55,12 @@ argument \code{stics_version}.
 }
 
 
-The first column gives the sta file name (to be generated), all following columns give the parameter value to put
-in the file, and each line denotes a separate sta file (for e.g. several USMs).
+The first column gives the sta file name (to be generated),
+all following columns give the parameter value to put in the file,
+and each line denotes a separate sta file (for e.g. several USMs).
 
-The first column name must contain the keyword sta or Sta or STA as a prefix to be detected
-(as shown in the table extract above).
+The first column name must contain the keyword sta or Sta or STA
+as a prefix to be detected (as shown in the table extract above).
 
 If not given (the default, \code{NULL}), the function returns the template as is.
 }

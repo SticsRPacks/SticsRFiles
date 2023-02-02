@@ -34,11 +34,13 @@ gen_tec_doc <- function(xml_doc = NULL,
                         ...) {
 
 
-  # Fix first time
-  sort <- TRUE
   dot_args <- list(...)
   dot_args_names <- names(dot_args)
-  if ("sort" %in% dot_args_names) sort <- dot_args$sort
+  if ("sort" %in% dot_args_names) {
+    sort <- dot_args$sort
+  } else {
+    sort <- TRUE
+  }
 
   na_values <- NA
   if ("na_values" %in% dot_args_names) na_values <- dot_args$na_values
@@ -68,7 +70,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         gen_tec_doc(
           xml_doc = cloneXmlDoc(xml_doc),
           param_table = as.data.frame(t(x),
-            stringsAsFactors = FALSE
+                                      stringsAsFactors = FALSE
           ),
           stics_version = stics_version,
           dict = dict,
@@ -139,15 +141,16 @@ gen_tec_doc <- function(xml_doc = NULL,
   # 3- Excluding the other one from names vector
   if ("codemodfauche" %in% table_names) {
     code <- table_params[["codemodfauche"]]
-    modfauche <- NULL
-    rmmodfauche <- NULL
+
     if (code == "2") {
       modfauche <- "julfauche"
       rmmodfauche <- "tempfauche"
-    }
-    if (code == "3") {
+    } else if (code == "3") {
       modfauche <- "tempfauche"
       rmmodfauche <- "julfauche"
+    } else {
+      modfauche <- NULL
+      rmmodfauche <- NULL
     }
     vec_names <- setdiff(vec_names, rmmodfauche)
   }
@@ -171,8 +174,8 @@ gen_tec_doc <- function(xml_doc = NULL,
     nb_values <- length(param_values)
     if ((nb_values > 0) && nb_par == nb_values) {
       set_param_value(xml_doc,
-        param_name = par_name,
-        param_value = param_values
+                      param_name = par_name,
+                      param_value = param_values
       )
     } else {
       if (nb_par > 0) {
@@ -195,9 +198,11 @@ gen_tec_doc <- function(xml_doc = NULL,
           gen_error <- TRUE
           cat(paste(
             "The parameter", par_name,
-            "is unique in the original xml file, and not attached to \"intervention\"\n"
+            "is unique in the original xml file,",
+            "and not attached to \"intervention\"\n"
           ))
-          cat("Multiple values are present in input table, check consistency with formalism definition !\n")
+          cat(paste0("Multiple values are present in input table,",
+                     " check consistency with formalism definition !\n"))
           cat("The treatment for this parameter is aborted.")
           cat("\n")
           next
@@ -255,7 +260,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       is_thin <- par_name %in% c("juleclair", "nbinfloecl")
       if (is_thin) {
         parent_name <- "thinning"
-        # parent_path <- get_param_type(xml_doc, "ta", "option", parent_name)$xpath
+
         parent_path <- get_param_type(xml_doc, "ta", "choix", parent_name)$xpath
       }
       #-------------------------------------------------------------------------
@@ -272,7 +277,6 @@ gen_tec_doc <- function(xml_doc = NULL,
       set_param_value(
         xml_doc = xml_doc,
         param_name = par_name,
-        # param_value = table_params[[par_name]])
         param_value = param_values
       )
 

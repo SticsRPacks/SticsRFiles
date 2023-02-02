@@ -53,7 +53,7 @@ replace_txt_param_value <- function(file_path,
                 file_path,
                 redir)
 
-
+  lapply(cmd, function(x) system(x, intern = TRUE))
 
   # testing if replacement is ok
   # 1- in place against a temporary file

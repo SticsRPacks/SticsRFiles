@@ -26,7 +26,8 @@ the xsl file (xml, txt).
 \examples{
 \dontrun{
 xml_plt <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
-xsl_file <- "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
+xsl_file <-
+   "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
 
 SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
 }

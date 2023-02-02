@@ -367,7 +367,7 @@ gen_usms_xml2txt <- function(javastics,
       )
     } else {
       if (verbose)
-        cli::cli_alert_warning(paste0("Obs file not found for USM","
+        cli::cli_alert_warning(paste0("Obs file not found for USM", "
                                       {.val {usm_name}}: {.file {obs_path}}"))
     }
 

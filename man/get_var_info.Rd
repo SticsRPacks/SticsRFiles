@@ -13,21 +13,23 @@ get_var_info(
 }
 \arguments{
 \item{var}{Vector of variable names (or partial names).
-Optional, if not provided, the function returns information for all variables.}
+Optional, if not provided, the function returns information for
+all variables.}
 
 \item{keyword}{Search by keyword instead of variable name
 (search in the name and description field)}
 
-\item{stics_version}{Name of the Stics version. Optional, can be used to search
-parameters information relative to a specific Stics version. By default the
-latest version returned by \code{get_stics_versions_compat()} is used.}
+\item{stics_version}{Name of the Stics version. Optional, can be used
+to search parameters information relative to a specific Stics version.
+By default the latest version returned by \code{get_stics_versions_compat()}
+is used.}
 
 \item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
 longer supported, use \code{stics_version} instead.}
 }
 \description{
-Helper function that returns names and descriptions of STICS output variables
-from a partial name and/or descriptive keywords.
+Helper function that returns names and descriptions of
+STICS output variables from a partial name and/or descriptive keywords.
 }
 \details{
 The function understand \code{\link[base]{regex}} as input.

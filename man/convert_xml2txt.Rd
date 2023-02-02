@@ -23,9 +23,11 @@ convert_xml2txt(
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2)}
 
-\item{out_dir}{Path of the directory where to generate the file. Optional, set to the path of the input xml file by default}
+\item{out_dir}{Path of the directory where to generate the file.
+Optional, set to the path of the input xml file by default}
 
-\item{save_as}{Name of the output file (optional, default: fixed name for Stics)}
+\item{save_as}{Name of the output file
+(optional, default: fixed name for Stics)}
 
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use \code{file} instead.}
@@ -40,8 +42,10 @@ longer supported, use \code{plant_id} instead.}
 longer supported, use \code{save_as} instead.}
 }
 \description{
-The input file according to his type (ini,plant,tec,station,soil,par)
-is converted to a text file readable by the Stics model (ficini.txt, ficplt1.txt,...)
+The input file according to his type
+(ini,plant,tec,station,soil,par)
+is converted to a text file readable by the Stics model
+(ficini.txt, ficplt1.txt,...)
 }
 \examples{
 \dontrun{

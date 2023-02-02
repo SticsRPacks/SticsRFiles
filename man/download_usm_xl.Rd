@@ -22,9 +22,11 @@ download_usm_xl(
 \item{out_dir}{Directory path where to copy the Excel file
 (optional, default: \code{tempdir()})}
 
-\item{stics_version}{Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.}
+\item{stics_version}{Name of the Stics version. Optional, by default
+the latest version returned by get_stics_versions_compat() is used.}
 
-\item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
+\item{overwrite}{Optional logical, TRUE for overwriting files,
+FALSE otherwise (default)}
 
 \item{verbose}{Logical value for displaying information while running}
 
@@ -43,11 +45,13 @@ longer supported, use out_dir instead.}
 A vector of copied files path.
 }
 \description{
-The file is an example that can be used for generating JavaStics input files
-from parameters values stored in Excel spreadsheet format (USMs, Ini, Soils, Tec, Station, ...).
-Each sheet contains parameters values to insert into XML files, with the help of
-these functions: \code{\link{gen_usms_xml}}, \code{\link{gen_sols_xml}}, \code{\link{gen_tec_xml}},
-\code{\link{gen_sta_xml}}, \code{\link{gen_usms_xml}}, \code{\link{gen_ini_xml}}
+The file is an example that can be used for generating
+JavaStics input files from parameters values stored in Excel spreadsheet
+format (USMs, Ini, Soils, Tec, Station, ...). Each sheet contains parameters
+values to insert into XML files, with the help of these functions:
+\code{\link{gen_usms_xml}}, \code{\link{gen_sols_xml}},
+\code{\link{gen_tec_xml}}, \code{\link{gen_sta_xml}},
+\code{\link{gen_usms_xml}}, \code{\link{gen_ini_xml}}
 }
 \examples{
 \dontrun{

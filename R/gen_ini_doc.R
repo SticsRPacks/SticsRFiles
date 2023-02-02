@@ -173,7 +173,7 @@ gen_ini_doc <- function(xml_doc = NULL,
       for (j in 1:5) {
         # densinitial
         par2 <- paste0(p, "_", j, "_", crop_tag, i)
-        # print(par2)
+
         if (is.element(par2, param_names) && !is.na(param_table[[par2]])) {
           set_param_value(
             xml_doc = xml_doc,

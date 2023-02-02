@@ -53,7 +53,7 @@ check_usms_files <- function(workspace_path,
     }
   }
 
-  usms_nb <- length(usms_full_list)
+
   par_list <- c(
     "nbplantes", "finit", "fstation", "fclim1", "fclim2", "fplt",
     "ftec", "flai"
@@ -180,7 +180,8 @@ check_usms_files <- function(workspace_path,
         collapse = ","
       ),
       "not found in", workspace_path,
-      ". \nPlease note that with SticsRpacks, plant folder (that contains plant files)",
+      ".\nPlease note that with SticsRpacks, ",
+      "plant folder (that contains plant files)",
       "can be located either inside the workspace or in the JavaStics path.\n",
       "Check that your plant files exist in one of these."
     ))
@@ -198,7 +199,8 @@ check_usms_files <- function(workspace_path,
         collapse = ","
       ),
       "not found in", workspace_path,
-      ". Please note that with SticsRpacks, plant folder (that contains plant files)",
+      ". Please note that with SticsRpacks, plant folder",
+      " (that contains plant files)",
       "can be located either inside the workspace or in the JavaStics path.\n",
       "Check that your plant files exist in one of these."
     ))

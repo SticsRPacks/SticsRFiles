@@ -30,8 +30,9 @@ longer supported, use \code{file} instead.}
 The path to the folder where data have been downloaded
 }
 \description{
-Download locally the example data from the \href{https://github.com/SticsRPacks/data}{data repository}
-in the SticsRPacks organisation.
+Download locally the example data from the
+\href{https://github.com/SticsRPacks/data}{data repository} in the SticsRPacks
+organisation.
 }
 \examples{
 \dontrun{

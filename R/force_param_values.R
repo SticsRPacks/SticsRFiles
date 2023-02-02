@@ -74,7 +74,6 @@ force_param_values <- function(workspace,
     param_values <- param_values[ind_non_na]
 
     # converting par names to Stics names
-    # stics_names <- col_names_to_var(names(param_values))
     # names conversion done in exist_param_csv()
     stics_names <- names(param_exist[ind_non_na])
 

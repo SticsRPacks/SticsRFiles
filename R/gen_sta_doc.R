@@ -72,7 +72,6 @@ gen_sta_doc <- function(xml_doc = NULL,
     return(xml_docs)
   }
 
-  # print(stics_version)
 
 
   for (p in in_params) {

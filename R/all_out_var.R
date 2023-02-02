@@ -1,12 +1,13 @@
 
 #' Return all possible STICS outputs for var.mod
 #'
-#' @description Helper function to print the list of all possible variables to set as output
-#' from the STICS model.
+#' @description Helper function to print the list of all possible variables
+#' to set as output from the STICS model.
 #'
-#' @param stics_version Name of the Stics version. Optional, can be used to search
-#' parameters information relative to a specific Stics version. By default the
-#' latest version returned by `get_stics_versions_compat()` is used.
+#' @param stics_version Name of the Stics version. Optional, can be used to
+#' search parameters information relative to a specific Stics version.
+#' By default the latest version returned by `get_stics_versions_compat()`
+#' is used.
 #'
 #' @seealso `get_var_info()`, `gen_varmod()`, and `get_stics_versions_compat()`
 #'
@@ -28,7 +29,10 @@ all_out_var <- function(stics_version = "latest") {
   }
 
   var_df <- utils::read.csv2(
-    file.path(get_examples_path(file_type = "csv", stics_version = stics_version), "outputs.csv"),
+    file.path(
+      get_examples_path(file_type = "csv",
+                        stics_version = stics_version),
+      "outputs.csv"),
     header = FALSE,
     stringsAsFactors = FALSE
   )[, cols_idx]
@@ -43,16 +47,18 @@ all_out_var <- function(stics_version = "latest") {
 
 #' Find STICS output variable names and description
 #'
-#' @description Helper function that returns names and descriptions of STICS output variables
-#' from a partial name and/or descriptive keywords.
+#' @description Helper function that returns names and descriptions of
+#' STICS output variables from a partial name and/or descriptive keywords.
 #'
 #' @param var Vector of variable names (or partial names).
-#' Optional, if not provided, the function returns information for all variables.
+#' Optional, if not provided, the function returns information for
+#' all variables.
 #' @param keyword Search by keyword instead of variable name
 #' (search in the name and description field)
-#' @param stics_version Name of the Stics version. Optional, can be used to search
-#' parameters information relative to a specific Stics version. By default the
-#' latest version returned by `get_stics_versions_compat()` is used.
+#' @param stics_version Name of the Stics version. Optional, can be used
+#' to search parameters information relative to a specific Stics version.
+#' By default the latest version returned by `get_stics_versions_compat()`
+#' is used.
 #'
 #' @param version `r lifecycle::badge("deprecated")` `version` is no
 #'   longer supported, use `stics_version` instead.
@@ -110,12 +116,14 @@ get_var_info <- function(var = NULL,
 
 #' Search if a STICS variable exist
 #'
-#' @description Tells if one or more variable names are valid STICS output variables.
+#' @description Tells if one or more variable names are valid STICS
+#' output variables.
 #'
 #' @param var     A vector of variable names
-#' @param stics_version Name of the Stics version. Optional, can be used to search
-#' parameters information relative to a specific Stics version. By default the
-#' latest version returned by `get_stics_versions_compat()` is used.
+#' @param stics_version Name of the Stics version. Optional, can be used
+#' to search parameters information relative to a specific Stics version.
+#' By default the latest version returned by `get_stics_versions_compat()`
+#' is used.
 #'
 #' @param version `r lifecycle::badge("deprecated")` `version` is no
 #'   longer supported, use `stics_version` instead.
@@ -155,7 +163,10 @@ is_stics_var <- function(var,
   index_var <- match(var_parsed, vars_names_parsed)
   var_found <- !is.na(index_var)
   if (any(!var_found)) {
-    cli::cli_alert_warning("Variable{?s} {.var {var_parsed[!var_found]}} not found. Try {.code get_var_info()}.")
+    cli::cli_alert_warning(
+      paste0("Variable{?s} {.var {var_parsed[!var_found]}}",
+             " not found. Try {.code get_var_info()}.")
+    )
   }
   return(var_found)
 }

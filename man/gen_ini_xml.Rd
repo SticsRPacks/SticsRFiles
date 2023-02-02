@@ -16,16 +16,22 @@ gen_ini_xml(
 )
 }
 \arguments{
-\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters
+to use (see details)}
 
-\item{file}{Path of an ini xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version (see \code{stics_version} argument)}
+\item{file}{Path of an ini xml file to be used as a template. Optional,
+if not provided, the function will use a standard template depending on
+the stics version (see \code{stics_version} argument)}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{crop_tag}{identifier for the crop parameters names related to the main crop, or the associated crop if any
-(example: Crop is used in the param_table example in the details section below)}
+\item{crop_tag}{identifier for the crop parameters names related to the
+main crop, or the associated crop if any (example: Crop is used in the
+param_table example in the details section below)}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file} argument is not provided. In this case the function uses a standard template associated to the stics version.}
+\item{stics_version}{Name of the Stics version.
+Optional, used if the \code{file} argument is not provided. In this case
+the function uses a standard template associated to the stics version.}
 
 \item{ini_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{ini_in_file} is no
 longer supported, use \code{file} instead.}
@@ -43,27 +49,30 @@ an invisible xmlDocument object or a list of
 Generate Stics ini xml file(s) from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
+Please see \code{get_stics_versions_compat()} for the full list of
+stics versions that can be used for the
 argument \code{stics_version}.
 
-\code{param_df} is a \code{data.frame} with the following format:\tabular{lrlrrr}{
-   Ini_name \tab nbplantes \tab stade0_Crop1 \tab lai0_Crop1 \tab masec0_Crop1 \tab QNplante0_Crop1 \cr
-   USM_2017_T1_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Vill09_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Vill10_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Vill11_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Vill12_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Vill13_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Vill14_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
-   Standard_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \tab 0 \cr
+\code{param_df} is a \code{data.frame} with the following format:\tabular{lrlrr}{
+   Ini_name \tab nbplantes \tab stade0_Crop1 \tab lai0_Crop1 \tab masec0_Crop1 \cr
+   USM_2017_T1_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Vill09_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Vill10_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Vill11_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Vill12_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Vill13_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Vill14_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
+   Standard_ini.xml \tab 1 \tab snu \tab 0 \tab 0 \cr
 }
 
 
-The first column gives the ini file name (to be generated), all following columns give the parameter value to put
-in the file, and each line denotes a separate ini file (for e.g. several USMs).
+The first column gives the ini file name (to be generated), all following
+columns give the parameter value to put
+in the file, and each line denotes a separate ini file
+(for e.g. several USMs).
 
-The first column name must contain the keyword ini or Ini or INI as a prefix to be detected
-(as shown in the table extract above).
+The first column name must contain the keyword ini or Ini or INI as a prefix
+to be detected (as shown in the table extract above).
 
 If not given (the default, \code{NULL}), the function returns the template as is.
 }

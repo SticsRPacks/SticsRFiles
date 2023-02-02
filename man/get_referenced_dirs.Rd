@@ -2,12 +2,14 @@
 % Please edit documentation in R/download_data.R
 \name{get_referenced_dirs}
 \alias{get_referenced_dirs}
-\title{Getting valid directories string for download from SticsRpacks data repository}
+\title{Getting valid directories string for download from SticsRpacks data
+repository}
 \usage{
 get_referenced_dirs(dirs = NULL, stics_version = NULL)
 }
 \arguments{
-\item{dirs}{Directories names of the referenced use cases (optional), starting with "study_case_"}
+\item{dirs}{Directories names of the referenced use cases (optional),
+starting with "study_case_"}
 
 \item{stics_version}{An optional version string
 within those given by get_stics_versions_compat()$versions_list}
@@ -16,7 +18,8 @@ within those given by get_stics_versions_compat()$versions_list}
 Vector of referenced directories string (as "study_case_1/V9.0")
 }
 \description{
-Getting valid directories string for download from SticsRpacks data repository
+Getting valid directories string for download from SticsRpacks data
+repository
 }
 \examples{
 \dontrun{
