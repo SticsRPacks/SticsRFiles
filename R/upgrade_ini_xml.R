@@ -118,7 +118,7 @@ upgrade_ini_xml <- function(file,
   # Removing useless nodes
   rm_nodes <- unlist(lapply(rm_names, function(x) {
     unlist(getNodeS(
-      docObj = old_doc,
+      doc_obj = old_doc,
       path = paste0("//", x)
     ))
   }))

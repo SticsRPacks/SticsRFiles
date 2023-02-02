@@ -139,7 +139,7 @@ upgrade_plt_xml <- function(file,
   # nodes existing outside of 'cultivar parameters' formalism
   nodes_to_rm <- lapply(param_names_to_varietal, function(x) {
     getNodeS(
-      docObj = old_doc,
+      doc_obj = old_doc,
       path = paste0("//formalisme[@nom!='cultivar parameters']//param[@nom='",
                     x, "']")
     )
