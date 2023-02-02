@@ -37,12 +37,12 @@ setGeneric("calcType", function(doc_obj) standardGeneric("calcType"))
 # defined for xml_document
 
 setGeneric("xmldocument", function(file) standardGeneric("xmldocument"))
-setGeneric("setContent<-", function(doc_obj, value) standardGeneric("setContent<-"))
+setGeneric("set_content<-", function(doc_obj, value) standardGeneric("set_content<-"))
 
-setGeneric("getContent", function(doc_obj) standardGeneric("getContent"))
+setGeneric("get_content", function(doc_obj) standardGeneric("get_content"))
 
-setGeneric("loadContent", function(doc_obj) standardGeneric("loadContent"))
-setGeneric("isLoaded", function(doc_obj) standardGeneric("isLoaded"))
+setGeneric("load_content", function(doc_obj) standardGeneric("load_content"))
+setGeneric("is_loaded", function(doc_obj) standardGeneric("is_loaded"))
 
 setGeneric("is.xml_document", function(doc_obj) standardGeneric("is.xml_document"))
 

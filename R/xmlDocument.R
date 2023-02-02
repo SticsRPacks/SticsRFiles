@@ -41,7 +41,7 @@ setMethod(
   function(.Object, file = character(length = 0), warn = FALSE) {
     .Object <- methods::callNextMethod(.Object, file)
     methods::validObject(.Object)
-    .Object <- loadContent(.Object)
+    .Object <- load_content(.Object)
     return(.Object)
   }
 )
@@ -49,14 +49,14 @@ setMethod(
 
 setMethod("show", "xml_document", function(object) {
   methods::callNextMethod()
-  if (isLoaded(object)) {
+  if (is_loaded(object)) {
     print(paste0("   content : ", class(object@content)[[1]]))
   }
 })
 
 # setter methods
 setReplaceMethod(
-  "setContent", signature(doc_obj = "xml_document"),
+  "set_content", signature(doc_obj = "xml_document"),
   function(doc_obj, value) {
     if (!methods::is(value, "XMLInternalDocument")) {
       stop("Input value is not a XMLInternalDocument class object")
@@ -67,7 +67,7 @@ setReplaceMethod(
 )
 
 # getter methods
-setMethod("getContent", signature(doc_obj = "xml_document"), function(doc_obj) {
+setMethod("get_content", signature(doc_obj = "xml_document"), function(doc_obj) {
   return(doc_obj@content)
 })
 
@@ -76,7 +76,7 @@ setMethod(
   "getNodeS", signature(doc_obj = "xml_document"),
   function(doc_obj, path = NULL) {
     node_set <- NULL
-    if (!isLoaded(doc_obj)) {
+    if (!is_loaded(doc_obj)) {
       stop("xml file is not loaded in xml_document object")
     }
 
@@ -428,14 +428,14 @@ setMethod(
 
 
 # other methods
-setMethod("loadContent", signature(doc_obj = "xml_document"), function(doc_obj) {
+setMethod("load_content", signature(doc_obj = "xml_document"), function(doc_obj) {
 
-  setContent(doc_obj) <- XML::xmlParse(getPath(doc_obj))
+  set_content(doc_obj) <- XML::xmlParse(getPath(doc_obj))
   return(doc_obj)
 })
 
 
-setMethod("isLoaded", signature(doc_obj = "xml_document"), function(doc_obj) {
+setMethod("is_loaded", signature(doc_obj = "xml_document"), function(doc_obj) {
   return(methods::is(doc_obj@content, "XMLInternalDocument"))
 })
 
@@ -452,7 +452,7 @@ setMethod("is.xml_document", signature(doc_obj = "ANY"), function(doc_obj) {
 setMethod(
   "saveXmlDoc", signature(doc_obj = "xml_document"),
   function(doc_obj, xml_path) {
-    if (isLoaded(doc_obj)) {
+    if (is_loaded(doc_obj)) {
       write(XML::saveXML(doc_obj@content), xml_path)
     }
   }
@@ -460,11 +460,11 @@ setMethod(
 
 # clone method
 setMethod("cloneXmlDoc", signature(doc_obj = "xml_document"), function(doc_obj) {
-  if (!isLoaded(doc_obj)) {
+  if (!is_loaded(doc_obj)) {
     return(NULL)
   }
 
-  setContent(doc_obj) <- XML::xmlClone(getContent(doc_obj))
+  set_content(doc_obj) <- XML::xmlClone(get_content(doc_obj))
 
   return(doc_obj)
 })
