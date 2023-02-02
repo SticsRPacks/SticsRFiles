@@ -11,7 +11,6 @@ check_param_names <- function(param_names, ref_names, pattern_tag = "",
     )
   )
 
-  # diff_names <- setdiff(param_names, tolower(ref_names))
   diff_names <- setdiff(param_names, ref_names)
 
   if (length(diff_names)) {

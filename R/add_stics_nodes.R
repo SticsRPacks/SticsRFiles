@@ -45,7 +45,6 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   file_idx <- which(node_types$files_tags == file_tag)
 
   parent_name <- node_types$parent[file_idx]
-  node_name <- node_types$node_names[file_idx]
 
   if (!is.null(formalism_name)) {
     # Case : tec

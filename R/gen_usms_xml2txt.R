@@ -291,8 +291,6 @@ gen_usms_xml2txt <- function(javastics,
     "fictec2.txt"
   )
 
-  files_nb <- length(files_list)
-
   # Generating source files paths
   files_path <- file.path(workspace_path, files_list)
 
@@ -300,8 +298,6 @@ gen_usms_xml2txt <- function(javastics,
   out_files_def <- c("var.mod", "rap.mod", "prof.mod")
   out_files_path <- file.path(javastics_path, "config", out_files_def)
 
-
-  # start_time <- Sys.time()
   # For keeping target usms dir paths
   usms_path <- vector(mode = "character", usms_number)
 

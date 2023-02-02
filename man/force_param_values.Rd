@@ -12,28 +12,38 @@ force_param_values(
 )
 }
 \arguments{
-\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
+\item{workspace}{Path of the workspace containing the Stics (txt)
+input files.}
 
-\item{values}{named vector of parameter values to force. See Details for more information.}
+\item{values}{named vector of parameter values to force.
+See Details for more information.}
 
 \item{javastics}{Path of JavaStics.}
 
-\item{param_values}{old_param \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{old_param} is no
-longer supported, use new_param instead.}
+\item{param_values}{old_param \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{old_param}
+is no longer supported, use new_param instead.}
 }
 \value{
 A logical status TRUE if successfull, FALSE otherwise
 }
 \description{
-Generates a param.sti file and sets code optim in new_travail.usm to force parameters values in Stics simulations (this function is typically called before \code{SticsOnR::run_stics()})
+Generates a param.sti file and sets code optim in
+new_travail.usm to force parameters values in Stics simulations
+(this function is typically called before \code{SticsOnR::run_stics()})
 }
 \details{
-This function operates on Stics text input files. Do not use it before calling \code{gen_usms_xml2txt()}, otherwise param.sti and new_travail.usm files will be overwritten.
+This function operates on Stics text input files.
+Do not use it before calling \code{gen_usms_xml2txt()}, otherwise
+param.sti and new_travail.usm files will be overwritten.
 
-This function has been created to be called before \code{SticsOnR::run_stics()}. It can not work with \code{SticsOnR::run_javastics()}, that will overwrite param.sti and new_travail.usm files.
+This function has been created to be called before
+\code{SticsOnR::run_stics()}. It can not work with \code{SticsOnR::run_javastics()},
+that will overwrite param.sti and new_travail.usm files.
 
-param_values can contain NA. In this case, the corresponding parameter(s) will not be forced (default value(s), i.e. read in Stics input files, will be used).
-If param_values==NA or param_values==NULL, not any parameter will be forced (all default values used).
+param_values can contain NA. In this case, the corresponding parameter(s)
+will not be forced (default value(s), i.e. read in Stics input files,
+will be used). If param_values==NA or param_values==NULL,
+not any parameter will be forced (all default values used).
 }
 \examples{
 \dontrun{

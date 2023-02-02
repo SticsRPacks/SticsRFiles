@@ -152,7 +152,6 @@ tmp2 <- unlist(get_param_txt(
 ))
 test_that("Set and get of a non-varietal parameter for an intercrop
           for the simulated variety", {
-  # expect_equal(as.numeric(tmp[plant]) + 1, as.numeric(tmp2[plant]))
   expect_equal(tmp[[plant]] + 1, tmp2[[plant]])
 })
 

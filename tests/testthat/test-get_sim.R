@@ -127,7 +127,6 @@ test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
 
-  # unlink(file.path(path,"banana"))
 })
 
 unlink(file.path(path, "banana"))

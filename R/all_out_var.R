@@ -20,7 +20,7 @@
 all_out_var <- function(stics_version = "latest") {
 
   # Checking and getting the right version
-  version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version_compat(stics_version = stics_version)
 
   if (get_version_num(stics_version = stics_version) < 9.2) {
     cols_idx <- 1:4

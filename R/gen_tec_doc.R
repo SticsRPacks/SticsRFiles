@@ -36,11 +36,6 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   dot_args <- list(...)
   dot_args_names <- names(dot_args)
-  if ("sort" %in% dot_args_names) {
-    sort <- dot_args$sort
-  } else {
-    sort <- TRUE
-  }
 
   na_values <- NA
   if ("na_values" %in% dot_args_names) na_values <- dot_args$na_values
@@ -74,7 +69,6 @@ gen_tec_doc <- function(xml_doc = NULL,
           ),
           stics_version = stics_version,
           dict = dict,
-          sort = FALSE,
           na_values = na_values
         )
       }
@@ -143,13 +137,10 @@ gen_tec_doc <- function(xml_doc = NULL,
     code <- table_params[["codemodfauche"]]
 
     if (code == "2") {
-      modfauche <- "julfauche"
       rmmodfauche <- "tempfauche"
     } else if (code == "3") {
-      modfauche <- "tempfauche"
       rmmodfauche <- "julfauche"
     } else {
-      modfauche <- NULL
       rmmodfauche <- NULL
     }
     vec_names <- setdiff(vec_names, rmmodfauche)

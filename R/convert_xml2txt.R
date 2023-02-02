@@ -89,7 +89,7 @@ convert_xml2txt <- function(file,
   calc_name <- length(idx) > 0
 
   # Not possible to define output file name
-  if (base::is.null(out_file) & !calc_name) {
+  if (base::is.null(out_file) && !calc_name) {
     stop("Output file name not found or not provided as argument! ")
   }
 

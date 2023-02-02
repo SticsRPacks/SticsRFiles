@@ -55,7 +55,6 @@ gen_ini_doc <- function(xml_doc = NULL,
   # tag see treatment inside next block
   if (base::is.null(params_desc)) {
     # detecting ini names column
-    # crop_regex <- paste0("_",tolower(crop_tag),"[0-9]*$")
     crop_regex <- paste0("_", crop_tag, "[0-9]*$")
     layer_regex <- "_[0-9]*$"
 
@@ -83,7 +82,6 @@ gen_ini_doc <- function(xml_doc = NULL,
     plante_params_pref <- params_desc$plante_params_pref
     other_params_pref <- params_desc$other_params_pref
     base_params <- params_desc$base_params
-    # param_names <- params_desc$param_names
   }
 
   # Checking parameter names from param_table against xml ones
