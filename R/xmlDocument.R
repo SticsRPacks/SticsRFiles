@@ -3,12 +3,12 @@
 # xml class based on fileDocument class
 setClass("xml_document",
   contains = c("file_document"),
-  validity = validDoc
+  validity = valid_doc
 )
 
 
 # object validation
-setMethod("validDoc", signature(object = "xml_document"), function(object) {
+setMethod("valid_doc", signature(object = "xml_document"), function(object) {
 
   ext <- getExt(object)
 
@@ -386,7 +386,7 @@ setMethod(
 
 # addNodes
 setMethod(
-  "addNodes", signature(object = "xml_document"),
+  "add_nodes", signature(object = "xml_document"),
   function(object, nodes_to_add, parent_path = NULL) {
     # parent node is root node
     if (base::is.null(parent_path)) {
@@ -415,7 +415,7 @@ setMethod(
 
 # removeNodes
 setMethod(
-  "delNodes", signature(object = "xml_document"),
+  "del_nodes", signature(object = "xml_document"),
   function(object, path) {
     node_set <- get_nodes(object, path)
 
@@ -451,7 +451,7 @@ setMethod("is.xml_document", signature(object = "ANY"), function(object) {
 
 # save method
 setMethod(
-  "saveXmlDoc", signature(object = "xml_document"),
+  "save_xml_doc", signature(object = "xml_document"),
   function(object, xml_path) {
     if (is_loaded(object)) {
       write(XML::saveXML(object@content), xml_path)
@@ -460,7 +460,7 @@ setMethod(
 )
 
 # clone method
-setMethod("cloneXmlDoc", signature(object = "xml_document"), function(object) {
+setMethod("clone_xml_doc", signature(object = "xml_document"), function(object) {
   if (!is_loaded(object)) {
     return(NULL)
   }

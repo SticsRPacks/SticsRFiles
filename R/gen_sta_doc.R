@@ -62,7 +62,7 @@ gen_sta_doc <- function(xml_doc = NULL,
       param_table, 1,
       function(x) {
         gen_sta_doc(
-          xml_doc = cloneXmlDoc(xml_doc),
+          xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x)),
           stics_version = stics_version,
           check_names = FALSE

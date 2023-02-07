@@ -63,7 +63,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       param_table, 1,
       function(x) {
         gen_tec_doc(
-          xml_doc = cloneXmlDoc(xml_doc),
+          xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x),
                                       stringsAsFactors = FALSE
           ),

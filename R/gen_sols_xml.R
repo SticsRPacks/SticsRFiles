@@ -138,7 +138,7 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
 
   # for getting onlye the xml doc in return
   if (!base::is.null(sols_out_file)) {
-    saveXmlDoc(xml_doc, sols_out_file)
+    save_xml_doc(xml_doc, sols_out_file)
   }
 
   return(invisible(xml_doc))

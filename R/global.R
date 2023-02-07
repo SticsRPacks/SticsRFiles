@@ -1,6 +1,6 @@
 #' @import XML
 # for generic functions declarations for *Document classes
-setGeneric("validDoc", function(object) standardGeneric("validDoc"))
+setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
 # defined for fileDocument
 types_list <- c("file", "dir", "url", "link")
 
@@ -68,13 +68,13 @@ setGeneric("set_values", function(object, path, values_list, nodes_ids = NULL) s
 
 setGeneric("get_values", function(object, path, nodes_ids = NULL) standardGeneric("get_values"))
 
-setGeneric("saveXmlDoc", function(object, xml_path) standardGeneric("saveXmlDoc"))
+setGeneric("save_xml_doc", function(object, xml_path) standardGeneric("save_xml_doc"))
 
-setGeneric("cloneXmlDoc", function(object) standardGeneric("cloneXmlDoc"))
+setGeneric("clone_xml_doc", function(object) standardGeneric("clone_xml_doc"))
 
 # adding and removing nodes to doc
 
-setGeneric("addNodes", function(object, nodes_to_add, parent_path = NULL) standardGeneric("addNodes"))
+setGeneric("add_nodes", function(object, nodes_to_add, parent_path = NULL) standardGeneric("add_nodes"))
 # removing nodes
 
-setGeneric("delNodes", function(object, path) standardGeneric("delNodes"))
+setGeneric("del_nodes", function(object, path) standardGeneric("del_nodes"))

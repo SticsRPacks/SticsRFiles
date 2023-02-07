@@ -247,6 +247,6 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
     return(invisible(FALSE))
   }
 
-  saveXmlDoc(xml_doc, file)
+  save_xml_doc(xml_doc, file)
   return(TRUE)
 }

@@ -101,7 +101,7 @@ gen_ini_doc <- function(xml_doc = NULL,
       1,
       function(x) {
         gen_ini_doc(
-          xml_doc = cloneXmlDoc(xml_doc),
+          xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x),
             stringsAsFactors = FALSE
           ),

@@ -140,7 +140,7 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
 
   # for getting only the xml doc in return
   if (!base::is.null(usms_out_file)) {
-    saveXmlDoc(xml_doc, usms_out_file)
+    save_xml_doc(xml_doc, usms_out_file)
   }
 
 

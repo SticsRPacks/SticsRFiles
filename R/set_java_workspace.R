@@ -54,7 +54,7 @@ set_java_workspace <- function(javastics, workspace) {
     n <- XML::xmlParseString(
       paste0("<entry key=\"workingDirectory.current\">", workspace, "</entry>")
       )
-    addNodes(xml_pref, n)
+    add_nodes(xml_pref, n)
   } else {
     # if it's not different from the new one,
     if (current_wd == workspace ||
@@ -68,5 +68,5 @@ set_java_workspace <- function(javastics, workspace) {
   }
 
   # writing file
-  saveXmlDoc(xml_pref, xml_path)
+  save_xml_doc(xml_pref, xml_path)
 }

@@ -194,7 +194,7 @@ set_param_xml <- function(file,
 
 
   # Saving
-  saveXmlDoc(xml_doc, out_path)
+  save_xml_doc(xml_doc, out_path)
 
   # Output status
   return(invisible(TRUE))

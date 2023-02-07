@@ -146,7 +146,7 @@ gen_sta_xml <- function(param_df = NULL,
   # saving files
   # TODO: vectorize the saveXmlDoc method of the xml_document class
   for (f in seq_along(xml_docs)) {
-    saveXmlDoc(xml_docs[[f]], sta_out_file[[f]])
+    save_xml_doc(xml_docs[[f]], sta_out_file[[f]])
   }
 
   return(invisible(xml_docs))
