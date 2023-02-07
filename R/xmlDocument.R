@@ -1,36 +1,38 @@
 #' @keywords internal
 
 # xml class based on fileDocument class
-setClass("xml_document",
+setClass(
+  "xml_document",
   contains = c("file_document"),
   validity = valid_doc
 )
 
 
 # object validation
-setMethod("valid_doc", signature(object = "xml_document"), function(object) {
+setMethod(
+  "valid_doc", signature(object = "xml_document"),
+  function(object) {
 
-  ext <- getExt(object)
+    ext <- get_ext(object)
 
-  if (length(object@name) == 0 || object@name == "") {
-    return("file name is empty !")
-  }
-  if (!length(ext) || !ext == "xml") {
-    return("Error: no xml extension")
-  }
-  if (!exist(object)) {
-    return(paste("Error: file doesn't exist:", object@name, "!"))
-  }
-  if (exist(object) && isempty(object)) {
-    return(paste("Error: file is empty:", object@name, "!"))
-  }
-  TRUE
-})
+    if (length(object@name) == 0 || object@name == "") {
+      return("file name is empty !")
+    }
+    if (!length(ext) || !ext == "xml") {
+      return("Error: no xml extension")
+    }
+    if (!exist(object)) {
+      return(paste("Error: file doesn't exist:", object@name, "!"))
+    }
+    if (exist(object) && isempty(object)) {
+      return(paste("Error: file is empty:", object@name, "!"))
+    }
+    TRUE
+  })
 
 
 # constructor
 setMethod(
-
   "xmldocument", signature(file = "character"),
   function(file = character(length = 0)) {
     methods::new("xml_document", file = file)
@@ -68,9 +70,12 @@ setReplaceMethod(
 )
 
 # getter methods
-setMethod("get_content", signature(object = "xml_document"), function(object) {
-  return(object@content)
-})
+setMethod(
+  "get_content", signature(object = "xml_document"),
+  function(object) {
+    return(object@content)
+  }
+)
 
 
 setMethod(
@@ -157,7 +162,8 @@ setMethod(
       if (object@warn) {
         print(class(attr_list))
         warning(paste(
-        "Existing nodes with different attributes comparing to others on xpath, missing attributes ?",
+          "Existing nodes with different attributes comparing to others,",
+          "missing attributes ?",
           path
         ))
       }
@@ -289,7 +295,7 @@ setMethod(
 setMethod(
   "add_attrs", signature(object = "xml_document"),
   function(object, path, named_vector) {
-    # add not base::is.null node_set !!!!
+    # add not is nullnull node_set !!!!
     if (!base::is.null(names(named_vector))) {
       node_set <- get_nodes(object, path)
       invisible(sapply(node_set, function(x) XML::xmlAttrs(x) <- named_vector))
@@ -429,24 +435,33 @@ setMethod(
 
 
 # other methods
-setMethod("load_content", signature(object = "xml_document"), function(object) {
+setMethod(
+  "load_content", signature(object = "xml_document"),
+  function(object) {
 
-  set_content(object) <- XML::xmlParse(getPath(object))
-  return(object)
-})
-
-
-setMethod("is_loaded", signature(object = "xml_document"), function(object) {
-  return(methods::is(object@content, "XMLInternalDocument"))
-})
-
-setMethod("is.xml_document", signature(object = "ANY"), function(object) {
-  if (methods::is(object, "xml_document")) {
-    return(TRUE)
-  } else {
-    return(FALSE)
+    set_content(object) <- XML::xmlParse(get_path(object))
+    return(object)
   }
-})
+)
+
+
+setMethod(
+  "is_loaded", signature(object = "xml_document"),
+  function(object) {
+    return(methods::is(object@content, "XMLInternalDocument"))
+  }
+)
+
+setMethod(
+  "is.xml_document", signature(object = "ANY"),
+  function(object) {
+    if (methods::is(object, "xml_document")) {
+      return(TRUE)
+    } else {
+      return(FALSE)
+    }
+  }
+)
 
 
 # save method
@@ -460,12 +475,15 @@ setMethod(
 )
 
 # clone method
-setMethod("clone_xml_doc", signature(object = "xml_document"), function(object) {
-  if (!is_loaded(object)) {
-    return(NULL)
+setMethod(
+  "clone_xml_doc", signature(object = "xml_document"),
+  function(object) {
+    if (!is_loaded(object)) {
+      return(NULL)
+    }
+
+    set_content(object) <- XML::xmlClone(get_content(object))
+
+    return(object)
   }
-
-  set_content(object) <- XML::xmlClone(get_content(object))
-
-  return(object)
-})
+)

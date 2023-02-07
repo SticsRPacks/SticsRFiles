@@ -5,18 +5,18 @@ setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
 types_list <- c("file", "dir", "url", "link")
 
 setGeneric("filedocument", function(file, type) standardGeneric("filedocument"))
-setGeneric("setName<-", function(object, value) standardGeneric("setName<-"))
-setGeneric("setName", function(object, value) standardGeneric("setName"))
-setGeneric("setWarn<-", function(object, value) standardGeneric("setWarn<-"))
-setGeneric("setDir<-", function(object, value) standardGeneric("setDir<-"))
-setGeneric("setExt<-", function(object, value) standardGeneric("setExt<-"))
-setGeneric("getName", function(object) standardGeneric("getName"))
+setGeneric("set_name<-", function(object, value) standardGeneric("set_name<-"))
+setGeneric("set_name", function(object, value) standardGeneric("set_name"))
+setGeneric("set_warn<-", function(object, value) standardGeneric("set_warn<-"))
+setGeneric("set_dir<-", function(object, value) standardGeneric("set_dir<-"))
+setGeneric("set_ext<-", function(object, value) standardGeneric("set_ext<-"))
+setGeneric("get_name", function(object) standardGeneric("get_name"))
 
-setGeneric("getDir", function(object) standardGeneric("getDir"))
-setGeneric("getExt", function(object) standardGeneric("getExt"))
-setGeneric("getType", function(object) standardGeneric("getType"))
+setGeneric("get_dir", function(object) standardGeneric("get_dir"))
+setGeneric("get_ext", function(object) standardGeneric("get_ext"))
+setGeneric("get_type", function(object) standardGeneric("get_type"))
 
-setGeneric("getPath", function(object) standardGeneric("getPath"))
+setGeneric("get_path", function(object) standardGeneric("get_path"))
 
 setGeneric("exist", function(object) standardGeneric("exist"))
 
@@ -31,8 +31,8 @@ setGeneric("infos", function(object, type = "all") standardGeneric("infos"))
 
 setGeneric("isdir", function(object) standardGeneric("isdir"))
 setGeneric("isempty", function(object) standardGeneric("isempty"))
-setGeneric("calcExt", function(object) standardGeneric("calcExt"))
-setGeneric("calcType", function(object) standardGeneric("calcType"))
+setGeneric("calc_ext", function(object) standardGeneric("calc_ext"))
+setGeneric("calc_type", function(object) standardGeneric("calc_type"))
 
 #setGeneric("show", function(object) standardGeneric("show"))
 
