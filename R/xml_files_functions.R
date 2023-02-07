@@ -110,7 +110,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
   ver <- to_xml_version(new_version)
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
-  att <- getAttrs(xml_doc, path = root_path)
+  att <- get_attrs(xml_doc, path = root_path)
 
   # Checking file version
   if (!is.null(att) && att[, "version"] == new_version && !overwrite) {
@@ -129,7 +129,7 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   xml_doc <- get_xml_doc(xml_file_or_doc)
   xml_root_name <- XML::xmlName(XML::xmlRoot(xml_doc@content))
 
-  att <- getAttrs(xml_doc, path = paste0("/", xml_root_name))
+  att <- get_attrs(xml_doc, path = paste0("/", xml_root_name))
 
   if ("version" %in% colnames(att)) {
     version_string <- get_version_string(att[, "version"])

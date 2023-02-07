@@ -52,11 +52,11 @@ setGeneric("is.xml_document", function(object) standardGeneric("is.xml_document"
 
 setGeneric("get_nodes", function(object, path = NULL) standardGeneric("get_nodes"))
 
-setGeneric("getAttrs", function(object, path) standardGeneric("getAttrs"))
+setGeneric("get_attrs", function(object, path) standardGeneric("get_attrs"))
 
-setGeneric("getAttrsNames", function(object, path) standardGeneric("getAttrsNames"))
+setGeneric("get_attrs_names", function(object, path) standardGeneric("get_attrs_names"))
 
-setGeneric("getAttrsValues", function(object, path, attr_list, nodes_ids = NULL) standardGeneric("getAttrsValues"))
+setGeneric("get_attrs_values", function(object, path, attr_list, nodes_ids = NULL) standardGeneric("get_attrs_values"))
 
 setGeneric("addAttrs", function(object, path, named_vector) standardGeneric("addAttrs"))
 

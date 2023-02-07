@@ -92,7 +92,7 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 param_formalism_elt <- function(xml_doc, xpath, name) {
 
   # Formatting a parameter formalism list unit
-  values <- getAttrsValues(xml_doc, xpath, "nom")
+  values <- get_attrs_values(xml_doc, xpath, "nom")
 
   param_values <- get_param_value(xml_doc = xml_doc, param_name = name)
 

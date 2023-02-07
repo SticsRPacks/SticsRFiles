@@ -85,7 +85,7 @@ get_param_bounds <- function(xml_doc,
   # for an option parameter, getting
   if (param_type$type == "option") {
     xpath <- paste0(xpath, "/choix")
-    tmp_values <- as.numeric(getAttrsValues(xml_doc, xpath, "code"))
+    tmp_values <- as.numeric(get_attrs_values(xml_doc, xpath, "code"))
     bounds_values <- c(
       min(tmp_values),
       max(tmp_values)
@@ -95,7 +95,7 @@ get_param_bounds <- function(xml_doc,
     # Adding unique for repeated parameters : for exmaple in sols.xml
     bounds_values <- lapply(
       bounds_name,
-      function(x) as.numeric(getAttrsValues(xml_doc, xpath, x))
+      function(x) as.numeric(get_attrs_values(xml_doc, xpath, x))
     )
   }
 

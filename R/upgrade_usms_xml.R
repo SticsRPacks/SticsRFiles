@@ -107,7 +107,7 @@ upgrade_usms_xml <- function(file,
 
 
   # Usms names
-  usms_names <- getAttrsValues(old_doc, "//usm", "nom")
+  usms_names <- get_attrs_values(old_doc, "//usm", "nom")
 
   # existing obs files
   # intercrops usms are not taken into account in that case

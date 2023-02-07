@@ -73,7 +73,7 @@ get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
   lai_forced <- as.logical(as.numeric(getValues(xml_usms, "//codesimul")))
 
   # Xml usms names
-  usm_names <- getAttrs(xml_usms, "//usm")
+  usm_names <- get_attrs(xml_usms, "//usm")
   names(lai_forced) <- usm_names
 
   # Filtering using usms_list if needed

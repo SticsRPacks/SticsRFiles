@@ -137,16 +137,16 @@ get_param_value <- function(xml_doc,
            value <- getValues(xml_doc, xpath, ids)
          },
          attr = {
-           value <- getAttrsValues(xml_doc, xpath, param_type$attr, ids)
+           value <- get_attrs_values(xml_doc, xpath, param_type$attr, ids)
          },
          attrname = {
-           value <- getAttrsValues(xml_doc, xpath, param_type$attr, ids)
+           value <- get_attrs_values(xml_doc, xpath, param_type$attr, ids)
          },
          param = {
            value <- getValues(xml_doc, xpath, ids)
          },
          option = {
-           value <- getAttrsValues(xml_doc, xpath, "choix", ids)
+           value <- get_attrs_values(xml_doc, xpath, "choix", ids)
          },
          table = {
            value <- getValues(xml_doc, xpath, ids)
@@ -164,10 +164,10 @@ get_param_value <- function(xml_doc,
            value <- getValues(xml_doc, xpath, ids)
          },
          node_option = {
-           value <- getAttrsValues(xml_doc, xpath, "choix", ids)
+           value <- get_attrs_values(xml_doc, xpath, "choix", ids)
          },
          form_option = {
-           value <- getAttrsValues(xml_doc, xpath, "choix", ids)
+           value <- get_attrs_values(xml_doc, xpath, "choix", ids)
          },
          node_table = {
            value <- getValues(xml_doc, xpath, ids)
@@ -176,16 +176,16 @@ get_param_value <- function(xml_doc,
            value <- getValues(xml_doc, xpath, ids)
          },
          node_attr = {
-           value <- getAttrsValues(xml_doc, xpath, "nom", ids)
+           value <- get_attrs_values(xml_doc, xpath, "nom", ids)
          },
          attr_attr = {
            value <- getValues(xml_doc, xpath, ids)
          },
          attr_attr2 = {
-           value <- getAttrsValues(xml_doc, xpath, param_name, ids)
+           value <- get_attrs_values(xml_doc, xpath, param_name, ids)
          },
          choix_attr = {
-           value <- getAttrsValues(xml_doc, xpath, param_name, ids)
+           value <- get_attrs_values(xml_doc, xpath, param_name, ids)
          },
          nodename_childs = {
            value <- getValues(xml_doc, xpath, ids)

@@ -111,7 +111,7 @@ setMethod(
 )
 
 setMethod(
-  "getAttrs", signature(object = "xml_document"),
+  "get_attrs", signature(object = "xml_document"),
   function(object, path) {
     attr_list <- NULL
     node_set <- get_nodes(object, path)
@@ -167,12 +167,12 @@ setMethod(
   }
 )
 
-# getAttrsNames
+# get_attrs_names
 setMethod(
-  "getAttrsNames", signature(object = "xml_document"),
+  "get_attrs_names", signature(object = "xml_document"),
   function(object, path) {
     attr_names <- NULL
-    attr_list <- getAttrs(object, path)
+    attr_list <- get_attrs(object, path)
 
     dim_names <- dimnames(attr_list)
     if (!base::is.null(dim_names[[1]])) {
@@ -187,9 +187,9 @@ setMethod(
 )
 
 
-# getAttrsValues
+# get_attrs_values
 setMethod(
-  "getAttrsValues", signature(object = "xml_document"),
+  "get_attrs_values", signature(object = "xml_document"),
   function(object, path, attr_list = character(length = 0),
            nodes_ids = NULL) {
     # browser()
@@ -198,7 +198,7 @@ setMethod(
 
 
     # getting attributes values from doc
-    attr_values <- getAttrs(object, path)
+    attr_values <- get_attrs(object, path)
 
     # no attributes for the query
     if (base::is.null(attr_values)) {
@@ -255,7 +255,7 @@ setMethod(
 )
 
 
-# factoriser avec getAttrs!! + getNode(object,path,kind)
+# factoriser avec get_attrs!! + getNode(object,path,kind)
 setMethod(
   "getValues", signature(object = "xml_document"),
   function(object, path, nodes_ids = NULL) {

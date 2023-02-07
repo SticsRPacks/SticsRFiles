@@ -109,7 +109,7 @@ get_plants_nb_xml <- function(usms_file,
   plants_nb <- as.numeric(getValues(xml_usms, "//nbplantes"))
 
   # Xml usms names
-  usm_names <- getAttrs(xml_usms, "//usm")
+  usm_names <- get_attrs(xml_usms, "//usm")
   names(plants_nb) <- usm_names
 
   # Filtering using usms_list if needed

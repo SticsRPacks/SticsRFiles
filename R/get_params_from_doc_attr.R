@@ -42,7 +42,7 @@ get_params_from_doc_attr <- function(xml_doc,
 
 
   for (t in 1:nb_types) {
-    tmp <- getAttrsValues(xml_doc, xpath[t], name_field[t])
+    tmp <- get_attrs_values(xml_doc, xpath[t], name_field[t])
     if (!base::is.null(tmp)) {
       params[[t]] <- tmp
       is_null[t] <- FALSE
