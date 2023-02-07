@@ -72,7 +72,7 @@ upgrade_param_gen_xml <- function(file,
   rm_names <- c("FINERT", "FMIN1", "FMIN2", "FMIN3", "khaut", "rayon", "concrr")
 
   rm_nodes <- lapply(rm_names, function(x) {
-    getNodeS(
+    get_nodes(
       old_doc,
       path = paste0("//param[@nom='", x, "']")
     )
@@ -83,7 +83,7 @@ upgrade_param_gen_xml <- function(file,
   # Nodes to change
   # <param format="real" max="20.0" min="1.0" nom="k_desat">3.0</param>
   # k_desat to kdesat
-  nodes_to_change <- getNodeS(old_doc, path = "//param[@nom='k_desat']")
+  nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='k_desat']")
   if (!is.null(nodes_to_change)) {
     setAttrValues(old_doc,
                   path = "//param[@nom='k_desat']",
@@ -108,7 +108,7 @@ upgrade_param_gen_xml <- function(file,
 
 
   new_nodes <- XML::getNodeSet(new_node, path = "//param")
-  prev_sibling <- getNodeS(old_doc, "//param[@nom='TREFr']")[[1]]
+  prev_sibling <- get_nodes(old_doc, "//param[@nom='TREFr']")[[1]]
 
   # For adding them in the right order
   for (n in seq_along(new_nodes)) {

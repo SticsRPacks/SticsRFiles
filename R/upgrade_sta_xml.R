@@ -120,7 +120,7 @@ upgrade_sta_xml <- function(file,
   )
 
   # Getting the preceeding sibling node
-  prev_sibling <- getNodeS(old_doc, "//*[@nom='NH3ref']")[[1]]
+  prev_sibling <- get_nodes(old_doc, "//*[@nom='NH3ref']")[[1]]
   XML::addSibling(node = prev_sibling, XML::xmlClone(concrr_node), after = TRUE)
 
   # Setting concrr value
@@ -150,7 +150,7 @@ upgrade_sta_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  par_node <- getNodeS(old_doc, path = "/fichiersta")[[1]]
+  par_node <- get_nodes(old_doc, path = "/fichiersta")[[1]]
   XML::addChildren(par_node, XML::xmlClone(new_node))
 
   # Writing to file _sta.xml

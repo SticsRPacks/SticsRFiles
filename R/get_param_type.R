@@ -114,7 +114,7 @@ get_param_type <- function(xml_doc,
         ))
       }
 
-      # or getNodeS ?
+      # or get_nodes ?
       values <- getValues(xml_doc, xpath_nodename)
       if (!base::is.null(values)) {
         return(list(

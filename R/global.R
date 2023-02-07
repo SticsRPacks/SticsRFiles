@@ -50,7 +50,7 @@ setGeneric("is.xml_document", function(object) standardGeneric("is.xml_document"
 
 # xml manipulations
 
-setGeneric("getNodeS", function(object, path = NULL) standardGeneric("getNodeS"))
+setGeneric("get_nodes", function(object, path = NULL) standardGeneric("get_nodes"))
 
 setGeneric("getAttrs", function(object, path) standardGeneric("getAttrs"))
 

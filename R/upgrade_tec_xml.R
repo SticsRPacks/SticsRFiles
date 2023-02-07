@@ -135,7 +135,7 @@ upgrade_tec_xml <- function(file,
   )
 
   nodes_to_change <- lapply(param_names, function(x) {
-    getNodeS(
+    get_nodes(
       old_doc,
       path = paste0("//param[@nom='", x, "']")
     )
@@ -160,7 +160,7 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='soil tillage']"
   )[[1]]
@@ -177,7 +177,7 @@ upgrade_tec_xml <- function(file,
 
   new_nodes <- XML::getNodeSet(new_node, path = "//param")
 
-  prev_sibling <- getNodeS(
+  prev_sibling <- get_nodes(
     old_doc,
     path = "//param[@nom='nbjseuiltempref']"
   )[[1]]
@@ -210,7 +210,7 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
+  prev_sibling <- get_nodes(
     old_doc,
     path = "//param[@nom='doseirrigmin']"
   )[[1]]
@@ -224,7 +224,7 @@ upgrade_tec_xml <- function(file,
                                   addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='fertilisation']//ta_entete"
   )[[1]]
@@ -235,7 +235,7 @@ upgrade_tec_xml <- function(file,
 
   # If any intervention node
   # adding engrais parameter and setting nb_colonnes as in ta_entete
-  parent_nodes <- getNodeS(
+  parent_nodes <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='fertilisation']//ta/intervention"
   )
@@ -263,7 +263,7 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='harvest']"
   )[[1]]
@@ -294,7 +294,7 @@ upgrade_tec_xml <- function(file,
     )
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//option[@nomParam='codefauche']/choix"
   )[[1]]
@@ -315,7 +315,7 @@ upgrade_tec_xml <- function(file,
 
   new_nodes <- XML::getNodeSet(new_node, path = "//colonne")
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//choix[@nom='calendar in days']//ta_entete"
   )[[1]]
@@ -329,7 +329,7 @@ upgrade_tec_xml <- function(file,
   # set kept value of engrais, mscoupemini
   # set default values tauxexportfauche = 1 et restit = 2
 
-  parent_nodes <- getNodeS(
+  parent_nodes <- get_nodes(
     old_doc,
     path = "//choix[@nom='calendar in days']//ta/intervention"
   )
@@ -358,7 +358,7 @@ upgrade_tec_xml <- function(file,
 
 
   ## Choix "calendar in degree days"
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//choix[@nom='calendar in degree days']//ta_entete"
   )[[1]]
@@ -371,7 +371,7 @@ upgrade_tec_xml <- function(file,
   # add new param nodes: mscoupemini,  tauxexportfauche, restit
   # set kept value of engrais, mscoupemini
   # set default values tauxexportfauche = 1 et restit = 2
-  parent_nodes <- getNodeS(
+  parent_nodes <- get_nodes(
     old_doc,
     path = "//choix[@nom='calendar in degree days']//ta/intervention"
   )
@@ -406,7 +406,7 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//option[@nomParam='codeclaircie']//choix[@code='2']"
   )[[1]]
@@ -417,12 +417,12 @@ upgrade_tec_xml <- function(file,
   # Using values of juleclair, nbinfloecl got from the old parameters
   if (codeclaircie == 2) {
     # recup noeud ta_entete
-    op_node <- XML::xmlClone(getNodeS(
+    op_node <- XML::xmlClone(get_nodes(
       old_doc,
       paste0("//ta_entete[colonne[@nom='", "juleclair", "']]")
     )[[1]])
     XML::xmlName(op_node) <- "intervention"
-    parent_node <- getNodeS(
+    parent_node <- get_nodes(
       old_doc,
       path = "//option[@nomParam='codeclaircie']//choix[@code='2']/ta"
     )[[1]]
@@ -452,7 +452,7 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='special techniques']"
   )[[1]]

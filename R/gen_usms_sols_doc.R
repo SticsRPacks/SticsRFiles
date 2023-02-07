@@ -88,7 +88,7 @@ gen_usms_sols_doc <- function(doc_type,
   }
 
   # getting usm/sol nodes
-  xml_nodes <- getNodeS(xml_doc, node_str)
+  xml_nodes <- get_nodes(xml_doc, node_str)
 
   # Nothing to do
   doc_nodes_nb <- length(xml_nodes)

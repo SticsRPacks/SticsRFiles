@@ -231,7 +231,7 @@ get_xml_doc <- function(xml_file_or_doc) {
 node_exist <- function(xml_file_or_doc, xpath) {
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
-  nodes <- getNodeS(xml_doc, xpath)
+  nodes <- get_nodes(xml_doc, xpath)
 
   if (is.null(nodes)) {
     return(FALSE)

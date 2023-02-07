@@ -127,7 +127,7 @@ set_param_value <- function(xml_doc,
   }
 
   values_nb <- length(param_value)
-  nodes_nb <- length(getNodeS(xml_doc, xpath))
+  nodes_nb <- length(get_nodes(xml_doc, xpath))
   # checking dimensions between nodes ids and nodes number for xpath
   if (base::is.null(ids) && values_nb > 1 && !values_nb == nodes_nb) {
     warning(

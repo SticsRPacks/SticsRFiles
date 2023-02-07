@@ -20,7 +20,7 @@ Converting an attributes list to a matrix
 
 xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 sols_doc <- SticsRFiles:::xmldocument(xml_path)
-node_set <- SticsRFiles:::getNodeS(sols_doc,
+node_set <- SticsRFiles:::get_nodes(sols_doc,
                                "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
 attr_list <- sapply(node_set, function(x) XML::xmlAttrs(x))
 

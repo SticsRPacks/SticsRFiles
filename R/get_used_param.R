@@ -77,7 +77,7 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
                          "'",
                         value,
                         "']/param")
-    nodes_set <- getNodeS(xml_doc, path = path_param)
+    nodes_set <- get_nodes(xml_doc, path = path_param)
 
 
     if (!is.null(nodes_set)) {
@@ -141,7 +141,7 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
                                sub_value,
                                "']/param")
 
-      nodes_set <- getNodeS(xml_doc, path = sub_path_param)
+      nodes_set <- get_nodes(xml_doc, path = sub_path_param)
 
 
       if (!is.null(nodes_set)) {
@@ -193,7 +193,7 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
                            "']//param[@code='",
                            v_value,
                            "']")
-    nodes_set <- getNodeS(xml_doc, path = v_path_param)
+    nodes_set <- get_nodes(xml_doc, path = v_path_param)
 
 
     if (!is.null(nodes_set)) {

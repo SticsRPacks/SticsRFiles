@@ -74,7 +74,7 @@ setMethod("get_content", signature(object = "xml_document"), function(object) {
 
 
 setMethod(
-  "getNodeS", signature(object = "xml_document"),
+  "get_nodes", signature(object = "xml_document"),
   function(object, path = NULL) {
     node_set <- NULL
     if (!is_loaded(object)) {
@@ -114,7 +114,7 @@ setMethod(
   "getAttrs", signature(object = "xml_document"),
   function(object, path) {
     attr_list <- NULL
-    node_set <- getNodeS(object, path)
+    node_set <- get_nodes(object, path)
     #
 
     if (base::is.null(node_set)) {
@@ -259,7 +259,7 @@ setMethod(
 setMethod(
   "getValues", signature(object = "xml_document"),
   function(object, path, nodes_ids = NULL) {
-    node_set <- getNodeS(object, path)
+    node_set <- get_nodes(object, path)
 
     # getting nodes number
     nodes_nb <- length(node_set)
@@ -291,7 +291,7 @@ setMethod(
   function(object, path, named_vector) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(names(named_vector))) {
-      node_set <- getNodeS(object, path)
+      node_set <- get_nodes(object, path)
       invisible(sapply(node_set, function(x) XML::xmlAttrs(x) <- named_vector))
     }
   }
@@ -306,7 +306,7 @@ setMethod(
   function(object, path, attr_names) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(attr_names)) {
-      node_set <- getNodeS(object, path)
+      node_set <- get_nodes(object, path)
       attr_nb <- length(attr_names)
       for (i in 1:attr_nb) {
         sapply(node_set, function(x) XML::removeAttributes(x, attr_names[i]))
@@ -322,7 +322,7 @@ setMethod(
 setMethod(
   "setAttrValues", signature(object = "xml_document"),
   function(object, path, attr_name, values_list, nodes_ids = NULL) {
-    node_set <- getNodeS(object, path)
+    node_set <- get_nodes(object, path)
     if (base::is.null(node_set)) {
       return(invisible())
     }
@@ -352,7 +352,7 @@ setMethod(
 setMethod(
   "setValues", signature(object = "xml_document"),
   function(object, path, values_list, nodes_ids = NULL) {
-    node_set <- getNodeS(object, path)
+    node_set <- get_nodes(object, path)
 
     if (base::is.null(node_set)) {
       return(invisible())
@@ -393,7 +393,7 @@ setMethod(
       pnode <- XML::xmlRoot(object@content)
       # getting parent node from given parent_path
     } else {
-      node_set <- getNodeS(object, parent_path)
+      node_set <- get_nodes(object, parent_path)
 
       if (base::is.null(node_set)) {
         return()
@@ -417,7 +417,7 @@ setMethod(
 setMethod(
   "delNodes", signature(object = "xml_document"),
   function(object, path) {
-    node_set <- getNodeS(object, path)
+    node_set <- get_nodes(object, path)
 
     if (base::is.null(node_set)) {
       return()

@@ -42,7 +42,7 @@
 add_node_to_doc <- function(xml_doc, new_node, nodes_nb = 1, parent_path) {
 
   # Checking that parent_path is valid xpath for xml_doc
-  if (is.null(getNodeS(xml_doc, parent_path))) {
+  if (is.null(get_nodes(xml_doc, parent_path))) {
     warning(paste("Given xpath is not a valid one:", parent_path))
     return(invisible())
   }

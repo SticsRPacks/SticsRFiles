@@ -35,7 +35,7 @@ get_param_names <- function(xml_object,
 
     if (parent_name %in% c("formalisme", "formalismev", "optionv",
                            "usm", "sol", "variete"))
-      tmp_xml_object <- getNodeS(xml_object,
+      tmp_xml_object <- get_nodes(xml_object,
                                  path = paste0("//", parent_name,
                                                "[@nom='",
                                                parent_sel_attr,
@@ -43,7 +43,7 @@ get_param_names <- function(xml_object,
 
     if (is.null(tmp_xml_object)) {
       if (parent_name == "option")
-        tmp_xml_object <- getNodeS(xml_object,
+        tmp_xml_object <- get_nodes(xml_object,
                                    path = paste0("//", parent_name,
                                                  "[@nomParam='",
                                                  parent_sel_attr,
@@ -53,7 +53,7 @@ get_param_names <- function(xml_object,
     # plante: for usms and ini files
     if (is.null(tmp_xml_object)) {
       if (parent_name == "plante")
-        tmp_xml_object <- getNodeS(xml_object,
+        tmp_xml_object <- get_nodes(xml_object,
                                    path = paste0("//", parent_name,
                                                  "[@dominance='",
                                                  parent_sel_attr,

@@ -106,7 +106,7 @@ upgrade_param_newform_xml <- function(file,
   )
 
   nodes_to_rm <- lapply(form_names, function(x) {
-    getNodeS(
+    get_nodes(
       old_doc,
       path = paste0("//formalisme[@nom='", x, "']")
     )
@@ -121,7 +121,7 @@ upgrade_param_newform_xml <- function(file,
   )
 
   nodes_to_rm <- lapply(opt_names, function(x) {
-    getNodeS(
+    get_nodes(
       old_doc,
       path = paste0("//option[@nom='", x, "']")
     )
@@ -136,7 +136,7 @@ upgrade_param_newform_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
+  prev_sibling <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='Mineralization models']"
   )[[1]]
@@ -173,7 +173,7 @@ upgrade_param_newform_xml <- function(file,
     # if a version 10.0 file is retreated
     # codemineral option must be retreived for the moment
 
-    codemineral_node <- getNodeS(
+    codemineral_node <- get_nodes(
       old_doc,
       path = paste0("//option[@nomParam='codemineral']")
     )
@@ -239,7 +239,7 @@ upgrade_param_newform_xml <- function(file,
                                   addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
+  prev_sibling <- get_nodes(
     old_doc,
     path = "//formalisme[@nom='New Roots']"
   )[[1]]
