@@ -73,7 +73,7 @@ upgrade_param_gen_xml <- function(file,
 
   rm_nodes <- lapply(rm_names, function(x) {
     getNodeS(
-      doc_obj = old_doc,
+      old_doc,
       path = paste0("//param[@nom='", x, "']")
     )
   })

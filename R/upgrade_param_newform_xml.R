@@ -107,7 +107,7 @@ upgrade_param_newform_xml <- function(file,
 
   nodes_to_rm <- lapply(form_names, function(x) {
     getNodeS(
-      doc_obj = old_doc,
+      old_doc,
       path = paste0("//formalisme[@nom='", x, "']")
     )
   })
@@ -122,7 +122,7 @@ upgrade_param_newform_xml <- function(file,
 
   nodes_to_rm <- lapply(opt_names, function(x) {
     getNodeS(
-      doc_obj = old_doc,
+      old_doc,
       path = paste0("//option[@nom='", x, "']")
     )
   })
@@ -137,7 +137,7 @@ upgrade_param_newform_xml <- function(file,
   )
 
   prev_sibling <- getNodeS(
-    doc_obj = old_doc,
+    old_doc,
     path = "//formalisme[@nom='Mineralization models']"
   )[[1]]
   XML::addSibling(prev_sibling, XML::xmlClone(new_node), after = TRUE)
@@ -174,7 +174,7 @@ upgrade_param_newform_xml <- function(file,
     # codemineral option must be retreived for the moment
 
     codemineral_node <- getNodeS(
-      doc_obj = old_doc,
+      old_doc,
       path = paste0("//option[@nomParam='codemineral']")
     )
 
@@ -196,14 +196,14 @@ upgrade_param_newform_xml <- function(file,
   # formalism modifications
   # replacing formalisme option @nom, choix
   setAttrValues(
-    doc_obj = old_doc,
+    old_doc,
     path = "//option[@nomParam='codecalferti']",
     attr_name = "nom",
     values_list = "automatic calculation of fertilisation"
   )
 
   setAttrValues(
-    doc_obj = old_doc,
+    old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "nom",
     values_list = paste0("automatic N fertilisation (1 = based on rainfall",
@@ -211,7 +211,7 @@ upgrade_param_newform_xml <- function(file,
   )
 
   setAttrValues(
-    doc_obj = old_doc,
+    old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "choix",
     values_list = "1"
@@ -240,7 +240,7 @@ upgrade_param_newform_xml <- function(file,
   )
 
   prev_sibling <- getNodeS(
-    doc_obj = old_doc,
+    old_doc,
     path = "//formalisme[@nom='New Roots']"
   )[[1]]
   XML::addSibling(prev_sibling, XML::xmlClone(new_node))

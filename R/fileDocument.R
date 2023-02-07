@@ -72,85 +72,85 @@ setMethod("initialize", "file_document", function(.Object,
 
 # set
 setReplaceMethod(
-  "setWarn", signature(doc_obj = "file_document"),
-  function(doc_obj, value) {
-    doc_obj@warn <- value
-    return(doc_obj)
+  "setWarn", signature(object = "file_document"),
+  function(object, value) {
+    object@warn <- value
+    return(object)
   }
 )
 
 
 setReplaceMethod(
-  "setName", signature(doc_obj = "file_document"),
-  function(doc_obj, value) {
-    doc_obj@name <- value
-    return(doc_obj)
+  "setName", signature(object = "file_document"),
+  function(object, value) {
+    object@name <- value
+    return(object)
   }
 )
 
 setReplaceMethod(
-  "setDir", signature(doc_obj = "file_document"),
-  function(doc_obj, value) {
-    doc_obj@dir <- normalizePath(value)
-    return(doc_obj)
+  "setDir", signature(object = "file_document"),
+  function(object, value) {
+    object@dir <- normalizePath(value)
+    return(object)
   }
 )
 
 setReplaceMethod(
-  "setExt", signature(doc_obj = "file_document"),
-  function(doc_obj, value) {
-    doc_obj@ext <- value
+  "setExt", signature(object = "file_document"),
+  function(object, value) {
+    object@ext <- value
     # add reconstruct file name !!!!!!!!!
-    return(doc_obj)
+    return(object)
   }
 )
 
 # set
 setMethod(
-  "setName", signature(doc_obj = "file_document"),
-  function(doc_obj, value) {
-    doc_obj@name <- value
-    return(doc_obj)
+  "setName", signature(object = "file_document"),
+  function(object, value) {
+    object@name <- value
+    return(object)
   }
 )
 
 
 # getter methods
-setMethod("getName", signature(doc_obj = "file_document"), function(doc_obj) {
-  return(doc_obj@name)
+setMethod("getName", signature(object = "file_document"), function(object) {
+  return(object@name)
 })
 
 #
-setMethod("getDir", signature(doc_obj = "file_document"), function(doc_obj) {
-  return(doc_obj@dir)
+setMethod("getDir", signature(object = "file_document"), function(object) {
+  return(object@dir)
 })
 
 #
-setMethod("getExt", signature(doc_obj = "file_document"), function(doc_obj) {
-  # print(doc_obj)
-  return(doc_obj@ext)
+setMethod("getExt", signature(object = "file_document"), function(object) {
+  # print(object)
+  return(object@ext)
 })
 
-setMethod("getType", signature(doc_obj = "file_document"), function(doc_obj) {
-  # print(doc_obj)
-  return(doc_obj@type)
+setMethod("getType", signature(object = "file_document"), function(object) {
+  # print(object)
+  return(object@type)
 })
 
-setMethod("getPath", signature(doc_obj = "file_document"), function(doc_obj) {
-  return(file.path(doc_obj@dir, doc_obj@name))
+setMethod("getPath", signature(object = "file_document"), function(object) {
+  return(file.path(object@dir, object@name))
 })
 
-setMethod("exist", signature(doc_obj = "file_document"), function(doc_obj) {
+setMethod("exist", signature(object = "file_document"), function(object) {
   message <- FALSE
   # TODO: make distinction between dir and file !!!
-  p <- getPath(doc_obj)
+  p <- getPath(object)
   ret <- file.exists(p)
 
   if (ret) {
-    if (isdir(doc_obj)) {
-      ret <- ret & getType(doc_obj) == "dir"
+    if (isdir(object)) {
+      ret <- ret & getType(object) == "dir"
     } else {
-      ret <- ret & getType(doc_obj) == "file"
+      ret <- ret & getType(object) == "file"
     }
   }
   if (!ret & message) {
@@ -168,13 +168,13 @@ setMethod("show", "file_document", function(object) {
 })
 
 #
-setMethod("create", signature(doc_obj = "file_document"), function(doc_obj) {
-  p <- getPath(doc_obj)
-  if (!exist(doc_obj)) {
-    if (doc_obj@type == "file") {
+setMethod("create", signature(object = "file_document"), function(object) {
+  p <- getPath(object)
+  if (!exist(object)) {
+    if (object@type == "file") {
       file.create(p)
     }
-    if (doc_obj@type == "dir") {
+    if (object@type == "dir") {
       dir.create(p)
     }
   } else {
@@ -183,36 +183,36 @@ setMethod("create", signature(doc_obj = "file_document"), function(doc_obj) {
 })
 
 #
-setMethod("move", signature(doc_obj = "file_document"), function(doc_obj, toFile) {
+setMethod("move", signature(object = "file_document"), function(object, toFile) {
   # cas : rename, move
-  if (exist(doc_obj)) {
+  if (exist(object)) {
     if (dir.exists(toFile)) {
-      toFile <- file.path(toFile, doc_obj@name)
+      toFile <- file.path(toFile, object@name)
     }
-    file.rename(getPath(doc_obj), toFile)
+    file.rename(getPath(object), toFile)
 
-    # doc_obj@file <- toFile
-    doc_obj <- methods::new(class(doc_obj)[[1]], toFile)
+    # object@file <- toFile
+    object <- methods::new(class(object)[[1]], toFile)
   } else {
-    setName(doc_obj) <- toFile
+    setName(object) <- toFile
   }
-  return(doc_obj)
+  return(object)
 })
 
 #
 setMethod(
-  "rename", signature(doc_obj = "file_document"),
-  function(doc_obj, toFile) {
-    move(doc_obj, toFile)
+  "rename", signature(object = "file_document"),
+  function(object, toFile) {
+    move(object, toFile)
   }
 )
 
 #
-setMethod("delete", signature(doc_obj = "file_document"), function(doc_obj) {
-  if (exist(doc_obj)) {
-    file.remove(getPath(doc_obj))
+setMethod("delete", signature(object = "file_document"), function(object) {
+  if (exist(object)) {
+    file.remove(getPath(object))
   } else {
-    # print(paste0(' File already exists : ',doc_obj@file))
+    # print(paste0(' File already exists : ',object@file))
   }
 })
 
@@ -223,11 +223,11 @@ setMethod("delete", signature(doc_obj = "file_document"), function(doc_obj) {
 # from this class ???
 
 #
-setMethod("infos", signature(doc_obj = "ANY"), function(doc_obj, type) {
-  if (methods::is(doc_obj, "character")) {
-    p <- doc_obj
+setMethod("infos", signature(object = "ANY"), function(object, type) {
+  if (methods::is(object, "character")) {
+    p <- object
   } else {
-    p <- getPath(doc_obj)
+    p <- getPath(object)
   }
   # type: all,size,mtime,isdir
   ret <- file.info("")
@@ -240,8 +240,8 @@ setMethod("infos", signature(doc_obj = "ANY"), function(doc_obj, type) {
 })
 
 #
-setMethod("isdir", signature(doc_obj = "ANY"), function(doc_obj) {
-  ret <- infos(doc_obj, "isdir")
+setMethod("isdir", signature(object = "ANY"), function(object) {
+  ret <- infos(object, "isdir")
   if (is.na(ret)) {
     stop("Unavailable information: file or dir doesn't exist !")
   }
@@ -249,34 +249,34 @@ setMethod("isdir", signature(doc_obj = "ANY"), function(doc_obj) {
 })
 
 #
-setMethod("isempty", signature(doc_obj = "ANY"), function(doc_obj) {
+setMethod("isempty", signature(object = "ANY"), function(object) {
   # for files and dirs
-  ret <- infos(doc_obj, "size") == 0
+  ret <- infos(object, "size") == 0
   if (is.na(ret)) {
     stop("Unavailable information: file doesn't exist !")
   }
-  if (isdir(doc_obj)) {
-    if (methods::is(doc_obj, "character")) {
-      l <- list.files(doc_obj)
+  if (isdir(object)) {
+    if (methods::is(object, "character")) {
+      l <- list.files(object)
     } else {
-      l <- list.files(getPath(doc_obj))
+      l <- list.files(getPath(object))
     }
     ret <- length(l) == 0
   }
   return(ret)
 })
 
-# setGeneric('getClass', function(doc_obj) standardGeneric('getClass'))
-# setMethod('getClass',signature(doc_obj='ANY'),
-# function(doc_obj){ return(class(doc_obj)[[1]]) } )
+# setGeneric('getClass', function(object) standardGeneric('getClass'))
+# setMethod('getClass',signature(object='ANY'),
+# function(object){ return(class(object)[[1]]) } )
 
 #
-setMethod("calcExt", signature(doc_obj = "ANY"), function(doc_obj) {
+setMethod("calcExt", signature(object = "ANY"), function(object) {
   ext <- ""
-  if (methods::is(doc_obj, "character")) {
-    name <- doc_obj
+  if (methods::is(object, "character")) {
+    name <- object
   } else {
-    name <- doc_obj@name
+    name <- object@name
   }
   char_vec <- unlist(strsplit(name, "[.]"))
   n_char <- length(char_vec)
@@ -287,13 +287,13 @@ setMethod("calcExt", signature(doc_obj = "ANY"), function(doc_obj) {
   return(ext)
 })
 
-setMethod("calcType", signature(doc_obj = "ANY"), function(doc_obj) {
+setMethod("calcType", signature(object = "ANY"), function(object) {
   # default type
   type <- "file"
-  if (methods::is(doc_obj, "character")) {
-    name <- doc_obj
+  if (methods::is(object, "character")) {
+    name <- object
   } else {
-    name <- getPath(doc_obj)
+    name <- getPath(object)
   }
   # keep this order for identifying file from dir
   if (file.exists(name)) type <- "file"
