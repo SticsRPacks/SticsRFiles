@@ -29,8 +29,8 @@ setMethod("validDoc", signature(object = "xml_document"), function(object) {
 
 
 # constructor
-#' @export
 setMethod(
+
   "xmldocument", signature(file = "character"),
   function(file = character(length = 0)) {
     methods::new("xml_document", file = file)
