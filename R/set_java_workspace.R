@@ -45,7 +45,7 @@ set_java_workspace <- function(javastics, workspace) {
   }
 
   # getting current registered wd
-  current_wd <- getValues(xml_pref, '//entry[@key="workingDirectory.current"]')
+  current_wd <- get_values(xml_pref, '//entry[@key="workingDirectory.current"]')
 
   # entry doesn't exist, normally it could not occur because
   # we set pref file before, but using JavaStics interface first
@@ -64,7 +64,7 @@ set_java_workspace <- function(javastics, workspace) {
     }
 
     # else, setting entry value
-    setValues(xml_pref, '//entry[@key="workingDirectory.current"]', workspace)
+    set_values(xml_pref, '//entry[@key="workingDirectory.current"]', workspace)
   }
 
   # writing file

@@ -134,7 +134,7 @@ get_param_value <- function(xml_doc,
   # TODO: see if it could be simplified with a default case !
   switch(type,
          nodename = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          attr = {
            value <- get_attrs_values(xml_doc, xpath, param_type$attr, ids)
@@ -143,25 +143,25 @@ get_param_value <- function(xml_doc,
            value <- get_attrs_values(xml_doc, xpath, param_type$attr, ids)
          },
          param = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          option = {
            value <- get_attrs_values(xml_doc, xpath, "choix", ids)
          },
          table = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          table2 = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          node_param = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          choix_param = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          node_node = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          node_option = {
            value <- get_attrs_values(xml_doc, xpath, "choix", ids)
@@ -170,16 +170,16 @@ get_param_value <- function(xml_doc,
            value <- get_attrs_values(xml_doc, xpath, "choix", ids)
          },
          node_table = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          node_table2 = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          node_attr = {
            value <- get_attrs_values(xml_doc, xpath, "nom", ids)
          },
          attr_attr = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          },
          attr_attr2 = {
            value <- get_attrs_values(xml_doc, xpath, param_name, ids)
@@ -188,7 +188,7 @@ get_param_value <- function(xml_doc,
            value <- get_attrs_values(xml_doc, xpath, param_name, ids)
          },
          nodename_childs = {
-           value <- getValues(xml_doc, xpath, ids)
+           value <- get_values(xml_doc, xpath, ids)
          }
 
 

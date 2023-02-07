@@ -50,7 +50,7 @@ get_option_choice_param_values <- function(xml_file_path,
   param_list <- list()
   xml_param <- xmldocument(xml_file_path)
 
-  param_list$values <- getValues(xml_param, xpath)
+  param_list$values <- get_values(xml_param, xpath)
   param_list$names <- get_attrs_values(xml_param, xpath, "nom")
   return(param_list)
 }

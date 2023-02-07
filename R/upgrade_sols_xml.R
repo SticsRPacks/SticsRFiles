@@ -89,7 +89,7 @@ upgrade_sols_xml <- function(file,
   if (any(grep(pattern = "horizon", tableau_noms))) {
     new_names <- unlist(lapply(tableau_noms,
         function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")))
-    setAttrValues(old_doc, "//tableau", "nom", new_names)
+    set_attrs_values(old_doc, "//tableau", "nom", new_names)
   }
 
   # Nodes to add
@@ -106,7 +106,7 @@ upgrade_sols_xml <- function(file,
   if (is.null(prev_sibling)) {
     prev_sibling <- get_nodes(old_doc, "//param[@nom='csurNsol']")
     # updating nom attribute content
-    setAttrValues(old_doc,
+    set_attrs_values(old_doc,
       path = "//param[@nom='csurNsol']",
       attr_name = "nom",
       values_list = "CsurNsol"

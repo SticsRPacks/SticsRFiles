@@ -106,7 +106,7 @@ get_plants_nb_xml <- function(usms_file,
   xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm
-  plants_nb <- as.numeric(getValues(xml_usms, "//nbplantes"))
+  plants_nb <- as.numeric(get_values(xml_usms, "//nbplantes"))
 
   # Xml usms names
   usm_names <- get_attrs(xml_usms, "//usm")

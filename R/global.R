@@ -58,15 +58,15 @@ setGeneric("get_attrs_names", function(object, path) standardGeneric("get_attrs_
 
 setGeneric("get_attrs_values", function(object, path, attr_list, nodes_ids = NULL) standardGeneric("get_attrs_values"))
 
-setGeneric("addAttrs", function(object, path, named_vector) standardGeneric("addAttrs"))
+setGeneric("add_attrs", function(object, path, named_vector) standardGeneric("add_attrs"))
 
-setGeneric("removeAttrs", function(object, path, attr_names) standardGeneric("removeAttrs"))
+setGeneric("remove_attrs", function(object, path, attr_names) standardGeneric("remove_attrs"))
 
-setGeneric("setAttrValues", function(object, path, attr_name, values_list, nodes_ids = NULL) standardGeneric("setAttrValues"))
+setGeneric("set_attrs_values", function(object, path, attr_name, values_list, nodes_ids = NULL) standardGeneric("set_attrs_values"))
 
-setGeneric("setValues", function(object, path, values_list, nodes_ids = NULL) standardGeneric("setValues"))
+setGeneric("set_values", function(object, path, values_list, nodes_ids = NULL) standardGeneric("set_values"))
 
-setGeneric("getValues", function(object, path, nodes_ids = NULL) standardGeneric("getValues"))
+setGeneric("get_values", function(object, path, nodes_ids = NULL) standardGeneric("get_values"))
 
 setGeneric("saveXmlDoc", function(object, xml_path) standardGeneric("saveXmlDoc"))
 

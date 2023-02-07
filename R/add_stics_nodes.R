@@ -85,6 +85,6 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
     nb_interventions <-
       as.numeric(get_attrs_values(xml_doc, parent_path, "nb_interventions")) +
       nodes_nb
-    setAttrValues(xml_doc, parent_path, "nb_interventions", nb_interventions)
+    set_attrs_values(xml_doc, parent_path, "nb_interventions", nb_interventions)
   }
 }

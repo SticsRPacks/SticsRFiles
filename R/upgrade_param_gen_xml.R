@@ -85,7 +85,7 @@ upgrade_param_gen_xml <- function(file,
   # k_desat to kdesat
   nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='k_desat']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc,
+    set_attrs_values(old_doc,
                   path = "//param[@nom='k_desat']",
                   attr_name = "nom",
                   values_list = "kdesat"

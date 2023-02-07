@@ -257,7 +257,7 @@ setMethod(
 
 # factoriser avec get_attrs!! + getNode(object,path,kind)
 setMethod(
-  "getValues", signature(object = "xml_document"),
+  "get_values", signature(object = "xml_document"),
   function(object, path, nodes_ids = NULL) {
     node_set <- get_nodes(object, path)
 
@@ -285,9 +285,9 @@ setMethod(
 )
 
 
-# addAttrs
+# add_attrs
 setMethod(
-  "addAttrs", signature(object = "xml_document"),
+  "add_attrs", signature(object = "xml_document"),
   function(object, path, named_vector) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(names(named_vector))) {
@@ -302,7 +302,7 @@ setMethod(
 # delAttrs
 # TODO: to remove all attrs !!!!!!!!!
 setMethod(
-  "removeAttrs", signature(object = "xml_document"),
+  "remove_attrs", signature(object = "xml_document"),
   function(object, path, attr_names) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(attr_names)) {
@@ -318,9 +318,9 @@ setMethod(
 
 # Setters
 #
-# TODO : same code as setValues,
+# TODO : same code as set_values,
 setMethod(
-  "setAttrValues", signature(object = "xml_document"),
+  "set_attrs_values", signature(object = "xml_document"),
   function(object, path, attr_name, values_list, nodes_ids = NULL) {
     node_set <- get_nodes(object, path)
     if (base::is.null(node_set)) {
@@ -348,9 +348,9 @@ setMethod(
 )
 
 
-# setValues
+# set_values
 setMethod(
-  "setValues", signature(object = "xml_document"),
+  "set_values", signature(object = "xml_document"),
   function(object, path, values_list, nodes_ids = NULL) {
     node_set <- get_nodes(object, path)
 

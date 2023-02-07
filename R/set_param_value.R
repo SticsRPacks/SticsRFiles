@@ -141,65 +141,65 @@ set_param_value <- function(xml_doc,
   # TODO: see if could be simplified with a default case !
   switch(type,
     nodename = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     attr = {
-      value <- setAttrValues(xml_doc, xpath, "nom", param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, "nom", param_value, ids)
     },
     attrname = {
-      value <- setAttrValues(xml_doc, xpath, param_name, param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, param_name, param_value, ids)
     },
     param = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     option = {
-      value <- setAttrValues(xml_doc, xpath, "choix", param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, "choix", param_value, ids)
     },
     table = {
       # check number if values
       if (length(param_value) > param_type$length) {
         stop("Too many values to set !")
       }
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     table2 = {
       if (length(param_value) > param_type$length) {
         stop("Too many values to set !")
       }
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     node_param = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     choix_param = {
-      value <- setAttrValues(xml_doc, xpath, "choix", param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, "choix", param_value, ids)
     },
     node_node = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     node_option = {
-      value <- setAttrValues(xml_doc, xpath, "choix", param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, "choix", param_value, ids)
     },
     form_option = {
-      value <- setAttrValues(xml_doc, xpath, "choix", param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, "choix", param_value, ids)
     },
     node_table = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     node_attr = {
-      value <- setAttrValues(xml_doc, xpath, "nom", param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, "nom", param_value, ids)
     },
     attr_attr = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     },
     attr_attr2 = {
-      value <- setAttrValues(xml_doc, xpath, param_name, param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, param_name, param_value, ids)
     },
     choix_attr = {
-      value <- setAttrValues(xml_doc, xpath, param_name, param_value, ids)
+      value <- set_attrs_values(xml_doc, xpath, param_name, param_value, ids)
     },
     nodename_childs = {
-      value <- setValues(xml_doc, xpath, param_value, ids)
+      value <- set_values(xml_doc, xpath, param_value, ids)
     }
   )
 

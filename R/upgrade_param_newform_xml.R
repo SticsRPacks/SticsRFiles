@@ -195,14 +195,14 @@ upgrade_param_newform_xml <- function(file,
 
   # formalism modifications
   # replacing formalisme option @nom, choix
-  setAttrValues(
+  set_attrs_values(
     old_doc,
     path = "//option[@nomParam='codecalferti']",
     attr_name = "nom",
     values_list = "automatic calculation of fertilisation"
   )
 
-  setAttrValues(
+  set_attrs_values(
     old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "nom",
@@ -210,7 +210,7 @@ upgrade_param_newform_xml <- function(file,
                          " 2 = based on soil water content)")
   )
 
-  setAttrValues(
+  set_attrs_values(
     old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "choix",

@@ -120,7 +120,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
     ))
   }
 
-  addAttrs(xml_doc, path = root_path, named_vector = ver)
+  add_attrs(xml_doc, path = root_path, named_vector = ver)
 }
 
 # TODO : see existing get_xml_stics_version, to be merged or replaced with

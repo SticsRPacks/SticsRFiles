@@ -12,7 +12,7 @@ get_base_used_param <- function(xml_doc) {
     attr_list = "nom"
   )
   colnames(name) <- "name"
-  value <- getValues(xml_doc, path = "//formalisme/param")
+  value <- get_values(xml_doc, path = "//formalisme/param")
   df <- data.frame(name = name,
                    value = value,
                    cultivar = "none",
@@ -31,7 +31,7 @@ get_base_used_param <- function(xml_doc) {
   cultivar <- unlist(lapply(cultivars, function(x) rep(x, parv_nb)))
 
   colnames(namev) <- "name"
-  valuev <- getValues(xml_doc, path = "//variete/param")
+  valuev <- get_values(xml_doc, path = "//variete/param")
 
   dfv <- data.frame(name = namev,
                     value = valuev,
@@ -84,7 +84,7 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
       param_names <- as.vector(
         get_attrs_values(xml_doc, path = path_param, "nom")
         )
-      param_values <- as.vector(getValues(xml_doc, path = path_param))
+      param_values <- as.vector(get_values(xml_doc, path = path_param))
       param_list <- rbind(param_list, data.frame(
         option = name, code = value,
         name = param_names, value = param_values,
@@ -149,7 +149,7 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
           get_attrs_values(xml_doc, path = sub_path_param, "nom")
           )
 
-        sub_param_values <- as.vector(getValues(xml_doc, path = sub_path_param))
+        sub_param_values <- as.vector(get_values(xml_doc, path = sub_path_param))
         param_list <- rbind(param_list, data.frame(
           option = sub_name, code = sub_value,
           name = sub_param_names, value = sub_param_values,
@@ -200,7 +200,7 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
       v_param_names <- as.vector(
         get_attrs_values(xml_doc, path = v_path_param, "nom")
         )
-      v_param_values <- as.vector(getValues(xml_doc, path = v_path_param))
+      v_param_values <- as.vector(get_values(xml_doc, path = v_path_param))
       param_list <- rbind(param_list, data.frame(
         option = v_name, code = v_value,
         name = v_param_names, value = v_param_values,

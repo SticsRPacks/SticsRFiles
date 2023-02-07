@@ -635,7 +635,7 @@ nomParam="codedyntalle">
   # <param format="real" max="2.0" min="0.0" nom="hautbase">0</param>
   nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='hautbase']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc, path = "//param[@nom='hautbase']",
+    set_attrs_values(old_doc, path = "//param[@nom='hautbase']",
                   attr_name = "min", values_list = "0.1")
   }
   #
@@ -644,12 +644,12 @@ nomParam="codedyntalle">
   # oui to yes, non to no
   nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='oui']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc, path = "//choix[@nom='oui']", attr_name = "nom",
+    set_attrs_values(old_doc, path = "//choix[@nom='oui']", attr_name = "nom",
                   values_list = "yes")
   }
   nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='non']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc, path = "//choix[@nom='non']", attr_name = "nom",
+    set_attrs_values(old_doc, path = "//choix[@nom='non']", attr_name = "nom",
                   values_list = "no")
   }
 
