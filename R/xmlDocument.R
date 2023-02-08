@@ -151,7 +151,6 @@ setMethod(
 
     # testing if any node has not any attribute
     any_null <- any(sapply(attr_list, function(x) base::is.null(x)))
-    # print(attr_list)
     if (any_null && object@warn) {
       warning(paste("Existing nodes without any attributes on xpath", path))
     }
@@ -183,7 +182,6 @@ setMethod(
     dim_names <- dimnames(attr_list)
     if (!base::is.null(dim_names[[1]])) {
       attr_names <- dim_names[[1]]
-      # print(attr_names)
     } else {
       attr_names <- dim_names[[2]]
     }
@@ -198,10 +196,7 @@ setMethod(
   "get_attrs_values", signature(object = "xml_document"),
   function(object, path, attr_list = character(length = 0),
            nodes_ids = NULL) {
-    # browser()
     sel_values <- NULL
-
-
 
     # getting attributes values from doc
     attr_values <- get_attrs(object, path)

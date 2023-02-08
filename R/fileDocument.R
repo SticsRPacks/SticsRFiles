@@ -28,7 +28,6 @@ setClass(
 # constructor
 setMethod("filedocument", signature(file = "character", type = "character"),
           function(file = character(length = 0), type = character(length = 0)) {
-            # print(file)
             return(methods::new("file_document", file, type))
           }
 )
@@ -37,7 +36,6 @@ setMethod("filedocument", signature(file = "character", type = "character"),
 # file only
 setMethod("filedocument", signature(file = "character", type = "missing"),
           function(file = character(length = 0), type = character(length = 0)) {
-            # print(file)
             return(methods::new("file_document", file))
           }
 )
@@ -127,14 +125,12 @@ setMethod("get_dir", signature(object = "file_document"),
 #
 setMethod("get_ext", signature(object = "file_document"),
           function(object) {
-            # print(object)
             return(object@ext)
           }
 )
 
 setMethod("get_type", signature(object = "file_document"),
           function(object) {
-            # print(object)
             return(object@type)
           }
 )
@@ -168,7 +164,6 @@ setMethod("exist", signature(object = "file_document"),
 
 setMethod("show", "file_document",
           function(object) {
-            # print("show de file_document")
             print(paste0("   name : ", object@name))
             print(paste0("   type : ", object@type))
             print(paste0("   dir : ", object@dir))
@@ -195,18 +190,17 @@ setMethod("create", signature(object = "file_document"),
 
 #
 setMethod("move", signature(object = "file_document"),
-          function(object, toFile) {
+          function(object, to_file) {
             # cas : rename, move
             if (exist(object)) {
-              if (dir.exists(toFile)) {
-                toFile <- file.path(toFile, object@name)
+              if (dir.exists(to_file)) {
+                to_file <- file.path(to_file, object@name)
               }
-              file.rename(get_path(object), toFile)
+              file.rename(get_path(object), to_file)
 
-              # object@file <- toFile
-              object <- methods::new(class(object)[[1]], toFile)
+              object <- methods::new(class(object)[[1]], to_file)
             } else {
-              set_name(object) <- toFile
+              set_name(object) <- to_file
             }
             return(object)
           }
@@ -214,8 +208,8 @@ setMethod("move", signature(object = "file_document"),
 
 #
 setMethod("rename", signature(object = "file_document"),
-          function(object, toFile) {
-            move(object, toFile)
+          function(object, to_file) {
+            move(object, to_file)
           }
 )
 
@@ -224,8 +218,6 @@ setMethod("delete", signature(object = "file_document"),
           function(object) {
             if (exist(object)) {
               file.remove(get_path(object))
-            } else {
-              # print(paste0(' File already exists : ',object@file))
             }
           }
 )
@@ -285,10 +277,6 @@ setMethod("isempty", signature(object = "ANY"),
             return(ret)
           }
 )
-
-# setGeneric('getClass', function(object) standardGeneric('getClass'))
-# setMethod('getClass',signature(object='ANY'),
-# function(object){ return(class(object)[[1]]) } )
 
 #
 setMethod("calc_ext", signature(object = "ANY"),
