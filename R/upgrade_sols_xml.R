@@ -84,12 +84,12 @@ upgrade_sols_xml <- function(file,
                        overwrite = overwrite)
 
   # Checking if layer @nom are up to date (old @nom = horizon)
-  tableau_noms <- unlist(getNodeS(old_doc, "//tableau/@nom"))
+  tableau_noms <- unlist(get_nodes(old_doc, "//tableau/@nom"))
 
   if (any(grep(pattern = "horizon", tableau_noms))) {
     new_names <- unlist(lapply(tableau_noms,
         function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")))
-    setAttrValues(old_doc, "//tableau", "nom", new_names)
+    set_attrs_values(old_doc, "//tableau", "nom", new_names)
   }
 
   # Nodes to add
@@ -100,13 +100,13 @@ upgrade_sols_xml <- function(file,
   # new_node <- XML::xmlParseString('<param nom="finert">0.65000</param>',
   #                           addFinalizer = TRUE)
 
-  prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
+  prev_sibling <- get_nodes(old_doc, "//param[@nom='CsurNsol']")
 
   # added for compatibility with old misspelled parameters
   if (is.null(prev_sibling)) {
-    prev_sibling <- getNodeS(old_doc, "//param[@nom='csurNsol']")
+    prev_sibling <- get_nodes(old_doc, "//param[@nom='csurNsol']")
     # updating nom attribute content
-    setAttrValues(old_doc,
+    set_attrs_values(old_doc,
       path = "//param[@nom='csurNsol']",
       attr_name = "nom",
       values_list = "CsurNsol"

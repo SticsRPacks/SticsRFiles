@@ -1,6 +1,6 @@
 #' @title Get a Stics xml parameter type and xpath
-#' from a request in an xmlDocument
-#' @param xml_doc an xmlDocument object (created from an xml file)
+#' from a request in an xml_document
+#' @param xml_doc an xml_document object (created from an xml file)
 #' @param param_name parameter name or a vector of names
 #' @param parent_name xml parent node name
 #' @param parent_sel_attr parent attribute value for selecting
@@ -87,7 +87,7 @@ get_param_type <- function(xml_doc,
 
     # if no bad charaters in param_name
     if (!filter_name) {
-      attr_values <- getAttrsValues(xml_doc, xpath_nodename, "nom")
+      attr_values <- get_attrs_values(xml_doc, xpath_nodename, "nom")
       if (!base::is.null(attr_values)) {
         return(list(
           type = "attr",
@@ -96,7 +96,7 @@ get_param_type <- function(xml_doc,
           attr = "nom"))
       }
 
-      attr_values <- getAttrsValues(xml_doc, xpath_nodename, "dominance")
+      attr_values <- get_attrs_values(xml_doc, xpath_nodename, "dominance")
       if (!base::is.null(attr_values)) {
         return(list(
           type = "attr",
@@ -106,7 +106,7 @@ get_param_type <- function(xml_doc,
       }
 
       # new case for getting values of the node childs
-      values <- getValues(xml_doc, xpath_nodename_childs)
+      values <- get_values(xml_doc, xpath_nodename_childs)
       if (!base::is.null(values)) {
         return(list(
           type = "nodename_childs", xpath = xpath_nodename_childs,
@@ -114,8 +114,8 @@ get_param_type <- function(xml_doc,
         ))
       }
 
-      # or getNodeS ?
-      values <- getValues(xml_doc, xpath_nodename)
+      # or get_nodes ?
+      values <- get_values(xml_doc, xpath_nodename)
       if (!base::is.null(values)) {
         return(list(
           type = "nodename",
@@ -124,7 +124,7 @@ get_param_type <- function(xml_doc,
       }
 
       # for example for : nb_interventions
-      attr_values <- getAttrsValues(xml_doc, xpath_attrname, param_name)
+      attr_values <- get_attrs_values(xml_doc, xpath_attrname, param_name)
       if (!base::is.null(attr_values)) {
         return(list(
           type = "attrname",
@@ -134,22 +134,22 @@ get_param_type <- function(xml_doc,
       }
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_param, "nom")
+    attr_values <- get_attrs_values(xml_doc, xpath_param, "nom")
     if (!base::is.null(attr_values)) {
       return(list(type = "param", xpath = xpath_param, length = 1))
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_option, "nomParam")
+    attr_values <- get_attrs_values(xml_doc, xpath_option, "nomParam")
     if (!base::is.null(attr_values)) {
       return(list(type = "option", xpath = xpath_option, length = 1))
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_optionv, "nomParam")
+    attr_values <- get_attrs_values(xml_doc, xpath_optionv, "nomParam")
     if (!base::is.null(attr_values)) {
       return(list(type = "optionv", xpath = xpath_option, length = 1))
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_table, "nom")
+    attr_values <- get_attrs_values(xml_doc, xpath_table, "nom")
     if (!base::is.null(attr_values)) {
       return(list(
         type = "table",
@@ -157,7 +157,7 @@ get_param_type <- function(xml_doc,
         length = length(attr_values)))
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_table2, "nom")
+    attr_values <- get_attrs_values(xml_doc, xpath_table2, "nom")
     if (!base::is.null(attr_values)) {
       return(list(
         type = "table2",
@@ -165,7 +165,7 @@ get_param_type <- function(xml_doc,
         length = length(attr_values)))
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_ent, "nom")
+    attr_values <- get_attrs_values(xml_doc, xpath_ent, "nom")
     if (!base::is.null(attr_values)) {
       return(list(
         type = "table_ent",
@@ -186,7 +186,7 @@ get_param_type <- function(xml_doc,
     )
   }
 
-  values <- getValues(xml_doc, xpath_attr_attr)
+  values <- get_values(xml_doc, xpath_attr_attr)
   if (!base::is.null(values)) {
     return(list(
       type = "attr_attr",
@@ -205,7 +205,7 @@ get_param_type <- function(xml_doc,
       )
     }
 
-    values <- getAttrsValues(xml_doc, xpath_attr_attr, param_name)
+    values <- get_attrs_values(xml_doc, xpath_attr_attr, param_name)
     if (!base::is.null(values)) {
       return(list(
         type = "attr_attr2",
@@ -223,7 +223,7 @@ get_param_type <- function(xml_doc,
       sel_id
     )
   }
-  attr_values <- getAttrsValues(xml_doc, xpath_choix_attr, param_name)
+  attr_values <- get_attrs_values(xml_doc, xpath_choix_attr, param_name)
   if (!base::is.null(attr_values)) {
     return(list(
       type = "choix_attr",
@@ -242,7 +242,7 @@ get_param_type <- function(xml_doc,
       )
     }
 
-    attr_values <- getAttrsValues(xml_doc, xpath_node_attr, "nom")
+    attr_values <- get_attrs_values(xml_doc, xpath_node_attr, "nom")
     if (!base::is.null(attr_values)) {
       return(list(
         type = "node_attr",
@@ -263,7 +263,7 @@ get_param_type <- function(xml_doc,
                              "//param[@nom=\"",
                              param_name, "\"]")
 
-  values <- getValues(xml_doc, xpath_node_param)
+  values <- get_values(xml_doc, xpath_node_param)
   if (!base::is.null(values)) {
     return(list(
       type = "node_param",
@@ -279,7 +279,7 @@ get_param_type <- function(xml_doc,
     "/param[@nom=\"", param_name, "\"]"
   )
 
-  attr_values <- getAttrsValues(xml_doc, xpath_choix_param, "nom")
+  attr_values <- get_attrs_values(xml_doc, xpath_choix_param, "nom")
   if (!base::is.null(attr_values)) {
     return(list(type = "choix_param", xpath = xpath_choix_param, length = 1))
   }
@@ -304,7 +304,7 @@ get_param_type <- function(xml_doc,
     "//option[@nomParam=\"", param_name, "\"]"
   )
 
-  attr_values <- getAttrsValues(xml_doc, xpath_form_option, "choix")
+  attr_values <- get_attrs_values(xml_doc, xpath_form_option, "choix")
   if (!base::is.null(attr_values)) {
     return(list(
       type = "form_option",
@@ -327,7 +327,7 @@ get_param_type <- function(xml_doc,
                               param_name,
                               "\"]")
 
-  attr_values <- getAttrsValues(xml_doc, xpath_node_option, "choix")
+  attr_values <- get_attrs_values(xml_doc, xpath_node_option, "choix")
   if (!base::is.null(attr_values)) {
     return(list(
       type = "node_option",
@@ -355,7 +355,7 @@ get_param_type <- function(xml_doc,
     param_name,
     "\"]")
 
-  attr_values <- getAttrsValues(xml_doc, xpath_node_option, "choix")
+  attr_values <- get_attrs_values(xml_doc, xpath_node_option, "choix")
   if (!base::is.null(attr_values)) {
     return(list(
       type = "node_option",
@@ -377,7 +377,7 @@ get_param_type <- function(xml_doc,
 
     xpath_node_node <- paste0("//", new_parent_name, "//", param_name)
 
-    values <- getValues(xml_doc, xpath_node_node)
+    values <- get_values(xml_doc, xpath_node_node)
     if (!base::is.null(values)) {
       return(list(
         type = "node_node",
@@ -403,7 +403,7 @@ get_param_type <- function(xml_doc,
       param_name,
       "/horizon")
 
-    values <- getValues(xml_doc, xpath_node_node)
+    values <- get_values(xml_doc, xpath_node_node)
     if (!base::is.null(values)) {
       return(list(
         type = "node_node",
@@ -423,7 +423,7 @@ get_param_type <- function(xml_doc,
 
     xpath_node_node <- paste0("//", new_parent_name, "//", param_name)
 
-    values <- getValues(xml_doc, xpath_node_node)
+    values <- get_values(xml_doc, xpath_node_node)
     if (!base::is.null(values)) {
       return(list(
         type = "node_node",
@@ -451,7 +451,7 @@ get_param_type <- function(xml_doc,
     param_name,
     "\"]")
 
-  values <- getValues(xml_doc, xpath_node_table)
+  values <- get_values(xml_doc, xpath_node_table)
   if (!base::is.null(values)) {
     return(list(
       type = "node_table",
@@ -472,7 +472,7 @@ get_param_type <- function(xml_doc,
     new_parent_name,
     "//intervention/colonne[@nom=\"", param_name, "\"]")
 
-  values <- getValues(xml_doc, xpath_node_table2)
+  values <- get_values(xml_doc, xpath_node_table2)
   if (!base::is.null(values)) {
     return(list(
       type = "node_table2",
@@ -490,7 +490,7 @@ get_param_type <- function(xml_doc,
     param_name,
     "\"]")
 
-  values <- getValues(xml_doc, xpath_node_table)
+  values <- get_values(xml_doc, xpath_node_table)
   if (!base::is.null(values)) {
     return(list(
       type = "node_table_ent",

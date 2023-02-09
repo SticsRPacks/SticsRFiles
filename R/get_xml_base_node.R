@@ -1,4 +1,4 @@
-#' @title Get an xmlDocument node (set of parameters) from a Stics xml node
+#' @title Get an xml_document node (set of parameters) from a Stics xml node
 #' file template
 #' @param file_tag file tag among "usms","sols", "tec"
 #' @param form_name formalism name
@@ -103,7 +103,7 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   xml_doc <- xmldocument(xml_file)
 
   # Convert it into a string
-  base_node_txt <- XML::saveXML(getNodeS(xml_doc, paste0("//", node))[[1]])
+  base_node_txt <- XML::saveXML(get_nodes(xml_doc, paste0("//", node))[[1]])
 
   # TODO: see if usefull to call xmlClone or not ?
   # Getting the node from a node set

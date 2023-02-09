@@ -2,12 +2,12 @@
 % Please edit documentation in R/set_sols_param_xml.R
 \name{set_sols_param_xml}
 \alias{set_sols_param_xml}
-\title{Setting a sol param value(s) in a sols xmlDocument}
+\title{Setting a sol param value(s) in a sols xml_document}
 \usage{
 set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from an xml sols file)}
+\item{xml_doc_object}{an xml_document object (created from an xml sols file)}
 
 \item{sols_param}{soils parameters (data.frame)}
 
@@ -15,7 +15,7 @@ set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 updating existing ones (FALSE)}
 }
 \description{
-Setting a sol param value(s) in a sols xmlDocument
+Setting a sol param value(s) in a sols xml_document
 }
 \examples{
 \dontrun{
@@ -28,7 +28,7 @@ sols_df <- read_excel(xl_path, sheet = "Soils")
 
 # For updating an existing xml doc (using existing soils names)
 # Creating a fake existing_doc
-existing_doc <- SticsRFiles:::gen_xml_doc("sols", nodes_nb = 3)
+existing_doc <- SticsRFiles:::gen_usms_sols_doc("sols", nodes_nb = 3)
 SticsRFiles:::set_param_value(existing_doc,
   param_name = "sol",
   param_value = sols_df$Soil_name[c(3, 1, 5)]
@@ -40,7 +40,7 @@ SticsRFiles:::set_sols_param_xml(existing_doc, sols_df)
 # For a new xml doc
 # In that case: sols_df must contain all the soils parameters !)
 soils_nb <- dim(sols_df)[1]
-new_doc <- SticsRFiles:::gen_xml_doc("sols", nodes_nb = soils_nb)
+new_doc <- SticsRFiles:::gen_usms_sols_doc("sols", nodes_nb = soils_nb)
 
 SticsRFiles:::set_sols_param_xml(new_doc, sols_df, overwrite = TRUE)
 }

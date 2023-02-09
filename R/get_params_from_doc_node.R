@@ -1,5 +1,5 @@
 #' @title Get a list of Stics xml parameters names from nodes names in
-#' an xmlDocument
+#' an xml_document
 #' @param xml_node an xml XMLInternalElementNode
 #'
 #' @param param_list param names vector, used for recursive calls

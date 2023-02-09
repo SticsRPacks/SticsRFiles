@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sta_doc.R
 \name{gen_sta_doc}
 \alias{gen_sta_doc}
-\title{Generatefrom a template a Stics sta xmlDocument}
+\title{Generatefrom a template a Stics sta xml_document}
 \usage{
 gen_sta_doc(
   xml_doc = NULL,
@@ -12,7 +12,7 @@ gen_sta_doc(
 )
 }
 \arguments{
-\item{xml_doc}{an optional xmlDocument object (created from an sta file)}
+\item{xml_doc}{an optional xml_document object (created from an sta file)}
 
 \item{param_table}{a table (df, tibble) containing parameters to use
 (optional)}
@@ -23,10 +23,10 @@ gen_sta_doc(
 \item{check_names}{logical for checking names of param_table columns or not}
 }
 \value{
-an invisible xmlDocument object or a list of
+an invisible xml_document object or a list of
 }
 \description{
-Generatefrom a template a Stics sta xmlDocument
+Generatefrom a template a Stics sta xml_document
 }
 \examples{
 \dontrun{

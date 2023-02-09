@@ -1,10 +1,10 @@
-#' @title Get an xmlDocument from a Stics xml file template
+#' @title Get an xml_document from a Stics xml file template
 #' @param xml_type xml file type (see types returned when calling
 #' get_xml_base_doc())
 #'
 #' @param stics_version the stics files version to use
 #'
-#' @return an xmlDocument object
+#' @return an xml_document object
 #'
 #' @examples
 #' \dontrun{
@@ -38,7 +38,7 @@ get_xml_base_doc <- function(xml_type = NULL,
   idx <- types %in% xml_type
   # checking the xml_type
   if (!any(idx)) {
-    stop("Unknown xml type for getting an xml template xmlDocument !")
+    stop("Unknown xml type for getting an xml template xml_document !")
   }
 
   # check & get version

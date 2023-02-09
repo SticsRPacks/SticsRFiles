@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_bounds.R
 \name{get_param_bounds}
 \alias{get_param_bounds}
-\title{Getting parameters bounds from an xmlDocument object}
+\title{Getting parameters bounds from an xml_document object}
 \usage{
 get_param_bounds(
   xml_doc,
@@ -12,7 +12,7 @@ get_param_bounds(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument class object}
+\item{xml_doc}{an xml_document class object}
 
 \item{param_name}{a parameter name of a vector of parameters names}
 
@@ -28,7 +28,7 @@ for bounds.
 }
 \description{
 Extracting parameters min and/or max bounds for a parameter
-or a vector of parameters from an xmlDocument class object.
+or a vector of parameters from an xml_document class object.
 }
 \examples{
 \dontrun{

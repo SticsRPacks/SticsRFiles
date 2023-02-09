@@ -1,6 +1,6 @@
-#' Add node to an xmlDocument object
+#' Add node to an xml_document object
 #'
-#' @param xml_doc an xmlDocument
+#' @param xml_doc an xml_document
 #' @param new_node a new node to add
 #' @param nodes_nb nodes number to add to parent node
 #' @param parent_path path of the parent node
@@ -42,12 +42,12 @@
 add_node_to_doc <- function(xml_doc, new_node, nodes_nb = 1, parent_path) {
 
   # Checking that parent_path is valid xpath for xml_doc
-  if (is.null(getNodeS(xml_doc, parent_path))) {
+  if (is.null(get_nodes(xml_doc, parent_path))) {
     warning(paste("Given xpath is not a valid one:", parent_path))
     return(invisible())
   }
 
   # Adding nodes_nb new_node to the xml_doc under parent node
   # after existing sibling nodes
-  replicate(nodes_nb, addNodes(xml_doc, XML::xmlClone(new_node), parent_path))
+  replicate(nodes_nb, add_nodes(xml_doc, XML::xmlClone(new_node), parent_path))
 }

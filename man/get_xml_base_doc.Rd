@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_xml_base_doc.R
 \name{get_xml_base_doc}
 \alias{get_xml_base_doc}
-\title{Get an xmlDocument from a Stics xml file template}
+\title{Get an xml_document from a Stics xml file template}
 \usage{
 get_xml_base_doc(xml_type = NULL, stics_version = "latest")
 }
@@ -13,10 +13,10 @@ get_xml_base_doc())}
 \item{stics_version}{the stics files version to use}
 }
 \value{
-an xmlDocument object
+an xml_document object
 }
 \description{
-Get an xmlDocument from a Stics xml file template
+Get an xml_document from a Stics xml file template
 }
 \examples{
 \dontrun{

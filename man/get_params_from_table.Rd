@@ -20,7 +20,7 @@ get_params_from_table(
 
 \item{param_names}{parameters names to select}
 
-\item{xml_doc}{an xmlDocument object (of any xml type)}
+\item{xml_doc}{an xml_document object (of any xml type)}
 
 \item{lines_id}{table lines identifiers to select}
 

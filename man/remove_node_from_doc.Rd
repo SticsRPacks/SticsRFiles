@@ -26,7 +26,7 @@ remove_node_from_doc(
 \item{nodes_ids}{The node IDs to be removed (optional)}
 }
 \description{
-Remove a node from an xmlDocument instance
+Remove a node from an xml_document instance
 }
 \examples{
 \dontrun{

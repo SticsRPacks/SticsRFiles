@@ -106,8 +106,8 @@ upgrade_param_newform_xml <- function(file,
   )
 
   nodes_to_rm <- lapply(form_names, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//formalisme[@nom='", x, "']")
     )
   })
@@ -121,8 +121,8 @@ upgrade_param_newform_xml <- function(file,
   )
 
   nodes_to_rm <- lapply(opt_names, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//option[@nom='", x, "']")
     )
   })
@@ -136,8 +136,8 @@ upgrade_param_newform_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
+  prev_sibling <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='Mineralization models']"
   )[[1]]
   XML::addSibling(prev_sibling, XML::xmlClone(new_node), after = TRUE)
@@ -173,8 +173,8 @@ upgrade_param_newform_xml <- function(file,
     # if a version 10.0 file is retreated
     # codemineral option must be retreived for the moment
 
-    codemineral_node <- getNodeS(
-      docObj = old_doc,
+    codemineral_node <- get_nodes(
+      old_doc,
       path = paste0("//option[@nomParam='codemineral']")
     )
 
@@ -195,23 +195,23 @@ upgrade_param_newform_xml <- function(file,
 
   # formalism modifications
   # replacing formalisme option @nom, choix
-  setAttrValues(
-    docObj = old_doc,
+  set_attrs_values(
+    old_doc,
     path = "//option[@nomParam='codecalferti']",
     attr_name = "nom",
     values_list = "automatic calculation of fertilisation"
   )
 
-  setAttrValues(
-    docObj = old_doc,
+  set_attrs_values(
+    old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "nom",
     values_list = paste0("automatic N fertilisation (1 = based on rainfall",
                          " 2 = based on soil water content)")
   )
 
-  setAttrValues(
-    docObj = old_doc,
+  set_attrs_values(
+    old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "choix",
     values_list = "1"
@@ -239,8 +239,8 @@ upgrade_param_newform_xml <- function(file,
                                   addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
+  prev_sibling <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='New Roots']"
   )[[1]]
   XML::addSibling(prev_sibling, XML::xmlClone(new_node))

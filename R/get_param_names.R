@@ -1,6 +1,6 @@
-#' @title Get a list of Stics xml parameters names an xmlDocument or  XML node
+#' @title Get a list of Stics xml parameters names an xml_document or  XML node
 #' @param xml_object an xml XML::XMLInternalElementNode
-#' or SticsRFiles::xmlDocument object
+#' or SticsRFiles::xml_document object
 #' @param param_list param names vector, only used for recursive calls
 #' @param full_list TRUE for getting all names, FALSE otherwise (default)
 #' @param root_name Only for getting the root node name (file type),
@@ -35,7 +35,7 @@ get_param_names <- function(xml_object,
 
     if (parent_name %in% c("formalisme", "formalismev", "optionv",
                            "usm", "sol", "variete"))
-      tmp_xml_object <- getNodeS(xml_object,
+      tmp_xml_object <- get_nodes(xml_object,
                                  path = paste0("//", parent_name,
                                                "[@nom='",
                                                parent_sel_attr,
@@ -43,7 +43,7 @@ get_param_names <- function(xml_object,
 
     if (is.null(tmp_xml_object)) {
       if (parent_name == "option")
-        tmp_xml_object <- getNodeS(xml_object,
+        tmp_xml_object <- get_nodes(xml_object,
                                    path = paste0("//", parent_name,
                                                  "[@nomParam='",
                                                  parent_sel_attr,
@@ -53,7 +53,7 @@ get_param_names <- function(xml_object,
     # plante: for usms and ini files
     if (is.null(tmp_xml_object)) {
       if (parent_name == "plante")
-        tmp_xml_object <- getNodeS(xml_object,
+        tmp_xml_object <- get_nodes(xml_object,
                                    path = paste0("//", parent_name,
                                                  "[@dominance='",
                                                  parent_sel_attr,
@@ -71,7 +71,7 @@ get_param_names <- function(xml_object,
 
 
   # If xml_object converting input argument to an XML node
-  if (base::is.element("xmlDocument", class(xml_object))) {
+  if (base::is.element("xml_document", class(xml_object))) {
     xml_node <- XML::xmlRoot(xml_object@content)
     root_name <- XML::xmlName(xml_node)
   } else if (base::is.element("XMLInternalElementNode", class(xml_object))) {

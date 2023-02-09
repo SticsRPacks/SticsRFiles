@@ -26,7 +26,7 @@ get_options_names <- function(xml_file_path, option_names = NULL) {
   xml_param <- xmldocument(xml_file_path)
 
   # Getting all options names
-  param_names <- getAttrsValues(xml_param, "//option", "nomParam")
+  param_names <- get_attrs_values(xml_param, "//option", "nomParam")
 
   # Checking if given names exist in param_names
   if (!base::is.null(option_names)) {

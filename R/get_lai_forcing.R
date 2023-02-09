@@ -66,14 +66,14 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
 #'
 get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 
-  # Loading xml file as xmlDocument object
+  # Loading xml file as xml_document object
   xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm
-  lai_forced <- as.logical(as.numeric(getValues(xml_usms, "//codesimul")))
+  lai_forced <- as.logical(as.numeric(get_values(xml_usms, "//codesimul")))
 
   # Xml usms names
-  usm_names <- getAttrs(xml_usms, "//usm")
+  usm_names <- get_attrs(xml_usms, "//usm")
   names(lai_forced) <- usm_names
 
   # Filtering using usms_list if needed

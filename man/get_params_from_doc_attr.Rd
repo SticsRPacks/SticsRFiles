@@ -3,12 +3,12 @@
 \name{get_params_from_doc_attr}
 \alias{get_params_from_doc_attr}
 \title{Get a list of Stics xml parameters names from nodes attributes in
-an xmlDocument}
+an xml_document}
 \usage{
 get_params_from_doc_attr(xml_doc, type_name = NULL, unique_val = TRUE)
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an xml file)}
+\item{xml_doc}{an xml_document object (created from an xml file)}
 
 \item{type_name}{type name, one of "option", "param", "colonne"}
 
@@ -19,6 +19,6 @@ a named list of parameter names
 }
 \description{
 Get a list of Stics xml parameters names from nodes attributes in
-an xmlDocument
+an xml_document
 }
 \keyword{internal}

@@ -1,14 +1,14 @@
-#' @title Get an xmlDocument from a Stics xml file example
+#' @title Get an xml_document from a Stics xml file example
 #' @param xml_name xml file name
 #' (see file names by calling get_xml_doc_example())
 #'
 #' @param stics_version the stics files version to use
 #'
-#' @return An xmlDocument object
+#' @return An xml_document object
 #'
 #' @examples
 #' \dontrun{
-#' # Retrieving xml examples files to get xmlDocument from
+#' # Retrieving xml examples files to get xml_document from
 #' SticsRFiles:::get_xml_doc_example()
 #'
 #' # Loading an usms.xml file

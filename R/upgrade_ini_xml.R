@@ -117,8 +117,8 @@ upgrade_ini_xml <- function(file,
 
   # Removing useless nodes
   rm_nodes <- unlist(lapply(rm_names, function(x) {
-    unlist(getNodeS(
-      docObj = old_doc,
+    unlist(get_nodes(
+      old_doc,
       path = paste0("//", x)
     ))
   }))
@@ -151,7 +151,7 @@ upgrade_ini_xml <- function(file,
   new_node <- XML::xmlParseString(str, addFinalizer = TRUE)
 
   # Getting zrac0 node
-  prev_sibling <- unlist(getNodeS(old_doc, "//zrac0"))
+  prev_sibling <- unlist(get_nodes(old_doc, "//zrac0"))
 
   # Adding new node
   lapply(prev_sibling, function(x) XML::addSibling(x, XML::xmlClone(new_node)))
@@ -164,7 +164,7 @@ upgrade_ini_xml <- function(file,
                   param_value = old_values)
 
 
-  if (is.null(getNodeS(old_doc, "//snow"))) {
+  if (is.null(get_nodes(old_doc, "//snow"))) {
     # Adding snow node
     new_node <- XML::xmlParseString(
       "<snow>
@@ -176,14 +176,14 @@ upgrade_ini_xml <- function(file,
       addFinalizer = TRUE
     )
 
-    parent_node <- getNodeS(old_doc, path = "//initialisations")[[1]]
+    parent_node <- get_nodes(old_doc, path = "//initialisations")[[1]]
 
     XML::addChildren(parent_node, XML::xmlClone(new_node))
   } else {
     # checking names an renaming them !
     old_names <- c("SDepth", "Sdry", "Swet", "ps")
     new_names <- c("Sdepth0", "Sdry0", "Swet0", "ps0")
-    n <- getNodeS(old_doc, c(sprintf("//%s", old_names)))
+    n <- get_nodes(old_doc, c(sprintf("//%s", old_names)))
 
     if (!is.null(n)) {
       nodes_idx <- unlist(lapply(n, XML::xmlName)) %in% old_names
@@ -197,11 +197,11 @@ upgrade_ini_xml <- function(file,
 
   # Renaming soil parameters
   # hinit, NO3init, NH4init => hinitf, NO3initf, NH4initf
-  current_node <- getNodeS(old_doc, path = "//hinit")[[1]]
+  current_node <- get_nodes(old_doc, path = "//hinit")[[1]]
   XML::xmlName(current_node) <- "Hinitf"
-  current_node <- getNodeS(old_doc, path = "//NO3init")[[1]]
+  current_node <- get_nodes(old_doc, path = "//NO3init")[[1]]
   XML::xmlName(current_node) <- "NO3initf"
-  current_node <- getNodeS(old_doc, path = "//NH4init")[[1]]
+  current_node <- get_nodes(old_doc, path = "//NH4init")[[1]]
   XML::xmlName(current_node) <- "NH4initf"
 
 

@@ -88,7 +88,7 @@ upgrade_usms_xml <- function(file,
   )
 
   # checking if fobs exist
-  obs_nodes <- getNodeS(old_doc, "//fobs")
+  obs_nodes <- get_nodes(old_doc, "//fobs")
 
   # TODO: detect if fobs exist and evaluate
   # where to add fobs fields !!!!!
@@ -98,7 +98,7 @@ upgrade_usms_xml <- function(file,
                                     addFinalizer = TRUE
     )
 
-    parent_node <- getNodeS(old_doc, "//plante")
+    parent_node <- get_nodes(old_doc, "//plante")
 
     lapply(parent_node,
            function(x) XML::addChildren(x, XML::xmlClone(new_node))
@@ -107,7 +107,7 @@ upgrade_usms_xml <- function(file,
 
 
   # Usms names
-  usms_names <- getAttrsValues(old_doc, "//usm", "nom")
+  usms_names <- get_attrs_values(old_doc, "//usm", "nom")
 
   # existing obs files
   # intercrops usms are not taken into account in that case

@@ -138,8 +138,8 @@ upgrade_plt_xml <- function(file,
 
   # nodes existing outside of 'cultivar parameters' formalism
   nodes_to_rm <- lapply(param_names_to_varietal, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//formalisme[@nom!='cultivar parameters']//param[@nom='",
                     x, "']")
     )
@@ -182,13 +182,13 @@ upgrade_plt_xml <- function(file,
   )
 
   # test if the node exists
-  node_exists <- !is.null(getNodeS(old_doc,
+  node_exists <- !is.null(get_nodes(old_doc,
                                    '//option[@nomParam="codephot_part"]'))
 
   if (node_exists) stop(
     "codephot_part already exists, not a v9.1 or 9.2 _plt.xml file")
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     '//option[@nomParam="codephot"]/choix[@code="1"]')[[1]]
 
@@ -196,8 +196,8 @@ upgrade_plt_xml <- function(file,
 
 
   # moving nbfeuilplant
-  node_to_move <- getNodeS(old_doc, path = "//param[@nom='nbfeuilplant']")[[1]]
-  prev_sibling <- getNodeS(old_doc, path = "//param[@nom='laiplantule']")[[1]]
+  node_to_move <- get_nodes(old_doc, path = "//param[@nom='nbfeuilplant']")[[1]]
+  prev_sibling <- get_nodes(old_doc, path = "//param[@nom='laiplantule']")[[1]]
 
   XML::addSibling(prev_sibling, node_to_move)
 
@@ -217,7 +217,7 @@ upgrade_plt_xml <- function(file,
   )
 
   # adding irazomax node
-  parent_node <- getNodeS(old_doc,
+  parent_node <- get_nodes(old_doc,
                           path = "//formalisme[@nom='yield formation']")[[1]]
   XML::addChildren(parent_node, new_node, at = 0)
 
@@ -231,8 +231,8 @@ upgrade_plt_xml <- function(file,
 
 
   # moving irmax
-  node_to_move <- getNodeS(old_doc, path = "//param[@nom='irmax']")[[1]]
-  parent_node <- getNodeS(
+  node_to_move <- get_nodes(old_doc, path = "//param[@nom='irmax']")[[1]]
+  parent_node <- get_nodes(
     old_doc,
     path = "//option[@nomParam='codeir']/choix[@code='1']")[[1]]
 
@@ -253,14 +253,14 @@ upgrade_plt_xml <- function(file,
   )
   # before sibling
   # <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
-  prev_sibling <- getNodeS(old_doc, '//option[@nomParam="codazorac"]')[[1]]
+  prev_sibling <- get_nodes(old_doc, '//option[@nomParam="codazorac"]')[[1]]
   XML::addSibling(prev_sibling, new_node, after = FALSE)
 
 
   # Changing varietal section structure ----------------------------------------
   #
   # Remove nodes from old doc for varietal content (under variete nodes)
-  nodes_to_rm <- getNodeS(old_doc, path = "//variete/*")
+  nodes_to_rm <- get_nodes(old_doc, path = "//variete/*")
   lapply(nodes_to_rm, function(x) XML::removeNodes(x))
 
   # Add under each variete node new nodes
@@ -392,7 +392,7 @@ upgrade_plt_xml <- function(file,
 
 
   # adding var nodes under each "variete" node
-  var_parent_nodes <- getNodeS(old_doc, path = "//variete")
+  var_parent_nodes <- get_nodes(old_doc, path = "//variete")
   lapply(var_parent_nodes,
          function(x) {
            XML::addChildren(x,
@@ -475,7 +475,7 @@ upgrade_plt_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(old_doc, "//*[@nomParam='codetemprac']")[[1]]
+  prev_sibling <- get_nodes(old_doc, "//*[@nomParam='codetemprac']")[[1]]
   XML::addSibling(prev_sibling, XML::xmlClone(new_node))
 
 
@@ -491,7 +491,7 @@ upgrade_plt_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(old_doc,
+  parent_node <- get_nodes(old_doc,
                           "//*[@nomParam='codegdhdeb']/choix[@code='1']")[[1]]
   XML::addChildren(parent_node, new_node)
 
@@ -551,7 +551,7 @@ nomParam="codedyntalle">
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
+  parent_node <- get_nodes(
     old_doc,
     "//formalisme[@nom='partitioning of biomass in organs']"
   )[[1]]
@@ -564,7 +564,7 @@ nomParam="codedyntalle">
   new_node <- XML::xmlParseString(
     '<param format="real" max="0.07" min="0.005" nom="rayon">0.02</param>'
   )
-  prev_sibling <- getNodeS(old_doc, "//*[@nom='contrdamax']")[[1]]
+  prev_sibling <- get_nodes(old_doc, "//*[@nom='contrdamax']")[[1]]
   XML::addSibling(prev_sibling, new_node)
 
   # adding 2 option nodes
@@ -594,7 +594,7 @@ nomParam="codedyntalle">
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(old_doc, "//choix[@nom='true density']")[[1]]
+  parent_node <- get_nodes(old_doc, "//choix[@nom='true density']")[[1]]
 
   XML::addChildren(parent_node, kids = unlist(XML::xmlChildren(new_nodes)))
 
@@ -633,23 +633,23 @@ nomParam="codedyntalle">
   # Changing param min / max wrong attributes values
   # hautbase => 0.1
   # <param format="real" max="2.0" min="0.0" nom="hautbase">0</param>
-  nodes_to_change <- getNodeS(old_doc, path = "//param[@nom='hautbase']")
+  nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='hautbase']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc, path = "//param[@nom='hautbase']",
+    set_attrs_values(old_doc, path = "//param[@nom='hautbase']",
                   attr_name = "min", values_list = "0.1")
   }
   #
   # Changing options' "choix",  "nom" attribute values
   #
   # oui to yes, non to no
-  nodes_to_change <- getNodeS(old_doc, path = "//choix[@nom='oui']")
+  nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='oui']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc, path = "//choix[@nom='oui']", attr_name = "nom",
+    set_attrs_values(old_doc, path = "//choix[@nom='oui']", attr_name = "nom",
                   values_list = "yes")
   }
-  nodes_to_change <- getNodeS(old_doc, path = "//choix[@nom='non']")
+  nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='non']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc, path = "//choix[@nom='non']", attr_name = "nom",
+    set_attrs_values(old_doc, path = "//choix[@nom='non']", attr_name = "nom",
                   values_list = "no")
   }
 

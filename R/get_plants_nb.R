@@ -102,14 +102,14 @@ get_plants_nb_xml <- function(usms_file,
     usm_xml_path <- usms_file # to remove when we update inside the function
   }
 
-  # Loading xml file as xmlDocument object
+  # Loading xml file as xml_document object
   xml_usms <- xmldocument(usm_xml_path)
 
   # Getting plants nb per usm
-  plants_nb <- as.numeric(getValues(xml_usms, "//nbplantes"))
+  plants_nb <- as.numeric(get_values(xml_usms, "//nbplantes"))
 
   # Xml usms names
-  usm_names <- getAttrs(xml_usms, "//usm")
+  usm_names <- get_attrs(xml_usms, "//usm")
   names(plants_nb) <- usm_names
 
   # Filtering using usms_list if needed

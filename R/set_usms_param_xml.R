@@ -1,5 +1,5 @@
-#' @title Setting a usm param value(s) in an usms xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from an usms file)
+#' @title Setting a usm param value(s) in an usms
+#' @param xml_doc_object an  object (created from an usms file)
 #'
 #' @param usms_param usms parameters (data.frame)
 #' @param overwrite replace existing usms (TRUE) or not,
@@ -10,13 +10,13 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' usms_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xml"),
+#' xl_path <- file.path(get_examples_path(file_type = "xl"),
 #'                      "inputs_stics_example.xlsx")
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
 #' # For updating an existing xml doc (using existing usms names)
 #' # Creating a fake existing_doc
-#' existing_doc <- SticsRFiles:::gen_xml_doc("usms", nodes_nb = 3)
+#' existing_doc <- SticsRFiles:::gen_usms_sols_doc("usms", nodes_nb = 3)
 #' SticsRFiles:::set_param_value(existing_doc,
 #'   param_name = "usm",
 #'   param_value = usms_df$usm_nom[c(3, 1, 5)]
@@ -28,7 +28,7 @@
 #' # For a new xml doc
 #' # In that case: usms_df must contain all the usms parameters !
 #' usms_nb <- dim(usms_df)[1]
-#' new_doc <- SticsRFiles:::gen_xml_doc("usms", nodes_nb = usms_nb)
+#' new_doc <- SticsRFiles:::gen_usms_sols_doc("usms", nodes_nb = usms_nb)
 #'
 #' SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = TRUE)
 #' }
@@ -50,8 +50,8 @@ set_usms_param_xml <- function(xml_doc_object,
     }
   }
 
-  if (!"xmlDocument" %in% class(xml_doc_object)) {
-    stop("xml_doc_object is not an XMLDocument object")
+  if (!is.xml_document(xml_doc_object)) {
+    stop("xml_doc_object is not an xml_document object")
   }
 
   # detecting usm names column

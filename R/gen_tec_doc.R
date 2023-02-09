@@ -1,6 +1,6 @@
-#' @title Generate from a template or modify a Stics tec xmlDocument
+#' @title Generate from a template or modify a Stics tec xml_document
 #'
-#' @param xml_doc an xmlDocument object (created from an ini file)
+#' @param xml_doc an xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param stics_version the stics files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
@@ -9,7 +9,7 @@
 #' @param ... Additional arguments (for example, coming from a call
 #' from gen_tec_xml using a na_values argument)
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #'
 #' @examples
@@ -63,7 +63,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       param_table, 1,
       function(x) {
         gen_tec_doc(
-          xml_doc = cloneXmlDoc(xml_doc),
+          xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x),
                                       stringsAsFactors = FALSE
           ),
@@ -182,7 +182,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         # node cannot be removed. Consistency error between the
         # values detected in the parameters table and the param type
         # in the xml file.
-        if (XML::xmlName(XML::xmlParent(getNodeS(
+        if (XML::xmlName(XML::xmlParent(get_nodes(
           xml_doc,
           xpath_node
         )[[1]])) == "formalisme") {
@@ -215,7 +215,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       # attribute
       # Cloning "ta_entete" node, from the current xml_doc
       # renaming it and reusing it for intervention nodes creation
-      op_node <- XML::xmlClone(getNodeS(
+      op_node <- XML::xmlClone(get_nodes(
         xml_doc,
         paste0("//ta_entete[colonne[@nom='", par_name, "']]")
       )[[1]])

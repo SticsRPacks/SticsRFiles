@@ -2,7 +2,7 @@
 #' Stics files templates in the package
 #'
 #' @param stics_version A version key of a Stics version (i.e. V9.1)
-#' @param xml_doc an xmlDocument of a Stics xml file (Unused for the moment,
+#' @param xml_doc an xml_document of a Stics xml file (Unused for the moment,
 #' no version String included in xml files)
 #'
 #' @return a Stics version string
