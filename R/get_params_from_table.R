@@ -57,7 +57,7 @@ get_params_from_table <- function(params_table,
   for (key in names(dict)) {
     params_table <- params_table %>%
       dplyr::rename_at(
-        dplyr::vars(dplyr::starts_with(key)),
+        dplyr::vars(dplyr::matches(paste0("^",key,"$"))),
         list(~ stringr::str_replace(., key, dict[[key]]))
       )
   }
