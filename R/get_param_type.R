@@ -29,7 +29,7 @@ get_param_type <- function(xml_doc,
     "choix_param", "node_node", "node_option", "node_table",
     "node_param", "form_option", "node_attr", "attr", "attrname",
     "attr_attr", "choix_attr", "nodename", "attr_attr2",
-    "nodename_childs", "node_table_ent"
+    "nodename_childs", "node_table_ent", "node_table_ent2"
   )
 
 
@@ -81,8 +81,10 @@ get_param_type <- function(xml_doc,
     xpath_optionv <- paste0("//optionv[@nomParam=\"", param_name, "\"]")
     xpath_table <- paste0("//tableau/colonne[@nom=\"", param_name, "\"]")
     xpath_table2 <- paste0("//intervention/colonne[@nom=\"", param_name, "\"]")
-    # Ajout des en-tete si pas de noeuds intervention
-    xpath_ent <- paste0("//ta_entete/colonne[@nom=\"", param_name, "\"]")
+    # ajout des en-tete si pas noeud tableau (sols.xml)
+    xpath_ent <- paste0("//tableau_entete/colonne[@nom=\"", param_name, "\"]")
+    # Ajout des en-tete si pas de noeuds intervention (fichier _tec.xml)
+    xpath_ent2 <- paste0("//ta_entete/colonne[@nom=\"", param_name, "\"]")
 
 
     # if no bad charaters in param_name
@@ -168,8 +170,16 @@ get_param_type <- function(xml_doc,
     attr_values <- get_attrs_values(xml_doc, xpath_ent, "nom")
     if (!base::is.null(attr_values)) {
       return(list(
-        type = "table_ent",
+        type = "node_table_ent",
         xpath = xpath_ent,
+        length = length(attr_values)))
+    }
+
+    attr_values <- get_attrs_values(xml_doc, xpath_ent2, "nom")
+    if (!base::is.null(attr_values)) {
+      return(list(
+        type = "node_table_ent2",
+        xpath = xpath_ent2,
         length = length(attr_values)))
     }
 
