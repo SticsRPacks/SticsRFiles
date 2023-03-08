@@ -89,10 +89,10 @@ get_xml_files_param_df <- function(file_path,
       file_path[files_exist],
       function(x) {
         get_xml_files_param_df(x,
-          select = select,
-          name = name,
-          param_names = param_names,
-          wide_shape = FALSE
+                               select = select,
+                               name = name,
+                               param_names = param_names,
+                               wide_shape = FALSE
         )
       }
     )
@@ -141,27 +141,25 @@ get_xml_files_param_df <- function(file_path,
     names(param_values) <- param_names
   }
 
+
   # Getting parameters values number
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
-  # Getting expanded parameters names vector
-  param <- rep(names(param_values), values_nb)
-
-  id <- NULL
-  # Calculating identifier for each occurrence of a parameter and name column
   if (base::is.null(select)) {
-    id <- unlist(lapply(values_nb, function(x) {
-      l <- NA
-      if (x > 1) l <- 1:x
-      return(l)
-    }), use.names = FALSE)
+    # calling the function calculating ids
+    param_id_names <- get_params_id(file_path, param_values)
+    param_id <- param_id_names$id
+    param_names <- param_id_names$names
+
+    names(param_values) <- param_names
+
     name_col <- rep(basename(file_path), sum(values_nb))
   } else {
     # Getting values nb for each usm or sol
     values_per_par <- length(names_list)
 
 
-    id <- unlist(lapply(values_nb, function(x) {
+    param_id <- unlist(lapply(values_nb, function(x) {
       l <- rep(NA, x)
       if (x > values_per_par) l <- rep(1:(x / values_per_par), values_per_par)
       return(l)
@@ -180,15 +178,19 @@ get_xml_files_param_df <- function(file_path,
   }
 
 
-  # Setting file type
+  # Getting expanded parameters names vector
+  param <- rep(names(param_values), values_nb)
+
+  # Getting param file type
   type_col <- rep(get_xml_type(file_path), sum(values_nb))
+
 
   # Defining the returned data.frame
   data_df <- data.frame(
     name = name_col,
     type = type_col,
     param = param,
-    id = id,
+    id = param_id,
     value = unlist(param_values, use.names = FALSE),
     stringsAsFactors = FALSE
   )
@@ -221,4 +223,63 @@ df_wider <- function(df, convert_type = TRUE, string_as_factors = FALSE) {
   if (convert_type) df <- utils::type.convert(df, as.is = !string_as_factors)
 
   return(df)
+}
+
+
+get_params_id <- function(file_path, param_values) {
+
+  # files types
+  # "initialisations" "usms" "sols" "fichiertec" "fichiersta"
+  # "fichierplt"  "fichierpar" "fichierparamgen"
+
+  file_type <- get_xml_type(file_path)
+
+  values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
+
+  param <- list()
+  param$names <- names(param_values)
+
+  if (file_type == "fichiertec") {
+    param_types_data <- SticsRFiles:::get_param_type(
+      SticsRFiles:::xmldocument(file_path),
+      param_name = names(param_values))
+
+    param$id <- unlist(lapply(param_types_data, function(x) {
+      l <- NA
+      if (x$type %in% c("table", "table2")) l <- 1:x$length
+      return(l)
+    }), use.names = FALSE)
+
+
+    return(param)
+  }
+
+  if (file_type == "initialisations") {
+    # change param_values names using Crop1 & Crop2
+    param$id <- unlist(lapply(values_nb, function(x) {
+      l <- NA
+      if (x > 1) l <- 1:x
+      return(l)
+    }), use.names = FALSE)
+
+    # change id => 1, plant param
+
+    #param$names <- convert with _Crop1[_x], _Crop2[_x]
+
+  }
+
+  # "fichierplt" ???
+
+
+  # general case: usms, sols, "fichiersta", "fichierpar", "fichierparamgen"
+  param$id <- unlist(lapply(values_nb, function(x) {
+    l <- NA
+    if (x > 1) l <- 1:x
+    return(l)
+  }), use.names = FALSE)
+
+
+
+  return(param)
+
 }
