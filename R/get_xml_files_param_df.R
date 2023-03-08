@@ -135,14 +135,6 @@ get_xml_files_param_df <- function(file_path,
   # for one name
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
-  # Fixing parameters with no values with NA
-  param_values <- lapply(param_values, function(x) {
-    if (length(x) == 0) {
-      return(NA)
-    }
-    x
-  })
-
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
     param_values <- list(param_values)
@@ -167,6 +159,7 @@ get_xml_files_param_df <- function(file_path,
   } else {
     # Getting values nb for each usm or sol
     values_per_par <- length(names_list)
+
 
     id <- unlist(lapply(values_nb, function(x) {
       l <- rep(NA, x)
