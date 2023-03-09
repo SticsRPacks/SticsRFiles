@@ -107,6 +107,8 @@ get_xml_files_param_df <- function(file_path,
     return(df)
   }
 
+  # Getting parameters file type
+  file_type <- get_xml_type(file_path)
 
   # Checking if select can be set (for sols and usms)
   if (base::is.null(select)) {
@@ -134,6 +136,9 @@ get_xml_files_param_df <- function(file_path,
 
   # for one name
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
+
+  if (file_type == "initialisations")
+    param_values <- reformat_param_values_init(param_values)
 
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
@@ -182,7 +187,7 @@ get_xml_files_param_df <- function(file_path,
   param <- rep(names(param_values), values_nb)
 
   # Getting param file type
-  type_col <- rep(get_xml_type(file_path), sum(values_nb))
+  type_col <- rep(file_type, sum(values_nb))
 
 
   # Defining the returned data.frame
@@ -226,13 +231,12 @@ df_wider <- function(df, convert_type = TRUE, string_as_factors = FALSE) {
 }
 
 
-get_params_id <- function(file_path, param_values) {
+get_params_id <- function(file_type, param_values) {
 
   # files types
   # "initialisations" "usms" "sols" "fichiertec" "fichiersta"
   # "fichierplt"  "fichierpar" "fichierparamgen"
 
-  file_type <- get_xml_type(file_path)
 
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
@@ -254,24 +258,12 @@ get_params_id <- function(file_path, param_values) {
     return(param)
   }
 
-  if (file_type == "initialisations") {
-    # change param_values names using Crop1 & Crop2
-    param$id <- unlist(lapply(values_nb, function(x) {
-      l <- NA
-      if (x > 1) l <- 1:x
-      return(l)
-    }), use.names = FALSE)
-
-    # change id => 1, plant param
-
-    #param$names <- convert with _Crop1[_x], _Crop2[_x]
-
-  }
 
   # "fichierplt" ???
 
 
-  # general case: usms, sols, "fichiersta", "fichierpar", "fichierparamgen"
+  # general case: usms, sols, "fichiersta", "fichierpar", "fichierparamgen",
+  # "initialisations"
   param$id <- unlist(lapply(values_nb, function(x) {
     l <- NA
     if (x > 1) l <- 1:x
@@ -283,3 +275,47 @@ get_params_id <- function(file_path, param_values) {
   return(param)
 
 }
+
+reformat_param_values_init <- function(param_values) {
+
+  # change id => 1, plant param
+  plt_init_names <- c("stade0","lai0", "magrain0", "zrac0", "maperenne0",
+                      "QNperenne0", "masecnp0", "QNplantenp0", "masec0",
+                      "QNplante0", "restemp0")
+  par_names <- names(param_values)
+
+  new_param_values <- param_values
+
+  # removing plant init parameters
+  for (p in c(plt_init_names, "densinitial")) new_param_values[[p]] <- NULL
+
+
+  plt_names_to_treat <- intersect(par_names, plt_init_names)
+
+  for (n in seq_along(par_names)) {
+    par_name <-  par_names[n]
+    idx <- grep(x = plt_init_names, pattern = paste0("^",par_name))
+    if (length(idx) > 0) {
+
+      new_param_values[[paste0(par_name, "_Crop1")]] <- param_values[[par_name]][1]
+      new_param_values[[paste0(par_name, "_Crop2")]] <- param_values[[par_name]][2]
+
+    }
+  }
+  # treating densinitial
+  id_start <- 0
+  for (i in 1:2) {
+    for (j in 1:5) {
+
+      new_param_values[[paste0("densinitial_",j,"_Crop",i)]] <-
+        param_values$densinitial[id_start + j]
+
+    }
+    id_start <- 5
+  }
+
+
+  new_param_values
+}
+
+
