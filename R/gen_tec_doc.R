@@ -108,7 +108,6 @@ gen_tec_doc <- function(xml_doc = NULL,
     )
   }
 
-  # Getting scalar and vector parameter names
   vec_idx <- unlist(lapply(
     table_params,
     function(x) length(grep(pattern = "_[0-9]*$", names(x))) > 0

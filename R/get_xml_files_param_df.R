@@ -281,7 +281,7 @@ reformat_param_values_init <- function(param_values) {
   # change id => 1, plant param
   plt_init_names <- c("stade0","lai0", "magrain0", "zrac0", "maperenne0",
                       "QNperenne0", "masecnp0", "QNplantenp0", "masec0",
-                      "QNplante0", "restemp0")
+                      "QNplante0", "restemp0", "code_acti_reserve")
   par_names <- names(param_values)
 
   new_param_values <- param_values
