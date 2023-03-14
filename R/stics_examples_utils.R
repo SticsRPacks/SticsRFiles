@@ -86,6 +86,6 @@ list_examples_files <- function(file_type,
 
 
 get_examples_types <- function() {
-  file_types <- c("csv", "obs", "sti", "txt", "xml", "xl", "xml_tmpl")
+  file_types <- c("csv", "obs", "sti", "txt", "xml", "xl", "xml_tmpl", "xsl")
   return(file_types)
 }
