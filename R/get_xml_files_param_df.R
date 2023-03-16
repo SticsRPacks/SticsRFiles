@@ -152,7 +152,7 @@ get_xml_files_param_df <- function(file_path,
 
   if (base::is.null(select)) {
     # calling the function calculating ids
-    param_id_names <- get_params_id(file_path, param_values)
+    param_id_names <- get_params_id(file_type, file_path, param_values)
     param_id <- param_id_names$id
     param_names <- param_id_names$names
 
@@ -231,7 +231,7 @@ df_wider <- function(df, convert_type = TRUE, string_as_factors = FALSE) {
 }
 
 
-get_params_id <- function(file_type, param_values) {
+get_params_id <- function(file_type, file_path, param_values) {
 
   # files types
   # "initialisations" "usms" "sols" "fichiertec" "fichiersta"
