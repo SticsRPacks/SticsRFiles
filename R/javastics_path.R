@@ -76,7 +76,7 @@ write_javastics_path <- function(javastics_path) {
 
   if (file.exists(renviron_path)) {
       content <- readLines(renviron_path)
-      idx <- grep(pattern = paste0("^", javastics_var),
+      idx <- grep(pattern = "^javastics_path",
                   x = content)
       content[idx] <- env_string
   } else {

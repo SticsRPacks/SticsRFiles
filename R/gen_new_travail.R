@@ -54,7 +54,7 @@ gen_new_travail <- function(workspace,
 
 
 get_usm_data <- function(workspace,
-                         usm,
+                         usms,
                          lai_forcing = 0,
                          codesuite = 0,
                          codoptim = 0) {
@@ -139,7 +139,7 @@ get_usm_data <- function(workspace,
 
 get_numsol <- function(soil_name, soil_file = "sols.xml") {
 
-  id <- which(soil_name == get_param_xml(file = sols, param = "sol")$sols.xml$sol)
+  id <- which(soil_name == get_param_xml(file = soil_file, param = "sol")$sols.xml$sol)
 
   if (length(id > 0)) return(id)
 
