@@ -54,7 +54,7 @@ gen_new_travail <- function(workspace,
 
 
 get_usm_data <- function(workspace,
-                         usms,
+                         usm,
                          lai_forcing = 0,
                          codesuite = 0,
                          codoptim = 0) {
@@ -62,7 +62,9 @@ get_usm_data <- function(workspace,
   data <- list()
 
 
-  data <- get_param_xml(file = usms, select = "usm", select_value = usm)$usms.xml
+  data <- get_param_xml(file = file.path(workspace, "usms.xml",
+                                         usms, select = "usm",
+                                         select_value = usm)$usms.xml
 
   # codesimul
   # 0: culture, 1: feuille, lai forcing

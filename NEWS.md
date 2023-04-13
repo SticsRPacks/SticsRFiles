@@ -1,4 +1,4 @@
-# SticsRFiles 1.1.1 (2022-12-08)
+# SticsRFiles 1.1.1 _2022-12-08_
 
 * FUNCTIONS
    * Changes in plant files upgrading function according to a fix done in JavaSTICS 1.5.1 for plant files
@@ -8,7 +8,7 @@
    * Little compatibility fix in STICS plant files upgrading function 
    
 
-# SticsRFiles 1.1.0 (2022-10-28)
+# SticsRFiles 1.1.0 _2022-10-28_
 
 Following the changes done in the previous release 1.0.0, related to the adaptation to the new versions 10.0 of STICS and 1.5.0 of JavaSTICS.
 
@@ -21,7 +21,7 @@ Following the changes done in the previous release 1.0.0, related to the adaptat
   * Some fixes about use of XML objects or lists of (kind, content) in tests
 
 
-# SticsRFiles 1.0.0 (2022-07-22)
+# SticsRFiles 1.0.0 _2022-07-22_
 
 The main changes are mainly related to the adaptation to the new versions 10.0 of STICS  
 and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to fixes.
@@ -59,7 +59,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
   
   
 
-# SticsRFiles 0.4.2 (2021-10-07)
+# SticsRFiles 0.4.2 _2021-10-07_
 
 * Prepared templates for STICS V10.
 
@@ -80,7 +80,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
 
-# SticsRFiles 0.4.1 (2021-07-02)
+# SticsRFiles 0.4.1 _2021-07-02_
 
 ## Changes
 
@@ -135,7 +135,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
 
-# SticsRFiles 0.3.0 (2021-04-15)
+# SticsRFiles 0.3.0 _2021-04-15_
 
 ## General changes
 
@@ -173,7 +173,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
 
-# SticsRFiles 0.2.0 (2021-01-15)
+# SticsRFiles 0.2.0 _2021-01-15_
 
 ## General changes
 
@@ -290,6 +290,6 @@ name of the XML file added to the output
 
 
 
-# SticsRFiles 0.1.0.9004 (2020-02-03)
+# SticsRFiles 0.1.0.9004 _2020-02-03_
 
 * Added a `NEWS.md` file to track changes to the package.
