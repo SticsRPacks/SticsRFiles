@@ -1,4 +1,3 @@
-#' @import XML
 # for generic functions declarations for *Document classes
 setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
 # defined for fileDocument
