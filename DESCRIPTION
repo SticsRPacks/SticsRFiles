@@ -191,6 +191,6 @@ Collate:
     'upgrade_usms_xml.R'
     'upgrade_workspace_xml.R'
     'var_to_col_names.R'
-    'xmlDocument.R'
+    'xml_document.R'
     'xml_files_functions.R'
     'zzz.R'
