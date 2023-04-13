@@ -10,11 +10,12 @@ title: 'SticsRFiles: Read And Modify STICS Input/Output Files'
 version: 1.1.2
 abstract: The purpose of SticsRFiles is to provide functions for manipulations of
   STICS input and output files. These files are either standard JavaStics XML files
-  or more directly the text files used by the model executable. The most basic functionality
-  is to read and write parameter names and values through XML queries, or text files
-  IO. More advanced functionalities include the generation of input XML from XML templates
-  and spreadsheets with as many simulations contexts as needed, or the generation
-  of the input text files from the XML input files for distributed computing.
+  or more directly the text files used by the model fortran executable. The most basic
+  functionality is to read and write parameter names and values through XML queries,
+  or text files ones. More advanced functionalities include the generation of input
+  XML from XML templates and spreadsheets with as many simulations contexts as needed,
+  or the generation of the input text files from the XML input files for distributed
+  computing.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -176,10 +177,10 @@ references:
   authors:
   - family-names: Henry
     given-names: Lionel
-    email: lionel@rstudio.com
+    email: lionel@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2023'
 - type: software
   title: rstudioapi
@@ -348,15 +349,19 @@ references:
   authors:
   - family-names: Aden-Buie
     given-names: Garrick
-    email: garrick@rstudio.com
+    email: garrick@posit.co
     orcid: https://orcid.org/0000-0002-7111-0077
   - family-names: Schloerke
     given-names: Barret
-    email: barret@rstudio.com
+    email: barret@posit.co
     orcid: https://orcid.org/0000-0001-9986-114X
   - family-names: Allaire
     given-names: JJ
-    email: jj@rstudio.com
+    email: jj@posit.co
+  - family-names: Rossell Hayes
+    given-names: Alexander
+    email: alex.rossellhayes@posit.co
+    orcid: https://orcid.org/0000-0001-9412-0457
   year: '2023'
 - type: software
   title: readxl
@@ -383,35 +388,38 @@ references:
   authors:
   - family-names: Allaire
     given-names: JJ
-    email: jj@rstudio.com
+    email: jj@posit.co
   - family-names: Xie
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
   - family-names: McPherson
     given-names: Jonathan
-    email: jonathan@rstudio.com
+    email: jonathan@posit.co
   - family-names: Luraschi
     given-names: Javier
-    email: javier@rstudio.com
   - family-names: Ushey
     given-names: Kevin
-    email: kevin@rstudio.com
+    email: kevin@posit.co
   - family-names: Atkins
     given-names: Aron
-    email: aron@rstudio.com
+    email: aron@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   - family-names: Cheng
     given-names: Joe
-    email: joe@rstudio.com
+    email: joe@posit.co
   - family-names: Chang
     given-names: Winston
-    email: winston@rstudio.com
+    email: winston@posit.co
   - family-names: Iannone
     given-names: Richard
-    email: rich@rstudio.com
+    email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2023'
 - type: software
