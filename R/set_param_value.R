@@ -116,6 +116,7 @@ set_param_value <- function(xml_doc,
     print(xpath)
   }
 
+
   if (!is.element(type, param_types)) {
     warning(
       "Setting values failed for parameter : ",
@@ -125,6 +126,15 @@ set_param_value <- function(xml_doc,
     # returning success status
     return(FALSE)
   }
+
+  # TODO
+  # Add treatment if type is  (tableau_entete, ou ta_entete)
+  # How to add nodes tableau or intervention to set param_value
+  # in following switch
+  # add functions to return a tableau node or an intervention node
+  # according to stics version : get_xml_node(file, node_name) from
+  # xml examples files
+
 
   values_nb <- length(param_value)
   nodes_nb <- length(get_nodes(xml_doc, xpath))
