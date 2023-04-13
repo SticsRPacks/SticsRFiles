@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
 [![Codecov test coverage](https://app.codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 
+
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
 <!-- badges: end -->
 
@@ -29,7 +30,7 @@ The goal of SticsRFiles is to perform manipulations of the [STICS](https://www6.
 
 The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the [Get started page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
-Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://SticsRPacks.github.io/SticsOnR) package.
+Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://sticsrpacks.github.io/SticsOnR/) package.
 
 If you want to be notified when a new release of this package is made, you can tick the Releases box in the "Watch / Unwatch => Custom" menu at the top right of [this page](https://github.com/SticsRPacks/SticsRFiles).
 
