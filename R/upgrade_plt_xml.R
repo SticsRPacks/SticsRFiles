@@ -432,9 +432,9 @@ upgrade_plt_xml <- function(file,
       jvc_data[[basename(file)]][["variete"]] %in% current_var$variete
 
     if (any(common_var)) {
-      values <- get_param_value(old_doc, "jvc",
-                                select = "variete",
-                                select_value = current_var[common_var])$jvc
+      values <- get_param_value(old_doc, param_name = "jvc",
+                                parent_name = "variete",
+                                parent_sel_attr = current_var[common_var])$jvc
 
       values_999_ids <- which(values == -999)
       if (length(values_999_ids) > 0) {

@@ -65,7 +65,7 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
   interv_par_names <-
     unique(
       unlist(
-        lapply(interv_nodes, function(x) xmlSApply(x, FUN = XML::xmlAttrs))
+        lapply(interv_nodes, function(x) XML::xmlSApply(x, FUN = XML::xmlAttrs))
       )
     )
   if (all(choice_specif_par %in% interv_par_names)) {
