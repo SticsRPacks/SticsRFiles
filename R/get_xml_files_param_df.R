@@ -244,8 +244,8 @@ get_params_id <- function(file_type, file_path, param_values) {
   param$names <- names(param_values)
 
   if (file_type == "fichiertec") {
-    param_types_data <- SticsRFiles:::get_param_type(
-      SticsRFiles:::xmldocument(file_path),
+    param_types_data <- get_param_type(
+      xmldocument(file_path),
       param_name = names(param_values))
 
     param$id <- unlist(lapply(param_types_data, function(x) {
