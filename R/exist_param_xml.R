@@ -74,12 +74,12 @@ exist_param_csv <- function(param,
   final_names <- param
 
   # managing environment for storing data frames and file path
-  if (!exists("stics.env")) {
+  if (!exists("env_stics")) {
     parent <- eval(parse(text = ".GlobalEnv"))
-    stics.env <- new.env(parent)
+    env_stics <- new.env(parent)
     assign(
-      x = "stics.env",
-      value = stics.env,
+      x = "env_stics",
+      value = env_stics,
       pos = parent
     )
   }
@@ -88,12 +88,12 @@ exist_param_csv <- function(param,
   read_csv <- FALSE
 
   # checking existence of csv_path
-  if (!"inputs_path" %in% names(stics.env)) {
-    stics.env[["inputs_path"]] <- inputs_path
+  if (!"inputs_path" %in% names(env_stics)) {
+    env_stics[["inputs_path"]] <- inputs_path
     read_csv <- TRUE
   } else {
-    if (stics.env[["inputs_path"]] != inputs_path) {
-      stics.env[["inputs_path"]] <- inputs_path
+    if (env_stics[["inputs_path"]] != inputs_path) {
+      env_stics[["inputs_path"]] <- inputs_path
       read_csv <- TRUE
     }
   }
@@ -103,9 +103,9 @@ exist_param_csv <- function(param,
     par_names <- get_param_data_df(
       file = inputs_path,
     )$name
-    stics.env[["par_names"]] <- par_names
+    env_stics[["par_names"]] <- par_names
   } else {
-    par_names <- stics.env[["par_names"]]
+    par_names <- env_stics[["par_names"]]
   }
 
 

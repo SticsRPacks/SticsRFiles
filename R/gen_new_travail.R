@@ -24,8 +24,6 @@ gen_new_travail <- function(workspace,
                             codoptim = 0,
                             out_dir = getwd()) {
 
-  # if (is.null(javastics)) javastics <- get_javastics_path()
-
   usm_data <- get_usm_data(workspace,
                            usm,
                            lai_forcing = 0,
@@ -43,7 +41,7 @@ gen_new_travail <- function(workspace,
   p_table <- vector(mode = "character", length = 2 * length(data_order))
 
   for (p in seq_along(data_order)) {
-    idx <- p*2
+    idx <- p * 2
     p_table[idx - 1] <- paste0(":", as.character(data_order[p]))
     p_table[idx] <- usm_data[[data_order[p]]]
   }
@@ -62,9 +60,9 @@ get_usm_data <- function(workspace,
   data <- list()
 
 
-  data <- get_param_xml(file = file.path(workspace, "usms.xml",
-                                         usms, select = "usm",
-                                         select_value = usm)$usms.xml
+  data <- get_param_xml(file = file.path(workspace, "usms.xml"),
+                        usm, select = "usm",
+                        select_value = usm)$usms.xml
 
   # codesimul
   # 0: culture, 1: feuille, lai forcing
@@ -109,8 +107,8 @@ get_usm_data <- function(workspace,
 
   # nbans
   data$nbans <-
-    as.numeric(strsplit(x = data$fclim2, split = ".",fixed = TRUE)[[1]][2]) -
-    as.numeric(strsplit(x = data$fclim1, split = ".",fixed = TRUE)[[1]][2]) +
+    as.numeric(strsplit(x = data$fclim2, split = ".", fixed = TRUE)[[1]][2]) -
+    as.numeric(strsplit(x = data$fclim1, split = ".", fixed = TRUE)[[1]][2]) +
     data$culturean
 
   # culturean
@@ -141,7 +139,9 @@ get_usm_data <- function(workspace,
 
 get_numsol <- function(soil_name, soil_file = "sols.xml") {
 
-  id <- which(soil_name == get_param_xml(file = soil_file, param = "sol")$sols.xml$sol)
+  id <- which(soil_name == get_param_xml(
+    file = soil_file,
+    param = "sol")$sols.xml$sol)
 
   if (length(id > 0)) return(id)
 
