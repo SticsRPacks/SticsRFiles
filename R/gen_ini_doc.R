@@ -131,6 +131,7 @@ gen_ini_doc <- function(xml_doc = NULL,
   # Getting resulting param names
   param_names <- names(param_table)
 
+  plant_nb <- 2
 
   # Setting base parameters
   for (p in base_params) {
@@ -140,21 +141,9 @@ gen_ini_doc <- function(xml_doc = NULL,
         param_name = p,
         param_value = param_table[[p]]
       )
+      if(p == "nbplantes") plant_nb <- param_table[[p]]
     }
   }
-
-  # Setting plant number in xml_doc
-  # If columns with suffix crop_tag2 exist
-  # setting "nbplantes" to 2, whatever the existing value
-  # in the xml_doc
-  plant_nb <- 1
-  # if nbplantes not present trying to determine if
-  # should be set to 2 or not ?
-  # Deactivating for the moment, it is the user responsibility to fix it !
-  # if (length(grep(paste0(crop_tag, "2$"), names(param_table)))) {
-  #   set_param_value(xml_doc, "nbplantes", 2)
-  #   plant_nb <- 2
-  # }
 
   # Setting plante params
   for (i in 1:plant_nb) {
