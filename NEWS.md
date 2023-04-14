@@ -1,3 +1,30 @@
+# SticsRFiles 1.1.3 _2023-04-14_
+
+* FUNCTIONS
+   * New function for generating the new_travail.usm Stics file
+
+* FIXES:
+   * get_var_info: for variables names vector
+   * get_param_txt: manage global variables use
+   * for fixing checks issues (code formatting, comments, file names, variables names, function
+   names,...) 
+   * package namespace use in packages functions calls
+   * pattern for replacing parameters names which are not    
+   consistent between XML files and inputs.csv
+   * pattern for selecting xl parameters & filtering parameter starting with code_
+   * renaming plant initialisation parameters according to crop tag (Crop1, Crop2)
+   * tydiselect and filter syntax
+
+* DATA
+   * added: meta-data and xsl files for converting XML files to text files for Stics
+   
+
+# SticsRFiles 1.1.2 _2022-12-16_
+
+* FIX:
+   * Fix for cff file generation using github action
+   
+   
 # SticsRFiles 1.1.1 _2022-12-08_
 
 * FUNCTIONS
