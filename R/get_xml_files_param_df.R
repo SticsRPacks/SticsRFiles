@@ -279,7 +279,7 @@ get_params_id <- function(file_type, file_path, param_values) {
 reformat_param_values_init <- function(param_values) {
 
   # change id => 1, plant param
-  plt_init_names <- c("stade0","lai0", "magrain0", "zrac0", "maperenne0",
+  plt_init_names <- c("stade0", "lai0", "magrain0", "zrac0", "maperenne0",
                       "QNperenne0", "masecnp0", "QNplantenp0", "masec0",
                       "QNplante0", "restemp0", "code_acti_reserve")
   par_names <- names(param_values)
@@ -289,12 +289,9 @@ reformat_param_values_init <- function(param_values) {
   # removing plant init parameters
   for (p in c(plt_init_names, "densinitial")) new_param_values[[p]] <- NULL
 
-
-  plt_names_to_treat <- intersect(par_names, plt_init_names)
-
   for (n in seq_along(par_names)) {
     par_name <-  par_names[n]
-    idx <- grep(x = plt_init_names, pattern = paste0("^",par_name))
+    idx <- grep(x = plt_init_names, pattern = paste0("^", par_name))
     if (length(idx) > 0) {
 
       new_param_values[[paste0(par_name, "_Crop1")]] <- param_values[[par_name]][1]
@@ -307,7 +304,7 @@ reformat_param_values_init <- function(param_values) {
   for (i in 1:2) {
     for (j in 1:5) {
 
-      new_param_values[[paste0("densinitial_",j,"_Crop",i)]] <-
+      new_param_values[[paste0("densinitial_", j, "_Crop", i)]] <-
         param_values$densinitial[id_start + j]
 
     }

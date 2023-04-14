@@ -35,13 +35,18 @@ ini_xml <- file.path(out_dir, ini_param[1, ]$Ini_name)
 
 
 # For plante 1
-xl_plt1_values <- select(ini_param[1, ], ends_with("Crop1"), -starts_with("code"))
+xl_plt1_values <- select(ini_param[1, ],
+                         ends_with("Crop1"),
+                         -starts_with("code"))
 xl_params <- gsub(
   pattern = "(.*)_(.*)", x = names(xl_plt1_values),
   replacement = "\\1"
 )
 
-xl_params <- gsub(pattern = "(.*)(\\_[0-9]*$)", x = xl_params, replacement = "\\1")
+xl_params <- gsub(pattern = "(.*)(\\_[0-9]*$)",
+                  x = xl_params,
+                  replacement = "\\1")
+
 xl_plt1_values <- select(xl_plt1_values, starts_with(xl_params))
 xml_plt1_values <- get_param_xml(
   file = ini_xml, select = "plante",
@@ -56,13 +61,18 @@ xml_plt2_values <- unlist(get_param_xml(
   select_value = 2
 )[[1]])
 
-xl_plt2_values <- select(ini_param[1, ], ends_with("Crop2"), -starts_with("code"))
+xl_plt2_values <- select(ini_param[1, ],
+                         ends_with("Crop2"),
+                         -starts_with("code"))
 xl_params <- gsub(
   pattern = "(.*)_(.*)", x = names(xl_plt1_values),
   replacement = "\\1"
 )
 
-xl_params <- gsub(pattern = "(.*)(\\_[0-9]*$)", x = xl_params, replacement = "\\1")
+xl_params <- gsub(pattern = "(.*)(\\_[0-9]*$)",
+                  x = xl_params,
+                  replacement = "\\1")
+
 xl_plt2_values <- select(xl_plt2_values, starts_with(xl_params))
 xml_plt2_values <- get_param_xml(
   file = ini_xml, select = "plante",

@@ -58,9 +58,9 @@ get_params_from_table <- function(params_table,
     params_table <- params_table %>%
       dplyr::rename_at(
         #dplyr::vars(dplyr::starts_with(key)),
-        dplyr::vars(dplyr::matches(paste0(key,"\\_[0-9*]"))),
-        list(~ gsub(x = .,pattern = paste0("(",key,")(\\_[0-9*])"),
-             replacement = paste0(dict[[key]],"\\2")))
+        dplyr::vars(dplyr::matches(paste0(key, "\\_[0-9*]"))),
+        list(~ gsub(x = ., pattern = paste0("(", key, ")(\\_[0-9*])"),
+             replacement = paste0(dict[[key]], "\\2")))
       )
   }
 

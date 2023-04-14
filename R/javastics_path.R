@@ -51,7 +51,7 @@ exists_javastics_path <- function() {
 
   path_exists <- TRUE
 
-  if( path == "") path_exists <- FALSE
+  if (path == "") path_exists <- FALSE
 
   attr(path_exists, "path") <- path
 
@@ -72,7 +72,7 @@ exists_javastics_path <- function() {
 write_javastics_path <- function(javastics_path) {
 
   renviron_path <- file.path(path.expand("~"), ".Renviron")
-  env_string <- paste0('javastics_path="',javastics_path,'"')
+  env_string <- paste0('javastics_path="', javastics_path, '"')
 
   if (file.exists(renviron_path)) {
       content <- readLines(renviron_path)
@@ -85,4 +85,3 @@ write_javastics_path <- function(javastics_path) {
 
   writeLines(text = content, con = renviron_path)
 }
-
