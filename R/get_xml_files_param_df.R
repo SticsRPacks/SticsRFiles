@@ -294,8 +294,10 @@ reformat_param_values_init <- function(param_values) {
     idx <- grep(x = plt_init_names, pattern = paste0("^", par_name))
     if (length(idx) > 0) {
 
-      new_param_values[[paste0(par_name, "_Crop1")]] <- param_values[[par_name]][1]
-      new_param_values[[paste0(par_name, "_Crop2")]] <- param_values[[par_name]][2]
+      new_param_values[[paste0(par_name, "_Crop1")]] <-
+        param_values[[par_name]][1]
+      new_param_values[[paste0(par_name, "_Crop2")]] <-
+        param_values[[par_name]][2]
 
     }
   }
@@ -310,9 +312,5 @@ reformat_param_values_init <- function(param_values) {
     }
     id_start <- 5
   }
-
-
   new_param_values
 }
-
-

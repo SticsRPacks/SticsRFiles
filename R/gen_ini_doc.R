@@ -141,7 +141,7 @@ gen_ini_doc <- function(xml_doc = NULL,
         param_name = p,
         param_value = param_table[[p]]
       )
-      if(p == "nbplantes") plant_nb <- param_table[[p]]
+      if (p == "nbplantes") plant_nb <- param_table[[p]]
     }
   }
 
