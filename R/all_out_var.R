@@ -104,7 +104,13 @@ get_var_info <- function(var = NULL,
   if (!is.null(var)) {
     var <- var_to_col_names(var)
     vars_names_parsed <- var_to_col_names(all_vars$name)
-    all_vars[grep(var, vars_names_parsed, ignore.case = TRUE), ]
+    idx <- unlist(lapply(var,
+                         function(x) {
+                           grep(x, vars_names_parsed, ignore.case = TRUE)
+                           }
+                         )
+                  )
+    all_vars[idx, ]
   } else if (!is.null(keyword)) {
     idx <- grepl(keyword, all_vars$definition, ignore.case = TRUE)
     idx <- idx | grepl(keyword, all_vars$name, ignore.case = TRUE)
