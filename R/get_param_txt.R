@@ -688,7 +688,7 @@ val <- function() {
   if (index == length(values)) {
     return()
   }
-  index <<- index + 1
+  assign(x = "index", value = index + 1, envir = .GlobalEnv)
   val_txt <- unlist(strsplit(trimws(values[index - 1]), split = " "))
   val_num <- suppressWarnings(as.numeric(val_txt))
   if (any(is.na(val_num))) {
