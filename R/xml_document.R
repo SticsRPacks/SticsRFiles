@@ -1,6 +1,6 @@
 #' @keywords internal
 
-# xml class based on fileDocument class
+# xml class based on file_document class
 setClass(
   "xml_document",
   contains = c("file_document"),
