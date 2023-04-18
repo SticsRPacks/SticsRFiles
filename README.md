@@ -128,7 +128,7 @@ Thanks for that, this would greatly help us to improve this package.
 ## Citation
 
 If you have used this package for a study that led to a publication or
-report, please cite us. You can either use the citation tool from Github
+report, please cite us. You can either use the citation tool from GitHub
 if you used the last version, or use `citation("SticsRFiles")` from R
 otherwise.
 

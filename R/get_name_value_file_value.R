@@ -3,7 +3,7 @@
 #'
 #' @param file_path Stics text file path
 #' @param param_names vector of parameters names
-#' @param names_dict List of correspondance between parameter names
+#' @param names_dict List of correspondence between parameter names
 #' given and files intern names
 #'
 #' @return A vector of parameters values

@@ -121,7 +121,7 @@ The USMs data which are necessary for generating the `usms.xml` must be all prov
 
 Other data stored in Excel or CSV files must be adapted to the use cases here after:
 
-* For generating new files, containing parameters with differents values for each USM, tables **must contain values for all the files parameters**.
+* For generating new files, containing parameters with different values for each USM, tables **must contain values for all the files parameters**.
 
 * For generating files with a common set of parameter values and only a part of them must be overloaded with values coming from parameters tables, one **must give an existing** file as a template for files generation to functions `gen_*_xml` (listed [here](#pkg-funs)).
 
@@ -149,7 +149,7 @@ These first columns may contain either **names identifiers or files names** acco
 * Initialization, station or crop management data: files names either with or without suffix and XML extension
     (**\_ini.xml, \_tec.xml, or \_sta.xml**)
 
-Other columns of tables are named with **parameters names** according to the fololowing rules:
+Other columns of tables are named with **parameters names** according to the following rules:
 
 * Scalar parameters
 used parameter names must match the exact parameter names (checking it syntax with the help of the `get_param_info` function)

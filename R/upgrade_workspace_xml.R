@@ -20,7 +20,7 @@
 #' - If general parameters files exist in `workspace`, they are also upgraded.
 #' In that case, residues parameters values are kept and might not be adapted
 #' to the target model version.
-#' - Wheather data and observations files are fully copied to `out_dir`
+#' - Weather data and observations files are fully copied to `out_dir`
 #'
 #' @examples
 #' \dontrun{

@@ -22,7 +22,7 @@
 # SticsRFiles 1.1.2 _2022-12-16_
 
 * FIX:
-   * Fix for cff file generation using github action
+   * Fix for cff file generation using a GitHub action
    
    
 # SticsRFiles 1.1.1 _2022-12-08_
@@ -147,7 +147,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 	added data.frame columns detection for filtering data on dates
 
   * functions for manipulating xml files 
-    taking into account a new kind of Stics parameter dependency (for plant and soil layers dependant parameters)
+    taking into account a new kind of Stics parameter dependency (for plant and soil layers dependent parameters)
     
   * set_param_txt: fix for setting values for varietal parameters
     
@@ -212,7 +212,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 * README:
   * Travis badge removed
-  * Github Actions R-CMD-check badge added
+  * GitHub Actions R-CMD-check badge added
   
 * Functions:
   * useless functions have been removed
@@ -234,7 +234,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 * Automatic testing: 
   * Github Actions added for checks
   * Travis checks removed
-  * SticsRTest Travis tests triggering removed
+  * SticsRTests Travis tests triggering removed
 
 
 

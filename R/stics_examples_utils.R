@@ -56,11 +56,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
   file_str <- gsub(pattern = "(.*)_.*", x = file_type, replacement = "\\1")
 
   # unzipping data for file_str files type and version (version_dir)
-  examples_path <- unzip_examples(file.path("extdata", file_str), version_dir)
-
-  # examples_dir_path <- file.path("extdata", file_str, version_dir)
-  #
-  # examples_path <- system.file(examples_dir_path,  package = "SticsRFiles")
+  examples_path <- file.path(unzip_examples(file_str), version_dir)
 
   # Not existing type
   if (examples_path == "")
@@ -68,8 +64,6 @@ get_examples_path <- function(file_type, stics_version = "latest",
          file_type,
          " examples for version: ",
          version_name)
-
-
 
   # Returning the examples files dir path for the given type
   return(examples_path)
@@ -97,7 +91,8 @@ get_examples_types <- function() {
 }
 
 
-#' Unzip files archive if need and return examples files path
+#' Unzip files archive if needed and return examples files path
+#' in extdata directory
 #'
 #' @param examples_type_path library path for examples files set
 #' @param version_dir version directory names of the example files
@@ -107,23 +102,21 @@ get_examples_types <- function() {
 #' @keywords internal
 #'
 # @examples
-unzip_examples <- function(examples_type_path, version_dir) {
+unzip_examples <- function(files_type, version_dir) {
 
-  ex_path <- system.file(examples_type_path,
+  ex_path <- system.file("extdata",
                          package = "SticsRFiles")
 
-  dir_path <- file.path(ex_path, version_dir)
+  dir_path <- file.path(ex_path, files_type)
 
   if (dir.exists(dir_path)) return(dir_path)
 
-  zip_path <- paste0(dir_path,".zip")
+  zip_path <- file.path(ex_path, paste0(files_type, ".zip"))
 
   if (!file.exists(zip_path))
     stop("Missing file: ", zip_path)
 
-
   utils::unzip(zipfile = zip_path, exdir = ex_path)
-
 
   return(dir_path)
 }

@@ -28,9 +28,9 @@ knitr::opts_chunk$set(
 
 The goal of SticsRFiles is to perform manipulations of the [STICS](https://www6.paca.inrae.fr/stics_eng/)  model files either on XML files (used by the JavaStics GUI) or on text files used by the model fortran executable.
 
-The basic functionnalites allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the [Get started page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
+The basic functionalities allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the [Get started page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
-Advanced functionnalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://sticsrpacks.github.io/SticsOnR/) package.
+Advanced functionalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaStics workspace is generated and directly usable from the JavaStics interface (GUI or command line), or with an R JavaStics interface provided by the [SticsOnR](https://sticsrpacks.github.io/SticsOnR/) package.
 
 If you want to be notified when a new release of this package is made, you can tick the Releases box in the "Watch / Unwatch => Custom" menu at the top right of [this page](https://github.com/SticsRPacks/SticsRFiles).
 
@@ -81,7 +81,7 @@ devtools::install_github("SticsRPacks/SticsRFiles@*release")
 remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
-Normaly, all the package dependencies will be installed for CRAN packages.
+Normally, all the package dependencies will be installed for CRAN packages.
 
 ## Examples
 
@@ -105,7 +105,7 @@ Thanks for that, this would greatly help us to improve this package.
 ## Citation
 
 If you have used this package for a study that led to a publication or
-report, please cite us. You can either use the citation tool from Github if you used the last version, or use `citation("SticsRFiles")` from R otherwise.
+report, please cite us. You can either use the citation tool from GitHub if you used the last version, or use `citation("SticsRFiles")` from R otherwise.
 
 ## Code of conduct
 

@@ -165,7 +165,7 @@ set_param_txt(workspace = example_txt_dir, param = "patm", value = 1000)
 
 There are four more arguments to the function:
 
-* `append`: instead of changing the value of a parameter that already exist in the files, a parameter can be added to the file using this argument. This is used mainly by developpers that added a parameter to the model and need to programatically add it to the input files.
+* `append`: instead of changing the value of a parameter that already exist in the files, a parameter can be added to the file using this argument. This is used mainly by developers that added a parameter to the model and need to programatically add it to the input files.
 
 * `plant_id`: This is used for intercropping when there are two plant and tec files. The user can then choose to which plant the value will be changed.
 

@@ -1,4 +1,4 @@
-#' @title Generatefrom a template a Stics sta xml_document
+#' @title Generates from a template a Stics sta xml_document
 #'
 #' @param xml_doc an optional xml_document object (created from an sta file)
 #' @param param_table a table (df, tibble) containing parameters to use

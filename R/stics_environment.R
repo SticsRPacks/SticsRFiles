@@ -69,9 +69,8 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
   return(local_env)
 }
 
-#' Create a stics env
-#'
-#' Create a new stics envirnoment
+
+#' Create a new stics environment
 #'
 #' @param name The name of the stics environment
 #' @param env_name The name of the parent environment

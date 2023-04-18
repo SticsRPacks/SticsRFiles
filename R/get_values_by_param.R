@@ -3,7 +3,7 @@
 #' @param params_table a table (df, tibble) with parameters names
 #' indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2
 #' or not for scalar parameters
-#' @param param_name Optional arameter(s) name(s) vector
+#' @param param_name Optional parameter(s) name(s) vector
 #' @param lines_id Optional data.frame lines numerical identifiers
 #' @param na_values value to use as missing value in param_table
 #' (optional, default : NA)

@@ -19,13 +19,13 @@ get_svn_identifiers <- function() {
 
 
 
-#' Dowloading inputs and/or outputs csv files from a repository branch/tag
+#' Downloading inputs and/or outputs csv files from a repository branch/tag
 #'
 #' @param branch_url Address of the branch or tag
 #' @param dest_dir Directory path where to store files
 #' @param file_name File name(s)
 #' or keyword "all" for both files (default)
-#' @param ids Connexion identifiers to the subversion server
+#' @param ids Connection identifiers to the subversion server
 #' @param overwrite Logical, TRUE for overwtiting files, FALSE otherwise
 #' @param verbose TRUE to display warnings (default), FALSE otherwise
 #'
