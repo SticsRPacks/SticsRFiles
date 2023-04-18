@@ -1,9 +1,9 @@
-#' @title Checking and getting JavaStics workspace path
+#' @title Checking and getting JavaSTICS workspace path
 #'
 #' @description Looking in JavaSTICS for a workspace path in JavaSTICS
 #' preferences or producing a full path to a workspace located in JavaSTICS root
 #' directory or validating an external absolute path. And also checking if the
-#' path is a valid JavaStics workspace
+#' path is a valid JavaSTICS workspace
 #'
 #' @param javastics Path of JavaSTICS installation directory
 #' @param workspace An absolute or relative path (to JavaSTICS path)
@@ -41,14 +41,14 @@ check_java_workspace <- function(javastics, workspace = NULL) {
   }
 
   if (base::is.null(ws) || !dir.exists(ws)) {
-    warning(paste("The given directory does not exist or JavaStics working
+    warning(paste("The given directory does not exist or JavaSTICS working
                   directory is not set :\n", ws))
     return()
   }
 
   # checking if it's a workspace directory: searching usms.xml
   if (!file.exists(file.path(ws, "usms.xml"))) {
-    warning("This directory is not a JavaStics workspace: ", ws)
+    warning("This directory is not a JavaSTICS workspace: ", ws)
     return()
   }
   return(ws)

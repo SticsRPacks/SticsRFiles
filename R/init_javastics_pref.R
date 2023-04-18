@@ -1,8 +1,8 @@
-#' Initialize JavaStics preferences
+#' Initialize JavaSTICS preferences
 #'
-#' @description Initialize the JavaStics `preferences.xml` file.
+#' @description Initialize the JavaSTICS `preferences.xml` file.
 #'
-#' @param javastics JavaStics installation folder
+#' @param javastics JavaSTICS installation folder
 #' @param overwrite Boolean. Overwrite the existing preference file ?
 #'
 #' @return `TRUE` if the file was created, `FALSE` otherwise.
@@ -50,7 +50,7 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
     cli::cli_alert_danger(
       paste0(
         "Couldn't add a {.val preference.xml}",
-        "file in the JavaStics installation. ",
+        "file in the JavaSTICS installation. ",
         "Please run {.pkg Javastics} once to create it."
       ))
     return(FALSE)

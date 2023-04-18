@@ -3,7 +3,7 @@
 #' @description Testing if preferences.xml file exist in JavaSTICS
 #' installation folder
 #'
-#' @param javastics JavaStics installation folder
+#' @param javastics JavaSTICS installation folder
 #'
 #' @examples
 #' \dontrun{

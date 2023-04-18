@@ -2,7 +2,7 @@
 #' given as argument
 #'
 #' @param in_dict a named list with parameters names as values
-# @param javastics_dir a JavaStics path
+# @param javastics_dir a JavaSTICS path
 #'
 #' @return A named list with XML parameters names
 #'

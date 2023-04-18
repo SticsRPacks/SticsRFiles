@@ -6,7 +6,7 @@
 #' input files.
 #' @param values named vector of parameter values to force.
 #' See Details for more information.
-#' @param javastics Path of JavaStics.
+#' @param javastics Path of JavaSTICS
 #' @param param_values `r lifecycle::badge("deprecated")` `param_values`
 #' is no longer supported, use `values` instead.
 #'

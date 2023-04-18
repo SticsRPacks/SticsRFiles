@@ -45,7 +45,7 @@ exist_param_xml <- function(param,
 #' Checking existing parameters names in csv input files
 #'
 #' @param param Parameter name or a vector of
-#' @param javastics Path of JavaStics.
+#' @param javastics Path of JavaSTICS
 #'
 #' @return A named logical vector of existing parameters, with
 #' real parameters names

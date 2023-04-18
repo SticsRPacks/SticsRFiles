@@ -7,7 +7,7 @@ context("get model outputs")
 
 path <- get_examples_path(file_type = "sti", stics_version = stics_version)
 
-# Testing with a JavaStics workspace like
+# Testing with a JavaSTICS workspace like
 test_that("output is always list", {
   outputs <- get_sim(path, "banana")
   expect_true(is.list(outputs) && !is.data.frame(outputs))

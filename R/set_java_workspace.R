@@ -1,13 +1,13 @@
-#' @title Setting JavaStics workspace
+#' @title Setting JavaSTICS workspace
 #'
-#' @description Setting a new JavaStics working directory, a relative directory
-#' to JavaStics path or an absolute one
+#' @description Setting a new JavaSTICS working directory, a relative directory
+#' to JavaSTICS path or an absolute one
 #'
-#' @details Checking if the directory is a JavaStics workspace
+#' @details Checking if the directory is a JavaSTICS workspace
 #' (any usms.xml file), and if it's already registered
 #' @details before setting new one
-#' @param javastics JavaStics installation root folder
-#' @param workspace JavaStics working directory
+#' @param javastics JavaSTICS installation root folder
+#' @param workspace JavaSTICS working directory
 #' (absolute,relative to javastics path)
 #'
 #' @examples
@@ -48,7 +48,7 @@ set_java_workspace <- function(javastics, workspace) {
   current_wd <- get_values(xml_pref, '//entry[@key="workingDirectory.current"]')
 
   # entry doesn't exist, normally it could not occur because
-  # we set pref file before, but using JavaStics interface first
+  # we set pref file before, but using JavaSTICS interface first
   # doesn't fix a default workspace, so ...
   if (base::is.null(current_wd)) {
     n <- XML::xmlParseString(

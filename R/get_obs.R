@@ -1,6 +1,6 @@
 #' Read STICS observation files (*.obs)
 #'
-#' @description Read STICS observation files from a JavaStics workspace and
+#' @description Read STICS observation files from a JavaSTICS workspace and
 #' store data into a list per usm
 #'
 #' @param workspace Vector of path(s) of directory(ies) containing the STICS
@@ -16,9 +16,9 @@
 #' @param dates list of dates to filter (POSIX date)
 #' @param usms_file Path of a USM xml file. Optional, if provided, the plant
 #' names are added in the Plant column (see details).
-#' @param javastics Path of JavaStics. Optional, should be provided in addition
+#' @param javastics Path of JavaSTICS. Optional, should be provided in addition
 #' to usms_file to get the plant codes if the plant files used are not
-#' in the workspace but in the JavaStics distribution (see Details).
+#' in the workspace but in the JavaSTICS distribution (see Details).
 #' @param verbose Logical value for displaying or not information while running
 #'
 #' @param usm_name `r lifecycle::badge("deprecated")` `usm_name` is no

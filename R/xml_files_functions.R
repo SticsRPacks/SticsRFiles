@@ -49,7 +49,7 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
 
   if (is.null(javastics_dir)) {
     warning(
-      "JavaStics path must be given as input argument\n",
+      "JavaSTICS path must be given as input argument\n",
       type, " has not been found in ", workspace_dir
     )
     return()

@@ -3,12 +3,12 @@
 #'
 #' @description Get the plant name (and file name) for each usm in a workspace
 #'
-#' @param workspace      Path of a JavaStics workspace, or a vector of
+#' @param workspace      Path of a JavaSTICS workspace, or a vector of
 #' (recursive call).
 #' @param usms_filepath  Path of the usms file (`usms.xml`)
 #' @param usm_name      Vector of usms to read (optional, used to filter usms)
-#' @param javastics_path JavaStics installation path (Optional, needed if the
-#' plant files are not in the `workspace` but rather in the JavaStics
+#' @param javastics_path JavaSTICS installation path (Optional, needed if the
+#' plant files are not in the `workspace` but rather in the JavaSTICS
 #' default workspace). Only used to get the plants names.
 #' @param verbose Logical value (optional), TRUE to display information
 #' on error, FALSE otherwise (default)

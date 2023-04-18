@@ -1,8 +1,8 @@
-#' Upgrading XML files of a JavaStics workspace directory
+#' Upgrading XML files of a JavaSTICS workspace directory
 #' to a newer STICS version format
 #'
-#' @param workspace Path of a JavaStics workspace
-#' @param javastics Path of JavaStics
+#' @param workspace Path of a JavaSTICS workspace
+#' @param javastics Path of JavaSTICS
 #' @param out_dir Output directory of the generated files
 #' @param stics_version Name of the STICS version (VX.Y format)
 #' @param target_version Name of the STICS version to upgrade files
@@ -94,19 +94,19 @@ upgrade_workspace_xml <- function(workspace,
     !file.exists(file.path(workspace, "usms.xml"))) {
     stop(
       workspace,
-      ": the directory does not exist or is not a JavaStics workspace !"
+      ": the directory does not exist or is not a JavaSTICS workspace !"
     )
   }
 
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
-  # Testing the JavaStics dir
+  # Testing the JavaSTICS dir
   if (!dir.exists(javastics) ||
     !file.exists(file.path(javastics, "JavaStics.exe"))) {
     stop(
       javastics,
-      " : the directory does nor exist or is not a JavaStics one !"
+      " : the directory does nor exist or is not a JavaSTICS one !"
     )
   }
 
@@ -270,7 +270,7 @@ upgrade_workspace_xml <- function(workspace,
   }
 
   # TODO: see how to manage variables names checks in *.mod files
-  # Probably, the new JavaStics path may be added as a new function argument
+  # Probably, the new JavaSTICS path may be added as a new function argument
   # for getting information on output variables
   # (use get_var_info with the appropriate version string)
 

@@ -2,19 +2,19 @@
 #' content
 #'
 #' @description The function creates sets of input files for one or multiple
-#' usms from usms data stored in a JavaStics workspace. For multiple usms,
+#' usms from usms data stored in a JavaSTICS workspace. For multiple usms,
 #' sets will be generated into individual folders named with usm names.
 #' Observations files will be also copied if they are named `[usm_name].obs`
 #' For one usm, files will be generated either in the workspace directory
 #' or in a subdirectory.
 #'
 #'
-#' @param javastics Path of JavaStics.
-#' @param workspace Path of a JavaStics workspace
+#' @param javastics Path of JavaSTICS.
+#' @param workspace Path of a JavaSTICS workspace
 #' (i.e. containing the STICS XML input files). Optional, if not provided
-#' the current workspace stored in JavaStics preferences will be used.
+#' the current workspace stored in JavaSTICS preferences will be used.
 #' @param out_dir The path of the directory where to create usms directories
-#' (Optional), if not provided the JavaStics workspace will be used as root
+#' (Optional), if not provided the JavaSTICS workspace will be used as root
 #' @param usm List of usms to generate (Optional). If not provided, all
 #' usms contained in workspace_path/usms.xml file will be generated.
 #' @param verbose Logical value for displaying information while running
@@ -38,7 +38,7 @@
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing STICS input files),
-#' files : generated files list (in JavaStics workspace origin),
+#' files : generated files list (in JavaSTICS workspace origin),
 #' copy_status : logical value vector, indicating if all files have been
 #' generated for each usm
 #' obs_copy_status : logical value vector, indicating if observation files
@@ -151,7 +151,7 @@ gen_usms_xml2txt <- function(javastics,
   setwd(javastics_path)
 
 
-  # Checking and getting JavaStics workspace path
+  # Checking and getting JavaSTICS workspace path
   workspace_path <- check_java_workspace(javastics_path, workspace_path)
   if (base::is.null(workspace_path)) {
     return()
@@ -263,7 +263,7 @@ gen_usms_xml2txt <- function(javastics,
   # multiple usms. In that case files will be overwritten.
   # So fixing it to TRUE
   if (!dir_per_usm_flag && usms_number > 1) {
-    warning("Generating files in the JavaStics workspace",
+    warning("Generating files in the JavaSTICS workspace",
             " is not compatible with multiple usms !")
     dir_per_usm_flag <- TRUE
   }

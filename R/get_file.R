@@ -1,18 +1,18 @@
 #' Read STICS observation or simulation files (.obs or mod_s)
 #'
-#' @description Read STICS observation or simulation files from a JavaStics
+#' @description Read STICS observation or simulation files from a JavaSTICS
 #' workspace and store data into a list per usm.
 #' Used by `get_obs()` and `get_sim()`. Operate first computation and
 #' then call `get_file_()`.
 #'
-#' @param workspace      Path of a JavaStics workspace, or a vector of.
+#' @param workspace      Path of a JavaSTICS workspace, or a vector of.
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
 #' @param var_list   vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
 #' @param usms_filepath  Path of the usms file (optional)
-#' @param javastics_path JavaStics installation path (optional, needed if
-#' the plant files are not in the `workspace` but rather in the JavaStics
+#' @param javastics_path JavaSTICS installation path (optional, needed if
+#' the plant files are not in the `workspace` but rather in the JavaSTICS
 #'  default workspace). Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display information
 #' on error, FALSE otherwise (default)
@@ -85,17 +85,17 @@ get_file <- function(workspace,
 #' Read STICS observation or simulation files (.obs or mod_s)
 #'
 #' @description Read STICS observation or simulation files from a
-#' JavaStics workspace and store data into a list per usm.
+#' JavaSTICS workspace and store data into a list per usm.
 #' Used by `get_obs()` and `get_sim()`.
 #'
-#' @param workspace      Path of a JavaStics workspace
+#' @param workspace      Path of a JavaSTICS workspace
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
 #' @param usms_filepath  Path of the usms file (optional)
 #' @param var_list   vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
-#' @param javastics_path JavaStics installation path (optional, needed if
-#' the plant files are not in the `workspace` but rather in the JavaStics
+#' @param javastics_path JavaSTICS installation path (optional, needed if
+#' the plant files are not in the `workspace` but rather in the JavaSTICS
 #' default workspace). Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display information
 #' on error, FALSE otherwise (default)
@@ -255,7 +255,7 @@ get_file_ <- function(workspace = getwd(),
 #' Get a simulation or observation file for one situation at a time,
 #' for sole or intercrop
 #'
-#' @param dirpath Path of a JavaStics workspace
+#' @param dirpath Path of a JavaSTICS workspace
 #' @param filename File name(s)
 #' @param p_name Plant name(s)
 #' @param verbose Logical value (optional), TRUE to display information

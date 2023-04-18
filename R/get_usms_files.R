@@ -1,15 +1,15 @@
 #' Getting existing xml files path list per usm from an usms.xml file
 #'
-#' @param workspace Path of a JavaStics workspace (i.e. containing the STICS
+#' @param workspace Path of a JavaSTICS workspace (i.e. containing the STICS
 #' XML input files)
 #' @param usms_list Vector of usms names (Optional)
 #' @param usms_file Path (including name) of a USM XML file.
 #' @param file_type Vector of file(s) type to get (if not given,
 #' all types are returned, see details)
-#' @param javastics Path of JavaStics. Optional, only needed if the plant files
+#' @param javastics Path of JavaSTICS Optional, only needed if the plant files
 #' are not in the workspace
 #' (in this case the plant files used are those included in the
-#' JavaStics distribution)
+#' JavaSTICS distribution)
 #' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path`
 #' is no longer supported, use `workspace` instead.
 #' @param file_name `r lifecycle::badge("deprecated")` `file_name` is no

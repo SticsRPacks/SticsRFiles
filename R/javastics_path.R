@@ -1,4 +1,4 @@
-#' Getting JavaStics path from javastics_path environment variable
+#' Getting JavaSTICS path from javastics_path environment variable
 #'
 #' @return Path of the JavaSTICS root directory if javastics_path
 #' environment variable exists

@@ -126,7 +126,7 @@ In some cases, information relative to upward dependence are needed for extracti
 # Getting XML files examples from the `SticsRFiles` library
 
 Several XML examples files have bee included  in the package in order to use them in `reproducible`
-**manipulations** and **results** described in this document. These examples files are extracted from the JavaStics
+**manipulations** and **results** described in this document. These examples files are extracted from the JavaSTICS
 standard distribution (some of them have been renamed).
 
 ## Getting the XML files source directory

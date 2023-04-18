@@ -4,7 +4,7 @@
 #' is converted to a text file readable by the STICS model
 #' (ficini.txt, ficplt1.txt,...)
 #' @param file Path (including name) of the xml file to convert
-#' @param javastics Path of JavaStics
+#' @param javastics Path of JavaSTICS
 #' @param plant_id The plant identifier (main crop: 1 ; associated crop: 2)
 #' @param out_dir Path of the directory where to generate the file.
 #' Optional, set to the path of the input xml file by default

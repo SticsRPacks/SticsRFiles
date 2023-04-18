@@ -410,7 +410,7 @@ upgrade_plt_xml <- function(file,
 
   # Special case: jvc not any more under an option choice
   # Checking values for jvc, if == -999, and replacing with
-  # a value set in new files provided with JavaStics.
+  # a value set in new files provided with JavaSTICS
   # Values stores in a jvc.RData in the package.
   #
   #

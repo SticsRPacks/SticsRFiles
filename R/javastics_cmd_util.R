@@ -9,11 +9,11 @@
 #' (optional)
 #' @param type keywords for filtering in the returned list what kind of command
 #' to be generated (default both: "generate" and "run")
-#' @param workspace A JavaStics workspace path (optional)
+#' @param workspace A JavaSTICS workspace path (optional)
 #' @param verbose Logical value (optional), TRUE to display run information,
 #' FALSE otherwise (default)
 #'
-#' @details According to a JavaStics version (i.e. javastics path content) and
+#' @details According to a JavaSTICS version (i.e. javastics path content) and
 #' the OS type, the function builds command line strings used from system2
 #' calls. Commands may be filtered using type argument.
 #'
@@ -36,7 +36,7 @@ get_javastics_cmd <- function(javastics,
                               workspace = NULL,
                               verbose = TRUE) {
 
-  # detecting JavaStics command exe name from javastics path
+  # detecting JavaSTICS command exe name from javastics path
   javastics_cmd <- file.path(javastics, "JavaSticsCmd.exe")
   cmd <- check_javastics_cmd(
     javastics_cmd = javastics_cmd,
@@ -74,21 +74,21 @@ get_javastics_cmd <- function(javastics,
 }
 
 #' @title Checking if the java virtual machine is compatible with the given
-#' JavaStics command executable, and command line options
+#' JavaSTICS command executable, and command line options
 #'
 #' @description For Unix like systems, the system java virtual machine is
-#' detected and consistency for JavaStics executable used is checked.
-#' Command line verbosity option is detected for JavaStics command line for all
+#' detected and consistency for JavaSTICS executable used is checked.
+#' Command line verbosity option is detected for JavaSTICS command line for all
 #' systems.
 #'
-#' @param javastics_cmd path to JavaStics command line executable
+#' @param javastics_cmd path to JavaSTICS command line executable
 #' @param java_cmd Name or path of the java virtual machine executable
 #'
-#' @details Errors are raised if the JavaStics executable cannot be run with the
+#' @details Errors are raised if the JavaSTICS executable cannot be run with the
 #' given java virtual machine for unix like systems.
 #'
-#' @return A named list with the JavaStics command line path,
-#' the java path and the verbose string option (according to JavaStics command
+#' @return A named list with the JavaSTICS command line path,
+#' the java path and the verbose string option (according to JavaSTICS command
 #'  line version, and the "verbose" argument value)
 #'
 #' @examples
@@ -117,7 +117,7 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
     )
   }
 
-  # detecting invalid option for given JavaStics command line
+  # detecting invalid option for given JavaSTICS command line
   help_status <- !length(
     grep(pattern = "Invalid option entered",
          help_test)) > 0

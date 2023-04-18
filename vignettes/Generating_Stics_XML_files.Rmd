@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 
 * Observations data files generation have been included even if they are not in XML format.
 
-* The generation of weather files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
+* The generation of weather files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaSTICS GUI to perform these files generation.
 
 
 This document has been generated using the latest STICS version **`r stics_version`**.

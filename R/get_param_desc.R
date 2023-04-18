@@ -17,7 +17,7 @@ get_param_desc <- function(file_path = NULL,
                            kind = FALSE) {
 
   # TODO
-  # file_path : check if it is a JavaStics dir, calculate
+  # file_path : check if it is a JavaSTICS dir, calculate
   # check if the file exists in the dir
   if (base::is.null(file_path)) {
     file_path <- file.path(get_examples_path(file_type = "csv",

@@ -2,7 +2,7 @@
 #'
 #' @description Read STICS model input parameters from a usm in text format
 #' (STICS input)
-#' Generally used after calling building a usm with `JavaStics`.
+#' Generally used after calling building a usm with `JavaSTICS`.
 #'
 #' @param workspace      Path of the workspace containing the STICS (txt)
 #' input files.
