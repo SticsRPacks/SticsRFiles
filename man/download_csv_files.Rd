@@ -2,7 +2,7 @@
 % Please edit documentation in R/manage_stics_versions.R
 \name{download_csv_files}
 \alias{download_csv_files}
-\title{Dowloading inputs and/or outputs csv files from a repository branch/tag}
+\title{Downloading inputs and/or outputs csv files from a repository branch/tag}
 \usage{
 download_csv_files(
   branch_url,
@@ -21,14 +21,14 @@ download_csv_files(
 \item{file_name}{File name(s)
 or keyword "all" for both files (default)}
 
-\item{ids}{Connexion identifiers to the subversion server}
+\item{ids}{Connection identifiers to the subversion server}
 
-\item{overwrite}{Logical, TRUE for overwtiting files, FALSE otherwise}
+\item{overwrite}{Logical, TRUE for overwriting files, FALSE otherwise}
 
 \item{verbose}{TRUE to display warnings (default), FALSE otherwise}
 }
 \description{
-Dowloading inputs and/or outputs csv files from a repository branch/tag
+Downloading inputs and/or outputs csv files from a repository branch/tag
 }
 \examples{
 \dontrun{

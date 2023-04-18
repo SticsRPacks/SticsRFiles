@@ -31,7 +31,7 @@ get_file(
 the plant files are not in the \code{workspace} but rather in the JavaStics
 default workspace). Only used to get the plants names.}
 
-\item{verbose}{Logical value (optional), TRUE to display infos
+\item{verbose}{Logical value (optional), TRUE to display information
 on error, FALSE otherwise (default)}
 
 \item{type}{The type of file to read, either "obs" or "sim".}
@@ -48,7 +48,7 @@ Used by \code{get_obs()} and \code{get_sim()}. Operate first computation and
 then call \code{get_file_()}.
 }
 \details{
-The \code{.obs} files names should match USMs mames, e.g.
+The \code{.obs} files names should match USMs names, e.g.
 for a usm called "banana", the \code{.obs} file should be named \code{banana.obs}.
 For intercrops, the name should be suffixed by "p" for the principal
 and "a" for the associated plant.

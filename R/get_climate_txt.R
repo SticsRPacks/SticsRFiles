@@ -1,4 +1,4 @@
-#' Read STICS input meteo file
+#' Read STICS input meteorology file
 #'
 #' @description Read the meteorology input for STICS ("climat.txt")
 #'

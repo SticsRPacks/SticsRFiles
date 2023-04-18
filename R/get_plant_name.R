@@ -10,8 +10,8 @@
 #' @param javastics_path JavaStics installation path (Optional, needed if the
 #' plant files are not in the `workspace` but rather in the JavaStics
 #' default workspace). Only used to get the plants names.
-#' @param verbose Logical value (optional), TRUE to display infos on error,
-#' FALSE otherwise (default)
+#' @param verbose Logical value (optional), TRUE to display information
+#' on error, FALSE otherwise (default)
 #'
 #'
 #' @return A list of plant names for each usm with one value for sole crop

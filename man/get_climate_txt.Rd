@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_climate_txt.R
 \name{get_climate_txt}
 \alias{get_climate_txt}
-\title{Read STICS input meteo file}
+\title{Read STICS input meteorology file}
 \usage{
 get_climate_txt(
   workspace = getwd(),

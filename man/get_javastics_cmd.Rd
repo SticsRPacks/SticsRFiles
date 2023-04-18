@@ -23,7 +23,7 @@ to be generated (default both: "generate" and "run")}
 
 \item{workspace}{A JavaStics workspace path (optional)}
 
-\item{verbose}{Logical value (optional), TRUE to display run infos,
+\item{verbose}{Logical value (optional), TRUE to display run information,
 FALSE otherwise (default)}
 }
 \value{

@@ -46,7 +46,7 @@ to a newer Stics version format
 \item If general parameters files exist in \code{workspace}, they are also upgraded.
 In that case, residues parameters values are kept and might not be adapted
 to the target model version.
-\item Wheather data and observations files are fully copied to \code{out_dir}
+\item Weather data and observations files are fully copied to \code{out_dir}
 }
 }
 \examples{

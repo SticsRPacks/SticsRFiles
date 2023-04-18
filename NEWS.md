@@ -241,7 +241,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 ## Specific changes
 * get_obs, get_daily_results: removed useless columns from return, simplification 
 
-* download_usm_xl, download_usm_csv: added verbose argument for masquing warnings/displays, added overwritting case
+* download_usm_xl, download_usm_csv: added verbose argument for masking warnings/displays, added overwriting case
 
 * read_params_table : new function for getting parameters tables either from csv files or excel files sheets
 

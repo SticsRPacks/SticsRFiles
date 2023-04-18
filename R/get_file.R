@@ -14,11 +14,11 @@
 #' @param javastics_path JavaStics installation path (optional, needed if
 #' the plant files are not in the `workspace` but rather in the JavaStics
 #'  default workspace). Only used to get the plants names.
-#' @param verbose        Logical value (optional), TRUE to display infos
+#' @param verbose        Logical value (optional), TRUE to display information
 #' on error, FALSE otherwise (default)
 #' @param type          The type of file to read, either "obs" or "sim".
 #'
-#' @details The `.obs` files names should match USMs mames, e.g.
+#' @details The `.obs` files names should match USMs names, e.g.
 #' for a usm called "banana", the `.obs` file should be named `banana.obs`.
 #' For intercrops, the name should be suffixed by "p" for the principal
 #' and "a" for the associated plant.
@@ -97,11 +97,11 @@ get_file <- function(workspace,
 #' @param javastics_path JavaStics installation path (optional, needed if
 #' the plant files are not in the `workspace` but rather in the JavaStics
 #' default workspace). Only used to get the plants names.
-#' @param verbose        Logical value (optional), TRUE to display infos
+#' @param verbose        Logical value (optional), TRUE to display information
 #' on error, FALSE otherwise (default)
 #' @param type          The type of file to read, either "obs" or "sim".
 #'
-#' @details The `.obs` files names should match USMs mames, e.g. for a
+#' @details The `.obs` files names should match USMs names, e.g. for a
 #' usm called "banana", the `.obs` file should be named `banana.obs`.
 #' For intercrops, the name should be suffixed by "p" for the principal
 #' and "a" for the associated plant.
@@ -258,8 +258,8 @@ get_file_ <- function(workspace = getwd(),
 #' @param dirpath Path of a JavaStics workspace
 #' @param filename File name(s)
 #' @param p_name Plant name(s)
-#' @param verbose Logical value (optional), TRUE to display infos on error,
-#' FALSE otherwise (default)
+#' @param verbose Logical value (optional), TRUE to display information
+#' on error, FALSE otherwise (default)
 #' @param dates_list list of dates to filter (optional, should be a POSIX date)
 #' @param var_list vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)

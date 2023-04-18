@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sta_doc.R
 \name{gen_sta_doc}
 \alias{gen_sta_doc}
-\title{Generatefrom a template a Stics sta xml_document}
+\title{Generates from a template a Stics sta xml_document}
 \usage{
 gen_sta_doc(
   xml_doc = NULL,
@@ -26,7 +26,7 @@ gen_sta_doc(
 an invisible xml_document object or a list of
 }
 \description{
-Generatefrom a template a Stics sta xml_document
+Generates from a template a Stics sta xml_document
 }
 \examples{
 \dontrun{

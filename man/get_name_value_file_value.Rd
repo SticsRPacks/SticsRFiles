@@ -12,7 +12,7 @@ get_name_value_file_value(file_path, param_names, names_dict = NULL)
 
 \item{param_names}{vector of parameters names}
 
-\item{names_dict}{List of correspondance between parameter names
+\item{names_dict}{List of correspondence between parameter names
 given and files intern names}
 }
 \value{

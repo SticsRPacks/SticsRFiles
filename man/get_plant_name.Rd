@@ -24,8 +24,8 @@ get_plant_name(
 plant files are not in the \code{workspace} but rather in the JavaStics
 default workspace). Only used to get the plants names.}
 
-\item{verbose}{Logical value (optional), TRUE to display infos on error,
-FALSE otherwise (default)}
+\item{verbose}{Logical value (optional), TRUE to display information
+on error, FALSE otherwise (default)}
 }
 \value{
 A list of plant names for each usm with one value for sole crop

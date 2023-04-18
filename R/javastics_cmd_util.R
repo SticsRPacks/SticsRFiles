@@ -10,7 +10,7 @@
 #' @param type keywords for filtering in the returned list what kind of command
 #' to be generated (default both: "generate" and "run")
 #' @param workspace A JavaStics workspace path (optional)
-#' @param verbose Logical value (optional), TRUE to display run infos,
+#' @param verbose Logical value (optional), TRUE to display run information,
 #' FALSE otherwise (default)
 #'
 #' @details According to a JavaStics version (i.e. javastics path content) and

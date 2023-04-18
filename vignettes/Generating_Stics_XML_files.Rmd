@@ -128,7 +128,7 @@ Other data stored in Excel or CSV files must be adapted to the use cases here af
 
 ## Specificities of Excel sheets
 
-Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters set they contain.
+Excel sheet names are completely free, but must be meaningful regarding the kind of parameters set they contain.
 
 In the example, usefull sheets for generating XML parameters files are named: **USMs, Ini, Soils, Tec, Station**
 

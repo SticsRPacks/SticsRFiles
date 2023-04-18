@@ -26,7 +26,7 @@ get_svn_identifiers <- function() {
 #' @param file_name File name(s)
 #' or keyword "all" for both files (default)
 #' @param ids Connection identifiers to the subversion server
-#' @param overwrite Logical, TRUE for overwtiting files, FALSE otherwise
+#' @param overwrite Logical, TRUE for overwriting files, FALSE otherwise
 #' @param verbose TRUE to display warnings (default), FALSE otherwise
 #'
 # @return

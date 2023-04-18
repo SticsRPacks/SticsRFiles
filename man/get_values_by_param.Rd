@@ -17,7 +17,7 @@ get_values_by_param(
 indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2
 or not for scalar parameters}
 
-\item{param_name}{Optional arameter(s) name(s) vector}
+\item{param_name}{Optional parameter(s) name(s) vector}
 
 \item{lines_id}{Optional data.frame lines numerical identifiers}
 
