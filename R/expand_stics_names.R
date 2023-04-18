@@ -1,4 +1,4 @@
-#' Expand stics names from parameters/variables simple names,
+#' Expand STICS names from parameters/variables simple names,
 #' with indices (i.e. par(1), par(2),...regarding to parameter/variable
 #'  dimensions)
 #'

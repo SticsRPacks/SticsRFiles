@@ -1,4 +1,4 @@
-#' @title Get a list of Stics xml parameters names from nodes attributes in
+#' @title Get a list of STICS xml parameters names from nodes attributes in
 #' an xml_document
 #' @param xml_doc an xml_document object (created from an xml file)
 #'

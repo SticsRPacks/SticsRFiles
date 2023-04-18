@@ -5,8 +5,8 @@
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param obs_dir Directory path of the observation data files
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
@@ -46,7 +46,7 @@ upgrade_usms_xml <- function(file,
 
     min_version <- get_version_num("V9.1")
 
-    # extracting or detecting the Stics version corresponding to the xml file
+    # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
                                            stics_version,
@@ -81,7 +81,7 @@ upgrade_usms_xml <- function(file,
   # loading the old doc
   old_doc <- xmldocument(file = file)
 
-  # setting file stics version
+  # setting file STICS version
   set_xml_file_version(old_doc,
                        new_version = target_version,
                        overwrite = overwrite

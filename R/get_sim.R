@@ -1,4 +1,4 @@
-#' Load and format Stics daily output file(s)
+#' Load and format STICS daily output file(s)
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
@@ -28,21 +28,21 @@ get_daily_results <- function(...) {
   get_sim(...)
 }
 
-#' Load and format Stics daily output file(s)
+#' Load and format STICS daily output file(s)
 #'
 #' @description Reads and format daily output file(s) (mod_s*.sti) for usm(s)
 #' with possible selection on variable names, cumulative DOY and dates
 #'
-#' @param workspace Vector of path(s) of directory(ies) containing the Stics
+#' @param workspace Vector of path(s) of directory(ies) containing the STICS
 #' output files to read (mod_s*.sti file) or path of a single directory
 #' containing one sub-folder per USM (named as the USM names),
-#' each of them containing the corresponding Stics output file to read.
+#' each of them containing the corresponding STICS output file to read.
 #' In the second case, the argument `usm` must also be provided.
 #' @param usm Vector of USM names. Optional, if not provided, the function
 #' returns the results for all USMs.
 #' @param var Vector of variable names for which results have to be provided.
 #' Optional, all variables considered by default. See `get_var_info()`
-#' to get the list of Stics variables names.
+#' to get the list of STICS variables names.
 #' @param dates list of dates to filter (POSIX date)
 #' @param usms_file Path of a USM xml file. Optional, if provided, the plant
 #' names are added in the Plant column (see details).

@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert_xml2txt.R
 \name{convert_xml2txt}
 \alias{convert_xml2txt}
-\title{Transforming a Stics xml file into a text file}
+\title{Transforming a STICS xml file into a text file}
 \usage{
 convert_xml2txt(
   file,
@@ -27,7 +27,7 @@ convert_xml2txt(
 Optional, set to the path of the input xml file by default}
 
 \item{save_as}{Name of the output file
-(optional, default: fixed name for Stics)}
+(optional, default: fixed name for STICS)}
 
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use \code{file} instead.}
@@ -44,7 +44,7 @@ longer supported, use \code{save_as} instead.}
 \description{
 The input file according to his type
 (ini,plant,tec,station,soil,par)
-is converted to a text file readable by the Stics model
+is converted to a text file readable by the STICS model
 (ficini.txt, ficplt1.txt,...)
 }
 \examples{

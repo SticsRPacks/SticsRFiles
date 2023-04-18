@@ -1,4 +1,4 @@
-#' @title Generate from a template or modify a Stics sols or usms xml_document
+#' @title Generate from a template or modify a STICS sols or usms xml_document
 
 #' @param doc_type Document type
 #' @param xml_doc  The xml document

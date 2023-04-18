@@ -2,7 +2,7 @@
 % Please edit documentation in R/replace_txt_param_value.R
 \name{replace_txt_param_value}
 \alias{replace_txt_param_value}
-\title{Replacing value in Stics parameters files}
+\title{Replacing value in STICS parameters files}
 \usage{
 replace_txt_param_value(
   file_path,

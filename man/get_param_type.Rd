@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_type.R
 \name{get_param_type}
 \alias{get_param_type}
-\title{Get a Stics xml parameter type and xpath
+\title{Get a STICS xml parameter type and xpath
 from a request in an xml_document}
 \usage{
 get_param_type(
@@ -28,7 +28,7 @@ get_param_type(
 a list with fields $type, $xpath and $length, or a named list of
 }
 \description{
-Get a Stics xml parameter type and xpath
+Get a STICS xml parameter type and xpath
 from a request in an xml_document
 }
 \examples{

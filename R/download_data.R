@@ -8,7 +8,7 @@
 #' @param dir `r lifecycle::badge("deprecated")` `dir` is no
 #'   longer supported, use `out_dir` instead.
 #' @param example_dirs List of use case directories names (optional)
-#' @param stics_version Name of the Stics version. Optional, by default the
+#' @param stics_version Name of the STICS version. Optional, by default the
 #' latest version returned by get_stics_versions_compat() is used.
 #' @param version_name `r lifecycle::badge("deprecated")` `file_path` is no
 #'   longer supported, use `file` instead.
@@ -96,7 +96,7 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 }
 
 
-#' Getting valid directories string for download from SticsRpacks data
+#' Getting valid directories string for download from SticsRPacks data
 #' repository
 #'
 #' @param dirs Directories names of the referenced use cases (optional),

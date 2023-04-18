@@ -59,7 +59,7 @@ get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
 get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
 }
 \arguments{
-\item{workspace}{Path of the workspace containing the Stics (txt)
+\item{workspace}{Path of the workspace containing the STICS (txt)
 input files.}
 
 \item{param}{Vector of parameter names. Optional, if not provided,

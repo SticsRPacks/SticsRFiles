@@ -4,8 +4,8 @@
 #' @description Helper function to print the list of all possible variables
 #' to set as output from the STICS model.
 #'
-#' @param stics_version Name of the Stics version. Optional, can be used to
-#' search parameters information relative to a specific Stics version.
+#' @param stics_version Name of the STICS version. Optional, can be used to
+#' search parameters information relative to a specific STICS version.
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
 #'
@@ -55,8 +55,8 @@ all_out_var <- function(stics_version = "latest") {
 #' all variables.
 #' @param keyword Search by keyword instead of variable name
 #' (search in the name and description field)
-#' @param stics_version Name of the Stics version. Optional, can be used
-#' to search parameters information relative to a specific Stics version.
+#' @param stics_version Name of the STICS version. Optional, can be used
+#' to search parameters information relative to a specific STICS version.
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
 #'
@@ -126,8 +126,8 @@ get_var_info <- function(var = NULL,
 #' output variables.
 #'
 #' @param var     A vector of variable names
-#' @param stics_version Name of the Stics version. Optional, can be used
-#' to search parameters information relative to a specific Stics version.
+#' @param stics_version Name of the STICS version. Optional, can be used
+#' to search parameters information relative to a specific STICS version.
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
 #'

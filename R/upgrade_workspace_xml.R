@@ -1,11 +1,11 @@
 #' Upgrading XML files of a JavaStics workspace directory
-#' to a newer Stics version format
+#' to a newer STICS version format
 #'
 #' @param workspace Path of a JavaStics workspace
 #' @param javastics Path of JavaStics
 #' @param out_dir Output directory of the generated files
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to  (VX.Y format)
 #' @param plant logical (optional), TRUE for upgrading plant files if a "plant"
 #' sub-directory of workspace exists, FALSE otherwise
@@ -62,7 +62,7 @@ upgrade_workspace_xml <- function(workspace,
   }
   if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
 
-  # Extracting or detecting the Stics version corresponding to the xml file
+  # Extracting or detecting the STICS version corresponding to the xml file
   # based on param_gen.xml file content
   file_version <- check_xml_file_version(par_gen, stics_version)
   if (!file_version) {

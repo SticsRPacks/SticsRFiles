@@ -1,7 +1,7 @@
 
-#' Extracting data from the Stics report file
+#' Extracting data from the STICS report file
 #'
-#' @param workspace Path of the directory containing the Stics report file
+#' @param workspace Path of the directory containing the STICS report file
 #' to read.
 #' @param file_name A report file name among "mod_rapport.sti" (default),
 #' "mod_rapportA.sti", "mod_rapportP.sti"

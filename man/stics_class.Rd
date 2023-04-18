@@ -2,7 +2,7 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_class}
 \alias{stics_class}
-\title{Get the class of a stics object}
+\title{Get the class of a STICS object}
 \usage{
 stics_class(name, env_name = sticsenv_name())
 }
@@ -10,6 +10,6 @@ stics_class(name, env_name = sticsenv_name())
 A vector of classes
 }
 \description{
-Get the class of a stics object
+Get the class of a STICS object
 }
 \keyword{internal}

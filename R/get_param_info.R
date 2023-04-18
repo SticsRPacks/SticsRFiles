@@ -17,9 +17,9 @@
 #' in parameters data (i.e.: parameters names, formalisms description,
 #' file names or part to which parameters are attached to)
 #'
-#' @param stics_version Name of the Stics version. Optional,
+#' @param stics_version Name of the STICS version. Optional,
 #' can be used to search parameters information relative to a specific
-#' Stics version. By default the latest version returned
+#' STICS version. By default the latest version returned
 #' by `get_stics_versions_compat()` is used.
 #'
 #' @param version `r lifecycle::badge("deprecated")` `version` is no
@@ -223,7 +223,7 @@ get_param_data_df <- function(param = NULL,
   param <- unique(param)
 
   if (base::is.null(file)) {
-    # Check Stics version
+    # Check STICS version
     stics_version <- get_xml_stics_version(stics_version)
 
     # Getting XML examples files dir from the package
@@ -273,7 +273,7 @@ get_param_data_df <- function(param = NULL,
 
   # Not any parameters found
   if (dim(param_names)[1] < 1) {
-    warning(paste("Not any parameter found for Stics version: ", stics_version))
+    warning(paste("Not any parameter found for STICS version: ", stics_version))
     return(invisible())
   }
 

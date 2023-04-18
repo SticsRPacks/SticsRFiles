@@ -16,7 +16,7 @@ get_usms_files(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace (i.e. containing the Stics
+\item{workspace}{Path of a JavaStics workspace (i.e. containing the STICS
 XML input files)}
 
 \item{usms_list}{Vector of usms names (Optional)}

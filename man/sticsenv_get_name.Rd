@@ -2,14 +2,14 @@
 % Please edit documentation in R/stics_environment.R
 \name{sticsenv_get_name}
 \alias{sticsenv_get_name}
-\title{Get stics env name from object}
+\title{Get STICS env name from object}
 \usage{
 sticsenv_get_name(name = NULL, env_name = sticsenv_name())
 }
 \arguments{
-\item{name}{The name of an object potentially found in a stics environment}
+\item{name}{The name of an object potentially found in a STICS environment}
 
-\item{env_name}{The name of the stics environment}
+\item{env_name}{The name of the STICS environment}
 }
 \value{
 A vector of environment names

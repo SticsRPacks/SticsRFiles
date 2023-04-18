@@ -1,14 +1,14 @@
-#' @title Generate Stics sta xml file(s) from a template or an input file
+#' @title Generate STICS sta xml file(s) from a template or an input file
 #'
 #' @param param_df A table (df, tibble) containing the values of the parameters
 #' to use (see details)
 #' @param file Path of a sta xml file to be used as a template. Optional,
 #' if not provided, the function will use a standard template depending
-#' on the stics version.
+#' on the STICS version.
 #' @param out_dir Path of the directory where to generate the file(s).
-#' @param stics_version Name of the Stics version. Optional, used if
+#' @param stics_version Name of the STICS version. Optional, used if
 #' the `file` argument is not provided. In this case the function uses a
-#' standard template associated to the stics version.
+#' standard template associated to the STICS version.
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
 #'   longer supported, use `param_df` instead.
 #' @param sta_in_file `r lifecycle::badge("deprecated")` `sta_in_file` is no
@@ -17,7 +17,7 @@
 #'   longer supported, use `out_dir` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
-#' stics versions that can be used for the argument `stics_version`.
+#' STICS versions that can be used for the argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'

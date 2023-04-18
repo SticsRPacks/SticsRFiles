@@ -1,4 +1,4 @@
-#' Add node to a Stics XML document
+#' Add node to a STICS XML document
 #'
 #' @param xml_doc XML document
 #' @param formalism_name Name of the formalism (optional)

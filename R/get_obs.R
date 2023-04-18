@@ -3,7 +3,7 @@
 #' @description Read STICS observation files from a JavaStics workspace and
 #' store data into a list per usm
 #'
-#' @param workspace Vector of path(s) of directory(ies) containing the Stics
+#' @param workspace Vector of path(s) of directory(ies) containing the STICS
 #' observation files to read (*.obs file) or path of a single directory
 #' containing one sub-folder per USM (named as the USM names),
 #' each of them containing the corresponding files to read.
@@ -12,7 +12,7 @@
 #' returns the results for all USMs.
 #' @param var Vector of variable names for which results have to be provided.
 #' Optional, all variables considered by default. See `get_var_info()`
-#' to get the list of Stics variables names.
+#' to get the list of STICS variables names.
 #' @param dates list of dates to filter (POSIX date)
 #' @param usms_file Path of a USM xml file. Optional, if provided, the plant
 #' names are added in the Plant column (see details).

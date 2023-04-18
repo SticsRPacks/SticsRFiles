@@ -1,11 +1,11 @@
-#' @title Generate from a template or modify a Stics tec xml_document
+#' @title Generate from a template or modify a STICS tec xml_document
 #'
 #' @param xml_doc an xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
-#' @param stics_version the stics files version to use (optional,
+#' @param stics_version the STICS files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
 #' @param dict List of correspondence between given parameter names and
-#' Stics internal names.
+#' STICS internal names.
 #' @param ... Additional arguments (for example, coming from a call
 #' from gen_tec_xml using a na_values argument)
 #'

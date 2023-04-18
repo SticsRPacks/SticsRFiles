@@ -2,8 +2,8 @@
 #'
 #' @param file Path of a param_gen.xml file
 #' @param out_dir Output directory path of the generated file
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
@@ -37,7 +37,7 @@ upgrade_param_gen_xml <- function(file,
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
-    # Extracting or detecting the Stics version corresponding to the xml file
+    # Extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file, stics_version)
 
@@ -63,7 +63,7 @@ upgrade_param_gen_xml <- function(file,
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
-  # Setting file stics version
+  # Setting file STICS version
   set_xml_file_version(old_doc,
                        new_version = target_version,
                        overwrite = overwrite)

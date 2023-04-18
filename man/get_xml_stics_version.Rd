@@ -3,26 +3,26 @@
 \name{get_xml_stics_version}
 \alias{get_xml_stics_version}
 \title{Get a version/or the latest version string of available
-Stics files templates in the package}
+STICS files templates in the package}
 \usage{
 get_xml_stics_version(stics_version = "latest", xml_doc = NULL)
 }
 \arguments{
-\item{stics_version}{A version key of a Stics version (i.e. V9.1)}
+\item{stics_version}{A version key of a STICS version (i.e. V9.1)}
 
-\item{xml_doc}{an xml_document of a Stics xml file (Unused for the moment,
+\item{xml_doc}{an xml_document of a STICS xml file (Unused for the moment,
 no version String included in xml files)}
 }
 \value{
-a Stics version string
+a STICS version string
 }
 \description{
 Get a version/or the latest version string of available
-Stics files templates in the package
+STICS files templates in the package
 }
 \examples{
 \dontrun{
-# View available Stics files version
+# View available STICS files version
 SticsRFiles:::get_xml_stics_version()
 
 # View the latest version

@@ -8,7 +8,7 @@
 #' @details before setting new one
 #' @param javastics JavaStics installation root folder
 #' @param workspace JavaStics working directory
-#' (absolute,relative to javastics parh)
+#' (absolute,relative to javastics path)
 #'
 #' @examples
 #' \dontrun{

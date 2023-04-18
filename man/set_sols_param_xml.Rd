@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_sols_param_xml.R
 \name{set_sols_param_xml}
 \alias{set_sols_param_xml}
-\title{Setting a sol param value(s) in a sols xml_document}
+\title{Setting soil parameter(s) value(s) in a sols xml_document}
 \usage{
 set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 }
@@ -15,7 +15,7 @@ set_sols_param_xml(xml_doc_object, sols_param, overwrite = FALSE)
 updating existing ones (FALSE)}
 }
 \description{
-Setting a sol param value(s) in a sols xml_document
+Setting soil parameter(s) value(s) in a sols xml_document
 }
 \examples{
 \dontrun{

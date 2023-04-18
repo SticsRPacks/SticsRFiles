@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sim.R
 \name{get_sim}
 \alias{get_sim}
-\title{Load and format Stics daily output file(s)}
+\title{Load and format STICS daily output file(s)}
 \usage{
 get_sim(
   workspace,
@@ -20,10 +20,10 @@ get_sim(
 )
 }
 \arguments{
-\item{workspace}{Vector of path(s) of directory(ies) containing the Stics
+\item{workspace}{Vector of path(s) of directory(ies) containing the STICS
 output files to read (mod_s*.sti file) or path of a single directory
 containing one sub-folder per USM (named as the USM names),
-each of them containing the corresponding Stics output file to read.
+each of them containing the corresponding STICS output file to read.
 In the second case, the argument \code{usm} must also be provided.}
 
 \item{usm}{Vector of USM names. Optional, if not provided, the function
@@ -31,7 +31,7 @@ returns the results for all USMs.}
 
 \item{var}{Vector of variable names for which results have to be provided.
 Optional, all variables considered by default. See \code{get_var_info()}
-to get the list of Stics variables names.}
+to get the list of STICS variables names.}
 
 \item{dates}{list of dates to filter (POSIX date)}
 

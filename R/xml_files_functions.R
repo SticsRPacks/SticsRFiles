@@ -115,7 +115,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
   # Checking file version
   if (!is.null(att) && att[, "version"] == new_version && !overwrite) {
     stop(paste(
-      "The version has already been updated to Stics version",
+      "The version has already been updated to STICS version",
       new_version
     ))
   }
@@ -139,7 +139,7 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   # Global detection of the version based for the moment on the
   # param_gen.xml file content
   if (xml_root_name != "fichierpar" && is.null(param_gen_file)) {
-    warning("Stics version corresponding to the XML file was not detected.\n")
+    warning("STICS version corresponding to the XML file was not detected.\n")
     return()
   }
 
@@ -172,7 +172,7 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 
   # both exist
   # How to make a distinction between 9.1 and 9.2 ?
-  # using the stics exe ???
+  # using the STICS exe ???
   # For the moment returning a vector of versions !!!
   if (all(!is_null)) {
     return(c("V9.1", "V9.2"))

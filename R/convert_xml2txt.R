@@ -1,7 +1,7 @@
-#' @title Transforming a Stics xml file into a text file
+#' @title Transforming a STICS xml file into a text file
 #' @description The input file according to his type
 #' (ini,plant,tec,station,soil,par)
-#' is converted to a text file readable by the Stics model
+#' is converted to a text file readable by the STICS model
 #' (ficini.txt, ficplt1.txt,...)
 #' @param file Path (including name) of the xml file to convert
 #' @param javastics Path of JavaStics
@@ -9,7 +9,7 @@
 #' @param out_dir Path of the directory where to generate the file.
 #' Optional, set to the path of the input xml file by default
 #' @param save_as Name of the output file
-#' (optional, default: fixed name for Stics)
+#' (optional, default: fixed name for STICS)
 #' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
 #'   longer supported, use `file` instead.
 #' @param java_dir `r lifecycle::badge("deprecated")` `java_dir` is no

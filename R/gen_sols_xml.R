@@ -1,4 +1,4 @@
-#' @title Generate Stics sols xml file from a template or an input file
+#' @title Generate STICS sols xml file from a template or an input file
 #'
 #' @param file Path (including name) of the sols file to generate.
 #' @param sols_out_file `r lifecycle::badge("deprecated")` `sols_out_file` is no
@@ -11,15 +11,15 @@
 #'   longer supported, use `param_df` instead.
 #' @param template Path of a soil xml file to be used as a template. Optional,
 #' if not provided, the function will use a standard template depending on
-#' the stics version.
+#' the STICS version.
 #' @param sols_in_file `r lifecycle::badge("deprecated")` `sols_in_file` is no
 #'   longer supported, use `template` instead.
-#' @param stics_version Name of the Stics version. Optional, used if the `file`
+#' @param stics_version Name of the STICS version. Optional, used if the `file`
 #' argument is not provided. In this case the function uses a standard template
-#' associated to the stics version.
+#' associated to the STICS version.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
-#' stics versions that can be used for the argument `stics_version`.
+#' STICS versions that can be used for the argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'

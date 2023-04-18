@@ -4,7 +4,7 @@
 #'
 #' @param file_path A file path
 #'
-#' @return Execution status: TRUE for successfull operation, FALSE otherwise
+#' @return Execution status: TRUE for successful operation, FALSE otherwise
 #'
 #' @keywords internal
 #'

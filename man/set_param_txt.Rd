@@ -103,7 +103,7 @@ set_soil_txt(
 )
 }
 \arguments{
-\item{workspace}{Path of the workspace containing the Stics (txt)
+\item{workspace}{Path of the workspace containing the STICS (txt)
 input files.}
 
 \item{param}{Vector of parameter names.}

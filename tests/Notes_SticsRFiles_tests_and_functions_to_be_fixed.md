@@ -13,7 +13,7 @@ replace values in the list and rewrite the txt file => new function playing with
   * not returning the same object either giving no param names as input nor giving a names vector ?
   * the function should give results for multiple parameters names!
   * is it possible to make compatible the reading of the content of the tec file whatever the version is (at the moment 9.2 (list filling is hard coded) vs 10.0?
-* how to generalize tests to make them passing over stics versions knowing that variables, parameters and values may change over versions. Not only a question of functions defects.  
+* how to generalize tests to make them passing over STICS versions knowing that variables, parameters and values may change over versions. Not only a question of functions defects.  
 
 ## <u>test-force_param_values.R</u>: TO FIX
   * tests : 

@@ -5,7 +5,7 @@
 #' @param xml_path An xml file path
 #' @param file_type The type of the xml file
 #'
-#' @return A logical value giving if input xml file is a Stics one
+#' @return A logical value giving if input xml file is a STICS one
 #' (TRUE), or not (FALSE)
 #'
 #'

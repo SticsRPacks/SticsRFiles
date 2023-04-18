@@ -1,4 +1,4 @@
-#' @title Get a set of a (or a list of) Stics xml parameter(s)
+#' @title Get a set of a (or a list of) STICS xml parameter(s)
 #' values from a request
 #' @title in an xml_document or a list of
 #' @title Getting parameter value for different kinds of parameters

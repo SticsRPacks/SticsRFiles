@@ -11,7 +11,7 @@
 #'
 #' @param javastics Path of JavaStics.
 #' @param workspace Path of a JavaStics workspace
-#' (i.e. containing the Stics XML input files). Optional, if not provided
+#' (i.e. containing the STICS XML input files). Optional, if not provided
 #' the current workspace stored in JavaStics preferences will be used.
 #' @param out_dir The path of the directory where to create usms directories
 #' (Optional), if not provided the JavaStics workspace will be used as root
@@ -37,7 +37,7 @@
 #'
 #'
 #' @return A list with named elements:
-#' usms_path : created directories paths (for storing Stics input files),
+#' usms_path : created directories paths (for storing STICS input files),
 #' files : generated files list (in JavaStics workspace origin),
 #' copy_status : logical value vector, indicating if all files have been
 #' generated for each usm

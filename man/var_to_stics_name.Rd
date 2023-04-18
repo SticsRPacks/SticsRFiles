@@ -2,21 +2,21 @@
 % Please edit documentation in R/var_to_col_names.R
 \name{var_to_stics_name}
 \alias{var_to_stics_name}
-\title{Variable name to stics variable name}
+\title{Variable name to STICS variable name}
 \usage{
 var_to_stics_name(var, version = "latest")
 }
 \arguments{
 \item{var}{Vector of variable names}
 
-\item{version}{Stics version.}
+\item{version}{STICS version.}
 }
 \value{
-A vector of variable names compatible with stics
+A vector of variable names compatible with STICS
 (usually used for \code{gen_varmod()})
 }
 \description{
-Convert a variable name into a stics-compatible variable name.
+Convert a variable name into a STICS-compatible variable name.
 E.g. \code{lai_n} into \code{lai(n)}.
 }
 \examples{

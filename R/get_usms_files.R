@@ -1,6 +1,6 @@
 #' Getting existing xml files path list per usm from an usms.xml file
 #'
-#' @param workspace Path of a JavaStics workspace (i.e. containing the Stics
+#' @param workspace Path of a JavaStics workspace (i.e. containing the STICS
 #' XML input files)
 #' @param usms_list Vector of usms names (Optional)
 #' @param usms_file Path (including name) of a USM XML file.

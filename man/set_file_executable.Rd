@@ -10,7 +10,7 @@ set_file_executable(file_path)
 \item{file_path}{A file path}
 }
 \value{
-Execution status: TRUE for successfull operation, FALSE otherwise
+Execution status: TRUE for successful operation, FALSE otherwise
 }
 \description{
 Setting executable status on for a file under Linux or Mac OS.

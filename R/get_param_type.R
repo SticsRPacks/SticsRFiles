@@ -1,4 +1,4 @@
-#' @title Get a Stics xml parameter type and xpath
+#' @title Get a STICS xml parameter type and xpath
 #' from a request in an xml_document
 #' @param xml_doc an xml_document object (created from an xml file)
 #' @param param_name parameter name or a vector of names

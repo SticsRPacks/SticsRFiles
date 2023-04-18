@@ -137,7 +137,7 @@ dlaimax <- get_param_xml(plant_file, "dlaimax")
 dlaimax
 ```
 
-But this function is way more powerfull than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
+But this function is way more powerful than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
 
 ```{r}
 values <- get_param_xml(plant_file, select = "formalisme",

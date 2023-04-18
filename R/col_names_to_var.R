@@ -1,9 +1,9 @@
-#' @title  Convert columns names list to Stics variables names
+#' @title  Convert columns names list to STICS variables names
 #' @description Change the `varname.n.` or `varname_n` by `varname(n)`
 #' other names are unchanged (i.e.: varname, varname(n), ...)
 #' @param var_list Columns names list
 #'
-#' @return List of Stics variables names
+#' @return List of STICS variables names
 #'
 #' @examples
 #' col_names <- c("var1", "var2_n", "var3.1.")

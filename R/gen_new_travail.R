@@ -88,8 +88,8 @@ get_usm_data <- function(workspace,
   # data$finit
 
   # soil number
-  # not used by stics !!!!
-  # in fact trhrough javastics always == 1
+  # not used by STICS !!!!
+  # in fact trhrough javaSTICS always == 1
   data$numsol <- get_numsol(soil_name = data$nomsol,
                             soil_file = file.path(workspace, "sols.xml"))
 

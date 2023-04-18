@@ -2,7 +2,7 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_split_list}
 \alias{stics_split_list}
-\title{Split stics names}
+\title{Split STICS names}
 \usage{
 stics_split_list(name)
 }
@@ -10,6 +10,6 @@ stics_split_list(name)
 A vector of names
 }
 \description{
-Split stics names by "$"
+Split STICS names by "$"
 }
 \keyword{internal}

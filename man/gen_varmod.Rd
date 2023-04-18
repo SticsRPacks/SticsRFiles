@@ -16,7 +16,7 @@ gen_varmod(
 )
 }
 \arguments{
-\item{workspace}{Path of the directory containing the Stics var.mod file
+\item{workspace}{Path of the directory containing the STICS var.mod file
 to modify}
 
 \item{var}{vector of variables names (see details)}
@@ -26,7 +26,7 @@ to modify}
 \item{file_name}{file name to generate
 (without path, default value: "var.mod")}
 
-\item{stics_version}{Name of the Stics version
+\item{stics_version}{Name of the STICS version
 (used to check variable names)}
 
 \item{force}{Force variables writing even if they are not a

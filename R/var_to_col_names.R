@@ -1,6 +1,6 @@
-#' @title  Convert Stics variables names, or generated column names to
+#' @title  Convert STICS variables names, or generated column names to
 #' valid conventional column names.
-#' @description Change Stics variables names as valid variable R name
+#' @description Change STICS variables names as valid variable R name
 #' Like `varname(n)` or `varname.n.` to  `varname_n`.
 #' Other names are unchanged (i.e.: varname, varname_n, ...)
 #' @param var_vec Valid names vector
@@ -30,15 +30,15 @@ var_to_col_names <- function(var_vec) {
 
 
 
-#' Variable name to stics variable name
+#' Variable name to STICS variable name
 #'
-#' @description Convert a variable name into a stics-compatible variable name.
+#' @description Convert a variable name into a STICS-compatible variable name.
 #'  E.g. `lai_n` into `lai(n)`.
 #'
 #' @param var     Vector of variable names
-#' @param version Stics version.
+#' @param version STICS version.
 #'
-#' @return A vector of variable names compatible with stics
+#' @return A vector of variable names compatible with STICS
 #' (usually used for `gen_varmod()`)
 #' @keywords internal
 #'

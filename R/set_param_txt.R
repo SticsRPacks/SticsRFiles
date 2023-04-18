@@ -3,7 +3,7 @@
 #' @description Replace or set an input parameter from a pre-existing
 #'              STICS input file.
 #'
-#' @param workspace  Path of the workspace containing the Stics (txt)
+#' @param workspace  Path of the workspace containing the STICS (txt)
 #' input files.
 #' @param param    Vector of parameter names.
 #' @param value    New parameter value

@@ -7,7 +7,7 @@
 check_choice_param(xml_doc, param_name, stop = FALSE)
 }
 \arguments{
-\item{xml_doc}{an xmldocument object}
+\item{xml_doc}{an xml_document object}
 
 \item{param_name}{parameter names vector, i.e.: parameter name or option code}
 

@@ -1,4 +1,4 @@
-#' @title Generates from a template a Stics ini xml_document
+#' @title Generates from a template a STICS ini xml_document
 #'
 #' @param xml_doc an optional xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
@@ -7,7 +7,7 @@
 #' (for example like "crop" used for in a parameter suffix :
 #' param_crop1, param_crop2)
 #' @param params_desc a list describing crop parameters and others
-#' @param stics_version the stics files version to use (optional,
+#' @param stics_version the STICS files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
 #'

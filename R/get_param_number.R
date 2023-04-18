@@ -1,4 +1,4 @@
-#' @title Get the number of a (or alist of) Stics xml parameter(s) occurence
+#' @title Get the number of a (or a list of) STICS xml parameter(s) occurence
 #' from a request in an xml_document
 #' @param xml_doc_object an xml_document object (created from an xml file)
 #'

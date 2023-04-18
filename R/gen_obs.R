@@ -169,7 +169,7 @@ gen_obs_ <- function(obs_table, file_path) {
   # TODO: see what is the purpose of _sd ending tag !
   # Linked to associated plants ???
 
-  # Back to Stics variables names syntax !
+  # Back to STICS variables names syntax !
   colnames(obs_table) <- col_names_to_var(colnames(obs_table))
 
   ret <- try(utils::write.table(obs_table,

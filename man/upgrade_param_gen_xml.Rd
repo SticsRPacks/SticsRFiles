@@ -18,9 +18,9 @@ upgrade_param_gen_xml(
 
 \item{out_dir}{Output directory path of the generated file}
 
-\item{stics_version}{Name of the Stics version (VX.Y format)}
+\item{stics_version}{Name of the STICS version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files
+\item{target_version}{Name of the STICS version to upgrade files
 to (VX.Y format)}
 
 \item{check_version}{Perform version consistency with in stics_version input

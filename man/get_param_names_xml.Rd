@@ -22,7 +22,7 @@ get_param_names_xml(
 
 \item{output}{Output data format either "list" or "data.frame" (default)}
 
-\item{combine}{Logical, usefull only for data.frame.
+\item{combine}{Logical, useful only for data.frame.
 TRUE, to transform a data.frame list to a unique data.frame,
 FALSE otherwise.}
 

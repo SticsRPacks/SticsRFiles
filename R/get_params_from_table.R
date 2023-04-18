@@ -1,4 +1,4 @@
-#' @title Get a list of Stics xml parameters names and values from a table
+#' @title Get a list of STICS xml parameters names and values from a table
 #' (data.frame, tibble)
 #' @param params_table a table (df, tibble) containing parameters to use
 #'
@@ -12,7 +12,8 @@
 #' @param na_values value to use as missing value in param_table
 #' (optional, default : NA)
 #'
-#' @return a named list (with param names as list names) of data.frame/tibble
+#' @return a named list (with parameters names as list names)
+#' of data.frame/tibble
 #'
 #' @examples
 #' \dontrun{

@@ -11,7 +11,7 @@
 #' @param file Name of an Excel file (optional, not used for the moment)
 #' @param out_dir Directory path where to copy the Excel file
 #'  (optional, default: `tempdir()`)
-#' @param stics_version Name of the Stics version. Optional, by default
+#' @param stics_version Name of the STICS version. Optional, by default
 #' the latest version returned by get_stics_versions_compat() is used.
 #' @param overwrite Optional logical, TRUE for overwriting files,
 #' FALSE otherwise (default)
@@ -140,7 +140,7 @@ download_usm_xl <- function(file = NULL,
 #' @param file Name of a csv file (optional, not used for the moment)
 #' @param out_dir Directory path where to copy the csv file
 #' (default: `tempdir()`)
-#' @param stics_version Name of the Stics version. Optional, by default
+#' @param stics_version Name of the STICS version. Optional, by default
 #' the latest version returned by get_stics_versions_compat() is used.
 #' @param overwrite Optional logical, TRUE for overwriting files,
 #' FALSE otherwise (default)

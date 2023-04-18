@@ -17,7 +17,7 @@ convert_xml2txt_int(xml_file, style_file, out_file = NULL)
 Path of the generated file
 }
 \description{
-Using an xslt tranformation, an xml input file is converted to
+Using an xslt transformation, an xml input file is converted to
 an other file format (text, xml). The output file name may be given or
 calculated.
 In the latest case, the extension is defined after getting xsl method from

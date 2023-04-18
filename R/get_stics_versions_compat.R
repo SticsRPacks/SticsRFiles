@@ -1,6 +1,6 @@
-#' Get the compatible Stics versions
+#' Get the compatible STICS versions
 #'
-#' @description Get the versions of stics that are fully compatible
+#' @description Get the versions of STICS that are fully compatible
 #' with this package.
 #'
 #' @param version_index Absolute positive index, or negative relative index from

@@ -7,7 +7,7 @@
 get_varmod(workspace, file_name = "var.mod")
 }
 \arguments{
-\item{workspace}{Path of the directory containing the Stics var.mod file}
+\item{workspace}{Path of the directory containing the STICS var.mod file}
 
 \item{file_name}{file name to read (without path, default value: "var.mod")}
 }

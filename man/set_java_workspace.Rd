@@ -10,7 +10,7 @@ set_java_workspace(javastics, workspace)
 \item{javastics}{JavaStics installation root folder}
 
 \item{workspace}{JavaStics working directory
-(absolute,relative to javastics parh)}
+(absolute,relative to javastics path)}
 }
 \description{
 Setting a new JavaStics working directory, a relative directory

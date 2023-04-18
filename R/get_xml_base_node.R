@@ -1,8 +1,8 @@
-#' @title Get an xml_document node (set of parameters) from a Stics xml node
+#' @title Get an xml_document node (set of parameters) from a STICS xml node
 #' file template
 #' @param file_tag file tag among "usms","sols", "tec"
 #' @param form_name formalism name
-#' @param stics_version the stics files version to use
+#' @param stics_version the STICS files version to use
 #'
 #'
 #' @return An xml node of type "usm", "sol", "intervention"
@@ -25,7 +25,7 @@
 get_xml_base_node <- function(file_tag, form_name = NULL,
                               stics_version = "latest") {
 
-  # check/get Stics version
+  # check/get STICS version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
 
@@ -105,7 +105,7 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   # Convert it into a string
   base_node_txt <- XML::saveXML(get_nodes(xml_doc, paste0("//", node))[[1]])
 
-  # TODO: see if usefull to call xmlClone or not ?
+  # TODO: see if useful to call xmlClone or not ?
   # Getting the node from a node set
   new_node <- XML::getNodeSet(
     XML::xmlParse(base_node_txt),

@@ -74,7 +74,7 @@ get_file <- function(workspace,
   }), recursive = FALSE)
 
   # Manage duplicated list names ?
-  # TODO: is this usefull ?
+  # TODO: is this useful ?
   # If same usms exist in different folders, with different parameterization
   # this must be taken into account and rename duplicates instead of
   # deleting them !

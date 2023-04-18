@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_ini_xml.R
 \name{gen_ini_xml}
 \alias{gen_ini_xml}
-\title{Generate Stics ini xml file(s) from a template or an input file}
+\title{Generate STICS ini xml file(s) from a template or an input file}
 \usage{
 gen_ini_xml(
   param_df = NULL,
@@ -21,7 +21,7 @@ to use (see details)}
 
 \item{file}{Path of an ini xml file to be used as a template. Optional,
 if not provided, the function will use a standard template depending on
-the stics version (see \code{stics_version} argument)}
+the STICS version (see \code{stics_version} argument)}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
@@ -29,9 +29,9 @@ the stics version (see \code{stics_version} argument)}
 main crop, or the associated crop if any (example: Crop is used in the
 param_table example in the details section below)}
 
-\item{stics_version}{Name of the Stics version.
+\item{stics_version}{Name of the STICS version.
 Optional, used if the \code{file} argument is not provided. In this case
-the function uses a standard template associated to the stics version.}
+the function uses a standard template associated to the STICS version.}
 
 \item{ini_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{ini_in_file} is no
 longer supported, use \code{file} instead.}
@@ -46,11 +46,11 @@ longer supported, use \code{out_dir} instead.}
 an invisible xml_document object or a list of
 }
 \description{
-Generate Stics ini xml file(s) from a template or an input file
+Generate STICS ini xml file(s) from a template or an input file
 }
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of
-stics versions that can be used for the
+STICS versions that can be used for the
 argument \code{stics_version}.
 
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrlrr}{

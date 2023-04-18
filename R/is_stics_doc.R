@@ -6,7 +6,7 @@
 #' @param doc_type The type of xml document
 #' @param doc_types The different possible document types (optional)
 #'
-#' @return A logical value giving if xml_doc is a Stics xmlDoxument object
+#' @return A logical value giving if xml_doc is a STICS xml_document object
 #' (TRUE, with document type as attribute "type"), or not (FALSE)
 #'
 #'
@@ -22,7 +22,7 @@
 is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
 
   # TODO : doc_types have been added as input arg, but not used yet,
-  # will be used when doc_types will be defined against Stics Version
+  # will be used when doc_types will be defined against STICS Version
   # because they may change with versions ?
 
   if (base::is.null(doc_types)) {
@@ -45,7 +45,7 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   if (!base::is.null(doc_type) && !(doc_type %in% doc_types)) {
     warning(paste0("Not any tag name \"",
                    doc_type,
-                   "\" for stics xml document!"))
+                   "\" for STICS xml document!"))
     return(FALSE)
   }
 

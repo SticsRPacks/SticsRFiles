@@ -1,10 +1,10 @@
-#' @title Get a list of Stics xml parameters names an xml_document or  XML node
+#' @title Get a list of STICS xml parameters names an xml_document or  XML node
 #' @param xml_object an xml XML::XMLInternalElementNode
 #' or SticsRFiles::xml_document object
 #' @param param_list param names vector, only used for recursive calls
 #' @param full_list TRUE for getting all names, FALSE otherwise (default)
 #' @param root_name Only for getting the root node name (file type),
-#' usefull for filtering unwanted names to be includes in parameters names list
+#' useful for filtering unwanted names to be includes in parameters names list
 #'
 #' for unique names list
 #'

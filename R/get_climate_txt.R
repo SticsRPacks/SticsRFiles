@@ -2,10 +2,10 @@
 #'
 #' @description Read the meteorology input for STICS ("climat.txt")
 #'
-#' @param workspace Path of the workspace containing the Stics
+#' @param workspace Path of the workspace containing the STICS
 #' climate file to read
 #' @param file_name The meteorology file name (default to \code{climat.txt}).
-#' @param preserve Logical, `TRUE`` for keeping the stics columns related
+#' @param preserve Logical, `TRUE`` for keeping the STICS columns related
 #' to date calculation (year, month, day, julian),
 #' or only the Date column as a `POSIXct` otherwise. Default to `TRUE`.
 #'

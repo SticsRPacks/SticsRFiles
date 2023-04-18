@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_number.R
 \name{get_param_number}
 \alias{get_param_number}
-\title{Get the number of a (or alist of) Stics xml parameter(s) occurence
+\title{Get the number of a (or a list of) STICS xml parameter(s) occurence
 from a request in an xml_document}
 \usage{
 get_param_number(xml_doc_object, param_name, ...)
@@ -19,7 +19,7 @@ function (see doc)}
 a numeric vector
 }
 \description{
-Get the number of a (or alist of) Stics xml parameter(s) occurence
+Get the number of a (or a list of) STICS xml parameter(s) occurence
 from a request in an xml_document
 }
 \examples{

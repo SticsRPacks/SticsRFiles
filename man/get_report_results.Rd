@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_report_results.R
 \name{get_report_results}
 \alias{get_report_results}
-\title{Extracting data from the Stics report file}
+\title{Extracting data from the STICS report file}
 \usage{
 get_report_results(
   workspace,
@@ -13,7 +13,7 @@ get_report_results(
 )
 }
 \arguments{
-\item{workspace}{Path of the directory containing the Stics report file
+\item{workspace}{Path of the directory containing the STICS report file
 to read.}
 
 \item{file_name}{A report file name among "mod_rapport.sti" (default),
@@ -32,7 +32,7 @@ longer supported, use \code{usm} instead.}
 A data.frame
 }
 \description{
-Extracting data from the Stics report file
+Extracting data from the STICS report file
 }
 \details{
 The data may be filtered using \code{usm_name} vector of usm names and

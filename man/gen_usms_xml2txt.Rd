@@ -25,7 +25,7 @@ gen_usms_xml2txt(
 \item{javastics}{Path of JavaStics.}
 
 \item{workspace}{Path of a JavaStics workspace
-(i.e. containing the Stics XML input files). Optional, if not provided
+(i.e. containing the STICS XML input files). Optional, if not provided
 the current workspace stored in JavaStics preferences will be used.}
 
 \item{out_dir}{The path of the directory where to create usms directories
@@ -61,7 +61,7 @@ longer supported, use \code{check} instead.}
 }
 \value{
 A list with named elements:
-usms_path : created directories paths (for storing Stics input files),
+usms_path : created directories paths (for storing STICS input files),
 files : generated files list (in JavaStics workspace origin),
 copy_status : logical value vector, indicating if all files have been
 generated for each usm

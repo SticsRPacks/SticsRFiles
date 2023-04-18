@@ -36,7 +36,7 @@ is_newpar_xml(xml_path)
 \item{file_type}{The type of the xml file}
 }
 \value{
-A logical value giving if input xml file is a Stics one
+A logical value giving if input xml file is a STICS one
 (TRUE), or not (FALSE)
 }
 \description{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_params_from_table.R
 \name{get_params_from_table}
 \alias{get_params_from_table}
-\title{Get a list of Stics xml parameters names and values from a table
+\title{Get a list of STICS xml parameters names and values from a table
 (data.frame, tibble)}
 \usage{
 get_params_from_table(
@@ -34,10 +34,11 @@ and real parameters names}
 (optional, default : NA)}
 }
 \value{
-a named list (with param names as list names) of data.frame/tibble
+a named list (with parameters names as list names)
+of data.frame/tibble
 }
 \description{
-Get a list of Stics xml parameters names and values from a table
+Get a list of STICS xml parameters names and values from a table
 (data.frame, tibble)
 }
 \examples{

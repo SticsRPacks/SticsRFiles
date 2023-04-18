@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_params_from_doc_attr.R
 \name{get_params_from_doc_attr}
 \alias{get_params_from_doc_attr}
-\title{Get a list of Stics xml parameters names from nodes attributes in
+\title{Get a list of STICS xml parameters names from nodes attributes in
 an xml_document}
 \usage{
 get_params_from_doc_attr(xml_doc, type_name = NULL, unique_val = TRUE)
@@ -18,7 +18,7 @@ get_params_from_doc_attr(xml_doc, type_name = NULL, unique_val = TRUE)
 a named list of parameter names
 }
 \description{
-Get a list of Stics xml parameters names from nodes attributes in
+Get a list of STICS xml parameters names from nodes attributes in
 an xml_document
 }
 \keyword{internal}

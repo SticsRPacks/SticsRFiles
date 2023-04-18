@@ -1,12 +1,12 @@
 #' @title Generating a var.mod type file
 #' @description Generating a daily variable list file from variables names
-#' @param workspace Path of the directory containing the Stics var.mod file
+#' @param workspace Path of the directory containing the STICS var.mod file
 #' to modify
 #' @param var vector of variables names (see details)
 #' @param append if TRUE, `var` data are appended to `file_name`
 #' @param file_name file name to generate
 #' (without path, default value: "var.mod")
-#' @param stics_version   Name of the Stics version
+#' @param stics_version   Name of the STICS version
 #' (used to check variable names)
 #' @param force     Force variables writing even if they are not a
 #' STICS variable (default: FALSE).

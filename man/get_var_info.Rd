@@ -19,8 +19,8 @@ all variables.}
 \item{keyword}{Search by keyword instead of variable name
 (search in the name and description field)}
 
-\item{stics_version}{Name of the Stics version. Optional, can be used
-to search parameters information relative to a specific Stics version.
+\item{stics_version}{Name of the STICS version. Optional, can be used
+to search parameters information relative to a specific STICS version.
 By default the latest version returned by \code{get_stics_versions_compat()}
 is used.}
 

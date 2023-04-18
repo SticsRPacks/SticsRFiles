@@ -2,7 +2,7 @@
 #'
 #' @description Get the STICS output variables (from var.mod file)
 #'
-#' @param workspace Path of the directory containing the Stics var.mod file
+#' @param workspace Path of the directory containing the STICS var.mod file
 #' @param file_name file name to read (without path, default value: "var.mod")
 #'
 #' @return The variables that will be returned by STICS

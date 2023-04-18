@@ -1,4 +1,4 @@
-#' @title Generate Stics usms xml file from a template or an input file
+#' @title Generate STICS usms xml file from a template or an input file
 #'
 #' @param file Path (including name) of the usms file to generate. Optional,
 #' set to `file.path(getwd(), "usms.xml")`by default.
@@ -6,10 +6,10 @@
 #' to use (see details)
 #' @param template Path of an USM xml file to be used as a template.
 #' Optional, if not provided, the function will use a standard template
-#' depending on the stics version.
-#' @param stics_version Name of the Stics version. Optional,
+#' depending on the STICS version.
+#' @param stics_version Name of the STICS version. Optional,
 #' used if the `file` argument is not provided. In this case the function uses
-#' a standard template associated to the stics version.
+#' a standard template associated to the STICS version.
 #' @param usms_out_file `r lifecycle::badge("deprecated")` `usms_out_file` is no
 #'   longer supported, use `file` instead.
 #' @param usms_nb `r lifecycle::badge("deprecated")` `usms_nb` is no
@@ -20,7 +20,7 @@
 #'   longer supported, use `template` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
-#' stics versions that can be used for the argument `stics_version`.
+#' STICS versions that can be used for the argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'

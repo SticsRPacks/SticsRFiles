@@ -4,7 +4,7 @@
 #' (STICS input)
 #' Generally used after calling building a usm with `JavaStics`.
 #'
-#' @param workspace      Path of the workspace containing the Stics (txt)
+#' @param workspace      Path of the workspace containing the STICS (txt)
 #' input files.
 #' @param param        Vector of parameter names. Optional, if not provided,
 #' the function returns an object with all parameters.
@@ -508,7 +508,7 @@ get_tec_txt <- function(file = "fictec1.txt",
   }
 
 
-  # Treatment for Stics version < V10.0
+  # Treatment for STICS version < V10.0
   itk$nbjres <- val()
 
   if (itk$nbjres > 0) {

@@ -26,7 +26,7 @@ FALSE otherwise}
 FALSE otherwise}
 }
 \value{
-An invisible logical value, TRUE if successfull removing,
+An invisible logical value, TRUE if successful removing,
 FALSE otherwise
 }
 \description{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_tec_xml.R
 \name{gen_tec_xml}
 \alias{gen_tec_xml}
-\title{Generate Stics tec xml file(s) from a template or an input file}
+\title{Generate STICS tec xml file(s) from a template or an input file}
 \usage{
 gen_tec_xml(
   param_df = NULL,
@@ -21,13 +21,13 @@ to use (see details)}
 
 \item{file}{Path of a tec xml file to be used as a template. Optional,
 if not provided, the function will use a standard template depending
-on the stics version.}
+on the STICS version.}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{Name of the Stics version. Optional, used if
+\item{stics_version}{Name of the STICS version. Optional, used if
 the \code{file} argument is not provided. In this case the function uses a
-standard template associated to the stics version.}
+standard template associated to the STICS version.}
 
 \item{na_values}{value to use as missing value in param_table
 (optional, default : NA)}
@@ -45,11 +45,11 @@ longer supported, use \code{out_dir} instead.}
 an invisible xml_document object or a list of
 }
 \description{
-Generate Stics tec xml file(s) from a template or an input file
+Generate STICS tec xml file(s) from a template or an input file
 }
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of
-stics versions that can be used for the
+STICS versions that can be used for the
 argument \code{stics_version}.
 
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrr}{

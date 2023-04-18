@@ -1,8 +1,8 @@
-#' @title Generates files to force parameters values in Stics simulations
+#' @title Generates files to force parameters values in STICS simulations
 #' @description Generates a param.sti file and sets code optim in
-#' new_travail.usm to force parameters values in Stics simulations
+#' new_travail.usm to force parameters values in STICS simulations
 #' (this function is typically called before `SticsOnR::run_stics()`)
-#' @param workspace Path of the workspace containing the Stics (txt)
+#' @param workspace Path of the workspace containing the STICS (txt)
 #' input files.
 #' @param values named vector of parameter values to force.
 #' See Details for more information.
@@ -10,7 +10,7 @@
 #' @param param_values `r lifecycle::badge("deprecated")` `param_values`
 #' is no longer supported, use `values` instead.
 #'
-#' @details This function operates on Stics text input files.
+#' @details This function operates on STICS text input files.
 #' Do not use it before calling `gen_usms_xml2txt()`, otherwise
 #' param.sti and new_travail.usm files will be overwritten.
 #'
@@ -19,11 +19,11 @@
 #'   that will overwrite param.sti and new_travail.usm files.
 #'
 #'   `values` can contain NA. In this case, the corresponding parameter(s)
-#'   will not be forced (default value(s), i.e. read in Stics input files,
+#'   will not be forced (default value(s), i.e. read in STICS input files,
 #'   will be used). If values==NA or values==NULL,
 #'   not any parameter will be forced (all default values used).
 #'
-#' @return A logical status TRUE if successfull, FALSE otherwise
+#' @return A logical status TRUE if successful, FALSE otherwise
 #'
 #' @examples
 #' \dontrun{
@@ -87,7 +87,7 @@ force_param_values <- function(workspace,
     }
     param_values <- param_values[ind_non_na]
 
-    # converting par names to Stics names
+    # converting par names to STICS names
     # names conversion done in exist_param_csv()
     stics_names <- names(param_exist[ind_non_na])
 

@@ -2,19 +2,19 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_get}
 \alias{stics_get}
-\title{Get object from stics env}
+\title{Get object from STICS env}
 \usage{
 stics_get(name = NULL, env_name = sticsenv_name())
 }
 \arguments{
-\item{name}{Name of the object in the stics environment}
+\item{name}{Name of the object in the STICS environment}
 
-\item{env_name}{The name of the stics environment}
+\item{env_name}{The name of the STICS environment}
 }
 \value{
 The object value.
 }
 \description{
-Get an object from the stics environment
+Get an object from the STICS environment
 }
 \keyword{internal}

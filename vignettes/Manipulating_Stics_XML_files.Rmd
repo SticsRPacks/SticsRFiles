@@ -273,7 +273,7 @@ get_param_info(param = c("albedo", "latitude", "humcapil"))
 
 ### Getting parameters information using partial names matching
 
-A search with uncomplete names may be done as follows
+A search with incomplete names may be done as follows
 
 ```{r}
 

@@ -1,4 +1,4 @@
-#' @title Setting a sol param value(s) in a sols xml_document
+#' @title Setting soil parameter(s) value(s) in a sols xml_document
 #' @param xml_doc_object an xml_document object (created from an xml sols file)
 #'
 #' @param sols_param soils parameters (data.frame)

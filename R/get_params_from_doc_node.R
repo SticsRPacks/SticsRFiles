@@ -1,8 +1,8 @@
-#' @title Get a list of Stics xml parameters names from nodes names in
+#' @title Get a list of STICS xml parameters names from nodes names in
 #' an xml_document
 #' @param xml_node an xml XMLInternalElementNode
 #'
-#' @param param_list param names vector, used for recursive calls
+#' @param param_list parameters names vector, used for recursive calls
 #' @param unique_val logical, TRUE to get unique names list, FALSE otherwise
 #'
 #' @return a character vector of parameters names

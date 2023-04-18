@@ -1,6 +1,6 @@
 #' Checking if any parameter appear in 2 option choices
 #'
-#' @param xml_doc an xmldocument object
+#' @param xml_doc an xml_document object
 #' @param param_name parameter names vector, i.e.: parameter name or option code
 #' @param stop TRUE for rising an error, FALSE for just warning
 #'

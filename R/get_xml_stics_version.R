@@ -1,15 +1,15 @@
 #' @title Get a version/or the latest version string of available
-#' Stics files templates in the package
+#' STICS files templates in the package
 #'
-#' @param stics_version A version key of a Stics version (i.e. V9.1)
-#' @param xml_doc an xml_document of a Stics xml file (Unused for the moment,
+#' @param stics_version A version key of a STICS version (i.e. V9.1)
+#' @param xml_doc an xml_document of a STICS xml file (Unused for the moment,
 #' no version String included in xml files)
 #'
-#' @return a Stics version string
+#' @return a STICS version string
 #'
 #' @examples
 #' \dontrun{
-#' # View available Stics files version
+#' # View available STICS files version
 #' SticsRFiles:::get_xml_stics_version()
 #'
 #' # View the latest version

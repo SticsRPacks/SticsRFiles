@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_stics_nodes.R
 \name{add_stics_nodes}
 \alias{add_stics_nodes}
-\title{Add node to a Stics XML document}
+\title{Add node to a STICS XML document}
 \usage{
 add_stics_nodes(
   xml_doc,
@@ -21,7 +21,7 @@ add_stics_nodes(
 \item{stics_version}{The version of STICS (eg "V9.1")}
 }
 \description{
-Add node to a Stics XML document
+Add node to a STICS XML document
 }
 \examples{
 \dontrun{

@@ -6,8 +6,8 @@
 #' to the file version
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
@@ -53,7 +53,7 @@ upgrade_tec_xml <- function(file,
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
-    # extracting or detecting the Stics version corresponding to the xml file
+    # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
                                            stics_version,
@@ -106,7 +106,7 @@ upgrade_tec_xml <- function(file,
   # Loading the old xml file
   old_doc <- xmldocument(file = file)
 
-  # Setting file stics version
+  # Setting file STICS version
   set_xml_file_version(old_doc,
                        new_version = target_version,
                        overwrite = overwrite
@@ -299,7 +299,7 @@ upgrade_tec_xml <- function(file,
     path = "//option[@nomParam='codefauche']/choix"
   )[[1]]
 
-  # See if xmlClone is usefull to apply ???
+  # See if xmlClone is useful to apply ???
   XML::addChildren(parent_node, kids = new_node, at = 0)
 
 
@@ -319,7 +319,7 @@ upgrade_tec_xml <- function(file,
     old_doc,
     path = "//choix[@nom='calendar in days']//ta_entete"
   )[[1]]
-  # See if xmlClone is usefull to apply ???
+  # See if xmlClone is useful to apply ???
   XML::addChildren(parent_node, kids = new_nodes)
 
   XML::xmlAttrs(parent_node)["nb_colonnes"] <- "9"
@@ -334,7 +334,7 @@ upgrade_tec_xml <- function(file,
     path = "//choix[@nom='calendar in days']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    # See if xmlClone is usefull to apply ???
+    # See if xmlClone is useful to apply ???
     lapply(parent_nodes, function(x) XML::addChildren(x, new_nodes))
     set_param_value(
       xml_doc = old_doc, param_name = "engraiscoupe",
@@ -362,7 +362,7 @@ upgrade_tec_xml <- function(file,
     old_doc,
     path = "//choix[@nom='calendar in degree days']//ta_entete"
   )[[1]]
-  # See if xmlClone is usefull to apply ???
+  # See if xmlClone is useful to apply ???
   XML::addChildren(parent_node, kids = new_nodes)
 
   XML::xmlAttrs(parent_node)["nb_colonnes"] <- "9"
@@ -376,7 +376,7 @@ upgrade_tec_xml <- function(file,
     path = "//choix[@nom='calendar in degree days']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    # See if xmlClone is usefull to apply ???
+    # See if xmlClone is useful to apply ???
     lapply(parent_nodes, function(x) XML::addChildren(x, new_nodes))
     set_param_value(
       xml_doc = old_doc, param_name = "engraiscoupe",

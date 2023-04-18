@@ -40,7 +40,7 @@ test_that("regex name", {
 })
 
 
-test_that("different stics versions", {
+test_that("different STICS versions", {
   v_90 <- get_param_info("vitircarbT", stics_version = "V9.0")
   v_92 <- get_param_info("vitircarbT", stics_version = "V9.2")
   vlast <- get_param_info("vitircarbT", stics_version = stics_version)

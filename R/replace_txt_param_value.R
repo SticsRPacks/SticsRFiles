@@ -1,4 +1,4 @@
-#' @title Replacing value in Stics parameters files
+#' @title Replacing value in STICS parameters files
 #'
 #' @description Replacing one or several values in a source file
 #' corresponding to a parameter tag for generating one (in place or not)

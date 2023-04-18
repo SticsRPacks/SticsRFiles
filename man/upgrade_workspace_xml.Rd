@@ -3,7 +3,7 @@
 \name{upgrade_workspace_xml}
 \alias{upgrade_workspace_xml}
 \title{Upgrading XML files of a JavaStics workspace directory
-to a newer Stics version format}
+to a newer STICS version format}
 \usage{
 upgrade_workspace_xml(
   workspace,
@@ -23,9 +23,9 @@ upgrade_workspace_xml(
 
 \item{out_dir}{Output directory of the generated files}
 
-\item{stics_version}{Name of the Stics version (VX.Y format)}
+\item{stics_version}{Name of the STICS version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files
+\item{target_version}{Name of the STICS version to upgrade files
 to  (VX.Y format)}
 
 \item{plant}{logical (optional), TRUE for upgrading plant files if a "plant"
@@ -38,7 +38,7 @@ TRUE for overwriting files if they exist, FALSE otherwise}
 }
 \description{
 Upgrading XML files of a JavaStics workspace directory
-to a newer Stics version format
+to a newer STICS version format
 }
 \details{
 \itemize{

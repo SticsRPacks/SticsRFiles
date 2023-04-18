@@ -1,8 +1,8 @@
 ---
-title: "Manipulating Stics text files"
+title: "Manipulating STICS text files"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Manipulating Stics text files}
+  %\VignetteIndexEntry{Manipulating STICS text files}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,25 +27,25 @@ stics_version <- get_stics_versions_compat()$latest_version
 
 ## Overview
 
-This package allows the user to programatically manipulate either the XML files used to store more information, or the text files directly used as inputs by the STICS model. This vignette explains the second one. For more details on how to manipulate XML files, please refer to the vignette [Manipulating Stics XML files](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html).
+This package allows the user to programmatically manipulate either the XML files used to store more information, or the text files directly used as inputs by the STICS model. This vignette explains the second one. For more details on how to manipulate XML files, please refer to the vignette [Manipulating STICS XML files](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html).
 
 > Disclaimer: These functionalities are more oriented toward advanced users and/or developers.
 
 Using this package, it is possible to:
 
-* convert the XML files to text files (`convert_xml2txt()`), please see the [Generating Stics text files](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files) vignette;
+* convert the XML files to text files (`convert_xml2txt()`), please see the [Generating STICS text files](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files) vignette;
 * read ([`get_param_txt()`](R/read_param.R)) or set ([`set_param_txt()`](R/read_param.R)) parameters;
 * Read the climate (`get_climate_txt()`);
 * Set the output variables required (`gen_varmod()`).
 
 To run a STICS simulation on these input files, please refer to the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/index.html).
 
-Some example data are available from the package and can be retrieved using the following function call for the Stics version `r stics_version`:
+Some example data are available from the package and can be retrieved using the following function call for the STICS version `r stics_version`:
 
 ```{r}
 example_txt_dir <- get_examples_path(file_type = "txt")
 ```
-The `example_txt_dir` directory is: `r example_txt_dir`. By default, the latest Stics version is taken into account. 
+The `example_txt_dir` directory is: `r example_txt_dir`. By default, the latest STICS version is taken into account. 
 For getting an example directory for another version, an additional argument must be given `stics_version` according to an existing version included in the package. The version list can be retrieved using:
 
 ```{r}
@@ -165,7 +165,7 @@ set_param_txt(workspace = example_txt_dir, param = "patm", value = 1000)
 
 There are four more arguments to the function:
 
-* `append`: instead of changing the value of a parameter that already exist in the files, a parameter can be added to the file using this argument. This is used mainly by developers that added a parameter to the model and need to programatically add it to the input files.
+* `append`: instead of changing the value of a parameter that already exist in the files, a parameter can be added to the file using this argument. This is used mainly by developers that added a parameter to the model and need to programmatically add it to the input files.
 
 * `plant_id`: This is used for intercropping when there are two plant and tec files. The user can then choose to which plant the value will be changed.
 

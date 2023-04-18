@@ -1,17 +1,17 @@
-#' @title Generate Stics ini xml file(s) from a template or an input file
+#' @title Generate STICS ini xml file(s) from a template or an input file
 #'
 #' @param param_df A table (df, tibble) containing the values of the parameters
 #' to use (see details)
 #' @param file Path of an ini xml file to be used as a template. Optional,
 #' if not provided, the function will use a standard template depending on
-#' the stics version (see `stics_version` argument)
+#' the STICS version (see `stics_version` argument)
 #' @param out_dir Path of the directory where to generate the file(s).
 #' @param crop_tag identifier for the crop parameters names related to the
 #' main crop, or the associated crop if any (example: Crop is used in the
 #' param_table example in the details section below)
-#' @param stics_version Name of the Stics version.
+#' @param stics_version Name of the STICS version.
 #' Optional, used if the `file` argument is not provided. In this case
-#' the function uses a standard template associated to the stics version.
+#' the function uses a standard template associated to the STICS version.
 #' @param ini_in_file `r lifecycle::badge("deprecated")` `ini_in_file` is no
 #'   longer supported, use `file` instead.
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
@@ -20,7 +20,7 @@
 #'   longer supported, use `out_dir` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
-#' stics versions that can be used for the
+#' STICS versions that can be used for the
 #' argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:

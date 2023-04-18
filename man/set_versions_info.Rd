@@ -2,7 +2,7 @@
 % Please edit documentation in R/manage_stics_versions.R
 \name{set_versions_info}
 \alias{set_versions_info}
-\title{Writing information about Stics versions and related example files
+\title{Writing information about STICS versions and related example files
 directories in the SticsRFiles library or package}
 \usage{
 set_versions_info(
@@ -27,7 +27,7 @@ FALSE otherwise (default)}
 FALSE otherwise}
 }
 \description{
-Writing information about Stics versions and related example files
+Writing information about STICS versions and related example files
 directories in the SticsRFiles library or package
 }
 \keyword{internal}

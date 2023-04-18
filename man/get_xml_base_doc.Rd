@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_xml_base_doc.R
 \name{get_xml_base_doc}
 \alias{get_xml_base_doc}
-\title{Get an xml_document from a Stics xml file template}
+\title{Get an xml_document from a STICS xml file template}
 \usage{
 get_xml_base_doc(xml_type = NULL, stics_version = "latest")
 }
@@ -10,27 +10,27 @@ get_xml_base_doc(xml_type = NULL, stics_version = "latest")
 \item{xml_type}{xml file type (see types returned when calling
 get_xml_base_doc())}
 
-\item{stics_version}{the stics files version to use}
+\item{stics_version}{the STICS files version to use}
 }
 \value{
 an xml_document object
 }
 \description{
-Get an xml_document from a Stics xml file template
+Get an xml_document from a STICS xml file template
 }
 \examples{
 \dontrun{
-# Getting xml Stics files types list (i.e. keywords)
+# Getting xml STICS files types list (i.e. keywords)
 SticsRFiles:::get_xml_base_doc()
 
 # Getting a soil document with one soil definition
 SticsRFiles:::get_xml_base_doc("sols")
 
-# Stics version can be provided, V9.1
+# STICS version can be provided, V9.1
 # corresponds to stics_version = "latest"
-# View available Stics files version
+# View available STICS files version
 SticsRFiles:::get_xml_stics_version()
-# Giving Stics version
+# Giving STICS version
 SticsRFiles:::get_xml_base_doc("sols", stics_version = "V9.1")
 }
 

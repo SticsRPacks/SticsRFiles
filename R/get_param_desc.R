@@ -1,7 +1,7 @@
-#' get param desc
+#' Getting parameters description
 #'
 #' @param file_path csv file path
-#' @param stics_version The stics version. See `get_stics_versions_compat()`
+#' @param stics_version The STICS version. See `get_stics_versions_compat()`
 #' to get all compatible versions. Default
 #' to "latest", a special code to get the latest version.
 #' @param name a name vector for selecting loaded content using

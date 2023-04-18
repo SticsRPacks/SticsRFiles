@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sta_xml.R
 \name{gen_sta_xml}
 \alias{gen_sta_xml}
-\title{Generate Stics sta xml file(s) from a template or an input file}
+\title{Generate STICS sta xml file(s) from a template or an input file}
 \usage{
 gen_sta_xml(
   param_df = NULL,
@@ -20,13 +20,13 @@ to use (see details)}
 
 \item{file}{Path of a sta xml file to be used as a template. Optional,
 if not provided, the function will use a standard template depending
-on the stics version.}
+on the STICS version.}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{stics_version}{Name of the Stics version. Optional, used if
+\item{stics_version}{Name of the STICS version. Optional, used if
 the \code{file} argument is not provided. In this case the function uses a
-standard template associated to the stics version.}
+standard template associated to the STICS version.}
 
 \item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
 longer supported, use \code{param_df} instead.}
@@ -41,11 +41,11 @@ longer supported, use \code{out_dir} instead.}
 an invisible xml_document object or a list of
 }
 \description{
-Generate Stics sta xml file(s) from a template or an input file
+Generate STICS sta xml file(s) from a template or an input file
 }
 \details{
 Please see \code{get_stics_versions_compat()} for the full list of
-stics versions that can be used for the argument \code{stics_version}.
+STICS versions that can be used for the argument \code{stics_version}.
 
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrr}{
    Sta_name \tab zr \tab NH3ref \tab latitude \tab patm \tab aclim \cr

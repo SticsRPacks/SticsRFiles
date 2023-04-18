@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sim.R
 \name{get_daily_results}
 \alias{get_daily_results}
-\title{Load and format Stics daily output file(s)}
+\title{Load and format STICS daily output file(s)}
 \usage{
 get_daily_results(...)
 }

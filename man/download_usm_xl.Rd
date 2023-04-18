@@ -22,7 +22,7 @@ download_usm_xl(
 \item{out_dir}{Directory path where to copy the Excel file
 (optional, default: \code{tempdir()})}
 
-\item{stics_version}{Name of the Stics version. Optional, by default
+\item{stics_version}{Name of the STICS version. Optional, by default
 the latest version returned by get_stics_versions_compat() is used.}
 
 \item{overwrite}{Optional logical, TRUE for overwriting files,

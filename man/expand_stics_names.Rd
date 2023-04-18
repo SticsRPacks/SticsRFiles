@@ -2,7 +2,7 @@
 % Please edit documentation in R/expand_stics_names.R
 \name{expand_stics_names}
 \alias{expand_stics_names}
-\title{Expand stics names from parameters/variables simple names,
+\title{Expand STICS names from parameters/variables simple names,
 with indices (i.e. par(1), par(2),...regarding to parameter/variable
 dimensions)}
 \usage{
@@ -16,7 +16,7 @@ expand_stics_names(in_csv_file, out_csv_file, header_vec = NULL)
 \item{header_vec}{An optional header vector}
 }
 \description{
-Expand stics names from parameters/variables simple names,
+Expand STICS names from parameters/variables simple names,
 with indices (i.e. par(1), par(2),...regarding to parameter/variable
 dimensions)
 }

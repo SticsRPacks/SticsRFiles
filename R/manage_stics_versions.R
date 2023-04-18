@@ -1,4 +1,4 @@
-#' Getting read only account identifiers for the Stics subversion repository
+#' Getting read only account identifiers for the STICS subversion repository
 #'
 #' @return A list with fields `username` and `password`
 #' @keywords internal
@@ -203,7 +203,7 @@ add_stics_version <- function(version_name,
 #' @param verbose Logical, TRUE for displaying warnings (default),
 #' FALSE otherwise
 #'
-#' @return An invisible logical value, TRUE if successfull removing,
+#' @return An invisible logical value, TRUE if successful removing,
 #'  FALSE otherwise
 #'
 #' @keywords internal
@@ -365,7 +365,7 @@ update_stics_version <- function(version_name,
 }
 
 
-#' Writing information about Stics versions and related example files
+#' Writing information about STICS versions and related example files
 #' directories in the SticsRFiles library or package
 #'
 #' @param version_name name (i.e. "VX.Y") of the version to add in versions

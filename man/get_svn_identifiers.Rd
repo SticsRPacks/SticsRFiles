@@ -2,7 +2,7 @@
 % Please edit documentation in R/manage_stics_versions.R
 \name{get_svn_identifiers}
 \alias{get_svn_identifiers}
-\title{Getting read only account identifiers for the Stics subversion repository}
+\title{Getting read only account identifiers for the STICS subversion repository}
 \usage{
 get_svn_identifiers()
 }
@@ -10,7 +10,7 @@ get_svn_identifiers()
 A list with fields \code{username} and \code{password}
 }
 \description{
-Getting read only account identifiers for the Stics subversion repository
+Getting read only account identifiers for the STICS subversion repository
 }
 \examples{
 \dontrun{

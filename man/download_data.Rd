@@ -17,7 +17,7 @@ download_data(
 
 \item{example_dirs}{List of use case directories names (optional)}
 
-\item{stics_version}{Name of the Stics version. Optional, by default the
+\item{stics_version}{Name of the STICS version. Optional, by default the
 latest version returned by get_stics_versions_compat() is used.}
 
 \item{dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dir} is no

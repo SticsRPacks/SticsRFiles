@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_ini_doc.R
 \name{gen_ini_doc}
 \alias{gen_ini_doc}
-\title{Generates from a template a Stics ini xml_document}
+\title{Generates from a template a STICS ini xml_document}
 \usage{
 gen_ini_doc(
   xml_doc = NULL,
@@ -25,7 +25,7 @@ param_crop1, param_crop2)}
 
 \item{params_desc}{a list describing crop parameters and others}
 
-\item{stics_version}{the stics files version to use (optional,
+\item{stics_version}{the STICS files version to use (optional,
 default to latest). Only used if xml_doc = NULL.}
 
 \item{check_names}{logical for checking names of param_table columns or not}
@@ -34,7 +34,7 @@ default to latest). Only used if xml_doc = NULL.}
 an invisible xml_document object or a list of
 }
 \description{
-Generates from a template a Stics ini xml_document
+Generates from a template a STICS ini xml_document
 }
 \examples{
 \dontrun{

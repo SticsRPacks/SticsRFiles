@@ -32,7 +32,7 @@ get_params_dict <- function(in_dict = NULL) { # , javastics_dir = NULL) {
   # file when it will contain the XML parameters names correspondence
   # or if specifying a dict type as files types i.e. tec, ini,...
   # that will allow to load parameters names from anb XML file
-  # (regarding to the Stics version)
+  # (regarding to the STICS version)
 
   # For V9.1
   base_dict <- list(
@@ -126,7 +126,7 @@ merge_dict <- function(in_dict, base_dict) {
 
 check_dict <- function(in_dict) { # , javastics_dir, file_name = "inputs.csv") {
 
-  # TODO: will be usefull when in inputs.csv when correspondence will
+  # TODO: will be useful when in inputs.csv when correspondence will
   # be integrated between code names and param names in XML files
   # to be able to check param names in XML files !!!
 

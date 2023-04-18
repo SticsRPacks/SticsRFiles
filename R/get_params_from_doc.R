@@ -1,4 +1,4 @@
-#' @title Get a list of Stics xml parameters names in an xml_document
+#' @title Get a list of STICS xml parameters names in an xml_document
 #' @param xml_doc_object an xml_document object (created from an xml file)
 #'
 #' @param type_name type name, one of "option", "param", "colonne"

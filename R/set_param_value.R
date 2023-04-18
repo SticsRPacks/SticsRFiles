@@ -132,7 +132,7 @@ set_param_value <- function(xml_doc,
   # How to add nodes tableau or intervention to set param_value
   # in following switch
   # add functions to return a tableau node or an intervention node
-  # according to stics version : get_xml_node(file, node_name) from
+  # according to STICS version : get_xml_node(file, node_name) from
   # xml examples files
 
 
@@ -214,7 +214,7 @@ set_param_value <- function(xml_doc,
   )
 
   ret <- TRUE
-  # unsuccessfull replacement
+  # unsuccessful replacement
   if (base::is.null(value)) ret <- FALSE
 
   return(invisible(ret))
