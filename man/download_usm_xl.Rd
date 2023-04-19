@@ -46,7 +46,7 @@ A vector of copied files path.
 }
 \description{
 The file is an example that can be used for generating
-JavaStics input files from parameters values stored in Excel spreadsheet
+JavaSTICS input files from parameters values stored in Excel spreadsheet
 format (USMs, Ini, Soils, Tec, Station, ...). Each sheet contains parameters
 values to insert into XML files, with the help of these functions:
 \code{\link{gen_usms_xml}}, \code{\link{gen_sols_xml}},

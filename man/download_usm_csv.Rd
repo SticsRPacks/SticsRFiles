@@ -42,7 +42,7 @@ longer supported, use out_dir instead.}
 A vector of copied files path.
 }
 \description{
-The file is an example that can be used for generating JavaStics
+The file is an example that can be used for generating JavaSTICS
 usms.xml input file from parameters values stored in a CSV file using
 the function \code{\link{gen_usms_xml}}
 }

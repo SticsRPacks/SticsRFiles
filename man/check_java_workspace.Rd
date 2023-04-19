@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_java_workspace.R
 \name{check_java_workspace}
 \alias{check_java_workspace}
-\title{Checking and getting JavaStics workspace path}
+\title{Checking and getting JavaSTICS workspace path}
 \usage{
 check_java_workspace(javastics, workspace = NULL)
 }
@@ -19,6 +19,6 @@ An absolute JavaSTICS workspace path
 Looking in JavaSTICS for a workspace path in JavaSTICS
 preferences or producing a full path to a workspace located in JavaSTICS root
 directory or validating an external absolute path. And also checking if the
-path is a valid JavaStics workspace
+path is a valid JavaSTICS workspace
 }
 \keyword{internal}

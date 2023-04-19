@@ -19,7 +19,7 @@ convert_xml2txt(
 \arguments{
 \item{file}{Path (including name) of the xml file to convert}
 
-\item{javastics}{Path of JavaStics}
+\item{javastics}{Path of JavaSTICS}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2)}
 

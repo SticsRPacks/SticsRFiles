@@ -38,9 +38,9 @@ to get the list of STICS variables names.}
 \item{usms_file}{Path of a USM xml file. Optional, if provided, the plant
 names are added in the Plant column (see details).}
 
-\item{javastics}{Path of JavaStics. Optional, should be provided in addition
+\item{javastics}{Path of JavaSTICS Optional, should be provided in addition
 to usms_file to get the plant codes if the plant files used are not
-in the workspace but in the JavaStics distribution (see Details).}
+in the workspace but in the JavaSTICS distribution (see Details).}
 
 \item{verbose}{Logical value for displaying or not information while running}
 

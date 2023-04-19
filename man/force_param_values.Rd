@@ -18,7 +18,7 @@ input files.}
 \item{values}{named vector of parameter values to force.
 See Details for more information.}
 
-\item{javastics}{Path of JavaStics.}
+\item{javastics}{Path of JavaSTICS}
 
 \item{param_values}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_values}
 is no longer supported, use \code{values} instead.}

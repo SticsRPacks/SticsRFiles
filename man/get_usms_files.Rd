@@ -16,7 +16,7 @@ get_usms_files(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace (i.e. containing the STICS
+\item{workspace}{Path of a JavaSTICS workspace (i.e. containing the STICS
 XML input files)}
 
 \item{usms_list}{Vector of usms names (Optional)}
@@ -26,10 +26,10 @@ XML input files)}
 \item{file_type}{Vector of file(s) type to get (if not given,
 all types are returned, see details)}
 
-\item{javastics}{Path of JavaStics. Optional, only needed if the plant files
+\item{javastics}{Path of JavaSTICS Optional, only needed if the plant files
 are not in the workspace
 (in this case the plant files used are those included in the
-JavaStics distribution)}
+JavaSTICS distribution)}
 
 \item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path}
 is no longer supported, use \code{workspace} instead.}

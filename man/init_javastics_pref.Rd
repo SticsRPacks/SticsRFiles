@@ -2,12 +2,12 @@
 % Please edit documentation in R/init_javastics_pref.R
 \name{init_javastics_pref}
 \alias{init_javastics_pref}
-\title{Initialize JavaStics preferences}
+\title{Initialize JavaSTICS preferences}
 \usage{
 init_javastics_pref(javastics, overwrite = FALSE)
 }
 \arguments{
-\item{javastics}{JavaStics installation folder}
+\item{javastics}{JavaSTICS installation folder}
 
 \item{overwrite}{Boolean. Overwrite the existing preference file ?}
 }
@@ -15,7 +15,7 @@ init_javastics_pref(javastics, overwrite = FALSE)
 \code{TRUE} if the file was created, \code{FALSE} otherwise.
 }
 \description{
-Initialize the JavaStics \code{preferences.xml} file.
+Initialize the JavaSTICS \code{preferences.xml} file.
 }
 \examples{
 \dontrun{

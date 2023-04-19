@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_workspace_xml.R
 \name{upgrade_workspace_xml}
 \alias{upgrade_workspace_xml}
-\title{Upgrading XML files of a JavaStics workspace directory
+\title{Upgrading XML files of a JavaSTICS workspace directory
 to a newer STICS version format}
 \usage{
 upgrade_workspace_xml(
@@ -17,9 +17,9 @@ upgrade_workspace_xml(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace}
+\item{workspace}{Path of a JavaSTICS workspace}
 
-\item{javastics}{Path of JavaStics}
+\item{javastics}{Path of JavaSTICS}
 
 \item{out_dir}{Output directory of the generated files}
 
@@ -37,7 +37,7 @@ TRUE for overwriting files if they exist, FALSE otherwise}
 \item{...}{Additional input arguments}
 }
 \description{
-Upgrading XML files of a JavaStics workspace directory
+Upgrading XML files of a JavaSTICS workspace directory
 to a newer STICS version format
 }
 \details{

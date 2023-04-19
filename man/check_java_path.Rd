@@ -2,15 +2,15 @@
 % Please edit documentation in R/check_java_path.R
 \name{check_java_path}
 \alias{check_java_path}
-\title{Checking JavaStics directory content}
+\title{Checking JavaSTICS directory content}
 \usage{
 check_java_path(javastics)
 }
 \arguments{
-\item{javastics}{JavaStics installation root folder}
+\item{javastics}{JavaSTICS installation root folder}
 }
 \description{
-Checking if directory exists and if it contains JavaStics jar
+Checking if directory exists and if it contains JavaSTICS jar
 files
 }
 \details{

@@ -21,7 +21,7 @@ get_javastics_cmd(
 \item{type}{keywords for filtering in the returned list what kind of command
 to be generated (default both: "generate" and "run")}
 
-\item{workspace}{A JavaStics workspace path (optional)}
+\item{workspace}{A JavaSTICS workspace path (optional)}
 
 \item{verbose}{Logical value (optional), TRUE to display run information,
 FALSE otherwise (default)}
@@ -36,7 +36,7 @@ files generation from XML and/or running simulation through
 a system2 command execution
 }
 \details{
-According to a JavaStics version (i.e. javastics path content) and
+According to a JavaSTICS version (i.e. javastics path content) and
 the OS type, the function builds command line strings used from system2
 calls. Commands may be filtered using type argument.
 }

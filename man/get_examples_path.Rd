@@ -14,7 +14,7 @@ get_examples_path(
 \item{file_type}{A file type string among files types
 ("csv", "obs", "sti", "txt", "xml")}
 
-\item{stics_version}{Name of the Stics version. Optional, by default
+\item{stics_version}{Name of the STICS version. Optional, by default
 the latest version returned by \code{get_stics_versions_compat()} is used.}
 
 \item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no

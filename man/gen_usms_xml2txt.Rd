@@ -22,14 +22,14 @@ gen_usms_xml2txt(
 )
 }
 \arguments{
-\item{javastics}{Path of JavaStics.}
+\item{javastics}{Path of JavaSTICS.}
 
-\item{workspace}{Path of a JavaStics workspace
+\item{workspace}{Path of a JavaSTICS workspace
 (i.e. containing the STICS XML input files). Optional, if not provided
-the current workspace stored in JavaStics preferences will be used.}
+the current workspace stored in JavaSTICS preferences will be used.}
 
 \item{out_dir}{The path of the directory where to create usms directories
-(Optional), if not provided the JavaStics workspace will be used as root}
+(Optional), if not provided the JavaSTICS workspace will be used as root}
 
 \item{usm}{List of usms to generate (Optional). If not provided, all
 usms contained in workspace_path/usms.xml file will be generated.}
@@ -62,7 +62,7 @@ longer supported, use \code{check} instead.}
 \value{
 A list with named elements:
 usms_path : created directories paths (for storing STICS input files),
-files : generated files list (in JavaStics workspace origin),
+files : generated files list (in JavaSTICS workspace origin),
 copy_status : logical value vector, indicating if all files have been
 generated for each usm
 obs_copy_status : logical value vector, indicating if observation files
@@ -70,7 +70,7 @@ have been successfully copied in usms directories
 }
 \description{
 The function creates sets of input files for one or multiple
-usms from usms data stored in a JavaStics workspace. For multiple usms,
+usms from usms data stored in a JavaSTICS workspace. For multiple usms,
 sets will be generated into individual folders named with usm names.
 Observations files will be also copied if they are named \verb{[usm_name].obs}
 For one usm, files will be generated either in the workspace directory

@@ -111,7 +111,7 @@ A list of parameters, depending on the file/function:
 \description{
 Read STICS model input parameters from a usm in text format
 (STICS input)
-Generally used after calling building a usm with \code{JavaStics}.
+Generally used after calling building a usm with \code{JavaSTICS}.
 
 Read a specific STICS model input parameter file.
 Users would generally use the wrapper \code{get_param_txt()} instead.

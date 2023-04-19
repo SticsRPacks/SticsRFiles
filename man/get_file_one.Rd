@@ -7,7 +7,7 @@
 get_file_one(dirpath, filename, p_name, verbose, dates_list, var_list)
 }
 \arguments{
-\item{dirpath}{Path of a JavaStics workspace}
+\item{dirpath}{Path of a JavaSTICS workspace}
 
 \item{filename}{File name(s)}
 

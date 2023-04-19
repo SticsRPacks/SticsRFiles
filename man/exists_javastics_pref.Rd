@@ -7,7 +7,7 @@
 exists_javastics_pref(javastics)
 }
 \arguments{
-\item{javastics}{JavaStics installation folder}
+\item{javastics}{JavaSTICS installation folder}
 }
 \value{
 logical value, TRUE if file exists, FALSE otherwise

@@ -13,15 +13,15 @@ get_plant_name(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace, or a vector of
+\item{workspace}{Path of a JavaSTICS workspace, or a vector of
 (recursive call).}
 
 \item{usms_filepath}{Path of the usms file (\code{usms.xml})}
 
 \item{usm_name}{Vector of usms to read (optional, used to filter usms)}
 
-\item{javastics_path}{JavaStics installation path (Optional, needed if the
-plant files are not in the \code{workspace} but rather in the JavaStics
+\item{javastics_path}{JavaSTICS installation path (Optional, needed if the
+plant files are not in the \code{workspace} but rather in the JavaSTICS
 default workspace). Only used to get the plants names.}
 
 \item{verbose}{Logical value (optional), TRUE to display information
