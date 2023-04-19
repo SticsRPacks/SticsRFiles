@@ -183,7 +183,7 @@ upgrade_plt_xml <- function(file,
 
   # test if the node exists
   node_exists <- !is.null(get_nodes(old_doc,
-                                   '//option[@nomParam="codephot_part"]'))
+                                    '//option[@nomParam="codephot_part"]'))
 
   if (node_exists) stop(
     "codephot_part already exists, not a v9.1 or 9.2 _plt.xml file")
@@ -218,7 +218,7 @@ upgrade_plt_xml <- function(file,
 
   # adding irazomax node
   parent_node <- get_nodes(old_doc,
-                          path = "//formalisme[@nom='yield formation']")[[1]]
+                           path = "//formalisme[@nom='yield formation']")[[1]]
   XML::addChildren(parent_node, new_node, at = 0)
 
 
@@ -420,8 +420,14 @@ upgrade_plt_xml <- function(file,
   # - intersect names with those in loaded RData file
   # - set values for parameters == -999 for common varieties
   # to those loaded
-  load(file.path(system.file("extdata", package = "SticsRFiles"),
-                 "xml", "param", target_version, "jvc_data.RData"))
+
+  load(
+    file.path(
+      get_examples_path(file_type = "xml_param",
+                        stics_version = target_version
+      ),
+      "jvc_data.RData")
+  )
 
   # get varieties
   current_var <- get_param_value(old_doc, "variete")
@@ -492,7 +498,7 @@ upgrade_plt_xml <- function(file,
   )
 
   parent_node <- get_nodes(old_doc,
-                          "//*[@nomParam='codegdhdeb']/choix[@code='1']")[[1]]
+                           "//*[@nomParam='codegdhdeb']/choix[@code='1']")[[1]]
   XML::addChildren(parent_node, new_node)
 
 
@@ -636,7 +642,7 @@ nomParam="codedyntalle">
   nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='hautbase']")
   if (!is.null(nodes_to_change)) {
     set_attrs_values(old_doc, path = "//param[@nom='hautbase']",
-                  attr_name = "min", values_list = "0.1")
+                     attr_name = "min", values_list = "0.1")
   }
   #
   # Changing options' "choix",  "nom" attribute values
@@ -645,12 +651,12 @@ nomParam="codedyntalle">
   nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='oui']")
   if (!is.null(nodes_to_change)) {
     set_attrs_values(old_doc, path = "//choix[@nom='oui']", attr_name = "nom",
-                  values_list = "yes")
+                     values_list = "yes")
   }
   nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='non']")
   if (!is.null(nodes_to_change)) {
     set_attrs_values(old_doc, path = "//choix[@nom='non']", attr_name = "nom",
-                  values_list = "no")
+                     values_list = "no")
   }
 
 
