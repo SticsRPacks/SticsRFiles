@@ -86,7 +86,7 @@ This kind of definition is common for all files types and the parameter name is 
 The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example (*choix="2"*).
 
 ```{r , eval = TRUE, echo = FALSE, class.output="xml"}
-par_xml <- file.path(get_examples_path("xml"), "param_gen.xml")
+par_xml <- file.path(get_examples_path("xml", stics_version = stics_version), "param_gen.xml")
 par <- readLines(par_xml)
 idx_water <- grep(pattern = "formalisme", par)[9:10]
 cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
@@ -99,7 +99,8 @@ Several values may be defined for example relatively to soil parameters (differe
 In the above file extract for soil parameters, each set of parameters (included in `tableau` nodes) is repeated for each soil layer (layers names are set in the `nom` attributes from *layer 1* to *layer 5*). The parameters names are defined in a `nom` attribute in each `colonne` XML tag.
 
 ```{r , eval = TRUE, echo = FALSE, class.output="xml"}
-sol_xml <- file.path(get_examples_path("xml"), "sols.xml")
+sol_xml <- 
+  file.path(get_examples_path("xml", stics_version = stics_version), "sols.xml")
 sol <- readLines(sol_xml)
 lines_sol <- c(sol[3], "...", sol[70:79], "...", sol[110:119], "...")
 cat(paste(lines_sol, collapse = "\n"))
@@ -109,7 +110,7 @@ cat(paste(lines_sol, collapse = "\n"))
 In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number) corresponding to an `intervention` node . Inside each `intervention` node, parameters names are defined in a `nom` attribute for each `colonne` XML tag.
 
 ```{r , eval = TRUE, echo = FALSE, class.output="xml"}
-tec_xml <- file.path(get_examples_path("xml"), "file_tec.xml")
+tec_xml <- file.path(get_examples_path("xml", stics_version = stics_version), "file_tec.xml")
 tec <- readLines(tec_xml)[3:22]
 tec <- c(tec, "...", tec[12:20], "...")
 tec[23] <- gsub(pattern = "112", replacement = "220", tec[23])

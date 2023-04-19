@@ -43,7 +43,8 @@ To run a STICS simulation on these input files, please refer to the [`run_stics(
 Some example data are available from the package and can be retrieved using the following function call for the STICS version `r stics_version`:
 
 ```{r}
-example_txt_dir <- get_examples_path(file_type = "txt")
+example_txt_dir <- 
+  get_examples_path(file_type = "txt", stics_version = stics_version)
 ```
 The `example_txt_dir` directory is: `r example_txt_dir`. By default, the latest STICS version is taken into account. 
 For getting an example directory for another version, an additional argument must be given `stics_version` according to an existing version included in the package. The version list can be retrieved using:

@@ -25,7 +25,8 @@ get_xml_doc_example <- function(xml_name = NULL,
 
   # stics_xml_types
   files <- list.files(pattern = ".xml$",
-                      path = get_examples_path(file_type = "xml")
+                      path = get_examples_path(file_type = "xml",
+                                               stics_version = stics_version)
   )
 
   if (base::is.null(xml_name)) {
