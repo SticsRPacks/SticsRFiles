@@ -56,7 +56,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
     stop("No examples available for version: ", version_name)
 
   # Getting files dir path for the given type
-  version_dirs <- unlist(dplyr::select(ver_data, all_of(file_type)))
+  version_dirs <- unlist(dplyr::select(ver_data, dplyr::all_of(file_type)))
   is_na_dirs <- is.na(version_dirs)
 
   if (any(is_na_dirs))
