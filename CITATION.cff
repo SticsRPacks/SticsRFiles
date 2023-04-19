@@ -8,14 +8,14 @@ message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 title: 'SticsRFiles: Read And Modify STICS Input/Output Files'
 version: 1.1.3
-abstract: The purpose of SticsRFiles is to provide functions for manipulations of
-  STICS input and output files. These files are either standard JavaStics XML files
-  or more directly the text files used by the model fortran executable. The most basic
-  functionality is to read and write parameter names and values through XML queries,
-  or text files ones. More advanced functionalities include the generation of input
-  XML from XML templates and spreadsheets with as many simulations contexts as needed,
-  or the generation of the input text files from the XML input files for distributed
-  computing.
+abstract: The purpose of SticsRFiles is to provide functions for manipulating input
+  and output files of the STICS crop model. These files are either standard JavaStics
+  XML files or more directly the text files used by the model fortran executable.
+  The most basic functionality is to read and write parameter names and values through
+  XML queries, or text files ones. More advanced functionalities include the generation
+  of input XML from XML templates and spreadsheets with as many simulations contexts
+  as needed, or the generation of the input text files from the XML input files for
+  distributed computing.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
