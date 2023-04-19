@@ -11,7 +11,7 @@ get_examples_path(
 )
 }
 \arguments{
-\item{file_type}{A file type string among files types
+\item{file_type}{A file type string among files types or a vector of
 ("csv", "obs", "sti", "txt", "xml")}
 
 \item{stics_version}{Name of the STICS version. Optional, by default
@@ -22,7 +22,7 @@ longer supported, use \code{stics_version} instead.}
 }
 \value{
 A directory path for examples files for given file type and STICS
-version or NULL if missing file_type (types list is displayed)
+version or a vector of (for unknown file types "" is returned as path)
 }
 \description{
 Getting examples files path attached to a STICS version for a given file type
@@ -31,6 +31,8 @@ Getting examples files path attached to a STICS version for a given file type
 \dontrun{
 
 get_examples_path(file_type = "csv")
+
+get_examples_path(file_type = c("csv", "sti"))
 
 get_examples_path(file_type = "csv", stics_version = "V8.5")
 }
