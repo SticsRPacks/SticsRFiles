@@ -1,6 +1,3 @@
-# for declaring global variables
-utils::globalVariables(c("index", "params", "values"), package = "SticsRFiles")
-
 # for generic functions declarations for *document classes
 setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
 # defined for file_document

@@ -187,10 +187,14 @@ get_param_txt <- function(workspace = getwd(),
 filter_param <- function(in_list, param = NULL, exact = FALSE) {
   out_list <- list()
   names_vec <- names(in_list)
+
   for (i in seq_along(names_vec)) {
     name <- names_vec[[i]]
+
     if (is.list(in_list[[name]])) {
-      tmp <- filter_param(in_list[[name]], param = param, exact = exact)
+      tmp <- filter_param(in_list[[name]], param = param,
+                          exact = exact)
+
       if (length(tmp) > 0) out_list[[name]] <- tmp
       next
     }
@@ -203,7 +207,9 @@ filter_param <- function(in_list, param = NULL, exact = FALSE) {
     if (exact) {
       idx <- param %in% name
     } else {
-      idx <- unlist(lapply(param, function(x) grepl(pattern = x, x = name)))
+      # fixing pattern to use for param containing ()
+      pattern <- gsub("\\)", "\\\\)", gsub("\\(", "\\\\(", param))
+      idx <- unlist(lapply(pattern, function(x) grepl(pattern = x, x = name)))
     }
 
     if (any(idx)) {
@@ -496,24 +502,22 @@ get_tec_txt <- function(file = "fictec1.txt",
   params <- par_lines[!ids_val]
   values <- par_lines[ids_val]
 
-  assign(x = "index", value = 1, envir = .GlobalEnv)
-  assign(x = "params", value = params, envir = .GlobalEnv)
-  assign(x = "values", value = values, envir = .GlobalEnv)
-
 
   # Early return here for version >= 10.0
   # get_tec_txt_ is not fully generic for the moment!
   if (get_version_num(stics_version = stics_version) >= 10) {
-    return(get_tec_txt_())
+    return(get_tec_txt_(params, values))
   }
 
-
   # Treatment for STICS version < V10.0
-  itk$nbjres <- val()
+  pval <- val(values = values)
+  itk$nbjres <- pval$val
 
   if (itk$nbjres > 0) {
     for (i in 1:itk$nbjres) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       itk$julres <- c(itk$julres, vec[1])
       itk$coderes <- c(itk$coderes, vec[2])
       itk$qres <- c(itk$qres, vec[3])
@@ -523,23 +527,36 @@ get_tec_txt <- function(file = "fictec1.txt",
       itk$eaures <- c(itk$eaures, vec[7])
     }
   }
-  itk$nbjtrav <- val()
+
+  pval <- val(values = values)
+  itk$nbjtrav <- pval$val
+
   if (itk$nbjtrav > 0) {
     for (i in 1:itk$nbjtrav) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       itk$jultrav <- c(itk$jultrav, vec[1])
       itk$profres <- c(itk$profres, vec[2])
       itk$proftrav <- c(itk$proftrav, vec[3])
     }
   }
 
-  for (i in 1:27) itk[[parname(-1)]] <- val()
+  for (i in 1:27) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
 
-  itk$nap <- val()
+  pval <- val(values = values)
+  itk$nap <- pval$val
+
 
   if (itk$nap > 0) {
     for (i in 1:itk$nap) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       if (itk$codedateappH2O != 1) {
         itk$julapI <- c(itk$julapI, vec[1])
       } else {
@@ -549,22 +566,32 @@ get_tec_txt <- function(file = "fictec1.txt",
     }
   }
 
-  for (i in 1:3) itk[[parname(-1)]] <- val()
+  for (i in 1:3) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
 
+  pval <- val(pval, values)
   if (!is.null(several_fert) && !several_fert) {
-    itk$engrais <- val()
-  } else {
-    val()
+    itk$engrais <- pval$val
   }
 
 
+  for (i in 1:4) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
 
-  for (i in 1:4) itk[[parname(-1)]] <- val()
-  itk$napN <- val()
+  pval <- val(pval, values)
+  itk$napN <- pval$val
 
   if (itk$napN > 0) {
     for (i in 1:itk$napN) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       if (itk$codedateappN != 1) {
         if (itk$codefracappN == 1) {
           if (!is.null(several_fert) && several_fert) {
@@ -598,7 +625,11 @@ get_tec_txt <- function(file = "fictec1.txt",
   }
 
 
-  for (i in 1:19) itk[[parname(-1)]] <- val()
+  for (i in 1:19) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
 
   if (itk$codemodfauche == 1) {
     itk$lecfauche <- FALSE
@@ -607,12 +638,20 @@ get_tec_txt <- function(file = "fictec1.txt",
   }
 
 
-  for (i in 1:2) itk[[parname(-1)]] <- val()
-  nbcoupe2 <- val()
+  for (i in 1:2) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
+
+  pval <- val(pval, values)
+  nbcoupe2 <- pval$val
 
   if (itk$codemodfauche == 2) {
     for (i in 1:nbcoupe2) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       if (is_pasture) {
         itk$restit <- c(itk$restit, vec[6])
         itk$mscoupemini <- c(itk$mscoupemini, vec[7])
@@ -626,11 +665,14 @@ get_tec_txt <- function(file = "fictec1.txt",
     itk$nbcoupe <- nbcoupe2
   }
 
-  nbcoupe3 <- val()
+  pval <- val(pval, values)
+  nbcoupe3 <- pval$val
 
   if (itk$codemodfauche == 3) {
     for (i in 1:nbcoupe3) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       if (is_pasture) {
         itk$restit <- c(itk$restit, vec[6])
         itk$mscoupemini <- c(itk$mscoupemini, vec[7])
@@ -646,31 +688,43 @@ get_tec_txt <- function(file = "fictec1.txt",
   }
 
 
-  for (i in 1:11) itk[[parname(-1)]] <- val()
+  for (i in 1:11) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
 
   if (!is.null(several_thin) && several_thin) {
-    itk$nb_eclair <- val()
+    pval <- val(pval, values)
+    itk$nb_eclair <- pval$val
+
     for (i in 1:itk$nb_eclair) {
-      vec <- val()
+      pval <- val(pval, values)
+      vec <- pval$val
+
       itk$juleclair <- c(itk$juleclair, vec[1])
       itk$nbinfloecl <- c(itk$nbinfloecl, vec[2])
     }
   } else {
     itk$nb_eclair <- 1
-    itk$juleclair <- val()
-    itk$nbinfloecl <- val()
+    pval <- val(pval, values)
+    itk$juleclair <- pval$val
+
+    pval <- val(pval, values)
+    itk$nbinfloecl <- pval$val
   }
 
 
-  for (i in 1:30) itk[[parname(-1)]] <- val()
-
-  assign(x = "index", value = 1, envir = .GlobalEnv)
-
+  for (i in 1:30) {
+    pval <- val(pval, values)
+    pname <- parname(pval$index, params, -1)
+    itk[[pname]] <- pval$val
+  }
 
   return(itk)
 }
 
-parname <- function(idx = NULL) {
+parname <- function(index, params, idx = NULL) {
   if (!is.null(idx)) {
     loc_idx <- index + idx
   } else {
@@ -684,22 +738,29 @@ parname <- function(idx = NULL) {
   }))
 }
 
-val <- function() {
-  if (index == length(values)) {
+val <- function(pval = list(index = 1, val = NA), values) {
+
+  if (pval$index == length(values)) {
     return()
   }
-  assign(x = "index", value = index + 1, envir = .GlobalEnv)
-  val_txt <- unlist(strsplit(trimws(values[index - 1]), split = " "))
-  val_num <- suppressWarnings(as.numeric(val_txt))
-  if (any(is.na(val_num))) {
-    return(val_txt)
+
+  pval$index <- pval$index + 1
+
+  val_txt <- unlist(strsplit(trimws(values[pval$index - 1]), split = " "))
+
+  out_val <- suppressWarnings(as.numeric(val_txt))
+  if (any(is.na(out_val))) {
+    out_val <- val_txt
   }
-  return(val_num)
+
+  pval$val <- out_val
+
+  return(pval)
 }
 
 #'
 # @examples
-get_tec_txt_ <- function() {
+get_tec_txt_ <- function(params, values) {
   itk <- list()
   num_op <- 0
   nb_interventions <- 0
@@ -711,10 +772,12 @@ get_tec_txt_ <- function() {
   v <- list()
 
   multi <- FALSE
+  pval <- list(index = 1, val = NA)
 
   while (TRUE) {
-    param <- parname()
-    value <- val()
+    param <- parname(pval$index, params)
+    pval <- val(pval, values)
+    value <- pval$val
 
     if (is.null(value)) break
 
@@ -733,7 +796,7 @@ get_tec_txt_ <- function() {
     }
 
     # multiple parameters
-    if (all(param == parname(-2))) {
+    if (all(param == parname(pval$index, params, -2))) {
       value <- as.data.frame(as.list(value),
                              stringsAsFactors = FALSE
       )
@@ -783,12 +846,11 @@ get_soil_txt <- function(file = "param.sol",
   params <- readLines(filepath, warn = FALSE)
   soil <- vector(mode = "list", length = 0)
 
-  index <- 1
-  val <- function() {
-    index <<- index + 1
+  val <- function(index = 1) {
+    index <- index + 1
     vec <- strsplit(x = params[index - 1], split = " ")[[1]]
     vec <- vec[vec != ""]
-    return(vec)
+    return(list(vec = vec, index = index))
   }
 
   soil$nbcouchessol_max <- "1000"
@@ -807,22 +869,29 @@ get_soil_txt <- function(file = "param.sol",
     )
   }
 
-  soil[par_vec] <- val()
+  ret_val <- val(index)
+  soil[par_vec] <- ret_val$vec
 
+
+  ret_val <- val(ret_val$index)
 
   soil[c(
     "numsol", "codecailloux", "codemacropor", "codefente",
     "codrainage", "coderemontcap", "codenitrif", "codedenit"
-  )] <- val()
+  )] <- ret_val$vec
+
+  ret_val <- val(ret_val$index)
+
 
   soil[c(
     "numsol", "profimper", "ecartdrain", "ksol", "profdrain",
     "capiljour", "humcapil", "profdenit", "vpotdenit"
-  )] <- val()
+  )] <- ret_val$vec
 
   vec <- matrix(data = NA, nrow = 9, ncol = 5)
   for (i in 1:5) {
-    vec[, i] <- val()
+    ret_val <- val(ret_val$index)
+    vec[, i] <- ret_val$vec
   }
   vec <- apply(vec, MARGIN = 1, FUN = list)
 
