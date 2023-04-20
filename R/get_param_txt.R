@@ -869,7 +869,7 @@ get_soil_txt <- function(file = "param.sol",
     )
   }
 
-  ret_val <- val(index)
+  ret_val <- val()
   soil[par_vec] <- ret_val$vec
 
 
