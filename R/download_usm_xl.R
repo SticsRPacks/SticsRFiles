@@ -84,7 +84,7 @@ download_usm_xl <- function(file = NULL,
     xl_name <- xl_patt
   }
 
-  xl_dir <- get_examples_path(file_type = "xl", stics_version = version_name)
+  xl_dir <- get_examples_path(file_type = c("xl", "csv"), stics_version = version_name)
 
   files_list <- list.files(xl_dir, pattern = xl_name)
 
