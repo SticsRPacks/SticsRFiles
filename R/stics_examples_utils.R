@@ -77,7 +77,9 @@ get_examples_path <- function(file_type, stics_version = "latest",
     if (base_path == "") {
       examples_path[i] <- ""
     } else {
-      examples_path[i] <- file.path(base_path, version_dirs[i])
+      examples_path[i] <- normalizePath(file.path(base_path, version_dirs[i]),
+                                        winslash = "/",
+                                        mustWork = FALSE)
     }
   }
 
