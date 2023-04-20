@@ -12,6 +12,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(SticsRFiles)
+# for unzipping examples files in tempdir
+get_examples_path(c("xml", "csv", "sti", "obs"))
 ```
 
 ## Introduction
@@ -76,7 +79,6 @@ All the example data used in this article are available from the [`data` reposit
 SticsRFiles provides a function to download it from the command line. Please execute the following command in R:
 
 ```{r include=FALSE}
-library(SticsRFiles)
 example_data <- SticsRFiles::download_data(out_dir = tempdir(),
                                            example_dirs = "study_case_1",
                                            "V10.0")
