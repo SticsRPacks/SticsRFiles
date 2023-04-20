@@ -92,7 +92,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
             version_name)
 
   # Returning the examples files dir path for the given type
-  return(examples_path)
+  return(invisible(examples_path))
 }
 
 # TODO: evaluate if useful ?
