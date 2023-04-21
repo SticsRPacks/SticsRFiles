@@ -17,8 +17,12 @@ knitr::opts_chunk$set(
 
 ```
 
-```{r}
+```{r eval=FALSE}
 library(SticsRFiles)
+```
+
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
 ```
 
 ```{r echo=FALSE}

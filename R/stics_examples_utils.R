@@ -134,7 +134,9 @@ unzip_examples <- function(files_type, version_dir) {
   ex_path <- system.file("extdata",
                          package = "SticsRFiles")
 
-  dir_path <- file.path(tempdir(), files_type)
+  dir_path <- normalizePath(file.path(tempdir(), files_type),
+                            winslash = "/",
+                            mustWork = FALSE)
 
   if (dir.exists(dir_path)) return(dir_path)
 

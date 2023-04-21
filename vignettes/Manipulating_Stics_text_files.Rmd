@@ -15,9 +15,14 @@ knitr::opts_chunk$set(
 options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
-```{r}
+```{r eval=FALSE}
 library(SticsRFiles)
 ```
+
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
+```
+
 ```{r echo=FALSE}
 stics_version <- get_stics_versions_compat()$latest_version
 ```
