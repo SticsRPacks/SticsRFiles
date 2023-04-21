@@ -12,9 +12,15 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+```
+```{r eval=FALSE}
 library(SticsRFiles)
-# for unzipping examples files in tempdir
-get_examples_path(c("xml", "csv", "sti", "obs"))
+```
+
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
+# just in case for unzipping examples files in tempdir
+get_examples_path(c("xml", "csv"))
 ```
 
 ## Introduction

@@ -23,10 +23,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo = TRUE, eval = TRUE}
+```{r eval=FALSE}
 library(SticsRFiles)
 ```
 
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
+```
 
 ```{r, echo = FALSE, eval = TRUE}
 javastics_path <- params$javastics_path
