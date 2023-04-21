@@ -52,20 +52,14 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Install XML 3.99-0.3
-        run: Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/XML_3.99-0.3.tar.gz', repos = NULL, type = 'source')"
-        
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          #pak-version: rc
+          pak-version: rc
           # about pak-version:
           # Ubuntu doesn't install the proper version of XML see https://github.com/r-lib/actions/issues/559. Remove when fixed.
           # see also: https://stackoverflow.com/questions/73243945/pkgdown-action-failing-at-build-xml
-          extra-packages: any::rcmdcheck, XML=?ignore
+          extra-packages: any::rcmdcheck
           needs: check
-
-      #- name: Install XML 3.99-0.3
-      #  run: Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/XML_3.99-0.3.tar.gz', repos = NULL, type = 'source')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
