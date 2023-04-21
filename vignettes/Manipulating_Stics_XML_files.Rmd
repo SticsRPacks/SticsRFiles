@@ -95,8 +95,14 @@ The corresponding parameter name for an **option** node is stored in an attribut
 par_xml <- file.path(examples_path, "param_gen.xml")
 par <- readLines(par_xml)
 idx_water <- grep(pattern = "formalisme", par)[9:10]
-cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
+#cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
 ```
+
+````{r results='asis', echo = FALSE}
+cat('```xml\n')
+cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
+cat('\n```\n')
+````
 
 * Parameters with several values (for soil layers, technical operations,...)
 Several values may be defined for example relatively to soil parameters (different layers) or for crop management operations (with time repetitions).
@@ -108,8 +114,14 @@ In the above file extract for soil parameters, each set of parameters (included 
 sol_xml <- file.path(examples_path, "sols.xml")
 sol <- readLines(sol_xml)
 lines_sol <- c(sol[3], "...", sol[70:79], "...", sol[110:119], "...")
-cat(paste(lines_sol, collapse = "\n"))
+#cat(paste(lines_sol, collapse = "\n"))
 ```
+
+````{r results='asis', echo = FALSE}
+cat('```xml\n')
+cat(paste(lines_sol, collapse = "\n"))
+cat('\n```\n')
+````
 
 * Example from tec files
 In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number) corresponding to an `intervention` node . Inside each `intervention` node, parameters names are defined in a `nom` attribute for each `colonne` XML tag.
@@ -120,8 +132,15 @@ tec <- readLines(tec_xml)[3:22]
 tec <- c(tec, "...", tec[12:20], "...")
 tec[23] <- gsub(pattern = "112", replacement = "220", tec[23])
 
-cat(paste(tec, collapse = "\n"))
+#cat(paste(tec, collapse = "\n"))
 ```
+
+````{r results='asis', echo = FALSE}
+cat('```xml\n')
+cat(paste(tec, collapse = "\n"))
+cat('\n```\n')
+````
+
 
 ## Functions for XML files manipulations
 
