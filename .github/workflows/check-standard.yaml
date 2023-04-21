@@ -61,8 +61,8 @@ jobs:
           extra-packages: |
             any::rcmdcheck
             SticsRPacks/SticsRFiles@master
+            XML=?ignore-before-r=4.0.0
           needs: check
-          exclude: XML
 
       - name: Install XML 3.99-0.3
         run: Rscript -e "install.packages('https://cran.r-project.org/src/contrib/Archive/XML/XML_3.99-0.3.tar.gz', repos = NULL, type = 'source')"
