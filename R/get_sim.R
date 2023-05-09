@@ -15,7 +15,6 @@
 #'
 #' @keywords internal
 #'
-#' @export
 
 
 get_daily_results <- function(...) {

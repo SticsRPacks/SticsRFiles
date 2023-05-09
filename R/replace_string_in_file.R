@@ -8,7 +8,6 @@
 #' @param replace_string The replacing string
 #' @param new_file_path The newly-created file path
 #'
-# @export
 #'
 #' @keywords internal
 #'

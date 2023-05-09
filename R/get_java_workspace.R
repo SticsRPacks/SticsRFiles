@@ -12,7 +12,6 @@
 #'
 #' @keywords internal
 #'
-# @export
 
 get_java_workspace <- function(javastics) {
 

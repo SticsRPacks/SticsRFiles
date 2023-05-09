@@ -37,6 +37,9 @@ allowed to the target_version. If TRUE, param_gen_file is mandatory.}
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
 }
+\value{
+None
+}
 \description{
 Upgrading a usms.xml file to a newer version
 }

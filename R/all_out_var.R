@@ -65,6 +65,9 @@ all_out_var <- function(stics_version = "latest") {
 #'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
+#' @return A data.frame with information about variable(s) with columns
+#'        `name`, `definition`, `unit`, `type`
+#'
 #' @seealso \code{\link{all_out_var}}
 #'
 #' @examples

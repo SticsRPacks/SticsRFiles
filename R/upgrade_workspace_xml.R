@@ -13,6 +13,8 @@
 #' TRUE for overwriting files if they exist, FALSE otherwise
 #' @param ... Additional input arguments
 #'
+#' @return None
+#'
 #' @export
 #'
 #' @details

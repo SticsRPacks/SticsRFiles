@@ -43,6 +43,8 @@
 #'       To replace the output variables required from STICS,
 #'       please directly call \code{gen_varmod}.
 #'
+#' @return None
+#'
 #' @export
 #'
 #' @examples

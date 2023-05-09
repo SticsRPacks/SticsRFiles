@@ -14,6 +14,8 @@
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #' @param ... Additional input arguments
 #'
+#' @return None
+#'
 #' @export
 #'
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
