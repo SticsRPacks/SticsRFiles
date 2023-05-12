@@ -39,7 +39,7 @@ This package allows the user to programmatically manipulate either the XML files
 Using this package, it is possible to:
 
 * convert the XML files to text files (`convert_xml2txt()`), please see the [Generating STICS text files](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files) vignette;
-* read ([`get_param_txt()`](R/read_param.R)) or set ([`set_param_txt()`](R/read_param.R)) parameters;
+* read (`get_param_txt()` or set (`set_param_txt()`) parameters;
 * Read the climate (`get_climate_txt()`);
 * Set the output variables required (`gen_varmod()`).
 

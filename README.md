@@ -134,8 +134,8 @@ otherwise.
 ## Code of conduct
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Conduct](https://github.com/SticsRPacks/SticsRFiles/blob/master/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 The package is under intensive development, so you can fill an issue or
 request us a feature
