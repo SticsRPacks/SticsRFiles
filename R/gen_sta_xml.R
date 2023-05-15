@@ -1,9 +1,14 @@
-#' @title Generate Stics sta xml file(s) from a template or an input file
+#' @title Generate STICS sta xml file(s) from a template or an input file
 #'
-#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
-#' @param file Path of a sta xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.
+#' @param param_df A table (df, tibble) containing the values of the parameters
+#' to use (see details)
+#' @param file Path of a sta xml file to be used as a template. Optional,
+#' if not provided, the function will use a standard template depending
+#' on the STICS version.
 #' @param out_dir Path of the directory where to generate the file(s).
-#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided. In this case the function uses a standard template associated to the stics version.
+#' @param stics_version Name of the STICS version. Optional, used if
+#' the `file` argument is not provided. In this case the function uses a
+#' standard template associated to the STICS version.
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
 #'   longer supported, use `param_df` instead.
 #' @param sta_in_file `r lifecycle::badge("deprecated")` `sta_in_file` is no
@@ -11,8 +16,8 @@
 #' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
 #'   longer supported, use `out_dir` instead.
 #'
-#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
-#' argument `stics_version`.
+#' @details Please see `get_stics_versions_compat()` for the full list of
+#' STICS versions that can be used for the argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'
@@ -22,15 +27,16 @@
 #'  |climatex2_sta.xml | 2.8|      0|       49| 1000|    20|
 #'  |climatex3_sta.xml | 2.2|      0|       49| 1000|    20|
 #'
-#' The first column gives the sta file name (to be generated), all following columns give the parameter value to put
-#' in the file, and each line denotes a separate sta file (for e.g. several USMs).
+#' The first column gives the sta file name (to be generated),
+#' all following columns give the parameter value to put in the file,
+#' and each line denotes a separate sta file (for e.g. several USMs).
 #'
-#' The first column name must contain the keyword sta or Sta or STA as a prefix to be detected
-#' (as shown in the table extract above).
+#' The first column name must contain the keyword sta or Sta or STA
+#' as a prefix to be detected (as shown in the table extract above).
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #' @examples
 #' \dontrun{
@@ -51,17 +57,23 @@ gen_sta_xml <- function(param_df = NULL,
                         sta_in_file = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_sta_xml(param_table)", "gen_sta_xml(param_df)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_sta_xml(param_table)",
+                              "gen_sta_xml(param_df)")
   } else {
     param_table <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(sta_in_file)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_sta_xml(sta_in_file)", "gen_sta_xml(file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_sta_xml(sta_in_file)",
+                              "gen_sta_xml(file)")
   } else {
     sta_in_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_sta_xml(out_path)", "gen_sta_xml(out_dir)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_sta_xml(out_path)",
+                              "gen_sta_xml(out_dir)")
   } else {
     out_path <- out_dir # to remove when we update inside the function
   }
@@ -90,7 +102,7 @@ gen_sta_xml <- function(param_df = NULL,
   )
 
 
-  if (!is.list(xml_docs) && methods::is(xml_docs, "xmlDocument")) {
+  if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
 
@@ -100,7 +112,8 @@ gen_sta_xml <- function(param_df = NULL,
 
   if (any(out_idx)) {
     cat("\n")
-    cat("Errors have been detected while trying to replace parameters values in xml documents\n")
+    cat(paste0("Errors have been detected while trying to replace",
+        " parameters values in xml documents\n"))
     cat(paste(sum(!out_idx), "files have been generated !\n"))
     # selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
@@ -131,9 +144,9 @@ gen_sta_xml <- function(param_df = NULL,
   }
 
   # saving files
-  # TODO: vectorize the saveXmlDoc method of the xmlDocument class
-  for (f in 1:length(xml_docs)) {
-    saveXmlDoc(xml_docs[[f]], sta_out_file[[f]])
+  # TODO: vectorize the saveXmlDoc method of the xml_document class
+  for (f in seq_along(xml_docs)) {
+    save_xml_doc(xml_docs[[f]], sta_out_file[[f]])
   }
 
   return(invisible(xml_docs))

@@ -21,6 +21,7 @@ replace_string_in_file(
 \item{new_file_path}{The newly-created file path}
 }
 \description{
-Replacing occurrences of a string by another one, in place or creating a new file
+Replacing occurrences of a string by another one,
+in place or creating a new file
 }
 \keyword{internal}

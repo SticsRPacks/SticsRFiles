@@ -2,14 +2,15 @@
 % Please edit documentation in R/get_params_from_doc_node.R
 \name{get_params_from_doc_node}
 \alias{get_params_from_doc_node}
-\title{Get a list of Stics xml parameters names from nodes names in an xmlDocument}
+\title{Get a list of STICS xml parameters names from nodes names in
+an xml_document}
 \usage{
 get_params_from_doc_node(xml_node, param_list = c(), unique_val = TRUE)
 }
 \arguments{
 \item{xml_node}{an xml XMLInternalElementNode}
 
-\item{param_list}{param names vector, used for recursive calls}
+\item{param_list}{parameters names vector, used for recursive calls}
 
 \item{unique_val}{logical, TRUE to get unique names list, FALSE otherwise}
 }
@@ -17,6 +18,7 @@ get_params_from_doc_node(xml_node, param_list = c(), unique_val = TRUE)
 a character vector of parameters names
 }
 \description{
-Get a list of Stics xml parameters names from nodes names in an xmlDocument
+Get a list of STICS xml parameters names from nodes names in
+an xml_document
 }
 \keyword{internal}

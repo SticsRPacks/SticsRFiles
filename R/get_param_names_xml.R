@@ -1,6 +1,7 @@
 #' @title Getting parameters names from xml files
 #'
-#' @description Extracting parameters names for an xml files or a vector of files.
+#' @description Extracting parameters names for an xml files or a vector
+#' of files.
 #'
 #' @param xml_file an xml file path or a vector of paths
 #'
@@ -10,14 +11,15 @@
 #'
 #' @param output Output data format either "list" or "data.frame" (default)
 #'
-#' @param combine Logical, usefull only for data.frame.
+#' @param combine Logical, useful only for data.frame.
 #' TRUE, to transform a data.frame list to a unique data.frame,
 #' FALSE otherwise.
 #'
-#' @param exact Logical, if TRUE, the exact name is searched, FALSE otherwise for partial search
+#' @param exact Logical, if TRUE, the exact name is searched, FALSE otherwise
+#' for partial search
 #'
-#' @return A list of parameters names data.frames or list, or a unique data.frame
-#' for multiple files.
+#' @return A list of parameters names data.frames or list, or a unique
+#' data.frame for multiple files.
 #'
 #' @examples
 #' \dontrun{
@@ -29,12 +31,12 @@
 #'
 #' param_names <- get_param_names_xml(xml_files_list)
 #'
-#' param_names <- get_param_names_xml(xml_files_list, param_name = c("al", "albedo"))
+#' param_names <- get_param_names_xml(xml_files_list,
+#'                                    param_name = c("al", "albedo"))
 #' }
 #'
 #' @keywords internal
 #'
-#' @importFrom dplyr bind_rows
 #'
 #'
 get_param_names_xml <- function(xml_file,
@@ -43,7 +45,6 @@ get_param_names_xml <- function(xml_file,
                                 output = "data.frame",
                                 combine = TRUE,
                                 exact = FALSE) {
-  output_formats <- c("list", "data.frame")
 
   # Switch for transformations to data.frame format
   df_out <- output == "data.frame"
@@ -123,7 +124,8 @@ get_param_names_xml <- function(xml_file,
     }
   } else {
     if (bounds) {
-      param_names <- list(list(file = base::basename(xml_file), name = param_bounds))
+      param_names <- list(list(file = base::basename(xml_file),
+                               name = param_bounds))
     } else {
 
       # To a named list

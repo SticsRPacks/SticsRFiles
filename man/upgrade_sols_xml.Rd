@@ -22,9 +22,9 @@ upgrade_sols_xml(
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
 
-\item{stics_version}{Name of the Stics version (VX.Y format)}
+\item{stics_version}{Name of the STICS version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files to
+\item{target_version}{Name of the STICS version to upgrade files to
 (VX.Y format)}
 
 \item{check_version}{Perform version consistency with in stics_version input
@@ -33,6 +33,9 @@ allowed to the target_version. If TRUE, param_gen_file is mandatory.}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
+}
+\value{
+None
 }
 \description{
 Upgrading a sols.xml file to a newer version

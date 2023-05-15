@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_stics_versions_compat.R
 \name{get_stics_versions_compat}
 \alias{get_stics_versions_compat}
-\title{Get the compatible Stics versions}
+\title{Get the compatible STICS versions}
 \usage{
 get_stics_versions_compat(version_index = NULL)
 }
@@ -16,7 +16,7 @@ A named list with the STICS versions compatible with this package
 an existing version selected using version_index.
 }
 \description{
-Get the versions of stics that are fully compatible
+Get the versions of STICS that are fully compatible
 with this package.
 }
 \examples{

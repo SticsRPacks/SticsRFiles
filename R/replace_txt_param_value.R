@@ -1,7 +1,8 @@
-#' @title Replacing value in Stics parameters files
+#' @title Replacing value in STICS parameters files
 #'
-#' @description Replacing one or several values in a source file corresponding to a parameter tag
-#' for generating one (in place or not) or several files
+#' @description Replacing one or several values in a source file
+#' corresponding to a parameter tag for generating one (in place or not)
+#' or several files
 #'
 #' @param file_path The file path
 #' @param param_tag The parameter name
@@ -10,7 +11,10 @@
 #'
 #' @keywords internal
 #'
-replace_txt_param_value <- function(file_path, param_tag, param_value, out_file_path = NULL) {
+replace_txt_param_value <- function(file_path,
+                                    param_tag,
+                                    param_value,
+                                    out_file_path = NULL) {
 
   # default values for redirecting output to another file, or other files
   # if several values and several output files !
@@ -30,7 +34,7 @@ replace_txt_param_value <- function(file_path, param_tag, param_value, out_file_
     in_place <- TRUE
   }
 
-  if (length(param_value) > 1 & length(param_value) != length(out_file_path)) {
+  if (length(param_value) > 1 && length(param_value) != length(out_file_path)) {
     stop()
   }
 
@@ -38,17 +42,32 @@ replace_txt_param_value <- function(file_path, param_tag, param_value, out_file_
   param_tag <- gsub(":", "", param_tag)
 
   # character vector of system commands
-  cmd <- paste0("sed ", opt, "'/\\b", param_tag, "\\b/{n;s/.*/", as.character(param_value), "/}'", " ", file_path, redir)
+  cmd <- paste0("sed ",
+                opt,
+                "'/\\b",
+                param_tag,
+                "\\b/{n;s/.*/",
+                as.character(param_value),
+                "/}'",
+                " ",
+                file_path,
+                redir)
 
-  # print(cmd)
-
-  disp <- lapply(cmd, function(x) system(x, intern = TRUE))
+  lapply(cmd, function(x) system(x, intern = TRUE))
 
   # testing if replacement is ok
   # 1- in place against a temporary file
   # 2- with one or several output files
   # diff for a file or several files
-  diff_files <- lapply(new, function(x) system(paste("diff", old, x, "| wc -l"), intern = TRUE))
+  diff_files <- lapply(new,
+                       function(x) {
+                         system(paste("diff",
+                                      old,
+                                      x,
+                                      "| wc -l"),
+                                intern = TRUE)
+                       }
+  )
 
   diff_files <- as.numeric(diff_files)
   not_replaced_files <- diff_files == 0

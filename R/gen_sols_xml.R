@@ -1,23 +1,25 @@
-#' @title Generate Stics sols xml file from a template or an input file
+#' @title Generate STICS sols xml file from a template or an input file
 #'
 #' @param file Path (including name) of the sols file to generate.
 #' @param sols_out_file `r lifecycle::badge("deprecated")` `sols_out_file` is no
 #'   longer supported, use `file` instead.
 #' @param sols_nb `r lifecycle::badge("deprecated")` `sols_nb` is no
 #'   longer supported, it is now computed in the function.
-#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
+#' @param param_df A table (df, tibble) containing the values of the parameters
+#'  to use (see details)
 #' @param sols_param `r lifecycle::badge("deprecated")` `sols_param` is no
 #'   longer supported, use `param_df` instead.
 #' @param template Path of a soil xml file to be used as a template. Optional,
-#' if not provided, the function will use a standard template depending on the stics version.
+#' if not provided, the function will use a standard template depending on
+#' the STICS version.
 #' @param sols_in_file `r lifecycle::badge("deprecated")` `sols_in_file` is no
 #'   longer supported, use `template` instead.
-#' @param stics_version Name of the Stics version. Optional, used if the `file`
+#' @param stics_version Name of the STICS version. Optional, used if the `file`
 #' argument is not provided. In this case the function uses a standard template
-#' associated to the stics version.
+#' associated to the STICS version.
 #'
-#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
-#' argument `stics_version`.
+#' @details Please see `get_stics_versions_compat()` for the full list of
+#' STICS versions that can be used for the argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'
@@ -39,14 +41,15 @@
 #'
 #'
 #' The first column gives the soil name, all following
-#' columns give the parameter values to put in the sols.xml file for each soil row.
+#' columns give the parameter values to put in the sols.xml file for each
+#' soil row.
 #'
-#' The first column name must contain the keyword Soil or soil or SOIL as a prefix to be detected
-#' (as shown in the table extract above).
+#' The first column name must contain the keyword Soil or soil or SOIL as
+#' a prefix to be detected (as shown in the table extract above).
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xmlDocument object
+#' @return an invisible xml_document object
 #'
 #' @examples
 #' \dontrun{
@@ -135,7 +138,7 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
 
   # for getting onlye the xml doc in return
   if (!base::is.null(sols_out_file)) {
-    saveXmlDoc(xml_doc, sols_out_file)
+    save_xml_doc(xml_doc, sols_out_file)
   }
 
   return(invisible(xml_doc))

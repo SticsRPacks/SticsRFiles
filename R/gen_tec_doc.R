@@ -1,15 +1,15 @@
-#' @title Generate from a template or modify a Stics tec xmlDocument
+#' @title Generate from a template or modify a STICS tec xml_document
 #'
-#' @param xml_doc an xmlDocument object (created from an ini file)
+#' @param xml_doc an xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
-#' @param stics_version the stics files version to use (optional,
+#' @param stics_version the STICS files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
 #' @param dict List of correspondence between given parameter names and
-#' Stics internal names.
+#' STICS internal names.
 #' @param ... Additional arguments (for example, coming from a call
 #' from gen_tec_xml using a na_values argument)
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #'
 #' @examples
@@ -34,11 +34,8 @@ gen_tec_doc <- function(xml_doc = NULL,
                         ...) {
 
 
-  # Fix first time
-  sort <- TRUE
   dot_args <- list(...)
   dot_args_names <- names(dot_args)
-  if ("sort" %in% dot_args_names) sort <- dot_args$sort
 
   na_values <- NA
   if ("na_values" %in% dot_args_names) na_values <- dot_args$na_values
@@ -66,13 +63,12 @@ gen_tec_doc <- function(xml_doc = NULL,
       param_table, 1,
       function(x) {
         gen_tec_doc(
-          xml_doc = cloneXmlDoc(xml_doc),
+          xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x),
-            stringsAsFactors = FALSE
+                                      stringsAsFactors = FALSE
           ),
           stics_version = stics_version,
           dict = dict,
-          sort = FALSE,
           na_values = na_values
         )
       }
@@ -112,7 +108,6 @@ gen_tec_doc <- function(xml_doc = NULL,
     )
   }
 
-  # Getting scalar and vector parameter names
   vec_idx <- unlist(lapply(
     table_params,
     function(x) length(grep(pattern = "_[0-9]*$", names(x))) > 0
@@ -139,15 +134,13 @@ gen_tec_doc <- function(xml_doc = NULL,
   # 3- Excluding the other one from names vector
   if ("codemodfauche" %in% table_names) {
     code <- table_params[["codemodfauche"]]
-    modfauche <- NULL
-    rmmodfauche <- NULL
+
     if (code == "2") {
-      modfauche <- "julfauche"
       rmmodfauche <- "tempfauche"
-    }
-    if (code == "3") {
-      modfauche <- "tempfauche"
+    } else if (code == "3") {
       rmmodfauche <- "julfauche"
+    } else {
+      rmmodfauche <- NULL
     }
     vec_names <- setdiff(vec_names, rmmodfauche)
   }
@@ -171,8 +164,8 @@ gen_tec_doc <- function(xml_doc = NULL,
     nb_values <- length(param_values)
     if ((nb_values > 0) && nb_par == nb_values) {
       set_param_value(xml_doc,
-        param_name = par_name,
-        param_value = param_values
+                      param_name = par_name,
+                      param_value = param_values
       )
     } else {
       if (nb_par > 0) {
@@ -188,16 +181,18 @@ gen_tec_doc <- function(xml_doc = NULL,
         # node cannot be removed. Consistency error between the
         # values detected in the parameters table and the param type
         # in the xml file.
-        if (xmlName(xmlParent(getNodeS(
+        if (XML::xmlName(XML::xmlParent(get_nodes(
           xml_doc,
           xpath_node
         )[[1]])) == "formalisme") {
           gen_error <- TRUE
           cat(paste(
             "The parameter", par_name,
-            "is unique in the original xml file, and not attached to \"intervention\"\n"
+            "is unique in the original xml file,",
+            "and not attached to \"intervention\"\n"
           ))
-          cat("Multiple values are present in input table, check consistency with formalism definition !\n")
+          cat(paste0("Multiple values are present in input table,",
+                     " check consistency with formalism definition !\n"))
           cat("The treatment for this parameter is aborted.")
           cat("\n")
           next
@@ -219,11 +214,11 @@ gen_tec_doc <- function(xml_doc = NULL,
       # attribute
       # Cloning "ta_entete" node, from the current xml_doc
       # renaming it and reusing it for intervention nodes creation
-      op_node <- xmlClone(getNodeS(
+      op_node <- XML::xmlClone(get_nodes(
         xml_doc,
         paste0("//ta_entete[colonne[@nom='", par_name, "']]")
       )[[1]])
-      xmlName(op_node) <- "intervention"
+      XML::xmlName(op_node) <- "intervention"
 
 
       # Getting needed nodes number and formalism or choice
@@ -255,7 +250,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       is_thin <- par_name %in% c("juleclair", "nbinfloecl")
       if (is_thin) {
         parent_name <- "thinning"
-        # parent_path <- get_param_type(xml_doc, "ta", "option", parent_name)$xpath
+
         parent_path <- get_param_type(xml_doc, "ta", "choix", parent_name)$xpath
       }
       #-------------------------------------------------------------------------
@@ -272,7 +267,6 @@ gen_tec_doc <- function(xml_doc = NULL,
       set_param_value(
         xml_doc = xml_doc,
         param_name = par_name,
-        # param_value = table_params[[par_name]])
         param_value = param_values
       )
 

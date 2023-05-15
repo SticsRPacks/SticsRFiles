@@ -15,14 +15,16 @@ get_javastics_cmd(
 \arguments{
 \item{javastics}{JavaSTICS installation root folder}
 
-\item{java_cmd}{Name or path of the java virtual machine executable (optional)}
+\item{java_cmd}{Name or path of the java virtual machine executable
+(optional)}
 
 \item{type}{keywords for filtering in the returned list what kind of command
 to be generated (default both: "generate" and "run")}
 
-\item{workspace}{A JavaStics workspace path (optional)}
+\item{workspace}{A JavaSTICS workspace path (optional)}
 
-\item{verbose}{Logical value (optional), TRUE to display run infos, FALSE otherwise (default)}
+\item{verbose}{Logical value (optional), TRUE to display run information,
+FALSE otherwise (default)}
 }
 \value{
 A named list with fields : command (java command/path), cmd_generate
@@ -34,7 +36,7 @@ files generation from XML and/or running simulation through
 a system2 command execution
 }
 \details{
-According to a JavaStics version (i.e. javastics path content) and
+According to a JavaSTICS version (i.e. javastics path content) and
 the OS type, the function builds command line strings used from system2
 calls. Commands may be filtered using type argument.
 }

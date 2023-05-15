@@ -13,12 +13,13 @@ gen_obs(
 )
 }
 \arguments{
-\item{df}{A data frame containing the values of the observations to use (see Details).}
+\item{df}{A data frame containing the values of the observations to use
+(see Details).}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
-\item{usms_list}{An optional list of usms names to be used for selecting which files to generate
-from the obs_table}
+\item{usms_list}{An optional list of usms names to be used for selecting
+which files to generate from the obs_table}
 
 \item{obs_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{obs_table} is no
 longer supported, use \code{df} instead.}
@@ -27,28 +28,31 @@ longer supported, use \code{df} instead.}
 longer supported, use \code{out_dir} instead.}
 }
 \value{
-A return logical status indicating if any error when writing files (FALSE),
-TRUE when no errors.
+A return logical status indicating if any error when writing
+files (FALSE), TRUE when no errors.
 }
 \description{
 Generating observation data files from a data.frame
 }
 \details{
-\code{df} is a \code{data.frame} with the following format:\tabular{lrrrrlrrrrrr}{
-   usm_name \tab ian \tab mo \tab jo \tab jul \tab densite \tab lai(n) \tab masec(n) \tab azomes \tab ammomes \tab resmes \tab AZnit(1) \cr
-   USM_2017_T1_CI \tab 2017 \tab 9 \tab 6 \tab 249 \tab NA \tab NA \tab 0.31 \tab 27.07395 \tab 9.364425 \tab 285 \tab 15.39825 \cr
-   USM_2017_T1_CI \tab 2017 \tab 9 \tab 20 \tab 263 \tab NA \tab NA \tab 0.60 \tab 27.90000 \tab 9.800000 \tab 270 \tab NA \cr
-   USM_2018_T1 \tab 2017 \tab 10 \tab 20 \tab 293 \tab NA \tab 0.1 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
-   USM_2018_T1 \tab 2018 \tab 5 \tab 15 \tab 482 \tab NA \tab 1.2 \tab NA \tab NA \tab NA \tab NA \tab NA \cr
+\code{df} is a \code{data.frame} with the following format:\tabular{lrrrrlrrr}{
+   usm_name \tab ian \tab mo \tab jo \tab jul \tab densite \tab lai(n) \tab masec(n) \tab azomes \cr
+   USM_2017_T1_CI \tab 2017 \tab 9 \tab 6 \tab 249 \tab NA \tab NA \tab 0.31 \tab 27.07395 \cr
+   USM_2017_T1_CI \tab 2017 \tab 9 \tab 20 \tab 263 \tab NA \tab NA \tab 0.60 \tab 27.90000 \cr
+   USM_2018_T1 \tab 2017 \tab 10 \tab 20 \tab 293 \tab NA \tab 0.1 \tab NA \tab NA \cr
+   USM_2018_T1 \tab 2018 \tab 5 \tab 15 \tab 482 \tab NA \tab 1.2 \tab NA \tab NA \cr
 }
 
 \itemize{
-\item \code{usm_name} column contains usms names which are used as output .obs files names
-\item \code{ian}, \code{mo}, \code{jo} and \code{jul} are mandatory (year, month, day and julian date)
+\item \code{usm_name} column contains usms names which are used as output .obs
+files names
+\item \code{ian}, \code{mo}, \code{jo} and \code{jul} are mandatory
+(year, month, day and julian date)
 \item Other columns one per variable contain observations values or NA
 }
 
-@seealso \code{\link{get_var_info}} for getting variable right syntax or searching a variable name.
+@seealso \code{\link{get_var_info}} for getting variable right syntax or
+searching a variable name.
 }
 \examples{
 \dontrun{

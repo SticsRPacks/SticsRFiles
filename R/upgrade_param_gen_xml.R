@@ -2,13 +2,16 @@
 #'
 #' @param file Path of a param_gen.xml file
 #' @param out_dir Output directory path of the generated file
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
+#' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
+#'
+#' @return None
 #'
 #' @export
 #'
@@ -36,7 +39,7 @@ upgrade_param_gen_xml <- function(file,
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
-    # Extracting or detecting the Stics version corresponding to the xml file
+    # Extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file, stics_version)
 
@@ -62,37 +65,39 @@ upgrade_param_gen_xml <- function(file,
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
-  # Setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+  # Setting file STICS version
+  set_xml_file_version(old_doc,
+                       new_version = target_version,
+                       overwrite = overwrite)
 
   # Nodes to remove
   rm_names <- c("FINERT", "FMIN1", "FMIN2", "FMIN3", "khaut", "rayon", "concrr")
 
   rm_nodes <- lapply(rm_names, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//param[@nom='", x, "']")
     )
   })
-  lapply(rm_nodes, function(x) removeNodes(x))
+  lapply(rm_nodes, function(x) XML::removeNodes(x))
 
 
   # Nodes to change
   # <param format="real" max="20.0" min="1.0" nom="k_desat">3.0</param>
   # k_desat to kdesat
-  nodes_to_change <- getNodeS(old_doc, path = "//param[@nom='k_desat']")
+  nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='k_desat']")
   if (!is.null(nodes_to_change)) {
-    setAttrValues(old_doc,
-      path = "//param[@nom='k_desat']",
-      attr_name = "nom",
-      values_list = "kdesat"
+    set_attrs_values(old_doc,
+                  path = "//param[@nom='k_desat']",
+                  attr_name = "nom",
+                  values_list = "kdesat"
     )
   }
 
 
 
   # Nodes to add
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<param format="real" max="1.0" min="0.0" nom="GMIN1">0.0007</param>
 <param format="real" max="1.0" min="0.0" nom="GMIN2">0.02519</param>
 <param format="real" max="1.0" min="0.0" nom="GMIN3">0.015</param>
@@ -104,50 +109,22 @@ upgrade_param_gen_xml <- function(file,
   )
 
 
-  new_nodes <- getNodeSet(new_node, path = "//param")
-  prev_sibling <- getNodeS(old_doc, "//param[@nom='TREFr']")[[1]]
+  new_nodes <- XML::getNodeSet(new_node, path = "//param")
+  prev_sibling <- get_nodes(old_doc, "//param[@nom='TREFr']")[[1]]
 
   # For adding them in the right order
   for (n in seq_along(new_nodes)) {
-    new <- xmlClone(new_nodes[[n]])
-    addSibling(prev_sibling, new)
+    new <- XML::xmlClone(new_nodes[[n]])
+    XML::addSibling(prev_sibling, new)
     prev_sibling <- new
   }
 
-  # TODO: evaluate if necessary
-  # # changing options values, formalisms names
-  # # codesnow
-  # setAttrValues(old_doc, path = "//option[@nomParam='codesnow']",
-  #               attr_name = "choix",
-  #               values_list = "2")
-  #
-  # # code_pdenit
-  # setAttrValues(old_doc, path = "//option[@nomParam='code_pdenit']",
-  #               attr_name = "choix",
-  #               values_list = "1")
-  #
-  # # <choix code="2" nom="Intermediate crop on surface">
-  # sel_nodes <- SticsRFiles:::getNodeS(old_doc, path="//choix[starts-with(@nom,'Intermediate')]")
-  # if (! is.null(sel_nodes)) {
-  #   lapply(sel_nodes, function(x)
-  #   {
-  #     f <- xmlAttrs(sel_nodes[[1]])[["nom"]]
-  #     xmlAttrs(sel_nodes[[1]])[["nom"]] <- gsub("Intermediate","Cover",f)
-  #   })
-  # }
-  #
-  # # <choix code="2" nom="Intermediate crop on surface">
-  # sel_nodes <- SticsRFiles:::getNodeS(old_doc, path="//choix[@nom='Others.2 ploughed in')]")
-  # if (! is.null(sel_nodes)) {
-  #   lapply(sel_nodes, function(x)
-  #   {
-  #     xmlAttrs(sel_nodes[[1]])[["nom"]] <- "Dead rhizomes in soil"
-  #   })
-  # }
 
   # Writing to file param_gen.xml
-  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite)
+  write_xml_file(old_doc,
+                 file.path(out_dir, basename(file)),
+                 overwrite = overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

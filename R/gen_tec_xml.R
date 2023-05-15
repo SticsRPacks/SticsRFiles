@@ -1,46 +1,53 @@
-#' @title Generate Stics tec xml file(s) from a template or an input file
+#' @title Generate STICS tec xml file(s) from a template or an input file
 #'
-#' @param param_df A table (df, tibble) containing the values of the parameters to use (see details)
-#' @param file Path of a tec xml file to be used as a template. Optional, if not provided, the function will use a standard template depending on the stics version.
+#' @param param_df A table (df, tibble) containing the values of the parameters
+#' to use (see details)
+#' @param file Path of a tec xml file to be used as a template. Optional,
+#' if not provided, the function will use a standard template depending
+#' on the STICS version.
 #' @param out_dir Path of the directory where to generate the file(s).
-#' @param stics_version Name of the Stics version. Optional, used if the `file` argument is not provided. In this case the function uses a standard template associated to the stics version.
-#' @param na_values value to use as missing value in param_table (optional, default : NA)
+#' @param stics_version Name of the STICS version. Optional, used if
+#' the `file` argument is not provided. In this case the function uses a
+#' standard template associated to the STICS version.
+#' @param na_values value to use as missing value in param_table
+#' (optional, default : NA)
 #' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
 #'   longer supported, use `param_df` instead.
 #' @param tec_in_file `r lifecycle::badge("deprecated")` `tec_in_file` is no
 #'   longer supported, use `file` instead.
 #' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
 #'   longer supported, use `out_dir` instead.
-# @param dict List of correspondance between given parameter names and internal names.
 #'
-#' @details Please see `get_stics_versions_compat()` for the full list of stics versions that can be used for the
+#' @details Please see `get_stics_versions_compat()` for the full list of
+#' STICS versions that can be used for the
 #' argument `stics_version`.
 #'
 #'  `param_df` is a `data.frame` with the following format:
 #'
-#' |Tec_name                                         | julres_1| coderes_1| qres_1| Crespc_1| CsurNres_1|
-#' |:------------------------------------------------|--------:|---------:|------:|--------:|----------:|
-#' |USM_2017_T1_CI_tec.xml                           |      NA |         1|      9|       42|         90|
-#' |BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml |      110|         1|      9|       42|         90|
-#' |BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml     |       73|         1|      9|       42|         90|
-#' |AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
-#' |AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
-#' |FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml             |       70|         1|      9|       42|         90|
-#' |MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml             |       81|         1|      9|       42|         90|
-#' |MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml       |      100|         1|      9|       42|         90|
-#' |MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml       |      100|         1|      9|       42|         90|
-#' |FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml       |       92|         1|      9|       42|         90|
-#' |FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|      9|       42|         90|
+#' |Tec_name                                         | julres_1| coderes_1|
+#' |:------------------------------------------------|--------:|---------:|
+#' |USM_2017_T1_CI_tec.xml                           |      NA |         1|
+#' |BIN_CANPC_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml |      110|         1|
+#' |BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml     |       73|         1|
+#' |AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|
+#' |AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|
+#' |FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml             |       70|         1|
+#' |MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml             |       81|         1|
+#' |MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml       |      100|         1|
+#' |MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml       |      100|         1|
+#' |FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml       |       92|         1|
+#' |FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml       |       82|         1|
 #'
-#' The first column gives the tec file name (to be generated), all following columns give the parameter value to put
-#' in the file, and each line denotes a separate tec file (for e.g. several USMs).
+#' The first column gives the tec file name (to be generated), all following
+#' columns give the parameter value to put in the file, and each line denotes a
+#' separate tec file (for e.g. several USMs).
 #'
-#' The first column name must contain the keyword tec or Tec or TEC as a prefix to be detected
-#' (as shown in the table extract above).
+#' The first column name must contain the keyword tec or Tec or TEC as
+#' a prefix to be detected (as shown in the table extract above).
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #' @examples
 #' \dontrun{
@@ -52,28 +59,36 @@
 #'
 #' @export
 #'
-# TODO: refactor with gen_sta_file, gen_ini_file : same code
+
 gen_tec_xml <- function(param_df = NULL,
                         file = NULL,
-                        # tec_names = NULL,
                         out_dir = getwd(),
                         stics_version = "latest",
-                        na_values = NA, # ) { #,  #dict = NULL) {
+                        na_values = NA,
                         param_table = lifecycle::deprecated(),
                         tec_in_file = lifecycle::deprecated(),
                         out_path = lifecycle::deprecated()) {
+
+  # TODO: refactor with gen_sta_file, gen_ini_file : same code
+
   if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_tec_xml(param_table)", "gen_tec_xml(param_df)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_tec_xml(param_table)",
+                              "gen_tec_xml(param_df)")
   } else {
     param_table <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(tec_in_file)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_tec_xml(tec_in_file)", "gen_tec_xml(file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_tec_xml(tec_in_file)",
+                              "gen_tec_xml(file)")
   } else {
     tec_in_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_tec_xml(out_path)", "gen_tec_xml(out_dir)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_tec_xml(out_path)",
+                              "gen_tec_xml(out_dir)")
   } else {
     out_path <- out_dir # to remove when we update inside the function
   }
@@ -95,13 +110,6 @@ gen_tec_xml <- function(param_df = NULL,
   }
   tec_col <- param_names[col_id]
 
-  # Pending -------------------------------------------------------------
-  # Filtering on tec_names vector arg
-  # if (!is.null(tec_names)) {
-  #   param_table <- param_table[param_table[[tec_col]] %in% tec_names, ]
-  # }
-  #----------------------------------------------------------------------
-
 
   # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(
@@ -113,7 +121,7 @@ gen_tec_xml <- function(param_df = NULL,
   # dict = dict)
 
 
-  if (!is.list(xml_docs) && methods::is(xml_docs, "xmlDocument")) {
+  if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
 
@@ -123,7 +131,8 @@ gen_tec_xml <- function(param_df = NULL,
 
   if (any(out_idx)) {
     cat("\n")
-    cat("Errors have been detected while trying to replace parameters values in xml documents\n")
+    cat(paste0("Errors have been detected while trying to replace",
+               "parameters values in xml documents\n"))
     cat(paste(sum(!out_idx), "files have been generated !\n"))
     # selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
@@ -160,9 +169,9 @@ gen_tec_xml <- function(param_df = NULL,
   tec_out_file <- tec_out_file[!out_idx]
 
   # saving files
-  # TODO: vectorize the saveXmlDoc method of the xmlDocument class
-  for (f in 1:length(xml_docs)) {
-    saveXmlDoc(xml_docs[[f]], tec_out_file[[f]])
+  # TODO: vectorize the saveXmlDoc method of the xml_document class
+  for (f in seq_along(xml_docs)) {
+    save_xml_doc(xml_docs[[f]], tec_out_file[[f]])
   }
 
   return(invisible(xml_docs))

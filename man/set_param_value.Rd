@@ -14,7 +14,7 @@ set_param_value(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object}
+\item{xml_doc}{an xml_document object}
 
 \item{param_name}{parameter name}
 
@@ -32,7 +32,7 @@ set_param_value(
 A logical vector with successes status return
 }
 \description{
-Setting parameter value in a xmlDocument object
+Setting parameter value in a xml_document object
 }
 \examples{
 \dontrun{

@@ -2,12 +2,12 @@
 % Please edit documentation in R/stics_environment.R
 \name{sticsenv_create}
 \alias{sticsenv_create}
-\title{Create a stics env}
+\title{Create a new STICS environment}
 \usage{
 sticsenv_create(name, env_name = ".GlobalEnv")
 }
 \arguments{
-\item{name}{The name of the stics environment}
+\item{name}{The name of the STICS environment}
 
 \item{env_name}{The name of the parent environment}
 }
@@ -15,6 +15,6 @@ sticsenv_create(name, env_name = ".GlobalEnv")
 The new environment
 }
 \description{
-Create a new stics envirnoment
+Create a new STICS environment
 }
 \keyword{internal}

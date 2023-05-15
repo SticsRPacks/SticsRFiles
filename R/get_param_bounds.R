@@ -1,15 +1,15 @@
-#' @title Getting parameters bounds from an xmlDocument object
+#' @title Getting parameters bounds from an xml_document object
 #'
 #' @description Extracting parameters min and/or max bounds for a parameter
-#' or a vector of parameters from an xmlDocument class object.
+#' or a vector of parameters from an xml_document class object.
 #'
-#' @param xml_doc an xmlDocument class object
+#' @param xml_doc an xml_document class object
 #' @param param_name a parameter name of a vector of parameters names
-#' @param bounds_name bounds name "min" or "max" (optional, default value c("min","max ))
+#' @param bounds_name bounds name "min" or "max"
+#' (optional, default value c("min","max ))
 #' @param output Output data format either "list" or "data.frame" (default)
 #'
 #' @return A data.frame with the name of the parameter and min, max values or
-#'
 #' one of them. Or a named list (with parameter name) containing a named vector
 #' for bounds.
 #'
@@ -21,7 +21,8 @@
 #'
 #' par_bounds <- SticsRFiles:::get_param_bounds(sta_doc, "zr")
 #'
-#' par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"))
+#' par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,
+#'                                                  c("zr", "altistation"))
 #'
 #'
 #' SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"), "min")
@@ -29,13 +30,12 @@
 #'
 #' @keywords internal
 #'
-#' @importFrom dplyr bind_rows
 #'
 get_param_bounds <- function(xml_doc,
                              param_name,
                              bounds_name = NULL,
                              output = "data.frame") {
-  output_formats <- c("list", "data.frame")
+
   def_names <- c("min", "max")
 
   df_out <- output == "data.frame"
@@ -85,7 +85,7 @@ get_param_bounds <- function(xml_doc,
   # for an option parameter, getting
   if (param_type$type == "option") {
     xpath <- paste0(xpath, "/choix")
-    tmp_values <- as.numeric(getAttrsValues(xml_doc, xpath, "code"))
+    tmp_values <- as.numeric(get_attrs_values(xml_doc, xpath, "code"))
     bounds_values <- c(
       min(tmp_values),
       max(tmp_values)
@@ -95,12 +95,11 @@ get_param_bounds <- function(xml_doc,
     # Adding unique for repeated parameters : for exmaple in sols.xml
     bounds_values <- lapply(
       bounds_name,
-      function(x) as.numeric(getAttrsValues(xml_doc, xpath, x))
+      function(x) as.numeric(get_attrs_values(xml_doc, xpath, x))
     )
   }
 
 
-  # print(xpath)
 
   # Fixing bounds values
   bounds_values <- list(fix_bounds(bounds_values, bounds_name, param_name))
@@ -124,10 +123,6 @@ fix_bounds <- function(values, bounds_name, param_name) {
   values <- fix_dup_bounds(values, bounds_name, param_name)
 
   values <- fix_missing_bounds(values, bounds_name)
-
-  # if (all(base::is.na(values))) return(values)
-
-
 
   return(values)
 }

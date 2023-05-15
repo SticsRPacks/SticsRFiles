@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_params_dict.R
 \name{get_params_dict}
 \alias{get_params_dict}
-\title{Getting an intern dictionnary or merging it with a given dictionnary
+\title{Getting an intern dictionary or merging it with a given dictionary
 given as argument}
 \usage{
 get_params_dict(in_dict = NULL)
@@ -14,20 +14,20 @@ get_params_dict(in_dict = NULL)
 A named list with XML parameters names
 }
 \description{
-Getting an intern dictionnary or merging it with a given dictionnary
+Getting an intern dictionary or merging it with a given dictionary
 given as argument
 }
 \examples{
 \dontrun{
-# Getting internal dictionnary default content
+# Getting internal dictionary default content
 # get_param_dict()
 
-# Giving a new dictionnary
+# Giving a new dictionary
 in_dict <- list(name1 = "param_name1", name2 = "param_name2")
 
 get_params_dict(in_dict)
 
-# Giving a new dictionnary with common values with the internal one
+# Giving a new dictionary with common values with the internal one
 in_dict <- list(name1 = "amount", name2 = "julapI_or_sum_upvt")
 
 get_params_dict(in_dict)

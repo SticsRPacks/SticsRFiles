@@ -19,11 +19,17 @@ knitr::opts_chunk$set(
 
 ```
 
-```{r}
+```{r eval=FALSE}
 library(SticsRFiles)
 ```
+
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
+```
+
 ```{r echo=FALSE}
 stics_version <- get_stics_versions_compat()$latest_version
+examples_path <- get_examples_path("xml", stics_version = stics_version)
 ```
 
 ```{r setup, results="hide", echo=FALSE}
@@ -86,11 +92,17 @@ This kind of definition is common for all files types and the parameter name is 
 The corresponding parameter name for an **option** node is stored in an attribute named `nomParam` and the corresponding value is given in the attribute `choix` of the option node. For example, the value of the parameter `codesymbiose` is `2` in the example (*choix="2"*).
 
 ```{r , eval = TRUE, echo = FALSE, class.output="xml"}
-par_xml <- file.path(get_examples_path("xml"), "param_gen.xml")
+par_xml <- file.path(examples_path, "param_gen.xml")
 par <- readLines(par_xml)
 idx_water <- grep(pattern = "formalisme", par)[9:10]
-cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
+#cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
 ```
+
+````{r results='asis', echo = FALSE}
+cat('```xml\n')
+cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
+cat('\n```\n')
+````
 
 * Parameters with several values (for soil layers, technical operations,...)
 Several values may be defined for example relatively to soil parameters (different layers) or for crop management operations (with time repetitions).
@@ -99,23 +111,36 @@ Several values may be defined for example relatively to soil parameters (differe
 In the above file extract for soil parameters, each set of parameters (included in `tableau` nodes) is repeated for each soil layer (layers names are set in the `nom` attributes from *layer 1* to *layer 5*). The parameters names are defined in a `nom` attribute in each `colonne` XML tag.
 
 ```{r , eval = TRUE, echo = FALSE, class.output="xml"}
-sol_xml <- file.path(get_examples_path("xml"), "sols.xml")
+sol_xml <- file.path(examples_path, "sols.xml")
 sol <- readLines(sol_xml)
 lines_sol <- c(sol[3], "...", sol[70:79], "...", sol[110:119], "...")
-cat(paste(lines_sol, collapse = "\n"))
+#cat(paste(lines_sol, collapse = "\n"))
 ```
+
+````{r results='asis', echo = FALSE}
+cat('```xml\n')
+cat(paste(lines_sol, collapse = "\n"))
+cat('\n```\n')
+````
 
 * Example from tec files
 In the above file extract for crop management parameters, each set of parameters is repeated for each operation (undefined number) corresponding to an `intervention` node . Inside each `intervention` node, parameters names are defined in a `nom` attribute for each `colonne` XML tag.
 
 ```{r , eval = TRUE, echo = FALSE, class.output="xml"}
-tec_xml <- file.path(get_examples_path("xml"), "file_tec.xml")
+tec_xml <- file.path(examples_path, "file_tec.xml")
 tec <- readLines(tec_xml)[3:22]
 tec <- c(tec, "...", tec[12:20], "...")
 tec[23] <- gsub(pattern = "112", replacement = "220", tec[23])
 
-cat(paste(tec, collapse = "\n"))
+#cat(paste(tec, collapse = "\n"))
 ```
+
+````{r results='asis', echo = FALSE}
+cat('```xml\n')
+cat(paste(tec, collapse = "\n"))
+cat('\n```\n')
+````
+
 
 ## Functions for XML files manipulations
 
@@ -126,7 +151,7 @@ In some cases, information relative to upward dependence are needed for extracti
 # Getting XML files examples from the `SticsRFiles` library
 
 Several XML examples files have bee included  in the package in order to use them in `reproducible`
-**manipulations** and **results** described in this document. These examples files are extracted from the JavaStics
+**manipulations** and **results** described in this document. These examples files are extracted from the JavaSTICS
 standard distribution (some of them have been renamed).
 
 ## Getting the XML files source directory
@@ -273,7 +298,7 @@ get_param_info(param = c("albedo", "latitude", "humcapil"))
 
 ### Getting parameters information using partial names matching
 
-A search with uncomplete names may be done as follows
+A search with incomplete names may be done as follows
 
 ```{r}
 

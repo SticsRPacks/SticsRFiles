@@ -17,11 +17,12 @@ get_values_by_param(
 indexed with suffixes _1, _2 ... i.e. paramname_1, paramname_2
 or not for scalar parameters}
 
-\item{param_name}{Optional arameter(s) name(s) vector}
+\item{param_name}{Optional parameter(s) name(s) vector}
 
 \item{lines_id}{Optional data.frame lines numerical identifiers}
 
-\item{na_values}{value to use as missing value in param_table (optional, default : NA)}
+\item{na_values}{value to use as missing value in param_table
+(optional, default : NA)}
 }
 \value{
 a named list of parameters values, with sorted values for multiple
@@ -33,7 +34,8 @@ from data.frame row(s), for all parameters columns or a selection
 }
 \examples{
 \dontrun{
-download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+download_usm_xl(file = "inputs_stics_example.xlsx",
+                dest_dir = "/path/to/dest/dir")
 xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 tec_param_df <- read_excel(xl_path, sheet = "Tec")
 SticsRFiles:::get_values_by_param(params_table = tec_param_df)

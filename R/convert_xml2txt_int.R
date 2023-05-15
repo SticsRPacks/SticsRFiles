@@ -1,5 +1,5 @@
 #' @title Transforming an xml file with the help of an xsl style file
-#' @description Using an xslt tranformation, an xml input file is converted to
+#' @description Using an xslt transformation, an xml input file is converted to
 #' an other file format (text, xml). The output file name may be given or
 #' calculated.
 #' In the latest case, the extension is defined after getting xsl method from
@@ -13,7 +13,8 @@
 #' @examples
 #' \dontrun{
 #' xml_plt <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
-#' xsl_file <- "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
+#' xsl_file <-
+#'    "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
 #'
 #' SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
 #' }
@@ -21,8 +22,6 @@
 #' @keywords internal
 #'
 convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
-
-  # library(xslt)
 
   f_names <- c(xml_file, style_file)
   ex_files <- file.exists(f_names)
@@ -40,8 +39,7 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
       fixed = TRUE
     ))
   })
-  # files_ext = c(unlist(strsplit(xml_file,".",fixed = TRUE))[2],
-  # unlist(strsplit(style_file,".",fixed = TRUE))[2])
+
   files_ext <- unlist(lapply(names_split, function(x) x[length(x)]))
   # any not matching expected extensions
   if (!all(files_ext %in% c("xml", "xsl"))) {

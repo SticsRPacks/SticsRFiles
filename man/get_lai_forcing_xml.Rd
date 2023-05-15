@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_lai_forcing.R
 \name{get_lai_forcing_xml}
 \alias{get_lai_forcing_xml}
-\title{Is LAI forced ? plants number per usm, all or selected from a given list}
+\title{Is LAI forced ? plants number per usm, all or selected from
+a given list}
 \usage{
 get_lai_forcing_xml(usm_xml_path, usms_list = c())
 }

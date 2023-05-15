@@ -2,7 +2,7 @@
 % Please edit documentation in R/manage_stics_versions.R
 \name{set_versions_info}
 \alias{set_versions_info}
-\title{Writing information about Stics versions and related example files
+\title{Writing information about STICS versions and related example files
 directories in the SticsRFiles library or package}
 \usage{
 set_versions_info(
@@ -16,17 +16,18 @@ set_versions_info(
 \item{version_name}{name (i.e. "VX.Y") of the version to add in versions
 information}
 
-\item{location}{The destination where to write information "install" for writing
-things in the installed SticsRFiles library (default), "package" for writing
-them in the package project (in RStudio)}
+\item{location}{The destination where to write information "install"
+for writing things in the installed SticsRFiles library (default),
+"package" for writing them in the package project (in RStudio)}
 
 \item{overwrite}{A logical, TRUE to overwrite versions info file,
 FALSE otherwise (default)}
 
-\item{verbose}{Logical, TRUE for displaying warnings (default), FALSE otherwise}
+\item{verbose}{Logical, TRUE for displaying warnings (default),
+FALSE otherwise}
 }
 \description{
-Writing information about Stics versions and related example files
+Writing information about STICS versions and related example files
 directories in the SticsRFiles library or package
 }
 \keyword{internal}

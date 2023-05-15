@@ -13,7 +13,8 @@ get_plants_nb_xml(
 \arguments{
 \item{usms_file}{Path of usms.xml file}
 
-\item{usms_list}{Usms selection list inside usms from usms.xml file (optional, see details)}
+\item{usms_list}{Usms selection list inside usms from usms.xml file
+(optional, see details)}
 
 \item{usm_xml_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_xml_path} is no
 longer supported, use \code{usms_file} instead.}

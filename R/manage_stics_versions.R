@@ -1,4 +1,4 @@
-#' Getting read only account identifiers for the Stics subversion repository
+#' Getting read only account identifiers for the STICS subversion repository
 #'
 #' @return A list with fields `username` and `password`
 #' @keywords internal
@@ -19,14 +19,14 @@ get_svn_identifiers <- function() {
 
 
 
-#' Dowloading inputs and/or outputs csv files from a repository branch/tag
+#' Downloading inputs and/or outputs csv files from a repository branch/tag
 #'
 #' @param branch_url Address of the branch or tag
 #' @param dest_dir Directory path where to store files
 #' @param file_name File name(s)
 #' or keyword "all" for both files (default)
-#' @param ids Connexion identifiers to the subversion server
-#' @param overwrite Logical, TRUE for overwtiting files, FALSE otherwise
+#' @param ids Connection identifiers to the subversion server
+#' @param overwrite Logical, TRUE for overwriting files, FALSE otherwise
 #' @param verbose TRUE to display warnings (default), FALSE otherwise
 #'
 # @return
@@ -35,8 +35,8 @@ get_svn_identifiers <- function() {
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::download_csv_files(
-#'   branch_url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
-#'   dest_dir = system.file("extdata", package = "SticsRFiles")
+#'  branch_url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
+#'  dest_dir = system.file("extdata", package = "SticsRFiles")
 #' )
 #' }
 download_csv_files <- function(branch_url,
@@ -80,8 +80,8 @@ download_csv_files <- function(branch_url,
 
     file_path[[f]] <- try(
       curl::curl_download(file_url[f],
-        handle = h,
-        destfile = dest_file
+                          handle = h,
+                          destfile = dest_file
       ),
       TRUE
     )
@@ -89,7 +89,8 @@ download_csv_files <- function(branch_url,
 
   err_idx <- unlist(lapply(file_path, function(x) class(x) == "try-error"))
 
-  if (any(err_idx) && verbose) warning("A least one file does not exist on the server !")
+  if (any(err_idx) && verbose)
+    warning("A least one file does not exist on the server !")
 
   file_path[err_idx] <- NA
 
@@ -106,12 +107,14 @@ download_csv_files <- function(branch_url,
 #' information from
 #' @param file_name File name(s)
 #' or keyword "all" for both files (default)
-#' @param location The destination where to write information "install" for writing
+#' @param location The destination where to write information
+#' "install" for writing
 #' things in the installed SticsRFiles library (default), "package" for writing
 #' them in the package project (in RStudio)
 #' @param overwrite A logical, TRUE to overwrite csv files,
 #' FALSE otherwise (default)
-#' @param verbose Logical, TRUE for displaying warnings (default), FALSE otherwise
+#' @param verbose Logical, TRUE for displaying warnings (default),
+#' FALSE otherwise
 #'
 #' @return An invisible data.frame containing versions data
 #' @keywords internal
@@ -136,12 +139,13 @@ add_stics_version <- function(version_name,
                               overwrite = FALSE,
                               verbose = TRUE) {
 
-  # Taking only into account adding or overwriting csv files : inputs.csv, outouts.csv
-  # and updating csv file stics_versions_info.csv gathering by version existing files examples
-  # by type.
+  # Taking only into account adding or overwriting csv files :
+  # inputs.csv, outouts.csv
+  # and updating csv file stics_versions_info.csv gathering by version
+  # existing files examples by type.
   # Only the csv col is automatically filled and files copied.
-  # Other files examples must be added manuelly and corresponding information updated in
-  # stics_versions_info.csv
+  # Other files examples must be added manuelly and corresponding
+  # information updated in stics_versions_info.csv
 
   # url: modulostics branch or tag url, starting with
   # https://w3.avignon.inra.fr/svn/modulostics/branches/ or
@@ -162,19 +166,26 @@ add_stics_version <- function(version_name,
 
 
   # Getting csv files from repos (branch or tag url) or overwriting them
-  download_csv_files(url, dir_path, file_name = file_name, overwrite = overwrite, verbose = verbose)
+  download_csv_files(url,
+                     dir_path,
+                     file_name = file_name,
+                     overwrite = overwrite,
+                     verbose = verbose)
 
 
   # Writing data updated with new version information (about csv files location)
   set_versions_info(
     version_name = version_name,
-    # versions_dir = dest_dir,
     location = location,
     overwrite = overwrite,
     verbose = verbose
   )
 
-  if (verbose) cat(paste0(version_name, " successfully set in SticsRFiles ", location, ".\n"))
+  if (verbose)
+    cat(paste0(version_name,
+               " successfully set in SticsRFiles ",
+               location,
+               ".\n"))
 }
 
 
@@ -184,13 +195,17 @@ add_stics_version <- function(version_name,
 #'
 #' @param version_name name (i.e. "VX.Y") of the version to set
 #' in the csv file containing informations about versions
-#' @param delete_files Logical, TRUE for removing files (default), FALSE otherwise
+#' @param delete_files Logical, TRUE for removing files (default),
+#' FALSE otherwise
 #' @param location The destination where to remove information and data
-#' "install" for removing things from the installed SticsRFiles library (default),
-#' "package" for removing them from the package project (in RStudio)
-#' @param verbose Logical, TRUE for displaying warnings (default), FALSE otherwise
+#' "install" for removing things from the installed SticsRFiles library
+#' (default), "package" for removing them from the package project (in RStudio)
+#' @param verbose Logical, TRUE for displaying warnings (default),
+#' FALSE otherwise
 #'
-#' @return An invisible logical value, TRUE if successfull removing FALSE otherwise
+#' @return An invisible logical value, TRUE if successful removing,
+#'  FALSE otherwise
+#'
 #' @keywords internal
 #'
 #' @examples
@@ -250,8 +265,8 @@ remove_stics_version <- function(version_name,
 #' Getting package or library data path
 #'
 #' @param location The destination where to remove information and data
-#' "install" for removing things from the installed SticsRFiles library (default),
-#' "package" for removing them from the package project (in RStudio)
+#' "install" for removing things from the installed SticsRFiles library
+#' (default), "package" for removing them from the package project (in RStudio)
 #'
 #' @return A directory path
 #' @keywords internal
@@ -263,12 +278,17 @@ remove_stics_version <- function(version_name,
 #' SticsRFiles:::get_data_dir(location = "package")
 #' }
 get_data_dir <- function(location = "install") {
-  if (location == "install") dest_dir <- system.file("extdata", package = "SticsRFiles")
+  if (location == "install")
+    dest_dir <- system.file("extdata", package = "SticsRFiles")
 
   if (location == "package") {
     proj_dir <- rstudioapi::getActiveProject()
-    pkg <- gsub(pattern = "\\.Rproj$", x = list.files(pattern = "\\.Rproj$", proj_dir), replacement = "")
-    if (base::is.null(proj_dir) || pkg != "SticsRFiles") stop("Load the project SticsRFiles before proceeding !")
+    pkg <- gsub(pattern = "\\.Rproj$",
+                x = list.files(pattern = "\\.Rproj$", proj_dir),
+                replacement = "")
+    if (base::is.null(proj_dir) || pkg != "SticsRFiles")
+      stop("Load the project SticsRFiles before proceeding !")
+
     dest_dir <- file.path(proj_dir, "inst", "extdata")
   }
 
@@ -280,8 +300,8 @@ get_data_dir <- function(location = "install") {
 #' Getting versions information csv file path according to its location
 #'
 #' @param location The destination where to remove information and data
-#' "install" for removing things from the installed SticsRFiles library (default),
-#' "package" for removing them from the package project (in RStudio)
+#' "install" for removing things from the installed SticsRFiles library
+#' (default), "package" for removing them from the package project (in RStudio)
 #'
 #' @return A file path
 #' @keywords internal
@@ -293,7 +313,9 @@ get_data_dir <- function(location = "install") {
 #' SticsRFiles:::get_versions_file_path(location = "package")
 #' }
 get_versions_file_path <- function(location = "install") {
-  file.path(get_data_dir(location = location), "versions", get_versions_file_name())
+  file.path(get_data_dir(location = location),
+            "versions",
+            get_versions_file_name())
 }
 
 
@@ -303,9 +325,9 @@ get_versions_file_path <- function(location = "install") {
 #' @param url Subversion repository address of the branch, tag to get
 #' information from
 #' @param file_name File name(s)
-#' @param location The destination where to write information "install" for writing
-#' things in the installed SticsRFiles library (default), "package" for writing
-#' them in the package project (in RStudio)
+#' @param location The destination where to write information "install"
+#' for writing things in the installed SticsRFiles library (default),
+#' "package" for writing them in the package project (in RStudio)
 #' @param verbose Logical, TRUE for displaying warnings, FALSE otherwise
 #'
 #' @return An invisible data.frame containing versions data in the
@@ -334,26 +356,27 @@ update_stics_version <- function(version_name,
 
   # Forcing csv files overwriting
   add_stics_version(version_name,
-    url,
-    file_name = file_name,
-    location = location,
-    overwrite = TRUE,
-    verbose = verbose
+                    url,
+                    file_name = file_name,
+                    location = location,
+                    overwrite = TRUE,
+                    verbose = verbose
   )
 }
 
 
-#' Writing information about Stics versions and related example files
+#' Writing information about STICS versions and related example files
 #' directories in the SticsRFiles library or package
 #'
 #' @param version_name name (i.e. "VX.Y") of the version to add in versions
 #' information
-#' @param location The destination where to write information "install" for writing
-#' things in the installed SticsRFiles library (default), "package" for writing
-#' them in the package project (in RStudio)
+#' @param location The destination where to write information "install"
+#' for writing things in the installed SticsRFiles library (default),
+#' "package" for writing them in the package project (in RStudio)
 #' @param overwrite A logical, TRUE to overwrite versions info file,
 #' FALSE otherwise (default)
-#' @param verbose Logical, TRUE for displaying warnings (default), FALSE otherwise
+#' @param verbose Logical, TRUE for displaying warnings (default),
+#' FALSE otherwise
 #'
 # @return
 #' @keywords internal
@@ -416,7 +439,7 @@ set_versions_info <- function(version_name,
   )))
   versions_info <- versions_info[ord_idx, ]
 
-  # Writing the csv file in the appriopriate folder
+  # Writing the csv file in the appropriate folder
   if (write_file) {
     utils::write.csv2(
       x = versions_info,

@@ -7,13 +7,14 @@
 all_out_var(stics_version = "latest")
 }
 \arguments{
-\item{stics_version}{Name of the Stics version. Optional, can be used to search
-parameters information relative to a specific Stics version. By default the
-latest version returned by \code{get_stics_versions_compat()} is used.}
+\item{stics_version}{Name of the STICS version. Optional, can be used to
+search parameters information relative to a specific STICS version.
+By default the latest version returned by \code{get_stics_versions_compat()}
+is used.}
 }
 \description{
-Helper function to print the list of all possible variables to set as output
-from the STICS model.
+Helper function to print the list of all possible variables
+to set as output from the STICS model.
 }
 \examples{
 \dontrun{

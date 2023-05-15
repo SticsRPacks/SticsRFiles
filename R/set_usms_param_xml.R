@@ -1,20 +1,22 @@
-#' @title Setting a usm param value(s) in an usms xmlDocument
-#' @param xml_doc_object an xmlDocument object (created from an usms file)
+#' @title Setting a usm param value(s) in an usms
+#' @param xml_doc_object an  object (created from an usms file)
 #'
 #' @param usms_param usms parameters (data.frame)
-#' @param overwrite replace existing usms (TRUE) or not, updating existing ones (FALSE)
+#' @param overwrite replace existing usms (TRUE) or not,
+#' updating existing ones (FALSE)
 #'
 #' @examples
 #' \dontrun{
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' usms_doc <- SticsRFiles:::xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xml"), "inputs_stics_example.xlsx")
+#' xl_path <- file.path(get_examples_path(file_type = "xl"),
+#'                      "inputs_stics_example.xlsx")
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
 #' # For updating an existing xml doc (using existing usms names)
 #' # Creating a fake existing_doc
-#' existing_doc <- SticsRFiles:::gen_xml_doc("usms", nodes_nb = 3)
+#' existing_doc <- SticsRFiles:::gen_usms_sols_doc("usms", nodes_nb = 3)
 #' SticsRFiles:::set_param_value(existing_doc,
 #'   param_name = "usm",
 #'   param_value = usms_df$usm_nom[c(3, 1, 5)]
@@ -26,7 +28,7 @@
 #' # For a new xml doc
 #' # In that case: usms_df must contain all the usms parameters !
 #' usms_nb <- dim(usms_df)[1]
-#' new_doc <- SticsRFiles:::gen_xml_doc("usms", nodes_nb = usms_nb)
+#' new_doc <- SticsRFiles:::gen_usms_sols_doc("usms", nodes_nb = usms_nb)
 #'
 #' SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = TRUE)
 #' }
@@ -35,7 +37,9 @@
 #'
 
 
-set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FALSE) {
+set_usms_param_xml <- function(xml_doc_object,
+                               usms_param = NULL,
+                               overwrite = FALSE) {
   if (!base::is.null(usms_param)) {
     if (!("data.frame" %in% class(usms_param))) {
       stop("usms_param does not belong to data.frame class/type")
@@ -46,8 +50,8 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
     }
   }
 
-  if (!"xmlDocument" %in% class(xml_doc_object)) {
-    stop("xml_doc_object is not an XMLDocument object")
+  if (!is.xml_document(xml_doc_object)) {
+    stop("xml_doc_object is not an xml_document object")
   }
 
   # detecting usm names column
@@ -59,7 +63,7 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
   usm_col <- in_params[col_id]
 
   # default idx
-  usms_xml_idx <- 1:dim(usms_param)[1]
+  usms_xml_idx <- seq_len(dim(usms_param)[1])
 
   # Checking parameter names from param_table against xml ones
   check_param_names(
@@ -91,7 +95,8 @@ set_usms_param_xml <- function(xml_doc_object, usms_param = NULL, overwrite = FA
     # Selecting data & ordering upon xml
     # order
     usms_param <- usms_param[xl_in_xml, ]
-    usms_param <- usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]), ]
+    usms_param <-
+      usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]), ]
   } else {
     # setting usms names
     set_param_value(xml_doc_object, "usm", usms_param[[usm_col]])

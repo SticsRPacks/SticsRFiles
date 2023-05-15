@@ -1,7 +1,8 @@
-#' @title Get an xmlDocument node (set of parameters) from a Stics xml node file template
+#' @title Get an xml_document node (set of parameters) from a STICS xml node
+#' file template
 #' @param file_tag file tag among "usms","sols", "tec"
 #' @param form_name formalism name
-#' @param stics_version the stics files version to use
+#' @param stics_version the STICS files version to use
 #'
 #'
 #' @return An xml node of type "usm", "sol", "intervention"
@@ -24,7 +25,7 @@
 get_xml_base_node <- function(file_tag, form_name = NULL,
                               stics_version = "latest") {
 
-  # check/get Stics version
+  # check/get STICS version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
 
@@ -32,7 +33,8 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   node_names <- c("usm", "sol", "intervention")
   parent_nodes <- c("usms", "sols", "ta")
   formalism_tags <- list()
-  formalism_tags$tec <- c("res", "till", "irr", "ferN", "spec") # , "cutJul", "cutTemp")
+  formalism_tags$tec <- c("res", "till", "irr", "ferN", "spec")
+  # , "cutJul", "cutTemp")
   formalism_tags$usms <- c()
   formalism_tags$sols <- c()
 
@@ -82,7 +84,8 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   }
 
   # Retrieving the formalism tag
-  form_tag <- formalism_tags[[file_tag]][formalism_names[[file_tag]] %in% form_name]
+  form_tag <-
+    formalism_tags[[file_tag]][formalism_names[[file_tag]] %in% form_name]
 
   # Setting the right template name
   if (!in_formalism_name) {
@@ -92,17 +95,21 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   }
 
   # Template path in the library
-  xml_file <- file.path(get_examples_path(file_type = "xml_tmpl", stics_version = stics_version), file_name)
+  xml_file <- file.path(
+    get_examples_path(file_type = "xml_tmpl", stics_version = stics_version),
+    file_name)
 
   # Loading the template into an xmDocument
   xml_doc <- xmldocument(xml_file)
 
   # Convert it into a string
-  base_node_txt <- saveXML(getNodeS(xml_doc, paste0("//", node))[[1]])
+  base_node_txt <- XML::saveXML(get_nodes(xml_doc, paste0("//", node))[[1]])
 
-  # TODO: see if usefull to call xmlClone or not ?
+  # TODO: see if useful to call xmlClone or not ?
   # Getting the node from a node set
-  new_node <- getNodeSet(xmlParse(base_node_txt), paste0("//", node))[[1]]
+  new_node <- XML::getNodeSet(
+    XML::xmlParse(base_node_txt),
+    paste0("//", node))[[1]]
 
   return(new_node)
 }

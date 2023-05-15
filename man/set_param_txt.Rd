@@ -103,7 +103,8 @@ set_soil_txt(
 )
 }
 \arguments{
-\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
+\item{workspace}{Path of the workspace containing the STICS (txt)
+input files.}
 
 \item{param}{Vector of parameter names.}
 
@@ -114,8 +115,9 @@ set_soil_txt(
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
 Only used for plant, technical or initialisation parameters.}
 
-\item{variety}{The plant variety to set the parameter value, either the variety
-name (\code{codevar} in the plant file) or the index (\code{variete} in the technical file).}
+\item{variety}{The plant variety to set the parameter value,
+either the variety name (\code{codevar} in the plant file) or
+the index (\code{variete} in the technical file).}
 
 \item{layer}{The soil layer if any (only concerns soil-related parameters)}
 
@@ -136,23 +138,28 @@ longer supported, use \code{plant_id} instead.}
 \item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
 longer supported, use \code{file} instead.}
 }
+\value{
+None
+}
 \description{
-Replace or set an input parameter from a pre-existing STICS input
-file.
+Replace or set an input parameter from a pre-existing
+STICS input file.
 }
 \details{
-The \code{plant} parameter can be either equal to \code{1}, \code{2} for
-the associated plant in the case of intercrop, or \code{c(1,2)} for both
-Principal and associated plants.
-\code{\link{get_var_info}} is a helper function that returns all possible
-output variables.
-If the \code{variety} is not given and if \code{param} is a varietal parameter,
-the function will modify the value of \code{param} for the simulated variety, as given
+The \code{plant} parameter can be either equal to \code{1},
+\code{2} for the associated plant in the case of intercrop, or
+\code{c(1,2)} for both Principal and associated plants.
+\code{\link{get_var_info}} is a helper function that returns
+all possible output variables.
+If the \code{variety} is not given and if \code{param}
+is a varietal parameter, the function will modify the value of
+\code{param} for the simulated variety, as given
 in the technical file.
 }
 \note{
-\code{gen_varmod} is not used by \code{set_param_txt}. To replace the output
-variables required from STICS, please directly call \code{gen_varmod}.
+\code{gen_varmod} is not used by \code{set_param_txt}.
+To replace the output variables required from STICS,
+please directly call \code{gen_varmod}.
 }
 \examples{
 \dontrun{
@@ -167,15 +174,18 @@ set_param_txt(workspace = path, param = "interrang", value = 0.01)
 set_param_txt(workspace = path, param = "durvieF", value = 245)
 
 # Change the value of durvieF for another variety:
-set_param_txt(workspace = path, param = "durvieF", variety = "Nefer", value = 178)
+set_param_txt(workspace = path, param = "durvieF",
+              variety = "Nefer", value = 178)
 
 # Change the value of infil for a given layer:
 set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 
-# If the parameter is found in several files, use the set_* functions direclty, e.g.
-# cailloux is found in the general file ("codetycailloux") and the soil file. If we want to
-# change its value in the soil file, we use set_soil_txt():
-set_soil_txt(file = file.path(path, "param.sol"), param = "cailloux", layer = 2, value = 1)
+# If the parameter is found in several files, use the set_*
+functions directly, e.g. cailloux is found in the general file
+("codetycailloux") and the soil file. If we want to change its value
+in the soil file, we use set_soil_txt():
+set_soil_txt(file = file.path(path, "param.sol"),
+             param = "cailloux", layer = 2, value = 1)
 }
 
 }

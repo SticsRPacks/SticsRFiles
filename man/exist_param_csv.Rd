@@ -9,7 +9,7 @@ exist_param_csv(param, javastics)
 \arguments{
 \item{param}{Parameter name or a vector of}
 
-\item{javastics}{Path of JavaStics.}
+\item{javastics}{Path of JavaSTICS}
 }
 \value{
 A named logical vector of existing parameters, with

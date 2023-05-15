@@ -59,14 +59,16 @@ get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
 get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
 }
 \arguments{
-\item{workspace}{Path of the workspace containing the Stics (txt) input files.}
+\item{workspace}{Path of the workspace containing the STICS (txt)
+input files.}
 
 \item{param}{Vector of parameter names. Optional, if not provided,
 the function returns an object with all parameters.}
 
 \item{variety}{Integer. The plant variety to get the parameter from.}
 
-\item{exact}{Boolean indicating if the function must return results only for exact match.}
+\item{exact}{Boolean indicating if the function must return results
+only for exact match.}
 
 \item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}
@@ -107,25 +109,27 @@ A list of parameters, depending on the file/function:
 \item{tmp}{Temporary parameters}
 }
 \description{
-Read STICS model input parameters from a usm in text format (STICS input)
-Generally used after calling building a usm with \code{JavaStics}.
+Read STICS model input parameters from a usm in text format
+(STICS input)
+Generally used after calling building a usm with \code{JavaSTICS}.
 
 Read a specific STICS model input parameter file.
 Users would generally use the wrapper \code{get_param_txt()} instead.
 }
 \details{
-If the \code{variety} is not given and a \code{param} is asked, the function will return the values
-for the variety that is simulated in the USM by checking the \code{variete} parameter in the technical file.
-If \code{param} is not provided by the user, the values from all varieties will be returned unless the user
-ask for a given \code{variety}.
+If the \code{variety} is not given and a \code{param} is asked,
+the function will return the values for the variety that is simulated in
+the USM by checking the \code{variete} parameter in the technical file.
+If \code{param} is not provided by the user, the values from all varieties
+will be returned unless the user ask for a given \code{variety}.
 
-\code{several_fert}, \code{several_thin} and \code{is_pasture} are read from the tmp
-file (\code{tempoparv6.sti}). \code{get_param_txt()} does it automatically. If you absolutely
-need to use directly \code{get_tec_txt}, please see example.
+\code{several_fert}, \code{several_thin} and \code{is_pasture} are read from
+the tmp file (\code{tempoparv6.sti}). \code{get_param_txt()} does it automatically.
+If you absolutely need to use directly \code{get_tec_txt}, please see example.
 }
 \note{
-Users would generally use \code{get_param_txt} to identify parameters names and values and pass
-them to other functions.
+Users would generally use \code{get_param_txt} to identify parameters
+names and values and pass them to other functions.
 
 The functions are compatible with intercrops. Users generally only use
 \code{get_param_txt()}, which is a wrapper for all these functions.
@@ -159,7 +163,8 @@ get_ini_txt(path)
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp <- get_tmp_txt(file = file.path(get_examples_path(file_type = "txt"), "tempoparv6.sti"))
+tmp <- get_tmp_txt(file = file.path(get_examples_path(file_type = "txt"),
+                                    "tempoparv6.sti"))
 several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
 several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
 is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
@@ -167,7 +172,8 @@ is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
 # Then, get the technical parameters:
 get_tec_txt(
   file = file.path(get_examples_path(file_type = "txt"), "fictec1.txt"),
-  several_fert = several_fert, several_thin = several_thin, is_pasture = is_pasture
+  several_fert = several_fert, several_thin = several_thin,
+  is_pasture = is_pasture
 )
 }
 

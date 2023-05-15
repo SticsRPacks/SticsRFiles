@@ -1,17 +1,17 @@
-#' @title Generatefrom a template a Stics ini xmlDocument
+#' @title Generates from a template a STICS ini xml_document
 #'
-#' @param xml_doc an optional xmlDocument object (created from an ini file)
+#' @param xml_doc an optional xml_document object (created from an ini file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' (optional)
 #' @param crop_tag a crop identifier for crop parameters
 #' (for example like "crop" used for in a parameter suffix :
 #' param_crop1, param_crop2)
-#' @param params_desc a list decribing crop parameters and others
-#' @param stics_version the stics files version to use (optional,
+#' @param params_desc a list describing crop parameters and others
+#' @param stics_version the STICS files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
 #' @param check_names logical for checking names of param_table columns or not
 #'
-#' @return an invisible xmlDocument object or a list of
+#' @return an invisible xml_document object or a list of
 #'
 #' @examples
 #' \dontrun{
@@ -55,7 +55,6 @@ gen_ini_doc <- function(xml_doc = NULL,
   # tag see treatment inside next block
   if (base::is.null(params_desc)) {
     # detecting ini names column
-    # crop_regex <- paste0("_",tolower(crop_tag),"[0-9]*$")
     crop_regex <- paste0("_", crop_tag, "[0-9]*$")
     layer_regex <- "_[0-9]*$"
 
@@ -83,7 +82,6 @@ gen_ini_doc <- function(xml_doc = NULL,
     plante_params_pref <- params_desc$plante_params_pref
     other_params_pref <- params_desc$other_params_pref
     base_params <- params_desc$base_params
-    # param_names <- params_desc$param_names
   }
 
   # Checking parameter names from param_table against xml ones
@@ -103,7 +101,7 @@ gen_ini_doc <- function(xml_doc = NULL,
       1,
       function(x) {
         gen_ini_doc(
-          xml_doc = cloneXmlDoc(xml_doc),
+          xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x),
             stringsAsFactors = FALSE
           ),
@@ -133,6 +131,7 @@ gen_ini_doc <- function(xml_doc = NULL,
   # Getting resulting param names
   param_names <- names(param_table)
 
+  plant_nb <- 2
 
   # Setting base parameters
   for (p in base_params) {
@@ -142,17 +141,8 @@ gen_ini_doc <- function(xml_doc = NULL,
         param_name = p,
         param_value = param_table[[p]]
       )
+      if (p == "nbplantes") plant_nb <- param_table[[p]]
     }
-  }
-
-  # Setting plant number in xml_doc
-  # If columns with suffix crop_tag2 exist
-  # setting "nbplantes" to 2, whatever the existing value
-  # in the xml_doc
-  plant_nb <- 1
-  if (length(grep(paste0(crop_tag, "2$"), names(param_table)))) {
-    set_param_value(xml_doc, "nbplantes", 2)
-    plant_nb <- 2
   }
 
   # Setting plante params
@@ -173,7 +163,7 @@ gen_ini_doc <- function(xml_doc = NULL,
       for (j in 1:5) {
         # densinitial
         par2 <- paste0(p, "_", j, "_", crop_tag, i)
-        # print(par2)
+
         if (is.element(par2, param_names) && !is.na(param_table[[par2]])) {
           set_param_value(
             xml_doc = xml_doc,

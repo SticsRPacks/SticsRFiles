@@ -12,8 +12,9 @@ parse_mixed_file(file_names, type = c("sim", "obs"))
 \item{type}{The type of file to read, either "obs" or "sim".}
 }
 \value{
-A list of observation or simulation files associated to their usm name. The mixed
-crops are always returned as c("Principal","Associated").
+A list of observation or simulation files associated to
+their usm name. The mixed crops are always returned as
+c("Principal","Associated").
 }
 \description{
 Get mixed observation or simulation files by name
@@ -25,14 +26,17 @@ at the end in the case of associated crops.
 }
 \examples{
 \dontrun{
-parse_mixed_file(list("banana.obs", "IC_banana_sorghuma.obs", "IC_banana_sorghump.obs"),
-  type = "obs"
+parse_mixed_file(list("banana.obs", "IC_banana_sorghuma.obs",
+                     "IC_banana_sorghump.obs"),
+                 type = "obs"
 )
 
-# Simulations with usm names starting with "a", with or without intercropping:
+# Simulations with usm names starting with "a", with or
+# without intercropping:
 file_names <- list(
   "mod_sauzevilleSC_Wheat_Wheat_2005-2006_N0.sti",
-  "mod_saIC_Wheat_Wheat_2005-2006_N0.sti", "mod_spIC_Wheat_Wheat_2005-2006_N0.sti"
+  "mod_saIC_Wheat_Wheat_2005-2006_N0.sti",
+  "mod_spIC_Wheat_Wheat_2005-2006_N0.sti"
 )
 
 parse_mixed_file(file_names, type = "sim")

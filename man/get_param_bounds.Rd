@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_bounds.R
 \name{get_param_bounds}
 \alias{get_param_bounds}
-\title{Getting parameters bounds from an xmlDocument object}
+\title{Getting parameters bounds from an xml_document object}
 \usage{
 get_param_bounds(
   xml_doc,
@@ -12,23 +12,23 @@ get_param_bounds(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument class object}
+\item{xml_doc}{an xml_document class object}
 
 \item{param_name}{a parameter name of a vector of parameters names}
 
-\item{bounds_name}{bounds name "min" or "max" (optional, default value c("min","max ))}
+\item{bounds_name}{bounds name "min" or "max"
+(optional, default value c("min","max ))}
 
 \item{output}{Output data format either "list" or "data.frame" (default)}
 }
 \value{
 A data.frame with the name of the parameter and min, max values or
-
 one of them. Or a named list (with parameter name) containing a named vector
 for bounds.
 }
 \description{
 Extracting parameters min and/or max bounds for a parameter
-or a vector of parameters from an xmlDocument class object.
+or a vector of parameters from an xml_document class object.
 }
 \examples{
 \dontrun{
@@ -38,7 +38,8 @@ sta_doc <- SticsRFiles:::xmldocument(xml_sta)
 
 par_bounds <- SticsRFiles:::get_param_bounds(sta_doc, "zr")
 
-par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"))
+par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,
+                                                 c("zr", "altistation"))
 
 
 SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"), "min")

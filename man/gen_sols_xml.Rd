@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_sols_xml.R
 \name{gen_sols_xml}
 \alias{gen_sols_xml}
-\title{Generate Stics sols xml file from a template or an input file}
+\title{Generate STICS sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
   file = file.path(getwd(), "sols.xml"),
@@ -18,14 +18,16 @@ gen_sols_xml(
 \arguments{
 \item{file}{Path (including name) of the sols file to generate.}
 
-\item{param_df}{A table (df, tibble) containing the values of the parameters to use (see details)}
+\item{param_df}{A table (df, tibble) containing the values of the parameters
+to use (see details)}
 
 \item{template}{Path of a soil xml file to be used as a template. Optional,
-if not provided, the function will use a standard template depending on the stics version.}
+if not provided, the function will use a standard template depending on
+the STICS version.}
 
-\item{stics_version}{Name of the Stics version. Optional, used if the \code{file}
+\item{stics_version}{Name of the STICS version. Optional, used if the \code{file}
 argument is not provided. In this case the function uses a standard template
-associated to the stics version.}
+associated to the STICS version.}
 
 \item{sols_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_in_file} is no
 longer supported, use \code{template} instead.}
@@ -40,14 +42,14 @@ longer supported, use \code{file} instead.}
 longer supported, it is now computed in the function.}
 }
 \value{
-an invisible xmlDocument object
+an invisible xml_document object
 }
 \description{
-Generate Stics sols xml file from a template or an input file
+Generate STICS sols xml file from a template or an input file
 }
 \details{
-Please see \code{get_stics_versions_compat()} for the full list of stics versions that can be used for the
-argument \code{stics_version}.
+Please see \code{get_stics_versions_compat()} for the full list of
+STICS versions that can be used for the argument \code{stics_version}.
 
 \code{param_df} is a \code{data.frame} with the following format:\tabular{lrrrrrrr}{
    Soil_name \tab argi \tab norg \tab calc \tab pH \tab albedo \tab q0 \tab epc_1 \cr
@@ -68,10 +70,11 @@ argument \code{stics_version}.
 
 
 The first column gives the soil name, all following
-columns give the parameter values to put in the sols.xml file for each soil row.
+columns give the parameter values to put in the sols.xml file for each
+soil row.
 
-The first column name must contain the keyword Soil or soil or SOIL as a prefix to be detected
-(as shown in the table extract above).
+The first column name must contain the keyword Soil or soil or SOIL as
+a prefix to be detected (as shown in the table extract above).
 
 If not given (the default, \code{NULL}), the function returns the template as is.
 }

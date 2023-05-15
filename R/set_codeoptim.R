@@ -1,6 +1,6 @@
 #' @title Set codoptim
 #' @description Change value of codeoptim in the new_travail.usm file
-#' @param workspace Path of the Stics inputs files of an usm
+#' @param workspace Path of the STICS inputs files of an usm
 #' @param value Value of the codeoptim parameter (1 = activating
 #' parameters values forcing)
 #' @param file_name Name of the file

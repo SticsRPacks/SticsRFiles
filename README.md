@@ -10,31 +10,30 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![R build
 status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
 [![Codecov test
-coverage](https://app.codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
-
+coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
 <!-- badges: end -->
 
 The goal of SticsRFiles is to perform manipulations of the
 [STICS](https://www6.paca.inrae.fr/stics_eng/) model files either on XML
-files (used by the JavaStics GUI) or on text files used by the model
+files (used by the JavaSTICS GUI) or on text files used by the model
 fortran executable.
 
-The basic functionnalites allows to read parameters names and values
+The basic functionalities allows to read parameters names and values
 through XML queries and replace parameters values in files. A starting
 guide is available on the [Get started
 page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
-Advanced functionnalities are dedicated to produce XML parameter files
+Advanced functionalities are dedicated to produce XML parameter files
 using a mailing process like from XML templates and Excel sheets
-containing multiple simulations contexts. A JavaStics workspace is
-generated and directly usable from the JavaStics interface (GUI or
-command line), or with an R JavaStics interface provided by the
-[SticsOnR](https://SticsRPacks.github.io/SticsOnR/) package.
+containing multiple simulations contexts. A JavaSTICS workspace is
+generated and directly usable from the JavaSTICS interface (GUI or
+command line), or with an R JavaSTICS interface provided by the
+[SticsOnR](https://sticsrpacks.github.io/SticsOnR/) package.
 
 If you want to be notified when a new release of this package is made,
-you can tick the Releases box in the “Watch / Unwatch => Custom” menu at
-the top right of [this
+you can tick the Releases box in the “Watch / Unwatch =\> Custom” menu
+at the top right of [this
 page](https://github.com/SticsRPacks/SticsRFiles).
 
 ## Prerequisites and technical tips
@@ -50,9 +49,9 @@ page](https://github.com/SticsRPacks/SticsRFiles).
 ***Warning:*** *If during the installation process, packages updates are
 suggested.*
 
--   First, abort the installation.
--   Second, update the installed packages, except the `XML` package.
--   Finally, install the SticsRFiles package.
+- First, abort the installation.
+- Second, update the installed packages, except the `XML` package.
+- Finally, install the SticsRFiles package.
 
 ------------------------------------------------------------------------
 
@@ -68,10 +67,9 @@ package:
 devtools::install_github("SticsRPacks/SticsRPacks")
 ```
 
--   With `remotes`
+- With `remotes`
 
 ``` r
-# install.packages("remotes")
 remotes::install_github("SticsRPacks/SticsRPacks")
 ```
 
@@ -80,44 +78,43 @@ version.
 
 ### Or, install directly
 
--   With `devtools`
+- With `devtools`
 
 ``` r
 devtools::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
--   With `remotes`
+- With `remotes`
 
 ``` r
-# install.packages("remotes")
 remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
-Normaly, all the package dependencies will be installed for CRAN
+Normally, all the package dependencies will be installed for CRAN
 packages.
 
 ## Examples
 
 ### Files manipulations
 
--   A description of how to use the functions for manipulating XML input
-    files is detailed
-    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html)
+- A description of how to use the functions for manipulating XML input
+  files is detailed
+  [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html)
 
--   A description of how to use the functions for manipulating text
-    input files is available
-    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files).
+- A description of how to use the functions for manipulating text input
+  files is available
+  [here](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_text_files).
 
 ### Files generation
 
--   A description of usefull functions for generating XML input files
-    from usms parameters data stored in Excel files sheets or CSV files
-    is available
-    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html).
+- A description of useful functions for generating XML input files from
+  usms parameters data stored in Excel files sheets or CSV files is
+  available
+  [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html).
 
--   A description of functions for generating text input files from XML
-    one of usms parameters is available
-    [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html).
+- A description of functions for generating text input files from XML
+  one of usms parameters is available
+  [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_text_files.html).
 
 ## Getting help
 
@@ -130,7 +127,7 @@ Thanks for that, this would greatly help us to improve this package.
 ## Citation
 
 If you have used this package for a study that led to a publication or
-report, please cite us. You can either use the citation tool from Github
+report, please cite us. You can either use the citation tool from GitHub
 if you used the last version, or use `citation("SticsRFiles")` from R
 otherwise.
 

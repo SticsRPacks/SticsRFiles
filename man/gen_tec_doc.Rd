@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_tec_doc.R
 \name{gen_tec_doc}
 \alias{gen_tec_doc}
-\title{Generate from a template or modify a Stics tec xmlDocument}
+\title{Generate from a template or modify a STICS tec xml_document}
 \usage{
 gen_tec_doc(
   xml_doc = NULL,
@@ -13,24 +13,24 @@ gen_tec_doc(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an ini file)}
+\item{xml_doc}{an xml_document object (created from an ini file)}
 
 \item{param_table}{a table (df, tibble) containing parameters to use}
 
-\item{stics_version}{the stics files version to use (optional,
+\item{stics_version}{the STICS files version to use (optional,
 default to latest). Only used if xml_doc = NULL.}
 
 \item{dict}{List of correspondence between given parameter names and
-Stics internal names.}
+STICS internal names.}
 
 \item{...}{Additional arguments (for example, coming from a call
 from gen_tec_xml using a na_values argument)}
 }
 \value{
-an invisible xmlDocument object or a list of
+an invisible xml_document object or a list of
 }
 \description{
-Generate from a template or modify a Stics tec xmlDocument
+Generate from a template or modify a STICS tec xml_document
 }
 \examples{
 \dontrun{

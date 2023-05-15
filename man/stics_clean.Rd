@@ -2,15 +2,15 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_clean}
 \alias{stics_clean}
-\title{Clean stics environment}
+\title{Clean STICS environment}
 \usage{
 stics_clean()
 }
 \value{
-Nothing. Just cleans the stics environment.
+Nothing. Just cleans the STICS environment.
 }
 \description{
-Clean stics environment
+Clean STICS environment
 }
 \examples{
 \dontrun{

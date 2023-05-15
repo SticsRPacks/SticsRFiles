@@ -2,21 +2,21 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_set}
 \alias{stics_set}
-\title{Add to stics env}
+\title{Add to STICS env}
 \usage{
 stics_set(name, value, env_name = sticsenv_name())
 }
 \arguments{
-\item{name}{Name of the object used in the stics environment}
+\item{name}{Name of the object used in the STICS environment}
 
 \item{value}{Value to associate to the object}
 
-\item{env_name}{The name of the stics environment}
+\item{env_name}{The name of the STICS environment}
 }
 \value{
 Nothing. Just adds an object to the given environment.
 }
 \description{
-Add an object to the stics environment
+Add an object to the STICS environment
 }
 \keyword{internal}

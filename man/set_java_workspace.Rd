@@ -2,20 +2,23 @@
 % Please edit documentation in R/set_java_workspace.R
 \name{set_java_workspace}
 \alias{set_java_workspace}
-\title{Setting JavaStics workspace}
+\title{Setting JavaSTICS workspace}
 \usage{
 set_java_workspace(javastics, workspace)
 }
 \arguments{
-\item{javastics}{JavaStics installation root folder}
+\item{javastics}{JavaSTICS installation root folder}
 
-\item{workspace}{JavaStics working directory (absolute,relative to javastics parh)}
+\item{workspace}{JavaSTICS working directory
+(absolute,relative to javastics path)}
 }
 \description{
-Setting a new JavaStics working directory, a relative directory to JavaStics path or an absolute one
+Setting a new JavaSTICS working directory, a relative directory
+to JavaSTICS path or an absolute one
 }
 \details{
-Checking if the directory is a JavaStics workspace (any usms.xml file), and if it's already registered
+Checking if the directory is a JavaSTICS workspace
+(any usms.xml file), and if it's already registered
 
 before setting new one
 }

@@ -1,17 +1,19 @@
-#' Upgrading XML files of a JavaStics workspace directory
-#' to a newer Stics version format
+#' Upgrading XML files of a JavaSTICS workspace directory
+#' to a newer STICS version format
 #'
-#' @param workspace Path of a JavaStics workspace
-#' @param javastics Path of JavaStics
+#' @param workspace Path of a JavaSTICS workspace
+#' @param javastics Path of JavaSTICS
 #' @param out_dir Output directory of the generated files
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to  (VX.Y format)
 #' @param plant logical (optional), TRUE for upgrading plant files if a "plant"
 #' sub-directory of workspace exists, FALSE otherwise
 #' @param overwrite logical (optional),
 #' TRUE for overwriting files if they exist, FALSE otherwise
 #' @param ... Additional input arguments
+#'
+#' @return None
 #'
 #' @export
 #'
@@ -20,7 +22,7 @@
 #' - If general parameters files exist in `workspace`, they are also upgraded.
 #' In that case, residues parameters values are kept and might not be adapted
 #' to the target model version.
-#' - Wheather data and observations files are fully copied to `out_dir`
+#' - Weather data and observations files are fully copied to `out_dir`
 #'
 #' @examples
 #' \dontrun{
@@ -39,10 +41,6 @@ upgrade_workspace_xml <- function(workspace,
                                   overwrite = FALSE,
                                   ...) {
 
-  # TODO: to put elsewhere for getting compat for a list of versions !
-  # v <- list("8.5","9.0",c("9.1","9.2))
-  # c <- c(FALSE,FALSE,TRUE)
-  # list(NULL, NULL, "V10.0")
 
   # For testing if files are upgradable
   check_version <- FALSE
@@ -66,7 +64,7 @@ upgrade_workspace_xml <- function(workspace,
   }
   if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
 
-  # Extracting or detecting the Stics version corresponding to the xml file
+  # Extracting or detecting the STICS version corresponding to the xml file
   # based on param_gen.xml file content
   file_version <- check_xml_file_version(par_gen, stics_version)
   if (!file_version) {
@@ -98,28 +96,22 @@ upgrade_workspace_xml <- function(workspace,
     !file.exists(file.path(workspace, "usms.xml"))) {
     stop(
       workspace,
-      ": the directory does not exist or is not a JavaStics workspace !"
+      ": the directory does not exist or is not a JavaSTICS workspace !"
     )
   }
 
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
-  # Testing the JavaStics dir
+  # Testing the JavaSTICS dir
   if (!dir.exists(javastics) ||
     !file.exists(file.path(javastics, "JavaStics.exe"))) {
     stop(
       javastics,
-      " : the directory does nor exist or is not a JavaStics one !"
+      " : the directory does nor exist or is not a JavaSTICS one !"
     )
   }
 
-  # Testing if a plant directory exists in the workspace
-  # plant_path <- NULL
-  if (plant) {
-    tmp_path <- file.path(workspace, "plant")
-    if (dir.exists(tmp_path)) plant_path <- tmp_path
-  }
 
   if (verbose) {
     cat(paste(
@@ -280,7 +272,7 @@ upgrade_workspace_xml <- function(workspace,
   }
 
   # TODO: see how to manage variables names checks in *.mod files
-  # Probably, the new JavaStics path may be added as a new function argument
+  # Probably, the new JavaSTICS path may be added as a new function argument
   # for getting information on output variables
   # (use get_var_info with the appropriate version string)
 
@@ -303,10 +295,19 @@ upgrade_workspace_xml <- function(workspace,
   # (i.e. year, as .1996) are taken into account because when USM are
   # defined over 2 successive years, files are not explicitly mentioned
   # in the usms.xml file.
+
+  weather_files <-
+    list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]")
+
   stat <- file.copy(
-    from = list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]"),
+    from = weather_files,
     to = out_dir, overwrite = overwrite
   )
+
+  if (!all(stat)) {
+    warning("Error when copying file(s): ",
+            paste(weather_files[stat], collapse = ", "))
+  }
 
   if (verbose) {
     cat("Copying weather files.\n")

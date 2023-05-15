@@ -1,6 +1,6 @@
 context("searching parameter information (get_param_info)")
 
-# stics_version <- "V9.2"
+
 stics_version <- get_stics_versions_compat()$latest_version
 
 test_that("unknown name (should return NULL)", {
@@ -40,18 +40,18 @@ test_that("regex name", {
 })
 
 
-test_that("different stics versions", {
-  v9.0 <- get_param_info("vitircarbT", stics_version = "V9.0")
-  v9.2 <- get_param_info("vitircarbT", stics_version = "V9.2")
+test_that("different STICS versions", {
+  v_90 <- get_param_info("vitircarbT", stics_version = "V9.0")
+  v_92 <- get_param_info("vitircarbT", stics_version = "V9.2")
   vlast <- get_param_info("vitircarbT", stics_version = stics_version)
 
-  testthat::expect_equal(attr(v9.0, "version"), "V9.0")
-  testthat::expect_equal(attr(v9.2, "version"), "V9.2")
+  testthat::expect_equal(attr(v_90, "version"), "V9.0")
+  testthat::expect_equal(attr(v_92, "version"), "V9.2")
   testthat::expect_equal(attr(vlast, "version"), stics_version)
 
   # Set both versions to the same value for comparison:
-  attr(v9.0, "version") <- attr(v9.2, "version")
-  testthat::expect_equal(v9.0, v9.2)
+  attr(v_90, "version") <- attr(v_92, "version")
+  testthat::expect_equal(v_90, v_92)
   # breaking, parameter moved to cultivar parameters since V9.2
-  testthat::expect_false(identical(vlast, v9.2))
+  testthat::expect_false(identical(vlast, v_92))
 })

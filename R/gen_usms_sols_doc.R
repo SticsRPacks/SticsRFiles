@@ -1,4 +1,4 @@
-#' @title Generate from a template or modify a Stics sols or usms xmlDocument
+#' @title Generate from a template or modify a STICS sols or usms xml_document
 
 #' @param doc_type Document type
 #' @param xml_doc  The xml document
@@ -6,7 +6,7 @@
 #' @param nodes_param Node parameter
 #' @param stics_version Version of the STICS model
 #'
-#' @return An xmlDocument object
+#' @return An xml_document object
 #'
 #' @examples
 #' \dontrun{
@@ -88,7 +88,7 @@ gen_usms_sols_doc <- function(doc_type,
   }
 
   # getting usm/sol nodes
-  xml_nodes <- getNodeS(xml_doc, node_str)
+  xml_nodes <- get_nodes(xml_doc, node_str)
 
   # Nothing to do
   doc_nodes_nb <- length(xml_nodes)
@@ -96,35 +96,19 @@ gen_usms_sols_doc <- function(doc_type,
     return(xml_doc)
   }
 
-  # TODO: fix it
-  # Normally this part is to be removed
-  # because this function must be working on
-  # a xml template doc containing only one
-  # node (coming a empty template to fill
-  # or a user template to overload)
-
-  # if (doc_nodes_nb < elts_nb ) overwrite = TRUE
-  # Creating doc structure from a base node
-  # if ( overwrite ) {
-  # Keeping only one usm node in the xml document
-  #   if ( doc_nodes_nb > 1) removeNodes(xml_nodes[2:doc_nodes_nb])
-  #
-  #   if ( keep_existing ) {
-  #     add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = (elts_nb - 1), paste0("//",root))
-  #   } else {
-  #     removeNodes(xml_nodes[1])
-  #     add_stics_nodes(xml_doc = xml_doc, nodes_nb = elts_nb)
-  #   }
-  #
-  # }
 
   # Creating nodes for usms or sols
-  add_node_to_doc(xml_doc, xml_nodes[[1]], nodes_nb = elts_nb - 1, parent_path = root_str)
+  add_node_to_doc(xml_doc,
+                  xml_nodes[[1]],
+                  nodes_nb = elts_nb - 1,
+                  parent_path = root_str)
 
   # Warning if nodes number > 1
   # I that case, the xml_doc cannot be considered as a template
   if (doc_nodes_nb > 1) {
-    stop("Multiple elements in ", doc_type, " file, cannot be used as a template !")
+    stop("Multiple elements in ",
+         doc_type,
+         " file, cannot be used as a template !")
   }
 
   # Not any parameters values for overloading
@@ -138,17 +122,6 @@ gen_usms_sols_doc <- function(doc_type,
     sols = set_sols_param_xml(xml_doc, nodes_param, overwrite = TRUE)
   )
 
-
-  # TODO: evaluate how to implement checks
-  # depending on parameter file kind
-  # This next block is not valid for all files kinds
-  # Checking values for detecting missing ones
-  # final_values <- get_param_value(xml_doc)
-  # missing_values <- unlist(lapply(final_values, function(x) any(is.na(as.numeric(x)))))
-  # if (any(missing_values)) {
-  #   warning("Missing values for parameters: ",
-  #           paste(names(final_values)[missing_values], collapse = ","))
-  # }
 
   return(xml_doc)
 }

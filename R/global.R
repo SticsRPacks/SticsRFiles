@@ -1,78 +1,117 @@
-#' @import XML
-# for generic functions declarations for *Document classes
-setGeneric("validDoc", function(object) standardGeneric("validDoc"))
-# defined for fileDocument
+# for generic functions declarations for *document classes
+setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
+# defined for file_document
 types_list <- c("file", "dir", "url", "link")
 
 setGeneric("filedocument", function(file, type) standardGeneric("filedocument"))
-setGeneric("setName<-", function(docObj, value) standardGeneric("setName<-"))
-setGeneric("setName", function(docObj, value) standardGeneric("setName"))
-setGeneric("setWarn<-", function(docObj, value) standardGeneric("setWarn<-"))
-setGeneric("setDir<-", function(docObj, value) standardGeneric("setDir<-"))
-setGeneric("setExt<-", function(docObj, value) standardGeneric("setExt<-"))
-setGeneric("getName", function(docObj) standardGeneric("getName"))
+setGeneric("set_name<-", function(object, value) standardGeneric("set_name<-"))
+setGeneric("set_name", function(object, value) standardGeneric("set_name"))
+setGeneric("set_warn<-", function(object, value) standardGeneric("set_warn<-"))
+setGeneric("set_dir<-", function(object, value) standardGeneric("set_dir<-"))
+setGeneric("set_ext<-", function(object, value) standardGeneric("set_ext<-"))
+setGeneric("get_name", function(object) standardGeneric("get_name"))
 
-setGeneric("getDir", function(docObj) standardGeneric("getDir"))
-setGeneric("getExt", function(docObj) standardGeneric("getExt"))
-setGeneric("getType", function(docObj) standardGeneric("getType"))
+setGeneric("get_dir", function(object) standardGeneric("get_dir"))
+setGeneric("get_ext", function(object) standardGeneric("get_ext"))
+setGeneric("get_type", function(object) standardGeneric("get_type"))
 
-setGeneric("getPath", function(docObj) standardGeneric("getPath"))
+setGeneric("get_path", function(object) standardGeneric("get_path"))
 
-setGeneric("exist", function(docObj) standardGeneric("exist"))
+setGeneric("exist", function(object) standardGeneric("exist"))
 
-setGeneric("create", function(docObj) standardGeneric("create"))
+setGeneric("create", function(object) standardGeneric("create"))
 
-setGeneric("move", function(docObj, toFile) standardGeneric("move"))
+setGeneric("move", function(object, to_file) standardGeneric("move"))
 
-setGeneric("rename", function(docObj, toFile) standardGeneric("rename"))
+setGeneric("rename", function(object, to_file) standardGeneric("rename"))
 
-setGeneric("delete", function(docObj) standardGeneric("delete"))
-setGeneric("infos", function(docObj, type = "all") standardGeneric("infos"))
+setGeneric("delete", function(object) standardGeneric("delete"))
+setGeneric("infos", function(object, type = "all") standardGeneric("infos"))
 
-setGeneric("isdir", function(docObj) standardGeneric("isdir"))
-setGeneric("isempty", function(docObj) standardGeneric("isempty"))
-setGeneric("calcExt", function(docObj) standardGeneric("calcExt"))
-setGeneric("calcType", function(docObj) standardGeneric("calcType"))
+setGeneric("isdir", function(object) standardGeneric("isdir"))
+setGeneric("isempty", function(object) standardGeneric("isempty"))
+setGeneric("calc_ext", function(object) standardGeneric("calc_ext"))
+setGeneric("calc_type", function(object) standardGeneric("calc_type"))
 
-# defined for xmlDocument
+# defined for xml_document
 
 setGeneric("xmldocument", function(file) standardGeneric("xmldocument"))
-setGeneric("setContent<-", function(docObj, value) standardGeneric("setContent<-"))
+setGeneric("set_content<-",
+           function(object, value) standardGeneric("set_content<-"))
 
-setGeneric("getContent", function(docObj) standardGeneric("getContent"))
+setGeneric("get_content", function(object) standardGeneric("get_content"))
 
-setGeneric("loadContent", function(docObj) standardGeneric("loadContent"))
-setGeneric("isLoaded", function(docObj) standardGeneric("isLoaded"))
+setGeneric("load_content", function(object) standardGeneric("load_content"))
+setGeneric("is_loaded", function(object) standardGeneric("is_loaded"))
 
-setGeneric("is.xmlDocument", function(docObj) standardGeneric("is.xmlDocument"))
+setGeneric("is.xml_document",
+           function(object) standardGeneric("is.xml_document"))
 
 # xml manipulations
 
-setGeneric("getNodeS", function(docObj, path = NULL) standardGeneric("getNodeS"))
+setGeneric("get_nodes",
+           function(object, path = NULL) standardGeneric("get_nodes"))
 
-setGeneric("getAttrs", function(docObj, path) standardGeneric("getAttrs"))
+setGeneric("get_attrs", function(object, path) standardGeneric("get_attrs"))
 
-setGeneric("getAttrsNames", function(docObj, path) standardGeneric("getAttrsNames"))
+setGeneric("get_attrs_names",
+           function(object, path) standardGeneric("get_attrs_names"))
 
-setGeneric("getAttrsValues", function(docObj, path, attr_list, nodes_ids = NULL) standardGeneric("getAttrsValues"))
+setGeneric("get_attrs_values",
+           function(object,
+                    path,
+                    attr_list,
+                    nodes_ids = NULL) {
+             standardGeneric("get_attrs_values")
+           }
+)
 
-setGeneric("addAttrs", function(docObj, path, named_vector) standardGeneric("addAttrs"))
+setGeneric("add_attrs",
+           function(object, path, named_vector) standardGeneric("add_attrs"))
 
-setGeneric("removeAttrs", function(docObj, path, attr_names) standardGeneric("removeAttrs"))
+setGeneric("remove_attrs",
+           function(object, path, attr_names) standardGeneric("remove_attrs"))
 
-setGeneric("setAttrValues", function(docObj, path, attr_name, values_list, nodes_ids = NULL) standardGeneric("setAttrValues"))
+setGeneric("set_attrs_values",
+           function(object,
+                    path, attr_name,
+                    values_list,
+                    nodes_ids = NULL) {
+             standardGeneric("set_attrs_values")
+           }
+)
 
-setGeneric("setValues", function(docObj, path, values_list, nodes_ids = NULL) standardGeneric("setValues"))
+setGeneric("set_values",
+           function(object,
+                    path,
+                    values_list,
+                    nodes_ids = NULL) {
+             standardGeneric("set_values")
+           }
+)
 
-setGeneric("getValues", function(docObj, path, nodes_ids = NULL) standardGeneric("getValues"))
+setGeneric("get_values",
+           function(object,
+                    path,
+                    nodes_ids = NULL) {
+             standardGeneric("get_values")
+           }
+)
 
-setGeneric("saveXmlDoc", function(docObj, xml_path) standardGeneric("saveXmlDoc"))
+setGeneric("save_xml_doc",
+           function(object, xml_path) standardGeneric("save_xml_doc"))
 
-setGeneric("cloneXmlDoc", function(docObj) standardGeneric("cloneXmlDoc"))
+setGeneric("clone_xml_doc", function(object) standardGeneric("clone_xml_doc"))
 
 # adding and removing nodes to doc
 
-setGeneric("addNodes", function(docObj, nodes_to_add, parent_path = NULL) standardGeneric("addNodes"))
+setGeneric("add_nodes",
+           function(object,
+                    nodes_to_add,
+                    parent_path = NULL) {
+             standardGeneric("add_nodes")
+           }
+)
 # removing nodes
 
-setGeneric("delNodes", function(docObj, path) standardGeneric("delNodes"))
+setGeneric("del_nodes", function(object, path) standardGeneric("del_nodes"))

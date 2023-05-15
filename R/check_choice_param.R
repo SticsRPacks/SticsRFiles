@@ -1,6 +1,6 @@
 #' Checking if any parameter appear in 2 option choices
 #'
-#' @param xml_doc an xmldocument object
+#' @param xml_doc an xml_document object
 #' @param param_name parameter names vector, i.e.: parameter name or option code
 #' @param stop TRUE for rising an error, FALSE for just warning
 #'
@@ -21,7 +21,7 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
   #--------------------------------------------------------------------#
 
   # Early exiting for other docs than tec ones
-  if (!xmlName(xmlRoot(xml_doc@content)) == "fichiertec") {
+  if (!XML::xmlName(XML::xmlRoot(xml_doc@content)) == "fichiertec") {
     return(invisible())
   }
 
@@ -61,11 +61,11 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
 
   # Getting all nodes intervention containing a common parameter
   common_par_path <- get_param_type(xml_doc, param_name = common_par_name)$xpath
-  interv_nodes <- lapply(getNodeS(xml_doc, common_par_path), xmlParent)
+  interv_nodes <- lapply(get_nodes(xml_doc, common_par_path), XML::xmlParent)
   interv_par_names <-
     unique(
       unlist(
-        lapply(interv_nodes, function(x) xmlSApply(x, FUN = xmlAttrs))
+        lapply(interv_nodes, function(x) XML::xmlSApply(x, FUN = XML::xmlAttrs))
       )
     )
   if (all(choice_specif_par %in% interv_par_names)) {

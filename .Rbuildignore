@@ -16,3 +16,6 @@ man/figures
 ^CITATION.cff$
 ^\.github$
 ^cran-comments\.md$
+^CITATION\.cff$
+^inst/extdata/src_files$
+^\.vscode$

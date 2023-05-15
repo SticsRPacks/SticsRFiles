@@ -5,14 +5,16 @@
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param obs_dir Directory path of the observation data files
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
+#'
+#' @return None
 #'
 #' @export
 #'
@@ -46,11 +48,11 @@ upgrade_usms_xml <- function(file,
 
     min_version <- get_version_num("V9.1")
 
-    # extracting or detecting the Stics version corresponding to the xml file
+    # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
     if (!file_version) {
@@ -81,39 +83,33 @@ upgrade_usms_xml <- function(file,
   # loading the old doc
   old_doc <- xmldocument(file = file)
 
-  # setting file stics version
+  # setting file STICS version
   set_xml_file_version(old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+                       new_version = target_version,
+                       overwrite = overwrite
   )
 
   # checking if fobs exist
-  obs_nodes <- getNodeS(old_doc, "//fobs")
+  obs_nodes <- get_nodes(old_doc, "//fobs")
 
   # TODO: detect if fobs exist and evaluate
   # where to add fobs fields !!!!!
   # default behavior: no existing fobs fields
   if (is.null(obs_nodes)) {
-    new_node <- xmlParseString("<fobs>null</fobs>",
-      addFinalizer = TRUE
+    new_node <- XML::xmlParseString("<fobs>null</fobs>",
+                                    addFinalizer = TRUE
     )
 
-    parent_node <- getNodeS(old_doc, "//plante")
+    parent_node <- get_nodes(old_doc, "//plante")
 
-    lapply(parent_node, function(x) addChildren(x, xmlClone(new_node)))
+    lapply(parent_node,
+           function(x) XML::addChildren(x, XML::xmlClone(new_node))
+    )
   }
 
 
-  # TODO: use following to get usms with no fobs field
-  # usms_with_fobs <- SticsRFiles:::getAttrsValues(
-  #   docObj = old_doc,path = "//usm[plante[@dominance='1']/fobs]",
-  #   attr_list = "nom")
-
   # Usms names
-  usms_names <- getAttrsValues(old_doc, "//usm", "nom")
-
-  # usm names to use
-  # usm_names <- setdiff(usms_names, usms_with_fobs)
+  usms_names <- get_attrs_values(old_doc, "//usm", "nom")
 
   # existing obs files
   # intercrops usms are not taken into account in that case
@@ -124,16 +120,16 @@ upgrade_usms_xml <- function(file,
 
   # Setting obs files names into fobs for existing files
   set_param_value(old_doc,
-    param_name = "fobs",
-    param_value = obs_val,
-    parent_name = "plante",
-    parent_sel_attr = "1"
+                  param_name = "fobs",
+                  param_value = obs_val,
+                  parent_name = "plante",
+                  parent_sel_attr = "1"
   )
 
 
   # writing file
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

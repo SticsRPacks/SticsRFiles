@@ -2,15 +2,15 @@
 % Please edit documentation in R/get_java_workspace.R
 \name{get_java_workspace}
 \alias{get_java_workspace}
-\title{Getting current workspace in JavaStics preferences configuration}
+\title{Getting current workspace in JavaSTICS preferences configuration}
 \usage{
 get_java_workspace(javastics)
 }
 \arguments{
-\item{javastics}{JavaStics installation root folder}
+\item{javastics}{JavaSTICS installation root folder}
 }
 \description{
-Getting current JavaStics working directory,
+Getting current JavaSTICS working directory,
 if not any setting to \code{example} directory
 }
 \examples{

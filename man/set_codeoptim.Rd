@@ -7,7 +7,7 @@
 set_codeoptim(workspace, value = 1, file_name = "new_travail.usm")
 }
 \arguments{
-\item{workspace}{Path of the Stics inputs files of an usm}
+\item{workspace}{Path of the STICS inputs files of an usm}
 
 \item{value}{Value of the codeoptim parameter (1 = activating
 parameters values forcing)}

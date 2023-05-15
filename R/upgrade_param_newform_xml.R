@@ -4,14 +4,17 @@
 #' @param out_dir Output directory path of the generated file
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to (VX.Y format)
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
+#' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
 
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
+#'
+#' @return None
 #'
 #' @export
 #'
@@ -31,8 +34,7 @@ upgrade_param_newform_xml <- function(file,
                                       stics_version = "V9.2",
                                       target_version = "V10.0",
                                       check_version = TRUE,
-                                      overwrite = FALSE # ,
-                                      # codemineral = FALSE
+                                      overwrite = FALSE
 ) {
 
   # TODO: eliminate when option will be reactivated later.
@@ -45,11 +47,11 @@ upgrade_param_newform_xml <- function(file,
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
-    # Extracting or detecting the Stics version corresponding to the xml file
+    # Extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
     if (!file_version && is.null(param_gen_file)) {
@@ -79,8 +81,10 @@ upgrade_param_newform_xml <- function(file,
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
-  # Setting file stics version
-  set_xml_file_version(old_doc, new_version = target_version, overwrite = overwrite)
+  # Setting file STICS version
+  set_xml_file_version(old_doc,
+                       new_version = target_version,
+                       overwrite = overwrite)
 
 
   # TODO : add from here if cond for calling specific version ranges updates
@@ -94,7 +98,8 @@ upgrade_param_newform_xml <- function(file,
     "Calculation of the maximal reserve compartment during reproductive stages",
     "Calculation of the stem elongation stage for perenial grasslands",
     "Moisture test for sowing decision",
-    "automatic irrigations (associated with the options of automatic irrigation in tec file)",
+    paste0("automatic irrigations (associated with the options of automatic",
+           "irrigation in tec file)"),
     "calculation of the root death at cutting date for grasslands",
     "option for several thinning ",
     "option for several fertilizer type ",
@@ -103,76 +108,41 @@ upgrade_param_newform_xml <- function(file,
   )
 
   nodes_to_rm <- lapply(form_names, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//formalisme[@nom='", x, "']")
     )
   })
 
-  lapply(nodes_to_rm, function(x) if (!is.null(x)) removeNodes(x))
-  # removeNodes(nodes_to_rm)
-  # TODO: reactivate or substitute func call (see comment in xml_files_functions)
-  # remove_formalism(xml_doc = old_doc, elt_name = form_names)
+  lapply(nodes_to_rm, function(x) if (!is.null(x)) XML::removeNodes(x))
 
 
   # options to be removed
   opt_names <- c(
-    "New mineralization of soil organic matter " # ,
-    # Useless now
-    # options now removed while removing the "residue incorporation" formalism
-    # "depht of residue incorporation plant 1 ",
-    # "depht of residue incorporation plant 2 "
+    "New mineralization of soil organic matter "
   )
 
   nodes_to_rm <- lapply(opt_names, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//option[@nom='", x, "']")
     )
   })
-  lapply(nodes_to_rm, function(x) removeNodes(x))
-  # removeNodes(nodes_to_rm)
-  # TODO: reactivate or substitute func call with
-  # remove_node_from_doc (see comment in xml_files_functions)
-  # remove_node_from_doc (see comment in xml_files_functions)
-  # remove_option(xml_doc = old_doc, elt_name = opt_names)
-
-
-  # formalisms to add
-  #
-  # Useless, option now removed in the model
-  # "evaluation options"
-  # Getting new formalism
-  # new_node <- xmlParseString(
-  #   '<formalisme nom="evaluation options">
-  #   <option choix="1" nom="stock initialisation " nomParam="code_stock_BM">
-  #      <choix code="1" nom="9.1 version"/>
-  #      <choix code="2" nom="BM perenne version"/>
-  #   </option>
-  #   </formalisme>',
-  #   addFinalizer = TRUE
-  # )
-  #
-  # prev_sibling <- getNodeS(
-  #   docObj = old_doc,
-  #   path = "//formalisme[@nom='residue incorporation']"
-  # )[[1]]
-  # addSibling(prev_sibling, xmlClone(new_node))
-
+  lapply(nodes_to_rm, function(x) XML::removeNodes(x))
 
   # roots
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<formalisme nom="New Roots">
     <param format="integer" max="1.0" min="0.0" nom="humirac">1</param>
   </formalisme>',
     addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
+  prev_sibling <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='Mineralization models']"
   )[[1]]
-  addSibling(prev_sibling, xmlClone(new_node), after = TRUE)
+  XML::addSibling(prev_sibling, XML::xmlClone(new_node), after = TRUE)
 
   # options to add
   # min, CsurN
@@ -180,84 +150,70 @@ upgrade_param_newform_xml <- function(file,
   parent_node <- prev_sibling
 
   if (codemineral) {
-    new_node <- list(
-      xmlParseString(
-        '<option choix="1" nom="New mineralization model" nomParam="codemineral">
+
+    new_node <- list(XML::xmlParseString(
+      '<option choix="1" nom="New mineralization model" nomParam="codemineral">
   <choix code="1" nom="no"/>
   <choix code="2" nom="new_minr"/>
   <choix code="3" nom="new_minh+new_minr"/>
 </option>',
-        addFinalizer = TRUE
-      ),
-      xmlParseString(
-        '<option choix="2" nom="CsurNsol dynamic" nomParam="code_CsurNsol_dynamic">
+      addFinalizer = TRUE),
+      XML::xmlParseString(
+        '<option choix="2" nom="CsurNsol dynamic"
+      nomParam="code_CsurNsol_dynamic">
   <choix code="1" nom="yes"/>
   <choix code="2" nom="no"/>
 </option>',
         addFinalizer = TRUE
-      )
-    )
+      ))
 
-    lapply(new_node, function(x) addChildren(parent_node, xmlClone(x)))
+    lapply(new_node,
+           function(x) XML::addChildren(parent_node, XML::xmlClone(x))
+    )
   } else {
 
     # if a version 10.0 file is retreated
     # codemineral option must be retreived for the moment
 
-    codemineral_node <- getNodeS(
-      docObj = old_doc,
+    codemineral_node <- get_nodes(
+      old_doc,
       path = paste0("//option[@nomParam='codemineral']")
     )
 
-    if (!is.null(codemineral_node)) removeNodes(codemineral_node)
+    if (!is.null(codemineral_node)) XML::removeNodes(codemineral_node)
 
-    new_node <- xmlParseString(
-      '<option choix="2" nom="CsurNsol dynamic" nomParam="code_CsurNsol_dynamic">
+    new_node <- XML::xmlParseString(
+      '<option choix="2" nom="CsurNsol dynamic"
+      nomParam="code_CsurNsol_dynamic">
   <choix code="1" nom="yes"/>
   <choix code="2" nom="no"/>
 </option>',
       addFinalizer = TRUE
     )
 
-    addChildren(parent_node, xmlClone(new_node))
+    XML::addChildren(parent_node, XML::xmlClone(new_node))
   }
-
-
-  # Useless, option now removed in the model
-  #   # humus
-  #   new_node <- xmlParseString(
-  #     '<option choix="1" nom="depth of humus division " nomParam="code_depth_mixed_humus">
-  #   <choix code="1" nom="old calculation proftrav1 to proftrav2"/>
-  #   <choix code="2" nom="new calculation 1 to proftrav2"/>
-  # </option>',
-  #     addFinalizer = TRUE
-  #   )
-  #
-  #   parent_node <- getNodeS(
-  #     docObj = old_doc,
-  #     path = "//formalisme[@nom='residue incorporation']"
-  #   )[[1]]
-  #   addChildren(parent_node, xmlClone(new_node))
 
 
   # formalism modifications
   # replacing formalisme option @nom, choix
-  setAttrValues(
-    docObj = old_doc,
+  set_attrs_values(
+    old_doc,
     path = "//option[@nomParam='codecalferti']",
     attr_name = "nom",
     values_list = "automatic calculation of fertilisation"
   )
 
-  setAttrValues(
-    docObj = old_doc,
+  set_attrs_values(
+    old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "nom",
-    values_list = "automatic N fertilisation (1 = based on rainfall, 2 = based on soil water content)"
+    values_list = paste0("automatic N fertilisation (1 = based on rainfall",
+                         " 2 = based on soil water content)")
   )
 
-  setAttrValues(
-    docObj = old_doc,
+  set_attrs_values(
+    old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "choix",
     values_list = "1"
@@ -268,10 +224,11 @@ upgrade_param_newform_xml <- function(file,
   # TODO: see what to do for the future v10 version !
   # ---------------------------------------------------------------------------
   # ISOP specific option to temporarily add
-  new_node <- xmlParseString('<formalisme nom="ISOP">
+  new_node <- XML::xmlParseString('<formalisme nom="ISOP">
 		<option choix="2" nom="activation of ISOP equations" nomParam="code_ISOP">
 			<choix code="1" nom="yes">
-			<option choix="2" nom="activation of legume fixation in grassland" nomParam="code_pct_legume">
+			<option choix="2" nom="activation of legume fixation in grassland"
+			nomParam="code_pct_legume">
 				<choix code="1" nom="yes">
 					<param format="real" max="1.0" min="0.0" nom="pct_legum">0.5</param>
 				</choix>
@@ -281,20 +238,22 @@ upgrade_param_newform_xml <- function(file,
 			<choix code="2" nom="no"/>
 		</option>
    </formalisme>',
-    addFinalizer = TRUE
+                                  addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
+  prev_sibling <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='New Roots']"
   )[[1]]
-  addSibling(prev_sibling, xmlClone(new_node))
+  XML::addSibling(prev_sibling, XML::xmlClone(new_node))
   # ---------------------------------------------------------------------------
 
 
   # Writing to file param_newform.xml
-  write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite = overwrite)
+  write_xml_file(old_doc,
+                 file.path(out_dir, basename(file)),
+                 overwrite = overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

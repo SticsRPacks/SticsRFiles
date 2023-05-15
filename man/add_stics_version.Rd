@@ -23,14 +23,16 @@ information from}
 \item{file_name}{File name(s)
 or keyword "all" for both files (default)}
 
-\item{location}{The destination where to write information "install" for writing
+\item{location}{The destination where to write information
+"install" for writing
 things in the installed SticsRFiles library (default), "package" for writing
 them in the package project (in RStudio)}
 
 \item{overwrite}{A logical, TRUE to overwrite csv files,
 FALSE otherwise (default)}
 
-\item{verbose}{Logical, TRUE for displaying warnings (default), FALSE otherwise}
+\item{verbose}{Logical, TRUE for displaying warnings (default),
+FALSE otherwise}
 }
 \value{
 An invisible data.frame containing versions data

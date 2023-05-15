@@ -1,101 +1,99 @@
 #' @keywords internal
 
-# xml class based on fileDocument class
-setClass("xmlDocument",
-  contains = c("fileDocument"),
-  validity = validDoc
+# xml class based on file_document class
+setClass(
+  "xml_document",
+  contains = c("file_document"),
+  validity = valid_doc
 )
 
 
 # object validation
-setMethod("validDoc", signature(object = "xmlDocument"), function(object) {
-  # methods::callNextMethod()
-  # print("calling xmlDocument validDoc")
-  ext <- getExt(object)
-  # print(ext)
-  # print(object@content)
-  if (length(object@name) == 0 || object@name == "") {
-    return("file name is empty !")
-  }
-  if (!length(ext) || !ext == "xml") {
-    return("Error: no xml extension")
-  }
-  if (!exist(object)) {
-    return(paste("Error: file doesn't exist:", object@name, "!"))
-  }
-  if (exist(object) && isempty(object)) {
-    return(paste("Error: file is empty:", object@name, "!"))
-  }
-  TRUE
-})
+setMethod(
+  "valid_doc", signature(object = "xml_document"),
+  function(object) {
+
+    ext <- get_ext(object)
+
+    if (length(object@name) == 0 || object@name == "") {
+      return("file name is empty !")
+    }
+    if (!length(ext) || !ext == "xml") {
+      return("Error: no xml extension")
+    }
+    if (!exist(object)) {
+      return(paste("Error: file doesn't exist:", object@name, "!"))
+    }
+    if (exist(object) && isempty(object)) {
+      return(paste("Error: file is empty:", object@name, "!"))
+    }
+    TRUE
+  })
 
 
 # constructor
 setMethod(
   "xmldocument", signature(file = "character"),
   function(file = character(length = 0)) {
-    # print(file)
-    methods::new("xmlDocument", file)
+    methods::new("xml_document", file = file)
   }
 )
 
 setMethod(
-  "initialize", "xmlDocument",
+  "initialize", "xml_document",
   function(.Object, file = character(length = 0), warn = FALSE) {
     .Object <- methods::callNextMethod(.Object, file)
-    # print('xmlDocument initialization')
-    # print(file)
     methods::validObject(.Object)
-    .Object <- loadContent(.Object)
-    # .Object@warn <- warn
+    .Object <- load_content(.Object)
     return(.Object)
   }
 )
 
 
-setMethod("show", "xmlDocument", function(object) {
+setMethod("show", "xml_document", function(object) {
   methods::callNextMethod()
-  # print("show de xmlDocument")
-  if (isLoaded(object)) {
+  if (is_loaded(object)) {
     print(paste0("   content : ", class(object@content)[[1]]))
   }
 })
 
 # setter methods
 setReplaceMethod(
-  "setContent", signature(docObj = "xmlDocument"),
-  function(docObj, value) {
+  "set_content", signature(object = "xml_document"),
+  function(object, value) {
     if (!methods::is(value, "XMLInternalDocument")) {
       stop("Input value is not a XMLInternalDocument class object")
     }
-    docObj@content <- value
-    return(docObj)
+    object@content <- value
+    return(object)
   }
 )
 
 # getter methods
-setMethod("getContent", signature(docObj = "xmlDocument"), function(docObj) {
-  return(docObj@content)
-})
+setMethod(
+  "get_content", signature(object = "xml_document"),
+  function(object) {
+    return(object@content)
+  }
+)
 
 
 setMethod(
-  "getNodeS", signature(docObj = "xmlDocument"),
-  function(docObj, path = NULL) {
+  "get_nodes", signature(object = "xml_document"),
+  function(object, path = NULL) {
     node_set <- NULL
-    if (!isLoaded(docObj)) {
-      stop("xml file is not loaded in xmlDocument object")
+    if (!is_loaded(object)) {
+      stop("xml file is not loaded in xml_document object")
     }
 
     if (base::is.null(path)) {
       # getting root node name to get corresponding node set
-      node_set <- getNodeSet(
-        docObj@content,
-        paste0("/", xmlName(xmlRoot(docObj@content)))
+      node_set <- XML::getNodeSet(
+        object@content,
+        paste0("/", XML::xmlName(XML::xmlRoot(object@content)))
       )
     } else {
-      node_set <- getNodeSet(docObj@content, path[1])
-      # browser("test getNodeS")
+      node_set <- XML::getNodeSet(object@content, path[1])
       # For a path vector, a loop is necessary
       # to keep results according to the path order !
       path_nb <- length(path)
@@ -103,14 +101,14 @@ setMethod(
         for (i in 2:path_nb) {
           node_set <- merge_nodesets(
             node_set,
-            getNodeSet(docObj@content, path[i])
+            XML::getNodeSet(object@content, path[i])
           )
         }
       }
     }
 
     if (!length(node_set)) {
-      if (docObj@warn) warning("Node set is empty, check xml input path !")
+      if (object@warn) warning("Node set is empty, check xml input path !")
       node_set <- NULL
     }
     return(node_set)
@@ -118,10 +116,10 @@ setMethod(
 )
 
 setMethod(
-  "getAttrs", signature(docObj = "xmlDocument"),
-  function(docObj, path) {
+  "get_attrs", signature(object = "xml_document"),
+  function(object, path) {
     attr_list <- NULL
-    node_set <- getNodeS(docObj, path)
+    node_set <- get_nodes(object, path)
     #
 
     if (base::is.null(node_set)) {
@@ -130,7 +128,7 @@ setMethod(
 
     # tranforming attributes to matrix (if only one attribute, a character
     # vector is returned)
-    attr_list <- sapply(node_set, function(x) xmlAttrs(x))
+    attr_list <- sapply(node_set, function(x) XML::xmlAttrs(x))
     # not any attributes in nodeset
     if (base::is.null(unlist(attr_list))) {
       return()
@@ -143,42 +141,28 @@ setMethod(
       }
       attr_list <- new_list
     }
-    # attr_list=as.matrix(attr_list)
+
     if (is.list(attr_list)) {
       attr_list <- attributes_list2matrix(attr_list)
     } else {
       attr_list <- t(attr_list)
     }
-    # # test to detect if there's only one attribute
-    # # TODO: add a contition to test if rownames (dimnames[[1]]) are identical
-    # # and dim()[[2]]==1
-    # r_names = unique(rownames(attr_list))
-    # if (base::is.null(r_names)) {
-    #
-    # }
-    # if (dim(attr_list)[[2]] ==1 & length(r_names) == 1) {
-    #   colnames(attr_list) <- unique(rownames(attr_list))
-    #   rownames(attr_list) <- c()
-    # } else {
-    #   # transposing the matrix to have attribute names as colnames !
-    #   attr_list=t(attr_list)
-    # }
+
 
     # testing if any node has not any attribute
     any_null <- any(sapply(attr_list, function(x) base::is.null(x)))
-    # print(attr_list)
-    if (any_null && docObj@warn) {
+    if (any_null && object@warn) {
       warning(paste("Existing nodes without any attributes on xpath", path))
     }
 
-    # browser("test getAttrs")
 
     # testing if all nodes have the same attributes !!
     if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
-      if (docObj@warn) {
+      if (object@warn) {
         print(class(attr_list))
         warning(paste(
-        "Existing nodes with different attributes comparing to others on xpath, missing attributes ?",
+          "Existing nodes with different attributes comparing to others,",
+          "missing attributes ?",
           path
         ))
       }
@@ -188,53 +172,34 @@ setMethod(
   }
 )
 
-# getAttrsNames
+# get_attrs_names
 setMethod(
-  "getAttrsNames", signature(docObj = "xmlDocument"),
-  function(docObj, path) {
+  "get_attrs_names", signature(object = "xml_document"),
+  function(object, path) {
     attr_names <- NULL
-    attr_list <- getAttrs(docObj, path)
+    attr_list <- get_attrs(object, path)
 
-
-    # print(path)
-    #  print(attr_list)
-    #   if (base::is.null(attr_list))  {
-    #     return(attr_list)}
-
-    # TODO: Normally USELESS, see getAttrs (as.matrix ...)
-    # if (!is.matrix(attr_list)) {
-    #  print("attrs characters ")
-    #  # attr_names=unique(names(attr_list))
-    #  attr_names=lapply(attr_list,function(x) names(x))
-    # } # else {
-    # print("attrs matrix ")
     dim_names <- dimnames(attr_list)
     if (!base::is.null(dim_names[[1]])) {
       attr_names <- dim_names[[1]]
-      # print(attr_names)
     } else {
       attr_names <- dim_names[[2]]
     }
-    # attr_names=unlist(attr_names)
-    # print(attr_names)
-    # }
+
     return(attr_names)
   }
 )
 
 
-# getAttrsValues
+# get_attrs_values
 setMethod(
-  "getAttrsValues", signature(docObj = "xmlDocument"),
-  function(docObj, path, attr_list = character(length = 0),
+  "get_attrs_values", signature(object = "xml_document"),
+  function(object, path, attr_list = character(length = 0),
            nodes_ids = NULL) {
-    # browser()
     sel_values <- NULL
 
-
-
     # getting attributes values from doc
-    attr_values <- getAttrs(docObj, path)
+    attr_values <- get_attrs(object, path)
 
     # no attributes for the query
     if (base::is.null(attr_values)) {
@@ -253,7 +218,7 @@ setMethod(
 
     if (!any(sel)) {
       # not any given attr_list names exist in path
-      if (docObj@warn) {
+      if (object@warn) {
         warning(paste(
           "Not any given attribute name exist in ", path,
           "aborting !"
@@ -261,8 +226,6 @@ setMethod(
         return()
       }
     }
-
-    # browser()
 
     # getting existing names from attr_list in attr_values
     # and getting the original order in initial attr_list
@@ -279,8 +242,6 @@ setMethod(
       colnames(sel_values) <- sel_list
     }
 
-    # browser()
-
     # keeping only lines specified by nodes_ids
     if (!base::is.null(nodes_ids)) {
       if (max(nodes_ids) <= dim(sel_values)[1]) {
@@ -295,11 +256,11 @@ setMethod(
 )
 
 
-# factoriser avec getAttrs!! + getNode(docObj,path,kind)
+# factoriser avec get_attrs!! + getNode(object,path,kind)
 setMethod(
-  "getValues", signature(docObj = "xmlDocument"),
-  function(docObj, path, nodes_ids = NULL) {
-    node_set <- getNodeS(docObj, path)
+  "get_values", signature(object = "xml_document"),
+  function(object, path, nodes_ids = NULL) {
+    node_set <- get_nodes(object, path)
 
     # getting nodes number
     nodes_nb <- length(node_set)
@@ -308,33 +269,31 @@ setMethod(
       return(invisible())
     }
 
-    # browser()
 
     if (!base::is.null(nodes_ids)) {
       if (max(nodes_ids) <= nodes_nb) {
         node_set <- node_set[nodes_ids]
       } else {
         stop("Subscript out of range, check ids !")
-        # return(invisible())
       }
     }
 
     # Getting values from the node_set
-    val_list <- unlist(lapply(node_set, function(x) xmlValue(x)))
+    val_list <- unlist(lapply(node_set, function(x) XML::xmlValue(x)))
 
     return(val_list)
   }
 )
 
 
-# addAttrs
+# add_attrs
 setMethod(
-  "addAttrs", signature(docObj = "xmlDocument"),
-  function(docObj, path, named_vector) {
-    # add not base::is.null node_set !!!!
+  "add_attrs", signature(object = "xml_document"),
+  function(object, path, named_vector) {
+    # add not is nullnull node_set !!!!
     if (!base::is.null(names(named_vector))) {
-      node_set <- getNodeS(docObj, path)
-      invisible(sapply(node_set, function(x) xmlAttrs(x) <- named_vector))
+      node_set <- get_nodes(object, path)
+      invisible(sapply(node_set, function(x) XML::xmlAttrs(x) <- named_vector))
     }
   }
 )
@@ -344,14 +303,14 @@ setMethod(
 # delAttrs
 # TODO: to remove all attrs !!!!!!!!!
 setMethod(
-  "removeAttrs", signature(docObj = "xmlDocument"),
-  function(docObj, path, attr_names) {
+  "remove_attrs", signature(object = "xml_document"),
+  function(object, path, attr_names) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(attr_names)) {
-      node_set <- getNodeS(docObj, path)
+      node_set <- get_nodes(object, path)
       attr_nb <- length(attr_names)
       for (i in 1:attr_nb) {
-        sapply(node_set, function(x) removeAttributes(x, attr_names[i]))
+        sapply(node_set, function(x) XML::removeAttributes(x, attr_names[i]))
       }
     }
   }
@@ -360,11 +319,11 @@ setMethod(
 
 # Setters
 #
-# TODO : same code as setValues,
+# TODO : same code as set_values,
 setMethod(
-  "setAttrValues", signature(docObj = "xmlDocument"),
-  function(docObj, path, attr_name, values_list, nodes_ids = NULL) {
-    node_set <- getNodeS(docObj, path)
+  "set_attrs_values", signature(object = "xml_document"),
+  function(object, path, attr_name, values_list, nodes_ids = NULL) {
+    node_set <- get_nodes(object, path)
     if (base::is.null(node_set)) {
       return(invisible())
     }
@@ -384,18 +343,18 @@ setMethod(
     }
     for (i in 1:nodes_nb) {
       value <- values_list[[i]]
-      xmlAttrs(node_set[[i]])[[attr_name]] <- value
+      XML::xmlAttrs(node_set[[i]])[[attr_name]] <- value
     }
   }
 )
 
 
-# setValues
+# set_values
 setMethod(
-  "setValues", signature(docObj = "xmlDocument"),
-  function(docObj, path, values_list, nodes_ids = NULL) {
-    node_set <- getNodeS(docObj, path)
-    # browser("setValues")
+  "set_values", signature(object = "xml_document"),
+  function(object, path, values_list, nodes_ids = NULL) {
+    node_set <- get_nodes(object, path)
+
     if (base::is.null(node_set)) {
       return(invisible())
     }
@@ -417,7 +376,7 @@ setMethod(
     }
 
     for (i in 1:nodes_nb) {
-      xmlValue(node_set[[i]]) <- values_list[[i]]
+      XML::xmlValue(node_set[[i]]) <- values_list[[i]]
     }
   }
 )
@@ -428,15 +387,15 @@ setMethod(
 
 # addNodes
 setMethod(
-  "addNodes", signature(docObj = "xmlDocument"),
-  function(docObj, nodes_to_add, parent_path = NULL) {
+  "add_nodes", signature(object = "xml_document"),
+  function(object, nodes_to_add, parent_path = NULL) {
     # parent node is root node
     if (base::is.null(parent_path)) {
-      pnode <- xmlRoot(docObj@content)
+      pnode <- XML::xmlRoot(object@content)
       # getting parent node from given parent_path
     } else {
-      node_set <- getNodeS(docObj, parent_path)
-      # print(node_set[[1]])
+      node_set <- get_nodes(object, parent_path)
+
       if (base::is.null(node_set)) {
         return()
       }
@@ -445,11 +404,11 @@ setMethod(
     # for a node set
     if (class(nodes_to_add)[[1]] == "XMLNodeSet") {
       for (n in seq_along(nodes_to_add)) {
-        addChildren(pnode, nodes_to_add[[n]])
+        XML::addChildren(pnode, nodes_to_add[[n]])
       }
       # for a single node
     } else {
-      addChildren(pnode, nodes_to_add)
+      XML::addChildren(pnode, nodes_to_add)
     }
   }
 )
@@ -457,66 +416,69 @@ setMethod(
 
 # removeNodes
 setMethod(
-  "delNodes", signature(docObj = "xmlDocument"),
-  function(docObj, path) {
-    node_set <- getNodeS(docObj, path)
+  "del_nodes", signature(object = "xml_document"),
+  function(object, path) {
+    node_set <- get_nodes(object, path)
 
     if (base::is.null(node_set)) {
       return()
     }
 
-    removeNodes(node_set)
+    XML::removeNodes(node_set)
   }
 )
 
 
-
-# replaceNodes ??
-
-# delNode
-# removeChildren
-# removeNodes
-# nodes=getNodeS(xnode,'//param[@nom="lvmax"]')
-# removeChildren(xmlRoot(xnode@content),nodes[[1]])
-
 # other methods
-setMethod("loadContent", signature(docObj = "xmlDocument"), function(docObj) {
-  # print("dans loadContent...")
-  setContent(docObj) <- xmlParse(getPath(docObj))
-  return(docObj)
-})
+setMethod(
+  "load_content", signature(object = "xml_document"),
+  function(object) {
 
-
-setMethod("isLoaded", signature(docObj = "xmlDocument"), function(docObj) {
-  return(methods::is(docObj@content, "XMLInternalDocument"))
-})
-
-setMethod("is.xmlDocument", signature(docObj = "ANY"), function(docObj) {
-  if (methods::is(docObj, "xmlDocument")) {
-    return(TRUE)
-  } else {
-    return(FALSE)
+    set_content(object) <- XML::xmlParse(get_path(object))
+    return(object)
   }
-})
+)
+
+
+setMethod(
+  "is_loaded", signature(object = "xml_document"),
+  function(object) {
+    return(methods::is(object@content, "XMLInternalDocument"))
+  }
+)
+
+setMethod(
+  "is.xml_document", signature(object = "ANY"),
+  function(object) {
+    if (methods::is(object, "xml_document")) {
+      return(TRUE)
+    } else {
+      return(FALSE)
+    }
+  }
+)
 
 
 # save method
 setMethod(
-  "saveXmlDoc", signature(docObj = "xmlDocument"),
-  function(docObj, xml_path) {
-    if (isLoaded(docObj)) {
-      write(saveXML(docObj@content), xml_path)
+  "save_xml_doc", signature(object = "xml_document"),
+  function(object, xml_path) {
+    if (is_loaded(object)) {
+      write(XML::saveXML(object@content), xml_path)
     }
   }
 )
 
 # clone method
-setMethod("cloneXmlDoc", signature(docObj = "xmlDocument"), function(docObj) {
-  if (!isLoaded(docObj)) {
-    return(NULL)
+setMethod(
+  "clone_xml_doc", signature(object = "xml_document"),
+  function(object) {
+    if (!is_loaded(object)) {
+      return(NULL)
+    }
+
+    set_content(object) <- XML::xmlClone(get_content(object))
+
+    return(object)
   }
-
-  setContent(docObj) <- xmlClone(getContent(docObj))
-
-  return(docObj)
-})
+)

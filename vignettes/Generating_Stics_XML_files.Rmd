@@ -1,16 +1,19 @@
 ---
-title: "Generating Stics XML files from tabulated data"
+title: "Generating STICS XML files from tabulated data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Generating Stics XML files from tabulated data}
+  %\VignetteIndexEntry{Generating STICS XML files from tabulated data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, eval = TRUE, echo = TRUE}
+```{r eval=FALSE}
 library(SticsRFiles)
 ```
 
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
+```
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -27,7 +30,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-* In this part information are focusing on functionalities related to Stics XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.
+* In this part information are focusing on functionalities related to STICS XML files generation capabilities based on parameterization for lists of simulations (USMs) stored in tabulated data files; as Excel or CSV files.
 
 * The functions operate on data loaded as data.frames from Excel sheets or CSV files
 
@@ -35,7 +38,7 @@ knitr::opts_chunk$set(
 
 * Observations data files generation have been included even if they are not in XML format.
 
-* The generation of wheather files files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaStics GUI to perform these files generation.
+* The generation of weather files is not included yet in the package, but will be included in a future version. One can use the tool provided by JavaSTICS GUI to perform these files generation.
 
 
 This document has been generated using the latest STICS version **`r stics_version`**.
@@ -112,7 +115,7 @@ usm_csv_file <- download_usm_csv(file = "inputs_stics_example_USMs.csv",
 
 As told in the previous section, parameters data may be stored either in Excel files containing several sheets or in several equivalent individual CSV files.
 
-Sheets content and CSV files content is the same, only their use is different. But, CSV files are easily traced under verion control systems and they also can be generated programmatically with the help of functions dedicated for example to generating crop management parameters like irrigation, fertilization (interventions and doses calculations).
+Sheets content and CSV files content is the same, only their use is different. But, CSV files are easily traced under version control systems and they also can be generated programmatically with the help of functions dedicated for example to generating crop management parameters like irrigation, fertilization (interventions and doses calculations).
 
 
 ## Important information
@@ -121,16 +124,16 @@ The USMs data which are necessary for generating the `usms.xml` must be all prov
 
 Other data stored in Excel or CSV files must be adapted to the use cases here after:
 
-* For generating new files, containing parameters with differents values for each USM, tables **must contain values for all the files parameters**.
+* For generating new files, containing parameters with different values for each USM, tables **must contain values for all the files parameters**.
 
 * For generating files with a common set of parameter values and only a part of them must be overloaded with values coming from parameters tables, one **must give an existing** file as a template for files generation to functions `gen_*_xml` (listed [here](#pkg-funs)).
 
 
 ## Specificities of Excel sheets
 
-Excel sheet names are completely free, but must be meaningfull regarding the kind of parameters set they contain.
+Excel sheet names are completely free, but must be meaningful regarding the kind of parameters set they contain.
 
-In the example, usefull sheets for generating XML parameters files are named: **USMs, Ini, Soils, Tec, Station**
+In the example, useful sheets for generating XML parameters files are named: **USMs, Ini, Soils, Tec, Station**
 
 
 
@@ -149,7 +152,7 @@ These first columns may contain either **names identifiers or files names** acco
 * Initialization, station or crop management data: files names either with or without suffix and XML extension
     (**\_ini.xml, \_tec.xml, or \_sta.xml**)
 
-Other columns of tables are named with **parameters names** according to the fololowing rules:
+Other columns of tables are named with **parameters names** according to the following rules:
 
 * Scalar parameters
 used parameter names must match the exact parameter names (checking it syntax with the help of the `get_param_info` function)
@@ -174,7 +177,7 @@ As an example, looking in the Tec sheet of the previously downloaded Excel file,
 
 ## Data consistency checks in tables
 
-For the moment, *no consistency checks* (between Excel sheets or CSV equivalents files) functionnalities have been included in the package in order to prevent missing generated files or misspelled file names or identifiers.
+For the moment, *no consistency checks* (between Excel sheets or CSV equivalents files) functionalities have been included in the package in order to prevent missing generated files or misspelled file names or identifiers.
 
 So, one must take care of **links between xml files names** for example files names defined for usms related to names declared for example in Excel sheets `Tec`, `Station`, and so on.
 
@@ -183,7 +186,7 @@ In future developments, checks will be included to run be run prior to files gen
 
 ## USMs table example {#usms-table-example}
 
-The Excel file which contains parameters values to take into account for Stics inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).
+The Excel file which contains parameters values to take into account for STICS inputs may contain specific sheets for each kind of parameters groups, i.e. USMs, crop management, soil, weather station, initializations (except plant parameters and general parameters).
 
 The following table contains data extracted from a sheet named USMs containing a list of USMS parameters or from his equivalent CSV example file.
 

@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_params_from_doc.R
 \name{get_params_from_doc}
 \alias{get_params_from_doc}
-\title{Get a list of Stics xml parameters names in an xmlDocument}
+\title{Get a list of STICS xml parameters names in an xml_document}
 \usage{
 get_params_from_doc(xml_doc_object, type_name = NULL, unique_val = TRUE)
 }
 \arguments{
-\item{xml_doc_object}{an xmlDocument object (created from an xml file)}
+\item{xml_doc_object}{an xml_document object (created from an xml file)}
 
 \item{type_name}{type name, one of "option", "param", "colonne"}
 
@@ -17,6 +17,6 @@ get_params_from_doc(xml_doc_object, type_name = NULL, unique_val = TRUE)
 a character vector of parameters names
 }
 \description{
-Get a list of Stics xml parameters names in an xmlDocument
+Get a list of STICS xml parameters names in an xml_document
 }
 \keyword{internal}

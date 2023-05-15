@@ -15,16 +15,19 @@ remove_stics_version(
 \item{version_name}{name (i.e. "VX.Y") of the version to set
 in the csv file containing informations about versions}
 
-\item{delete_files}{Logical, TRUE for removing files (default), FALSE otherwise}
+\item{delete_files}{Logical, TRUE for removing files (default),
+FALSE otherwise}
 
 \item{location}{The destination where to remove information and data
-"install" for removing things from the installed SticsRFiles library (default),
-"package" for removing them from the package project (in RStudio)}
+"install" for removing things from the installed SticsRFiles library
+(default), "package" for removing them from the package project (in RStudio)}
 
-\item{verbose}{Logical, TRUE for displaying warnings (default), FALSE otherwise}
+\item{verbose}{Logical, TRUE for displaying warnings (default),
+FALSE otherwise}
 }
 \value{
-An invisible logical value, TRUE if successfull removing FALSE otherwise
+An invisible logical value, TRUE if successful removing,
+FALSE otherwise
 }
 \description{
 Removing a version and data from the SticsRFiles library or package

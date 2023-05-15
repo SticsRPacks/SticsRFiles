@@ -16,15 +16,17 @@ get_param_xml(
 )
 }
 \arguments{
-\item{file}{Vector of the xml file paths from which parameters values must be extracted}
+\item{file}{Vector of the xml file paths from which parameters values
+must be extracted}
 
 \item{param}{Vector of parameter names. Optional, if not provided, the
 function returns information for all parameters.}
 
-\item{select}{node name or attribute name to use for selection (optional, default to no selection)}
+\item{select}{node name or attribute name to use for selection
+(optional, default to no selection)}
 
-\item{select_value}{Vector of values used for select (see examples). Optional,
-should be provided only if select is provided.}
+\item{select_value}{Vector of values used for select (see examples).
+Optional, should be provided only if select is provided.}
 
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use \code{file} instead.}
@@ -41,7 +43,8 @@ longer supported, use \code{select_value} instead.}
 A list of parameter values for each xml_file (a list of list)
 }
 \description{
-Extracting parameter values for a list of xml files and parameters
+Extracting parameter values for a list of xml files and
+parameters
 }
 \examples{
 \dontrun{

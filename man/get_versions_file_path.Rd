@@ -8,8 +8,8 @@ get_versions_file_path(location = "install")
 }
 \arguments{
 \item{location}{The destination where to remove information and data
-"install" for removing things from the installed SticsRFiles library (default),
-"package" for removing them from the package project (in RStudio)}
+"install" for removing things from the installed SticsRFiles library
+(default), "package" for removing them from the package project (in RStudio)}
 }
 \value{
 A file path

@@ -1,7 +1,7 @@
 #' @title Getting options parameter names from an xml parameter file
 #'
-#' @description Extracting options parameter name from an xml file data, and checking
-#' names if provided in options_names
+#' @description Extracting options parameter name from an xml file data,
+#' and checking names if provided in options_names
 #'
 #' @param xml_file_path path of xml parameter file
 #' @param option_names options names vector (optional)
@@ -26,7 +26,7 @@ get_options_names <- function(xml_file_path, option_names = NULL) {
   xml_param <- xmldocument(xml_file_path)
 
   # Getting all options names
-  param_names <- getAttrsValues(xml_param, "//option", "nomParam")
+  param_names <- get_attrs_values(xml_param, "//option", "nomParam")
 
   # Checking if given names exist in param_names
   if (!base::is.null(option_names)) {

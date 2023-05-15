@@ -2,8 +2,8 @@
 % Please edit documentation in R/get_param_type.R
 \name{get_param_type}
 \alias{get_param_type}
-\title{Get a Stics xml parameter type and xpath
-from a request in an xmlDocument}
+\title{Get a STICS xml parameter type and xpath
+from a request in an xml_document}
 \usage{
 get_param_type(
   xml_doc,
@@ -14,7 +14,7 @@ get_param_type(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object (created from an xml file)}
+\item{xml_doc}{an xml_document object (created from an xml file)}
 
 \item{param_name}{parameter name or a vector of names}
 
@@ -28,8 +28,8 @@ get_param_type(
 a list with fields $type, $xpath and $length, or a named list of
 }
 \description{
-Get a Stics xml parameter type and xpath
-from a request in an xmlDocument
+Get a STICS xml parameter type and xpath
+from a request in an xml_document
 }
 \examples{
 \dontrun{

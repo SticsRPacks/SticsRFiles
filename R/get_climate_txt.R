@@ -1,11 +1,13 @@
-#' Read STICS input meteo file
+#' Read STICS input meteorology file
 #'
 #' @description Read the meteorology input for STICS ("climat.txt")
 #'
-#' @param workspace Path of the workspace containing the Stics climate file to read
+#' @param workspace Path of the workspace containing the STICS
+#' climate file to read
 #' @param file_name The meteorology file name (default to \code{climat.txt}).
-#' @param preserve Logical, `TRUE`` for keeping the stics columns related to date (year,
-#' month, day, julian), or only keep the date as a `POSIXct` otherwise. Default to `TRUE`.
+#' @param preserve Logical, `TRUE`` for keeping the STICS columns related
+#' to date calculation (year, month, day, julian),
+#' or only the Date column as a `POSIXct` otherwise. Default to `TRUE`.
 #'
 #' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
 #'   longer supported, use `workspace` instead.
@@ -14,12 +16,11 @@
 #'
 #'
 #' @note The time-related variables are summarised into one POSIXct column named
-#'       `Date`.
+#'       `date`.
 #'
-#' @return A data.frame of the input meteorological variables used as input for the
-#'         STICS model.
+#' @return A data.frame of the input meteorological variables used as input
+#'         for the STICS model.
 #'
-#' @importFrom data.table fread
 #'
 #' @examples
 #' library(SticsRFiles)
@@ -68,7 +69,7 @@ get_climate_txt <- function(workspace = getwd(),
     "station", "year", "month", "day", "julian", "ttmin", "ttmax",
     "ttrg", "ttetp", "ttrr", "ttvent", "ttpm", "ttco2"
   )
-  Date <- data.frame(Date = as.POSIXct(
+  date <- data.frame(Date = as.POSIXct(
     x = paste(meteo_data$year, meteo_data$month, meteo_data$day, sep = "-"),
     format = "%Y-%m-%d", tz = "UTC"
   ))
@@ -79,8 +80,8 @@ get_climate_txt <- function(workspace = getwd(),
     if (length(col_idx)) meteo_data <- meteo_data[, -col_idx]
   }
 
-  # Adding Date to data.frame
-  meteo_data <- cbind(Date, meteo_data)
+  # Adding date to data.frame
+  meteo_data <- cbind(date, meteo_data)
 
   # Adding file path as attribute
   attr(meteo_data, "file") <- file_path

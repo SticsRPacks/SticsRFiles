@@ -2,19 +2,19 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_exists}
 \alias{stics_exists}
-\title{Is object part of stics env}
+\title{Is object part of STICS env}
 \usage{
 stics_exists(name = NULL, env_name = sticsenv_name())
 }
 \arguments{
-\item{name}{Name of the object in the stics environment}
+\item{name}{Name of the object in the STICS environment}
 
-\item{env_name}{The name of the stics environment}
+\item{env_name}{The name of the STICS environment}
 }
 \value{
 A boolean, \code{TRUE} if the object is in the env, \code{FALSE} otherwise.
 }
 \description{
-Test if an object is in a stics environment
+Test if an object is in a STICS environment
 }
 \keyword{internal}

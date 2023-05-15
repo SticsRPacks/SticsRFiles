@@ -20,9 +20,9 @@ information from}
 
 \item{file_name}{File name(s)}
 
-\item{location}{The destination where to write information "install" for writing
-things in the installed SticsRFiles library (default), "package" for writing
-them in the package project (in RStudio)}
+\item{location}{The destination where to write information "install"
+for writing things in the installed SticsRFiles library (default),
+"package" for writing them in the package project (in RStudio)}
 
 \item{verbose}{Logical, TRUE for displaying warnings, FALSE otherwise}
 }

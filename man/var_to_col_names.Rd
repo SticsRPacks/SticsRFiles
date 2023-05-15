@@ -2,7 +2,7 @@
 % Please edit documentation in R/var_to_col_names.R
 \name{var_to_col_names}
 \alias{var_to_col_names}
-\title{Convert Stics variables names, or generated column names to
+\title{Convert STICS variables names, or generated column names to
 valid conventional column names.}
 \usage{
 var_to_col_names(var_vec)
@@ -14,7 +14,7 @@ var_to_col_names(var_vec)
 Vector of formatted column names
 }
 \description{
-Change Stics variables names as valid variable R name
+Change STICS variables names as valid variable R name
 Like \code{varname(n)} or \code{varname.n.} to  \code{varname_n}.
 Other names are unchanged (i.e.: varname, varname_n, ...)
 }

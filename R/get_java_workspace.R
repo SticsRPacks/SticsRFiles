@@ -1,9 +1,9 @@
-#' @title Getting current workspace in JavaStics preferences configuration
+#' @title Getting current workspace in JavaSTICS preferences configuration
 #'
-#' @description Getting current JavaStics working directory,
+#' @description Getting current JavaSTICS working directory,
 #' if not any setting to `example` directory
 #'
-#' @param javastics JavaStics installation root folder
+#' @param javastics JavaSTICS installation root folder
 #'
 #' @examples
 #' \dontrun{
@@ -12,7 +12,6 @@
 #'
 #' @keywords internal
 #'
-# @export
 
 get_java_workspace <- function(javastics) {
 
@@ -28,9 +27,11 @@ get_java_workspace <- function(javastics) {
   xml_path <- file.path(javastics, "config", "preferences.xml")
 
   xml_pref <- xmldocument(xml_path)
-  current_wd <- getValues(xml_pref, '//entry[@key="workingDirectory.current"]')
+  current_wd <- get_values(xml_pref, '//entry[@key="workingDirectory.current"]')
 
-  if (base::is.null(current_wd)) stop("JavaStics working directory hasn't been set (use set_java_wd to do so)!")
+  if (base::is.null(current_wd))
+    stop("JavaSTICS working directory hasn't been set ",
+         "(use set_java_wd to do so)!")
 
   return(current_wd)
 }

@@ -7,22 +7,24 @@
 #' @param filename A vector of observation file name(s). Optional, see details.
 #' @param mixed    (optional) Is the simulation on mixed species (boolean)
 #'
-#' @details If \code{filename} is not specified (or equal to \code{NULL}), the
-#'          function tries first to match the \code{mod_s*} names for the same \*.obs
-#'          names, and then to use the \code{.obs} file if there is one only
-#'          (used for sole crops or for both mixed crops). If there are no .obs files,
-#'          or two but not specified for reading, the function returns \code{NULL}
-#'          If \code{mixed} is not specified (or equal to \code{NULL}), the function
-#'          tries to read the number of species from the input files.
+#' @details If \code{filename} is not specified (or equal to \code{NULL}),
+#'          the function tries first to match the \code{mod_s*} names for
+#'          the same \*.obs names, and then to use the \code{.obs} file if there
+#'           is one only (used for sole crops or for both mixed crops).
+#'           If there are no .obs files, or two but not specified for reading,
+#'           the function returns \code{NULL}
+#'          If \code{mixed} is not specified (or equal to \code{NULL}),
+#'          the function tries to read the number of species from the
+#'          input files.
 #'
-#' @return A data.frameof the STICS-formated observations. Return \code{NULL} if no files were found,
-#'         or more files than useable. If mixed crops (two `filename` provided), the function binds
-#'         them and add a new column called "Plant" which corresponds to the name of each observation
-#'         file.
+#' @return A data.frame of the STICS-formatted observations.
+#'         Return is \code{NULL} if no files were found,
+#'         or more files than usable. If mixed crops (two `filename` provided),
+#'         the function binds them and add a new column called "Plant"
+#'         which corresponds to the name of each observation file.
 #'
 # @seealso \code{\link{read_output}}
 #'
-#' @importFrom data.table fread rbindlist
 #'
 #' @examples
 #' \dontrun{
@@ -37,7 +39,8 @@ get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
   if (is.null(mixed)) {
     if (file.exists(file.path(dirpath, "new_travail.usm"))) {
       nbplants <-
-        get_usm_txt(filepath = file.path(dirpath, "new_travail.usm"))$nbplantes %>%
+        get_usm_txt(filepath = file.path(dirpath,
+                                         "new_travail.usm"))$nbplantes %>%
         as.numeric()
       if (nbplants > 1) {
         mixed <- TRUE
@@ -96,15 +99,20 @@ get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
         }
     }
 
-    # If the *.obs names are the same used for mod_s* files, read them accordingly...
+    # If the *.obs names are the same used for mod_s* files,
+    # read them accordingly...
     if (all(file.exists(file.path(dirpath, paste0(plant_name, ".obs"))))) {
       obs_table <- get_file_int(dirpath, paste0(plant_name, ".obs"))
       warning(
-        "Observation file names read from matching mod_s* file names.\nmod_s* names:",
-        plant_name, "\n*.obs:", paste0(plant_name, ".obs")
+        "Observation file names read from matching mod_s* ",
+        "file names.\nmod_s* names:",
+        plant_name,
+        "\n*.obs:",
+        paste0(plant_name, ".obs")
       )
     } else {
-      # ...else try to read a single *.obs file (multiple .obs file are not allowed)
+      # ...else try to read a single *.obs file (multiple .obs
+      # file are not allowed)
       obs_files <- list.files(dirpath) %>% .[grep("\\.obs$", .)]
       if (length(obs_files) == 1) {
         obs_table <- get_file_int(dirpath, obs_files)
@@ -114,8 +122,10 @@ get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
         )
       } else {
         warning(
-          "\nObservation file names do not match mod_s* file names and several *.obs ",
-          "file names are present. Please provide the *.obs file names using the ",
+          "\nObservation file names do not match mod_s* ",
+          "file names and several *.obs ",
+          "file names are present. ",
+          "Please provide the *.obs file names using the ",
           "filename parameter"
         )
         obs_table <- NULL

@@ -2,7 +2,7 @@
 % Please edit documentation in R/col_names_to_var.R
 \name{col_names_to_var}
 \alias{col_names_to_var}
-\title{Convert columns names list to Stics variables names}
+\title{Convert columns names list to STICS variables names}
 \usage{
 col_names_to_var(var_list = c())
 }
@@ -10,7 +10,7 @@ col_names_to_var(var_list = c())
 \item{var_list}{Columns names list}
 }
 \value{
-List of Stics variables names
+List of STICS variables names
 }
 \description{
 Change the \code{varname.n.} or \code{varname_n} by \code{varname(n)}

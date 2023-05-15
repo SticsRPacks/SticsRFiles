@@ -1,7 +1,5 @@
 library(SticsRFiles)
-# options(warn=-1)
 
-# stics_version <- "V9.2"
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
@@ -23,7 +21,6 @@ context("checking existing usms names, one or two files")
 usm_name <- "SugarCane"
 test_that("name, one file", {
   expect_true(usm_name %in% usms_names)
-  # expect_true(all(lapply(usms_names, function(x) usm_name %in% x)))
 })
 
 
@@ -32,7 +29,6 @@ usm_name <- "UsmTest"
 
 test_that("name, one file", {
   expect_false(usm_name %in% usms_names)
-  # expect_false(all(lapply(usms_names, function(x) usm_name %in% x)))
 })
 
 

@@ -34,15 +34,15 @@
     <zrac0/>
     <option choix="2" nom="Simulation of Nitrogen and Carbon reserves" nomParam="code_acti_reserve">
       <choix code="1" nom="yes">
-        <maperenne0>-999</maperenne0>
-        <QNperenne0>-999</QNperenne0>
-        <masecnp0>-999</masecnp0>
-        <QNplantenp0>-999</QNplantenp0>
+        <maperenne0/>
+        <QNperenne0/>
+        <masecnp0/>
+        <QNplantenp0/>
       </choix>
       <choix code="2" nom="no">
-        <masec0>-999</masec0>
-        <QNplante0>-999</QNplante0>
-        <restemp0>-999</restemp0>
+        <masec0/>
+        <QNplante0/>
+        <restemp0/>
       </choix>
     </option>
     <densinitial>

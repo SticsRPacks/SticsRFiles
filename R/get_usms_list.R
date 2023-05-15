@@ -18,7 +18,9 @@
 #'
 #' usms_list <- get_usms_list(file = file.path(path, "usms.xml"))
 #'
-#' usms_list <- get_usms_list(file = file.path(path, "usms.xml"), usm = c("usm1", "usm2"))
+#' usms_list <- get_usms_list(file = file.path(path, "usms.xml"),
+#' usm = c("usm1", "usm2"))
+#'
 #' @export
 #'
 get_usms_list <- function(file,

@@ -2,14 +2,14 @@
 % Please edit documentation in R/stics_environment.R
 \name{sticsenv_name}
 \alias{sticsenv_name}
-\title{stics env name}
+\title{STICS env name}
 \usage{
 sticsenv_name()
 }
 \value{
-The default stics env name
+The default STICS env name
 }
 \description{
-Get the default stics environment name
+Get the default STICS environment name
 }
 \keyword{internal}

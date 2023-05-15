@@ -1,5 +1,5 @@
 
-# stics_version <- "V9.2"
+
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- SticsRFiles:::get_version_num()
 
@@ -7,7 +7,7 @@ context("get model outputs")
 
 path <- get_examples_path(file_type = "sti", stics_version = stics_version)
 
-# Testing with a JavaStics workspace like
+# Testing with a JavaSTICS workspace like
 test_that("output is always list", {
   outputs <- get_sim(path, "banana")
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -109,7 +109,6 @@ test_that("output is always list, without usms.xml, banana, wheat sub-dir", {
   outputs <- get_sim(path3, usm = c("banana", "wheat"))
   expect_true(is.list(outputs) && !is.data.frame(outputs))
 
-  # unlink(file.path(path,"banana"))
 })
 
 # Restoring usms.xml
@@ -118,10 +117,7 @@ if (file.exists(file.path(path, "usms.xml.ori"))) {
 }
 
 test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
-  # if (!dir.exists(file.path(path,"banana"))) dir.create(
-  # file.path(path,"banana"))
-  # file.copy(file.path(path,"mod_sbanana.sti"), file.path(path,"banana"))
-  outputs <- get_sim(path3, "banana",
+    outputs <- get_sim(path3, "banana",
     usms_file = file.path(path, "usms_example.xml")
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -131,7 +127,6 @@ test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
 
-  # unlink(file.path(path,"banana"))
 })
 
 unlink(file.path(path, "banana"))
@@ -139,13 +134,13 @@ unlink(file.path(path, "wheat"))
 
 
 # Testing intercropping usms  ------------------------------------
-example_IC <- download_data(
+example_ic <- download_data(
   example_dirs = "study_case_intercrop",
   stics_version = stics_version
 )
 
 test_that("get simulations with intercrops", {
-  outputs <- get_sim(workspace = example_IC)
+  outputs <- get_sim(workspace = example_ic)
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   expect_true(all(names(outputs) %in%
@@ -168,8 +163,8 @@ test_that("get simulations with intercrops", {
 
 test_that("get simulations with intercrops, giving usms.xml file", {
   outputs <- get_obs(
-    workspace = example_IC,
-    usms_file = file.path(example_IC, "usms.xml")
+    workspace = example_ic,
+    usms_file = file.path(example_ic, "usms.xml")
   )
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))

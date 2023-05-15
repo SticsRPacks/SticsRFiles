@@ -1,18 +1,20 @@
 
-#' Extracting data from the Stics report file
+#' Extracting data from the STICS report file
 #'
-#' @param workspace Path of the directory containing the Stics report file to read.
+#' @param workspace Path of the directory containing the STICS report file
+#' to read.
 #' @param file_name A report file name among "mod_rapport.sti" (default),
 #' "mod_rapportA.sti", "mod_rapportP.sti"
-#' @param usm Vector of USM names. Optional, if not provided, the function returns the results for all USMs.
+#' @param usm Vector of USM names. Optional, if not provided, the function
+#' returns the results for all USMs.
 #' @param var_list vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
 #' @param usm_name `r lifecycle::badge("deprecated")` `usm_name` is no
-#'   longer supported, use `usm` instead.
+#' longer supported, use `usm` instead.
 #'
 #' @details The data may be filtered using `usm_name` vector of usm names and
-#' and/or `var_list` vector of variables names. In the returned data.frame, variables
-#' names respect the same syntax as in the get_sim output.
+#' and/or `var_list` vector of variables names. In the returned data.frame,
+#' variables names respect the same syntax as in the get_sim output.
 #'
 #' @return A data.frame
 #'
@@ -40,7 +42,9 @@ get_report_results <- function(workspace,
                                var_list = NULL,
                                usm_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn("1.0.0", "get_report_results(usm_name)", "get_report_results(usm)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_report_results(usm_name)",
+                              "get_report_results(usm)")
   } else {
     usm_name <- usm # to remove when we update inside the function
   }
@@ -67,7 +71,8 @@ get_report_results <- function(workspace,
       stringsAsFactors = FALSE
     )
 
-    if (any(is.na(h))) stop("Headers strings are not homogeneous in report file!")
+    if (any(is.na(h)))
+      stop("Headers strings are not homogeneous in report file!")
   } else {
     warning("Not any header in report file (no col names in ouput)!")
   }
@@ -91,7 +96,7 @@ get_report_results <- function(workspace,
   # otherwise column are named V1 to Vncol
   if (length(h_idx)) {
     col_names <- unlist(h[1, ], use.names = FALSE)
-    df <- df[, 1:length(col_names)]
+    df <- df[, seq_along(col_names)]
     names(df) <- col_names
   } else {
     col_names <- names(df)

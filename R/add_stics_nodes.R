@@ -1,4 +1,4 @@
-#' Add node to a Stics XML document
+#' Add node to a STICS XML document
 #'
 #' @param xml_doc XML document
 #' @param formalism_name Name of the formalism (optional)
@@ -45,7 +45,6 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   file_idx <- which(node_types$files_tags == file_tag)
 
   parent_name <- node_types$parent[file_idx]
-  node_name <- node_types$node_names[file_idx]
 
   if (!is.null(formalism_name)) {
     # Case : tec
@@ -84,8 +83,8 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   # Updating if needed interventions_nb
   if (XML::xmlName(new_node) == "intervention") {
     nb_interventions <-
-      as.numeric(getAttrsValues(xml_doc, parent_path, "nb_interventions")) +
+      as.numeric(get_attrs_values(xml_doc, parent_path, "nb_interventions")) +
       nodes_nb
-    setAttrValues(xml_doc, parent_path, "nb_interventions", nb_interventions)
+    set_attrs_values(xml_doc, parent_path, "nb_interventions", nb_interventions)
   }
 }

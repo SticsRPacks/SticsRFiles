@@ -3,7 +3,7 @@
 \name{check_javastics_cmd}
 \alias{check_javastics_cmd}
 \title{Checking if the java virtual machine is compatible with the given
-JavaStics command executable, and command line options}
+JavaSTICS command executable, and command line options}
 \usage{
 check_javastics_cmd(
   javastics_cmd = "JavaSticsCmd.exe",
@@ -12,23 +12,23 @@ check_javastics_cmd(
 )
 }
 \arguments{
-\item{javastics_cmd}{path to JavaStics command line executable}
+\item{javastics_cmd}{path to JavaSTICS command line executable}
 
 \item{java_cmd}{Name or path of the java virtual machine executable}
 }
 \value{
-A named list with the JavaStics command line path,
-the java path and the verbose string option (according to JavaStics command
+A named list with the JavaSTICS command line path,
+the java path and the verbose string option (according to JavaSTICS command
 line version, and the "verbose" argument value)
 }
 \description{
 For Unix like systems, the system java virtual machine is
-detected and consistency for JavaStics executable used is checked.
-Command line verbosity option is detected for JavaStics command line for all
+detected and consistency for JavaSTICS executable used is checked.
+Command line verbosity option is detected for JavaSTICS command line for all
 systems.
 }
 \details{
-Errors are raised if the JavaStics executable cannot be run with the
+Errors are raised if the JavaSTICS executable cannot be run with the
 given java virtual machine for unix like systems.
 }
 \examples{

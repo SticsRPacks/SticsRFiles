@@ -1,12 +1,12 @@
 #' @title Generating a param.sti type file
 #' @description Generating a parameters forcing file from parameters names
 #' and parameters values vectors
-#' @param workspace Stics or JavaStics workspace path
+#' @param workspace STICS or JavaSTICS workspace path
 #' @param par_names vector of parameters names
 #' @param par_values vector of parameters values
 #' @param file_name file name to generate (default value: param.sti)
 #'
-#' @return A logical status TRUE if successfull, FALSE otherwise
+#' @return A logical status TRUE if successful, FALSE otherwise
 #'
 #' @examples
 #' \dontrun{
@@ -39,7 +39,7 @@ gen_paramsti <- function(workspace,
     return(FALSE)
   }
 
-  # TODO: checking if par_names exist (related to Stics version) ?
+  # TODO: checking if par_names exist (related to STICS version) ?
 
   # Writing file content
   con <- file(file_path, method = "w+")

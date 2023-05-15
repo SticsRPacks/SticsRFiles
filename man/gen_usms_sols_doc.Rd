@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_usms_sols_doc.R
 \name{gen_usms_sols_doc}
 \alias{gen_usms_sols_doc}
-\title{Generate from a template or modify a Stics sols or usms xmlDocument}
+\title{Generate from a template or modify a STICS sols or usms xml_document}
 \usage{
 gen_usms_sols_doc(
   doc_type,
@@ -24,10 +24,10 @@ gen_usms_sols_doc(
 \item{stics_version}{Version of the STICS model}
 }
 \value{
-An xmlDocument object
+An xml_document object
 }
 \description{
-Generate from a template or modify a Stics sols or usms xmlDocument
+Generate from a template or modify a STICS sols or usms xml_document
 }
 \examples{
 \dontrun{

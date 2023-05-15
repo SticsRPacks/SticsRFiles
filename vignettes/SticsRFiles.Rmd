@@ -13,6 +13,15 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+```{r eval=FALSE}
+library(SticsRFiles)
+```
+
+```{r include=FALSE}
+suppressWarnings(library(SticsRFiles))
+# just in case for unzipping examples files in tempdir
+get_examples_path(c("xml", "csv"))
+```
 
 ## Introduction
 
@@ -76,7 +85,6 @@ All the example data used in this article are available from the [`data` reposit
 SticsRFiles provides a function to download it from the command line. Please execute the following command in R:
 
 ```{r include=FALSE}
-library(SticsRFiles)
 example_data <- SticsRFiles::download_data(out_dir = tempdir(),
                                            example_dirs = "study_case_1",
                                            "V10.0")
@@ -137,7 +145,7 @@ dlaimax <- get_param_xml(plant_file, "dlaimax")
 dlaimax
 ```
 
-But this function is way more powerfull than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
+But this function is way more powerful than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
 
 ```{r}
 values <- get_param_xml(plant_file, select = "formalisme",

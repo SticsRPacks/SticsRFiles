@@ -16,7 +16,8 @@ get_param_bounds_xml(
 
 \item{param_name}{a parameter name of a vector of parameters names}
 
-\item{bounds_name}{bounds name "min" or "max" (optional, default value c("min","max ))}
+\item{bounds_name}{bounds name "min" or "max"
+(optional, default value c("min","max ))}
 
 \item{output}{Output data format either "list" or "data.frame" (default)}
 }

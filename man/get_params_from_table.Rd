@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_params_from_table.R
 \name{get_params_from_table}
 \alias{get_params_from_table}
-\title{Get a list of Stics xml parameters names and values from a table (data.frame, tibble)}
+\title{Get a list of STICS xml parameters names and values from a table
+(data.frame, tibble)}
 \usage{
 get_params_from_table(
   params_table,
@@ -19,26 +20,32 @@ get_params_from_table(
 
 \item{param_names}{parameters names to select}
 
-\item{xml_doc}{an xmlDocument object (of any xml type)}
+\item{xml_doc}{an xml_document object (of any xml type)}
 
 \item{lines_id}{table lines identifiers to select}
 
-\item{stopping}{logical value for stopping if any unknown parameters (if TRUE)}
+\item{stopping}{logical value for stopping if any unknown parameters
+(if TRUE)}
 
-\item{dict}{List of names correspondence between short names (tags) and real parameters names}
+\item{dict}{List of names correspondence between short names (tags)
+and real parameters names}
 
-\item{na_values}{value to use as missing value in param_table (optional, default : NA)}
+\item{na_values}{value to use as missing value in param_table
+(optional, default : NA)}
 }
 \value{
-a named list (with param names as list names) of data.frame/tibble
+a named list (with parameters names as list names)
+of data.frame/tibble
 }
 \description{
-Get a list of Stics xml parameters names and values from a table (data.frame, tibble)
+Get a list of STICS xml parameters names and values from a table
+(data.frame, tibble)
 }
 \examples{
 \dontrun{
 
-download_usm_xl(file = "inputs_stics_example.xlsx", dest_dir = "/path/to/dest/dir")
+download_usm_xl(file = "inputs_stics_example.xlsx",
+                dest_dir = "/path/to/dest/dir")
 xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 ini_param_df <- read_excel(xl_path, sheet = "Ini")
 xml_path <- "path/to/ini/xml"

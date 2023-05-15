@@ -45,7 +45,7 @@ exist_param_xml <- function(param,
 #' Checking existing parameters names in csv input files
 #'
 #' @param param Parameter name or a vector of
-#' @param javastics Path of JavaStics.
+#' @param javastics Path of JavaSTICS
 #'
 #' @return A named logical vector of existing parameters, with
 #' real parameters names
@@ -74,12 +74,12 @@ exist_param_csv <- function(param,
   final_names <- param
 
   # managing environment for storing data frames and file path
-  if (!exists("sticsEnv")) {
+  if (!exists("env_stics")) {
     parent <- eval(parse(text = ".GlobalEnv"))
-    sticsEnv <- new.env(parent)
+    env_stics <- new.env(parent)
     assign(
-      x = "sticsEnv",
-      value = sticsEnv,
+      x = "env_stics",
+      value = env_stics,
       pos = parent
     )
   }
@@ -88,12 +88,12 @@ exist_param_csv <- function(param,
   read_csv <- FALSE
 
   # checking existence of csv_path
-  if (!"inputs_path" %in% names(sticsEnv)) {
-    sticsEnv[["inputs_path"]] <- inputs_path
+  if (!"inputs_path" %in% names(env_stics)) {
+    env_stics[["inputs_path"]] <- inputs_path
     read_csv <- TRUE
   } else {
-    if (sticsEnv[["inputs_path"]] != inputs_path) {
-      sticsEnv[["inputs_path"]] <- inputs_path
+    if (env_stics[["inputs_path"]] != inputs_path) {
+      env_stics[["inputs_path"]] <- inputs_path
       read_csv <- TRUE
     }
   }
@@ -103,9 +103,9 @@ exist_param_csv <- function(param,
     par_names <- get_param_data_df(
       file = inputs_path,
     )$name
-    sticsEnv[["par_names"]] <- par_names
+    env_stics[["par_names"]] <- par_names
   } else {
-    par_names <- sticsEnv[["par_names"]]
+    par_names <- env_stics[["par_names"]]
   }
 
 

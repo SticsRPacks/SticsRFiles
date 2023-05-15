@@ -1,4 +1,4 @@
-#' Expand stics names from parameters/variables simple names,
+#' Expand STICS names from parameters/variables simple names,
 #' with indices (i.e. par(1), par(2),...regarding to parameter/variable
 #'  dimensions)
 #'
@@ -35,9 +35,8 @@ expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
   out_df <- data.frame()
 
   # duplicating rows and concatenation
-  for (p in 1:dim(par_to_expand)[1]) {
+  for (p in seq_len(dim(par_to_expand)[1])) {
     par <- par_to_expand$name[p]
-    # print(par)
     par_dim <- par_to_expand$dim[p]
     tmp <- par_to_expand[rep(p, par_dim), ]
     tmp$name <- paste0(par, sprintf("(%i)", 1:par_dim))

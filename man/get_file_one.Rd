@@ -7,17 +7,19 @@
 get_file_one(dirpath, filename, p_name, verbose, dates_list, var_list)
 }
 \arguments{
-\item{dirpath}{Path of a JavaStics workspace}
+\item{dirpath}{Path of a JavaSTICS workspace}
 
 \item{filename}{File name(s)}
 
 \item{p_name}{Plant name(s)}
 
-\item{verbose}{Logical value (optional), TRUE to display infos on error, FALSE otherwise (default)}
+\item{verbose}{Logical value (optional), TRUE to display information
+on error, FALSE otherwise (default)}
 
 \item{dates_list}{list of dates to filter (optional, should be a POSIX date)}
 
-\item{var_list}{vector of output variables names to filter (optional, see \code{get_var_info()} to get the names of the variables)}
+\item{var_list}{vector of output variables names to filter
+(optional, see \code{get_var_info()} to get the names of the variables)}
 }
 \value{
 the obs or simulation output

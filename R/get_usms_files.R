@@ -1,17 +1,21 @@
 #' Getting existing xml files path list per usm from an usms.xml file
 #'
-#' @param workspace Path of a JavaStics workspace (i.e. containing the Stics XML input files)
+#' @param workspace Path of a JavaSTICS workspace (i.e. containing the STICS
+#' XML input files)
 #' @param usms_list Vector of usms names (Optional)
 #' @param usms_file Path (including name) of a USM XML file.
-#' @param file_type Vector of file(s) type to get (if not given, all types are returned, see details)
-#' @param javastics Path of JavaStics. Optional, only needed if the plant files are not in the workspace
-#' (in this case the plant files used are those included in the JavaStics distribution)
-#' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path` is no
-#'   longer supported, use `workspace` instead.
+#' @param file_type Vector of file(s) type to get (if not given,
+#' all types are returned, see details)
+#' @param javastics Path of JavaSTICS Optional, only needed if the plant files
+#' are not in the workspace
+#' (in this case the plant files used are those included in the
+#' JavaSTICS distribution)
+#' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path`
+#' is no longer supported, use `workspace` instead.
 #' @param file_name `r lifecycle::badge("deprecated")` `file_name` is no
 #'   longer supported, use `usms_file` instead.
-#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path` is no
-#'   longer supported, use `javastics` instead.
+#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
+#' is no longer supported, use `javastics` instead.
 #'
 #' @details The possible values of file types are: "fplt", "finit", "fclim1",
 #' "fclim2", "fstation" and "ftec"
@@ -19,8 +23,8 @@
 #' @return A named list with existing files path in each usm element
 #'
 #' @export
-#' @seealso See `get_soils_list()` to get all soils in a usm file, and `get_usms_list()` to get
-#' the list of usms.
+#' @seealso See `get_soils_list()` to get all soils in a usm file,
+#' and `get_usms_list()` to get the list of usms.
 #'
 #' @examples
 #' \dontrun{
@@ -50,17 +54,23 @@ get_usms_files <- function(workspace,
                            file_name = lifecycle::deprecated(),
                            javastics_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(workspace_path)) {
-    lifecycle::deprecate_warn("1.0.0", "get_usms_files(workspace_path)", "get_usms_files(workspace)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_usms_files(workspace_path)",
+                              "get_usms_files(workspace)")
   } else {
     workspace_path <- workspace # to remove when we update inside the function
   }
   if (lifecycle::is_present(file_name)) {
-    lifecycle::deprecate_warn("1.0.0", "get_usms_files(file_name)", "get_usms_files(usms_file)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_usms_files(file_name)",
+                              "get_usms_files(usms_file)")
   } else {
     file_name <- usms_file # to remove when we update inside the function
   }
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("1.0.0", "get_usms_files(javastics_path)", "get_usms_files(javastics)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "get_usms_files(javastics_path)",
+                              "get_usms_files(javastics)")
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }
@@ -82,27 +92,24 @@ get_usms_files <- function(workspace,
     javastics_plt_path <- NULL
     ws_plt_path <- NULL
 
-    if (!base::is.null(javastics_path) && dir.exists(file.path(javastics_path, "plant"))) {
-      javastics_plt_path <- suppressWarnings(normalizePath(file.path(javastics_path, "plant")))
+    if (!base::is.null(javastics_path) &&
+        dir.exists(file.path(javastics_path, "plant"))) {
+      javastics_plt_path <- suppressWarnings(
+        normalizePath(file.path(javastics_path, "plant"))
+        )
     }
 
     if (dir.exists(file.path(workspace_path, "plant"))) {
-      ws_plt_path <- suppressWarnings(normalizePath(file.path(workspace_path, "plant")))
+      ws_plt_path <- suppressWarnings(
+        normalizePath(file.path(workspace_path, "plant"))
+        )
     }
-
-    # if(is.null(javastics_path)){
-    #   plt_path <- file.path(workspace_path, "plant")
-    #   if(!dir.exists(plt_path)){
-    #     stop("plant folder not found, please add javastics_path to check in the plant files from javaStics !")
-    #   }
-    # }else{
-    #   plt_path <- try(normalizePath(file.path(workspace_path, "plant")))
-    # }
 
     plt_path <- c(ws_plt_path, javastics_plt_path)
 
     if (base::is.null(plt_path)) {
-      stop("not any plant folder found, please add javastics_path directory as function input argument or a workspace plant directory !")
+      stop("not any plant folder found, please add javastics_path directory",
+      "as function input argument or a workspace plant directory !")
     }
     check_plt <- TRUE
     file_type <- setdiff(file_type, "fplt")
@@ -148,7 +155,8 @@ get_usms_files <- function(workspace,
     ), use.names = FALSE)
 
     # For selecting plant files regarding plants number
-    plants_sel <- 1:get_plants_nb(usms_file = usms_xml_path, usms_list = usm_name)
+    plants_sel <- 1:get_plants_nb(usms_file = usms_xml_path,
+                                  usms_list = usm_name)
 
     # Getting all usms xml files, except plant files
     usm_files <- unique(usm_files[usm_files != "null"])
@@ -193,7 +201,8 @@ get_usms_files <- function(workspace,
       plt_files <- plt_files[plt_files != "null"][plants_sel]
 
       # applying for multiple paths (javastics, workspace)
-      plt_files_path <- unlist(lapply(plt_path, function(x) file.path(x, plt_files)))
+      plt_files_path <- unlist(lapply(plt_path,
+                                      function(x) file.path(x, plt_files)))
       plt_idx <- file.exists(plt_files_path)
       plt_files_path <- plt_files_path[plt_idx]
       # If one occurrence of each file at least, NOT checking duplicates !

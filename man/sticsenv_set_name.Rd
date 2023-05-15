@@ -2,17 +2,17 @@
 % Please edit documentation in R/stics_environment.R
 \name{sticsenv_set_name}
 \alias{sticsenv_set_name}
-\title{Replace stics env name}
+\title{Replace STICS env name}
 \usage{
 sticsenv_set_name(name, env_name = sticsenv_name(), fix_name = NULL)
 }
 \arguments{
-\item{name}{The name of an object potentially found in a stics environment}
+\item{name}{The name of an object potentially found in a STICS environment}
 
-\item{env_name}{The name of the stics environment}
+\item{env_name}{The name of the STICS environment}
 
-\item{fix_name}{Fix the name of the environment to \code{fix_name}, or to \code{paste0("R_", name)}
-if \code{NULL} (default).}
+\item{fix_name}{Fix the name of the environment to \code{fix_name},
+or to \code{paste0("R_", name)} if \code{NULL} (default).}
 }
 \value{
 The new environment

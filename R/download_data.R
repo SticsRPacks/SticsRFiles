@@ -1,13 +1,14 @@
 #' Download example USMs
 #'
-#' @description Download locally the example data from the [data repository](https://github.com/SticsRPacks/data)
-#' in the SticsRPacks organisation.
+#' @description Download locally the example data from the
+#' [data repository](https://github.com/SticsRPacks/data) in the SticsRPacks
+#' organisation.
 #'
 #' @param out_dir Path of the directory where to download the data
 #' @param dir `r lifecycle::badge("deprecated")` `dir` is no
 #'   longer supported, use `out_dir` instead.
 #' @param example_dirs List of use case directories names (optional)
-#' @param stics_version Name of the Stics version. Optional, by default the
+#' @param stics_version Name of the STICS version. Optional, by default the
 #' latest version returned by get_stics_versions_compat() is used.
 #' @param version_name `r lifecycle::badge("deprecated")` `file_path` is no
 #'   longer supported, use `file` instead.
@@ -35,14 +36,18 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(dir)) {
-    lifecycle::deprecate_warn("1.0.0", "download_data(dir)", "download_data(out_dir)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "download_data(dir)",
+                              "download_data(out_dir)")
   } else {
     dir <- out_dir # to remove when we update inside the function
   }
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn("1.0.0", "download_data(version_name)", "download_data(stics_version)")
+    lifecycle::deprecate_warn("1.0.0",
+                              "download_data(version_name)",
+                              "download_data(stics_version)")
   } else {
     version_name <- stics_version # to remove when we update inside the function
   }
@@ -54,14 +59,20 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 
 
   # Getting path string(s) from examples data file
-  dirs_str <- get_referenced_dirs(dirs = example_dirs, stics_version = version_name)
+  dirs_str <- get_referenced_dirs(dirs = example_dirs,
+                                  stics_version = version_name)
 
   # Not any examples_dirs not found in example data file
-  if (base::is.null(dirs_str)) stop("Error: no available data for ", example_dirs)
+  if (base::is.null(dirs_str))
+    stop("Error: no available data for ", example_dirs)
 
   data_dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
-  data_dir_zip <- normalizePath(file.path(data_dir, "master.zip"), winslash = "/", mustWork = FALSE)
-  utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip", data_dir_zip)
+  data_dir_zip <- normalizePath(file.path(data_dir, "master.zip"),
+                                winslash = "/",
+                                mustWork = FALSE)
+  utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip",
+                       data_dir_zip)
+
   df_name <- utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
 
   # Creating files list to extract from dirs strings
@@ -71,7 +82,11 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
   ))
 
   # No data corresponding to example_dirs request in the archive !
-  if (!length(arch_files)) stop("No downloadable data for example(s), version: ", example_dirs, ",", version_name)
+  if (!length(arch_files))
+    stop("No downloadable data for example(s), version: ",
+         example_dirs,
+         ",",
+         version_name)
 
   # Finally extracting data
   utils::unzip(data_dir_zip, exdir = data_dir, files = arch_files)
@@ -81,9 +96,11 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 }
 
 
-#' Getting valid directories string for download from SticsRpacks data repository
+#' Getting valid directories string for download from SticsRPacks data
+#' repository
 #'
-#' @param dirs Directories names of the referenced use cases (optional), starting with "study_case_"
+#' @param dirs Directories names of the referenced use cases (optional),
+#' starting with "study_case_"
 #' @param stics_version An optional version string
 #' within those given by get_stics_versions_compat()$versions_list
 #'
@@ -109,7 +126,8 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
 
   # Loading csv file with data information
   ver_data <- get_versions_info(stics_version = stics_version)
-  if (base::is.null(ver_data)) stop("No examples data referenced for version: ", stics_version)
+  if (base::is.null(ver_data))
+    stop("No examples data referenced for version: ", stics_version)
 
   dirs_names <- grep(pattern = "^study_case", x = names(ver_data), value = TRUE)
   if (base::is.null(dirs)) dirs <- dirs_names
@@ -135,7 +153,8 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
 
   # Compiling referenced dirs/version strings, for existing version
   is_na <- base::is.na(version_data)
-  dirs_str <- sprintf("%s/%s", names(version_data)[!is_na], version_data[!is_na])
+  dirs_str <-
+    sprintf("%s/%s", names(version_data)[!is_na], version_data[!is_na])
 
   return(dirs_str)
 }

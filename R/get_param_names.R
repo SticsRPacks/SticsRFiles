@@ -1,10 +1,10 @@
-#' @title Get a list of Stics xml parameters names an xmlDocument or  XML node
+#' @title Get a list of STICS xml parameters names an xml_document or  XML node
 #' @param xml_object an xml XML::XMLInternalElementNode
-#' or SticsRFiles::xmlDocument object
+#' or SticsRFiles::xml_document object
 #' @param param_list param names vector, only used for recursive calls
 #' @param full_list TRUE for getting all names, FALSE otherwise (default)
 #' @param root_name Only for getting the root node name (file type),
-#' usefull for filtering unwanted names to be includes in parameters names list
+#' useful for filtering unwanted names to be includes in parameters names list
 #'
 #' for unique names list
 #'
@@ -35,7 +35,7 @@ get_param_names <- function(xml_object,
 
     if (parent_name %in% c("formalisme", "formalismev", "optionv",
                            "usm", "sol", "variete"))
-      tmp_xml_object <- getNodeS(xml_object,
+      tmp_xml_object <- get_nodes(xml_object,
                                  path = paste0("//", parent_name,
                                                "[@nom='",
                                                parent_sel_attr,
@@ -43,7 +43,7 @@ get_param_names <- function(xml_object,
 
     if (is.null(tmp_xml_object)) {
       if (parent_name == "option")
-        tmp_xml_object <- getNodeS(xml_object,
+        tmp_xml_object <- get_nodes(xml_object,
                                    path = paste0("//", parent_name,
                                                  "[@nomParam='",
                                                  parent_sel_attr,
@@ -53,7 +53,7 @@ get_param_names <- function(xml_object,
     # plante: for usms and ini files
     if (is.null(tmp_xml_object)) {
       if (parent_name == "plante")
-        tmp_xml_object <- getNodeS(xml_object,
+        tmp_xml_object <- get_nodes(xml_object,
                                    path = paste0("//", parent_name,
                                                  "[@dominance='",
                                                  parent_sel_attr,
@@ -65,15 +65,15 @@ get_param_names <- function(xml_object,
 
     xml_object <- tmp_xml_object
 
-    parent_name = NULL
-    parent_sel_attr = NULL
+    parent_name <- NULL
+    parent_sel_attr <- NULL
   }
 
 
   # If xml_object converting input argument to an XML node
-  if (base::is.element("xmlDocument", class(xml_object))) {
-    xml_node <- xmlRoot(xml_object@content)
-    root_name <- xmlName(xml_node)
+  if (base::is.element("xml_document", class(xml_object))) {
+    xml_node <- XML::xmlRoot(xml_object@content)
+    root_name <- XML::xmlName(xml_node)
   } else if (base::is.element("XMLInternalElementNode", class(xml_object))) {
     xml_node <- xml_object
   }
@@ -83,18 +83,18 @@ get_param_names <- function(xml_object,
     stop("The XML object is neither an xml node nor an xml document !")
   }
 
-  node_name <- xmlName(xml_node)
+  node_name <- XML::xmlName(xml_node)
 
   # getting only one usm node or sol node
   if (node_name %in% c("sols", "usms")) {
     # if ( node_name == "usms" ) {
-    xml_node <- xmlChildren(xml_node)[[1]]
+    xml_node <- XML::xmlChildren(xml_node)[[1]]
   }
 
-  childs <- xmlChildren(xml_node)
+  childs <- XML::xmlChildren(xml_node)
   childs_names <- names(childs)
 
-  node_name <- xmlName(xml_node)
+  node_name <- XML::xmlName(xml_node)
 
 
   childs_nb <- length(childs)
@@ -129,7 +129,7 @@ get_param_names <- function(xml_object,
   }
 
   if (node_name == "colonne" &&
-      (xmlName(xmlParent(xml_node)) %in% tab_names)) {
+      (XML::xmlName(XML::xmlParent(xml_node)) %in% tab_names)) {
     attr_name <- "nom"
   }
 
@@ -146,8 +146,8 @@ get_param_names <- function(xml_object,
   if ((!is.null(parent_name) &&
        node_name != parent_name) ||
       (is.null(parent_name) &&
-       attr_name %in% names(xmlAttrs(xml_node)))) {
-    param_name <- xmlAttrs(xml_node)[attr_name]
+       attr_name %in% names(XML::xmlAttrs(xml_node)))) {
+    param_name <- XML::xmlAttrs(xml_node)[attr_name]
   }
 
   # Adding the param name to the param names list

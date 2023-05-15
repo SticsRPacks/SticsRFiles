@@ -38,7 +38,7 @@ is_stics_newpar(xml_doc)
 \item{doc_types}{The different possible document types (optional)}
 }
 \value{
-A logical value giving if xml_doc is a Stics xmlDoxument object
+A logical value giving if xml_doc is a STICS xml_document object
 (TRUE, with document type as attribute "type"), or not (FALSE)
 }
 \description{

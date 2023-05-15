@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_value.R
 \name{get_param_value}
 \alias{get_param_value}
-\title{Get a set of a (or a list of) Stics xml parameter(s)
+\title{Get a set of a (or a list of) STICS xml parameter(s)
 values from a request}
 \usage{
 get_param_value(
@@ -14,7 +14,7 @@ get_param_value(
 )
 }
 \arguments{
-\item{xml_doc}{an xmlDocument object}
+\item{xml_doc}{an xml_document object}
 
 \item{param_name}{parameter name or a vector of names (optional)}
 

@@ -73,7 +73,8 @@ value= list(c(1,2), c(2.3,4.5))
 
 # Soil file
 
-file.copy(file.path(get_examples_path(file_type = "xml"), "sols.xml"), getwd())
+file.copy(file.path(get_examples_path(file_type = "xml"),
+          "sols.xml"), getwd())
 
 # For scalar parameters per soil
 
@@ -117,7 +118,8 @@ get_param_xml("sols.xml", c("epc", "HCCF"),
 
 
 # Crop management file
-file.copy(file.path(get_examples_path(file_type = "xml"), "file_tec.xml"), getwd())
+file.copy(file.path(get_examples_path(file_type = "xml"),
+          "file_tec.xml"), getwd())
 
 # Modifying irrigations parameters
 set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),

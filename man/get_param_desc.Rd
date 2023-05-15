@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_param_desc.R
 \name{get_param_desc}
 \alias{get_param_desc}
-\title{get param desc}
+\title{Getting parameters description}
 \usage{
 get_param_desc(
   file_path = NULL,
@@ -14,14 +14,17 @@ get_param_desc(
 \arguments{
 \item{file_path}{csv file path}
 
-\item{stics_version}{The stics version. See \code{get_stics_versions_compat()} to get all compatible versions. Default
+\item{stics_version}{The STICS version. See \code{get_stics_versions_compat()}
+to get all compatible versions. Default
 to "latest", a special code to get the latest version.}
 
-\item{name}{a name vector for selecting loaded content using name column matching}
+\item{name}{a name vector for selecting loaded content using
+name column matching}
 
-\item{kind}{a name vector for selecting loaded content using kind column matching}
+\item{kind}{a name vector for selecting loaded content using
+kind column matching}
 }
 \description{
-get param desc
+Getting parameters description
 }
 \keyword{internal}

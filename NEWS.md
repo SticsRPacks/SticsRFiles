@@ -1,14 +1,47 @@
-# SticsRFiles 1.1.1 (2022-12-08)
+# SticsRFiles 1.1.3 _2023-05-10_
+
+* FUNCTIONS
+   * New function for generating the new_travail.usm STICS file
+
+* FIXES:
+   * get_var_info: for variables names vector
+   * get_param_txt: removed global variables use, looking for parameters names
+    including parentheses 
+   * code formatting, comments, file names, variables names, function names,...
+   * package namespace use in packages functions calls
+   * pattern for replacing parameters names were are not consistent 
+     between XML files and inputs.csv
+   * pattern for selecting parameters in Excel files, filtering parameter 
+     starting with "code_"
+   * renaming plant initialisation parameters according to 
+     crop number tag (Crop1, Crop2)
+   * tidyselect and filter syntax
+   * homogenous naming of JavaSTICS and STICS
+
+* DATA
+   * added: meta-data and xsl files for converting XML files to 
+     text files for STICS
+   * examples files for different files format used in the package are now
+     distributed as zip files for lightening the extdata directory
+   
+
+# SticsRFiles 1.1.2 _2022-12-16_
+
+* FIX:
+   * Fix for cff file generation using a GitHub action
+   
+   
+# SticsRFiles 1.1.1 _2022-12-08_
 
 * FUNCTIONS
    * Changes in plant files upgrading function according to a fix done in JavaSTICS 1.5.1 for plant files
-   (without any impact on R packages functionning)
+   (without any impact on R packages functioning)
 
 * FIXES:
    * Little compatibility fix in STICS plant files upgrading function 
    
 
-# SticsRFiles 1.1.0 (2022-10-28)
+# SticsRFiles 1.1.0 _2022-10-28_
 
 Following the changes done in the previous release 1.0.0, related to the adaptation to the new versions 10.0 of STICS and 1.5.0 of JavaSTICS.
 
@@ -21,7 +54,7 @@ Following the changes done in the previous release 1.0.0, related to the adaptat
   * Some fixes about use of XML objects or lists of (kind, content) in tests
 
 
-# SticsRFiles 1.0.0 (2022-07-22)
+# SticsRFiles 1.0.0 _2022-07-22_
 
 The main changes are mainly related to the adaptation to the new versions 10.0 of STICS  
 and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to fixes.
@@ -30,7 +63,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
   * New set of functions for upgrading XML files of STICS version 9.2 to STICS version 10.0 (either each kind of XML file or a whole workspace) 
   * Homogenization of arguments names in functions
   * Some functions have been moved from the SticsOnR package into SticsRFiles
-  * Improvement of functions dedicated to java/JavaStics command line use, added checks
+  * Improvement of functions dedicated to java/JavaSTICS command line use, added checks
 
 * FIXES:
   * Extraction of vectorized parameters from _tec.xml and _ini.xml files
@@ -59,7 +92,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
   
   
 
-# SticsRFiles 0.4.2 (2021-10-07)
+# SticsRFiles 0.4.2 _2021-10-07_
 
 * Prepared templates for STICS V10.
 
@@ -80,7 +113,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
 
-# SticsRFiles 0.4.1 (2021-07-02)
+# SticsRFiles 0.4.1 _2021-07-02_
 
 ## Changes
 
@@ -106,7 +139,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
   * Files:
     * some useless files removed 
-    * new Stics dirs added (needed by tests)
+    * new STICS dirs added (needed by tests)
     * fix: example dirs names in inst
     
   * Tutorial: minor fix for use-xml-files (working dir creation)
@@ -120,7 +153,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 	added data.frame columns detection for filtering data on dates
 
   * functions for manipulating xml files 
-    taking into account a new kind of Stics parameter dependency (for plant and soil layers dependant parameters)
+    taking into account a new kind of STICS parameter dependency (for plant and soil layers dependent parameters)
     
   * set_param_txt: fix for setting values for varietal parameters
     
@@ -135,7 +168,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
 
-# SticsRFiles 0.3.0 (2021-04-15)
+# SticsRFiles 0.3.0 _2021-04-15_
 
 ## General changes
 
@@ -173,7 +206,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
 
-# SticsRFiles 0.2.0 (2021-01-15)
+# SticsRFiles 0.2.0 _2021-01-15_
 
 ## General changes
 
@@ -185,7 +218,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 * README:
   * Travis badge removed
-  * Github Actions R-CMD-check badge added
+  * GitHub Actions R-CMD-check badge added
   
 * Functions:
   * useless functions have been removed
@@ -207,18 +240,18 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 * Automatic testing: 
   * Github Actions added for checks
   * Travis checks removed
-  * SticsRTest Travis tests triggering removed
+  * SticsRTests Travis tests triggering removed
 
 
 
 ## Specific changes
 * get_obs, get_daily_results: removed useless columns from return, simplification 
 
-* download_usm_xl, download_usm_csv: added verbose argument for masquing warnings/displays, added overwritting case
+* download_usm_xl, download_usm_csv: added verbose argument for masking warnings/displays, added overwriting case
 
 * read_params_table : new function for getting parameters tables either from csv files or excel files sheets
 
-* get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for Stics version 8.5
+* get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for STICS version 8.5
 
 * Manipulating_Stics_XML_files.Rmd: using XML file for the latest model version for displaying files fragments as examples
 
@@ -248,10 +281,10 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 * get_report_results: new function for extracting data from reports files
 
-* get_param_info: added using of a specific XML file, attribute for Stics version, unique for parameters names list, building a filter before dplyr::filter 
-* functions added to manage Stics versions data
+* get_param_info: added using of a specific XML file, attribute for STICS version, unique for parameters names list, building a filter before dplyr::filter 
+* functions added to manage STICS versions data
 
-* get_obs, get_plant_name: using usms.xml file outside of a Stics workspace, parsing mixed crops, file checking,usms_list renamed as usm_name
+* get_obs, get_plant_name: using usms.xml file outside of a STICS workspace, parsing mixed crops, file checking,usms_list renamed as usm_name
 
 * gen_*_xml functions: fix for usms name column
 
@@ -275,9 +308,9 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 * All functions code and help now using the get_examples_path function
 
-* get_examples_path: new function for getting files examples according to their type (txt, XML, csv,...) and embedded Stics versions data
+* get_examples_path: new function for getting files examples according to their type (txt, XML, csv,...) and embedded STICS versions data
 
-* gen_varmod: forcing to add variable not in Stics output variables for a given version, now checks if a variable exists, dual variable syntax (i.e. lai_n or lai(n))
+* gen_varmod: forcing to add variable not in STICS output variables for a given version, now checks if a variable exists, dual variable syntax (i.e. lai_n or lai(n))
 
 * set_param_txt: set value per soil layer, per variety
 
@@ -290,6 +323,6 @@ name of the XML file added to the output
 
 
 
-# SticsRFiles 0.1.0.9004 (2020-02-03)
+# SticsRFiles 0.1.0.9004 _2020-02-03_
 
 * Added a `NEWS.md` file to track changes to the package.

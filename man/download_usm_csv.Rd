@@ -18,11 +18,14 @@ download_usm_csv(
 \arguments{
 \item{file}{Name of a csv file (optional, not used for the moment)}
 
-\item{out_dir}{Directory path where to copy the csv file (default: \code{tempdir()})}
+\item{out_dir}{Directory path where to copy the csv file
+(default: \code{tempdir()})}
 
-\item{stics_version}{Name of the Stics version. Optional, by default the latest version returned by get_stics_versions_compat() is used.}
+\item{stics_version}{Name of the STICS version. Optional, by default
+the latest version returned by get_stics_versions_compat() is used.}
 
-\item{overwrite}{Optional logical, TRUE for overwriting files, FALSE otherwise (default)}
+\item{overwrite}{Optional logical, TRUE for overwriting files,
+FALSE otherwise (default)}
 
 \item{verbose}{Logical value for displaying information while running}
 
@@ -39,9 +42,9 @@ longer supported, use out_dir instead.}
 A vector of copied files path.
 }
 \description{
-The file is an example that can be used for generating JavaStics
-usms.xml input file from parameters values stored in a CSV file using the function
-\code{\link{gen_usms_xml}}
+The file is an example that can be used for generating JavaSTICS
+usms.xml input file from parameters values stored in a CSV file using
+the function \code{\link{gen_usms_xml}}
 }
 \examples{
 \dontrun{

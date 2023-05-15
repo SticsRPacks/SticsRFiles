@@ -1,9 +1,9 @@
 #' Checking xml files existence got from usms.xml
 #'
-#' @param workspace_path The path to a JavaStics-compatible workspace
-#' @param javastics_path JavaStics installation path (Optional, needed if the
+#' @param workspace_path The path to a JavaSTICS-compatible workspace
+#' @param javastics_path JavaSTICS installation path (Optional, needed if the
 #'  plant files are not in the `workspace_path`
-#' but rather in the JavaStics default plant folder)
+#' but rather in the JavaSTICS default plant folder)
 #' @param usms_list Vector of usms names (Optional)
 #' @param file_name Usms XML file name (Optional)
 #'
@@ -53,7 +53,7 @@ check_usms_files <- function(workspace_path,
     }
   }
 
-  usms_nb <- length(usms_full_list)
+
   par_list <- c(
     "nbplantes", "finit", "fstation", "fclim1", "fclim2", "fplt",
     "ftec", "flai"
@@ -180,8 +180,9 @@ check_usms_files <- function(workspace_path,
         collapse = ","
       ),
       "not found in", workspace_path,
-      ". \nPlease note that with SticsRpacks, plant folder (that contains plant files)",
-      "can be located either inside the workspace or in the JavaStics path.\n",
+      ".\nPlease note that with SticsRpacks, ",
+      "plant folder (that contains plant files)",
+      "can be located either inside the workspace or in the JavaSTICS path.\n",
       "Check that your plant files exist in one of these."
     ))
   }
@@ -198,8 +199,9 @@ check_usms_files <- function(workspace_path,
         collapse = ","
       ),
       "not found in", workspace_path,
-      ". Please note that with SticsRpacks, plant folder (that contains plant files)",
-      "can be located either inside the workspace or in the JavaStics path.\n",
+      ". Please note that with SticsRpacks, plant folder",
+      " (that contains plant files)",
+      "can be located either inside the workspace or in the JavaSTICS path.\n",
       "Check that your plant files exist in one of these."
     ))
   }

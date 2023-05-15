@@ -2,15 +2,15 @@
 % Please edit documentation in R/stics_environment.R
 \name{stics_remove}
 \alias{stics_remove}
-\title{Remove objects from stics environment}
+\title{Remove objects from STICS environment}
 \usage{
 stics_remove(name = NULL, env_name = sticsenv_name())
 }
 \value{
-Nothing. Just removes an object from the stics environment.
+Nothing. Just removes an object from the STICS environment.
 }
 \description{
-Remove objects listed in a stics environment.
+Remove objects listed in a STICS environment.
 }
 \examples{
 \dontrun{

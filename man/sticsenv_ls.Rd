@@ -2,14 +2,14 @@
 % Please edit documentation in R/stics_environment.R
 \name{sticsenv_ls}
 \alias{sticsenv_ls}
-\title{List stics env}
+\title{List STICS env}
 \usage{
 sticsenv_ls(name = NULL, env_name = sticsenv_name(), detail = FALSE)
 }
 \arguments{
-\item{name}{Optionally, the name of an object in the stics environment}
+\item{name}{Optionally, the name of an object in the STICS environment}
 
-\item{env_name}{The name of the stics environment}
+\item{env_name}{The name of the STICS environment}
 
 \item{detail}{Return all details ? (use \code{ls.str()})}
 }
@@ -17,6 +17,6 @@ sticsenv_ls(name = NULL, env_name = sticsenv_name(), detail = FALSE)
 A vector of all object names in the environment
 }
 \description{
-List all objects in a stics environment
+List all objects in a STICS environment
 }
 \keyword{internal}

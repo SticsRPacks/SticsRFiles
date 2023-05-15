@@ -6,8 +6,8 @@
 #' to the file version
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files
 #' to (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
@@ -15,6 +15,8 @@
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #' @param ... Additional input arguments
+#'
+#' @return None
 #'
 #' @export
 #'
@@ -53,11 +55,11 @@ upgrade_tec_xml <- function(file,
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
-    # extracting or detecting the Stics version corresponding to the xml file
+    # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-      stics_version,
-      param_gen_file = param_gen_file
+                                           stics_version,
+                                           param_gen_file = param_gen_file
     )
 
     if (!file_version && is.null(param_gen_file)) {
@@ -106,17 +108,14 @@ upgrade_tec_xml <- function(file,
   # Loading the old xml file
   old_doc <- xmldocument(file = file)
 
-  # Setting file stics version
+  # Setting file STICS version
   set_xml_file_version(old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+                       new_version = target_version,
+                       overwrite = overwrite
   )
 
 
   # Getting values to keep
-  # nodes to be moved ressuite et irecbutoir, no need to keep their values
-  # ressuite <- get_param_value(xml_doc = old_doc, param_name = "ressuite")
-  # irecbutoir <- get_param_value(xml_doc = old_doc, param_name = "irecbutoir")
   mscoupemini <- get_param_value(xml_doc = old_doc, param_name = "mscoupemini")
 
   # Keeping the value if any intervention node
@@ -138,21 +137,22 @@ upgrade_tec_xml <- function(file,
   )
 
   nodes_to_change <- lapply(param_names, function(x) {
-    getNodeS(
-      docObj = old_doc,
+    get_nodes(
+      old_doc,
       path = paste0("//param[@nom='", x, "']")
     )
   })
   # Removing useless nodes
-  lapply(nodes_to_change[3:6], function(x) removeNodes(x))
+  lapply(nodes_to_change[3:6], function(x) XML::removeNodes(x))
 
   # Nodes to be moved elsewhere: "irecbutoir", "ressuite"
   nodes_to_move <- nodes_to_change[1:2]
 
 
   # tillage option
-  new_node <- xmlParseString(
-    '<option choix="1" nom="Automatic calculation of the depth of residues incorporation in function of proftrav" nomParam="code_auto_profres">
+  new_node <- XML::xmlParseString(
+    '<option choix="1" nom="Automatic calculation of the depth of residues
+    incorporation in function of proftrav" nomParam="code_auto_profres">
 	<choix code="1" nom="yes">
 		<param format="real" max="0.0" min="1.0" nom="resk">0.14</param>
 		<param format="real" max="0.0" min="10.0" nom="resz">5.00000</param>
@@ -162,89 +162,101 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='soil tillage']"
   )[[1]]
 
-  addChildren(parent_node, xmlClone(new_node), at = 0)
+  XML::addChildren(parent_node, XML::xmlClone(new_node), at = 0)
 
   # codedecisemis param
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<param format="integer" max="20" min="1" nom="nbj_pr_apres_semis">3</param>
 <param format="integer" max="20" min="0" nom="eau_mini_decisemis">10</param>
 <param format="real" max="1.0" min="0.0" nom="humirac_decisemis">0.75</param>',
     addFinalizer = TRUE
   )
 
-  new_nodes <- getNodeSet(new_node, path = "//param")
+  new_nodes <- XML::getNodeSet(new_node, path = "//param")
 
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
+  prev_sibling <- get_nodes(
+    old_doc,
     path = "//param[@nom='nbjseuiltempref']"
   )[[1]]
   # to keep the right order
   for (n in seq_along(new_nodes)) {
-    new <- xmlClone(new_nodes[[n]])
-    addSibling(prev_sibling, new)
+    new <- XML::xmlClone(new_nodes[[n]])
+    XML::addSibling(prev_sibling, new)
     prev_sibling <- new
   }
 
 
   # option codedate_irrigauto
-  new_node <- xmlParseString(
-    '<option choix="3" nom="dates to drive automatic irrigations" nomParam="codedate_irrigauto">
+  new_node <- XML::xmlParseString(
+    '<option choix="3" nom="dates to drive automatic irrigations"
+    nomParam="codedate_irrigauto">
   <choix code="1" nom="dates">
-    <param format="integer" max="731" min="0.0" nom="datedeb_irrigauto">0</param>
-    <param format="integer" max="731" min="0.0" nom="datefin_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="datedeb_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="datefin_irrigauto">0</param>
   </choix>
   <choix code="2" nom="stages">
-    <param format="integer" max="731" min="0.0" nom="stage_start_irrigauto">0</param>
-    <param format="integer" max="731" min="0.0" nom="stage_end_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="stage_start_irrigauto">0</param>
+    <param format="integer" max="731" min="0.0"
+    nom="stage_end_irrigauto">0</param>
   </choix>
   <choix code="3" nom="no"/>
 </option>',
     addFinalizer = TRUE
   )
 
-  prev_sibling <- getNodeS(
-    docObj = old_doc,
+  prev_sibling <- get_nodes(
+    old_doc,
     path = "//param[@nom='doseirrigmin']"
   )[[1]]
 
-  addSibling(prev_sibling, new_node)
+  XML::addSibling(prev_sibling, new_node)
 
 
-  # intervention + engrais
+  # intervention , engrais
   # -----------------------
-  new_node <- xmlParseString('<colonne nom="engrais"/>',
-    addFinalizer = TRUE
+  new_node <- XML::xmlParseString('<colonne nom="engrais"/>',
+                                  addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='fertilisation']//ta_entete"
   )[[1]]
 
-  addChildren(parent_node, xmlClone(new_node))
+  XML::addChildren(parent_node, XML::xmlClone(new_node))
 
-  xmlAttrs(parent_node)["nb_colonnes"] <- "3"
+  XML::xmlAttrs(parent_node)["nb_colonnes"] <- "3"
 
   # If any intervention node
   # adding engrais parameter and setting nb_colonnes as in ta_entete
-  parent_nodes <- getNodeS(
-    docObj = old_doc,
+  parent_nodes <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='fertilisation']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    lapply(parent_nodes, function(x) addChildren(x, xmlClone(new_node)))
-    set_param_value(xml_doc = old_doc, param_name = "engrais", param_value = engrais)
-    lapply(parent_nodes, function(x) xmlAttrs(x)["nb_colonnes"] <- "3")
+    lapply(parent_nodes,
+           function(x) {
+             XML::addChildren(x, XML::xmlClone(new_node))
+           }
+    )
+    set_param_value(xml_doc = old_doc,
+                    param_name = "engrais",
+                    param_value = engrais)
+    lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "3")
   }
 
-  # param + option: harvest
-  new_node <- xmlParseString(
-    '<option choix="2" nom="automatic calculation of crop aerial residues in function of user parameterization" nomParam="code_autoressuite">
+  # param, option: harvest
+  new_node <- XML::xmlParseString(
+    '<option choix="2" nom="automatic calculation of crop aerial residues
+    in function of user parameterization" nomParam="code_autoressuite">
   <choix code="1" nom="yes">
     <param format="real" max="100.0" min="0.0" nom="Stubblevegratio">0</param>
   </choix>
@@ -253,28 +265,30 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='harvest']"
   )[[1]]
 
-  addChildren(parent_node, xmlClone(new_node), at = 0)
+  XML::addChildren(parent_node, XML::xmlClone(new_node), at = 0)
 
   # Moving nodes do not require cloning them (I guess)
-  addChildren(parent_node, kids = nodes_to_move, at = 0)
+  XML::addChildren(parent_node, kids = nodes_to_move, at = 0)
 
 
   # special techniques: codefauche
   new_node <- list(
-    xmlParseString(
-      '<option choix="2" nom="dynamic calculation of residual lai on biomass after cutting" nomParam="code_hautfauche_dyn">
+    XML::xmlParseString(
+      '<option choix="2" nom="dynamic calculation of residual lai
+      on biomass after cutting" nomParam="code_hautfauche_dyn">
   <choix code="1" nom="yes"/>
   <choix code="2" nom="no"/>
 </option>',
       addFinalizer = TRUE
     ),
-    xmlParseString(
-      '<option choix="1" nom="reference thermal time to compute cutting dates " nomParam="codetempfauche">
+    XML::xmlParseString(
+      '<option choix="1" nom="reference thermal time to compute
+      cutting dates " nomParam="codetempfauche">
   <choix code="1" nom="in upvt"/>
   <choix code="2" nom="in udevair"/>
 </option>',
@@ -282,18 +296,18 @@ upgrade_tec_xml <- function(file,
     )
   )
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//option[@nomParam='codefauche']/choix"
   )[[1]]
 
-  # See if xmlClone is usefull to apply ???
-  addChildren(parent_node, kids = new_node, at = 0)
+  # See if xmlClone is useful to apply ???
+  XML::addChildren(parent_node, kids = new_node, at = 0)
 
 
   # special techniques: codemodfauche
   ## Choix "calendar in days"
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<colonne nom="engraiscoupe"/>
 <colonne nom="tauxexportfauche"/>
 <colonne nom="restit"/>
@@ -301,29 +315,29 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  new_nodes <- getNodeSet(new_node, path = "//colonne")
+  new_nodes <- XML::getNodeSet(new_node, path = "//colonne")
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//choix[@nom='calendar in days']//ta_entete"
   )[[1]]
-  # See if xmlClone is usefull to apply ???
-  addChildren(parent_node, kids = new_nodes)
+  # See if xmlClone is useful to apply ???
+  XML::addChildren(parent_node, kids = new_nodes)
 
-  xmlAttrs(parent_node)["nb_colonnes"] <- "9"
+  XML::xmlAttrs(parent_node)["nb_colonnes"] <- "9"
 
   # If any intervention node
   # add new param nodes: mscoupemini,  tauxexportfauche, restit
   # set kept value of engrais, mscoupemini
   # set default values tauxexportfauche = 1 et restit = 2
 
-  parent_nodes <- getNodeS(
-    docObj = old_doc,
+  parent_nodes <- get_nodes(
+    old_doc,
     path = "//choix[@nom='calendar in days']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    # See if xmlClone is usefull to apply ???
-    lapply(parent_nodes, function(x) addChildren(x, new_nodes))
+    # See if xmlClone is useful to apply ???
+    lapply(parent_nodes, function(x) XML::addChildren(x, new_nodes))
     set_param_value(
       xml_doc = old_doc, param_name = "engraiscoupe",
       param_value = engrais
@@ -340,32 +354,32 @@ upgrade_tec_xml <- function(file,
       xml_doc = old_doc, param_name = "restit",
       param_value = 2
     )
-    lapply(parent_nodes, function(x) xmlAttrs(x)["nb_colonnes"] <- "9")
+    lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "9")
   }
 
 
 
   ## Choix "calendar in degree days"
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//choix[@nom='calendar in degree days']//ta_entete"
   )[[1]]
-  # See if xmlClone is usefull to apply ???
-  addChildren(parent_node, kids = new_nodes)
+  # See if xmlClone is useful to apply ???
+  XML::addChildren(parent_node, kids = new_nodes)
 
-  xmlAttrs(parent_node)["nb_colonnes"] <- "9"
+  XML::xmlAttrs(parent_node)["nb_colonnes"] <- "9"
 
   # If any intervention node
   # add new param nodes: mscoupemini,  tauxexportfauche, restit
   # set kept value of engrais, mscoupemini
   # set default values tauxexportfauche = 1 et restit = 2
-  parent_nodes <- getNodeS(
-    docObj = old_doc,
+  parent_nodes <- get_nodes(
+    old_doc,
     path = "//choix[@nom='calendar in degree days']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    # See if xmlClone is usefull to apply ???
-    lapply(parent_nodes, function(x) addChildren(x, new_nodes))
+    # See if xmlClone is useful to apply ???
+    lapply(parent_nodes, function(x) XML::addChildren(x, new_nodes))
     set_param_value(
       xml_doc = old_doc, param_name = "engraiscoupe",
       param_value = engrais
@@ -379,12 +393,12 @@ upgrade_tec_xml <- function(file,
       param_value = 1
     )
     set_param_value(xml_doc = old_doc, param_name = "restit", param_value = 2)
-    lapply(parent_nodes, function(x) xmlAttrs(x)["nb_colonnes"] <- "9")
+    lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "9")
   }
 
 
   # special techniques: codeclaircie
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<ta nb_interventions="0" nom="thinning management">
    <ta_entete nb_colonnes="2">
      <colonne nom="juleclair"/>
@@ -394,27 +408,27 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//option[@nomParam='codeclaircie']//choix[@code='2']"
   )[[1]]
 
-  addChildren(parent_node, xmlClone(new_node))
+  XML::addChildren(parent_node, XML::xmlClone(new_node))
 
   # adding intervention if choix codeclaircie == 2 (activation)
   # Using values of juleclair, nbinfloecl got from the old parameters
   if (codeclaircie == 2) {
     # recup noeud ta_entete
-    op_node <- xmlClone(getNodeS(
+    op_node <- XML::xmlClone(get_nodes(
       old_doc,
       paste0("//ta_entete[colonne[@nom='", "juleclair", "']]")
     )[[1]])
-    xmlName(op_node) <- "intervention"
-    parent_node <- getNodeS(
-      docObj = old_doc,
+    XML::xmlName(op_node) <- "intervention"
+    parent_node <- get_nodes(
+      old_doc,
       path = "//option[@nomParam='codeclaircie']//choix[@code='2']/ta"
     )[[1]]
-    addChildren(parent_node, op_node)
+    XML::addChildren(parent_node, op_node)
     set_param_value(
       xml_doc = old_doc, param_name = "juleclair",
       param_value = juleclair
@@ -424,13 +438,14 @@ upgrade_tec_xml <- function(file,
       param_value = nbinfloecl
     )
 
-    xmlAttrs(parent_node)["nb_interventions"] <- "1"
+    XML::xmlAttrs(parent_node)["nb_interventions"] <- "1"
   }
 
 
   # codejourdes
-  new_node <- xmlParseString(
-    '<option choix="2" nom="date of plant destruction (for perennial crops only)" nomParam="codejourdes">
+  new_node <- XML::xmlParseString(
+    '<option choix="2" nom="date of plant destruction
+    (for perennial crops only)" nomParam="codejourdes">
   <choix code="1" nom="yes">
     <param format="integer" max="999" min="1" nom="juldes">999</param>
   </choix>
@@ -439,30 +454,17 @@ upgrade_tec_xml <- function(file,
     addFinalizer = TRUE
   )
 
-  parent_node <- getNodeS(
-    docObj = old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='special techniques']"
   )[[1]]
 
-  addChildren(parent_node, xmlClone(new_node))
+  XML::addChildren(parent_node, XML::xmlClone(new_node))
 
 
   # ----------------------------------------------------------------------------
   # Updating values with param_newform.xml ones
   #
-  # codetempfauche
-  #
-  # <formalisme nom="Moisture test for sowing decision">
-  # nbj_pr_apres_semis, eau_mini_decisemis, humirac_decisemis
-  #
-  # <option choix="3" nom="dates to drive automatic irrigations"
-  # nomParam="P_codedate_irrigauto"> -> codedate_irrigauto
-  # datedeb_irrigauto datefin_irrigauto stage_start_irrigauto
-  # stage_end_irrigauto
-  #
-  # <option choix="1" nom="Automatic calculation of the depht of residues
-  # incorporation in fucntion of proftrav" nomParam="code_auto_profres">
-  # code_auto_profres, resk, resz
 
   param_names <- c(
     "codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis",
@@ -471,7 +473,7 @@ upgrade_tec_xml <- function(file,
     "stage_start_irrigauto", "stage_end_irrigauto"
   )
   old_val <- get_param_xml(param_newform_file,
-    param = param_names
+                           param = param_names
   )[[basename(param_newform_file)]]
 
   # writing to file _tec.xml
@@ -492,15 +494,9 @@ upgrade_tec_xml <- function(file,
     overwrite = TRUE
   )
 
-  # error !!:
-  # set_param_value(old_doc, c("codetempfauche", "nbj_pr_apres_semis",
-  # "eau_mini_decisemis", "humirac_decisemis", "code_auto_profres","resk",
-  # "resz", "codedate_irrigauto", "datedeb_irrigauto", "datefin_irrigauto",
-  # "stage_start_irrigauto", "stage_end_irrigauto"), old_val)
-  #
-  # write_xml_file(old_doc, out_tec, overwrite)
 
 
-  free(old_doc@content)
+
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

@@ -4,14 +4,16 @@
 #' @param out_dir Output directory path of the generated file
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-#' @param stics_version Name of the Stics version (VX.Y format)
-#' @param target_version Name of the Stics version to upgrade files to
+#' @param stics_version Name of the STICS version (VX.Y format)
+#' @param target_version Name of the STICS version to upgrade files to
 #'  (VX.Y format)
 #' @param check_version Perform version consistency with in stics_version input
 #' with the file version and finally checking if the upgrade is possible
 #' allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
+#'
+#' @return None
 #'
 #' @export
 #'
@@ -42,7 +44,7 @@ upgrade_sols_xml <- function(file,
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
-    # extracting or detecting the Stics version corresponding to the xml file
+    # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
       stics_version,
@@ -79,34 +81,34 @@ upgrade_sols_xml <- function(file,
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
-  # Setting file stics version
+  # Setting file STICS version
   set_xml_file_version(old_doc, new_version = target_version,
                        overwrite = overwrite)
 
   # Checking if layer @nom are up to date (old @nom = horizon)
-  tableau_noms <- unlist(getNodeS(old_doc, "//tableau/@nom"))
+  tableau_noms <- unlist(get_nodes(old_doc, "//tableau/@nom"))
 
   if (any(grep(pattern = "horizon", tableau_noms))) {
     new_names <- unlist(lapply(tableau_noms,
         function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")))
-    setAttrValues(old_doc, "//tableau", "nom", new_names)
+    set_attrs_values(old_doc, "//tableau", "nom", new_names)
   }
 
   # Nodes to add
-  new_node <- xmlParseString(
+  new_node <- XML::xmlParseString(
     '<param format="real" max="1.0" min="0.0" nom="finert">0.65000</param>',
     addFinalizer = TRUE
   )
-  # new_node <- xmlParseString('<param nom="finert">0.65000</param>',
+  # new_node <- XML::xmlParseString('<param nom="finert">0.65000</param>',
   #                           addFinalizer = TRUE)
 
-  prev_sibling <- getNodeS(old_doc, "//param[@nom='CsurNsol']")
+  prev_sibling <- get_nodes(old_doc, "//param[@nom='CsurNsol']")
 
   # added for compatibility with old misspelled parameters
   if (is.null(prev_sibling)) {
-    prev_sibling <- getNodeS(old_doc, "//param[@nom='csurNsol']")
+    prev_sibling <- get_nodes(old_doc, "//param[@nom='csurNsol']")
     # updating nom attribute content
-    setAttrValues(old_doc,
+    set_attrs_values(old_doc,
       path = "//param[@nom='csurNsol']",
       attr_name = "nom",
       values_list = "CsurNsol"
@@ -114,12 +116,12 @@ upgrade_sols_xml <- function(file,
   }
 
   for (n in seq_along(prev_sibling)) {
-    addSibling(prev_sibling[[n]], xmlClone(new_node))
+    XML::addSibling(prev_sibling[[n]], XML::xmlClone(new_node))
   }
 
   # writing sols.xml file
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite)
 
-  free(old_doc@content)
+  XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }

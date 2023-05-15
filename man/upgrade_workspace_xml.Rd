@@ -2,8 +2,8 @@
 % Please edit documentation in R/upgrade_workspace_xml.R
 \name{upgrade_workspace_xml}
 \alias{upgrade_workspace_xml}
-\title{Upgrading XML files of a JavaStics workspace directory
-to a newer Stics version format}
+\title{Upgrading XML files of a JavaSTICS workspace directory
+to a newer STICS version format}
 \usage{
 upgrade_workspace_xml(
   workspace,
@@ -17,15 +17,15 @@ upgrade_workspace_xml(
 )
 }
 \arguments{
-\item{workspace}{Path of a JavaStics workspace}
+\item{workspace}{Path of a JavaSTICS workspace}
 
-\item{javastics}{Path of JavaStics}
+\item{javastics}{Path of JavaSTICS}
 
 \item{out_dir}{Output directory of the generated files}
 
-\item{stics_version}{Name of the Stics version (VX.Y format)}
+\item{stics_version}{Name of the STICS version (VX.Y format)}
 
-\item{target_version}{Name of the Stics version to upgrade files
+\item{target_version}{Name of the STICS version to upgrade files
 to  (VX.Y format)}
 
 \item{plant}{logical (optional), TRUE for upgrading plant files if a "plant"
@@ -36,9 +36,12 @@ TRUE for overwriting files if they exist, FALSE otherwise}
 
 \item{...}{Additional input arguments}
 }
+\value{
+None
+}
 \description{
-Upgrading XML files of a JavaStics workspace directory
-to a newer Stics version format
+Upgrading XML files of a JavaSTICS workspace directory
+to a newer STICS version format
 }
 \details{
 \itemize{
@@ -46,7 +49,7 @@ to a newer Stics version format
 \item If general parameters files exist in \code{workspace}, they are also upgraded.
 In that case, residues parameters values are kept and might not be adapted
 to the target model version.
-\item Wheather data and observations files are fully copied to \code{out_dir}
+\item Weather data and observations files are fully copied to \code{out_dir}
 }
 }
 \examples{
