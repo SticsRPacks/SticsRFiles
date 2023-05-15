@@ -52,7 +52,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 3.6.0'
+  version: '>= 4.0.0'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
