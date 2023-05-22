@@ -6,4 +6,5 @@ context("Create obs file ")
 
 test_that("Obs file", {
   expect_true(gen_obs(df = obs_df, out_dir = get_examples_path("xl")))
+  expect_warning(gen_obs(df = obs_df, out_dir = "xxx"))
 })
