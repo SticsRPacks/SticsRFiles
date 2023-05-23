@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   tidy = TRUE
 )
-
 ```
 
 ```{r eval=FALSE}
@@ -25,6 +24,11 @@ library(SticsRFiles)
 
 ```{r include=FALSE}
 suppressWarnings(library(SticsRFiles))
+suppressWarnings(library(tibble))
+
+load_param_names <- function() {
+  tibble::as_tibble(read.csv2(file = "param_names.csv", stringsAsFactors = FALSE))
+}
 ```
 
 ```{r echo=FALSE}
@@ -206,7 +210,7 @@ xml_files <- list.files(path = xml_dir, pattern = ".xml$", full.names = TRUE)
 ``` {r, echo=FALSE, results="hide"}
 files_list <- list.files(path = xml_dir, pattern = ".xml$")
 legend <- c("initializations", "plant", "station", "crop management",
-               "general", "general (new formalisms)", "soils", "usms")
+            "general", "general (new formalisms)", "soils", "usms")
 dt <- data.frame(files = files_list, groups = legend)
 
 ```
@@ -269,13 +273,19 @@ Using the `get_param_info` function without any argument, or with specifying the
 
 In the above code block, an extract of the returned information table is shown:
 
-```{r}
+```{r, eval = FALSE}
 
 param_names <- get_param_info()
 
 head(param_names)
 
 ```
+```{r echo=FALSE}
+param_names <- load_param_names()
+
+head(param_names)
+```
+
 
 The full parameters data.frame content is presented in the above paged table.
 
@@ -288,11 +298,21 @@ rmarkdown::paged_table(param_names)
 
 If parameters names are known and are given with the right syntax, information can be retrieved as follows
 
-```{r, results="markup"}
+```{r, eval = FALSE}
 
 get_param_info(param = "albedo")
 
 get_param_info(param = c("albedo", "latitude", "humcapil"))
+
+```
+```{r echo=FALSE}
+param_names[grep("albedo", param_names$name),]
+
+idx <- grepl("albedo", param_names$name) | 
+  grepl("latitude", param_names$name) |
+  grepl("humcapil", param_names$name)
+
+param_names[idx,]
 
 ```
 
@@ -300,13 +320,21 @@ get_param_info(param = c("albedo", "latitude", "humcapil"))
 
 A search with incomplete names may be done as follows
 
-```{r}
+```{r eval=FALSE}
 
 get_param_info(param = "hum")
 
 
 param_names <- get_param_info(param = c("al", "hum"))
 
+```
+```{r echo=FALSE}
+param_names[grep("hum", param_names$name),]
+
+idx <- grepl("al", param_names$name) | 
+  grepl("hum", param_names$name)
+
+param_names <- param_names[idx,]
 ```
 
 The found parameters data.frame content is presented in the above paged table.
@@ -322,7 +350,7 @@ rmarkdown::paged_table(param_names)
 
 One or more words may be given for sreaching them in formalisms description (short)
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 
 get_param_info(formalism = "yield")
 
@@ -332,19 +360,34 @@ param_formalisms <- get_param_info(formalism = c("yield", "leaves"))
 head(param_formalisms)
 
 ```
+```{r echo=FALSE}
+param_names <- load_param_names()
+
+param_names[grep("yield", param_names$formalism),]
+
+idx <- grepl("yield", param_names$formalism) | 
+  grepl("leaves", param_names$formalism)
+
+param_formalisms <- param_names[idx,]
+
+head(param_formalisms)
+
+```
+
+
 
 The found parameters data.frame content is presented in the above paged table.
 
 ```{r echo=FALSE}
 # Displaying the returned data as a paged table
-rmarkdown::paged_table(param_names)
+rmarkdown::paged_table(param_formalisms)
 ```
 
 ### Finding parameters using partial match on formalism and parameter names
 
 Parameters may be found combining search in formalisms and parameter names:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 
 get_param_info(formalism = "yield", param = "grain")
 
@@ -352,6 +395,21 @@ get_param_info(formalism = "yield", param = "grain")
 param_formalisms <- get_param_info(formalism = "yield",
                                    param = c("inflo", "lai"))
 
+
+```
+```{r echo=FALSE}
+param_names <- load_param_names()
+
+idx <- grepl("yield", param_names$formalism) | 
+  grepl("grain", param_names$name)
+
+param_names[idx,]
+
+idx <- grepl("yield", param_names$formalism) | 
+  grepl("inflo", param_names$name) |
+  grepl("lai", param_names$name)
+
+param_formalisms <- param_names[idx,]
 
 ```
 
@@ -367,12 +425,30 @@ rmarkdown::paged_table(param_formalisms)
 
 The `keyword` argument (one or several possible strings) may be used to search in all textual columns as `name`, `file` or `formalism`.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 
 get_param_info(keyword = "plant")
 
 
 param_names <- get_param_info(keyword = c("plant", "leave"))
+
+
+```
+```{r echo=FALSE}
+param_names <- load_param_names()
+
+idx <- grepl("plant", param_names$formalism) | 
+  grepl("plant", param_names$name) |
+  grepl("plant", param_names$file)
+
+param_names[idx,]
+
+idx <- idx |
+  grepl("leave", param_names$formalism) | 
+  grepl("leave", param_names$name) |
+  grepl("leave", param_names$file)
+
+param_names <- param_names[idx,]
 
 
 ```
