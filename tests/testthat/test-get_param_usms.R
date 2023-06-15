@@ -68,7 +68,6 @@ test_that("getting all param from an usm", {
   )
 
 
-
   expect_equal(
     get_param_xml(xml_path, "fplt",
       select = "plante",
@@ -76,7 +75,6 @@ test_that("getting all param from an usm", {
     )$usms.xml$fplt[2],
     "proto_potato_plt.xml"
   )
-
 
 
   expect_equal(
@@ -88,7 +86,6 @@ test_that("getting all param from an usm", {
   )
 
 
-
   expect_equal(
     get_param_xml(xml_path, "flai",
       select = "plante",
@@ -96,4 +93,28 @@ test_that("getting all param from an usm", {
     )$usms.xml$flai[2],
     "null"
   )
+})
+
+
+test_that("Changing output type", {
+
+
+  set_param_xml(xml_path, param = "fclim1",
+                select = "usm",
+                select_value = "potato",
+                values = 12345.1997,
+                overwrite = TRUE)
+  fclim1 <- get_param_xml(xml_path, param = "fclim1",
+                          select = "usm",
+                          select_value = "potato")
+
+  expect_type(object = fclim1$usms.xml$fclim1, type = "double")
+
+  fclim1 <- get_param_xml(xml_path, param = "fclim1",
+                          select = "usm",
+                          select_value = "potato",
+                          to_num = FALSE)
+
+  expect_type(object = fclim1$usms.xml$fclim1, type = "character")
+
 })
