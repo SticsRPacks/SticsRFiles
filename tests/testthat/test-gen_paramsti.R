@@ -5,7 +5,7 @@ version_num <- SticsRFiles:::get_version_num()
 
 context("Creating an xml station file to latest version")
 
-workspace_path <- get_examples_path("xml", stics_version = stics_version)
+workspace_path <- get_examples_path("csv", stics_version = stics_version)
 
 test_that("Create a xml station file", {
   expect_true(gen_paramsti(workspace_path, c("par1", "par2"), c(1, 2)))
