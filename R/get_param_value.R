@@ -53,7 +53,7 @@ get_param_value <- function(xml_doc,
   if ("show_xpath" %in% dot_names)
     show_xpath <- dot_args$show_xpath else show_xpath <- FALSE
   if ("to_num" %in% dot_names)
-    to_num = dot_args$to_num else to_num <- TRUE
+    to_num <- dot_args$to_num else to_num <- TRUE
 
 
   # Getting param values for the same parameters for the xml documents list
