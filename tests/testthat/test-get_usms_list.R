@@ -14,6 +14,7 @@ context("Getting returned type")
 
 test_that("type, character vector", {
   expect_is(usms_names, "character")
+  expect_equal(length(get_usms_list(file = xml_usms)),44)
 })
 
 
