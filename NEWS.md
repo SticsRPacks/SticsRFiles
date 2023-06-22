@@ -1,22 +1,28 @@
-# SticsRFiles 1.1.3 _2023-04-14_
+# SticsRFiles 1.1.3 _2023-05-10_
 
 * FUNCTIONS
    * New function for generating the new_travail.usm STICS file
 
 * FIXES:
    * get_var_info: for variables names vector
-   * get_param_txt: manage global variables use
-   * for fixing checks issues (code formatting, comments, file names, variables names, function
-   names,...) 
+   * get_param_txt: removed global variables use, looking for parameters names
+    including parentheses 
+   * code formatting, comments, file names, variables names, function names,...
    * package namespace use in packages functions calls
-   * pattern for replacing parameters names which are not    
-   consistent between XML files and inputs.csv
-   * pattern for selecting xl parameters & filtering parameter starting with code_
-   * renaming plant initialisation parameters according to crop tag (Crop1, Crop2)
+   * pattern for replacing parameters names were are not consistent 
+     between XML files and inputs.csv
+   * pattern for selecting parameters in Excel files, filtering parameter 
+     starting with "code_"
+   * renaming plant initialisation parameters according to 
+     crop number tag (Crop1, Crop2)
    * tidyselect and filter syntax
+   * homogenous naming of JavaSTICS and STICS
 
 * DATA
-   * added: meta-data and xsl files for converting XML files to text files for STICS
+   * added: meta-data and xsl files for converting XML files to 
+     text files for STICS
+   * examples files for different files format used in the package are now
+     distributed as zip files for lightening the extdata directory
    
 
 # SticsRFiles 1.1.2 _2022-12-16_

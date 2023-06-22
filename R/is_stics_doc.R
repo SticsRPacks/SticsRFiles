@@ -72,49 +72,41 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
 
 
 #' @rdname is_stics_doc
-# @export
 is_stics_ini <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "initialisations"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_usms <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "usms"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_sols <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "sols"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_tec <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "fichiertec"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_sta <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "fichiersta"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_plt <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "fichierplt"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_par <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "fichierpar"))
 }
 
 #' @rdname is_stics_doc
-# @export
 is_stics_newpar <- function(xml_doc) {
   return(is_stics_doc(xml_doc, "fichierparamgen"))
 }

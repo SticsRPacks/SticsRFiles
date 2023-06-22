@@ -21,6 +21,8 @@
 #' @param plt_num `r lifecycle::badge("deprecated")` `plt_num` is no
 #'   longer supported, use `plant_id` instead.
 #'
+#' @return None
+#'
 #' @examples
 #' \dontrun{
 #' xml_path <- "/path/to/corn_plt.xml"

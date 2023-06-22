@@ -14,7 +14,7 @@
 
 check_java_path <- function(javastics) {
   if (!file.exists(javastics)) {
-    stop("The JavasStics folder doesn't exist : ", javastics)
+    stop("The JavaStics folder doesn't exist : ", javastics)
   }
 
   # checking if it's a JavaSTICS root directory

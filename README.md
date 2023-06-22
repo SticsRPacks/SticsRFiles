@@ -10,26 +10,25 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![R build
 status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
 [![Codecov test
-coverage](https://app.codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
-
+coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
 <!-- badges: end -->
 
 The goal of SticsRFiles is to perform manipulations of the
 [STICS](https://www6.paca.inrae.fr/stics_eng/) model files either on XML
-files (used by the JavaStics GUI) or on text files used by the model
+files (used by the JavaSTICS GUI) or on text files used by the model
 fortran executable.
 
-The basic functionnalites allows to read parameters names and values
+The basic functionalities allows to read parameters names and values
 through XML queries and replace parameters values in files. A starting
 guide is available on the [Get started
 page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
-Advanced functionnalities are dedicated to produce XML parameter files
+Advanced functionalities are dedicated to produce XML parameter files
 using a mailing process like from XML templates and Excel sheets
-containing multiple simulations contexts. A JavaStics workspace is
-generated and directly usable from the JavaStics interface (GUI or
-command line), or with an R JavaStics interface provided by the
+containing multiple simulations contexts. A JavaSTICS workspace is
+generated and directly usable from the JavaSTICS interface (GUI or
+command line), or with an R JavaSTICS interface provided by the
 [SticsOnR](https://sticsrpacks.github.io/SticsOnR/) package.
 
 If you want to be notified when a new release of this package is made,
@@ -91,7 +90,7 @@ devtools::install_github("SticsRPacks/SticsRFiles@*release")
 remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
-Normaly, all the package dependencies will be installed for CRAN
+Normally, all the package dependencies will be installed for CRAN
 packages.
 
 ## Examples
@@ -108,7 +107,7 @@ packages.
 
 ### Files generation
 
-- A description of usefull functions for generating XML input files from
+- A description of useful functions for generating XML input files from
   usms parameters data stored in Excel files sheets or CSV files is
   available
   [here](https://sticsrpacks.github.io/SticsRFiles/articles/Generating_Stics_XML_files.html).
@@ -135,8 +134,8 @@ otherwise.
 ## Code of conduct
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Conduct](https://github.com/SticsRPacks/SticsRFiles/blob/master/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 The package is under intensive development, so you can fill an issue or
 request us a feature

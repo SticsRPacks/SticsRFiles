@@ -41,6 +41,9 @@ TRUE for overwriting file if it exists, FALSE otherwise}
 
 \item{...}{Additional input arguments}
 }
+\value{
+None
+}
 \description{
 Upgrading _plt.xml file(s) to a newer version
 }

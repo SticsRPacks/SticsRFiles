@@ -39,7 +39,7 @@ longer supported, use \code{var} instead.}
 longer supported, use \code{stics_version} instead.}
 }
 \value{
-Nothing. Writes to a file.
+None
 }
 \description{
 Generating a daily variable list file from variables names

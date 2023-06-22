@@ -27,6 +27,10 @@ is used.}
 \item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
 longer supported, use \code{stics_version} instead.}
 }
+\value{
+A data.frame with information about variable(s) with columns
+\code{name}, \code{definition}, \code{unit}, \code{type}
+}
 \description{
 Helper function that returns names and descriptions of
 STICS output variables from a partial name and/or descriptive keywords.

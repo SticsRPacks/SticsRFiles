@@ -36,6 +36,9 @@ TRUE for overwriting files if they exist, FALSE otherwise}
 
 \item{...}{Additional input arguments}
 }
+\value{
+None
+}
 \description{
 Upgrading XML files of a JavaSTICS workspace directory
 to a newer STICS version format

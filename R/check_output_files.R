@@ -18,7 +18,7 @@
 #' }
 #'
 #' @keywords internal
-# @export
+
 check_output_files <- function(run_dir, usm_name = NULL) {
   if (base::is.null(usm_name)) {
     usm <- basename(run_dir)

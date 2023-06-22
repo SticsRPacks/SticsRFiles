@@ -45,6 +45,9 @@ longer supported, use \code{plant_id} instead.}
 \item{out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_file} is no
 longer supported, use \code{save_as} instead.}
 }
+\value{
+None
+}
 \description{
 The input file according to his type
 (ini,plant,tec,station,soil,par)

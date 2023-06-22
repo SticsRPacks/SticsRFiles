@@ -1,21 +1,20 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.4.1
+# CITATION file created with {cffr} R package, v0.5.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
-title: 'SticsRFiles: Read And Modify STICS Input/Output Files'
+title: 'SticsRFiles: Read and Modify ''STICS'' Input/Output Files'
 version: 1.1.3
-abstract: The purpose of SticsRFiles is to provide functions for manipulating input
-  and output files of the STICS crop model. These files are either standard JavaStics
-  XML files or more directly the text files used by the model fortran executable.
-  The most basic functionality is to read and write parameter names and values through
-  XML queries, or text files ones. More advanced functionalities include the generation
-  of input XML from XML templates and spreadsheets with as many simulations contexts
-  as needed, or the generation of the input text files from the XML input files for
-  distributed computing.
+abstract: Manipulating input and output files of the 'STICS' crop model. These files
+  are either standard 'JavaSTICS' XML files or more directly the text files used by
+  the model 'fortran' executable. The most basic functionality is to read and write
+  parameter names and values through XML queries, or text files ones. More advanced
+  functionalities include the generation of input XML from XML templates and spreadsheets
+  with as many simulations contexts as needed, or the generation of the input text
+  files from the XML input files for distributed computing.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -35,7 +34,7 @@ authors:
   orcid: https://orcid.org/0000-0002-9310-2377
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2023-04-14'
+date-released: '2023-05-23'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -53,7 +52,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 3.6.0'
+  version: '>= 4.0.0'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -446,5 +445,5 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2023'

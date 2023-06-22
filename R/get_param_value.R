@@ -52,6 +52,8 @@ get_param_value <- function(xml_doc,
   if ("ids" %in% dot_names) ids <- dot_args$ids else ids <- NULL
   if ("show_xpath" %in% dot_names)
     show_xpath <- dot_args$show_xpath else show_xpath <- FALSE
+  if ("to_num" %in% dot_names)
+    to_num <- dot_args$to_num else to_num <- TRUE
 
 
   # Getting param values for the same parameters for the xml documents list
@@ -199,14 +201,15 @@ get_param_value <- function(xml_doc,
 
   # Converting value to numeric if not any character in it
   # numbers may contain scientific notation e+ e-, decimal, and space
-  num_value <- suppressWarnings(as.numeric(value))
-  is_number <- suppressWarnings(!is.na(num_value))
+  if (to_num) {
+    num_value <- suppressWarnings(as.numeric(value))
+    is_number <- suppressWarnings(!is.na(num_value))
 
-  # conversion to numeric
-  if (all(is_number)) {
-    value <- num_value
+    # conversion to numeric
+    if (all(is_number)) {
+      value <- num_value
+    }
   }
-
 
   value <- suppressWarnings(as.vector(value))
 

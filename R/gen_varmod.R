@@ -22,7 +22,7 @@
 #' the variables that exist. `force= TRUE` may however be used to write
 #' variables that do not exist.
 #'
-#' @return Nothing. Writes to a file.
+#' @return None
 #'
 #' @examples
 #' \dontrun{
