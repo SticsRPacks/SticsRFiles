@@ -8,6 +8,9 @@ xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 
 SticsRFiles:::get_option_choice_param_values(xml_path, "codetemp", "2")
 test_that("Option choice", {
-  expect_equal(length(unlist(SticsRFiles:::get_option_choice_param_values(xml_path, "codetemp", "2"),use.names = FALSE)),14)
-  #expect_warning(unlist(get_obs_txt(file.path(workspace_path,"simple_example"),mixed=TRUE)))
-})
+  expect_equal(
+    length(
+      unlist(get_option_choice_param_values(xml_path, "codetemp", "2"),
+             use.names = FALSE)),
+    14)
+  })

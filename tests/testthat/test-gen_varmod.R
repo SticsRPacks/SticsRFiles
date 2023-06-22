@@ -12,7 +12,7 @@ test_that("Create a varmod file", {
 })
 
 
-gen_varmod(out_dir, "hauteur",append=TRUE)
+gen_varmod(out_dir, "hauteur", append = TRUE)
 
 test_that("Add a new variable", {
   expect_true(
@@ -21,4 +21,3 @@ test_that("Add a new variable", {
   expect_warning(gen_varmod(out_dir, ""))
 
   })
-

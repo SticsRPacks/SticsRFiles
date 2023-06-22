@@ -11,11 +11,11 @@ test_that("Read obs file", {
   expect_equal(
     unlist(
       dplyr::count(get_obs_txt(file.path(workspace_path, "simple_example"))),
-      use.names=FALSE),
+      use.names = FALSE),
     37)
   expect_warning(
     unlist(
       get_obs_txt(file.path(workspace_path, "simple_example"),
-                  mixed=TRUE))
+                  mixed = TRUE))
     )
 })

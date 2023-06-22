@@ -1,7 +1,7 @@
 library(SticsRFiles)
 
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- SticsRFiles:::get_version_num()
+
 
 xml_usms <- file.path(
   get_examples_path("xml", stics_version = stics_version),
@@ -14,7 +14,7 @@ context("Getting returned type")
 
 test_that("type, character vector", {
   expect_is(usms_names, "character")
-  expect_equal(length(get_usms_list(file = xml_usms)),44)
+  expect_equal(length(get_usms_list(file = xml_usms)), 44)
 })
 
 
