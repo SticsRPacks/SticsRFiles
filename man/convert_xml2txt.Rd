@@ -10,6 +10,7 @@ convert_xml2txt(
   plant_id = 1,
   out_dir = NULL,
   save_as = NULL,
+  stics_version = "latest",
   xml_file = lifecycle::deprecated(),
   java_dir = lifecycle::deprecated(),
   plt_num = lifecycle::deprecated(),
@@ -28,6 +29,9 @@ Optional, set to the path of the input xml file by default}
 
 \item{save_as}{Name of the output file
 (optional, default: fixed name for STICS)}
+
+\item{stics_version}{the STICS files version to use (optional,
+default to latest).}
 
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use \code{file} instead.}

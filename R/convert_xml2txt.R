@@ -10,6 +10,8 @@
 #' Optional, set to the path of the input xml file by default
 #' @param save_as Name of the output file
 #' (optional, default: fixed name for STICS)
+#' @param stics_version the STICS files version to use (optional,
+#' default to latest).
 #' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
 #'   longer supported, use `file` instead.
 #' @param java_dir `r lifecycle::badge("deprecated")` `java_dir` is no
@@ -33,6 +35,7 @@ convert_xml2txt <- function(file,
                             plant_id = 1,
                             out_dir = NULL,
                             save_as = NULL,
+                            stics_version = "latest",
                             xml_file = lifecycle::deprecated(),
                             java_dir = lifecycle::deprecated(),
                             plt_num = lifecycle::deprecated(),
@@ -116,10 +119,69 @@ convert_xml2txt <- function(file,
   # (see above code, finding idx!)
   doc <- xml2::read_xml(xml_file)
   filet <- xml2::xml_name(doc)
-  style_file <- file.path(java_dir,
-                          "bin/resources/xml/stylesheet",
-                          xsl_files[filet])
 
-  # calling the function
-  convert_xml2txt_int(xml_file, style_file, out_file_path)
+  # Calling get_examples_path
+  xsl_dir <- get_examples_path("xsl", stics_version = stics_version)
+
+  style_file <- file.path(xsl_dir, xsl_files[filet])
+
+  # calling the xml conversion function
+  status <- convert_xml2txt_int(xml_file, style_file, out_file_path)
+
+  return(status)
 }
+
+
+#' Generating the soil xsl stylesheet for a soil name
+#'
+#' @param workspace Path of a JavaSTICS workspace
+#' (i.e. containing the STICS XML input files)
+#' @param usm an usm name
+#' @param stics_version the STICS files version to use
+#'
+#' @return conversion success status (TRUE/FALSE)
+#'
+#' @examples
+#' \dontrun{
+#' SticsRFiles:::gen_sol_xsl_file("path/to/workspace", "usm_name", "V10" )
+#' }
+#'
+#' @keywords internal
+#'
+gen_sol_xsl_file <- function(workspace, usm, stics_version) {
+
+  # getting soil name
+  soil_name <- get_param_xml(file = file.path(workspace, "usms.xml"),
+                             param = "nomsol",
+                             select = "usm",
+                             select_value = usm)$usms.xml$nomsol
+
+  xsl_dir <- get_examples_path("xsl", stics_version = stics_version)
+
+  sol_xsl <- file.path(xsl_dir, "sol2txt.xsl")
+  sol_xsl_tmpl <- file.path(xsl_dir, "sol2txt.xsl.tmpl")
+
+  if(!file.exists(sol_xsl_tmpl)) {
+    file.copy(sol_xsl, sol_xsl_tmpl)
+  }
+
+  file_lines <- readLines(sol_xsl_tmpl)
+
+  # idx of xsl:variable line
+  idx <- grep(pattern = "variable", x = file_lines)
+
+  # replace nomsol in it
+  file_lines[idx] <- gsub(pattern = "\\?",
+                          x = file_lines[idx],
+                          replacement = soil_name )
+
+  ret <- try(writeLines(text = file_lines, con = sol_xsl))
+
+  if (methods::is(ret, "try-error")) {
+    return(invisible(FALSE))
+  }
+
+  return(invisible(TRUE))
+}
+
+

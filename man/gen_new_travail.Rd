@@ -11,7 +11,7 @@ gen_new_travail(
   lai_forcing = 0,
   codesuite = 0,
   codoptim = 0,
-  out_dir = getwd()
+  out_dir = NULL
 )
 }
 \arguments{

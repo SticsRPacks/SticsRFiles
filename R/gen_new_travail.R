@@ -12,8 +12,8 @@
 #' (containing parameters values to be forced), 0 otherwise
 #' @param out_dir Directory path where to store the `new_travail.usm` file.
 #'
-# @return
-# @export
+#' @return Nothing. Writes to a file.
+#'
 #' @keywords internal
 #'
 # @examples
@@ -22,7 +22,7 @@ gen_new_travail <- function(workspace,
                             lai_forcing = 0,
                             codesuite = 0,
                             codoptim = 0,
-                            out_dir = getwd()) {
+                            out_dir = NULL) {
 
   usm_data <- get_usm_data(workspace,
                            usm,
@@ -30,11 +30,17 @@ gen_new_travail <- function(workspace,
                            codesuite = 0,
                            codoptim = 0)
 
+  data_plt2 <- c()
+  if (usm_data$nbplantes > 1)
+    data_plt2 <- c("fplt2", "ftec2", "flai2")
+
   data_order <- c("codesimul", "codoptim", "codesuite", "nbplantes", "nom",
                   "datedebut", "datefin", "finit", "numsol", "nomsol",
                   "fstation",
                   "fclim1", "fclim2", "nbans", "culturean", "fplt1",
-                  "ftec1", "flai1", "fplt2", "ftec2", "flai2")
+                  "ftec1", "flai1", data_plt2)
+
+  if (is.null(out_dir)) out_dir <- workspace
 
   out_file <- file.path(out_dir, "new_travail.usm")
 
@@ -46,8 +52,13 @@ gen_new_travail <- function(workspace,
     p_table[idx] <- usm_data[[data_order[p]]]
   }
 
-  writeLines(text = p_table, con = out_file)
+  ret <- try(writeLines(text = p_table, con = out_file))
 
+  if (methods::is(ret, "try-error")) {
+    return(invisible(FALSE))
+  }
+
+  return(invisible(TRUE))
 }
 
 
@@ -61,7 +72,7 @@ get_usm_data <- function(workspace,
 
 
   data <- get_param_xml(file = file.path(workspace, "usms.xml"),
-                        usm, select = "usm",
+                        select = "usm",
                         select_value = usm)$usms.xml
 
   # codesimul
@@ -89,9 +100,7 @@ get_usm_data <- function(workspace,
 
   # soil number
   # not used by STICS !!!!
-  # in fact trhrough javaSTICS always == 1
-  data$numsol <- get_numsol(soil_name = data$nomsol,
-                            soil_file = file.path(workspace, "sols.xml"))
+  data$numsol <- 1
 
   # nomsol
   # data$nomsol
@@ -106,10 +115,8 @@ get_usm_data <- function(workspace,
   # data$fclim2
 
   # nbans
-  data$nbans <-
-    as.numeric(strsplit(x = data$fclim2, split = ".", fixed = TRUE)[[1]][2]) -
-    as.numeric(strsplit(x = data$fclim1, split = ".", fixed = TRUE)[[1]][2]) +
-    data$culturean
+  data$nbans <- 2 - data$culturean
+
 
   # culturean
   # data$culturean
@@ -122,34 +129,22 @@ get_usm_data <- function(workspace,
 
   if (data$flai1 == "null") data$codesimul <- get_codesimul(0)
 
-  data$fplt2 <- data$fplt[2]
+  if (data$nbplantes > 1) {
+    data$fplt2 <- data$fplt[2]
 
-  data$ftec2 <- data$ftec[2]
+    data$ftec2 <- data$ftec[2]
 
-  data$flai2 <- data$flai[2]
+    data$flai2 <- data$flai[2]
+  }
 
   data[["ftec"]] <- NULL
   data[["fplt"]] <- NULL
   data[["flai"]] <- NULL
   data[["fobs"]] <- NULL
 
-  data
+  return(data)
 }
 
-
-get_numsol <- function(soil_name, soil_file = "sols.xml") {
-
-  id <- which(soil_name == get_param_xml(
-    file = soil_file,
-    param = "sol")$sols.xml$sol)
-
-  if (length(id > 0)) return(id)
-
-  warning("Unknown soil name: ", soil_name)
-
-  return(NaN)
-
-}
 
 get_codesimul <- function(lai_forcing = 0) {
 

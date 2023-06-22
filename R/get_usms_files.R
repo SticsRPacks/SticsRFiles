@@ -76,7 +76,8 @@ get_usms_files <- function(workspace,
   }
 
   # Types definition
-  files_types <- c("fplt", "finit", "fclim1", "fclim2", "fstation", "ftec")
+  files_types <- c("fplt", "finit", "fclim1", "fclim2", "fstation", "ftec",
+                   "sols", "pargen", "parnew")
   if (is.null(file_type)) {
     file_type <- files_types
   } else {
@@ -209,11 +210,58 @@ get_usms_files <- function(workspace,
       plt_files_all_exist <- length(plt_files) <= length(plt_files_path)
     }
 
+    # soil file
+    sols_file_path <- NULL
+    sols_file_exists <- TRUE
+    if ("sols" %in% file_type) {
+      sols_file_path <- suppressWarnings(
+        normalizePath(file.path(workspace_path, "sols.xml"))
+      )
+      sols_file_exists <- file.exists(sols_file_path)
+    }
+
+    # param_gen.xml
+    pargen_file_path <- NULL
+    pargen_file_exists <- TRUE
+    if ("pargen" %in% file_type) {
+      pargen_file_path <- suppressWarnings(
+        normalizePath(file.path(workspace_path, "param_gen.xml"))
+      )
+
+      if (!file.exists(pargen_file_path))
+        pargen_file_path <- suppressWarnings(
+          normalizePath(file.path(workspace_path, "param_gen.xml"))
+        )
+
+      pargen_file_exists <- file.exists(pargen_file_path)
+    }
+
+    # param_newform.xml
+    parnew_file_path <- NULL
+    parnew_file_exists <- TRUE
+    if ("parnew" %in% file_type) {
+      parnew_file_path <- suppressWarnings(
+        normalizePath(file.path(workspace_path, "param_newform.xml"))
+      )
+
+      if (!file.exists(parnew_file_path))
+        parnew_file_path <- suppressWarnings(
+          normalizePath(file.path(workspace_path, "param_newform.xml"))
+        )
+
+      parnew_file_exists <- file.exists(parnew_file_path)
+    }
+
     #
     # Adding the files lists
     usms_files[[i]] <- list(
-      paths = c(usm_files_path, plt_files_path),
-      all_exist = usm_files_all_exist & plt_files_all_exist
+      paths = c(usm_files_path, plt_files_path, sols_file_path,
+                pargen_file_path, parnew_file_path),
+      all_exist = usm_files_all_exist &
+        plt_files_all_exist &
+        sols_file_exists &
+        pargen_file_exists &
+        parnew_file_exists
     )
   }
 
