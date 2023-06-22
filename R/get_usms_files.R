@@ -18,7 +18,7 @@
 #' is no longer supported, use `javastics` instead.
 #'
 #' @details The possible values of file types are: "fplt", "finit", "fclim1",
-#' "fclim2", "fstation" and "ftec"
+#' "fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"
 #'
 #' @return A named list with existing files path in each usm element
 #'

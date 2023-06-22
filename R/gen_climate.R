@@ -1,8 +1,12 @@
-#' Generating the climat.txt file
+#' Generating the STICS climat.txt file
 #'
 #' @param files_path Vector of 1 or 2 weather data files
 #' @param out_dir output directory path
 #' @return a generation success status (TRUE/FALSE)
+#'
+#' @details If 2 files are given, the file list is completed if the years
+#' are not consecutive using the complete_climate_paths function
+#' (for a multi-years data set)
 #'
 #' @examples
 #' \dontrun{
