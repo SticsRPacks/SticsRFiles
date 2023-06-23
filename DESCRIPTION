@@ -97,6 +97,7 @@ Collate:
     'file_document.R'
     'find_names.R'
     'force_param_values.R'
+    'gen_climate.R'
     'gen_ini_doc.R'
     'gen_ini_xml.R'
     'gen_new_travail.R'
