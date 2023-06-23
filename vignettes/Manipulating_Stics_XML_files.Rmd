@@ -27,7 +27,9 @@ suppressWarnings(library(SticsRFiles))
 suppressWarnings(library(tibble))
 
 load_param_names <- function() {
-  tibble::as_tibble(read.csv2(file = "param_names.csv", stringsAsFactors = FALSE))
+  tibble::as_tibble(
+    read.csv2(file = "param_names.csv", stringsAsFactors = FALSE)
+    )
 }
 ```
 
@@ -99,13 +101,12 @@ The corresponding parameter name for an **option** node is stored in an attribut
 par_xml <- file.path(examples_path, "param_gen.xml")
 par <- readLines(par_xml)
 idx_water <- grep(pattern = "formalisme", par)[9:10]
-#cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
 ```
 
 ````{r results='asis', echo = FALSE}
-cat('```xml\n')
+cat("```xml\n")
 cat(paste(par[idx_water[1]:idx_water[2]], collapse = "\n"))
-cat('\n```\n')
+cat("\n```\n")
 ````
 
 * Parameters with several values (for soil layers, technical operations,...)
@@ -118,13 +119,12 @@ In the above file extract for soil parameters, each set of parameters (included 
 sol_xml <- file.path(examples_path, "sols.xml")
 sol <- readLines(sol_xml)
 lines_sol <- c(sol[3], "...", sol[70:79], "...", sol[110:119], "...")
-#cat(paste(lines_sol, collapse = "\n"))
 ```
 
 ````{r results='asis', echo = FALSE}
-cat('```xml\n')
+cat("```xml\n")
 cat(paste(lines_sol, collapse = "\n"))
-cat('\n```\n')
+cat("\n```\n")
 ````
 
 * Example from tec files
@@ -135,14 +135,12 @@ tec_xml <- file.path(examples_path, "file_tec.xml")
 tec <- readLines(tec_xml)[3:22]
 tec <- c(tec, "...", tec[12:20], "...")
 tec[23] <- gsub(pattern = "112", replacement = "220", tec[23])
-
-#cat(paste(tec, collapse = "\n"))
 ```
 
 ````{r results='asis', echo = FALSE}
-cat('```xml\n')
+cat("```xml\n")
 cat(paste(tec, collapse = "\n"))
-cat('\n```\n')
+cat("\n```\n")
 ````
 
 
@@ -306,13 +304,13 @@ get_param_info(param = c("albedo", "latitude", "humcapil"))
 
 ```
 ```{r echo=FALSE}
-param_names[grep("albedo", param_names$name),]
+param_names[grep("albedo", param_names$name), ]
 
-idx <- grepl("albedo", param_names$name) | 
+idx <- grepl("albedo", param_names$name) |
   grepl("latitude", param_names$name) |
   grepl("humcapil", param_names$name)
 
-param_names[idx,]
+param_names[idx, ]
 
 ```
 
@@ -329,12 +327,12 @@ param_names <- get_param_info(param = c("al", "hum"))
 
 ```
 ```{r echo=FALSE}
-param_names[grep("hum", param_names$name),]
+param_names[grep("hum", param_names$name), ]
 
-idx <- grepl("al", param_names$name) | 
+idx <- grepl("al", param_names$name) |
   grepl("hum", param_names$name)
 
-param_names <- param_names[idx,]
+param_names <- param_names[idx, ]
 ```
 
 The found parameters data.frame content is presented in the above paged table.
@@ -363,12 +361,12 @@ head(param_formalisms)
 ```{r echo=FALSE}
 param_names <- load_param_names()
 
-param_names[grep("yield", param_names$formalism),]
+param_names[grep("yield", param_names$formalism), ]
 
-idx <- grepl("yield", param_names$formalism) | 
+idx <- grepl("yield", param_names$formalism) |
   grepl("leaves", param_names$formalism)
 
-param_formalisms <- param_names[idx,]
+param_formalisms <- param_names[idx, ]
 
 head(param_formalisms)
 
@@ -400,16 +398,16 @@ param_formalisms <- get_param_info(formalism = "yield",
 ```{r echo=FALSE}
 param_names <- load_param_names()
 
-idx <- grepl("yield", param_names$formalism) | 
+idx <- grepl("yield", param_names$formalism) |
   grepl("grain", param_names$name)
 
-param_names[idx,]
+param_names[idx, ]
 
-idx <- grepl("yield", param_names$formalism) | 
+idx <- grepl("yield", param_names$formalism) |
   grepl("inflo", param_names$name) |
   grepl("lai", param_names$name)
 
-param_formalisms <- param_names[idx,]
+param_formalisms <- param_names[idx, ]
 
 ```
 
@@ -437,18 +435,18 @@ param_names <- get_param_info(keyword = c("plant", "leave"))
 ```{r echo=FALSE}
 param_names <- load_param_names()
 
-idx <- grepl("plant", param_names$formalism) | 
+idx <- grepl("plant", param_names$formalism) |
   grepl("plant", param_names$name) |
   grepl("plant", param_names$file)
 
-param_names[idx,]
+param_names[idx, ]
 
 idx <- idx |
-  grepl("leave", param_names$formalism) | 
+  grepl("leave", param_names$formalism) |
   grepl("leave", param_names$name) |
   grepl("leave", param_names$file)
 
-param_names <- param_names[idx,]
+param_names <- param_names[idx, ]
 
 
 ```

@@ -1,14 +1,14 @@
 library(SticsRFiles)
 
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- SticsRFiles:::get_version_num()
+version_num <- get_version_num()
 
 workspace_path <- get_examples_path("xml", stics_version = stics_version)
 javastics_path <- workspace_path
 
 xml_usms <- file.path(workspace_path, "usms.xml")
 
-usm_files<-SticsRFiles:::check_usms_files(
+usm_files <- check_usms_files(
   workspace_path,
   javastics_path,
   usms_list = NULL,
