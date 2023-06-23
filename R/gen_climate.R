@@ -20,7 +20,7 @@
 gen_climate <- function(files_path, out_dir) {
 
   # generate intermediate paths for a multi-years simulation
-  # i.e. > 2
+  # i.e. greater than 2
   files_path <- complete_climate_paths(files_path)
 
   # data concatenation
@@ -79,7 +79,7 @@ complete_climate_paths <- function(files_path) {
   years_chr <- as.character(years)
   file_name <- strsplit(basename(files_path[1]), split = "\\.")[[1]][1]
   files_path <- file.path(
-    dirname(files_path[1]), paste0(file_name,".", years_chr)
+    dirname(files_path[1]), paste0(file_name, ".", years_chr)
   )
 
   return(files_path)

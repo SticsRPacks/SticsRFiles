@@ -211,7 +211,7 @@ if (length(usms_list) == 0) {
 # getting files list
 all_files_list <- get_usms_files(
   workspace = workspace_path,
-  javastics= javastics_path,
+  javastics = javastics_path,
   usms_list = usms_list
 )
 
@@ -336,19 +336,19 @@ for (i in 1:usms_number) {
       found_plt <- grepl(pattern = "_plt", x = file_path)
       found_tec <- grepl(pattern = "_tec", x = file_path)
 
-      if(found_plt) {
+      if (found_plt) {
         plant_id_plt <- plant_id_plt + 1
         plant_id <- plant_id_plt
       }
 
-      if(found_tec) {
+      if (found_tec) {
         plant_id_tec <- plant_id_tec + 1
         plant_id <- plant_id_tec
       }
 
       # using a template and replacing nomsol in it
       # for generating sol2txt.xsl file
-      if(grepl(pattern = "sols", x = file_path)) {
+      if (grepl(pattern = "sols", x = file_path)) {
         # generate sol2txt.xsl
         ret <- gen_sol_xsl_file(workspace_path, usm_name, stics_version)
         if (!ret)
@@ -471,5 +471,3 @@ return(invisible(list(
   lai_copy_status = lai_copy_status
 )))
 }
-
-
