@@ -31,6 +31,9 @@ input file.}
 
 \item{out_dir}{Directory path where to store the \code{new_travail.usm} file.}
 }
+\value{
+Nothing. Writes to a file.
+}
 \description{
 Generates a \code{new_travail.usm} file from usm XML files content and some
 switch parameters for lai forcing, parameters forcing and usm chaining.

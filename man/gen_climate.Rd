@@ -2,7 +2,7 @@
 % Please edit documentation in R/gen_climate.R
 \name{gen_climate}
 \alias{gen_climate}
-\title{Generating the climat.txt file}
+\title{Generating the STICS climat.txt file}
 \usage{
 gen_climate(files_path, out_dir)
 }
@@ -15,7 +15,12 @@ gen_climate(files_path, out_dir)
 a generation success status (TRUE/FALSE)
 }
 \description{
-Generating the climat.txt file
+Generating the STICS climat.txt file
+}
+\details{
+If 2 files are given, the file list is completed if the years
+are not consecutive using the complete_climate_paths function
+(for a multi-years data set)
 }
 \examples{
 \dontrun{
