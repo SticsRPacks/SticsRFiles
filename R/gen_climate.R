@@ -26,7 +26,6 @@ gen_climate <- function(files_path, out_dir) {
   # data concatenation
   climate_lines <- c()
   for (i in seq_along(files_path)) {
-    #out_files_lines[[i]] <- trimws(readLines(files_path[i]))
     climate_lines <- c(climate_lines, trimws(readLines(files_path[i])))
   }
 
@@ -42,9 +41,6 @@ gen_climate <- function(files_path, out_dir) {
 
   return(invisible(TRUE))
 
-
-
-  return(TRUE)
 }
 
 
@@ -86,9 +82,5 @@ complete_climate_paths <- function(files_path) {
     dirname(files_path[1]), paste0(file_name,".", years_chr)
   )
 
-
-
-
   return(files_path)
-
 }
