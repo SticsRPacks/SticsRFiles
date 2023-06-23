@@ -9,5 +9,5 @@ context("Exist Javasitcs ")
 
 test_that("exist Javastics", {
   expect_error(check_java_path(workspace_path))
-  expect_error(check_java_path(file.path(workspace_path,"xxx")))
+  expect_error(check_java_path(file.path(workspace_path, "xxx")))
 })
