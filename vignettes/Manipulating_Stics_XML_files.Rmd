@@ -39,7 +39,6 @@ examples_path <- get_examples_path("xml", stics_version = stics_version)
 ```
 
 ```{r setup, results="hide", echo=FALSE}
-#options(warn=-1)
 xml_root <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
 xml_loc_dir <- file.path(xml_root, "XML")
 if (!dir.exists(xml_loc_dir)) dir.create(xml_loc_dir)
@@ -186,7 +185,6 @@ xml_files <- list.files(path = xml_dir, pattern = ".xml$", full.names = TRUE)
 
 # Listing only the first three files of the entire list
 
-# head(xml_files, n = 3)
 # For linux
 #> [1] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml
 #> /examples/V10.0/file_ini.xml"

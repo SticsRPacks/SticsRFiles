@@ -1,9 +1,10 @@
-# SticsRFiles 1.1.3 _2023-05-10_
+# SticsRFiles 1.1.3 _2023-05-23_
 
 * FUNCTIONS
    * New function for generating the new_travail.usm STICS file
 
 * FIXES:
+   * get_param_value: forcing to get a character returned value
    * get_var_info: for variables names vector
    * get_param_txt: removed global variables use, looking for parameters names
     including parentheses 
