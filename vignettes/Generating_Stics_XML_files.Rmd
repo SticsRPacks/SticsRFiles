@@ -222,12 +222,7 @@ library(readxl)
 # Reading the Excel file
 xl_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
 
-# xl_param <- read_excel(usm_xl_file,sheet = "USMs",
-# col_types = c(rep("guess",13),rep("text", 4) ), na="NA")
-
 xl_param <- read_params_table(usm_xl_file, sheet_name = "USMs")
-
-#xl_param[is.na(xl_param)] <- ""
 
 rmarkdown::paged_table(xl_param)
 ```

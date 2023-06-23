@@ -79,7 +79,7 @@ references:
   title: curl
   abstract: 'curl: A Modern and Flexible Web Client for R'
   notes: Imports
-  url: https://curl.se/libcurl/
+  url: https://jeroen.r-universe.dev/curl
   repository: https://CRAN.R-project.org/package=curl
   authors:
   - family-names: Ooms
