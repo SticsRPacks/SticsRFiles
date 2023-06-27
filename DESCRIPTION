@@ -30,7 +30,7 @@ Description: Manipulating input and output files of the 'STICS' crop
     and spreadsheets with as many simulations contexts as needed, or the
     generation of the input text files from the XML input files for
     distributed computing.
-License: file LICENSE
+License: LGPL (>= 3)
 URL: https://github.com/SticsRPacks/SticsRFiles,
     https://doi.org/10.5281/zenodo.4443206
 BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
