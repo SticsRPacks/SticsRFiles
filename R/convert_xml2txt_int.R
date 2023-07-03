@@ -26,16 +26,16 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
   f_names <- c(xml_file, style_file)
   ex_files <- file.exists(f_names)
   if (any(!ex_files)) {
-    warning("At least one input file doesn't exist ! \n", paste(f_names[!ex_files],
-                                                             collapse = ", "
-    ))
+    warning("At least one input file doesn't exist ! \n",
+            paste(f_names[!ex_files], collapse = ", ")
+    )
     return(FALSE)
   }
 
   # checking files extensions
   names_split <- lapply(f_names, function(x) {
     unlist(strsplit(x, ".",
-      fixed = TRUE
+                    fixed = TRUE
     ))
   })
 
@@ -64,7 +64,7 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
     out_file <- file.path(
       dirname(xml_file),
       paste0(unlist(strsplit(basename(xml_file), ".",
-        fixed = TRUE
+                             fixed = TRUE
       ))[1], ".", ext)
     )
   }
@@ -76,6 +76,3 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
 
   return(invisible(TRUE))
 }
-
-
-

@@ -220,7 +220,7 @@ all_files_list <- get_usms_files(
 # Checking if all files exist, returning missing file(s) name(s)
 # if any
 all_files_exist <- unlist(
-  lapply(all_files_list, function(x) return(x$all_exist)))
+  lapply(all_files_list, function(x) return(all(x$all_exist))))
 
 if (!all(all_files_exist)) {
   stop(paste(
@@ -229,6 +229,9 @@ if (!all(all_files_exist)) {
   ))
 }
 
+
+# removing usms with missing files
+all_files_list <- all_files_list[all_files_exist]
 
 
 if (java_converter) {
