@@ -103,6 +103,7 @@ Collate:
     'gen_new_travail.R'
     'gen_obs.R'
     'gen_paramsti.R'
+    'gen_sol_xsl_file.R'
     'gen_sols_xml.R'
     'gen_sta_doc.R'
     'gen_sta_xml.R'
