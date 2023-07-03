@@ -21,6 +21,7 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
 gen_sta_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         stics_version = "latest",

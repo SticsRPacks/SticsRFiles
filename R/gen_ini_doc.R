@@ -25,6 +25,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_ini_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         crop_tag = "Crop",

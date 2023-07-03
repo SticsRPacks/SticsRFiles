@@ -128,6 +128,8 @@ get_examples_types <- function() {
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 # @examples
 unzip_examples <- function(files_type, version_dir) {
 

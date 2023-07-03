@@ -11,7 +11,9 @@
 #' }
 #'
 #' @keywords internal
-
+#'
+#' @noRd
+#'
 check_java_path <- function(javastics) {
   if (!file.exists(javastics)) {
     stop("The JavaStics folder doesn't exist : ", javastics)

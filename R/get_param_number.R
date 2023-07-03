@@ -22,6 +22,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 # TODO: may use get_param_types returning values nb in $length field
 get_param_number <- function(xml_doc_object, param_name, ...) {
   values <- get_param_value(xml_doc_object, param_name, ...)

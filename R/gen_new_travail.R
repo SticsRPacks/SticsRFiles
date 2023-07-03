@@ -12,11 +12,12 @@
 #' (containing parameters values to be forced), 0 otherwise
 #' @param out_dir Directory path where to store the `new_travail.usm` file.
 #'
-# @return
-# @export
+#'
 #' @keywords internal
 #'
-# @examples
+#' @noRd
+#'
+
 gen_new_travail <- function(workspace,
                             usm,
                             lai_forcing = 0,

@@ -181,6 +181,8 @@ get_param_info <- function(param = NULL,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #'

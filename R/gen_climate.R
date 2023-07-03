@@ -17,6 +17,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_climate <- function(files_path, out_dir) {
 
   # generate intermediate paths for a multi-years simulation
@@ -60,6 +62,9 @@ gen_climate <- function(files_path, out_dir) {
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
 #'
 complete_climate_paths <- function(files_path) {
 

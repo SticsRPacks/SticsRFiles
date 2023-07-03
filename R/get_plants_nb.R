@@ -86,6 +86,7 @@ get_plants_nb <- function(usms_file,
 #' }
 #'
 #' @keywords internal
+#' @noRd
 #'
 get_plants_nb_xml <- function(usms_file,
                               usms_list = c(),

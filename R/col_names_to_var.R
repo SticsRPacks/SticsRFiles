@@ -10,6 +10,8 @@
 #' valid_names <- SticsRFiles:::col_names_to_var(col_names)
 #' @keywords internal
 #'
+#' @noRd
+#'
 col_names_to_var <- function(var_list = c()) {
   . <- NULL
 

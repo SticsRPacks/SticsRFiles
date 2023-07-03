@@ -23,6 +23,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #'
 get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 

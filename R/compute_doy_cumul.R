@@ -15,8 +15,10 @@
 #' ))
 #' }
 #'
-#' #
+#'
 #' @keywords internal
+#'
+#' @noRd
 #'
 compute_doy_cumul <- function(doys_vec, years_vec) {
   if (!all(c(class(doys_vec), class(years_vec)) %in% c("numeric", "integer"))) {

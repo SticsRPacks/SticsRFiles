@@ -22,6 +22,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_values_by_param <- function(params_table,
                                 param_name = NULL,
                                 lines_id = NULL,

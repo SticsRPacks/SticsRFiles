@@ -16,6 +16,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @importFrom rlang .data
 #'
 #' @examples

@@ -11,6 +11,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 replace_string_in_file <- function(file_path,
                                    target_string,
                                    replace_string,

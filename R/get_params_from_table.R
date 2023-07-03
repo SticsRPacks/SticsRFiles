@@ -29,6 +29,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_params_from_table <- function(params_table,
                                   param_names = NULL,
                                   xml_doc,

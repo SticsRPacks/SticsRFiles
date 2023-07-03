@@ -21,6 +21,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_xml_stics_version <- function(stics_version = "latest", xml_doc = NULL) {
 
   # TODO: A renommer pour clarifier version des fichiers

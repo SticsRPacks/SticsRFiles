@@ -39,6 +39,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 add_node_to_doc <- function(xml_doc, new_node, nodes_nb = 1, parent_path) {
 
   # Checking that parent_path is valid xpath for xml_doc

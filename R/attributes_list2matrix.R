@@ -37,6 +37,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 
 attributes_list2matrix <- function(attr_list) {
   # Getting unique attributes names list

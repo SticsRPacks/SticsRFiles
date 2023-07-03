@@ -35,6 +35,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 
 
 set_usms_param_xml <- function(xml_doc_object,

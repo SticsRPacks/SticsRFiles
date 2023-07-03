@@ -15,6 +15,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 
 
 get_daily_results <- function(...) {

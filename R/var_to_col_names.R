@@ -13,6 +13,8 @@
 #' valid_names <- SticsRFiles:::var_to_col_names(var_names)
 #' @keywords internal
 #'
+#' @noRd
+#'
 var_to_col_names <- function(var_vec) {
   . <- NULL
   # (n)
@@ -41,6 +43,8 @@ var_to_col_names <- function(var_vec) {
 #' @return A vector of variable names compatible with STICS
 #' (usually used for `gen_varmod()`)
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @seealso `gen_varmod()`
 #'

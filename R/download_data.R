@@ -108,6 +108,8 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' # Getting all available dirs from the data repos

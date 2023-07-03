@@ -79,6 +79,8 @@ get_stics_versions_compat <- function(version_index = NULL) {
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #'
@@ -109,6 +111,8 @@ check_version_compat <- function(stics_version = "latest") {
 #' @return A data.frame with versions data
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -163,6 +167,8 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 #' @return version number (numeric or character)
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_version_num()
@@ -192,6 +198,8 @@ get_version_num <- function(stics_version = "latest", numeric = TRUE) {
 #' @return version string
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_version_string()
@@ -212,6 +220,8 @@ get_version_string <- function(stics_version) {
 #'
 #' @return file name
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

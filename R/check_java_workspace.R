@@ -12,6 +12,7 @@
 #' @return An absolute JavaSTICS workspace path
 #'
 #' @keywords internal
+#' @noRd
 
 check_java_workspace <- function(javastics, workspace = NULL) {
 

@@ -29,6 +29,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_file <- function(workspace,
                      usm_name = NULL,
                      var_list = NULL,
@@ -112,6 +114,8 @@ get_file <- function(workspace,
 #' @importFrom rlang .data
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_file_ <- function(workspace = getwd(),
                       usm_name = NULL,
@@ -267,6 +271,8 @@ get_file_ <- function(workspace = getwd(),
 #' @return the obs or simulation output
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_file_one <- function(dirpath, filename, p_name,
                          verbose, dates_list, var_list) {
   out <-
@@ -379,6 +385,8 @@ get_file_from_usms <- function(workspace,
 #' c("Principal","Associated").
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

@@ -136,6 +136,8 @@ gen_obs <- function(df,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_obs_ <- function(obs_table, file_path) {
 
 

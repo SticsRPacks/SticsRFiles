@@ -26,6 +26,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 remove_parent_from_doc <- function(xml_doc,
                                    param_name,
                                    nodes_ids = NULL) {

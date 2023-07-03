@@ -67,9 +67,9 @@
 #' set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 #'
 #' # If the parameter is found in several files, use the set_*
-#' functions directly, e.g. cailloux is found in the general file
-#' ("codetycailloux") and the soil file. If we want to change its value
-#' in the soil file, we use set_soil_txt():
+#' # functions directly, e.g. cailloux is found in the general file
+#' # ("codecailloux") and the soil file. If we want to change its value
+#' # in the soil file, we use set_soil_txt():
 #' set_soil_txt(file = file.path(path, "param.sol"),
 #'              param = "cailloux", layer = 2, value = 1)
 #' }
@@ -590,6 +590,8 @@ set_soil_txt <- function(file = "param.sol",
 #' @seealso \code{\link{set_param_txt}}.
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 set_file_txt <- function(file,
                          param,

@@ -9,6 +9,9 @@
 #' @export
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' # Getting internal dictionary default content

@@ -18,6 +18,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
   in_data <- utils::read.table(in_csv_file,
     sep = ";", stringsAsFactors = FALSE,

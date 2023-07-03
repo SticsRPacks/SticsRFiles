@@ -8,6 +8,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #'
 set_file_executable <- function(file_path) {
   if (is_windows()) {

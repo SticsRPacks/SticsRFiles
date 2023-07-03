@@ -19,6 +19,9 @@
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
 add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
                             stics_version = "latest") {
 

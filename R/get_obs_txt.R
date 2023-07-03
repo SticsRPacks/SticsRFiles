@@ -34,6 +34,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
   . <- NULL # to avoid CRAN note for pipe
   if (is.null(mixed)) {

@@ -27,6 +27,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_usms_sols_doc <- function(doc_type,
                               xml_doc = NULL,
                               nodes_nb = NULL,

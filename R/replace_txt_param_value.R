@@ -11,6 +11,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 replace_txt_param_value <- function(file_path,
                                     param_tag,
                                     param_value,

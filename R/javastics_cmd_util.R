@@ -30,6 +30,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_javastics_cmd <- function(javastics,
                               java_cmd = "java",
                               type = c("generate", "run"),
@@ -102,6 +104,8 @@ get_javastics_cmd <- function(javastics,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
                                 java_cmd = "java",
                                 verbose = TRUE) {
@@ -172,6 +176,8 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_java_version <- function(java_cmd = "java") {
 

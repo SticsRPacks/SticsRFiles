@@ -19,6 +19,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
 
   # TODO : doc_types have been added as input arg, but not used yet,

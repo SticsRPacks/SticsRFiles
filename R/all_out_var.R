@@ -17,6 +17,8 @@
 #' }
 #' @keywords internal
 #'
+#' @noRd
+#'
 all_out_var <- function(stics_version = "latest") {
 
   # Checking and getting the right version

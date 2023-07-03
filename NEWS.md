@@ -2,7 +2,7 @@
 
 * FUNCTIONS
    * New function for generating the new_travail.usm STICS file
-   * New function for generating wheather data file (climat.txt)
+   * New function for generating weather data files (climat.txt)
    * New unit tests added
 
 * FIXES:

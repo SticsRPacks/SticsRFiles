@@ -35,6 +35,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 
 get_param_value <- function(xml_doc,
                             param_name = NULL,

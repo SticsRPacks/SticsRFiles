@@ -22,6 +22,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_options_choices <- function(xml_file_path, options_names = NULL) {
 
 

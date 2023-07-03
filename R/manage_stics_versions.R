@@ -7,6 +7,11 @@
 #' \dontrun{
 #' SticsRFiles:::get_svn_identifiers()
 #' }
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
 get_svn_identifiers <- function() {
 
   # logged user identifiers !
@@ -31,6 +36,8 @@ get_svn_identifiers <- function() {
 #'
 # @return
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -118,6 +125,8 @@ download_csv_files <- function(branch_url,
 #'
 #' @return An invisible data.frame containing versions data
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -208,6 +217,8 @@ add_stics_version <- function(version_name,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::remove_stics_version(version_name = "V10.0")
@@ -271,6 +282,8 @@ remove_stics_version <- function(version_name,
 #' @return A directory path
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_data_dir()
@@ -306,6 +319,8 @@ get_data_dir <- function(location = "install") {
 #' @return A file path
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' SticsRFiles:::get_versions_file_path()
@@ -334,6 +349,8 @@ get_versions_file_path <- function(location = "install") {
 #' SticsRFiles library (or package)
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -380,6 +397,8 @@ update_stics_version <- function(version_name,
 #'
 # @return
 #' @keywords internal
+#'
+#' @noRd
 #'
 # @examples
 set_versions_info <- function(version_name,
@@ -463,6 +482,8 @@ set_versions_info <- function(version_name,
 #' sub-directory)
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

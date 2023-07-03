@@ -959,6 +959,8 @@ get_usm_txt <- function(file = "new_travail.usm",
 #' @return A named (if names=TRUE) list of parameter values
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' path <- file.path(get_examples_path(file_type = "txt",
@@ -1000,6 +1002,8 @@ get_txt_generic <- function(file,
 #' @return A list with numeric values when possible
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

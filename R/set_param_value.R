@@ -41,6 +41,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 set_param_value <- function(xml_doc,
                             param_name,
                             param_value,

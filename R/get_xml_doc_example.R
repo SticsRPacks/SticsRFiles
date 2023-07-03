@@ -17,6 +17,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_xml_doc_example <- function(xml_name = NULL,
                                 stics_version = "latest") {
 

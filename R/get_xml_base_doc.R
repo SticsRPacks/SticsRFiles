@@ -24,6 +24,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_xml_base_doc <- function(xml_type = NULL,
                              stics_version = "latest") {
 

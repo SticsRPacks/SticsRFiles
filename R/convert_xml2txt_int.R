@@ -21,6 +21,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
 
   f_names <- c(xml_file, style_file)

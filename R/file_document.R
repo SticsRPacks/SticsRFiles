@@ -1,6 +1,4 @@
 #' @include global.R
-#' @keywords internal
-
 #' An S4 class to represent a file or dir.
 #'
 #' @slot type A file type ('file','dir')
@@ -10,6 +8,9 @@
 #' @slot con A file connexion
 #' @slot content A file content
 #' @slot warn Logical, to display (TRUE) or not (FALSE) warnings (default)
+#'
+#' @keywords internal
+#' @noRd
 #'
 setClass(
   "file_document",

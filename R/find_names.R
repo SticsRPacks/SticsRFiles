@@ -7,6 +7,8 @@
 #' @return Character vector of founds strings
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #'
 #' names <- c("abscission", "alphaphot", "codelaitr", "dlaimax", "lai")

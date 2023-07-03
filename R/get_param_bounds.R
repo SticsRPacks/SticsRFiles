@@ -30,6 +30,7 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
 #'
 get_param_bounds <- function(xml_doc,
                              param_name,
@@ -139,6 +140,7 @@ fix_bounds <- function(values, bounds_name, param_name) {
 #' @return A named vector for bound(s)
 #'
 #' @keywords internal
+#' @noRd
 #'
 #'
 #'

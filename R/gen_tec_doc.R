@@ -27,6 +27,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_tec_doc <- function(xml_doc = NULL,
                         param_table = NULL,
                         stics_version = "latest",

@@ -19,6 +19,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_param_names <- function(xml_object,
                             param_list = c(),
                             parent_name = NULL,

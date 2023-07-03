@@ -13,6 +13,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' static_help("SticsRFiles")
