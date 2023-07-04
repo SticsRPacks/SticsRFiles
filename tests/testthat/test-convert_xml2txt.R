@@ -7,10 +7,10 @@ out_dir <- file.path(tempdir(), "Test_Convert")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 convert_xml2txt_int(xml_file = xml_plt,
                                   style_file = xsl_file,
-                                  file.path(out_dir,"ficplt.txt"))
+                                  file.path(out_dir, "ficplt.txt"))
 
 context("Convert file type")
 
 test_that("Convert xml file to txt file", {
-  expect_true(file.exists(file.path(out_dir,"ficplt.txt")))
+  expect_true(file.exists(file.path(out_dir, "ficplt.txt")))
 })
