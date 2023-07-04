@@ -51,7 +51,7 @@ is converted to a text file readable by the STICS model
 (ficini.txt, ficplt1.txt,...)
 }
 \examples{
-\dontrun{
+\donttest{
 xml_path <- "/path/to/corn_plt.xml"
 javastics_path <- "/path/to/JavaSTICS/folder"
 convert_xml2txt(xml_file = xml_path, java_dir = javastics_path)

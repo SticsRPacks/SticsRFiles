@@ -72,7 +72,7 @@ all_out_var <- function(stics_version = "latest") {
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Find by variable name (fuzzy search):
 #' SticsRFiles::get_var_info("lai")
 #'
@@ -138,16 +138,15 @@ get_var_info <- function(var = NULL,
 #' @param version `r lifecycle::badge("deprecated")` `version` is no
 #'   longer supported, use `stics_version` instead.
 #'
-#' @return A boolean vector: `TRUE` if the variable exist, `FALSE` if it doesn't
+#' @return A boolean vector: `TRUE` if the variable exist, `FALSE` otherwise
 #'
 #' @seealso `get_var_info()` for interactive use.
 #'
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' is_stics_var(c("lai(n)", "masec(n)", "truc"))
-#' }
+#' is_stics_var(c("lai(n)", "masec(n)", "unknown"))
+#'
 is_stics_var <- function(var,
                          stics_version = "latest",
                          version = lifecycle::deprecated()) {

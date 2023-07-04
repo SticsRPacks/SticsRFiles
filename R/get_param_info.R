@@ -35,9 +35,9 @@
 #' @export
 #'
 #' @examples
-#'
+#' \donttest{
 #' get_param_info(param = "albedo")
-#' \dontrun{
+
 #' get_param_info(param = "albedo", file = "/path/to/file.xml")
 #'
 #' get_param_info(param = "albedo", formalism = "special")

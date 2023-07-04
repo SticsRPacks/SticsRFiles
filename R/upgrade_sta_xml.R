@@ -21,7 +21,7 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' upgrade_sta_xml(
 #'   file = "/path/to/_sta.xml",
 #'   out_dir = "/path/to/directory",

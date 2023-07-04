@@ -33,7 +33,7 @@
 #' value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' # Soil file
 #'

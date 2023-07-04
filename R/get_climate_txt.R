@@ -23,9 +23,9 @@
 #'
 #'
 #' @examples
-#' library(SticsRFiles)
 #' path <- get_examples_path(file_type = "txt")
 #' Meteo <- get_climate_txt(path)
+#'
 #' @export
 #'
 get_climate_txt <- function(workspace = getwd(),

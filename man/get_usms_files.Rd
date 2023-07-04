@@ -51,7 +51,7 @@ The possible values of file types are: "fplt", "finit", "fclim1",
 "fclim2", "fstation" and "ftec"
 }
 \examples{
-\dontrun{
+\donttest{
 
 get_usms_files(
   workspace = "/path/to/workspace",

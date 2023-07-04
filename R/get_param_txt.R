@@ -40,14 +40,12 @@
 #'
 #'
 #' @examples
-#' # Read the interrow distance parameter:
-#' \dontrun{
-#' library(SticsRFiles)
 #' path <- get_examples_path(file_type = "txt")
+#'
+#' # Getting the interrow distance parameter value
 #' get_param_txt(path, param = "interrang")
 #'
-#' # Getting varietal values:
-#'
+#' # Getting varietal parameters values
 #' # Get the leaf lifespan of the variety used in the usm:
 #' get_param_txt(workspace = path, param = "durvieF")
 #' # Get the leaf lifespan of another variety available in the plant file:
@@ -57,7 +55,7 @@
 #' get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 #' # Or get it from the output of the function returning all parameters:
 #' get_param_txt(workspace = path)$plant$plant1$durvieF
-#' }
+#'
 #'
 #' @export
 get_param_txt <- function(workspace = getwd(),

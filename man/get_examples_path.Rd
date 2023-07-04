@@ -28,12 +28,10 @@ version or a vector of (for unknown file types "" is returned as path)
 Getting examples files path attached to a STICS version for a given file type
 }
 \examples{
-\dontrun{
-
 get_examples_path(file_type = "csv")
 
 get_examples_path(file_type = c("csv", "sti"))
 
 get_examples_path(file_type = "csv", stics_version = "V8.5")
-}
+
 }

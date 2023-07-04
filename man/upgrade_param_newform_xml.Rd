@@ -44,7 +44,7 @@ Upgrading a param_newform.xml file to a newer version
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
-\dontrun{
+\donttest{
 upgrade_param_newform_xml(
   file = "/path/to/param_newform.xml",
   out_dir = "/path/to/directory",

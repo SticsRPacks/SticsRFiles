@@ -54,7 +54,7 @@ values to insert into XML files, with the help of these functions:
 \code{\link{gen_usms_xml}}, \code{\link{gen_ini_xml}}
 }
 \examples{
-\dontrun{
+\donttest{
 download_usm_xl()
 download_usm_xl(out_dir = "/path/to/destination/dir")
 }

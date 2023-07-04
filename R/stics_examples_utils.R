@@ -13,14 +13,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'
 #' get_examples_path(file_type = "csv")
 #'
 #' get_examples_path(file_type = c("csv", "sti"))
 #'
 #' get_examples_path(file_type = "csv", stics_version = "V8.5")
-#' }
+#'
 get_examples_path <- function(file_type, stics_version = "latest",
                               version_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(version_name)) {

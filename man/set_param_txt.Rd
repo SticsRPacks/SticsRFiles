@@ -162,8 +162,6 @@ To replace the output variables required from STICS,
 please directly call \code{gen_varmod}.
 }
 \examples{
-\dontrun{
-
 # Getting example data path
 path <- get_examples_path(file_type = "txt")
 
@@ -186,6 +184,6 @@ set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 # in the soil file, we use set_soil_txt():
 set_soil_txt(file = file.path(path, "param.sol"),
              param = "cailloux", layer = 2, value = 1)
-}
+
 
 }

@@ -48,10 +48,10 @@ None
 Upgrading _plt.xml file(s) to a newer version
 }
 \details{
-See SticsRFiles::get_stics_versions_compat() for listing versions
+See get_stics_versions_compat() for listing versions
 }
 \examples{
-\dontrun{
+\donttest{
 upgrade_plt_xml(
   file = "/path/to/_plt.xml",
   param_gen_file = "/path/to/param_gen.xml",

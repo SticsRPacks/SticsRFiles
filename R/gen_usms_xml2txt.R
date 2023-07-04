@@ -45,7 +45,7 @@
 #' have been successfully copied in usms directories
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' javastics <- "/path/to/JavaSTICS/folder"
 #' workspace <- "/path/to/workspace"
 #'

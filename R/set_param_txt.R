@@ -48,8 +48,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Getting example data path
 #' path <- get_examples_path(file_type = "txt")
 #'
@@ -72,7 +70,7 @@
 #' # in the soil file, we use set_soil_txt():
 #' set_soil_txt(file = file.path(path, "param.sol"),
 #'              param = "cailloux", layer = 2, value = 1)
-#' }
+#'
 #'
 set_param_txt <- function(workspace = getwd(),
                           param,

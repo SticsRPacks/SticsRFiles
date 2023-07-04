@@ -18,10 +18,10 @@
 #'
 #' @export
 #'
-#' @details See SticsRFiles::get_stics_versions_compat() for listing versions
+#' @details See get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' upgrade_usms_xml(
 #'   file = "/path/to/usms.xml",
 #'   out_dir = "/path/to/directory",

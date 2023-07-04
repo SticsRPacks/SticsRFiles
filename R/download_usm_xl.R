@@ -27,7 +27,7 @@
 #' @return A vector of copied files path.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' download_usm_xl()
 #' download_usm_xl(out_dir = "/path/to/destination/dir")
 #' }
@@ -155,7 +155,7 @@ download_usm_xl <- function(file = NULL,
 #' @return A vector of copied files path.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' download_usm_csv(out_dir = "/path/to/destination/dir")
 #' }
 #'

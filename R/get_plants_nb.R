@@ -16,8 +16,6 @@
 #' @return A named numeric vector of plants number per usm
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Xml case
 #' xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' get_plants_nb(xml_usms)
@@ -27,7 +25,6 @@
 #' # Txt case
 #' txt_usm <- file.path(get_examples_path(file_type = "txt"), "new_travail.usm")
 #' get_plants_nb(txt_usm)
-#' }
 #'
 #' @export
 #'

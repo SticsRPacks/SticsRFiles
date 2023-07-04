@@ -11,9 +11,6 @@
 #' an existing version selected using version_index.
 #'
 #' @examples
-#' #
-#' \dontrun{
-#'
 #' # Getting the complete versions list
 #' get_stics_versions_compat()
 #'
@@ -23,8 +20,6 @@
 #' # Getting the previous version of the latest one
 #' get_stics_versions_compat(-1)
 #'
-#' #
-#' }
 #'
 #' @export
 #'

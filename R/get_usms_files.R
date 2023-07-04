@@ -27,7 +27,7 @@
 #' and `get_usms_list()` to get the list of usms.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' get_usms_files(
 #'   workspace = "/path/to/workspace",

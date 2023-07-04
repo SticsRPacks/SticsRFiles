@@ -77,7 +77,7 @@ For one usm, files will be generated either in the workspace directory
 or in a subdirectory.
 }
 \examples{
-\dontrun{
+\donttest{
 javastics <- "/path/to/JavaSTICS/folder"
 workspace <- "/path/to/workspace"
 
