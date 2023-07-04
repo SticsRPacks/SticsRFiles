@@ -39,7 +39,7 @@ STICS output variables from a partial name and/or descriptive keywords.
 The function understand \code{\link[base]{regex}} as input.
 }
 \examples{
-\donttest{
+
 # Find by variable name (fuzzy search):
 SticsRFiles::get_var_info("lai")
 
@@ -48,6 +48,6 @@ SticsRFiles::get_var_info(keyword = "lai")
 
 # Find for a particular version:
 SticsRFiles::get_var_info("lai", stics_version = "V9.0")
-}
+
 
 }

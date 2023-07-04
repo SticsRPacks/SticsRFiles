@@ -72,7 +72,7 @@ all_out_var <- function(stics_version = "latest") {
 #'
 #'
 #' @examples
-#' \donttest{
+#'
 #' # Find by variable name (fuzzy search):
 #' SticsRFiles::get_var_info("lai")
 #'
@@ -81,7 +81,7 @@ all_out_var <- function(stics_version = "latest") {
 #'
 #' # Find for a particular version:
 #' SticsRFiles::get_var_info("lai", stics_version = "V9.0")
-#' }
+#'
 #'
 #' @export
 #'

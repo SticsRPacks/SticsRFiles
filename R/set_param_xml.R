@@ -33,12 +33,11 @@
 #' value= list(c(1,2), c(2.3,4.5))
 #'
 #' @examples
-#' \donttest{
 #'
 #' # Soil file
 #'
 #' file.copy(file.path(get_examples_path(file_type = "xml"),
-#'           "sols.xml"), getwd())
+#'           "sols.xml"), tempdir())
 #'
 #' # For scalar parameters per soil
 #'
@@ -91,7 +90,7 @@
 #' )
 #'
 #' get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
-#' }
+#'
 #'
 #' @export
 set_param_xml <- function(file,

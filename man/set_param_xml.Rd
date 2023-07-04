@@ -69,12 +69,11 @@ a vector of values. For example, for two parameters with two values each:
 value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
-\donttest{
 
 # Soil file
 
 file.copy(file.path(get_examples_path(file_type = "xml"),
-          "sols.xml"), getwd())
+          "sols.xml"), tempdir())
 
 # For scalar parameters per soil
 
@@ -127,6 +126,6 @@ set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
 )
 
 get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
-}
+
 
 }
