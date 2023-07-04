@@ -13,11 +13,11 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 #'
 #' # For getting all options choices
-#' SticsRFiles:::get_options_choices(xml_path)
+#' get_options_choices(xml_path)
 #'
 #' # For getting one option choices or more
-#' SticsRFiles:::get_options_choices(xml_path, "codetemp")
-#' SticsRFiles:::get_options_choices(xml_path, c("codegdh", "codetemp"))
+#' get_options_choices(xml_path, "codetemp")
+#' get_options_choices(xml_path, c("codegdh", "codetemp"))
 #' }
 #'
 #' @keywords internal

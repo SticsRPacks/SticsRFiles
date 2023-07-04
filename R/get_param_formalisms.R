@@ -13,11 +13,11 @@
 #'
 #' xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 #'
-#' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
+#' sta_doc <- xmldocument(xml_sta)
 #'
-#' par_form <- SticsRFiles:::get_param_formalisms(sta_doc, "zr")
+#' par_form <- get_param_formalisms(sta_doc, "zr")
 #'
-#' par_form_list <- SticsRFiles:::get_param_formalisms(sta_doc,
+#' par_form_list <- get_param_formalisms(sta_doc,
 #'                                                    c("zr", "altistation"))
 #' }
 #'

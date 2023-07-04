@@ -10,8 +10,8 @@
 #' \dontrun{
 #'
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
-#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
-#' node_set <- SticsRFiles:::get_nodes(sols_doc,
+#' sols_doc <- xmldocument(xml_path)
+#' node_set <- get_nodes(sols_doc,
 #'                                "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
 #' attr_list <- sapply(node_set, function(x) XML::xmlAttrs(x))
 #'
@@ -27,7 +27,7 @@
 #' #> format        max        min        nom
 #' #> "real"      "2.0"      "0.0" "mulchbat"
 #'
-#' SticsRFiles:::attributes_list2matrix(attr_list)
+#' attributes_list2matrix(attr_list)
 #'
 #' #>      nom        format max   min
 #' #> [1,] "solcanne" NA     NA    NA

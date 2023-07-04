@@ -5,7 +5,7 @@ xml_plt <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 xsl_file <- file.path(get_examples_path(file_type = "xsl"), "xml2txt.xsl")
 out_dir <- file.path(tempdir(), "Test_Convert")
 if (!dir.exists(out_dir)) dir.create(out_dir)
-SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt,
+convert_xml2txt_int(xml_file = xml_plt,
                                   style_file = xsl_file,
                                   file.path(out_dir,"ficplt.txt"))
 

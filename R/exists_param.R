@@ -12,10 +12,10 @@
 #' @examples
 #' xml_sols <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #'
-#' xml_doc <- SticsRFiles:::xmldocument(xml_sols)
+#' xml_doc <- xmldocument(xml_sols)
 #'
-#' SticsRFiles:::exists_param(xml_doc, "cfes")
-#' SticsRFiles:::exists_param(xml_doc, c("cfes", "mulchbat"))
+#' exists_param(xml_doc, "cfes")
+#' exists_param(xml_doc, c("cfes", "mulchbat"))
 #' @keywords internal
 #'
 #' @noRd

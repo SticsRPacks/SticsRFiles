@@ -16,19 +16,19 @@
 #' @examples
 #' \dontrun{
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
-#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
-#' SticsRFiles:::get_param_value(sols_doc, "argi")
-#' SticsRFiles:::get_param_value(sols_doc, c("argi", "norg"))
+#' sols_doc <- xmldocument(xml_path)
+#' get_param_value(sols_doc, "argi")
+#' get_param_value(sols_doc, c("argi", "norg"))
 #'
-#' SticsRFiles:::get_param_value(sols_doc, "argi",
+#' get_param_value(sols_doc, "argi",
 #'   parent_name = "sol", parent_sel_attr = "solcanne"
 #' )
 #'
-#' SticsRFiles:::get_param_value(sols_doc, c("argi", "norg"),
+#' get_param_value(sols_doc, c("argi", "norg"),
 #'   parent_name = "sol", parent_sel_attr = c("solcanne", "solbanane")
 #' )
 #'
-#' SticsRFiles:::get_param_value(list(sols_doc, sols_doc), c("argi", "norg"),
+#' get_param_value(list(sols_doc, sols_doc), c("argi", "norg"),
 #'   parent_name = "sol", parent_sel_attr = c("solcanne", "solbanane")
 #' )
 #' }

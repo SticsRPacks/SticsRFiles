@@ -84,7 +84,7 @@ get_stics_versions_compat <- function(version_index = NULL) {
 #' @examples
 #' \dontrun{
 #'
-#' SticsRFiles:::check_version_compat()
+#' check_version_compat()
 #' }
 check_version_compat <- function(stics_version = "latest") {
   versions <- get_stics_versions_compat()
@@ -117,7 +117,7 @@ check_version_compat <- function(stics_version = "latest") {
 #' @examples
 #' \dontrun{
 #'
-#' SticsRFiles:::get_versions_info()
+#' get_versions_info()
 #'
 #' get_versions_info(stics_version = "V8.5")
 #'
@@ -171,7 +171,7 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_version_num()
+#' get_version_num()
 #' }
 get_version_num <- function(stics_version = "latest", numeric = TRUE) {
   if (is.numeric(stics_version) && numeric) {
@@ -202,7 +202,7 @@ get_version_num <- function(stics_version = "latest", numeric = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_version_string()
+#' get_version_string()
 #' }
 get_version_string <- function(stics_version) {
   pattern <- "^[V | v]"
@@ -225,7 +225,7 @@ get_version_string <- function(stics_version) {
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_versions_file_name()
+#' get_versions_file_name()
 #' }
 get_versions_file_name <- function() {
   return("stics_versions_info.csv")

@@ -22,7 +22,7 @@
 #' )
 #' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' tec_param_df <- read_excel(xl_path, sheet = "Tec")
-#' tec_doc <- SticsRFiles:::gen_tec_doc(param_table = tec_param_df)
+#' tec_doc <- gen_tec_doc(param_table = tec_param_df)
 #' }
 #'
 #' @keywords internal

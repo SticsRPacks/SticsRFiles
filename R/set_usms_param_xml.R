@@ -8,7 +8,7 @@
 #' @examples
 #' \dontrun{
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
-#' usms_doc <- SticsRFiles:::xmldocument(xml_path)
+#' usms_doc <- xmldocument(xml_path)
 #'
 #' xl_path <- file.path(get_examples_path(file_type = "xl"),
 #'                      "inputs_stics_example.xlsx")
@@ -16,21 +16,21 @@
 #'
 #' # For updating an existing xml doc (using existing usms names)
 #' # Creating a fake existing_doc
-#' existing_doc <- SticsRFiles:::gen_usms_sols_doc("usms", nodes_nb = 3)
-#' SticsRFiles:::set_param_value(existing_doc,
+#' existing_doc <- gen_usms_sols_doc("usms", nodes_nb = 3)
+#' set_param_value(existing_doc,
 #'   param_name = "usm",
 #'   param_value = usms_df$usm_nom[c(3, 1, 5)]
 #' )
 #'
-#' SticsRFiles:::set_usms_param_xml(existing_doc, usms_df)
+#' set_usms_param_xml(existing_doc, usms_df)
 #'
 #'
 #' # For a new xml doc
 #' # In that case: usms_df must contain all the usms parameters !
 #' usms_nb <- dim(usms_df)[1]
-#' new_doc <- SticsRFiles:::gen_usms_sols_doc("usms", nodes_nb = usms_nb)
+#' new_doc <- gen_usms_sols_doc("usms", nodes_nb = usms_nb)
 #'
-#' SticsRFiles:::set_usms_param_xml(new_doc, usms_df, overwrite = TRUE)
+#' set_usms_param_xml(new_doc, usms_df, overwrite = TRUE)
 #' }
 #'
 #' @keywords internal

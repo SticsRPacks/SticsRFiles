@@ -9,7 +9,7 @@
 #' \dontrun{
 #'
 #' ws <- "path/to/stics/workspace"
-#' SticsRFiles:::set_codoptim(workspace = ws, value = 0)
+#' set_codoptim(workspace = ws, value = 0)
 #' }
 #'
 #' @keywords internal

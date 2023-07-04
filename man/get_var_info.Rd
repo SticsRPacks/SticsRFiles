@@ -51,6 +51,3 @@ SticsRFiles::get_var_info("lai", stics_version = "V9.0")
 }
 
 }
-\seealso{
-\code{\link{all_out_var}}
-}

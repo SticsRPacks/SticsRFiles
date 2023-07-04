@@ -70,7 +70,6 @@ all_out_var <- function(stics_version = "latest") {
 #' @return A data.frame with information about variable(s) with columns
 #'        `name`, `definition`, `unit`, `type`
 #'
-#' @seealso \code{\link{all_out_var}}
 #'
 #' @examples
 #' \dontrun{

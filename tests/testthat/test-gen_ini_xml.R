@@ -3,7 +3,7 @@ library(dplyr)
 
 stics_version <- get_stics_versions_compat()$latest_version
 
-if (SticsRFiles:::get_version_num(stics_version = stics_version)
+if (get_version_num(stics_version = stics_version)
 >= 10) {
   stics_version <- "V10.0"
 }

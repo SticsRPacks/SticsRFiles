@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' col_names <- c("var1", "var2_n", "var3.1.")
-#' valid_names <- SticsRFiles:::col_names_to_var(col_names)
+#' valid_names <- col_names_to_var(col_names)
 #' @keywords internal
 #'
 #' @noRd

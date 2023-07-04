@@ -29,7 +29,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' obs_table <- SticsRFiles:::get_obs_txt()
+#' obs_table <- get_obs_txt()
 #' }
 #'
 #' @keywords internal

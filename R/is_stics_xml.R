@@ -1,6 +1,5 @@
-#' Is it a STICS xml file
-#'
-#' @description Test if an XML file is a STICS one.
+#' Evaluate if the content of an XML file
+#' corresponds to a STICS file
 #'
 #' @param xml_path An xml file path
 #' @param file_type The type of the xml file
@@ -12,7 +11,7 @@
 #' @examples
 #' \dontrun{
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
-#' SticsRFiles:::is_stics_xml(xml_path)
+#' is_stics_xml(xml_path)
 #' }
 #'
 #' @keywords internal
@@ -29,42 +28,42 @@ is_stics_xml <- function(xml_path, file_type = NULL) {
   return(is_stics_doc(xml_doc, doc_type = file_type))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_ini_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "initialisations"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_usms_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "usms"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_sols_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "sols"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_tec_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "fichiertec"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_sta_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "fichiersta"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_plt_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "fichierplt"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_par_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "fichierpar"))
 }
 
-#' @rdname is_stics_xml
+# @rdname is_stics_xml
 is_newpar_xml <- function(xml_path) {
   return(is_stics_xml(xml_path, "fichierparamgen"))
 }

@@ -12,14 +12,14 @@
 #' \dontrun{
 #' # A newly created one, with one or more usms and
 #' # fake parameters values
-#' xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms")
-#' xml_doc <- SticsRFiles:::gen_xml_doc(doc_type = "usms", node_nb = 3)
+#' xml_doc <- gen_xml_doc(doc_type = "usms")
+#' xml_doc <- gen_xml_doc(doc_type = "usms", node_nb = 3)
 #'
 #' # With changing parameters values, from an existing document
 #' # and a data.frame contaning usms parameters values
-#' existing_doc <- SticsRFiles:::xmldocument("/path/to/usms.xml")
+#' existing_doc <- xmldocument("/path/to/usms.xml")
 #'
-#' out_xml_doc <- SticsRFiles:::gen_xml_doc(
+#' out_xml_doc <- gen_xml_doc(
 #'   doc_type = "usms",
 #'   xml_doc = existing_doc, nodes_param = param_data_frame
 #' )
