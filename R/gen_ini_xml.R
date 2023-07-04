@@ -51,21 +51,18 @@
 #' @return an invisible xml_document object or a list of
 #'
 #' @examples
-#' \dontrun{
 #' library(readxl)
 #'
-#' xl_path <- "inputs_stics_example.xlsx"
-#' download_usm_xl(file = xl_path)
+#' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
+#'
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' gen_ini_xml(
-#'   out_dir = "/path/to/dest/dir",
+#'   out_dir = tempdir(),
 #'   param_table = ini_param_df
 #' )
-#' }
 #'
 #' @export
 #'
-# TODO: refactor with gen_sta_file, gen_tec_file : same code
 gen_ini_xml <- function(param_df = NULL,
                         file = NULL,
                         out_dir = getwd(),

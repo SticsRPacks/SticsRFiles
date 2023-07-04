@@ -52,12 +52,10 @@
 #' @return an invisible xml_document object
 #'
 #' @examples
-#' \dontrun{
 #'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
 #' gen_sols_xml(file = "sols.xml", param_df = sols_param_df)
-#' }
 #'
 #' @export
 #'

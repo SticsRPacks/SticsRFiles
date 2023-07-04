@@ -37,13 +37,13 @@ None
 Upgrading a param_gen.xml file to a newer version
 }
 \details{
-See SticsRFiles::get_stics_versions_compat() for listing versions
+See get_stics_versions_compat() for listing versions
 }
 \examples{
-\dontrun{
+dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
+
 upgrade_param_gen_xml(
-  file = "/path/to/param_gen.xml",
-  out_dir = "/path/to/directory"
+  file = file.path(dir_path, "param_gen.xml"),
+  out_dir = tempdir()
 )
-}
 }

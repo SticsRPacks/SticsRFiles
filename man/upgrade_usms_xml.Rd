@@ -47,12 +47,13 @@ Upgrading a usms.xml file to a newer version
 See get_stics_versions_compat() for listing versions
 }
 \examples{
-\donttest{
+
+dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
+
 upgrade_usms_xml(
-  file = "/path/to/usms.xml",
-  out_dir = "/path/to/directory",
-  param_gen_file = "/path/to/param_gen.xml",
-  obs_dir = "/path/to/obs/directory"
+  file = file.path(dir_path,"usms.xml"),
+  out_dir = tempdir(),
+  param_gen_file = file.path(dir_path, "param_gen.xml")
 )
-}
+
 }

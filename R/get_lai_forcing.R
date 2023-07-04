@@ -12,14 +12,12 @@
 #' for each usm
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Xml case
 #' xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' get_lai_forcing(xml_usms)
 #' get_lai_forcing(xml_usms, "wheat")
 #' get_lai_forcing(xml_usms, c("wheat", "intercrop_pea_barley"))
-#' }
+#'
 #'
 #' @export
 #'
