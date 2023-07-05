@@ -14,6 +14,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_sol_xsl_file <- function(workspace, usm, stics_version = "latest") {
 
   # getting soil name
