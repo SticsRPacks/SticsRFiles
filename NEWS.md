@@ -1,4 +1,4 @@
-# SticsRFiles 1.1.3 _2023-06-29_
+# SticsRFiles 1.1.3 _2023-07-05_
 
 * FUNCTIONS
    * New function for generating the new_travail.usm STICS file
