@@ -99,7 +99,7 @@ Meas <- get_obs(path)
 # Get observations only for banana:
 Meas_banana <- get_obs(path, "banana")
 
-\donttest{
+\dontrun{
 # Get observations with real plant names when plant
 # folder is not in the workspace:
 get_obs(path, "banana", javastics = "/path/to/JavaSTICS/folder")

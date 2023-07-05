@@ -25,7 +25,7 @@
 #' - Weather data and observations files are fully copied to `out_dir`
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' upgrade_workspace_xml(
 #'   workspace = "/path/to/JavaSTICS/workspace",
 #'   javastics = "/path/to/JavaSTICS/folder",

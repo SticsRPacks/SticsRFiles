@@ -77,7 +77,7 @@ For one usm, files will be generated either in the workspace directory
 or in a subdirectory.
 }
 \examples{
-\donttest{
+\dontrun{
 javastics <- "/path/to/JavaSTICS/folder"
 workspace <- "/path/to/workspace"
 
@@ -88,8 +88,6 @@ gen_usms_xml2txt(javastics, workspace)
 usm <- c("usm1", "usm2")
 gen_usms_xml2txt(javastics, workspace, usm)
 
-# For one usm
-gen_usms_xml2txt(javastics, workspace, dir_per_usm_flag = FALSE, "usm1")
 }
 
 }

@@ -55,7 +55,7 @@ parameter and formalism may be both set or only one of them, but
 none of them can be if keyword argument is used.
 }
 \examples{
-\donttest{
+\dontrun{
 get_param_info(param = "albedo")
 get_param_info(param = "albedo", file = "/path/to/file.xml")
 

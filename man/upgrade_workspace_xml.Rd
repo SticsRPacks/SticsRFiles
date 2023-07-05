@@ -53,7 +53,7 @@ to the target model version.
 }
 }
 \examples{
-\donttest{
+\dontrun{
 upgrade_workspace_xml(
   workspace = "/path/to/JavaSTICS/workspace",
   javastics = "/path/to/JavaSTICS/folder",

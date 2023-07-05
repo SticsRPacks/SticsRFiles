@@ -46,11 +46,11 @@ will be used). If values==NA or values==NULL,
 not any parameter will be forced (all default values used).
 }
 \examples{
-\donttest{
+\dontrun{
 example_txt_dir <- get_examples_path(file_type = "txt")
 force_param_values(example_txt_dir,
   setNames(object = c(220, 330), c("stlevamf", "stamflax")),
-  javastics = tempdir()
+  javastics = "/path/to/javastics"
 )
 }
 
