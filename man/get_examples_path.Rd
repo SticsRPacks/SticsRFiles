@@ -7,6 +7,7 @@
 get_examples_path(
   file_type,
   stics_version = "latest",
+  overwrite = FALSE,
   version_name = lifecycle::deprecated()
 )
 }
@@ -16,6 +17,8 @@ get_examples_path(
 
 \item{stics_version}{Name of the STICS version. Optional, by default
 the latest version returned by \code{get_stics_versions_compat()} is used.}
+
+\item{overwrite}{TRUE for overwriting directory; FALSE otherwise}
 
 \item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no
 longer supported, use \code{stics_version} instead.}
