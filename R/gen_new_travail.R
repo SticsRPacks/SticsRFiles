@@ -115,6 +115,11 @@ get_usm_data <- function(workspace,
   # data$fclim2
 
   # nbans
+  if (data$culturean > 1)
+    stop("The value of 'culturean' is not correct: ", data$culturean,
+         paste0(".\nAllowed values: either 0 for a crop cycle over 2 years or",
+                "1 for a cycle within a year."))
+
   data$nbans <- 2 - data$culturean
 
 
