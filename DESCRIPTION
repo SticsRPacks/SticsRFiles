@@ -27,7 +27,7 @@ Description: Manipulating input and output files of the 'STICS' crop
     or writing parameter names and values in both XML or text input files,
     and getting data from output files.  Advanced functionalities include
     XML files generation from XML templates and/or spreadsheets, or text
-    files generation from XML files by using xslt transformation.
+    files generation from XML files by using 'xslt' transformation.
 License: LGPL (>= 3)
 URL: https://github.com/SticsRPacks/SticsRFiles,
     https://doi.org/10.5281/zenodo.4443206

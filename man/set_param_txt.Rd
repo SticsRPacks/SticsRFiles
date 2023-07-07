@@ -13,7 +13,7 @@
 \title{Set (replace) STICS input file parameters}
 \usage{
 set_param_txt(
-  workspace = getwd(),
+  workspace,
   param,
   value,
   append = FALSE,

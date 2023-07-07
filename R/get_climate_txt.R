@@ -28,7 +28,7 @@
 #'
 #' @export
 #'
-get_climate_txt <- function(workspace = getwd(),
+get_climate_txt <- function(workspace,
                             file_name = "climat.txt",
                             preserve = TRUE,
                             dirpath = lifecycle::deprecated(),

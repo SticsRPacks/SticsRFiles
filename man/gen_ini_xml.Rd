@@ -5,9 +5,9 @@
 \title{Generate STICS ini xml file(s) from a template or an input file}
 \usage{
 gen_ini_xml(
-  param_df = NULL,
+  param_df,
   file = NULL,
-  out_dir = getwd(),
+  out_dir,
   crop_tag = "Crop",
   stics_version = "latest",
   ini_in_file = lifecycle::deprecated(),

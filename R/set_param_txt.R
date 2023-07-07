@@ -72,7 +72,7 @@
 #'              param = "cailloux", layer = 2, value = 1)
 #'
 #'
-set_param_txt <- function(workspace = getwd(),
+set_param_txt <- function(workspace,
                           param,
                           value,
                           append = FALSE,

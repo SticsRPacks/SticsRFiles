@@ -63,8 +63,8 @@
 #'
 #'
 #'
-gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
-                         param_df = NULL,
+gen_sols_xml <- function(file,
+                         param_df,
                          template = NULL,
                          stics_version = "latest",
                          sols_in_file = lifecycle::deprecated(),
@@ -110,11 +110,6 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
   }
 
   xml_doc <- NULL
-
-  # Fix : default output file path if not provided
-  if (base::is.null(sols_out_file)) {
-    sols_out_file <- file.path(getwd(), "sols.xml")
-  }
 
   if (!base::is.null(sols_in_file)) {
     xml_doc <- xmldocument(sols_in_file)

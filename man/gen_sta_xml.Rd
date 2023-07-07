@@ -5,9 +5,9 @@
 \title{Generate STICS sta xml file(s) from a template or an input file}
 \usage{
 gen_sta_xml(
-  param_df = NULL,
+  param_df,
   file = NULL,
-  out_dir = getwd(),
+  out_dir,
   stics_version = "latest",
   param_table = lifecycle::deprecated(),
   sta_in_file = lifecycle::deprecated(),

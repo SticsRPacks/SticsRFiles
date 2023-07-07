@@ -59,7 +59,7 @@
 
 gen_tec_xml <- function(param_df = NULL,
                         file = NULL,
-                        out_dir = getwd(),
+                        out_dir,
                         stics_version = "latest",
                         na_values = NA,
                         param_table = lifecycle::deprecated(),

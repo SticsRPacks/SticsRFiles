@@ -23,7 +23,7 @@
 static_help <- function(pkg,
                         links_level = 0,
                         topic = NULL,
-                        out_dir = getwd(),
+                        out_dir,
                         overwrite = TRUE) {
   if (!dir.exists(out_dir)) dir.create(out_dir)
 

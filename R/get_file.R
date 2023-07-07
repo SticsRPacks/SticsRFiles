@@ -117,7 +117,7 @@ get_file <- function(workspace,
 #'
 #' @noRd
 #'
-get_file_ <- function(workspace = getwd(),
+get_file_ <- function(workspace,
                       usm_name = NULL,
                       usms_filepath = NULL,
                       var_list = NULL,

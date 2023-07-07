@@ -5,7 +5,7 @@
 \title{Read STICS input meteorology file}
 \usage{
 get_climate_txt(
-  workspace = getwd(),
+  workspace,
   file_name = "climat.txt",
   preserve = TRUE,
   dirpath = lifecycle::deprecated(),

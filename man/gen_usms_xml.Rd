@@ -5,7 +5,7 @@
 \title{Generate STICS usms xml file from a template or an input file}
 \usage{
 gen_usms_xml(
-  file = file.path(getwd(), "usms.xml"),
+  file,
   param_df = NULL,
   template = NULL,
   stics_version = "latest",
@@ -16,8 +16,7 @@ gen_usms_xml(
 )
 }
 \arguments{
-\item{file}{Path (including name) of the usms file to generate. Optional,
-set to \code{file.path(getwd(), "usms.xml")}by default.}
+\item{file}{Path (including name) of the usms file to generate.}
 
 \item{param_df}{A table (df, tibble) containing the values of the parameters
 to use (see details)}

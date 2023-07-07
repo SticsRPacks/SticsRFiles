@@ -13,7 +13,7 @@
 \title{Read STICS input parameters from text files}
 \usage{
 get_param_txt(
-  workspace = getwd(),
+  workspace,
   param = NULL,
   variety = NULL,
   exact = FALSE,

@@ -20,22 +20,24 @@
 
 gen_new_travail <- function(workspace,
                             usm,
-                            lai_forcing = 0,
-                            codesuite = 0,
-                            codoptim = 0,
-                            out_dir = getwd()) {
+                            lai_forcing = NULL,
+                            codesuite = NULL,
+                            codoptim = NULL,
+                            out_dir = NULL) {
 
   usm_data <- get_usm_data(workspace,
                            usm,
-                           lai_forcing = 0,
-                           codesuite = 0,
-                           codoptim = 0)
+                           lai_forcing = lai_forcing,
+                           codesuite = codesuite,
+                           codoptim = codoptim)
 
   data_order <- c("codesimul", "codoptim", "codesuite", "nbplantes", "nom",
                   "datedebut", "datefin", "finit", "numsol", "nomsol",
                   "fstation",
                   "fclim1", "fclim2", "nbans", "culturean", "fplt1",
                   "ftec1", "flai1", "fplt2", "ftec2", "flai2")
+
+  if (is.null(out_dir)) out_dir <- workspace
 
   out_file <- file.path(out_dir, "new_travail.usm")
 
@@ -54,9 +56,9 @@ gen_new_travail <- function(workspace,
 
 get_usm_data <- function(workspace,
                          usm,
-                         lai_forcing = 0,
-                         codesuite = 0,
-                         codoptim = 0) {
+                         lai_forcing = NULL,
+                         codesuite = NULL,
+                         codoptim = NULL) {
 
   data <- list()
 
@@ -65,13 +67,18 @@ get_usm_data <- function(workspace,
                         usm, select = "usm",
                         select_value = usm)$usms.xml
 
-  # codesimul
+  # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
-  data$codesimul <- get_codesimul(lai_forcing)
+  if(!is.null(lai_forcing) & lai_forcing %in% c(0,1))
+    data$codesimul <- get_codesimul(lai_forcing)
 
-  data$codoptim <- codoptim
+  # forcing codoptim
+  if(!is.null(codoptim) & codoptim %in% c(0,1))
+    data$codoptim <- codoptim
 
-  data$codesuite <- codesuite
+  # forcing codesuite
+  if(!is.null(codesuite) & codesuite %in% c(0,1))
+    data$codesuite <- codesuite
 
   # nbplantes
   #data$nbplantes
@@ -110,7 +117,7 @@ get_usm_data <- function(workspace,
   data$nbans <-
     as.numeric(strsplit(x = data$fclim2, split = ".", fixed = TRUE)[[1]][2]) -
     as.numeric(strsplit(x = data$fclim1, split = ".", fixed = TRUE)[[1]][2]) +
-    data$culturean
+    1
 
   # culturean
   # data$culturean

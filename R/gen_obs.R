@@ -41,7 +41,7 @@
 #' @export
 #'
 gen_obs <- function(df,
-                    out_dir = getwd(),
+                    out_dir,
                     usms_list = NULL,
                     obs_table = lifecycle::deprecated(),
                     out_path = lifecycle::deprecated()) {

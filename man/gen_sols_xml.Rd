@@ -5,8 +5,8 @@
 \title{Generate STICS sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
-  file = file.path(getwd(), "sols.xml"),
-  param_df = NULL,
+  file,
+  param_df,
   template = NULL,
   stics_version = "latest",
   sols_in_file = lifecycle::deprecated(),

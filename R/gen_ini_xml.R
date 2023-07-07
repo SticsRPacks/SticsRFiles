@@ -63,9 +63,9 @@
 #'
 #' @export
 #'
-gen_ini_xml <- function(param_df = NULL,
+gen_ini_xml <- function(param_df,
                         file = NULL,
-                        out_dir = getwd(),
+                        out_dir,
                         crop_tag = "Crop",
                         stics_version = "latest",
                         ini_in_file = lifecycle::deprecated(),

@@ -36,7 +36,9 @@
 #'
 #' @noRd
 #'
-get_obs_txt <- function(dirpath = getwd(), filename = NULL, mixed = NULL) {
+get_obs_txt <- function(dirpath,
+                        filename = NULL,
+                        mixed = NULL) {
   . <- NULL # to avoid CRAN note for pipe
   if (is.null(mixed)) {
     if (file.exists(file.path(dirpath, "new_travail.usm"))) {

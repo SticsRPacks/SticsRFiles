@@ -46,9 +46,9 @@
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_xml <- function(param_df = NULL,
+gen_sta_xml <- function(param_df,
                         file = NULL,
-                        out_dir = getwd(),
+                        out_dir,
                         stics_version = "latest",
                         param_table = lifecycle::deprecated(),
                         sta_in_file = lifecycle::deprecated(),

@@ -58,7 +58,7 @@
 #'
 #'
 #' @export
-get_param_txt <- function(workspace = getwd(),
+get_param_txt <- function(workspace,
                           param = NULL,
                           variety = NULL,
                           exact = FALSE,
