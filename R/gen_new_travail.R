@@ -12,23 +12,25 @@
 #' (containing parameters values to be forced), 0 otherwise
 #' @param out_dir Directory path where to store the `new_travail.usm` file.
 #'
-#' @return Nothing. Writes to a file.
+#' @return None
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 # @examples
 gen_new_travail <- function(workspace,
                             usm,
-                            lai_forcing = 0,
-                            codesuite = 0,
-                            codoptim = 0,
+                            lai_forcing = NULL,
+                            codesuite = NULL,
+                            codoptim = NULL,
                             out_dir = NULL) {
 
   usm_data <- get_usm_data(workspace,
                            usm,
-                           lai_forcing = 0,
-                           codesuite = 0,
-                           codoptim = 0)
+                           lai_forcing = lai_forcing,
+                           codesuite = codesuite,
+                           codoptim = codoptim)
 
   data_plt2 <- c()
   if (usm_data$nbplantes > 1)
@@ -62,11 +64,31 @@ gen_new_travail <- function(workspace,
 }
 
 
+#' Get information attached to a usm from usms.xml, and possibly change
+#' some forcing options
+#'
+#' @param workspace Path of the directory containing the usm XML files
+#' @param usm Usm name
+#' @param lai_forcing 1, if `lai` is to be read from a daily lai, 0 otherwise
+#' input file.
+#' @param codesuite 1, if the usm is to be chained with the previous
+#' simulated (for getting system state variables), 0 otherwise
+#' input file.
+#' @param codoptim 1, if parameters are to be read from a `param.sti` file
+#' (containing parameters values to be forced), 0 otherwise
+#'
+#' @return a named list
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
+#'
 get_usm_data <- function(workspace,
                          usm,
-                         lai_forcing = 0,
-                         codesuite = 0,
-                         codoptim = 0) {
+                         lai_forcing = NULL,
+                         codesuite = NULL,
+                         codoptim = NULL) {
 
   data <- list()
 
@@ -75,13 +97,18 @@ get_usm_data <- function(workspace,
                         select = "usm",
                         select_value = usm)$usms.xml
 
-  # codesimul
+  # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
-  data$codesimul <- get_codesimul(lai_forcing)
+  if(!is.null(lai_forcing) & lai_forcing %in% c(0,1))
+    data$codesimul <- get_codesimul(lai_forcing)
 
-  data$codoptim <- codoptim
+  # forcing codoptim
+  if(!is.null(codoptim) & codoptim %in% c(0,1))
+    data$codoptim <- codoptim
 
-  data$codesuite <- codesuite
+  # forcing codesuite
+  if(!is.null(codesuite) & codesuite %in% c(0,1))
+    data$codesuite <- codesuite
 
   # nbplantes
   #data$nbplantes
@@ -114,14 +141,14 @@ get_usm_data <- function(workspace,
   # fclim2
   # data$fclim2
 
-  # nbans
+  # add constraint on culturean
   if (data$culturean > 1)
-    stop("The value of 'culturean' is not correct: ", data$culturean,
-         paste0(".\nAllowed values: either 0 for a crop cycle over 2 years or",
-                "1 for a cycle within a year."))
+    data$culturean <- 1
 
-  data$nbans <- 2 - data$culturean
-
+  # nbans
+  data$nbans <- get_years_number(
+    file.path(workspace,c(data$fclim1, data$fclim2))
+  )
 
   # culturean
   # data$culturean
@@ -151,6 +178,16 @@ get_usm_data <- function(workspace,
 }
 
 
+#' Getting the string indicating a forcing lai mode or not
+#'
+#' @param lai_forcing 0 for forcing mode, 0 otherwise
+#'
+#' @return a string, either "culture" or "feuille"
+
+#' @keywords internal
+#'
+#' @noRd
+#'
 get_codesimul <- function(lai_forcing = 0) {
 
   if (lai_forcing == 0) return("culture")
@@ -160,4 +197,63 @@ get_codesimul <- function(lai_forcing = 0) {
   stop("Error on lai forcing value: ",
        lai_forcing,
        "\nmIt must be 0 or 1 !")
+}
+
+
+#' Calculating simulation years number
+#'
+#' @param clim_path character vector of 2 weather data files
+#' for the first and the last year
+#'
+#' @return years number
+
+#' @keywords internal
+#'
+#' @noRd
+#'
+
+get_years_number <- function(clim_path) {
+
+  year1 <- get_year(clim_path = clim_path[1])
+
+  if(clim_path[1] == clim_path[2]) {
+    year2 <- year1
+  } else {
+    year2 <- get_year(clim_path = clim_path[2])
+  }
+
+  if(any(is.na(c(year1, year2))))
+    stop(
+      "Impossible to calculate the number of years from weather data files !"
+      )
+
+  return(year2 - year1 + 1)
+
+}
+
+#' Get weather data file year
+#'
+#' @param clim_path path of a weather data file
+#'
+#' @return a year (numeric)
+
+#' @keywords internal
+#'
+#' @noRd
+#'
+
+get_year <- function(clim_path) {
+
+  if(!file.exists(clim_path)) stop()
+
+  str <- strsplit(
+    trimws(readLines(con = clim_path, n = 1)),
+    split = " ")[[1]][2]
+
+  ret <- try(as.numeric(str))
+
+  if (methods::is(ret, "try-error")) {
+    return(invisible(NA))
+  }
+
 }
