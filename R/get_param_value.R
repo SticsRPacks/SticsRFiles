@@ -126,7 +126,7 @@ get_param_value <- function(xml_doc,
   value <- NULL
 
   if (show_xpath) {
-    print(xpath)
+    message(xpath)
   }
 
   if (base::is.null(xpath)) {

@@ -125,10 +125,10 @@ gen_ini_xml <- function(param_df,
   out_idx <- unlist(lapply(xml_docs, base::is.null))
 
   if (any(out_idx)) {
-    cat("\n")
-    cat(paste0("Errors have been detected while trying to replace",
-               " parameters values in xml documents\n"))
-    cat(paste(sum(!out_idx), "files have been generated !\n"))
+    message("\nErrors have been detected while trying to replace",
+            "parameters values in xml documents",
+            paste(sum(!out_idx), "files have been generated !"),
+            appendLF = TRUE)
     # selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
   }

@@ -191,7 +191,7 @@ add_stics_version <- function(version_name,
   )
 
   if (verbose)
-    cat(paste0(version_name,
+    message(paste0(version_name,
                " successfully set in SticsRFiles ",
                location,
                ".\n"))

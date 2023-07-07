@@ -38,7 +38,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
 
   # If not any arguments : displaying files types list
   if (missing(file_type)) {
-    cat("Available files types: ", paste(get_examples_types(), collapse = ","))
+    message("Available files types: ", paste(get_examples_types(), collapse = ","))
     return(invisible())
   }
 

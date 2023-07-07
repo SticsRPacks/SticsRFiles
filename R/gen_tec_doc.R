@@ -188,20 +188,15 @@ gen_tec_doc <- function(xml_doc = NULL,
           xpath_node
         )[[1]])) == "formalisme") {
           gen_error <- TRUE
-          cat(paste(
+          message(paste(
             "The parameter", par_name,
             "is unique in the original xml file,",
             "and not attached to \"intervention\"\n"
           ))
-          cat(paste0("Multiple values are present in input table,",
+          message(paste0("Multiple values are present in input table,",
                      " check consistency with formalism definition !\n"))
-          cat("The treatment for this parameter is aborted.")
-          cat("\n")
+          message("The treatment for this parameter has aborted.\n")
           next
-        }
-
-        if (par_name == "engrais") {
-          print("ok for multiple engrais !")
         }
 
         # Removing existing nodes, for creating new set of
@@ -229,7 +224,7 @@ gen_tec_doc <- function(xml_doc = NULL,
       par_form <- get_param_formalisms(xml_doc = xml_doc, par_name)
 
       if (base::is.null(par_form)) {
-        print(paste("Error: formalism for:", par_name))
+        message(paste("Error: formalism for:", par_name))
       }
 
       # General case, linked to formalisms

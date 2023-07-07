@@ -115,7 +115,7 @@ set_param_value <- function(xml_doc,
   xpath <- param_type$xpath
 
   if (show_xpath) {
-    print(xpath)
+    message(xpath)
   }
 
 

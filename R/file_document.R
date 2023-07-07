@@ -157,7 +157,7 @@ setMethod("exist", signature(object = "file_document"),
               }
             }
             if (!ret & message) {
-              print(paste0("   File doesn't exist: ", p))
+              message(paste0("   File doesn't exist: ", p))
             }
             return(ret)
           }
@@ -184,7 +184,7 @@ setMethod("create", signature(object = "file_document"),
                 dir.create(p)
               }
             } else {
-              print(paste0("   File already exists : ", p))
+              warning(paste0("   File already exists : ", p))
             }
           }
 )

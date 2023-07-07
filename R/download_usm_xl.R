@@ -108,7 +108,7 @@ download_usm_xl <- function(file = NULL,
 
   if (any(success)) {
     if (verbose)
-      cat(paste(files_list[success],
+      message(paste(files_list[success],
                   " has been copied in directory ",
                   dest_dir))
     dest_list <- dest_list[success]

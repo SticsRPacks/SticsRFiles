@@ -88,7 +88,7 @@ get_params_from_table <- function(params_table,
     if (stopping) {
       stop(message_str)
     } else {
-      cat(message_str)
+      message(message_str)
     }
 
     # removing unknown param columns

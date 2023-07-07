@@ -50,7 +50,7 @@ remove_node_from_doc <- function(xml_doc, param_name,
 
   # if the type does not exist
   if (base::is.null(xpath_node)) {
-    print(paste("Unknown parameter in xml doc: ", param_name))
+    message(paste("Unknown parameter in xml doc: ", param_name))
     return(invisible())
   }
 
@@ -65,7 +65,7 @@ remove_node_from_doc <- function(xml_doc, param_name,
   }
 
   if (base::is.null(xml_nodes)) {
-    print("No nodes to remove from xml doc !")
+    message("No nodes to remove from xml doc !")
     return(invisible())
   }
 
