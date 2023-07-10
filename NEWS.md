@@ -1,7 +1,9 @@
-# SticsRFiles 1.1.3 _2023-05-23_
+# SticsRFiles 1.1.3 _2023-06-29_
 
 * FUNCTIONS
    * New function for generating the new_travail.usm STICS file
+   * New function for generating wheather data file (climat.txt)
+   * New unit tests added
 
 * FIXES:
    * get_param_value: forcing to get a character returned value
