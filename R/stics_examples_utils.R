@@ -38,7 +38,8 @@ get_examples_path <- function(file_type, stics_version = "latest",
 
   # If not any arguments : displaying files types list
   if (missing(file_type)) {
-    message("Available files types: ", paste(get_examples_types(), collapse = ","))
+    message("Available files types: ",
+            paste(get_examples_types(), collapse = ","))
     return(invisible())
   }
 
@@ -141,9 +142,9 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
                             winslash = "/",
                             mustWork = FALSE)
 
-  if (dir.exists(dir_path) & !overwrite) return(dir_path)
+  if (dir.exists(dir_path) && !overwrite) return(dir_path)
 
-  if(overwrite)
+  if (overwrite)
     unlink(x = dir_path, recursive = TRUE)
 
   zip_path <- file.path(ex_path, paste0(files_type, ".zip"))

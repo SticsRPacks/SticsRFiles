@@ -69,15 +69,15 @@ get_usm_data <- function(workspace,
 
   # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
-  if(!is.null(lai_forcing) & lai_forcing %in% c(0,1))
+  if (!is.null(lai_forcing) && lai_forcing %in% c(0, 1))
     data$codesimul <- get_codesimul(lai_forcing)
 
   # forcing codoptim
-  if(!is.null(codoptim) & codoptim %in% c(0,1))
+  if (!is.null(codoptim) && codoptim %in% c(0, 1))
     data$codoptim <- codoptim
 
   # forcing codesuite
-  if(!is.null(codesuite) & codesuite %in% c(0,1))
+  if (!is.null(codesuite) && codesuite %in% c(0, 1))
     data$codesuite <- codesuite
 
   # nbplantes
