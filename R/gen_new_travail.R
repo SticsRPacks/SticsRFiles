@@ -142,8 +142,8 @@ get_usm_data <- function(workspace,
   # data$fclim2
 
   # add constraint on culturean
-  if (data$culturean > 1)
-    data$culturean <- 1
+  if (data$culturean != 1)
+    data$culturean <- 0
 
   # nbans
   data$nbans <- get_years_number(
