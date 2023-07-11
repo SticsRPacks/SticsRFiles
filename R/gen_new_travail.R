@@ -95,32 +95,36 @@ get_usm_data <- function(workspace,
 
   data <- get_param_xml(file = file.path(workspace, "usms.xml"),
                         select = "usm",
-                        select_value = usm)$usms.xml
+                        select_value = usm,
+                        to_num = FALSE)$usms.xml
 
   # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
+  data$codesimul <- as.numeric(data$codesimul)
   if(!is.null(lai_forcing) && lai_forcing %in% c(0,1))
     data$codesimul <- get_codesimul(lai_forcing)
 
   # forcing codoptim
+  data$codoptim <- 0
   if(!is.null(codoptim) && codoptim %in% c(0,1))
     data$codoptim <- codoptim
 
+  data$codesuite <- 0
   # forcing codesuite
   if(!is.null(codesuite) && codesuite %in% c(0,1))
     data$codesuite <- codesuite
 
   # nbplantes
-  #data$nbplantes
+  data$nbplantes <- as.numeric(data$nbplantes)
 
   # nom
   data$nom <- usm
 
   # debut
-  # data$datedebut
+  data$datedebut <- as.numeric(data$datedebut)
 
   # fin
-  # data$datefin
+  data$datefin <- as.numeric(data$datefin)
 
   # init
   # data$finit
@@ -142,6 +146,7 @@ get_usm_data <- function(workspace,
   # data$fclim2
 
   # add constraint on culturean
+  data$culturean <- as.numeric(data$culturean)
   if (data$culturean != 1)
     data$culturean <- 0
 
@@ -225,7 +230,7 @@ get_years_number <- function(clim_path) {
   if(any(is.na(c(year1, year2))))
     stop(
       "Impossible to calculate the number of years from weather data files !"
-      )
+    )
 
   return(year2 - year1 + 1)
 
@@ -246,14 +251,17 @@ get_year <- function(clim_path) {
 
   if(!file.exists(clim_path)) stop()
 
-  str <- strsplit(
-    trimws(readLines(con = clim_path, n = 1)),
-    split = " ")[[1]][2]
+  line_str <- gsub(pattern = "\\t",
+                   x = trimws(readLines(con = clim_path, n = 1)),
+                   replacement = " ")
+  year_str <- strsplit(line_str, split = " ")[[1]][2]
 
-  ret <- try(as.numeric(str))
+  ret <- try(year <- as.numeric(year_str))
 
   if (methods::is(ret, "try-error")) {
     return(invisible(NA))
   }
+
+  return(year)
 
 }
