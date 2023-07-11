@@ -213,7 +213,7 @@ get_usms_files <- function(workspace,
         plt_path <- file.path(plt_dir_path[1], plt_files[p])
         plt_exist <- file.exists(plt_path)
 
-        if (!plt_exist & length(plt_dir_path) > 1) {
+        if (!plt_exist && length(plt_dir_path) > 1) {
           plt_path <- file.path(plt_dir_path[2], plt_files[p])
           plt_exist <- file.exists(plt_path)
         }
