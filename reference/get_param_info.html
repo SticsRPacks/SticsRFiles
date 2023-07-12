@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -35,16 +35,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from tabulated data</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -113,9 +113,10 @@ file names or part to which parameters are attached to)</p></dd>
 
 
 <dt>stics_version</dt>
-<dd><p>Name of the Stics version. Optional, can be used to search
-parameters information relative to a specific Stics version. By default the
-latest version returned by <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> is used.</p></dd>
+<dd><p>Name of the STICS version. Optional,
+can be used to search parameters information relative to a specific
+STICS version. By default the latest version returned
+by <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code> is used.</p></dd>
 
 
 <dt>file_path</dt>
@@ -149,15 +150,8 @@ none of them can be if keyword argument is used.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   name                 file            min   max formalism                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> albedomulchplastique file_tec.xml   0.05   0.8 special techniques             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> albedomulchresidus   param_gen.xml  0.05   0.8 Typology of pebbles fertiliser…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> albedo               sols.xml       0.05   0.6 none                           </span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span>, file <span class="op">=</span> <span class="st">"/path/to/file.xml"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_param_info</span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span>, formalism <span class="op">=</span> <span class="st">"special"</span><span class="op">)</span></span></span>

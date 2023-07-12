@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -35,16 +35,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from tabulated data</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -95,23 +95,57 @@
     <h2>Value</h2>
     
 
-<p>A named numeric vector with a Boolean value (<code>TRUE = forced</code>) for each usm</p>
+<p>A named numeric vector with a Boolean value (<code>TRUE = forced</code>)
+for each usm</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Use <code><a href="get_usms_list.html">get_usms_list()</a></code> to get the list of the usm names for an usms.xml file.</p>
+    <p>Use <code><a href="get_usms_list.html">get_usms_list()</a></code> to get the list of the usm names for an
+usms.xml file.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Xml case</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Xml case</span></span></span>
 <span class="r-in"><span><span class="va">xml_usms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span>file_type <span class="op">=</span> <span class="st">"xml"</span><span class="op">)</span>, <span class="st">"usms.xml"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">get_lai_forcing</span><span class="op">(</span><span class="va">xml_usms</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            SugarCane               potato               banana </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              sorghum            sugarbeet                wheat </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                maize              soybean              lettuce </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               tomato           DurumWheat             rapeseed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            sunflower                grass             BareSoil </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          demo_Wheat1       demo_BareSoil2          demo_maize3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    DurumWheat_4years         maize_4years           strawberry </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 vine               fescue                 flax </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> intercrop_pea_barley              timothy      DurumWheat_snow </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             Turmeric        cc_BristleOat           cc_mustard </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cc_ItalianRyegrass             cc_vetch     cc_CrimsonClover </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           proto_rice      Miscanthus_2006      Miscanthus_2007 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Miscanthus_2008      Miscanthus_2009      Miscanthus_2010 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Miscanthus_2011      Miscanthus_2012      Miscanthus_2013 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE                FALSE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Miscanthus_2014      Miscanthus_2015 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE </span>
 <span class="r-in"><span><span class="fu">get_lai_forcing</span><span class="op">(</span><span class="va">xml_usms</span>, <span class="st">"wheat"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wheat </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FALSE </span>
 <span class="r-in"><span><span class="fu">get_lai_forcing</span><span class="op">(</span><span class="va">xml_usms</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wheat"</span>, <span class="st">"intercrop_pea_barley"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                wheat intercrop_pea_barley </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                FALSE                FALSE </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

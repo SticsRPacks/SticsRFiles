@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -35,16 +35,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from tabulated data</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -73,16 +73,50 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.1" id="sticsrfiles-111-2022-12-08">SticsRFiles 1.1.1 (2022-12-08)<a class="anchor" aria-label="anchor" href="#sticsrfiles-111-2022-12-08"></a></h2>
+<h2 class="page-header" data-toc-text="1.1.3" id="sticsrfiles-113-2023-07-10">SticsRFiles 1.1.3 <em>2023-07-10</em>
+<small>2023-07-11</small><a class="anchor" aria-label="anchor" href="#sticsrfiles-113-2023-07-10"></a></h2>
 <ul><li>FUNCTIONS
-<ul><li>Changes in plant files upgrading function according to a fix done in JavaSTICS 1.5.1 for plant files (without any impact on R packages functionning)</li>
+<ul><li>New function for generating the new_travail.usm STICS file</li>
+<li>New function for generating weather data files (climat.txt)</li>
+<li>New unit tests added</li>
+</ul></li>
+<li>FIXES:
+<ul><li>get_param_value: forcing to get a character returned value</li>
+<li>get_var_info: for variables names vector</li>
+<li>get_param_txt: removed global variables use, looking for parameters names including parentheses</li>
+<li>code formatting, comments, file names, variables names, function names,…</li>
+<li>package namespace use in packages functions calls</li>
+<li>pattern for replacing parameters names were are not consistent between XML files and inputs.csv</li>
+<li>pattern for selecting parameters in Excel files, filtering parameter starting with “code_”</li>
+<li>renaming plant initialisation parameters according to crop number tag (Crop1, Crop2)</li>
+<li>tidyselect and filter syntax</li>
+<li>homogenous naming of JavaSTICS and STICS</li>
+</ul></li>
+<li>DATA
+<ul><li>added: meta-data and xsl files for converting XML files to text files for STICS</li>
+<li>examples files for different files format used in the package are now distributed as zip files for lightening the extdata directory</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.2" id="sticsrfiles-112-2022-12-16">SticsRFiles 1.1.2 <em>2022-12-16</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-112-2022-12-16"></a></h2>
+<ul><li>FIX:
+<ul><li>Fix for cff file generation using a GitHub action</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.1" id="sticsrfiles-111-2022-12-08">SticsRFiles 1.1.1 <em>2022-12-08</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-111-2022-12-08"></a></h2>
+<ul><li>FUNCTIONS
+<ul><li>Changes in plant files upgrading function according to a fix done in JavaSTICS 1.5.1 for plant files (without any impact on R packages functioning)</li>
 </ul></li>
 <li>FIXES:
 <ul><li>Little compatibility fix in STICS plant files upgrading function</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.0" id="sticsrfiles-110-2022-10-28">SticsRFiles 1.1.0 (2022-10-28)<a class="anchor" aria-label="anchor" href="#sticsrfiles-110-2022-10-28"></a></h2>
+<h2 class="page-header" data-toc-text="1.1.0" id="sticsrfiles-110-2022-10-28">SticsRFiles 1.1.0 <em>2022-10-28</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-110-2022-10-28"></a></h2>
 <p>Following the changes done in the previous release 1.0.0, related to the adaptation to the new versions 10.0 of STICS and 1.5.0 of JavaSTICS.</p>
 <ul><li>FUNCTIONS:
 <ul><li>Completion of the upgrade function for converting plant files from STICS 9.x versions to the latest STICS version 10.0</li>
@@ -94,14 +128,15 @@
 </ul></li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.0.0" id="sticsrfiles-100-2022-07-22">SticsRFiles 1.0.0 (2022-07-22)<a class="anchor" aria-label="anchor" href="#sticsrfiles-100-2022-07-22"></a></h2>
+<h2 class="page-header" data-toc-text="1.0.0" id="sticsrfiles-100-2022-07-22">SticsRFiles 1.0.0 <em>2022-07-22</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-100-2022-07-22"></a></h2>
 <p>The main changes are mainly related to the adaptation to the new versions 10.0 of STICS<br>
 and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to fixes.</p>
 <ul><li>FUNCTIONS:
 <ul><li>New set of functions for upgrading XML files of STICS version 9.2 to STICS version 10.0 (either each kind of XML file or a whole workspace)</li>
 <li>Homogenization of arguments names in functions</li>
 <li>Some functions have been moved from the SticsOnR package into SticsRFiles</li>
-<li>Improvement of functions dedicated to java/JavaStics command line use, added checks</li>
+<li>Improvement of functions dedicated to java/JavaSTICS command line use, added checks</li>
 </ul></li>
 <li>FIXES:
 <ul><li>Extraction of vectorized parameters from _tec.xml and _ini.xml files</li>
@@ -129,7 +164,8 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 </ul></li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4.2" id="sticsrfiles-042-2021-10-07">SticsRFiles 0.4.2 (2021-10-07)<a class="anchor" aria-label="anchor" href="#sticsrfiles-042-2021-10-07"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.2" id="sticsrfiles-042-2021-10-07">SticsRFiles 0.4.2 <em>2021-10-07</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-042-2021-10-07"></a></h2>
 <ul><li><p>Prepared templates for STICS V10.</p></li>
 <li>
 <p>FIXES:</p>
@@ -144,7 +180,8 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 </ul></li>
 </ul></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.4.1" id="sticsrfiles-041-2021-07-02">SticsRFiles 0.4.1 (2021-07-02)<a class="anchor" aria-label="anchor" href="#sticsrfiles-041-2021-07-02"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.1" id="sticsrfiles-041-2021-07-02">SticsRFiles 0.4.1 <em>2021-07-02</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-041-2021-07-02"></a></h2>
 <div class="section level3">
 <h3 id="changes-0-4-1">Changes<a class="anchor" aria-label="anchor" href="#changes-0-4-1"></a></h3>
 <ul><li><p>FIX: force_param_values() did not work for parameters which names included parenthesis</p></li>
@@ -170,7 +207,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <li>
 <p>Files:</p>
 <ul><li>some useless files removed</li>
-<li>new Stics dirs added (needed by tests)</li>
+<li>new STICS dirs added (needed by tests)</li>
 <li>fix: example dirs names in inst</li>
 </ul></li>
 <li><p>Tutorial: minor fix for use-xml-files (working dir creation)</p></li>
@@ -178,14 +215,15 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <div class="section level3">
 <h3 id="specific-changes-0-4-0">Specific changes<a class="anchor" aria-label="anchor" href="#specific-changes-0-4-0"></a></h3>
 <ul><li><p>get_sim / get_obs / get_file / get_file_ refactoring added some controls now taking into account a usms file path in functions fixed issues related to intercrops data loading added data.frame columns detection for filtering data on dates</p></li>
-<li><p>functions for manipulating xml files taking into account a new kind of Stics parameter dependency (for plant and soil layers dependant parameters)</p></li>
+<li><p>functions for manipulating xml files taking into account a new kind of STICS parameter dependency (for plant and soil layers dependent parameters)</p></li>
 <li><p>set_param_txt: fix for setting values for varietal parameters</p></li>
 <li><p>gen_obs: fixes generating multiple files from a sheet generating files from a single observed variable</p></li>
 <li><p>gen_usms_xml2txt now compatible with lai forcing added optional argument for checking files now removing files before each files generation</p></li>
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.0" id="sticsrfiles-030-2021-04-15">SticsRFiles 0.3.0 (2021-04-15)<a class="anchor" aria-label="anchor" href="#sticsrfiles-030-2021-04-15"></a></h2>
+<h2 class="page-header" data-toc-text="0.3.0" id="sticsrfiles-030-2021-04-15">SticsRFiles 0.3.0 <em>2021-04-15</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-030-2021-04-15"></a></h2>
 <div class="section level3">
 <h3 id="general-changes-0-3-0">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-3-0"></a></h3>
 <ul><li>DESCRIPTION
@@ -214,7 +252,8 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.0" id="sticsrfiles-020-2021-01-15">SticsRFiles 0.2.0 (2021-01-15)<a class="anchor" aria-label="anchor" href="#sticsrfiles-020-2021-01-15"></a></h2>
+<h2 class="page-header" data-toc-text="0.2.0" id="sticsrfiles-020-2021-01-15">SticsRFiles 0.2.0 <em>2021-01-15</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-020-2021-01-15"></a></h2>
 <div class="section level3">
 <h3 id="general-changes-0-2-0">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-2-0"></a></h3>
 <ul><li>DESCRIPTION
@@ -225,7 +264,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 </ul></li>
 <li>README:
 <ul><li>Travis badge removed</li>
-<li>Github Actions R-CMD-check badge added</li>
+<li>GitHub Actions R-CMD-check badge added</li>
 </ul></li>
 <li>Functions:
 <ul><li>useless functions have been removed</li>
@@ -246,15 +285,15 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <li>Automatic testing:
 <ul><li>Github Actions added for checks</li>
 <li>Travis checks removed</li>
-<li>SticsRTest Travis tests triggering removed</li>
+<li>SticsRTests Travis tests triggering removed</li>
 </ul></li>
 </ul></div>
 <div class="section level3">
 <h3 id="specific-changes-0-2-0">Specific changes<a class="anchor" aria-label="anchor" href="#specific-changes-0-2-0"></a></h3>
 <ul><li><p>get_obs, get_daily_results: removed useless columns from return, simplification</p></li>
-<li><p>download_usm_xl, download_usm_csv: added verbose argument for masquing warnings/displays, added overwritting case</p></li>
+<li><p>download_usm_xl, download_usm_csv: added verbose argument for masking warnings/displays, added overwriting case</p></li>
 <li><p>read_params_table : new function for getting parameters tables either from csv files or excel files sheets</p></li>
-<li><p>get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for Stics version 8.5</p></li>
+<li><p>get_param_txt: added varieties management, earlier return when param is null, catching names ending with numerical indices, get varietal parameter, reading now parameters attached to several layers or fertilizations, added examples files for STICS version 8.5</p></li>
 <li><p>Manipulating_Stics_XML_files.Rmd: using XML file for the latest model version for displaying files fragments as examples</p></li>
 <li><p>get_stics_versions_compat, manage_stics_versions.R: added NA management in data</p></li>
 <li><p>get_file: added plant names in output (for obs and daily data), fixed issue and tests added for intercropping case</p></li>
@@ -269,9 +308,9 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <li><p>set_param_xml: output dir checking</p></li>
 <li><p>force_param_values: new function for forcing model parameters</p></li>
 <li><p>get_report_results: new function for extracting data from reports files</p></li>
-<li><p>get_param_info: added using of a specific XML file, attribute for Stics version, unique for parameters names list, building a filter before dplyr::filter</p></li>
-<li><p>functions added to manage Stics versions data</p></li>
-<li><p>get_obs, get_plant_name: using usms.xml file outside of a Stics workspace, parsing mixed crops, file checking,usms_list renamed as usm_name</p></li>
+<li><p>get_param_info: added using of a specific XML file, attribute for STICS version, unique for parameters names list, building a filter before dplyr::filter</p></li>
+<li><p>functions added to manage STICS versions data</p></li>
+<li><p>get_obs, get_plant_name: using usms.xml file outside of a STICS workspace, parsing mixed crops, file checking,usms_list renamed as usm_name</p></li>
 <li><p>gen_*_xml functions: fix for usms name column</p></li>
 <li><p>get_plant_name: getting now plant files list outside mapply call</p></li>
 <li><p>get_param_value: returns a named list even if only one parameter, fix for param_name nb &gt; 1, without parameters names in args;returned for each file</p></li>
@@ -283,8 +322,8 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <li><p>get_stics_versions_compat: all data as character, study_case_1 added</p></li>
 <li><p>gen_usms_obs: added usms_list</p></li>
 <li><p>All functions code and help now using the get_examples_path function</p></li>
-<li><p>get_examples_path: new function for getting files examples according to their type (txt, XML, csv,…) and embedded Stics versions data</p></li>
-<li><p>gen_varmod: forcing to add variable not in Stics output variables for a given version, now checks if a variable exists, dual variable syntax (i.e. lai_n or lai(n))</p></li>
+<li><p>get_examples_path: new function for getting files examples according to their type (txt, XML, csv,…) and embedded STICS versions data</p></li>
+<li><p>gen_varmod: forcing to add variable not in STICS output variables for a given version, now checks if a variable exists, dual variable syntax (i.e. lai_n or lai(n))</p></li>
 <li><p>set_param_txt: set value per soil layer, per variety</p></li>
 <li><p>get_usms_files: taking into account 2 plant files folders (but without duplicates checks), taking into account varieties management</p></li>
 <li><p>get_usms_list: returns now a character vector of usms names</p></li>
@@ -292,7 +331,8 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.1.0.9004" id="sticsrfiles-0109004-2020-02-03">SticsRFiles 0.1.0.9004 (2020-02-03)<a class="anchor" aria-label="anchor" href="#sticsrfiles-0109004-2020-02-03"></a></h2>
+<h2 class="page-header" data-toc-text="0.1.0.9004" id="sticsrfiles-0109004-2020-02-03">SticsRFiles 0.1.0.9004 <em>2020-02-03</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-0109004-2020-02-03"></a></h2>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul></div>
   </div>

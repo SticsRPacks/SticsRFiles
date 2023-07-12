@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -35,16 +35,16 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from tabulated data</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -99,11 +99,12 @@
 
 
 <dt>stics_version</dt>
-<dd><p>Name of the Stics version (VX.Y format)</p></dd>
+<dd><p>Name of the STICS version (VX.Y format)</p></dd>
 
 
 <dt>target_version</dt>
-<dd><p>Name of the Stics version to upgrade files to (VX.Y format)</p></dd>
+<dd><p>Name of the STICS version to upgrade files
+to (VX.Y format)</p></dd>
 
 
 <dt>check_version</dt>
@@ -117,19 +118,25 @@ allowed to the target_version</p></dd>
 TRUE for overwriting file if it exists, FALSE otherwise</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>None</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
-    <p>See SticsRFiles::get_stics_versions_compat() for listing versions</p>
+    <p>See get_stics_versions_compat() for listing versions</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dir_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span>file_type <span class="op">=</span> <span class="st">"xml"</span>, stics_version <span class="op">=</span> <span class="st">"V9.2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">upgrade_param_gen_xml</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  file <span class="op">=</span> <span class="st">"/path/to/param_gen.xml"</span>,</span></span>
-<span class="r-in"><span>  out_dir <span class="op">=</span> <span class="st">"/path/to/directory"</span></span></span>
+<span class="r-in"><span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">dir_path</span>, <span class="st">"param_gen.xml"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

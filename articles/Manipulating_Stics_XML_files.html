@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -53,16 +53,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from tabulated data</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -105,8 +105,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Learn SticsRFiles at: <span style="color: #0000BB; font-weight: bold; text-decoration: underline;">https://SticsRPacks.github.io/SticsRFiles</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -166,24 +165,24 @@ attribute <code>choix</code> of the option node. For example, the value
 of the parameter <code>codesymbiose</code> is <code>2</code> in the
 example (<em>choix=“2”</em>).</p></li>
 </ul>
-<pre><code><span><span class="co">#&gt;     &lt;formalisme nom="Water absorption and nitrogen content of the plant"&gt;</span></span>
-<span><span class="co">#&gt;     &lt;param format="real" max="2.0" min="1.0" nom="beta"&gt;1.40000&lt;/param&gt;</span></span>
-<span><span class="co">#&gt;         &lt;param format="real" max="1.0" min="0.2" nom="lvopt"&gt;0.50000&lt;/param&gt;</span></span>
-<span><span class="co">#&gt;         &lt;param format="real" max="0.1" min="0.01" nom="difN"&gt;0.04500&lt;/param&gt;</span></span>
-<span><span class="co">#&gt;         &lt;param format="real" max="30.0" min="5.0" nom="plNmin"&gt;10.00000&lt;/param&gt;</span></span>
-<span><span class="co">#&gt;         &lt;param format="real" max="50.0" min="0.0" nom="irrlev"&gt;20.00000&lt;/param&gt;</span></span>
-<span><span class="co">#&gt;         &lt;param format="real" max="50.0" min="0.0" nom="QNpltminINN"&gt;0.00000&lt;/param&gt;</span></span>
-<span><span class="co">#&gt;         &lt;option choix="2" nom="Nitrogen fixation by legumes" nomParam="codesymbiose"&gt;</span></span>
-<span><span class="co">#&gt;         &lt;choix code="1" nom="critical nitrogen"/&gt;</span></span>
-<span><span class="co">#&gt;             &lt;choix code="2" nom="nodule activity"&gt;</span></span>
-<span><span class="co">#&gt;             &lt;option choix="2" nom="mineral nitrogen inhibition" nomParam="codefxn"&gt;</span></span>
-<span><span class="co">#&gt;                 &lt;choix code="1" nom="no effect"/&gt;</span></span>
-<span><span class="co">#&gt;                     &lt;choix code="2" nom="nitrogen amount"/&gt;</span></span>
-<span><span class="co">#&gt;                     &lt;choix code="3" nom="nitrogen concentration"/&gt;</span></span>
-<span><span class="co">#&gt;                 &lt;/option&gt;</span></span>
-<span><span class="co">#&gt;             &lt;/choix&gt;</span></span>
-<span><span class="co">#&gt;         &lt;/option&gt;</span></span>
-<span><span class="co">#&gt;     &lt;/formalisme&gt;</span></span></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">formalisme</span><span class="ot"> nom=</span><span class="st">"Water absorption and nitrogen content of the plant"</span>&gt;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2.0"</span><span class="ot"> min=</span><span class="st">"1.0"</span><span class="ot"> nom=</span><span class="st">"beta"</span>&gt;1.40000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1.0"</span><span class="ot"> min=</span><span class="st">"0.2"</span><span class="ot"> nom=</span><span class="st">"lvopt"</span>&gt;0.50000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.1"</span><span class="ot"> min=</span><span class="st">"0.01"</span><span class="ot"> nom=</span><span class="st">"difN"</span>&gt;0.04500&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"30.0"</span><span class="ot"> min=</span><span class="st">"5.0"</span><span class="ot"> nom=</span><span class="st">"plNmin"</span>&gt;10.00000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"irrlev"</span>&gt;20.00000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"QNpltminINN"</span>&gt;0.00000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"Nitrogen fixation by legumes"</span><span class="ot"> nomParam=</span><span class="st">"codesymbiose"</span>&gt;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"critical nitrogen"</span>/&gt;</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"nodule activity"</span>&gt;</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"mineral nitrogen inhibition"</span><span class="ot"> nomParam=</span><span class="st">"codefxn"</span>&gt;</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"no effect"</span>/&gt;</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                    &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"nitrogen amount"</span>/&gt;</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                    &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"3"</span><span class="ot"> nom=</span><span class="st">"nitrogen concentration"</span>/&gt;</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                &lt;/<span class="kw">option</span>&gt;</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">choix</span>&gt;</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">option</span>&gt;</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">formalisme</span>&gt;</span></code></pre></div>
 <ul>
 <li><p>Parameters with several values (for soil layers, technical
 operations,…) Several values may be defined for example relatively to
@@ -196,30 +195,30 @@ nodes) is repeated for each soil layer (layers names are set in the
 The parameters names are defined in a <code>nom</code> attribute in each
 <code>colonne</code> XML tag.</p></li>
 </ul>
-<pre><code><span><span class="co">#&gt;     </span></span>
-<span><span class="co">#&gt; ...</span></span>
-<span><span class="co">#&gt;             &lt;/choix&gt;</span></span>
-<span><span class="co">#&gt;             &lt;choix code="2" nom="no"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;/option&gt;</span></span>
-<span><span class="co">#&gt;         &lt;tableau_entete nb_colonnes="8"&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="epc"/&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="HCCF"/&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="HMINF"/&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="DAF"/&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="cailloux"/&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="typecailloux"/&gt;</span></span>
-<span><span class="co">#&gt; ...</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="infil"&gt;50.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="epd"&gt;10&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;/tableau&gt;</span></span>
-<span><span class="co">#&gt;         &lt;tableau nb_colonnes="8" nom="layer 4"&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="epc"&gt;20.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="HCCF"&gt;50.10&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="HMINF"&gt;25.50&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="DAF"&gt;0.99&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="cailloux"&gt;0.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;             &lt;colonne nom="typecailloux"&gt;1&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt; ...</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">sol</span><span class="ot"> nom=</span><span class="st">"solcanne"</span>&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">tableau_entete</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">tableau</span><span class="ot"> nb_colonnes=</span><span class="st">"8"</span><span class="ot"> nom=</span><span class="st">"layer 1"</span>&gt;</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epc"</span>&gt;20.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HCCF"</span>&gt;46.80&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HMINF"</span>&gt;26.20&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"DAF"</span>&gt;1.08&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"cailloux"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"typecailloux"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"infil"</span>&gt;50.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epd"</span>&gt;10&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">tableau</span>&gt;</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">tableau</span><span class="ot"> nb_colonnes=</span><span class="st">"8"</span><span class="ot"> nom=</span><span class="st">"layer 5"</span>&gt;</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epc"</span>&gt;20.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HCCF"</span>&gt;50.10&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HMINF"</span>&gt;25.50&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"DAF"</span>&gt;0.99&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"cailloux"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"typecailloux"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"infil"</span>&gt;50.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epd"</span>&gt;10&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>...</span></code></pre></div>
 <ul>
 <li>Example from tec files In the above file extract for crop management
 parameters, each set of parameters is repeated for each operation
@@ -228,37 +227,37 @@ Inside each <code>intervention</code> node, parameters names are defined
 in a <code>nom</code> attribute for each <code>colonne</code> XML
 tag.</li>
 </ul>
-<pre><code><span><span class="co">#&gt;   &lt;formalisme nom="supply of organic residus"&gt;</span></span>
-<span><span class="co">#&gt;     &lt;ta nb_interventions="1" nom="interventions"&gt;</span></span>
-<span><span class="co">#&gt;       &lt;ta_entete nb_colonnes="7"&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="julres"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="coderes"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="qres"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="Crespc"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="CsurNres"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="Nminres"/&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="eaures"/&gt;</span></span>
-<span><span class="co">#&gt;       &lt;/ta_entete&gt;</span></span>
-<span><span class="co">#&gt;       &lt;intervention nb_colonnes="7"&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="julres"&gt;112&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="coderes"&gt;1&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="qres"&gt;1.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="Crespc"&gt;42.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="CsurNres"&gt;60.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="Nminres"&gt;0.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="eaures"&gt;0.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;       &lt;/intervention&gt;</span></span>
-<span><span class="co">#&gt; ...</span></span>
-<span><span class="co">#&gt;       &lt;intervention nb_colonnes="7"&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="julres"&gt;220&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="coderes"&gt;1&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="qres"&gt;1.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="Crespc"&gt;42.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="CsurNres"&gt;60.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="Nminres"&gt;0.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;         &lt;colonne nom="eaures"&gt;0.00&lt;/colonne&gt;</span></span>
-<span><span class="co">#&gt;       &lt;/intervention&gt;</span></span>
-<span><span class="co">#&gt; ...</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">formalisme</span><span class="ot"> nom=</span><span class="st">"supply of organic residus"</span>&gt;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">ta</span><span class="ot"> nb_interventions=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"interventions"</span>&gt;</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">ta_entete</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>/&gt;</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>/&gt;</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>/&gt;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>/&gt;</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>/&gt;</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>/&gt;</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>/&gt;</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">ta_entete</span>&gt;</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>&gt;112&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>&gt;1.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>&gt;42.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>&gt;60.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">intervention</span>&gt;</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>&gt;220&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>&gt;1.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>&gt;42.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>&gt;60.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">intervention</span>&gt;</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>...</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="functions-for-xml-files-manipulations">Functions for XML files manipulations<a class="anchor" aria-label="anchor" href="#functions-for-xml-files-manipulations"></a>
@@ -278,7 +277,7 @@ library<a class="anchor" aria-label="anchor" href="#getting-xml-files-examples-f
 <p>Several XML examples files have bee included in the package in order
 to use them in <code>reproducible</code> <strong>manipulations</strong>
 and <strong>results</strong> described in this document. These examples
-files are extracted from the JavaStics standard distribution (some of
+files are extracted from the JavaSTICS standard distribution (some of
 them have been renamed).</p>
 <div class="section level3">
 <h3 id="getting-the-xml-files-source-directory">Getting the XML files source directory<a class="anchor" aria-label="anchor" href="#getting-the-xml-files-source-directory"></a>
@@ -303,7 +302,7 @@ the SticsRFiles installation directory.</p>
 <span></span>
 <span><span class="co"># Listing only the first three files of the entire list</span></span>
 <span></span>
-<span><span class="co"># head(xml_files, n = 3) For linux &gt; [1]</span></span>
+<span><span class="co"># For linux &gt; [1]</span></span>
 <span><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml &gt;</span></span>
 <span><span class="co"># /examples/V10.0/file_ini.xml' &gt; [2]</span></span>
 <span><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml &gt;</span></span>
@@ -433,8 +432,8 @@ is shown:</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">param_names</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">param_names</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
 <span><span class="co">#&gt;   name              file           min   max formalism</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> code_acti_reserve file_ini.xml     1     2 none     </span></span>
@@ -442,7 +441,7 @@ is shown:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Hinitf            file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> lai0              file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> magrain0          file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> maperenne0        file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> maperenne0        file_ini.xml    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span> none</span></span></code></pre>
 <p>The full parameters data.frame content is presented in the above
 paged table.</p>
 <div data-pagedtable="false">
@@ -456,17 +455,17 @@ paged table.</p>
 </h4>
 <p>If parameters names are known and are given with the right syntax,
 information can be retrieved as follows</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="st">"albedo"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"albedo"</span>, <span class="st">"latitude"</span>, <span class="st">"humcapil"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">#&gt;   name                 file            min   max formalism                      </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> albedomulchplastique file_tec.xml   0.05   0.8 special techniques             </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> albedomulchresidus   param_gen.xml  0.05   0.8 Typology of pebbles fertiliser…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> albedo               sols.xml       0.05   0.6 none</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"albedo"</span>, <span class="st">"latitude"</span>, <span class="st">"humcapil"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 5</span></span></span>
 <span><span class="co">#&gt;   name                 file             min   max formalism                     </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         </span></span>
@@ -474,16 +473,19 @@ information can be retrieved as follows</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> albedomulchplastique file_tec.xml    0.05   0.8 special techniques            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> albedomulchresidus   param_gen.xml   0.05   0.8 Typology of pebbles fertilise…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> albedo               sols.xml        0.05   0.6 none                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> humcapil             sols.xml       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   none</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> humcapil             sols.xml       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   none</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="getting-parameters-information-using-partial-names-matching">Getting parameters information using partial names matching<a class="anchor" aria-label="anchor" href="#getting-parameters-information-using-partial-names-matching"></a>
 </h4>
-<p>A search with uncomplete names may be done as follows</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p>A search with incomplete names may be done as follows</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="st">"hum"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 5</span></span></span>
+<span></span>
+<span></span>
+<span><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"al"</span>, <span class="st">"hum"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 5</span></span></span>
 <span><span class="co">#&gt;    name              file                min   max formalism                    </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> humirac_decisemis file_tec.xml        0     1   sowing                       </span></span>
@@ -495,10 +497,7 @@ information can be retrieved as follows</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> codetesthumN      param_newform.xml   1     2   Fertilisation driving        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> humirac           param_newform.xml   0     1   New Roots                    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> humcapil          sols.xml           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   none                         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> profhum           sols.xml           10   150   none</span></span>
-<span></span>
-<span></span>
-<span><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"al"</span>, <span class="st">"hum"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> profhum           sols.xml           10   150   none</span></span></code></pre>
 <p>The found parameters data.frame content is presented in the above
 paged table.</p>
 <div data-pagedtable="false">
@@ -516,10 +515,15 @@ paged table.</p>
 </h4>
 <p>One or more words may be given for sreaching them in formalisms
 description (short)</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 5</span></span></span>
+<span></span>
+<span></span>
+<span><span class="va">param_formalisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yield"</span>, <span class="st">"leaves"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">param_formalisms</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 5</span></span></span>
 <span><span class="co">#&gt;    name            file           min   max formalism      </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> afpf            file_plt.xml  0.01     1 yield formation</span></span>
@@ -540,11 +544,6 @@ description (short)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> tmaxremp        file_plt.xml 10       40 yield formation</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> tminremp        file_plt.xml  0       20 yield formation</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> yield formation file_plt.xml <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span> yield formation</span></span>
-<span></span>
-<span></span>
-<span><span class="va">param_formalisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"yield"</span>, <span class="st">"leaves"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">param_formalisms</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
 <span><span class="co">#&gt;   name       file           min   max formalism      </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
@@ -553,12 +552,12 @@ description (short)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> allocfrmax file_plt.xml  0.05     1 yield formation</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> alphaphot  file_plt.xml  0     <span style="text-decoration: underline;">1</span>000 leaves         </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> bfpf       file_plt.xml  0       30 yield formation</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> cfpf       file_plt.xml  0.1    100 yield formation</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> cfpf       file_plt.xml  0.1    100 yield formation</span></span></code></pre>
 <p>The found parameters data.frame content is presented in the above
 paged table.</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["file"],"name":[2],"type":["chr"],"align":["left"]},{"label":["min"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["formalism"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"densinitial","2":"file_ini.xml","3":"NA","4":"NA","5":"none"},{"1":"allocfrmax","2":"file_plt.xml","3":"5e-02","4":"1.00","5":"yield formation"},{"1":"alloperirac","2":"file_plt.xml","3":"0e+00","4":"1.00","5":"roots"},{"1":"alphaco2","2":"file_plt.xml","3":"1e+00","4":"2.00","5":"effect of atmospheric CO2 concentration"},{"1":"alphaphot","2":"file_plt.xml","3":"0e+00","4":"1000.00","5":"leaves"},{"1":"codcalinflo","2":"file_plt.xml","3":"1e+00","4":"2.00","5":"cultivar parameters"},{"1":"codedyntalle","2":"file_plt.xml","3":"1e+00","4":"2.00","5":"partitioning of biomass in organs"},{"1":"codemortalracine","2":"file_plt.xml","3":"1e+00","4":"2.00","5":"roots"},{"1":"codetranspitalle","2":"file_plt.xml","3":"1e+00","4":"2.00","5":"partitioning of biomass in organs"},{"1":"julvernal","2":"file_plt.xml","3":"1e+00","4":"731.00","5":"phasic development"},{"1":"MaxTalle","2":"file_plt.xml","3":"3e+03","4":"5000.00","5":"partitioning of biomass in organs"},{"1":"SeuilMorTalle","2":"file_plt.xml","3":"1e-02","4":"0.04","5":"partitioning of biomass in organs"},{"1":"SigmaDisTalle","2":"file_plt.xml","3":"1e-01","4":"0.20","5":"partitioning of biomass in organs"},{"1":"tletale","2":"file_plt.xml","3":"-3e+01","4":"-1.00","5":"frost"},{"1":"albveg","2":"file_sta.xml","3":"5e-02","4":"0.30","5":"Microclimate"},{"1":"alphapt","2":"file_sta.xml","3":"1e+00","4":"2.00","5":"climate"},{"1":"altinversion","2":"file_sta.xml","3":"0e+00","4":"2000.00","5":"climate"},{"1":"altisimul","2":"file_sta.xml","3":"0e+00","4":"2000.00","5":"climate"},{"1":"altistation","2":"file_sta.xml","3":"0e+00","4":"2000.00","5":"climate"},{"1":"codaltitude","2":"file_sta.xml","3":"1e+00","4":"2.00","5":"climate"},{"1":"codecaltemp","2":"file_sta.xml","3":"1e+00","4":"2.00","5":"Microclimate"},{"1":"absolute_value/%","2":"file_tec.xml","3":"NA","4":"NA","5":"fertilisation"},{"1":"albedomulchplastique","2":"file_tec.xml","3":"5e-02","4":"0.80","5":"special techniques"},{"1":"codcaleffeuil","2":"file_tec.xml","3":"1e+00","4":"2.00","5":"special techniques"},{"1":"codcalrogne","2":"file_tec.xml","3":"1e+00","4":"2.00","5":"special techniques"},{"1":"codecalirrig","2":"file_tec.xml","3":"1e+00","4":"2.00","5":"irrigation"},{"1":"codepalissage","2":"file_tec.xml","3":"1e+00","4":"2.00","5":"special techniques"},{"1":"dalabour","2":"file_tec.xml","3":"8e-01","4":"2.00","5":"soil modification by techniques (compaction-fragmentation)"},{"1":"humirac_decisemis","2":"file_tec.xml","3":"0e+00","4":"1.00","5":"sowing"},{"1":"phenological stages","2":"file_tec.xml","3":"NA","4":"NA","5":"phenological stages"},{"1":"profhumrecolteuse","2":"file_tec.xml","3":"0e+00","4":"100.00","5":"soil modification by techniques (compaction-fragmentation)"},{"1":"profhumsemoir","2":"file_tec.xml","3":"0e+00","4":"100.00","5":"soil modification by techniques (compaction-fragmentation)"},{"1":"special techniques","2":"file_tec.xml","3":"NA","4":"NA","5":"special techniques"},{"1":"albedomulchresidus","2":"param_gen.xml","3":"5e-02","4":"0.80","5":"Typology of pebbles fertilisers and residues"},{"1":"alphaph","2":"param_gen.xml","3":"1e-03","4":"0.02","5":"Soil C and N processes and fertiliser losses"},{"1":"codemsfinal","2":"param_gen.xml","3":"1e+00","4":"2.00","5":"Simulation options"},{"1":"prophumtassrec","2":"param_gen.xml","3":"8e-01","4":"1.80","5":"Soil hydrology and compaction"},{"1":"prophumtasssem","2":"param_gen.xml","3":"8e-01","4":"1.80","5":"Soil hydrology and compaction"},{"1":"psihumin","2":"param_gen.xml","3":"-5e+00","4":"-0.10","5":"Soil hydrology and compaction"},{"1":"scale_tdenitopt","2":"param_gen.xml","3":"1e+01","4":"40.00","5":"Nitrification, denitrification and associated N2O emissions"},{"1":"scale_tnitopt","2":"param_gen.xml","3":"5e+00","4":"30.00","5":"Nitrification, denitrification and associated N2O emissions"},{"1":"tmin_mineralisation","2":"param_gen.xml","3":"5e-02","4":"0.50","5":"Soil C and N processes and fertiliser losses"},{"1":"codecalferti","2":"param_newform.xml","3":"1e+00","4":"2.00","5":"Fertilisation driving"},{"1":"codetesthumN","2":"param_newform.xml","3":"1e+00","4":"2.00","5":"Fertilisation driving"},{"1":"coef_calcul_doseN","2":"param_newform.xml","3":"3e+01","4":"1.00","5":"option for pasture"},{"1":"coef_calcul_qres","2":"param_newform.xml","3":"1e+01","4":"1.00","5":"option for pasture"},{"1":"humirac","2":"param_newform.xml","3":"0e+00","4":"1.00","5":"New Roots"},{"1":"Mineralization models","2":"param_newform.xml","3":"NA","4":"NA","5":"Mineralization models"},{"1":"albedo","2":"sols.xml","3":"5e-02","4":"0.60","5":"none"},{"1":"calc","2":"sols.xml","3":"0e+00","4":"100.00","5":"none"},{"1":"humcapil","2":"sols.xml","3":"NA","4":"NA","5":"none"},{"1":"profhum","2":"sols.xml","3":"1e+01","4":"150.00","5":"none"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["file"],"name":[2],"type":["chr"],"align":["left"]},{"label":["min"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["formalism"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"abscission","2":"file_plt.xml","3":"0.00","4":"100.0","5":"leaves"},{"1":"afpf","2":"file_plt.xml","3":"0.01","4":"1.0","5":"yield formation"},{"1":"allocfrmax","2":"file_plt.xml","3":"0.05","4":"1.0","5":"yield formation"},{"1":"alphaphot","2":"file_plt.xml","3":"0.00","4":"1000.0","5":"leaves"},{"1":"bfpf","2":"file_plt.xml","3":"0.00","4":"30.0","5":"yield formation"},{"1":"cfpf","2":"file_plt.xml","3":"0.10","4":"100.0","5":"yield formation"},{"1":"cgrain","2":"file_plt.xml","3":"0.01","4":"1.0","5":"yield formation"},{"1":"cgrainv0","2":"file_plt.xml","3":"0.00","4":"15000.0","5":"yield formation"},{"1":"codelaitr","2":"file_plt.xml","3":"1.00","4":"2.0","5":"leaves"},{"1":"codestrphot","2":"file_plt.xml","3":"1.00","4":"2.0","5":"leaves"},{"1":"codetremp","2":"file_plt.xml","3":"1.00","4":"2.0","5":"yield formation"},{"1":"dfpf","2":"file_plt.xml","3":"0.01","4":"5.0","5":"yield formation"},{"1":"dlaimin","2":"file_plt.xml","3":"0.01","4":"1.0","5":"leaves"},{"1":"dltamsmaxsen","2":"file_plt.xml","3":"0.01","4":"0.1","5":"leaves"},{"1":"dltamsminsen","2":"file_plt.xml","3":"0.01","4":"0.1","5":"leaves"},{"1":"durviesupmax","2":"file_plt.xml","3":"0.00","4":"1.0","5":"leaves"},{"1":"infrecouv","2":"file_plt.xml","3":"0.00","4":"3.0","5":"leaves"},{"1":"innturgmin","2":"file_plt.xml","3":"-2.00","4":"1.0","5":"leaves"},{"1":"irazomax","2":"file_plt.xml","3":"0.01","4":"1.0","5":"yield formation"},{"1":"irmax","2":"file_plt.xml","3":"0.20","4":"1.0","5":"yield formation"},{"1":"laicomp","2":"file_plt.xml","3":"0.00","4":"1.0","5":"leaves"},{"1":"leaves","2":"file_plt.xml","3":"NA","4":"NA","5":"leaves"},{"1":"nboite","2":"file_plt.xml","3":"1.00","4":"20.0","5":"yield formation"},{"1":"parazofmorte","2":"file_plt.xml","3":"10.00","4":"20.0","5":"leaves"},{"1":"pentlaimax","2":"file_plt.xml","3":"0.00","4":"10.0","5":"leaves"},{"1":"pentrecouv","2":"file_plt.xml","3":"0.00","4":"10.0","5":"leaves"},{"1":"phobasesen","2":"file_plt.xml","3":"1.00","4":"12.0","5":"leaves"},{"1":"phyllotherme","2":"file_plt.xml","3":"10.00","4":"150.0","5":"leaves"},{"1":"ratiodurvieI","2":"file_plt.xml","3":"0.00","4":"1.0","5":"leaves"},{"1":"ratiosen","2":"file_plt.xml","3":"0.00","4":"1.0","5":"leaves"},{"1":"spfrmax","2":"file_plt.xml","3":"0.70","4":"2.0","5":"yield formation"},{"1":"spfrmin","2":"file_plt.xml","3":"0.00","4":"1.0","5":"yield formation"},{"1":"splaimax","2":"file_plt.xml","3":"0.70","4":"2.0","5":"yield formation"},{"1":"splaimin","2":"file_plt.xml","3":"0.01","4":"1.0","5":"yield formation"},{"1":"tauxrecouvkmax","2":"file_plt.xml","3":"0.50","4":"1.0","5":"leaves"},{"1":"tauxrecouvmax","2":"file_plt.xml","3":"0.50","4":"1.0","5":"leaves"},{"1":"tcmax","2":"file_plt.xml","3":"10.00","4":"50.0","5":"leaves"},{"1":"tcmin","2":"file_plt.xml","3":"-10.00","4":"15.0","5":"leaves"},{"1":"tcxstop","2":"file_plt.xml","3":"0.00","4":"100.0","5":"leaves"},{"1":"tmaxremp","2":"file_plt.xml","3":"10.00","4":"40.0","5":"yield formation"},{"1":"tminremp","2":"file_plt.xml","3":"0.00","4":"20.0","5":"yield formation"},{"1":"tustressmin","2":"file_plt.xml","3":"0.30","4":"1.0","5":"leaves"},{"1":"udlaimax","2":"file_plt.xml","3":"1.00","4":"3.0","5":"leaves"},{"1":"vlaimax","2":"file_plt.xml","3":"1.50","4":"2.5","5":"leaves"},{"1":"yield formation","2":"file_plt.xml","3":"NA","4":"NA","5":"yield formation"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -568,10 +567,13 @@ names<a class="anchor" aria-label="anchor" href="#finding-parameters-using-parti
 </h4>
 <p>Parameters may be found combining search in formalisms and parameter
 names:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span>, param <span class="op">=</span> <span class="st">"grain"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 26 × 5</span></span></span>
+<span></span>
+<span></span>
+<span><span class="va">param_formalisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inflo"</span>, <span class="st">"lai"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 26 × 5</span></span></span>
 <span><span class="co">#&gt;    name       file           min   max formalism      </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> magrain0   file_ini.xml <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span> none           </span></span>
@@ -584,10 +586,7 @@ names:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> codetremp  file_plt.xml  1        2 yield formation</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> dfpf       file_plt.xml  0.01     5 yield formation</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> inngrain1  file_plt.xml  0.3      2 nitrogen       </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 16 more rows</span></span></span>
-<span></span>
-<span></span>
-<span><span class="va">param_formalisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>formalism <span class="op">=</span> <span class="st">"yield"</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inflo"</span>, <span class="st">"lai"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more rows</span></span></span></code></pre>
 <p>The found parameters data.frame content is presented in the above
 paged table.</p>
 <div data-pagedtable="false">
@@ -603,36 +602,35 @@ paged table.</p>
 <p>The <code>keyword</code> argument (one or several possible strings)
 may be used to search in all textual columns as <code>name</code>,
 <code>file</code> or <code>formalism</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"plant"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 5</span></span></span>
-<span><span class="co">#&gt;    name                                               file     min   max forma…¹</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> nbplantes                                          file_… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> QNplante0                                          file_… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> QNplantenp0                                        file_… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> codemonocot                                        file_…  1<span style="color: #949494;">e</span>+0   2   plant …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> codeplante                                         file_… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   plant …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> laiplantule                                        file_…  0<span style="color: #949494;"> </span>     8   emerge…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> masecplantule                                      file_…  2<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>   4   emerge…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> nbfeuilplant                                       file_…  0<span style="color: #949494;"> </span>    10   emerge…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> plant name and group                               file_… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   plant …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> zracplantule                                       file_…  0<span style="color: #949494;"> </span>   200   emerge…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> beta                                               param…  1<span style="color: #949494;">e</span>+0   2   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> codefxn                                            param…  1<span style="color: #949494;">e</span>+0   3   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> codesymbiose                                       param…  1<span style="color: #949494;">e</span>+0   2   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> difN                                               param…  1<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>   0.1 Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> irrlev                                             param…  0<span style="color: #949494;"> </span>    50   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> lvopt                                              param…  2<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   1   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> plNmin                                             param…  5<span style="color: #949494;">e</span>+0  30   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> QNpltminINN                                        param…  0<span style="color: #949494;"> </span>    50   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> Water absorption and nitrogen content of the plant param… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   Water …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> nbplantes                                          usms.… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​formalism</span></span></span>
 <span></span>
 <span></span>
 <span><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plant"</span>, <span class="st">"leave"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 5</span></span></span>
+<span><span class="co">#&gt;    name                                              file    min   max formalism</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> nbplantes                                         file… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> QNplante0                                         file… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> QNplantenp0                                       file… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> codemonocot                                       file…  1<span style="color: #949494;">e</span>+0   2   plant na…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> codeplante                                        file… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   plant na…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> laiplantule                                       file…  0<span style="color: #949494;"> </span>     8   emergenc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> masecplantule                                     file…  2<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span>   4   emergenc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> nbfeuilplant                                      file…  0<span style="color: #949494;"> </span>    10   emergenc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> plant name and group                              file… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   plant na…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> zracplantule                                      file…  0<span style="color: #949494;"> </span>   200   emergenc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> beta                                              para…  1<span style="color: #949494;">e</span>+0   2   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> codefxn                                           para…  1<span style="color: #949494;">e</span>+0   3   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> codesymbiose                                      para…  1<span style="color: #949494;">e</span>+0   2   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> difN                                              para…  1<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span>   0.1 Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> irrlev                                            para…  0<span style="color: #949494;"> </span>    50   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> lvopt                                             para…  2<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   1   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> plNmin                                            para…  5<span style="color: #949494;">e</span>+0  30   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> QNpltminINN                                       para…  0<span style="color: #949494;"> </span>    50   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> Water absorption and nitrogen content of the pla… para… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   Water ab…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> nbplantes                                         usms… <span style="color: #BB0000;">NA</span><span style="color: #949494;"> </span>    <span style="color: #BB0000;">NA</span>   none</span></span></code></pre>
 <p>The found parameters data.frame content is presented in the above
 paged table.</p>
 <div data-pagedtable="false">
@@ -667,7 +665,7 @@ requires different input arguments combination to do so.</p>
 <ul>
 <li>For one parameter and one occurrence</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fixing files paths</span></span>
 <span><span class="va">sols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">xml_loc_dir</span>, <span class="st">"sols.xml"</span><span class="op">)</span></span>
 <span><span class="va">par_gen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">xml_loc_dir</span>, <span class="st">"param_gen.xml"</span><span class="op">)</span></span>
@@ -692,7 +690,7 @@ requires different input arguments combination to do so.</p>
 <ul>
 <li>For one parameter and several occurences</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># For all soils</span></span>
 <span></span>
@@ -705,7 +703,7 @@ requires different input arguments combination to do so.</p>
 <ul>
 <li>For several parameters and several occurrences</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># For all soils</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">sols</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"argi"</span>, <span class="st">"pH"</span><span class="op">)</span><span class="op">)</span></span>
@@ -723,7 +721,7 @@ requires different input arguments combination to do so.</p>
 <li>For several parameters and one occurrence (conditional
 selection)</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># For one soil</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">sols</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"argi"</span>, <span class="st">"pH"</span><span class="op">)</span>, select <span class="op">=</span> <span class="st">"sol"</span>, select_value <span class="op">=</span> <span class="st">"solcanne"</span><span class="op">)</span></span>
@@ -742,7 +740,7 @@ management files.</p>
 <ul>
 <li>Getting all values for given parameters and all soils</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For all soil layers</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">sols</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"epc"</span>, <span class="st">"infil"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $sols.xml</span></span>
@@ -777,19 +775,22 @@ management files.</p>
 <li>Getting all values for given parameters (for a given soil, or crop
 management operation)</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For all soil layers</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">sols</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"epc"</span>, <span class="st">"infil"</span><span class="op">)</span>, select <span class="op">=</span> <span class="st">"sol"</span>, value <span class="op">=</span> <span class="st">"solcanne"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: The `value` argument of `get_param_xml()` is deprecated as of SticsRFiles</span></span>
 <span><span class="co">#&gt; 1.0.0.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use the `select_value` argument instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span><span class="co">#&gt; $sols.xml</span></span>
 <span><span class="co">#&gt; $sols.xml$epc</span></span>
 <span><span class="co">#&gt; [1] 20 20 20 20 20</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sols.xml$infil</span></span>
 <span><span class="co">#&gt; [1] 50 50 50 50 50</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For all irrigation supplies</span></span>
 <span><span class="va">tec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">xml_loc_dir</span>, <span class="st">"file_tec.xml"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">tec</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span><span class="op">)</span><span class="op">)</span></span>
@@ -803,7 +804,7 @@ management operation)</li>
 <li>Selecting with values index (among 5 soil layers, several
 irrigations supply)</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For soil layers 1 to 3</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">sols</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"epc"</span>, <span class="st">"infil"</span><span class="op">)</span>, select <span class="op">=</span> <span class="st">"sol"</span>, select_value <span class="op">=</span> <span class="st">"solcanne"</span>,</span>
 <span>    ids <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
@@ -813,7 +814,7 @@ irrigations supply)</li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sols.xml$infil</span></span>
 <span><span class="co">#&gt; [1] 50 50 50</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># For irrigation operations 1 to 5</span></span>
 <span><span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">tec</span>, param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"julapI_or_sum_upvt"</span>, <span class="st">"amount"</span><span class="op">)</span>, ids <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
@@ -829,7 +830,7 @@ irrigations supply)</li>
 </h3>
 <p>Using the function without any argument produces a list of all
 parameters values of a file.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tec_param_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">tec</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co"># Displaying only a subset of the list</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tec_param_values</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -864,7 +865,7 @@ parameters values of a file.</p>
 <span><span class="co">#&gt; [1] 5</span></span></code></pre></div>
 <p>A files list may be used also to get all parameters as follows in the
 same list</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">param_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tec</span>, <span class="va">sols</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Files list names</span></span>
@@ -941,7 +942,7 @@ call.</p>
 <ul>
 <li>For one parameter and one occurrence</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">## An option parameter</span></span>
@@ -1005,7 +1006,7 @@ call.</p>
 single values for several parameters, the <code>param_value</code>
 argument must contain a list of vectors of values with the same length
 as <code>param</code> vector.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## For all soils</span></span>
 <span><span class="va">soils_number</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_soils_list.html">get_soils_list</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span><span class="op">)</span></span>
@@ -1040,7 +1041,7 @@ as <code>param</code> vector.</p>
 <ul>
 <li>For several parameters and several occurrences</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## For all soils</span></span>
 <span><span class="va">soils_number</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_soils_list.html">get_soils_list</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span><span class="op">)</span></span>
@@ -1078,7 +1079,7 @@ as <code>param</code> vector.</p>
 <li>For several parameters and one occurrence (conditional
 selection)</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## For one soil</span></span>
 <span></span>
@@ -1110,7 +1111,7 @@ selection)</li>
 <ul>
 <li>All values (for all soil layers, or crop management operations)</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## For all soil layers</span></span>
 <span></span>
 <span><span class="co"># Initial values</span></span>
@@ -1134,7 +1135,7 @@ selection)</li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sols.xml$infil</span></span>
 <span><span class="co">#&gt; [1] 48 49 50 51 52</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## For all irrigation operations</span></span>
 <span><span class="va">tec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">xml_loc_dir</span>, <span class="st">"file_tec.xml"</span><span class="op">)</span></span>
 <span></span>
@@ -1168,7 +1169,7 @@ irrigation supplies operations amounts. In that case, used values in
 <code>ids</code> are contiguous, but they do not need to be.</p>
 <p>A vector of logical values may be used instead of position values for
 queries or replacement.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## For soil layers 1 to 3</span></span>
 <span></span>
 <span><span class="co"># Initial values</span></span>
@@ -1195,7 +1196,7 @@ queries or replacement.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sols.xml$infil</span></span>
 <span><span class="co">#&gt; [1] 50 49 48</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## For irrigation operations 1 to 5 (same indices for all parameters)</span></span>
 <span></span>

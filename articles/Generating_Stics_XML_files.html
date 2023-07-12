@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generating Stics XML files from tabulated data • SticsRFiles</title>
+<title>Generating STICS XML files from tabulated data • SticsRFiles</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Generating Stics XML files from tabulated data">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Generating STICS XML files from tabulated data">
 <meta property="og:description" content="SticsRFiles">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
       </span>
     </div>
 
@@ -53,16 +53,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating Stics XML files from tabulated data</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
-      <a href="../articles/Generating_Stics_text_files.html">Generating Stics text files from XML files</a>
+      <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating Stics text files</a>
+      <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -94,7 +94,7 @@
 <script src="Generating_Stics_XML_files_files/pagedtable-1.1/js/pagedtable.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Generating Stics XML files from tabulated
+      <h1 data-toc-skip>Generating STICS XML files from tabulated
 data</h1>
             
       
@@ -107,13 +107,12 @@ data</h1>
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Learn SticsRFiles at: <span style="color: #0000BB; font-weight: bold; text-decoration: underline;">https://SticsRPacks.github.io/SticsRFiles</span></span></span></code></pre>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <ul>
 <li><p>In this part information are focusing on functionalities related
-to Stics XML files generation capabilities based on parameterization for
+to STICS XML files generation capabilities based on parameterization for
 lists of simulations (USMs) stored in tabulated data files; as Excel or
 CSV files.</p></li>
 <li><p>The functions operate on data loaded as data.frames from Excel
@@ -126,9 +125,9 @@ generation are not available, but will be eventually included in future
 developments.</p></li>
 <li><p>Observations data files generation have been included even if
 they are not in XML format.</p></li>
-<li><p>The generation of wheather files files is not included yet in the
+<li><p>The generation of weather files is not included yet in the
 package, but will be included in a future version. One can use the tool
-provided by JavaStics GUI to perform these files generation.</p></li>
+provided by JavaSTICS GUI to perform these files generation.</p></li>
 </ul>
 <p>This document has been generated using the latest STICS version
 <strong>V10.0</strong>.</p>
@@ -162,7 +161,7 @@ in next parts below.</p>
 <p>In the following example <code>/path/to/target/dir</code> must be
 replaced with a real path depending on the operating system
 (i.e. starting with <code>c:/</code> for windows for example)</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Getting the file in the current directory</span></span>
 <span><span class="va">usm_xl_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -173,6 +172,8 @@ replaced with a real path depending on the operating system
 <span></span>
 <span><span class="co">#&gt; [1] "inputs_stics_example.xlsx  has been copied in directory</span></span>
 <span><span class="co">#&gt; "/path/to/xl/dir</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Warning in download_usm_xl(file = "inputs_stics_example.xlsx", out_dir = workspace_path): Error copying files:</span></span>
+<span><span class="co">#&gt; /private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpXR4aw9/csv/V10.0/inputs_stics_example.xlsx</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="get-csv">Getting an USMs inputs <code>CSV</code> example file from the
@@ -190,6 +191,8 @@ replaced with a real path depending on the operating system
 <span></span>
 <span><span class="co">#&gt; [1] inputs_stics_example_USMs.csv  has been copied in directory</span></span>
 <span><span class="co">#&gt; "/path/to/csv/dir</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Warning in download_usm_xl(file = csv_name, out_dir = dest_dir, stics_version = version_name, : Error copying files:</span></span>
+<span><span class="co">#&gt; /private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpXR4aw9/csv/V10.0/inputs_stics_example_USMs.csv</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -199,8 +202,8 @@ replaced with a real path depending on the operating system
 in Excel files containing several sheets or in several equivalent
 individual CSV files.</p>
 <p>Sheets content and CSV files content is the same, only their use is
-different. But, CSV files are easily traced under verion control systems
-and they also can be generated programmatically with the help of
+different. But, CSV files are easily traced under version control
+systems and they also can be generated programmatically with the help of
 functions dedicated for example to generating crop management parameters
 like irrigation, fertilization (interventions and doses
 calculations).</p>
@@ -214,7 +217,7 @@ example</a>.</p>
 <p>Other data stored in Excel or CSV files must be adapted to the use
 cases here after:</p>
 <ul>
-<li><p>For generating new files, containing parameters with differents
+<li><p>For generating new files, containing parameters with different
 values for each USM, tables <strong>must contain values for all the
 files parameters</strong>.</p></li>
 <li><p>For generating files with a common set of parameter values and
@@ -227,10 +230,10 @@ template for files generation to functions <code>gen_*_xml</code>
 <div class="section level3">
 <h3 id="specificities-of-excel-sheets">Specificities of Excel sheets<a class="anchor" aria-label="anchor" href="#specificities-of-excel-sheets"></a>
 </h3>
-<p>Excel sheet names are completely free, but must be meaningfull
+<p>Excel sheet names are completely free, but must be meaningful
 regarding the kind of parameters set they contain.</p>
-<p>In the example, usefull sheets for generating XML parameters files
-are named: <strong>USMs, Ini, Soils, Tec, Station</strong></p>
+<p>In the example, useful sheets for generating XML parameters files are
+named: <strong>USMs, Ini, Soils, Tec, Station</strong></p>
 </div>
 <div class="section level3">
 <h3 id="common-tables-specifications">Common tables specifications<a class="anchor" aria-label="anchor" href="#common-tables-specifications"></a>
@@ -253,7 +256,7 @@ with or without suffix and XML extension (<strong>_ini.xml, _tec.xml, or
 _sta.xml</strong>)</li>
 </ul>
 <p>Other columns of tables are named with <strong>parameters
-names</strong> according to the fololowing rules:</p>
+names</strong> according to the following rules:</p>
 <ul>
 <li>Scalar parameters used parameter names must match the exact
 parameter names (checking it syntax with the help of the
@@ -282,7 +285,7 @@ doseI_2,… instead of using <strong>absolute_value/%</strong> and
 <h3 id="data-consistency-checks-in-tables">Data consistency checks in tables<a class="anchor" aria-label="anchor" href="#data-consistency-checks-in-tables"></a>
 </h3>
 <p>For the moment, <em>no consistency checks</em> (between Excel sheets
-or CSV equivalents files) functionnalities have been included in the
+or CSV equivalents files) functionalities have been included in the
 package in order to prevent missing generated files or misspelled file
 names or identifiers.</p>
 <p>So, one must take care of <strong>links between xml files
@@ -296,7 +299,7 @@ to files generations, for preventing errors.</p>
 <h3 id="usms-table-example">USMs table example<a class="anchor" aria-label="anchor" href="#usms-table-example"></a>
 </h3>
 <p>The Excel file which contains parameters values to take into account
-for Stics inputs may contain specific sheets for each kind of parameters
+for STICS inputs may contain specific sheets for each kind of parameters
 groups, i.e. USMs, crop management, soil, weather station,
 initializations (except plant parameters and general parameters).</p>
 <p>The following table contains data extracted from a sheet named USMs
@@ -612,7 +615,7 @@ code shows how to get data from the downloaded examples <a href="#get-xl">Excel<
 <h3 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
 <span><span class="va">usms_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"USMs"</span><span class="op">)</span></span>
 <span><span class="co"># Or</span></span>
@@ -629,7 +632,7 @@ code shows how to get data from the downloaded examples <a href="#get-xl">Excel<
 <h3 id="generating-the-file">Generating the file<a class="anchor" aria-label="anchor" href="#generating-the-file"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Output file path</span></span>
 <span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/usms.xml"</span></span>
@@ -683,7 +686,7 @@ generation section.</p>
 <h3 id="getting-data-1">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-1"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
 <span><span class="va">soils_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Soils"</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
@@ -697,7 +700,7 @@ generation section.</p>
 <h3 id="generating-the-file-1">Generating the file<a class="anchor" aria-label="anchor" href="#generating-the-file-1"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Output file path</span></span>
 <span><span class="va">out_file</span> <span class="op">&lt;-</span> <span class="st">"/path/to/file/sols.xml"</span></span>
@@ -756,7 +759,7 @@ generation section.</p>
 <h3 id="getting-data-2">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-2"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
 <span><span class="va">tec_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Tec"</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
@@ -770,7 +773,7 @@ generation section.</p>
 <h3 id="generating-files">Generating files<a class="anchor" aria-label="anchor" href="#generating-files"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># *_tec.xml files, one for each xl_param line</span></span>
 <span><span class="fu"><a href="../reference/gen_tec_xml.html">gen_tec_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">tec_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
@@ -817,13 +820,13 @@ generation section.</p>
 <h3 id="getting-data-3">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-3"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
 <span><span class="va">ini_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Ini"</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Ini_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["stade0_Crop1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["lai0_Crop1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["masec0_Crop1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["QNplante0_Crop1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["magrain0_Crop1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["zrac0_Crop1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["restemp0_Crop1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["densinitial_1_Crop1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["densinitial_2_Crop1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["densinitial_3_Crop1"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["densinitial_4_Crop1"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densinitial_5_Crop1"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["Hinitf_1"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Hinitf_2"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["Hinitf_3"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Hinitf_4"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Hinitf_5"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["NO3initf_1"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["NO3initf_2"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["NO3initf_3"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["NO3initf_4"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["NO3initf_5"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["NH4initf_1"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["NH4initf_2"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["NH4initf_3"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["NH4initf_4"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["NH4initf_5"],"name":[29],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"12.24982","16":"11.40512","17":"12.40357","18":"14.07414","19":"12.57361","20":"43.322","21":"6.1706","22":"2.0362","23":"1.1692","24":"2.031","25":"2.5564","26":"2.1078","27":"1.3432","28":"1.0428","29":"1.0587"},{"1":"Vill09_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"20.50000","16":"20.40000","17":"21.20000","18":"0.00000","19":"0.00000","20":"38.100","21":"27.1000","22":"23.8000","23":"0.0000","24":"0.000","25":"1.8000","26":"1.8000","27":"0.7000","28":"0.0000","29":"0.0000"},{"1":"Vill10_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"26.00000","16":"21.70000","17":"22.40000","18":"0.00000","19":"0.00000","20":"3.800","21":"13.3000","22":"11.0000","23":"0.0000","24":"0.000","25":"4.9000","26":"1.3000","27":"0.7000","28":"0.0000","29":"0.0000"},{"1":"Vill11_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0.00000","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"20.000","21":"20.0000","22":"15.0000","23":"0.0000","24":"0.000","25":"10.0000","26":"10.0000","27":"4.0000","28":"0.0000","29":"0.0000"},{"1":"Vill12_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"25.10000","16":"22.90000","17":"22.40000","18":"0.00000","19":"0.00000","20":"22.000","21":"12.2000","22":"8.4000","23":"0.0000","24":"0.000","25":"2.5000","26":"1.9000","27":"1.5000","28":"0.0000","29":"0.0000"},{"1":"Vill13_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"21.00000","16":"19.50000","17":"20.00000","18":"0.00000","19":"0.00000","20":"46.200","21":"55.5000","22":"26.8000","23":"0.0000","24":"0.000","25":"35.5000","26":"50.3000","27":"16.5000","28":"0.0000","29":"0.0000"},{"1":"Vill14_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"22.70000","16":"21.10000","17":"21.60000","18":"0.00000","19":"0.00000","20":"23.100","21":"22.3000","22":"12.9000","23":"0.0000","24":"0.000","25":"11.7000","26":"4.0000","27":"1.5000","28":"0.0000","29":"0.0000"},{"1":"Standard_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0.00000","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"20.000","21":"20.0000","22":"15.0000","23":"0.0000","24":"0.000","25":"10.0000","26":"10.0000","27":"4.0000","28":"0.0000","29":"0.0000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Ini_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["stade0_Crop1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["lai0_Crop1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["magrain0_Crop1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["zrac0_Crop1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["code_acti_reserve_Crop1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["masec0_Crop1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["QNplante0_Crop1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["restemp0_Crop1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["densinitial_1_Crop1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["densinitial_2_Crop1"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["densinitial_3_Crop1"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densinitial_4_Crop1"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["densinitial_5_Crop1"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Hinitf_1"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["Hinitf_2"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Hinitf_3"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Hinitf_4"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["Hinitf_5"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["NO3initf_1"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["NO3initf_2"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["NO3initf_3"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["NO3initf_4"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["NO3initf_5"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["NH4initf_1"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["NH4initf_2"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["NH4initf_3"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["NH4initf_4"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["NH4initf_5"],"name":[30],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"12.24982","17":"11.40512","18":"12.40357","19":"14.07414","20":"12.57361","21":"43.322","22":"6.1706","23":"2.0362","24":"1.1692","25":"2.031","26":"2.5564","27":"2.1078","28":"1.3432","29":"1.0428","30":"1.0587"},{"1":"Vill09_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"20.50000","17":"20.40000","18":"21.20000","19":"0.00000","20":"0.00000","21":"38.100","22":"27.1000","23":"23.8000","24":"0.0000","25":"0.000","26":"1.8000","27":"1.8000","28":"0.7000","29":"0.0000","30":"0.0000"},{"1":"Vill10_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"26.00000","17":"21.70000","18":"22.40000","19":"0.00000","20":"0.00000","21":"3.800","22":"13.3000","23":"11.0000","24":"0.0000","25":"0.000","26":"4.9000","27":"1.3000","28":"0.7000","29":"0.0000","30":"0.0000"},{"1":"Vill11_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"0.00000","21":"20.000","22":"20.0000","23":"15.0000","24":"0.0000","25":"0.000","26":"10.0000","27":"10.0000","28":"4.0000","29":"0.0000","30":"0.0000"},{"1":"Vill12_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"25.10000","17":"22.90000","18":"22.40000","19":"0.00000","20":"0.00000","21":"22.000","22":"12.2000","23":"8.4000","24":"0.0000","25":"0.000","26":"2.5000","27":"1.9000","28":"1.5000","29":"0.0000","30":"0.0000"},{"1":"Vill13_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"21.00000","17":"19.50000","18":"20.00000","19":"0.00000","20":"0.00000","21":"46.200","22":"55.5000","23":"26.8000","24":"0.0000","25":"0.000","26":"35.5000","27":"50.3000","28":"16.5000","29":"0.0000","30":"0.0000"},{"1":"Vill14_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"22.70000","17":"21.10000","18":"21.60000","19":"0.00000","20":"0.00000","21":"23.100","22":"22.3000","23":"12.9000","24":"0.0000","25":"0.000","26":"11.7000","27":"4.0000","28":"1.5000","29":"0.0000","30":"0.0000"},{"1":"Standard_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"0.00000","21":"20.000","22":"20.0000","23":"15.0000","24":"0.0000","25":"0.000","26":"10.0000","27":"10.0000","28":"4.0000","29":"0.0000","30":"0.0000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -831,7 +834,7 @@ generation section.</p>
 <h3 id="generating-files-1">Generating files<a class="anchor" aria-label="anchor" href="#generating-files-1"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># *_ini.xml files, one for each xl_param line</span></span>
 <span><span class="fu"><a href="../reference/gen_ini_xml.html">gen_ini_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">ini_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
@@ -871,7 +874,7 @@ generation section.</p>
 <h3 id="getting-data-4">Getting data<a class="anchor" aria-label="anchor" href="#getting-data-4"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Reading the Excel file</span></span>
 <span><span class="va">sta_param</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_params_table.html">read_params_table</a></span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet_name <span class="op">=</span> <span class="st">"Station"</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
@@ -885,7 +888,7 @@ generation section.</p>
 <h3 id="generating-files-2">Generating files<a class="anchor" aria-label="anchor" href="#generating-files-2"></a>
 </h3>
 <!-- Only for the show -->
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># *_sta.xml files, one for each xl_param line</span></span>
 <span><span class="fu"><a href="../reference/gen_sta_xml.html">gen_sta_xml</a></span><span class="op">(</span>param_df <span class="op">=</span> <span class="va">sta_param</span>, out_dir <span class="op">=</span> <span class="va">workspace_path</span><span class="op">)</span></span></code></pre></div>
 <!-- active chunk to be run -->
