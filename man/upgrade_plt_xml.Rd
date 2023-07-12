@@ -48,15 +48,17 @@ None
 Upgrading _plt.xml file(s) to a newer version
 }
 \details{
-See SticsRFiles::get_stics_versions_compat() for listing versions
+See get_stics_versions_compat() for listing versions
 }
 \examples{
-\dontrun{
+
+dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
+
 upgrade_plt_xml(
-  file = "/path/to/_plt.xml",
-  param_gen_file = "/path/to/param_gen.xml",
-  param_newform_file = "/path/to/param_newform.xml",
-  out_dir = "/path/to/directory"
+  file = file.path(dir_path,"file_plt.xml"),
+  out_dir = tempdir(),
+  param_newform_file = file.path(dir_path, "param_newform.xml"),
+  param_gen_file = file.path(dir_path, "param_gen.xml")
 )
-}
+
 }

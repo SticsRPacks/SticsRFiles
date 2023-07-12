@@ -52,19 +52,19 @@
 #' @return an invisible xml_document object
 #'
 #' @examples
-#' \dontrun{
 #'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
+#'
 #' sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
-#' gen_sols_xml(file = "sols.xml", param_df = sols_param_df)
-#' }
+#' gen_sols_xml(file = file.path(tempdir(), "sols.xml"),
+#' param_df = sols_param_df)
 #'
 #' @export
 #'
 #'
 #'
-gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
-                         param_df = NULL,
+gen_sols_xml <- function(file,
+                         param_df,
                          template = NULL,
                          stics_version = "latest",
                          sols_in_file = lifecycle::deprecated(),
@@ -110,11 +110,6 @@ gen_sols_xml <- function(file = file.path(getwd(), "sols.xml"),
   }
 
   xml_doc <- NULL
-
-  # Fix : default output file path if not provided
-  if (base::is.null(sols_out_file)) {
-    sols_out_file <- file.path(getwd(), "sols.xml")
-  }
 
   if (!base::is.null(sols_in_file)) {
     xml_doc <- xmldocument(sols_in_file)

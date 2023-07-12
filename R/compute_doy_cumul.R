@@ -9,14 +9,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::compute_doy_cumul(c(350, 360, 10, 20, 30), c(
+#' compute_doy_cumul(c(350, 360, 10, 20, 30), c(
 #'   1990, 1990, 1991,
 #'   1991, 1991
 #' ))
 #' }
 #'
-#' #
+#'
 #' @keywords internal
+#'
+#' @noRd
 #'
 compute_doy_cumul <- function(doys_vec, years_vec) {
   if (!all(c(class(doys_vec), class(years_vec)) %in% c("numeric", "integer"))) {

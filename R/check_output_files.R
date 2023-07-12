@@ -18,6 +18,7 @@
 #' }
 #'
 #' @keywords internal
+#' @noRd
 
 check_output_files <- function(run_dir, usm_name = NULL) {
   if (base::is.null(usm_name)) {

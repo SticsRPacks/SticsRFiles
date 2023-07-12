@@ -12,6 +12,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 
 get_java_workspace <- function(javastics) {
 

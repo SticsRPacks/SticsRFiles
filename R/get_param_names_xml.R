@@ -37,7 +37,7 @@
 #'
 #' @keywords internal
 #'
-#'
+#' @noRd
 #'
 get_param_names_xml <- function(xml_file,
                                 name = NULL,

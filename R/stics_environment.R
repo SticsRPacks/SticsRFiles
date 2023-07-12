@@ -6,6 +6,7 @@
 #'
 #' @return The default STICS env name
 #' @keywords internal
+#' @noRd
 #'
 sticsenv_name <- function() {
   return(".stics")
@@ -22,6 +23,7 @@ sticsenv_name <- function() {
 #' @param create   Create the environment name
 #'
 #' @keywords internal
+#' @noRd
 #'
 stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
   exists_env <- stics_exists()
@@ -77,6 +79,7 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
 #'
 #' @return The new environment
 #' @keywords internal
+#' @noRd
 #'
 sticsenv_create <- function(name, env_name = ".GlobalEnv") {
   parent <- eval(parse(text = env_name))
@@ -105,6 +108,8 @@ sticsenv_create <- function(name, env_name = ".GlobalEnv") {
 #'
 #' @return The new environment
 #' @keywords internal
+#' @noRd
+#'
 sticsenv_set_name <- function(name,
                               env_name = sticsenv_name(),
                               fix_name = NULL) {
@@ -135,6 +140,7 @@ sticsenv_set_name <- function(name,
 #'
 #' @return A vector of environment names
 #' @keywords internal
+#' @noRd
 sticsenv_get_name <- function(name = NULL, env_name = sticsenv_name()) {
   if (!stics_exists(name = name, env_name = env_name)) {
     return(invisible())
@@ -154,6 +160,7 @@ sticsenv_get_name <- function(name = NULL, env_name = sticsenv_name()) {
 #'
 #' @return A vector of all object names in the environment
 #' @keywords internal
+#' @noRd
 sticsenv_ls <- function(name = NULL,
                         env_name = sticsenv_name(),
                         detail = FALSE) {
@@ -179,6 +186,7 @@ sticsenv_ls <- function(name = NULL,
 #'
 #' @return A boolean, `TRUE` if the object is in the env, `FALSE` otherwise.
 #' @keywords internal
+#' @noRd
 stics_exists <- function(name = NULL, env_name = sticsenv_name()) {
   exists_env <- exists(
     x = sticsenv_name(),
@@ -226,6 +234,7 @@ stics_exists <- function(name = NULL, env_name = sticsenv_name()) {
 #'
 #' @return The object value.
 #' @keywords internal
+#' @noRd
 stics_get <- function(name = NULL, env_name = sticsenv_name()) {
   if (base::is.null(name) || name == sticsenv_name()) {
     return(stics_env(create = FALSE))
@@ -278,6 +287,7 @@ stics_get <- function(name = NULL, env_name = sticsenv_name()) {
 #'
 #' @return Nothing. Just adds an object to the given environment.
 #' @keywords internal
+#' @noRd
 #'
 stics_set <- function(name, value, env_name = sticsenv_name()) {
   envir <- stics_env(name = env_name)
@@ -325,6 +335,7 @@ stics_set <- function(name, value, env_name = sticsenv_name()) {
 #'
 #' @return A vector of classes
 #' @keywords internal
+#' @noRd
 #'
 stics_class <- function(name, env_name = sticsenv_name()) {
   return(class(stics_get(name = name, env_name = env_name)))
@@ -337,6 +348,7 @@ stics_class <- function(name, env_name = sticsenv_name()) {
 #'
 #' @return A vector of names
 #' @keywords internal
+#' @noRd
 #'
 stics_split_list <- function(name) {
   return(unlist(strsplit(x = name, split = "\\$")))
@@ -348,6 +360,7 @@ stics_split_list <- function(name) {
 #'
 #' @return Nothing. Just removes an object from the STICS environment.
 #' @keywords internal
+#' @noRd
 #'
 #' @examples
 #' \dontrun{
@@ -416,6 +429,7 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
 #'
 #' @return Nothing. Just cleans the STICS environment.
 #' @keywords internal
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

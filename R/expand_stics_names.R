@@ -13,10 +13,12 @@
 #' csv_file <- "/path/to/JavaSTICS/folder/config/inputs.csv"
 #' out_csv_file <- "/path/to/out/dir/config/inputs_xpanded.csv"
 #'
-#' SticsRFiles:::expand_stics_names(csv_file, out_csv_file)
+#' expand_stics_names(csv_file, out_csv_file)
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
   in_data <- utils::read.table(in_csv_file,

@@ -13,6 +13,10 @@
 #' @return logical value, TRUE if file exists, FALSE otherwise
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
+#'
 exists_javastics_pref <- function(javastics) {
   # checking javastics path
   check_java_path(javastics)

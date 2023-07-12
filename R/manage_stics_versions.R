@@ -5,8 +5,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_svn_identifiers()
+#' get_svn_identifiers()
 #' }
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
 get_svn_identifiers <- function() {
 
   # logged user identifiers !
@@ -32,9 +37,11 @@ get_svn_identifiers <- function() {
 # @return
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::download_csv_files(
+#' download_csv_files(
 #'  branch_url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
 #'  dest_dir = system.file("extdata", package = "SticsRFiles")
 #' )
@@ -119,14 +126,16 @@ download_csv_files <- function(branch_url,
 #' @return An invisible data.frame containing versions data
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::add_stics_version(
+#' add_stics_version(
 #'   version_name = "V10.0",
 #'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10"
 #' )
 #'
-#' SticsRFiles:::add_stics_version(
+#' add_stics_version(
 #'   version_name = "V10.0",
 #'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
 #'   location = "package"
@@ -182,7 +191,7 @@ add_stics_version <- function(version_name,
   )
 
   if (verbose)
-    cat(paste0(version_name,
+    message(paste0(version_name,
                " successfully set in SticsRFiles ",
                location,
                ".\n"))
@@ -208,11 +217,13 @@ add_stics_version <- function(version_name,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::remove_stics_version(version_name = "V10.0")
+#' remove_stics_version(version_name = "V10.0")
 #'
-#' SticsRFiles:::remove_stics_version(
+#' remove_stics_version(
 #'   version_name = "V10.0",
 #'   location = "package"
 #' )
@@ -271,11 +282,13 @@ remove_stics_version <- function(version_name,
 #' @return A directory path
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_data_dir()
+#' get_data_dir()
 #'
-#' SticsRFiles:::get_data_dir(location = "package")
+#' get_data_dir(location = "package")
 #' }
 get_data_dir <- function(location = "install") {
   if (location == "install")
@@ -306,11 +319,13 @@ get_data_dir <- function(location = "install") {
 #' @return A file path
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_versions_file_path()
+#' get_versions_file_path()
 #'
-#' SticsRFiles:::get_versions_file_path(location = "package")
+#' get_versions_file_path(location = "package")
 #' }
 get_versions_file_path <- function(location = "install") {
   file.path(get_data_dir(location = location),
@@ -335,14 +350,16 @@ get_versions_file_path <- function(location = "install") {
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::update_stics_version(
+#' update_stics_version(
 #'   version_name = "V10.0",
 #'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10"
 #' )
 #'
-#' SticsRFiles:::update_stics_version(
+#' update_stics_version(
 #'   version_name = "V10.0",
 #'   url = "https://w3.avignon.inra.fr/svn/modulostics/branches/branch10",
 #'   location = "package"
@@ -380,6 +397,8 @@ update_stics_version <- function(version_name,
 #'
 # @return
 #' @keywords internal
+#'
+#' @noRd
 #'
 # @examples
 set_versions_info <- function(version_name,
@@ -464,9 +483,11 @@ set_versions_info <- function(version_name,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_versions_info(version_name = "V10.0")
+#' get_versions_info(version_name = "V10.0")
 #' }
 get_version_info_tmpl <- function(version_name) {
   data.frame(

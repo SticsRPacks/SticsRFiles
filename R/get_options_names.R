@@ -13,12 +13,14 @@
 #'
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 #'
-#' SticsRFiles:::get_options_names(xml_path)
+#' get_options_names(xml_path)
 #'
-#' SticsRFiles:::get_options_names(xml_path, c("codemonocot", "codlainet"))
+#' get_options_names(xml_path, c("codemonocot", "codlainet"))
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_options_names <- function(xml_file_path, option_names = NULL) {
 

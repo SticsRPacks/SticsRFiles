@@ -159,7 +159,7 @@ setMethod(
     # testing if all nodes have the same attributes !!
     if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
       if (object@warn) {
-        print(class(attr_list))
+        message(class(attr_list))
         warning(paste(
           "Existing nodes with different attributes comparing to others,",
           "missing attributes ?",

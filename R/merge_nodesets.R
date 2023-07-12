@@ -8,6 +8,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 # @examples
 merge_nodesets <- function(ns1, ns2) {
   new_ns <- ns1

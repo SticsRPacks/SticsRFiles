@@ -47,8 +47,6 @@ usms.xml input file from parameters values stored in a CSV file using
 the function \code{\link{gen_usms_xml}}
 }
 \examples{
-\dontrun{
-download_usm_csv(out_dir = "/path/to/destination/dir")
-}
+download_usm_csv(out_dir = tempdir())
 
 }

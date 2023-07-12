@@ -15,15 +15,16 @@
 #'
 #' @export
 #'
-#' @details See SticsRFiles::get_stics_versions_compat() for listing versions
+#' @details See get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#' \dontrun{
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
+#'
 #' upgrade_param_gen_xml(
-#'   file = "/path/to/param_gen.xml",
-#'   out_dir = "/path/to/directory"
+#'   file = file.path(dir_path, "param_gen.xml"),
+#'   out_dir = tempdir()
 #' )
-#' }
+
 upgrade_param_gen_xml <- function(file,
                                   out_dir,
                                   stics_version = "V9.2",

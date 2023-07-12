@@ -22,7 +22,7 @@
 #' @return A list of parameter values for each xml_file (a list of list)
 #'
 #' @examples
-#' \dontrun{
+#'
 #' # Soil file
 #' file <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #'
@@ -55,7 +55,7 @@
 #'
 #' # Getting all parameters for a given formalism: "irrigation"
 #' get_param_xml(file, select = "formalisme", select_value = "irrigation")
-#' }
+#'
 #' @export
 get_param_xml <- function(file,
                           param = NULL,

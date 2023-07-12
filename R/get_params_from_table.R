@@ -23,11 +23,13 @@
 #' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' xml_path <- "path/to/ini/xml"
-#' ini_doc <- SticsRFiles:::xmldocument(xml_path)
+#' ini_doc <- xmldocument(xml_path)
 #' get_params_from_table(ini_param_df, ini_doc)
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_params_from_table <- function(params_table,
                                   param_names = NULL,
@@ -86,7 +88,7 @@ get_params_from_table <- function(params_table,
     if (stopping) {
       stop(message_str)
     } else {
-      cat(message_str)
+      message(message_str)
     }
 
     # removing unknown param columns

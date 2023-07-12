@@ -1,8 +1,8 @@
-# SticsRFiles 1.1.3 _2023-06-29_
+# SticsRFiles 1.1.3 _2023-07-10_
 
 * FUNCTIONS
    * New function for generating the new_travail.usm STICS file
-   * New function for generating wheather data file (climat.txt)
+   * New function for generating weather data files (climat.txt)
    * New unit tests added
 
 * FIXES:

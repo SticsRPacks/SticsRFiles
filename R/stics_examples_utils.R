@@ -4,6 +4,7 @@
 #' ("csv", "obs", "sti", "txt", "xml")
 #' @param stics_version Name of the STICS version. Optional, by default
 #' the latest version returned by `get_stics_versions_compat()` is used.
+#' @param overwrite TRUE for overwriting directory; FALSE otherwise
 #' @param version_name `r lifecycle::badge("deprecated")` `version_name` is no
 #'   longer supported, use `stics_version` instead.
 #'
@@ -13,15 +14,14 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'
 #' get_examples_path(file_type = "csv")
 #'
 #' get_examples_path(file_type = c("csv", "sti"))
 #'
 #' get_examples_path(file_type = "csv", stics_version = "V8.5")
-#' }
+#'
 get_examples_path <- function(file_type, stics_version = "latest",
+                              overwrite = FALSE,
                               version_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(version_name)) {
     lifecycle::deprecate_warn(
@@ -38,7 +38,8 @@ get_examples_path <- function(file_type, stics_version = "latest",
 
   # If not any arguments : displaying files types list
   if (missing(file_type)) {
-    cat("Available files types: ", paste(get_examples_types(), collapse = ","))
+    message("Available files types: ",
+            paste(get_examples_types(), collapse = ","))
     return(invisible())
   }
 
@@ -73,7 +74,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
   # Getting and storing path for each kind of file
   examples_path <- vector(mode = "character", length = length(files_str))
   for (i in seq_along(files_str)) {
-    base_path <- unzip_examples(files_str[i])
+    base_path <- unzip_examples(files_str[i], overwrite = overwrite)
     if (base_path == "") {
       examples_path[i] <- ""
     } else {
@@ -121,15 +122,18 @@ get_examples_types <- function() {
 #' Unzip files archive if needed and return examples files path
 #' in extdata directory
 #'
-#' @param examples_type_path library path for examples files set
+#' @param files_types type of file of examples files set
 #' @param version_dir version directory names of the example files
+#' @param overwrite TRUE for overwriting directory; FALSE otherwise
 #'
 #' @return library examples files path
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 # @examples
-unzip_examples <- function(files_type, version_dir) {
+unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 
   ex_path <- system.file("extdata",
                          package = "SticsRFiles")
@@ -138,7 +142,10 @@ unzip_examples <- function(files_type, version_dir) {
                             winslash = "/",
                             mustWork = FALSE)
 
-  if (dir.exists(dir_path)) return(dir_path)
+  if (dir.exists(dir_path) && !overwrite) return(dir_path)
+
+  if (overwrite)
+    unlink(x = dir_path, recursive = TRUE)
 
   zip_path <- file.path(ex_path, paste0(files_type, ".zip"))
 

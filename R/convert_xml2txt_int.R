@@ -16,10 +16,12 @@
 #' xsl_file <-
 #'    "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
 #'
-#' SticsRFiles:::convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
+#' convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
 

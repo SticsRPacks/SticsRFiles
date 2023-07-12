@@ -35,9 +35,9 @@
 #' @export
 #'
 #' @examples
-#'
-#' get_param_info(param = "albedo")
 #' \dontrun{
+#' get_param_info(param = "albedo")
+
 #' get_param_info(param = "albedo", file = "/path/to/file.xml")
 #'
 #' get_param_info(param = "albedo", formalism = "special")
@@ -180,6 +180,8 @@ get_param_info <- function(param = NULL,
 #' or both of them.
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

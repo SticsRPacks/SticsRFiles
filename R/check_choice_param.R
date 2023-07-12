@@ -7,6 +7,8 @@
 #' @return invisible NULL
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' check_choice_param(xml_doc = xml_doc, param_name = param_name)
