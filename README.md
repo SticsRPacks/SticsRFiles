@@ -12,6 +12,8 @@ status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.s
 [![Codecov test
 coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
+![](https://www.r-pkg.org/badges/version-ago/SticsRFiles)
+
 <!-- badges: end -->
 
 The goal of SticsRFiles is to perform manipulations of the
