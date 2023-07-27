@@ -24,6 +24,10 @@ col_names_to_var <- function(var_list = c()) {
     FALSE
   }))
 
+  # Nothing to do, t=returning the input vector
+  if(!any(idx_end_convert)) return(var_list)
+
+
   conv_var_list <- var_list[idx_end_convert]
 
   # for varname_n, var_name_n,
