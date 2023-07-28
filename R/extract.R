@@ -10,11 +10,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(SticsRFiles)
-#' sim <- SticsRFiles::get_sim(workspace = "inst/extdata/stics_example_1")
-#' sim[[1]] # returns a `cropr_simulation` list
-#' }
+#' path <- file.path(get_examples_path("sti"), "workspace1")
+#' sim <- SticsRFiles::get_sim(workspace = path)
+#' # sim returns a `cropr_simulation` list
+#'
 `[.cropr_simulation` <- function(x, ...) {
   l <- unclass(x)[...]
   attr_names <- names(attributes(x))

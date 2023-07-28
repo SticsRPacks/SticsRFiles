@@ -27,6 +27,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_param_bounds_xml <- function(xml_file,
                                  param_name,
                                  bounds_name = NULL,

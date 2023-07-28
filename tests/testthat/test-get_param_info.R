@@ -8,7 +8,7 @@ test_that("unknown name (should return NULL)", {
 })
 
 test_that("fuzzy name", {
-  if (SticsRFiles:::get_version_num() < 10) {
+  if (get_version_num() < 10) {
     lai_params <-
       c(
         "lai0", "codelaitr", "codlainet", "dlaimax", "dlaimaxbrut", "dlaimin",

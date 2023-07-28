@@ -1,7 +1,6 @@
 #' @title Generate STICS usms xml file from a template or an input file
 #'
-#' @param file Path (including name) of the usms file to generate. Optional,
-#' set to `file.path(getwd(), "usms.xml")`by default.
+#' @param file Path (including name) of the usms file to generate.
 #' @param param_df A table (df, tibble) containing the values of the parameters
 #' to use (see details)
 #' @param template Path of an USM xml file to be used as a template.
@@ -51,17 +50,15 @@
 #' @return an invisible xml_document object
 #'
 #' @examples
-#' \dontrun{
-#'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
-#' gen_usms_xml(usms_out_file = "usms.xml", usms_param = usms_param_df)
-#' }
+#' gen_usms_xml(file = file.path(tempdir(), "usms.xml"),
+#'  param_df = usms_param_df)
 #'
 #' @export
 #'
 
-gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
+gen_usms_xml <- function(file,
                          param_df = NULL,
                          template = NULL,
                          stics_version = "latest",
@@ -100,11 +97,6 @@ gen_usms_xml <- function(file = file.path(getwd(), "usms.xml"),
   }
 
   xml_doc <- NULL
-
-  # Fix : default output file path if not provided
-  if (base::is.null(usms_out_file)) {
-    usms_out_file <- file.path(getwd(), "usms.xml")
-  }
 
   # If a template file is provided
   if (!base::is.null(usms_in_file)) {

@@ -21,7 +21,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' path <- get_examples_path(file_type = "sti")
 #' get_report_results(workspace = path)
 #'
@@ -34,7 +33,7 @@
 #' get_report_results(workspace = path)
 #'
 #' get_report_results(workspace = path, file_name = "mod_rapportA.sti")
-#' }
+#'
 #'
 get_report_results <- function(workspace,
                                file_name = "mod_rapport.sti",

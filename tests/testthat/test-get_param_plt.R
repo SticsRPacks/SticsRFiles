@@ -1,7 +1,6 @@
-library(SticsRFiles)
 
-stics_version <- SticsRFiles:::get_stics_versions_compat()$latest_version
-version_num <- SticsRFiles:::get_version_num()
+stics_version <- get_stics_versions_compat()$latest_version
+version_num <- get_version_num()
 
 xml_path <- file.path(
   get_examples_path("xml", stics_version = stics_version),

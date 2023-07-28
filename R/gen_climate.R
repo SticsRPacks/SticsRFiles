@@ -10,12 +10,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::gen_climate(
+#' gen_climate(
 #'                   c("path/to/weather.year1", "path/to/weather.year2"),
 #'                  "/path/to/out/dir" )
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 gen_climate <- function(files_path, out_dir) {
 
@@ -52,11 +54,14 @@ gen_climate <- function(files_path, out_dir) {
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::complete_climate_paths(
+#' complete_climate_paths(
 #'             c("path/to/weather.year1", "path/to/weather.year2"))
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
 #'
 complete_climate_paths <- function(files_path) {
 

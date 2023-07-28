@@ -69,64 +69,65 @@ a vector of values. For example, for two parameters with two values each:
 value= list(c(1,2), c(2.3,4.5))
 }
 \examples{
-\dontrun{
+
+ex_path <- get_examples_path(file_type = "xml")
 
 # Soil file
 
-file.copy(file.path(get_examples_path(file_type = "xml"),
-          "sols.xml"), getwd())
+sol_path <- file.path(ex_path, "sols.xml")
 
 # For scalar parameters per soil
 
 # Setting all soils "argi" values to 50
-set_param_xml("sols.xml", "argi", 50, overwrite = TRUE)
+set_param_xml(sol_path, "argi", 50, overwrite = TRUE)
 
-get_param_xml("sols.xml", "argi")
+get_param_xml(sol_path, "argi")
 
 # Setting a specific value to "argi" for "solcanne" soil
-set_param_xml("sols.xml", "argi", 56,
-  select = "sol", select_value = "solcanne", overwrite = TRUE
+set_param_xml(file = sol_path, param = "argi", values = 56,
+   select = "sol", select_value = "solcanne", overwrite = TRUE
 )
 
-get_param_xml("sols.xml", "argi",
+get_param_xml(sol_path, "argi",
   select = "sol", select_value = "solcanne"
 )
 
 
 # Setting a specific values to 2 parameters "argi" and
 # "norg" for "solcanne" soil
-set_param_xml("sols.xml", c("argi", "norg"), list(100, 150),
+set_param_xml(sol_path, c("argi", "norg"), list(100, 150),
   select = "sol", select_value = "solcanne", overwrite = TRUE
 )
 
-get_param_xml("sols.xml", c("argi", "norg"),
+get_param_xml(sol_path, c("argi", "norg"),
   select = "sol", select_value = "solcanne"
 )
 
 
 # For vector parameters per soil (5 values, one per soil layer)
-set_param_xml("sols.xml", c("epc", "HCCF"),
+set_param_xml(sol_path, c("epc", "HCCF"),
   select = "sol",
   select_value = c("solcanne", "solbanane"),
   param_value = list(c(20:24, 10:14), c(50:54, 40:44)), overwrite = TRUE
 )
 
-get_param_xml("sols.xml", c("epc", "HCCF"),
+get_param_xml(sol_path, c("epc", "HCCF"),
   select = "sol",
   select_value = c("solcanne", "solbanane")
 )
 
 
 # Crop management file
-file.copy(file.path(get_examples_path(file_type = "xml"),
-          "file_tec.xml"), getwd())
+
+
+tec_path <- file.path(ex_path, "file_tec.xml")
 
 # Modifying irrigations parameters
-set_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"),
+set_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"),
   param_value = list(200:215, 20:35), overwrite = TRUE
 )
 
-get_param_xml("file_tec.xml", c("julapI_or_sum_upvt", "amount"))
-}
+get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))
+
 
 }

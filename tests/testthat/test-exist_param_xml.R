@@ -1,6 +1,5 @@
-library(SticsRFiles)
 
-stics_version <- SticsRFiles:::get_stics_versions_compat()$latest_version
+stics_version <- get_stics_versions_compat()$latest_version
 
 context("Exist param ")
 

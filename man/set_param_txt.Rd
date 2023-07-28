@@ -13,7 +13,7 @@
 \title{Set (replace) STICS input file parameters}
 \usage{
 set_param_txt(
-  workspace = getwd(),
+  workspace,
   param,
   value,
   append = FALSE,
@@ -162,8 +162,6 @@ To replace the output variables required from STICS,
 please directly call \code{gen_varmod}.
 }
 \examples{
-\dontrun{
-
 # Getting example data path
 path <- get_examples_path(file_type = "txt")
 
@@ -181,11 +179,11 @@ set_param_txt(workspace = path, param = "durvieF",
 set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 
 # If the parameter is found in several files, use the set_*
-functions directly, e.g. cailloux is found in the general file
-("codetycailloux") and the soil file. If we want to change its value
-in the soil file, we use set_soil_txt():
+# functions directly, e.g. cailloux is found in the general file
+# ("codecailloux") and the soil file. If we want to change its value
+# in the soil file, we use set_soil_txt():
 set_soil_txt(file = file.path(path, "param.sol"),
              param = "cailloux", layer = 2, value = 1)
-}
+
 
 }

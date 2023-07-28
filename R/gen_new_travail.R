@@ -18,7 +18,7 @@
 #'
 #' @noRd
 #'
-# @examples
+
 gen_new_travail <- function(workspace,
                             usm,
                             lai_forcing = NULL,
@@ -41,6 +41,8 @@ gen_new_travail <- function(workspace,
                   "fstation",
                   "fclim1", "fclim2", "nbans", "culturean", "fplt1",
                   "ftec1", "flai1", data_plt2)
+
+  if (is.null(out_dir)) out_dir <- workspace
 
   if (is.null(out_dir)) out_dir <- workspace
 
@@ -112,6 +114,7 @@ get_usm_data <- function(workspace,
   data$codesuite <- 0
   # forcing codesuite
   if(!is.null(codesuite) && codesuite %in% c(0,1))
+
     data$codesuite <- codesuite
 
   # nbplantes

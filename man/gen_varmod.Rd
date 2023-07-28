@@ -52,12 +52,10 @@ the variables that exist. \code{force= TRUE} may however be used to write
 variables that do not exist.
 }
 \examples{
-\dontrun{
-gen_varmod(".", c("lai(n)", "hauteur"))
-gen_varmod("/path/to/stics/workspace", c("lai(n)", "hauteur"))
+gen_varmod(tempdir(), c("lai(n)", "hauteur"))
 # Add a variable to the others:
-gen_varmod(".", "masec(n)", append = TRUE)
+gen_varmod(tempdir(), "masec(n)", append = TRUE)
 # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
-}
+
 
 }

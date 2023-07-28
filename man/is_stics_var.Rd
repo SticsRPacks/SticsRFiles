@@ -18,16 +18,15 @@ is used.}
 longer supported, use \code{stics_version} instead.}
 }
 \value{
-A boolean vector: \code{TRUE} if the variable exist, \code{FALSE} if it doesn't
+A boolean vector: \code{TRUE} if the variable exist, \code{FALSE} otherwise
 }
 \description{
 Tells if one or more variable names are valid STICS
 output variables.
 }
 \examples{
-\dontrun{
-is_stics_var(c("lai(n)", "masec(n)", "truc"))
-}
+is_stics_var(c("lai(n)", "masec(n)", "unknown"))
+
 }
 \seealso{
 \code{get_var_info()} for interactive use.

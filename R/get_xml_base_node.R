@@ -9,17 +9,19 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::get_xml_base_node("usms")
+#' get_xml_base_node("usms")
 #'
-#' SticsRFiles:::get_xml_base_node("sols")
+#' get_xml_base_node("sols")
 #'
 #' # Formalism labels can be retrieved using
-#' SticsRFiles:::get_xml_base_node()$form_names$tec
+#' get_xml_base_node()$form_names$tec
 #'
-#' SticsRFiles:::get_xml_base_node("tec", "irrigation")
+#' get_xml_base_node("tec", "irrigation")
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 # TODO: under construction !!!!!!!!!!!!!!!!!
 get_xml_base_node <- function(file_tag, form_name = NULL,

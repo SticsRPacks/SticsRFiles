@@ -40,7 +40,6 @@ and/or \code{var_list} vector of variables names. In the returned data.frame,
 variables names respect the same syntax as in the get_sim output.
 }
 \examples{
-\dontrun{
 path <- get_examples_path(file_type = "sti")
 get_report_results(workspace = path)
 
@@ -53,6 +52,6 @@ get_report_results(workspace = path, usm = c("DurumWheat", "grass"))
 get_report_results(workspace = path)
 
 get_report_results(workspace = path, file_name = "mod_rapportA.sti")
-}
+
 
 }

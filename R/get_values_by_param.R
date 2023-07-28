@@ -17,10 +17,12 @@
 #'                 dest_dir = "/path/to/dest/dir")
 #' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' tec_param_df <- read_excel(xl_path, sheet = "Tec")
-#' SticsRFiles:::get_values_by_param(params_table = tec_param_df)
+#' get_values_by_param(params_table = tec_param_df)
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_values_by_param <- function(params_table,
                                 param_name = NULL,

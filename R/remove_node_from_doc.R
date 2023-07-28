@@ -14,25 +14,27 @@
 #' \dontrun{
 #'
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
-#' tec_doc <- SticsRFiles:::xmldocument(xml_path)
+#' tec_doc <- xmldocument(xml_path)
 #'
 #' # removing a single parameter
-#' SticsRFiles:::remove_node_from_doc(tec_doc, param_name = "jultrav")
+#' remove_node_from_doc(tec_doc, param_name = "jultrav")
 #'
 #' # removing all the parent nodes the parameter belongs to
-#' SticsRFiles:::remove_node_from_doc(tec_doc,
+#' remove_node_from_doc(tec_doc,
 #'   param_name = "julapI_or_sum_upvt",
 #'   remove_parent = TRUE
 #' )
 #'
 #' # removing some of the parent nodes the parameter belongs to
-#' SticsRFiles:::remove_node_from_doc(tec_doc,
+#' remove_node_from_doc(tec_doc,
 #'   param_name = "julapI_or_sum_upvt",
 #'   remove_parent = TRUE, nodes_ids = c(1, 3)
 #' )
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 remove_node_from_doc <- function(xml_doc, param_name,
                                  parent_name = NULL,
@@ -48,7 +50,7 @@ remove_node_from_doc <- function(xml_doc, param_name,
 
   # if the type does not exist
   if (base::is.null(xpath_node)) {
-    print(paste("Unknown parameter in xml doc: ", param_name))
+    message(paste("Unknown parameter in xml doc: ", param_name))
     return(invisible())
   }
 
@@ -63,7 +65,7 @@ remove_node_from_doc <- function(xml_doc, param_name,
   }
 
   if (base::is.null(xml_nodes)) {
-    print("No nodes to remove from xml doc !")
+    message("No nodes to remove from xml doc !")
     return(invisible())
   }
 

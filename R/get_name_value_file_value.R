@@ -12,6 +12,8 @@
 # @examples
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_name_value_file_value <- function(file_path,
                                       param_names,
                                       names_dict = NULL) {

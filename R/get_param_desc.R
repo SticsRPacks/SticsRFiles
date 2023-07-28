@@ -11,6 +11,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_param_desc <- function(file_path = NULL,
                            stics_version = "latest",
                            name = NULL,

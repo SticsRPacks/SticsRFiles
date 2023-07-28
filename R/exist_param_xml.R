@@ -8,6 +8,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #'
@@ -51,6 +53,8 @@ exist_param_xml <- function(param,
 #' real parameters names
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 #' @examples
 #' \dontrun{

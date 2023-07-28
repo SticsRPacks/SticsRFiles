@@ -13,7 +13,7 @@
 \title{Read STICS input parameters from text files}
 \usage{
 get_param_txt(
-  workspace = getwd(),
+  workspace,
   param = NULL,
   variety = NULL,
   exact = FALSE,
@@ -135,14 +135,12 @@ The functions are compatible with intercrops. Users generally only use
 \code{get_param_txt()}, which is a wrapper for all these functions.
 }
 \examples{
-# Read the interrow distance parameter:
-\dontrun{
-library(SticsRFiles)
 path <- get_examples_path(file_type = "txt")
+
+# Getting the interrow distance parameter value
 get_param_txt(path, param = "interrang")
 
-# Getting varietal values:
-
+# Getting varietal parameters values
 # Get the leaf lifespan of the variety used in the usm:
 get_param_txt(workspace = path, param = "durvieF")
 # Get the leaf lifespan of another variety available in the plant file:
@@ -152,7 +150,7 @@ varieties <- c("Pactol", "Cherif", "Furio", "Dunia", "Volga", "Cecilia")
 get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 # Or get it from the output of the function returning all parameters:
 get_param_txt(workspace = path)$plant$plant1$durvieF
-}
+
 
 \dontrun{
 # Read the initialisation file (ficini.txt):

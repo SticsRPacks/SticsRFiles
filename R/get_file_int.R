@@ -16,6 +16,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @importFrom rlang .data
 #'
 #' @examples
@@ -28,7 +30,7 @@ get_file_int <- function(workspace,
                          plant_name = NULL,
                          verbose = TRUE) {
 
-  if (verbose) print(filename)
+  if (verbose) message(filename)
 
   if (is.list(filename)) filename <- unlist(filename)
   if (is.list(plant_name)) plant_name <- unlist(plant_name)

@@ -85,9 +85,7 @@ If \code{usms_file} is not specified, the plants are named "plant_1" by default
 (+ "plant_2" for intercrops).
 }
 \examples{
-\dontrun{
 path <- get_examples_path(file_type = "sti")
-get_sim(path, "banana")
-}
+sim_data <- get_sim(path, "banana")
 
 }

@@ -47,7 +47,7 @@ Extracting parameter values for a list of xml files and
 parameters
 }
 \examples{
-\dontrun{
+
 # Soil file
 file <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 
@@ -80,5 +80,5 @@ get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 
 # Getting all parameters for a given formalism: "irrigation"
 get_param_xml(file, select = "formalisme", select_value = "irrigation")
-}
+
 }
