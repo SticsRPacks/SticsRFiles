@@ -90,7 +90,8 @@ convert_xml2txt <- function(file,
   )
 
   # Using tags from in files names for the xml file type identification
-  tags <- list("_ini", "sols.xml", "_plt", "_tec", "_sta", "_new", "_gen")
+  tags <- list("_ini\\.xml", "sols\\.xml", "_plt\\.xml",
+               "_tec\\.xml", "_sta\\.xml", "_newform\\.xml", "_gen\\.xml")
   idx <- which(unlist(lapply(tags, function(x) grepl(x, xml_file))))
   calc_name <- length(idx) > 0
 
