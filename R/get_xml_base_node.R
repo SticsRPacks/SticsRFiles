@@ -113,5 +113,7 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
     XML::xmlParse(base_node_txt),
     paste0("//", node))[[1]]
 
+  delete(xml_doc)
+
   return(new_node)
 }

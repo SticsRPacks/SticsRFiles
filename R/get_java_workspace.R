@@ -5,6 +5,8 @@
 #'
 #' @param javastics JavaSTICS installation root folder
 #'
+#' @return Current JavaStics workspace
+#'
 #' @examples
 #' \dontrun{
 #' get_java_workspace("/path/to/JavaSTICS/folder")
@@ -34,6 +36,8 @@ get_java_workspace <- function(javastics) {
   if (base::is.null(current_wd))
     stop("JavaSTICS working directory hasn't been set ",
          "(use set_java_wd to do so)!")
+
+  delete(xml_pref)
 
   return(current_wd)
 }

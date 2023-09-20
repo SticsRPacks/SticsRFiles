@@ -75,6 +75,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         )
       }
     )
+
     return(xml_docs)
   }
 
@@ -277,6 +278,7 @@ gen_tec_doc <- function(xml_doc = NULL,
   }
 
   if (gen_error) {
+    delete(xml_doc)
     xml_doc <- NULL
   }
 

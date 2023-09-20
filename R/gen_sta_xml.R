@@ -36,7 +36,7 @@
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xml_document object or a list of
+#' @return None
 #'
 #' @examples
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
@@ -76,10 +76,10 @@ gen_sta_xml <- function(param_df,
   }
 
 
-  xml_doc <- NULL
+  xml_doc_tmpl <- NULL
 
   if (!base::is.null(sta_in_file)) {
-    xml_doc <- xmldocument(sta_in_file)
+    xml_doc_tmpl <- xmldocument(sta_in_file)
   }
 
 
@@ -93,7 +93,7 @@ gen_sta_xml <- function(param_df,
 
 
   xml_docs <- gen_sta_doc(
-    xml_doc = xml_doc,
+    xml_doc = xml_doc_tmpl,
     param_table = param_table[, -col_id],
     stics_version = stics_version
   )
@@ -144,7 +144,11 @@ gen_sta_xml <- function(param_df,
   # TODO: vectorize the saveXmlDoc method of the xml_document class
   for (f in seq_along(xml_docs)) {
     save_xml_doc(xml_docs[[f]], sta_out_file[[f]])
+
+    delete(xml_docs[[f]])
   }
 
-  return(invisible(xml_docs))
+  if (!base::is.null(xml_doc_tmpl) & class(xml_doc_tmpl) =="xml_document")
+    delete(xml_doc_tmpl)
+
 }

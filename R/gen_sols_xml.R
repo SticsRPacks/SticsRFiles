@@ -49,7 +49,7 @@
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xml_document object
+#' @return None
 #'
 #' @examples
 #'
@@ -103,21 +103,21 @@ gen_sols_xml <- function(file,
 
   if (lifecycle::is_present(sols_nb)) {
     lifecycle::deprecate_warn("1.0.0", "gen_sols_xml(sols_nb)",
-      details = "It is now directly computed in the function."
+                              details = "It is now directly computed in the function."
     )
   } else {
     sols_nb <- nrow(sols_param)
   }
 
-  xml_doc <- NULL
+  xml_doc_tmpl <- NULL
 
   if (!base::is.null(sols_in_file)) {
-    xml_doc <- xmldocument(sols_in_file)
+    xml_doc_tmpl <- xmldocument(sols_in_file)
   }
 
   xml_doc <- gen_usms_sols_doc(
     doc_type = "sols",
-    xml_doc = xml_doc,
+    xml_doc = xml_doc_tmpl,
     nodes_nb = sols_nb,
     nodes_param = sols_param,
     stics_version = stics_version
@@ -131,10 +131,13 @@ gen_sols_xml <- function(file,
     stop(paste("The directory does not exist: ", out_path))
   }
 
-  # for getting onlye the xml doc in return
-  if (!base::is.null(sols_out_file)) {
-    save_xml_doc(xml_doc, sols_out_file)
-  }
+  # saving file
+  save_xml_doc(xml_doc, sols_out_file)
 
-  return(invisible(xml_doc))
+  # finalizing object
+  delete(xml_doc)
+
+  if (!base::is.null(xml_doc_tmpl) & class(xml_doc_tmpl) =="xml_document")
+    delete(xml_doc_tmpl)
+
 }

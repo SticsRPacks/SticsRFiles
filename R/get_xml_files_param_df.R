@@ -246,8 +246,9 @@ get_params_id <- function(file_type, file_path, param_values) {
   param$names <- names(param_values)
 
   if (file_type == "fichiertec") {
+    xml_doc <- xmldocument(file_path)
     param_types_data <- get_param_type(
-      xmldocument(file_path),
+      xml_doc,
       param_name = names(param_values))
 
     param$id <- unlist(lapply(param_types_data, function(x) {
@@ -256,6 +257,8 @@ get_params_id <- function(file_type, file_path, param_values) {
       return(l)
     }), use.names = FALSE)
 
+
+    delete(xml_doc)
 
     return(param)
   }

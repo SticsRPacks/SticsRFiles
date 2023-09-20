@@ -38,7 +38,7 @@ longer supported, use \code{file} instead.}
 longer supported, use \code{out_dir} instead.}
 }
 \value{
-an invisible xml_document object or a list of
+None
 }
 \description{
 Generate STICS sta xml file(s) from a template or an input file
