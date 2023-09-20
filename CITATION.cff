@@ -6,15 +6,15 @@
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
+license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify ''STICS'' Input/Output Files'
 version: 1.1.3
-abstract: Manipulating input and output files of the 'STICS' crop model. These files
-  are either standard 'JavaSTICS' XML files or more directly the text files used by
-  the model 'fortran' executable. The most basic functionality is to read and write
-  parameter names and values through XML queries, or text files ones. More advanced
-  functionalities include the generation of input XML from XML templates and spreadsheets
-  with as many simulations contexts as needed, or the generation of the input text
-  files from the XML input files for distributed computing.
+abstract: Manipulating input and output files of the 'STICS' crop model. Files are
+  either 'JavaSTICS' XML files or text files used by the model 'fortran' executable.
+  Most basic functionalities are reading or writing parameter names and values in
+  both XML or text input files, and getting data from output files. Advanced functionalities
+  include XML files generation from XML templates and/or spreadsheets, or text files
+  generation from XML files by using 'xslt' transformation.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -32,9 +32,10 @@ authors:
   given-names: Michel
   email: michel.giner@cirad.fr
   orcid: https://orcid.org/0000-0002-9310-2377
+repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2023-05-23'
+date-released: '2023-07-10'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -52,7 +53,7 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 4.0.0'
+  version: '>= 3.6.0'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -193,13 +194,13 @@ references:
     email: kevin@rstudio.com
   - family-names: Allaire
     given-names: JJ
-    email: jj@rstudio.com
+    email: jj@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   - family-names: Ritchie
     given-names: Gary
-    email: gary@rstudio.com
+    email: gary@posit.co
   year: '2023'
 - type: software
   title: stringr
