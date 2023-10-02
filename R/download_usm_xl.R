@@ -69,11 +69,11 @@ download_usm_xl <- function(file = NULL,
   args <- list(...)
 
 
-  xl_patt <- "^inputs\\_.*\\.(xls|xlsx)$"
+  xl_patt <- "^inputs\\_.*(example|USMs)\\.(xls|xlsx)$"
   file_type <- "xl"
 
   if ("type" %in% names(args) && args$type == "csv") {
-    xl_patt <- "^inputs\\_.*\\.csv$"
+    xl_patt <- "^inputs\\_.*(example|USMs)\\.csv$"
     file_type <- "csv"
   }
 
@@ -151,7 +151,7 @@ download_usm_xl <- function(file = NULL,
 #' @return A vector of copied files path.
 #'
 #' @examples
-#' download_usm_csv(out_dir = tempdir())
+#' download_usm_csv()
 #'
 #' @export
 #'
