@@ -54,6 +54,12 @@ get_formalisms_xml <- function(xml_file,
     form_list <- param_by_form(form_list)
   }
 
+  if (is.list(xml_doc)) {
+    lapply(xml_doc, delete)
+  }
+
+  if (class(xml_doc) == "xml_document") delete(xml_doc)
+
   return(form_list)
 }
 

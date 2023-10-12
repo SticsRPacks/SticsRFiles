@@ -98,6 +98,7 @@ get_param_names_xml <- function(xml_file,
 
   # No parameters names found
   if (!length(param_names)) {
+    delete(xml_doc)
     return(NULL)
   }
 
@@ -132,6 +133,8 @@ get_param_names_xml <- function(xml_file,
       names(param_names) <- base::basename(xml_file)
     }
   }
+
+  delete(xml_doc)
 
   return(dplyr::as_tibble(param_names))
 }

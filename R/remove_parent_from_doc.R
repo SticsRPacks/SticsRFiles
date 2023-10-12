@@ -38,5 +38,4 @@ remove_parent_from_doc <- function(xml_doc,
     nodes_ids = nodes_ids
   )
 
-  return(invisible(xml_doc))
 }

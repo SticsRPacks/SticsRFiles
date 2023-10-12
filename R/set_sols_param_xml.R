@@ -1,5 +1,5 @@
 #' @title Setting soil parameter(s) value(s) in a sols xml_document
-#' @param xml_doc_object an xml_document object (created from an xml sols file)
+#' @param xml_doc an xml_document object (created from an xml sols file)
 #'
 #' @param sols_param soils parameters (data.frame)
 #' @param overwrite replace existing soil (TRUE) or not,
@@ -39,13 +39,13 @@
 #' @noRd
 #'
 
-set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
+set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
   if (!"data.frame" %in% class(sols_param)) {
     stop("sols_param do not belong to data.frame class/type")
   }
 
-  if (!is.xml_document(xml_doc_object)) {
-    stop("xml_doc_object is not an xml_document object")
+  if (!is.xml_document(xml_doc)) {
+    stop("xml_doc is not an xml_document object")
   }
 
 
@@ -60,14 +60,14 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
   # Checking parameter names from param_table against xml ones
   check_param_names(
     param_names = in_params[-col_id],
-    ref_names = get_param_names(xml_object = xml_doc_object)
+    ref_names = get_param_names(xml_object = xml_doc)
   )
 
   # TODO: evaluate if this use case is relevant !
   # checking soils based on names if overwrite == FALSE
   if (!overwrite) {
     # getting soils names
-    xml_sols <- as.vector(get_param_value(xml_doc_object, "sol"))
+    xml_sols <- as.vector(get_param_value(xml_doc, "sol"))
 
 
     ###############################################
@@ -91,7 +91,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
       sols_param[match(xml_sols[sols_xml_idx], sols_param[[sol_col]]), ]
   } else {
     # setting soils names
-    set_param_value(xml_doc_object, "sol", sols_param[[sol_col]])
+    set_param_value(xml_doc, "sol", sols_param[[sol_col]])
   }
 
 
@@ -131,7 +131,7 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
       # Setting parameters values in doc
       if (is.element(par, layers_params)) {
-        set_param_value(xml_doc_object, p, par_values, layer, which(sols_idx))
+        set_param_value(xml_doc, p, par_values, layer, which(sols_idx))
       }
     }
   }
@@ -141,14 +141,12 @@ set_sols_param_xml <- function(xml_doc_object, sols_param, overwrite = FALSE) {
 
   # No other parameters than layer dependent ones to set
   if (!length(other_params)) {
-    return(xml_doc_object)
+    return(xml_doc)
   }
 
   # Setting param values
   for (p in other_params) {
-    set_param_value(xml_doc_object, p, sols_param[[p]])
+    set_param_value(xml_doc, p, sols_param[[p]])
   }
 
-  # final doc return
-  return(xml_doc_object)
 }

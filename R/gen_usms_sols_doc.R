@@ -62,17 +62,19 @@ gen_usms_sols_doc <- function(doc_type,
     stics_version <- get_xml_stics_version(stics_version = stics_version)
 
     # using function get_xml_base_doc
-    xml_doc <- get_xml_base_doc(
+    xml_doc_out <- get_xml_base_doc(
       xml_type = doc_type,
       stics_version = stics_version
     )
+  } else {
+    xml_doc_out <- xml_doc
   }
 
   elts_nb <- NULL
 
   # identity or single usms/sols doc from the template file
   if (all(base::is.null(c(nodes_nb, nodes_param)))) {
-    return(xml_doc)
+    return(xml_doc_out)
   }
 
   # Calculating nodes number
@@ -90,23 +92,23 @@ gen_usms_sols_doc <- function(doc_type,
   }
 
   # getting usm/sol nodes
-  xml_nodes <- get_nodes(xml_doc, node_str)
+  xml_nodes <- get_nodes(xml_doc_out, node_str)
 
   # Nothing to do
   doc_nodes_nb <- length(xml_nodes)
   if (doc_nodes_nb == elts_nb && base::is.null(nodes_param)) {
-    return(xml_doc)
+    return(xml_doc_out)
   }
 
 
   # Creating nodes for usms or sols
-  add_node_to_doc(xml_doc,
+  add_node_to_doc(xml_doc_out,
                   xml_nodes[[1]],
                   nodes_nb = elts_nb - 1,
                   parent_path = root_str)
 
   # Warning if nodes number > 1
-  # I that case, the xml_doc cannot be considered as a template
+  # I that case, the xml_doc_out cannot be considered as a template
   if (doc_nodes_nb > 1) {
     stop("Multiple elements in ",
          doc_type,
@@ -116,14 +118,19 @@ gen_usms_sols_doc <- function(doc_type,
   # Not any parameters values for overloading
   # existing ones, returning the template content.
   if (base::is.null(nodes_param)) {
-    return(xml_doc)
+    return(xml_doc_out)
   }
 
   switch(doc_type,
-    usms = set_usms_param_xml(xml_doc, nodes_param, overwrite = TRUE),
-    sols = set_sols_param_xml(xml_doc, nodes_param, overwrite = TRUE)
+    usms = set_usms_param_xml(xml_doc = xml_doc_out,
+                              usms_param = nodes_param,
+                              overwrite = TRUE),
+    sols = set_sols_param_xml(xml_doc = xml_doc_out,
+                              sols_param = nodes_param,
+                              overwrite = TRUE)
   )
 
+  rm(xml_nodes)
 
-  return(xml_doc)
+  return(xml_doc_out)
 }

@@ -3,6 +3,9 @@ get_used_param_xml <- function(file) {
   param <- list()
   param$options <- get_options_used_param(xml_doc)
   param$base <- get_base_used_param(xml_doc)
+
+  delete(xml_doc)
+
   param
 }
 

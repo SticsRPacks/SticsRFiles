@@ -42,7 +42,7 @@ longer supported, use \code{file} instead.}
 longer supported, it is now computed in the function.}
 }
 \value{
-an invisible xml_document object
+None
 }
 \description{
 Generate STICS sols xml file from a template or an input file

@@ -52,5 +52,7 @@ get_param_bounds_xml <- function(xml_file,
 
   param_bounds <- get_param_bounds(xml_doc, param_name, bounds_name, output)
 
+  delete(xml_doc)
+
   return(param_bounds)
 }

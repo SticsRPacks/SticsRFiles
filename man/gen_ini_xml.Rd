@@ -43,7 +43,7 @@ longer supported, use \code{param_df} instead.}
 longer supported, use \code{out_dir} instead.}
 }
 \value{
-an invisible xml_document object or a list of
+None
 }
 \description{
 Generate STICS ini xml file(s) from a template or an input file

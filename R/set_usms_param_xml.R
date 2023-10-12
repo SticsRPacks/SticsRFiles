@@ -1,5 +1,5 @@
 #' @title Setting a usm param value(s) in an usms
-#' @param xml_doc_object an  object (created from an usms file)
+#' @param xml_doc an  object (created from an usms file)
 #'
 #' @param usms_param usms parameters (data.frame)
 #' @param overwrite replace existing usms (TRUE) or not,
@@ -39,7 +39,7 @@
 #'
 
 
-set_usms_param_xml <- function(xml_doc_object,
+set_usms_param_xml <- function(xml_doc,
                                usms_param = NULL,
                                overwrite = FALSE) {
   if (!base::is.null(usms_param)) {
@@ -52,8 +52,8 @@ set_usms_param_xml <- function(xml_doc_object,
     }
   }
 
-  if (!is.xml_document(xml_doc_object)) {
-    stop("xml_doc_object is not an xml_document object")
+  if (!is.xml_document(xml_doc)) {
+    stop("xml_doc is not an xml_document object")
   }
 
   # detecting usm names column
@@ -70,13 +70,13 @@ set_usms_param_xml <- function(xml_doc_object,
   # Checking parameter names from param_table against xml ones
   check_param_names(
     param_names = in_params[-col_id],
-    ref_names = get_param_names(xml_object = xml_doc_object)
+    ref_names = get_param_names(xml_object = xml_doc)
   )
 
   # checking usms based on names if overwrite == FALSE
   if (!overwrite) {
     # getting usm names
-    xml_usms <- as.vector(get_param_value(xml_doc_object, "usm"))
+    xml_usms <- as.vector(get_param_value(xml_doc, "usm"))
 
     ###############################################
     # TODO : see adding usms not in xml file ?
@@ -101,7 +101,7 @@ set_usms_param_xml <- function(xml_doc_object,
       usms_param[match(xml_usms[usms_xml_idx], usms_param[[usm_col]]), ]
   } else {
     # setting usms names
-    set_param_value(xml_doc_object, "usm", usms_param[[usm_col]])
+    set_param_value(xml_doc, "usm", usms_param[[usm_col]])
     usms_xml_idx <- seq_along(usms_param[[usm_col]])
   }
 
@@ -121,7 +121,7 @@ set_usms_param_xml <- function(xml_doc_object,
         par <- paste0(p, "_", i)
         if (is.element(par, plante_params)) {
           set_param_value(
-            xml_doc_object, p,
+            xml_doc, p,
             usms_param[[par]],
             "plante", as.character(i),
             usms_xml_idx
@@ -134,16 +134,14 @@ set_usms_param_xml <- function(xml_doc_object,
   other_params <- setdiff(in_params, c(plante_params, usm_col))
 
   if (!length(other_params)) {
-    return(xml_doc_object)
+    return()
   }
 
   # Setting param values
   for (p in other_params) {
     set_param_value(
-      xml_doc_object, p, usms_param[[p]],
+      xml_doc, p, usms_param[[p]],
       usms_xml_idx
     )
   }
-
-  return(xml_doc_object)
 }
