@@ -62,34 +62,40 @@ suggested.*
 The best way to install the packages from `SticsRPacks`, from which
 `SticsRFiles` is part of, is by installing the `[SticsRPacks]` package.
 The package can be installed from [GitHub](https://github.com/) using
-either the `devtools` package, or the more lightweight `remotes`
+either the `devtools` package, or the more lightweight the `remotes`
 package:
 
+- With `devtools`
+
 ``` r
-devtools::install_github("SticsRPacks/SticsRPacks")
+      devtools::install_github("SticsRPacks/SticsRPacks")
 ```
 
 - With `remotes`
 
 ``` r
-remotes::install_github("SticsRPacks/SticsRPacks")
+      remotes::install_github("SticsRPacks/SticsRPacks")
 ```
 
 The package will install the packages for you at the latest release
 version.
 
-### Or, install directly
+### Direct installation from the CRAN or [GitHub](https://github.com/)
 
-- With `devtools`
+- From the CRAN
 
 ``` r
-devtools::install_github("SticsRPacks/SticsRFiles@*release")
+      install.packages("SticsRFiles")
 ```
 
-- With `remotes`
+- From GitHub
 
 ``` r
-remotes::install_github("SticsRPacks/SticsRFiles@*release")
+      devtools::install_github("SticsRPacks/SticsRFiles@*release")
+
+      or 
+      
+      remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
 Normally, all the package dependencies will be installed for CRAN
