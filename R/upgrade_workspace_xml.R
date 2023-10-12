@@ -93,7 +93,7 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the workspace dir to be converted
   if (!dir.exists(workspace) ||
-    !file.exists(file.path(workspace, "usms.xml"))) {
+      !file.exists(file.path(workspace, "usms.xml"))) {
     stop(
       workspace,
       ": the directory does not exist or is not a JavaSTICS workspace !"
@@ -105,7 +105,7 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the JavaSTICS dir
   if (!dir.exists(javastics) ||
-    !file.exists(file.path(javastics, "JavaStics.exe"))) {
+      !file.exists(file.path(javastics, "JavaStics.exe"))) {
     stop(
       javastics,
       " : the directory does nor exist or is not a JavaSTICS one !"
@@ -114,13 +114,12 @@ upgrade_workspace_xml <- function(workspace,
 
 
   if (verbose) {
-    cat(paste(
+    message(paste(
       "Upgrading files from version", stics_version, "to",
-      target_version, "\n"
-    ))
-    cat(paste("From: ", workspace, "\n"))
-    cat(paste("To: ", out_dir, "\n"))
-    cat("-----------------------------------\n")
+      target_version, "\n"),
+      paste("From: ", workspace, "\n"),
+      paste("To: ", out_dir, "\n"),
+      "-----------------------------------\n")
   }
 
   # Converting param_gen.xml
@@ -135,7 +134,7 @@ upgrade_workspace_xml <- function(workspace,
     )
 
     if (verbose) {
-      cat("param_gen.xml\n")
+      message("param_gen.xml\n")
     }
   }
 
@@ -166,7 +165,7 @@ upgrade_workspace_xml <- function(workspace,
     )
 
     if (verbose) {
-      cat("param_new_form.xml\n")
+      message("param_new_form.xml\n")
     }
   }
 
@@ -186,7 +185,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("usms.xml\n")
+    message("usms.xml\n")
   }
 
   # Converting sols.xml file
@@ -203,7 +202,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("sols.xml\n")
+    message("sols.xml\n")
   }
 
   # Converting station files (*_sta.xml)
@@ -221,7 +220,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("*_sta.xml\n")
+    message("*_sta.xml\n")
   }
 
   # Converting initialisation files (*_ini.xml)
@@ -239,7 +238,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("*_ini.xml\n")
+    message("*_ini.xml\n")
   }
 
   # Converting crop management files (*_tec.xml)
@@ -258,7 +257,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("*_tec.xml\n")
+    message("*_tec.xml\n")
   }
 
   # Copying *.mod files (for model outputs)
@@ -268,7 +267,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("Copying *.mod files.\n")
+    message("Copying *.mod files.\n")
   }
 
   # TODO: see how to manage variables names checks in *.mod files
@@ -287,7 +286,7 @@ upgrade_workspace_xml <- function(workspace,
   )
 
   if (verbose) {
-    cat("Copying *.obs files.\n")
+    message("Copying *.obs files.\n")
   }
 
   # Copying weather data files
@@ -310,7 +309,7 @@ upgrade_workspace_xml <- function(workspace,
   }
 
   if (verbose) {
-    cat("Copying weather files.\n")
+    message("Copying weather files.\n")
   }
 
 
@@ -324,7 +323,7 @@ upgrade_workspace_xml <- function(workspace,
 
   if (length(plant_files) > 0) {
     if (verbose) {
-      cat("*_plt.xml\n")
+      message("*_plt.xml\n")
     }
 
     # For creating a sub-directory in workspace for upgraded plant files
@@ -345,7 +344,8 @@ upgrade_workspace_xml <- function(workspace,
   }
 
   if (verbose) {
-    cat("-----------------------------------\n")
+    message(paste0("-----------------------------------\n",
+                   "Files upgrade and copy is complete.\n")
+    )
   }
-  cat("Files upgrade and copy is complete.\n")
 }

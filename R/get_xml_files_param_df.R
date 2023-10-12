@@ -54,6 +54,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' dir_path <- get_examples_path("xml")

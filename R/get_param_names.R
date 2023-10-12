@@ -13,11 +13,13 @@
 #' @examples
 #' \dontrun{
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
-#' sols_doc <- SticsRFiles:::xmldocument(xml_path)
-#' SticsRFiles:::get_param_names(sols_doc)
+#' sols_doc <- xmldocument(xml_path)
+#' get_param_names(sols_doc)
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_param_names <- function(xml_object,
                             param_list = c(),

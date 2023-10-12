@@ -11,6 +11,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 replace_txt_param_value <- function(file_path,
                                     param_tag,
                                     param_value,
@@ -72,8 +74,8 @@ replace_txt_param_value <- function(file_path,
   diff_files <- as.numeric(diff_files)
   not_replaced_files <- diff_files == 0
   if (any(not_replaced_files)) {
-    print("No replacement for file(s):")
-    print(out_file_path[not_replaced_files])
+    message("No replacement for file(s):")
+    message(out_file_path[not_replaced_files])
   }
   # removing the temporary file
   if (in_place) {

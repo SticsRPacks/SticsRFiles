@@ -7,15 +7,17 @@
 #' @return Character vector of founds strings
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #'
 #' names <- c("abscission", "alphaphot", "codelaitr", "dlaimax", "lai")
 #'
-#' SticsRFiles:::find_names(names, "lai")
+#' find_names(names, "lai")
 #'
 #' #> [1] "codelaitr" "dlaimax"
 #'
-#' SticsRFiles:::find_names(names, "lai", exact = TRUE)
+#' find_names(names, "lai", exact = TRUE)
 #'
 #' #> [1] "lai"
 find_names <- function(names, name, exact = FALSE) {

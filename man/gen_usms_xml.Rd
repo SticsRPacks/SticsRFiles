@@ -5,7 +5,7 @@
 \title{Generate STICS usms xml file from a template or an input file}
 \usage{
 gen_usms_xml(
-  file = file.path(getwd(), "usms.xml"),
+  file,
   param_df = NULL,
   template = NULL,
   stics_version = "latest",
@@ -16,8 +16,7 @@ gen_usms_xml(
 )
 }
 \arguments{
-\item{file}{Path (including name) of the usms file to generate. Optional,
-set to \code{file.path(getwd(), "usms.xml")}by default.}
+\item{file}{Path (including name) of the usms file to generate.}
 
 \item{param_df}{A table (df, tibble) containing the values of the parameters
 to use (see details)}
@@ -78,11 +77,9 @@ as a prefix to be detected (as shown in the table extract above).
 If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
-\dontrun{
-
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
-gen_usms_xml(usms_out_file = "usms.xml", usms_param = usms_param_df)
-}
+gen_usms_xml(file = file.path(tempdir(), "usms.xml"),
+ param_df = usms_param_df)
 
 }

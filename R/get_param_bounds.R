@@ -17,19 +17,20 @@
 #' \dontrun{
 #' xml_sta <- file.path(get_examples_path(file_type = "xml"), "file_sta.xml")
 #'
-#' sta_doc <- SticsRFiles:::xmldocument(xml_sta)
+#' sta_doc <- xmldocument(xml_sta)
 #'
-#' par_bounds <- SticsRFiles:::get_param_bounds(sta_doc, "zr")
+#' par_bounds <- get_param_bounds(sta_doc, "zr")
 #'
-#' par_bounds_list <- SticsRFiles:::get_param_bounds(sta_doc,
+#' par_bounds_list <- get_param_bounds(sta_doc,
 #'                                                  c("zr", "altistation"))
 #'
 #'
-#' SticsRFiles:::get_param_bounds(sta_doc, c("zr", "altistation"), "min")
+#' get_param_bounds(sta_doc, c("zr", "altistation"), "min")
 #' }
 #'
 #' @keywords internal
 #'
+#' @noRd
 #'
 get_param_bounds <- function(xml_doc,
                              param_name,
@@ -139,6 +140,7 @@ fix_bounds <- function(values, bounds_name, param_name) {
 #' @return A named vector for bound(s)
 #'
 #' @keywords internal
+#' @noRd
 #'
 #'
 #'

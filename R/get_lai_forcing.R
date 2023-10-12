@@ -12,14 +12,12 @@
 #' for each usm
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Xml case
 #' xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' get_lai_forcing(xml_usms)
 #' get_lai_forcing(xml_usms, "wheat")
 #' get_lai_forcing(xml_usms, c("wheat", "intercrop_pea_barley"))
-#' }
+#'
 #'
 #' @export
 #'
@@ -63,6 +61,8 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
 #' @return A names numeric vector of a boolean value for each usm
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 

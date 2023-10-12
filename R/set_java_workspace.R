@@ -17,6 +17,10 @@
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
+
 set_java_workspace <- function(javastics, workspace) {
 
 

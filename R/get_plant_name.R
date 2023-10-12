@@ -18,6 +18,8 @@
 #' and two values for intercrop (principal, associated).
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' path <- get_examples_path(file_type = "xml")

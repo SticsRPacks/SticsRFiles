@@ -9,6 +9,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 get_params_from_doc_node <- function(xml_node,
                                      param_list = c(),
                                      unique_val = TRUE) {

@@ -32,8 +32,6 @@ Use \code{get_usms_list()} to get the list of the usm names for
 an usms.xml file.
 }
 \examples{
-\dontrun{
-
 # Xml case
 xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 get_plants_nb(xml_usms)
@@ -43,6 +41,5 @@ get_plants_nb(xml_usms, c("wheat", "intercrop_pea_barley"))
 # Txt case
 txt_usm <- file.path(get_examples_path(file_type = "txt"), "new_travail.usm")
 get_plants_nb(txt_usm)
-}
 
 }

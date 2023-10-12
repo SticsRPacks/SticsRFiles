@@ -10,23 +10,24 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::gen_climate(
+#' gen_climate(
 #'                   c("path/to/weather.year1", "path/to/weather.year2"),
 #'                  "/path/to/out/dir" )
 #' }
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_climate <- function(files_path, out_dir) {
 
   # generate intermediate paths for a multi-years simulation
-  # i.e. > 2
+  # i.e. over 2
   files_path <- complete_climate_paths(files_path)
 
   # data concatenation
   climate_lines <- c()
   for (i in seq_along(files_path)) {
-    #out_files_lines[[i]] <- trimws(readLines(files_path[i]))
     climate_lines <- c(climate_lines, trimws(readLines(files_path[i])))
   }
 
@@ -56,11 +57,14 @@ gen_climate <- function(files_path, out_dir) {
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::complete_climate_paths(
+#' complete_climate_paths(
 #'             c("path/to/weather.year1", "path/to/weather.year2"))
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
+#'
 #'
 complete_climate_paths <- function(files_path) {
 
@@ -83,7 +87,7 @@ complete_climate_paths <- function(files_path) {
   years_chr <- as.character(years)
   file_name <- strsplit(basename(files_path[1]), split = "\\.")[[1]][1]
   files_path <- file.path(
-    dirname(files_path[1]), paste0(file_name,".", years_chr)
+    dirname(files_path[1]), paste0(file_name, ".", years_chr)
   )
 
 

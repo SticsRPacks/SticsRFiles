@@ -18,7 +18,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #'
 #' # Getting all data
 #' download_data()
@@ -28,7 +27,7 @@
 #'
 #' # Getting data for a given example : study_case_1 and a given version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
-#' }
+#'
 download_data <- function(out_dir = tempdir(), example_dirs = NULL,
                           stics_version = "latest",
                           dir = lifecycle::deprecated(),
@@ -108,18 +107,20 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' # Getting all available dirs from the data repos
-#' SticsRFiles:::get_referenced_dirs()
+#' get_referenced_dirs()
 #'
 #' # Getting dirs for a use case
-#' SticsRFiles:::get_referenced_dirs("study_case_1")
+#' get_referenced_dirs("study_case_1")
 #'
 #' # Getting dirs for a use case and a version
-#' SticsRFiles:::get_referenced_dirs("study_case_1", "V9.0")
+#' get_referenced_dirs("study_case_1", "V9.0")
 #'
-#' SticsRFiles:::get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0")
+#' get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0")
 #' }
 #'
 get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {

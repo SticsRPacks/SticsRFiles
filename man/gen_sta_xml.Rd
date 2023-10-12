@@ -5,9 +5,9 @@
 \title{Generate STICS sta xml file(s) from a template or an input file}
 \usage{
 gen_sta_xml(
-  param_df = NULL,
+  param_df,
   file = NULL,
-  out_dir = getwd(),
+  out_dir,
   stics_version = "latest",
   param_table = lifecycle::deprecated(),
   sta_in_file = lifecycle::deprecated(),
@@ -65,11 +65,8 @@ as a prefix to be detected (as shown in the table extract above).
 If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
-\dontrun{
-
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 sta_param_df <- read_params_table(file = xl_path, sheet_name = "Station")
-gen_sta_xml(out_dir = "/path/to/dest/dir", param_df = sta_param_df)
-}
+gen_sta_xml(out_dir = tempdir(), param_df = sta_param_df)
 
 }

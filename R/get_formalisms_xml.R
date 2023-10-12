@@ -22,6 +22,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #'
 get_formalisms_xml <- function(xml_file,
                                par_name = NULL,

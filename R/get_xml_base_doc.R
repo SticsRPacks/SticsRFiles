@@ -9,20 +9,22 @@
 #' @examples
 #' \dontrun{
 #' # Getting xml STICS files types list (i.e. keywords)
-#' SticsRFiles:::get_xml_base_doc()
+#' get_xml_base_doc()
 #'
 #' # Getting a soil document with one soil definition
-#' SticsRFiles:::get_xml_base_doc("sols")
+#' get_xml_base_doc("sols")
 #'
 #' # STICS version can be provided, V9.1
 #' # corresponds to stics_version = "latest"
 #' # View available STICS files version
-#' SticsRFiles:::get_xml_stics_version()
+#' get_xml_stics_version()
 #' # Giving STICS version
-#' SticsRFiles:::get_xml_base_doc("sols", stics_version = "V9.1")
+#' get_xml_base_doc("sols", stics_version = "V9.1")
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_xml_base_doc <- function(xml_type = NULL,
                              stics_version = "latest") {

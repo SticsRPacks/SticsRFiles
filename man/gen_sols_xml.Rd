@@ -5,8 +5,8 @@
 \title{Generate STICS sols xml file from a template or an input file}
 \usage{
 gen_sols_xml(
-  file = file.path(getwd(), "sols.xml"),
-  param_df = NULL,
+  file,
+  param_df,
   template = NULL,
   stics_version = "latest",
   sols_in_file = lifecycle::deprecated(),
@@ -79,11 +79,11 @@ a prefix to be detected (as shown in the table extract above).
 If not given (the default, \code{NULL}), the function returns the template as is.
 }
 \examples{
-\dontrun{
 
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
+
 sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
-gen_sols_xml(file = "sols.xml", param_df = sols_param_df)
-}
+gen_sols_xml(file = file.path(tempdir(), "sols.xml"),
+param_df = sols_param_df)
 
 }

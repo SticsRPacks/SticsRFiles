@@ -10,16 +10,18 @@
 #' @examples
 #' \dontrun{
 #' # View available STICS files version
-#' SticsRFiles:::get_xml_stics_version()
+#' get_xml_stics_version()
 #'
 #' # View the latest version
-#' SticsRFiles:::get_xml_stics_version("latest")
+#' get_xml_stics_version("latest")
 #'
 #' # Checking if a version exists
-#' SticsRFiles:::get_xml_stics_version("V9.2")
+#' get_xml_stics_version("V9.2")
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_xml_stics_version <- function(stics_version = "latest", xml_doc = NULL) {
 

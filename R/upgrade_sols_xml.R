@@ -20,13 +20,15 @@
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#' \dontrun{
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
+#'
 #' upgrade_sols_xml(
-#'   file = "/path/to/sols.xml",
-#'   param_gen_file = "/path/to/param_gen.xml",
-#'   out_dir = "/path/to/an/output/directory"
+#'   file = file.path(dir_path,"sols.xml" ),
+#'   out_dir = tempdir(),
+#'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#' }
+#'
 upgrade_sols_xml <- function(file,
                              out_dir,
                              param_gen_file,

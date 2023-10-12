@@ -9,13 +9,15 @@
 #' @examples
 #' \dontrun{
 #' # Retrieving xml examples files to get xml_document from
-#' SticsRFiles:::get_xml_doc_example()
+#' get_xml_doc_example()
 #'
 #' # Loading an usms.xml file
-#' usm_doc <- SticsRFiles:::get_xml_doc_example("usms.xml")
+#' usm_doc <- get_xml_doc_example("usms.xml")
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 get_xml_doc_example <- function(xml_name = NULL,
                                 stics_version = "latest") {

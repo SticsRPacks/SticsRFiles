@@ -16,6 +16,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 gen_paramsti <- function(workspace,
                          par_names,
                          par_values,

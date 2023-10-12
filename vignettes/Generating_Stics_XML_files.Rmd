@@ -164,7 +164,7 @@ in some cases used parameters names in tables may be different from real paramet
 Here is the actual **correspondence table** of `keywords` to be used in parameters tables (i.e excel files for example) in replacement of real names in XML files:
 
 ```{r echo=FALSE, eval=TRUE, fig.align='center'}
-l <- get_params_dict()
+l <- SticsRFiles:::get_params_dict()
 df <- data.frame(keyword = names(l), realname = unlist(l, use.names = FALSE),
                  stringsAsFactors = FALSE)
 rmarkdown::paged_table(df)

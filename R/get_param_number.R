@@ -13,14 +13,16 @@
 #' \dontrun{
 #' xml_usms <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #'
-#' usms_doc <- SticsRFiles:::xmldocument(xml_usms)
+#' usms_doc <- xmldocument(xml_usms)
 #'
-#' par_nb <- SticsRFiles:::get_param_number(usms_doc, "usm")
+#' par_nb <- get_param_number(usms_doc, "usm")
 #'
-#' par_nb_vec <- SticsRFiles:::get_param_number(usms_doc, c("usm", "fplt"))
+#' par_nb_vec <- get_param_number(usms_doc, c("usm", "fplt"))
 #' }
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 # TODO: may use get_param_types returning values nb in $length field
 get_param_number <- function(xml_doc_object, param_name, ...) {

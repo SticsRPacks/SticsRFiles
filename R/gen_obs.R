@@ -34,17 +34,14 @@
 #' files (FALSE), TRUE when no errors.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' obs_df <- read_params_table(file = xl_path, sheet_name = "Obs")
 #' gen_obs(df = obs_df, out_dir = "/path/to/dest/dir")
-#' }
 #'
 #' @export
 #'
 gen_obs <- function(df,
-                    out_dir = getwd(),
+                    out_dir,
                     usms_list = NULL,
                     obs_table = lifecycle::deprecated(),
                     out_path = lifecycle::deprecated()) {
@@ -135,6 +132,8 @@ gen_obs <- function(df,
 #'  or not (FALSE)
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 gen_obs_ <- function(obs_table, file_path) {
 

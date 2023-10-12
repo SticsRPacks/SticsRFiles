@@ -3,7 +3,7 @@ context("searching variables information")
 
 # fixing version to latest standard one
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- SticsRFiles:::get_version_num()
+version_num <- get_version_num()
 stics_prev_version <- get_stics_versions_compat(-1)
 
 

@@ -27,10 +27,9 @@
 #' @return A vector of copied files path.
 #'
 #' @examples
-#' \dontrun{
+#'
 #' download_usm_xl()
-#' download_usm_xl(out_dir = "/path/to/destination/dir")
-#' }
+#'
 #'
 #' @export
 #'
@@ -66,28 +65,26 @@ download_usm_xl <- function(file = NULL,
     dest_dir <- out_dir # to remove when we update inside the function
   }
 
-  oldw <- getOption("warn")
-  if (!verbose) {
-    options(warn = -1)
-  } else {
-    options(warn = 0)
-  }
 
   args <- list(...)
 
 
-  xl_patt <- "\\.(xls|xlsx)$"
+  xl_patt <- "^inputs\\_.*(example|USMs)\\.(xls|xlsx)$"
+  file_type <- "xl"
 
-  if ("type" %in% names(args) && args$type == "csv") xl_patt <- "\\.csv$"
+  if ("type" %in% names(args) && args$type == "csv") {
+    xl_patt <- "^inputs\\_.*(example|USMs)\\.csv$"
+    file_type <- "csv"
+  }
 
   if (base::is.null(xl_name)) {
     xl_name <- xl_patt
   }
 
-  xl_dir <- get_examples_path(file_type = c("xl", "csv"),
+  xl_dir <- get_examples_path(file_type = "xl",
                               stics_version = version_name)
 
-  files_list <- list.files(xl_dir, pattern = xl_name)
+  files_list <- list.files(xl_dir, pattern = xl_patt)
 
   if (length(files_list) > 1) {
     warning("You must give a file name, see in returned list !")
@@ -115,9 +112,9 @@ download_usm_xl <- function(file = NULL,
 
   if (any(success)) {
     if (verbose)
-      print(paste(files_list[success],
-                  " has been copied in directory ",
-                  dest_dir))
+      message(paste(files_list[success],
+                    " has been copied in directory ",
+                    dest_dir))
     dest_list <- dest_list[success]
   }
 
@@ -125,7 +122,6 @@ download_usm_xl <- function(file = NULL,
     warning("Error copying files:\n", paste(src_list[!success],
                                             collapse = "\n"))
 
-  options(warn = oldw)
 
   return(invisible(dest_list))
 }
@@ -155,9 +151,7 @@ download_usm_xl <- function(file = NULL,
 #' @return A vector of copied files path.
 #'
 #' @examples
-#' \dontrun{
-#' download_usm_csv(out_dir = "/path/to/destination/dir")
-#' }
+#' download_usm_csv()
 #'
 #' @export
 #'

@@ -39,19 +39,16 @@
 #' @return an invisible xml_document object or a list of
 #'
 #' @examples
-#' \dontrun{
-#'
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' sta_param_df <- read_params_table(file = xl_path, sheet_name = "Station")
-#' gen_sta_xml(out_dir = "/path/to/dest/dir", param_df = sta_param_df)
-#' }
+#' gen_sta_xml(out_dir = tempdir(), param_df = sta_param_df)
 #'
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_xml <- function(param_df = NULL,
+gen_sta_xml <- function(param_df,
                         file = NULL,
-                        out_dir = getwd(),
+                        out_dir,
                         stics_version = "latest",
                         param_table = lifecycle::deprecated(),
                         sta_in_file = lifecycle::deprecated(),
@@ -111,10 +108,10 @@ gen_sta_xml <- function(param_df = NULL,
   out_idx <- unlist(lapply(xml_docs, base::is.null))
 
   if (any(out_idx)) {
-    cat("\n")
-    cat(paste0("Errors have been detected while trying to replace",
-        " parameters values in xml documents\n"))
-    cat(paste(sum(!out_idx), "files have been generated !\n"))
+    message(paste0("\nErrors have been detected while trying to replace",
+                   "parameters values in xml documents\n"),
+            paste(sum(!out_idx), "files have been generated !\n"))
+
     # selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
   }

@@ -13,7 +13,9 @@
 #' }
 #'
 #' @keywords internal
-# @export
+#'
+#' @noRd
+#'
 init_javastics_pref <- function(javastics, overwrite = FALSE) {
   check_java_path(javastics)
 

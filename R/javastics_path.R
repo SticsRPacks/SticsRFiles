@@ -5,6 +5,8 @@
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 # @examples
 get_javastics_path <- function() {
 
@@ -21,6 +23,8 @@ get_javastics_path <- function() {
 #'
 # @return
 #' @keywords internal
+#'
+#' @noRd
 #'
 # @examples
 set_javastics_path <- function(javastics_path, write = FALSE) {
@@ -43,6 +47,8 @@ set_javastics_path <- function(javastics_path, write = FALSE) {
 #' the variable content.
 #'
 #' @keywords internal
+#'
+#' @noRd
 #'
 # @examples
 exists_javastics_path <- function() {
@@ -67,6 +73,8 @@ exists_javastics_path <- function() {
 #'
 # @return
 #' @keywords internal
+#'
+#' @noRd
 #'
 # @examples
 write_javastics_path <- function(javastics_path) {
