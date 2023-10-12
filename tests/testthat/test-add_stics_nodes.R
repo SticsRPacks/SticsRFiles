@@ -1,16 +1,24 @@
 library(SticsRFiles)
 
-stics_version <- "V9.0"
-#get_stics_versions_compat()$latest_version
-tec_xml <- file.path(get_examples_path(file_type = "xml"),stics_version, "file_tec.xml")
+stics_version <- get_stics_versions_compat()$latest_version
+version_num <- SticsRFiles:::get_version_num()
+
+tec_xml <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 tec_doc <- SticsRFiles:::xmldocument(tec_xml)
+# Adding one irrigation operation
+SticsRFiles:::add_stics_nodes(tec_doc, "irrigation")
+
+# Adding three irrigation operations
+SticsRFiles:::add_stics_nodes(tec_doc, "irrigation", nodes_nb = 3)
+context("Reaserching parameter bounds")
 
 
-context("Getting and Setting values from txt files")
-#SticsRFiles:::add_stics_nodes(tec_doc, "irrigation", nodes_nb = 3)
-test_that("variety argument can take NULL, integer or characters", {
-  expect_error (SticsRFiles:::add_stics_nodes(tec_doc, "irrigation", nodes_nb = 3))
-  expect_error (SticsRFiles:::add_stics_nodes(tec_xml, "irrigation", nodes_nb = 3))
-  #expect_message (SticsRFiles:::add_stics_nodes(tec_doc, "irrigation", nodes_nb = 3),"The xml document is of wrong type")
-  #expect_equal(tmp2, tmp3)
+test_that("Reaserching parameter bounds", {
+   expect_equal(length(get_param_bounds_xml(xml_file, "profhum", "min")),2)
+   expect_equal(length(get_param_bounds_xml(xml_file, "profhum")),3)
+   expect_equal(length(get_param_bounds_xml(c(xml_file,plt_file), c("profhum","codemonocot"))),2)
+   expect_warning(length(get_param_bounds_xml(xml_file, "profhum")))
+   expect_equal(length(get_param_bounds_xml(xml_file, "profhum",c("min", "max"))),3)
 })
+
+
