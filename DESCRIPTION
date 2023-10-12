@@ -119,7 +119,6 @@ Collate:
     'get_lai_forcing.R'
     'get_name_value_file_value.R'
     'get_obs.R'
-    'get_obs_txt.R'
     'get_option_choice_param_values.R'
     'get_options_choices.R'
     'get_options_names.R'
