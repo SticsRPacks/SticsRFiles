@@ -80,11 +80,10 @@ remove_node_from_doc <- function(xml_doc, param_name,
   # ids out of range !
   if (!max(nodes_ids) <= nodes_nb) {
     warning("No nodes removed from the xml document, ids out of range !")
-    return(xml_doc)
+    #return(invisible(xml_doc))
   }
 
   # Removing nodes from the document object
   XML::removeNodes(xml_nodes[nodes_ids])
 
-  return(invisible(xml_doc))
 }

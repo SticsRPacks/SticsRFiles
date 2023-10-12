@@ -75,6 +75,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         )
       }
     )
+
     return(xml_docs)
   }
 
@@ -100,14 +101,13 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   # Updating param names and table
   if (any(unknown_idx)) {
-    table_params <- table_params[!unknown_idx]
-    table_names <- names(table_params)
-
     # Message for unknown parameters
     warning(
-      paste(table_params[!unknown_idx], collapse = ", "),
+      paste(table_params[unknown_idx], collapse = ", "),
       ": unknown parameters !"
     )
+    table_params <- table_params[!unknown_idx]
+    table_names <- names(table_params)
   }
 
   vec_idx <- unlist(lapply(
@@ -278,6 +278,7 @@ gen_tec_doc <- function(xml_doc = NULL,
   }
 
   if (gen_error) {
+    delete(xml_doc)
     xml_doc <- NULL
   }
 

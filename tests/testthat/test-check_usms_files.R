@@ -1,9 +1,11 @@
-library(SticsRFiles)
-
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
 
-workspace_path <- get_examples_path("xml", stics_version = stics_version)
+workspace_path <- file.path(download_data(
+  example_dirs = "study_case_1",
+  stics_version = get_stics_versions_compat()$latest_version,
+), "XmlFiles")
+#workspace_path <- get_examples_path("xml", stics_version = stics_version)
 javastics_path <- workspace_path
 
 xml_usms <- file.path(workspace_path, "usms.xml")
@@ -22,7 +24,7 @@ test_that("type, character vector", {
 })
 
 context("checking existing usm names, one or two files")
-usm_name <- "flax"
+usm_name <- "bo96iN+"
 test_that("name, one file", {
   expect_true(usm_name %in% usm_files$usm)
 })

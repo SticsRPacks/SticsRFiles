@@ -48,7 +48,7 @@ Getting existing xml files path list per usm from an usms.xml file
 }
 \details{
 The possible values of file types are: "fplt", "finit", "fclim1",
-"fclim2", "fstation" and "ftec"
+"fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"
 }
 \examples{
 \dontrun{

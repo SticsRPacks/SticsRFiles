@@ -17,13 +17,15 @@
 #' (Optional), if not provided the JavaSTICS workspace will be used as root
 #' @param usm List of usms to generate (Optional). If not provided, all
 #' usms contained in workspace_path/usms.xml file will be generated.
+#' @param stics_version the STICS files version to use (optional,
+#' default to latest).
 #' @param verbose Logical value for displaying information while running
 #' @param dir_per_usm_flag logical, TRUE if one want to create one directory
 #' per USM, FALSE if USM files are generated in the target_path
 #' (only useful for usms_list of size one)
-#' @param check Logical, TRUE to check if usms files exist, FALSE otherwise
 #' @param java_cmd The java virtual machine command name or executable path
-#'
+#' @param java_converter logical TRUE for using JavaStics command,
+#'                       FALSE otherwise
 #' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
 #' is no longer supported, use `javastics` instead.
 #' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path`
@@ -32,9 +34,6 @@
 #'   longer supported, use `out_dir` instead.
 #' @param usms_list `r lifecycle::badge("deprecated")` `usms_list` is no
 #'   longer supported, use `usm` instead.
-#' @param check_files `r lifecycle::badge("deprecated")` `check_files` is no
-#'   longer supported, use `check` instead.
-#'
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing STICS input files),
@@ -66,16 +65,15 @@ gen_usms_xml2txt <- function(javastics,
                              workspace = NULL,
                              out_dir = NULL,
                              usm = c(),
+                             stics_version = "latest",
                              verbose = TRUE,
                              dir_per_usm_flag = TRUE,
-                             check = TRUE,
                              java_cmd = "java",
+                             java_converter = FALSE,
                              javastics_path = lifecycle::deprecated(),
                              workspace_path = lifecycle::deprecated(),
                              target_path = lifecycle::deprecated(),
-                             usms_list = lifecycle::deprecated(),
-                             check_files = lifecycle::deprecated()) {
-
+                             usms_list = lifecycle::deprecated()) {
 
 
   # javastics_path
@@ -119,28 +117,6 @@ gen_usms_xml2txt <- function(javastics,
     usms_list <- usm # to remove when we update inside the function
   }
 
-  # check_files
-  if (lifecycle::is_present(check_files)) {
-    lifecycle::deprecate_warn(
-      "1.0.0", "gen_usms_xml2txt(check_files)",
-      "gen_usms_xml2txt(check)"
-    )
-  } else {
-    check_files <- check # to remove when we update inside the function
-  }
-
-  # overwrite = FALSE,parallelized = FALSE, exec_time = FALSE) {
-
-
-  ################### TODO ######################################
-  # TODO : for file overwriting right, activate obverwriting arg
-  # and add overwriting management in the code !
-  #
-  # TODO : for parallel work add a copy of workspace_path
-  # and calculate if at the beginning of the foreach loop !
-  #################################################################
-
-
   # checking javastics path
   check_java_path(javastics_path)
   start_wd <- getwd()
@@ -165,28 +141,30 @@ gen_usms_xml2txt <- function(javastics,
     dir.create(target_path)
   }
 
+  usms_file_path <- file.path(workspace_path, "usms.xml")
+
   # Retrieving usm names list from the usms.xml file
-  full_usms_list <- get_usms_list(file = file.path(workspace_path, "usms.xml"))
+  full_usms_list <- get_usms_list(file = usms_file_path)
 
   # Do some usms have lai forcing? If so, read it accordingly:
-  lai_forcing <- get_lai_forcing_xml(file.path(workspace_path, "usms.xml"))
+  lai_forcing <- get_lai_forcing_xml(usms_file_path)
   lai_file_path <-
     file.path(
       workspace_path,
       get_param_xml(
-        file = file.path(workspace_path, "usms.xml"),
+        file = usms_file_path,
         param = "flai"
       )[[1]]$flai
     )
 
   dominance <- get_param_xml(
-    file = file.path(workspace_path, "usms.xml"),
+    file = usms_file_path,
     param = "dominance"
   )[[1]]$dominance
 
 
   nbplantes <- get_param_xml(
-    file = file.path(workspace_path, "usms.xml"),
+    file = usms_file_path,
     param = "nbplantes"
   )[[1]]$nbplantes
 
@@ -228,32 +206,45 @@ gen_usms_xml2txt <- function(javastics,
     }
   }
 
-  # Checking XML files existence, check_files
-  if (check_files) {
-    all_files_exist <- check_usms_files(
-      workspace_path = workspace_path,
-      javastics_path = javastics_path,
-      usms_list = usms_list
-    )$all_exist
+  # getting files list
+  all_files_list <- get_usms_files(
+    workspace = workspace_path,
+    javastics = javastics_path,
+    usms_list = usms_list
+  )
 
-    if (!all(all_files_exist)) {
-      stop(paste(
-        "Missing files have been detected for usm(s):",
-        paste(usms_list[!all_files_exist], collapse = ", ")
-      ))
-    }
+  # Checking XML files existence, check_files
+  #if (check_files) {
+  # Checking if all files exist, returning missing file(s) name(s)
+  # if any
+  all_files_exist <- unlist(
+    lapply(all_files_list, function(x) return(all(x$all_exist))))
+
+  if (!all(all_files_exist)) {
+    stop(paste(
+      "Missing files have been detected for usm(s):",
+      paste(usms_list[!all_files_exist], collapse = ", ")
+    ))
   }
 
 
-  # Getting javastics cmd line
-  cmd_list <- get_javastics_cmd(javastics_path,
-                                java_cmd = java_cmd,
-                                type = "generate",
-                                workspace = workspace_path
-  )
-  cmd_args <- cmd_list$cmd_generate
-  cmd <- cmd_list$command
+  # removing usms with missing files
+  all_files_list <- all_files_list[all_files_exist]
 
+
+  if (java_converter) {
+    # Getting javastics cmd line
+    cmd_list <- get_javastics_cmd(javastics_path,
+                                  java_cmd = java_cmd,
+                                  type = "generate",
+                                  workspace = workspace_path
+    )
+    cmd_args <- cmd_list$cmd_generate
+    cmd <- cmd_list$command
+  } else {
+    cmd_args <- NULL
+    cmd <- NULL
+  }
 
   usms_number <- length(usms_list)
 
@@ -293,8 +284,19 @@ gen_usms_xml2txt <- function(javastics,
   files_path <- file.path(workspace_path, files_list)
 
   # outputs definition files
+  # Looking for them first in workspace_path, and then
+  # in javastics_path for those that do not exist in
+  # workspace_path
   out_files_def <- c("var.mod", "rap.mod", "prof.mod")
-  out_files_path <- file.path(javastics_path, "config", out_files_def)
+  out_files_java_path <- file.path(javastics_path, "config", out_files_def)
+  out_files_work_path <- file.path(workspace_path, out_files_def)
+
+  out_files_idx_path <- file.exists(out_files_work_path)
+  out_files_path <- out_files_work_path[out_files_idx_path]
+  if (!all(out_files_idx_path)) {
+    out_files_path <- c(out_files_path,
+                        out_files_java_path[!out_files_idx_path])
+  }
 
   # For keeping target usms dir paths
   usms_path <- vector(mode = "character", usms_number)
@@ -309,21 +311,6 @@ gen_usms_xml2txt <- function(javastics,
     # Removing all previous generated files, to be sure.
     file.remove(files_path[file.exists(files_path)])
 
-    # Generating text files
-    ret <- system2(
-      command = cmd, args = paste(cmd_args, usm_name),
-      stdout = TRUE, stderr = TRUE
-    )
-
-    # Get info returned by system2 for detecting errors
-    exec_status[i] <- !any(grepl(pattern = "ERROR", ret))
-    if (!exec_status[i]) {
-      # displaying usm name
-      if (verbose)
-        cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
-      next
-    }
-
     #  dir creation for the curent usm, if needed
     if (dir_per_usm_flag) {
       usm_path <- file.path(target_path, usm_name)
@@ -332,25 +319,113 @@ gen_usms_xml2txt <- function(javastics,
       usm_path <- target_path
     }
 
-    # TODO: evaluate if return might be done here !
+    if (java_converter) {
+      # Generating text files
+      ret <- system2(
+        command = cmd, args = paste(cmd_args, usm_name),
+        stdout = TRUE, stderr = TRUE
+      )
+      # Get info returned by system2 for detecting errors
+      exec_status[i] <- !any(grepl(pattern = "ERROR", ret))
+      if (!exec_status[i]) {
+        # displaying usm name
+        if (verbose)
+          cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
+        next
+      }
+
+      # Copying generated files to the usm directory
+      if(dir_per_usm_flag) {
+        copy_status <- all(file.copy(
+          from = files_path[file.exists(files_path)],
+          to = usm_path, overwrite = TRUE
+        ))
+      }
+
+    } else {
+
+      usm_files_path <- all_files_list[[usm_name]]$paths
+
+      clim_files_path <- usm_files_path[grep(pattern = "\\.xml$",
+                                             x = usm_files_path,
+                                             invert = TRUE)]
+      files_idx <- grep(pattern = "\\.xml$",
+                        usm_files_path)
+      xml_files_path <- usm_files_path[files_idx]
+
+      # generation status vector for xml files and new_travail.usm
+      # and climate.txt
+      gen_files_status <- rep(TRUE, length(xml_files_path) + 2)
+      plant_id_plt <- 0
+      plant_id_tec <- 0
+      plant_id <- 0
+      for (f in seq_along(xml_files_path)) {
+        file_path <- xml_files_path[f]
+
+        found_plt <- grepl(pattern = "_plt", x = file_path)
+        found_tec <- grepl(pattern = "_tec", x = file_path)
+
+        if (found_plt) {
+          plant_id_plt <- plant_id_plt + 1
+          plant_id <- plant_id_plt
+        }
+
+        if (found_tec) {
+          plant_id_tec <- plant_id_tec + 1
+          plant_id <- plant_id_tec
+        }
+
+        # using a template and replacing nomsol in it
+        # for generating sol2txt.xsl file
+        if (grepl(pattern = "sols", x = file_path)) {
+          # generate sol2txt.xsl
+          ret <- gen_sol_xsl_file(workspace_path, usm_name, stics_version)
+          if (!ret)
+            warning("Problem when generating soil xsl file !")
+        }
+
+        gen_files_status[f] <- convert_xml2txt(file = file_path,
+                                               javastics = javastics_path,
+                                               stics_version = stics_version,
+                                               out_dir = usm_path,
+                                               plant_id = plant_id)
+
+      }
+
+      # generating new_travail.usm
+      gen_files_status[f + 1] <- gen_new_travail(workspace = workspace_path,
+                                                 usm = usm_name,
+                                                 out_dir = usm_path)
+
+      # generating climat.txt file
+      gen_files_status[f + 2] <- gen_climate(clim_files_path,
+                                             out_dir = usm_path)
+
+      # setting exec status result
+      exec_status[i] <- all(gen_files_status)
+
+      copy_status <- exec_status[i]
+    }
+
+    # Copying default files for outputs definition
+    # if they do not exist in usm_path
+    to_copy_idx <- !file.exists(file.path(usm_path, basename(out_files_path)))
+
+    if(any(to_copy_idx)) {
+      out_copy_status <- all(file.copy(
+        from = out_files_path[to_copy_idx],
+        to = usm_path, overwrite = TRUE
+      ))
+    } else {
+      out_copy_status <- TRUE
+    }
+
     # If only one usm, for exiting the loop if target_path
     # is the workspace path, no need to copy files
     if (!dir_per_usm_flag && target_path == workspace_path) {
       global_copy_status[i] <- TRUE
       next
     }
-
-    # Copying files to the usm directory
-    copy_status <- all(file.copy(
-      from = files_path[file.exists(files_path)],
-      to = usm_path, overwrite = TRUE
-    ))
-
-    # Copying default files for outputs definition
-    out_copy_status <- all(file.copy(
-      from = out_files_path,
-      to = usm_path, overwrite = TRUE
-    ))
 
     # Copying observation files
     obs_path <- file.path(workspace_path, paste0(usm_name, ".obs"))

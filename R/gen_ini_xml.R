@@ -48,7 +48,7 @@
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xml_document object or a list of
+#' @return None
 #'
 #' @examples
 #' library(readxl)
@@ -93,10 +93,10 @@ gen_ini_xml <- function(param_df,
     out_path <- out_dir # to remove when we update inside the function
   }
 
-  xml_doc <- NULL
+  xml_doc_tmpl <- NULL
 
   if (!base::is.null(ini_in_file)) {
-    xml_doc <- xmldocument(ini_in_file)
+    xml_doc_tmpl <- xmldocument(ini_in_file)
   }
 
   # detect the ini names column
@@ -111,7 +111,7 @@ gen_ini_xml <- function(param_df,
   # generating xml documents for all table lines
   # removing ini names col
   xml_docs <- gen_ini_doc(
-    xml_doc = xml_doc,
+    xml_doc = xml_doc_tmpl,
     param_table = param_table[, -col_id],
     crop_tag = crop_tag,
     stics_version = stics_version
@@ -161,7 +161,12 @@ gen_ini_xml <- function(param_df,
   # TODO: vectorize the saveXmlDoc method of the xml_document class
   for (f in seq_along(xml_docs)) {
     save_xml_doc(xml_docs[[f]], ini_out_file[[f]])
+
+    # finalizing objects
+    delete(xml_docs[[f]])
   }
 
-  return(invisible(xml_docs))
+  if (!base::is.null(xml_doc_tmpl) & class(xml_doc_tmpl) =="xml_document")
+    delete(xml_doc_tmpl)
+
 }

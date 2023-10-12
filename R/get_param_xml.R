@@ -131,5 +131,7 @@ get_param_xml <- function(file,
 
   names(values) <- xml_names
 
+  lapply(xml_docs, delete)
+
   return(values)
 }

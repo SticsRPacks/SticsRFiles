@@ -10,6 +10,8 @@
 #' Optional, set to the path of the input xml file by default
 #' @param save_as Name of the output file
 #' (optional, default: fixed name for STICS)
+#' @param stics_version the STICS files version to use (optional,
+#' default to latest).
 #' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
 #'   longer supported, use `file` instead.
 #' @param java_dir `r lifecycle::badge("deprecated")` `java_dir` is no
@@ -36,6 +38,7 @@ convert_xml2txt <- function(file,
                             plant_id = 1,
                             out_dir = NULL,
                             save_as = NULL,
+                            stics_version = "latest",
                             xml_file = lifecycle::deprecated(),
                             java_dir = lifecycle::deprecated(),
                             plt_num = lifecycle::deprecated(),
@@ -87,7 +90,8 @@ convert_xml2txt <- function(file,
   )
 
   # Using tags from in files names for the xml file type identification
-  tags <- list("_ini", "sols.xml", "_plt", "_tec", "_sta", "_new", "_gen")
+  tags <- list("_ini\\.xml", "sols\\.xml", "_plt\\.xml",
+               "_tec\\.xml", "_sta\\.xml", "_newform\\.xml", "_gen\\.xml")
   idx <- which(unlist(lapply(tags, function(x) grepl(x, xml_file))))
   calc_name <- length(idx) > 0
 
@@ -119,10 +123,15 @@ convert_xml2txt <- function(file,
   # (see above code, finding idx!)
   doc <- xml2::read_xml(xml_file)
   filet <- xml2::xml_name(doc)
-  style_file <- file.path(java_dir,
-                          "bin/resources/xml/stylesheet",
-                          xsl_files[filet])
 
-  # calling the function
-  convert_xml2txt_int(xml_file, style_file, out_file_path)
+  # Calling get_examples_path
+  xsl_dir <- get_examples_path("xsl", stics_version = stics_version)
+
+  style_file <- file.path(xsl_dir, xsl_files[filet])
+
+  # calling the xml conversion function
+  status <- convert_xml2txt_int(xml_file, style_file, out_file_path)
+
+  return(status)
 }
+

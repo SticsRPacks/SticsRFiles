@@ -45,6 +45,7 @@ set_java_workspace <- function(javastics, workspace) {
   # checking if exists if it is a workspace a
   ws <- check_java_workspace(javastics, workspace)
   if (base::is.null(ws)) {
+    delete(xml_pref)
     return()
   }
 
@@ -73,4 +74,6 @@ set_java_workspace <- function(javastics, workspace) {
 
   # writing file
   save_xml_doc(xml_pref, xml_path)
+
+  delete(xml_pref)
 }

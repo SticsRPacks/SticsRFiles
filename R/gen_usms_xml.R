@@ -96,11 +96,11 @@ gen_usms_xml <- function(file,
     usms_nb <- nrow(param_df) # to remove when we update inside the function
   }
 
-  xml_doc <- NULL
+  xml_doc_tmpl <- NULL
 
   # If a template file is provided
   if (!base::is.null(usms_in_file)) {
-    xml_doc <- xmldocument(usms_in_file)
+    xml_doc_tmpl <- xmldocument(usms_in_file)
   }
 
   vars <- c("flai_1", "fplt_2", "ftec_2", "flai_2")
@@ -117,13 +117,13 @@ gen_usms_xml <- function(file,
   # Common switch function for sols.xml and usms.xml files
   xml_doc <- gen_usms_sols_doc(
     doc_type = "usms",
-    xml_doc,
+    xml_doc_tmpl,
     nodes_nb = usms_nb,
     nodes_param = usms_param,
     stics_version = stics_version
   )
 
-  # hecking if out dir exists
+  # checking if out dir exists
   out_path <- dirname(usms_out_file)
   if (!dir.exists(out_path)) {
     stop(paste("The directory does not exist: ", out_path))
@@ -135,6 +135,9 @@ gen_usms_xml <- function(file,
     save_xml_doc(xml_doc, usms_out_file)
   }
 
+  if (!is.null(xml_doc_tmpl) & class(xml_doc) =="xml_document")
+    delete(xml_doc_tmpl)
 
-  return(invisible(xml_doc))
+  #return(invisible(xml_doc))
+  delete(xml_doc)
 }

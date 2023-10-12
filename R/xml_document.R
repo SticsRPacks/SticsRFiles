@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @importFrom XML free
 
 # xml class based on file_document class
 setClass(
@@ -480,5 +481,19 @@ setMethod(
     set_content(object) <- XML::xmlClone(get_content(object))
 
     return(object)
+  }
+)
+
+# delete object method
+setMethod(
+  "delete", signature(object = "xml_document"),
+  function(object) {
+    # freeing object @content slot (external pointer)
+    # and deleting xml_document object
+    free(object@content)
+
+    rm(object)
+    invisible(gc(verbose = FALSE))
+
   }
 )

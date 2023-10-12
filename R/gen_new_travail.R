@@ -12,6 +12,7 @@
 #' (containing parameters values to be forced), 0 otherwise
 #' @param out_dir Directory path where to store the `new_travail.usm` file.
 #'
+#' @return None
 #'
 #' @keywords internal
 #'
@@ -31,11 +32,17 @@ gen_new_travail <- function(workspace,
                            codesuite = codesuite,
                            codoptim = codoptim)
 
+  data_plt2 <- c()
+  if (usm_data$nbplantes > 1)
+    data_plt2 <- c("fplt2", "ftec2", "flai2")
+
   data_order <- c("codesimul", "codoptim", "codesuite", "nbplantes", "nom",
                   "datedebut", "datefin", "finit", "numsol", "nomsol",
                   "fstation",
                   "fclim1", "fclim2", "nbans", "culturean", "fplt1",
-                  "ftec1", "flai1", "fplt2", "ftec2", "flai2")
+                  "ftec1", "flai1", data_plt2)
+
+  if (is.null(out_dir)) out_dir <- workspace
 
   if (is.null(out_dir)) out_dir <- workspace
 
@@ -49,11 +56,36 @@ gen_new_travail <- function(workspace,
     p_table[idx] <- usm_data[[data_order[p]]]
   }
 
-  writeLines(text = p_table, con = out_file)
+  ret <- try(writeLines(text = p_table, con = out_file))
 
+  if (methods::is(ret, "try-error")) {
+    return(invisible(FALSE))
+  }
+
+  return(invisible(TRUE))
 }
 
 
+#' Get information attached to a usm from usms.xml, and possibly change
+#' some forcing options
+#'
+#' @param workspace Path of the directory containing the usm XML files
+#' @param usm Usm name
+#' @param lai_forcing 1, if `lai` is to be read from a daily lai, 0 otherwise
+#' input file.
+#' @param codesuite 1, if the usm is to be chained with the previous
+#' simulated (for getting system state variables), 0 otherwise
+#' input file.
+#' @param codoptim 1, if parameters are to be read from a `param.sti` file
+#' (containing parameters values to be forced), 0 otherwise
+#'
+#' @return a named list
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
+#'
 get_usm_data <- function(workspace,
                          usm,
                          lai_forcing = NULL,
@@ -64,42 +96,45 @@ get_usm_data <- function(workspace,
 
 
   data <- get_param_xml(file = file.path(workspace, "usms.xml"),
-                        usm, select = "usm",
-                        select_value = usm)$usms.xml
+                        select = "usm",
+                        select_value = usm,
+                        to_num = FALSE)$usms.xml
 
   # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
-  if (!is.null(lai_forcing) && lai_forcing %in% c(0, 1))
+  data$codesimul <- get_codesimul(as.numeric(data$codesimul))
+  if(!is.null(lai_forcing) && lai_forcing %in% c(0,1))
     data$codesimul <- get_codesimul(lai_forcing)
 
   # forcing codoptim
-  if (!is.null(codoptim) && codoptim %in% c(0, 1))
+  data$codoptim <- 0
+  if(!is.null(codoptim) && codoptim %in% c(0,1))
     data$codoptim <- codoptim
 
+  data$codesuite <- 0
   # forcing codesuite
-  if (!is.null(codesuite) && codesuite %in% c(0, 1))
+  if(!is.null(codesuite) && codesuite %in% c(0,1))
+
     data$codesuite <- codesuite
 
   # nbplantes
-  #data$nbplantes
+  data$nbplantes <- as.numeric(data$nbplantes)
 
   # nom
   data$nom <- usm
 
   # debut
-  # data$datedebut
+  data$datedebut <- as.numeric(data$datedebut)
 
   # fin
-  # data$datefin
+  data$datefin <- as.numeric(data$datefin)
 
   # init
   # data$finit
 
   # soil number
   # not used by STICS !!!!
-  # in fact trhrough javaSTICS always == 1
-  data$numsol <- get_numsol(soil_name = data$nomsol,
-                            soil_file = file.path(workspace, "sols.xml"))
+  data$numsol <- 1
 
   # nomsol
   # data$nomsol
@@ -113,11 +148,15 @@ get_usm_data <- function(workspace,
   # fclim2
   # data$fclim2
 
+  # add constraint on culturean
+  data$culturean <- as.numeric(data$culturean)
+  if (data$culturean != 1)
+    data$culturean <- 0
+
   # nbans
-  data$nbans <-
-    as.numeric(strsplit(x = data$fclim2, split = ".", fixed = TRUE)[[1]][2]) -
-    as.numeric(strsplit(x = data$fclim1, split = ".", fixed = TRUE)[[1]][2]) +
-    1
+  data$nbans <- get_years_number(
+    file.path(workspace,c(data$fclim1, data$fclim2))
+  )
 
   # culturean
   # data$culturean
@@ -130,35 +169,33 @@ get_usm_data <- function(workspace,
 
   if (data$flai1 == "null") data$codesimul <- get_codesimul(0)
 
-  data$fplt2 <- data$fplt[2]
+  if (data$nbplantes > 1) {
+    data$fplt2 <- data$fplt[2]
 
-  data$ftec2 <- data$ftec[2]
+    data$ftec2 <- data$ftec[2]
 
-  data$flai2 <- data$flai[2]
+    data$flai2 <- data$flai[2]
+  }
 
   data[["ftec"]] <- NULL
   data[["fplt"]] <- NULL
   data[["flai"]] <- NULL
   data[["fobs"]] <- NULL
 
-  data
+  return(data)
 }
 
 
-get_numsol <- function(soil_name, soil_file = "sols.xml") {
+#' Getting the string indicating a forcing lai mode or not
+#'
+#' @param lai_forcing 0 for forcing mode, 0 otherwise
+#'
+#' @return a string, either "culture" or "feuille"
 
-  id <- which(soil_name == get_param_xml(
-    file = soil_file,
-    param = "sol")$sols.xml$sol)
-
-  if (length(id > 0)) return(id)
-
-  warning("Unknown soil name: ", soil_name)
-
-  return(NaN)
-
-}
-
+#' @keywords internal
+#'
+#' @noRd
+#'
 get_codesimul <- function(lai_forcing = 0) {
 
   if (lai_forcing == 0) return("culture")
@@ -168,4 +205,66 @@ get_codesimul <- function(lai_forcing = 0) {
   stop("Error on lai forcing value: ",
        lai_forcing,
        "\nmIt must be 0 or 1 !")
+}
+
+
+#' Calculating simulation years number
+#'
+#' @param clim_path character vector of 2 weather data files
+#' for the first and the last year
+#'
+#' @return years number
+
+#' @keywords internal
+#'
+#' @noRd
+#'
+
+get_years_number <- function(clim_path) {
+
+  year1 <- get_year(clim_path = clim_path[1])
+
+  if(clim_path[1] == clim_path[2]) {
+    year2 <- year1
+  } else {
+    year2 <- get_year(clim_path = clim_path[2])
+  }
+
+  if(any(is.na(c(year1, year2))))
+    stop(
+      "Impossible to calculate the number of years from weather data files !"
+    )
+
+  return(year2 - year1 + 1)
+
+}
+
+#' Get weather data file year
+#'
+#' @param clim_path path of a weather data file
+#'
+#' @return a year (numeric)
+
+#' @keywords internal
+#'
+#' @noRd
+#'
+
+get_year <- function(clim_path) {
+
+  if(!file.exists(clim_path)) stop()
+
+  line_str <- gsub(pattern = "\\t",
+                   x = trimws(readLines(con = clim_path, n = 1)),
+                   replacement = " ")
+  year_str <- strsplit(line_str, split = " ")[[1]][2]
+
+  ret <- try(year <- as.numeric(year_str))
+
+  if (methods::is(ret, "try-error")) {
+    return(invisible(NA))
+  }
+
+  return(year)
+
 }
