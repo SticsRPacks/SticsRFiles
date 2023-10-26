@@ -47,23 +47,32 @@ get_usms_list <- function(file,
     name <- usm # to remove when we update inside the function
   }
 
+  xml_doc <- xmldocument(usm_path)
+
   # Detecting file type
-  if (!is_usms_xml(usm_path)) {
+  if (!is_stics_usms(xml_doc)) {
     stop("The file does not exist or is not a usms file")
   }
 
-  return(find_usms_soils_names(
-    file_path = usm_path,
-    xml_name = "usm",
-    name = name
-  ))
+  return(
+    find_usms_soils_names(
+      xml_doc = xml_doc,
+      xml_name = "usm",
+      name = name
+    )
+  )
 }
 
 
-find_usms_soils_names <- function(file_path, xml_name, name = NULL) {
+find_usms_soils_names <- function(xml_doc, xml_name, name = NULL) {
 
   # Getting names usms/soils list
-  names_list <- get_param_xml(file_path, xml_name)[[1]][[xml_name]]
+  names_list <- unlist(
+    lapply(
+      XML::getNodeSet(doc = xml_doc@content, path = paste0("//",xml_name)),
+      function(x) XML::xmlGetAttr(x,"nom")
+    )
+  )
 
   # Not any names, (may be useless bcause xml file already checked!)
   if (is.null(names_list)) {
