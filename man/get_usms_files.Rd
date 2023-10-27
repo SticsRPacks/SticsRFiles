@@ -10,6 +10,7 @@ get_usms_files(
   usms_file = "usms.xml",
   file_type = NULL,
   javastics = NULL,
+  df_output = FALSE,
   workspace_path = lifecycle::deprecated(),
   file_name = lifecycle::deprecated(),
   javastics_path = lifecycle::deprecated()
@@ -31,6 +32,9 @@ are not in the workspace
 (in this case the plant files used are those included in the
 JavaSTICS distribution)}
 
+\item{df_output}{logical if TRUE returning a data.frame, otherwise returning
+a named list if FALSE (default)}
+
 \item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path}
 is no longer supported, use \code{workspace} instead.}
 
@@ -47,7 +51,7 @@ A named list with existing files path in each usm element
 Getting existing xml files path list per usm from an usms.xml file
 }
 \details{
-The possible values of file types are: "fplt", "finit", "fclim1",
+The possible values for file_type are: "fplt", "finit", "fclim1",
 "fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"
 }
 \examples{
@@ -60,7 +64,8 @@ get_usms_files(
 
 get_usms_files(
   workspace = "/path/to/workspace",
-  javastics = "/path/to/JavaSTICS/folder", usm_list = c("usm1", "usm3")
+  javastics = "/path/to/JavaSTICS/folder",
+  usm_list = c("usm1", "usm3")
 )
 
 get_usms_files(

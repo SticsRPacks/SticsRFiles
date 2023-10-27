@@ -13,6 +13,8 @@
 #'
 #' @noRd
 #'
+#' @importFrom dplyr %>%
+#'
 col_names_to_var <- function(var_list = c()) {
   . <- NULL
 
@@ -20,10 +22,10 @@ col_names_to_var <- function(var_list = c()) {
 
   # Getting the index of the variables to convert
   #
-  idx_end_convert <- unlist(lapply(X = words, function(x){
+  idx_end_convert <- unlist(lapply(X = words, function(x) {
     end_conv <- grepl("[n | 0-9*]|nboite|nboite-1|ao|as",
                       x[length(x)])
-    if(end_conv) return(TRUE)
+    if (end_conv) return(TRUE)
     FALSE
   }))
 
@@ -32,7 +34,7 @@ col_names_to_var <- function(var_list = c()) {
     !grepl("_\\d{1,2}_\\d{1,2}.{,1}$", var_list)
 
   # Nothing to do, t=returning the input vector
-  if(any(idx_end_convert)){
+  if (any(idx_end_convert)) {
     conv_var_list <- var_list[idx_end_convert]
   } else {
     return(var_list)

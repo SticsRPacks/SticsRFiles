@@ -119,4 +119,3 @@ setGeneric("del_nodes", function(object, path) standardGeneric("del_nodes"))
 
 # freeing memory of an object
 setGeneric("delete", function(object) standardGeneric("delete"))
-

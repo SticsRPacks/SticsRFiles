@@ -52,16 +52,22 @@ get_soils_list <- function(file,
 
   xml_name <- NULL
 
-  # Detecting file type
-  if (is_usms_xml(file_path)) xml_name <- "nomsol"
+  xml_doc <- xmldocument(file_path)
 
-  if (is_sols_xml(file_path)) xml_name <- "sol"
+  # Detecting file type to determine the parameter to use for the soil name
+  if (is_stics_usms(xml_doc)) xml_name <- "nomsol"
+
+  if (is_stics_sols(xml_doc)) xml_name <- "sol"
 
   if (base::is.null(xml_name)) {
     stop("The file must be either a usm (usms) or a soil (sols) file")
   }
 
-  return(find_usms_soils_names(file_path = file_path,
-                               xml_name = xml_name,
-                               name = name))
+  return(
+    find_usms_soils_names(
+      xml_doc = xml_doc,
+      xml_name = xml_name,
+      name = name
+    )
+  )
 }

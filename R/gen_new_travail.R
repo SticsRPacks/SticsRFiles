@@ -1,7 +1,8 @@
 #' Generates a `new_travail.usm` file from usm XML files content and some
 #' switch parameters for lai forcing, parameters forcing and usm chaining.
 #'
-#' @param workspace Path of the directory containing the usm XML files
+#' @param usm_data a named list of informations attached to an usm definition
+#' (coming from an usms.xml file)
 #' @param usm Usm name
 #' @param lai_forcing 1, if `lai` is to be read from a daily lai, 0 otherwise
 #' input file.
@@ -19,18 +20,14 @@
 #' @noRd
 #'
 
-gen_new_travail <- function(workspace,
+gen_new_travail <- function(usm_data,
                             usm,
+                            workspace,
                             lai_forcing = NULL,
                             codesuite = NULL,
                             codoptim = NULL,
                             out_dir = NULL) {
 
-  usm_data <- get_usm_data(workspace,
-                           usm,
-                           lai_forcing = lai_forcing,
-                           codesuite = codesuite,
-                           codoptim = codoptim)
 
   data_plt2 <- c()
   if (usm_data$nbplantes > 1)
@@ -41,8 +38,6 @@ gen_new_travail <- function(workspace,
                   "fstation",
                   "fclim1", "fclim2", "nbans", "culturean", "fplt1",
                   "ftec1", "flai1", data_plt2)
-
-  if (is.null(out_dir)) out_dir <- workspace
 
   if (is.null(out_dir)) out_dir <- workspace
 
@@ -69,8 +64,9 @@ gen_new_travail <- function(workspace,
 #' Get information attached to a usm from usms.xml, and possibly change
 #' some forcing options
 #'
-#' @param workspace Path of the directory containing the usm XML files
+#' @param usms_doc xml document object loaded from an usms xml file
 #' @param usm Usm name
+#' @param workspace Path of a JavaSTICS workspace
 #' @param lai_forcing 1, if `lai` is to be read from a daily lai, 0 otherwise
 #' input file.
 #' @param codesuite 1, if the usm is to be chained with the previous
@@ -86,35 +82,37 @@ gen_new_travail <- function(workspace,
 #' @noRd
 #'
 #'
-get_usm_data <- function(workspace,
+get_usm_data <- function(usms_doc,
                          usm,
+                         workspace,
                          lai_forcing = NULL,
                          codesuite = NULL,
                          codoptim = NULL) {
 
-  data <- list()
-
-
-  data <- get_param_xml(file = file.path(workspace, "usms.xml"),
-                        select = "usm",
-                        select_value = usm,
-                        to_num = FALSE)$usms.xml
+  data <- XML::getNodeSet(usms_doc@content,
+                          path = paste0("//usm[@nom='", usm, "']"),
+                          fun = XML::xmlToList)[[1]]
+  n <- names(data)
+  n[11] <- "plante1"
+  n[12] <- "plante2"
+  names(data) <- n
 
   # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
   data$codesimul <- get_codesimul(as.numeric(data$codesimul))
-  if(!is.null(lai_forcing) && lai_forcing %in% c(0,1))
+
+  if (!is.null(lai_forcing) && lai_forcing %in% c(0, 1))
     data$codesimul <- get_codesimul(lai_forcing)
 
   # forcing codoptim
   data$codoptim <- 0
-  if(!is.null(codoptim) && codoptim %in% c(0,1))
+
+  if (!is.null(codoptim) && codoptim %in% c(0, 1))
     data$codoptim <- codoptim
 
   data$codesuite <- 0
   # forcing codesuite
-  if(!is.null(codesuite) && codesuite %in% c(0,1))
-
+  if (!is.null(codesuite) && codesuite %in% c(0, 1))
     data$codesuite <- codesuite
 
   # nbplantes
@@ -130,23 +128,28 @@ get_usm_data <- function(workspace,
   data$datefin <- as.numeric(data$datefin)
 
   # init
-  # data$finit
+  # already defined
 
   # soil number
   # not used by STICS !!!!
   data$numsol <- 1
 
   # nomsol
-  # data$nomsol
+  # already defined
 
   # station
-  # data$fstation
+  # already defined
 
   # fclim1
-  # data$fclim1
+  # already defined
 
   # fclim2
-  # data$fclim2
+  # already defined
+
+  # add constraint on culturean
+  data$culturean <- as.numeric(data$culturean)
+  if (data$culturean != 1)
+    data$culturean <- 2
 
   # add constraint on culturean
   data$culturean <- as.numeric(data$culturean)
@@ -155,32 +158,37 @@ get_usm_data <- function(workspace,
 
   # nbans
   data$nbans <- get_years_number(
-    file.path(workspace,c(data$fclim1, data$fclim2))
+    file.path(workspace, c(data$fclim1, data$fclim2))
   )
 
-  # culturean
-  # data$culturean
+  data$fplt1 <- data$plante1$fplt
 
-  data$fplt1 <- data$fplt[1]
+  data$ftec1 <- data$plante1$ftec
 
-  data$ftec1 <- data$ftec[1]
+  data$flai1 <- data$plante1$flai
 
-  data$flai1 <- data$flai[1]
+  data$fobs1 <- data$plante1$fobs
 
-  if (data$flai1 == "null") data$codesimul <- get_codesimul(0)
+  if (data$flai1 == "null" || data$flai1 == "defaut.lai")
+    data$codesimul <- get_codesimul(0)
 
   if (data$nbplantes > 1) {
-    data$fplt2 <- data$fplt[2]
+    data$fplt2 <- data$plante2$fplt
 
-    data$ftec2 <- data$ftec[2]
+    data$ftec2 <- data$plante2$ftec
 
-    data$flai2 <- data$flai[2]
+    data$flai2 <- data$plante2$flai
+
+    data$fobs2 <- data$plante2$fobs
   }
 
   data[["ftec"]] <- NULL
   data[["fplt"]] <- NULL
   data[["flai"]] <- NULL
   data[["fobs"]] <- NULL
+  data[["plante1"]] <- NULL
+  data[["plante2"]] <- NULL
+  data[[".attrs"]] <- NULL
 
   return(data)
 }
@@ -224,13 +232,13 @@ get_years_number <- function(clim_path) {
 
   year1 <- get_year(clim_path = clim_path[1])
 
-  if(clim_path[1] == clim_path[2]) {
+  if (clim_path[1] == clim_path[2]) {
     year2 <- year1
   } else {
     year2 <- get_year(clim_path = clim_path[2])
   }
 
-  if(any(is.na(c(year1, year2))))
+  if (any(is.na(c(year1, year2))))
     stop(
       "Impossible to calculate the number of years from weather data files !"
     )
@@ -252,12 +260,17 @@ get_years_number <- function(clim_path) {
 
 get_year <- function(clim_path) {
 
-  if(!file.exists(clim_path)) stop()
+  if (!file.exists(clim_path)) stop()
 
   line_str <- gsub(pattern = "\\t",
                    x = trimws(readLines(con = clim_path, n = 1)),
                    replacement = " ")
-  year_str <- strsplit(line_str, split = " ")[[1]][2]
+
+  words <- strsplit(line_str, split = " ")[[1]]
+
+  # filtering empty strings
+  words <- words[words != ""]
+  year_str <- words[2]
 
   ret <- try(year <- as.numeric(year_str))
 

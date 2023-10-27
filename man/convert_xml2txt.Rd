@@ -6,21 +6,17 @@
 \usage{
 convert_xml2txt(
   file,
-  javastics,
   plant_id = 1,
   out_dir = NULL,
   save_as = NULL,
   stics_version = "latest",
   xml_file = lifecycle::deprecated(),
-  java_dir = lifecycle::deprecated(),
   plt_num = lifecycle::deprecated(),
   out_file = lifecycle::deprecated()
 )
 }
 \arguments{
 \item{file}{Path (including name) of the xml file to convert}
-
-\item{javastics}{Path of JavaSTICS}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2)}
 
@@ -35,9 +31,6 @@ default to latest).}
 
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use \code{file} instead.}
-
-\item{java_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{java_dir} is no
-longer supported, use \code{javastics} instead.}
 
 \item{plt_num}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plt_num} is no
 longer supported, use \code{plant_id} instead.}

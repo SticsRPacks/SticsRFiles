@@ -102,8 +102,9 @@ gen_sols_xml <- function(file,
   }
 
   if (lifecycle::is_present(sols_nb)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_sols_xml(sols_nb)",
-                              details = "It is now directly computed in the function."
+    lifecycle::deprecate_warn("1.0.0",
+                              "gen_sols_xml(sols_nb)",
+                              details = "directly computed in the function."
     )
   } else {
     sols_nb <- nrow(sols_param)
@@ -137,7 +138,7 @@ gen_sols_xml <- function(file,
   # finalizing object
   delete(xml_doc)
 
-  if (!base::is.null(xml_doc_tmpl) & class(xml_doc_tmpl) =="xml_document")
+  if (!base::is.null(xml_doc_tmpl) && class(xml_doc_tmpl) == "xml_document")
     delete(xml_doc_tmpl)
 
 }

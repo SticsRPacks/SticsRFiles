@@ -10,9 +10,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' gen_climate(
-#'                   c("path/to/weather.year1", "path/to/weather.year2"),
-#'                  "/path/to/out/dir" )
+#' gen_climate(c("path/to/weather.year1", "path/to/weather.year2"),
+#'            "/path/to/out/dir" )
 #' }
 #'
 #' @keywords internal
