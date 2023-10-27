@@ -32,6 +32,10 @@ gen_new_travail <- function(usm_data,
   if (usm_data$nbplantes > 1)
     data_plt2 <- c("fplt2", "ftec2", "flai2")
 
+  data_plt2 <- c()
+  if (usm_data$nbplantes > 1)
+    data_plt2 <- c("fplt2", "ftec2", "flai2")
+
   data_order <- c("codesimul", "codoptim", "codesuite", "nbplantes", "nom",
                   "datedebut", "datefin", "finit", "numsol", "nomsol",
                   "fstation",
@@ -99,18 +103,19 @@ get_usm_data <- function(usms_doc,
   # forcing codesimul
   # 0: culture, 1: feuille, lai forcing
   data$codesimul <- get_codesimul(as.numeric(data$codesimul))
+
   if (!is.null(lai_forcing) && lai_forcing %in% c(0, 1))
     data$codesimul <- get_codesimul(lai_forcing)
 
   # forcing codoptim
   data$codoptim <- 0
+
   if (!is.null(codoptim) && codoptim %in% c(0, 1))
     data$codoptim <- codoptim
 
   data$codesuite <- 0
   # forcing codesuite
   if (!is.null(codesuite) && codesuite %in% c(0, 1))
-
     data$codesuite <- codesuite
 
   # nbplantes
@@ -149,11 +154,15 @@ get_usm_data <- function(usms_doc,
   if (data$culturean != 1)
     data$culturean <- 2
 
+  # add constraint on culturean
+  data$culturean <- as.numeric(data$culturean)
+  if (data$culturean != 1)
+    data$culturean <- 0
+
   # nbans
   data$nbans <- get_years_number(
     file.path(workspace, c(data$fclim1, data$fclim2))
   )
-
 
   data$fplt1 <- data$plante1$fplt
 
@@ -259,7 +268,9 @@ get_year <- function(clim_path) {
   line_str <- gsub(pattern = "\\t",
                    x = trimws(readLines(con = clim_path, n = 1)),
                    replacement = " ")
+
   words <- strsplit(line_str, split = " ")[[1]]
+
   # filtering empty strings
   words <- words[words != ""]
   year_str <- words[2]

@@ -123,3 +123,4 @@ convert_xml2txt <- function(file,
 
   return(status)
 }
+
