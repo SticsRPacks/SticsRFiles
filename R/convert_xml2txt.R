@@ -4,7 +4,6 @@
 #' is converted to a text file readable by the STICS model
 #' (ficini.txt, ficplt1.txt,...)
 #' @param file Path (including name) of the xml file to convert
-#' @param javastics Path of JavaSTICS
 #' @param plant_id The plant identifier (main crop: 1 ; associated crop: 2)
 #' @param out_dir Path of the directory where to generate the file.
 #' Optional, set to the path of the input xml file by default
@@ -14,8 +13,6 @@
 #' default to latest).
 #' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
 #'   longer supported, use `file` instead.
-#' @param java_dir `r lifecycle::badge("deprecated")` `java_dir` is no
-#'   longer supported, use `javastics` instead.
 #' @param out_file `r lifecycle::badge("deprecated")` `out_file` is no
 #'   longer supported, use `save_as` instead.
 #' @param plt_num `r lifecycle::badge("deprecated")` `plt_num` is no
@@ -34,13 +31,11 @@
 #' @export
 #'
 convert_xml2txt <- function(file,
-                            javastics,
                             plant_id = 1,
                             out_dir = NULL,
                             save_as = NULL,
                             stics_version = "latest",
                             xml_file = lifecycle::deprecated(),
-                            java_dir = lifecycle::deprecated(),
                             plt_num = lifecycle::deprecated(),
                             out_file = lifecycle::deprecated()) {
 
@@ -51,13 +46,7 @@ convert_xml2txt <- function(file,
   } else {
     xml_file <- file # to remove when we update inside the function
   }
-  if (lifecycle::is_present(java_dir)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "convert_xml2txt(java_dir)",
-                              "convert_xml2txt(javastics)")
-  } else {
-    java_dir <- javastics # to remove when we update inside the function
-  }
+
   if (lifecycle::is_present(plt_num)) {
     lifecycle::deprecate_warn("1.0.0",
                               "convert_xml2txt(plt_num)",
@@ -134,4 +123,3 @@ convert_xml2txt <- function(file,
 
   return(status)
 }
-

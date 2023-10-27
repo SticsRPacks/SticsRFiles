@@ -6,7 +6,7 @@
 content}
 \usage{
 gen_usms_xml2txt(
-  javastics,
+  javastics = NULL,
   workspace = NULL,
   out_dir = NULL,
   usm = c(),
@@ -22,7 +22,8 @@ gen_usms_xml2txt(
 )
 }
 \arguments{
-\item{javastics}{Path of JavaSTICS.}
+\item{javastics}{Path of JavaSTICS. Optional (needed if the JavaSTICS
+converter is used, java_converter set to TRUE in inputs)}
 
 \item{workspace}{Path of a JavaSTICS workspace
 (i.e. containing the STICS XML input files). Optional, if not provided
@@ -43,10 +44,14 @@ default to latest).}
 per USM, FALSE if USM files are generated in the target_path
 (only useful for usms_list of size one)}
 
-\item{java_cmd}{The java virtual machine command name or executable path}
+\item{java_cmd}{For unix like systems, the java virtual machine command
+name or executable path. Usefull only if the JavaSTICS command line
+is used for generating files. "java" is the default system command,
+but a full path to a java executable (other than the default one)
+may be given}
 
-\item{java_converter}{logical TRUE for using JavaStics command,
-FALSE otherwise}
+\item{java_converter}{logical TRUE for using JavaStics command
+(a JavaSTICS path must be set in the function inputs), FALSE otherwise}
 
 \item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path}
 is no longer supported, use \code{javastics} instead.}

@@ -135,9 +135,8 @@ gen_usms_xml <- function(file,
     save_xml_doc(xml_doc, usms_out_file)
   }
 
-  if (!is.null(xml_doc_tmpl) & class(xml_doc) =="xml_document")
+  if (!is.null(xml_doc_tmpl) && class(xml_doc) == "xml_document")
     delete(xml_doc_tmpl)
 
-  #return(invisible(xml_doc))
   delete(xml_doc)
 }

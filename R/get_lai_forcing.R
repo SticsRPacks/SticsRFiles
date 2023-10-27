@@ -67,13 +67,19 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
 get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 
   # Loading xml file as xml_document object
-  xml_usms <- xmldocument(usm_xml_path)
+  usms_doc <- xmldocument(usm_xml_path)
+
+  get_lai_forcing_xml_doc(usms_doc, usms_list = usms_list)
+}
+
+
+get_lai_forcing_xml_doc <- function(usm_doc, usms_list = c()) {
 
   # Getting plants nb per usm
-  lai_forced <- as.logical(as.numeric(get_values(xml_usms, "//codesimul")))
+  lai_forced <- as.logical(as.numeric(get_values(usm_doc, "//codesimul")))
 
   # Xml usms names
-  usm_names <- get_attrs(xml_usms, "//usm")
+  usm_names <- get_attrs(usm_doc, "//usm")
   names(lai_forced) <- usm_names
 
   # Filtering using usms_list if needed
@@ -83,9 +89,6 @@ get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 
   return(lai_forced)
 }
-
-
-
 
 get_lai_forcing_txt <- function(usm_txt_path, usm_name = NULL) {
   if (base::basename(usm_txt_path) != "new_travail.usm") {

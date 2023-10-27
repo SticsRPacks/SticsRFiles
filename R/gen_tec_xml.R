@@ -172,7 +172,7 @@ gen_tec_xml <- function(param_df = NULL,
     delete(xml_docs[[f]])
   }
 
-  if (!base::is.null(xml_doc_tmpl) & class(xml_doc_tmpl) =="xml_document")
+  if (!base::is.null(xml_doc_tmpl) && class(xml_doc_tmpl) == "xml_document")
     delete(xml_doc_tmpl)
 
 }
