@@ -380,7 +380,6 @@ gen_usms_xml2txt <- function(javastics = NULL,
         # for generating sol2txt.xsl file
         if (grepl(pattern = "sols", x = file_path)) {
           # generate sol2txt.xsl
-          #ret <- gen_sol_xsl_file(workspace_path, usm_name, stics_version)
           ret <- gen_sol_xsl_file(usm_data$nomsol, stics_version)
 
           if (!ret)
