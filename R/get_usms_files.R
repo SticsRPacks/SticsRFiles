@@ -195,6 +195,7 @@ get_usms_files <- function(workspace,
       # getting plant files path in workspace or JavaSTICS/config folders
       plt_files_path <- vector(mode = "character", length(plt_files))
       plt_files_exist <- vector(mode = "logical", length(plt_files))
+
       for (p in seq_along(plt_files)) {
         plt_path <- file.path(plt_dir_path[1], plt_files[p])
         plt_exist <- file.exists(plt_path)
@@ -265,11 +266,11 @@ get_usms_files <- function(workspace,
 
   # Returning a named list
   names(usms_files_list) <- usms_list
+
   # returning a data.frame or a list (default)
   if (df_output) {
     return(dplyr::bind_rows(usms_files_list, .id = "usm"))
   } else {
     return(usms_files_list)
   }
-
 }

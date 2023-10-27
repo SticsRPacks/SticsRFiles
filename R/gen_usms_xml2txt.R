@@ -230,7 +230,6 @@ gen_usms_xml2txt <- function(javastics = NULL,
   # removing usms with missing files
   all_files_list <- all_files_list[all_files_exist]
 
-
   if (java_converter) {
     # Getting javastics cmd line
     cmd_list <- get_javastics_cmd(javastics_path,
@@ -392,7 +391,6 @@ gen_usms_xml2txt <- function(javastics = NULL,
                                                plant_id = plant_id)
 
       }
-
 
       # generating new_travail.usm
       gen_files_status[f + 1] <- gen_new_travail(usm_data,

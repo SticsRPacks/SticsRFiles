@@ -28,9 +28,6 @@ gen_new_travail <- function(usm_data,
                             codoptim = NULL,
                             out_dir = NULL) {
 
-  data_plt2 <- c()
-  if (usm_data$nbplantes > 1)
-    data_plt2 <- c("fplt2", "ftec2", "flai2")
 
   data_plt2 <- c()
   if (usm_data$nbplantes > 1)

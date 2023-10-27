@@ -113,7 +113,6 @@ setGeneric("add_nodes",
            }
 )
 
-
 # removing nodes
 setGeneric("del_nodes", function(object, path) standardGeneric("del_nodes"))
 

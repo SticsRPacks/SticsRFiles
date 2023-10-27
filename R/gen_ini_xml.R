@@ -168,5 +168,4 @@ gen_ini_xml <- function(param_df,
 
   if (!base::is.null(xml_doc_tmpl) && class(xml_doc_tmpl) == "xml_document")
     delete(xml_doc_tmpl)
-
 }
