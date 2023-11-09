@@ -94,7 +94,7 @@ get_xml_files_param_df <- function(file_path,
                                select = select,
                                name = name,
                                param_names = param_names,
-                               wide_shape = FALSE
+                               wide_shape = wide_shape
         )
       }
     )
@@ -139,8 +139,8 @@ get_xml_files_param_df <- function(file_path,
   # for one name
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
-  if (file_type == "initialisations")
-    param_values <- reformat_param_values_init(param_values)
+  # if (file_type == "initialisations")
+  #   param_values <- reformat_param_values_init(param_values)
 
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
@@ -156,6 +156,8 @@ get_xml_files_param_df <- function(file_path,
     # calling the function calculating ids
     param_id_names <- get_params_id(file_type, file_path, param_values)
     param_id <- param_id_names$id
+    param_id2 <- param_id_names$id2
+
     param_names <- param_id_names$names
 
     names(param_values) <- param_names
@@ -165,7 +167,6 @@ get_xml_files_param_df <- function(file_path,
     # Getting values nb for each usm or sol
     values_per_par <- length(names_list)
 
-
     param_id <- unlist(lapply(values_nb, function(x) {
       l <- rep(NA, x)
       if (x > values_per_par) l <- rep(1:(x / values_per_par), values_per_par)
@@ -173,6 +174,14 @@ get_xml_files_param_df <- function(file_path,
     }),
     use.names = FALSE
     )
+
+    if (get_xml_type(file_path) == "usms") {
+      param_id2 <- param_id
+      param_id <- rep(NA, length(param_id))
+    } else {
+      param_id2 <- rep(NA, length(param_id))
+    }
+
 
     name_col <- unlist(lapply(values_nb, function(x) {
       l <- names_list
@@ -198,6 +207,7 @@ get_xml_files_param_df <- function(file_path,
     type = type_col,
     param = param,
     id = param_id,
+    id2 = param_id2,
     value = unlist(param_values, use.names = FALSE),
     stringsAsFactors = FALSE
   )
@@ -218,16 +228,21 @@ get_xml_files_param_df <- function(file_path,
 
 
 df_wider <- function(df, convert_type = TRUE, string_as_factors = FALSE) {
-  valid_id <- !is.na(df$id)
-  df$param[valid_id] <-
-    paste0(df$param[valid_id], "_", as.character(df$id[valid_id]))
+  soil_id <- !is.na(df$id)
+  df$param[soil_id] <-
+    paste0(df$param[soil_id], "_", as.character(df$id[soil_id]))
+  plant_id <- !is.na(df$id2)
+  df$param[plant_id] <-
+    paste0(df$param[plant_id], "_Crop", as.character(df$id2[plant_id]))
 
   # parameters wider data.frame
   df <- df %>%
-    dplyr::select(-"id") %>%
+    dplyr::select(-c("id", "id2")) %>%
     tidyr::pivot_wider(names_from = "param", values_from = "value")
 
-  if (convert_type) df <- utils::type.convert(df, as.is = !string_as_factors)
+  if (convert_type) df <- utils::type.convert(df,
+                                              as.is = !string_as_factors,
+                                              na.strings = c("NA", ""))
 
   return(df)
 }
@@ -257,12 +272,41 @@ get_params_id <- function(file_type, file_path, param_values) {
       return(l)
     }), use.names = FALSE)
 
+    param$id2 <- rep(NA, length(param$id))
+
 
     delete(xml_doc)
 
     return(param)
   }
 
+  if (file_type == "initialisations") {
+    param <- list()
+    param$names <- names(param_values)
+
+    param_with_ids <- lapply(param_values, function(x) {
+      if(length(x) == 1) return(list(id = NA, id2 = NA))
+      if((length(x) %% 2) > 0) {
+        return(list(id = 1:length(x), id2 = rep(NA,length(x))))
+      } else {
+        if (length(x) < 3) {
+          id <- rep(NA, length(x))
+        } else {
+          id <- rep(1:(length(x)/2),2)
+        }
+        return(list(id = id, id2 = c(rep(1,(length(x)/2)),rep(2,(length(x))/2) )))
+      }
+    })
+
+    param$id <- unlist(
+      lapply(param_with_ids, function(x) return(x$id)),
+      use.names = FALSE)
+    param$id2 <- unlist(
+      lapply(param_with_ids, function(x) return(x$id2)),
+      use.names = FALSE)
+
+    return(param)
+  }
 
   # "fichierplt" ???
 
@@ -275,7 +319,7 @@ get_params_id <- function(file_type, file_path, param_values) {
     return(l)
   }), use.names = FALSE)
 
-
+  param$id2 <- rep(NA, length(param$id))
 
   return(param)
 
