@@ -78,7 +78,7 @@ get_xml_files_param_df <- function(file_path,
 
 
   # For managing a files list
-  if (length(file_path) > 1) {
+  if ( length(file_path) > 1 ){
     files_exist <- file.exists(file_path)
 
     if (!all(files_exist))
@@ -99,33 +99,30 @@ get_xml_files_param_df <- function(file_path,
       }
     )
 
-    df <- data.table::rbindlist(files_df)
-
-    # Conversion to a wider table (with type conversion)
-    if (wide_shape) {
-      df <- df_wider(df)
-    }
+    df <- data.table::rbindlist(files_df, fill = TRUE)
 
     return(df)
   }
 
+  print(file_path)
   # Getting parameters file type
   file_type <- get_xml_type(file_path)
 
-  # Checking if select can be set (for sols and usms)
+  # This this usefull if select is null for detecting
+  # what is the select keyword
   if (base::is.null(select)) {
     if (is_sols_xml(file_path)) select <- "sol"
     if (is_usms_xml(file_path)) select <- "usm"
   }
 
   # Getting usm or sol names vector
-  names_list <- NULL
-  if (!base::is.null(select))
+  if (!is.null(select))
     names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
 
   # Getting all usm or sol names from the file
   select_name <- FALSE
   if (!is.null(select_value)) {
+
     # Checking names
     exist_names <- names_list %in% select_value
     if (sum(exist_names) < length(select_value)) {
@@ -138,9 +135,6 @@ get_xml_files_param_df <- function(file_path,
 
   # for one name
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
-
-  # if (file_type == "initialisations")
-  #   param_values <- reformat_param_values_init(param_values)
 
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
@@ -202,14 +196,16 @@ get_xml_files_param_df <- function(file_path,
 
 
   # Defining the returned data.frame
-  data_df <- data.frame(
-    name = name_col,
-    type = type_col,
-    param = param,
-    id = param_id,
-    crop = param_crop,
-    value = unlist(param_values, use.names = FALSE),
-    stringsAsFactors = FALSE
+  data_df <- data.table::as.data.table(
+    data.frame(
+      name = name_col,
+      type = type_col,
+      param = param,
+      id = param_id,
+      crop = param_crop,
+      value = unlist(param_values, use.names = FALSE),
+      stringsAsFactors = FALSE
+    )
   )
 
   if (select_name) {
@@ -221,7 +217,7 @@ get_xml_files_param_df <- function(file_path,
     data_df <- df_wider(data_df)
   }
 
-
+  # TODO: return a data.table as in recursive case
   return(data_df)
 }
 
