@@ -7,6 +7,8 @@
 #' @param select_value value used for select (optional)
 #' @param param_names vector of parameters names (optional)
 #' @param wide_shape Optional logical for keeping the long data.frame
+#' @param bind_list Optional for binding tables list into a single table
+#' (TRUE, default) or not (FALSE)
 #' format FALSE, default) or converting it to a wider format one (TRUE)
 #'
 #' @return A data.frame with name, type, param, id and value columns
@@ -74,7 +76,8 @@ get_xml_files_param_df <- function(file_path,
                                    select = NULL,
                                    select_value = NULL,
                                    param_names = NULL,
-                                   wide_shape = FALSE) {
+                                   wide_shape = FALSE,
+                                   bind_list = TRUE) {
 
 
   # For managing a files list
@@ -99,9 +102,10 @@ get_xml_files_param_df <- function(file_path,
       }
     )
 
-    df <- data.table::rbindlist(files_df, fill = TRUE)
+    if (bind_list)
+      return(data.table::rbindlist(files_df, fill = TRUE))
 
-    return(df)
+    return(files_df)
   }
 
   print(file_path)
