@@ -67,10 +67,18 @@ get_usms_list <- function(file,
 find_usms_soils_names <- function(xml_doc, xml_name, name = NULL) {
 
   # Getting names usms/soils list
-  names_list <- unlist(
-    lapply(
-      XML::getNodeSet(doc = xml_doc@content, path = paste0("//", xml_name)),
-      function(x) XML::xmlGetAttr(x, "nom")
+  names_list <- unique(
+    unlist(
+      lapply(
+        XML::getNodeSet(doc = xml_doc@content, path = paste0("//", xml_name)),
+        function(x) {
+          switch(xml_name,
+                 nomsol = XML::xmlValue(x),
+                 # default case handling xml_namevalues : sol, usm
+                 XML::xmlGetAttr(x, "nom")
+          )
+        }
+      )
     )
   )
 
