@@ -4,7 +4,12 @@
 \alias{get_param_info}
 \title{Finding parameters information using partial search words}
 \usage{
-get_param_info(param = NULL, keyword = NULL, stics_version = "latest")
+get_param_info(
+  param = NULL,
+  keyword = NULL,
+  stics_version = "latest",
+  file = NULL
+)
 }
 \arguments{
 \item{param}{Vector of parameter names (or partial names). Optional, if not
@@ -18,6 +23,9 @@ file names or part to which parameters are attached to)}
 to search parameters information relative to a specific STICS version.
 By default the latest version returned by \code{get_stics_versions_compat()}
 is used.}
+
+\item{file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file} is no
+longer supported.}
 }
 \value{
 A data.frame with information about parameter(s) with columns
