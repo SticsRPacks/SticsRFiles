@@ -64,6 +64,9 @@ all_in_par <- function(stics_version = "latest") {
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
 #'
+#' @param file `r lifecycle::badge("deprecated")` `file` is no
+#' longer supported.
+#'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
 #' @return A data.frame with information about parameter(s) with columns
@@ -86,7 +89,16 @@ all_in_par <- function(stics_version = "latest") {
 #'
 get_param_info <- function(param = NULL,
                            keyword = NULL,
-                           stics_version = "latest") {
+                           stics_version = "latest",
+                           file = NULL) {
+
+
+  if (lifecycle::is_present(file) && length(file) == 1) {
+    lifecycle::deprecate_warn(
+      "1.0.0", "get_var_info(file)"
+    )
+    return(invisible())
+  }
 
 
   all_pars <- all_in_par(stics_version)
