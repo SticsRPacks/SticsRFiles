@@ -122,18 +122,18 @@ Sometimes it is also useful to search in the variable definition instead of its 
 SticsRFiles::get_var_info(keyword = "lai")
 ```
 
-#### Get parameter names
+#### Get informations on parameters
 
-`get_param_info()` is used to get parameter names from XML files:
+`get_param_info()` can be used giving a part of parameters names :
 
 ```{r}
 get_param_info(param = "lai")
 ```
 
-We can also read the parameters inside a particular XML file. This helps users of custom or old versions of JavaSTICS still get the parameters:
+it can also be used by giving a keyword that will be searched in the parameters definitions:
 
 ```{r}
-get_param_info(file = plant_file)
+get_param_info(key="plant")
 ```
 
 #### Get parameter values
