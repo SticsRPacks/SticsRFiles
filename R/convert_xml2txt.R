@@ -24,8 +24,7 @@
 #'
 #' \dontrun{
 #' xml_path <- "/path/to/corn_plt.xml"
-#' javastics_path <- "/path/to/JavaSTICS/folder"
-#' convert_xml2txt(file = xml_path, javastics = javastics_path)
+#' convert_xml2txt(file = xml_path)
 #' }
 #'
 #' @export
