@@ -130,10 +130,10 @@ SticsRFiles::get_var_info(keyword = "lai")
 get_param_info(param = "lai")
 ```
 
-it can also be used by giving a keyword that will be searched in the parameters definitions:
+it can also be used by giving a keyword that will be searched in the parameters names and definitions:
 
 ```{r}
-get_param_info(key="plant")
+get_param_info(keyword = "plant")
 ```
 
 #### Get parameter values

@@ -39,7 +39,7 @@ all_in_par <- function(stics_version = "latest") {
     stringsAsFactors = FALSE
   )[, cols_idx]
 
-  names(par_df) <- c("name", "file", "min", "max","definition")
+  names(par_df) <- c("name", "file", "min", "max", "definition")
 
   # Adding a version  attribute
   attr(x = par_df, which = "version") <- stics_version
@@ -56,16 +56,12 @@ all_in_par <- function(stics_version = "latest") {
 #' provided, the function returns information for all parameters
 #'
 #' @param keyword Optional, strings or a vector of to be used for searching
-#' in parameters data (i.e.: parameters names, formalisms description,
-#' file names or part to which parameters are attached to)
+#' in parameters names and definition
 #'
 #' @param stics_version Name of the STICS version. Optional, can be used
 #' to search parameters information relative to a specific STICS version.
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
-#'
-#' @param file `r lifecycle::badge("deprecated")` `file` is no
-#' longer supported.
 #'
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
@@ -77,6 +73,7 @@ all_in_par <- function(stics_version = "latest") {
 #'
 #' # Find by parameter name (fuzzy search):
 #' SticsRFiles::get_param_info("alb")
+#' SticsRFiles::get_param_info("alb[e]?")
 #'
 #' # Find by keyword (fuzzy search in parameter name and description):
 #' SticsRFiles::get_param_info(keyword = "bdil")
@@ -89,36 +86,37 @@ all_in_par <- function(stics_version = "latest") {
 #'
 get_param_info <- function(param = NULL,
                            keyword = NULL,
-                           stics_version = "latest",
-                           file = NULL) {
-
-
-  if (lifecycle::is_present(file) && length(file) == 1) {
-    lifecycle::deprecate_warn(
-      "1.0.0", "get_var_info(file)"
-    )
-    return(invisible())
-  }
-
+                           stics_version = "latest") {
 
   all_pars <- all_in_par(stics_version)
+
+  if (!is.null(keyword)) {
+    keyword_param <- unique(c(param, keyword))
+
+    idx <- get_idx_matches(keyword_param, all_pars$definition)
+    idx <- unique(idx, get_idx_matches(keyword_param, all_pars$name))
+
+    return(all_pars[idx, ])
+  }
+
   if (!is.null(param)) {
     param <- var_to_col_names(param)
     pars_names_parsed <- var_to_col_names(all_pars$name)
-    idx <- unlist(lapply(param,
-                         function(x) {
-                           grep(x, pars_names_parsed, ignore.case = TRUE)
-                         }
-    )
-    )
-    all_pars[idx, ]
-  } else if (!is.null(keyword)) {
-    idx <- grepl(keyword, all_pars$definition, ignore.case = TRUE)
-    idx <- idx | grepl(keyword, all_pars$name, ignore.case = TRUE)
-    all_pars[idx, ]
-  } else {
-    all_pars
+
+    idx <- get_idx_matches(param, pars_names_parsed)
+    return(all_pars[idx, ])
   }
+
+  return(all_pars)
+}
+
+get_idx_matches <- function(string, names){
+  unlist(lapply(string,
+                function(x) {
+                  grep(x, names, ignore.case = TRUE)
+                }
+  )
+  )
 }
 
 #' Search if a STICS parameter exist

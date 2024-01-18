@@ -4,28 +4,19 @@
 \alias{get_param_info}
 \title{Finding parameters information using partial search words}
 \usage{
-get_param_info(
-  param = NULL,
-  keyword = NULL,
-  stics_version = "latest",
-  file = NULL
-)
+get_param_info(param = NULL, keyword = NULL, stics_version = "latest")
 }
 \arguments{
 \item{param}{Vector of parameter names (or partial names). Optional, if not
 provided, the function returns information for all parameters}
 
 \item{keyword}{Optional, strings or a vector of to be used for searching
-in parameters data (i.e.: parameters names, formalisms description,
-file names or part to which parameters are attached to)}
+in parameters names and definition}
 
 \item{stics_version}{Name of the STICS version. Optional, can be used
 to search parameters information relative to a specific STICS version.
 By default the latest version returned by \code{get_stics_versions_compat()}
 is used.}
-
-\item{file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file} is no
-longer supported.}
 }
 \value{
 A data.frame with information about parameter(s) with columns
@@ -42,6 +33,7 @@ The function understand \code{\link[base]{regex}} as input.
 
 # Find by parameter name (fuzzy search):
 SticsRFiles::get_param_info("alb")
+SticsRFiles::get_param_info("alb[e]?")
 
 # Find by keyword (fuzzy search in parameter name and description):
 SticsRFiles::get_param_info(keyword = "bdil")
