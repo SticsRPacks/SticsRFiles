@@ -13,13 +13,22 @@ empty_df <- data.frame(
   stringsAsFactors = FALSE
 )
 
+
+# getting all parameters
+p <- get_examples_path(file_type = "csv")
+lines_inputs <- readLines(file.path(p, "inputs.csv"))
+df_inputs <- get_param_info()
+test_that("giving a unknown variable name returns a 0 row data", {
+  testthat::expect_equal(length(lines_inputs), dim(df_inputs)[1])
+})
+
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
   empty_df_var <- get_param_info("myunknownvariable",
-                               stics_version = stics_version
+                                 stics_version = stics_version
   )
   empty_df_keyword <- get_param_info(
-    keyword = "myunknownvariable",
+    keyword = "myunknownkeyword",
     stics_version = stics_version
   )
 
@@ -56,10 +65,10 @@ test_that("fuzzy name", {
         "lairesiduel(5)", "lairesiduel(6)", "lairesiduel(7)", "lairesiduel(8)",
         "lairesiduel(9)", "pentlaimax", "seuilLAIapex", "splaimax", "splaimin",
         "udlaimax", "vlaimax"
-        )
+      )
   }
   testthat::expect_equal(get_param_info("lai",
-    stics_version = stics_version
+                                        stics_version = stics_version
   )$name, lai_params)
 })
 
@@ -74,7 +83,7 @@ test_that("regex name", {
       "lairesiduel(18)", "lairesiduel(19)", "lairesiduel(2)", "lairesiduel(20)",
       "lairesiduel(3)", "lairesiduel(4)", "lairesiduel(5)", "lairesiduel(6)",
       "lairesiduel(7)", "lairesiduel(8)", "lairesiduel(9)"
-      )
+    )
   )
 })
 
