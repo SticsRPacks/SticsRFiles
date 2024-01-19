@@ -17,3 +17,4 @@ gen_sols_xml(file = file.path(out_dir, "sols.xml"), param_df = sols_param_df)
 test_that("Create a xml soil file", {
   expect_true(file.exists(file.path(out_dir, "sols.xml")))
 })
+
