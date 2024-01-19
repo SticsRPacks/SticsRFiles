@@ -68,10 +68,11 @@ ByteCompile: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
+    'all_in_par.R'
     'all_out_var.R'
     'attributes_list2matrix.R'
     'check_choice_param.R'
@@ -125,7 +126,7 @@ Collate:
     'get_param_bounds_xml.R'
     'get_param_desc.R'
     'get_param_formalisms.R'
-    'get_param_info.R'
+    'get_param_info_xml.R'
     'get_param_names.R'
     'get_param_names_xml.R'
     'get_param_number.R'

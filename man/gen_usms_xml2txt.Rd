@@ -33,7 +33,7 @@ the current workspace stored in JavaSTICS preferences will be used.}
 (Optional), if not provided the JavaSTICS workspace will be used as root}
 
 \item{usm}{List of usms to generate (Optional). If not provided, all
-usms contained in workspace_path/usms.xml file will be generated.}
+usms contained in workspace/usms.xml file will be generated.}
 
 \item{stics_version}{the STICS files version to use (optional,
 default to latest).}

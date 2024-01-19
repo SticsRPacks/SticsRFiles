@@ -16,7 +16,7 @@
 #' @param out_dir The path of the directory where to create usms directories
 #' (Optional), if not provided the JavaSTICS workspace will be used as root
 #' @param usm List of usms to generate (Optional). If not provided, all
-#' usms contained in workspace_path/usms.xml file will be generated.
+#' usms contained in workspace/usms.xml file will be generated.
 #' @param stics_version the STICS files version to use (optional,
 #' default to latest).
 #' @param verbose Logical value for displaying information while running
