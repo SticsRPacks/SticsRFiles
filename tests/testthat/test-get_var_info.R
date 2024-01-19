@@ -18,13 +18,8 @@ empty_df <- data.frame(
 
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
-  empty_df_var <- get_var_info("myunknownvariable",
-                               stics_version = stics_version
-  )
-  empty_df_keyword <- get_var_info(
-    keyword = "myunknownvariable",
-    stics_version = stics_version
-  )
+  empty_df_var <- get_var_info("myunknownvariable")
+  empty_df_keyword <- get_var_info(keyword = "myunknownvariable")
 
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_var))
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_keyword))
