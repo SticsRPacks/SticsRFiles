@@ -4,12 +4,7 @@
 \alias{get_var_info}
 \title{Find STICS output variable names and description}
 \usage{
-get_var_info(
-  var = NULL,
-  keyword = NULL,
-  stics_version = "latest",
-  version = lifecycle::deprecated()
-)
+get_var_info(var = NULL, keyword = NULL, stics_version = "latest")
 }
 \arguments{
 \item{var}{Vector of variable names (or partial names).
@@ -23,9 +18,6 @@ all variables.}
 to search parameters information relative to a specific STICS version.
 By default the latest version returned by \code{get_stics_versions_compat()}
 is used.}
-
-\item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
-longer supported, use \code{stics_version} instead.}
 }
 \value{
 A data.frame with information about variable(s) with columns
