@@ -85,7 +85,7 @@ get_var_info <- function(var = NULL,
                          keyword = NULL,
                          stics_version = "latest") {
 
-  all_vars <- all_out_var(version)
+  all_vars <- all_out_var(stics_version)
   if (!is.null(var)) {
     var <- var_to_col_names(var)
     vars_names_parsed <- var_to_col_names(all_vars$name)
@@ -128,7 +128,7 @@ get_var_info <- function(var = NULL,
 is_stics_var <- function(var,
                          stics_version = "latest") {
 
-  all_vars <- all_out_var(version)
+  all_vars <- all_out_var(stics_version)
   var_parsed <- var_to_col_names(var)
   vars_names_parsed <- var_to_col_names(all_vars$name)
 
