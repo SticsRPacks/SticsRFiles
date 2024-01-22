@@ -61,15 +61,11 @@ all_out_var <- function(stics_version = "latest") {
 #' to search parameters information relative to a specific STICS version.
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
-#'
-#' @param version `r lifecycle::badge("deprecated")` `version` is no
-#'   longer supported, use `stics_version` instead.
-#'
+
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
 #' @return A data.frame with information about variable(s) with columns
 #'        `name`, `definition`, `unit`, `type`
-#'
 #'
 #' @examples
 #'
@@ -87,22 +83,7 @@ all_out_var <- function(stics_version = "latest") {
 #'
 get_var_info <- function(var = NULL,
                          keyword = NULL,
-                         stics_version = "latest",
-                         version = lifecycle::deprecated()) {
-
-  # added a second condition because
-  # if version is not given as an arg.
-  # version always exist and giving detailed information
-  # about R version and platform (see ?version)
-  if (lifecycle::is_present(version) && length(version) == 1) {
-    lifecycle::deprecate_warn(
-      "1.0.0", "get_var_info(version)",
-      "get_var_info(stics_version)"
-    )
-  } else {
-    version <- stics_version # to remove when we update inside the function
-  }
-
+                         stics_version = "latest") {
 
   all_vars <- all_out_var(version)
   if (!is.null(var)) {
@@ -135,9 +116,6 @@ get_var_info <- function(var = NULL,
 #' By default the latest version returned by `get_stics_versions_compat()`
 #' is used.
 #'
-#' @param version `r lifecycle::badge("deprecated")` `version` is no
-#'   longer supported, use `stics_version` instead.
-#'
 #' @return A boolean vector: `TRUE` if the variable exist, `FALSE` otherwise
 #'
 #' @seealso `get_var_info()` for interactive use.
@@ -148,22 +126,7 @@ get_var_info <- function(var = NULL,
 #' is_stics_var(c("lai(n)", "masec(n)", "unknown"))
 #'
 is_stics_var <- function(var,
-                         stics_version = "latest",
-                         version = lifecycle::deprecated()) {
-
-
-  # added a second condition because
-  # if version is not given as an arg.
-  # version always exist and giving detailed information
-  # about R version and platform (see ?version)
-  if (lifecycle::is_present(version) && length(version) == 1) {
-    lifecycle::deprecate_warn(
-      "1.0.0", "is_stics_var(version)",
-      "is_stics_var(stics_version)"
-    )
-  } else {
-    version <- stics_version # to remove when we update inside the function
-  }
+                         stics_version = "latest") {
 
   all_vars <- all_out_var(version)
   var_parsed <- var_to_col_names(var)

@@ -18,7 +18,7 @@ empty_df <- data.frame(
 p <- get_examples_path(file_type = "csv")
 lines_inputs <- readLines(file.path(p, "inputs.csv"))
 df_inputs <- get_param_info()
-test_that("giving a unknown variable name returns a 0 row data", {
+test_that("getting all parameters from inputs.csv", {
   testthat::expect_equal(length(lines_inputs), dim(df_inputs)[1])
 })
 
@@ -35,10 +35,6 @@ test_that("giving a unknown variable name returns a 0 row data", {
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_var))
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_keyword))
 })
-
-# test_that("unknown name (should return NULL)", {
-#  testthat::expect_null(get_param_info("myunknownparam"))
-#})
 
 test_that("fuzzy name", {
   if (get_version_num() < 10) {
