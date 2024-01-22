@@ -16,15 +16,18 @@ empty_df <- data.frame(
   stringsAsFactors = FALSE
 )
 
+# getting all parameters
+p <- get_examples_path(file_type = "csv")
+lines_outputs <- readLines(file.path(p, "outputs.csv"))
+df_outputs <- get_var_info()
+test_that("getting all variables from outputs.csv", {
+  testthat::expect_equal(length(lines_outputs), dim(df_outputs)[1])
+})
+
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
-  empty_df_var <- get_var_info("myunknownvariable",
-                               stics_version = stics_version
-  )
-  empty_df_keyword <- get_var_info(
-    keyword = "myunknownvariable",
-    stics_version = stics_version
-  )
+  empty_df_var <- get_var_info("myunknownvariable")
+  empty_df_keyword <- get_var_info(keyword = "myunknownvariable")
 
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_var))
   testthat::expect_true(dplyr::all_equal(empty_df, empty_df_keyword))
