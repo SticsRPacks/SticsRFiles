@@ -19,7 +19,8 @@ upgrade_workspace_xml(
 \arguments{
 \item{workspace}{Path of a JavaSTICS workspace}
 
-\item{javastics}{Path of JavaSTICS}
+\item{javastics}{Path of JavaSTICS containing the STICS version corresponding
+to the version of the files to be converted}
 
 \item{out_dir}{Output directory of the generated files}
 

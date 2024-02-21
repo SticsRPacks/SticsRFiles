@@ -1,3 +1,24 @@
+# SticsRFiles 1.2.0 _2024-02-21_
+
+* FUNCTIONS
+   * Text files generation from xml files are now done without use of JavaStics 
+   command line (the speedup is about 10 times)
+   * Getting parameters information (get_param_info) do not use XML files 
+   exploration, the speed is largely improved
+   * Improvement of XML files manipulations/generation for reducing memory 
+   use/saturation in R when intensive use is performed
+   * tests coverage improvement
+
+* FIXES
+   * update of a bunch of unit tests according to other packages evolutions
+   * STICS versions management and XML files upgrade
+
+* DATA
+   * examples, templates files for different files format added for the latest
+   STICS version 10.1.0
+   * versions meta-data 
+   
+
 # SticsRFiles 1.1.3 _2023-07-10_
 
 * FUNCTIONS
@@ -5,7 +26,7 @@
    * New function for generating weather data files (climat.txt)
    * New unit tests added
 
-* FIXES:
+* FIXES
    * get_param_value: forcing to get a character returned value
    * get_var_info: for variables names vector
    * get_param_txt: removed global variables use, looking for parameters names
