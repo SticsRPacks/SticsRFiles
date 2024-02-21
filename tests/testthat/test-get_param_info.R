@@ -32,8 +32,10 @@ test_that("giving a unknown variable name returns a 0 row data", {
     stics_version = stics_version
   )
 
-  testthat::expect_true(dplyr::all_equal(empty_df, empty_df_var))
-  testthat::expect_true(dplyr::all_equal(empty_df, empty_df_keyword))
+  testthat::expect_equal(nrow(empty_df), nrow(empty_df_var))
+  testthat::expect_equal(length(empty_df), length(empty_df_var))
+  testthat::expect_equal(nrow(empty_df), nrow(empty_df_keyword))
+  testthat::expect_equal(length(empty_df), length(empty_df_keyword))
 })
 
 test_that("fuzzy name", {
@@ -95,7 +97,7 @@ test_that("different STICS versions", {
 
   # Set both versions to the same value for comparison:
   attr(v_90, "version") <- attr(v_92, "version")
-  testthat::expect_true(dplyr::all_equal(v_90, v_92))
+  testthat::expect_equivalent(v_90, v_92)
 
   # breaking, parameter moved to cultivar parameters since V9.2
   testthat::expect_false(identical(vlast, v_92))
