@@ -119,7 +119,6 @@ get_param_xml(sol_path, c("epc", "HCCF"),
 
 # Crop management file
 
-
 tec_path <- file.path(ex_path, "file_tec.xml")
 
 # Modifying irrigations parameters

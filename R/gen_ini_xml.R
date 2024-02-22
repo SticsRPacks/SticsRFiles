@@ -58,7 +58,7 @@
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' gen_ini_xml(
 #'   out_dir = tempdir(),
-#'   param_table = ini_param_df
+#'   param_df = ini_param_df[1:2,]
 #' )
 #'
 #' @export
