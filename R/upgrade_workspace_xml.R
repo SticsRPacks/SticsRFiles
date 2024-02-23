@@ -2,7 +2,8 @@
 #' to a newer STICS version format
 #'
 #' @param workspace Path of a JavaSTICS workspace
-#' @param javastics Path of JavaSTICS
+#' @param javastics Path of JavaSTICS containing the STICS version corresponding
+#' to the version of the files to be converted
 #' @param out_dir Output directory of the generated files
 #' @param stics_version Name of the STICS version (VX.Y format)
 #' @param target_version Name of the STICS version to upgrade files

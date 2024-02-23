@@ -51,8 +51,6 @@
 #' # Getting example data path
 #' path <- get_examples_path(file_type = "txt")
 #'
-#' # Replace the interrow distance parameter to 0.01:
-#' set_param_txt(workspace = path, param = "interrang", value = 0.01)
 #'
 #' # Change the value of durvieF for the current variety:
 #' set_param_txt(workspace = path, param = "durvieF", value = 245)
@@ -60,9 +58,6 @@
 #' # Change the value of durvieF for another variety:
 #' set_param_txt(workspace = path, param = "durvieF",
 #'               variety = "Nefer", value = 178)
-#'
-#' # Change the value of infil for a given layer:
-#' set_param_txt(workspace = path, param = "infil", layer = 2, value = 60)
 #'
 #' # If the parameter is found in several files, use the set_*
 #' # functions directly, e.g. cailloux is found in the general file

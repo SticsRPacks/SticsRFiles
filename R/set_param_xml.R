@@ -41,20 +41,19 @@
 #' sol_path <- file.path(ex_path, "sols.xml")
 #'
 #' # For scalar parameters per soil
-#'
 #' # Setting all soils "argi" values to 50
 #' set_param_xml(sol_path, "argi", 50, overwrite = TRUE)
-#'
-#' get_param_xml(sol_path, "argi")
+#' # Getting changed values
+#' # get_param_xml(sol_path, "argi")
 #'
 #' # Setting a specific value to "argi" for "solcanne" soil
 #' set_param_xml(file = sol_path, param = "argi", values = 56,
 #'    select = "sol", select_value = "solcanne", overwrite = TRUE
 #' )
-#'
-#' get_param_xml(sol_path, "argi",
-#'   select = "sol", select_value = "solcanne"
-#' )
+#' # Getting changed values
+#' # get_param_xml(sol_path, "argi",
+#' #   select = "sol", select_value = "solcanne"
+#' #)
 #'
 #'
 #' # Setting a specific values to 2 parameters "argi" and
@@ -62,10 +61,10 @@
 #' set_param_xml(sol_path, c("argi", "norg"), list(100, 150),
 #'   select = "sol", select_value = "solcanne", overwrite = TRUE
 #' )
-#'
-#' get_param_xml(sol_path, c("argi", "norg"),
-#'   select = "sol", select_value = "solcanne"
-#' )
+#' # Getting changed values
+#' # get_param_xml(sol_path, c("argi", "norg"),
+#' #   select = "sol", select_value = "solcanne"
+#' #)
 #'
 #'
 #' # For vector parameters per soil (5 values, one per soil layer)
@@ -74,15 +73,14 @@
 #'   select_value = c("solcanne", "solbanane"),
 #'   param_value = list(c(20:24, 10:14), c(50:54, 40:44)), overwrite = TRUE
 #' )
-#'
-#' get_param_xml(sol_path, c("epc", "HCCF"),
-#'   select = "sol",
-#'   select_value = c("solcanne", "solbanane")
-#' )
+#' # Getting changed values
+#' # get_param_xml(sol_path, c("epc", "HCCF"),
+#' # select = "sol",
+#' # select_value = c("solcanne", "solbanane")
+#' # )
 #'
 #'
 #' # Crop management file
-#'
 #'
 #' tec_path <- file.path(ex_path, "file_tec.xml")
 #'
@@ -90,8 +88,8 @@
 #' set_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"),
 #'   param_value = list(200:215, 20:35), overwrite = TRUE
 #' )
-#'
-#' get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))
+#' # Getting changed values
+#' # get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))
 #'
 #'
 #' @export

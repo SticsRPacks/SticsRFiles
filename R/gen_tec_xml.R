@@ -52,7 +52,7 @@
 #' @examples
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' tec_param_df <- read_params_table(file = xl_path, sheet_name = "Tec")
-#' gen_tec_xml(out_dir = tempdir(), param_df = tec_param_df)
+#' gen_tec_xml(out_dir = tempdir(), param_df = tec_param_df[1:2, ])
 #'
 #' @export
 #'
@@ -172,7 +172,7 @@ gen_tec_xml <- function(param_df = NULL,
     delete(xml_docs[[f]])
   }
 
-  if (!base::is.null(xml_doc_tmpl) && class(xml_doc_tmpl) == "xml_document")
+  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document"))
     delete(xml_doc_tmpl)
 
 }

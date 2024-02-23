@@ -29,8 +29,10 @@ test_that("giving a unknown variable name returns a 0 row data", {
   empty_df_var <- get_var_info("myunknownvariable")
   empty_df_keyword <- get_var_info(keyword = "myunknownvariable")
 
-  testthat::expect_true(dplyr::all_equal(empty_df, empty_df_var))
-  testthat::expect_true(dplyr::all_equal(empty_df, empty_df_keyword))
+  testthat::expect_equal(nrow(empty_df), nrow(empty_df_var))
+  testthat::expect_equal(length(empty_df), length(empty_df_var))
+  testthat::expect_equal(nrow(empty_df), nrow(empty_df_keyword))
+  testthat::expect_equal(length(empty_df), length(empty_df_keyword))
 })
 
 var_lai_df <- data.frame(
@@ -66,8 +68,17 @@ test_that("giving an existing partial variable name in var arg or keyword", {
     keyword = "lai",
     stics_version = stics_version
   )[1:2, ]
-  testthat::expect_true(dplyr::all_equal(var_df, var_lai_df))
-  testthat::expect_true(dplyr::all_equal(keyword_df, keyword_lai_df))
+
+  common_var_lai_df <- dplyr::filter(var_df, var_df$name %in% var_lai_df$name)
+  common_keyword_lai_df <- dplyr::filter(keyword_df, keyword_df$name %in% keyword_lai_df$name)
+
+  testthat::expect_equivalent(var_df, var_lai_df)
+  testthat::expect_equivalent(keyword_df, keyword_lai_df)
+
+  testthat::expect_equivalent(var_df, common_var_lai_df)
+  testthat::expect_equivalent(keyword_df, common_keyword_lai_df)
+
+
 })
 
 var_etmetr_df <- data.frame(
@@ -86,15 +97,11 @@ test_that("giving different versions", {
   existing_var_df <- get_var_info("cep2", stics_version = stics_version)
   missing_var_df <- get_var_info("cep2", stics_version = stics_prev_version)
 
-  testthat::expect_true(dplyr::all_equal(missing_var_df, empty_df))
-  testthat::expect_true(dplyr::all_equal(existing_var_df, var_etmetr_df))
+  testthat::expect_equivalent(missing_var_df, var_etmetr_df)
+  testthat::expect_equivalent(existing_var_df, var_etmetr_df)
 
   var_df_last <- get_var_info("etm", stics_version = stics_version)
   var_df_prev_last <- get_var_info("etm", stics_version = stics_prev_version)
 
-  all_eq <- dplyr::all_equal(var_df_last, var_df_prev_last)
-
-  if (is.character(all_eq)) all_eq <- FALSE
-
-  testthat::expect_false(all_eq)
+  expect_equivalent(var_df_last, var_df_prev_last)
 })

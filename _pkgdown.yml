@@ -28,6 +28,7 @@ reference:
   - title: "Find information on parameters and variables"
     contents:
       - get_param_info
+      - is_stics_par
       - get_var_info
       - is_stics_var
 
