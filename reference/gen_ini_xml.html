@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -138,7 +138,7 @@ longer supported, use <code>out_dir</code> instead.</p></dd>
     <h2>Value</h2>
     
 
-<p>an invisible xml_document object or a list of</p>
+<p>None</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -159,19 +159,14 @@ to be detected (as shown in the table extract above).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">xl_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example.xlsx"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpxmuSwc </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/h1/8hndypj13nsbj5pn4xsnv1tm0000gn/T//Rtmpy7ydGh </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Consider to set overwrite = TRUE to overwrite (it | them )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ini_param_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="va">xl_path</span>, sheet <span class="op">=</span> <span class="st">"Ini"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">gen_ini_xml</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  param_table <span class="op">=</span> <span class="va">ini_param_df</span></span></span>
+<span class="r-in"><span>  param_df <span class="op">=</span> <span class="va">ini_param_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The `param_table` argument of `gen_ini_xml()` is deprecated as of SticsRFiles</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> 1.0.0.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use the `param_df` argument instead.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Found more than one class "xml_document" in cache; using the first, from namespace 'xml2'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Also defined by ‘SticsRFiles’</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

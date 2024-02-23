@@ -24,7 +24,7 @@ or in a subdirectory."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -92,26 +92,27 @@ or in a subdirectory.</p>
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gen_usms_xml2txt</span><span class="op">(</span></span>
-<span>  <span class="va">javastics</span>,</span>
+<span>  javastics <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  workspace <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  out_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  usm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dir_per_usm_flag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  check <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  java_cmd <span class="op">=</span> <span class="st">"java"</span>,</span>
+<span>  java_converter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  javastics_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  workspace_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  target_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  usms_list <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  check_files <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  usms_list <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>javastics</dt>
-<dd><p>Path of JavaSTICS.</p></dd>
+<dd><p>Path of JavaSTICS. Optional (needed if the JavaSTICS
+converter is used, java_converter set to TRUE in inputs)</p></dd>
 
 
 <dt>workspace</dt>
@@ -127,7 +128,12 @@ the current workspace stored in JavaSTICS preferences will be used.</p></dd>
 
 <dt>usm</dt>
 <dd><p>List of usms to generate (Optional). If not provided, all
-usms contained in workspace_path/usms.xml file will be generated.</p></dd>
+usms contained in workspace/usms.xml file will be generated.</p></dd>
+
+
+<dt>stics_version</dt>
+<dd><p>the STICS files version to use (optional,
+default to latest).</p></dd>
 
 
 <dt>verbose</dt>
@@ -140,12 +146,17 @@ per USM, FALSE if USM files are generated in the target_path
 (only useful for usms_list of size one)</p></dd>
 
 
-<dt>check</dt>
-<dd><p>Logical, TRUE to check if usms files exist, FALSE otherwise</p></dd>
-
-
 <dt>java_cmd</dt>
-<dd><p>The java virtual machine command name or executable path</p></dd>
+<dd><p>For unix like systems, the java virtual machine command
+name or executable path. Usefull only if the JavaSTICS command line
+is used for generating files. "java" is the default system command,
+but a full path to a java executable (other than the default one)
+may be given</p></dd>
+
+
+<dt>java_converter</dt>
+<dd><p>logical TRUE for using JavaStics command
+(a JavaSTICS path must be set in the function inputs), FALSE otherwise</p></dd>
 
 
 <dt>javastics_path</dt>
@@ -166,11 +177,6 @@ longer supported, use <code>out_dir</code> instead.</p></dd>
 <dt>usms_list</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>usms_list</code> is no
 longer supported, use <code>usm</code> instead.</p></dd>
-
-
-<dt>check_files</dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>check_files</code> is no
-longer supported, use <code>check</code> instead.</p></dd>
 
 </dl></div>
     <div id="value">

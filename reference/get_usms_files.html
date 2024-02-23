@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -84,6 +84,7 @@
 <span>  usms_file <span class="op">=</span> <span class="st">"usms.xml"</span>,</span>
 <span>  file_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  javastics <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  df_output <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  workspace_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  file_name <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  javastics_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -117,6 +118,11 @@ are not in the workspace
 JavaSTICS distribution)</p></dd>
 
 
+<dt>df_output</dt>
+<dd><p>logical if TRUE returning a data.frame, otherwise returning
+a named list if FALSE (default)</p></dd>
+
+
 <dt>workspace_path</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>workspace_path</code>
 is no longer supported, use <code>workspace</code> instead.</p></dd>
@@ -140,8 +146,8 @@ is no longer supported, use <code>javastics</code> instead.</p></dd>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>The possible values of file types are: "fplt", "finit", "fclim1",
-"fclim2", "fstation" and "ftec"</p>
+    <p>The possible values for file_type are: "fplt", "finit", "fclim1",
+"fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -160,7 +166,8 @@ and <code><a href="get_usms_list.html">get_usms_list()</a></code> to get the lis
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_usms_files</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  workspace <span class="op">=</span> <span class="st">"/path/to/workspace"</span>,</span></span>
-<span class="r-in"><span>  javastics <span class="op">=</span> <span class="st">"/path/to/JavaSTICS/folder"</span>, usm_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"usm1"</span>, <span class="st">"usm3"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  javastics <span class="op">=</span> <span class="st">"/path/to/JavaSTICS/folder"</span>,</span></span>
+<span class="r-in"><span>  usm_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"usm1"</span>, <span class="st">"usm3"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_usms_files</span><span class="op">(</span></span></span>

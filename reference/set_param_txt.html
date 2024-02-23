@@ -18,7 +18,7 @@ STICS input file."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -264,9 +264,6 @@ please directly call <code>gen_varmod</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Getting example data path</span></span></span>
 <span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span>file_type <span class="op">=</span> <span class="st">"txt"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Replace the interrow distance parameter to 0.01:</span></span></span>
-<span class="r-in"><span><span class="fu">set_param_txt</span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">path</span>, param <span class="op">=</span> <span class="st">"interrang"</span>, value <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change the value of durvieF for the current variety:</span></span></span>
 <span class="r-in"><span><span class="fu">set_param_txt</span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">path</span>, param <span class="op">=</span> <span class="st">"durvieF"</span>, value <span class="op">=</span> <span class="fl">245</span><span class="op">)</span></span></span>
@@ -281,9 +278,6 @@ please directly call <code>gen_varmod</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Change the value of infil for a given layer:</span></span></span>
-<span class="r-in"><span><span class="fu">set_param_txt</span><span class="op">(</span>workspace <span class="op">=</span> <span class="va">path</span>, param <span class="op">=</span> <span class="st">"infil"</span>, layer <span class="op">=</span> <span class="fl">2</span>, value <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># If the parameter is found in several files, use the set_*</span></span></span>
 <span class="r-in"><span><span class="co"># functions directly, e.g. cailloux is found in the general file</span></span></span>

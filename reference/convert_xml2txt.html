@@ -20,7 +20,7 @@ is converted to a text file readable by the STICS model
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -86,12 +86,11 @@ is converted to a text file readable by the STICS model
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">convert_xml2txt</span><span class="op">(</span></span>
 <span>  <span class="va">file</span>,</span>
-<span>  <span class="va">javastics</span>,</span>
 <span>  plant_id <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  out_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  save_as <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  xml_file <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  java_dir <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  plt_num <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  out_file <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -101,10 +100,6 @@ is converted to a text file readable by the STICS model
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>Path (including name) of the xml file to convert</p></dd>
-
-
-<dt>javastics</dt>
-<dd><p>Path of JavaSTICS</p></dd>
 
 
 <dt>plant_id</dt>
@@ -121,14 +116,14 @@ Optional, set to the path of the input xml file by default</p></dd>
 (optional, default: fixed name for STICS)</p></dd>
 
 
+<dt>stics_version</dt>
+<dd><p>the STICS files version to use (optional,
+default to latest).</p></dd>
+
+
 <dt>xml_file</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>xml_file</code> is no
 longer supported, use <code>file</code> instead.</p></dd>
-
-
-<dt>java_dir</dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>java_dir</code> is no
-longer supported, use <code>javastics</code> instead.</p></dd>
 
 
 <dt>plt_num</dt>

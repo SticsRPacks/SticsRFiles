@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The goal of SticsRFiles is to perform manipulations of the <a href="https://www6.paca.inrae.fr/stics_eng/" class="external-link">STICS</a> model files either on XML files (used by the JavaSTICS GUI) or on text files used by the model fortran executable.</p>
+<p>The goal of SticsRFiles is to perform manipulations of the <a href="https://eng-stics.paca.hub.inrae.fr/" class="external-link">STICS</a> model files either on XML files (used by the JavaSTICS GUI) or on text files used by the model fortran executable.</p>
 <p>The basic functionalities allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the <a href="https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html" class="external-link">Get started page</a>.</p>
 <p>Advanced functionalities are dedicated to produce XML parameter files using a mailing process like from XML templates and Excel sheets containing multiple simulations contexts. A JavaSTICS workspace is generated and directly usable from the JavaSTICS interface (GUI or command line), or with an R JavaSTICS interface provided by the <a href="https://sticsrpacks.github.io/SticsOnR/" class="external-link">SticsOnR</a> package.</p>
 <p>If you want to be notified when a new release of this package is made, you can tick the Releases box in the “Watch / Unwatch =&gt; Custom” menu at the top right of <a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">this page</a>.</p>
@@ -131,32 +131,39 @@
 <h3 id="recommended-installation-sticsrpacks">Recommended installation: <code>SticsRPacks</code>
 <a class="anchor" aria-label="anchor" href="#recommended-installation-sticsrpacks"></a>
 </h3>
-<p>The best way to install the packages from <code>SticsRPacks</code>, from which <code>SticsRFiles</code> is part of, is by installing the <code>[SticsRPacks]</code> package. The package can be installed from <a href="https://github.com/" class="external-link">GitHub</a> using either the <code>devtools</code> package, or the more lightweight <code>remotes</code> package:</p>
+<p>The best way to install the packages from <code>SticsRPacks</code>, from which <code>SticsRFiles</code> is part of, is by installing the <code>[SticsRPacks]</code> package. The package can be installed from <a href="https://github.com/" class="external-link">GitHub</a> using either the <code>devtools</code> package, or the more lightweight the <code>remotes</code> package:</p>
+<ul>
+<li>With <code>devtools</code>
+</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span>      <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>With <code>remotes</code>
 </li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span>      <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRPacks"</span><span class="op">)</span></span></code></pre></div>
 <p>The package will install the packages for you at the latest release version.</p>
 </div>
 <div class="section level3">
-<h3 id="or-install-directly">Or, install directly<a class="anchor" aria-label="anchor" href="#or-install-directly"></a>
+<h3 id="direct-installation-from-the-cran-or-github">Direct installation from the CRAN or <a href="https://github.com/" class="external-link">GitHub</a>
+<a class="anchor" aria-label="anchor" href="#direct-installation-from-the-cran-or-github"></a>
 </h3>
 <ul>
-<li>With <code>devtools</code>
-</li>
+<li>From the CRAN</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span>      <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"SticsRFiles"</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>With <code>remotes</code>
-</li>
+<li>From GitHub</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span>      <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></span>
+<span></span>
+<span>      <span class="va">or</span> </span>
+<span>      </span>
+<span>      <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SticsRPacks/SticsRFiles@*release"</span><span class="op">)</span></span></code></pre></div>
 <p>Normally, all the package dependencies will be installed for CRAN packages.</p>
 </div>
 </div>

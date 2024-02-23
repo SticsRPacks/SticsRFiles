@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@ replaced respectively with num_na or char_na</p>
 <span class="r-in"><span>  file <span class="op">=</span> <span class="st">"inputs_stics_example.xlsx"</span>,</span></span>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpxmuSwc </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/h1/8hndypj13nsbj5pn4xsnv1tm0000gn/T//Rtmpy7ydGh </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Consider to set overwrite = TRUE to overwrite (it | them )</span>
 <span class="r-in"><span><span class="fu">read_params_table</span><span class="op">(</span><span class="va">usm_xl_file</span>, sheet <span class="op">=</span> <span class="st">"USMs"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 19</span></span>
@@ -155,10 +155,10 @@ replaced respectively with num_na or char_na</p>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>  stics_version <span class="op">=</span> <span class="st">"V9.2"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Error copying files:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> /private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpxmuSwc/csv/V9.2/inputs_stics_example_USMs.csv</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example_USMs.csv already exists in  /var/folders/h1/8hndypj13nsbj5pn4xsnv1tm0000gn/T//Rtmpy7ydGh </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Consider to set overwrite = TRUE to overwrite (it | them )</span>
 <span class="r-in"><span><span class="fu">read_params_table</span><span class="op">(</span>file <span class="op">=</span> <span class="va">usm_csv_file</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    usm_name      datedebut datefin finit nomsol fstation fclim1 fclim2 culturean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> USM_2017_T1_…       199     263 USM_… USM_T1 climate… clima… clima…         1</span>
@@ -173,8 +173,9 @@ replaced respectively with num_na or char_na</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MAG_ARV_12_S…       264     570 Vill… LF1    climate… clima… clima…         2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> FRA_ARB_12_S…       199     263 Vill… LF1    climate… clima… clima…         2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> FRA_ARB_13_S…       264     570 Vill… LF1    climate… clima… clima…         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: nbplantes &lt;int&gt;, codesimul &lt;int&gt;, fplt_1 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ftec_1 &lt;chr&gt;, flai_1 &lt;chr&gt;, fplt_2 &lt;chr&gt;, ftec_2 &lt;chr&gt;, flai_2 &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: nbplantes &lt;int&gt;, codesimul &lt;int&gt;, fplt_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ftec_1 &lt;chr&gt;, flai_1 &lt;chr&gt;, fobs_1 &lt;chr&gt;, fplt_2 &lt;chr&gt;, ftec_2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   flai_2 &lt;chr&gt;, fobs_2 &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </div>

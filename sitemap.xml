@@ -174,6 +174,10 @@ c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), em
   </url>
   <url>
     <loc>https://sticsrpacks.github.io/SticsRFiles/
+c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"), person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"), person(given = "SticsRPacks", role = c("aut","cph")), person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")), person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")), person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")), person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")), person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")), person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev")) )/reference/is_stics_param.html</loc>
+  </url>
+  <url>
+    <loc>https://sticsrpacks.github.io/SticsRFiles/
 c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"), person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"), person(given = "SticsRPacks", role = c("aut","cph")), person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")), person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")), person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")), person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")), person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")), person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev")) )/reference/is_stics_var.html</loc>
   </url>
   <url>
