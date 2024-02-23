@@ -53,16 +53,11 @@ file <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 
 # For all soils
 get_param_xml(file)
-get_param_xml(file, "argi")
 get_param_xml(file, c("argi", "norg"))
 
 # With soil selection
 # scalar parameters per soil
 get_param_xml(file, c("argi", "norg"),
-  select = "sol", select_value = c("solcanne", "solbanane")
-)
-# vector parameters per soil (5 values, one per soil layer)
-get_param_xml(file, c("epc", "HCCF"),
   select = "sol", select_value = c("solcanne", "solbanane")
 )
 
@@ -72,7 +67,5 @@ file <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 # Getting parameters for irrigation (date and quantity)
 get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 
-# Getting all parameters for a given formalism: "irrigation"
-get_param_xml(file, select = "formalisme", select_value = "irrigation")
 
 }
