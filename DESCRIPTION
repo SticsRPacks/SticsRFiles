@@ -75,6 +75,7 @@ Collate:
     'all_in_par.R'
     'all_out_var.R'
     'attributes_list2matrix.R'
+    'calendar_to_julian_dates.R'
     'check_choice_param.R'
     'check_java_path.R'
     'check_java_workspace.R'
