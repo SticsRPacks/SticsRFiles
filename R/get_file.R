@@ -95,7 +95,7 @@ get_file <- function(workspace,
 #' @param usms_filepath  Path of the usms file (optional)
 #' @param var_list   vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
-#' @param dates_list list of dates to filter (optional, should be a POSIX date)
+#' @param dates_list list of dates to filter (optional, POSIX dates)
 #' @param javastics_path JavaSTICS installation path (optional, needed if
 #' the plant files are not in the `workspace` but rather in the JavaSTICS
 #' default workspace). Only used to get the plants names.
@@ -132,19 +132,44 @@ get_file_ <- function(workspace,
   type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
   if (type == "sim") {
     file_pattern <- "^mod_s"
+    full_type <- "simulation"
   } else {
     file_pattern <- "\\.obs$"
+    full_type <- "observation"
   }
 
   # Getting files list from workspace vector
   workspace_files <- list.files(pattern = file_pattern, path = workspace)
+
+  # Checking if usm_name correspond to existing simulation
+  # or observation files, a warning with missing outputs/obs usm
+  # names
+  if (length(workspace_files) && !is.null(usm_name)) {
+    idx <- lapply(usm_name,
+                  function(x) grep(pattern = paste0(x, "\\."),
+                                   x = workspace_files)
+    )
+    usm_idx <- unlist(lapply(idx, function(x) length(x) > 0))
+    files_idx <- unlist(idx)
+    if (!all(usm_idx))
+      warning("No ",
+              full_type,
+              " files for in the workspace: ",
+              workspace,
+              "\n",
+              "for usms:\n",
+              paste(usm_name[!usm_idx], collapse = ", "))
+    workspace_files <- workspace_files[files_idx]
+  }
+
   # If no files found, and usms name are given,
   # trying to find sub-directories named with usms names
   if (!length(workspace_files) && !is.null(usm_name)) {
-    usm_name <- sort(usm_name)
     workspace <- file.path(workspace, usm_name)
-    workspace_files <- as.list(list.files(pattern = file_pattern,
-                                          path = workspace))
+    workspace_files <-
+      lapply(workspace,
+             function(x) list.files(path = x, pattern = file_pattern)
+      )
   }
 
   # No sim/obs file found
@@ -224,8 +249,10 @@ get_file_ <- function(workspace,
     )
 
     idx <- sapply(
-      tmp, function(x) grep(x, names(file_name), fixed = TRUE), simplify = FALSE
+      tmp, function(y) grep(pattern = paste0("^", y, "$"),
+                            x =names(file_name))
     )
+
 
     to_remove <- which(sapply(idx, function(x) (length(x) == 0)))
 
@@ -416,7 +443,7 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
   } else {
     usm_pattern <- "\\.obs$"
     mixed_pattern <- "((a|p)\\.obs)$"
-    associated_pattern <- "a.obs$"
+    associated_pattern <- "a\\.obs$"
   }
 
   usm_names <- gsub(pattern = usm_pattern, replacement = "", x = file_names)
