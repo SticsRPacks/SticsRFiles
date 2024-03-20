@@ -217,7 +217,7 @@ get_file_ <- function(workspace,
 
     # Getting sim/obs files list from directory
     file_name <-
-      parse_mixed_file(file_names = workspace_files, type = type)
+      parse_mixed_file(file_names = as.list(workspace_files), type = type)
     usms <- names(file_name)
 
     # Selecting using usm_name
@@ -443,7 +443,7 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
   } else {
     usm_pattern <- "\\.obs$"
     mixed_pattern <- "((a|p)\\.obs)$"
-    associated_pattern <- "a.obs$"
+    associated_pattern <- "a\\.obs$"
   }
 
   usm_names <- gsub(pattern = usm_pattern, replacement = "", x = file_names)
