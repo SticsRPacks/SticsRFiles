@@ -20,5 +20,5 @@ man/figures
 ^inst/extdata/src_files$
 ^\.vscode$
 ^CRAN-SUBMISSION$
-^LICENSE\.md$
+LICENSE
 ^revdep$
