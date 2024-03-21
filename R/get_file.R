@@ -276,6 +276,7 @@ get_file_ <- function(workspace,
                        x = names(file_name))
     )
 
+
     to_remove <- which(sapply(idx, function(x) (length(x) == 0)))
 
     if (length(to_remove) > 0) {
