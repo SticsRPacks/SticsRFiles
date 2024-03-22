@@ -129,6 +129,13 @@ upgrade_ini_xml <- function(file,
   lapply(rm_nodes, function(x) XML::removeNodes(x))
 
 
+  # Moving magrain0 node
+  mv_nodes <- unlist(get_nodes(old_doc, "//magrain0"))
+  prev_sibling <- unlist(get_nodes(old_doc, "//lai0"))
+  XML::addSibling(prev_sibling[[1]], mv_nodes[[1]])
+  XML::addSibling(prev_sibling[[2]], mv_nodes[[2]])
+
+
   # Adding new option node
   # including old nodes masec0,QNplante0,restemp0
   # (previously named resperennes0)
