@@ -180,7 +180,7 @@ get_file_ <- function(workspace,
     # checking common files
     common_idx <- basename(workspace_files_sub) %in% workspace_files
     if (any(common_idx)) {
-      stop("Files exist in both ",
+      warning("Files exist in both ",
            workspace,
            " and ",
            workspace_sub[common_idx],
