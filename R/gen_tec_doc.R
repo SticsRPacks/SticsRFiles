@@ -43,10 +43,7 @@ gen_tec_doc <- function(xml_doc = NULL,
   if ("na_values" %in% dot_args_names) na_values <- dot_args$na_values
 
   # check/get version
-  stics_version <- get_xml_stics_version(
-    stics_version = stics_version,
-    xml_doc = xml_doc
-  )
+  stics_version <- check_version_compat(stics_version = stics_version)
 
   # getting a default xml template
   if (base::is.null(xml_doc)) {

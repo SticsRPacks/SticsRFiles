@@ -65,7 +65,7 @@ get_param_data_df <- function(param = NULL,
 
   if (base::is.null(file)) {
     # Check STICS version
-    stics_version <- get_xml_stics_version(stics_version)
+    stics_version <- check_version_compat(stics_version = stics_version)
 
     # Getting XML examples files dir from the package
     xml_dir <- get_examples_path(file_type = "xml",

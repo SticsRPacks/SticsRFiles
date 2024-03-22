@@ -28,7 +28,7 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
                               stics_version = "latest") {
 
   # check/get STICS version
-  stics_version <- get_xml_stics_version(stics_version = stics_version)
+  stics_version <- check_version_compat(stics_version = stics_version)
 
 
   files_tags <- c("usms", "sols", "tec")

@@ -23,7 +23,7 @@ get_xml_doc_example <- function(xml_name = NULL,
                                 stics_version = "latest") {
 
   # check/get version
-  stics_version <- get_xml_stics_version(stics_version = stics_version)
+  stics_version <- check_version_compat(stics_version = stics_version)
 
   # stics_xml_types
   files <- list.files(pattern = ".xml$",

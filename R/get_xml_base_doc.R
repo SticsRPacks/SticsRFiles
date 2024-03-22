@@ -17,7 +17,7 @@
 #' # STICS version can be provided, V9.1
 #' # corresponds to stics_version = "latest"
 #' # View available STICS files version
-#' get_xml_stics_version()
+#' get_stics_versions_compat()
 #' # Giving STICS version
 #' get_xml_base_doc("sols", stics_version = "V9.1")
 #' }
@@ -44,7 +44,7 @@ get_xml_base_doc <- function(xml_type = NULL,
   }
 
   # check & get version
-  stics_version <- get_xml_stics_version(stics_version = stics_version)
+  stics_version <- check_version_compat(stics_version = stics_version)
 
   # getting files prefix
   files_pref <- c("one", "one", "file", "file", "file")

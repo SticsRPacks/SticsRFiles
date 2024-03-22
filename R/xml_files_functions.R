@@ -123,8 +123,7 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
   add_attrs(xml_doc, path = root_path, named_vector = ver)
 }
 
-# TODO : see existing get_xml_stics_version, to be merged or replaced with
-# this one and see what to do in gen_*_doc functions using templates ...
+
 get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   xml_doc <- get_xml_doc(xml_file_or_doc)
   xml_root_name <- XML::xmlName(XML::xmlRoot(xml_doc@content))
@@ -183,12 +182,10 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 }
 
 # TODO: see *xml_file_version functions ...
-# check_xml_stics_version <- function(xml_file_or_doc, version,
-# param_gen_file = NULL) {
+
 check_xml_file_version <- function(xml_file_or_doc, stics_version,
                                    param_gen_file = NULL) {
-  # xml_version <- get_xml_stics_version(xml_file_or_doc,
-  # param_gen_file = param_gen_file)
+
   xml_version <- get_xml_file_version(xml_file_or_doc,
     param_gen_file = param_gen_file
   )

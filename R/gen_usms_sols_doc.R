@@ -59,7 +59,7 @@ gen_usms_sols_doc <- function(doc_type,
   # getting a default xml template
   if (base::is.null(xml_doc)) {
     # check/get version of templates xml files
-    stics_version <- get_xml_stics_version(stics_version = stics_version)
+    stics_version <- check_version_compat(stics_version = stics_version)
 
     # using function get_xml_base_doc
     xml_doc_out <- get_xml_base_doc(
