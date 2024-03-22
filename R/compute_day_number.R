@@ -1,10 +1,10 @@
-##' Julian days
+##' Day of year
 ##'
-##' Returns the Julian day equivalent to a given date.
+##' Returns the day number of the year corresponding to a given date.
 ##' @param date date you wish to convert, in the \code{\link[base]{Date}} format
 ##' @return integer
 ##' @author Timothee Flutre
-get_julian_days <- function(date){
+get_day_of_year <- function(date){
   stopifnot(methods::is(date, "Date"))
   out <- format(date, "%j")
   return(as.integer(out))
@@ -12,17 +12,18 @@ get_julian_days <- function(date){
 
 ##' Leap year
 ##'
-##' Returns TRUE if the given year is a leap year, FALSE otherwise
+##' Returns TRUE if the given year is a leap year, FALSE otherwise.
 ##' @param year numeric
 ##' @return logical
 ##' @author Timothee Flutre
-isLeapYear <- function(year){
+is_leap_year <- function(year){
   year %% 4 == 0 & (year %% 100 != 0 | year %% 400 == 0)
 }
 
-##' Convert dates
+##' Convert date into day number
 ##'
-##' Converts a calendar date into a Julian date using a start date, as used for STICS, that is, Julian day counted from January 1 of the year of the start date, typically the simulation start year.
+##' Computes the day number corresponding to a given date with reference to a start date.
+##' Typically, the start date should be the date at which a STICS simulation will start.
 ##' Leap years are properly handled.
 ##' @param date date you wish to convert, in the \code{\link[base]{Date}} format
 ##' @param start_date date used as the reference point, in the \code{\link[base]{Date}} format, typically the simulation start year
@@ -31,23 +32,23 @@ isLeapYear <- function(year){
 ##' @examples
 ##' start_date <- as.Date("2014-08-01")
 ##' date <- as.Date("2015-02-10")
-##' julian_date_for_stics(date=date, start_date=start_date)
+##' compute_day_from_date(date=date, start_date=start_date)
 ##'
 ##' start_date <- as.Date("2008-08-01")
 ##' date <- as.Date("2009-02-10")
-##' julian_date_for_stics(date=date, start_date=start_date)
+##' compute_day_from_date(date=date, start_date=start_date)
 ##' @export
-julian_date_for_stics <- function(date, start_date){
+compute_day_from_date <- function(date, start_date){
   stopifnot(methods::is(date, "Date"),
             methods::is(start_date, "Date"),
             date > start_date)
 
   out <- 0
 
-  start_date_julian <- get_julian_days(start_date)
+  start_date_julian <- get_day_of_year(start_date)
   start_date_year <- as.integer(format(start_date, "%Y"))
 
-  date_julian <- get_julian_days(date)
+  date_julian <- get_day_of_year(date)
   date_year <- as.integer(format(date, "%Y"))
 
   years <- seq(start_date_year, date_year)
@@ -55,8 +56,8 @@ julian_date_for_stics <- function(date, start_date){
     out <- date_julian
   } else{
     years <- years[1:(length(years)-1)]
-    nbLeapYears <- sum(isLeapYear(years))
-    nbNonLeapYears <- sum(! isLeapYear(years))
+    nbLeapYears <- sum(is_leap_year(years))
+    nbNonLeapYears <- sum(! is_leap_year(years))
     out <- 365 * nbNonLeapYears + 366 * nbLeapYears + date_julian
   }
 
