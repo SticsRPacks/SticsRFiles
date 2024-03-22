@@ -52,7 +52,7 @@ julian_date_for_stics <- function(date, start_date){
 
   years <- seq(start_date_year, date_year)
   if(length(years) == 1){
-    out <- date_julian - start_date_julian
+    out <- date_julian
   } else{
     years <- years[1:(length(years)-1)]
     nbLeapYears <- sum(isLeapYear(years))

@@ -3,8 +3,8 @@ context("Convert calendar dates to julian dates")
 
 test_that("same-year", {
   start_date <- as.Date("2014-08-01")
-  date <- as.Date("2014-08-05")
-  expected <- 4
+  date <- as.Date("2014-08-10")
+  expected <- 222
   observed <- julian_date_for_stics(date=date, start_date=start_date)
   expect_equal(observed, expected)
 })
