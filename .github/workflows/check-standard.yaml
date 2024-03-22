@@ -76,6 +76,6 @@ jobs:
       - name: Trigger
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.STICSRTEST_TRIGGER }}
+          token: ${{ secrets.TRIGGER_PAT }}
           repository: SticsRPacks/SticsRTests
           event-type: R-CMD-check
