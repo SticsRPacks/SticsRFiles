@@ -185,7 +185,6 @@ Collate:
     'upgrade_sols_xml.R'
     'upgrade_sta_xml.R'
     'upgrade_tec_xml.R'
-    'upgrade_tools.R'
     'upgrade_usms_xml.R'
     'upgrade_workspace_xml.R'
     'var_to_col_names.R'
