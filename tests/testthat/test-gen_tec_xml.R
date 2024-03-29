@@ -47,14 +47,14 @@ xl_irr_values <- dplyr::select(
   tec_param[4, ],
   starts_with(sort(names(xml_irr_values)))
 ) %>%
-  dplyr::select(tidyselect::where(function(x) !is.na(x)) &
-           tidyselect::where(function(x) {
-             c <- x != "NA"
-             if (is.na(c)) c <- TRUE
-             return(c)
+  dplyr::select(where(function(x) !is.na(x)) &
+                  where(function(x) {
+                    c <- x != "NA"
+                    if (is.na(c)) c <- TRUE
+                    return(c)
 
-           }
-           ))
+                  }
+                  ))
 
 
 #
@@ -71,14 +71,14 @@ xl_irr_values <- dplyr::select(
   tec_param[4, ],
   starts_with(common_names)
 ) %>%
-  dplyr::select(tidyselect::where(function(x) !is.na(x)) &
-           tidyselect::where(function(x) {
-             c <- x != "NA"
-             if (is.na(c)) c <- TRUE
-             return(c)
+  dplyr::select(where(function(x) !is.na(x)) &
+                  where(function(x) {
+                    c <- x != "NA"
+                    if (is.na(c)) c <- TRUE
+                    return(c)
 
-           }
-           ))
+                  }
+                  ))
 
 
 
