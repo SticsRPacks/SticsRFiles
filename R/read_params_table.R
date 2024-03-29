@@ -28,7 +28,7 @@
 #' read_params_table(file = usm_csv_file)
 read_params_table <- function(file, sheet_name = NULL,
                               num_na = "NA",
-                              char_na = "",
+                              char_na = "NA",
                               file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
     lifecycle::deprecate_warn("1.0.0",
@@ -76,11 +76,17 @@ read_params_table <- function(file, sheet_name = NULL,
         file = file_path,
         header = TRUE,
         sep = ";",
-        stringsAsFactors = FALSE
+        stringsAsFactors = FALSE,
+        na.strings = "",
+        strip.white = TRUE,
+        colClasses = "character"
       )
     },
     {
-      out_table <- readxl::read_excel(file_path, sheet = sheet_name)
+      out_table <- readxl::read_excel(file_path,
+                                      sheet = sheet_name,
+                                      trim_ws = TRUE,
+                                      col_types = "text")
     }
   )
 
