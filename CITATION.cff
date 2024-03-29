@@ -253,6 +253,20 @@ references:
     given-names: Maximilian
   year: '2024'
 - type: software
+  title: tidyselect
+  abstract: 'tidyselect: Select from a Set of Strings'
+  notes: Imports
+  url: https://tidyselect.r-lib.org
+  repository: https://CRAN.R-project.org/package=tidyselect
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+- type: software
   title: tools
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
