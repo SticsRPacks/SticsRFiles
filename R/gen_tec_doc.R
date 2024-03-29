@@ -11,6 +11,7 @@
 #'
 #' @return an invisible xml_document object or a list of
 #'
+#' @importFrom tidyselect where
 #'
 #' @examples
 #' \dontrun{
@@ -82,14 +83,14 @@ gen_tec_doc <- function(xml_doc = NULL,
   gen_error <- FALSE
 
   param_table <- param_table %>%
-    select(where(function(x) !is.na(x)) &
-             where(function(x) {
-               c <- x != "NA"
-               if (is.na(c)) c <- TRUE
-               return(c)
+    dplyr::select(where(function(x) !is.na(x)) &
+                    where(function(x) {
+                      c <- x != "NA"
+                      if (is.na(c)) c <- TRUE
+                      return(c)
 
-             }
-             ))
+                    }
+                    ))
 
   # TODO : Avoid making conversion at each call !!!!!!
   # getting values of params declared in the table

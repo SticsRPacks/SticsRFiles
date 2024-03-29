@@ -29,7 +29,7 @@ xml_res_vec <- unlist(get_param_xml(
   select_value = "supply of organic residus"
 )[[1]])
 
-xl_res_vec <- select(tec_param[4, ], starts_with(names(xml_res_vec)))
+xl_res_vec <- dplyr::select(tec_param[4, ], starts_with(names(xml_res_vec)))
 
 # For irrigation
 xml_irr_values <- get_param_xml(
@@ -39,15 +39,22 @@ xml_irr_values <- get_param_xml(
 
 # renaming param according to table
 names(xml_irr_values)[names(xml_irr_values) %in%
-                    c("julapI_or_sum_upvt", "amount")] <- c("julapI", "doseI")
+                        c("julapI_or_sum_upvt", "amount")] <- c("julapI", "doseI")
 
 
 # select columns with no NA values
-xl_irr_values <- select(
+xl_irr_values <- dplyr::select(
   tec_param[4, ],
   starts_with(sort(names(xml_irr_values)))
 ) %>%
-  select_if(~ !any(is.na(.)))
+  dplyr::select(tidyselect::where(function(x) !is.na(x)) &
+           tidyselect::where(function(x) {
+             c <- x != "NA"
+             if (is.na(c)) c <- TRUE
+             return(c)
+
+           }
+           ))
 
 
 #
@@ -60,11 +67,18 @@ xml_irr_values <- unlist(xml_irr_values[common_names],
                          use.names = FALSE
 )
 
-xl_irr_values <- select(
+xl_irr_values <- dplyr::select(
   tec_param[4, ],
   starts_with(common_names)
 ) %>%
-  select_if(~ !any(is.na(.)))
+  dplyr::select(tidyselect::where(function(x) !is.na(x)) &
+           tidyselect::where(function(x) {
+             c <- x != "NA"
+             if (is.na(c)) c <- TRUE
+             return(c)
+
+           }
+           ))
 
 
 
@@ -76,13 +90,13 @@ xml_fert_values <- get_param_xml(
 
 # renaming param according to table (TODO: use param dict)
 names(xml_fert_values)[names(xml_fert_values) %in%
-            c("julapN_or_sum_upvt", "absolute_value/%")] <- c("julapN", "doseN")
+                         c("julapN_or_sum_upvt", "absolute_value/%")] <- c("julapN", "doseN")
 
-xl_fert_values <- select(
+xl_fert_values <- dplyr::select(
   tec_param[4, ],
   starts_with(sort(names(xml_fert_values)))
 ) %>%
-  select_if(~ !any(is.na(.)))
+  dplyr::select_if(~ !any(is.na(.)))
 
 
 xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)",
@@ -92,14 +106,14 @@ xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)",
 common_names <- sort(intersect(names(xml_fert_values), xl_names))
 
 xml_fert_values <- unlist(xml_fert_values[common_names],
-                         use.names = FALSE
+                          use.names = FALSE
 )
 
-xl_fert_values <- select(
+xl_fert_values <- dplyr::select(
   tec_param[4, ],
   starts_with(common_names)
 ) %>%
-  select_if(~ !any(is.na(.)))
+  dplyr::select_if(~ !any(is.na(.)))
 
 
 context("Comparing table values vs xml tec file values")
