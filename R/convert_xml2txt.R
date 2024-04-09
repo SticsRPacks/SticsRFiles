@@ -92,7 +92,7 @@ convert_xml2txt <- function(file,
   # Detecting plt or tec in xml file name
   if (calc_name && base::is.null(out_file)) {
     tag <- tags[[idx]]
-    if (tag == "_plt" || tag == "_tec") {
+    if (tag == "_plt\\.xml" || tag == "_tec\\.xml") {
       out_file <- files_names[[idx]][[plt_num]]
     } else {
       out_file <- files_names[[idx]][[1]]
