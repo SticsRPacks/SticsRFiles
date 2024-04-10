@@ -7,17 +7,20 @@
 compute_day_from_date(date, start_date)
 }
 \arguments{
-\item{date}{date you wish to convert, in the \code{\link[base]{Date}} format}
+\item{date}{date vector you wish to convert,
+in the \code{\link[base]{Date}} format}
 
-\item{start_date}{date used as the reference point, in the \code{\link[base]{Date}} format, typically the simulation start year}
+\item{start_date}{date used as the reference point,
+in the \code{\link[base]{Date}} format, typically the simulation start year}
 }
 \value{
-numeric
+numeric vector
 }
 \description{
-Computes the day number corresponding to a given date with reference to a start date.
-Typically, the start date should be the date at which a STICS simulation will start.
-Leap years are properly handled.
+Computes the day number corresponding to a given date (or vector of)
+with reference to a start date.
+Typically, the start date should be the date at which a STICS simulation
+will start. Leap years are properly handled.
 }
 \examples{
 start_date <- as.Date("2014-08-01")
