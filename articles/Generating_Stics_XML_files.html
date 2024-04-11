@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generating STICS XML files from tabulated data • SticsRFiles</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -53,16 +53,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
-    </li>
-    <li>
       <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -106,7 +106,8 @@ data</h1>
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -325,16 +326,16 @@ file.</p>
 </colgroup>
 <thead><tr class="header">
 <th align="left">usm_name</th>
-<th align="right">datedebut</th>
-<th align="right">datefin</th>
+<th align="left">datedebut</th>
+<th align="left">datefin</th>
 <th align="left">finit</th>
 <th align="left">nomsol</th>
 <th align="left">fstation</th>
 <th align="left">fclim1</th>
 <th align="left">fclim2</th>
-<th align="right">culturean</th>
-<th align="right">nbplantes</th>
-<th align="right">codesimul</th>
+<th align="left">culturean</th>
+<th align="left">nbplantes</th>
+<th align="left">codesimul</th>
 <th align="left">fplt_1</th>
 <th align="left">ftec_1</th>
 <th align="left">flai_1</th>
@@ -347,255 +348,255 @@ file.</p>
 <tbody>
 <tr class="odd">
 <td align="left">USM_2017_T1_CI</td>
-<td align="right">199</td>
-<td align="right">263</td>
+<td align="left">199</td>
+<td align="left">263</td>
 <td align="left">USM_2017_T1_ini.xml</td>
 <td align="left">USM_T1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2017</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">rapeseed_plt.xml</td>
 <td align="left">USM_2017_T1_CI_tec.xml</td>
-<td align="left"></td>
+<td align="left">NA</td>
 <td align="left">USM_2017_T1_CI.obs</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">USM_2018_T1</td>
-<td align="right">264</td>
-<td align="right">570</td>
+<td align="left">264</td>
+<td align="left">570</td>
 <td align="left">USM_2017_T1_ini.xml</td>
 <td align="left">USM_T1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2018</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">wheat_plt.xml</td>
 <td align="left">USM_2018_T1_tec.xml</td>
-<td align="left"></td>
+<td align="left">NA</td>
 <td align="left">USM_2018_T1.obs</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q</td>
-<td align="right">199</td>
-<td align="right">263</td>
+<td align="left">199</td>
+<td align="left">263</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2017</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q</td>
-<td align="right">264</td>
-<td align="right">570</td>
+<td align="left">264</td>
+<td align="left">570</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2018</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">AGA_ARB_13_IRR_220-0-0_37K_ARB13_C</td>
-<td align="right">199</td>
-<td align="right">263</td>
+<td align="left">199</td>
+<td align="left">263</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2017</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">AGA_ARB_13_SEC_220-0-0_37K_ARB13_C</td>
-<td align="right">264</td>
-<td align="right">570</td>
+<td align="left">264</td>
+<td align="left">570</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2018</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">FRA_ARB_11_SEC_220-0-0_38K_E</td>
-<td align="right">199</td>
-<td align="right">263</td>
+<td align="left">199</td>
+<td align="left">263</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2017</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">MAG_ARB_09_SEC_220-0-0_38K_E</td>
-<td align="right">264</td>
-<td align="right">570</td>
+<td align="left">264</td>
+<td align="left">570</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2018</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">MAG_ARV_12_IRR_220-0-0_36K_ARV12_C</td>
-<td align="right">199</td>
-<td align="right">263</td>
+<td align="left">199</td>
+<td align="left">263</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2017</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">MAG_ARV_12_SEC_220-0-0_36K_ARV12_C</td>
-<td align="right">264</td>
-<td align="right">570</td>
+<td align="left">264</td>
+<td align="left">570</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2018</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">FRA_ARB_12_SEC_220-0-0_31K_ARB12_C</td>
-<td align="right">199</td>
-<td align="right">263</td>
+<td align="left">199</td>
+<td align="left">263</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2017</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">FRA_ARB_13_SEC_220-0-0_37K_ARB13_C</td>
-<td align="right">264</td>
-<td align="right">570</td>
+<td align="left">264</td>
+<td align="left">570</td>
 <td align="left">Vill11_ini.xml</td>
 <td align="left">LF1</td>
 <td align="left">climatex_sta.xml</td>
 <td align="left">climatex.2017</td>
 <td align="left">climatex.2018</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">proto_potato_plt.xml</td>
 <td align="left">FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -620,7 +621,7 @@ code shows how to get data from the downloaded examples <a href="#get-xl">Excel<
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["usm_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["datedebut"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["datefin"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["finit"],"name":[4],"type":["chr"],"align":["left"]},{"label":["nomsol"],"name":[5],"type":["chr"],"align":["left"]},{"label":["fstation"],"name":[6],"type":["chr"],"align":["left"]},{"label":["fclim1"],"name":[7],"type":["chr"],"align":["left"]},{"label":["fclim2"],"name":[8],"type":["chr"],"align":["left"]},{"label":["culturean"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["nbplantes"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["codesimul"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["fplt_1"],"name":[12],"type":["chr"],"align":["left"]},{"label":["ftec_1"],"name":[13],"type":["chr"],"align":["left"]},{"label":["flai_1"],"name":[14],"type":["chr"],"align":["left"]},{"label":["fobs_1"],"name":[15],"type":["chr"],"align":["left"]},{"label":["fplt_2"],"name":[16],"type":["chr"],"align":["left"]},{"label":["ftec_2"],"name":[17],"type":["chr"],"align":["left"]},{"label":["flai_2"],"name":[18],"type":["chr"],"align":["left"]},{"label":["fobs_2"],"name":[19],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_2017_T1_CI","2":"199","3":"263","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"1","10":"1","11":"0","12":"rapeseed_plt.xml","13":"USM_2017_T1_CI_tec.xml","14":"","15":"USM_2017_T1_CI.obs","16":"","17":"","18":"","19":""},{"1":"USM_2018_T1","2":"264","3":"570","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"wheat_plt.xml","13":"USM_2018_T1_tec.xml","14":"","15":"USM_2018_T1.obs","16":"","17":"","18":"","19":""},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"","15":"","16":"","17":"","18":"","19":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["usm_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["datedebut"],"name":[2],"type":["chr"],"align":["left"]},{"label":["datefin"],"name":[3],"type":["chr"],"align":["left"]},{"label":["finit"],"name":[4],"type":["chr"],"align":["left"]},{"label":["nomsol"],"name":[5],"type":["chr"],"align":["left"]},{"label":["fstation"],"name":[6],"type":["chr"],"align":["left"]},{"label":["fclim1"],"name":[7],"type":["chr"],"align":["left"]},{"label":["fclim2"],"name":[8],"type":["chr"],"align":["left"]},{"label":["culturean"],"name":[9],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[10],"type":["chr"],"align":["left"]},{"label":["codesimul"],"name":[11],"type":["chr"],"align":["left"]},{"label":["fplt_1"],"name":[12],"type":["chr"],"align":["left"]},{"label":["ftec_1"],"name":[13],"type":["chr"],"align":["left"]},{"label":["flai_1"],"name":[14],"type":["chr"],"align":["left"]},{"label":["fobs_1"],"name":[15],"type":["chr"],"align":["left"]},{"label":["fplt_2"],"name":[16],"type":["chr"],"align":["left"]},{"label":["ftec_2"],"name":[17],"type":["chr"],"align":["left"]},{"label":["flai_2"],"name":[18],"type":["chr"],"align":["left"]},{"label":["fobs_2"],"name":[19],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_2017_T1_CI","2":"199","3":"263","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"1","10":"1","11":"0","12":"rapeseed_plt.xml","13":"USM_2017_T1_CI_tec.xml","14":"__NA__","15":"USM_2017_T1_CI.obs","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"USM_2018_T1","2":"264","3":"570","4":"USM_2017_T1_ini.xml","5":"USM_T1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"wheat_plt.xml","13":"USM_2018_T1_tec.xml","14":"__NA__","15":"USM_2018_T1.obs","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C","2":"199","3":"263","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2017","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C","2":"264","3":"570","4":"Vill11_ini.xml","5":"LF1","6":"climatex_sta.xml","7":"climatex.2017","8":"climatex.2018","9":"2","10":"1","11":"0","12":"proto_potato_plt.xml","13":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","14":"__NA__","15":"__NA__","16":"__NA__","17":"__NA__","18":"__NA__","19":"__NA__"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -659,14 +660,14 @@ code shows how to get data from the downloaded examples <a href="#get-xl">Excel<
 <span><span class="co">#&gt;     &lt;plante dominance="1"&gt;</span></span>
 <span><span class="co">#&gt;       &lt;fplt&gt;rapeseed_plt.xml&lt;/fplt&gt;</span></span>
 <span><span class="co">#&gt;       &lt;ftec&gt;USM_2017_T1_CI_tec.xml&lt;/ftec&gt;</span></span>
-<span><span class="co">#&gt;       &lt;flai&gt;null&lt;/flai&gt;</span></span>
+<span><span class="co">#&gt;       &lt;flai&gt;NA&lt;/flai&gt;</span></span>
 <span><span class="co">#&gt;       &lt;fobs&gt;USM_2017_T1_CI.obs&lt;/fobs&gt;</span></span>
 <span><span class="co">#&gt;     &lt;/plante&gt;</span></span>
 <span><span class="co">#&gt;     &lt;plante dominance="2"&gt;</span></span>
-<span><span class="co">#&gt;       &lt;fplt&gt;null&lt;/fplt&gt;</span></span>
-<span><span class="co">#&gt;       &lt;ftec&gt;null&lt;/ftec&gt;</span></span>
-<span><span class="co">#&gt;       &lt;flai&gt;null&lt;/flai&gt;</span></span>
-<span><span class="co">#&gt;       &lt;fobs&gt;&lt;/fobs&gt;</span></span>
+<span><span class="co">#&gt;       &lt;fplt&gt;NA&lt;/fplt&gt;</span></span>
+<span><span class="co">#&gt;       &lt;ftec&gt;NA&lt;/ftec&gt;</span></span>
+<span><span class="co">#&gt;       &lt;flai&gt;NA&lt;/flai&gt;</span></span>
+<span><span class="co">#&gt;       &lt;fobs&gt;NA&lt;/fobs&gt;</span></span>
 <span><span class="co">#&gt; ...</span></span>
 <span><span class="co">#&gt; &lt;/usms&gt;</span></span></code></pre>
 </div>
@@ -688,7 +689,7 @@ generation section.</p>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Soil_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["argi"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["norg"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["profhum"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["calc"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["pH"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["concseuil"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["albedo"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["q0"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["ruisolnu"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["obstarac"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["pluiebat"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["mulchbat"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["zesx"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["cfes"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["z0solnu"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["CsurNsol"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["finert"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["penterui"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["codecailloux"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["codemacropor"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["codefente"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["codrainage"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["profimper"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["ecartdrain"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["ksol"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["profdrain"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["coderemontcap"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["capiljour"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["humcapil"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["codenitrif"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["codedenit"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["profdenit"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["vpotdenit"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["epc_1"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["HCCF_1"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["HMINF_1"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["DAF_1"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["typecailloux_1"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["cailloux_1"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["infil_1"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["epd_1"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["epc_2"],"name":[43],"type":["dbl"],"align":["right"]},{"label":["HCCF_2"],"name":[44],"type":["dbl"],"align":["right"]},{"label":["HMINF_2"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["DAF_2"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["typecailloux_2"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["cailloux_2"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["infil_2"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["epd_2"],"name":[50],"type":["dbl"],"align":["right"]},{"label":["epc_3"],"name":[51],"type":["dbl"],"align":["right"]},{"label":["HCCF_3"],"name":[52],"type":["dbl"],"align":["right"]},{"label":["HMINF_3"],"name":[53],"type":["dbl"],"align":["right"]},{"label":["DAF_3"],"name":[54],"type":["dbl"],"align":["right"]},{"label":["typecailloux_3"],"name":[55],"type":["dbl"],"align":["right"]},{"label":["cailloux_3"],"name":[56],"type":["dbl"],"align":["right"]},{"label":["infil_3"],"name":[57],"type":["dbl"],"align":["right"]},{"label":["epd_3"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["epc_4"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["HCCF_4"],"name":[60],"type":["dbl"],"align":["right"]},{"label":["HMINF_4"],"name":[61],"type":["dbl"],"align":["right"]},{"label":["DAF_4"],"name":[62],"type":["dbl"],"align":["right"]},{"label":["typecailloux_4"],"name":[63],"type":["dbl"],"align":["right"]},{"label":["cailloux_4"],"name":[64],"type":["dbl"],"align":["right"]},{"label":["infil_4"],"name":[65],"type":["dbl"],"align":["right"]},{"label":["epd_4"],"name":[66],"type":["dbl"],"align":["right"]},{"label":["epc_5"],"name":[67],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_T1","2":"20.35000","3":"0.100","4":"40","5":"0.52","6":"8.23","7":"0.20","8":"0.22","9":"9.630","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"1","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.75000","37":"10.69000","38":"1.378","39":"1","40":"0","41":"50","42":"10","43":"30","44":"23.75000","45":"10.69000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"22.20000","53":"9.99000","54":"1.556","55":"1","56":"0","57":"50","58":"10","59":"30","60":"22.28000","61":"10.02000","62":"1.588","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LF1","2":"17.00000","3":"1.900","4":"31","5":"0.00","6":"6.70","7":"0.00","8":"0.22","9":"9.360","10":"0","11":"155","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.75642","37":"8.71690","38":"1.384","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.07603","45":"10.23300","46":"1.600","47":"1","48":"0","49":"50","50":"10","51":"35","52":"21.91055","53":"11.60350","54":"1.610","55":"1","56":"0","57":"50","58":"10","59":"50","60":"22.11954","61":"10.78948","62":"1.590","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LF2","2":"17.00000","3":"1.800","4":"27","5":"0.00","6":"6.70","7":"0.00","8":"0.22","9":"9.360","10":"0","11":"120","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.55866","37":"8.63507","38":"1.388","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.07603","45":"10.23300","46":"1.600","47":"1","48":"0","49":"50","50":"10","51":"35","52":"21.91055","53":"11.60350","54":"1.610","55":"1","56":"0","57":"50","58":"10","59":"50","60":"22.11954","61":"10.78948","62":"1.590","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LAP","2":"22.00000","3":"2.000","4":"27","5":"0.00","6":"6.50","7":"0.00","8":"0.22","9":"9.760","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"25","36":"23.99720","37":"10.51450","38":"1.379","39":"1","40":"0","41":"50","42":"10","43":"25","44":"21.44407","45":"9.60248","46":"1.610","47":"1","48":"0","49":"50","50":"10","51":"20","52":"21.52376","53":"10.33508","54":"1.610","55":"1","56":"0","57":"50","58":"10","59":"80","60":"21.46918","61":"10.34594","62":"1.610","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LAS","2":"24.05000","3":"2.500","4":"40","5":"30.00","6":"8.00","7":"0.00","8":"0.22","9":"9.928","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"1","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"24.46466","37":"12.33346","38":"1.357","39":"1","40":"0","41":"50","42":"10","43":"65","44":"22.42365","45":"11.97536","46":"1.519","47":"1","48":"0","49":"50","50":"10","51":"55","52":"20.77105","53":"11.76273","54":"1.574","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LA0","2":"30.00675","3":"2.300","4":"30","5":"0.50","6":"7.50","7":"0.00","8":"0.22","9":"10.400","10":"0","11":"150","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"24.72421","37":"13.70100","38":"1.365","39":"1","40":"0","41":"50","42":"10","43":"50","44":"27.81205","45":"22.04558","46":"1.411","47":"1","48":"0","49":"50","50":"10","51":"50","52":"19.74820","53":"13.42940","54":"1.636","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LC0","2":"22.38750","3":"2.000","4":"50","5":"10.00","6":"7.90","7":"0.20","8":"0.22","9":"9.792","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"25","36":"24.74253","37":"10.79102","38":"1.379","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.29392","45":"8.76972","46":"1.586","47":"1","48":"0","49":"50","50":"10","51":"110","52":"22.04337","53":"8.03415","54":"1.601","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill09","2":"25.00000","3":"0.101","4":"35","5":"0.40","6":"7.90","7":"0.00","8":"0.22","9":"10.000","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill10","2":"14.30000","3":"0.099","4":"50","5":"1.50","6":"8.20","7":"0.00","8":"0.22","9":"9.144","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"1","22":"1","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"15","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill11","2":"11.80000","3":"0.100","4":"30","5":"0.00","6":"7.30","7":"0.05","8":"0.22","9":"8.944","10":"0","11":"90","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill12","2":"14.30000","3":"0.091","4":"30","5":"0.60","6":"8.30","7":"0.01","8":"0.22","9":"9.144","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill13","2":"16.80000","3":"0.088","4":"27","5":"0.20","6":"7.80","7":"0.00","8":"0.22","9":"9.344","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill14","2":"15.10000","3":"0.095","4":"22","5":"1.30","6":"7.90","7":"0.00","8":"0.22","9":"9.208","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0.00000","37":"0.00000","38":"1.400","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0.00000","45":"0.00000","46":"1.500","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0.00000","53":"0.00000","54":"1.500","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0.00000","61":"0.00000","62":"0.000","63":"1","64":"0","65":"50","66":"10","67":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Soil_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["argi"],"name":[2],"type":["chr"],"align":["left"]},{"label":["norg"],"name":[3],"type":["chr"],"align":["left"]},{"label":["profhum"],"name":[4],"type":["chr"],"align":["left"]},{"label":["calc"],"name":[5],"type":["chr"],"align":["left"]},{"label":["pH"],"name":[6],"type":["chr"],"align":["left"]},{"label":["concseuil"],"name":[7],"type":["chr"],"align":["left"]},{"label":["albedo"],"name":[8],"type":["chr"],"align":["left"]},{"label":["q0"],"name":[9],"type":["chr"],"align":["left"]},{"label":["ruisolnu"],"name":[10],"type":["chr"],"align":["left"]},{"label":["obstarac"],"name":[11],"type":["chr"],"align":["left"]},{"label":["pluiebat"],"name":[12],"type":["chr"],"align":["left"]},{"label":["mulchbat"],"name":[13],"type":["chr"],"align":["left"]},{"label":["zesx"],"name":[14],"type":["chr"],"align":["left"]},{"label":["cfes"],"name":[15],"type":["chr"],"align":["left"]},{"label":["z0solnu"],"name":[16],"type":["chr"],"align":["left"]},{"label":["CsurNsol"],"name":[17],"type":["chr"],"align":["left"]},{"label":["finert"],"name":[18],"type":["chr"],"align":["left"]},{"label":["penterui"],"name":[19],"type":["chr"],"align":["left"]},{"label":["codecailloux"],"name":[20],"type":["chr"],"align":["left"]},{"label":["codemacropor"],"name":[21],"type":["chr"],"align":["left"]},{"label":["codefente"],"name":[22],"type":["chr"],"align":["left"]},{"label":["codrainage"],"name":[23],"type":["chr"],"align":["left"]},{"label":["profimper"],"name":[24],"type":["chr"],"align":["left"]},{"label":["ecartdrain"],"name":[25],"type":["chr"],"align":["left"]},{"label":["ksol"],"name":[26],"type":["chr"],"align":["left"]},{"label":["profdrain"],"name":[27],"type":["chr"],"align":["left"]},{"label":["coderemontcap"],"name":[28],"type":["chr"],"align":["left"]},{"label":["capiljour"],"name":[29],"type":["chr"],"align":["left"]},{"label":["humcapil"],"name":[30],"type":["chr"],"align":["left"]},{"label":["codenitrif"],"name":[31],"type":["chr"],"align":["left"]},{"label":["codedenit"],"name":[32],"type":["chr"],"align":["left"]},{"label":["profdenit"],"name":[33],"type":["chr"],"align":["left"]},{"label":["vpotdenit"],"name":[34],"type":["chr"],"align":["left"]},{"label":["epc_1"],"name":[35],"type":["chr"],"align":["left"]},{"label":["HCCF_1"],"name":[36],"type":["chr"],"align":["left"]},{"label":["HMINF_1"],"name":[37],"type":["chr"],"align":["left"]},{"label":["DAF_1"],"name":[38],"type":["chr"],"align":["left"]},{"label":["typecailloux_1"],"name":[39],"type":["chr"],"align":["left"]},{"label":["cailloux_1"],"name":[40],"type":["chr"],"align":["left"]},{"label":["infil_1"],"name":[41],"type":["chr"],"align":["left"]},{"label":["epd_1"],"name":[42],"type":["chr"],"align":["left"]},{"label":["epc_2"],"name":[43],"type":["chr"],"align":["left"]},{"label":["HCCF_2"],"name":[44],"type":["chr"],"align":["left"]},{"label":["HMINF_2"],"name":[45],"type":["chr"],"align":["left"]},{"label":["DAF_2"],"name":[46],"type":["chr"],"align":["left"]},{"label":["typecailloux_2"],"name":[47],"type":["chr"],"align":["left"]},{"label":["cailloux_2"],"name":[48],"type":["chr"],"align":["left"]},{"label":["infil_2"],"name":[49],"type":["chr"],"align":["left"]},{"label":["epd_2"],"name":[50],"type":["chr"],"align":["left"]},{"label":["epc_3"],"name":[51],"type":["chr"],"align":["left"]},{"label":["HCCF_3"],"name":[52],"type":["chr"],"align":["left"]},{"label":["HMINF_3"],"name":[53],"type":["chr"],"align":["left"]},{"label":["DAF_3"],"name":[54],"type":["chr"],"align":["left"]},{"label":["typecailloux_3"],"name":[55],"type":["chr"],"align":["left"]},{"label":["cailloux_3"],"name":[56],"type":["chr"],"align":["left"]},{"label":["infil_3"],"name":[57],"type":["chr"],"align":["left"]},{"label":["epd_3"],"name":[58],"type":["chr"],"align":["left"]},{"label":["epc_4"],"name":[59],"type":["chr"],"align":["left"]},{"label":["HCCF_4"],"name":[60],"type":["chr"],"align":["left"]},{"label":["HMINF_4"],"name":[61],"type":["chr"],"align":["left"]},{"label":["DAF_4"],"name":[62],"type":["chr"],"align":["left"]},{"label":["typecailloux_4"],"name":[63],"type":["chr"],"align":["left"]},{"label":["cailloux_4"],"name":[64],"type":["chr"],"align":["left"]},{"label":["infil_4"],"name":[65],"type":["chr"],"align":["left"]},{"label":["epd_4"],"name":[66],"type":["chr"],"align":["left"]},{"label":["epc_5"],"name":[67],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_T1","2":"20.35","3":"0.1","4":"40","5":"0.52","6":"8.23","7":"0.2","8":"0.22","9":"9.63","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"1","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.75","37":"10.69","38":"1.378","39":"1","40":"0","41":"50","42":"10","43":"30","44":"23.75","45":"10.69","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"22.2","53":"9.99","54":"1.556","55":"1","56":"0","57":"50","58":"10","59":"30","60":"22.28","61":"10.02","62":"1.588","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LF1","2":"17","3":"1.9","4":"31","5":"0","6":"6.7","7":"0","8":"0.22","9":"9.36","10":"0","11":"155","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.75642","37":"8.7169","38":"1.384","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.07603","45":"10.233","46":"1.6","47":"1","48":"0","49":"50","50":"10","51":"35","52":"21.91055","53":"11.6035","54":"1.61","55":"1","56":"0","57":"50","58":"10","59":"50","60":"22.11954","61":"10.78948","62":"1.59","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LF2","2":"17","3":"1.8","4":"27","5":"0","6":"6.7","7":"0","8":"0.22","9":"9.36","10":"0","11":"120","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"23.55866","37":"8.63507","38":"1.388","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.07603","45":"10.233","46":"1.6","47":"1","48":"0","49":"50","50":"10","51":"35","52":"21.91055","53":"11.6035","54":"1.61","55":"1","56":"0","57":"50","58":"10","59":"50","60":"22.11954","61":"10.78948","62":"1.59","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LAP","2":"22","3":"2","4":"27","5":"0","6":"6.5","7":"0","8":"0.22","9":"9.76","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"25","36":"23.9972","37":"10.5145","38":"1.379","39":"1","40":"0","41":"50","42":"10","43":"25","44":"21.44407","45":"9.60248","46":"1.61","47":"1","48":"0","49":"50","50":"10","51":"20","52":"21.52376","53":"10.33508","54":"1.61","55":"1","56":"0","57":"50","58":"10","59":"80","60":"21.46918","61":"10.34594","62":"1.61","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LAS","2":"24.05","3":"2.5","4":"40","5":"30","6":"8","7":"0","8":"0.22","9":"9.928","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"1","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"24.46466","37":"12.33346","38":"1.357","39":"1","40":"0","41":"50","42":"10","43":"65","44":"22.42365","45":"11.97536","46":"1.519","47":"1","48":"0","49":"50","50":"10","51":"55","52":"20.77105","53":"11.76273","54":"1.574","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LA0","2":"30.00675","3":"2.3","4":"30","5":"0.5","6":"7.5","7":"0","8":"0.22","9":"10.4","10":"0","11":"150","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"24.72421","37":"13.701","38":"1.365","39":"1","40":"0","41":"50","42":"10","43":"50","44":"27.81205","45":"22.04558","46":"1.411","47":"1","48":"0","49":"50","50":"10","51":"50","52":"19.7482","53":"13.4294","54":"1.636","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"LC0","2":"22.3875","3":"2","4":"50","5":"10","6":"7.9","7":"0.2","8":"0.22","9":"9.792","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"25","36":"24.74253","37":"10.79102","38":"1.379","39":"1","40":"0","41":"50","42":"10","43":"15","44":"22.29392","45":"8.76972","46":"1.586","47":"1","48":"0","49":"50","50":"10","51":"110","52":"22.04337","53":"8.03415","54":"1.601","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill09","2":"25","3":"0.101","4":"35","5":"0.4","6":"7.9","7":"0","8":"0.22","9":"10","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0","37":"0","38":"1.4","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0","45":"0","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0","53":"0","54":"1.5","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill10","2":"14.3","3":"0.099","4":"50","5":"1.5","6":"8.2","7":"0","8":"0.22","9":"9.144","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"1","22":"1","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"15","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0","37":"0","38":"1.4","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0","45":"0","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0","53":"0","54":"1.5","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill11","2":"11.8","3":"0.1","4":"30","5":"0","6":"7.3","7":"0.05","8":"0.22","9":"8.944","10":"0","11":"90","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0","37":"0","38":"1.4","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0","45":"0","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0","53":"0","54":"1.5","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill12","2":"14.3","3":"0.091","4":"30","5":"0.6","6":"8.3","7":"0.01","8":"0.22","9":"9.144","10":"0","11":"60","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0","37":"0","38":"1.4","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0","45":"0","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0","53":"0","54":"1.5","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill13","2":"16.8","3":"0.088","4":"27","5":"0.2","6":"7.8","7":"0","8":"0.22","9":"9.344","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0","37":"0","38":"1.4","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0","45":"0","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0","53":"0","54":"1.5","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"},{"1":"Vill14","2":"15.1","3":"0.095","4":"22","5":"1.3","6":"7.9","7":"0","8":"0.22","9":"9.208","10":"0","11":"200","12":"50","13":"0.5","14":"60","15":"5","16":"0.01","17":"0","18":"0.65","19":"0.33","20":"2","21":"2","22":"2","23":"2","24":"10","25":"0","26":"0","27":"0","28":"2","29":"1","30":"10","31":"2","32":"2","33":"20","34":"2","35":"30","36":"0","37":"0","38":"1.4","39":"1","40":"0","41":"50","42":"10","43":"30","44":"0","45":"0","46":"1.5","47":"1","48":"0","49":"50","50":"10","51":"30","52":"0","53":"0","54":"1.5","55":"1","56":"0","57":"50","58":"10","59":"0","60":"0","61":"0","62":"0","63":"1","64":"0","65":"50","66":"10","67":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -761,7 +762,7 @@ generation section.</p>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Tec_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["julres_1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["coderes_1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["qres_1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Crespc_1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["CsurNres_1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Nminres_1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["eaures_1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["jultrav_1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["profres_1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["proftrav_1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["iplt0"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["profsem"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densitesem"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["variete"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["codestade"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["ilev"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["iamf"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ilax"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["isen"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["ilan"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["iflo"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["idrp"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["imat"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["irec"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["irecbutoir"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["effirr"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["codecalirrig"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["codedateappH2O"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["julapI_1"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["doseI_1"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["julapI_2"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["doseI_2"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["julapI_3"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["doseI_3"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["julapI_4"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["doseI_4"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["julapI_5"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["doseI_5"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["julapI_6"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["doseI_6"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["julapI_7"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["doseI_7"],"name":[43],"type":["dbl"],"align":["right"]},{"label":["julapI_8"],"name":[44],"type":["dbl"],"align":["right"]},{"label":["doseI_8"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["julapI_9"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["doseI_9"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["julapI_10"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["doseI_10"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["julapI_11"],"name":[50],"type":["dbl"],"align":["right"]},{"label":["doseI_11"],"name":[51],"type":["dbl"],"align":["right"]},{"label":["julapI_12"],"name":[52],"type":["dbl"],"align":["right"]},{"label":["doseI_12"],"name":[53],"type":["dbl"],"align":["right"]},{"label":["codlocirrig"],"name":[54],"type":["dbl"],"align":["right"]},{"label":["locirrig"],"name":[55],"type":["dbl"],"align":["right"]},{"label":["profmes"],"name":[56],"type":["dbl"],"align":["right"]},{"label":["concirr"],"name":[57],"type":["dbl"],"align":["right"]},{"label":["codedateappN"],"name":[58],"type":["dbl"],"align":["right"]},{"label":["codefracappN"],"name":[59],"type":["dbl"],"align":["right"]},{"label":["Qtot_N"],"name":[60],"type":["dbl"],"align":["right"]},{"label":["engrais_1"],"name":[61],"type":["dbl"],"align":["right"]},{"label":["julapN_1"],"name":[62],"type":["dbl"],"align":["right"]},{"label":["doseN_1"],"name":[63],"type":["dbl"],"align":["right"]},{"label":["codlocferti"],"name":[64],"type":["dbl"],"align":["right"]},{"label":["locferti"],"name":[65],"type":["dbl"],"align":["right"]},{"label":["ressuite"],"name":[66],"type":["chr"],"align":["left"]},{"label":["codceuille"],"name":[67],"type":["dbl"],"align":["right"]},{"label":["nbceuille"],"name":[68],"type":["dbl"],"align":["right"]},{"label":["cadencerec"],"name":[69],"type":["dbl"],"align":["right"]},{"label":["codrecolte"],"name":[70],"type":["dbl"],"align":["right"]},{"label":["nbjmaxapresrecolte"],"name":[71],"type":["dbl"],"align":["right"]},{"label":["codeffeuil"],"name":[72],"type":["dbl"],"align":["right"]},{"label":["codhauteff"],"name":[73],"type":["dbl"],"align":["right"]},{"label":["codcaleffeuil"],"name":[74],"type":["dbl"],"align":["right"]},{"label":["laidebeff"],"name":[75],"type":["dbl"],"align":["right"]},{"label":["effeuil"],"name":[76],"type":["dbl"],"align":["right"]},{"label":["juleffeuil"],"name":[77],"type":["chr"],"align":["left"]},{"label":["laieffeuil"],"name":[78],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_CI_tec.xml","2":"52","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"NA","10":"NA","11":"NA","12":"199","13":"15","14":"100.000000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"NA","61":"NA","62":"NA","63":"NA","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"USM_2018_T1_tec.xml","2":"74","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"NA","10":"NA","11":"NA","12":"199","13":"15","14":"100.000000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"NA","61":"NA","62":"NA","63":"NA","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","2":"110","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"110","10":"5","11":"30","12":"143","13":"15","14":"3.454873","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"266","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","2":"73","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"73","10":"5","11":"30","12":"103","13":"15","14":"3.336699","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"254","26":"999","27":"0.75","28":"2","29":"2","30":"156","31":"25.0","32":"164","33":"25.0","34":"172","35":"25","36":"180","37":"25","38":"185","39":"25","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"182","31":"23.5","32":"182","33":"23.5","34":"188","35":"20","36":"193","37":"30","38":"193","39":"30","40":"199","41":"30","42":"203","43":"34","44":"203","45":"34","46":"216","47":"35","48":"225","49":"17","50":"225","51":"17","52":"244","53":"20","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","2":"70","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"70","10":"5","11":"30","12":"100","13":"15","14":"3.850000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","2":"81","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"81","10":"5","11":"30","12":"111","13":"15","14":"3.850000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"248","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.680000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"203","31":"20.0","32":"223","33":"20.0","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.680000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","2":"92","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"92","10":"5","11":"30","12":"122","13":"15","14":"3.185000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"0","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"0","10":"5","11":"30","12":"112","13":"15","14":"3.700000","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"1.00","28":"2","29":"2","30":"NA","31":"NA","32":"NA","33":"NA","34":"NA","35":"NA","36":"NA","37":"NA","38":"NA","39":"NA","40":"NA","41":"NA","42":"NA","43":"NA","44":"NA","45":"NA","46":"NA","47":"NA","48":"NA","49":"NA","50":"NA","51":"NA","52":"NA","53":"NA","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"","78":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Tec_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["julres_1"],"name":[2],"type":["chr"],"align":["left"]},{"label":["coderes_1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["qres_1"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Crespc_1"],"name":[5],"type":["chr"],"align":["left"]},{"label":["CsurNres_1"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Nminres_1"],"name":[7],"type":["chr"],"align":["left"]},{"label":["eaures_1"],"name":[8],"type":["chr"],"align":["left"]},{"label":["jultrav_1"],"name":[9],"type":["chr"],"align":["left"]},{"label":["profres_1"],"name":[10],"type":["chr"],"align":["left"]},{"label":["proftrav_1"],"name":[11],"type":["chr"],"align":["left"]},{"label":["iplt0"],"name":[12],"type":["chr"],"align":["left"]},{"label":["profsem"],"name":[13],"type":["chr"],"align":["left"]},{"label":["densitesem"],"name":[14],"type":["chr"],"align":["left"]},{"label":["variete"],"name":[15],"type":["chr"],"align":["left"]},{"label":["codestade"],"name":[16],"type":["chr"],"align":["left"]},{"label":["ilev"],"name":[17],"type":["chr"],"align":["left"]},{"label":["iamf"],"name":[18],"type":["chr"],"align":["left"]},{"label":["ilax"],"name":[19],"type":["chr"],"align":["left"]},{"label":["isen"],"name":[20],"type":["chr"],"align":["left"]},{"label":["ilan"],"name":[21],"type":["chr"],"align":["left"]},{"label":["iflo"],"name":[22],"type":["chr"],"align":["left"]},{"label":["idrp"],"name":[23],"type":["chr"],"align":["left"]},{"label":["imat"],"name":[24],"type":["chr"],"align":["left"]},{"label":["irec"],"name":[25],"type":["chr"],"align":["left"]},{"label":["irecbutoir"],"name":[26],"type":["chr"],"align":["left"]},{"label":["effirr"],"name":[27],"type":["chr"],"align":["left"]},{"label":["codecalirrig"],"name":[28],"type":["chr"],"align":["left"]},{"label":["codedateappH2O"],"name":[29],"type":["chr"],"align":["left"]},{"label":["julapI_1"],"name":[30],"type":["chr"],"align":["left"]},{"label":["doseI_1"],"name":[31],"type":["chr"],"align":["left"]},{"label":["julapI_2"],"name":[32],"type":["chr"],"align":["left"]},{"label":["doseI_2"],"name":[33],"type":["chr"],"align":["left"]},{"label":["julapI_3"],"name":[34],"type":["chr"],"align":["left"]},{"label":["doseI_3"],"name":[35],"type":["chr"],"align":["left"]},{"label":["julapI_4"],"name":[36],"type":["chr"],"align":["left"]},{"label":["doseI_4"],"name":[37],"type":["chr"],"align":["left"]},{"label":["julapI_5"],"name":[38],"type":["chr"],"align":["left"]},{"label":["doseI_5"],"name":[39],"type":["chr"],"align":["left"]},{"label":["julapI_6"],"name":[40],"type":["chr"],"align":["left"]},{"label":["doseI_6"],"name":[41],"type":["chr"],"align":["left"]},{"label":["julapI_7"],"name":[42],"type":["chr"],"align":["left"]},{"label":["doseI_7"],"name":[43],"type":["chr"],"align":["left"]},{"label":["julapI_8"],"name":[44],"type":["chr"],"align":["left"]},{"label":["doseI_8"],"name":[45],"type":["chr"],"align":["left"]},{"label":["julapI_9"],"name":[46],"type":["chr"],"align":["left"]},{"label":["doseI_9"],"name":[47],"type":["chr"],"align":["left"]},{"label":["julapI_10"],"name":[48],"type":["chr"],"align":["left"]},{"label":["doseI_10"],"name":[49],"type":["chr"],"align":["left"]},{"label":["julapI_11"],"name":[50],"type":["chr"],"align":["left"]},{"label":["doseI_11"],"name":[51],"type":["chr"],"align":["left"]},{"label":["julapI_12"],"name":[52],"type":["chr"],"align":["left"]},{"label":["doseI_12"],"name":[53],"type":["chr"],"align":["left"]},{"label":["codlocirrig"],"name":[54],"type":["chr"],"align":["left"]},{"label":["locirrig"],"name":[55],"type":["chr"],"align":["left"]},{"label":["profmes"],"name":[56],"type":["chr"],"align":["left"]},{"label":["concirr"],"name":[57],"type":["chr"],"align":["left"]},{"label":["codedateappN"],"name":[58],"type":["chr"],"align":["left"]},{"label":["codefracappN"],"name":[59],"type":["chr"],"align":["left"]},{"label":["Qtot_N"],"name":[60],"type":["chr"],"align":["left"]},{"label":["engrais_1"],"name":[61],"type":["chr"],"align":["left"]},{"label":["julapN_1"],"name":[62],"type":["chr"],"align":["left"]},{"label":["doseN_1"],"name":[63],"type":["chr"],"align":["left"]},{"label":["codlocferti"],"name":[64],"type":["chr"],"align":["left"]},{"label":["locferti"],"name":[65],"type":["chr"],"align":["left"]},{"label":["ressuite"],"name":[66],"type":["chr"],"align":["left"]},{"label":["codceuille"],"name":[67],"type":["chr"],"align":["left"]},{"label":["nbceuille"],"name":[68],"type":["chr"],"align":["left"]},{"label":["cadencerec"],"name":[69],"type":["chr"],"align":["left"]},{"label":["codrecolte"],"name":[70],"type":["chr"],"align":["left"]},{"label":["nbjmaxapresrecolte"],"name":[71],"type":["chr"],"align":["left"]},{"label":["codeffeuil"],"name":[72],"type":["chr"],"align":["left"]},{"label":["codhauteff"],"name":[73],"type":["chr"],"align":["left"]},{"label":["codcaleffeuil"],"name":[74],"type":["chr"],"align":["left"]},{"label":["laidebeff"],"name":[75],"type":["chr"],"align":["left"]},{"label":["effeuil"],"name":[76],"type":["chr"],"align":["left"]},{"label":["juleffeuil"],"name":[77],"type":["chr"],"align":["left"]},{"label":["laieffeuil"],"name":[78],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_2017_T1_CI_tec.xml","2":"52","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"__NA__","10":"__NA__","11":"__NA__","12":"199","13":"15","14":"100","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"__NA__","61":"__NA__","62":"__NA__","63":"__NA__","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"USM_2018_T1_tec.xml","2":"74","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"__NA__","10":"__NA__","11":"__NA__","12":"199","13":"15","14":"100","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"999","26":"999","27":"1","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"__NA__","61":"__NA__","62":"__NA__","63":"__NA__","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"BIN_CAN_05_SEC_220-0-0_34K_CANPC05T3_Q_tec.xml","2":"110","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"110","10":"5","11":"30","12":"143","13":"15","14":"3.4548725779064","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"266","26":"999","27":"0.75","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"BIN_AGT_04_IRR_220-0-0_33K_AGT04T2_Q_tec.xml","2":"73","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"73","10":"5","11":"30","12":"103","13":"15","14":"3.33669926140668","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"254","26":"999","27":"0.75","28":"2","29":"2","30":"156","31":"25","32":"164","33":"25","34":"172","35":"25","36":"180","37":"25","38":"185","39":"25","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"AGA_ARB_13_IRR_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.7","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"182","31":"23.5","32":"182","33":"23.5","34":"188","35":"20","36":"193","37":"30","38":"193","39":"30","40":"199","41":"30","42":"203","43":"34","44":"203","45":"34","46":"216","47":"35","48":"225","49":"17","50":"225","51":"17","52":"244","53":"20","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"AGA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"82","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"82","10":"5","11":"30","12":"112","13":"15","14":"3.7","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"0.75","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"FRA_ARB_11_SEC_220-0-0_38K_E_tec.xml","2":"70","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"70","10":"5","11":"30","12":"100","13":"15","14":"3.85","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"0.75","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"MAG_ARB_09_SEC_220-0-0_38K_E_tec.xml","2":"81","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"81","10":"5","11":"30","12":"111","13":"15","14":"3.85","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"248","26":"999","27":"0.75","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"MAG_ARV_12_IRR_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.68","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"203","31":"20","32":"223","33":"20","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"MAG_ARV_12_SEC_220-0-0_36K_ARV12_C_tec.xml","2":"100","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"100","10":"5","11":"30","12":"130","13":"15","14":"3.68","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"259","26":"999","27":"0.75","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"FRA_ARB_12_SEC_220-0-0_31K_ARB12_C_tec.xml","2":"92","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"92","10":"5","11":"30","12":"122","13":"15","14":"3.185","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"245","26":"999","27":"1","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"},{"1":"FRA_ARB_13_SEC_220-0-0_37K_ARB13_C_tec.xml","2":"0","3":"1","4":"9","5":"42","6":"90","7":"0","8":"7","9":"0","10":"5","11":"30","12":"112","13":"15","14":"3.7","15":"1","16":"1","17":"999","18":"999","19":"999","20":"999","21":"999","22":"999","23":"999","24":"999","25":"262","26":"999","27":"1","28":"2","29":"2","30":"__NA__","31":"__NA__","32":"__NA__","33":"__NA__","34":"__NA__","35":"__NA__","36":"__NA__","37":"__NA__","38":"__NA__","39":"__NA__","40":"__NA__","41":"__NA__","42":"__NA__","43":"__NA__","44":"__NA__","45":"__NA__","46":"__NA__","47":"__NA__","48":"__NA__","49":"__NA__","50":"__NA__","51":"__NA__","52":"__NA__","53":"__NA__","54":"1","55":"0","56":"120","57":"0","58":"2","59":"1","60":"220","61":"1","62":"143","63":"220","64":"2","65":"15","66":"straw+roots","67":"1","68":"1","69":"7","70":"1","71":"15","72":"1","73":"1","74":"1","75":"0","76":"0","77":"__NA__","78":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -822,7 +823,7 @@ generation section.</p>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Ini_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["stade0_Crop1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["lai0_Crop1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["magrain0_Crop1"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["zrac0_Crop1"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["code_acti_reserve_Crop1"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["masec0_Crop1"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["QNplante0_Crop1"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["restemp0_Crop1"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["densinitial_1_Crop1"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["densinitial_2_Crop1"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["densinitial_3_Crop1"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["densinitial_4_Crop1"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["densinitial_5_Crop1"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Hinitf_1"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["Hinitf_2"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Hinitf_3"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Hinitf_4"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["Hinitf_5"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["NO3initf_1"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["NO3initf_2"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["NO3initf_3"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["NO3initf_4"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["NO3initf_5"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["NH4initf_1"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["NH4initf_2"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["NH4initf_3"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["NH4initf_4"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["NH4initf_5"],"name":[30],"type":["dbl"],"align":["right"]}],"data":[{"1":"USM_2017_T1_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"12.24982","17":"11.40512","18":"12.40357","19":"14.07414","20":"12.57361","21":"43.322","22":"6.1706","23":"2.0362","24":"1.1692","25":"2.031","26":"2.5564","27":"2.1078","28":"1.3432","29":"1.0428","30":"1.0587"},{"1":"Vill09_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"20.50000","17":"20.40000","18":"21.20000","19":"0.00000","20":"0.00000","21":"38.100","22":"27.1000","23":"23.8000","24":"0.0000","25":"0.000","26":"1.8000","27":"1.8000","28":"0.7000","29":"0.0000","30":"0.0000"},{"1":"Vill10_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"26.00000","17":"21.70000","18":"22.40000","19":"0.00000","20":"0.00000","21":"3.800","22":"13.3000","23":"11.0000","24":"0.0000","25":"0.000","26":"4.9000","27":"1.3000","28":"0.7000","29":"0.0000","30":"0.0000"},{"1":"Vill11_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"0.00000","21":"20.000","22":"20.0000","23":"15.0000","24":"0.0000","25":"0.000","26":"10.0000","27":"10.0000","28":"4.0000","29":"0.0000","30":"0.0000"},{"1":"Vill12_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"25.10000","17":"22.90000","18":"22.40000","19":"0.00000","20":"0.00000","21":"22.000","22":"12.2000","23":"8.4000","24":"0.0000","25":"0.000","26":"2.5000","27":"1.9000","28":"1.5000","29":"0.0000","30":"0.0000"},{"1":"Vill13_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"21.00000","17":"19.50000","18":"20.00000","19":"0.00000","20":"0.00000","21":"46.200","22":"55.5000","23":"26.8000","24":"0.0000","25":"0.000","26":"35.5000","27":"50.3000","28":"16.5000","29":"0.0000","30":"0.0000"},{"1":"Vill14_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"22.70000","17":"21.10000","18":"21.60000","19":"0.00000","20":"0.00000","21":"23.100","22":"22.3000","23":"12.9000","24":"0.0000","25":"0.000","26":"11.7000","27":"4.0000","28":"1.5000","29":"0.0000","30":"0.0000"},{"1":"Standard_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0.00000","17":"0.00000","18":"0.00000","19":"0.00000","20":"0.00000","21":"20.000","22":"20.0000","23":"15.0000","24":"0.0000","25":"0.000","26":"10.0000","27":"10.0000","28":"4.0000","29":"0.0000","30":"0.0000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Ini_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["nbplantes"],"name":[2],"type":["chr"],"align":["left"]},{"label":["stade0_Crop1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["lai0_Crop1"],"name":[4],"type":["chr"],"align":["left"]},{"label":["magrain0_Crop1"],"name":[5],"type":["chr"],"align":["left"]},{"label":["zrac0_Crop1"],"name":[6],"type":["chr"],"align":["left"]},{"label":["code_acti_reserve_Crop1"],"name":[7],"type":["chr"],"align":["left"]},{"label":["masec0_Crop1"],"name":[8],"type":["chr"],"align":["left"]},{"label":["QNplante0_Crop1"],"name":[9],"type":["chr"],"align":["left"]},{"label":["restemp0_Crop1"],"name":[10],"type":["chr"],"align":["left"]},{"label":["densinitial_1_Crop1"],"name":[11],"type":["chr"],"align":["left"]},{"label":["densinitial_2_Crop1"],"name":[12],"type":["chr"],"align":["left"]},{"label":["densinitial_3_Crop1"],"name":[13],"type":["chr"],"align":["left"]},{"label":["densinitial_4_Crop1"],"name":[14],"type":["chr"],"align":["left"]},{"label":["densinitial_5_Crop1"],"name":[15],"type":["chr"],"align":["left"]},{"label":["Hinitf_1"],"name":[16],"type":["chr"],"align":["left"]},{"label":["Hinitf_2"],"name":[17],"type":["chr"],"align":["left"]},{"label":["Hinitf_3"],"name":[18],"type":["chr"],"align":["left"]},{"label":["Hinitf_4"],"name":[19],"type":["chr"],"align":["left"]},{"label":["Hinitf_5"],"name":[20],"type":["chr"],"align":["left"]},{"label":["NO3initf_1"],"name":[21],"type":["chr"],"align":["left"]},{"label":["NO3initf_2"],"name":[22],"type":["chr"],"align":["left"]},{"label":["NO3initf_3"],"name":[23],"type":["chr"],"align":["left"]},{"label":["NO3initf_4"],"name":[24],"type":["chr"],"align":["left"]},{"label":["NO3initf_5"],"name":[25],"type":["chr"],"align":["left"]},{"label":["NH4initf_1"],"name":[26],"type":["chr"],"align":["left"]},{"label":["NH4initf_2"],"name":[27],"type":["chr"],"align":["left"]},{"label":["NH4initf_3"],"name":[28],"type":["chr"],"align":["left"]},{"label":["NH4initf_4"],"name":[29],"type":["chr"],"align":["left"]},{"label":["NH4initf_5"],"name":[30],"type":["chr"],"align":["left"]}],"data":[{"1":"USM_2017_T1_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"12.2498236911716","17":"11.4051209137012","18":"12.403574703501","19":"14.0741405718364","20":"12.5736108922922","21":"43.322","22":"6.1706","23":"2.0362","24":"1.1692","25":"2.031","26":"2.5564","27":"2.1078","28":"1.3432","29":"1.0428","30":"1.0587"},{"1":"Vill09_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"20.5","17":"20.4","18":"21.2","19":"0","20":"0","21":"38.1","22":"27.1","23":"23.8","24":"0","25":"0","26":"1.8","27":"1.8","28":"0.7","29":"0","30":"0"},{"1":"Vill10_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"26","17":"21.7","18":"22.4","19":"0","20":"0","21":"3.8","22":"13.3","23":"11","24":"0","25":"0","26":"4.9","27":"1.3","28":"0.7","29":"0","30":"0"},{"1":"Vill11_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"20","22":"20","23":"15","24":"0","25":"0","26":"10","27":"10","28":"4","29":"0","30":"0"},{"1":"Vill12_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"25.1","17":"22.9","18":"22.4","19":"0","20":"0","21":"22","22":"12.2","23":"8.4","24":"0","25":"0","26":"2.5","27":"1.9","28":"1.5","29":"0","30":"0"},{"1":"Vill13_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"21","17":"19.5","18":"20","19":"0","20":"0","21":"46.2","22":"55.5","23":"26.8","24":"0","25":"0","26":"35.5","27":"50.3","28":"16.5","29":"0","30":"0"},{"1":"Vill14_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"22.7","17":"21.1","18":"21.6","19":"0","20":"0","21":"23.1","22":"22.3","23":"12.9","24":"0","25":"0","26":"11.7","27":"4","28":"1.5","29":"0","30":"0"},{"1":"Standard_ini.xml","2":"1","3":"snu","4":"0","5":"0","6":"0","7":"2","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"20","22":"20","23":"15","24":"0","25":"0","26":"10","27":"10","28":"4","29":"0","30":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -876,7 +877,7 @@ generation section.</p>
 <!-- active chunk to be run -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Sta_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["zr"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["NH3ref"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["latitude"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["patm"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["aclim"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["codeetp"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["alphapt"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["codeclichange"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["codaltitude"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["altistation"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["altisimul"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["gradtn"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["gradtx"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["altinversion"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["gradtninv"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["cielclair"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["codadret"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["ombragetx"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["ra"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["albveg"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["aangst"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["bangst"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["corecTrosee"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["codecaltemp"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["codernet"],"name":[26],"type":["dbl"],"align":["right"]},{"label":["coefdevil"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["aks"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["bks"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["cvent"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["phiv0"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["coefrnet"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["tsmax"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["trmax"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["DKmax"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["Kmin"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["Tmf"],"name":[37],"type":["dbl"],"align":["right"]},{"label":["SWrf"],"name":[38],"type":["dbl"],"align":["right"]},{"label":["Pns"],"name":[39],"type":["dbl"],"align":["right"]},{"label":["E"],"name":[40],"type":["dbl"],"align":["right"]},{"label":["prof"],"name":[41],"type":["dbl"],"align":["right"]},{"label":["tminseuil"],"name":[42],"type":["dbl"],"align":["right"]},{"label":["tmaxseuil"],"name":[43],"type":["dbl"],"align":["right"]}],"data":[{"1":"climatex_sta.xml","2":"2.5","3":"0","4":"49","5":"1000","6":"20","7":"1","8":"1.25","9":"1","10":"1","11":"440","12":"800","13":"-0.5","14":"-0.55","15":"500","16":"1.3","17":"0.8","18":"1","19":"-1.4","20":"50","21":"0.23","22":"0.18","23":"0.62","24":"1","25":"1","26":"2","27":"0.7","28":"6","29":"0.5","30":"0.16","31":"0.004","32":"0.59","33":"-1.99","34":"1","35":"1.49","36":"2","37":"0.49","38":"0.01","39":"99.9","40":"0.02","41":"9.99","42":"-0.6","43":"0.1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Sta_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["zr"],"name":[2],"type":["chr"],"align":["left"]},{"label":["NH3ref"],"name":[3],"type":["chr"],"align":["left"]},{"label":["latitude"],"name":[4],"type":["chr"],"align":["left"]},{"label":["patm"],"name":[5],"type":["chr"],"align":["left"]},{"label":["aclim"],"name":[6],"type":["chr"],"align":["left"]},{"label":["codeetp"],"name":[7],"type":["chr"],"align":["left"]},{"label":["alphapt"],"name":[8],"type":["chr"],"align":["left"]},{"label":["codeclichange"],"name":[9],"type":["chr"],"align":["left"]},{"label":["codaltitude"],"name":[10],"type":["chr"],"align":["left"]},{"label":["altistation"],"name":[11],"type":["chr"],"align":["left"]},{"label":["altisimul"],"name":[12],"type":["chr"],"align":["left"]},{"label":["gradtn"],"name":[13],"type":["chr"],"align":["left"]},{"label":["gradtx"],"name":[14],"type":["chr"],"align":["left"]},{"label":["altinversion"],"name":[15],"type":["chr"],"align":["left"]},{"label":["gradtninv"],"name":[16],"type":["chr"],"align":["left"]},{"label":["cielclair"],"name":[17],"type":["chr"],"align":["left"]},{"label":["codadret"],"name":[18],"type":["chr"],"align":["left"]},{"label":["ombragetx"],"name":[19],"type":["chr"],"align":["left"]},{"label":["ra"],"name":[20],"type":["chr"],"align":["left"]},{"label":["albveg"],"name":[21],"type":["chr"],"align":["left"]},{"label":["aangst"],"name":[22],"type":["chr"],"align":["left"]},{"label":["bangst"],"name":[23],"type":["chr"],"align":["left"]},{"label":["corecTrosee"],"name":[24],"type":["chr"],"align":["left"]},{"label":["codecaltemp"],"name":[25],"type":["chr"],"align":["left"]},{"label":["codernet"],"name":[26],"type":["chr"],"align":["left"]},{"label":["coefdevil"],"name":[27],"type":["chr"],"align":["left"]},{"label":["aks"],"name":[28],"type":["chr"],"align":["left"]},{"label":["bks"],"name":[29],"type":["chr"],"align":["left"]},{"label":["cvent"],"name":[30],"type":["chr"],"align":["left"]},{"label":["phiv0"],"name":[31],"type":["chr"],"align":["left"]},{"label":["coefrnet"],"name":[32],"type":["chr"],"align":["left"]},{"label":["tsmax"],"name":[33],"type":["chr"],"align":["left"]},{"label":["trmax"],"name":[34],"type":["chr"],"align":["left"]},{"label":["DKmax"],"name":[35],"type":["chr"],"align":["left"]},{"label":["Kmin"],"name":[36],"type":["chr"],"align":["left"]},{"label":["Tmf"],"name":[37],"type":["chr"],"align":["left"]},{"label":["SWrf"],"name":[38],"type":["chr"],"align":["left"]},{"label":["Pns"],"name":[39],"type":["chr"],"align":["left"]},{"label":["E"],"name":[40],"type":["chr"],"align":["left"]},{"label":["prof"],"name":[41],"type":["chr"],"align":["left"]},{"label":["tminseuil"],"name":[42],"type":["chr"],"align":["left"]},{"label":["tmaxseuil"],"name":[43],"type":["chr"],"align":["left"]}],"data":[{"1":"climatex_sta.xml","2":"2.5","3":"0","4":"49","5":"1000","6":"20","7":"1","8":"1.25","9":"1","10":"1","11":"440","12":"800","13":"-0.5","14":"-0.55","15":"500","16":"1.3","17":"0.8","18":"1","19":"-1.4","20":"50","21":"0.23","22":"0.18","23":"0.62","24":"1","25":"1","26":"2","27":"0.7","28":"6","29":"0.5","30":"0.16","31":"0.004","32":"0.59","33":"-1.99","34":"1","35":"1.49","36":"2","37":"0.49","38":"0.01","39":"99.9","40":"0.02","41":"9.99","42":"-0.6","43":"0.1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -957,7 +958,7 @@ generation section.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manipulating STICS XML files • SticsRFiles</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -53,16 +53,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
-    </li>
-    <li>
       <a href="../articles/Generating_Stics_text_files.html">Generating STICS text files from XML files</a>
     </li>
     <li>
-      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
+      <a href="../articles/Generating_Stics_XML_files.html">Generating STICS XML files from tabulated data</a>
     </li>
     <li>
       <a href="../articles/Manipulating_Stics_text_files.html">Manipulating STICS text files</a>
+    </li>
+    <li>
+      <a href="../articles/Manipulating_Stics_XML_files.html">Manipulating STICS XML files</a>
     </li>
     <li>
       <a href="../articles/Upgrading_STICS_XML_files.html">Upgrading STICS XML files</a>
@@ -165,24 +165,24 @@ attribute <code>choix</code> of the option node. For example, the value
 of the parameter <code>codesymbiose</code> is <code>2</code> in the
 example (<em>choix=“2”</em>).</p></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">formalisme</span><span class="ot"> nom=</span><span class="st">"Water absorption and nitrogen content of the plant"</span>&gt;</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2.0"</span><span class="ot"> min=</span><span class="st">"1.0"</span><span class="ot"> nom=</span><span class="st">"beta"</span>&gt;1.40000&lt;/<span class="kw">param</span>&gt;</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1.0"</span><span class="ot"> min=</span><span class="st">"0.2"</span><span class="ot"> nom=</span><span class="st">"lvopt"</span>&gt;0.50000&lt;/<span class="kw">param</span>&gt;</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.1"</span><span class="ot"> min=</span><span class="st">"0.01"</span><span class="ot"> nom=</span><span class="st">"difN"</span>&gt;0.04500&lt;/<span class="kw">param</span>&gt;</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"30.0"</span><span class="ot"> min=</span><span class="st">"5.0"</span><span class="ot"> nom=</span><span class="st">"plNmin"</span>&gt;10.00000&lt;/<span class="kw">param</span>&gt;</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"irrlev"</span>&gt;20.00000&lt;/<span class="kw">param</span>&gt;</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"QNpltminINN"</span>&gt;0.00000&lt;/<span class="kw">param</span>&gt;</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"Nitrogen fixation by legumes"</span><span class="ot"> nomParam=</span><span class="st">"codesymbiose"</span>&gt;</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"critical nitrogen"</span>/&gt;</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"nodule activity"</span>&gt;</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            &lt;<span class="kw">option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"mineral nitrogen inhibition"</span><span class="ot"> nomParam=</span><span class="st">"codefxn"</span>&gt;</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"no effect"</span>/&gt;</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                    &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"nitrogen amount"</span>/&gt;</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                    &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"3"</span><span class="ot"> nom=</span><span class="st">"nitrogen concentration"</span>/&gt;</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                &lt;/<span class="kw">option</span>&gt;</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            &lt;/<span class="kw">choix</span>&gt;</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">option</span>&gt;</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">formalisme</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>    &lt;<span class="kw">formalisme</span><span class="ot"> nom=</span><span class="st">"Water absorption and nitrogen content of the plant"</span>&gt;</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"2.0"</span><span class="ot"> min=</span><span class="st">"1.0"</span><span class="ot"> nom=</span><span class="st">"beta"</span>&gt;1.40000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"1.0"</span><span class="ot"> min=</span><span class="st">"0.2"</span><span class="ot"> nom=</span><span class="st">"lvopt"</span>&gt;0.50000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"0.1"</span><span class="ot"> min=</span><span class="st">"0.01"</span><span class="ot"> nom=</span><span class="st">"difN"</span>&gt;0.04500&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"30.0"</span><span class="ot"> min=</span><span class="st">"5.0"</span><span class="ot"> nom=</span><span class="st">"plNmin"</span>&gt;10.00000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"irrlev"</span>&gt;20.00000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>        &lt;<span class="kw">param</span><span class="ot"> format=</span><span class="st">"real"</span><span class="ot"> max=</span><span class="st">"50.0"</span><span class="ot"> min=</span><span class="st">"0.0"</span><span class="ot"> nom=</span><span class="st">"QNpltminINN"</span>&gt;0.00000&lt;/<span class="kw">param</span>&gt;</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>        &lt;<span class="kw">option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"Nitrogen fixation by legumes"</span><span class="ot"> nomParam=</span><span class="st">"codesymbiose"</span>&gt;</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>        &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"critical nitrogen"</span>/&gt;</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>            &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"nodule activity"</span>&gt;</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>            &lt;<span class="kw">option</span><span class="ot"> choix=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"mineral nitrogen inhibition"</span><span class="ot"> nomParam=</span><span class="st">"codefxn"</span>&gt;</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>                &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"no effect"</span>/&gt;</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>                    &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"2"</span><span class="ot"> nom=</span><span class="st">"nitrogen amount"</span>/&gt;</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>                    &lt;<span class="kw">choix</span><span class="ot"> code=</span><span class="st">"3"</span><span class="ot"> nom=</span><span class="st">"nitrogen concentration"</span>/&gt;</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>                &lt;/<span class="kw">option</span>&gt;</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>            &lt;/<span class="kw">choix</span>&gt;</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>        &lt;/<span class="kw">option</span>&gt;</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>    &lt;/<span class="kw">formalisme</span>&gt;</span></code></pre></div>
 <ul>
 <li><p>Parameters with several values (for soil layers, technical
 operations,…) Several values may be defined for example relatively to
@@ -195,30 +195,30 @@ nodes) is repeated for each soil layer (layers names are set in the
 The parameters names are defined in a <code>nom</code> attribute in each
 <code>colonne</code> XML tag.</p></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">sol</span><span class="ot"> nom=</span><span class="st">"solcanne"</span>&gt;</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">tableau_entete</span>&gt;</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">tableau</span><span class="ot"> nb_colonnes=</span><span class="st">"8"</span><span class="ot"> nom=</span><span class="st">"layer 1"</span>&gt;</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epc"</span>&gt;20.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HCCF"</span>&gt;46.80&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HMINF"</span>&gt;26.20&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"DAF"</span>&gt;1.08&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"cailloux"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"typecailloux"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"infil"</span>&gt;50.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epd"</span>&gt;10&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>...</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">tableau</span>&gt;</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">tableau</span><span class="ot"> nb_colonnes=</span><span class="st">"8"</span><span class="ot"> nom=</span><span class="st">"layer 5"</span>&gt;</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epc"</span>&gt;20.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HCCF"</span>&gt;50.10&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HMINF"</span>&gt;25.50&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"DAF"</span>&gt;0.99&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"cailloux"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"typecailloux"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"infil"</span>&gt;50.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epd"</span>&gt;10&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>...</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>  &lt;<span class="kw">sol</span><span class="ot"> nom=</span><span class="st">"solcanne"</span>&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>...</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    &lt;/<span class="kw">tableau_entete</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    &lt;<span class="kw">tableau</span><span class="ot"> nb_colonnes=</span><span class="st">"8"</span><span class="ot"> nom=</span><span class="st">"layer 1"</span>&gt;</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epc"</span>&gt;20.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HCCF"</span>&gt;46.80&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HMINF"</span>&gt;26.20&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"DAF"</span>&gt;1.08&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"cailloux"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"typecailloux"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"infil"</span>&gt;50.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epd"</span>&gt;10&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>...</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>    &lt;/<span class="kw">tableau</span>&gt;</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    &lt;<span class="kw">tableau</span><span class="ot"> nb_colonnes=</span><span class="st">"8"</span><span class="ot"> nom=</span><span class="st">"layer 5"</span>&gt;</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epc"</span>&gt;20.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HCCF"</span>&gt;50.10&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"HMINF"</span>&gt;25.50&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"DAF"</span>&gt;0.99&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"cailloux"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"typecailloux"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"infil"</span>&gt;50.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>      &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"epd"</span>&gt;10&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>...</span></code></pre></div>
 <ul>
 <li>Example from tec files In the above file extract for crop management
 parameters, each set of parameters is repeated for each operation
@@ -227,37 +227,37 @@ Inside each <code>intervention</code> node, parameters names are defined
 in a <code>nom</code> attribute for each <code>colonne</code> XML
 tag.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">formalisme</span><span class="ot"> nom=</span><span class="st">"supply of organic residus"</span>&gt;</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">ta</span><span class="ot"> nb_interventions=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"interventions"</span>&gt;</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">ta_entete</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>/&gt;</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>/&gt;</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>/&gt;</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>/&gt;</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>/&gt;</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>/&gt;</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>/&gt;</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">ta_entete</span>&gt;</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>&gt;112&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>&gt;1.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>&gt;42.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>&gt;60.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">intervention</span>&gt;</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>...</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>&gt;220&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>&gt;1.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>&gt;42.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>&gt;60.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">intervention</span>&gt;</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>...</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>  &lt;<span class="kw">formalisme</span><span class="ot"> nom=</span><span class="st">"supply of organic residus"</span>&gt;</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    &lt;<span class="kw">ta</span><span class="ot"> nb_interventions=</span><span class="st">"1"</span><span class="ot"> nom=</span><span class="st">"interventions"</span>&gt;</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>      &lt;<span class="kw">ta_entete</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>/&gt;</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>/&gt;</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>/&gt;</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>/&gt;</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>/&gt;</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>/&gt;</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>/&gt;</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>      &lt;/<span class="kw">ta_entete</span>&gt;</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>      &lt;<span class="kw">intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>&gt;112&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>&gt;1.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>&gt;42.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>&gt;60.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>      &lt;/<span class="kw">intervention</span>&gt;</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>...</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>      &lt;<span class="kw">intervention</span><span class="ot"> nb_colonnes=</span><span class="st">"7"</span>&gt;</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"julres"</span>&gt;220&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"coderes"</span>&gt;1&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"qres"</span>&gt;1.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Crespc"</span>&gt;42.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"CsurNres"</span>&gt;60.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"Nminres"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>        &lt;<span class="kw">colonne</span><span class="ot"> nom=</span><span class="st">"eaures"</span>&gt;0.00&lt;/<span class="kw">colonne</span>&gt;</span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>      &lt;/<span class="kw">intervention</span>&gt;</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>...</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="functions-for-xml-files-manipulations">Functions for XML files manipulations<a class="anchor" aria-label="anchor" href="#functions-for-xml-files-manipulations"></a>
@@ -1269,7 +1269,7 @@ queries or replacement.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
       </footer>
