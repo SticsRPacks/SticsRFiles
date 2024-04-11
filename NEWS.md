@@ -1,3 +1,24 @@
+# SticsRFiles 1.3.0 _2024-04-10_
+
+* FUNCTIONS
+   * Message improvement for missing xml files detected before text files
+   generation
+   * New functions for computing days numbers from dates with reference to
+   starting dates
+
+* FIXES
+   * Updating STICS versions information 
+   * get_file using usm names (regex pattern)
+   * upgrade _ini.xml file (magrain0 parameter position)
+   * xml files generation: missing data management when loading xls/csv 
+   files
+   * text files generation: plant and tec files were not generated in
+   intercropping usms for the associated crop
+
+* DOC
+   * added license file
+
+
 # SticsRFiles 1.2.0 _2024-02-21_
 
 * FUNCTIONS

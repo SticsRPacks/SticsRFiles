@@ -4,6 +4,7 @@ url: https://sticsrpacks.github.io/SticsRFiles/
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
       person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
       person(given = "SticsRPacks", role = c("aut","cph")),
+      person("Timothee", "Flutre", ,"timothee.flutre@inrae.fr", role = "ctb"),
       person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")),
       person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")),
       person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
@@ -115,3 +116,4 @@ reference:
       - is_unix
       - is_windows
       - "`[.cropr_simulation`"
+      - compute_day_from_date
