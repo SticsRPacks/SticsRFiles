@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="initialisations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nbplantes" type="xs:integer" />
+        <xs:element ref="plante" minOccurs="2" maxOccurs="2" />
+        <xs:element ref="sol" />
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="optional" /> 
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="plante">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="stade0"      type="stade"           />
+        <xs:element name="lai0"        type="nullableDecimal" />
+        <xs:element name="masec0"      type="nullableDecimal" />
+        <xs:element name="zrac0"       type="nullableDecimal" />
+        <xs:element name="magrain0"    type="nullableDecimal" />
+        <xs:element name="QNplante0"   type="nullableDecimal" />
+        <xs:element name="resperenne0" type="nullableDecimal" />
+        <xs:element name="densinitial">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="dominance" type="xs:integer" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="sol">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="hinit">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="NO3init">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="NH4init">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Stades possibles. -->
+  <xs:simpleType name="stade">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="snu" />
+      <xs:enumeration value="lax" />
+      <xs:enumeration value="plt" />
+      <xs:enumeration value="drp" />
+      <xs:enumeration value="lev" />
+      <xs:enumeration value="sen" />
+      <xs:enumeration value="amf" />
+      <xs:enumeration value="dor" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Nombre décimal, ou chaîne vide. -->
+  <xs:simpleType name="nullableDecimal">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal" />
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:length value="0" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <!-- Entier strictement supérieur à 0. -->
+  <xs:simpleType name="intGreaterThanOne">
+    <xs:restriction base="xs:integer">
+      <xs:minExclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="horizon">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="nullableDecimal">
+          <xs:attribute name="nh" type="intGreaterThanOne" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

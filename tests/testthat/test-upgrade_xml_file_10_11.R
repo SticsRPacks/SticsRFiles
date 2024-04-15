@@ -1,6 +1,6 @@
 
-stics_from_version <- "V9.2"
-stics_to_version <- "V10.0"
+stics_from_version <- "V10.0"
+stics_to_version <- get_stics_versions_compat()$latest_version
 
 context("Upgrading xml files to latest version")
 
@@ -16,62 +16,45 @@ path <- tempdir()
 out_path <- file.path(path, "out_xml")
 if (!dir.exists(out_path)) dir.create(out_path)
 
-upgrade_ini_xml(
+upgrade_ini_xml_10_11(
   file = file.path(path, "file_ini.xml"),
-  out_dir = out_path,
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
-upgrade_plt_xml(
+upgrade_plt_xml_10_11(
   file = file.path(path, "file_plt.xml"),
-  out_dir = out_path,
-  param_newform_file = file.path(path, "param_newform.xml"),
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
-upgrade_sta_xml(
+upgrade_sta_xml_10_11(
   file = file.path(path, "file_sta.xml"),
-  out_dir = out_path,
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
-upgrade_tec_xml(
+upgrade_tec_xml_10_11(
   file = file.path(path, "file_tec.xml"),
-  out_dir = out_path,
-  param_newform_file = file.path(path, "param_newform.xml"),
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
 
-upgrade_param_gen_xml(
+upgrade_param_gen_xml_10_11(
   file = file.path(path, "param_gen.xml"),
-  out_dir = out_path,
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
-upgrade_param_newform_xml(
+upgrade_param_newform_xml_10_11(
   file = file.path(path, "param_newform.xml"),
-  out_dir = out_path,
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
-upgrade_sols_xml(
+upgrade_sols_xml_10_11(
   file = file.path(path, "sols.xml"),
   out_dir = out_path,
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
 )
 
-upgrade_usms_xml(
+upgrade_usms_xml_10_11(
   file = file.path(path, "usms.xml"),
-  out_dir = out_path,
-  param_gen_file = file.path(path, "param_gen.xml"),
-  stics_version = stics_from_version
+  out_dir = out_path
 )
 
 

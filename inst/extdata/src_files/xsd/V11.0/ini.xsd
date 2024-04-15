@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="initialisations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="nbplantes" type="xs:integer" />
+        <xs:element ref="plante" minOccurs="2" maxOccurs="2" />
+        <xs:element ref="sol" />
+        <xs:element ref="snow"  minOccurs="0" maxOccurs="1" />
+      </xs:sequence>
+    <xs:attribute name="version" type="xs:token" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="plante">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="stade0" type="stade" />
+        <xs:element name="lai0" type="nullableDecimal"/>
+        <xs:element name="magrain0" type="nullableDecimal" />        
+	<xs:element name="zrac0" type="nullableDecimal" />
+        <xs:element name="option" >
+			<xs:complexType>
+			    <xs:sequence>
+			      <xs:element ref="choix" maxOccurs="2" />
+			    </xs:sequence>
+			  <xs:attribute name="choix" type="xs:integer" use="required" />
+			  <xs:attribute name="nom" type="xs:string" use="required" />
+			  <xs:attribute name="nomParam" type="xs:token" use="required" />
+			</xs:complexType>
+		</xs:element>
+        <xs:element name="densinitial">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="dominance" type="xs:integer" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="sol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Hinitf">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="NO3initf">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="NH4initf">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="horizon" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Snow state variables -->
+  <xs:element name="snow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Sdepth0" type="nullableDecimal" />
+        <xs:element name="Sdry0" type="nullableDecimal" />
+        <xs:element name="Swet0" type="nullableDecimal" />
+        <xs:element name="ps0" type="nullableDecimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Stades possibles. -->
+  <xs:simpleType name="stade">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="snu" />
+      <xs:enumeration value="lax" />
+      <xs:enumeration value="plt" />
+      <xs:enumeration value="drp" />
+      <xs:enumeration value="lev" />
+      <xs:enumeration value="sen" />
+      <xs:enumeration value="amf" />
+      <xs:enumeration value="dor" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Nombre décimal, ou chaîne vide. -->
+  <xs:simpleType name="nullableDecimal">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal" />
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:length value="0" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <!-- Entier strictement supérieur à 0. -->
+  <xs:simpleType name="intGreaterThanOne">
+    <xs:restriction base="xs:integer">
+      <xs:minExclusive value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="horizon">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="nullableDecimal">
+          <xs:attribute name="nh" type="intGreaterThanOne" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+	<xs:element name="choix">
+		<xs:complexType>
+		    <xs:all>
+				<xs:element name="maperenne0" type="nullableDecimal" minOccurs="0" />
+				<xs:element name="QNperenne0" type="nullableDecimal" minOccurs="0" />
+				<xs:element name="masecnp0" type="nullableDecimal" minOccurs="0" />
+				<xs:element name="QNplantenp0" type="nullableDecimal" minOccurs="0" />
+				<xs:element name="masec0" type="nullableDecimal" minOccurs="0" />
+				<xs:element name="QNplante0" type="nullableDecimal" minOccurs="0" />
+				<xs:element name="restemp0" type="nullableDecimal" minOccurs="0" />
+                                <!-- resperenne0 to be removed -->
+                                <xs:element name="resperenne0" type="nullableDecimal" minOccurs="0" />
+			</xs:all>
+			<xs:attribute name="code" type="xs:integer" use="required" />
+			<xs:attribute name="nom" type="xs:token" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

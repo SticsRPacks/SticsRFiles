@@ -190,6 +190,7 @@ Collate:
     'upgrade_sta_xml.R'
     'upgrade_tec_xml.R'
     'upgrade_usms_xml.R'
+    'upgrade_v10_v11.R'
     'upgrade_workspace_xml.R'
     'var_to_col_names.R'
     'xml_document.R'
