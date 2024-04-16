@@ -275,7 +275,7 @@ hauteur;height of canopy;m;p;real;0;2
 HI_C;harvest index for carbon;0-1;p;real;0;0
 HI_N;harvest index for nitrogen;0-1;p;real;0;0
 Hmax;maximum height of water table between drains;cm;soil;real;0;0
-hnappe;height of water table affecting plant growth;cm;soil;real;0;0
+Hnappe;height of water table affecting plant growth;cm;soil;real;0;0
 Hpb;minimum depth of perched water table;cm;soil;real;0;0
 Hph;maximum depth of perched water table;cm;soil;real;0;0
 HR(1);water content of the soil layer 1;% dry weight;sc;real;1;0
