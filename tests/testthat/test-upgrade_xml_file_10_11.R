@@ -58,12 +58,11 @@ upgrade_usms_xml_10_11(
 )
 
 
-
+target_path <- get_examples_path("xml", stics_version = stics_to_version)
 for (file_path in list.files(out_path, full.names = TRUE)) {
   file_name <- basename(file_path)
   # loading files
   out_xml <- xmldocument(file_path)
-  target_path <- get_examples_path("xml", stics_version = stics_to_version)
   target_xml <- xmldocument(file.path(target_path, file_name))
 
   test_that(paste(file_name, "XML documents match"), {

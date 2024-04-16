@@ -135,6 +135,7 @@ unlink(file.path(path, "wheat"))
 
 # Testing intercropping usms  ------------------------------------
 example_ic <- download_data(
+  branch = "update-files-v11",
   example_dirs = "study_case_intercrop",
   stics_version = stics_version
 )
