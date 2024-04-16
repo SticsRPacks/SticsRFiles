@@ -4,6 +4,7 @@
 #' [data repository](https://github.com/SticsRPacks/data) in the SticsRPacks
 #' organisation.
 #'
+#' @param branch Git branch name (default : master)
 #' @param out_dir Path of the directory where to download the data
 #' @param dir `r lifecycle::badge("deprecated")` `dir` is no
 #'   longer supported, use `out_dir` instead.
@@ -22,7 +23,9 @@
 #' # Getting data for a given example : study_case_1 and a given STICS version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
-download_data <- function(out_dir = tempdir(), example_dirs = NULL,
+download_data <- function(branch = "master",
+                          out_dir = tempdir(),
+                          example_dirs = NULL,
                           stics_version = "latest",
                           dir = lifecycle::deprecated(),
                           version_name = lifecycle::deprecated()) {
@@ -63,7 +66,11 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
   data_dir_zip <- normalizePath(file.path(data_dir, "master.zip"),
                                 winslash = "/",
                                 mustWork = FALSE)
-  utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip",
+  # utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip",
+  #                      data_dir_zip)
+
+  utils::download.file(paste0("https://github.com/SticsRPacks/data/archive/",
+                              branch, ".zip"),
                        data_dir_zip)
 
   df_name <- utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
