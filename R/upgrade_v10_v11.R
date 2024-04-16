@@ -45,7 +45,15 @@ upgrade_tec_xml_10_11 <- function(file,
                                    attr_name = "format",
                                    values_list = "character" )
     SticsRFiles:::remove_attrs(xml_doc, path = "//param[@nom='stage_end_irrigauto']", attr_names = c("min", "max"))
+
+
   }
+
+  SticsRFiles:::set_param_value(
+    xml_doc,
+    param_name = list('stage_start_irrigauto', 'stage_end_irrigauto'),
+    param_value = list("null", "null")
+  )
 
   out_file <- file.path(out_dir, basename(file))
   SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
@@ -103,7 +111,7 @@ upgrade_plt_xml_10_11 <- function(file,
     <param format="character" nom="stage_const_height">no</param>
       <param format="real" max="2.0" min="1.0" nom="elongation">1.0</param>
         <param format="real" max="1.0" min="0.0" nom="nw_height">0.0</param>
-          <option choix="2" nom="LAI, Dry mass or phasic development relationship - Principal plant" nomParam="code_shape">
+          <option choix="1" nom="LAI, Dry mass or phasic development relationship - Principal plant" nomParam="code_shape">
             <choix code="1" nom="LAI"/>
               <choix code="2" nom="Development">
                 <param format="real" max="5000.0" min="0.0" nom="haut_dev_x0">0.0</param>
@@ -113,8 +121,10 @@ upgrade_plt_xml_10_11 <- function(file,
                     </formalisme>',
                                      addFinalizer = TRUE)
 
-  nrow_node <- XML::xmlParseString('<param format="real" max="10.0" min="1.0" nom="nrow">1</param>',
-                                   addFinalizer = TRUE)
+  nrow_node <- XML::xmlParseString(
+    '<param format="real" max="10.0" min="1.0" nom="nrow">1</param>',
+    addFinalizer = TRUE)
+
   leaves_node <- SticsRFiles:::get_nodes(xml_doc, path = "//formalisme[@nom='leaves']")
 
   XML::addSibling(leaves_node[[1]], XML::xmlClone(height_node))
@@ -125,7 +135,9 @@ upgrade_plt_xml_10_11 <- function(file,
 
   # Set values to added parameters if given as func inputs
   # using
-  param <- get_plt_IC_param(crop = crop)
+  plant <- SticsRFiles:::get_param_value(xml_doc = xml_doc,
+                                         param_name = "codeplante")$codeplante
+  param <- get_plt_IC_param(crop = plant)
 
   if(!is.null(stage_const_height)) param$stage_const_height <- stage_const_height
   if(!is.null(elongation)) param$elongation <- elongation
@@ -185,42 +197,42 @@ plt_IC_param_list <- function() {
   param$default$stage_const_height <- "no"
   param$default$elongation <- 1.0
   param$default$nw_height <- 0.0
-  param$default$code_shape <- 2
+  param$default$code_shape <- 1
   param$default$haut_dev_x0 <- 0.0
   param$default$haut_dev_k <- 0.0
   param$default$nrow <- 1
 
-  param$pea$stage_const_height <- "mat"
-  param$pea$elongation <- 1.0
-  param$pea$nw_height <- 0.0
-  param$pea$code_shape <- 2
-  param$pea$haut_dev_x0 <- 685.395497474724
-  param$pea$haut_dev_k <- 0.0113605979397447
-  param$pea$nrow <- 1
+  param$poi$stage_const_height <- "mat"
+  param$poi$elongation <- 1.0
+  param$poi$nw_height <- 0.0
+  param$poi$code_shape <- 2
+  param$poi$haut_dev_x0 <- 685.395497474724
+  param$poi$haut_dev_k <- 0.0113605979397447
+  param$poi$nrow <- 1
 
-  param$wheat$stage_const_height <- "no"
-  param$wheat$elongation <- 1.0
-  param$wheat$nw_height <- 0.0
-  param$wheat$code_shape <- 2
-  param$wheat$haut_dev_x0 <- 886.219548558914
-  param$wheat$haut_dev_k <- 0.00538369741357949
-  param$wheat$nrow <- 1
+  param$ble$stage_const_height <- "no"
+  param$ble$elongation <- 1.0
+  param$ble$nw_height <- 0.0
+  param$ble$code_shape <- 2
+  param$ble$haut_dev_x0 <- 886.219548558914
+  param$ble$haut_dev_k <- 0.00538369741357949
+  param$ble$nrow <- 1
 
-  param$fababean$stage_const_height <- "no"
-  param$fababean$elongation <- 1.0
-  param$fababean$nw_height <- 0.45
-  param$fababean$code_shape <- 2
-  param$fababean$haut_dev_x0 <- 998.494003649625
-  param$fababean$haut_dev_k <- 0.00726768251150451
-  param$fababean$nrow <- 1
+  param$faba$stage_const_height <- "no"
+  param$faba$elongation <- 1.0
+  param$faba$nw_height <- 0.45
+  param$faba$code_shape <- 2
+  param$faba$haut_dev_x0 <- 998.494003649625
+  param$faba$haut_dev_k <- 0.00726768251150451
+  param$faba$nrow <- 1
 
-  param$barley$stage_const_height <- "no"
-  param$barley$elongation <- 1.0
-  param$barley$nw_height <- 0.0
-  param$barley$code_shape <- 2
-  param$barley$haut_dev_x0 <- 714.811280801783
-  param$barley$haut_dev_k <- 0.00891413714283287
-  param$barley$nrow <- 1
+  param$esc$stage_const_height <- "no"
+  param$esc$elongation <- 1.0
+  param$esc$nw_height <- 0.0
+  param$esc$code_shape <- 2
+  param$esc$haut_dev_x0 <- 714.811280801783
+  param$esc$haut_dev_k <- 0.00891413714283287
+  param$esc$nrow <- 1
 
   return(param)
 
@@ -251,18 +263,34 @@ upgrade_sta_xml_10_11 <- function(file,
   check_and_upgrade_xml_version(xml_doc, from_version = "V10.1.1", target_version = "V11.0")
 
   # fix old nom attributes
-  codeetp <- '<option choix="1" nom="reading OR calculation of PET" nomParam="codeetp">
+  codeetp <- XML::xmlParseString(
+    '<option choix="1" nom="reading OR calculation of PET" nomParam="codeetp">
             <choix code="1" nom="PET-Penman_reading"/>
             <choix code="2" nom="PET-Penman_calculation"/>
             <choix code="3" nom="PET-Shuttleworth-Wallace_calculation"/>
             <choix code="4" nom="PET-Priestley-Taylor_calculation">
                 <param format="real" max="2.0" min="1.0" nom="alphapt">1.26000</param>
             </choix>
-        </option>'
+        </option>',
+    addFinalizer = TRUE)
 
   # get current values
+  par_values <- SticsRFiles:::get_param_value(xml_doc,
+                                              param_name = c("codeetp", "alphapt"))
+
   # replace codetp node with the previous one
+  codetp_node_to_rm <- SticsRFiles:::get_nodes(xml_doc,
+                                               path = '//option[@nomParam="codeetp"]')
+  XML::removeNodes(codetp_node_to_rm[[1]])
+
+  par_node <- SticsRFiles:::get_nodes(xml_doc,
+                                      path = '//formalisme[@nom="climate"]')
+
+  XML::addChildren(par_node[[1]], XML::xmlClone(codeetp), at = 0)
+
   # set values to current values
+  SticsRFiles:::set_param_value(xml_doc, param_name = c("codeetp", "alphapt"),
+                                param_value = par_values)
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
@@ -324,12 +352,21 @@ upgrade_param_gen_xml_10_11 <- function(file,
 
 
   # after <formalisme nom="Simulation options">
-  IC_form <- '<formalisme nom="Intercropping">
-		<param format="real" max="1.0" min="0.05" nom="hauteur_threshold">0.2</param>
-    </formalisme>'
+  IC_form_node <- XML::xmlParseString(
+    '<formalisme nom="Intercropping">
+      <param format="real" max="1.0" min="0.05" nom="hauteur_threshold">0.2</param>
+      </formalisme>',
+    addFinalizer = TRUE)
+  sim_options_node <- SticsRFiles:::get_nodes(xml_doc, path = "//formalisme[@nom='Simulation options']")
+  XML::addSibling(sim_options_node[[1]], XML::xmlClone(IC_form_node))
 
   # after <param format="real" max="0.6" min="0.4" nom="parsurrg">0.48000</param>
-  par2net <- '<param format="real" max="1.0" min="0.5" nom="par_to_net">0.83</param>'
+  par2net_node <- XML::xmlParseString(
+    '<param format="real" max="1.0" min="0.5" nom="par_to_net">0.83</param>',
+    addFinalizer = TRUE)
+
+  parsurg_node <- SticsRFiles:::get_nodes(xml_doc, path = "//param[@nom='parsurrg']")
+  XML::addSibling(parsurg_node[[1]], XML::xmlClone(par2net_node))
 
   # Set values to added parameters if given as func inputs
 
@@ -344,8 +381,8 @@ upgrade_param_gen_xml_10_11 <- function(file,
 
 #' @export
 upgrade_param_newform_xml_10_11 <- function(file,
-                                       out_dir,
-                                       overwrite = FALSE) {
+                                            out_dir,
+                                            overwrite = FALSE) {
 
   xml_doc <- SticsRFiles:::xmldocument(file)
 
@@ -363,8 +400,8 @@ upgrade_param_newform_xml_10_11 <- function(file,
 
 #' @export
 upgrade_sols_xml_10_11 <- function(file,
-                                  out_dir,
-                                  overwrite = FALSE) {
+                                   out_dir,
+                                   overwrite = FALSE) {
 
   xml_doc <- SticsRFiles:::xmldocument(file)
 
@@ -404,7 +441,7 @@ upgrade_usms_xml_10_11 <- function(file,
 
 #' @export
 upgrade_workspace_xml_10_11 <- function(workspace,
-                                        javastics,
+                                        javastics = NULL,
                                         out_dir,
                                         from_version = "V10.0",
                                         target_version = "V11.0",
@@ -432,8 +469,8 @@ upgrade_workspace_xml_10_11 <- function(workspace,
   )
 
   upgrade_param_newform_xml_10_11(file = par_new,
-                             out_dir = out_dir,
-                             overwrite = overwrite)
+                                  out_dir = out_dir,
+                                  overwrite = overwrite)
 
   # Converting usms.xml file
   usms <- file.path(workspace, "usms.xml")
@@ -471,18 +508,20 @@ upgrade_workspace_xml_10_11 <- function(workspace,
 
   usms_plt_files <- usms_plt_files[!plant_idx]
 
-  plant_files <- SticsRFiles:::get_in_files(
-    in_dir_or_files = file.path(javastics, "plant"),
-    kind = "plt"
-  )
+  if(!is.null(javastics)) {
+    plant_files <- SticsRFiles:::get_in_files(
+      in_dir_or_files = file.path(javastics, "plant"),
+      kind = "plt"
+    )
 
-  plant_idx <- usms_plt_files %in% basename(plant_files)
+    plant_idx <- usms_plt_files %in% basename(plant_files)
 
-  # combining javastics and workspace plant files
-  full_plant_files <- c(full_plant_files,
-                        file.path(javastics,
-                                  "plant",
-                                  usms_plt_files[plant_idx]))
+    # combining javastics and workspace plant files
+    full_plant_files <- c(full_plant_files,
+                          file.path(javastics,
+                                    "plant",
+                                    usms_plt_files[plant_idx]))
+  }
 
 
   if (length(full_plant_files) > 0) {
