@@ -17,46 +17,46 @@ upgrade_tec_xml_10_11 <- function(file,
   }
 
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
   check_and_upgrade_xml_version(xml_doc, from_version = "V10.1.1", target_version = "V11.0")
 
-  format <- SticsRFiles:::get_attrs_values(xml_doc, path = "//param[@nom='stage_start_irrigauto']",
+  format <- get_attrs_values(xml_doc, path = "//param[@nom='stage_start_irrigauto']",
                                            attr_list = "format")
 
   if (format != "character") {
 
-    SticsRFiles:::set_attrs_values(xml_doc,
+    set_attrs_values(xml_doc,
                                    path = "//param[@nom='stage_start_irrigauto']",
                                    attr_name = "format",
                                    values_list = "character" )
-    SticsRFiles:::remove_attrs(xml_doc, path = "//param[@nom='stage_start_irrigauto']", attr_names = c("min", "max"))
+    remove_attrs(xml_doc, path = "//param[@nom='stage_start_irrigauto']", attr_names = c("min", "max"))
   }
 
-  format <- SticsRFiles:::get_attrs_values(xml_doc, path = "//param[@nom='stage_end_irrigauto']",
+  format <- get_attrs_values(xml_doc, path = "//param[@nom='stage_end_irrigauto']",
                                            attr_list = "format")
 
   if (format != "character") {
 
-    SticsRFiles:::set_attrs_values(xml_doc,
+    set_attrs_values(xml_doc,
                                    path = "//param[@nom='stage_end_irrigauto']",
                                    attr_name = "format",
                                    values_list = "character" )
-    SticsRFiles:::remove_attrs(xml_doc, path = "//param[@nom='stage_end_irrigauto']", attr_names = c("min", "max"))
+    remove_attrs(xml_doc, path = "//param[@nom='stage_end_irrigauto']", attr_names = c("min", "max"))
 
 
   }
 
-  SticsRFiles:::set_param_value(
+  set_param_value(
     xml_doc,
     param_name = list('stage_start_irrigauto', 'stage_end_irrigauto'),
     param_value = list("null", "null")
   )
 
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -99,7 +99,7 @@ upgrade_plt_xml_10_11 <- function(file,
     return(invisible())
   }
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -125,17 +125,17 @@ upgrade_plt_xml_10_11 <- function(file,
     '<param format="real" max="10.0" min="1.0" nom="nrow">1</param>',
     addFinalizer = TRUE)
 
-  leaves_node <- SticsRFiles:::get_nodes(xml_doc, path = "//formalisme[@nom='leaves']")
+  leaves_node <- get_nodes(xml_doc, path = "//formalisme[@nom='leaves']")
 
   XML::addSibling(leaves_node[[1]], XML::xmlClone(height_node))
 
-  dfolhaut_node <- SticsRFiles:::get_nodes(xml_doc, path = "//param[@nom='dfolhaut']")
+  dfolhaut_node <- get_nodes(xml_doc, path = "//param[@nom='dfolhaut']")
 
   XML::addSibling(dfolhaut_node[[1]], XML::xmlClone(nrow_node))
 
   # Set values to added parameters if given as func inputs
   # using
-  plant <- SticsRFiles:::get_param_value(xml_doc = xml_doc,
+  plant <- get_param_value(xml_doc = xml_doc,
                                          param_name = "codeplante")$codeplante
   param <- get_plt_IC_param(crop = plant)
 
@@ -153,7 +153,7 @@ upgrade_plt_xml_10_11 <- function(file,
 
 
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -256,7 +256,7 @@ upgrade_sta_xml_10_11 <- function(file,
     return(invisible())
   }
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -275,26 +275,26 @@ upgrade_sta_xml_10_11 <- function(file,
     addFinalizer = TRUE)
 
   # get current values
-  par_values <- SticsRFiles:::get_param_value(xml_doc,
+  par_values <- get_param_value(xml_doc,
                                               param_name = c("codeetp", "alphapt"))
 
   # replace codetp node with the previous one
-  codetp_node_to_rm <- SticsRFiles:::get_nodes(xml_doc,
+  codetp_node_to_rm <- get_nodes(xml_doc,
                                                path = '//option[@nomParam="codeetp"]')
   XML::removeNodes(codetp_node_to_rm[[1]])
 
-  par_node <- SticsRFiles:::get_nodes(xml_doc,
+  par_node <- get_nodes(xml_doc,
                                       path = '//formalisme[@nom="climate"]')
 
   XML::addChildren(par_node[[1]], XML::xmlClone(codeetp), at = 0)
 
   # set values to current values
-  SticsRFiles:::set_param_value(xml_doc, param_name = c("codeetp", "alphapt"),
+  set_param_value(xml_doc, param_name = c("codeetp", "alphapt"),
                                 param_value = par_values)
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -318,7 +318,7 @@ upgrade_ini_xml_10_11 <- function(file,
     return(invisible())
   }
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -331,7 +331,7 @@ upgrade_ini_xml_10_11 <- function(file,
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -344,7 +344,7 @@ upgrade_param_gen_xml_10_11 <- function(file,
                                         par_to_net = NULL,
                                         overwrite = FALSE) {
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -357,7 +357,7 @@ upgrade_param_gen_xml_10_11 <- function(file,
       <param format="real" max="1.0" min="0.05" nom="hauteur_threshold">0.2</param>
       </formalisme>',
     addFinalizer = TRUE)
-  sim_options_node <- SticsRFiles:::get_nodes(xml_doc, path = "//formalisme[@nom='Simulation options']")
+  sim_options_node <- get_nodes(xml_doc, path = "//formalisme[@nom='Simulation options']")
   XML::addSibling(sim_options_node[[1]], XML::xmlClone(IC_form_node))
 
   # after <param format="real" max="0.6" min="0.4" nom="parsurrg">0.48000</param>
@@ -365,14 +365,14 @@ upgrade_param_gen_xml_10_11 <- function(file,
     '<param format="real" max="1.0" min="0.5" nom="par_to_net">0.83</param>',
     addFinalizer = TRUE)
 
-  parsurg_node <- SticsRFiles:::get_nodes(xml_doc, path = "//param[@nom='parsurrg']")
+  parsurg_node <- get_nodes(xml_doc, path = "//param[@nom='parsurrg']")
   XML::addSibling(parsurg_node[[1]], XML::xmlClone(par2net_node))
 
   # Set values to added parameters if given as func inputs
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -384,7 +384,7 @@ upgrade_param_newform_xml_10_11 <- function(file,
                                             out_dir,
                                             overwrite = FALSE) {
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -392,7 +392,7 @@ upgrade_param_newform_xml_10_11 <- function(file,
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -403,7 +403,7 @@ upgrade_sols_xml_10_11 <- function(file,
                                    out_dir,
                                    overwrite = FALSE) {
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -411,7 +411,7 @@ upgrade_sols_xml_10_11 <- function(file,
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -423,7 +423,7 @@ upgrade_usms_xml_10_11 <- function(file,
                                    out_dir,
                                    overwrite = FALSE) {
 
-  xml_doc <- SticsRFiles:::xmldocument(file)
+  xml_doc <- xmldocument(file)
 
 
   # set_version
@@ -431,7 +431,7 @@ upgrade_usms_xml_10_11 <- function(file,
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
-  SticsRFiles:::write_xml_file(xml_doc, out_file, overwrite = overwrite)
+  write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
@@ -453,7 +453,7 @@ upgrade_workspace_xml_10_11 <- function(workspace,
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
   # Getting param_gen.xml path
-  par_gen <- SticsRFiles:::get_param_gen_file(type = "param_gen.xml",
+  par_gen <- get_param_gen_file(type = "param_gen.xml",
                                               workspace,
                                               javastics)
 
@@ -463,7 +463,7 @@ upgrade_workspace_xml_10_11 <- function(workspace,
 
 
   # Getting param_newform.xml path
-  par_new <- SticsRFiles:::get_param_gen_file(
+  par_new <- get_param_gen_file(
     type = "param_newform.xml",
     workspace, javastics
   )
@@ -482,15 +482,15 @@ upgrade_workspace_xml_10_11 <- function(workspace,
   upgrade_sols_xml_10_11(sols, out_dir, overwrite = overwrite)
 
   # Converting station files (*_sta.xml)
-  sta_files <- SticsRFiles:::get_in_files(in_dir_or_files = workspace, kind = "sta")
+  sta_files <- get_in_files(in_dir_or_files = workspace, kind = "sta")
   upgrade_sta_xml_10_11(sta_files, out_dir, overwrite = overwrite)
 
   # Converting initialisation files (*_ini.xml)
-  ini_files <- SticsRFiles:::get_in_files(in_dir_or_files = workspace, kind = "ini")
+  ini_files <- get_in_files(in_dir_or_files = workspace, kind = "ini")
   upgrade_ini_xml_10_11(ini_files, out_dir, overwrite = overwrite)
 
   # Converting crop management files (*_tec.xml)
-  tec_files <- SticsRFiles:::get_in_files(in_dir_or_files = workspace, kind = "tec")
+  tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
   upgrade_tec_xml_10_11(tec_files, out_dir, overwrite = overwrite)
 
   # Upgrading plant files
@@ -499,7 +499,7 @@ upgrade_workspace_xml_10_11 <- function(workspace,
   usms_plt_files <-
     unique(unlist(get_param_xml(file = usms, param = "fplt")$usms$fplt))
   usms_plt_files <- usms_plt_files[usms_plt_files != "null"]
-  plant_files <- SticsRFiles:::get_in_files(
+  plant_files <- get_in_files(
     in_dir_or_files = file.path(workspace, "plant"),
     kind = "plt"
   )
@@ -509,7 +509,7 @@ upgrade_workspace_xml_10_11 <- function(workspace,
   usms_plt_files <- usms_plt_files[!plant_idx]
 
   if(!is.null(javastics)) {
-    plant_files <- SticsRFiles:::get_in_files(
+    plant_files <- get_in_files(
       in_dir_or_files = file.path(javastics, "plant"),
       kind = "plt"
     )
@@ -543,8 +543,8 @@ check_and_upgrade_xml_version <- function(xml_doc,
 
 
 
-  from_version_num <- SticsRFiles:::get_version_num(from_version)
-  target_version_num <- SticsRFiles:::get_version_num(target_version)
+  from_version_num <- get_version_num(from_version)
+  target_version_num <- get_version_num(target_version)
 
   if ((target_version_num - from_version_num) < 1e-06)
     stop("The target version ",
@@ -555,16 +555,16 @@ check_and_upgrade_xml_version <- function(xml_doc,
 
   # Checking if target version is supported
   # raising an error if not!
-  SticsRFiles:::check_version_compat(target_version)
+  check_version_compat(target_version)
 
-  # if (!SticsRFiles:::is.xml_document(file_or_doc)) {
-  #   file_or_doc <- SticsRFiles:::xmldocument(file_or_doc)
+  # if (!is.xml_document(file_or_doc)) {
+  #   file_or_doc <- xmldocument(file_or_doc)
   # }
 
   # checking actual version consistency between from_version
   # and file version
   from_version <- get_major_version(from_version)
-  file_version <- get_major_version(SticsRFiles:::get_xml_file_version(xml_doc))
+  file_version <- get_major_version(get_xml_file_version(xml_doc))
 
   #print(xml_doc)
   #print(from_version)
@@ -575,7 +575,7 @@ check_and_upgrade_xml_version <- function(xml_doc,
          paste0(from_version,".x"))
 
   # Setting new file STICS version
-  SticsRFiles:::set_xml_file_version(xml_doc,
+  set_xml_file_version(xml_doc,
                                      new_version = target_version
   )
 }
@@ -587,5 +587,5 @@ get_major_version <- function(version, to_num = FALSE) {
   if(!to_num)
     return(str_version)
 
-  SticsRFiles:::get_version_num(str_version)
+  get_version_num(str_version)
 }
