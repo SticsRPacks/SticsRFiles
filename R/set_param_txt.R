@@ -627,11 +627,19 @@ set_file_txt <- function(file,
            # changing param value in ref
            if (is.null(plant_id)) {
              if (is.null(layer)) {
+               # TODO
+               # add check on values nb
+               # before replacing them
                ref[[param]] <- value
              } else {
+               # TODO
+               # check layers idx [layer]
+               # and values number
                ref[[param]][layer] <- value
              }
            } else {
+             # TODO
+             # same as before for layer !!!
              if (is.null(layer)) {
                ref$plant[[paste0("plant", plant_id)]][[param]] <- value
              } else {
