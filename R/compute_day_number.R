@@ -48,7 +48,7 @@ is_leap_year <- function(year, integer = FALSE){
 #' compute_day_from_date(date = "2015-02-10", start_year = 2014)
 #'
 #' date <- as.Date("2009-02-10")
-#' compute_day_from_date(date = date, start_date = 2008 )
+#' compute_day_from_date(date = date, start_year = 2008 )
 #'
 #' @export
 compute_day_from_date <- function(date, start_year = NULL){
