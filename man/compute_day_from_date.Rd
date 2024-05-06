@@ -4,7 +4,11 @@
 \alias{compute_day_from_date}
 \title{Convert date into day number}
 \usage{
-compute_day_from_date(date, start_year = NULL)
+compute_day_from_date(
+  date,
+  start_year = NULL,
+  start_date = lifecycle::deprecated()
+)
 }
 \arguments{
 \item{date}{date(s) vector to be converted,
@@ -12,6 +16,9 @@ in the character format ("YYYY-MM-DD") or \code{\link[base]{Date}} format}
 
 \item{start_year}{year to be used as time reference (simulation start year).
 Optional.}
+
+\item{start_date}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{start_date} is no
+longer supported, use \code{start_year} instead.}
 }
 \value{
 numeric vector
@@ -31,6 +38,9 @@ compute_day_from_date(date = "2015-02-10", start_year = 2014)
 
 date <- as.Date("2009-02-10")
 compute_day_from_date(date = date, start_year = 2008 )
+
+dates <- c(as.Date("2008-02-10"), as.Date("2009-02-10"))
+compute_day_from_date(date = dates, start_year = 2008 )
 
 }
 \author{
