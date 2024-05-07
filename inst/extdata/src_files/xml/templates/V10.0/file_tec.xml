@@ -81,8 +81,8 @@
             <param format="integer" max="731" min="0.0" nom="datefin_irrigauto">-999</param>
           </choix>
           <choix code="2" nom="stages">
-            <param format="integer" max="731" min="0.0" nom="stage_start_irrigauto">-999</param>
-            <param format="integer" max="731" min="0.0" nom="stage_end_irrigauto">-999</param>
+            <param format="character" nom="stage_start_irrigauto">-999</param>
+            <param format="character" nom="stage_end_irrigauto">-999</param>
           </choix>
           <choix code="3" nom="no"/>
         </option>
