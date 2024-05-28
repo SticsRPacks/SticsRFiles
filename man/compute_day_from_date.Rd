@@ -4,32 +4,44 @@
 \alias{compute_day_from_date}
 \title{Convert date into day number}
 \usage{
-compute_day_from_date(date, start_date)
+compute_day_from_date(
+  date,
+  start_year = NULL,
+  start_date = lifecycle::deprecated()
+)
 }
 \arguments{
-\item{date}{date vector you wish to convert,
-in the \code{\link[base]{Date}} format}
+\item{date}{date(s) vector to be converted,
+in the character format ("YYYY-MM-DD") or \code{\link[base]{Date}} format}
 
-\item{start_date}{date used as the reference point,
-in the \code{\link[base]{Date}} format, typically the simulation start year}
+\item{start_year}{year to be used as time reference (simulation start year).
+Optional.}
+
+\item{start_date}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{start_date} is no
+longer supported, use \code{start_year} instead.}
 }
 \value{
 numeric vector
 }
 \description{
 Computes the day number corresponding to a given date (or vector of)
-with reference to a start date.
-Typically, the start date should be the date at which a STICS simulation
-will start. Leap years are properly handled.
+from the first day of a start year. Typically, the start year should
+be the year of a STICS simulation start.
+Leap years are properly handled.
 }
 \examples{
-start_date <- as.Date("2014-08-01")
-date <- as.Date("2015-02-10")
-compute_day_from_date(date=date, start_date=start_date)
 
-start_date <- as.Date("2008-08-01")
+date <- as.Date("2015-02-10")
+compute_day_from_date(date = date)
+
+compute_day_from_date(date = "2015-02-10", start_year = 2014)
+
 date <- as.Date("2009-02-10")
-compute_day_from_date(date=date, start_date=start_date)
+compute_day_from_date(date = date, start_year = 2008 )
+
+dates <- c(as.Date("2008-02-10"), as.Date("2009-02-10"))
+compute_day_from_date(date = dates, start_year = 2008 )
+
 }
 \author{
 Timothee Flutre
