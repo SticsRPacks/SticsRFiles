@@ -17,13 +17,14 @@ set_param_txt(
   param,
   value,
   append = FALSE,
-  plant_id = NULL,
+  plant_id = 1,
   variety = NULL,
-  layer = NULL,
+  value_id = NULL,
   stics_version = "latest",
   dirpath = lifecycle::deprecated(),
   add = lifecycle::deprecated(),
-  plant = lifecycle::deprecated()
+  plant = lifecycle::deprecated(),
+  layer = lifecycle::deprecated()
 )
 
 set_usm_txt(
@@ -89,6 +90,7 @@ set_tec_txt(
   param,
   value,
   append = FALSE,
+  value_id = NULL,
   filepath = lifecycle::deprecated(),
   add = lifecycle::deprecated()
 )
@@ -113,13 +115,13 @@ input files.}
 \item{append}{Boolean. Append input to existing file}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
-Only used for plant, technical or initialisation parameters.}
+Only used for plant, technical or initialisation parameters (default = 1).}
 
 \item{variety}{The plant variety to set the parameter value,
 either the variety name (\code{codevar} in the plant file) or
 the index (\code{variete} in the technical file).}
 
-\item{layer}{The soil layer if any (only concerns soil-related parameters)}
+\item{value_id}{The soil layers id or technical interventions id}
 
 \item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}
@@ -132,6 +134,9 @@ longer supported, use \code{append} instead.}
 
 \item{plant}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plant} is no
 longer supported, use \code{plant_id} instead.}
+
+\item{layer}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{layer} is no
+longer supported, use \code{value_id} instead.}
 
 \item{file}{Path (including name) of the file to modify}
 
@@ -172,13 +177,16 @@ set_param_txt(workspace = path, param = "durvieF", value = 245)
 # Change the value of durvieF for another variety:
 set_param_txt(workspace = path, param = "durvieF",
               variety = "Nefer", value = 178)
+# Change the value of soil parameter "cailloux" for all layers
+# or a specific one
+set_param_txt(workspace = path, param = "cailloux", value = 1)
+set_param_txt(workspace = path, param = "cailloux", value_id = 2, value = 2)
 
-# If the parameter is found in several files, use the set_*
-# functions directly, e.g. cailloux is found in the general file
-# ("codecailloux") and the soil file. If we want to change its value
-# in the soil file, we use set_soil_txt():
-set_soil_txt(file = file.path(path, "param.sol"),
-             param = "cailloux", layer = 2, value = 1)
+# Change the value of parameter "amount" for all water supply interventions
+# or a specific one
+set_param_txt(workspace = path, param = "amount", value = 50)
+set_param_txt(workspace = path, param = "amount", value_id = 2, value = 40)
+
 
 
 }
