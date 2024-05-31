@@ -9,11 +9,11 @@
 #' @param value    New parameter value
 #' @param append      Boolean. Append input to existing file
 #' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
-#' Only used for plant, technical or initialisation parameters.
+#' Only used for plant, technical or initialisation parameters (default = 1).
 #' @param variety The plant variety to set the parameter value,
 #' either the variety name (`codevar` in the plant file) or
 #' the index (`variete` in the technical file).
-#' @param layer    The soil layer if any (only concerns soil-related parameters)
+#' @param value_id    The soil layers id or technical interventions id
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
 #' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
@@ -22,7 +22,8 @@
 #'   longer supported, use `append` instead.
 #' @param plant `r lifecycle::badge("deprecated")` `plant` is no
 #'   longer supported, use `plant_id` instead.
-#'
+#' @param layer `r lifecycle::badge("deprecated")` `layer` is no
+#'   longer supported, use `value_id` instead.
 #'
 #' @param file Path (including name) of the file to modify
 #' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
@@ -51,33 +52,36 @@
 #' # Getting example data path
 #' path <- get_examples_path(file_type = "txt")
 #'
-#'
 #' # Change the value of durvieF for the current variety:
 #' set_param_txt(workspace = path, param = "durvieF", value = 245)
 #'
 #' # Change the value of durvieF for another variety:
 #' set_param_txt(workspace = path, param = "durvieF",
 #'               variety = "Nefer", value = 178)
+#' # Change the value of soil parameter "cailloux" for all layers
+#' # or a specific one
+#' set_param_txt(workspace = path, param = "cailloux", value = 1)
+#' set_param_txt(workspace = path, param = "cailloux", value_id = 2, value = 2)
 #'
-#' # If the parameter is found in several files, use the set_*
-#' # functions directly, e.g. cailloux is found in the general file
-#' # ("codecailloux") and the soil file. If we want to change its value
-#' # in the soil file, we use set_soil_txt():
-#' set_soil_txt(file = file.path(path, "param.sol"),
-#'              param = "cailloux", layer = 2, value = 1)
+#' # Change the value of parameter "amount" for all water supply interventions
+#' # or a specific one
+#' set_param_txt(workspace = path, param = "amount", value = 50)
+#' set_param_txt(workspace = path, param = "amount", value_id = 2, value = 40)
+#'
 #'
 #'
 set_param_txt <- function(workspace,
                           param,
                           value,
                           append = FALSE,
-                          plant_id = NULL,
+                          plant_id = 1,
                           variety = NULL,
-                          layer = NULL,
+                          value_id = NULL,
                           stics_version = "latest",
                           dirpath = lifecycle::deprecated(),
                           add = lifecycle::deprecated(),
-                          plant = lifecycle::deprecated()) {
+                          plant = lifecycle::deprecated(),
+                          layer = lifecycle::deprecated()) {
 
   # dirpath
   if (lifecycle::is_present(dirpath)) {
@@ -109,10 +113,19 @@ set_param_txt <- function(workspace,
     plant <- plant_id # to remove when we update inside the function
   }
 
+  # layer
+  if (lifecycle::is_present(layer)) {
+    lifecycle::deprecate_warn(
+      "1.4.0", "set_param_txt(plant)",
+      "set_param_txt(plant_id)"
+    )
+    value_id <- layer
+  }
+
   stics_version <- check_version_compat(stics_version = stics_version)
 
-
   param <- gsub("P_", "", param)
+
   param_val <- get_param_txt(
     workspace = dirpath,
     param = param,
@@ -120,10 +133,17 @@ set_param_txt <- function(workspace,
     stics_version = stics_version
   )
 
-  file_type <-
-    lapply(strsplit(names(param_val), "\\$"), function(x) {
-      x[1]
-    }) %>%
+  if (length(param_val) == 0)
+    stop("Unknown parameter: ", param, "\n",
+         "Check case sensitivity or ",
+         "use get_param_info for searching the exact name")
+
+  file_param_list <- lapply(
+    strsplit(names(param_val), "\\$"), function(x) {
+      x[1] }
+  )
+
+  file_type <- file_param_list %>%
     unlist() %>%
     unique()
 
@@ -138,7 +158,7 @@ set_param_txt <- function(workspace,
            set_ini_txt(
              file = file.path(dirpath, "ficini.txt"),
              param = param, value = value, append = add,
-             plant_id = plant, layer = layer,
+             plant_id = plant, layer = value_id,
              stics_version = stics_version
            )
          },
@@ -159,7 +179,7 @@ set_param_txt <- function(workspace,
              file = file.path(dirpath, "param.sol"),
              param = param,
              value = value,
-             layer = layer,
+             layer = value_id,
              stics_version = stics_version
            )
          },
@@ -179,14 +199,12 @@ set_param_txt <- function(workspace,
            lapply(plant, function(x) {
              set_tec_txt(
                file = file.path(dirpath, paste0("fictec", x, ".txt")),
-               param = param, value = value, append = add
+               param = param, value = value, append = add,
+               value_id = value_id
              )
            })
          },
          plant = {
-           # default : 1 plant
-           if (is.null(plant)) plant <- 1
-
            lapply(plant, function(x) {
              if (is.null(variety)) {
                variety <-
@@ -220,6 +238,7 @@ set_param_txt <- function(workspace,
          },
          stop("Parameter not found")
   )
+  invisible()
 }
 
 
@@ -319,7 +338,8 @@ set_ini_txt <- function(file = "ficini.txt",
 
   set_file_txt(filepath, param, value, add,
                plant_id = plant_id,
-               layer = layer, stics_version = stics_version
+               value_id = layer,
+               stics_version = stics_version
   )
 }
 
@@ -426,6 +446,7 @@ set_tec_txt <- function(file = "fictec1.txt",
                         param,
                         value,
                         append = FALSE,
+                        value_id = NULL,
                         filepath = lifecycle::deprecated(),
                         add = lifecycle::deprecated()) {
 
@@ -448,7 +469,11 @@ set_tec_txt <- function(file = "fictec1.txt",
     add <- append # to remove when we update inside the function
   }
 
-  set_file_txt(filepath, param, value, add)
+  set_file_txt(file = filepath,
+               param =  param,
+               value = value,
+               append = add,
+               value_id = value_id)
 }
 
 #' @rdname set_param_txt
@@ -475,24 +500,18 @@ set_soil_txt <- function(file = "param.sol",
   param <- paste0("^", param, "$")
 
   if (!is.null(layer)) {
-    length_param_file <- length(ref[grep(param, names(ref))][layer])
-  } else {
-    length_param_file <- length(ref[grep(param, names(ref))])
-  }
-
-  if (length_param_file != length(value)) {
-    cli::cli_alert_danger(paste(
-      "Length of input value different from parameter value length.\n",
-      "Original values: {.val {ref[grep(param,names(ref))]}} \n",
-      "Input values: {.val { value}}"
-    ))
-    stop("Number of values don't match.")
-  }
-
-  if (!is.null(layer)) {
+    check_param_dim(param = param,
+                    file_value = ref[[grep(param, names(ref))]],
+                    value_id = layer,
+                    value = value)
     ref[[grep(param, names(ref))]][layer] <- format(value, scientific = FALSE)
   } else {
-    ref[[grep(param, names(ref))]] <- format(value, scientific = FALSE)
+    if(length(value) > 1) {
+      check_param_dim(param = param,
+                      file_value = ref[[grep(param, names(ref))]],
+                      value = value)
+    }
+    ref[[grep(param, names(ref))]][] <- format(value, scientific = FALSE)
   }
 
 
@@ -569,7 +588,8 @@ set_soil_txt <- function(file = "param.sol",
 #' either the variety
 #' name (`codevar` in the plant file) or the index
 #' (`variete` in the technical file).
-#' @param layer    The soil layer if any (only concerns soil-related parameters)
+#' @param value_id index of technical interventions to be used to
+#' set parameter values, or layer index for soil parameters
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
 #'
@@ -592,7 +612,7 @@ set_file_txt <- function(file,
                          append,
                          plant_id = NULL,
                          variety = NULL,
-                         layer = NULL,
+                         value_id = NULL,
                          stics_version = "latest") {
   param <- gsub("P_", "", param)
 
@@ -626,16 +646,39 @@ set_file_txt <- function(file,
 
            # changing param value in ref
            if (is.null(plant_id)) {
-             if (is.null(layer)) {
-               ref[[param]] <- value
+             if (is.null(value_id)) {
+               if (length(value) > 1){
+                 check_param_dim(param = param,
+                                 file_value = ref[[param]],
+                                 value = value)
+               }
+               # all values take the same now
+               ref[[param]][] <- value
              } else {
-               ref[[param]][layer] <- value
+               # check layers idx
+               # and values number
+               check_param_dim(param = param,
+                               file_value = ref[[param]],
+                               value_id = value_id,
+                               value = value)
+               ref[[param]][[value_id]] <- value
              }
            } else {
-             if (is.null(layer)) {
-               ref$plant[[paste0("plant", plant_id)]][[param]] <- value
+             plt_tag <- paste0("plant", plant_id)
+             if (is.null(value_id)) {
+               if (length(value) > 1) {
+                 check_param_dim(param = param,
+                                 file_value = ref$plant[[plt_tag]][[param]],
+                                 value = value)
+               }
+               # all values take the same now
+               ref$plant[[plt_tag]][[param]][] <- value
              } else {
-               ref$plant[[paste0("plant", plant_id)]][[param]][layer] <- value
+               check_param_dim(param = param,
+                               file_value = ref$plant[[plt_tag]][[param]],
+                               value_id = value_id,
+                               value = value)
+               ref$plant[[plt_tag]][[param]][value_id] <- value
              }
            }
 
@@ -673,7 +716,22 @@ set_file_txt <- function(file,
            lines_values <- ref[line_param]
 
            # replacing values
-           lines_values[[param]] <- value
+           # all values with a single
+           if(is.null(value_id)) {
+             if (length(value) > 1) {
+               check_param_dim(param = param,
+                               file_value = lines_values[[param]],
+                               value = value)
+             }
+             lines_values[[param]][] <- value
+           } else {
+             # several values for specific ids
+             check_param_dim(param = param,
+                             file_value = lines_values[[param]],
+                             value_id = value_id,
+                             value = value)
+             lines_values[[param]][value_id] <- value
+           }
 
            df_lines_values <- as.data.frame(
              lapply(lines_values, as.character), stringsAsFactors = FALSE)
@@ -754,3 +812,62 @@ get_ini_val_idx <- function(stics_version) {
   }
   idx
 }
+
+
+#' Check consistency of 2 vectors lengths
+#'
+#' @param param parameter name
+#' @param file_value vector of param values
+#' @param value_id vector of values id used for replacement
+#' @param value vector of new values for `param` (its length is
+#' either equal to file_value or value_id length)
+#'
+#' @return None
+#' @keywords internal
+#'
+#' @noRd
+#'
+check_param_dim <- function(param,
+                            file_value,
+                            value_id = NULL,
+                            value = NULL) {
+
+  file_val_nb <- length(file_value)
+  if (is.null(value_id)) {
+    max_id <- file_val_nb
+  } else {
+    value_id <- unique(value_id)
+    max_id <- max(value_id)
+  }
+
+  if (max_id > file_val_nb)
+    stop("for ", param, " parameter values replacement\n",
+         "the maximum number of values to be replaced in the file (",
+         file_val_nb,
+         ") ",
+         "exceeds with the maximum of given id (",
+         max_id,
+         ")")
+
+  # no more checks
+  if (is.null(value)) return(invisible())
+
+  # checking replacing value
+  replace_val_nb <- length(value)
+
+  if (file_val_nb == replace_val_nb) return(invisible())
+
+  if (!is.null(value_id)) {
+    replace_val_id_nb <- length(value_id)
+    if (replace_val_id_nb == replace_val_nb)
+      return(invisible())
+
+  }
+
+  stop("for ", param, " parameter values replacement\n",
+       "the number of values to be replaced in the file (", replace_val_nb, ") ",
+       "is not consistent with the given values' ids (", replace_val_id_nb,
+       ")")
+
+}
+
