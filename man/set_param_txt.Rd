@@ -170,7 +170,6 @@ please directly call \code{gen_varmod}.
 # Getting example data path
 path <- get_examples_path(file_type = "txt")
 
-
 # Change the value of durvieF for the current variety:
 set_param_txt(workspace = path, param = "durvieF", value = 245)
 

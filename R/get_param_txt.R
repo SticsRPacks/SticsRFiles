@@ -272,7 +272,8 @@ filter_param <- function(in_list,
       out_list[[name]] <- out_list[[name]][value_id]
     }
   }
-  out_list
+
+  return(out_list)
 }
 
 
@@ -362,7 +363,15 @@ get_ini_txt <- function(file = "ficini.txt",
   ini$plant <- list()
 
 
-  if (get_version_num(stics_version = stics_version) < 10) {
+  stics_version_num <- get_version_num(stics_version = stics_version)
+
+  if (stics_version_num < 10) {
+
+    if (length(params) > 28)
+      stop("The used STICS version ",
+           stics_version_num,
+           " does not correspond to the file content (STICS version >= 10)")
+
     ini$plant$plant1 <- list(
       stade0 = params[[4]],
       lai0 = params[[5]],
@@ -389,6 +398,12 @@ get_ini_txt <- function(file = "ficini.txt",
     ini$NO3init <- params[[26]]
     ini$NH4init <- params[[28]]
   } else {
+
+    if (length(params) < 49)
+      stop("The used STICS version ",
+           stics_version_num,
+           " does not correspond to the file content (STICS version < 10)")
+
     ini$plant$plant1 <- list(
       stade0 = params[[4]],
       lai0 = params[[5]],
@@ -425,9 +440,9 @@ get_ini_txt <- function(file = "ficini.txt",
     ini$NO3initf <- params[[38]]
     ini$NH4initf <- params[[40]]
     ini$Sdepth0 <- params[[43]]
-    ini$Sdry0 <- params[[43]]
-    ini$Swet0 <- params[[43]]
-    ini$ps0 <- params[[43]]
+    ini$Sdry0 <- params[[45]]
+    ini$Swet0 <- params[[47]]
+    ini$ps0 <- params[[49]]
   }
 
   ini <- character_to_numeric_list(ini)

@@ -133,15 +133,15 @@ set_param_txt <- function(workspace,
     stics_version = stics_version
   )
 
+  if (length(param_val) == 0)
+    stop("Unknown parameter: ", param, "\n",
+         "Check case sensitivity or ",
+         "use get_param_info for searching the exact name")
+
   file_param_list <- lapply(
     strsplit(names(param_val), "\\$"), function(x) {
       x[1] }
   )
-
-  if (length(file_param_list) == 0)
-    stop("Unknown parameter `", param, "\n",
-         "check case sensitivity or ",
-         "use get_param_info for searching the exact name")
 
   file_type <- file_param_list %>%
     unlist() %>%
