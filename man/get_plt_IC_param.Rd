@@ -9,6 +9,8 @@ get_plt_IC_param(crop, warning = TRUE)
 \arguments{
 \item{crop}{Stics crop code among code list
 (to get crops codes get_plt_IC_param() )}
+
+\item{warning}{Logical for rising warnings, FALSE otherwise}
 }
 \value{
 A named list of V11 new plant parameters values

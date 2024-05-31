@@ -10,8 +10,7 @@ upgrade_workspace_xml_10_11(
   out_dir,
   from_version = "V10.0",
   target_version = "V11.0",
-  overwrite = FALSE,
-  ...
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -27,8 +26,6 @@ upgrade_workspace_xml_10_11(
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
-
-\item{...}{}
 }
 \value{
 None

@@ -198,6 +198,7 @@ upgrade_plt_xml_10_11 <- function(file,
 #'
 #' @param crop Stics crop code among code list
 #' (to get crops codes get_plt_IC_param() )
+#' @param warning Logical for rising warnings, FALSE otherwise
 #'
 #' @return A named list of V11 new plant parameters values
 #'
@@ -599,7 +600,6 @@ upgrade_usms_xml_10_11 <- function(file,
 # @param plant
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
-#' @param ...
 #'
 #' @return None
 #'
@@ -612,9 +612,8 @@ upgrade_workspace_xml_10_11 <- function(workspace,
                                         out_dir,
                                         from_version = "V10.0",
                                         target_version = "V11.0",
-                                        #plant = FALSE,
-                                        overwrite = FALSE,
-                                        ...) {
+                                        overwrite = FALSE){
+
 
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
