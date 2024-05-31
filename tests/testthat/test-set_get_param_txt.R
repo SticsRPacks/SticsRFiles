@@ -56,6 +56,123 @@ test_that("variety argument can be a vector of characters", {
   expect_equal(tmp1, tmp2)
 })
 
+
+# Using a specific plant id
+tmp <- get_param_txt(
+  workspace = path,
+  param = "stlevamf",
+  stics_version = stics_version
+)$plant$plant1$stlevamf
+
+# existing id
+tmp2 <- get_param_txt(
+  workspace = path,
+  param = "stlevamf",
+  plant_id = 1,
+  stics_version = stics_version
+)$plant$plant1$stlevamf
+
+test_that("get for an existing plant id or not", {
+  expect_equal(tmp, tmp2)
+  expect_error(
+    get_param_txt(
+      workspace = path,
+      param = "stlevamf",
+      plant_id = 2,
+      stics_version = stics_version
+    )$plant$plant1$stlevamf
+  )
+})
+
+# Using specific value_id, for existing id or not
+# soil layer: soil, ini parameters
+set_param_txt(workspace = path,
+              param = "cailloux",
+              value = 2)
+
+tmp <- get_param_txt(
+  workspace = path,
+  param = "cailloux",
+  stics_version = stics_version
+)$soil$cailloux
+
+set_param_txt(workspace = path,
+              param = "cailloux",
+              value = c(1, 3, 5),
+              value_id = c(1, 3, 5))
+
+tmp2 <- get_param_txt(
+  workspace = path,
+  param = "cailloux",
+  stics_version = stics_version
+)$soil$cailloux[c(1,3,5)]
+
+tmp3 <- get_param_txt(
+  workspace = path,
+  param = "cailloux",
+  stics_version = stics_version,
+  value_id = c(1,3,5)
+)$soil$cailloux
+
+test_that("get for layer id", {
+  expect_equal(tmp, rep(2,5))
+  expect_equal(tmp2, tmp3)
+  expect_error(
+    get_param_txt(
+      workspace = path,
+      param = "cailloux",
+      stics_version = stics_version,
+      value_id = c(1,3,5),
+      exact = FALSE
+    )$plant$plant1$stlevamf
+  )
+})
+
+# technical operations (irrigation)
+set_param_txt(workspace = path,
+              param = "amount",
+              value = 40)
+
+tmp <- get_param_txt(
+  workspace = path,
+  param = "amount",
+  stics_version = stics_version
+)$tec$plant1$amount
+
+set_param_txt(workspace = path,
+              param = "amount",
+              value = c(50, 60, 70),
+              value_id = c(1, 9, 16))
+
+tmp2 <- get_param_txt(
+  workspace = path,
+  param = "amount",
+  stics_version = stics_version
+)$tec$plant1$amount[c(1, 9, 16)]
+
+
+tmp3 <- get_param_txt(
+  workspace = path,
+  param = "amount",
+  stics_version = stics_version,
+  value_id = c(1, 9, 16)
+)$tec$plant1$amount
+
+
+test_that("get for layer id", {
+  expect_equal(tmp, rep(40,16))
+  expect_equal(tmp2, tmp3)
+  expect_error(
+    get_param_txt(
+      workspace = path,
+      param = "amount",
+      stics_version = stics_version,
+      value_id = c(1, 9, 20)
+    )$ptec$plant1$amount
+  )
+})
+
+
 # Get and modify the non-varietal parameter "forme"
 # (another parameter has a similar name : rapforme ...)
 
