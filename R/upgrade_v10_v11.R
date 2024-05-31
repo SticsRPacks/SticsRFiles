@@ -1,8 +1,21 @@
-# fix tec et appel depuis
+
+#' Upgrade technical file(s) from version 10 to 11
+#'
+#' @param file xml technical file path or a vector of
+#' @param out_dir Output directory path
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
 upgrade_tec_xml_10_11 <- function(file,
                                   out_dir,
                                   overwrite = FALSE) {
+
 
   # Treating a files list
   if (length(file) > 1) {
@@ -24,26 +37,26 @@ upgrade_tec_xml_10_11 <- function(file,
   check_and_upgrade_xml_version(xml_doc, from_version = "V10.1.1", target_version = "V11.0")
 
   format <- get_attrs_values(xml_doc, path = "//param[@nom='stage_start_irrigauto']",
-                                           attr_list = "format")
+                             attr_list = "format")
 
   if (format != "character") {
 
     set_attrs_values(xml_doc,
-                                   path = "//param[@nom='stage_start_irrigauto']",
-                                   attr_name = "format",
-                                   values_list = "character" )
+                     path = "//param[@nom='stage_start_irrigauto']",
+                     attr_name = "format",
+                     values_list = "character" )
     remove_attrs(xml_doc, path = "//param[@nom='stage_start_irrigauto']", attr_names = c("min", "max"))
   }
 
   format <- get_attrs_values(xml_doc, path = "//param[@nom='stage_end_irrigauto']",
-                                           attr_list = "format")
+                             attr_list = "format")
 
   if (format != "character") {
 
     set_attrs_values(xml_doc,
-                                   path = "//param[@nom='stage_end_irrigauto']",
-                                   attr_name = "format",
-                                   values_list = "character" )
+                     path = "//param[@nom='stage_end_irrigauto']",
+                     attr_name = "format",
+                     values_list = "character" )
     remove_attrs(xml_doc, path = "//param[@nom='stage_end_irrigauto']", attr_names = c("min", "max"))
 
 
@@ -63,11 +76,29 @@ upgrade_tec_xml_10_11 <- function(file,
 
 }
 
-
+#' Upgrade plant file from version 10 to 11
+#' @param file xml plant file path or a vector of
+#' @param out_dir Output directory path
+#' @param stage_const_height Plant height computation parameter (optional)
+#' @param elongation Plant height computation parameter (optional)
+#' @param nw_height Plant height computation parameter (optional)
+#' @param code_shape Plant height computation parameter (optional)
+#' @param haut_dev_x0 Plant height computation parameter (optional)
+#' @param haut_dev_k Plant height computation parameter (optional)
+#' @param nrow Plant radiation interception parameter (optional)
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#' @param warning Logical for rising warnings, FALSE otherwise
+#'
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
 upgrade_plt_xml_10_11 <- function(file,
                                   out_dir,
-                                  crop = NULL,
                                   stage_const_height = NULL,
                                   elongation = NULL,
                                   nw_height = NULL,
@@ -75,7 +106,8 @@ upgrade_plt_xml_10_11 <- function(file,
                                   haut_dev_x0= NULL,
                                   haut_dev_k = NULL,
                                   nrow = NULL,
-                                  overwrite = FALSE) {
+                                  overwrite = FALSE,
+                                  warning = TRUE) {
 
 
 
@@ -85,7 +117,6 @@ upgrade_plt_xml_10_11 <- function(file,
       upgrade_plt_xml_10_11(
         file = x,
         out_dir = out_dir,
-        crop,
         stage_const_height = stage_const_height,
         elongation = elongation,
         nw_height = nw_height,
@@ -103,7 +134,9 @@ upgrade_plt_xml_10_11 <- function(file,
 
 
   # set_version
-  check_and_upgrade_xml_version(xml_doc, from_version = "V10.1.1", target_version = "V11.0")
+  check_and_upgrade_xml_version(xml_doc,
+                                from_version = "V10.1.1",
+                                target_version = "V11.0")
 
 
 
@@ -136,8 +169,8 @@ upgrade_plt_xml_10_11 <- function(file,
   # Set values to added parameters if given as func inputs
   # using
   plant <- get_param_value(xml_doc = xml_doc,
-                                         param_name = "codeplante")$codeplante
-  param <- get_plt_IC_param(crop = plant)
+                           param_name = "codeplante")$codeplante
+  param <- get_plt_IC_param(crop = plant, warning = warning)
 
   if(!is.null(stage_const_height)) param$stage_const_height <- stage_const_height
   if(!is.null(elongation)) param$elongation <- elongation
@@ -161,15 +194,34 @@ upgrade_plt_xml_10_11 <- function(file,
 }
 
 
-get_plt_IC_param <- function(crop) {
+#' Get crop new parameters for STICS V11
+#'
+#' @param crop Stics crop code among code list
+#' (to get crops codes get_plt_IC_param() )
+#'
+#' @return A named list of V11 new plant parameters values
+#'
+#' @export
+#'
+#' @examples
+#' # get plant codes
+#' get_plt_IC_param()
+#' # get default parameters values
+#' get_plt_IC_param(NULL)
+#' # get parameters values for poi
+#' get_plt_IC_param("poi")
+#'
+get_plt_IC_param <- function(crop, warning = TRUE) {
 
   crops_param <- plt_IC_param_list()
   crop_names <- names(crops_param)
 
   if (missing(crop)) {
-    warning("A crop name is mandatory see above list:\n",
-            sprintf(fmt = "%s, ",crop_names))
-    return()
+    if (warning) {
+      warning("A crop name is mandatory see above list:\n",
+              sprintf(fmt = "%s, ",crop_names))
+    }
+    return(invisible())
   }
 
   if (is.null(crop)) crop <- "default"
@@ -177,18 +229,35 @@ get_plt_IC_param <- function(crop) {
   name <- tolower(crop)
 
   if (!name %in% crop_names) {
-    warning("Unknown crop code name: ",
-            crop, "\n See above list: \n",
-            sprintf("%s, ", crop_names),
-            "\n",
-            "Using default parameters values!")
     name <- "default"
+    if (warning) {
+      val <- unlist(crops_param[[name]])
+      val_name <- names(val)
+      warning("Unknown crop code name: ",
+              crop,
+              #crop, "\n See above list: \n",
+              #sprintf("%s, ", crop_names),
+              #"\n",
+              " Using default parameters values!\n",
+              paste(sprintf("%s: %s",val_name, val), collapse = ", "))
+    }
+
   }
 
   return(crops_param[[name]])
 
 }
 
+
+#' New parameters values for V11 for
+#' several crops
+#'
+#' @return a named list with crop names and parameters values for each crop
+#'
+#' @keywords internal
+#' @noRd
+#'
+# @examples
 plt_IC_param_list <- function() {
 
   # pea, wheat, fababean, barley
@@ -238,8 +307,20 @@ plt_IC_param_list <- function() {
 
 }
 
-
+#' Upgrade xml station file from STICS version 10 to 11
+#'
+#' @param file xml plant file path or a vector of
+#' @param out_dir Output directory path
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
+#'
 upgrade_sta_xml_10_11 <- function(file,
                                   out_dir,
                                   overwrite = FALSE) {
@@ -276,21 +357,21 @@ upgrade_sta_xml_10_11 <- function(file,
 
   # get current values
   par_values <- get_param_value(xml_doc,
-                                              param_name = c("codeetp", "alphapt"))
+                                param_name = c("codeetp", "alphapt"))
 
   # replace codetp node with the previous one
   codetp_node_to_rm <- get_nodes(xml_doc,
-                                               path = '//option[@nomParam="codeetp"]')
+                                 path = '//option[@nomParam="codeetp"]')
   XML::removeNodes(codetp_node_to_rm[[1]])
 
   par_node <- get_nodes(xml_doc,
-                                      path = '//formalisme[@nom="climate"]')
+                        path = '//formalisme[@nom="climate"]')
 
   XML::addChildren(par_node[[1]], XML::xmlClone(codeetp), at = 0)
 
   # set values to current values
   set_param_value(xml_doc, param_name = c("codeetp", "alphapt"),
-                                param_value = par_values)
+                  param_value = par_values)
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
@@ -302,6 +383,19 @@ upgrade_sta_xml_10_11 <- function(file,
 }
 
 
+#' Upgrade xml initialisation file from STICS version 10 to 11
+#'
+#' @param file xml plant file path or a vector of
+#' @param out_dir Output directory path
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
+#' @export
+#'
+# @examples
+#'
 upgrade_ini_xml_10_11 <- function(file,
                                   out_dir,
                                   overwrite = FALSE) {
@@ -322,7 +416,9 @@ upgrade_ini_xml_10_11 <- function(file,
 
 
   # set_version
-  check_and_upgrade_xml_version(xml_doc, from_version = "V10.1.1", target_version = "V11.0")
+  check_and_upgrade_xml_version(xml_doc,
+                                from_version = "V10.1.1",
+                                target_version = "V11.0")
 
 
   # voir position de magrain0
@@ -337,7 +433,19 @@ upgrade_ini_xml_10_11 <- function(file,
   invisible(gc(verbose = FALSE))
 }
 
+#' Upgrade xml param_gen file from STICS version 10 to 11
+#'
+#' @param file xml param_gen file path or a vector of
+#' @param out_dir Output directory path
+#' @param hauteur_threshold new parameter for V11
+#' @param par_to_net new parameter for V11
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
 #' @export
+#'
 upgrade_param_gen_xml_10_11 <- function(file,
                                         out_dir,
                                         hauteur_threshold = NULL,
@@ -379,11 +487,24 @@ upgrade_param_gen_xml_10_11 <- function(file,
 
 }
 
+#' Upgrade xml param_newform file from STICS version 10 to 11
+#'
+#' @param file xml param_newform file path or a vector of
+#' @param out_dir Output directory path
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
 upgrade_param_newform_xml_10_11 <- function(file,
                                             out_dir,
                                             overwrite = FALSE) {
 
+
   xml_doc <- xmldocument(file)
 
 
@@ -398,11 +519,26 @@ upgrade_param_newform_xml_10_11 <- function(file,
   invisible(gc(verbose = FALSE))
 }
 
+
+
+#' Upgrade xml sols file from STICS version 10 to 11
+#'
+#' @param file xml sols file path
+#' @param out_dir Output directory path
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
 upgrade_sols_xml_10_11 <- function(file,
                                    out_dir,
                                    overwrite = FALSE) {
 
+
   xml_doc <- xmldocument(file)
 
 
@@ -418,11 +554,24 @@ upgrade_sols_xml_10_11 <- function(file,
 
 }
 
+#' Upgrade xml usms file from STICS version 10 to 11
+#'
+#' @param file xml usms file path
+#' @param out_dir Output directory path
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
 upgrade_usms_xml_10_11 <- function(file,
                                    out_dir,
                                    overwrite = FALSE) {
 
+
   xml_doc <- xmldocument(file)
 
 
@@ -439,13 +588,31 @@ upgrade_usms_xml_10_11 <- function(file,
 }
 
 
+
+#' Upgrading a Javastics xml workspace
+#'
+#' @param workspace JavaStics xml workspace path
+#' @param javastics JavaStics folder path (Optional)
+#' @param out_dir   Output directry path
+#' @param from_version Starting STICS version (character or numeric)
+#' @param target_version Target STICS version (character or numeric)
+# @param plant
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#' @param ...
+#'
+#' @return None
+#'
 #' @export
+#'
+# @examples
+#'
 upgrade_workspace_xml_10_11 <- function(workspace,
                                         javastics = NULL,
                                         out_dir,
                                         from_version = "V10.0",
                                         target_version = "V11.0",
-                                        plant = FALSE,
+                                        #plant = FALSE,
                                         overwrite = FALSE,
                                         ...) {
 
@@ -454,8 +621,8 @@ upgrade_workspace_xml_10_11 <- function(workspace,
 
   # Getting param_gen.xml path
   par_gen <- get_param_gen_file(type = "param_gen.xml",
-                                              workspace,
-                                              javastics)
+                                workspace,
+                                javastics)
 
   upgrade_param_gen_xml_10_11(file = par_gen,
                               out_dir = out_dir,
@@ -536,12 +703,24 @@ upgrade_workspace_xml_10_11 <- function(workspace,
 }
 
 
-#' @export
+#' Check if the versions for upgrading xml files are compatible
+#'
+#' @param xml_doc An SticsRFiles xml_doc object
+#' @param from_version STICS starting version
+#' @param target_version STICS target version
+#'
+#' @description
+#' Defining if the starting version to use for files upgrading process
+#' is compatible with the target version.
+#' Versions may be given either as character strings (i.e. "V9.2")
+#' or numerical value (i.e. 9.2)
+#'
+#' @keywords internal
+#' @noRd
+#'
 check_and_upgrade_xml_version <- function(xml_doc,
                                           from_version,
                                           target_version) {
-
-
 
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
@@ -557,18 +736,11 @@ check_and_upgrade_xml_version <- function(xml_doc,
   # raising an error if not!
   check_version_compat(target_version)
 
-  # if (!is.xml_document(file_or_doc)) {
-  #   file_or_doc <- xmldocument(file_or_doc)
-  # }
-
   # checking actual version consistency between from_version
   # and file version
   from_version <- get_major_version(from_version)
   file_version <- get_major_version(get_xml_file_version(xml_doc))
 
-  #print(xml_doc)
-  #print(from_version)
-  #print(file_version)
   if (!file_version %in% from_version)
     stop("file has a wrong starting version !",
          "must be a",
@@ -576,12 +748,21 @@ check_and_upgrade_xml_version <- function(xml_doc,
 
   # Setting new file STICS version
   set_xml_file_version(xml_doc,
-                                     new_version = target_version
+                       new_version = target_version
   )
 }
 
-#' @export
+#' Get the major version number of a STICS version
+#'
+#' @param version Character string representing the STICS version (i.e. "V9.2")
+#' @param to_num Logical, TRUE for converting character version to numeric one,
+#' FALSE otherwise (default)
+#'
+#' @keywords internal
+#' @noRd
+#'
 get_major_version <- function(version, to_num = FALSE) {
+
   str_version <- strsplit(x = version, split = "\\.")[[1]][1]
 
   if(!to_num)

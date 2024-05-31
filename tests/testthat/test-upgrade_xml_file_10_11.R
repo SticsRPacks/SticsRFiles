@@ -23,7 +23,8 @@ upgrade_ini_xml_10_11(
 
 upgrade_plt_xml_10_11(
   file = file.path(path, "file_plt.xml"),
-  out_dir = out_path
+  out_dir = out_path,
+  warning = FALSE
 )
 
 upgrade_sta_xml_10_11(
