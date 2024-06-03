@@ -111,7 +111,8 @@ tmp3 <- get_param_txt(
   workspace = path,
   param = "cailloux",
   stics_version = stics_version,
-  value_id = c(1,3,5)
+  value_id = c(1,3,5),
+  exact = TRUE
 )$soil$cailloux
 
 test_that("get for layer id", {
