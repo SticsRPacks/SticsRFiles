@@ -18,7 +18,7 @@ get_param_txt(
   plant_id = NULL,
   variety = NULL,
   value_id = NULL,
-  exact = TRUE,
+  exact = FALSE,
   stics_version = "latest",
   dirpath = lifecycle::deprecated(),
   ...
