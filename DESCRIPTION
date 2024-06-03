@@ -114,6 +114,7 @@ Collate:
     'gen_usms_xml2txt.R'
     'gen_varmod.R'
     'get_climate_txt.R'
+    'get_cultivars_list.R'
     'get_file.R'
     'get_file_int.R'
     'get_formalisms_xml.R'
