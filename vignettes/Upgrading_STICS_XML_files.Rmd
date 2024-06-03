@@ -39,7 +39,8 @@ One can either transform a complete workspace directory at once or each kind of 
 
 ```{r, include = FALSE, eval=FALSE}
 example_data <- SticsRFiles::download_data(out_dir = tempdir(),
-                                          example_dirs = "study_case_1", "V9.2")
+                                          example_dirs = "study_case_1",
+                                          stics_version ="V9.2")
 workspace <- file.path(example_data, "XmlFiles")
 out_dir <- file.path(tempdir(), "XmlFiles_V10.0")
 if (!dir.exists(out_dir)) dir.create(out_dir)

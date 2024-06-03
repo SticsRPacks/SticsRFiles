@@ -21,19 +21,9 @@
 0 errors ✔ | 0 warnings ✔ | 3 notes ✖
 
 
-> revdepcheck::revdep_check(num_workers = 4)
-── INSTALL ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 2 versions ──
-Installing CRAN version of SticsRFiles
-installation des dépendances ‘pillar’, ‘tidyselect’, ‘vctrs’, ‘timechange’, ‘stringi’, ‘fansi’, ‘pkgconfig’, ‘purrr’, ‘cpp11’, ‘Rcpp’, ‘cli’, ‘crayon’, ‘curl’, ‘data.table’, ‘dplyr’, ‘lifecycle’, ‘lubridate’, ‘rlang’, ‘rstudioapi’, ‘stringr’, ‘tibble’, ‘tidyr’, ‘XML’, ‘xml2’, ‘xslt’
+## revdepcheck results
 
-Installing DEV version of SticsRFiles
-Installing 31 packages: rlang, cli, vctrs, stringi, magrittr, lifecycle, glue, withr, pkgconfig, utf8, fansi, tidyselect, tibble, R6, pillar, generics, cpp11, Rcpp, xml2, stringr, purrr, dplyr, timechange, xslt, XML, tidyr, rstudioapi, lubridate, data.table, curl, crayon
-── CHECK ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 0 packages ──
-OK: 0
-BROKEN: 0
-Total time: <1 min
-── REPORT ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Writing summary to 'revdep/README.md'
-Writing problems to 'revdep/problems.md'
-Writing failures to 'revdep/failures.md'
-Writing CRAN report to 'revdep/cran.md'
+We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages

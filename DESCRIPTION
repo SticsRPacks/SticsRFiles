@@ -1,7 +1,7 @@
 Package: SticsRFiles
 Title: Read and Modify 'STICS' Input/Output Files
-Version: 1.2.0
-Date: 2024-02-23
+Version: 1.3.0
+Date: 2024-04-10
 Authors@R: c(
     person("Patrice", "Lecharpentier", , "patrice.lecharpentier@inrae.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4044-4322")),
@@ -11,6 +11,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-8676-5447")),
     person("Michel", "Giner", , "michel.giner@cirad.fr", role = "aut",
            comment = c(ORCID = "0000-0002-9310-2377")),
+    person("Timothee", "Flutre", ,"timothee.flutre@inrae.fr", role = "ctb"),
     person("Thomas", "Robine", role = "ctb"),
     person("Amine", "Barkaoui", role = "ctb"),
     person("Patrick", "Chabrier", role = "ctb"),
@@ -33,7 +34,7 @@ URL: https://github.com/SticsRPacks/SticsRFiles,
     https://doi.org/10.5281/zenodo.4443206
 BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
 Depends: 
-    R (>= 3.6.0)
+    R (>= 4.0.0)
 Imports: 
     cli,
     crayon,
@@ -82,7 +83,7 @@ Collate:
     'check_output_files.R'
     'check_param_names.R'
     'col_names_to_var.R'
-    'compute_doy_cumul.R'
+    'compute_day_number.R'
     'convert_xml2txt.R'
     'convert_xml2txt_int.R'
     'download_data.R'
@@ -187,6 +188,7 @@ Collate:
     'upgrade_sta_xml.R'
     'upgrade_tec_xml.R'
     'upgrade_usms_xml.R'
+    'upgrade_v10_v11.R'
     'upgrade_workspace_xml.R'
     'var_to_col_names.R'
     'xml_document.R'

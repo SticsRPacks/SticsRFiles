@@ -1,7 +1,6 @@
-library(SticsRFiles)
 
 stics_from_version <- "V9.2"
-stics_to_version <- get_stics_versions_compat()$latest_version
+stics_to_version <- "V10.0"
 
 context("Upgrading xml files to latest version")
 
