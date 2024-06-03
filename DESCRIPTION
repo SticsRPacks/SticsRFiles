@@ -83,6 +83,7 @@ Collate:
     'check_output_files.R'
     'check_param_names.R'
     'col_names_to_var.R'
+    'compute_date_from_day.R'
     'compute_day_number.R'
     'convert_xml2txt.R'
     'convert_xml2txt_int.R'
