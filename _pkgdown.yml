@@ -67,6 +67,7 @@ reference:
       - get_usms_files
       - get_usms_list
       - get_soils_list
+      - get_cultivars_list
 
   - title: "Generate Stics Input files (Text format)"
     desc: Input parameters files, outputs definition files or observations files
