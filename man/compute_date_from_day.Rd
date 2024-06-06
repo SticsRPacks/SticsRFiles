@@ -21,11 +21,9 @@ be the year of a STICS simulation start, but not necessarily.
 }
 \examples{
 
-compute_date_from_day(day=290, start_year=1994)
+compute_date_from_day(day = 290, start_year = 1994)
 
-compute_date_from_day(day=700, start_year=1994)
-
-compute_day_from_date(date=as.Date("1995-12-01"), start_date=as.Date("1995-01-01"))
+compute_date_from_day(day = 700, start_year = 1994)
 
 }
 \author{
