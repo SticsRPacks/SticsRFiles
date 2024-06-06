@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_cultivars_list.R
 \name{get_cultivars_list}
 \alias{get_cultivars_list}
-\title{Get the cultivar names for a plt.xml file}
+\title{Get the cultivar names for an xml plant file (*_plt.xml)}
 \usage{
 get_cultivars_list(file)
 }

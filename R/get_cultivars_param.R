@@ -1,6 +1,8 @@
-#' @title Get the values of cultivar-specific parameters from a plant.xml file
+#' @title Get the values of cultivar-specific parameters from an xml
+#' plant file (*_plt.xml)
 #'
-#' @description Extracts the values of cultivar-specific parameters from a plant file
+#' @description Extracts the values of cultivar-specific parameters from a
+#' plant file
 #'
 #' @param file The path of a plant file.
 #'
@@ -14,11 +16,11 @@
 #'
 #' @export
 #'
-get_cultivars_param <- function(file){
+get_cultivars_param <- function(file) {
 
   cv_list <- get_cultivars_list(file)
 
-  out <- get_param_xml(file, select="variete", select_value=cv_list)
+  out <- get_param_xml(file, select = "variete", select_value = cv_list)
   out <- as.data.frame(do.call(cbind, out[[1]]))
   rownames(out) <- cv_list
 

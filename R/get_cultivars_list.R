@@ -1,4 +1,4 @@
-#' @title Get the cultivar names for a plt.xml file
+#' @title Get the cultivar names for an xml plant file (*_plt.xml)
 #'
 #' @description Extracts the cultivar names from a plant file
 #'
@@ -16,8 +16,6 @@
 #'
 get_cultivars_list <- function(file) {
 
-  ## get_param_xml(file, param="variete") # returns a list of lists
-
   xml_doc <- xmldocument(file)
 
   stopifnot(is_stics_plt(xml_doc))
@@ -27,7 +25,8 @@ get_cultivars_list <- function(file) {
   cv_list <- unique(
       unlist(
           lapply(
-              XML::getNodeSet(doc = xml_doc@content, path = paste0("//", xml_name)),
+              XML::getNodeSet(doc = xml_doc@content,
+                              path = paste0("//", xml_name)),
               function(x) {
                 XML::xmlGetAttr(x, "nom")
               }

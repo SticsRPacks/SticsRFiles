@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_cultivars_param.R
 \name{get_cultivars_param}
 \alias{get_cultivars_param}
-\title{Get the values of cultivar-specific parameters from a plant.xml file}
+\title{Get the values of cultivar-specific parameters from an xml
+plant file (*_plt.xml)}
 \usage{
 get_cultivars_param(file)
 }
@@ -13,7 +14,8 @@ get_cultivars_param(file)
 A data.frame with one row per cultivar and one column per parameter
 }
 \description{
-Extracts the values of cultivar-specific parameters from a plant file
+Extracts the values of cultivar-specific parameters from a
+plant file
 }
 \examples{
 path <- get_examples_path(file_type = "xml")
