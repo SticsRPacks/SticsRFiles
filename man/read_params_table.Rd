@@ -8,7 +8,7 @@ read_params_table(
   file,
   sheet_name = NULL,
   num_na = "NA",
-  char_na = "",
+  char_na = "NA",
   file_path = lifecycle::deprecated()
 )
 }

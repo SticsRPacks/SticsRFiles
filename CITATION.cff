@@ -1,14 +1,14 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify ''STICS'' Input/Output Files'
-version: 1.1.3
+version: 1.3.0
 abstract: Manipulating input and output files of the 'STICS' crop model. Files are
   either 'JavaSTICS' XML files or text files used by the model 'fortran' executable.
   Most basic functionalities are reading or writing parameter names and values in
@@ -35,7 +35,7 @@ authors:
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2023-07-10'
+date-released: '2024-04-10'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -48,12 +48,11 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 3.6.0'
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 4.0.0'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -64,7 +63,7 @@ references:
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: crayon
   abstract: 'crayon: Colored Terminal Output'
@@ -75,7 +74,7 @@ references:
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: curl
   abstract: 'curl: A Modern and Flexible Web Client for R'
@@ -87,7 +86,7 @@ references:
     given-names: Jeroen
     email: jeroen@berkeley.edu
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2023'
+  year: '2024'
 - type: software
   title: data.table
   abstract: 'data.table: Extension of `data.frame`'
@@ -95,13 +94,23 @@ references:
   url: https://r-datatable.com
   repository: https://CRAN.R-project.org/package=data.table
   authors:
+  - family-names: Barrett
+    given-names: Tyson
+    email: t.barrett88@gmail.com
   - family-names: Dowle
     given-names: Matt
     email: mattjdowle@gmail.com
   - family-names: Srinivasan
     given-names: Arun
     email: asrini@pm.me
-  year: '2023'
+  - family-names: Gorecki
+    given-names: Jan
+  - family-names: Chirico
+    given-names: Michael
+  - family-names: Hocking
+    given-names: Toby
+    orcid: https://orcid.org/0000-0002-3146-0865
+  year: '2024'
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
@@ -125,7 +134,7 @@ references:
     given-names: Davis
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
-  year: '2023'
+  year: '2024'
   version: '>= 1.0.0'
 - type: software
   title: lifecycle
@@ -136,12 +145,12 @@ references:
   authors:
   - family-names: Henry
     given-names: Lionel
-    email: lionel@rstudio.com
+    email: lionel@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
-  year: '2023'
+  year: '2024'
 - type: software
   title: lubridate
   abstract: 'lubridate: Make Dealing with Dates a Little Easier'
@@ -156,18 +165,17 @@ references:
     given-names: Garrett
   - family-names: Wickham
     given-names: Hadley
-  year: '2023'
+  year: '2024'
 - type: software
   title: methods
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
@@ -181,7 +189,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2023'
+  year: '2024'
 - type: software
   title: rstudioapi
   abstract: 'rstudioapi: Safely Access the RStudio API'
@@ -201,7 +209,7 @@ references:
   - family-names: Ritchie
     given-names: Gary
     email: gary@posit.co
-  year: '2023'
+  year: '2024'
 - type: software
   title: stringr
   abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
@@ -211,8 +219,8 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2023'
+    email: hadley@posit.co
+  year: '2024'
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
@@ -227,7 +235,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: tidyr
   abstract: 'tidyr: Tidy Messy Data'
@@ -243,29 +251,41 @@ references:
     email: davis@posit.co
   - family-names: Girlich
     given-names: Maximilian
-  year: '2023'
+  year: '2024'
+- type: software
+  title: tidyselect
+  abstract: 'tidyselect: Select from a Set of Strings'
+  notes: Imports
+  url: https://tidyselect.r-lib.org
+  repository: https://CRAN.R-project.org/package=tidyselect
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
 - type: software
   title: tools
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: XML
   abstract: 'XML: Tools for Parsing and Generating XML Within R and S-Plus'
@@ -277,7 +297,7 @@ references:
     given-names: Duncan
     email: duncan@r-project.org
     orcid: https://orcid.org/0000-0003-0159-1546
-  year: '2023'
+  year: '2024'
 - type: software
   title: xml2
   abstract: 'xml2: Parse XML'
@@ -287,12 +307,12 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   - family-names: Hester
     given-names: Jim
   - family-names: Ooms
     given-names: Jeroen
-  year: '2023'
+  year: '2024'
 - type: software
   title: xslt
   abstract: 'xslt: Extensible Style-Sheet Language Transformations'
@@ -304,7 +324,7 @@ references:
     given-names: Jeroen
     email: jeroen@berkeley.edu
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2023'
+  year: '2024'
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
@@ -315,7 +335,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: formatR
   abstract: 'formatR: Format R Code Automatically'
@@ -327,7 +347,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2023'
+  year: '2024'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -339,7 +359,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2023'
+  year: '2024'
 - type: software
   title: learnr
   abstract: 'learnr: Interactive Tutorials for R'
@@ -362,7 +382,7 @@ references:
     given-names: Alexander
     email: alex.rossellhayes@posit.co
     orcid: https://orcid.org/0000-0001-9412-0457
-  year: '2023'
+  year: '2024'
 - type: software
   title: readxl
   abstract: 'readxl: Read Excel Files'
@@ -378,7 +398,7 @@ references:
     given-names: Jennifer
     email: jenny@posit.co
     orcid: https://orcid.org/0000-0002-6983-2759
-  year: '2023'
+  year: '2024'
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -421,12 +441,12 @@ references:
     given-names: Richard
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
-  year: '2023'
+  year: '2024'
 - type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
   notes: Suggests
-  url: https://docs.ropensci.org/spelling/
+  url: https://ropensci.r-universe.dev/spelling
   repository: https://CRAN.R-project.org/package=spelling
   authors:
   - family-names: Ooms
@@ -436,7 +456,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.hester@rstudio.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -447,4 +467,5 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2023'
+  year: '2024'
+

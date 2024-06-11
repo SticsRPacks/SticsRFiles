@@ -16,7 +16,7 @@
 #' @param out_dir The path of the directory where to create usms directories
 #' (Optional), if not provided the JavaSTICS workspace will be used as root
 #' @param usm List of usms to generate (Optional). If not provided, all
-#' usms contained in workspace_path/usms.xml file will be generated.
+#' usms contained in workspace/usms.xml file will be generated.
 #' @param stics_version the STICS files version to use (optional,
 #' default to latest).
 #' @param verbose Logical value for displaying information while running
@@ -221,10 +221,21 @@ gen_usms_xml2txt <- function(javastics = NULL,
     lapply(all_files_list, function(x) return(all(x$all_exist))))
 
   if (!all(all_files_exist)) {
-    stop(paste(
-      "Missing files have been detected for usm(s):",
-      paste(usms_list[!all_files_exist], collapse = ", ")
-    ))
+    unknown_files <-
+      unlist(
+        lapply(all_files_list[!all_files_exist],
+               function(x) {x$paths[!x$all_exist]}),
+        use.names = FALSE
+      )
+    miss_files_mess <- paste(sprintf(fmt = "%s: %s \n", usms_list[!all_files_exist],
+                               unknown_files), collapse = "")
+
+    mess_length <- sum(nchar(miss_files_mess)) + 100L
+    if (options("warning.length")$warning.length < mess_length)
+      options(warning.length = mess_length)
+
+    stop("Missing files have been detected for usm(s):\n",
+         miss_files_mess)
   }
 
   # removing usms with missing files

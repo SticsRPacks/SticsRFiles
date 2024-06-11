@@ -9,6 +9,7 @@ vignette: >
 
 ```{r eval=FALSE}
 library(SticsRFiles)
+library(dplyr)
 ```
 
 ```{r include=FALSE}

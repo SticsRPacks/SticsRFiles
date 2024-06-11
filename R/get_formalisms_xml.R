@@ -58,7 +58,7 @@ get_formalisms_xml <- function(xml_file,
     lapply(xml_doc, delete)
   }
 
-  if (class(xml_doc) == "xml_document") delete(xml_doc)
+  if (inherits(xml_doc, "xml_document")) delete(xml_doc)
 
   return(form_list)
 }

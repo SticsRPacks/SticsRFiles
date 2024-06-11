@@ -138,7 +138,7 @@ gen_sols_xml <- function(file,
   # finalizing object
   delete(xml_doc)
 
-  if (!base::is.null(xml_doc_tmpl) && class(xml_doc_tmpl) == "xml_document")
+  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document"))
     delete(xml_doc_tmpl)
 
 }

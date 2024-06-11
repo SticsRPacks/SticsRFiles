@@ -1,0 +1,19 @@
+Name;Definition;Unit;Source
+C_allresidues;total amount of C for all residues by layer;kg.ha-1;sc
+Chum;Quantity of C in humus in each layer;kg.ha-1;sc
+efnrac;effect of mineral nitrogen on the roots;0-1;plant
+humirac;soil dryness on the roots;0-1;plant
+hur;soil water content;mm.cm-1;sc
+husup_by_cm;water drainage under each layer of 1 cm;mm;sc
+lracz;efficient root density profile;cm.cm-3sol;plant
+msrac;biomass of roots;t.ha-1;function
+N_allresidues;total amount of N for all residues by layer;kgN.ha-1;sc
+Nhum;Quantity of N in humus in each layer;kgN.ha-1;sc
+nit;profile of soil nitrates;kgN.ha-1;soil
+p_rl;percentage of root length in relation to total length;%;function
+p_rlf;percentage of fine roots;%;function
+p_rlg;percentage of coarse roots;%;function
+rl;length of coarse roots plus length of fine roots;cm.cm-2sol;function
+rlf;length of fine roots;cm.cm-2sol;plant
+rlg;length of coarse roots;cm.cm-2sol;plant
+tsol;profile of soil temperature;degrees.C;sc

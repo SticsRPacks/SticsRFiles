@@ -17,7 +17,7 @@ coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badg
 <!-- badges: end -->
 
 The goal of SticsRFiles is to perform manipulations of the
-[STICS](https://www6.paca.inrae.fr/stics_eng/) model files either on XML
+[STICS](https://eng-stics.paca.hub.inrae.fr/) model files either on XML
 files (used by the JavaSTICS GUI) or on text files used by the model
 fortran executable.
 

@@ -4,7 +4,7 @@
 #'
 #' @param in_csv_file Input csv file path
 #' @param out_csv_file Output csv file path
-#' @param header_vec An optional header vector
+#' @param header A logical TRUE if a header line exists, FALSE otherwise
 #'
 #'
 #' @examples
@@ -20,17 +20,20 @@
 #'
 #' @noRd
 #'
-expand_stics_names <- function(in_csv_file, out_csv_file, header_vec = NULL) {
+expand_stics_names <- function(in_csv_file, out_csv_file, header = FALSE) {
+
+  skip <- as.integer(header)
   in_data <- utils::read.table(in_csv_file,
     sep = ";", stringsAsFactors = FALSE,
-    header = FALSE
+    header = FALSE, skip = skip
   )
-  if (base::is.null(header_vec)) {
+
+  #if (base::is.null(header_vec)) {
     names(in_data) <- c(
       "name", "def", "unit", "param", "dim", "type",
       "min", "max", "optim", "n"
     )
-  }
+  #}
 
   # getting param names to duplicate
   par_to_expand <- in_data[in_data$dim > 1, ]

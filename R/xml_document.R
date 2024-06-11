@@ -36,7 +36,7 @@ setMethod(
 setMethod(
   "xmldocument", signature(file = "character"),
   function(file = character(length = 0)) {
-    methods::new("xml_document", file = file)
+    suppressMessages(methods::new("xml_document", file = file))
   }
 )
 

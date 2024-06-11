@@ -243,23 +243,31 @@ file.copy(from = xml_files, to = xml_loc_dir)
 
 ## Searching parameters names from files
 
-The `get_param_info` function only take names or names substring of parameters or a list of. The search is performed in an XML files list (see files list in [correspondence table](#examples-files) ) stored internally in the SticsRFiles library with respect to the model version (`r stics_version` as default one).
+The `get_param_info` function search is performed in a parameter table stored internally in the SticsRFiles library with respect to the model version (`r stics_version` as default one).
 
-In that case, no need to care of which XML file(s) may contain the searched parameter(s).
-
-Some warnings may be displayed in case of duplicated bounds values. In that case retained values are indicated in warning messages.
+This function uses 2 optional arguments i.e.:
+* `param` a name or a part of a parameter name (or a vector of) for searching in parameters names
+* and/or `keyword` for searching in the parameters description information.
 
 The information columns in the returned tibble are:
 
 * `name`: parameter name
-* `file`: XML file name
+* `file`: file type of the parameter (keyword), see above table for correspondence
+with files
+
+
+```{r echo=FALSE}
+knitr::kable(read.csv(file = "param_files_keywords.csv", sep = ";"), col.names = c("keyword", "xml file", "parameter kind"))
+```
+
 * `min`: minimal bound
 * `max`: maximal bound
-* `formalism`: formalism short description
+* `definition`: parameter description
+
 
 Whatever the arguments list is when calling the function, the returned tibble always contains all of these columns.
 
-Information about `bounds` or `formalism`, may be missing according to parameters kind.
+Information about `bounds` may be missing according to parameters kind.
 
 > For example, for initialization or usm parameters and/or character type parameters (files names, residues type,...), bounds dont make any sense and `NA` is used as missing values.
 
@@ -276,8 +284,8 @@ param_names <- get_param_info()
 head(param_names)
 
 ```
-```{r echo=FALSE}
-param_names <- load_param_names()
+```{r echo = FALSE}
+param_names <- get_param_info()
 
 head(param_names)
 ```
@@ -301,7 +309,7 @@ get_param_info(param = "albedo")
 get_param_info(param = c("albedo", "latitude", "humcapil"))
 
 ```
-```{r echo=FALSE}
+```{r echo = FALSE}
 param_names[grep("albedo", param_names$name), ]
 
 idx <- grepl("albedo", param_names$name) |
@@ -316,21 +324,13 @@ param_names[idx, ]
 
 A search with incomplete names may be done as follows
 
-```{r eval=FALSE}
+```{r}
 
 get_param_info(param = "hum")
 
 
-param_names <- get_param_info(param = c("al", "hum"))
+param_names <- get_param_info(param = c("alb", "hum"))
 
-```
-```{r echo=FALSE}
-param_names[grep("hum", param_names$name), ]
-
-idx <- grepl("al", param_names$name) |
-  grepl("hum", param_names$name)
-
-param_names <- param_names[idx, ]
 ```
 
 The found parameters data.frame content is presented in the above paged table.
@@ -340,112 +340,22 @@ The found parameters data.frame content is presented in the above paged table.
 rmarkdown::paged_table(param_names)
 ```
 
-## Searching parameters attached to formalisms
-
-### Finding parameters using formalisms partial names
-
-One or more words may be given for sreaching them in formalisms description (short)
-
-```{r, warning=FALSE, eval=FALSE}
-
-get_param_info(formalism = "yield")
-
-
-param_formalisms <- get_param_info(formalism = c("yield", "leaves"))
-
-head(param_formalisms)
-
-```
-```{r echo=FALSE}
-param_names <- load_param_names()
-
-param_names[grep("yield", param_names$formalism), ]
-
-idx <- grepl("yield", param_names$formalism) |
-  grepl("leaves", param_names$formalism)
-
-param_formalisms <- param_names[idx, ]
-
-head(param_formalisms)
-
-```
-
-
-
-The found parameters data.frame content is presented in the above paged table.
-
-```{r echo=FALSE}
-# Displaying the returned data as a paged table
-rmarkdown::paged_table(param_formalisms)
-```
-
-### Finding parameters using partial match on formalism and parameter names
-
-Parameters may be found combining search in formalisms and parameter names:
-
-```{r, warning=FALSE, eval=FALSE}
-
-get_param_info(formalism = "yield", param = "grain")
-
-
-param_formalisms <- get_param_info(formalism = "yield",
-                                   param = c("inflo", "lai"))
-
-
-```
-```{r echo=FALSE}
-param_names <- load_param_names()
-
-idx <- grepl("yield", param_names$formalism) |
-  grepl("grain", param_names$name)
-
-param_names[idx, ]
-
-idx <- grepl("yield", param_names$formalism) |
-  grepl("inflo", param_names$name) |
-  grepl("lai", param_names$name)
-
-param_formalisms <- param_names[idx, ]
-
-```
-
-The found parameters data.frame content is presented in the above paged table.
-
-```{r, warning=FALSE, echo = FALSE}
-
-rmarkdown::paged_table(param_formalisms)
-
-```
 
 ## Searching parameters using keywords
 
-The `keyword` argument (one or several possible strings) may be used to search in all textual columns as `name`, `file` or `formalism`.
+The `keyword` argument (one or several possible strings) may be used to search in all textual columns as `name` or `description`.
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning = FALSE, eval = FALSE}
 
-get_param_info(keyword = "plant")
+get_param_info(keyword = "hum")
 
 
-param_names <- get_param_info(keyword = c("plant", "leave"))
+param_names <- get_param_info(keyword = c("alb", "hum"))
 
 
 ```
-```{r echo=FALSE}
-param_names <- load_param_names()
-
-idx <- grepl("plant", param_names$formalism) |
-  grepl("plant", param_names$name) |
-  grepl("plant", param_names$file)
-
-param_names[idx, ]
-
-idx <- idx |
-  grepl("leave", param_names$formalism) |
-  grepl("leave", param_names$name) |
-  grepl("leave", param_names$file)
-
-param_names <- param_names[idx, ]
-
+```{r echo = FALSE}
+param_names <- get_param_info(keyword = c("alb", "hum"))
 
 ```
 

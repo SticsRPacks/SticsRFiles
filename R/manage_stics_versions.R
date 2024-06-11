@@ -192,9 +192,9 @@ add_stics_version <- function(version_name,
 
   if (verbose)
     message(paste0(version_name,
-               " successfully set in SticsRFiles ",
-               location,
-               ".\n"))
+                   " successfully set in SticsRFiles ",
+                   location,
+                   ".\n"))
 }
 
 
@@ -430,7 +430,7 @@ set_versions_info <- function(version_name,
   if (!any(version_idx)) {
     versions_info <- dplyr::bind_rows(versions_info, version_info)
     versions_info[is.na(versions_info)] <- ""
-  } else {
+
     write_file <- write_file & overwrite
     if (!write_file) {
       if (verbose) {
@@ -439,23 +439,19 @@ set_versions_info <- function(version_name,
           ", it is safer updating it by hand of set overwrite to TRUE !"
         )
       }
-
       return(invisible(versions_info))
-    } else {
-      # replacing data for this version
-      versions_info[version_idx, ] <- version_info
     }
+  } else {
+    return(invisible(versions_info))
   }
 
   # Sorting rows against the version number
   # extracted from the versions column
   # Just in case if an older version than existing ones
   # is added
-  ord_idx <- order(as.numeric(gsub(
-    pattern = "V([0-9\\.*])",
-    versions_info$versions,
-    replacement = "\\1"
-  )))
+
+  ord_idx <- order(get_version_num(versions_info$versions))
+
   versions_info <- versions_info[ord_idx, ]
 
   # Writing the csv file in the appropriate folder

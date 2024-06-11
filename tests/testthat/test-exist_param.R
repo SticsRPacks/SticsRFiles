@@ -1,5 +1,3 @@
-library(SticsRFiles)
-
 stics_version <- get_stics_versions_compat()$latest_version
 xml_sols <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 

@@ -4,7 +4,7 @@
 \alias{is_stics_var}
 \title{Search if a STICS variable exist}
 \usage{
-is_stics_var(var, stics_version = "latest", version = lifecycle::deprecated())
+is_stics_var(var, stics_version = "latest")
 }
 \arguments{
 \item{var}{A vector of variable names}
@@ -13,9 +13,6 @@ is_stics_var(var, stics_version = "latest", version = lifecycle::deprecated())
 to search parameters information relative to a specific STICS version.
 By default the latest version returned by \code{get_stics_versions_compat()}
 is used.}
-
-\item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
-longer supported, use \code{stics_version} instead.}
 }
 \value{
 A boolean vector: \code{TRUE} if the variable exist, \code{FALSE} otherwise

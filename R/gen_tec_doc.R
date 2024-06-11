@@ -11,6 +11,7 @@
 #'
 #' @return an invisible xml_document object or a list of
 #'
+#' @importFrom tidyselect where
 #'
 #' @examples
 #' \dontrun{
@@ -81,12 +82,24 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   gen_error <- FALSE
 
+  param_table <- param_table %>%
+    dplyr::select(where(function(x) !is.na(x)) &
+                    where(function(x) {
+                      c <- x != "NA"
+                      if (is.na(c)) c <- TRUE
+                      return(c)
+
+                    }
+                    ))
+
   # TODO : Avoid making conversion at each call !!!!!!
   # getting values of params declared in the table
   table_params <- get_params_from_table(
     params_table = param_table,
     xml_doc = xml_doc, dict = dict
   )
+
+
   table_names <- names(table_params)
 
   # Checking parameters names
@@ -194,7 +207,7 @@ gen_tec_doc <- function(xml_doc = NULL,
             "and not attached to \"intervention\"\n"
           ))
           message(paste0("Multiple values are present in input table,",
-                     " check consistency with formalism definition !\n"))
+                         " check consistency with formalism definition !\n"))
           message("The treatment for this parameter has aborted.\n")
           next
         }

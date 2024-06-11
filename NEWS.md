@@ -1,3 +1,45 @@
+# SticsRFiles 1.3.0 _2024-04-10_
+
+* FUNCTIONS
+   * Message improvement for missing xml files detected before text files
+   generation
+   * New functions for computing days numbers from dates with reference to
+   starting dates
+
+* FIXES
+   * Updating STICS versions information 
+   * get_file using usm names (regex pattern)
+   * upgrade _ini.xml file (magrain0 parameter position)
+   * xml files generation: missing data management when loading xls/csv 
+   files
+   * text files generation: plant and tec files were not generated in
+   intercropping usms for the associated crop
+
+* DOC
+   * added license file
+
+
+# SticsRFiles 1.2.0 _2024-02-21_
+
+* FUNCTIONS
+   * Text files generation from xml files are now done without using JavaStics 
+   command line (the speedup is about 10 times)
+   * Getting parameters information (get_param_info) do not use XML files 
+   exploration anymore, the speed is largely improved
+   * Improvement of XML files manipulations/generation for reducing memory 
+   use/freezing in R when intensive use is performed
+   * tests coverage improvement
+
+* FIXES
+   * update of a bunch of unit tests according to other packages evolutions
+   * STICS versions management and XML files upgrade
+
+* DATA
+   * examples, templates files for different files format added for the latest
+   STICS version 10.1.0
+   * versions meta-data update
+   
+
 # SticsRFiles 1.1.3 _2023-07-10_
 
 * FUNCTIONS
@@ -5,7 +47,7 @@
    * New function for generating weather data files (climat.txt)
    * New unit tests added
 
-* FIXES:
+* FIXES
    * get_param_value: forcing to get a character returned value
    * get_var_info: for variables names vector
    * get_param_txt: removed global variables use, looking for parameters names
