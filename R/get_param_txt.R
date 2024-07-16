@@ -367,7 +367,7 @@ get_ini_txt <- function(file = "ficini.txt",
 
   if (stics_version_num < 10) {
 
-    if (length(params) > 28)
+    if (length(params) > 48)
       stop("The used STICS version ",
            stics_version_num,
            " does not correspond to the file content (STICS version >= 10)")
@@ -399,7 +399,7 @@ get_ini_txt <- function(file = "ficini.txt",
     ini$NH4init <- params[[28]]
   } else {
 
-    if (length(params) < 49)
+    if (length(params) < 48)
       stop("The used STICS version ",
            stics_version_num,
            " does not correspond to the file content (STICS version < 10)")

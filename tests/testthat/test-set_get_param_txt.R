@@ -173,7 +173,6 @@ test_that("get for layer id", {
   )
 })
 
-
 # Get and modify the non-varietal parameter "forme"
 # (another parameter has a similar name : rapforme ...)
 
@@ -211,6 +210,7 @@ tmp2 <- unlist(get_param_txt(
   workspace = path, param = "stlevamf",
   stics_version = stics_version
 ))
+
 test_that("Set and get of a varietal parameter for a unique plant
           for the simulated variety", {
   expect_equal(tmp + 1, tmp2)
@@ -292,4 +292,36 @@ tmp2 <- unlist(get_param_txt(
 test_that("Set and get of a varietal parameter for an intercrop
           for the simulated variety", {
   expect_equal(tmp[[plant]] + 1, tmp2[[plant]])
+})
+
+
+
+
+# Getting parameters using a version number
+# that does not match the file content
+path <- get_examples_path("txt", stics_version = stics_version)
+test_that("get for NO3init, for a wrong version", {
+  expect_error(
+    get_param_txt(
+      workspace = path,
+      param = "NO3init",
+      stics_version = "V8.5")
+  )
+})
+path <- get_examples_path("txt", stics_version = "V8.5")
+test_that("get for NO3init, for a wrong version", {
+  expect_error(
+    get_param_txt(
+      workspace = path,
+      param = "NO3init")
+  )
+})
+
+path <- get_examples_path("txt", stics_version = "V9.2")
+test_that("get for NO3init, for a wrong version", {
+  expect_error(
+    get_param_txt(
+      workspace = path,
+      param = "NO3init")
+  )
 })
