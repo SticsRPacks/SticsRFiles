@@ -1,3 +1,21 @@
+# SticsRFiles 1.4.0 _2024-07-16_
+
+* FUNCTIONS
+  * New functions for computing dates from days numbers with reference to
+   starting year
+  * compute_day_from_date now uses a start year instead of a date, and date may
+  of type character
+  * get_param_txt, set_param_txt, get_param_xml, set_param_xml now use values
+  ids for getting or setting specific parameter vector values 
+  specific values
+  * New functions for getting cultivars list and extracting cultivars parameters
+  as a data.frame
+
+* FIXES
+  * management of STICS version consistency with text files content using
+  get_param_txt or set_param_txt
+
+
 # SticsRFiles 1.3.0 _2024-04-10_
 
 * FUNCTIONS
