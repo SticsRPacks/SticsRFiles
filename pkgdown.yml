@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.8
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   Generating_Stics_text_files: Generating_Stics_text_files.html
@@ -8,7 +8,7 @@ articles:
   Manipulating_Stics_XML_files: Manipulating_Stics_XML_files.html
   SticsRFiles: SticsRFiles.html
   Upgrading_STICS_XML_files: Upgrading_STICS_XML_files.html
-last_built: 2024-04-11T08:29Z
+last_built: 2024-07-17T12:27Z
 urls:
   reference: |-
     https://sticsrpacks.github.io/SticsRFiles/
@@ -16,4 +16,3 @@ urls:
   article: |-
     https://sticsrpacks.github.io/SticsRFiles/
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"), person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"), person(given = "SticsRPacks", role = c("aut","cph")), person("Timothee", "Flutre", ,"timothee.flutre@inrae.fr", role = "ctb"), person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")), person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")), person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")), person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")), person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")), person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev")) )/articles
-
