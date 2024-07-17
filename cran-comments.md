@@ -1,25 +1,47 @@
-## Test environments
-- R-hub windows-x86_64-devel (r-devel)
-- R-hub ubuntu-gcc-release (r-release)
-- R-hub fedora-clang-devel (r-devel)
-
 ## R CMD check results
-❯ On windows-x86_64-devel (r-devel)
-  checking for non-standard things in the check directory ... NOTE
-  Found the following files/directories:
-    ''NULL''
+Duration: 1m 13.7s
 
-❯ On windows-x86_64-devel (r-devel)
-  checking for detritus in the temp directory ... NOTE
-  Found the following files/directories:
-    'lastMiKTeXException'
+❯ checking for unstated dependencies in examples ... OK
+   WARNING
+  ‘qpdf’ is needed for checks on size reduction of PDFs
 
-❯ On ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
-  checking HTML version of manual ... NOTE
-  Skipping checking HTML validation: no command 'tidy' found
+0 errors ✔ | 1 warning ✖ | 0 notes ✔
 
-0 errors ✔ | 0 warnings ✔ | 3 notes ✖
 
+## R check results on R-hub (00check.log files)
+
+- windows: All R versions on GitHub Actions windows-latest
+> All Done!
+  Running 'testthat.R' [50s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [30s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: OK
+
+- linux: All R versions on GitHub Actions ubuntu-latest
+> All Done!
+  Running ‘testthat.R’ [31s/31s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [22s/20s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: OK
+
+- macos-arm64: All R versions on GitHub Actions macos-latest
+> All Done!
+  Running ‘testthat.R’ [21s/27s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [16s/19s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: OK
 
 ## revdepcheck results
 
