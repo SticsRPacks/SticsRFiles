@@ -9,6 +9,7 @@ get_param_xml(
   param = NULL,
   select = NULL,
   select_value = NULL,
+  value_id = NULL,
   xml_file = lifecycle::deprecated(),
   param_name = lifecycle::deprecated(),
   value = lifecycle::deprecated(),
@@ -27,6 +28,9 @@ function returns information for all parameters.}
 
 \item{select_value}{Vector of values used for select (see examples).
 Optional, should be provided only if select is provided.}
+
+\item{value_id}{Vector of ids of the parameters values to be retrieved
+from the parameter values vector}
 
 \item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
 longer supported, use \code{file} instead.}

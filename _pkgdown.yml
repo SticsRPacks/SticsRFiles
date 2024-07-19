@@ -67,6 +67,8 @@ reference:
       - get_usms_files
       - get_usms_list
       - get_soils_list
+      - get_cultivars_list
+      - get_cultivars_param
 
   - title: "Generate Stics Input files (Text format)"
     desc: Input parameters files, outputs definition files or observations files
@@ -117,3 +119,4 @@ reference:
       - is_windows
       - "`[.cropr_simulation`"
       - compute_day_from_date
+      - compute_date_from_day
