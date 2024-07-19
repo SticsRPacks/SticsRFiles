@@ -261,30 +261,34 @@ upgrade_workspace_xml <- function(workspace,
     message("*_tec.xml\n")
   }
 
+  # Copying *.mod files (for model outputs)
+  stat <- file.copy(
+    from = list.files(path = workspace, full.names = TRUE, pattern = "*.mod"),
+    to = out_dir, overwrite = overwrite
+  )
 
-  # # Copying *.mod files (for model outputs)
-  # stat <- file.copy(
-  #   from = list.files(path = workspace, full.names = TRUE, pattern = "*.mod"),
-  #   to = out_dir, overwrite = overwrite
-  # )
-  #
-  # if (verbose) {
-  #   message("Copying *.mod files.\n")
-  # }
+  if (verbose) {
+    message("Copying *.mod files.\n")
+  }
+
+  # TODO: see how to manage variables names checks in *.mod files
+  # Probably, the new JavaSTICS path may be added as a new function argument
+  # for getting information on output variables
+  # (use get_var_info with the appropriate version string)
 
 
   # Copying observation files
   # all .obs files deteted in workspace,
   # not only according to usms names, because now obs files names are
   # references in the usms.xml file (i.e. not fixed a priori)
-  # stat <- file.copy(
-  #   from = list.files(path = workspace, full.names = TRUE, pattern = "*.obs"),
-  #   to = out_dir, overwrite = overwrite
-  # )
-  #
-  # if (verbose) {
-  #   message("Copying *.obs files.\n")
-  # }
+  stat <- file.copy(
+    from = list.files(path = workspace, full.names = TRUE, pattern = "*.obs"),
+    to = out_dir, overwrite = overwrite
+  )
+
+  if (verbose) {
+    message("Copying *.obs files.\n")
+  }
 
   # Copying weather data files
   # Note: for the moment, all files with a numerical extension
@@ -292,36 +296,22 @@ upgrade_workspace_xml <- function(workspace,
   # defined over 2 successive years, files are not explicitly mentioned
   # in the usms.xml file.
 
-  # weather_files <-
-  #   list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]")
-  #
-  # stat <- file.copy(
-  #   from = weather_files,
-  #   to = out_dir, overwrite = overwrite
-  # )
-  #
-  # if (!all(stat)) {
-  #   warning("Error when copying file(s): ",
-  #           paste(weather_files[stat], collapse = ", "))
-  # }
-  #
-  # if (verbose) {
-  #   message("Copying weather files.\n")
-  # }
+  weather_files <-
+    list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]")
 
+  stat <- file.copy(
+    from = weather_files,
+    to = out_dir, overwrite = overwrite
+  )
 
-  # TODO: see how to manage variables names checks in *.mod files
-  # Probably, the new JavaSTICS path may be added as a new function argument
-  # for getting information on output variables
-  # (use get_var_info with the appropriate version string)
+  if (!all(stat)) {
+    warning("Error when copying file(s): ",
+            paste(weather_files[stat], collapse = ", "))
+  }
 
-  workspace_files_copy(workspace = workspace,
-                       file_type = c("mod", "obs", "lai", "meteo"),
-                       javastics = javastics,
-                       out_dir = out_dir,
-                       overwrite = overwrite,
-                       verbose = verbose)
-
+  if (verbose) {
+    message("Copying weather files.\n")
+  }
 
 
 
