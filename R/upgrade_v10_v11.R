@@ -699,6 +699,16 @@ upgrade_workspace_xml_10_11 <- function(workspace,
                           out_dir = plant_out_dir,
                           overwrite = overwrite)
   }
+
+  # Other files types copy from the source workspace, or from javastics "example"
+  # dir for *.mod files if they do not exist in the workspace
+  workspace_files_copy(workspace = workspace,
+                       #file_type = c("mod", "obs", "lai", "meteo"),
+                       javastics = javastics,
+                       out_dir = out_dir,
+                       overwrite = overwrite,
+                       verbose = verbose)
+
 }
 
 
