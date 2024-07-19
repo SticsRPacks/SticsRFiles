@@ -183,7 +183,7 @@ Collate:
     'set_usms_param_xml.R'
     'static_help.R'
     'stics_environment.R'
-    'stics_examples_utils.R'
+    'stics_files_utils.R'
     'upgrade_ini_xml.R'
     'upgrade_param_gen_xml.R'
     'upgrade_param_newform_xml.R'
