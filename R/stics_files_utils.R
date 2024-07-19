@@ -157,3 +157,114 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 
   return(dir_path)
 }
+
+
+#' Copy mod, obs, lai, and weather data files
+#' @param workspace JavaStics xml workspace path
+#' @param file_type file type to copy among "mod", "obs", "clim"
+#' @param javastics JavaStics folder path (Optional)
+#' @param out_dir   Output directry path
+#' @param verbose   logical, TRUE for displaying a copy message
+#' FALSE otherwise (default)
+#' @param overwrite Logical TRUE for overwriting files,
+#' FALSE otherwise (default)
+#'
+#' @return invisible copy statuses
+#'
+#' @keywords internal
+#' @noRd
+#'
+workspace_files_copy <- function(workspace,
+                                 file_type = NULL,
+                                 javastics = NULL,
+                                 out_dir,
+                                 overwrite = FALSE,
+                                 verbose = FALSE) {
+
+  # files types vector and associated regex
+  file_types <- c("mod", "obs", "lai", "meteo")
+  file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")
+  file_desc <- c("output definition (*.mod)",
+                 "observation (*.obs)",
+                 "LAI dynamics (*.lai)",
+                 "weather data (*.YYYY)")
+
+  # if file_type is not given, all files type are processed
+  if (is.null(file_type)) file_type <- file_types
+
+  # recurive call for a vector
+  if (length(file_type) > 1) {
+    stat_list <- vector(mode = "list", length(file_type))
+    for (i in seq_along(file_type)) {
+      stat_list[[i]] <- workspace_files_copy(workspace = workspace,
+                                             file_type = file_type[i],
+                                             javastics = javastics,
+                                             out_dir = out_dir,
+                                             overwrite = overwrite,
+                                             verbose = verbose
+      )
+    }
+    return(invisible(stat_list))
+  }
+
+  # Just in case if the func is used outside of the workspace upgrade
+  type_idx <- file_types %in% file_type
+
+  if (! any(type_idx)) {
+    warning("The given file type does not exist: ", file_type, " nothing done!")
+    return()
+  }
+
+  # getting the file path list to copy
+  patt <- file_patt[type_idx]
+  files_list <- list.files(path = workspace,
+                           full.names = TRUE,
+                           pattern = patt)
+
+  # Just for the *.mod files, looking in javastics if not found in the workspace
+  # TODO: combine both if partial match
+  if (length(files_list) == 0) {
+    if (file_type == "mod") {
+
+      if (is.null(javastics)) {
+        warning(paste("No", "mod",
+                      "files in the source workspace",
+                      "the Javastics path must be given",
+                      "as input for copying files from it"))
+      }
+
+      files_list <- list.files(
+        path = file.path(javastics, "example",
+                         full.names = TRUE,
+                         pattern = patt))
+
+    }
+  }
+
+  # nothing to do
+  if (length(files_list) == 0) {
+    warning(paste0("Not any '", file_desc[type_idx], "' file to copy!"))
+    return()
+  }
+
+  # copy and treat of the copy return
+  stat <- file.copy(
+    from = files_list,
+    to = out_dir,
+    overwrite = overwrite
+  )
+
+  if (verbose) {
+    message(paste("Copying", file_desc[type_idx], "files.\n"))
+  }
+
+  if (!all(stat)) {
+    warning("Error when copying file(s): ",
+            paste(basename(files_list[!stat]), collapse = ", "),
+            "\nin\n",
+            out_dir,
+            "\n",
+            "Consider to set as input: overwrite = TRUE")
+  }
+  return(invisible(stat))
+}
