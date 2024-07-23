@@ -178,8 +178,9 @@ get_usms_files <- function(workspace,
 
     # Keeping usms xml files, except plant files, obs, lai, null
     useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
+
     if (length(useless_files_idx) > 0) usm_files <- usm_files[-useless_files_idx]
-    usm_files <- unique(usm_files)
+
     usm_files_path <- file.path(workspace_path, usm_files)
 
 
@@ -215,7 +216,8 @@ get_usms_files <- function(workspace,
     sols_file_path <- NULL
     sols_file_exists <- vector("logical", 0)
     if ("sols" %in% file_type) {
-      sols_file_path <- suppressWarnings(
+      sols_file_path <- suppressWarnings(  # Returning a named list
+        names(usms_files_list) <- usms_list
         normalizePath(file.path(workspace_path, "sols.xml"))
       )
       sols_file_exists <- file.exists(sols_file_path)
