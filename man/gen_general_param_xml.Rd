@@ -12,6 +12,9 @@ gen_general_param_xml(out_dir, stics_version = "latest", overwrite = FALSE)
 
 \item{stics_version}{Name of the STICS version. Optional, the latest one
 is used as default}
+
+\item{overwrite}{Optional logical, TRUE for overwriting files,
+FALSE otherwise (default)}
 }
 \value{
 None
@@ -25,8 +28,8 @@ Please see \code{get_stics_versions_compat()} for the full list of
 STICS versions that can be used for the argument \code{stics_version}.
 }
 \examples{
-gen_param_gen_new_xml(out_dir = tempdir())
+gen_general_param_xml(out_dir = tempdir())
 
-gen_param_gen_new_xml(out_dir = tempdir(), stics_version = "V10.0")
+gen_general_param_xml(out_dir = tempdir(), stics_version = "V10.0")
 
 }
