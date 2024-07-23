@@ -54,6 +54,7 @@ There is not at the moment an integrated function which is able to produce all n
 * gen_ini_xml: for generating simulations initialization files (`*_ini.xml`)
 * gen_tec_xml: for generating crop management files (`*_tec.xml`)
 * gen_sta_xml: for generating weather stations files (`*_sta.xml`)
+* gen_general_param_xml: for generating general parameters files (`param_gen.xml and param_newform.xml`)
 
 
 
@@ -450,3 +451,18 @@ Example of a `sta` parameters file content sub-list:
 l <- readLines(con = file.path(workspace_path, "climatex_sta.xml"))
 cat(paste(c(l[1:41], "...", l[length(l) - 1]), collapse = "\n"))
 ```
+
+# Generating general parameters XML files (param_gen.xml and param_newform.xml)
+
+Nothing is to be done for specifying parameters values, the function is to be called with an optional argument for setting the desired version as follows.
+
+<!-- Only for the show -->
+```{r gen_gen_param, eval = FALSE}
+# with the latest version
+gen_general_param_xml(out_dir = workspace_path)
+
+# or with a specific version
+gen_general_param_xml(out_dir = workspace_path, stics_version = "V10.0")
+
+```
+

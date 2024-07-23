@@ -42,6 +42,7 @@ reference:
       - gen_sta_xml
       - gen_tec_xml
       - gen_usms_xml
+      - gen_general_param_xml
 
   - title: "Upgrade JavaStics XML files from version 9.2 or (9.1) to 10.0"
     desc: Functions for upgrading parameter files
