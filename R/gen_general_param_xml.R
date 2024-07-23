@@ -20,7 +20,9 @@
 #' @examples
 #' gen_general_param_xml(out_dir = tempdir())
 #'
-#' gen_general_param_xml(out_dir = tempdir(), stics_version = "V10.0")
+#' gen_general_param_xml(out_dir = tempdir(),
+#'                       stics_version = "V10.0",
+#'                       overwrite = TRUE)
 #'
 #' @export
 #'
