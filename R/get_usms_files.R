@@ -178,8 +178,9 @@ get_usms_files <- function(workspace,
 
     # Keeping usms xml files, except plant files, obs, lai, null
     useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
+
     if (length(useless_files_idx) > 0) usm_files <- usm_files[-useless_files_idx]
-    usm_files <- unique(usm_files)
+
     usm_files_path <- file.path(workspace_path, usm_files)
 
 

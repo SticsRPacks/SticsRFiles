@@ -1,3 +1,42 @@
+# SticsRFiles 1.4.0 _2024-07-16_
+
+* FUNCTIONS
+  * New functions for computing dates from days numbers with reference to
+   starting year
+  * compute_day_from_date now uses a start year instead of a date, and date may
+  of type character
+  * get_param_txt, set_param_txt, get_param_xml, set_param_xml now use values
+  ids for getting or setting specific parameter vector values 
+  specific values
+  * New functions for getting cultivars list and extracting cultivars parameters
+  as a data.frame
+
+* FIXES
+  * management of STICS version consistency with text files content using
+  get_param_txt or set_param_txt
+
+
+# SticsRFiles 1.3.0 _2024-04-10_
+
+* FUNCTIONS
+   * Message improvement for missing xml files detected before text files
+   generation
+   * New functions for computing days numbers from dates with reference to
+   starting dates
+
+* FIXES
+   * Updating STICS versions information 
+   * get_file using usm names (regex pattern)
+   * upgrade _ini.xml file (magrain0 parameter position)
+   * xml files generation: missing data management when loading xls/csv 
+   files
+   * text files generation: plant and tec files were not generated in
+   intercropping usms for the associated crop
+
+* DOC
+   * added license file
+
+
 # SticsRFiles 1.2.0 _2024-02-21_
 
 * FUNCTIONS

@@ -1,39 +1,51 @@
-## Test environments
-- R-hub windows-x86_64-devel (r-devel)
-- R-hub ubuntu-gcc-release (r-release)
-- R-hub fedora-clang-devel (r-devel)
-
 ## R CMD check results
-❯ On windows-x86_64-devel (r-devel)
-  checking for non-standard things in the check directory ... NOTE
-  Found the following files/directories:
-    ''NULL''
+Duration: 1m 13.7s
 
-❯ On windows-x86_64-devel (r-devel)
-  checking for detritus in the temp directory ... NOTE
-  Found the following files/directories:
-    'lastMiKTeXException'
+❯ checking for unstated dependencies in examples ... OK
+   WARNING
+  ‘qpdf’ is needed for checks on size reduction of PDFs
 
-❯ On ubuntu-gcc-release (r-release), fedora-clang-devel (r-devel)
-  checking HTML version of manual ... NOTE
-  Skipping checking HTML validation: no command 'tidy' found
-
-0 errors ✔ | 0 warnings ✔ | 3 notes ✖
+0 errors ✔ | 1 warning ✖ | 0 notes ✔
 
 
-> revdepcheck::revdep_check(num_workers = 4)
-── INSTALL ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 2 versions ──
-Installing CRAN version of SticsRFiles
-installation des dépendances ‘pillar’, ‘tidyselect’, ‘vctrs’, ‘timechange’, ‘stringi’, ‘fansi’, ‘pkgconfig’, ‘purrr’, ‘cpp11’, ‘Rcpp’, ‘cli’, ‘crayon’, ‘curl’, ‘data.table’, ‘dplyr’, ‘lifecycle’, ‘lubridate’, ‘rlang’, ‘rstudioapi’, ‘stringr’, ‘tibble’, ‘tidyr’, ‘XML’, ‘xml2’, ‘xslt’
+## R check results on R-hub (00check.log files)
 
-Installing DEV version of SticsRFiles
-Installing 31 packages: rlang, cli, vctrs, stringi, magrittr, lifecycle, glue, withr, pkgconfig, utf8, fansi, tidyselect, tibble, R6, pillar, generics, cpp11, Rcpp, xml2, stringr, purrr, dplyr, timechange, xslt, XML, tidyr, rstudioapi, lubridate, data.table, curl, crayon
-── CHECK ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 0 packages ──
-OK: 0
-BROKEN: 0
-Total time: <1 min
-── REPORT ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Writing summary to 'revdep/README.md'
-Writing problems to 'revdep/problems.md'
-Writing failures to 'revdep/failures.md'
-Writing CRAN report to 'revdep/cran.md'
+- windows: All R versions on GitHub Actions windows-latest
+> All Done!
+  Running 'testthat.R' [50s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [30s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: OK
+
+- linux: All R versions on GitHub Actions ubuntu-latest
+> All Done!
+  Running ‘testthat.R’ [31s/31s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [22s/20s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: OK
+
+- macos-arm64: All R versions on GitHub Actions macos-latest
+> All Done!
+  Running ‘testthat.R’ [21s/27s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [16s/19s] OK
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: OK
+
+## revdepcheck results
+
+We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages

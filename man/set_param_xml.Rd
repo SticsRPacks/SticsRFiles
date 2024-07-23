@@ -11,6 +11,7 @@ set_param_xml(
   save_as = NULL,
   select = NULL,
   select_value = NULL,
+  value_id = NULL,
   overwrite = FALSE,
   xml_file = lifecycle::deprecated(),
   out_path = lifecycle::deprecated(),
@@ -35,6 +36,9 @@ Optional, if NULL \code{file} is overwritten.}
 
 \item{select_value}{Vector of values used for select (see examples).
 Optional, should be provided only if select is provided.}
+
+\item{value_id}{Vector of ids of the parameters values to be retrieved
+from the parameter values vector}
 
 \item{overwrite}{Logical TRUE for overwriting the output file,
 FALSE otherwise (default)}
@@ -107,14 +111,31 @@ set_param_xml(sol_path, c("argi", "norg"), list(100, 150),
 set_param_xml(sol_path, c("epc", "HCCF"),
   select = "sol",
   select_value = c("solcanne", "solbanane"),
-  param_value = list(c(20:24, 10:14), c(50:54, 40:44)), overwrite = TRUE
+  values = list(c(20:24, 10:14), c(50:54, 40:44)),
+  overwrite = TRUE
 )
+
 # Getting changed values
 # get_param_xml(sol_path, c("epc", "HCCF"),
 # select = "sol",
 # select_value = c("solcanne", "solbanane")
 # )
 
+# For specific values of vector parameters
+set_param_xml(sol_path, "HCCF",
+  select = "sol",
+  select_value = "solcanne",
+  values = c(46.8, 48.5, 50.1),
+  value_id = c(1,3,5),
+  overwrite = TRUE
+ )
+
+# Getting changed values
+# get_param_xml(sol_path, "HCCF",
+# select = "sol",
+# select_value = "solcanne",
+# value_id = c(1,3,5)
+# )
 
 # Crop management file
 
@@ -122,7 +143,7 @@ tec_path <- file.path(ex_path, "file_tec.xml")
 
 # Modifying irrigations parameters
 set_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"),
-  param_value = list(200:215, 20:35), overwrite = TRUE
+  values = list(200:215, 20:35), overwrite = TRUE
 )
 # Getting changed values
 # get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))

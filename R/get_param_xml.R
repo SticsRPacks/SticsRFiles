@@ -15,6 +15,8 @@
 #' (optional, default to no selection)
 #' @param select_value Vector of values used for select (see examples).
 #' Optional, should be provided only if select is provided.
+#' @param value_id Vector of ids of the parameters values to be retrieved
+#' from the parameter values vector
 #' @param value `r lifecycle::badge("deprecated")` `value` is no
 #'   longer supported, use `select_value` instead.
 #' @param ... Pass further arguments to `get_param_value()`
@@ -48,6 +50,7 @@ get_param_xml <- function(file,
                           param = NULL,
                           select = NULL,
                           select_value = NULL,
+                          value_id = NULL,
                           xml_file = lifecycle::deprecated(),
                           param_name = lifecycle::deprecated(),
                           value = lifecycle::deprecated(),
@@ -97,6 +100,7 @@ get_param_xml <- function(file,
     param_name = param_name,
     parent_name = select,
     parent_sel_attr = value,
+    ids = value_id,
     ...
   )
   xml_names <- lapply(xml_file, basename) %>% unlist()

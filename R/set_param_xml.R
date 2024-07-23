@@ -12,6 +12,8 @@
 #' (optional, default to no selection)
 #' @param select_value Vector of values used for select (see examples).
 #' Optional, should be provided only if select is provided.
+#' @param value_id Vector of ids of the parameters values to be retrieved
+#' from the parameter values vector
 #' @param overwrite Logical TRUE for overwriting the output file,
 #' FALSE otherwise (default)
 #' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
@@ -71,14 +73,31 @@
 #' set_param_xml(sol_path, c("epc", "HCCF"),
 #'   select = "sol",
 #'   select_value = c("solcanne", "solbanane"),
-#'   param_value = list(c(20:24, 10:14), c(50:54, 40:44)), overwrite = TRUE
+#'   values = list(c(20:24, 10:14), c(50:54, 40:44)),
+#'   overwrite = TRUE
 #' )
+#'
 #' # Getting changed values
 #' # get_param_xml(sol_path, c("epc", "HCCF"),
 #' # select = "sol",
 #' # select_value = c("solcanne", "solbanane")
 #' # )
 #'
+#' # For specific values of vector parameters
+#' set_param_xml(sol_path, "HCCF",
+#'   select = "sol",
+#'   select_value = "solcanne",
+#'   values = c(46.8, 48.5, 50.1),
+#'   value_id = c(1,3,5),
+#'   overwrite = TRUE
+#'  )
+#'
+#' # Getting changed values
+#' # get_param_xml(sol_path, "HCCF",
+#' # select = "sol",
+#' # select_value = "solcanne",
+#' # value_id = c(1,3,5)
+#' # )
 #'
 #' # Crop management file
 #'
@@ -86,7 +105,7 @@
 #'
 #' # Modifying irrigations parameters
 #' set_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"),
-#'   param_value = list(200:215, 20:35), overwrite = TRUE
+#'   values = list(200:215, 20:35), overwrite = TRUE
 #' )
 #' # Getting changed values
 #' # get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))
@@ -99,6 +118,7 @@ set_param_xml <- function(file,
                           save_as = NULL,
                           select = NULL,
                           select_value = NULL,
+                          value_id = NULL,
                           overwrite = FALSE,
                           xml_file = lifecycle::deprecated(),
                           out_path = lifecycle::deprecated(),
@@ -188,6 +208,7 @@ set_param_xml <- function(file,
                   param_value = param_value,
                   parent_name = select,
                   parent_sel_attr = value,
+                  ids = value_id,
                   ...
   )
 
