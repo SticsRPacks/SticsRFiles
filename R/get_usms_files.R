@@ -216,8 +216,7 @@ get_usms_files <- function(workspace,
     sols_file_path <- NULL
     sols_file_exists <- vector("logical", 0)
     if ("sols" %in% file_type) {
-      sols_file_path <- suppressWarnings(  # Returning a named list
-        names(usms_files_list) <- usms_list
+      sols_file_path <- suppressWarnings(
         normalizePath(file.path(workspace_path, "sols.xml"))
       )
       sols_file_exists <- file.exists(sols_file_path)
