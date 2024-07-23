@@ -457,7 +457,7 @@ cat(paste(c(l[1:41], "...", l[length(l) - 1]), collapse = "\n"))
 Nothing is to be done for specifying parameters values, the function is to be called with an optional argument for setting the desired version as follows.
 
 <!-- Only for the show -->
-```{r gen_sta_files, eval = FALSE}
+```{r gen_gen_param, eval = FALSE}
 # with the latest version
 gen_general_param_xml(out_dir = workspace_path)
 
