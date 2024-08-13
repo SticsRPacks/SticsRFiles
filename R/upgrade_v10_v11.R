@@ -600,6 +600,8 @@ upgrade_usms_xml_10_11 <- function(file,
 # @param plant
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
+#' @param verbose   logical, TRUE for displaying a copy message
+#' FALSE otherwise (default)
 #'
 #' @return None
 #'
@@ -612,7 +614,8 @@ upgrade_workspace_xml_10_11 <- function(workspace,
                                         out_dir,
                                         from_version = "V10.0",
                                         target_version = "V11.0",
-                                        overwrite = FALSE){
+                                        overwrite = FALSE,
+                                        verbose = FALSE){
 
 
   # Just in case, creating the target directory

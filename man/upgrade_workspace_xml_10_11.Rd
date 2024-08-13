@@ -10,7 +10,8 @@ upgrade_workspace_xml_10_11(
   out_dir,
   from_version = "V10.0",
   target_version = "V11.0",
-  overwrite = FALSE
+  overwrite = FALSE,
+  verbose = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ upgrade_workspace_xml_10_11(
 \item{target_version}{Target STICS version (character or numeric)}
 
 \item{overwrite}{Logical TRUE for overwriting files,
+FALSE otherwise (default)}
+
+\item{verbose}{logical, TRUE for displaying a copy message
 FALSE otherwise (default)}
 }
 \value{
