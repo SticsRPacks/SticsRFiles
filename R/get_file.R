@@ -151,7 +151,9 @@ get_file_ <- function(workspace,
   if (length(workspace_files) && !is.null(usm_name)) {
     idx <- lapply(str2regex(usm_name),
                   function(y) {
-                    patt <- paste0(y, "\\.", file_ext)
+                    # using optional "p" or "a" in pattern for associated crops
+                    # p for principal crop, a for associated crop
+                    patt <- paste0(y, "[a|p]?\\.", file_ext)
                     grep(pattern = patt, x = workspace_files)
                   }
     )
