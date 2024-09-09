@@ -9,7 +9,7 @@ xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 test_that("Option choice", {
   expect_equal(
     length(unlist(get_options_choices(xml_path), use.names = FALSE)),
-    93)
+    95)
   expect_equal(
     length(unlist(get_options_choices(xml_path, "codetemp"),
                   use.names = FALSE)),

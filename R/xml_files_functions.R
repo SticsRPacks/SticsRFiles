@@ -110,17 +110,28 @@ set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
   ver <- to_xml_version(new_version)
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
-  att <- get_attrs(xml_doc, path = root_path)
+  att_value <- get_attrs_values(xml_doc,
+                                path = root_path,
+                                attr_list = "version")
+
+  if(length(att_value) == 0) {
+    add_attrs(xml_doc, path = root_path, named_vector = ver)
+    return(invisible())
+  }
 
   # Checking file version
-  if (!is.null(att) && att[, "version"] == new_version && !overwrite) {
+  if (att_value[, "version"] == new_version && !overwrite) {
     stop(paste(
       "The version has already been updated to STICS version",
       new_version
     ))
   }
 
-  add_attrs(xml_doc, path = root_path, named_vector = ver)
+  set_attrs_values(xml_doc,
+                   path = root_path,
+                   attr_name = "version",
+                   values_list = ver)
+
 }
 
 

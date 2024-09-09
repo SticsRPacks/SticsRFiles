@@ -41,6 +41,7 @@ expand_stics_names <- function(in_csv_file, out_csv_file, header = FALSE) {
 
   # duplicating rows and concatenation
   for (p in seq_len(dim(par_to_expand)[1])) {
+    if (par_to_expand$name[p] == "Name") next
     par <- par_to_expand$name[p]
     par_dim <- par_to_expand$dim[p]
     tmp <- par_to_expand[rep(p, par_dim), ]

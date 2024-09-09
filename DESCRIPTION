@@ -1,7 +1,7 @@
 Package: SticsRFiles
 Title: Read and Modify 'STICS' Input/Output Files
-Version: 1.2.0
-Date: 2024-02-23
+Version: 1.4.0
+Date: 2024-07-16
 Authors@R: c(
     person("Patrice", "Lecharpentier", , "patrice.lecharpentier@inrae.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4044-4322")),
@@ -11,6 +11,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-8676-5447")),
     person("Michel", "Giner", , "michel.giner@cirad.fr", role = "aut",
            comment = c(ORCID = "0000-0002-9310-2377")),
+    person("Timothee", "Flutre", ,"timothee.flutre@inrae.fr", role = "ctb"),
     person("Thomas", "Robine", role = "ctb"),
     person("Amine", "Barkaoui", role = "ctb"),
     person("Patrick", "Chabrier", role = "ctb"),
@@ -33,7 +34,7 @@ URL: https://github.com/SticsRPacks/SticsRFiles,
     https://doi.org/10.5281/zenodo.4443206
 BugReports: https://github.com/SticsRPacks/SticsRFiles/issues
 Depends: 
-    R (>= 3.6.0)
+    R (>= 4.0.0)
 Imports: 
     cli,
     crayon,
@@ -69,7 +70,7 @@ ByteCompile: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Collate: 
     'add_node_to_doc.R'
     'add_stics_nodes.R'
@@ -82,7 +83,8 @@ Collate:
     'check_output_files.R'
     'check_param_names.R'
     'col_names_to_var.R'
-    'compute_doy_cumul.R'
+    'compute_date_from_day.R'
+    'compute_day_number.R'
     'convert_xml2txt.R'
     'convert_xml2txt_int.R'
     'download_data.R'
@@ -97,6 +99,7 @@ Collate:
     'find_names.R'
     'force_param_values.R'
     'gen_climate.R'
+    'gen_general_param_xml.R'
     'gen_ini_doc.R'
     'gen_ini_xml.R'
     'gen_new_travail.R'
@@ -113,6 +116,8 @@ Collate:
     'gen_usms_xml2txt.R'
     'gen_varmod.R'
     'get_climate_txt.R'
+    'get_cultivars_list.R'
+    'get_cultivars_param.R'
     'get_file.R'
     'get_file_int.R'
     'get_formalisms_xml.R'
@@ -178,7 +183,7 @@ Collate:
     'set_usms_param_xml.R'
     'static_help.R'
     'stics_environment.R'
-    'stics_examples_utils.R'
+    'stics_files_utils.R'
     'upgrade_ini_xml.R'
     'upgrade_param_gen_xml.R'
     'upgrade_param_newform_xml.R'
@@ -187,6 +192,7 @@ Collate:
     'upgrade_sta_xml.R'
     'upgrade_tec_xml.R'
     'upgrade_usms_xml.R'
+    'upgrade_v10_v11.R'
     'upgrade_workspace_xml.R'
     'var_to_col_names.R'
     'xml_document.R'

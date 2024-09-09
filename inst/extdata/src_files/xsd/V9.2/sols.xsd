@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="sols">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sol" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="param"          maxOccurs="unbounded" />
+              <xs:element ref="option"         maxOccurs="unbounded" />
+              <xs:element ref="tableau_entete" maxOccurs="1" />
+              <xs:element ref="tableau"        maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="nom" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="optional" /> 
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="param">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="format" type="xs:string" />
+          <xs:attribute name="max"    type="xs:string" />
+          <xs:attribute name="min"    type="xs:string" />
+          <xs:attribute name="nom"    type="xs:string" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="option">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="choix" minOccurs="2" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="choix"    type="xs:integer" use="required" />
+      <xs:attribute name="nom"      type="xs:string"  use="required" />
+      <xs:attribute name="nomParam" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="choix">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="param" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="code" type="xs:integer" use="required" />
+      <xs:attribute name="nom"  type="xs:string"  use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="tableau_entete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="colonne" maxOccurs="unbounded" >
+          <xs:complexType>
+            <xs:attribute name="nom" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="nb_colonnes" type="xs:integer" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="tableau">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="colonne" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:float">
+                <xs:attribute name="nom" type="xs:string" use="required" />
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="nb_colonnes" type="xs:integer" use="required" />
+      <xs:attribute name="nom"         type="xs:string"  use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

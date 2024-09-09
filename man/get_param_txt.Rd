@@ -15,7 +15,9 @@
 get_param_txt(
   workspace,
   param = NULL,
+  plant_id = NULL,
   variety = NULL,
+  value_id = NULL,
   exact = FALSE,
   stics_version = "latest",
   dirpath = lifecycle::deprecated(),
@@ -56,7 +58,11 @@ get_soil_txt(
 
 get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
 
-get_usm_txt(file = "new_travail.usm", filepath = lifecycle::deprecated())
+get_usm_txt(
+  file = "new_travail.usm",
+  plant_id = NULL,
+  filepath = lifecycle::deprecated()
+)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the STICS (txt)
@@ -65,7 +71,13 @@ input files.}
 \item{param}{Vector of parameter names. Optional, if not provided,
 the function returns an object with all parameters.}
 
+\item{plant_id}{plant index (1, 2), default(NULL) calculated from from
+plant number in STICS initialization file}
+
 \item{variety}{Integer. The plant variety to get the parameter from.}
+
+\item{value_id}{index of technical interventions to be used to
+retrieve parameter values, or layer index for soil parameters}
 
 \item{exact}{Boolean indicating if the function must return results
 only for exact match.}
@@ -151,6 +163,16 @@ get_param_txt(workspace = path, param = "durvieF", variety = varieties)
 # Or get it from the output of the function returning all parameters:
 get_param_txt(workspace = path)$plant$plant1$durvieF
 
+# Get parameters for a specific plant
+get_param_txt(workspace = path, plant_id = 1)
+get_param_txt(workspace = path, param = "durvieF", plant_id = 1)
+get_param_txt(workspace = path, param = "durvieF", plant_id = 1,
+variety = varieties)
+
+# Get parameters for specific interventions or soil layers
+get_param_txt(workspace = path, param = "amount", value_id = c(1,3))
+get_param_txt(workspace = path, param = "Hinitf", value_id = c(1,3))
+get_param_txt(workspace = path, param = "epc", value_id = c(1,3))
 
 \dontrun{
 # Read the initialisation file (ficini.txt):

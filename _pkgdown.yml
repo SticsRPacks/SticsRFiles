@@ -4,6 +4,7 @@ url: https://sticsrpacks.github.io/SticsRFiles/
     c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
       person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
       person(given = "SticsRPacks", role = c("aut","cph")),
+      person("Timothee", "Flutre", ,"timothee.flutre@inrae.fr", role = "ctb"),
       person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")),
       person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")),
       person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
@@ -41,6 +42,7 @@ reference:
       - gen_sta_xml
       - gen_tec_xml
       - gen_usms_xml
+      - gen_general_param_xml
 
   - title: "Upgrade JavaStics XML files from version 9.2 or (9.1) to 10.0"
     desc: Functions for upgrading parameter files
@@ -66,6 +68,8 @@ reference:
       - get_usms_files
       - get_usms_list
       - get_soils_list
+      - get_cultivars_list
+      - get_cultivars_param
 
   - title: "Generate Stics Input files (Text format)"
     desc: Input parameters files, outputs definition files or observations files
@@ -115,3 +119,5 @@ reference:
       - is_unix
       - is_windows
       - "`[.cropr_simulation`"
+      - compute_day_from_date
+      - compute_date_from_day
