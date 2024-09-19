@@ -150,12 +150,12 @@ get_file_ <- function(workspace,
   # names
   if (length(workspace_files) && !is.null(usm_name)) {
     idx <- lapply(str2regex(usm_name),
-                  function(y) {
-                    # using optional "p" or "a" in pattern for associated crops
-                    # p for principal crop, a for associated crop
-                    patt <- paste0(y, "[a|p]?\\.", file_ext)
-                    grep(pattern = patt, x = workspace_files)
-                  }
+      function(y) {
+        # using optional "p" or "a" in pattern for associated crops
+        # p for principal crop, a for associated crop
+        patt <- paste0(y, "[a|p]?\\.", file_ext)
+        grep(pattern = patt, x = workspace_files)
+      }
     )
     usm_idx <- unlist(lapply(idx, function(x) length(x) > 0))
     files_idx <- unlist(idx)
@@ -167,12 +167,12 @@ get_file_ <- function(workspace,
     workspace_sub <- file.path(workspace, usm_name)
     workspace_files_sub <- unlist(
       lapply(workspace_sub,
-             {
-               function(x) list.files(path = x,
-                                      pattern = file_pattern,
-                                      recursive = FALSE,
-                                      full.names = TRUE)
-             }
+        function(x) {
+          list.files(path = x,
+                     pattern = file_pattern,
+                     recursive = FALSE,
+                     full.names = TRUE)
+        }
       )
     )
   }
@@ -183,11 +183,11 @@ get_file_ <- function(workspace,
     common_idx <- basename(workspace_files_sub) %in% workspace_files
     if (any(common_idx)) {
       warning("Files exist in both ",
-           workspace,
-           " and ",
-           workspace_sub[common_idx],
-           ": \n",
-           paste(basename(workspace_files_sub)[common_idx], collapse = ", ")
+        workspace,
+        " and ",
+        workspace_sub[common_idx],
+        ": \n",
+        paste(basename(workspace_files_sub)[common_idx], collapse = ", ")
       )
     }
   } else {
@@ -245,8 +245,13 @@ get_file_ <- function(workspace,
   # the .sti files as information.
   if (is.null(usms_filepath)) {
     # Getting sim/obs files list from directory
+    # adding the usm dir names as files list names
+    files_list <- as.list(basename(workspace_files))
+    names(files_list) <- basename(dirname(workspace_files))
+
     file_name <-
-      parse_mixed_file(file_names = as.list(basename(workspace_files)), type = type)
+      parse_mixed_file(file_names = files_list, type = type)
+
     usms <- names(file_name)
 
     # Selecting using usm_name
@@ -274,8 +279,10 @@ get_file_ <- function(workspace,
   if (length(workspace) > 1) {
     idx <- sapply(
       str2regex(basename(workspace)),
-      function(y) grep(pattern = paste0("^", y, "$"),
-                       x = names(file_name))
+      function(y) {
+        grep(pattern = paste0("^", y, "$"),
+             x = names(file_name))
+      }
     )
 
 
@@ -462,7 +469,9 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
   type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
   if (type == "sim") {
+    #usm_pattern <- "^(mod_s)|(\\.sti)$"
     usm_pattern <- "^(mod_s)|(\\.sti)$"
+    mixed_start <- "^(mod_s(a|p))"
     mixed_pattern <- "^(mod_s(a|p))|(\\.sti)$"
     associated_pattern <- "^mod_sa"
   } else {
@@ -471,24 +480,49 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
     associated_pattern <- "a\\.obs$"
   }
 
-  usm_names <- gsub(pattern = usm_pattern, replacement = "", x = file_names)
-  names(file_names) <- usm_names
+  # Getting usm names from file_names list names
+  usm_names <- names(file_names)
+  if (type == "sim") {
+    starting_filter <- grepl(pattern = mixed_start, x = file_names)
+  } else {
+    starting_filter <- rep(TRUE,length(file_names))
+  }
 
-  is_potential_mixed <- grepl(mixed_pattern, file_names)
+  # Getting usm names from files names
+  usm_name_potential_mixed <- file_names
+  usm_name_potential_mixed[starting_filter] <-
+    gsub(pattern = mixed_pattern,
+         replacement = "",
+         x = file_names[starting_filter])
 
-  usm_name_potential_mixed <-
-    gsub(pattern = mixed_pattern, replacement = "", x = file_names)
+  # Comparing usm names and potential mixed usm names
+  # or usm_name_potential_mixed does not contain .obs
+  is_potential_mixed <- usm_names == usm_name_potential_mixed |
+    !grepl(pattern = usm_pattern, usm_name_potential_mixed)
+
+  # not any potential mixed usm
+  # fixing usm names to file_names list using files names
+  if (!any(is_potential_mixed)) {
+    names(file_names) <- gsub(pattern = usm_pattern,
+                              replacement = "",
+                              x = file_names)
+    return(file_names)
+  }
 
   potential_mixed <- usm_name_potential_mixed[is_potential_mixed]
 
-  file_names2 <- file_names
 
   mixed_and_not_duplicated <-
     seq_along(file_names)[is_potential_mixed][!duplicated(potential_mixed)]
 
+  file_names2 <- vector(
+    mode = "list",
+    length = (length(mixed_and_not_duplicated) + sum(!is_potential_mixed))
+  )
+
   for (i in mixed_and_not_duplicated) {
     mixed <- which(
-      usm_name_potential_mixed[i] == usm_name_potential_mixed &
+      (usm_name_potential_mixed[[i]] == usm_name_potential_mixed) &
         is_potential_mixed
     )
 
@@ -500,16 +534,28 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
       file_names2[[i]] <-
         c(mixed_names[-associated_index], mixed_names[associated_index])
 
-      names(file_names2)[i] <- usm_name_potential_mixed[i]
+      names(file_names2)[i] <- usm_name_potential_mixed[[i]]
     } else {
-      # Here we thougth it was mixed, but it really is not because
+      # Here we thought it was mixed, but it really is not because
       # we did not found another associated file with the same name
       # modulo "a" or "p"
+      file_names2[i] <- file_names[i]
       names(file_names2)[i] <-
-        gsub(pattern = usm_pattern, replacement = "", x = file_names2[i])
+        gsub(pattern = usm_pattern, replacement = "", x = file_names[i])
     }
   }
-  file_names2[c(which(!is_potential_mixed), mixed_and_not_duplicated)]
+  # adding remaining not mixed usms files
+  if (any(!is_potential_mixed)) {
+    idx <- setdiff(seq_along(file_names2), seq_along(mixed_and_not_duplicated))
+    file_names2[idx] <- file_names[!is_potential_mixed]
+    names(file_names2)[idx] <-
+      gsub(pattern = usm_pattern,
+        replacement = "",
+        x = file_names[!is_potential_mixed]
+      )
+  }
+  #file_names2[c(which(!is_potential_mixed), mixed_and_not_duplicated)]
+  file_names2
 }
 
 
