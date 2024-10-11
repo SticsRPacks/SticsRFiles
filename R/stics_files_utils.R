@@ -63,7 +63,7 @@ get_examples_path <- function(file_type, stics_version = "latest",
   if (any(is_na_dirs))
     stop("Not any data in examples for ",
          paste(file_type[is_na_dirs], collapse = ", "),
-         "and version ", version_name)
+         " and version ", version_name)
 
   files_str <- unlist(
     lapply(file_type,
