@@ -169,11 +169,11 @@ xml_dir <- get_examples_path(file_type = "xml", stics_version = stics_version)
 
 # For linux
 #> "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/
-#> extdata/xml/examples/V10.0"
+#> extdata/xml/examples/V10.2.0"
 
 # For windows
 #> "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/
-#> extdata/xml/examples/V10.0"
+#> extdata/xml/examples/V10.2.0"
 
 ```
 
@@ -187,19 +187,19 @@ xml_files <- list.files(path = xml_dir, pattern = ".xml$", full.names = TRUE)
 
 # For linux
 #> [1] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml
-#> /examples/V10.0/file_ini.xml"
+#> /examples/V10.2.0/file_ini.xml"
 #> [2] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml
-#> /examples/V10.0/file_plt.xml"
+#> /examples/V10.2.0/file_plt.xml"
 #> [3] "/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml
-#> /examples/V10.0/file_sta.xml"
+#> /examples/V10.2.0/file_sta.xml"
 
 # For windows
 #> [1] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/
-#> examples/V10.0/file_ini.xml"
+#> examples/V10.2.0/file_ini.xml"
 #> [2] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/
-#> examples/V10.0/file_plt.xml"
+#> examples/V10.2.0/file_plt.xml"
 #> [3] "C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/
-#> examples/V10.0/file_sta.xml"
+#> examples/V10.2.0/file_sta.xml"
 
 ```
 

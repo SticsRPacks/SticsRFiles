@@ -41,7 +41,7 @@ One can either transform a complete workspace directory at once or each kind of 
 example_data <- SticsRFiles::download_data(out_dir = tempdir(),
                                           example_dirs = "study_case_1", "V9.2")
 workspace <- file.path(example_data, "XmlFiles")
-out_dir <- file.path(tempdir(), "XmlFiles_V10.0")
+out_dir <- file.path(tempdir(), "XmlFiles_V10.2.0")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 javastics <-
   "/home/plecharpent/tmp/TEST_UPDATE_XML_V9_V10/JavaSTICS-1.41-stics-9.2"
@@ -57,7 +57,7 @@ So, apart from the XML files, some other files as outputs definition files (*.mo
 
 ```{r, eval = FALSE, results='markup'}
 workspace <- "/path/to/workspace/dir/V9.2"
-out_dir <- "/path/to/out/dir/V10.0"
+out_dir <- "/path/to/out/dir/V10.2.0"
 javastics <- "/path/to/JavaSTICS-1.41-stics-9.2"
 upgrade_workspace_xml(workspace = workspace, javastics = javastics,
                       out_dir = out_dir)
@@ -65,9 +65,9 @@ upgrade_workspace_xml(workspace = workspace, javastics = javastics,
 Here is the output display indicating the treated files:
 
 <pre style="font-size:11px;">
-Upgrading files from version V9.2 to V10.0    
+Upgrading files from version V9.2 to V10.2.0    
 From:  /path/to/workspace/dir/V9.2   
-To:  /path/to/out/dir/V10.0    
+To:  /path/to/out/dir/V10.2.0    
 -----------------------------------   
 param_gen.xml   
 param_new_form.xml   
@@ -108,7 +108,7 @@ For example, the **`usms.xml`** file is to be upgraded as follows:
 
 ```{r, include = FALSE, eval=FALSE}
 usms_path <- file.path(example_data, "XmlFiles", "usms.xml")
-out_dir <- file.path(tempdir(), "XmlFiles_V10.0")
+out_dir <- file.path(tempdir(), "XmlFiles_V10.2.0")
 param_gen_path <- file.path(javastics, "config", "param_gen.xml")
 upgrade_usms_xml(file = usms_path, param_gen_file = param_gen_path,
                  out_dir = out_dir, overwrite = TRUE)
@@ -116,7 +116,7 @@ upgrade_usms_xml(file = usms_path, param_gen_file = param_gen_path,
 
 ```{r, eval = FALSE}
 usms_path <- "/path/to/workspace/dir/V9.2/usms.xml"
-out_dir <- "/path/to/workspace/dir/V10.0"
+out_dir <- "/path/to/workspace/dir/V10.2.0"
 param_gen_path <- "/path/to/JavaSTICS-1.41-stics-9.2/config/param_gen.xml"
 upgrade_usms_xml(file = usms_path, param_gen_file = param_gen_path,
                  out_dir = out_dir)
