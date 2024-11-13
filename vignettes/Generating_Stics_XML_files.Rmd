@@ -462,7 +462,7 @@ Nothing is to be done for specifying parameters values, the function is to be ca
 gen_general_param_xml(out_dir = workspace_path)
 
 # or with a specific version
-gen_general_param_xml(out_dir = workspace_path, stics_version = "V10.0")
+gen_general_param_xml(out_dir = workspace_path, stics_version = "V10.2.0")
 
 ```
 
