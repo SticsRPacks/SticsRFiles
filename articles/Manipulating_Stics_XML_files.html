@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
       <h1 data-toc-skip>Manipulating STICS XML files</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.4.0/vignettes/Manipulating_Stics_XML_files.Rmd" class="external-link"><code>vignettes/Manipulating_Stics_XML_files.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.5.0/vignettes/Manipulating_Stics_XML_files.Rmd" class="external-link"><code>vignettes/Manipulating_Stics_XML_files.Rmd</code></a></small>
       <div class="hidden name"><code>Manipulating_Stics_XML_files.Rmd</code></div>
 
     </div>
@@ -130,7 +130,7 @@ example, getting soil names/parameters using a criterion like
 <p>Exploring files content for files sets are also possible, but not
 replacing parameters values.</p>
 <p>This document has been generated using the latest STICS version
-<strong>V10.1.0</strong>.</p>
+<strong>V10.2.0</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="understanding-what-are-parameters-in-stics-xml-files">Understanding what are parameters in STICS XML files<a class="anchor" aria-label="anchor" href="#understanding-what-are-parameters-in-stics-xml-files"></a>
@@ -287,10 +287,10 @@ the SticsRFiles installation directory.</p>
 <code class="sourceCode R"><span><span class="va">xml_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_examples_path.html">get_examples_path</a></span><span class="op">(</span>file_type <span class="op">=</span> <span class="st">"xml"</span>, stics_version <span class="op">=</span> <span class="va">stics_version</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># For linux &gt; '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/ &gt;</span></span>
-<span><span class="co"># extdata/xml/examples/V10.0'</span></span>
+<span><span class="co"># extdata/xml/examples/V10.2.0'</span></span>
 <span></span>
 <span><span class="co"># For windows &gt; 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/ &gt;</span></span>
-<span><span class="co"># extdata/xml/examples/V10.0'</span></span></code></pre></div>
+<span><span class="co"># extdata/xml/examples/V10.2.0'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="examples-files">Examples files<a class="anchor" aria-label="anchor" href="#examples-files"></a>
@@ -303,19 +303,19 @@ the SticsRFiles installation directory.</p>
 <span></span>
 <span><span class="co"># For linux &gt; [1]</span></span>
 <span><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml &gt;</span></span>
-<span><span class="co"># /examples/V10.0/file_ini.xml' &gt; [2]</span></span>
+<span><span class="co"># /examples/V10.2.0/file_ini.xml' &gt; [2]</span></span>
 <span><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml &gt;</span></span>
-<span><span class="co"># /examples/V10.0/file_plt.xml' &gt; [3]</span></span>
+<span><span class="co"># /examples/V10.2.0/file_plt.xml' &gt; [3]</span></span>
 <span><span class="co"># '/path/to/user/R/x86_64-pc-linux-gnu-library/3.6/SticsRFiles/extdata/xml &gt;</span></span>
-<span><span class="co"># /examples/V10.0/file_sta.xml'</span></span>
+<span><span class="co"># /examples/V10.2.0/file_sta.xml'</span></span>
 <span></span>
 <span><span class="co"># For windows &gt; [1]</span></span>
 <span><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/ &gt;</span></span>
-<span><span class="co"># examples/V10.0/file_ini.xml' &gt; [2]</span></span>
+<span><span class="co"># examples/V10.2.0/file_ini.xml' &gt; [2]</span></span>
 <span><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/ &gt;</span></span>
-<span><span class="co"># examples/V10.0/file_plt.xml' &gt; [3]</span></span>
+<span><span class="co"># examples/V10.2.0/file_plt.xml' &gt; [3]</span></span>
 <span><span class="co"># 'C:/Users/username/Documents/R/win-lib/3.6/SticsRFiles/extdata/xml/ &gt;</span></span>
-<span><span class="co"># examples/V10.0/file_sta.xml'</span></span></code></pre></div>
+<span><span class="co"># examples/V10.2.0/file_sta.xml'</span></span></code></pre></div>
 <p>The corresponding files types to file names is given in the above
 table:</p>
 <table class="table">
@@ -390,7 +390,7 @@ table:</p>
 </h3>
 <p>The <code>get_param_info</code> function search is performed in a
 parameter table stored internally in the SticsRFiles library with
-respect to the model version (V10.1.0 as default one).</p>
+respect to the model version (V10.2.0 as default one).</p>
 <p>This function uses 2 optional arguments i.e.: * <code>param</code> a
 name or a part of a parameter name (or a vector of) for searching in
 parameters names * and/or <code>keyword</code> for searching in the
@@ -1278,7 +1278,7 @@ queries or replacement.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
