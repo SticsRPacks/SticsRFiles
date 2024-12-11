@@ -24,7 +24,7 @@
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_sols_xml(
-#'   file = file.path(dir_path,"sols.xml" ),
+#'   file = file.path(dir_path, "sols.xml"),
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
@@ -36,8 +36,6 @@ upgrade_sols_xml <- function(file,
                              target_version = "V10.0",
                              check_version = TRUE,
                              overwrite = FALSE) {
-
-
   # hecking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
@@ -84,15 +82,19 @@ upgrade_sols_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc, new_version = target_version,
-                       overwrite = overwrite)
+  set_xml_file_version(old_doc,
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
   # Checking if layer @nom are up to date (old @nom = horizon)
   tableau_noms <- unlist(get_nodes(old_doc, "//tableau/@nom"))
 
   if (any(grep(pattern = "horizon", tableau_noms))) {
-    new_names <- unlist(lapply(tableau_noms,
-        function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")))
+    new_names <- unlist(lapply(
+      tableau_noms,
+      function(x) gsub(pattern = "horizon(.*)", x, replacement = "layer\\1")
+    ))
     set_attrs_values(old_doc, "//tableau", "nom", new_names)
   }
 

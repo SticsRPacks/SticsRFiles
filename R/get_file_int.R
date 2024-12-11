@@ -29,7 +29,6 @@ get_file_int <- function(workspace,
                          filename,
                          plant_name = NULL,
                          verbose = TRUE) {
-
   if (verbose) message(filename)
 
   if (is.list(filename)) filename <- unlist(filename)
@@ -49,9 +48,9 @@ get_file_int <- function(workspace,
 
   out_table <- mapply(function(x, y) {
     out <- try(data.table::fread(file.path(workspace, x),
-                                 data.table = FALSE,
-                                 na.strings = c("************", "NA"),
-                                 stringsAsFactors = FALSE
+      data.table = FALSE,
+      na.strings = c("************", "NA"),
+      stringsAsFactors = FALSE
     ))
 
     # Removing empty extra lines (without year)
@@ -59,8 +58,10 @@ get_file_int <- function(workspace,
 
 
     if (inherits(out, "try-error")) {
-      cli::cli_alert_warning(paste0("couldn't find valid file for ",
-                                    "{.val {file.path(workspace,x)}}"))
+      cli::cli_alert_warning(paste0(
+        "couldn't find valid file for ",
+        "{.val {file.path(workspace,x)}}"
+      ))
       return(NULL)
     }
     colnames(out) <- var_to_col_names(colnames(out))
@@ -75,16 +76,16 @@ get_file_int <- function(workspace,
   out_table <- dplyr::bind_rows(out_table)
 
   if (nrow(out_table) > 0) {
-
     out_table <- dplyr::mutate(out_table,
-                               Date = as.POSIXct(
-                                 x = paste(out_table$ian,
-                                           out_table$mo,
-                                           out_table$jo,
-                                           sep = "-"),
-                                 format = "%Y-%m-%d",
-                                 tz = "UTC"
-                               )
+      Date = as.POSIXct(
+        x = paste(out_table$ian,
+          out_table$mo,
+          out_table$jo,
+          sep = "-"
+        ),
+        format = "%Y-%m-%d",
+        tz = "UTC"
+      )
     ) %>%
       dplyr::relocate(dplyr::all_of("Date")) %>%
       dplyr::select(-dplyr::all_of(c("ian", "mo", "jo", "jul")))

@@ -1,4 +1,3 @@
-
 #' Remove parent node of a parameter
 #'
 #' @description Remove a parent node from an XML file.
@@ -15,7 +14,8 @@
 #'
 #' # removing all the parent nodes the parameter belongs to
 #' remove_parent_from_doc(tec_doc,
-#'                                      param_name = "julapI_or_sum_upvt")
+#'   param_name = "julapI_or_sum_upvt"
+#' )
 #'
 #' # removing some of the parent nodes the parameter belongs to
 #' remove_parent_from_doc(tec_doc,
@@ -37,5 +37,4 @@ remove_parent_from_doc <- function(xml_doc,
     remove_parent = TRUE,
     nodes_ids = nodes_ids
   )
-
 }

@@ -63,13 +63,15 @@
 #' # Get parameters for a specific plant
 #' get_param_txt(workspace = path, plant_id = 1)
 #' get_param_txt(workspace = path, param = "durvieF", plant_id = 1)
-#' get_param_txt(workspace = path, param = "durvieF", plant_id = 1,
-#' variety = varieties)
+#' get_param_txt(
+#'   workspace = path, param = "durvieF", plant_id = 1,
+#'   variety = varieties
+#' )
 #'
 #' # Get parameters for specific interventions or soil layers
-#' get_param_txt(workspace = path, param = "amount", value_id = c(1,3))
-#' get_param_txt(workspace = path, param = "Hinitf", value_id = c(1,3))
-#' get_param_txt(workspace = path, param = "epc", value_id = c(1,3))
+#' get_param_txt(workspace = path, param = "amount", value_id = c(1, 3))
+#' get_param_txt(workspace = path, param = "Hinitf", value_id = c(1, 3))
+#' get_param_txt(workspace = path, param = "epc", value_id = c(1, 3))
 #'
 #' @export
 #'
@@ -82,7 +84,6 @@ get_param_txt <- function(workspace,
                           stics_version = "latest",
                           dirpath = lifecycle::deprecated(),
                           ...) {
-
   # dirpath
   if (lifecycle::is_present(dirpath)) {
     lifecycle::deprecate_warn(
@@ -96,32 +97,38 @@ get_param_txt <- function(workspace,
   stics_version <- check_version_compat(stics_version = stics_version)
 
   ini <- get_ini_txt(file.path(dirpath, "ficini.txt"),
-                     stics_version = stics_version)
+    stics_version = stics_version
+  )
 
   # specifying plant(s) to use, and checking if a given plant_id is
   # available ones
   avail_plant_id <- seq_len(ini$nbplantes)
 
-  if(is.null(plant_id)) {
+  if (is.null(plant_id)) {
     plant_id <- avail_plant_id
   } else {
-    if(!all(plant_id %in% avail_plant_id))
-      stop("Given plant id(s) (",
-           paste(plant_id, collapse = ","), ") ",
-           " do(es) not match available one(s) (",
-           paste(avail_plant_id, collapse = ","), ")")
+    if (!all(plant_id %in% avail_plant_id)) {
+      stop(
+        "Given plant id(s) (",
+        paste(plant_id, collapse = ","), ") ",
+        " do(es) not match available one(s) (",
+        paste(avail_plant_id, collapse = ","), ")"
+      )
+    }
   }
 
 
   general <- get_general_txt(file.path(dirpath, "tempopar.sti"))
 
   soil <- get_soil_txt(file.path(dirpath, "param.sol"),
-                       stics_version = stics_version)
+    stics_version = stics_version
+  )
 
   station <- get_station_txt(file.path(dirpath, "station.txt"))
 
   usm <- get_usm_txt(file.path(dirpath, "new_travail.usm"),
-                     plant_id = plant_id)
+    plant_id = plant_id
+  )
 
   tmp <- get_tmp_txt(file.path(dirpath, "tempoparv6.sti"))
 
@@ -131,11 +138,11 @@ get_param_txt <- function(workspace,
   several_fert <- several_thin <- is_pasture <- NULL
   tmp_names <- names(tmp)
   several_fert <- ifelse("option_engrais_multiple" %in% tmp_names &&
-                           tmp$option_engrais_multiple == 1, TRUE, FALSE)
+    tmp$option_engrais_multiple == 1, TRUE, FALSE)
   several_thin <- ifelse("option_thinning" %in% tmp_names &&
-                           tmp$option_thinning == 1, TRUE, FALSE)
+    tmp$option_thinning == 1, TRUE, FALSE)
   is_pasture <- ifelse("option_pature" %in% tmp_names &&
-                         tmp$option_pature == 1, TRUE, FALSE)
+    tmp$option_pature == 1, TRUE, FALSE)
 
   tec <- plant <- stats::setNames(
     vector(mode = "list", length = ini$nbplantes),
@@ -160,37 +167,43 @@ get_param_txt <- function(workspace,
       ))
 
     varieties[[i]] <-
-      get_plant_txt(file = file.path(dirpath,
-                                     paste0("ficplt", i, ".txt")))$codevar
+      get_plant_txt(file = file.path(
+        dirpath,
+        paste0("ficplt", i, ".txt")
+      ))$codevar
 
     tec_variety <- tec[[paste0("plant", i)]]$variete
 
-    alert_msg <- paste0("Variety not found in plant file. Possible ",
-                        "varieties are: {.val {varieties}}")
+    alert_msg <- paste0(
+      "Variety not found in plant file. Possible ",
+      "varieties are: {.val {varieties}}"
+    )
 
     plant[paste0("plant", i)] <-
       list(get_plant_txt(file.path(dirpath, paste0("ficplt", i, ".txt")),
-                         variety =
-                           if (is.null(variety[[i]])) {
-                             if (!is.null(param)) {
-                               varieties[[i]][tec_variety]
-                             } else {
-                               NULL
-                             }
-                           } else {
-                             # variety
-                             if (is.character(variety[[i]])) {
-                               variety[[i]] <- match(variety[[i]],
-                                                     varieties[[i]])
-                               if (any(is.na(variety))) {
-                                 cli::cli_alert_danger(alert_msg)
-                                 return()
-                               }
-                               varieties[[i]][variety[[i]]]
-                             } else {
-                               varieties[[i]][variety[[i]]]
-                             }
-                           }
+        variety =
+          if (is.null(variety[[i]])) {
+            if (!is.null(param)) {
+              varieties[[i]][tec_variety]
+            } else {
+              NULL
+            }
+          } else {
+            # variety
+            if (is.character(variety[[i]])) {
+              variety[[i]] <- match(
+                variety[[i]],
+                varieties[[i]]
+              )
+              if (any(is.na(variety))) {
+                cli::cli_alert_danger(alert_msg)
+                return()
+              }
+              varieties[[i]][variety[[i]]]
+            } else {
+              varieties[[i]][variety[[i]]]
+            }
+          }
       ))
 
     # Fixes the current variety
@@ -214,9 +227,10 @@ get_param_txt <- function(workspace,
   # using or not ids for soil layers, technical interventions (ini, soil or
   # tec parameters files)
   parameters <- filter_param(parameters,
-                             param = param,
-                             exact = exact,
-                             value_id = value_id)
+    param = param,
+    exact = exact,
+    value_id = value_id
+  )
 
 
   return(parameters)
@@ -235,8 +249,10 @@ filter_param <- function(in_list,
     name <- names_vec[[i]]
 
     if (is.list(in_list[[name]])) {
-      tmp <- filter_param(in_list[[name]], param = param,
-                          exact = exact, value_id = value_id)
+      tmp <- filter_param(in_list[[name]],
+        param = param,
+        exact = exact, value_id = value_id
+      )
 
       if (length(tmp) > 0) out_list[[name]] <- tmp
       next
@@ -258,15 +274,18 @@ filter_param <- function(in_list,
     if (any(idx)) {
       out_list[[name]] <- in_list[[name]]
 
-      if(is.null(value_id)) next
+      if (is.null(value_id)) next
 
       # checking if given ids exist in parameter values
       avail_ids <- seq_len(length(out_list[[name]]))
-      if (!all(value_id %in% avail_ids))
-        stop("Given ids (",
-             paste(value_id, collapse = ", "),
-             ") are not all available in existing ids (",
-             paste(avail_ids, collapse = ", "),")")
+      if (!all(value_id %in% avail_ids)) {
+        stop(
+          "Given ids (",
+          paste(value_id, collapse = ", "),
+          ") are not all available in existing ids (",
+          paste(avail_ids, collapse = ", "), ")"
+        )
+      }
 
       # sub scripting values
       out_list[[name]] <- out_list[[name]][value_id]
@@ -321,8 +340,10 @@ filter_param <- function(in_list,
 #' # Read the tec file directly:
 #'
 #' # First, get the parameters from the tmp file:
-#' tmp <- get_tmp_txt(file = file.path(get_examples_path(file_type = "txt"),
-#'                                     "tempoparv6.sti"))
+#' tmp <- get_tmp_txt(file = file.path(
+#'   get_examples_path(file_type = "txt"),
+#'   "tempoparv6.sti"
+#' ))
 #' several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
 #' several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
 #' is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
@@ -340,7 +361,6 @@ filter_param <- function(in_list,
 get_ini_txt <- function(file = "ficini.txt",
                         stics_version,
                         filepath = lifecycle::deprecated()) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -353,8 +373,9 @@ get_ini_txt <- function(file = "ficini.txt",
 
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  if (!file.exists(filepath))
+  if (!file.exists(filepath)) {
     stop(filepath, ": does not exist !")
+  }
 
   params <- readLines(filepath)
   ini <- list()
@@ -366,11 +387,13 @@ get_ini_txt <- function(file = "ficini.txt",
   stics_version_num <- get_version_num(stics_version = stics_version)
 
   if (stics_version_num < 10) {
-
-    if (length(params) > 48)
-      stop("The used STICS version ",
-           stics_version_num,
-           " does not correspond to the file content (STICS version >= 10)")
+    if (length(params) > 48) {
+      stop(
+        "The used STICS version ",
+        stics_version_num,
+        " does not correspond to the file content (STICS version >= 10)"
+      )
+    }
 
     ini$plant$plant1 <- list(
       stade0 = params[[4]],
@@ -398,11 +421,13 @@ get_ini_txt <- function(file = "ficini.txt",
     ini$NO3init <- params[[26]]
     ini$NH4init <- params[[28]]
   } else {
-
-    if (length(params) < 48)
-      stop("The used STICS version ",
-           stics_version_num,
-           " does not correspond to the file content (STICS version < 10)")
+    if (length(params) < 48) {
+      stop(
+        "The used STICS version ",
+        stics_version_num,
+        " does not correspond to the file content (STICS version < 10)"
+      )
+    }
 
     ini$plant$plant1 <- list(
       stade0 = params[[4]],
@@ -454,7 +479,6 @@ get_ini_txt <- function(file = "ficini.txt",
 #' @export
 get_general_txt <- function(file = "tempopar.sti",
                             filepath = lifecycle::deprecated()) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -473,7 +497,6 @@ get_general_txt <- function(file = "tempopar.sti",
 #' @export
 get_tmp_txt <- function(file = "tempoparv6.sti",
                         filepath = lifecycle::deprecated()) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -491,7 +514,6 @@ get_tmp_txt <- function(file = "tempoparv6.sti",
 #' @export
 get_plant_txt <- function(file = "ficplt1.txt", variety = NULL,
                           filepath = lifecycle::deprecated()) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -546,7 +568,6 @@ get_tec_txt <- function(file = "fictec1.txt",
                         is_pasture = NULL,
                         filepath = lifecycle::deprecated(),
                         ...) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -557,8 +578,9 @@ get_tec_txt <- function(file = "fictec1.txt",
     filepath <- file # to remove when we update inside the function
   }
 
-  if (!file.exists(filepath))
+  if (!file.exists(filepath)) {
     stop(filepath, ": does not exist !")
+  }
 
 
   # TODO: add dot args management
@@ -811,7 +833,6 @@ parname <- function(index, params, idx = NULL) {
 }
 
 val <- function(pval = list(index = 1, val = NA), values) {
-
   if (pval$index == length(values)) {
     return()
   }
@@ -870,7 +891,7 @@ get_tec_txt_ <- function(params, values) {
     # multiple parameters
     if (all(param == parname(pval$index, params, -2))) {
       value <- as.data.frame(as.list(value),
-                             stringsAsFactors = FALSE
+        stringsAsFactors = FALSE
       )
       names(value) <- param
       v <- rbind(v, value)
@@ -882,7 +903,7 @@ get_tec_txt_ <- function(params, values) {
       next
     } else {
       v <- as.data.frame(as.list(value),
-                         stringsAsFactors = FALSE
+        stringsAsFactors = FALSE
       )
       names(v) <- param
     }
@@ -900,7 +921,6 @@ get_tec_txt_ <- function(params, values) {
 get_soil_txt <- function(file = "param.sol",
                          stics_version,
                          filepath = lifecycle::deprecated()) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -913,8 +933,9 @@ get_soil_txt <- function(file = "param.sol",
 
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  if (!file.exists(filepath))
+  if (!file.exists(filepath)) {
     stop(filepath, ": does not exist !")
+  }
 
   params <- readLines(filepath, warn = FALSE)
   soil <- vector(mode = "list", length = 0)
@@ -1008,7 +1029,6 @@ get_station_txt <- function(file = "station.txt",
 get_usm_txt <- function(file = "new_travail.usm",
                         plant_id = NULL,
                         filepath = lifecycle::deprecated()) {
-
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -1024,7 +1044,9 @@ get_usm_txt <- function(file = "new_travail.usm",
   idx <- plant_id == 1:2
 
   if (is.null(plant_id) ||
-      (length(plant_id) == 2 && all(idx))) return(usm_params)
+    (length(plant_id) == 2 && all(idx))) {
+    return(usm_params)
+  }
 
   # getting specific info attached to plant id
   # fplt1 ou fplt2, ftec1 ou ftec2, flai1 ou flai2,
@@ -1057,16 +1079,18 @@ get_usm_txt <- function(file = "new_travail.usm",
 #'
 #' @examples
 #' \dontrun{
-#' path <- file.path(get_examples_path(file_type = "txt",
-#'                                    stics_version = "V8.5"), "station.txt")
+#' path <- file.path(get_examples_path(
+#'   file_type = "txt",
+#'   stics_version = "V8.5"
+#' ), "station.txt")
 #' get_txt_generic(path)
 #' }
 #'
 get_txt_generic <- function(file,
                             names = TRUE) {
-
-  if (!file.exists(file))
+  if (!file.exists(file)) {
     stop(file, ": does not exist !")
+  }
 
   params <- readLines(file)
 
@@ -1126,7 +1150,7 @@ char2num <- function(x) {
   }
 
   if (!all(grepl(pattern = "[0-9]", x = x)) ||
-      any(grepl(pattern = "[a-zA-Z]", x = x))) {
+    any(grepl(pattern = "[a-zA-Z]", x = x))) {
     return(x)
   }
 

@@ -24,15 +24,12 @@
 #'   file = file.path(dir_path, "param_gen.xml"),
 #'   out_dir = tempdir()
 #' )
-
 upgrade_param_gen_xml <- function(file,
                                   out_dir,
                                   stics_version = "V9.2",
                                   target_version = "V10.0",
                                   check_version = TRUE,
                                   overwrite = FALSE) {
-
-
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
@@ -68,8 +65,9 @@ upgrade_param_gen_xml <- function(file,
 
   # Setting file STICS version
   set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite)
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
   # Nodes to remove
   rm_names <- c("FINERT", "FMIN1", "FMIN2", "FMIN3", "khaut", "rayon", "concrr")
@@ -89,9 +87,9 @@ upgrade_param_gen_xml <- function(file,
   nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='k_desat']")
   if (!is.null(nodes_to_change)) {
     set_attrs_values(old_doc,
-                  path = "//param[@nom='k_desat']",
-                  attr_name = "nom",
-                  values_list = "kdesat"
+      path = "//param[@nom='k_desat']",
+      attr_name = "nom",
+      values_list = "kdesat"
     )
   }
 
@@ -123,8 +121,9 @@ upgrade_param_gen_xml <- function(file,
 
   # Writing to file param_gen.xml
   write_xml_file(old_doc,
-                 file.path(out_dir, basename(file)),
-                 overwrite = overwrite)
+    file.path(out_dir, basename(file)),
+    overwrite = overwrite
+  )
 
   XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))

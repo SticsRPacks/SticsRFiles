@@ -49,8 +49,6 @@ set_param_value <- function(xml_doc,
                             parent_name = NULL,
                             parent_sel_attr = NULL,
                             ...) {
-
-
   # Calling the for several parameters
   param_nb <- length(param_name)
 

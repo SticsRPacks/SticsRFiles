@@ -15,7 +15,6 @@
 #' @export
 #'
 get_cultivars_list <- function(file) {
-
   xml_doc <- xmldocument(file)
 
   stopifnot(is_stics_plt(xml_doc))
@@ -23,15 +22,17 @@ get_cultivars_list <- function(file) {
   xml_name <- "variete"
 
   cv_list <- unique(
-      unlist(
-          lapply(
-              XML::getNodeSet(doc = xml_doc@content,
-                              path = paste0("//", xml_name)),
-              function(x) {
-                XML::xmlGetAttr(x, "nom")
-              }
-          )
+    unlist(
+      lapply(
+        XML::getNodeSet(
+          doc = xml_doc@content,
+          path = paste0("//", xml_name)
+        ),
+        function(x) {
+          XML::xmlGetAttr(x, "nom")
+        }
       )
+    )
   )
 
   return(cv_list)

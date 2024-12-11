@@ -24,8 +24,6 @@
 #'
 add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
                             stics_version = "latest") {
-
-
   # Getting nodes types that may be added to xml_doc
   node_types <- get_xml_base_node()
 

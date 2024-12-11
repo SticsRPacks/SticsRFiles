@@ -11,6 +11,9 @@ test_that("Option choice", {
   expect_equal(
     length(
       unlist(get_option_choice_param_values(xml_path, "codetemp", "2"),
-             use.names = FALSE)),
-    14)
-  })
+        use.names = FALSE
+      )
+    ),
+    14
+  )
+})

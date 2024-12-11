@@ -1,4 +1,4 @@
-options(warn=-1)
+options(warn = -1)
 
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
@@ -108,7 +108,6 @@ test_that("output is always list, without usms.xml, banana, wheat sub-dir", {
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   outputs <- get_sim(path3, usm = c("banana", "wheat"))
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-
 })
 
 # Restoring usms.xml
@@ -117,7 +116,7 @@ if (file.exists(file.path(path, "usms.xml.ori"))) {
 }
 
 test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
-    outputs <- get_sim(path3, "banana",
+  outputs <- get_sim(path3, "banana",
     usms_file = file.path(path, "usms_example.xml")
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -126,7 +125,6 @@ test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
     usms_file = file.path(path, "usms_example.xml")
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-
 })
 
 unlink(file.path(path, "banana"))

@@ -10,6 +10,6 @@ context("Exist param ")
 test_that("exist parameter", {
   expect_true(exists_param(xml_doc, "cfes"))
   expect_vector(exists_param(xml_doc, c("cfes", "mulchbat")),
-                ptype = NULL, size = 2)
-
+    ptype = NULL, size = 2
+  )
 })

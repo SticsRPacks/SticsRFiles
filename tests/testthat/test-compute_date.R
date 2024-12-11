@@ -1,4 +1,3 @@
-
 context("Convert day numbers into calendar dates from a start year")
 
 test_that("a-single-day", {

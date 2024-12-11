@@ -50,8 +50,10 @@ keyword_lai_df <- data.frame(
   name = c("albedolai", "diftemp1intercoupe"),
   definition = c(
     "albedo of the crop including soil and vegetation",
-    paste("mean difference between crop and air temperatures during",
-          "the vegetative phase (emergence - maximum LAI)")
+    paste(
+      "mean difference between crop and air temperatures during",
+      "the vegetative phase (emergence - maximum LAI)"
+    )
   ),
   unit = c("SD", "degreeC"),
   type = c("real", "real"),
@@ -77,8 +79,6 @@ test_that("giving an existing partial variable name in var arg or keyword", {
 
   testthat::expect_equivalent(var_df, common_var_lai_df)
   testthat::expect_equivalent(keyword_df, common_keyword_lai_df)
-
-
 })
 
 var_etmetr_df <- data.frame(

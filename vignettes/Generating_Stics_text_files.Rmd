@@ -33,7 +33,7 @@ javastics_path <- params$javastics_path
 workspace_path <- params$workspace_path
 output_path <- params$output_path
 chunk_eval <- params$eval
-#java_cmd <- params$java_cmd
+# java_cmd <- params$java_cmd
 gen_usms_xml2txt <- SticsRFiles::gen_usms_xml2txt
 ```
 
@@ -61,7 +61,6 @@ workspace_path <- "example"
 
 # Specifying an output folder path
 output_path <- "/path/to/output/folder"
-
 ```
 
 ## Converting files into separated folders (one per usm)
@@ -69,8 +68,10 @@ output_path <- "/path/to/output/folder"
 ## Generating files for all the usms contained in the workspace
 
 # Into the workspace directory
-gen_usms_xml2txt(javastics_path,
-                 workspace_path)
+gen_usms_xml2txt(
+  javastics_path,
+  workspace_path
+)
 #> ℹ USM 'SugarCane' successfully created
 #> ℹ USM 'potato' successfully created
 #> ℹ USM 'banana' successfully created
@@ -119,42 +120,43 @@ gen_usms_xml2txt(javastics_path,
 #> ℹ USM 'cc_vetch' successfully created
 #> ℹ USM 'cc_CrimsonClover' successfully created
 #> ℹ USM 'proto_rice' successfully created
-
 ```
 
 ```{r convert_to_separate_2, eval = chunk_eval}
-
 # Into a specific output folder, with verbose mode turned off
 gen_usms_xml2txt(javastics_path,
-                 workspace_path,
-                 out_dir = output_path,
-                 verbose = FALSE)
+  workspace_path,
+  out_dir = output_path,
+  verbose = FALSE
+)
 
 
 ## Generating files for a subset of usms
 # Into the workspace directory
 gen_usms_xml2txt(javastics_path,
-                 workspace_path,
-                 usm = c("banana", "wheat"))
+  workspace_path,
+  usm = c("banana", "wheat")
+)
 #> ℹ USM 'banana' successfully created
 #> ℹ USM 'wheat' successfully created
 
 # Into a specific folder
 gen_usms_xml2txt(javastics_path,
-                 workspace_path,
-                 usm = c("banana", "wheat"),
-                 out_dir = output_path)
+  workspace_path,
+  usm = c("banana", "wheat"),
+  out_dir = output_path
+)
 #> ℹ USM 'banana' successfully created
 #> ℹ USM 'wheat' successfully created
-
 ```
 
 ```{r convert_to_separate_3, eval = chunk_eval}
 ## Getting returned information about files generation
 gen_info <- gen_usms_xml2txt(javastics_path,
-                             workspace_path,
-                             usm = c("banana", "wheat"),
-                             out_dir = output_path)
+  workspace_path,
+  usm = c("banana", "wheat"),
+  out_dir = output_path
+)
 #> ℹ USM 'banana' successfully created
 #> ℹ USM 'wheat' successfully created
 
@@ -186,16 +188,18 @@ gen_info
 # In this case the model files are overwritten at each gen_usms_xml2txt call !
 # In the workspace
 gen_usms_xml2txt(javastics_path,
-                 workspace_path,
-                 usm = "banana",
-                 dir_per_usm_flag = FALSE,
-                 verbose = FALSE)
+  workspace_path,
+  usm = "banana",
+  dir_per_usm_flag = FALSE,
+  verbose = FALSE
+)
 
 # In a specific folder
 gen_usms_xml2txt(javastics_path,
-                 workspace_path,
-                 usm = "banana",
-                 out_dir = output_path,
-                 dir_per_usm_flag = FALSE,
-                 verbose = FALSE)
+  workspace_path,
+  usm = "banana",
+  out_dir = output_path,
+  dir_per_usm_flag = FALSE,
+  verbose = FALSE
+)
 ```

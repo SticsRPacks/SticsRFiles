@@ -16,10 +16,12 @@
 #'
 #' @export
 #'
-compute_date_from_day <- function(day, start_year){
-  stopifnot(all(is.numeric(day)),
-            length(start_year) == 1,
-            is.numeric(start_year))
+compute_date_from_day <- function(day, start_year) {
+  stopifnot(
+    all(is.numeric(day)),
+    length(start_year) == 1,
+    is.numeric(start_year)
+  )
 
   return(as.Date(day - 1, origin = paste0(start_year, "-01-01")))
 }

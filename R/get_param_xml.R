@@ -44,7 +44,6 @@
 #' # Getting parameters for irrigation (date and quantity)
 #' get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 #'
-#'
 #' @export
 get_param_xml <- function(file,
                           param = NULL,
@@ -59,25 +58,31 @@ get_param_xml <- function(file,
 
   # Managing parameter names changes between versions:
   if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_param_xml(xml_file)",
-                              "get_param_xml(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_param_xml(xml_file)",
+      "get_param_xml(file)"
+    )
   } else {
     xml_file <- file # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(param_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_param_xml(param_name)",
-                              "get_param_xml(param)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_param_xml(param_name)",
+      "get_param_xml(param)"
+    )
   } else {
     param_name <- param # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(value)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_param_xml(value)",
-                              "get_param_xml(select_value)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_param_xml(value)",
+      "get_param_xml(select_value)"
+    )
   } else {
     value <- select_value # to remove when we update inside the function
   }
@@ -107,17 +112,23 @@ get_param_xml <- function(file,
 
   # If there are duplicated names in xml_file:
   is_duplicated_name <- xml_names %>% duplicated()
-  xml_names[is_duplicated_name] <- paste0("xml_",
-                                          which(is_duplicated_name == TRUE),
-                                          "_",
-                                          xml_names[is_duplicated_name])
+  xml_names[is_duplicated_name] <- paste0(
+    "xml_",
+    which(is_duplicated_name == TRUE),
+    "_",
+    xml_names[is_duplicated_name]
+  )
 
   # Fixing parameters with no values with NA
-  values[[1]] <- lapply(values[[1]],
-                        function(x) {
-                          if (length(x) == 0) return(NA)
-                          x
-                          })
+  values[[1]] <- lapply(
+    values[[1]],
+    function(x) {
+      if (length(x) == 0) {
+        return(NA)
+      }
+      x
+    }
+  )
 
 
   names(values) <- xml_names

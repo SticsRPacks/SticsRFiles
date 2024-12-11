@@ -36,81 +36,100 @@ setGeneric("calc_type", function(object) standardGeneric("calc_type"))
 # defined for xml_document
 
 setGeneric("xmldocument", function(file) standardGeneric("xmldocument"))
-setGeneric("set_content<-",
-           function(object, value) standardGeneric("set_content<-"))
+setGeneric(
+  "set_content<-",
+  function(object, value) standardGeneric("set_content<-")
+)
 
 setGeneric("get_content", function(object) standardGeneric("get_content"))
 
 setGeneric("load_content", function(object) standardGeneric("load_content"))
 setGeneric("is_loaded", function(object) standardGeneric("is_loaded"))
 
-setGeneric("is.xml_document",
-           function(object) standardGeneric("is.xml_document"))
+setGeneric(
+  "is.xml_document",
+  function(object) standardGeneric("is.xml_document")
+)
 
 # xml manipulations
 
-setGeneric("get_nodes",
-           function(object, path = NULL) standardGeneric("get_nodes"))
+setGeneric(
+  "get_nodes",
+  function(object, path = NULL) standardGeneric("get_nodes")
+)
 
 setGeneric("get_attrs", function(object, path) standardGeneric("get_attrs"))
 
-setGeneric("get_attrs_names",
-           function(object, path) standardGeneric("get_attrs_names"))
-
-setGeneric("get_attrs_values",
-           function(object,
-                    path,
-                    attr_list,
-                    nodes_ids = NULL) {
-             standardGeneric("get_attrs_values")
-           }
+setGeneric(
+  "get_attrs_names",
+  function(object, path) standardGeneric("get_attrs_names")
 )
 
-setGeneric("add_attrs",
-           function(object, path, named_vector) standardGeneric("add_attrs"))
-
-setGeneric("remove_attrs",
-           function(object, path, attr_names) standardGeneric("remove_attrs"))
-
-setGeneric("set_attrs_values",
-           function(object,
-                    path, attr_name,
-                    values_list,
-                    nodes_ids = NULL) {
-             standardGeneric("set_attrs_values")
-           }
+setGeneric(
+  "get_attrs_values",
+  function(object,
+           path,
+           attr_list,
+           nodes_ids = NULL) {
+    standardGeneric("get_attrs_values")
+  }
 )
 
-setGeneric("set_values",
-           function(object,
-                    path,
-                    values_list,
-                    nodes_ids = NULL) {
-             standardGeneric("set_values")
-           }
+setGeneric(
+  "add_attrs",
+  function(object, path, named_vector) standardGeneric("add_attrs")
 )
 
-setGeneric("get_values",
-           function(object,
-                    path,
-                    nodes_ids = NULL) {
-             standardGeneric("get_values")
-           }
+setGeneric(
+  "remove_attrs",
+  function(object, path, attr_names) standardGeneric("remove_attrs")
 )
 
-setGeneric("save_xml_doc",
-           function(object, xml_path) standardGeneric("save_xml_doc"))
+setGeneric(
+  "set_attrs_values",
+  function(object,
+           path, attr_name,
+           values_list,
+           nodes_ids = NULL) {
+    standardGeneric("set_attrs_values")
+  }
+)
+
+setGeneric(
+  "set_values",
+  function(object,
+           path,
+           values_list,
+           nodes_ids = NULL) {
+    standardGeneric("set_values")
+  }
+)
+
+setGeneric(
+  "get_values",
+  function(object,
+           path,
+           nodes_ids = NULL) {
+    standardGeneric("get_values")
+  }
+)
+
+setGeneric(
+  "save_xml_doc",
+  function(object, xml_path) standardGeneric("save_xml_doc")
+)
 
 setGeneric("clone_xml_doc", function(object) standardGeneric("clone_xml_doc"))
 
 # adding and removing nodes to doc
 
-setGeneric("add_nodes",
-           function(object,
-                    nodes_to_add,
-                    parent_path = NULL) {
-             standardGeneric("add_nodes")
-           }
+setGeneric(
+  "add_nodes",
+  function(object,
+           nodes_to_add,
+           parent_path = NULL) {
+    standardGeneric("add_nodes")
+  }
 )
 
 # removing nodes
