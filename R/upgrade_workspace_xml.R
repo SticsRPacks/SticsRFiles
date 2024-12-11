@@ -41,8 +41,6 @@ upgrade_workspace_xml <- function(workspace,
                                   plant = FALSE,
                                   overwrite = FALSE,
                                   ...) {
-
-
   # For testing if files are upgradable
   check_version <- FALSE
   verbose <- TRUE
@@ -94,7 +92,7 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the workspace dir to be converted
   if (!dir.exists(workspace) ||
-      !file.exists(file.path(workspace, "usms.xml"))) {
+    !file.exists(file.path(workspace, "usms.xml"))) {
     stop(
       workspace,
       ": the directory does not exist or is not a JavaSTICS workspace !"
@@ -106,7 +104,7 @@ upgrade_workspace_xml <- function(workspace,
 
   # Testing the JavaSTICS dir
   if (!dir.exists(javastics) ||
-      !file.exists(file.path(javastics, "JavaStics.exe"))) {
+    !file.exists(file.path(javastics, "JavaStics.exe"))) {
     stop(
       javastics,
       " : the directory does nor exist or is not a JavaSTICS one !"
@@ -115,12 +113,15 @@ upgrade_workspace_xml <- function(workspace,
 
 
   if (verbose) {
-    message(paste(
-      "Upgrading files from version", stics_version, "to",
-      target_version, "\n"),
+    message(
+      paste(
+        "Upgrading files from version", stics_version, "to",
+        target_version, "\n"
+      ),
       paste("From: ", workspace, "\n"),
       paste("To: ", out_dir, "\n"),
-      "-----------------------------------\n")
+      "-----------------------------------\n"
+    )
   }
 
   # Converting param_gen.xml
@@ -315,12 +316,14 @@ upgrade_workspace_xml <- function(workspace,
   # for getting information on output variables
   # (use get_var_info with the appropriate version string)
 
-  workspace_files_copy(workspace = workspace,
-                       file_type = c("mod", "obs", "lai", "meteo"),
-                       javastics = javastics,
-                       out_dir = out_dir,
-                       overwrite = overwrite,
-                       verbose = verbose)
+  workspace_files_copy(
+    workspace = workspace,
+    file_type = c("mod", "obs", "lai", "meteo"),
+    javastics = javastics,
+    out_dir = out_dir,
+    overwrite = overwrite,
+    verbose = verbose
+  )
 
 
 
@@ -355,8 +358,9 @@ upgrade_workspace_xml <- function(workspace,
   }
 
   if (verbose) {
-    message(paste0("-----------------------------------\n",
-                   "Files upgrade and copy is complete.\n")
-    )
+    message(paste0(
+      "-----------------------------------\n",
+      "Files upgrade and copy is complete.\n"
+    ))
   }
 }

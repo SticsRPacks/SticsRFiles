@@ -23,9 +23,13 @@ col_names_to_var <- function(var_list = c()) {
   # Getting the index of the variables to convert
   #
   idx_end_convert <- unlist(lapply(X = words, function(x) {
-    end_conv <- grepl("[n | 0-9*]|nboite|nboite-1|ao|as",
-                      x[length(x)])
-    if (end_conv) return(TRUE)
+    end_conv <- grepl(
+      "[n | 0-9*]|nboite|nboite-1|ao|as",
+      x[length(x)]
+    )
+    if (end_conv) {
+      return(TRUE)
+    }
     FALSE
   }))
 
@@ -44,9 +48,11 @@ col_names_to_var <- function(var_list = c()) {
   # for varname_1, var_name_1,
   # TODO: fix the case var_name_1_2
   conv_var_list <-
-    gsub("_(n{1}|\\d{1,2}|nboite|nboite-1|ao|as)$",
-         "(\\1",
-         conv_var_list)
+    gsub(
+      "_(n{1}|\\d{1,2}|nboite|nboite-1|ao|as)$",
+      "(\\1",
+      conv_var_list
+    )
 
   any_opening <- grepl("\\(", conv_var_list)
 

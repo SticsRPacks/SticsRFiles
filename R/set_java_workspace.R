@@ -22,8 +22,6 @@
 #'
 
 set_java_workspace <- function(javastics, workspace) {
-
-
   # checking javastics path
   check_java_path(javastics)
 
@@ -58,12 +56,12 @@ set_java_workspace <- function(javastics, workspace) {
   if (base::is.null(current_wd)) {
     n <- XML::xmlParseString(
       paste0("<entry key=\"workingDirectory.current\">", workspace, "</entry>")
-      )
+    )
     add_nodes(xml_pref, n)
   } else {
     # if it's not different from the new one,
     if (current_wd == workspace ||
-        (dirname(workspace) == javastics) &&
+      (dirname(workspace) == javastics) &&
         basename(workspace) == current_wd) {
       return()
     }

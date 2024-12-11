@@ -10,8 +10,10 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' usms_doc <- xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xl"),
-#'                      "inputs_stics_example.xlsx")
+#' xl_path <- file.path(
+#'   get_examples_path(file_type = "xl"),
+#'   "inputs_stics_example.xlsx"
+#' )
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
 #' # For updating an existing xml doc (using existing usms names)

@@ -13,7 +13,6 @@
 get_params_from_doc_attr <- function(xml_doc,
                                      type_name = NULL,
                                      unique_val = TRUE) {
-
   # For tec, param newform, param gen, sols, station
   # files
   type_names <- c("option", "param", "colonne", "colonne")

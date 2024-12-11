@@ -21,8 +21,10 @@
 #'
 #' par_bounds <- get_param_bounds(sta_doc, "zr")
 #'
-#' par_bounds_list <- get_param_bounds(sta_doc,
-#'                                                  c("zr", "altistation"))
+#' par_bounds_list <- get_param_bounds(
+#'   sta_doc,
+#'   c("zr", "altistation")
+#' )
 #'
 #'
 #' get_param_bounds(sta_doc, c("zr", "altistation"), "min")
@@ -36,7 +38,6 @@ get_param_bounds <- function(xml_doc,
                              param_name,
                              bounds_name = NULL,
                              output = "data.frame") {
-
   def_names <- c("min", "max")
 
   df_out <- output == "data.frame"
@@ -145,7 +146,6 @@ fix_bounds <- function(values, bounds_name, param_name) {
 #'
 #'
 fix_missing_bounds <- function(values, bounds_name) {
-
   # Fixing missing values
   val <- unlist(values)
 
@@ -162,8 +162,6 @@ fix_missing_bounds <- function(values, bounds_name) {
 
 
 fix_dup_bounds <- function(values, bounds_name, param_name) {
-
-
   # Fixing duplicates
   values <- lapply(values, unique)
   duplicates <- unlist(lapply(values, function(x) length(x) > 1))

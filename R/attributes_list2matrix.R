@@ -11,8 +11,10 @@
 #'
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #' sols_doc <- xmldocument(xml_path)
-#' node_set <- get_nodes(sols_doc,
-#'                                "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]")
+#' node_set <- get_nodes(
+#'   sols_doc,
+#'   "//*[@nom=\"solcanne\" or @nom=\"mulchbat\"]"
+#' )
 #' attr_list <- sapply(node_set, function(x) XML::xmlAttrs(x))
 #'
 #' #> [[1]]

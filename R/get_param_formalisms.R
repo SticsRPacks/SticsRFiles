@@ -17,8 +17,10 @@
 #'
 #' par_form <- get_param_formalisms(sta_doc, "zr")
 #'
-#' par_form_list <- get_param_formalisms(sta_doc,
-#'                                                    c("zr", "altistation"))
+#' par_form_list <- get_param_formalisms(
+#'   sta_doc,
+#'   c("zr", "altistation")
+#' )
 #' }
 #'
 #' @keywords internal
@@ -27,7 +29,6 @@
 #'
 #'
 get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
-
   # For multiple documents
   if (is.list(xml_doc) && length(xml_doc) > 1) {
     names <- lapply(
@@ -92,7 +93,6 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
 
 
 param_formalism_elt <- function(xml_doc, xpath, name) {
-
   # Formatting a parameter formalism list unit
   values <- get_attrs_values(xml_doc, xpath, "nom")
 

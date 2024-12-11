@@ -26,7 +26,6 @@
 # TODO: under construction !!!!!!!!!!!!!!!!!
 get_xml_base_node <- function(file_tag, form_name = NULL,
                               stics_version = "latest") {
-
   # check/get STICS version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
@@ -99,7 +98,8 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   # Template path in the library
   xml_file <- file.path(
     get_examples_path(file_type = "xml_tmpl", stics_version = stics_version),
-    file_name)
+    file_name
+  )
 
   # Loading the template into an xmDocument
   xml_doc <- xmldocument(xml_file)
@@ -111,7 +111,8 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   # Getting the node from a node set
   new_node <- XML::getNodeSet(
     XML::xmlParse(base_node_txt),
-    paste0("//", node))[[1]]
+    paste0("//", node)
+  )[[1]]
 
   delete(xml_doc)
 

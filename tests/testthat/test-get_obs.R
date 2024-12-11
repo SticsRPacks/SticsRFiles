@@ -1,4 +1,4 @@
-options(warn=-1)
+options(warn = -1)
 stics_version <- get_stics_versions_compat()$latest_version
 
 
@@ -12,9 +12,13 @@ path <- file.path(
   "simple_example"
 )
 
-path_mixed <- file.path(get_examples_path(file_type = "obs",
-                                          stics_version = stics_version),
-                        "mixed")
+path_mixed <- file.path(
+  get_examples_path(
+    file_type = "obs",
+    stics_version = stics_version
+  ),
+  "mixed"
+)
 
 # Get observations for all usms, but only banana has observations:
 meas <- get_obs(workspace = path)
@@ -85,9 +89,13 @@ test_that(
 
 test_that("reading mixed usms with usms_filename to usms.xml outside of folder,
           and usms in different folders", {
-  path <- file.path(get_examples_path(file_type = "obs",
-                                      stics_version = stics_version),
-                    "usms_outside")
+  path <- file.path(
+    get_examples_path(
+      file_type = "obs",
+      stics_version = stics_version
+    ),
+    "usms_outside"
+  )
   paths <- list.dirs(path)[-1]
   meas_2 <- get_obs(workspace = paths, usms_file = file.path(path, "usms.xml"))
 
@@ -99,9 +107,13 @@ test_that("reading mixed usms with usms_filename to usms.xml outside of folder,
 
 # Testing empty obs:
 test_that("reading empty usms returns a 0 row data", {
-  path_empty <- file.path(get_examples_path(file_type = "obs",
-                                            stics_version = stics_version),
-                          "empty")
+  path_empty <- file.path(
+    get_examples_path(
+      file_type = "obs",
+      stics_version = stics_version
+    ),
+    "empty"
+  )
   meas <- get_obs(workspace = path_empty)
   expect_true(is.data.frame(meas$empty))
   expect_length(meas$empty, 0)

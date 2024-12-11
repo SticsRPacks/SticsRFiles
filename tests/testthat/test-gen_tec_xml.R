@@ -39,7 +39,7 @@ xml_irr_values <- get_param_xml(
 
 # renaming param according to table
 names(xml_irr_values)[names(xml_irr_values) %in%
-                        c("julapI_or_sum_upvt", "amount")] <- c("julapI", "doseI")
+  c("julapI_or_sum_upvt", "amount")] <- c("julapI", "doseI")
 
 
 # select columns with no NA values
@@ -48,23 +48,23 @@ xl_irr_values <- dplyr::select(
   starts_with(sort(names(xml_irr_values)))
 ) %>%
   dplyr::select(where(function(x) !is.na(x)) &
-                  where(function(x) {
-                    c <- x != "NA"
-                    if (is.na(c)) c <- TRUE
-                    return(c)
-
-                  }
-                  ))
+    where(function(x) {
+      c <- x != "NA"
+      if (is.na(c)) c <- TRUE
+      return(c)
+    }))
 
 
 #
-xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)",
-                             x = colnames(xl_irr_values), replacement = "\\1")))
+xl_names <- sort(unique(gsub(
+  pattern = "(.*)(\\_[0-9]*)",
+  x = colnames(xl_irr_values), replacement = "\\1"
+)))
 
 common_names <- sort(intersect(names(xml_irr_values), xl_names))
 
 xml_irr_values <- unlist(xml_irr_values[common_names],
-                         use.names = FALSE
+  use.names = FALSE
 )
 
 xl_irr_values <- dplyr::select(
@@ -72,13 +72,11 @@ xl_irr_values <- dplyr::select(
   starts_with(common_names)
 ) %>%
   dplyr::select(where(function(x) !is.na(x)) &
-                  where(function(x) {
-                    c <- x != "NA"
-                    if (is.na(c)) c <- TRUE
-                    return(c)
-
-                  }
-                  ))
+    where(function(x) {
+      c <- x != "NA"
+      if (is.na(c)) c <- TRUE
+      return(c)
+    }))
 
 
 
@@ -90,7 +88,7 @@ xml_fert_values <- get_param_xml(
 
 # renaming param according to table (TODO: use param dict)
 names(xml_fert_values)[names(xml_fert_values) %in%
-                         c("julapN_or_sum_upvt", "absolute_value/%")] <- c("julapN", "doseN")
+  c("julapN_or_sum_upvt", "absolute_value/%")] <- c("julapN", "doseN")
 
 xl_fert_values <- dplyr::select(
   tec_param[4, ],
@@ -99,14 +97,16 @@ xl_fert_values <- dplyr::select(
   dplyr::select_if(~ !any(is.na(.)))
 
 
-xl_names <- sort(unique(gsub(pattern = "(.*)(\\_[0-9]*)",
-                             x = colnames(xl_fert_values),
-                             replacement = "\\1")))
+xl_names <- sort(unique(gsub(
+  pattern = "(.*)(\\_[0-9]*)",
+  x = colnames(xl_fert_values),
+  replacement = "\\1"
+)))
 
 common_names <- sort(intersect(names(xml_fert_values), xl_names))
 
 xml_fert_values <- unlist(xml_fert_values[common_names],
-                          use.names = FALSE
+  use.names = FALSE
 )
 
 xl_fert_values <- dplyr::select(

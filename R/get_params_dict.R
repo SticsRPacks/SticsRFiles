@@ -94,8 +94,9 @@ get_params_dict <- function(in_dict = NULL) { # , javastics_dir = NULL) {
 
   checked <- check_dict(in_dict = in_dict)
 
-  if (!checked)
+  if (!checked) {
     stop("A least one XML parameter name does not match the reference list ! ")
+  }
 
   # Merging the in_dict and the intern dict
   new_dict <- merge_dict(in_dict, base_dict)
@@ -105,7 +106,6 @@ get_params_dict <- function(in_dict = NULL) { # , javastics_dir = NULL) {
 
 
 merge_dict <- function(in_dict, base_dict) {
-
   # We suppose here that all XML parameters names of the in_dict list
   # have been previously checked in set_param_dict
 

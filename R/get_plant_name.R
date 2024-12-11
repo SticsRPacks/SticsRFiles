@@ -1,4 +1,3 @@
-
 #' Get plant names
 #'
 #' @description Get the plant name (and file name) for each usm in a workspace
@@ -61,9 +60,11 @@ get_plant_name <- function(workspace,
     # Some provided usms are not available:
     if (!all(usm_exist)) {
       if (verbose) {
-        cli::cli_alert_danger(paste0("The usm{?s} ",
-                                     "{.val {usm_name[!usm_exist]}}",
-                                     " d{?oes/o} not exist in the workspace!"))
+        cli::cli_alert_danger(paste0(
+          "The usm{?s} ",
+          "{.val {usm_name[!usm_exist]}}",
+          " d{?oes/o} not exist in the workspace!"
+        ))
         cli::cli_alert_info("Usm{?s} found in the workspace: {.val {usms}}")
       }
       stop(usm_name, ": do(es) not match usms")
@@ -74,34 +75,46 @@ get_plant_name <- function(workspace,
   nb_plant <- get_plants_nb(usms_path)[usms]
 
   # Getting plant files (fplt) for a set of usm
-  plant_files <- get_param_xml(file = usms_path,
-                               param = "fplt",
-                               select = "usm",
-                               select_value = usms)
+  plant_files <- get_param_xml(
+    file = usms_path,
+    param = "fplt",
+    select = "usm",
+    select_value = usms
+  )
   plant_files <- plant_files[[usms_filename]]$fplt
 
   # Getting plant list:
   if (length(plant_files) == 2 * length(usms)) {
     # If plante dominance="1" and plante dominance="2" are declared,
-    #put each one in a column:
-    plant_list <- unlist(apply(matrix(plant_files,
-                                      ncol = 2,
-                                      byrow = TRUE),
-                               MARGIN = 1, list),
-                         recursive = FALSE)
-
+    # put each one in a column:
+    plant_list <- unlist(
+      apply(
+        matrix(plant_files,
+          ncol = 2,
+          byrow = TRUE
+        ),
+        MARGIN = 1, list
+      ),
+      recursive = FALSE
+    )
   } else if (length(plant_files) == length(usms)) {
     # If plante dominance="2" is not declared, repeat plante dominance="1"
     # twice to get the same data structure:
-    plant_list <- unlist(apply(matrix(c(plant_files, plant_files),
-                                      ncol = 2,
-                                      byrow = TRUE),
-                               MARGIN = 1, list),
-                         recursive = FALSE)
-
+    plant_list <- unlist(
+      apply(
+        matrix(c(plant_files, plant_files),
+          ncol = 2,
+          byrow = TRUE
+        ),
+        MARGIN = 1, list
+      ),
+      recursive = FALSE
+    )
   } else {
-    stop("plante dominance=\"2\" should always be declared in usms.xml",
-         " even for sole crops (use null as values).")
+    stop(
+      "plante dominance=\"2\" should always be declared in usms.xml",
+      " even for sole crops (use null as values)."
+    )
   }
   names(plant_list) <- usms
 
@@ -117,14 +130,17 @@ get_plant_name <- function(workspace,
     plant_xml[nb_plant == 1] <- "plant_1"
     plant_xml[nb_plant > 1] <- c("plant_1", "plant_2")
     names(plant_xml) <- usms
-    if (verbose)
+    if (verbose) {
       cli::cli_alert_warning("Error reading usms file, using dummy plant names")
+    }
     return(plant_xml)
   }
 
-  alert_msg <- paste0("plant folder not found in the workspace, please add ",
-                      "{.code javastics_path} to use real plant names",
-                      " from javaStics.")
+  alert_msg <- paste0(
+    "plant folder not found in the workspace, please add ",
+    "{.code javastics_path} to use real plant names",
+    " from javaStics."
+  )
   if (is.null(javastics_path)) {
     plt_path <- file.path(workspace, "plant")
     if (!all(dir.exists(plt_path))) {
@@ -147,9 +163,13 @@ get_plant_name <- function(workspace,
 
   if (inherits(plant_names, "try-error")) {
     plant_names <- plant_xml
-    if (verbose) cli::cli_alert_warning(paste0("Error reading plant names, ",
-                                               "using plant file names for the",
-                                               " output instead"))
+    if (verbose) {
+      cli::cli_alert_warning(paste0(
+        "Error reading plant names, ",
+        "using plant file names for the",
+        " output instead"
+      ))
+    }
   }
 
   return(plant_names)

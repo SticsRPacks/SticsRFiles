@@ -35,8 +35,6 @@ gen_tec_doc <- function(xml_doc = NULL,
                         stics_version = "latest",
                         dict = NULL,
                         ...) {
-
-
   dot_args <- list(...)
   dot_args_names <- names(dot_args)
 
@@ -68,7 +66,7 @@ gen_tec_doc <- function(xml_doc = NULL,
         gen_tec_doc(
           xml_doc = clone_xml_doc(xml_doc),
           param_table = as.data.frame(t(x),
-                                      stringsAsFactors = FALSE
+            stringsAsFactors = FALSE
           ),
           stics_version = stics_version,
           dict = dict,
@@ -84,13 +82,11 @@ gen_tec_doc <- function(xml_doc = NULL,
 
   param_table <- param_table %>%
     dplyr::select(where(function(x) !is.na(x)) &
-                    where(function(x) {
-                      c <- x != "NA"
-                      if (is.na(c)) c <- TRUE
-                      return(c)
-
-                    }
-                    ))
+      where(function(x) {
+        c <- x != "NA"
+        if (is.na(c)) c <- TRUE
+        return(c)
+      }))
 
   # TODO : Avoid making conversion at each call !!!!!!
   # getting values of params declared in the table
@@ -179,8 +175,8 @@ gen_tec_doc <- function(xml_doc = NULL,
     nb_values <- length(param_values)
     if ((nb_values > 0) && nb_par == nb_values) {
       set_param_value(xml_doc,
-                      param_name = par_name,
-                      param_value = param_values
+        param_name = par_name,
+        param_value = param_values
       )
     } else {
       if (nb_par > 0) {
@@ -206,8 +202,10 @@ gen_tec_doc <- function(xml_doc = NULL,
             "is unique in the original xml file,",
             "and not attached to \"intervention\"\n"
           ))
-          message(paste0("Multiple values are present in input table,",
-                         " check consistency with formalism definition !\n"))
+          message(paste0(
+            "Multiple values are present in input table,",
+            " check consistency with formalism definition !\n"
+          ))
           message("The treatment for this parameter has aborted.\n")
           next
         }

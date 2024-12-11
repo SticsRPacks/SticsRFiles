@@ -58,13 +58,13 @@ The best way to install the packages from `SticsRPacks`, from which `SticsRFiles
 * With `devtools`
 
 ```{r eval=FALSE}
-      devtools::install_github("SticsRPacks/SticsRPacks")
+devtools::install_github("SticsRPacks/SticsRPacks")
 ```
 
 * With `remotes`
 
 ```{r eval=FALSE}
-      remotes::install_github("SticsRPacks/SticsRPacks")
+remotes::install_github("SticsRPacks/SticsRPacks")
 ```
 
 The package will install the packages for you at the latest release version. 
@@ -73,15 +73,15 @@ The package will install the packages for you at the latest release version.
 
 * From the CRAN    
 ```{r eval=FALSE}
-      install.packages("SticsRFiles")
+install.packages("SticsRFiles")
 ```
 * From GitHub     
 ```{r eval=FALSE}
-      devtools::install_github("SticsRPacks/SticsRFiles@*release")
+devtools::install_github("SticsRPacks/SticsRFiles@*release")
 
-      or 
-      
-      remotes::install_github("SticsRPacks/SticsRFiles@*release")
+or
+
+remotes::install_github("SticsRPacks/SticsRFiles@*release")
 ```
 
 Normally, all the package dependencies will be installed for CRAN packages.

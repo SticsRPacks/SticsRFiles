@@ -1,4 +1,3 @@
-
 stics_version <- get_stics_versions_compat()$latest_version
 
 xml_plant <- file.path(

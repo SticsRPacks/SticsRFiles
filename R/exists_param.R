@@ -1,4 +1,3 @@
-
 #' Test if a parameter exists
 #'
 #' @description Test if a parameter exists in an XML file

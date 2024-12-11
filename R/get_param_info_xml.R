@@ -68,8 +68,10 @@ get_param_data_df <- function(param = NULL,
     stics_version <- get_xml_stics_version(stics_version)
 
     # Getting XML examples files dir from the package
-    xml_dir <- get_examples_path(file_type = "xml",
-                                 stics_version = stics_version)
+    xml_dir <- get_examples_path(
+      file_type = "xml",
+      stics_version = stics_version
+    )
 
     # Getting the XML files list
     files_list <- list.files(
@@ -88,7 +90,7 @@ get_param_data_df <- function(param = NULL,
 
   # getting parameters from an inputs.csv file
   if (length(files_list) == 1 &&
-      grepl(pattern = "inputs.csv", x = files_list)) {
+    grepl(pattern = "inputs.csv", x = files_list)) {
     param_names <- utils::read.csv2(
       file,
       header = FALSE,
@@ -149,7 +151,6 @@ get_param_data_df <- function(param = NULL,
 
 
 form_list2df <- function(formalism_list) {
-
   # filtering NA list values (files whithout formalisms)
   formalism_list <- formalism_list[unlist(lapply(formalism_list, is.list))]
 
@@ -171,10 +172,12 @@ form_list2df <- function(formalism_list) {
       out_form <- c(out_form, rep(form, length(par_names)))
       out_param <- c(out_param, par_names)
     }
-    out[[i]] <- data.frame(file = out_file,
-                           formalism = out_form,
-                           name = out_param,
-                           stringsAsFactors = FALSE)
+    out[[i]] <- data.frame(
+      file = out_file,
+      formalism = out_form,
+      name = out_param,
+      stringsAsFactors = FALSE
+    )
   }
 
   # returning the tibble

@@ -18,8 +18,10 @@
 #' @examples
 #' \dontrun{
 #'
-#' download_usm_xl(file = "inputs_stics_example.xlsx",
-#'                 dest_dir = "/path/to/dest/dir")
+#' download_usm_xl(
+#'   file = "inputs_stics_example.xlsx",
+#'   dest_dir = "/path/to/dest/dir"
+#' )
 #' xl_path <- file.path("/path/to/dest/dir", "inputs_stics_example.xlsx")
 #' ini_param_df <- read_excel(xl_path, sheet = "Ini")
 #' xml_path <- "path/to/ini/xml"
@@ -38,7 +40,6 @@ get_params_from_table <- function(params_table,
                                   stopping = FALSE,
                                   dict = NULL,
                                   na_values = NA) {
-
   # TODO: doing a merge with get_values_from_table
 
   if (base::is.null(dict)) {
@@ -61,8 +62,10 @@ get_params_from_table <- function(params_table,
     params_table <- params_table %>%
       dplyr::rename_at(
         dplyr::vars(dplyr::matches(paste0(key, "\\_[0-9*]"))),
-        list(~ gsub(x = ., pattern = paste0("(", key, ")(\\_[0-9*])"),
-             replacement = paste0(dict[[key]], "\\2")))
+        list(~ gsub(
+          x = ., pattern = paste0("(", key, ")(\\_[0-9*])"),
+          replacement = paste0(dict[[key]], "\\2")
+        ))
       )
   }
 
