@@ -37,9 +37,7 @@ upgrade_param_newform_xml <- function(file,
                                       stics_version = "V9.2",
                                       target_version = "V10.0",
                                       check_version = TRUE,
-                                      overwrite = FALSE
-) {
-
+                                      overwrite = FALSE) {
   # TODO: eliminate when option will be reactivated later.
   codemineral <- FALSE
 
@@ -53,8 +51,8 @@ upgrade_param_newform_xml <- function(file,
     # Extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-                                           stics_version,
-                                           param_gen_file = param_gen_file
+      stics_version,
+      param_gen_file = param_gen_file
     )
 
     if (!file_version && is.null(param_gen_file)) {
@@ -86,8 +84,9 @@ upgrade_param_newform_xml <- function(file,
 
   # Setting file STICS version
   set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite)
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
 
   # TODO : add from here if cond for calling specific version ranges updates
@@ -101,8 +100,10 @@ upgrade_param_newform_xml <- function(file,
     "Calculation of the maximal reserve compartment during reproductive stages",
     "Calculation of the stem elongation stage for perenial grasslands",
     "Moisture test for sowing decision",
-    paste0("automatic irrigations (associated with the options of automatic ",
-           "irrigation in tec file)"),
+    paste0(
+      "automatic irrigations (associated with the options of automatic ",
+      "irrigation in tec file)"
+    ),
     "calculation of the root death at cutting date for grasslands",
     "option for several thinning ",
     "option for several fertilizer type ",
@@ -153,14 +154,15 @@ upgrade_param_newform_xml <- function(file,
   parent_node <- prev_sibling
 
   if (codemineral) {
-
-    new_node <- list(XML::xmlParseString(
-      '<option choix="1" nom="New mineralization model" nomParam="codemineral">
+    new_node <- list(
+      XML::xmlParseString(
+        '<option choix="1" nom="New mineralization model" nomParam="codemineral">
   <choix code="1" nom="no"/>
   <choix code="2" nom="new_minr"/>
   <choix code="3" nom="new_minh+new_minr"/>
 </option>',
-      addFinalizer = TRUE),
+        addFinalizer = TRUE
+      ),
       XML::xmlParseString(
         '<option choix="2" nom="CsurNsol dynamic"
       nomParam="code_CsurNsol_dynamic">
@@ -168,13 +170,14 @@ upgrade_param_newform_xml <- function(file,
   <choix code="2" nom="no"/>
 </option>',
         addFinalizer = TRUE
-      ))
+      )
+    )
 
-    lapply(new_node,
-           function(x) XML::addChildren(parent_node, XML::xmlClone(x))
+    lapply(
+      new_node,
+      function(x) XML::addChildren(parent_node, XML::xmlClone(x))
     )
   } else {
-
     # if a version 10.0 file is retreated
     # codemineral option must be retreived for the moment
 
@@ -211,8 +214,10 @@ upgrade_param_newform_xml <- function(file,
     old_doc,
     path = "//option[@nomParam='codetesthumN']",
     attr_name = "nom",
-    values_list = paste0("automatic N fertilisation (1 = based on rainfall",
-                         " 2 = based on soil water content)")
+    values_list = paste0(
+      "automatic N fertilisation (1 = based on rainfall",
+      " 2 = based on soil water content)"
+    )
   )
 
   set_attrs_values(
@@ -241,7 +246,7 @@ upgrade_param_newform_xml <- function(file,
 			<choix code="2" nom="no"/>
 		</option>
    </formalisme>',
-                                  addFinalizer = TRUE
+    addFinalizer = TRUE
   )
 
   prev_sibling <- get_nodes(
@@ -254,8 +259,9 @@ upgrade_param_newform_xml <- function(file,
 
   # Writing to file param_newform.xml
   write_xml_file(old_doc,
-                 file.path(out_dir, basename(file)),
-                 overwrite = overwrite)
+    file.path(out_dir, basename(file)),
+    overwrite = overwrite
+  )
 
   XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))

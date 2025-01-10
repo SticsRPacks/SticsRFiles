@@ -27,15 +27,17 @@ replace_string_in_file <- function(file_path,
     in_place <- ""
     redirect <- paste(" >", new_file_path)
   }
-  cmd <- paste0("perl -p",
-                in_place,
-                " -e 's/",
-                target_string,
-                "/",
-                replace_string,
-                "/g ' ",
-                file_path,
-                redirect)
+  cmd <- paste0(
+    "perl -p",
+    in_place,
+    " -e 's/",
+    target_string,
+    "/",
+    replace_string,
+    "/g ' ",
+    file_path,
+    redirect
+  )
 
   system(cmd)
 }

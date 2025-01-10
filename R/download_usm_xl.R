@@ -30,7 +30,6 @@
 #'
 #' download_usm_xl()
 #'
-#'
 #' @export
 #'
 
@@ -44,23 +43,29 @@ download_usm_xl <- function(file = NULL,
                             dest_dir = lifecycle::deprecated(),
                             ...) {
   if (lifecycle::is_present(xl_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_usm_xl(xl_name)",
-                              "download_usm_xl(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_usm_xl(xl_name)",
+      "download_usm_xl(file)"
+    )
   } else {
     xl_name <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_usm_xl(version_name)",
-                              "download_usm_xl(stics_version)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_usm_xl(version_name)",
+      "download_usm_xl(stics_version)"
+    )
   } else {
     version_name <- stics_version # to remove when we update inside the function
   }
   if (lifecycle::is_present(dest_dir)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_usm_xl(dest_dir)",
-                              "download_usm_xl(out_dir)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_usm_xl(dest_dir)",
+      "download_usm_xl(out_dir)"
+    )
   } else {
     dest_dir <- out_dir # to remove when we update inside the function
   }
@@ -81,8 +86,10 @@ download_usm_xl <- function(file = NULL,
     xl_name <- xl_patt
   }
 
-  xl_dir <- get_examples_path(file_type = "xl",
-                              stics_version = version_name)
+  xl_dir <- get_examples_path(
+    file_type = "xl",
+    stics_version = version_name
+  )
 
   files_list <- list.files(xl_dir, pattern = xl_patt)
 
@@ -111,16 +118,21 @@ download_usm_xl <- function(file = NULL,
   success <- file.copy(from = src_list, to = dest_dir, overwrite = overwrite)
 
   if (any(success)) {
-    if (verbose)
-      message(paste(files_list[success],
-                    " has been copied in directory ",
-                    dest_dir))
+    if (verbose) {
+      message(paste(
+        files_list[success],
+        " has been copied in directory ",
+        dest_dir
+      ))
+    }
     dest_list <- dest_list[success]
   }
 
-  if (!all(success))
+  if (!all(success)) {
     warning("Error copying files:\n", paste(src_list[!success],
-                                            collapse = "\n"))
+      collapse = "\n"
+    ))
+  }
 
 
   return(invisible(dest_list))
@@ -165,23 +177,29 @@ download_usm_csv <- function(file = NULL,
                              version_name = lifecycle::deprecated(),
                              dest_dir = lifecycle::deprecated()) {
   if (lifecycle::is_present(csv_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_usm_csv(csv_name)",
-                              "download_usm_csv(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_usm_csv(csv_name)",
+      "download_usm_csv(file)"
+    )
   } else {
     csv_name <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_usm_csv(version_name)",
-                              "download_usm_csv(stics_version)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_usm_csv(version_name)",
+      "download_usm_csv(stics_version)"
+    )
   } else {
     version_name <- stics_version # to remove when we update inside the function
   }
   if (lifecycle::is_present(dest_dir)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_usm_csv(dest_dir)",
-                              "download_usm_csv(out_dir)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_usm_csv(dest_dir)",
+      "download_usm_csv(out_dir)"
+    )
   } else {
     dest_dir <- out_dir # to remove when we update inside the function
   }

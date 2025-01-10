@@ -28,8 +28,6 @@
 get_formalisms_xml <- function(xml_file,
                                par_name = NULL,
                                by_form = TRUE) {
-
-
   # Just in case to be sure that xml files are different
   xml_file <- unique(xml_file)
 

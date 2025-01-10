@@ -33,7 +33,6 @@ get_climate_txt <- function(workspace,
                             preserve = TRUE,
                             dirpath = lifecycle::deprecated(),
                             filename = lifecycle::deprecated()) {
-
   # Managing deprecated arguments
   # dirpath
   if (lifecycle::is_present(dirpath)) {

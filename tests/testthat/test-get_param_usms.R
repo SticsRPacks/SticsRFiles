@@ -1,5 +1,3 @@
-
-
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
 
@@ -97,24 +95,27 @@ test_that("getting all param from an usm", {
 
 
 test_that("Changing output type", {
-
-
-  set_param_xml(xml_path, param = "fclim1",
-                select = "usm",
-                select_value = "potato",
-                values = 12345.1997,
-                overwrite = TRUE)
-  fclim1 <- get_param_xml(xml_path, param = "fclim1",
-                          select = "usm",
-                          select_value = "potato")
+  set_param_xml(xml_path,
+    param = "fclim1",
+    select = "usm",
+    select_value = "potato",
+    values = 12345.1997,
+    overwrite = TRUE
+  )
+  fclim1 <- get_param_xml(xml_path,
+    param = "fclim1",
+    select = "usm",
+    select_value = "potato"
+  )
 
   expect_type(object = fclim1$usms.xml$fclim1, type = "double")
 
-  fclim1 <- get_param_xml(xml_path, param = "fclim1",
-                          select = "usm",
-                          select_value = "potato",
-                          to_num = FALSE)
+  fclim1 <- get_param_xml(xml_path,
+    param = "fclim1",
+    select = "usm",
+    select_value = "potato",
+    to_num = FALSE
+  )
 
   expect_type(object = fclim1$usms.xml$fclim1, type = "character")
-
 })

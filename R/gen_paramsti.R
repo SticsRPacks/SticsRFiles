@@ -22,7 +22,6 @@ gen_paramsti <- function(workspace,
                          par_names,
                          par_values,
                          file_name = "param.sti") {
-
   # Checking if workspace exists
   if (!dir.exists(workspace)) {
     stop(paste(workspace, ": directory does not exist !"))

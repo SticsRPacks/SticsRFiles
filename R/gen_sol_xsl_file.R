@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' SticsRFiles:::gen_sol_xsl_file("soil_name", "V10" )
+#' SticsRFiles:::gen_sol_xsl_file("soil_name", "V10")
 #' }
 #'
 #' @keywords internal
@@ -15,7 +15,6 @@
 #' @noRd
 #'
 gen_sol_xsl_file <- function(soil_name, stics_version = "latest") {
-
   xsl_dir <- get_examples_path("xsl", stics_version = stics_version)
 
   sol_xsl <- file.path(xsl_dir, "sol2txt.xsl")
@@ -29,9 +28,11 @@ gen_sol_xsl_file <- function(soil_name, stics_version = "latest") {
   idx <- grep(pattern = "variable", x = file_lines)
 
   # replace nomsol in it
-  file_lines[idx] <- gsub(pattern = "\\?",
-                          x = file_lines[idx],
-                          replacement = soil_name)
+  file_lines[idx] <- gsub(
+    pattern = "\\?",
+    x = file_lines[idx],
+    replacement = soil_name
+  )
 
   ret <- try(writeLines(text = file_lines, con = sol_xsl_tmpl))
 

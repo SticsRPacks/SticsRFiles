@@ -33,8 +33,6 @@ gen_ini_doc <- function(xml_doc = NULL,
                         params_desc = NULL,
                         stics_version = "latest",
                         check_names = TRUE) {
-
-
   # check/get version
   stics_version <- get_xml_stics_version(
     stics_version = stics_version,

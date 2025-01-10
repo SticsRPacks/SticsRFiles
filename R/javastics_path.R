@@ -9,9 +9,7 @@
 #'
 # @examples
 get_javastics_path <- function() {
-
   attr(exists_javastics_path(), "path")
-
 }
 
 
@@ -28,7 +26,6 @@ get_javastics_path <- function() {
 #'
 # @examples
 set_javastics_path <- function(javastics_path, write = FALSE) {
-
   if (!dir.exists(javastics_path)) {
     stop(javastics_path, ": is not an existing path, aborting !")
   }
@@ -36,7 +33,6 @@ set_javastics_path <- function(javastics_path, write = FALSE) {
   Sys.setenv(javastics_path = javastics_path)
 
   if (write) write_javastics_path(javastics_path)
-
 }
 
 
@@ -52,7 +48,6 @@ set_javastics_path <- function(javastics_path, write = FALSE) {
 #'
 # @examples
 exists_javastics_path <- function() {
-
   path <- Sys.getenv("javastics_path")
 
   path_exists <- TRUE
@@ -62,7 +57,6 @@ exists_javastics_path <- function() {
   attr(path_exists, "path") <- path
 
   return(path_exists)
-
 }
 
 
@@ -78,15 +72,16 @@ exists_javastics_path <- function() {
 #'
 # @examples
 write_javastics_path <- function(javastics_path) {
-
   renviron_path <- file.path(path.expand("~"), ".Renviron")
   env_string <- paste0('javastics_path="', javastics_path, '"')
 
   if (file.exists(renviron_path)) {
-      content <- readLines(renviron_path)
-      idx <- grep(pattern = "^javastics_path",
-                  x = content)
-      content[idx] <- env_string
+    content <- readLines(renviron_path)
+    idx <- grep(
+      pattern = "^javastics_path",
+      x = content
+    )
+    content[idx] <- env_string
   } else {
     content <- env_string
   }

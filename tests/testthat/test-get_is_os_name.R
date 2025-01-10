@@ -8,5 +8,4 @@ test_that("Is OS name", {
   expect_type(is_os_name("windows"), "logical")
   expect_type(is_os_name("linux"), "logical")
   expect_type(is_os_name("mac"), "logical")
-
 })

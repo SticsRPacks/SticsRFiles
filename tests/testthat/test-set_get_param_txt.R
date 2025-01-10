@@ -86,9 +86,11 @@ test_that("get for an existing plant id or not", {
 
 # Using specific value_id, for existing id or not
 # soil layer: soil, ini parameters
-set_param_txt(workspace = path,
-              param = "cailloux",
-              value = 2)
+set_param_txt(
+  workspace = path,
+  param = "cailloux",
+  value = 2
+)
 
 tmp <- get_param_txt(
   workspace = path,
@@ -96,43 +98,47 @@ tmp <- get_param_txt(
   stics_version = stics_version
 )$soil$cailloux
 
-set_param_txt(workspace = path,
-              param = "cailloux",
-              value = c(1, 3, 5),
-              value_id = c(1, 3, 5))
+set_param_txt(
+  workspace = path,
+  param = "cailloux",
+  value = c(1, 3, 5),
+  value_id = c(1, 3, 5)
+)
 
 tmp2 <- get_param_txt(
   workspace = path,
   param = "cailloux",
   stics_version = stics_version
-)$soil$cailloux[c(1,3,5)]
+)$soil$cailloux[c(1, 3, 5)]
 
 tmp3 <- get_param_txt(
   workspace = path,
   param = "cailloux",
   stics_version = stics_version,
-  value_id = c(1,3,5),
+  value_id = c(1, 3, 5),
   exact = TRUE
 )$soil$cailloux
 
 test_that("get for layer id", {
-  expect_equal(tmp, rep(2,5))
+  expect_equal(tmp, rep(2, 5))
   expect_equal(tmp2, tmp3)
   expect_error(
     get_param_txt(
       workspace = path,
       param = "cailloux",
       stics_version = stics_version,
-      value_id = c(1,3,5),
+      value_id = c(1, 3, 5),
       exact = FALSE
     )$plant$plant1$stlevamf
   )
 })
 
 # technical operations (irrigation)
-set_param_txt(workspace = path,
-              param = "amount",
-              value = 40)
+set_param_txt(
+  workspace = path,
+  param = "amount",
+  value = 40
+)
 
 tmp <- get_param_txt(
   workspace = path,
@@ -140,10 +146,12 @@ tmp <- get_param_txt(
   stics_version = stics_version
 )$tec$plant1$amount
 
-set_param_txt(workspace = path,
-              param = "amount",
-              value = c(50, 60, 70),
-              value_id = c(1, 9, 16))
+set_param_txt(
+  workspace = path,
+  param = "amount",
+  value = c(50, 60, 70),
+  value_id = c(1, 9, 16)
+)
 
 tmp2 <- get_param_txt(
   workspace = path,
@@ -161,7 +169,7 @@ tmp3 <- get_param_txt(
 
 
 test_that("get for layer id", {
-  expect_equal(tmp, rep(40,16))
+  expect_equal(tmp, rep(40, 16))
   expect_equal(tmp2, tmp3)
   expect_error(
     get_param_txt(
@@ -305,7 +313,8 @@ test_that("get for NO3init, for a wrong version", {
     get_param_txt(
       workspace = path,
       param = "NO3init",
-      stics_version = "V8.5")
+      stics_version = "V8.5"
+    )
   )
 })
 path <- get_examples_path("txt", stics_version = "V8.5")
@@ -313,7 +322,8 @@ test_that("get for NO3init, for a wrong version", {
   expect_error(
     get_param_txt(
       workspace = path,
-      param = "NO3init")
+      param = "NO3init"
+    )
   )
 })
 
@@ -322,6 +332,7 @@ test_that("get for NO3init, for a wrong version", {
   expect_error(
     get_param_txt(
       workspace = path,
-      param = "NO3init")
+      param = "NO3init"
+    )
   )
 })

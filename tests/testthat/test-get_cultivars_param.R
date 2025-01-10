@@ -1,4 +1,3 @@
-
 stics_version <- get_stics_versions_compat()$latest_version
 
 xml_plant <- file.path(
@@ -15,5 +14,5 @@ test_that("type, data.frame", {
 
 context("Checking presence of row names")
 test_that("rownames", {
-  expect_identical(! is.null(rownames(cv_param_df)), TRUE)
+  expect_identical(!is.null(rownames(cv_param_df)), TRUE)
 })

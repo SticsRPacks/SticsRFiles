@@ -13,7 +13,6 @@ setClass(
 setMethod(
   "valid_doc", signature(object = "xml_document"),
   function(object) {
-
     ext <- get_ext(object)
 
     if (length(object@name) == 0 || object@name == "") {
@@ -29,7 +28,8 @@ setMethod(
       return(paste("Error: file is empty:", object@name, "!"))
     }
     TRUE
-  })
+  }
+)
 
 
 # constructor
@@ -434,7 +434,6 @@ setMethod(
 setMethod(
   "load_content", signature(object = "xml_document"),
   function(object) {
-
     set_content(object) <- XML::xmlParse(get_path(object))
     return(object)
   }
@@ -494,6 +493,5 @@ setMethod(
 
     rm(object)
     invisible(gc(verbose = FALSE))
-
   }
 )

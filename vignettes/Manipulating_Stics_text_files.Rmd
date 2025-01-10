@@ -101,13 +101,17 @@ A particular search in plant parameters for specific varieties, can be done usin
 
 * either using names,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf",
-              variety = c("Pactol", "Cecilia", "clarica"))
+get_param_txt(
+  workspace = example_txt_dir, param = "stlevamf",
+  variety = c("Pactol", "Cecilia", "clarica")
+)
 ```
 * or using varieties indexes in plant file,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf",
-              variety = c(1, 2, 5))
+get_param_txt(
+  workspace = example_txt_dir, param = "stlevamf",
+  variety = c(1, 2, 5)
+)
 ```
 
 
@@ -191,11 +195,13 @@ get_param_txt(workspace = example_txt_dir, param = "densinitial")
 * The values for the plant 1 and layers 1 and 4 are replaced as follows:
 
 ```{r}
-set_param_txt(workspace = example_txt_dir,
-              param = "densinitial",
-              plant_id = 1,
-              layer = c(1, 4),
-              value = c(0.5, 0.1))
+set_param_txt(
+  workspace = example_txt_dir,
+  param = "densinitial",
+  plant_id = 1,
+  layer = c(1, 4),
+  value = c(0.5, 0.1)
+)
 ```
 
 * The final values in the file are:

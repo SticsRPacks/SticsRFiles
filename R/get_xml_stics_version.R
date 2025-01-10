@@ -24,7 +24,6 @@
 #' @noRd
 #'
 get_xml_stics_version <- function(stics_version = "latest", xml_doc = NULL) {
-
   # TODO: A renommer pour clarifier version des fichiers
   # a generer et non pas version du modele exe.
   # il n'y aura plus de pb des que les fontions seront ventilees

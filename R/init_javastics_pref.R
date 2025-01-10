@@ -54,7 +54,8 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
         "Couldn't add a {.val preference.xml}",
         "file in the JavaSTICS installation. ",
         "Please run {.pkg Javastics} once to create it."
-      ))
+      )
+    )
     return(FALSE)
   }
 }

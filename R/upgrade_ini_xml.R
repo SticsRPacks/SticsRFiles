@@ -25,7 +25,7 @@
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_ini_xml(
-#'   file = file.path(dir_path,"file_ini.xml"),
+#'   file = file.path(dir_path, "file_ini.xml"),
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
@@ -38,8 +38,6 @@ upgrade_ini_xml <- function(file,
                             check_version = TRUE,
                             overwrite = FALSE,
                             ...) {
-
-
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -57,8 +55,8 @@ upgrade_ini_xml <- function(file,
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file[1],
-                                           stics_version,
-                                           param_gen_file = param_gen_file
+      stics_version,
+      param_gen_file = param_gen_file
     )
 
 
@@ -112,8 +110,9 @@ upgrade_ini_xml <- function(file,
 
   # Setting file STICS version
   set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite)
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
   # Keeping old values
   rm_names <- c("masec0", "QNplante0", "resperenne0")
@@ -134,10 +133,12 @@ upgrade_ini_xml <- function(file,
   # (previously named resperennes0)
 
 
-  str_1 <- paste0('<option choix="2" nom="Simulation of Nitrogen and Carbon',
-                  ' reserves" nomParam="code_acti_reserve">\n')
+  str_1 <- paste0(
+    '<option choix="2" nom="Simulation of Nitrogen and Carbon',
+    ' reserves" nomParam="code_acti_reserve">\n'
+  )
   str_2 <-
-  '<choix code="1" nom="yes">
+    '<choix code="1" nom="yes">
 		<maperenne0>0</maperenne0>
 		<QNperenne0>0</QNperenne0>
 		<masecnp0>0</masecnp0>
@@ -164,8 +165,9 @@ upgrade_ini_xml <- function(file,
   # resperennes0 became restemp0
   rm_names <- c("masec0", "QNplante0", "restemp0")
   set_param_value(old_doc,
-                  param_name = as.list(rm_names),
-                  param_value = old_values)
+    param_name = as.list(rm_names),
+    param_value = old_values
+  )
 
 
   if (is.null(get_nodes(old_doc, "//snow"))) {

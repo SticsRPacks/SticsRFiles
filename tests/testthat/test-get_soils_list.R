@@ -51,7 +51,7 @@ test_that("with or without success", {
 
   expect_equal(
     get_soils_list(file = xml_usms, soil = c("soil_rice", "to")),
-                   c("soil_rice", "soltomate", "soltousol")
+    c("soil_rice", "soltomate", "soltousol")
   )
 
   expect_equal(get_soils_list(file = xml_usms, soil = "zzz"), character(0))

@@ -25,7 +25,7 @@ test_that("getting all parameters from inputs.csv", {
 # Testing empty result
 test_that("giving a unknown variable name returns a 0 row data", {
   empty_df_var <- get_param_info("myunknownvariable",
-                                 stics_version = stics_version
+    stics_version = stics_version
   )
   empty_df_keyword <- get_param_info(
     keyword = "myunknownkeyword",
@@ -66,7 +66,7 @@ test_that("fuzzy name", {
       )
   }
   testthat::expect_equal(get_param_info("lai",
-                                        stics_version = stics_version
+    stics_version = stics_version
   )$name, lai_params)
 })
 

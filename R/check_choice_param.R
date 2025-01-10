@@ -15,7 +15,6 @@
 #' }
 #'
 check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
-
   #--------------------------------------------------------------------#
   # This is for the moment a specific case attached to tec files:
   # parameter names attached to intervention nodes

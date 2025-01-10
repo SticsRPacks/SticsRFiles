@@ -20,7 +20,6 @@
 #' @noRd
 #'
 is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
-
   # TODO : doc_types have been added as input arg, but not used yet,
   # will be used when doc_types will be defined against STICS Version
   # because they may change with versions ?
@@ -43,9 +42,11 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   }
 
   if (!base::is.null(doc_type) && !(doc_type %in% doc_types)) {
-    warning(paste0("Not any tag name \"",
-                   doc_type,
-                   "\" for STICS xml document!"))
+    warning(paste0(
+      "Not any tag name \"",
+      doc_type,
+      "\" for STICS xml document!"
+    ))
     return(FALSE)
   }
 

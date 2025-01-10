@@ -71,8 +71,9 @@ gen_obs <- function(df,
   usm_names <- unique(obs_table[[usm_idx]])
 
   # Treating a usms_list input
-  if (!base::is.null(usms_list))
+  if (!base::is.null(usms_list)) {
     usm_names <- usm_names[usm_names %in% usms_list]
+  }
 
   nb_usms <- length(usm_names)
 
@@ -136,8 +137,6 @@ gen_obs <- function(df,
 #' @noRd
 #'
 gen_obs_ <- function(obs_table, file_path) {
-
-
   # Checking file path
   dir_name <- dirname(file_path)
   if (!dir.exists(dir_name)) {
@@ -157,8 +156,10 @@ gen_obs_ <- function(obs_table, file_path) {
   obs_date_df <- obs_table[, grep(patt_str, colnames(obs_table)), drop = FALSE]
 
   if (!dim(obs_var_df)[2] || dim(obs_date_df)[2] < 4) {
-    warning("Missing columns for dates,",
-            " or no observation variables values to write !")
+    warning(
+      "Missing columns for dates,",
+      " or no observation variables values to write !"
+    )
     return(invisible(FALSE))
   }
 
@@ -172,11 +173,12 @@ gen_obs_ <- function(obs_table, file_path) {
   colnames(obs_table) <- col_names_to_var(colnames(obs_table))
 
   ret <- try(utils::write.table(obs_table,
-                                file_path,
-                                sep = ";",
-                                na = "-999.99",
-                                row.names = FALSE,
-                                quote = FALSE))
+    file_path,
+    sep = ";",
+    na = "-999.99",
+    row.names = FALSE,
+    quote = FALSE
+  ))
 
   # Checking if any error writing the file
   if (methods::is(ret, "try-error")) {
