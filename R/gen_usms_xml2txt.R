@@ -386,20 +386,20 @@ gen_usms_xml2txt <- function(javastics = NULL,
           plant_id <- plant_id_tec
         }
 
-        # using a template and replacing nomsol in it
-        # for generating sol2txt.xsl file
+        # defining soil name
+        # usefull for generating sol2txt.xsl file in
+        # gen_sol_xsl_file when used in convert_xml2txt
         if (grepl(pattern = "sols", x = file_path)) {
-          # generate sol2txt.xsl
-          ret <- gen_sol_xsl_file(usm_data$nomsol, stics_version)
-
-          if (!ret)
-            warning("Problem when generating soil xsl file !")
+          soil_name <- usm_data$nomsol
+        } else {
+          soil_name <- NULL
         }
 
         gen_files_status[f] <- convert_xml2txt(file = file_path,
                                                stics_version = stics_version,
                                                out_dir = usm_path,
-                                               plant_id = plant_id)
+                                               plant_id = plant_id,
+                                               soil_name = soil_name)
 
       }
 
