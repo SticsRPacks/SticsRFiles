@@ -136,8 +136,10 @@ convert_xml2txt <- function(file,
     soils_names <- get_soils_list(file.path(dirname(file), "sols.xml"))
 
     if (!soil_name %in% soils_names) {
-      stop(paste("Soil name ", soil_name,
-                 " not found in sols.xml file !"))
+      stop(paste(
+        "Soil name ", soil_name,
+        " not found in sols.xml file !"
+      ))
     }
 
     # generate sol2txt.xsl in the tempdir() directory
@@ -148,10 +150,11 @@ convert_xml2txt <- function(file,
 
     # if any writing problem
     if (!ret) {
-      stop("Problem when generating soil xsl file !\n",
-              style_file)
+      stop(
+        "Problem when generating soil xsl file !\n",
+        style_file
+      )
     }
-
   }
 
   # calling the xml conversion function
