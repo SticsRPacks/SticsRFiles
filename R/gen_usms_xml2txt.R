@@ -416,12 +416,13 @@ gen_usms_xml2txt <- function(javastics = NULL,
           soil_name <- NULL
         }
 
-        gen_files_status[f] <- convert_xml2txt(file = file_path,
-                                               stics_version = stics_version,
-                                               out_dir = usm_path,
-                                               plant_id = plant_id,
-                                               soil_name = soil_name)
-
+        gen_files_status[f] <- convert_xml2txt(
+          file = file_path,
+          stics_version = stics_version,
+          out_dir = usm_path,
+          plant_id = plant_id,
+          soil_name = soil_name
+        )
       }
 
       # generating new_travail.usm
