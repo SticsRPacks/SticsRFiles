@@ -26,8 +26,9 @@ is_os_name <- function(os_tag_name = character()) {
   }
   is_os_name <- FALSE
   os_name <- tolower(Sys.info()["sysname"])
-  if (is.element(os_name, os_names) && any(is.element(os_tag_name, os_name)))
+  if (is.element(os_name, os_names) && any(is.element(os_tag_name, os_name))) {
     is_os_name <- TRUE
+  }
 
   # Storing the OS name as name attribute value
   attr(is_os_name, "name") <- os_name

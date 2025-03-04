@@ -25,7 +25,7 @@
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_sta_xml(
-#'   file = file.path(dir_path,"file_sta.xml" ),
+#'   file = file.path(dir_path, "file_sta.xml"),
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
@@ -38,7 +38,6 @@ upgrade_sta_xml <- function(file,
                             check_version = TRUE,
                             overwrite = FALSE,
                             ...) {
-
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -110,8 +109,9 @@ upgrade_sta_xml <- function(file,
 
   # Setting file STICS version
   set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite)
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
   # Getting old concrr value
   concrr <- get_param_xml(param_gen_file, "concrr")$param_gen.xml$concrr

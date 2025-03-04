@@ -14,7 +14,7 @@
 #' \dontrun{
 #' xml_plt <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 #' xsl_file <-
-#'    "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
+#'   "/path/to/JavaSTICS/folder/bin/resources/xml/stylesheet/xml2txt.xsl"
 #'
 #' convert_xml2txt_int(xml_file = xml_plt, style_file = xsl_file)
 #' }
@@ -24,12 +24,12 @@
 #' @noRd
 #'
 convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
-
   f_names <- c(xml_file, style_file)
   ex_files <- file.exists(f_names)
   if (any(!ex_files)) {
-    warning("At least one input file doesn't exist ! \n",
-            paste(f_names[!ex_files], collapse = ", ")
+    warning(
+      "At least one input file doesn't exist ! \n",
+      paste(f_names[!ex_files], collapse = ", ")
     )
     return(FALSE)
   }
@@ -37,7 +37,7 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
   # checking files extensions
   names_split <- lapply(f_names, function(x) {
     unlist(strsplit(x, ".",
-                    fixed = TRUE
+      fixed = TRUE
     ))
   })
 
@@ -66,7 +66,7 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
     out_file <- file.path(
       dirname(xml_file),
       paste0(unlist(strsplit(basename(xml_file), ".",
-                             fixed = TRUE
+        fixed = TRUE
       ))[1], ".", ext)
     )
   }

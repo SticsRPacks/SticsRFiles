@@ -1,3 +1,16 @@
+# SticsRFiles 1.5.0 _2024-11-13_
+* FUNCTIONS
+  * New functions for generating xml general parameters files
+  * New function for copying .mod, .obs, .lai and weather (climat.txt) files 
+  
+* FIXES
+  * pattern to get obs files for intercrop usms or sole crops usms
+  * generation of xml parameters files
+  
+* DATA
+  * Added information about the latest STICS version 10.2.0
+
+
 # SticsRFiles 1.4.0 _2024-07-16_
 
 * FUNCTIONS

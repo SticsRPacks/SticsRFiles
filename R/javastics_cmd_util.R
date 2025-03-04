@@ -37,7 +37,6 @@ get_javastics_cmd <- function(javastics,
                               type = c("generate", "run"),
                               workspace = NULL,
                               verbose = TRUE) {
-
   # detecting JavaSTICS command exe name from javastics path
   javastics_cmd <- file.path(javastics, "JavaSticsCmd.exe")
   cmd <- check_javastics_cmd(
@@ -111,20 +110,23 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
                                 verbose = TRUE) {
   if (is_windows()) {
     help_test <- system2(javastics_cmd,
-                         c("--help"),
-                         stdout = TRUE, stderr = TRUE
+      c("--help"),
+      stdout = TRUE, stderr = TRUE
     )
   } else {
     help_test <- system2(java_cmd,
-                         c("-jar", javastics_cmd, "--help"),
-                         stdout = TRUE, stderr = TRUE
+      c("-jar", javastics_cmd, "--help"),
+      stdout = TRUE, stderr = TRUE
     )
   }
 
   # detecting invalid option for given JavaSTICS command line
   help_status <- !length(
-    grep(pattern = "Invalid option entered",
-         help_test)) > 0
+    grep(
+      pattern = "Invalid option entered",
+      help_test
+    )
+  ) > 0
 
   if (!is_windows()) {
     ver <- get_java_version(java_cmd = java_cmd)
@@ -132,19 +134,23 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
     status <- attr(help_test, "status")
 
     if (!is.null(status) && status > 0) {
-      stop("The given or default java version ",
-           ver,
-           " is not usable with that version of",
-           " JavaSTICS, use at least java version 11 !")
+      stop(
+        "The given or default java version ",
+        ver,
+        " is not usable with that version of",
+        " JavaSTICS, use at least java version 11 !"
+      )
     }
 
     if (is.null(status) &&
-        !help_status &&
-        ver > 1.8) {
-      stop("The given or default java version ",
-           ver,
-           " is not usable with that version of",
-           " JavaSTICS, use at most java version 1.8 !")
+      !help_status &&
+      ver > 1.8) {
+      stop(
+        "The given or default java version ",
+        ver,
+        " is not usable with that version of",
+        " JavaSTICS, use at most java version 1.8 !"
+      )
     }
   }
 
@@ -180,15 +186,15 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
 #' @noRd
 #'
 get_java_version <- function(java_cmd = "java") {
-
   # java_cmd must contain a java executable path, if not known in the system
   # environment
   if (!is_windows()) {
     java_path <- system2("which", java_cmd, stdout = TRUE, stderr = TRUE)
   } else {
     # for Windows: splitting command if java_cmd is a full path
-    if (!basename(java_cmd) == java_cmd)
+    if (!basename(java_cmd) == java_cmd) {
       java_cmd <- c("/R", dirname(java_cmd), basename(java_cmd))
+    }
 
     java_path <- system2("where", java_cmd, stdout = TRUE, stderr = TRUE)
   }

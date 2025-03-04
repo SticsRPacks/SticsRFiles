@@ -11,8 +11,10 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "sols.xml")
 #' sols_doc <- xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xl"),
-#'                     "inputs_stics_example.xlsx")
+#' xl_path <- file.path(
+#'   get_examples_path(file_type = "xl"),
+#'   "inputs_stics_example.xlsx"
+#' )
 #' sols_df <- read_excel(xl_path, sheet = "Soils")
 #'
 #' # For updating an existing xml doc (using existing soils names)
@@ -120,7 +122,7 @@ set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
       # except for epc
       sols_idx <- as.vector(
         !grepl(pattern = "^999", par_values) & !is.na(par_values)
-        )
+      )
 
       # Filtering all parameters
       if (!any(sols_idx)) next
@@ -148,5 +150,4 @@ set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
   for (p in other_params) {
     set_param_value(xml_doc, p, sols_param[[p]])
   }
-
 }

@@ -18,8 +18,6 @@
 #'
 
 get_java_workspace <- function(javastics) {
-
-
   # checking javastics path
   check_java_path(javastics)
 
@@ -33,9 +31,12 @@ get_java_workspace <- function(javastics) {
   xml_pref <- xmldocument(xml_path)
   current_wd <- get_values(xml_pref, '//entry[@key="workingDirectory.current"]')
 
-  if (base::is.null(current_wd))
-    stop("JavaSTICS working directory hasn't been set ",
-         "(use set_java_wd to do so)!")
+  if (base::is.null(current_wd)) {
+    stop(
+      "JavaSTICS working directory hasn't been set ",
+      "(use set_java_wd to do so)!"
+    )
+  }
 
   delete(xml_pref)
 

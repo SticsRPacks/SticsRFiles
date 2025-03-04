@@ -25,7 +25,7 @@
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_usms_xml(
-#'   file = file.path(dir_path,"usms.xml"),
+#'   file = file.path(dir_path, "usms.xml"),
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
@@ -38,7 +38,6 @@ upgrade_usms_xml <- function(file,
                              target_version = "V10.0",
                              check_version = TRUE,
                              overwrite = FALSE) {
-
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
@@ -52,8 +51,8 @@ upgrade_usms_xml <- function(file,
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-                                           stics_version,
-                                           param_gen_file = param_gen_file
+      stics_version,
+      param_gen_file = param_gen_file
     )
 
     if (!file_version) {
@@ -86,8 +85,8 @@ upgrade_usms_xml <- function(file,
 
   # setting file STICS version
   set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite
+    new_version = target_version,
+    overwrite = overwrite
   )
 
   # checking if fobs exist
@@ -98,13 +97,14 @@ upgrade_usms_xml <- function(file,
   # default behavior: no existing fobs fields
   if (is.null(obs_nodes)) {
     new_node <- XML::xmlParseString("<fobs>null</fobs>",
-                                    addFinalizer = TRUE
+      addFinalizer = TRUE
     )
 
     parent_node <- get_nodes(old_doc, "//plante")
 
-    lapply(parent_node,
-           function(x) XML::addChildren(x, XML::xmlClone(new_node))
+    lapply(
+      parent_node,
+      function(x) XML::addChildren(x, XML::xmlClone(new_node))
     )
   }
 
@@ -121,10 +121,10 @@ upgrade_usms_xml <- function(file,
 
   # Setting obs files names into fobs for existing files
   set_param_value(old_doc,
-                  param_name = "fobs",
-                  param_value = obs_val,
-                  parent_name = "plante",
-                  parent_sel_attr = "1"
+    param_name = "fobs",
+    param_value = obs_val,
+    parent_name = "plante",
+    parent_sel_attr = "1"
   )
 
 

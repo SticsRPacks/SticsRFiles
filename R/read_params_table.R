@@ -31,9 +31,11 @@ read_params_table <- function(file, sheet_name = NULL,
                               char_na = "NA",
                               file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "read_params_table(file_path)",
-                              "read_params_table(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "read_params_table(file_path)",
+      "read_params_table(file)"
+    )
   } else {
     file_path <- file # to remove when we update inside the function
   }
@@ -84,9 +86,10 @@ read_params_table <- function(file, sheet_name = NULL,
     },
     {
       out_table <- readxl::read_excel(file_path,
-                                      sheet = sheet_name,
-                                      trim_ws = TRUE,
-                                      col_types = "text")
+        sheet = sheet_name,
+        trim_ws = TRUE,
+        col_types = "text"
+      )
     }
   )
 
@@ -138,10 +141,11 @@ replace_na <- function(in_df, replacement) {
     return(in_df)
   }
 
-  idx_col_has_na <- unlist(lapply(in_df, function(x) {
-    any(is.na(x))
-  }),
-  use.names = FALSE
+  idx_col_has_na <- unlist(
+    lapply(in_df, function(x) {
+      any(is.na(x))
+    }),
+    use.names = FALSE
   )
 
   to_be_treated <- which(idx_type_col & idx_col_has_na)

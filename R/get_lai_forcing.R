@@ -18,7 +18,6 @@
 #' get_lai_forcing(xml_usms, "wheat")
 #' get_lai_forcing(xml_usms, c("wheat", "intercrop_pea_barley"))
 #'
-#'
 #' @export
 #'
 get_lai_forcing <- function(usm_file_path, usms_list = c()) {
@@ -30,17 +29,22 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
     return()
   }
 
-  if (!base::file.exists(usm_file_path))
+  if (!base::file.exists(usm_file_path)) {
     stop(usm_file_path, " does not exist")
+  }
 
   if (usm) {
-    return(get_lai_forcing_txt(usm_txt_path = usm_file_path,
-                               usm_name = usms_list))
+    return(get_lai_forcing_txt(
+      usm_txt_path = usm_file_path,
+      usm_name = usms_list
+    ))
   }
 
   if (usms) {
-    return(get_lai_forcing_xml(usm_xml_path = usm_file_path,
-                               usms_list = usms_list))
+    return(get_lai_forcing_xml(
+      usm_xml_path = usm_file_path,
+      usms_list = usms_list
+    ))
   }
 }
 
@@ -65,7 +69,6 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
 #' @noRd
 #'
 get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
-
   # Loading xml file as xml_document object
   usms_doc <- xmldocument(usm_xml_path)
 
@@ -74,7 +77,6 @@ get_lai_forcing_xml <- function(usm_xml_path, usms_list = c()) {
 
 
 get_lai_forcing_xml_doc <- function(usm_doc, usms_list = c()) {
-
   # Getting plants nb per usm
   lai_forced <- as.logical(as.numeric(get_values(usm_doc, "//codesimul")))
 
@@ -102,8 +104,9 @@ get_lai_forcing_txt <- function(usm_txt_path, usm_name = NULL) {
   usm_data <- get_usm_txt(filepath = usm_txt_path)
 
   # Checking usm name
-  if (!base::is.null(usm_name) && usm_data$nom != usm_name)
+  if (!base::is.null(usm_name) && usm_data$nom != usm_name) {
     stop(usm_name, ": wrong usm name")
+  }
 
   # Returning a named vector
   lai_forced <- usm_data$codesimul == "feuille"

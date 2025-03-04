@@ -23,27 +23,32 @@
 #' # Getting data for a given example : study_case_1 and a given STICS version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
-download_data <- function(branch = "master",
-                          out_dir = tempdir(),
-                          example_dirs = NULL,
-                          stics_version = "latest",
-                          dir = lifecycle::deprecated(),
-                          version_name = lifecycle::deprecated()) {
-
+download_data <- function(
+  branch = "master",
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest",
+  dir = lifecycle::deprecated(),
+  version_name = lifecycle::deprecated()
+) {
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(dir)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_data(dir)",
-                              "download_data(out_dir)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_data(dir)",
+      "download_data(out_dir)"
+    )
   } else {
     dir <- out_dir # to remove when we update inside the function
   }
 
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "download_data(version_name)",
-                              "download_data(stics_version)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "download_data(version_name)",
+      "download_data(stics_version)"
+    )
   } else {
     version_name <- stics_version # to remove when we update inside the function
   }
@@ -53,25 +58,27 @@ download_data <- function(branch = "master",
     version_name <- get_stics_versions_compat()$latest_version
   }
 
-
   # Getting path string(s) from examples data file
-  dirs_str <- get_referenced_dirs(dirs = example_dirs,
-                                  stics_version = version_name)
+  dirs_str <- get_referenced_dirs(
+    dirs = example_dirs,
+    stics_version = version_name
+  )
 
   # Not any examples_dirs not found in example data file
-  if (base::is.null(dirs_str))
+  if (base::is.null(dirs_str)) {
     stop("Error: no available data for ", example_dirs)
+  }
 
   data_dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
-  data_dir_zip <- normalizePath(file.path(data_dir, "master.zip"),
-                                winslash = "/",
-                                mustWork = FALSE)
-  # utils::download.file("https://github.com/SticsRPacks/data/archive/master.zip",
-  #                      data_dir_zip)
-
-  utils::download.file(paste0("https://github.com/SticsRPacks/data/archive/",
-                              branch, ".zip"),
-                       data_dir_zip)
+  data_dir_zip <- normalizePath(
+    file.path(data_dir, "master.zip"),
+    winslash = "/",
+    mustWork = FALSE
+  )
+  utils::download.file(
+    "https://github.com/SticsRPacks/data/archive/master.zip",
+    data_dir_zip
+  )
 
   df_name <- utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
 
@@ -82,11 +89,14 @@ download_data <- function(branch = "master",
   ))
 
   # No data corresponding to example_dirs request in the archive !
-  if (!length(arch_files))
-    stop("No downloadable data for example(s), version: ",
-         example_dirs,
-         ",",
-         version_name)
+  if (!length(arch_files)) {
+    stop(
+      "No downloadable data for example(s), version: ",
+      example_dirs,
+      ",",
+      version_name
+    )
+  }
 
   # Finally extracting data
   utils::unzip(data_dir_zip, exdir = data_dir, files = arch_files)
@@ -125,11 +135,11 @@ download_data <- function(branch = "master",
 #' }
 #'
 get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
-
   # Loading csv file with data information
   ver_data <- get_versions_info(stics_version = stics_version)
-  if (base::is.null(ver_data))
+  if (base::is.null(ver_data)) {
     stop("No examples data referenced for version: ", stics_version)
+  }
 
   dirs_names <- grep(pattern = "^study_case", x = names(ver_data), value = TRUE)
   if (base::is.null(dirs)) dirs <- dirs_names

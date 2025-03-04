@@ -32,7 +32,8 @@
 #' param_names <- get_param_names_xml(xml_files_list)
 #'
 #' param_names <- get_param_names_xml(xml_files_list,
-#'                                    param_name = c("al", "albedo"))
+#'   param_name = c("al", "albedo")
+#' )
 #' }
 #'
 #' @keywords internal
@@ -45,7 +46,6 @@ get_param_names_xml <- function(xml_file,
                                 output = "data.frame",
                                 combine = TRUE,
                                 exact = FALSE) {
-
   # Switch for transformations to data.frame format
   df_out <- output == "data.frame"
   df_comb <- df_out & combine
@@ -125,10 +125,11 @@ get_param_names_xml <- function(xml_file,
     }
   } else {
     if (bounds) {
-      param_names <- list(list(file = base::basename(xml_file),
-                               name = param_bounds))
+      param_names <- list(list(
+        file = base::basename(xml_file),
+        name = param_bounds
+      ))
     } else {
-
       # To a named list
       names(param_names) <- base::basename(xml_file)
     }

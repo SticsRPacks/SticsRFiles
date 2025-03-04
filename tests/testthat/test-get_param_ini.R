@@ -29,11 +29,12 @@ if (version_num < 10) {
 
 result <- c("snu", "0", "0", "0", "0", "0", "0")
 test_that("multiple param option value", {
-  val <- unlist(get_param_xml(xml_path, par_list,
-    select = "plante",
-    select_value = 1
-  ),
-  use.names = FALSE
+  val <- unlist(
+    get_param_xml(xml_path, par_list,
+      select = "plante",
+      select_value = 1
+    ),
+    use.names = FALSE
   )
 
 

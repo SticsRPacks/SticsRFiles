@@ -25,8 +25,6 @@
 #' @noRd
 #'
 get_options_choices <- function(xml_file_path, options_names = NULL) {
-
-
   # If no options_names given, taking the full list
   if (base::is.null(options_names)) {
     names_vec <- get_options_names(xml_file_path)

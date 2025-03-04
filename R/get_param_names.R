@@ -27,43 +27,56 @@ get_param_names <- function(xml_object,
                             parent_sel_attr = NULL,
                             full_list = FALSE,
                             root_name = NULL) {
-
-
   xml_node <- NULL
   param_name <- NULL
   tmp_xml_object <- NULL
 
   if (all(!is.null(c(parent_name, parent_sel_attr)))) {
-
-    if (parent_name %in% c("formalisme", "formalismev", "optionv",
-                           "usm", "sol", "variete"))
+    if (parent_name %in% c(
+      "formalisme", "formalismev", "optionv",
+      "usm", "sol", "variete"
+    )) {
       tmp_xml_object <- get_nodes(xml_object,
-                                 path = paste0("//", parent_name,
-                                               "[@nom='",
-                                               parent_sel_attr,
-                                               "']"))[[1]]
+        path = paste0(
+          "//", parent_name,
+          "[@nom='",
+          parent_sel_attr,
+          "']"
+        )
+      )[[1]]
+    }
 
     if (is.null(tmp_xml_object)) {
-      if (parent_name == "option")
+      if (parent_name == "option") {
         tmp_xml_object <- get_nodes(xml_object,
-                                   path = paste0("//", parent_name,
-                                                 "[@nomParam='",
-                                                 parent_sel_attr,
-                                                 "']"))[[1]]
+          path = paste0(
+            "//", parent_name,
+            "[@nomParam='",
+            parent_sel_attr,
+            "']"
+          )
+        )[[1]]
+      }
     }
 
     # plante: for usms and ini files
     if (is.null(tmp_xml_object)) {
-      if (parent_name == "plante")
+      if (parent_name == "plante") {
         tmp_xml_object <- get_nodes(xml_object,
-                                   path = paste0("//", parent_name,
-                                                 "[@dominance='",
-                                                 parent_sel_attr,
-                                                 "']"))[[1]]
+          path = paste0(
+            "//", parent_name,
+            "[@dominance='",
+            parent_sel_attr,
+            "']"
+          )
+        )[[1]]
+      }
     }
 
 
-    if (is.null(tmp_xml_object)) return()
+    if (is.null(tmp_xml_object)) {
+      return()
+    }
 
     xml_object <- tmp_xml_object
 
@@ -131,24 +144,26 @@ get_param_names <- function(xml_object,
   }
 
   if (node_name == "colonne" &&
-      (XML::xmlName(XML::xmlParent(xml_node)) %in% tab_names)) {
+    (XML::xmlName(XML::xmlParent(xml_node)) %in% tab_names)) {
     attr_name <- "nom"
   }
 
   # Getting param_name from a node name
   # but not in list "plante", "horizon" ,"initialisations", "sol", "usm"
   if (attr_name == "none" &&
-      !(node_name %in% c("plante", "horizon", "initialisations", "sol",
-                         "usm", "snow"))) {
+    !(node_name %in% c(
+      "plante", "horizon", "initialisations", "sol",
+      "usm", "snow"
+    ))) {
     param_name <- node_name
   }
 
 
   # Getting param_name from an attribute value
   if ((!is.null(parent_name) &&
-       node_name != parent_name) ||
-      (is.null(parent_name) &&
-       attr_name %in% names(XML::xmlAttrs(xml_node)))) {
+    node_name != parent_name) ||
+    (is.null(parent_name) &&
+      attr_name %in% names(XML::xmlAttrs(xml_node)))) {
     param_name <- XML::xmlAttrs(xml_node)[attr_name]
   }
 
@@ -156,7 +171,7 @@ get_param_names <- function(xml_object,
   # - if it does not exist
   # - if a full param names list is asked
   if (!base::is.null(param_name) &&
-      (full_list || !(param_name %in% param_list))) {
+    (full_list || !(param_name %in% param_list))) {
     param_list <- c(param_list, param_name)
   }
 
@@ -173,11 +188,11 @@ get_param_names <- function(xml_object,
       next
     }
     param_list <- get_param_names(childs[[n]],
-                                  param_list,
-                                  parent_name = parent_name,
-                                  parent_sel_attr = parent_sel_attr,
-                                  full_list = full_list,
-                                  root_name = root_name
+      param_list,
+      parent_name = parent_name,
+      parent_sel_attr = parent_sel_attr,
+      full_list = full_list,
+      root_name = root_name
     )
   }
 
@@ -192,8 +207,9 @@ get_param_names <- function(xml_object,
   )
 
   # Specific to plt file: variete also exists in fichierstec as a parameter
-  if (!is.null(root_name) && root_name == "fichierplt")
+  if (!is.null(root_name) && root_name == "fichierplt") {
     names_filt <- c(names_filt, "variete")
+  }
 
   param_list <- setdiff(param_list, names_filt)
 

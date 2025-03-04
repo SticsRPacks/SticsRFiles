@@ -5,6 +5,7 @@
 #' (ficini.txt, ficplt1.txt,...)
 #' @param file Path (including name) of the xml file to convert
 #' @param plant_id The plant identifier (main crop: 1 ; associated crop: 2)
+#' @param soil_name Soil name (optional, required for soil file)
 #' @param out_dir Path of the directory where to generate the file.
 #' Optional, set to the path of the input xml file by default
 #' @param save_as Name of the output file
@@ -21,7 +22,6 @@
 #' @return None
 #'
 #' @examples
-#'
 #' \dontrun{
 #' xml_path <- "/path/to/corn_plt.xml"
 #' javastics_path <- "/path/to/JavaSTICS/folder"
@@ -32,32 +32,38 @@
 #'
 convert_xml2txt <- function(file,
                             plant_id = 1,
+                            soil_name = NULL,
                             out_dir = NULL,
                             save_as = NULL,
                             stics_version = "latest",
                             xml_file = lifecycle::deprecated(),
                             plt_num = lifecycle::deprecated(),
                             out_file = lifecycle::deprecated()) {
-
   if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "convert_xml2txt(xml_file)",
-                              "convert_xml2txt(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "convert_xml2txt(xml_file)",
+      "convert_xml2txt(file)"
+    )
   } else {
     xml_file <- file # to remove when we update inside the function
   }
 
   if (lifecycle::is_present(plt_num)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "convert_xml2txt(plt_num)",
-                              "convert_xml2txt(plant_id)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "convert_xml2txt(plt_num)",
+      "convert_xml2txt(plant_id)"
+    )
   } else {
     plt_num <- plant_id # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "convert_xml2txt(out_file)",
-                              "convert_xml2txt(save_as)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "convert_xml2txt(out_file)",
+      "convert_xml2txt(save_as)"
+    )
   } else {
     out_file <- save_as # to remove when we update inside the function
   }
@@ -79,8 +85,10 @@ convert_xml2txt <- function(file,
   )
 
   # Using tags from in files names for the xml file type identification
-  tags <- list("_ini\\.xml", "sols\\.xml", "_plt\\.xml",
-               "_tec\\.xml", "_sta\\.xml", "_newform\\.xml", "_gen\\.xml")
+  tags <- list(
+    "_ini\\.xml", "sols\\.xml", "_plt\\.xml",
+    "_tec\\.xml", "_sta\\.xml", "_newform\\.xml", "_gen\\.xml"
+  )
   idx <- which(unlist(lapply(tags, function(x) grepl(x, xml_file))))
   calc_name <- length(idx) > 0
 
@@ -118,9 +126,39 @@ convert_xml2txt <- function(file,
 
   style_file <- file.path(xsl_dir, xsl_files[filet])
 
+  # specific case for soil file
+  if (filet == "sols") {
+    if (is.null(soil_name)) {
+      stop("Soil name not provided as argument! ")
+    }
+
+    # check if the soil_name is in the sols.xml file
+    soils_names <- get_soils_list(file.path(dirname(file), "sols.xml"))
+
+    if (!soil_name %in% soils_names) {
+      stop(paste(
+        "Soil name ", soil_name,
+        " not found in sols.xml file !"
+      ))
+    }
+
+    # generate sol2txt.xsl in the tempdir() directory
+    ret <- gen_sol_xsl_file(soil_name, stics_version)
+
+    # getting the path of the generated xsl file
+    style_file <- attr(ret, "path")
+
+    # if any writing problem
+    if (!ret) {
+      stop(
+        "Problem when generating soil xsl file !\n",
+        style_file
+      )
+    }
+  }
+
   # calling the xml conversion function
   status <- convert_xml2txt_int(xml_file, style_file, out_file_path)
 
   return(status)
 }
-

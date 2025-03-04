@@ -27,12 +27,11 @@
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_tec_xml(
-#'   file = file.path(dir_path,"file_tec.xml"),
+#'   file = file.path(dir_path, "file_tec.xml"),
 #'   out_dir = tempdir(),
 #'   param_newform_file = file.path(dir_path, "param_newform.xml"),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#'
 #'
 upgrade_tec_xml <- function(file,
                             out_dir,
@@ -43,7 +42,6 @@ upgrade_tec_xml <- function(file,
                             check_version = TRUE,
                             overwrite = FALSE,
                             ...) {
-
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -61,8 +59,8 @@ upgrade_tec_xml <- function(file,
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(file,
-                                           stics_version,
-                                           param_gen_file = param_gen_file
+      stics_version,
+      param_gen_file = param_gen_file
     )
 
     if (!file_version && is.null(param_gen_file)) {
@@ -113,8 +111,8 @@ upgrade_tec_xml <- function(file,
 
   # Setting file STICS version
   set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite
+    new_version = target_version,
+    overwrite = overwrite
   )
 
 
@@ -226,7 +224,7 @@ upgrade_tec_xml <- function(file,
   # intervention , engrais
   # -----------------------
   new_node <- XML::xmlParseString('<colonne nom="engrais"/>',
-                                  addFinalizer = TRUE
+    addFinalizer = TRUE
   )
 
   parent_node <- get_nodes(
@@ -245,14 +243,17 @@ upgrade_tec_xml <- function(file,
     path = "//formalisme[@nom='fertilisation']//ta/intervention"
   )
   if (!is.null(parent_nodes)) {
-    lapply(parent_nodes,
-           function(x) {
-             XML::addChildren(x, XML::xmlClone(new_node))
-           }
+    lapply(
+      parent_nodes,
+      function(x) {
+        XML::addChildren(x, XML::xmlClone(new_node))
+      }
     )
-    set_param_value(xml_doc = old_doc,
-                    param_name = "engrais",
-                    param_value = engrais)
+    set_param_value(
+      xml_doc = old_doc,
+      param_name = "engrais",
+      param_value = engrais
+    )
     lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "3")
   }
 
@@ -476,7 +477,7 @@ upgrade_tec_xml <- function(file,
     "stage_start_irrigauto", "stage_end_irrigauto"
   )
   old_val <- get_param_xml(param_newform_file,
-                           param = param_names
+    param = param_names
   )[[basename(param_newform_file)]]
 
   # writing to file _tec.xml

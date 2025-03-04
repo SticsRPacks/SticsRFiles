@@ -12,7 +12,7 @@ if (!dir.exists(studycase_path)) {
       branch = "update-files-v11",
       example_dirs = "study_case_1",
       stics_version = stics_version
-  )
+    )
 }
 
 workspace_path <- file.path(studycase_path, "XmlFiles")

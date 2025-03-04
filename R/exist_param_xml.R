@@ -24,7 +24,6 @@
 #'
 exist_param_xml <- function(param,
                             stics_version = "latest") {
-
   # Finding exact matchs in found names
   par_names <- get_param_data_df(
     param = param,
@@ -72,8 +71,6 @@ exist_param_xml <- function(param,
 #'
 exist_param_csv <- function(param,
                             javastics) {
-
-
   # Keeping names to modify with real names
   final_names <- param
 

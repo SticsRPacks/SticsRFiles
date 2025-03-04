@@ -1,5 +1,3 @@
-
-
 #' STICS env name
 #'
 #' Get the default STICS environment name
@@ -53,7 +51,7 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
   # Checking a sub-env
   exists_name <- exists(name, envir = local_stics, inherits = FALSE)
 
-  if (exists_name) {  # Returning .stics env object
+  if (exists_name) { # Returning .stics env object
 
     return(local_stics[[name]])
   }
@@ -367,7 +365,6 @@ stics_split_list <- function(name) {
 #' stics_remove()
 #' }
 stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
-
   envir <- stics_get(name = env_name)
 
   if (base::is.null(name)) {
@@ -407,7 +404,8 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
       list_var_names,
       function(x) {
         eval(parse(text = paste0("base::is.null(", x, " <- NULL)")),
-             envir = envir)
+          envir = envir
+        )
       }
     ))
     ret <- all(ret)
