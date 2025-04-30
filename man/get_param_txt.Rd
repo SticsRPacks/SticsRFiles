@@ -166,13 +166,15 @@ get_param_txt(workspace = path)$plant$plant1$durvieF
 # Get parameters for a specific plant
 get_param_txt(workspace = path, plant_id = 1)
 get_param_txt(workspace = path, param = "durvieF", plant_id = 1)
-get_param_txt(workspace = path, param = "durvieF", plant_id = 1,
-variety = varieties)
+get_param_txt(
+  workspace = path, param = "durvieF", plant_id = 1,
+  variety = varieties
+)
 
 # Get parameters for specific interventions or soil layers
-get_param_txt(workspace = path, param = "amount", value_id = c(1,3))
-get_param_txt(workspace = path, param = "Hinitf", value_id = c(1,3))
-get_param_txt(workspace = path, param = "epc", value_id = c(1,3))
+get_param_txt(workspace = path, param = "amount", value_id = c(1, 3))
+get_param_txt(workspace = path, param = "Hinitf", value_id = c(1, 3))
+get_param_txt(workspace = path, param = "epc", value_id = c(1, 3))
 
 \dontrun{
 # Read the initialisation file (ficini.txt):
@@ -183,8 +185,10 @@ get_ini_txt(path)
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp <- get_tmp_txt(file = file.path(get_examples_path(file_type = "txt"),
-                                    "tempoparv6.sti"))
+tmp <- get_tmp_txt(file = file.path(
+  get_examples_path(file_type = "txt"),
+  "tempoparv6.sti"
+))
 several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
 several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
 is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)

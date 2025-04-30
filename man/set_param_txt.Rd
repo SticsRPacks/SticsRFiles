@@ -174,8 +174,10 @@ path <- get_examples_path(file_type = "txt")
 set_param_txt(workspace = path, param = "durvieF", value = 245)
 
 # Change the value of durvieF for another variety:
-set_param_txt(workspace = path, param = "durvieF",
-              variety = "Nefer", value = 178)
+set_param_txt(
+  workspace = path, param = "durvieF",
+  variety = "Nefer", value = 178
+)
 # Change the value of soil parameter "cailloux" for all layers
 # or a specific one
 set_param_txt(workspace = path, param = "cailloux", value = 1)
@@ -185,7 +187,5 @@ set_param_txt(workspace = path, param = "cailloux", value_id = 2, value = 2)
 # or a specific one
 set_param_txt(workspace = path, param = "amount", value = 50)
 set_param_txt(workspace = path, param = "amount", value_id = 2, value = 40)
-
-
 
 }

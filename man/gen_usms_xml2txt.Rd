@@ -93,7 +93,6 @@ gen_usms_xml2txt(javastics, workspace)
 # For an usms list
 usm <- c("usm1", "usm2")
 gen_usms_xml2txt(javastics, workspace, usm)
-
 }
 
 }

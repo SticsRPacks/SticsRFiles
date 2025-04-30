@@ -29,5 +29,4 @@ get_stics_versions_compat(1)
 # Getting the previous version of the latest one
 get_stics_versions_compat(-1)
 
-
 }

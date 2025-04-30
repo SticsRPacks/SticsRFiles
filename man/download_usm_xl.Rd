@@ -57,5 +57,4 @@ values to insert into XML files, with the help of these functions:
 
 download_usm_xl()
 
-
 }

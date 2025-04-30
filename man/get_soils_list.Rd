@@ -45,6 +45,8 @@ soil_list <- get_soils_list(file = file.path(path, "usms.xml"))
 # Read from a soil file (all soil types available in a soil file)
 soil_list <- get_soils_list(file = file.path(path, "sols.xml"))
 
-soil_list <- get_soils_list(file = file.path(path, "usms.xml"),
-                            soil = c("solcanne", "sole"))
+soil_list <- get_soils_list(
+  file = file.path(path, "usms.xml"),
+  soil = c("solcanne", "sole")
+)
 }

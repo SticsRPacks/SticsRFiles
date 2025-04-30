@@ -53,5 +53,4 @@ get_report_results(workspace = path)
 
 get_report_results(workspace = path, file_name = "mod_rapportA.sti")
 
-
 }
