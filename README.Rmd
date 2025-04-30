@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
  
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/SticsRPacks/CroptimizR/actions/workflows/check-standard.yaml/badge.svg?branch=main)](https://github.com/SticsRPacks/CroptimizR/actions/workflows/check-standard.yaml)
+[![R-CMD-check](https://github.com/SticsRPacks/SticsRFiles/actions/workflows/check-standard.yaml/badge.svg?branch=main)](https://github.com/SticsRPacks/SticsRFiles/actions/workflows/check-standard.yaml)
 [![Codecov test coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
 ![](https://www.r-pkg.org/badges/version-ago/SticsRFiles)
