@@ -48,7 +48,7 @@ See SticsRFiles::get_stics_versions_compat() for listing versions
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 
 upgrade_sols_xml(
-  file = file.path(dir_path,"sols.xml" ),
+  file = file.path(dir_path, "sols.xml"),
   out_dir = tempdir(),
   param_gen_file = file.path(dir_path, "param_gen.xml")
 )

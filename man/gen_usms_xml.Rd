@@ -79,7 +79,9 @@ If not given (the default, \code{NULL}), the function returns the template as is
 \examples{
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
-gen_usms_xml(file = file.path(tempdir(), "usms.xml"),
- param_df = usms_param_df)
+gen_usms_xml(
+  file = file.path(tempdir(), "usms.xml"),
+  param_df = usms_param_df
+)
 
 }
