@@ -130,7 +130,6 @@ Collate:
     'get_options_names.R'
     'get_param_bounds.R'
     'get_param_bounds_xml.R'
-    'get_param_desc.R'
     'get_param_formalisms.R'
     'get_param_info_xml.R'
     'get_param_names.R'
