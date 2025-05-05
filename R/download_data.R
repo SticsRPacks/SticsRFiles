@@ -22,10 +22,13 @@
 #' # Getting data for a given example : study_case_1 and a given STICS version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
-download_data <- function(out_dir = tempdir(), example_dirs = NULL,
-                          stics_version = "latest",
-                          dir = lifecycle::deprecated(),
-                          version_name = lifecycle::deprecated()) {
+download_data <- function(
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest",
+  dir = lifecycle::deprecated(),
+  version_name = lifecycle::deprecated()
+) {
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(dir)) {
     lifecycle::deprecate_warn(
@@ -53,7 +56,6 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
     version_name <- get_stics_versions_compat()$latest_version
   }
 
-
   # Getting path string(s) from examples data file
   dirs_str <- get_referenced_dirs(
     dirs = example_dirs,
@@ -66,14 +68,38 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
   }
 
   data_dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
-  data_dir_zip <- normalizePath(file.path(data_dir, "master.zip"),
+  data_dir_zip <- normalizePath(
+    file.path(data_dir, "master.zip"),
     winslash = "/",
     mustWork = FALSE
   )
-  utils::download.file(
-    "https://github.com/SticsRPacks/data/archive/master.zip",
-    data_dir_zip
+
+  ret_ping <- system(
+    "ping -c 3 github.com",
+    intern = FALSE,
+    ignore.stdout = TRUE,
+    ignore.stderr = TRUE
   )
+
+  if (ret_ping != 0) {
+    message("No internet connection or the resource is unreachable.")
+    return(invisible())
+  }
+
+  # Download query for getting the master.zip
+  try_ret <- try(
+    suppressWarnings(utils::download.file(
+      "https://github.com/SticsRPacks/data/archive/master.zip",
+      data_dir_zip
+    )),
+    silent = TRUE
+  )
+
+  # Checking if the download was successful
+  if (inherits(try_ret, "try-error")) {
+    message("Error while downloading data from GitHub.")
+    return(invisible())
+  }
 
   df_name <- utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
 
@@ -85,8 +111,8 @@ download_data <- function(out_dir = tempdir(), example_dirs = NULL,
 
   # No data corresponding to example_dirs request in the archive !
   if (!length(arch_files)) {
-    stop(
-      "No downloadable data for example(s), version: ",
+    warning(
+      "No available data for example(s), version: ",
       example_dirs,
       ",",
       version_name
