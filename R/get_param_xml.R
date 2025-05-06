@@ -122,18 +122,18 @@ get_param_xml <- function(
   )
 
   # Fixing parameters with no values with NA
-  values <- lapply(
-    values,
-    function(x) {
-      lapply(x, function(y) {
-        idx <- y == ""
-        if (any(idx)) {
-          y <- suppressWarnings(as.numeric(y))
-        }
-        return(y)
-      })
-    }
-  )
+  # values <- lapply(
+  #   values,
+  #   function(x) {
+  #     lapply(x, function(y) {
+  #       idx <- y == ""
+  #       if (any(idx)) {
+  #         y <- suppressWarnings(as.numeric(y))
+  #       }
+  #       return(y)
+  #     })
+  #   }
+  # )
 
   names(values) <- xml_names
 
