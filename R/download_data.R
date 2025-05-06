@@ -23,12 +23,11 @@
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
 download_data <- function(
-  out_dir = tempdir(),
-  example_dirs = NULL,
-  stics_version = "latest",
-  dir = lifecycle::deprecated(),
-  version_name = lifecycle::deprecated()
-) {
+    out_dir = tempdir(),
+    example_dirs = NULL,
+    stics_version = "latest",
+    dir = lifecycle::deprecated(),
+    version_name = lifecycle::deprecated()) {
   # Managing the parameter name changes from 0.5.0 and onward:
   if (lifecycle::is_present(dir)) {
     lifecycle::deprecate_warn(
