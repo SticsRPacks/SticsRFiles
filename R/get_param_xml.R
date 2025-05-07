@@ -121,20 +121,6 @@ get_param_xml <- function(
     xml_names[is_duplicated_name]
   )
 
-  # Fixing parameters with no values with NA
-  # values <- lapply(
-  #   values,
-  #   function(x) {
-  #     lapply(x, function(y) {
-  #       idx <- y == ""
-  #       if (any(idx)) {
-  #         y <- suppressWarnings(as.numeric(y))
-  #       }
-  #       return(y)
-  #     })
-  #   }
-  # )
-
   names(values) <- xml_names
 
   lapply(xml_docs, delete)
