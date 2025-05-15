@@ -3,8 +3,7 @@ library(dplyr)
 
 stics_version <- get_stics_versions_compat()$latest_version
 
-if (get_version_num(stics_version = stics_version)
->= 10) {
+if (get_version_num(stics_version = stics_version) >= 10) {
   stics_version <- "V10.0"
 }
 parnames <- list()
@@ -27,7 +26,8 @@ out_dir <- file.path(tempdir(), "gen_xml")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 
 gen_ini_xml(
-  param_df = ini_param[1, ], out_dir = out_dir,
+  param_df = ini_param[1, ],
+  out_dir = out_dir,
   stics_version = stics_version
 )
 
@@ -41,7 +41,8 @@ xl_plt1_values <- select(
   -starts_with("code")
 )
 xl_params <- gsub(
-  pattern = "(.*)_(.*)", x = names(xl_plt1_values),
+  pattern = "(.*)_(.*)",
+  x = names(xl_plt1_values),
   replacement = "\\1"
 )
 
@@ -53,7 +54,8 @@ xl_params <- gsub(
 
 xl_plt1_values <- select(xl_plt1_values, starts_with(xl_params))
 xml_plt1_values <- get_param_xml(
-  file = ini_xml, select = "plante",
+  file = ini_xml,
+  select = "plante",
   select_value = 1
 )[[1]]
 idx <- names(xml_plt1_values) %in% xl_params
@@ -61,7 +63,8 @@ xml_plt1_values <- unlist(xml_plt1_values[idx])
 
 # For plant 2
 xml_plt2_values <- unlist(get_param_xml(
-  file = ini_xml, select = "plante",
+  file = ini_xml,
+  select = "plante",
   select_value = 2
 )[[1]])
 
@@ -71,7 +74,8 @@ xl_plt2_values <- select(
   -starts_with("code")
 )
 xl_params <- gsub(
-  pattern = "(.*)_(.*)", x = names(xl_plt1_values),
+  pattern = "(.*)_(.*)",
+  x = names(xl_plt1_values),
   replacement = "\\1"
 )
 
@@ -83,7 +87,8 @@ xl_params <- gsub(
 
 xl_plt2_values <- select(xl_plt2_values, starts_with(xl_params))
 xml_plt2_values <- get_param_xml(
-  file = ini_xml, select = "plante",
+  file = ini_xml,
+  select = "plante",
   select_value = 2
 )[[1]]
 idx <- names(xml_plt2_values) %in% xl_params
