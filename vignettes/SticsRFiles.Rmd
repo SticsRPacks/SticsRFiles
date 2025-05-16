@@ -86,7 +86,6 @@ SticsRFiles provides a function to download it from the command line. Please exe
 
 ```{r include=FALSE}
 example_data <- SticsRFiles::download_data(
-  out_dir = tempdir(),
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )

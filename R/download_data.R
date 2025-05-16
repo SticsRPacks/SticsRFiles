@@ -20,9 +20,10 @@
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
 download_data <- function(
-    out_dir = tempdir(),
-    example_dirs = NULL,
-    stics_version = "latest") {
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest"
+) {
   # Setting version value from input for version == "latest"
   if (is.null(stics_version) || stics_version == "latest") {
     stics_version <- get_stics_versions_compat()$latest_version
@@ -37,6 +38,18 @@ download_data <- function(
   # Not any examples_dirs not found in example data file
   if (base::is.null(dirs_str)) {
     stop("Error: no available data for ", example_dirs)
+  }
+
+  # checking if the path exist(s), if a prior extraction have been done
+  prev_data_dir <- file.path(
+    out_dir,
+    "data-master",
+    dirs_str
+  )
+
+  # all directories already exist, exiting
+  if (all(file.exists(prev_data_dir))) {
+    return(prev_data_dir)
   }
 
   data_dir <- normalizePath(out_dir, winslash = "/", mustWork = FALSE)
