@@ -58,10 +58,9 @@ setMethod(
   "initialize",
   "file_document",
   function(
-    .Object,
-    file = character(length = 0),
-    type = character(length = 0)
-  ) {
+      .Object,
+      file = character(length = 0),
+      type = character(length = 0)) {
     if (missing(file)) {
       stop("missing file name")
     }
@@ -361,9 +360,15 @@ setMethod(
     } else {
       name <- NULL
     }
-    if (is.null(name)) return("unknown")
+    if (is.null(name)) {
+      return("unknown")
+    }
     # keep this order for identifying file from dir
-    if (file.exists(name)) return("file")
-    if (dir.exists(name)) return("dir")
+    if (file.exists(name)) {
+      return("file")
+    }
+    if (dir.exists(name)) {
+      return("dir")
+    }
   }
 )
