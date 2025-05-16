@@ -169,7 +169,7 @@ setMethod(
     }
 
     # testing if all nodes have the same attributes !!
-    if (!is.matrix(attr_list) && !is.matrix(attr_list[,])) {
+    if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
       if (object@warn) {
         message(class(attr_list))
         warning(paste(
@@ -477,7 +477,7 @@ setMethod(
         warning(paste("Error loading xml file:", object@name))
       }
     }
-    #set_content(object) <- XML::xmlParse(get_path(object))
+    # set_content(object) <- XML::xmlParse(get_path(object))
     object
   }
 )

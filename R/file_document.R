@@ -15,7 +15,7 @@
 setClass(
   "file_document",
   representation(
-    #type = "character",
+    # type = "character",
     name = "character",
     dir = "character",
     ext = "character",
@@ -24,7 +24,7 @@ setClass(
     warn = "logical"
   ),
   prototype(
-    #type = character(length = 0),
+    # type = character(length = 0),
     name = character(length = 0),
     dir = character(length = 0),
     ext = character(length = 0),
@@ -46,11 +46,11 @@ setClass(
 # file only
 setMethod(
   "filedocument",
-  #signature(file = "character", type = "missing"),
-  #signature(file = "missing", type = "missing"),
+  # signature(file = "character", type = "missing"),
+  # signature(file = "missing", type = "missing"),
   signature(file = "character"),
   function(file = character(length = 0)) {
-    #, type = character(length = 0)) {
+    # , type = character(length = 0)) {
     return(methods::new("file_document", file))
   }
 )
@@ -60,10 +60,10 @@ setMethod(
   "initialize",
   "file_document",
   function(
-    .Object,
-    file = character(length = 0) #,
-    #type = character(length = 0)
-  ) {
+      .Object,
+      file = character(length = 0) # ,
+      # type = character(length = 0)
+      ) {
     if (missing(file)) {
       message("file name is missing !")
     }
@@ -72,7 +72,7 @@ setMethod(
     .Object@dir <- normalizePath(dirname(file), mustWork = FALSE)
     .Object@ext <- calc_ext(.Object@name)
 
-    #.Object@type <- calc_type(.Object)
+    # .Object@type <- calc_type(.Object)
 
     .Object@warn <- FALSE
 
@@ -206,7 +206,7 @@ setMethod(
   "file_document",
   function(object) {
     print(paste0("   name : ", object@name))
-    #print(paste0("   type : ", object@type))
+    # print(paste0("   type : ", object@type))
     print(paste0("   dir : ", object@dir))
     print(paste0("   ext : ", object@ext))
   }

@@ -1,9 +1,9 @@
 # for generic functions declarations for *document classes
 setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
 # defined for file_document
-#types_list <- c("file", "dir", "url", "link")
+# types_list <- c("file", "dir", "url", "link")
 
-#setGeneric("filedocument", function(file, type) standardGeneric("filedocument"))
+# setGeneric("filedocument", function(file, type) standardGeneric("filedocument"))
 setGeneric("filedocument", function(file) standardGeneric("filedocument"))
 setGeneric("set_name<-", function(object, value) standardGeneric("set_name<-"))
 setGeneric("set_name", function(object, value) standardGeneric("set_name"))
@@ -14,13 +14,13 @@ setGeneric("get_name", function(object) standardGeneric("get_name"))
 
 setGeneric("get_dir", function(object) standardGeneric("get_dir"))
 setGeneric("get_ext", function(object) standardGeneric("get_ext"))
-#setGeneric("get_type", function(object) standardGeneric("get_type"))
+# setGeneric("get_type", function(object) standardGeneric("get_type"))
 
 setGeneric("get_path", function(object) standardGeneric("get_path"))
 
 setGeneric("exist", function(object) standardGeneric("exist"))
 
-#setGeneric("create", function(object) standardGeneric("create"))
+# setGeneric("create", function(object) standardGeneric("create"))
 
 setGeneric("move", function(object, to_file) standardGeneric("move"))
 
@@ -32,7 +32,7 @@ setGeneric("infos", function(object, field = "all") standardGeneric("infos"))
 setGeneric("isdir", function(object) standardGeneric("isdir"))
 setGeneric("isempty", function(object) standardGeneric("isempty"))
 setGeneric("calc_ext", function(object) standardGeneric("calc_ext"))
-#setGeneric("calc_type", function(object) standardGeneric("calc_type"))
+# setGeneric("calc_type", function(object) standardGeneric("calc_type"))
 
 # defined for xml_document
 
