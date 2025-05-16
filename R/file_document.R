@@ -1,7 +1,7 @@
 #' @include global.R
 #' An S4 class to represent a file or dir.
 #'
-#' @slot type A file type ('file','dir')
+# @slot type A file type ('file','dir')
 #' @slot name A file name (with an extension or not)
 #' @slot dir A file dir or path
 #' @slot ext A file extension
@@ -15,7 +15,7 @@
 setClass(
   "file_document",
   representation(
-    type = "character",
+    #type = "character",
     name = "character",
     dir = "character",
     ext = "character",
@@ -24,7 +24,7 @@ setClass(
     warn = "logical"
   ),
   prototype(
-    type = character(length = 0),
+    #type = character(length = 0),
     name = character(length = 0),
     dir = character(length = 0),
     ext = character(length = 0),
@@ -34,21 +34,23 @@ setClass(
   )
 )
 
-# constructor
-setMethod(
-  "filedocument",
-  signature(file = "character", type = "character"),
-  function(file = character(length = 0), type = character(length = 0)) {
-    return(methods::new("file_document", file, type))
-  }
-)
-
+# # constructor
+# setMethod(
+#   "filedocument",
+#   signature(file = "character", type = "character"),
+#   function(file = character(length = 0), type = character(length = 0)) {
+#     return(methods::new("file_document", file, type))
+#   }
+# )
 
 # file only
 setMethod(
   "filedocument",
-  signature(file = "character", type = "missing"),
-  function(file = character(length = 0), type = character(length = 0)) {
+  #signature(file = "character", type = "missing"),
+  #signature(file = "missing", type = "missing"),
+  signature(file = "character"),
+  function(file = character(length = 0)) {
+    #, type = character(length = 0)) {
     return(methods::new("file_document", file))
   }
 )
@@ -59,18 +61,18 @@ setMethod(
   "file_document",
   function(
     .Object,
-    file = character(length = 0),
-    type = character(length = 0)
+    file = character(length = 0) #,
+    #type = character(length = 0)
   ) {
     if (missing(file)) {
-      stop("missing file name")
+      message("file name is missing !")
     }
 
     .Object@name <- basename(file)
-    .Object@dir <- normalizePath(dirname(file))
+    .Object@dir <- normalizePath(dirname(file), mustWork = FALSE)
     .Object@ext <- calc_ext(.Object@name)
 
-    .Object@type <- calc_type(.Object)
+    #.Object@type <- calc_type(.Object)
 
     .Object@warn <- FALSE
 
@@ -117,7 +119,6 @@ setReplaceMethod(
   signature(object = "file_document"),
   function(object, value) {
     object@ext <- value
-    # add reconstruct file name !!!!!!!!!
     return(object)
   }
 )
@@ -160,13 +161,13 @@ setMethod(
   }
 )
 
-setMethod(
-  "get_type",
-  signature(object = "file_document"),
-  function(object) {
-    return(object@type)
-  }
-)
+# setMethod(
+#   "get_type",
+#   signature(object = "file_document"),
+#   function(object) {
+#     return(object@type)
+#   }
+# )
 
 setMethod(
   "get_path",
@@ -180,22 +181,23 @@ setMethod(
   "exist",
   signature(object = "file_document"),
   function(object) {
-    message <- FALSE
-    # TODO: make distinction between dir and file !!!
-    p <- get_path(object)
-    ret <- file.exists(p)
-
-    if (ret) {
-      if (isdir(object)) {
-        ret <- ret & get_type(object) == "dir"
-      } else {
-        ret <- ret & get_type(object) == "file"
-      }
-    }
-    if (!ret & message) {
-      message(paste0("   File doesn't exist: ", p))
-    }
-    return(ret)
+    # message <- FALSE
+    # # TODO: make distinction between dir and file !!!
+    # p <- get_path(object)
+    # ret <- file.exists(p)
+    #
+    # if (ret) {
+    #   if (isdir(object)) {
+    #     ret <- ret & get_type(object) == "dir"
+    #   } else {
+    #     ret <- ret & get_type(object) == "file"
+    #   }
+    # }
+    # if (!ret & message) {
+    #   message(paste0("   File doesn't exist: ", p))
+    # }
+    # return(ret)
+    file.exists(get_path(object))
   }
 )
 
@@ -204,30 +206,30 @@ setMethod(
   "file_document",
   function(object) {
     print(paste0("   name : ", object@name))
-    print(paste0("   type : ", object@type))
+    #print(paste0("   type : ", object@type))
     print(paste0("   dir : ", object@dir))
     print(paste0("   ext : ", object@ext))
   }
 )
 
 #
-setMethod(
-  "create",
-  signature(object = "file_document"),
-  function(object) {
-    p <- get_path(object)
-    if (!exist(object)) {
-      if (object@type == "file") {
-        file.create(p)
-      }
-      if (object@type == "dir") {
-        dir.create(p)
-      }
-    } else {
-      warning(paste0("   File already exists : ", p))
-    }
-  }
-)
+# setMethod(
+#   "create",
+#   signature(object = "file_document"),
+#   function(object) {
+#     p <- get_path(object)
+#     if (!exist(object)) {
+#       if (object@type == "file") {
+#         file.create(p)
+#       }
+#       if (object@type == "dir") {
+#         dir.create(p)
+#       }
+#     } else {
+#       warning(paste0("   File already exists : ", p))
+#     }
+#   }
+# )
 
 #
 setMethod(
@@ -277,18 +279,18 @@ setMethod(
 setMethod(
   "infos",
   signature(object = "ANY"),
-  function(object, type) {
+  function(object, field) {
     if (methods::is(object, "character")) {
       p <- object
     } else {
       p <- get_path(object)
     }
-    # type: all,size,mtime,isdir
+    # field: all,size,mtime,isdir
     ret <- file.info("")
-    if (type == "all") {
+    if (field == "all") {
       ret <- file.info(p)
     } else {
-      ret <- file.info(p)[[type]]
+      ret <- file.info(p)[[field]]
     }
     return(ret)
   }
@@ -301,7 +303,8 @@ setMethod(
   function(object) {
     ret <- infos(object, "isdir")
     if (is.na(ret)) {
-      stop("Unavailable information: file or dir doesn't exist !")
+      warning("Unavailable information: file or dir doesn't exist !")
+      return(FALSE)
     }
     return(ret)
   }
@@ -315,7 +318,8 @@ setMethod(
     # for files and dirs
     ret <- infos(object, "size") == 0
     if (is.na(ret)) {
-      stop("Unavailable information: file doesn't exist !")
+      message("Unavailable information: file doesn't exist !")
+      return(FALSE)
     }
     if (isdir(object)) {
       if (methods::is(object, "character")) {
@@ -350,20 +354,20 @@ setMethod(
   }
 )
 
-setMethod(
-  "calc_type",
-  signature(object = "ANY"),
-  function(object) {
-    if (methods::is(object, "character")) {
-      name <- object
-    } else if (methods::is(object, "file_document")) {
-      name <- get_path(object)
-    } else {
-      name <- NULL
-    }
-    if (is.null(name)) return("unknown")
-    # keep this order for identifying file from dir
-    if (file.exists(name)) return("file")
-    if (dir.exists(name)) return("dir")
-  }
-)
+# setMethod(
+#   "calc_type",
+#   signature(object = "ANY"),
+#   function(object) {
+#     if (methods::is(object, "character")) {
+#       name <- object
+#     } else if (methods::is(object, "file_document")) {
+#       name <- get_path(object)
+#     } else {
+#       name <- character(0)
+#     }
+#     if (length(name) == 0) return("unknown")
+#     # keep this order for identifying file from dir
+#     if (file.exists(name)) return("file")
+#     if (dir.exists(name)) return("dir")
+#   }
+# )
