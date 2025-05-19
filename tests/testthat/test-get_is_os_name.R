@@ -1,6 +1,3 @@
-library(SticsRFiles)
-
-
 context("Is OS name")
 
 test_that("Is OS name", {

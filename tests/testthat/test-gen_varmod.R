@@ -1,5 +1,3 @@
-library(SticsRFiles)
-
 context("Creating a varmod file to latest version")
 
 out_dir <- file.path(tempdir(), "varmod")
@@ -19,7 +17,8 @@ test_that("Add a new variable", {
     grep(
       pattern = "hauteur",
       readLines(file.path(out_dir, "var.mod"))
-    ) > 0
+    ) >
+      0
   )
   expect_warning(gen_varmod(out_dir, ""))
 })

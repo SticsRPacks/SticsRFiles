@@ -1,5 +1,3 @@
-library(SticsRFiles)
-
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
 
@@ -12,13 +10,15 @@ test_that("Option choice", {
     93
   )
   expect_equal(
-    length(unlist(get_options_choices(xml_path, "codetemp"),
+    length(unlist(
+      get_options_choices(xml_path, "codetemp"),
       use.names = FALSE
     )),
     2
   )
   expect_equal(
-    length(unlist(get_options_choices(xml_path, c("codegdh", "codetemp")),
+    length(unlist(
+      get_options_choices(xml_path, c("codegdh", "codetemp")),
       use.names = FALSE
     )),
     4

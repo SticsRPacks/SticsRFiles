@@ -1,7 +1,6 @@
-library(dplyr)
-
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
+host <- "github.com"
 
 studycase_path <-
   file.path(tempdir(), "data-master", "study_case_1")
@@ -24,30 +23,37 @@ usms_files <- get_usms_files(workspace_path)
 
 context("Checking usm names in list")
 test_that("checking usm exists", {
+  testthat::skip_if_offline(host = host)
   expect_true("bo96iN+" %in% names(usms_files))
 })
 
 context("Checking all list usm names against usms file")
 test_that("checking usm consistency", {
+  testthat::skip_if_offline(host = host)
   expect_true(all(usms_list %in% names(usms_files)))
 })
 
 context("checking wrong usm name")
 test_that("one name", {
+  testthat::skip_if_offline(host = host)
   expect_false("brrr" %in% names(usms_files))
 })
 
 context("testing returned object type")
 test_that("is list", {
+  testthat::skip_if_offline(host = host)
   expect_true(is.list(usms_files))
 })
 test_that("is data.frame", {
+  testthat::skip_if_offline(host = host)
   usms_files <- get_usms_files(workspace_path, df_output = TRUE)
   expect_true(is.data.frame(usms_files))
 })
 
 context("Checking data.frame column types")
 test_that("usm, all_exist, paths", {
+  testthat::skip_if_offline(host = host)
+
   usms_files <- get_usms_files(workspace_path, df_output = TRUE)
   expect_is(usms_files$usm, "character")
   expect_is(usms_files$all_exist, "logical")

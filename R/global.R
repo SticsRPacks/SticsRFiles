@@ -1,9 +1,7 @@
 # for generic functions declarations for *document classes
 setGeneric("valid_doc", function(object) standardGeneric("valid_doc"))
 # defined for file_document
-types_list <- c("file", "dir", "url", "link")
-
-setGeneric("filedocument", function(file, type) standardGeneric("filedocument"))
+setGeneric("filedocument", function(file) standardGeneric("filedocument"))
 setGeneric("set_name<-", function(object, value) standardGeneric("set_name<-"))
 setGeneric("set_name", function(object, value) standardGeneric("set_name"))
 setGeneric("set_warn<-", function(object, value) standardGeneric("set_warn<-"))
@@ -13,25 +11,21 @@ setGeneric("get_name", function(object) standardGeneric("get_name"))
 
 setGeneric("get_dir", function(object) standardGeneric("get_dir"))
 setGeneric("get_ext", function(object) standardGeneric("get_ext"))
-setGeneric("get_type", function(object) standardGeneric("get_type"))
 
 setGeneric("get_path", function(object) standardGeneric("get_path"))
 
 setGeneric("exist", function(object) standardGeneric("exist"))
-
-setGeneric("create", function(object) standardGeneric("create"))
 
 setGeneric("move", function(object, to_file) standardGeneric("move"))
 
 setGeneric("rename", function(object, to_file) standardGeneric("rename"))
 
 setGeneric("delete", function(object) standardGeneric("delete"))
-setGeneric("infos", function(object, type = "all") standardGeneric("infos"))
+setGeneric("infos", function(object, field = "all") standardGeneric("infos"))
 
 setGeneric("isdir", function(object) standardGeneric("isdir"))
 setGeneric("isempty", function(object) standardGeneric("isempty"))
 setGeneric("calc_ext", function(object) standardGeneric("calc_ext"))
-setGeneric("calc_type", function(object) standardGeneric("calc_type"))
 
 # defined for xml_document
 
@@ -67,10 +61,7 @@ setGeneric(
 
 setGeneric(
   "get_attrs_values",
-  function(object,
-           path,
-           attr_list,
-           nodes_ids = NULL) {
+  function(object, path, attr_list, nodes_ids = NULL) {
     standardGeneric("get_attrs_values")
   }
 )
@@ -87,29 +78,21 @@ setGeneric(
 
 setGeneric(
   "set_attrs_values",
-  function(object,
-           path, attr_name,
-           values_list,
-           nodes_ids = NULL) {
+  function(object, path, attr_name, values_list, nodes_ids = NULL) {
     standardGeneric("set_attrs_values")
   }
 )
 
 setGeneric(
   "set_values",
-  function(object,
-           path,
-           values_list,
-           nodes_ids = NULL) {
+  function(object, path, values_list, nodes_ids = NULL) {
     standardGeneric("set_values")
   }
 )
 
 setGeneric(
   "get_values",
-  function(object,
-           path,
-           nodes_ids = NULL) {
+  function(object, path, nodes_ids = NULL) {
     standardGeneric("get_values")
   }
 )
@@ -125,9 +108,7 @@ setGeneric("clone_xml_doc", function(object) standardGeneric("clone_xml_doc"))
 
 setGeneric(
   "add_nodes",
-  function(object,
-           nodes_to_add,
-           parent_path = NULL) {
+  function(object, nodes_to_add, parent_path = NULL) {
     standardGeneric("add_nodes")
   }
 )
