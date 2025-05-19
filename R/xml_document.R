@@ -11,7 +11,8 @@ setClass(
 
 # object validation
 setMethod(
-  "valid_doc", signature(object = "xml_document"),
+  "valid_doc",
+  signature(object = "xml_document"),
   function(object) {
     ext <- get_ext(object)
 
@@ -34,14 +35,16 @@ setMethod(
 
 # constructor
 setMethod(
-  "xmldocument", signature(file = "character"),
+  "xmldocument",
+  signature(file = "character"),
   function(file = character(length = 0)) {
     suppressMessages(methods::new("xml_document", file = file))
   }
 )
 
 setMethod(
-  "initialize", "xml_document",
+  "initialize",
+  "xml_document",
   function(.Object, file = character(length = 0), warn = FALSE) {
     .Object <- methods::callNextMethod(.Object, file)
     methods::validObject(.Object)
@@ -60,10 +63,15 @@ setMethod("show", "xml_document", function(object) {
 
 # setter methods
 setReplaceMethod(
-  "set_content", signature(object = "xml_document"),
+  "set_content",
+  signature(object = "xml_document"),
   function(object, value) {
     if (!methods::is(value, "XMLInternalDocument")) {
-      stop("Input value is not a XMLInternalDocument class object")
+      warning(
+        "Input value is not a XMLInternalDocument class object",
+        "the object will not be modified"
+      )
+      return(object)
     }
     object@content <- value
     return(object)
@@ -72,7 +80,8 @@ setReplaceMethod(
 
 # getter methods
 setMethod(
-  "get_content", signature(object = "xml_document"),
+  "get_content",
+  signature(object = "xml_document"),
   function(object) {
     return(object@content)
   }
@@ -80,11 +89,14 @@ setMethod(
 
 
 setMethod(
-  "get_nodes", signature(object = "xml_document"),
+  "get_nodes",
+  signature(object = "xml_document"),
   function(object, path = NULL) {
-    node_set <- NULL
     if (!is_loaded(object)) {
-      stop("xml file is not loaded in xml_document object")
+      warning("xml file is not loaded in xml_document object")
+      empty_node_set <- list()
+      attr(empty_node_set, "class") <- "XMLNodeSet"
+      return(empty_node_set)
     }
 
     if (base::is.null(path)) {
@@ -117,7 +129,8 @@ setMethod(
 )
 
 setMethod(
-  "get_attrs", signature(object = "xml_document"),
+  "get_attrs",
+  signature(object = "xml_document"),
   function(object, path) {
     attr_list <- NULL
     node_set <- get_nodes(object, path)
@@ -149,13 +162,11 @@ setMethod(
       attr_list <- t(attr_list)
     }
 
-
     # testing if any node has not any attribute
     any_null <- any(sapply(attr_list, function(x) base::is.null(x)))
     if (any_null && object@warn) {
       warning(paste("Existing nodes without any attributes on xpath", path))
     }
-
 
     # testing if all nodes have the same attributes !!
     if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
@@ -175,7 +186,8 @@ setMethod(
 
 # get_attrs_names
 setMethod(
-  "get_attrs_names", signature(object = "xml_document"),
+  "get_attrs_names",
+  signature(object = "xml_document"),
   function(object, path) {
     attr_names <- NULL
     attr_list <- get_attrs(object, path)
@@ -194,17 +206,15 @@ setMethod(
 
 # get_attrs_values
 setMethod(
-  "get_attrs_values", signature(object = "xml_document"),
-  function(object, path, attr_list = character(length = 0),
-           nodes_ids = NULL) {
-    sel_values <- NULL
-
+  "get_attrs_values",
+  signature(object = "xml_document"),
+  function(object, path, attr_list = character(length = 0), nodes_ids = NULL) {
     # getting attributes values from doc
     attr_values <- get_attrs(object, path)
 
     # no attributes for the query
     if (base::is.null(attr_values)) {
-      return(sel_values)
+      return()
     }
 
     # selecting outputs
@@ -213,7 +223,6 @@ setMethod(
       return(attr_values)
     }
 
-
     # finding existing attr names in path
     sel <- is.element(colnames(attr_values), attr_list)
 
@@ -221,7 +230,8 @@ setMethod(
       # not any given attr_list names exist in path
       if (object@warn) {
         warning(paste(
-          "Not any given attribute name exist in ", path,
+          "Not any given attribute name exist in ",
+          path,
           "aborting !"
         ))
         return()
@@ -248,10 +258,10 @@ setMethod(
       if (max(nodes_ids) <= dim(sel_values)[1]) {
         sel_values <- sel_values[nodes_ids, ]
       } else {
-        stop("Subscript out of range, check ids !")
+        warning("Subscript out of range, check ids !")
+        return(NULL)
       }
     }
-
     return(sel_values)
   }
 )
@@ -259,7 +269,8 @@ setMethod(
 
 # factoriser avec get_attrs!! + getNode(object,path,kind)
 setMethod(
-  "get_values", signature(object = "xml_document"),
+  "get_values",
+  signature(object = "xml_document"),
   function(object, path, nodes_ids = NULL) {
     node_set <- get_nodes(object, path)
 
@@ -270,12 +281,12 @@ setMethod(
       return(invisible())
     }
 
-
     if (!base::is.null(nodes_ids)) {
       if (max(nodes_ids) <= nodes_nb) {
         node_set <- node_set[nodes_ids]
       } else {
-        stop("Subscript out of range, check ids !")
+        warning("Subscript out of range, check ids !")
+        return()
       }
     }
 
@@ -289,7 +300,8 @@ setMethod(
 
 # add_attrs
 setMethod(
-  "add_attrs", signature(object = "xml_document"),
+  "add_attrs",
+  signature(object = "xml_document"),
   function(object, path, named_vector) {
     # add not is nullnull node_set !!!!
     if (!base::is.null(names(named_vector))) {
@@ -304,7 +316,8 @@ setMethod(
 # delAttrs
 # TODO: to remove all attrs !!!!!!!!!
 setMethod(
-  "remove_attrs", signature(object = "xml_document"),
+  "remove_attrs",
+  signature(object = "xml_document"),
   function(object, path, attr_names) {
     # add not base::is.null node_set !!!!
     if (!base::is.null(attr_names)) {
@@ -322,7 +335,8 @@ setMethod(
 #
 # TODO : same code as set_values,
 setMethod(
-  "set_attrs_values", signature(object = "xml_document"),
+  "set_attrs_values",
+  signature(object = "xml_document"),
   function(object, path, attr_name, values_list, nodes_ids = NULL) {
     node_set <- get_nodes(object, path)
     if (base::is.null(node_set)) {
@@ -340,7 +354,11 @@ setMethod(
     }
     values_nb <- length(values_list)
     if (values_nb != nodes_nb) {
-      stop("Values number is not consistent with nodes number !")
+      warning(
+        "Values number is not consistent with nodes number !",
+        " Aborting !"
+      )
+      return(invisible())
     }
     for (i in 1:nodes_nb) {
       value <- values_list[[i]]
@@ -352,7 +370,8 @@ setMethod(
 
 # set_values
 setMethod(
-  "set_values", signature(object = "xml_document"),
+  "set_values",
+  signature(object = "xml_document"),
   function(object, path, values_list, nodes_ids = NULL) {
     node_set <- get_nodes(object, path)
 
@@ -366,14 +385,17 @@ setMethod(
 
     nodes_nb <- length(node_set)
 
-
     if (length(values_list) == 1) {
       values_list <- rep(values_list, nodes_nb)
     }
     values_nb <- length(values_list)
 
     if (values_nb != nodes_nb) {
-      stop("Values number is not consistent with nodes number to be modified !")
+      warning(
+        "Values number is not consistent with nodes number to be modified !",
+        " Aborting !"
+      )
+      return(invisible())
     }
 
     for (i in 1:nodes_nb) {
@@ -388,7 +410,8 @@ setMethod(
 
 # addNodes
 setMethod(
-  "add_nodes", signature(object = "xml_document"),
+  "add_nodes",
+  signature(object = "xml_document"),
   function(object, nodes_to_add, parent_path = NULL) {
     # parent node is root node
     if (base::is.null(parent_path)) {
@@ -417,7 +440,8 @@ setMethod(
 
 # removeNodes
 setMethod(
-  "del_nodes", signature(object = "xml_document"),
+  "del_nodes",
+  signature(object = "xml_document"),
   function(object, path) {
     node_set <- get_nodes(object, path)
 
@@ -432,23 +456,44 @@ setMethod(
 
 # other methods
 setMethod(
-  "load_content", signature(object = "xml_document"),
+  "load_content",
+  signature(object = "xml_document"),
   function(object) {
-    set_content(object) <- XML::xmlParse(get_path(object))
-    return(object)
+    # getting file path
+    # and checking if file exists
+    #
+    if (!exist(object)) {
+      set_content(object) <- XML::newXMLDoc()
+      return(object)
+    }
+    # loading xml content
+    ret <- try(
+      set_content(object) <- XML::xmlParse(get_path(object)),
+      silent = TRUE
+    )
+    if (methods::is(ret, "try-error")) {
+      set_content(object) <- XML::newXMLDoc()
+      if (object@warn) {
+        warning(paste("Error loading xml file:", object@name))
+      }
+    }
+    # set_content(object) <- XML::xmlParse(get_path(object))
+    object
   }
 )
 
 
 setMethod(
-  "is_loaded", signature(object = "xml_document"),
+  "is_loaded",
+  signature(object = "xml_document"),
   function(object) {
     return(methods::is(object@content, "XMLInternalDocument"))
   }
 )
 
 setMethod(
-  "is.xml_document", signature(object = "ANY"),
+  "is.xml_document",
+  signature(object = "ANY"),
   function(object) {
     if (methods::is(object, "xml_document")) {
       return(TRUE)
@@ -461,7 +506,8 @@ setMethod(
 
 # save method
 setMethod(
-  "save_xml_doc", signature(object = "xml_document"),
+  "save_xml_doc",
+  signature(object = "xml_document"),
   function(object, xml_path) {
     if (is_loaded(object)) {
       write(XML::saveXML(object@content), xml_path)
@@ -471,7 +517,8 @@ setMethod(
 
 # clone method
 setMethod(
-  "clone_xml_doc", signature(object = "xml_document"),
+  "clone_xml_doc",
+  signature(object = "xml_document"),
   function(object) {
     if (!is_loaded(object)) {
       return(NULL)
@@ -485,7 +532,8 @@ setMethod(
 
 # delete object method
 setMethod(
-  "delete", signature(object = "xml_document"),
+  "delete",
+  signature(object = "xml_document"),
   function(object) {
     # freeing object @content slot (external pointer)
     # and deleting xml_document object
