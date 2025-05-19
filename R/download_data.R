@@ -60,17 +60,17 @@ download_data <- function(
   )
 
   # Testing the internet connection to the server url
-  ret_ping <- system(
-    "ping -c 3 github.com",
-    intern = FALSE,
-    ignore.stdout = TRUE,
-    ignore.stderr = TRUE
-  )
-
-  if (ret_ping != 0) {
-    message("No internet connection or the resource is unreachable.")
-    return(invisible())
-  }
+  # ret_ping <- system(
+  #   "ping -c 3 github.com",
+  #   intern = FALSE,
+  #   ignore.stdout = TRUE,
+  #   ignore.stderr = TRUE
+  # )
+  #
+  # if (ret_ping != 0) {
+  #   message("No internet connection or the resource is unreachable.")
+  #   return(invisible())
+  # }
 
   # Download query for getting the master.zip
   try_ret <- try(
@@ -104,6 +104,7 @@ download_data <- function(
       ",",
       stics_version
     )
+    return(invisible())
   }
 
   # Finally extracting data and removing the archive

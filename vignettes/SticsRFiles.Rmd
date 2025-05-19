@@ -89,6 +89,10 @@ example_data <- SticsRFiles::download_data(
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )
+
+if (is.null(example_data)) {
+  stop("The example data could not be downloaded. The internet resource is not available.")
+}
 ```
 
 ```{r eval=FALSE}
@@ -127,16 +131,16 @@ SticsRFiles::get_var_info(keyword = "lai")
 
 #### Get informations on parameters
 
-`get_param_info()` can be used giving a part of parameters names :
+`get_param_info()` can be used giving a part of parameters names, here is a subset of the parameters names containing `lai`:
 
 ```{r}
-get_param_info(param = "lai")
+head(get_param_info(param = "lai"))
 ```
 
-it can also be used by giving a keyword that will be searched in the parameters names and definitions:
+it can also be used by giving a keyword that will be searched in the parameters names and definitions, here is a subset of the parameters names containing `plant`:
 
 ```{r}
-get_param_info(keyword = "plant")
+head(get_param_info(keyword = "plant"))
 ```
 
 #### Get parameter values
