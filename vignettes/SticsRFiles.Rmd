@@ -89,7 +89,8 @@ example_data <- SticsRFiles::download_data(
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )
-
+# In case of a download problem, the function will return NULL
+# stopping the vignette building
 if (is.null(example_data)) {
   stop("The example data could not be downloaded. The internet resource is not available.")
 }

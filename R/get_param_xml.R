@@ -46,15 +46,16 @@
 #'
 #' @export
 get_param_xml <- function(
-    file,
-    param = NULL,
-    select = NULL,
-    select_value = NULL,
-    value_id = NULL,
-    xml_file = lifecycle::deprecated(),
-    param_name = lifecycle::deprecated(),
-    value = lifecycle::deprecated(),
-    ...) {
+  file,
+  param = NULL,
+  select = NULL,
+  select_value = NULL,
+  value_id = NULL,
+  xml_file = lifecycle::deprecated(),
+  param_name = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
+  ...
+) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
   # Managing parameter names changes between versions:
@@ -75,7 +76,8 @@ get_param_xml <- function(
       "get_param_xml(param)"
     )
   } else {
-    param_name <- param # to remove when we update inside the function
+    # to remove when we update inside the function
+    param_name <- param
   }
 
   if (lifecycle::is_present(value)) {
@@ -85,7 +87,8 @@ get_param_xml <- function(
       "get_param_xml(select_value)"
     )
   } else {
-    value <- select_value # to remove when we update inside the function
+    # to remove when we update inside the function
+    value <- select_value
   }
 
   xml_docs <- lapply(xml_file, xmldocument)

@@ -49,7 +49,8 @@ setMethod(
     .Object <- methods::callNextMethod(.Object, file)
     methods::validObject(.Object)
     .Object <- load_content(.Object)
-    return(.Object)
+
+    .Object
   }
 )
 
@@ -74,7 +75,8 @@ setReplaceMethod(
       return(object)
     }
     object@content <- value
-    return(object)
+
+    object
   }
 )
 
@@ -83,7 +85,7 @@ setMethod(
   "get_content",
   signature(object = "xml_document"),
   function(object) {
-    return(object@content)
+    object@content
   }
 )
 
@@ -124,7 +126,8 @@ setMethod(
       if (object@warn) warning("Node set is empty, check xml input path !")
       node_set <- NULL
     }
-    return(node_set)
+
+    node_set
   }
 )
 
@@ -169,7 +172,7 @@ setMethod(
     }
 
     # testing if all nodes have the same attributes !!
-    if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
+    if (!is.matrix(attr_list) && !is.matrix(attr_list[,])) {
       if (object@warn) {
         message(class(attr_list))
         warning(paste(
@@ -180,7 +183,7 @@ setMethod(
       }
     }
 
-    return(attr_list)
+    attr_list
   }
 )
 
@@ -199,7 +202,7 @@ setMethod(
       attr_names <- dim_names[[2]]
     }
 
-    return(attr_names)
+    attr_names
   }
 )
 
@@ -262,12 +265,12 @@ setMethod(
         return(NULL)
       }
     }
-    return(sel_values)
+    sel_values
   }
 )
 
 
-# factoriser avec get_attrs!! + getNode(object,path,kind)
+# TODO: factoriser avec get_attrs!! + getNode(object,path,kind)
 setMethod(
   "get_values",
   signature(object = "xml_document"),
@@ -293,7 +296,7 @@ setMethod(
     # Getting values from the node_set
     val_list <- unlist(lapply(node_set, function(x) XML::xmlValue(x)))
 
-    return(val_list)
+    val_list
   }
 )
 
@@ -461,7 +464,6 @@ setMethod(
   function(object) {
     # getting file path
     # and checking if file exists
-    #
     if (!exist(object)) {
       set_content(object) <- XML::newXMLDoc()
       return(object)
@@ -477,7 +479,7 @@ setMethod(
         warning(paste("Error loading xml file:", object@name))
       }
     }
-    # set_content(object) <- XML::xmlParse(get_path(object))
+
     object
   }
 )
@@ -487,7 +489,7 @@ setMethod(
   "is_loaded",
   signature(object = "xml_document"),
   function(object) {
-    return(methods::is(object@content, "XMLInternalDocument"))
+    methods::is(object@content, "XMLInternalDocument")
   }
 )
 
@@ -526,7 +528,7 @@ setMethod(
 
     set_content(object) <- XML::xmlClone(get_content(object))
 
-    return(object)
+    object
   }
 )
 

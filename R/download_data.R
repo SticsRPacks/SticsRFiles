@@ -40,42 +40,33 @@ download_data <- function(
     stop("Error: no available data for ", example_dirs)
   }
 
-  # checking if the path exist(s), if a prior extraction have been done
+  # Checking if the path exist(s), if a prior extraction has been done
   prev_data_dir <- file.path(
     out_dir,
     "data-master",
     dirs_str
   )
 
-  # all directories already exist, exiting
+  # All directories already exist, exiting
   if (all(file.exists(prev_data_dir))) {
     return(prev_data_dir)
   }
 
+  url <- get_data_url()
+  file_name <- basename(url)
+  # directory wher to unzip the archive
   data_dir <- normalizePath(out_dir, winslash = "/", mustWork = FALSE)
+  # Archive file path
   data_dir_zip <- normalizePath(
-    file.path(data_dir, "master.zip"),
+    file.path(data_dir, file_name),
     winslash = "/",
     mustWork = FALSE
   )
 
-  # Testing the internet connection to the server url
-  # ret_ping <- system(
-  #   "ping -c 3 github.com",
-  #   intern = FALSE,
-  #   ignore.stdout = TRUE,
-  #   ignore.stderr = TRUE
-  # )
-  #
-  # if (ret_ping != 0) {
-  #   message("No internet connection or the resource is unreachable.")
-  #   return(invisible())
-  # }
-
   # Download query for getting the master.zip
   try_ret <- try(
     suppressWarnings(utils::download.file(
-      "https://github.com/SticsRPacks/data/archive/master.zip",
+      url,
       data_dir_zip
     )),
     silent = TRUE
@@ -83,7 +74,10 @@ download_data <- function(
 
   # Checking if the download was successful
   if (inherits(try_ret, "try-error")) {
-    message("Error while downloading data from GitHub.")
+    message(paste(
+      "Error while downloading data from GitHub.",
+      "Check internet connection, or resource availability."
+    ))
     return(invisible())
   }
 
@@ -111,11 +105,12 @@ download_data <- function(
   utils::unzip(data_dir_zip, exdir = data_dir, files = arch_files)
   unlink(data_dir_zip)
 
+  # Returning the path of the folder where data have been downloaded
   normalizePath(file.path(data_dir, arch_files[1]), winslash = "/")
 }
 
 
-#' Getting valid directories string for download from SticsRPacks data
+#' Getting valid directories string for download from SticsRPacks `data`
 #' repository
 #'
 #' @param dirs Directories names of the referenced use cases (optional),
@@ -131,13 +126,13 @@ download_data <- function(
 #'
 #' @examples
 #' \dontrun{
-#' # Getting all available dirs from the data repos
+#' # Getting all available directories from the data repository
 #' get_referenced_dirs()
 #'
-#' # Getting dirs for a use case
+#' # Getting directories for a use case
 #' get_referenced_dirs("study_case_1")
 #'
-#' # Getting dirs for a use case and a version
+#' # Getting directories for a use case and a version
 #' get_referenced_dirs("study_case_1", "V9.0")
 #'
 #' get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0")
@@ -159,7 +154,7 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
     return()
   }
 
-  # Filtering existing dirs in examples data
+  # Filtering existing directories in examples data
   if (!all(dirs_idx)) {
     dirs <- dirs_names[dirs_idx]
   }
@@ -169,13 +164,18 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
     return(dirs)
   }
 
-  # Getting data according to version and dirs
+  # Getting data according to version and directories
   version_data <- ver_data %>% dplyr::select(dplyr::any_of(dirs))
 
-  # Compiling referenced dirs/version strings, for existing version
+  # Compiling referenced directories/version strings, for existing version
   is_na <- base::is.na(version_data)
+
   dirs_str <-
     sprintf("%s/%s", names(version_data)[!is_na], version_data[!is_na])
 
-  return(dirs_str)
+  dirs_str
+}
+
+get_data_url <- function() {
+  "https://github.com/SticsRPacks/data/archive/master.zip"
 }

@@ -113,20 +113,21 @@
 #'
 #' @export
 set_param_xml <- function(
-    file,
-    param,
-    values,
-    save_as = NULL,
-    select = NULL,
-    select_value = NULL,
-    value_id = NULL,
-    overwrite = FALSE,
-    xml_file = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated(),
-    param_name = lifecycle::deprecated(),
-    param_value = lifecycle::deprecated(),
-    value = lifecycle::deprecated(),
-    ...) {
+  file,
+  param,
+  values,
+  save_as = NULL,
+  select = NULL,
+  select_value = NULL,
+  value_id = NULL,
+  overwrite = FALSE,
+  xml_file = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated(),
+  param_name = lifecycle::deprecated(),
+  param_value = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
+  ...
+) {
   # ... argument for passing : ids, show_xpath to get_param_value
   if (lifecycle::is_present(xml_file)) {
     lifecycle::deprecate_warn(
@@ -135,7 +136,8 @@ set_param_xml <- function(
       "set_param_xml(file)"
     )
   } else {
-    xml_file <- file # to remove when we update inside the function
+    # to remove when we update inside the function
+    xml_file <- file
   }
   if (lifecycle::is_present(out_path)) {
     lifecycle::deprecate_warn(
@@ -144,7 +146,8 @@ set_param_xml <- function(
       "set_param_xml(save_as)"
     )
   } else {
-    out_path <- save_as # to remove when we update inside the function
+    # to remove when we update inside the function
+    out_path <- save_as
   }
   if (lifecycle::is_present(param_name)) {
     lifecycle::deprecate_warn(
@@ -153,7 +156,8 @@ set_param_xml <- function(
       "set_param_xml(param)"
     )
   } else {
-    param_name <- param # to remove when we update inside the function
+    # to remove when we update inside the function
+    param_name <- param
   }
   if (lifecycle::is_present(param_value)) {
     lifecycle::deprecate_warn(
@@ -162,7 +166,8 @@ set_param_xml <- function(
       "set_param_xml(values)"
     )
   } else {
-    param_value <- values # to remove when we update inside the function
+    # to remove when we update inside the function
+    param_value <- values
   }
   if (lifecycle::is_present(value)) {
     lifecycle::deprecate_warn(
@@ -171,7 +176,8 @@ set_param_xml <- function(
       "set_param_xml(select_value)"
     )
   } else {
-    value <- select_value # to remove when we update inside the function
+    # to remove when we update inside the function
+    value <- select_value
   }
 
   # Setting output file path
@@ -224,5 +230,5 @@ set_param_xml <- function(
   delete(xml_doc)
 
   # Output status
-  return(invisible(TRUE))
+  invisible(TRUE)
 }
