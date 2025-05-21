@@ -1,3 +1,26 @@
+# SticsRFiles 1.6.0 _2025-05-21_
+* FUNCTIONS
+  * convert_xml2txt allows to convert sols.xml file to text files
+  * Some useless functions have been removed and functions help updated
+  * download_data is now fail with an informative message if the internet 
+  resource is not available
+  * set_param_xml.R: consistency for save_as and overwrite arguments 
+  and messages improvement
+  * file_document class: useless `type` slot removed
+  * general code re-formatting and cleaning
+  
+* FIXES
+  * get_param_xml: management of empty strings values in XML files
+  * removed use of library() in tests
+  
+* DATA
+  * Added a missing parameter (concrr) in the excel files templates
+  
+* VIGNETTES
+  * Added a stopping message when the download_data function fails 
+  (e.g. no internet connection or resource not available)
+
+
 # SticsRFiles 1.5.0 _2024-11-13_
 * FUNCTIONS
   * New functions for generating xml general parameters files
