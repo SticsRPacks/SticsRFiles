@@ -29,16 +29,17 @@
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
 #'
-upgrade_sols_xml <- function(file,
-                             out_dir,
-                             param_gen_file,
-                             stics_version = "V9.2",
-                             target_version = "V10.0",
-                             check_version = TRUE,
-                             overwrite = FALSE) {
+upgrade_sols_xml <- function(
+  file,
+  out_dir,
+  param_gen_file,
+  stics_version = "V9.2",
+  target_version = "V10.0",
+  check_version = TRUE,
+  overwrite = FALSE
+) {
   # hecking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
-
 
   # checking version
   if (check_version) {
@@ -46,7 +47,8 @@ upgrade_sols_xml <- function(file,
 
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file,
+    file_version <- check_xml_file_version(
+      file,
       stics_version,
       param_gen_file = param_gen_file
     )
@@ -57,9 +59,12 @@ upgrade_sols_xml <- function(file,
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file
+        attr(file_version, "version"),
+        " \n",
+        file
       )
     }
 
@@ -67,22 +72,23 @@ upgrade_sols_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
-
 
     # for checking only once when multiple files are treated !
     check_version <- FALSE
   }
 
-
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc,
+  set_xml_file_version(
+    old_doc,
     new_version = target_version,
     overwrite = overwrite
   )
@@ -112,7 +118,8 @@ upgrade_sols_xml <- function(file,
   if (is.null(prev_sibling)) {
     prev_sibling <- get_nodes(old_doc, "//param[@nom='csurNsol']")
     # updating nom attribute content
-    set_attrs_values(old_doc,
+    set_attrs_values(
+      old_doc,
       path = "//param[@nom='csurNsol']",
       attr_name = "nom",
       values_list = "CsurNsol"

@@ -30,14 +30,16 @@
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
 #'
-upgrade_sta_xml <- function(file,
-                            out_dir,
-                            param_gen_file,
-                            stics_version = "V9.2",
-                            target_version = "V10.0",
-                            check_version = TRUE,
-                            overwrite = FALSE,
-                            ...) {
+upgrade_sta_xml <- function(
+  file,
+  out_dir,
+  param_gen_file,
+  stics_version = "V9.2",
+  target_version = "V10.0",
+  check_version = TRUE,
+  overwrite = FALSE,
+  ...
+) {
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -54,16 +56,20 @@ upgrade_sta_xml <- function(file,
 
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file[1],
+    file_version <- check_xml_file_version(
+      file[1],
       stics_version,
       param_gen_file = param_gen_file
     )
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file[1]
+        attr(file_version, "version"),
+        " \n",
+        file[1]
       )
     }
 
@@ -71,11 +77,12 @@ upgrade_sta_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
-
 
     # for checking only once when multiple files are treated !
     check_version <- FALSE
@@ -98,7 +105,6 @@ upgrade_sta_xml <- function(file,
     return(invisible())
   }
 
-
   if (!file.exists(file)) {
     warning("Unknown file: ", file)
     return(invisible())
@@ -108,14 +114,14 @@ upgrade_sta_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc,
+  set_xml_file_version(
+    old_doc,
     new_version = target_version,
     overwrite = overwrite
   )
 
   # Getting old concrr value
   concrr <- get_param_xml(param_gen_file, "concrr")$param_gen.xml$concrr
-
 
   # Getting new parameter
   concrr_node <- XML::xmlParseString(
@@ -158,7 +164,9 @@ upgrade_sta_xml <- function(file,
   XML::addChildren(par_node, XML::xmlClone(new_node))
 
   # Writing to file _sta.xml
-  write_xml_file(old_doc, file.path(out_dir, basename(file)),
+  write_xml_file(
+    old_doc,
+    file.path(out_dir, basename(file)),
     overwrite = overwrite
   )
 

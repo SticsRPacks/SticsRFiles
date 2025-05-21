@@ -60,14 +60,16 @@
 #' @export
 #'
 
-gen_usms_xml <- function(file,
-                         param_df = NULL,
-                         template = NULL,
-                         stics_version = "latest",
-                         usms_out_file = lifecycle::deprecated(),
-                         usms_nb = lifecycle::deprecated(),
-                         usms_param = lifecycle::deprecated(),
-                         usms_in_file = lifecycle::deprecated()) {
+gen_usms_xml <- function(
+  file,
+  param_df = NULL,
+  template = NULL,
+  stics_version = "latest",
+  usms_out_file = lifecycle::deprecated(),
+  usms_nb = lifecycle::deprecated(),
+  usms_param = lifecycle::deprecated(),
+  usms_in_file = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(usms_out_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -96,7 +98,8 @@ gen_usms_xml <- function(file,
     usms_in_file <- template # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_nb)) {
-    lifecycle::deprecate_warn("1.0.0",
+    lifecycle::deprecate_warn(
+      "1.0.0",
       "gen_usms_xml(usms_nb)",
       details = "It is now directly computed in the function."
     )
@@ -136,7 +139,6 @@ gen_usms_xml <- function(file,
   if (!dir.exists(out_path)) {
     stop(paste("The directory does not exist: ", out_path))
   }
-
 
   # for getting only the xml doc in return
   if (!base::is.null(usms_out_file)) {

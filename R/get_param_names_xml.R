@@ -40,12 +40,14 @@
 #'
 #' @noRd
 #'
-get_param_names_xml <- function(xml_file,
-                                name = NULL,
-                                bounds = TRUE,
-                                output = "data.frame",
-                                combine = TRUE,
-                                exact = FALSE) {
+get_param_names_xml <- function(
+  xml_file,
+  name = NULL,
+  bounds = TRUE,
+  output = "data.frame",
+  combine = TRUE,
+  exact = FALSE
+) {
   # Switch for transformations to data.frame format
   df_out <- output == "data.frame"
   df_comb <- df_out & combine
@@ -89,7 +91,6 @@ get_param_names_xml <- function(xml_file,
   xml_doc <- xmldocument(xml_file)
   param_names <- get_param_names(xml_object = xml_doc)
 
-
   # Search based on names or a substring of parameters names
   # exact match with exact == TRUE
   if (!base::is.null(name)) {
@@ -101,7 +102,6 @@ get_param_names_xml <- function(xml_file,
     delete(xml_doc)
     return(NULL)
   }
-
 
   # Getting optional bounds
   if (bounds) {

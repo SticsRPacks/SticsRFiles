@@ -22,10 +22,12 @@
 #' @keywords internal
 #'
 #' @noRd
-gen_sta_doc <- function(xml_doc = NULL,
-                        param_table = NULL,
-                        stics_version = "latest",
-                        check_names = TRUE) {
+gen_sta_doc <- function(
+  xml_doc = NULL,
+  param_table = NULL,
+  stics_version = "latest",
+  check_names = TRUE
+) {
   # check/get version
   stics_version <- get_xml_stics_version(
     stics_version = stics_version,
@@ -52,13 +54,12 @@ gen_sta_doc <- function(xml_doc = NULL,
     )
   }
 
-
-
   # managing several doc generation based upon the lines number in param_table
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
     xml_docs <- apply(
-      param_table, 1,
+      param_table,
+      1,
       function(x) {
         gen_sta_doc(
           xml_doc = clone_xml_doc(xml_doc),
@@ -71,12 +72,9 @@ gen_sta_doc <- function(xml_doc = NULL,
     return(xml_docs)
   }
 
-
-
   for (p in in_params) {
     set_param_value(xml_doc, p, param_table[[p]])
   }
-
 
   return(invisible(xml_doc))
 }

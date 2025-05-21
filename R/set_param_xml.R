@@ -113,20 +113,21 @@
 #'
 #' @export
 set_param_xml <- function(
-    file,
-    param,
-    values,
-    save_as = NULL,
-    select = NULL,
-    select_value = NULL,
-    value_id = NULL,
-    overwrite = FALSE,
-    xml_file = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated(),
-    param_name = lifecycle::deprecated(),
-    param_value = lifecycle::deprecated(),
-    value = lifecycle::deprecated(),
-    ...) {
+  file,
+  param,
+  values,
+  save_as = NULL,
+  select = NULL,
+  select_value = NULL,
+  value_id = NULL,
+  overwrite = FALSE,
+  xml_file = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated(),
+  param_name = lifecycle::deprecated(),
+  param_value = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
+  ...
+) {
   # ... argument for passing : ids, show_xpath to get_param_value
   if (lifecycle::is_present(xml_file)) {
     lifecycle::deprecate_warn(

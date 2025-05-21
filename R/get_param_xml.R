@@ -46,15 +46,16 @@
 #'
 #' @export
 get_param_xml <- function(
-    file,
-    param = NULL,
-    select = NULL,
-    select_value = NULL,
-    value_id = NULL,
-    xml_file = lifecycle::deprecated(),
-    param_name = lifecycle::deprecated(),
-    value = lifecycle::deprecated(),
-    ...) {
+  file,
+  param = NULL,
+  select = NULL,
+  select_value = NULL,
+  value_id = NULL,
+  xml_file = lifecycle::deprecated(),
+  param_name = lifecycle::deprecated(),
+  value = lifecycle::deprecated(),
+  ...
+) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
   # Managing parameter names changes between versions:

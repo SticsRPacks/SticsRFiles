@@ -34,10 +34,12 @@
 #'
 #' @noRd
 #'
-get_param_bounds <- function(xml_doc,
-                             param_name,
-                             bounds_name = NULL,
-                             output = "data.frame") {
+get_param_bounds <- function(
+  xml_doc,
+  param_name,
+  bounds_name = NULL,
+  output = "data.frame"
+) {
   def_names <- c("min", "max")
 
   df_out <- output == "data.frame"
@@ -63,8 +65,6 @@ get_param_bounds <- function(xml_doc,
         )
       }
     )
-
-
 
     if (df_out) {
       bounds_list <- dplyr::bind_rows(bounds_list)
@@ -101,8 +101,6 @@ get_param_bounds <- function(xml_doc,
     )
   }
 
-
-
   # Fixing bounds values
   bounds_values <- list(fix_bounds(bounds_values, bounds_name, param_name))
   names(bounds_values) <- param_name
@@ -128,7 +126,6 @@ fix_bounds <- function(values, bounds_name, param_name) {
 
   return(values)
 }
-
 
 
 #' Setting bounds values (min, max) for missing bounds and/or
@@ -184,11 +181,17 @@ fix_dup_bounds <- function(values, bounds_name, param_name) {
     warning(paste(
       "Found different values in bound(s) \n",
       paste(bounds_name[duplicates], collapse = ", "),
-      "\nfor parameter", param_name, "\nA single value has been selected.\n",
-      paste(sprintf(
-        "%s: %s", bounds_name[duplicates],
-        as.character(values[duplicates])
-      ), collapse = "\n")
+      "\nfor parameter",
+      param_name,
+      "\nA single value has been selected.\n",
+      paste(
+        sprintf(
+          "%s: %s",
+          bounds_name[duplicates],
+          as.character(values[duplicates])
+        ),
+        collapse = "\n"
+      )
     ))
   }
 

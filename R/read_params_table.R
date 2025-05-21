@@ -26,10 +26,13 @@
 #'   stics_version = "V9.2"
 #' )
 #' read_params_table(file = usm_csv_file)
-read_params_table <- function(file, sheet_name = NULL,
-                              num_na = "NA",
-                              char_na = "NA",
-                              file_path = lifecycle::deprecated()) {
+read_params_table <- function(
+  file,
+  sheet_name = NULL,
+  num_na = "NA",
+  char_na = "NA",
+  file_path = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(file_path)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -59,7 +62,6 @@ read_params_table <- function(file, sheet_name = NULL,
   # If the sheet name is not provided
   if (!length(sheet_exists)) sheet_exists <- FALSE
 
-
   # Unknown sheet in XL file
   if (isFALSE(sheet_exists)) {
     warning(paste(
@@ -72,7 +74,8 @@ read_params_table <- function(file, sheet_name = NULL,
   }
 
   # Reading file according to its format
-  switch(file_ext,
+  switch(
+    file_ext,
     csv = {
       out_table <- utils::read.csv2(
         file = file_path,
@@ -85,7 +88,8 @@ read_params_table <- function(file, sheet_name = NULL,
       )
     },
     {
-      out_table <- readxl::read_excel(file_path,
+      out_table <- readxl::read_excel(
+        file_path,
         sheet = sheet_name,
         trim_ws = TRUE,
         col_types = "text"
@@ -126,7 +130,8 @@ replace_na <- function(in_df, replacement) {
   }
 
   # Getting columns ids according to rep_type
-  switch(rep_type,
+  switch(
+    rep_type,
     numeric = {
       idx_type_col <- unlist(lapply(in_df, is.numeric), use.names = FALSE)
     },
@@ -134,7 +139,6 @@ replace_na <- function(in_df, replacement) {
       idx_type_col <- unlist(lapply(in_df, is.character), use.names = FALSE)
     }
   )
-
 
   # Nothing to be replaced
   if (isFALSE(any(idx_type_col))) {
@@ -158,7 +162,6 @@ replace_na <- function(in_df, replacement) {
   for (i in to_be_treated) {
     in_df[is.na(in_df[, i]), i] <- replacement
   }
-
 
   in_df
 }

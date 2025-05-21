@@ -65,14 +65,16 @@
 #'
 #'
 #'
-gen_sols_xml <- function(file,
-                         param_df,
-                         template = NULL,
-                         stics_version = "latest",
-                         sols_in_file = lifecycle::deprecated(),
-                         sols_param = lifecycle::deprecated(),
-                         sols_out_file = lifecycle::deprecated(),
-                         sols_nb = lifecycle::deprecated()) {
+gen_sols_xml <- function(
+  file,
+  param_df,
+  template = NULL,
+  stics_version = "latest",
+  sols_in_file = lifecycle::deprecated(),
+  sols_param = lifecycle::deprecated(),
+  sols_out_file = lifecycle::deprecated(),
+  sols_nb = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(sols_in_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -104,7 +106,8 @@ gen_sols_xml <- function(file,
   }
 
   if (lifecycle::is_present(sols_nb)) {
-    lifecycle::deprecate_warn("1.0.0",
+    lifecycle::deprecate_warn(
+      "1.0.0",
       "gen_sols_xml(sols_nb)",
       details = "directly computed in the function."
     )
@@ -125,8 +128,6 @@ gen_sols_xml <- function(file,
     nodes_param = sols_param,
     stics_version = stics_version
   )
-
-
 
   # checking if out dir exists
   out_path <- dirname(sols_out_file)

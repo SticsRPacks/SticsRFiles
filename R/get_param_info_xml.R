@@ -48,11 +48,13 @@
 #' )
 #' }
 #'
-get_param_data_df <- function(param = NULL,
-                              file = NULL,
-                              stics_version = "latest",
-                              kind = "all",
-                              exact = FALSE) {
+get_param_data_df <- function(
+  param = NULL,
+  file = NULL,
+  stics_version = "latest",
+  kind = "all",
+  exact = FALSE
+) {
   kinds <- c("parameter", "formalism", "all")
 
   # Checking kind
@@ -89,8 +91,10 @@ get_param_data_df <- function(param = NULL,
   }
 
   # getting parameters from an inputs.csv file
-  if (length(files_list) == 1 &&
-    grepl(pattern = "inputs.csv", x = files_list)) {
+  if (
+    length(files_list) == 1 &&
+      grepl(pattern = "inputs.csv", x = files_list)
+  ) {
     param_names <- utils::read.csv2(
       file,
       header = FALSE,
@@ -147,7 +151,6 @@ get_param_data_df <- function(param = NULL,
   attr(x = param_df, which = "version") <- stics_version
   return(param_df)
 }
-
 
 
 form_list2df <- function(formalism_list) {

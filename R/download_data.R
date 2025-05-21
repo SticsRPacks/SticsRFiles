@@ -20,9 +20,10 @@
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #'
 download_data <- function(
-    out_dir = tempdir(),
-    example_dirs = NULL,
-    stics_version = "latest") {
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest"
+) {
   # Setting version value from input for version == "latest"
   if (is.null(stics_version) || stics_version == "latest") {
     stics_version <- get_stics_versions_compat()$latest_version

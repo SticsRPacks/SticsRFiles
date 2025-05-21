@@ -84,9 +84,11 @@ all_in_par <- function(stics_version = "latest") {
 #'
 #' @export
 #'
-get_param_info <- function(param = NULL,
-                           keyword = NULL,
-                           stics_version = "latest") {
+get_param_info <- function(
+  param = NULL,
+  keyword = NULL,
+  stics_version = "latest"
+) {
   all_pars <- all_in_par(stics_version)
 
   if (!is.null(keyword)) {
@@ -139,8 +141,7 @@ get_idx_matches <- function(string, names) {
 #' @examples
 #' is_stics_param(c("adil", "adilmax", "unknown"))
 #'
-is_stics_param <- function(param,
-                           stics_version = "latest") {
+is_stics_param <- function(param, stics_version = "latest") {
   all_pars <- all_in_par(stics_version)
   par_parsed <- var_to_col_names(param)
   pars_names_parsed <- var_to_col_names(all_pars$name)

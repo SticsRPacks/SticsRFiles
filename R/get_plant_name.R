@@ -36,11 +36,13 @@
 #' # javastics_path
 #' }
 #'
-get_plant_name <- function(workspace,
-                           usms_filepath,
-                           usm_name = NULL,
-                           javastics_path = NULL,
-                           verbose = TRUE) {
+get_plant_name <- function(
+  workspace,
+  usms_filepath,
+  usm_name = NULL,
+  javastics_path = NULL,
+  verbose = TRUE
+) {
   usms_path <- normalizePath(usms_filepath, mustWork = FALSE)
 
   if (!file.exists(usms_path)) {
@@ -89,11 +91,9 @@ get_plant_name <- function(workspace,
     # put each one in a column:
     plant_list <- unlist(
       apply(
-        matrix(plant_files,
-          ncol = 2,
-          byrow = TRUE
-        ),
-        MARGIN = 1, list
+        matrix(plant_files, ncol = 2, byrow = TRUE),
+        MARGIN = 1,
+        list
       ),
       recursive = FALSE
     )
@@ -102,11 +102,9 @@ get_plant_name <- function(workspace,
     # twice to get the same data structure:
     plant_list <- unlist(
       apply(
-        matrix(c(plant_files, plant_files),
-          ncol = 2,
-          byrow = TRUE
-        ),
-        MARGIN = 1, list
+        matrix(c(plant_files, plant_files), ncol = 2, byrow = TRUE),
+        MARGIN = 1,
+        list
       ),
       recursive = FALSE
     )
@@ -120,9 +118,13 @@ get_plant_name <- function(workspace,
 
   # Keeping only useful files names according to nb_plant data
   plant_xml <- try(
-    mapply(function(x, y) {
-      list(x[1:y])
-    }, x = plant_list, y = nb_plant)
+    mapply(
+      function(x, y) {
+        list(x[1:y])
+      },
+      x = plant_list,
+      y = nb_plant
+    )
   )
 
   if (inherits(plant_xml, "try-error")) {

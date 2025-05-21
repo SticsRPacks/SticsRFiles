@@ -63,14 +63,16 @@
 #'
 #' @export
 #'
-gen_ini_xml <- function(param_df,
-                        file = NULL,
-                        out_dir,
-                        crop_tag = "Crop",
-                        stics_version = "latest",
-                        ini_in_file = lifecycle::deprecated(),
-                        param_table = lifecycle::deprecated(),
-                        out_path = lifecycle::deprecated()) {
+gen_ini_xml <- function(
+  param_df,
+  file = NULL,
+  out_dir,
+  crop_tag = "Crop",
+  stics_version = "latest",
+  ini_in_file = lifecycle::deprecated(),
+  param_table = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(ini_in_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -131,7 +133,8 @@ gen_ini_xml <- function(param_df,
   out_idx <- unlist(lapply(xml_docs, base::is.null))
 
   if (any(out_idx)) {
-    message("\nErrors have been detected while trying to replace",
+    message(
+      "\nErrors have been detected while trying to replace",
       "parameters values in xml documents",
       paste(sum(!out_idx), "files have been generated !"),
       appendLF = TRUE
@@ -144,7 +147,6 @@ gen_ini_xml <- function(param_df,
   if (all(out_idx)) {
     return(invisible())
   }
-
 
   # Checking if out_path exists
   if (!dir.exists(out_path)) {

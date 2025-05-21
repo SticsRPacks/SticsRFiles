@@ -28,9 +28,11 @@
 #'
 #' @export
 #'
-gen_general_param_xml <- function(out_dir,
-                                  stics_version = "latest",
-                                  overwrite = FALSE) {
+gen_general_param_xml <- function(
+  out_dir,
+  stics_version = "latest",
+  overwrite = FALSE
+) {
   # check/get version
   stics_version <- get_xml_stics_version(
     stics_version = stics_version

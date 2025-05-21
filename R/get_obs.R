@@ -75,18 +75,20 @@
 #'
 #' @export
 #'
-get_obs <- function(workspace,
-                    usm = NULL,
-                    var = NULL,
-                    dates = NULL,
-                    usms_file = NULL,
-                    javastics = NULL,
-                    verbose = TRUE,
-                    usm_name = lifecycle::deprecated(),
-                    var_list = lifecycle::deprecated(),
-                    dates_list = lifecycle::deprecated(),
-                    usms_filepath = lifecycle::deprecated(),
-                    javastics_path = lifecycle::deprecated()) {
+get_obs <- function(
+  workspace,
+  usm = NULL,
+  var = NULL,
+  dates = NULL,
+  usms_file = NULL,
+  javastics = NULL,
+  verbose = TRUE,
+  usm_name = lifecycle::deprecated(),
+  var_list = lifecycle::deprecated(),
+  dates_list = lifecycle::deprecated(),
+  usms_filepath = lifecycle::deprecated(),
+  javastics_path = lifecycle::deprecated()
+) {
   # Managing deprecated arguments
   # usm_name
   if (lifecycle::is_present(usm_name)) {
@@ -127,9 +129,14 @@ get_obs <- function(workspace,
     javastics_path <- javastics # to remove when we update inside the function
   }
 
-
   get_file(
-    workspace, usm_name, var_list, dates_list, usms_filepath,
-    javastics_path, verbose, "obs"
+    workspace,
+    usm_name,
+    var_list,
+    dates_list,
+    usms_filepath,
+    javastics_path,
+    verbose,
+    "obs"
   )
 }
