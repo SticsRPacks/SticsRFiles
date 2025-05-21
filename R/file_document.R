@@ -44,9 +44,8 @@ setMethod(
 setMethod(
   "initialize",
   "file_document",
-  function(
-      .Object,
-      file = character(length = 0)) {
+  function(.Object,
+           file = character(length = 0)) {
     if (missing(file)) {
       message("file name is missing !")
     }
