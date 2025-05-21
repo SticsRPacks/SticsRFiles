@@ -51,11 +51,11 @@ stics_env <- function(name = NULL, env_name = globalenv(), create = TRUE) {
   # Checking a sub-env
   exists_name <- exists(name, envir = local_stics, inherits = FALSE)
 
-  if (exists_name) { # Returning .stics env object
+  if (exists_name) {
+    # Returning .stics env object
 
     return(local_stics[[name]])
   }
-
 
   if (!create) {
     # warning(name,
@@ -108,9 +108,11 @@ sticsenv_create <- function(name, env_name = ".GlobalEnv") {
 #' @keywords internal
 #' @noRd
 #'
-sticsenv_set_name <- function(name,
-                              env_name = sticsenv_name(),
-                              fix_name = NULL) {
+sticsenv_set_name <- function(
+  name,
+  env_name = sticsenv_name(),
+  fix_name = NULL
+) {
   envir <- suppressWarnings(stics_get(name = name, env_name = env_name))
 
   if (base::is.null(envir)) {
@@ -159,9 +161,11 @@ sticsenv_get_name <- function(name = NULL, env_name = sticsenv_name()) {
 #' @return A vector of all object names in the environment
 #' @keywords internal
 #' @noRd
-sticsenv_ls <- function(name = NULL,
-                        env_name = sticsenv_name(),
-                        detail = FALSE) {
+sticsenv_ls <- function(
+  name = NULL,
+  env_name = sticsenv_name(),
+  detail = FALSE
+) {
   envir <- stics_get(name, env_name = env_name)
 
   if (base::is.null(envir)) {
@@ -188,7 +192,8 @@ sticsenv_ls <- function(name = NULL,
 stics_exists <- function(name = NULL, env_name = sticsenv_name()) {
   exists_env <- exists(
     x = sticsenv_name(),
-    envir = globalenv(), inherits = FALSE
+    envir = globalenv(),
+    inherits = FALSE
   )
 
   if (!exists_env) {
@@ -198,8 +203,6 @@ stics_exists <- function(name = NULL, env_name = sticsenv_name()) {
   if (base::is.null(name) || name == sticsenv_name()) {
     return(exists_env)
   }
-
-
 
   # name contains a env name
   val <- eval(parse(text = paste0(sticsenv_name(), "$", name)))
@@ -245,7 +248,6 @@ stics_get <- function(name = NULL, env_name = sticsenv_name()) {
     return(out)
   }
 
-
   envir <- stics_env(name = env_name, create = FALSE)
 
   elts <- stics_split_list(name)
@@ -258,8 +260,6 @@ stics_get <- function(name = NULL, env_name = sticsenv_name()) {
     )
     return(NA)
   }
-
-
 
   loc_var <- get(elts[1], envir = envir, inherits = FALSE)
 
@@ -294,7 +294,6 @@ stics_set <- function(name, value, env_name = sticsenv_name()) {
   envir[["value"]] <- value
 
   elts <- stics_split_list(name)
-
 
   # Simple variable, existing or not
   if (length(elts) == 1) {
@@ -384,7 +383,6 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
   # si oui alors par rm mais evaluer a$b <- NULL
   # if ()
 
-
   # getting variable names
   splitted_names <- strsplit(name, split = "$", fixed = TRUE)
   list_idx <- unlist(lapply(splitted_names, function(x) length(x) > 1))
@@ -396,14 +394,14 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
 
   if (any(!list_idx)) var_names <- name[!list_idx]
 
-
   ret <- FALSE
   if (length(list_var_names)) {
     # suppression elts de liste
     ret <- unlist(lapply(
       list_var_names,
       function(x) {
-        eval(parse(text = paste0("base::is.null(", x, " <- NULL)")),
+        eval(
+          parse(text = paste0("base::is.null(", x, " <- NULL)")),
           envir = envir
         )
       }

@@ -172,7 +172,7 @@ setMethod(
     }
 
     # testing if all nodes have the same attributes !!
-    if (!is.matrix(attr_list) && !is.matrix(attr_list[, ])) {
+    if (!is.matrix(attr_list) && !is.matrix(attr_list[,])) {
       if (object@warn) {
         message(class(attr_list))
         warning(paste(

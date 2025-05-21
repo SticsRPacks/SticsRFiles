@@ -22,7 +22,6 @@ get_svn_identifiers <- function() {
 }
 
 
-
 #' Downloading inputs and/or outputs csv files from a repository branch/tag
 #'
 #' @param branch_url Address of the branch or tag
@@ -45,12 +44,14 @@ get_svn_identifiers <- function() {
 #'   dest_dir = system.file("extdata", package = "SticsRFiles")
 #' )
 #' }
-download_csv_files <- function(branch_url,
-                               dest_dir,
-                               file_name = "all",
-                               ids = get_svn_identifiers(),
-                               overwrite = FALSE,
-                               verbose = TRUE) {
+download_csv_files <- function(
+  branch_url,
+  dest_dir,
+  file_name = "all",
+  ids = get_svn_identifiers(),
+  overwrite = FALSE,
+  verbose = TRUE
+) {
   files_list <- c("inputs.csv", "outputs.csv")
 
   if (length(file_name) == 1 && file_name == "all") {
@@ -78,17 +79,15 @@ download_csv_files <- function(branch_url,
 
     if (file.exists(dest_file) && !overwrite) {
       warning(
-        "File ", dest_file,
+        "File ",
+        dest_file,
         "already exists",
         "(consider set overwrite to TRUE for passing through)!"
       )
     }
 
     file_path[[f]] <- try(
-      curl::curl_download(file_url[f],
-        handle = h,
-        destfile = dest_file
-      ),
+      curl::curl_download(file_url[f], handle = h, destfile = dest_file),
       TRUE
     )
   }
@@ -141,12 +140,14 @@ download_csv_files <- function(branch_url,
 #'   location = "package"
 #' )
 #' }
-add_stics_version <- function(version_name,
-                              url,
-                              file_name = "all",
-                              location = "install",
-                              overwrite = FALSE,
-                              verbose = TRUE) {
+add_stics_version <- function(
+  version_name,
+  url,
+  file_name = "all",
+  location = "install",
+  overwrite = FALSE,
+  verbose = TRUE
+) {
   # Taking only into account adding or overwriting csv files :
   # inputs.csv, outouts.csv
   # and updating csv file stics_versions_info.csv gathering by version
@@ -163,7 +164,6 @@ add_stics_version <- function(version_name,
   # location : install or package ?
   dest_dir <- get_data_dir(location = location)
 
-
   # Creating csv dir
   dir_path <- file.path(dest_dir, "csv")
   if (!dir.exists(dir_path)) dir.create(dir_path)
@@ -172,15 +172,14 @@ add_stics_version <- function(version_name,
   dir_path <- file.path(dir_path, version_name)
   if (!dir.exists(dir_path)) dir.create(path = dir_path)
 
-
   # Getting csv files from repos (branch or tag url) or overwriting them
-  download_csv_files(url,
+  download_csv_files(
+    url,
     dir_path,
     file_name = file_name,
     overwrite = overwrite,
     verbose = verbose
   )
-
 
   # Writing data updated with new version information (about csv files location)
   set_versions_info(
@@ -199,8 +198,6 @@ add_stics_version <- function(version_name,
     ))
   }
 }
-
-
 
 
 #' Removing a version and data from the SticsRFiles library or package
@@ -231,10 +228,12 @@ add_stics_version <- function(version_name,
 #'   location = "package"
 #' )
 #' }
-remove_stics_version <- function(version_name,
-                                 delete_files = TRUE,
-                                 location = "install",
-                                 verbose = TRUE) {
+remove_stics_version <- function(
+  version_name,
+  delete_files = TRUE,
+  location = "install",
+  verbose = TRUE
+) {
   # Getting existing data about versions
   versions_info <- get_versions_info(location = location)
 
@@ -315,7 +314,6 @@ get_data_dir <- function(location = "install") {
 }
 
 
-
 #' Getting versions information csv file path according to its location
 #'
 #' @param location The destination where to remove information and data
@@ -373,13 +371,16 @@ get_versions_file_path <- function(location = "install") {
 #'   location = "package"
 #' )
 #' }
-update_stics_version <- function(version_name,
-                                 url,
-                                 file_name = "all",
-                                 location = "install",
-                                 verbose = FALSE) {
+update_stics_version <- function(
+  version_name,
+  url,
+  file_name = "all",
+  location = "install",
+  verbose = FALSE
+) {
   # Forcing csv files overwriting
-  add_stics_version(version_name,
+  add_stics_version(
+    version_name,
     url,
     file_name = file_name,
     location = location,
@@ -408,10 +409,12 @@ update_stics_version <- function(version_name,
 #' @noRd
 #'
 # @examples
-set_versions_info <- function(version_name,
-                              location = "install",
-                              overwrite = FALSE,
-                              verbose = TRUE) {
+set_versions_info <- function(
+  version_name,
+  location = "install",
+  overwrite = FALSE,
+  verbose = TRUE
+) {
   # Setting file output flag
   write_file <- TRUE
 
@@ -441,7 +444,9 @@ set_versions_info <- function(version_name,
     if (!write_file) {
       if (verbose) {
         warning(
-          version_name, " already exists in ", versions_info_file,
+          version_name,
+          " already exists in ",
+          versions_info_file,
           ", it is safer updating it by hand of set overwrite to TRUE !"
         )
       }

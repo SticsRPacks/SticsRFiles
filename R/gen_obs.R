@@ -40,11 +40,13 @@
 #'
 #' @export
 #'
-gen_obs <- function(df,
-                    out_dir,
-                    usms_list = NULL,
-                    obs_table = lifecycle::deprecated(),
-                    out_path = lifecycle::deprecated()) {
+gen_obs <- function(
+  df,
+  out_dir,
+  usms_list = NULL,
+  obs_table = lifecycle::deprecated(),
+  out_path = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(obs_table)) {
     lifecycle::deprecate_warn("1.0.0", "gen_obs(obs_table)", "gen_obs(df)")
   } else {
@@ -172,7 +174,8 @@ gen_obs_ <- function(obs_table, file_path) {
   # Back to STICS variables names syntax !
   colnames(obs_table) <- col_names_to_var(colnames(obs_table))
 
-  ret <- try(utils::write.table(obs_table,
+  ret <- try(utils::write.table(
+    obs_table,
     file_path,
     sep = ";",
     na = "-999.99",

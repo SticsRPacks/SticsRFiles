@@ -25,15 +25,18 @@
 #'
 #' @export
 #'
-get_usms_list <- function(file,
-                          usm = NULL,
-                          usm_path = lifecycle::deprecated(),
-                          name = lifecycle::deprecated()) {
+get_usms_list <- function(
+  file,
+  usm = NULL,
+  usm_path = lifecycle::deprecated(),
+  name = lifecycle::deprecated()
+) {
   # TODO: add select key: i.e. get all usms names
   # with the same soil, plant 1,...
   if (lifecycle::is_present(usm_path)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "get_usms_list(usm_path)",
+      "1.0.0",
+      "get_usms_list(usm_path)",
       "get_usms_list(file)"
     )
   } else {
@@ -41,7 +44,8 @@ get_usms_list <- function(file,
   }
   if (lifecycle::is_present(name)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "get_usms_list(name)",
+      "1.0.0",
+      "get_usms_list(name)",
       "get_usms_list(usm)"
     )
   } else {
@@ -72,7 +76,8 @@ find_usms_soils_names <- function(xml_doc, xml_name, name = NULL) {
       lapply(
         XML::getNodeSet(doc = xml_doc@content, path = paste0("//", xml_name)),
         function(x) {
-          switch(xml_name,
+          switch(
+            xml_name,
             nomsol = XML::xmlValue(x),
             # default case handling xml_namevalues : sol, usm
             XML::xmlGetAttr(x, "nom")

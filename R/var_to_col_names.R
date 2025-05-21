@@ -31,7 +31,6 @@ var_to_col_names <- function(var_vec) {
 }
 
 
-
 #' Variable name to STICS variable name
 #'
 #' @description Convert a variable name into a STICS-compatible variable name.

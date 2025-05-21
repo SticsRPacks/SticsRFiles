@@ -20,8 +20,10 @@ check_java_path <- function(javastics) {
   }
 
   # checking if it's a JavaSTICS root directory
-  if (!file.exists(file.path(javastics, "JavaStics.exe")) &&
-    !file.exists(file.path(javastics, "JavaStics.jar"))) {
+  if (
+    !file.exists(file.path(javastics, "JavaStics.exe")) &&
+      !file.exists(file.path(javastics, "JavaStics.jar"))
+  ) {
     stop("This directory is not a JavaSTICS one: ", javastics)
   }
 }

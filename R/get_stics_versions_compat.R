@@ -46,7 +46,6 @@ get_stics_versions_compat <- function(version_index = NULL) {
   # getting relative backwards versions
   nb_versions <- length(versions$versions_list)
 
-
   if (version_index < 0) {
     if (version_index >= -nb_versions + 1) {
       return(versions$versions_list[nb_versions + version_index])
@@ -87,7 +86,6 @@ check_version_compat <- function(stics_version = "latest") {
   if (stics_version == "latest") {
     return(versions$latest_version)
   }
-
 
   if (stics_version %in% versions$versions_list) {
     return(stics_version)
@@ -132,7 +130,8 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
   }
 
   ver_info <- utils::read.csv2(
-    file = ver_file, stringsAsFactors = FALSE,
+    file = ver_file,
+    stringsAsFactors = FALSE,
     colClasses = "character"
   )
 
@@ -218,8 +217,10 @@ get_version_num <- function(stics_version = "latest", numeric = TRUE) {
 get_version_string <- function(stics_version) {
   pattern <- "^[V | v]"
 
-  if (is.character(stics_version) &&
-    grepl(pattern = pattern, x = stics_version)) {
+  if (
+    is.character(stics_version) &&
+      grepl(pattern = pattern, x = stics_version)
+  ) {
     return(toupper(stics_version))
   }
 

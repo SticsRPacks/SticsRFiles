@@ -10,15 +10,16 @@
 #' @keywords internal
 #' @noRd
 #'
-get_params_from_doc_attr <- function(xml_doc,
-                                     type_name = NULL,
-                                     unique_val = TRUE) {
+get_params_from_doc_attr <- function(
+  xml_doc,
+  type_name = NULL,
+  unique_val = TRUE
+) {
   # For tec, param newform, param gen, sols, station
   # files
   type_names <- c("option", "param", "colonne", "colonne")
   name_fields <- c("nomParam", "nom", "nom", "nom")
   parent_names <- c("", "", "ta_entete/", "tableau_entete/")
-
 
   if (base::is.null(type_name)) {
     type_name <- type_names
@@ -40,7 +41,6 @@ get_params_from_doc_attr <- function(xml_doc,
   params <- vector("list", nb_types)
   is_null <- rep(TRUE, nb_types)
 
-
   for (t in 1:nb_types) {
     tmp <- get_attrs_values(xml_doc, xpath[t], name_field[t])
     if (!base::is.null(tmp)) {
@@ -48,8 +48,6 @@ get_params_from_doc_attr <- function(xml_doc,
       is_null[t] <- FALSE
     }
   }
-
-
 
   params <- params[!is_null]
   names(params) <- type_name[!is_null]
