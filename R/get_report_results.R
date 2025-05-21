@@ -34,12 +34,11 @@
 #' get_report_results(workspace = path, file_name = "mod_rapportA.sti")
 #'
 get_report_results <- function(
-  workspace,
-  file_name = "mod_rapport.sti",
-  usm = NULL,
-  var_list = NULL,
-  usm_name = lifecycle::deprecated()
-) {
+    workspace,
+    file_name = "mod_rapport.sti",
+    usm = NULL,
+    var_list = NULL,
+    usm_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",

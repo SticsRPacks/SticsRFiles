@@ -30,12 +30,11 @@
 #' @noRd
 #'
 gen_usms_sols_doc <- function(
-  doc_type,
-  xml_doc = NULL,
-  nodes_nb = NULL,
-  nodes_param = NULL,
-  stics_version = "latest"
-) {
+    doc_type,
+    xml_doc = NULL,
+    nodes_nb = NULL,
+    nodes_param = NULL,
+    stics_version = "latest") {
   # for usms and sols files
 
   doc_types <- list()
@@ -124,8 +123,7 @@ gen_usms_sols_doc <- function(
     return(xml_doc_out)
   }
 
-  switch(
-    doc_type,
+  switch(doc_type,
     usms = set_usms_param_xml(
       xml_doc = xml_doc_out,
       usms_param = nodes_param,

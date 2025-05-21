@@ -47,14 +47,13 @@
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
 gen_sta_xml <- function(
-  param_df,
-  file = NULL,
-  out_dir,
-  stics_version = "latest",
-  param_table = lifecycle::deprecated(),
-  sta_in_file = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
-) {
+    param_df,
+    file = NULL,
+    out_dir,
+    stics_version = "latest",
+    param_table = lifecycle::deprecated(),
+    sta_in_file = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_table)) {
     lifecycle::deprecate_warn(
       "1.0.0",

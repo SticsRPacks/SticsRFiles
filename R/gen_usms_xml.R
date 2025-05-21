@@ -61,15 +61,14 @@
 #'
 
 gen_usms_xml <- function(
-  file,
-  param_df = NULL,
-  template = NULL,
-  stics_version = "latest",
-  usms_out_file = lifecycle::deprecated(),
-  usms_nb = lifecycle::deprecated(),
-  usms_param = lifecycle::deprecated(),
-  usms_in_file = lifecycle::deprecated()
-) {
+    file,
+    param_df = NULL,
+    template = NULL,
+    stics_version = "latest",
+    usms_out_file = lifecycle::deprecated(),
+    usms_nb = lifecycle::deprecated(),
+    usms_param = lifecycle::deprecated(),
+    usms_in_file = lifecycle::deprecated()) {
   if (lifecycle::is_present(usms_out_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",

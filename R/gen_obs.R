@@ -41,12 +41,11 @@
 #' @export
 #'
 gen_obs <- function(
-  df,
-  out_dir,
-  usms_list = NULL,
-  obs_table = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
-) {
+    df,
+    out_dir,
+    usms_list = NULL,
+    obs_table = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(obs_table)) {
     lifecycle::deprecate_warn("1.0.0", "gen_obs(obs_table)", "gen_obs(df)")
   } else {

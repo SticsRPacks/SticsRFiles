@@ -49,12 +49,11 @@
 #' }
 #'
 get_param_data_df <- function(
-  param = NULL,
-  file = NULL,
-  stics_version = "latest",
-  kind = "all",
-  exact = FALSE
-) {
+    param = NULL,
+    file = NULL,
+    stics_version = "latest",
+    kind = "all",
+    exact = FALSE) {
   kinds <- c("parameter", "formalism", "all")
 
   # Checking kind

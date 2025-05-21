@@ -34,15 +34,14 @@
 #' )
 #' }
 upgrade_workspace_xml <- function(
-  workspace,
-  javastics,
-  out_dir,
-  stics_version = "V9.2",
-  target_version = "V10.0",
-  plant = FALSE,
-  overwrite = FALSE,
-  ...
-) {
+    workspace,
+    javastics,
+    out_dir,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    plant = FALSE,
+    overwrite = FALSE,
+    ...) {
   # For testing if files are upgradable
   check_version <- FALSE
   verbose <- TRUE

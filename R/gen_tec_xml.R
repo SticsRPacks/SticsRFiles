@@ -58,15 +58,14 @@
 #'
 
 gen_tec_xml <- function(
-  param_df = NULL,
-  file = NULL,
-  out_dir,
-  stics_version = "latest",
-  na_values = NA,
-  param_table = lifecycle::deprecated(),
-  tec_in_file = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
-) {
+    param_df = NULL,
+    file = NULL,
+    out_dir,
+    stics_version = "latest",
+    na_values = NA,
+    param_table = lifecycle::deprecated(),
+    tec_in_file = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   # TODO: refactor with gen_sta_file, gen_ini_file : same code
 
   if (lifecycle::is_present(param_table)) {

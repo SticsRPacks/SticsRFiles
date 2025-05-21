@@ -31,16 +31,15 @@
 #' @export
 #'
 convert_xml2txt <- function(
-  file,
-  plant_id = 1,
-  soil_name = NULL,
-  out_dir = NULL,
-  save_as = NULL,
-  stics_version = "latest",
-  xml_file = lifecycle::deprecated(),
-  plt_num = lifecycle::deprecated(),
-  out_file = lifecycle::deprecated()
-) {
+    file,
+    plant_id = 1,
+    soil_name = NULL,
+    out_dir = NULL,
+    save_as = NULL,
+    stics_version = "latest",
+    xml_file = lifecycle::deprecated(),
+    plt_num = lifecycle::deprecated(),
+    out_file = lifecycle::deprecated()) {
   if (lifecycle::is_present(xml_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",

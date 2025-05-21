@@ -29,10 +29,9 @@
 #' @export
 #'
 get_plants_nb <- function(
-  usms_file,
-  usms_list = c(),
-  usm_file_path = lifecycle::deprecated()
-) {
+    usms_file,
+    usms_list = c(),
+    usm_file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_file_path)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -92,10 +91,9 @@ get_plants_nb <- function(
 #' @noRd
 #'
 get_plants_nb_xml <- function(
-  usms_file,
-  usms_list = c(),
-  usm_xml_path = lifecycle::deprecated()
-) {
+    usms_file,
+    usms_list = c(),
+    usm_xml_path = lifecycle::deprecated()) {
   # usm_xml_path
   if (lifecycle::is_present(usm_xml_path)) {
     lifecycle::deprecate_warn(

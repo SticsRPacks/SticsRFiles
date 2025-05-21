@@ -34,11 +34,10 @@
 #' @export
 #'
 get_soils_list <- function(
-  file,
-  soil = NULL,
-  file_path = lifecycle::deprecated(),
-  name = lifecycle::deprecated()
-) {
+    file,
+    soil = NULL,
+    file_path = lifecycle::deprecated(),
+    name = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
     lifecycle::deprecate_warn(
       "1.0.0",

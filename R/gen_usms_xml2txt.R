@@ -65,20 +65,19 @@
 #'
 
 gen_usms_xml2txt <- function(
-  javastics = NULL,
-  workspace = NULL,
-  out_dir = NULL,
-  usm = c(),
-  stics_version = "latest",
-  verbose = TRUE,
-  dir_per_usm_flag = TRUE,
-  java_cmd = "java",
-  java_converter = FALSE,
-  javastics_path = lifecycle::deprecated(),
-  workspace_path = lifecycle::deprecated(),
-  target_path = lifecycle::deprecated(),
-  usms_list = lifecycle::deprecated()
-) {
+    javastics = NULL,
+    workspace = NULL,
+    out_dir = NULL,
+    usm = c(),
+    stics_version = "latest",
+    verbose = TRUE,
+    dir_per_usm_flag = TRUE,
+    java_cmd = "java",
+    java_converter = FALSE,
+    javastics_path = lifecycle::deprecated(),
+    workspace_path = lifecycle::deprecated(),
+    target_path = lifecycle::deprecated(),
+    usms_list = lifecycle::deprecated()) {
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
     lifecycle::deprecate_warn(

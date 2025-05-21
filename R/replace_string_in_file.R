@@ -14,11 +14,10 @@
 #' @noRd
 #'
 replace_string_in_file <- function(
-  file_path,
-  target_string,
-  replace_string,
-  new_file_path = NULL
-) {
+    file_path,
+    target_string,
+    replace_string,
+    new_file_path = NULL) {
   if (!file.exists(file_path)) {
     warning(paste(file_path, "doesn't exist, aborting !"))
     return()

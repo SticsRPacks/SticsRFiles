@@ -12,10 +12,9 @@
 #' @noRd
 #'
 get_params_from_doc_node <- function(
-  xml_node,
-  param_list = c(),
-  unique_val = TRUE
-) {
+    xml_node,
+    param_list = c(),
+    unique_val = TRUE) {
   # for ini, usms files
 
   if (!methods::is(xml_node, "XMLInternalElementNode")) {

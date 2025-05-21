@@ -27,12 +27,11 @@
 #' )
 #' read_params_table(file = usm_csv_file)
 read_params_table <- function(
-  file,
-  sheet_name = NULL,
-  num_na = "NA",
-  char_na = "NA",
-  file_path = lifecycle::deprecated()
-) {
+    file,
+    sheet_name = NULL,
+    num_na = "NA",
+    char_na = "NA",
+    file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -74,8 +73,7 @@ read_params_table <- function(
   }
 
   # Reading file according to its format
-  switch(
-    file_ext,
+  switch(file_ext,
     csv = {
       out_table <- utils::read.csv2(
         file = file_path,
@@ -130,8 +128,7 @@ replace_na <- function(in_df, replacement) {
   }
 
   # Getting columns ids according to rep_type
-  switch(
-    rep_type,
+  switch(rep_type,
     numeric = {
       idx_type_col <- unlist(lapply(in_df, is.numeric), use.names = FALSE)
     },

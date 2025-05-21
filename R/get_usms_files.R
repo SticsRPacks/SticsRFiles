@@ -49,16 +49,15 @@
 #' }
 #'
 get_usms_files <- function(
-  workspace,
-  usms_list = NULL,
-  usms_file = "usms.xml",
-  file_type = NULL,
-  javastics = NULL,
-  df_output = FALSE,
-  workspace_path = lifecycle::deprecated(),
-  file_name = lifecycle::deprecated(),
-  javastics_path = lifecycle::deprecated()
-) {
+    workspace,
+    usms_list = NULL,
+    usms_file = "usms.xml",
+    file_type = NULL,
+    javastics = NULL,
+    df_output = FALSE,
+    workspace_path = lifecycle::deprecated(),
+    file_name = lifecycle::deprecated(),
+    javastics_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(workspace_path)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -202,8 +201,9 @@ get_usms_files <- function(
     # Keeping usms xml files, except plant files, obs, lai, null
     useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
 
-    if (length(useless_files_idx) > 0)
+    if (length(useless_files_idx) > 0) {
       usm_files <- usm_files[-useless_files_idx]
+    }
 
     usm_files_path <- file.path(workspace_path, usm_files)
 

@@ -34,16 +34,15 @@
 #'
 
 download_usm_xl <- function(
-  file = NULL,
-  out_dir = tempdir(),
-  stics_version = "latest",
-  overwrite = FALSE,
-  verbose = FALSE,
-  xl_name = lifecycle::deprecated(),
-  version_name = lifecycle::deprecated(),
-  dest_dir = lifecycle::deprecated(),
-  ...
-) {
+    file = NULL,
+    out_dir = tempdir(),
+    stics_version = "latest",
+    overwrite = FALSE,
+    verbose = FALSE,
+    xl_name = lifecycle::deprecated(),
+    version_name = lifecycle::deprecated(),
+    dest_dir = lifecycle::deprecated(),
+    ...) {
   if (lifecycle::is_present(xl_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -170,15 +169,14 @@ download_usm_xl <- function(
 #'
 
 download_usm_csv <- function(
-  file = NULL,
-  out_dir = tempdir(),
-  stics_version = "latest",
-  overwrite = FALSE,
-  verbose = FALSE,
-  csv_name = lifecycle::deprecated(),
-  version_name = lifecycle::deprecated(),
-  dest_dir = lifecycle::deprecated()
-) {
+    file = NULL,
+    out_dir = tempdir(),
+    stics_version = "latest",
+    overwrite = FALSE,
+    verbose = FALSE,
+    csv_name = lifecycle::deprecated(),
+    version_name = lifecycle::deprecated(),
+    dest_dir = lifecycle::deprecated()) {
   if (lifecycle::is_present(csv_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",

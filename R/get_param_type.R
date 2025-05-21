@@ -22,12 +22,11 @@
 #'
 # TODO : may be merged with get_params_types !
 get_param_type <- function(
-  xml_doc,
-  param_name,
-  parent_name = NULL,
-  parent_sel_attr = NULL,
-  id = NULL
-) {
+    xml_doc,
+    param_name,
+    parent_name = NULL,
+    parent_sel_attr = NULL,
+    id = NULL) {
   param_types <- c(
     "param",
     "option",

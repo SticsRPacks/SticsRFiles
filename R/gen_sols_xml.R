@@ -66,15 +66,14 @@
 #'
 #'
 gen_sols_xml <- function(
-  file,
-  param_df,
-  template = NULL,
-  stics_version = "latest",
-  sols_in_file = lifecycle::deprecated(),
-  sols_param = lifecycle::deprecated(),
-  sols_out_file = lifecycle::deprecated(),
-  sols_nb = lifecycle::deprecated()
-) {
+    file,
+    param_df,
+    template = NULL,
+    stics_version = "latest",
+    sols_in_file = lifecycle::deprecated(),
+    sols_param = lifecycle::deprecated(),
+    sols_out_file = lifecycle::deprecated(),
+    sols_nb = lifecycle::deprecated()) {
   if (lifecycle::is_present(sols_in_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",

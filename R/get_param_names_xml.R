@@ -41,13 +41,12 @@
 #' @noRd
 #'
 get_param_names_xml <- function(
-  xml_file,
-  name = NULL,
-  bounds = TRUE,
-  output = "data.frame",
-  combine = TRUE,
-  exact = FALSE
-) {
+    xml_file,
+    name = NULL,
+    bounds = TRUE,
+    output = "data.frame",
+    combine = TRUE,
+    exact = FALSE) {
   # Switch for transformations to data.frame format
   df_out <- output == "data.frame"
   df_comb <- df_out & combine

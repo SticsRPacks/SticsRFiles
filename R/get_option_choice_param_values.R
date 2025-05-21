@@ -25,10 +25,9 @@
 #' @noRd
 #'
 get_option_choice_param_values <- function(
-  xml_file_path,
-  option_param_name,
-  choice_name_or_code
-) {
+    xml_file_path,
+    option_param_name,
+    choice_name_or_code) {
   # TODO: see if choice_name_or_code could be optional, to give
   # param values for all choices ??
 

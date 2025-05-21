@@ -26,11 +26,10 @@
 #' get_file_int(path, "banana.obs")
 #' }
 get_file_int <- function(
-  workspace,
-  filename,
-  plant_name = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    filename,
+    plant_name = NULL,
+    verbose = TRUE) {
   if (verbose) message(filename)
 
   if (is.list(filename)) filename <- unlist(filename)

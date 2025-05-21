@@ -39,11 +39,10 @@
 #' @export
 #'
 force_param_values <- function(
-  workspace,
-  values,
-  javastics,
-  param_values = lifecycle::deprecated()
-) {
+    workspace,
+    values,
+    javastics,
+    param_values = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_values)) {
     lifecycle::deprecate_warn(
       "1.0.0",

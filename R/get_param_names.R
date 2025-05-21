@@ -22,13 +22,12 @@
 #' @noRd
 #'
 get_param_names <- function(
-  xml_object,
-  param_list = c(),
-  parent_name = NULL,
-  parent_sel_attr = NULL,
-  full_list = FALSE,
-  root_name = NULL
-) {
+    xml_object,
+    param_list = c(),
+    parent_name = NULL,
+    parent_sel_attr = NULL,
+    full_list = FALSE,
+    root_name = NULL) {
   xml_node <- NULL
   param_name <- NULL
   tmp_xml_object <- NULL

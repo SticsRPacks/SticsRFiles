@@ -64,15 +64,14 @@
 #' @export
 #'
 gen_ini_xml <- function(
-  param_df,
-  file = NULL,
-  out_dir,
-  crop_tag = "Crop",
-  stics_version = "latest",
-  ini_in_file = lifecycle::deprecated(),
-  param_table = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
-) {
+    param_df,
+    file = NULL,
+    out_dir,
+    crop_tag = "Crop",
+    stics_version = "latest",
+    ini_in_file = lifecycle::deprecated(),
+    param_table = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(ini_in_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",

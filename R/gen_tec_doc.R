@@ -31,12 +31,11 @@
 #' @noRd
 #'
 gen_tec_doc <- function(
-  xml_doc = NULL,
-  param_table = NULL,
-  stics_version = "latest",
-  dict = NULL,
-  ...
-) {
+    xml_doc = NULL,
+    param_table = NULL,
+    stics_version = "latest",
+    dict = NULL,
+    ...) {
   dot_args <- list(...)
   dot_args_names <- names(dot_args)
 

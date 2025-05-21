@@ -71,12 +71,11 @@
 #' }
 #'
 get_xml_files_param_df <- function(
-  file_path,
-  select = NULL,
-  name = NULL,
-  param_names = NULL,
-  wide_shape = FALSE
-) {
+    file_path,
+    select = NULL,
+    name = NULL,
+    param_names = NULL,
+    wide_shape = FALSE) {
   # For managing a files list
   if (length(file_path) > 1) {
     files_exist <- file.exists(file_path)

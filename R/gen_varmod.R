@@ -33,15 +33,14 @@
 #' @export
 #'
 gen_varmod <- function(
-  workspace,
-  var,
-  append = FALSE,
-  file_name = "var.mod",
-  stics_version = "latest",
-  force = FALSE,
-  var_names = lifecycle::deprecated(),
-  version = lifecycle::deprecated()
-) {
+    workspace,
+    var,
+    append = FALSE,
+    file_name = "var.mod",
+    stics_version = "latest",
+    force = FALSE,
+    var_names = lifecycle::deprecated(),
+    version = lifecycle::deprecated()) {
   # var_names
   if (lifecycle::is_present(var_names)) {
     lifecycle::deprecate_warn(

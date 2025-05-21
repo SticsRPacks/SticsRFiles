@@ -45,13 +45,12 @@ get_svn_identifiers <- function() {
 #' )
 #' }
 download_csv_files <- function(
-  branch_url,
-  dest_dir,
-  file_name = "all",
-  ids = get_svn_identifiers(),
-  overwrite = FALSE,
-  verbose = TRUE
-) {
+    branch_url,
+    dest_dir,
+    file_name = "all",
+    ids = get_svn_identifiers(),
+    overwrite = FALSE,
+    verbose = TRUE) {
   files_list <- c("inputs.csv", "outputs.csv")
 
   if (length(file_name) == 1 && file_name == "all") {
@@ -141,13 +140,12 @@ download_csv_files <- function(
 #' )
 #' }
 add_stics_version <- function(
-  version_name,
-  url,
-  file_name = "all",
-  location = "install",
-  overwrite = FALSE,
-  verbose = TRUE
-) {
+    version_name,
+    url,
+    file_name = "all",
+    location = "install",
+    overwrite = FALSE,
+    verbose = TRUE) {
   # Taking only into account adding or overwriting csv files :
   # inputs.csv, outouts.csv
   # and updating csv file stics_versions_info.csv gathering by version
@@ -229,11 +227,10 @@ add_stics_version <- function(
 #' )
 #' }
 remove_stics_version <- function(
-  version_name,
-  delete_files = TRUE,
-  location = "install",
-  verbose = TRUE
-) {
+    version_name,
+    delete_files = TRUE,
+    location = "install",
+    verbose = TRUE) {
   # Getting existing data about versions
   versions_info <- get_versions_info(location = location)
 
@@ -372,12 +369,11 @@ get_versions_file_path <- function(location = "install") {
 #' )
 #' }
 update_stics_version <- function(
-  version_name,
-  url,
-  file_name = "all",
-  location = "install",
-  verbose = FALSE
-) {
+    version_name,
+    url,
+    file_name = "all",
+    location = "install",
+    verbose = FALSE) {
   # Forcing csv files overwriting
   add_stics_version(
     version_name,
@@ -410,11 +406,10 @@ update_stics_version <- function(
 #'
 # @examples
 set_versions_info <- function(
-  version_name,
-  location = "install",
-  overwrite = FALSE,
-  verbose = TRUE
-) {
+    version_name,
+    location = "install",
+    overwrite = FALSE,
+    verbose = TRUE) {
   # Setting file output flag
   write_file <- TRUE
 
