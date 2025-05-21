@@ -49,9 +49,6 @@ get_lai_forcing <- function(usm_file_path, usms_list = c()) {
 }
 
 
-
-
-
 #' @title Is LAI forced ? plants number per usm, all or selected from
 #' a given list
 #'
@@ -97,11 +94,10 @@ get_lai_forcing_txt <- function(usm_txt_path, usm_name = NULL) {
     return()
   }
 
-
   if (length(usm_name) > 1) stop("Only one usm name may be given !")
 
   # Getting usm parameters
-  usm_data <- get_usm_txt(filepath = usm_txt_path)
+  usm_data <- get_usm_txt(file = usm_txt_path)
 
   # Checking usm name
   if (!base::is.null(usm_name) && usm_data$nom != usm_name) {
