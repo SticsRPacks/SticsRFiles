@@ -20,24 +20,39 @@
 #' @noRd
 #'
 
-gen_new_travail <- function(usm_data,
-                            usm,
-                            workspace,
-                            lai_forcing = NULL,
-                            codesuite = NULL,
-                            codoptim = NULL,
-                            out_dir = NULL) {
+gen_new_travail <- function(
+    usm_data,
+    usm,
+    workspace,
+    lai_forcing = NULL,
+    codesuite = NULL,
+    codoptim = NULL,
+    out_dir = NULL) {
   data_plt2 <- c()
   if (usm_data$nbplantes > 1) {
     data_plt2 <- c("fplt2", "ftec2", "flai2")
   }
 
   data_order <- c(
-    "codesimul", "codoptim", "codesuite", "nbplantes", "nom",
-    "datedebut", "datefin", "finit", "numsol", "nomsol",
+    "codesimul",
+    "codoptim",
+    "codesuite",
+    "nbplantes",
+    "nom",
+    "datedebut",
+    "datefin",
+    "finit",
+    "numsol",
+    "nomsol",
     "fstation",
-    "fclim1", "fclim2", "nbans", "culturean", "fplt1",
-    "ftec1", "flai1", data_plt2
+    "fclim1",
+    "fclim2",
+    "nbans",
+    "culturean",
+    "fplt1",
+    "ftec1",
+    "flai1",
+    data_plt2
   )
 
   if (is.null(out_dir)) out_dir <- workspace
@@ -83,13 +98,15 @@ gen_new_travail <- function(usm_data,
 #' @noRd
 #'
 #'
-get_usm_data <- function(usms_doc,
-                         usm,
-                         workspace,
-                         lai_forcing = NULL,
-                         codesuite = NULL,
-                         codoptim = NULL) {
-  data <- XML::getNodeSet(usms_doc@content,
+get_usm_data <- function(
+    usms_doc,
+    usm,
+    workspace,
+    lai_forcing = NULL,
+    codesuite = NULL,
+    codoptim = NULL) {
+  data <- XML::getNodeSet(
+    usms_doc@content,
     path = paste0("//usm[@nom='", usm, "']"),
     fun = XML::xmlToList
   )[[1]]

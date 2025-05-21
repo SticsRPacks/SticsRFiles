@@ -39,9 +39,9 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
   par_idx <- choice_specif_par %in% param_name
   if (all(par_idx)) {
     message <- sprintf(
-      "%s%s%s", "Parameters ", paste(choice_specif_par,
-        collapse = ", "
-      ),
+      "%s%s%s",
+      "Parameters ",
+      paste(choice_specif_par, collapse = ", "),
       "\ncannot be used for different choices of the same option 'cut crop'"
     )
     if (stop) {
@@ -75,7 +75,8 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
       setdiff(param_name, choice_specif_par)
     )
     message <- sprintf(
-      "%s%s%s%s", "Impossible to get/set values for parameters: ",
+      "%s%s%s%s",
+      "Impossible to get/set values for parameters: ",
       paste(par_list, collapse = ", "),
       "\nexisting in intervention nodes belonging",
       " to 2 choices of the same option 'cut crop'"

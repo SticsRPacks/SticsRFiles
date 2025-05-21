@@ -22,8 +22,7 @@
 #' exist_param_xml(param = c("albedo", "latitude", "humcapi"))
 #' }
 #'
-exist_param_xml <- function(param,
-                            stics_version = "latest") {
+exist_param_xml <- function(param, stics_version = "latest") {
   # Finding exact matchs in found names
   par_names <- get_param_data_df(
     param = param,
@@ -40,7 +39,6 @@ exist_param_xml <- function(param,
   # Exiting status vector
   return(exist_status)
 }
-
 
 
 #' Checking existing parameters names in csv input files
@@ -69,8 +67,7 @@ exist_param_xml <- function(param,
 #' )
 #' }
 #'
-exist_param_csv <- function(param,
-                            javastics) {
+exist_param_csv <- function(param, javastics) {
   # Keeping names to modify with real names
   final_names <- param
 
@@ -108,7 +105,6 @@ exist_param_csv <- function(param,
   } else {
     par_names <- env_stics[["par_names"]]
   }
-
 
   # searching parameters names
   idx_param <- unlist(lapply(param, function(x) any(par_names %in% x)))

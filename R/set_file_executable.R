@@ -23,7 +23,8 @@ set_file_executable <- function(file_path) {
   }
 
   # if OS != windows, set chmod +x exe
-  ret <- suppressWarnings(system(paste("chmod +x", file_path),
+  ret <- suppressWarnings(system(
+    paste("chmod +x", file_path),
     intern = TRUE,
     ignore.stdout = FALSE,
     ignore.stderr = FALSE

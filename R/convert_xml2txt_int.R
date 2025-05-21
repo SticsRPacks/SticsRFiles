@@ -36,9 +36,7 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
 
   # checking files extensions
   names_split <- lapply(f_names, function(x) {
-    unlist(strsplit(x, ".",
-      fixed = TRUE
-    ))
+    unlist(strsplit(x, ".", fixed = TRUE))
   })
 
   files_ext <- unlist(lapply(names_split, function(x) x[length(x)]))
@@ -65,9 +63,11 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
   if (base::is.null(out_file)) {
     out_file <- file.path(
       dirname(xml_file),
-      paste0(unlist(strsplit(basename(xml_file), ".",
-        fixed = TRUE
-      ))[1], ".", ext)
+      paste0(
+        unlist(strsplit(basename(xml_file), ".", fixed = TRUE))[1],
+        ".",
+        ext
+      )
     )
   }
 

@@ -33,19 +33,22 @@
 #'
 #' @noRd
 #'
-get_params_from_table <- function(params_table,
-                                  param_names = NULL,
-                                  xml_doc,
-                                  lines_id = NULL,
-                                  stopping = FALSE,
-                                  dict = NULL,
-                                  na_values = NA) {
+get_params_from_table <- function(
+    params_table,
+    param_names = NULL,
+    xml_doc,
+    lines_id = NULL,
+    stopping = FALSE,
+    dict = NULL,
+    na_values = NA) {
   # TODO: doing a merge with get_values_from_table
 
   if (base::is.null(dict)) {
     dict <- list(
-      julapI = "julapI_or_sum_upvt", doseI = "amount",
-      julapN = "julapN_or_sum_upvt", doseN = "absolute_value/%"
+      julapI = "julapI_or_sum_upvt",
+      doseI = "amount",
+      julapN = "julapN_or_sum_upvt",
+      doseN = "absolute_value/%"
     )
   }
 
@@ -55,25 +58,24 @@ get_params_from_table <- function(params_table,
     return(dict)
   }
 
-
   # replacing column names starting with names of the dico list
   # with values of corresponding field in dico
   for (key in names(dict)) {
     params_table <- params_table %>%
       dplyr::rename_at(
         dplyr::vars(dplyr::matches(paste0(key, "\\_[0-9*]"))),
-        list(~ gsub(
-          x = ., pattern = paste0("(", key, ")(\\_[0-9*])"),
-          replacement = paste0(dict[[key]], "\\2")
-        ))
+        list(
+          ~ gsub(
+            x = .,
+            pattern = paste0("(", key, ")(\\_[0-9*])"),
+            replacement = paste0(dict[[key]], "\\2")
+          )
+        )
       )
   }
 
-
-
   # getting values from table
   param_values <- get_values_by_param(params_table, param_name = param_names)
-
 
   # checking if all params from xl table exist in xml doc file
   tbl_par_names <- names(param_values)
@@ -83,7 +85,8 @@ get_params_from_table <- function(params_table,
 
   if (length(unknown_params)) {
     message_str <- sprintf(
-      "\n%s\n%s\n\n%s\n\n%s\n\n", "Unknown parameters found in table: ",
+      "\n%s\n%s\n\n%s\n\n%s\n\n",
+      "Unknown parameters found in table: ",
       paste(unknown_params, collapse = ", "),
       "Verify parameters names in xml files or",
       "check substitution names in list returned by get_params_from_table()"

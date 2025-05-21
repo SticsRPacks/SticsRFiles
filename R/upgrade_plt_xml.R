@@ -33,15 +33,16 @@
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
 #'
-upgrade_plt_xml <- function(file,
-                            out_dir,
-                            param_newform_file,
-                            param_gen_file,
-                            stics_version = "V9.2",
-                            target_version = "V10.0",
-                            check_version = TRUE,
-                            overwrite = FALSE,
-                            ...) {
+upgrade_plt_xml <- function(
+    file,
+    out_dir,
+    param_newform_file,
+    param_gen_file,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE,
+    ...) {
   # For verifying output dir existence
   check_dir <- TRUE
   args_list <- list(...)
@@ -58,11 +59,11 @@ upgrade_plt_xml <- function(file,
 
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file[1],
+    file_version <- check_xml_file_version(
+      file[1],
       stics_version,
       param_gen_file = param_gen_file
     )
-
 
     if (!file_version && is.null(param_gen_file)) {
       stop("param_gen_file must be provided! ")
@@ -70,9 +71,12 @@ upgrade_plt_xml <- function(file,
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file[1]
+        attr(file_version, "version"),
+        " \n",
+        file[1]
       )
     }
 
@@ -80,16 +84,16 @@ upgrade_plt_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
-
 
     # for checking only once when multiple files are treated !
     check_version <- FALSE
   }
-
 
   # Treating a files list
   if (length(file) > 1) {
@@ -115,26 +119,50 @@ upgrade_plt_xml <- function(file,
   # Loading the old xml file
   old_doc <- xmldocument(file = file)
 
-
   # Setting file STICS version
-  set_xml_file_version(old_doc,
+  set_xml_file_version(
+    old_doc,
     new_version = target_version,
     overwrite = overwrite
   )
-
 
   # Parameters to move to varietal parameters ----------------------------------
   #
   # Coming from other formalisms than varietal ones
   # Storing parameters values to set them to varietal ones
   param_names_to_varietal <- c(
-    "phobase", "phosat", "stdordebour", "bdens", "hautbase", "hautmax",
-    "dlaimax", "dlaimaxbrut", "innsen", "rapsenturg", "extin", "ktrou", "temin",
-    "teopt", "slamax", "tigefeuil", "nbjgrain", "nbgrmin", "vitircarb",
-    "vitircarbT", "stdrpnou", "nbinflo", "inflomax", "pentinflores",
-    "vitpropsucre", "vitprophuile", "vitirazo",
-    "tgellev10", "tgeljuv10", "tgelveg10",
-    "psisto", "psiturg",
+    "phobase",
+    "phosat",
+    "stdordebour",
+    "bdens",
+    "hautbase",
+    "hautmax",
+    "dlaimax",
+    "dlaimaxbrut",
+    "innsen",
+    "rapsenturg",
+    "extin",
+    "ktrou",
+    "temin",
+    "teopt",
+    "slamax",
+    "tigefeuil",
+    "nbjgrain",
+    "nbgrmin",
+    "vitircarb",
+    "vitircarbT",
+    "stdrpnou",
+    "nbinflo",
+    "inflomax",
+    "pentinflores",
+    "vitpropsucre",
+    "vitprophuile",
+    "vitirazo",
+    "tgellev10",
+    "tgeljuv10",
+    "tgelveg10",
+    "psisto",
+    "psiturg",
     "deshydbase"
   )
   param_values_to_varietal <- get_param_value(old_doc, param_names_to_varietal)
@@ -145,7 +173,8 @@ upgrade_plt_xml <- function(file,
       old_doc,
       path = paste0(
         "//formalisme[@nom!='cultivar parameters']//param[@nom='",
-        x, "']"
+        x,
+        "']"
       )
     )
   })
@@ -157,13 +186,26 @@ upgrade_plt_xml <- function(file,
   # Removing nodes
   lapply(nodes_to_rm, function(x) XML::removeNodes(x))
 
-
   # Already exist in varietal parameters
   # Storing parameters values before applying new varietal parameters structure
   param_names_keep <- c(
-    "stlevamf", "stamflax", "stlevdrp", "stflodrp", "stdrpdes", "pgrainmaxi",
-    "adens", "croirac", "durvieF", "jvc", "sensiphot", "stlaxsen", "stsenlan",
-    "nbgrmax", "stdrpmat", "afruitpot", "dureefruit"
+    "stlevamf",
+    "stamflax",
+    "stlevdrp",
+    "stflodrp",
+    "stdrpdes",
+    "pgrainmaxi",
+    "adens",
+    "croirac",
+    "durvieF",
+    "jvc",
+    "sensiphot",
+    "stlaxsen",
+    "stsenlan",
+    "nbgrmax",
+    "stdrpmat",
+    "afruitpot",
+    "dureefruit"
   )
 
   param_values_keep <- get_param_value(old_doc, param_names_keep)
@@ -172,7 +214,6 @@ upgrade_plt_xml <- function(file,
   if (!all(param_names_keep %in% names(param_values_keep))) {
     stop("Missing values, , not a v9.1 or 9.2 _plt.xml file")
   }
-
 
   # General plant parameters ---------------------------------------------------
   #
@@ -205,14 +246,11 @@ upgrade_plt_xml <- function(file,
 
   XML::addChildren(parent_node, XML::xmlClone(new_node))
 
-
   # moving nbfeuilplant
   node_to_move <- get_nodes(old_doc, path = "//param[@nom='nbfeuilplant']")[[1]]
   prev_sibling <- get_nodes(old_doc, path = "//param[@nom='laiplantule']")[[1]]
 
   XML::addSibling(prev_sibling, node_to_move)
-
-
 
   # Recalculating irazomax
   irazomax_calc <- calc_irazomax(
@@ -231,11 +269,11 @@ upgrade_plt_xml <- function(file,
   )
 
   # adding irazomax node
-  parent_node <- get_nodes(old_doc,
+  parent_node <- get_nodes(
+    old_doc,
     path = "//formalisme[@nom='yield formation']"
   )[[1]]
   XML::addChildren(parent_node, new_node, at = 0)
-
 
   message(
     old_doc@name,
@@ -245,9 +283,9 @@ upgrade_plt_xml <- function(file,
     paste0(
       "But this value needs to be ajusted according to ",
       "species and varieties "
-    ), "\n"
+    ),
+    "\n"
   )
-
 
   # moving irmax
   node_to_move <- get_nodes(old_doc, path = "//param[@nom='irmax']")[[1]]
@@ -257,8 +295,6 @@ upgrade_plt_xml <- function(file,
   )[[1]]
 
   XML::addChildren(parent_node, node_to_move)
-
-
 
   # add codedisrac option node
   new_node <- XML::xmlParseString(
@@ -275,7 +311,6 @@ upgrade_plt_xml <- function(file,
   # <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
   prev_sibling <- get_nodes(old_doc, '//option[@nomParam="codazorac"]')[[1]]
   XML::addSibling(prev_sibling, new_node, after = FALSE)
-
 
   # Changing varietal section structure ----------------------------------------
   #
@@ -410,15 +445,12 @@ upgrade_plt_xml <- function(file,
     addFinalizer = TRUE
   )
 
-
   # adding var nodes under each "variete" node
   var_parent_nodes <- get_nodes(old_doc, path = "//variete")
   lapply(
     var_parent_nodes,
     function(x) {
-      XML::addChildren(x,
-        kids = XML::xmlChildren(XML::xmlClone(var_nodes))
-      )
+      XML::addChildren(x, kids = XML::xmlChildren(XML::xmlClone(var_nodes)))
     }
   )
 
@@ -428,7 +460,6 @@ upgrade_plt_xml <- function(file,
   # param_values_to_varietal
   set_param_value(old_doc, param_names_to_varietal, param_values_to_varietal)
   set_param_value(old_doc, param_names_keep, param_values_keep)
-
 
   # Special case: jvc not any more under an option choice
   # Checking values for jvc, if == -999, and replacing with
@@ -461,7 +492,8 @@ upgrade_plt_xml <- function(file,
       jvc_data[[basename(file)]][["variete"]] %in% current_var$variete
 
     if (any(common_var)) {
-      values <- get_param_value(old_doc,
+      values <- get_param_value(
+        old_doc,
         param_name = "jvc",
         parent_name = "variete",
         parent_sel_attr = current_var[common_var]
@@ -470,7 +502,8 @@ upgrade_plt_xml <- function(file,
       values_999_ids <- which(values == -999)
       if (length(values_999_ids) > 0) {
         jvc_values <- jvc_data[[basename(file)]]$jvc[common_var][values_999_ids]
-        set_param_value(old_doc,
+        set_param_value(
+          old_doc,
           param_name = "jvc",
           param_value = jvc_values,
           ids = values_999_ids
@@ -490,11 +523,11 @@ upgrade_plt_xml <- function(file,
         ": be aware that jvc is from now a mandatory parameter",
         "and its value must be fixed !\n"
       ),
-      "for all varieties: \n", current_var[values_999_ids], "\n"
+      "for all varieties: \n",
+      current_var[values_999_ids],
+      "\n"
     )
   }
-
-
 
   # Adding new nodes
   #
@@ -515,7 +548,6 @@ upgrade_plt_xml <- function(file,
   prev_sibling <- get_nodes(old_doc, "//*[@nomParam='codetemprac']")[[1]]
   XML::addSibling(prev_sibling, XML::xmlClone(new_node))
 
-
   # code_WangEngel
   # in <choix code="1" nom="daily temperatures">
   new_node <- XML::xmlParseString(
@@ -533,7 +565,6 @@ upgrade_plt_xml <- function(file,
     "//*[@nomParam='codegdhdeb']/choix[@code='1']"
   )[[1]]
   XML::addChildren(parent_node, new_node)
-
 
   # Adding 2 option nodes
   # in <formalisme nom="partitioning of biomass in organs">
@@ -596,7 +627,6 @@ nomParam="codedyntalle">
   )[[1]]
   XML::addChildren(parent_node, kids = unlist(XML::xmlChildren(new_nodes)))
 
-
   # <formalisme nom="roots">
   # rayon
   #
@@ -637,7 +667,6 @@ nomParam="codedyntalle">
 
   XML::addChildren(parent_node, kids = unlist(XML::xmlChildren(new_nodes)))
 
-
   # -----------------------------------------------------------
   # Update param values
   #
@@ -647,11 +676,11 @@ nomParam="codedyntalle">
     file = param_gen_file,
     param = c("rayon", "khaut")
   )[[1]]
-  set_param_value(old_doc,
+  set_param_value(
+    old_doc,
     param_name = c("rayon", "khaut"),
     param_value = param_gen_values
   )
-
 
   # from param_newform.xml
   # coefracoupe(1), coefracoupe(2) -> coefracoupe
@@ -666,11 +695,11 @@ nomParam="codedyntalle">
     )
   }
 
-  set_param_value(old_doc,
+  set_param_value(
+    old_doc,
     param_name = "coefracoupe",
     param_value = param_newform_values[[1]]
   )
-
 
   # Updating other values than nodes values (i.e. nodes attributes values)
   #
@@ -679,9 +708,11 @@ nomParam="codedyntalle">
   # <param format="real" max="2.0" min="0.0" nom="hautbase">0</param>
   nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='hautbase']")
   if (!is.null(nodes_to_change)) {
-    set_attrs_values(old_doc,
+    set_attrs_values(
+      old_doc,
       path = "//param[@nom='hautbase']",
-      attr_name = "min", values_list = "0.1"
+      attr_name = "min",
+      values_list = "0.1"
     )
   }
   #
@@ -690,33 +721,30 @@ nomParam="codedyntalle">
   # oui to yes, non to no
   nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='oui']")
   if (!is.null(nodes_to_change)) {
-    set_attrs_values(old_doc,
-      path = "//choix[@nom='oui']", attr_name = "nom",
+    set_attrs_values(
+      old_doc,
+      path = "//choix[@nom='oui']",
+      attr_name = "nom",
       values_list = "yes"
     )
   }
   nodes_to_change <- get_nodes(old_doc, path = "//choix[@nom='non']")
   if (!is.null(nodes_to_change)) {
-    set_attrs_values(old_doc,
-      path = "//choix[@nom='non']", attr_name = "nom",
+    set_attrs_values(
+      old_doc,
+      path = "//choix[@nom='non']",
+      attr_name = "nom",
       values_list = "no"
     )
   }
-
-
-
 
   # Writing to file _plt.xml
   out_plt <- file.path(out_dir, basename(file))
   write_xml_file(old_doc, out_plt, overwrite)
 
-
-
   XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))
 }
-
-
 
 
 calc_irazomax <- function(irmax, vitircarb, vitirazo) {

@@ -38,11 +38,12 @@
 #' @noRd
 #'
 
-get_param_value <- function(xml_doc,
-                            param_name = NULL,
-                            parent_name = NULL,
-                            parent_sel_attr = NULL,
-                            ...) {
+get_param_value <- function(
+    xml_doc,
+    param_name = NULL,
+    parent_name = NULL,
+    parent_sel_attr = NULL,
+    ...) {
   # ... for getting : ids, show_xpath and mult_par arguments
   dot_args <- list(...)
   dot_names <- names(dot_args)
@@ -60,7 +61,6 @@ get_param_value <- function(xml_doc,
     to_num <- TRUE
   }
 
-
   # Getting param values for the same parameters for the xml documents list
   if (base::is.list(xml_doc)) {
     values <- lapply(xml_doc, function(x) {
@@ -77,7 +77,8 @@ get_param_value <- function(xml_doc,
 
   # If no given parameters names
   if (base::is.null(param_name)) {
-    param_name <- get_param_names(xml_doc,
+    param_name <- get_param_names(
+      xml_doc,
       parent_name = parent_name,
       parent_sel_attr = parent_sel_attr
     )
@@ -86,7 +87,9 @@ get_param_value <- function(xml_doc,
     if (is.null(param_name)) {
       stop(paste0(
         "Not any parameter names detected for: \n",
-        parent_name, " = ", parent_sel_attr
+        parent_name,
+        " = ",
+        parent_sel_attr
       ))
     }
   }
@@ -100,7 +103,6 @@ get_param_value <- function(xml_doc,
   } else {
     mult_par <- FALSE
   }
-
 
   # recursive call for a list of parameter names
   if (length(param_name) > 1) {
@@ -141,8 +143,6 @@ get_param_value <- function(xml_doc,
   if (base::is.null(xpath)) {
     return(value)
   }
-
-
 
   # TODO: see if it could be simplified with a default case !
   switch(type,
@@ -204,11 +204,9 @@ get_param_value <- function(xml_doc,
       value <- get_values(xml_doc, xpath, ids)
     }
 
-
     # TODO : add other cases for tables in ini, soil,
     # and other specific parameters
   )
-
 
   # Converting value to numeric if not any character in it
   # numbers may contain scientific notation e+ e-, decimal, and space
@@ -230,10 +228,8 @@ get_param_value <- function(xml_doc,
     names(value) <- param_name
   }
 
-
   return(value)
 }
-
 
 
 get_param_parent <- function(args_list) {
@@ -241,7 +237,6 @@ get_param_parent <- function(args_list) {
   parent_sel_attr <- NULL
 
   if (length(args_list) > 1) stop("Too much args !")
-
 
   # Argument names to be detected
   parent_names <- c("sol", "plante", "variete", "usm")

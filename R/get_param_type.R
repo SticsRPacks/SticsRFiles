@@ -21,19 +21,34 @@
 #' @noRd
 #'
 # TODO : may be merged with get_params_types !
-get_param_type <- function(xml_doc,
-                           param_name,
-                           parent_name = NULL,
-                           parent_sel_attr = NULL,
-                           id = NULL) {
+get_param_type <- function(
+    xml_doc,
+    param_name,
+    parent_name = NULL,
+    parent_sel_attr = NULL,
+    id = NULL) {
   param_types <- c(
-    "param", "option", "table", "table2",
-    "choix_param", "node_node", "node_option", "node_table",
-    "node_param", "form_option", "node_attr", "attr", "attrname",
-    "attr_attr", "choix_attr", "nodename", "attr_attr2",
-    "nodename_childs", "node_table_ent", "node_table_ent2"
+    "param",
+    "option",
+    "table",
+    "table2",
+    "choix_param",
+    "node_node",
+    "node_option",
+    "node_table",
+    "node_param",
+    "form_option",
+    "node_attr",
+    "attr",
+    "attrname",
+    "attr_attr",
+    "choix_attr",
+    "nodename",
+    "attr_attr2",
+    "nodename_childs",
+    "node_table_ent",
+    "node_table_ent2"
   )
-
 
   char_to_filter <- c("-", ".", ":", "/", "%", "#", " ", "(", ")")
 
@@ -49,7 +64,6 @@ get_param_type <- function(xml_doc,
     return(param_types)
   }
 
-
   param_name <- param_name[1]
   parent_name <- parent_name[1]
 
@@ -58,7 +72,6 @@ get_param_type <- function(xml_doc,
   } else {
     sel_id <- paste0("[", id, "]")
   }
-
 
   # filtering requests on special character presence in param_name
   # implying they cannot be used as : node name or attribute name
@@ -72,7 +85,6 @@ get_param_type <- function(xml_doc,
   if (length(find_bad_char)) {
     filter_name <- TRUE
   }
-
 
   # treatment of parameters with no dependencies
   if (base::is.null(parent_name) && base::is.null(parent_sel_attr)) {
@@ -89,7 +101,6 @@ get_param_type <- function(xml_doc,
     xpath_ent <- paste0("//tableau_entete/colonne[@nom=\"", param_name, "\"]")
     # Ajout des en-tete si pas de noeuds intervention (fichier _tec.xml)
     xpath_ent2 <- paste0("//ta_entete/colonne[@nom=\"", param_name, "\"]")
-
 
     # if no bad charaters in param_name
     if (!filter_name) {
@@ -117,7 +128,8 @@ get_param_type <- function(xml_doc,
       values <- get_values(xml_doc, xpath_nodename_childs)
       if (!base::is.null(values)) {
         return(list(
-          type = "nodename_childs", xpath = xpath_nodename_childs,
+          type = "nodename_childs",
+          xpath = xpath_nodename_childs,
           length = length(values)
         ))
       }
@@ -198,13 +210,17 @@ get_param_type <- function(xml_doc,
     return(list(type = "unknown", xpath = NULL, length = 0))
   }
 
-
   # node with attr value for @nom as param_name
   # and a parent name as @nom attr
   if (!base::is.null(parent_name)) {
     xpath_attr_attr <- paste0(
-      "//*[@nom=\"", parent_name, "\"]",
-      "//*[@nom=\"", param_name, "\"]", sel_id
+      "//*[@nom=\"",
+      parent_name,
+      "\"]",
+      "//*[@nom=\"",
+      param_name,
+      "\"]",
+      sel_id
     )
   }
 
@@ -222,8 +238,12 @@ get_param_type <- function(xml_doc,
     # path to nb_interventions ta node
     if (!base::is.null(parent_name)) {
       xpath_attr_attr <- paste0(
-        "//*[@nom=\"", parent_name,
-        "\"]", "//*[@", param_name, "]",
+        "//*[@nom=\"",
+        parent_name,
+        "\"]",
+        "//*[@",
+        param_name,
+        "]",
         sel_id
       )
     }
@@ -242,8 +262,11 @@ get_param_type <- function(xml_doc,
   # with a link to a parent node selected with a @nomParam name
   if (!base::is.null(parent_name)) {
     xpath_choix_attr <- paste0(
-      "//*", "[@nomParam=\"",
-      parent_name, "\"]", "/choix",
+      "//*",
+      "[@nomParam=\"",
+      parent_name,
+      "\"]",
+      "/choix",
       sel_id
     )
   }
@@ -261,8 +284,11 @@ get_param_type <- function(xml_doc,
     # node with attr value for @nom as param_name
     if (!base::is.null(parent_name)) {
       xpath_node_attr <- paste0(
-        "//", param_name,
-        "[@nom=\"", parent_name, "\"]",
+        "//",
+        param_name,
+        "[@nom=\"",
+        parent_name,
+        "\"]",
         sel_id
       )
     }
@@ -288,7 +314,8 @@ get_param_type <- function(xml_doc,
     "//",
     new_parent_name,
     "//param[@nom=\"",
-    param_name, "\"]"
+    param_name,
+    "\"]"
   )
 
   values <- get_values(xml_doc, xpath_node_param)
@@ -300,12 +327,15 @@ get_param_type <- function(xml_doc,
     ))
   }
 
-
   # treatment of param with parent dependency
   # parent node is a choix node
   xpath_choix_param <- paste0(
-    "//choix[@nom=\"", parent_name, "\"]",
-    "/param[@nom=\"", param_name, "\"]"
+    "//choix[@nom=\"",
+    parent_name,
+    "\"]",
+    "/param[@nom=\"",
+    param_name,
+    "\"]"
   )
 
   attr_values <- get_attrs_values(xml_doc, xpath_choix_param, "nom")
@@ -313,11 +343,8 @@ get_param_type <- function(xml_doc,
     return(list(type = "choix_param", xpath = xpath_choix_param, length = 1))
   }
 
-
   # parent is an option node -> pas utile dans ce cas nom param unique !
   # xpath_option_param
-
-
 
   # option node, with a parent formalisme node with fixed @nom
 
@@ -329,8 +356,11 @@ get_param_type <- function(xml_doc,
   }
 
   xpath_form_option <- paste0(
-    "//", new_parent_name,
-    "//option[@nomParam=\"", param_name, "\"]"
+    "//",
+    new_parent_name,
+    "//option[@nomParam=\"",
+    param_name,
+    "\"]"
   )
 
   attr_values <- get_attrs_values(xml_doc, xpath_form_option, "choix")
@@ -341,7 +371,6 @@ get_param_type <- function(xml_doc,
       length = 1
     ))
   }
-
 
   # option node with a parent node with possible select with
   # @nom attribute value
@@ -367,7 +396,6 @@ get_param_type <- function(xml_doc,
       length = length(attr_values)
     ))
   }
-
 
   # option node with a parent node with possible select with
   # @dominance attribute value (ini files, ...)
@@ -399,8 +427,6 @@ get_param_type <- function(xml_doc,
     ))
   }
 
-
-
   # simple node with possible simple node parent (ini files, ...)
   # with possible select with @nom attribute value
   # No special character in param_name
@@ -422,13 +448,14 @@ get_param_type <- function(xml_doc,
       ))
     }
 
-
     new_parent_name <- parent_name
     # with possible select with @dominance attribute value
     if (!base::is.null(parent_sel_attr)) {
       new_parent_name <- paste0(
-        parent_name, "[@dominance=\"",
-        as.character(parent_sel_attr), "\"]"
+        parent_name,
+        "[@dominance=\"",
+        as.character(parent_sel_attr),
+        "\"]"
       )
     }
 
@@ -450,13 +477,14 @@ get_param_type <- function(xml_doc,
       ))
     }
 
-
     new_parent_name <- parent_name
     # with possible select with @dominance attribute value
     if (!base::is.null(parent_sel_attr)) {
       new_parent_name <- paste0(
-        parent_name, "[@dominance=\"",
-        as.character(parent_sel_attr), "\"]"
+        parent_name,
+        "[@dominance=\"",
+        as.character(parent_sel_attr),
+        "\"]"
       )
     }
 
@@ -471,10 +499,6 @@ get_param_type <- function(xml_doc,
       ))
     }
   }
-
-
-
-
 
   # tableau/colonne node with a possible parent simple node,
   # possible selection with @nom
@@ -512,7 +536,9 @@ get_param_type <- function(xml_doc,
   xpath_node_table2 <- paste0(
     "//",
     new_parent_name,
-    "//intervention/colonne[@nom=\"", param_name, "\"]"
+    "//intervention/colonne[@nom=\"",
+    param_name,
+    "\"]"
   )
 
   values <- get_values(xml_doc, xpath_node_table2)
@@ -523,7 +549,6 @@ get_param_type <- function(xml_doc,
       length = length(values)
     ))
   }
-
 
   # pour en tete
   new_parent_name <- parent_name

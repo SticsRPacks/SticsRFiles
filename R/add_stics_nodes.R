@@ -22,11 +22,13 @@
 #'
 #' @noRd
 #'
-add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
-                            stics_version = "latest") {
+add_stics_nodes <- function(
+    xml_doc,
+    formalism_name = NULL,
+    nodes_nb = 1,
+    stics_version = "latest") {
   # Getting nodes types that may be added to xml_doc
   node_types <- get_xml_base_node()
-
 
   # Getting the file tag corresponding to the file type
   # among usms, sols, tec
@@ -40,7 +42,6 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   if (length(file_tag) < 1) {
     stop("The xml document is of wrong type")
   }
-
 
   # Getting information on document nodes that may be used
   file_idx <- which(node_types$files_tags == file_tag)
@@ -60,8 +61,10 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
     }
 
     parent_path <- get_param_type(
-      xml_doc, parent_name,
-      "formalisme", formalism_name
+      xml_doc,
+      parent_name,
+      "formalisme",
+      formalism_name
     )$xpath
   } else {
     # Case usms, sols
@@ -76,7 +79,9 @@ add_stics_nodes <- function(xml_doc, formalism_name = NULL, nodes_nb = 1,
   )
 
   # Adding new_node nodes_nb times
-  add_node_to_doc(xml_doc, new_node,
+  add_node_to_doc(
+    xml_doc,
+    new_node,
     nodes_nb = nodes_nb,
     parent_path = parent_path
   )

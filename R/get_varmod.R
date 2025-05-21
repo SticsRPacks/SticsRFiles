@@ -11,8 +11,7 @@
 #' @seealso `gen_varmod`
 #' @examples
 #' get_varmod(get_examples_path(file_type = "txt"))
-get_varmod <- function(workspace,
-                       file_name = "var.mod") {
+get_varmod <- function(workspace, file_name = "var.mod") {
   file_path <- file.path(workspace, file_name)
 
   if (!file.exists(file_path)) {

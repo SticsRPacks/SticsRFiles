@@ -86,7 +86,8 @@ complete_climate_paths <- function(files_path) {
   years_chr <- as.character(years)
   file_name <- strsplit(basename(files_path[1]), split = "\\.")[[1]][1]
   files_path <- file.path(
-    dirname(files_path[1]), paste0(file_name, ".", years_chr)
+    dirname(files_path[1]),
+    paste0(file_name, ".", years_chr)
   )
 
   return(files_path)

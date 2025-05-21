@@ -29,11 +29,12 @@
 #'
 #' @noRd
 #'
-gen_usms_sols_doc <- function(doc_type,
-                              xml_doc = NULL,
-                              nodes_nb = NULL,
-                              nodes_param = NULL,
-                              stics_version = "latest") {
+gen_usms_sols_doc <- function(
+    doc_type,
+    xml_doc = NULL,
+    nodes_nb = NULL,
+    nodes_param = NULL,
+    stics_version = "latest") {
   # for usms and sols files
 
   doc_types <- list()
@@ -98,9 +99,9 @@ gen_usms_sols_doc <- function(doc_type,
     return(xml_doc_out)
   }
 
-
   # Creating nodes for usms or sols
-  add_node_to_doc(xml_doc_out,
+  add_node_to_doc(
+    xml_doc_out,
     xml_nodes[[1]],
     nodes_nb = elts_nb - 1,
     parent_path = root_str

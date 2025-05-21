@@ -19,8 +19,7 @@
 #'
 #' @noRd
 #'
-get_xml_doc_example <- function(xml_name = NULL,
-                                stics_version = "latest") {
+get_xml_doc_example <- function(xml_name = NULL, stics_version = "latest") {
   # check/get version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 

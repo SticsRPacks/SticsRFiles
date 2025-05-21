@@ -33,11 +33,12 @@
 #'
 #' get_report_results(workspace = path, file_name = "mod_rapportA.sti")
 #'
-get_report_results <- function(workspace,
-                               file_name = "mod_rapport.sti",
-                               usm = NULL,
-                               var_list = NULL,
-                               usm_name = lifecycle::deprecated()) {
+get_report_results <- function(
+    workspace,
+    file_name = "mod_rapport.sti",
+    usm = NULL,
+    var_list = NULL,
+    usm_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -89,8 +90,6 @@ get_report_results <- function(workspace,
     na.strings = "",
     stringsAsFactors = FALSE
   )
-
-
 
   # If report header is present
   # otherwise column are named V1 to Vncol

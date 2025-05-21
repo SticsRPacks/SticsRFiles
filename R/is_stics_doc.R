@@ -26,8 +26,13 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
 
   if (base::is.null(doc_types)) {
     doc_types <- c(
-      "initialisations", "usms", "sols", "fichiertec",
-      "fichiersta", "fichierplt", "fichierpar",
+      "initialisations",
+      "usms",
+      "sols",
+      "fichiertec",
+      "fichiersta",
+      "fichierplt",
+      "fichierpar",
       "fichierparamgen"
     )
   }
@@ -69,7 +74,6 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   attr(ret, "type") <- root_name
   return(ret)
 }
-
 
 
 # @rdname is_stics_doc

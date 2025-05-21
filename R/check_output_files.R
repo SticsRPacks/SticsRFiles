@@ -27,8 +27,10 @@ check_output_files <- function(run_dir, usm_name = NULL) {
     usm <- usm_name
   }
   files_list <- c(
-    "modhistory.sti", paste0("mod_b", usm, ".sti"),
-    "mod_rapport.sti", paste0("mod_s", usm, ".sti")
+    "modhistory.sti",
+    paste0("mod_b", usm, ".sti"),
+    "mod_rapport.sti",
+    paste0("mod_s", usm, ".sti")
   )
   no_hist <- !file.exists(file.path(run_dir, files_list[1]))
   no_balance <- !file.exists(file.path(run_dir, files_list[2]))

@@ -46,13 +46,14 @@
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_xml <- function(param_df,
-                        file = NULL,
-                        out_dir,
-                        stics_version = "latest",
-                        param_table = lifecycle::deprecated(),
-                        sta_in_file = lifecycle::deprecated(),
-                        out_path = lifecycle::deprecated()) {
+gen_sta_xml <- function(
+    param_df,
+    file = NULL,
+    out_dir,
+    stics_version = "latest",
+    param_table = lifecycle::deprecated(),
+    sta_in_file = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_table)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -81,13 +82,11 @@ gen_sta_xml <- function(param_df,
     out_path <- out_dir # to remove when we update inside the function
   }
 
-
   xml_doc_tmpl <- NULL
 
   if (!base::is.null(sta_in_file)) {
     xml_doc_tmpl <- xmldocument(sta_in_file)
   }
-
 
   # detecting sta names column
   param_names <- names(param_table)
@@ -97,18 +96,15 @@ gen_sta_xml <- function(param_df,
   }
   sta_col <- param_names[col_id]
 
-
   xml_docs <- gen_sta_doc(
     xml_doc = xml_doc_tmpl,
     param_table = param_table[, -col_id],
     stics_version = stics_version
   )
 
-
   if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
-
 
   # Finding non NULL elements in xml_docs (i.e. no errors in doc generation)
   out_idx <- unlist(lapply(xml_docs, base::is.null))
@@ -130,7 +126,6 @@ gen_sta_xml <- function(param_df,
   if (all(out_idx)) {
     return(invisible())
   }
-
 
   # checking if out_path exists
   if (!dir.exists(out_path)) {

@@ -29,10 +29,11 @@
 #'
 #' @noRd
 #'
-get_param_bounds_xml <- function(xml_file,
-                                 param_name,
-                                 bounds_name = NULL,
-                                 output = "data.frame") {
+get_param_bounds_xml <- function(
+    xml_file,
+    param_name,
+    bounds_name = NULL,
+    output = "data.frame") {
   if (length(xml_file) > 1) {
     param_bounds <- lapply(
       xml_file,

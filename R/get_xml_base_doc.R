@@ -26,8 +26,7 @@
 #'
 #' @noRd
 #'
-get_xml_base_doc <- function(xml_type = NULL,
-                             stics_version = "latest") {
+get_xml_base_doc <- function(xml_type = NULL, stics_version = "latest") {
   # types list
   types <- c("sols", "usms", "ini", "tec", "sta")
   # returning types if no args

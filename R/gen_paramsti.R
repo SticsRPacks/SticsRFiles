@@ -18,10 +18,11 @@
 #'
 #' @noRd
 #'
-gen_paramsti <- function(workspace,
-                         par_names,
-                         par_values,
-                         file_name = "param.sti") {
+gen_paramsti <- function(
+    workspace,
+    par_names,
+    par_values,
+    file_name = "param.sti") {
   # Checking if workspace exists
   if (!dir.exists(workspace)) {
     stop(paste(workspace, ": directory does not exist !"))
@@ -46,7 +47,8 @@ gen_paramsti <- function(workspace,
   con <- file(file_path, method = "w+")
   w <- try(write(
     paste0(
-      nb_par, "\n",
+      nb_par,
+      "\n",
       paste0(sprintf("%s\n%f", par_names, par_values), collapse = "\n")
     ),
     con

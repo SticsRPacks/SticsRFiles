@@ -50,7 +50,6 @@ set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
     stop("xml_doc is not an xml_document object")
   }
 
-
   # detecting soils names column
   in_params <- names(sols_param)
   col_id <- grep("^soil", tolower(in_params))
@@ -70,7 +69,6 @@ set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
   if (!overwrite) {
     # getting soils names
     xml_sols <- as.vector(get_param_value(xml_doc, "sol"))
-
 
     ###############################################
     # TODO : see adding sols not in xml file ?
@@ -96,7 +94,6 @@ set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
     set_param_value(xml_doc, "sol", sols_param[[sol_col]])
   }
 
-
   # Managing parameter values replacement from sols_param
   # data.frame
 
@@ -107,8 +104,6 @@ set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
 
   layers_params <- grep("_[0-9]*$", in_params, value = TRUE)
   layers_params_names <- unique(gsub("_[0-9]*$", "", layers_params))
-
-
 
   for (i in 1:5) {
     for (p in layers_params_names) {

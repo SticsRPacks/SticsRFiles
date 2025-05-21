@@ -33,15 +33,16 @@
 #' @export
 #'
 
-download_usm_xl <- function(file = NULL,
-                            out_dir = tempdir(),
-                            stics_version = "latest",
-                            overwrite = FALSE,
-                            verbose = FALSE,
-                            xl_name = lifecycle::deprecated(),
-                            version_name = lifecycle::deprecated(),
-                            dest_dir = lifecycle::deprecated(),
-                            ...) {
+download_usm_xl <- function(
+    file = NULL,
+    out_dir = tempdir(),
+    stics_version = "latest",
+    overwrite = FALSE,
+    verbose = FALSE,
+    xl_name = lifecycle::deprecated(),
+    version_name = lifecycle::deprecated(),
+    dest_dir = lifecycle::deprecated(),
+    ...) {
   if (lifecycle::is_present(xl_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -70,9 +71,7 @@ download_usm_xl <- function(file = NULL,
     dest_dir <- out_dir # to remove when we update inside the function
   }
 
-
   args <- list(...)
-
 
   xl_patt <- "^inputs\\_.*(example|USMs)\\.(xls|xlsx)$"
   file_type <- "xl"
@@ -107,7 +106,9 @@ download_usm_xl <- function(file = NULL,
   exist_files <- file.exists(dest_list)
   if (!overwrite && any(exist_files)) {
     warning(paste(
-      files_list[exist_files], "already exists in ", dest_dir,
+      files_list[exist_files],
+      "already exists in ",
+      dest_dir,
       "\nConsider to set overwrite = TRUE to overwrite (it | them )"
     ))
     # filtering existing files, not copied if overwrite == FALSE
@@ -129,15 +130,14 @@ download_usm_xl <- function(file = NULL,
   }
 
   if (!all(success)) {
-    warning("Error copying files:\n", paste(src_list[!success],
-      collapse = "\n"
-    ))
+    warning(
+      "Error copying files:\n",
+      paste(src_list[!success], collapse = "\n")
+    )
   }
-
 
   return(invisible(dest_list))
 }
-
 
 
 #' @title Downloading a CSV usms data file example into a directory
@@ -168,14 +168,15 @@ download_usm_xl <- function(file = NULL,
 #' @export
 #'
 
-download_usm_csv <- function(file = NULL,
-                             out_dir = tempdir(),
-                             stics_version = "latest",
-                             overwrite = FALSE,
-                             verbose = FALSE,
-                             csv_name = lifecycle::deprecated(),
-                             version_name = lifecycle::deprecated(),
-                             dest_dir = lifecycle::deprecated()) {
+download_usm_csv <- function(
+    file = NULL,
+    out_dir = tempdir(),
+    stics_version = "latest",
+    overwrite = FALSE,
+    verbose = FALSE,
+    csv_name = lifecycle::deprecated(),
+    version_name = lifecycle::deprecated(),
+    dest_dir = lifecycle::deprecated()) {
   if (lifecycle::is_present(csv_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -203,7 +204,6 @@ download_usm_csv <- function(file = NULL,
   } else {
     dest_dir <- out_dir # to remove when we update inside the function
   }
-
 
   download_usm_xl(
     file = csv_name,

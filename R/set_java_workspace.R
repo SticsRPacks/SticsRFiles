@@ -60,9 +60,11 @@ set_java_workspace <- function(javastics, workspace) {
     add_nodes(xml_pref, n)
   } else {
     # if it's not different from the new one,
-    if (current_wd == workspace ||
-      (dirname(workspace) == javastics) &&
-        basename(workspace) == current_wd) {
+    if (
+      current_wd == workspace ||
+        (dirname(workspace) == javastics) &&
+          basename(workspace) == current_wd
+    ) {
       return()
     }
 

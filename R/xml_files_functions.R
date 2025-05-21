@@ -1,9 +1,14 @@
 get_in_files <- function(in_dir_or_files, kind) {
   files_patterns <- list(
-    ini = "_ini", sta = "_sta",
-    plt = "_plt", tec = "_tec",
-    gen = "_gen", newform = "_newform",
-    sols = "^sols", usms = "^usms", obs = "\\.obs$"
+    ini = "_ini",
+    sta = "_sta",
+    plt = "_plt",
+    tec = "_tec",
+    gen = "_gen",
+    newform = "_newform",
+    sols = "^sols",
+    usms = "^usms",
+    obs = "\\.obs$"
   )
 
   if (!kind %in% names(files_patterns)) stop("file kind error: ", kind)
@@ -16,20 +21,23 @@ get_in_files <- function(in_dir_or_files, kind) {
 
   if (dir.exists(in_dir_or_files)) {
     files_list <- list.files(
-      pattern = file_pattern, path = in_dir_or_files,
+      pattern = file_pattern,
+      path = in_dir_or_files,
       full.names = TRUE
     )
   } else {
     # files path: add grep for filtering
     files_list <- grep(
-      pattern = file_pattern, x = in_dir_or_files,
+      pattern = file_pattern,
+      x = in_dir_or_files,
       value = TRUE
     )
     exist <- file.exists(files_list)
     if (!all(exist)) {
-      warning("Some files do not exist", paste(files_list[!exist],
-        collapse = ", "
-      ))
+      warning(
+        "Some files do not exist",
+        paste(files_list[!exist], collapse = ", ")
+      )
       files_list <- files_list[exist]
     }
   }
@@ -37,9 +45,10 @@ get_in_files <- function(in_dir_or_files, kind) {
   files_list
 }
 
-get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
-                               workspace_dir,
-                               javastics_dir = NULL) {
+get_param_gen_file <- function(
+    type = c("param_gen.xml", "param_newform.xml"),
+    workspace_dir,
+    javastics_dir = NULL) {
   par_file <- file.path(workspace_dir, type)
 
   if (file.exists(par_file)) {
@@ -50,7 +59,9 @@ get_param_gen_file <- function(type = c("param_gen.xml", "param_newform.xml"),
   if (is.null(javastics_dir)) {
     warning(
       "JavaSTICS path must be given as input argument\n",
-      type, " has not been found in ", workspace_dir
+      type,
+      " has not been found in ",
+      workspace_dir
     )
     return()
   }
@@ -89,7 +100,6 @@ to_xml_version <- function(stics_version) {
 
   if (grepl(pattern = "\\.$", x = stics_version)) err <- TRUE
 
-
   if (err) {
     warning("Version must be X.Y, or VX.Y, or vX.Y")
     return()
@@ -101,8 +111,10 @@ to_xml_version <- function(stics_version) {
 
 # set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
 # overwrite = FALSE) {
-set_xml_file_version <- function(xml_file_or_doc, new_version = "V10.0",
-                                 overwrite = FALSE) {
+set_xml_file_version <- function(
+    xml_file_or_doc,
+    new_version = "V10.0",
+    overwrite = FALSE) {
   # Getting xml_document object
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
@@ -150,10 +162,9 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
     param_gen_doc <- get_xml_doc(param_gen_file)
   }
   # Using markers of versions
-  codesnow <- get_param_value(param_gen_doc,
-    param_name = "codesnow"
-  )
-  tmin_mineralisation <- get_param_value(param_gen_doc,
+  codesnow <- get_param_value(param_gen_doc, param_name = "codesnow")
+  tmin_mineralisation <- get_param_value(
+    param_gen_doc,
     param_name = "tmin_mineralisation"
   )
 
@@ -185,11 +196,14 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 # TODO: see *xml_file_version functions ...
 # check_xml_stics_version <- function(xml_file_or_doc, version,
 # param_gen_file = NULL) {
-check_xml_file_version <- function(xml_file_or_doc, stics_version,
-                                   param_gen_file = NULL) {
+check_xml_file_version <- function(
+    xml_file_or_doc,
+    stics_version,
+    param_gen_file = NULL) {
   # xml_version <- get_xml_stics_version(xml_file_or_doc,
   # param_gen_file = param_gen_file)
-  xml_version <- get_xml_file_version(xml_file_or_doc,
+  xml_version <- get_xml_file_version(
+    xml_file_or_doc,
     param_gen_file = param_gen_file
   )
 
@@ -208,8 +222,12 @@ check_xml_file_version <- function(xml_file_or_doc, stics_version,
 get_xml_doc <- function(xml_file_or_doc) {
   type_id <- c("character", "xml_document") %in% class(xml_file_or_doc)
 
-  if (!any(type_id)) stop("xml_file_or_doc: not a valid input,
-                          must be a file path or an xml_document object!")
+  if (!any(type_id)) {
+    stop(
+      "xml_file_or_doc: not a valid input,
+                          must be a file path or an xml_document object!"
+    )
+  }
 
   if (type_id[1] && !file.exists(xml_file_or_doc)) {
     stop(

@@ -32,11 +32,12 @@
 #'
 #' @noRd
 #'
-get_javastics_cmd <- function(javastics,
-                              java_cmd = "java",
-                              type = c("generate", "run"),
-                              workspace = NULL,
-                              verbose = TRUE) {
+get_javastics_cmd <- function(
+    javastics,
+    java_cmd = "java",
+    type = c("generate", "run"),
+    workspace = NULL,
+    verbose = TRUE) {
   # detecting JavaSTICS command exe name from javastics path
   javastics_cmd <- file.path(javastics, "JavaSticsCmd.exe")
   cmd <- check_javastics_cmd(
@@ -105,18 +106,23 @@ get_javastics_cmd <- function(javastics,
 #'
 #' @noRd
 #'
-check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
-                                java_cmd = "java",
-                                verbose = TRUE) {
+check_javastics_cmd <- function(
+    javastics_cmd = "JavaSticsCmd.exe",
+    java_cmd = "java",
+    verbose = TRUE) {
   if (is_windows()) {
-    help_test <- system2(javastics_cmd,
+    help_test <- system2(
+      javastics_cmd,
       c("--help"),
-      stdout = TRUE, stderr = TRUE
+      stdout = TRUE,
+      stderr = TRUE
     )
   } else {
-    help_test <- system2(java_cmd,
+    help_test <- system2(
+      java_cmd,
       c("-jar", javastics_cmd, "--help"),
-      stdout = TRUE, stderr = TRUE
+      stdout = TRUE,
+      stderr = TRUE
     )
   }
 
@@ -126,7 +132,8 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
       pattern = "Invalid option entered",
       help_test
     )
-  ) > 0
+  ) >
+    0
 
   if (!is_windows()) {
     ver <- get_java_version(java_cmd = java_cmd)
@@ -142,9 +149,11 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
       )
     }
 
-    if (is.null(status) &&
-      !help_status &&
-      ver > 1.8) {
+    if (
+      is.null(status) &&
+        !help_status &&
+        ver > 1.8
+    ) {
       stop(
         "The given or default java version ",
         ver,
@@ -163,7 +172,6 @@ check_javastics_cmd <- function(javastics_cmd = "JavaSticsCmd.exe",
     verbose_cmd = verbose_cmd
   )
 }
-
 
 
 #' @title Getting the java virtual machine version
