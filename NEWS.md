@@ -1,4 +1,4 @@
-# SticsRFiles 1.6.0 _2025-05-21_
+# SticsRFiles 1.6.0 _2025-05-26_
 * FUNCTIONS
   * convert_xml2txt allows to convert sols.xml file to text files
   * Some useless functions have been removed and functions help updated
