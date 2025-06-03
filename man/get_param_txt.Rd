@@ -177,7 +177,7 @@ get_param_txt(workspace = path, param = "Hinitf", value_id = c(1, 3))
 get_param_txt(workspace = path, param = "epc", value_id = c(1, 3))
 
 \dontrun{
-# Read the initialisation file (ficini.txt):
+# Read the initialization file (ficini.txt):
 library(SticsRFiles)
 path <- file.path(get_examples_path(file_type = "txt"), "ficini.txt")
 get_ini_txt(path)

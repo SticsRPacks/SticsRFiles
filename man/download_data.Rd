@@ -25,7 +25,7 @@ The path of the folder data have been downloaded into
 \description{
 Download locally the example data from the
 \href{https://github.com/SticsRPacks/data}{data repository} in the SticsRPacks
-organisation.
+organization.
 }
 \examples{
 

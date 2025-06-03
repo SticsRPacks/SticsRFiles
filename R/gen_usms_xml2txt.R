@@ -24,11 +24,11 @@
 #' per USM, FALSE if USM files are generated in the target_path
 #' (only useful for usms_list of size one)
 #' @param java_cmd For unix like systems, the java virtual machine command
-#' name or executable path. Usefull only if the JavaSTICS command line
+#' name or executable path. Useful only if the JavaSTICS command line
 #' is used for generating files. "java" is the default system command,
 #' but a full path to a java executable (other than the default one)
 #' may be given
-#' @param java_converter logical TRUE for using JavaStics command
+#' @param java_converter logical TRUE for using JavaSTICS command
 #' (a JavaSTICS path must be set in the function inputs), FALSE otherwise
 #' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
 #' is no longer supported, use `javastics` instead.
@@ -64,23 +64,25 @@
 #'
 #'
 
-gen_usms_xml2txt <- function(javastics = NULL,
-                             workspace = NULL,
-                             out_dir = NULL,
-                             usm = c(),
-                             stics_version = "latest",
-                             verbose = TRUE,
-                             dir_per_usm_flag = TRUE,
-                             java_cmd = "java",
-                             java_converter = FALSE,
-                             javastics_path = lifecycle::deprecated(),
-                             workspace_path = lifecycle::deprecated(),
-                             target_path = lifecycle::deprecated(),
-                             usms_list = lifecycle::deprecated()) {
+gen_usms_xml2txt <- function(
+    javastics = NULL,
+    workspace = NULL,
+    out_dir = NULL,
+    usm = c(),
+    stics_version = "latest",
+    verbose = TRUE,
+    dir_per_usm_flag = TRUE,
+    java_cmd = "java",
+    java_converter = FALSE,
+    javastics_path = lifecycle::deprecated(),
+    workspace_path = lifecycle::deprecated(),
+    target_path = lifecycle::deprecated(),
+    usms_list = lifecycle::deprecated()) {
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_usms_xml2txt(javastics_path)",
+      "1.0.0",
+      "gen_usms_xml2txt(javastics_path)",
       "gen_usms_xml2txt(javastics)"
     )
   } else {
@@ -89,7 +91,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
   # workspace_path
   if (lifecycle::is_present(workspace_path)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_usms_xml2txt(workspace_path)",
+      "1.0.0",
+      "gen_usms_xml2txt(workspace_path)",
       "gen_usms_xml2txt(workspace)"
     )
   } else {
@@ -104,7 +107,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
   # target_path
   if (lifecycle::is_present(target_path)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_usms_xml2txt(target_path)",
+      "1.0.0",
+      "gen_usms_xml2txt(target_path)",
       "gen_usms_xml2txt(out_dir)"
     )
   } else {
@@ -113,7 +117,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
   # usms_list
   if (lifecycle::is_present(usms_list)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_usms_xml2txt(usms_list)",
+      "1.0.0",
+      "gen_usms_xml2txt(usms_list)",
       "gen_usms_xml2txt(usm)"
     )
   } else {
@@ -167,11 +172,9 @@ gen_usms_xml2txt <- function(javastics = NULL,
       get_param_value(usms_doc, param_name = "flai")$flai
     )
 
-
   dominance <- get_param_value(usms_doc, param_name = "dominance")$dominance
 
   nbplantes <- get_param_value(usms_doc, param_name = "nbplantes")$nbplantes
-
 
   flai_usms <- vector(mode = "list", length = length(full_usms_list))
   names(flai_usms) <- full_usms_list
@@ -237,10 +240,14 @@ gen_usms_xml2txt <- function(javastics = NULL,
         ),
         use.names = FALSE
       )
-    miss_files_mess <- paste(sprintf(
-      fmt = "%s: %s \n", usms_list[!all_files_exist],
-      unknown_files
-    ), collapse = "")
+    miss_files_mess <- paste(
+      sprintf(
+        fmt = "%s: %s \n",
+        usms_list[!all_files_exist],
+        unknown_files
+      ),
+      collapse = ""
+    )
 
     mess_length <- sum(nchar(miss_files_mess)) + 100L
     if (options("warning.length")$warning.length < mess_length) {
@@ -258,7 +265,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
 
   if (java_converter) {
     # Getting javastics cmd line
-    cmd_list <- get_javastics_cmd(javastics_path,
+    cmd_list <- get_javastics_cmd(
+      javastics_path,
       java_cmd = java_cmd,
       type = "generate",
       workspace = workspace_path
@@ -283,12 +291,10 @@ gen_usms_xml2txt <- function(javastics = NULL,
     dir_per_usm_flag <- TRUE
   }
 
-
   # For storing if all files copy were successful or not
   # for each usm
   global_copy_status <- rep(FALSE, usms_number)
   obs_copy_status <- lai_copy_status <- global_copy_status
-
 
   # Full list of the files to copy
 
@@ -349,8 +355,10 @@ gen_usms_xml2txt <- function(javastics = NULL,
     if (java_converter) {
       # Generating text files
       ret <- system2(
-        command = cmd, args = paste(cmd_args, usm_name),
-        stdout = TRUE, stderr = TRUE
+        command = cmd,
+        args = paste(cmd_args, usm_name),
+        stdout = TRUE,
+        stderr = TRUE
       )
       # Get info returned by system2 for detecting errors
       exec_status[i] <- !any(grepl(pattern = "ERROR", ret))
@@ -366,7 +374,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
       if (dir_per_usm_flag) {
         copy_status <- all(file.copy(
           from = files_path[file.exists(files_path)],
-          to = usm_path, overwrite = TRUE
+          to = usm_path,
+          overwrite = TRUE
         ))
       }
     } else {
@@ -426,14 +435,16 @@ gen_usms_xml2txt <- function(javastics = NULL,
       }
 
       # generating new_travail.usm
-      gen_files_status[f + 1] <- gen_new_travail(usm_data,
+      gen_files_status[f + 1] <- gen_new_travail(
+        usm_data,
         usm = usm_name,
         workspace = workspace_path,
         out_dir = usm_path
       )
 
       # generating climat.txt file
-      gen_files_status[f + 2] <- gen_climate(clim_files_path,
+      gen_files_status[f + 2] <- gen_climate(
+        clim_files_path,
         out_dir = usm_path
       )
 
@@ -450,7 +461,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
     if (any(to_copy_idx)) {
       out_copy_status <- all(file.copy(
         from = out_files_path[to_copy_idx],
-        to = usm_path, overwrite = TRUE
+        to = usm_path,
+        overwrite = TRUE
       ))
     } else {
       out_copy_status <- TRUE
@@ -468,12 +480,16 @@ gen_usms_xml2txt <- function(javastics = NULL,
     if (file.exists(obs_path)) {
       obs_copy_status[i] <- file.copy(
         from = obs_path,
-        to = usm_path, overwrite = TRUE
+        to = usm_path,
+        overwrite = TRUE
       )
     } else {
       if (verbose) {
-        cli::cli_alert_warning(paste0("Obs file not found for USM", "
-                                      {.val {usm_name}}: {.file {obs_path}}"))
+        cli::cli_alert_warning(paste0(
+          "Obs file not found for USM",
+          "
+                                      {.val {usm_name}}: {.file {obs_path}}"
+        ))
       }
     }
 
@@ -483,7 +499,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
         if (file.exists(x)) {
           lai_copy_status[i] <- file.copy(
             from = x,
-            to = usm_path, overwrite = TRUE
+            to = usm_path,
+            overwrite = TRUE
           )
         } else {
           if (verbose) {
@@ -518,8 +535,6 @@ gen_usms_xml2txt <- function(javastics = NULL,
     ))
   }
 
-
-
   # Message about execution errors
   if (!all(exec_status)) {
     warning(
@@ -531,7 +546,8 @@ gen_usms_xml2txt <- function(javastics = NULL,
   # Returning a list of created directories and files copy status
   # for each directory ( FALSE if any files copy error )
   return(invisible(list(
-    usms_path = usms_path, files = basename(files_path),
+    usms_path = usms_path,
+    files = basename(files_path),
     copy_status = global_copy_status,
     obs_copy_status = obs_copy_status,
     lai_copy_status = lai_copy_status

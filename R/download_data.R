@@ -2,7 +2,7 @@
 #'
 #' @description Download locally the example data from the
 #' [data repository](https://github.com/SticsRPacks/data) in the SticsRPacks
-#' organisation.
+#' organization.
 #'
 #' @param out_dir Path of the directory where to download the data
 #' @param example_dirs List of use case directories names (optional)

@@ -43,12 +43,13 @@
 #'
 #' @noRd
 #'
-set_param_value <- function(xml_doc,
-                            param_name,
-                            param_value,
-                            parent_name = NULL,
-                            parent_sel_attr = NULL,
-                            ...) {
+set_param_value <- function(
+    xml_doc,
+    param_name,
+    param_value,
+    parent_name = NULL,
+    parent_sel_attr = NULL,
+    ...) {
   # Calling the for several parameters
   param_nb <- length(param_name)
 
@@ -61,7 +62,6 @@ set_param_value <- function(xml_doc,
     return(invisible(FALSE))
   }
 
-
   # Manage ids and show_xpath and remove them from the list
   ids <- NULL
   show_xpath <- FALSE
@@ -69,7 +69,6 @@ set_param_value <- function(xml_doc,
   # ... for getting : ids, show_xpath arguments
   dot_args <- list(...)
   dot_names <- names(dot_args)
-
 
   # Getting ids and show_xpath
   if ("ids" %in% dot_names) ids <- dot_args$ids
@@ -79,7 +78,8 @@ set_param_value <- function(xml_doc,
   if (param_nb > 1) {
     ret <- vector("logical", param_nb)
     for (p in 1:param_nb) {
-      ret[p] <- set_param_value(xml_doc,
+      ret[p] <- set_param_value(
+        xml_doc,
         param_name = param_name[p],
         param_value = param_value[[p]],
         parent_name = parent_name,
@@ -106,8 +106,10 @@ set_param_value <- function(xml_doc,
   }
 
   param_type <- get_param_type(
-    xml_doc, param_name,
-    parent_name, parent_sel_attr
+    xml_doc,
+    param_name,
+    parent_name,
+    parent_sel_attr
   ) # , ids)
   type <- param_type$type
   xpath <- param_type$xpath
@@ -115,7 +117,6 @@ set_param_value <- function(xml_doc,
   if (show_xpath) {
     message(xpath)
   }
-
 
   if (!is.element(type, param_types)) {
     warning(
@@ -134,7 +135,6 @@ set_param_value <- function(xml_doc,
   # add functions to return a tableau node or an intervention node
   # according to STICS version : get_xml_node(file, node_name) from
   # xml examples files
-
 
   values_nb <- length(param_value)
   nodes_nb <- length(get_nodes(xml_doc, xpath))

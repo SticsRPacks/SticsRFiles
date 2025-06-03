@@ -27,12 +27,13 @@
 #'
 #' @noRd
 #'
-gen_ini_doc <- function(xml_doc = NULL,
-                        param_table = NULL,
-                        crop_tag = "Crop",
-                        params_desc = NULL,
-                        stics_version = "latest",
-                        check_names = TRUE) {
+gen_ini_doc <- function(
+    xml_doc = NULL,
+    param_table = NULL,
+    crop_tag = "Crop",
+    params_desc = NULL,
+    stics_version = "latest",
+    check_names = TRUE) {
   # check/get version
   stics_version <- get_xml_stics_version(
     stics_version = stics_version,
@@ -49,7 +50,6 @@ gen_ini_doc <- function(xml_doc = NULL,
     return(xml_doc)
   }
 
-
   # TODO : replace with get_values_from_table
   # TODO : get_params_from_table to be completed with plant specificities crop
   # tag see treatment inside next block
@@ -63,7 +63,6 @@ gen_ini_doc <- function(xml_doc = NULL,
     base_params <- param_names[!grepl("[0-9]$", param_names)]
 
     plante_params <- param_names[grep(crop_regex, param_names)]
-
 
     other_params <- setdiff(param_names, c(plante_params, base_params))
     other_params_pref <- unique(gsub(layer_regex, "", other_params))
@@ -102,9 +101,7 @@ gen_ini_doc <- function(xml_doc = NULL,
       function(x) {
         gen_ini_doc(
           xml_doc = clone_xml_doc(xml_doc),
-          param_table = as.data.frame(t(x),
-            stringsAsFactors = FALSE
-          ),
+          param_table = as.data.frame(t(x), stringsAsFactors = FALSE),
           params_desc = params_desc,
           stics_version = stics_version,
           check_names = FALSE
@@ -114,11 +111,12 @@ gen_ini_doc <- function(xml_doc = NULL,
     return(xml_docs)
   }
 
-
   # Filtering parameters not to be set
   # i.e. : 999 or NA
-  par_idx <- as.vector(!grepl(pattern = "^999", param_table) &
-    !is.na(param_table))
+  par_idx <- as.vector(
+    !grepl(pattern = "^999", param_table) &
+      !is.na(param_table)
+  )
 
   # exiting not any parameters values to set
   if (!any(par_idx)) {
@@ -193,7 +191,6 @@ gen_ini_doc <- function(xml_doc = NULL,
       }
     }
   }
-
 
   return(invisible(xml_doc))
 }

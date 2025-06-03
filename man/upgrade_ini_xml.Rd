@@ -16,7 +16,7 @@ upgrade_ini_xml(
 )
 }
 \arguments{
-\item{file}{Path of an initialisation (*_ini.xml) file or a vector of}
+\item{file}{Path of an initialization (*_ini.xml) file or a vector of}
 
 \item{out_dir}{Output directory path of the generated files}
 

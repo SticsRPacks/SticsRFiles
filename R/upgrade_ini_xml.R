@@ -1,6 +1,6 @@
 #' Upgrading _ini.xml file(s) to a newer version
 #'
-#' @param file Path of an initialisation (*_ini.xml) file or a vector of
+#' @param file Path of an initialization (*_ini.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
@@ -30,14 +30,15 @@
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
 #'
-upgrade_ini_xml <- function(file,
-                            out_dir,
-                            param_gen_file,
-                            stics_version = "V9.2",
-                            target_version = "V10.0",
-                            check_version = TRUE,
-                            overwrite = FALSE,
-                            ...) {
+upgrade_ini_xml <- function(
+    file,
+    out_dir,
+    param_gen_file,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE,
+    ...) {
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -54,11 +55,11 @@ upgrade_ini_xml <- function(file,
 
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file[1],
+    file_version <- check_xml_file_version(
+      file[1],
       stics_version,
       param_gen_file = param_gen_file
     )
-
 
     if (!file_version && is.null(param_gen_file)) {
       stop("param_gen_file must be provided! ")
@@ -66,9 +67,12 @@ upgrade_ini_xml <- function(file,
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file[1]
+        attr(file_version, "version"),
+        " \n",
+        file[1]
       )
     }
 
@@ -76,16 +80,16 @@ upgrade_ini_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
-
 
     # for checking only once when multiple files are treated !
     check_version <- FALSE
   }
-
 
   # Treating a files list
   if (length(file) > 1) {
@@ -104,12 +108,12 @@ upgrade_ini_xml <- function(file,
     return(invisible())
   }
 
-
   # Loading the old xml file
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc,
+  set_xml_file_version(
+    old_doc,
     new_version = target_version,
     overwrite = overwrite
   )
@@ -127,11 +131,9 @@ upgrade_ini_xml <- function(file,
   }))
   lapply(rm_nodes, function(x) XML::removeNodes(x))
 
-
   # Adding new option node
   # including old nodes masec0,QNplante0,restemp0
   # (previously named resperennes0)
-
 
   str_1 <- paste0(
     '<option choix="2" nom="Simulation of Nitrogen and Carbon',
@@ -164,11 +166,11 @@ upgrade_ini_xml <- function(file,
   # setting values for restructured nodes
   # resperennes0 became restemp0
   rm_names <- c("masec0", "QNplante0", "restemp0")
-  set_param_value(old_doc,
+  set_param_value(
+    old_doc,
     param_name = as.list(rm_names),
     param_value = old_values
   )
-
 
   if (is.null(get_nodes(old_doc, "//snow"))) {
     # Adding snow node
@@ -210,12 +212,9 @@ upgrade_ini_xml <- function(file,
   current_node <- get_nodes(old_doc, path = "//NH4init")[[1]]
   XML::xmlName(current_node) <- "NH4initf"
 
-
   # Writing to file _ini.xml
   out_ini <- file.path(out_dir, basename(file))
   write_xml_file(old_doc, out_ini, overwrite)
-
-
 
   XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))

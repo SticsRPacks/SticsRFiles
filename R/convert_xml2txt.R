@@ -30,15 +30,16 @@
 #'
 #' @export
 #'
-convert_xml2txt <- function(file,
-                            plant_id = 1,
-                            soil_name = NULL,
-                            out_dir = NULL,
-                            save_as = NULL,
-                            stics_version = "latest",
-                            xml_file = lifecycle::deprecated(),
-                            plt_num = lifecycle::deprecated(),
-                            out_file = lifecycle::deprecated()) {
+convert_xml2txt <- function(
+    file,
+    plant_id = 1,
+    soil_name = NULL,
+    out_dir = NULL,
+    save_as = NULL,
+    stics_version = "latest",
+    xml_file = lifecycle::deprecated(),
+    plt_num = lifecycle::deprecated(),
+    out_file = lifecycle::deprecated()) {
   if (lifecycle::is_present(xml_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -70,24 +71,43 @@ convert_xml2txt <- function(file,
 
   # Defining which xsl file to use according to the input xml file
   xsl_files <- c(
-    "ini2txt.xsl", "sol2txt.xsl", "xml2txt.xsl", "xml2txt.xsl",
-    "xml2txt.xsl", "xml2txt.xsl", "xml2txt.xsl"
+    "ini2txt.xsl",
+    "sol2txt.xsl",
+    "xml2txt.xsl",
+    "xml2txt.xsl",
+    "xml2txt.xsl",
+    "xml2txt.xsl",
+    "xml2txt.xsl"
   )
   names(xsl_files) <- c(
-    "initialisations", "sols", "fichierplt", "fichiertec",
-    "fichiersta", "fichierparamgen", "fichierpar"
+    "initialisations",
+    "sols",
+    "fichierplt",
+    "fichiertec",
+    "fichiersta",
+    "fichierparamgen",
+    "fichierpar"
   )
   # output text file names
   files_names <- list(
-    "ficini.txt", "param.sol", list("ficplt1.txt", "ficplt2.txt"),
-    list("fictec1.txt", "fictec2.txt"), "station.txt", "tempoparv6.sti",
+    "ficini.txt",
+    "param.sol",
+    list("ficplt1.txt", "ficplt2.txt"),
+    list("fictec1.txt", "fictec2.txt"),
+    "station.txt",
+    "tempoparv6.sti",
     "tempopar.sti"
   )
 
   # Using tags from in files names for the xml file type identification
   tags <- list(
-    "_ini\\.xml", "sols\\.xml", "_plt\\.xml",
-    "_tec\\.xml", "_sta\\.xml", "_newform\\.xml", "_gen\\.xml"
+    "_ini\\.xml",
+    "sols\\.xml",
+    "_plt\\.xml",
+    "_tec\\.xml",
+    "_sta\\.xml",
+    "_newform\\.xml",
+    "_gen\\.xml"
   )
   idx <- which(unlist(lapply(tags, function(x) grepl(x, xml_file))))
   calc_name <- length(idx) > 0
@@ -137,7 +157,8 @@ convert_xml2txt <- function(file,
 
     if (!soil_name %in% soils_names) {
       stop(paste(
-        "Soil name ", soil_name,
+        "Soil name ",
+        soil_name,
         " not found in sols.xml file !"
       ))
     }

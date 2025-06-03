@@ -24,11 +24,12 @@
 #' @noRd
 #'
 # TODO: under construction !!!!!!!!!!!!!!!!!
-get_xml_base_node <- function(file_tag, form_name = NULL,
-                              stics_version = "latest") {
+get_xml_base_node <- function(
+    file_tag,
+    form_name = NULL,
+    stics_version = "latest") {
   # check/get STICS version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
-
 
   files_tags <- c("usms", "sols", "tec")
   node_names <- c("usm", "sol", "intervention")
@@ -53,7 +54,6 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
   formalism_names$usms <- c()
   formalism_names$sols <- c()
 
-
   if (!nargs()) {
     return(list(
       files_tags = files_tags,
@@ -63,8 +63,6 @@ get_xml_base_node <- function(file_tag, form_name = NULL,
       form_names = formalism_names
     ))
   }
-
-
 
   # see if needed: plt -> cultivars ?
 

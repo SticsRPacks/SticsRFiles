@@ -18,7 +18,6 @@
 #' @noRd
 #'
 
-
 get_daily_results <- function(...) {
   lifecycle::deprecate_warn(
     "1.0.0",
@@ -90,18 +89,19 @@ get_daily_results <- function(...) {
 #'
 #' @export
 #'
-get_sim <- function(workspace,
-                    usm = NULL,
-                    var = NULL,
-                    dates = NULL,
-                    usms_file = NULL,
-                    javastics = NULL,
-                    verbose = TRUE,
-                    usm_name = lifecycle::deprecated(),
-                    var_list = lifecycle::deprecated(),
-                    dates_list = lifecycle::deprecated(),
-                    usms_filepath = lifecycle::deprecated(),
-                    javastics_path = lifecycle::deprecated()) {
+get_sim <- function(
+    workspace,
+    usm = NULL,
+    var = NULL,
+    dates = NULL,
+    usms_file = NULL,
+    javastics = NULL,
+    verbose = TRUE,
+    usm_name = lifecycle::deprecated(),
+    var_list = lifecycle::deprecated(),
+    dates_list = lifecycle::deprecated(),
+    usms_filepath = lifecycle::deprecated(),
+    javastics_path = lifecycle::deprecated()) {
   # Managing deprecated arguments
   # usm_name
   if (lifecycle::is_present(usm_name)) {
@@ -154,12 +154,15 @@ get_sim <- function(workspace,
     javastics_path <- javastics # to remove when we update inside the function
   }
 
-
-
-
   res <- get_file(
-    workspace, usm_name, var_list, dates_list, usms_filepath,
-    javastics_path, verbose, "sim"
+    workspace,
+    usm_name,
+    var_list,
+    dates_list,
+    usms_filepath,
+    javastics_path,
+    verbose,
+    "sim"
   )
 
   # Testing if results list is not empty

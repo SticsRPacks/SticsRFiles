@@ -42,7 +42,6 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
       }
     )
 
-
     return(names)
   }
 
@@ -52,14 +51,10 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
   # If no parameter name is given
   if (base::is.null(name)) name <- get_param_names(xml_doc)
 
-
   # recursive call for a parameter name list
   if (length(name) > 1) {
     form_list <- lapply(name, function(x) {
-      get_param_formalisms(xml_doc,
-        x,
-        form_only = form_only
-      )
+      get_param_formalisms(xml_doc, x, form_only = form_only)
     })
     # if no formalism
     if (all(unlist(lapply(form_list, base::is.null)))) {
@@ -79,14 +74,12 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
     return(values)
   }
 
-
   # case : param name as value of @nomParam attribute
   x_path <- paste0("//*[@nomParam=\"", name, "\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
   if (!all(base::is.null(values)) && !all(values == "none")) {
     return(values)
   }
-
 
   return(values)
 }
@@ -106,7 +99,6 @@ param_formalism_elt <- function(xml_doc, xpath, name) {
     }
     return(values)
   }
-
 
   # Just for an unnamed vector
   names(values[[1]]) <- NULL
