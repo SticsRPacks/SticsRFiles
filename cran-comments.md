@@ -1,5 +1,6 @@
 ## R CMD check results
-Duration: 1m 39.9s
+── R CMD check results ───────────────────────────────────────────── SticsRFiles 1.6.0 ────
+Duration: 1m 22.8s
 
 ❯ checking for unstated dependencies in examples ... OK
    WARNING
