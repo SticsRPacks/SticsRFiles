@@ -32,18 +32,20 @@
 #'
 #' @export
 #'
-gen_varmod <- function(workspace,
-                       var,
-                       append = FALSE,
-                       file_name = "var.mod",
-                       stics_version = "latest",
-                       force = FALSE,
-                       var_names = lifecycle::deprecated(),
-                       version = lifecycle::deprecated()) {
+gen_varmod <- function(
+    workspace,
+    var,
+    append = FALSE,
+    file_name = "var.mod",
+    stics_version = "latest",
+    force = FALSE,
+    var_names = lifecycle::deprecated(),
+    version = lifecycle::deprecated()) {
   # var_names
   if (lifecycle::is_present(var_names)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_varmod(var_names)",
+      "1.0.0",
+      "gen_varmod(var_names)",
       "gen_varmod(var)"
     )
   } else {
@@ -56,14 +58,13 @@ gen_varmod <- function(workspace,
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_varmod(version)",
+      "1.0.0",
+      "gen_varmod(version)",
       "gen_varmod(stics_version)"
     )
   } else {
     version <- stics_version # to remove when we update inside the function
   }
-
-
 
   # Checking if workspace exists
   if (!dir.exists(workspace)) {
@@ -83,7 +84,6 @@ gen_varmod <- function(workspace,
 
   # Check if the variable exist:
   var_exist <- is_stics_var(var_names, version)
-
 
   if (any(!var_exist) && isFALSE(force)) {
     var_names <- var_names[var_exist]

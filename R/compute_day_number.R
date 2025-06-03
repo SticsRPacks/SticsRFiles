@@ -60,9 +60,10 @@ is_leap_year <- function(year, integer = FALSE) {
 #' compute_day_from_date(date = dates, start_year = 2008)
 #'
 #' @export
-compute_day_from_date <- function(date,
-                                  start_year = NULL,
-                                  start_date = lifecycle::deprecated()) {
+compute_day_from_date <- function(
+    date,
+    start_year = NULL,
+    start_date = lifecycle::deprecated()) {
   # In case of several input dates
   if (length(date) > 1) {
     out <- unlist(
@@ -113,8 +114,11 @@ compute_day_from_date <- function(date,
   # Impossible case
   if (start_year > date_year) {
     stop(
-      "The start year ", start_year,
-      " is greater than the date year ", date_year, "!"
+      "The start year ",
+      start_year,
+      " is greater than the date year ",
+      date_year,
+      "!"
     )
   }
 
@@ -123,7 +127,10 @@ compute_day_from_date <- function(date,
   leap_year_number <- sum(is_leap_year(years, integer = TRUE))
 
   # Calculating the day number over years
-  return(365 * (length(years) - leap_year_number) +
-    366 * leap_year_number +
-    day_of_year)
+  return(
+    365 *
+      (length(years) - leap_year_number) +
+      366 * leap_year_number +
+      day_of_year
+  )
 }

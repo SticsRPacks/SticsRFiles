@@ -20,12 +20,16 @@
 #'
 #' get_examples_path(file_type = "csv", stics_version = "V8.5")
 #'
-get_examples_path <- function(file_type, stics_version = "latest",
-                              overwrite = FALSE,
-                              version_name = lifecycle::deprecated()) {
+get_examples_path <- function(
+  file_type,
+  stics_version = "latest",
+  overwrite = FALSE,
+  version_name = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(version_name)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "get_examples_path(version_name)",
+      "1.0.0",
+      "get_examples_path(version_name)",
       "get_examples_path(stics_version)"
     )
   } else {
@@ -68,7 +72,8 @@ get_examples_path <- function(file_type, stics_version = "latest",
     stop(
       "Not any data in examples for ",
       paste(file_type[is_na_dirs], collapse = ", "),
-      " and version ", version_name
+      " and version ",
+      version_name
     )
   }
 
@@ -86,7 +91,8 @@ get_examples_path <- function(file_type, stics_version = "latest",
     if (base_path == "") {
       examples_path[i] <- ""
     } else {
-      examples_path[i] <- normalizePath(file.path(base_path, version_dirs[i]),
+      examples_path[i] <- normalizePath(
+        file.path(base_path, version_dirs[i]),
         winslash = "/",
         mustWork = FALSE
       )
@@ -109,14 +115,15 @@ get_examples_path <- function(file_type, stics_version = "latest",
 }
 
 # TODO: evaluate if useful ?
-list_examples_files <- function(file_type,
-                                version_name = "latest",
-                                full_names = TRUE) {
+list_examples_files <- function(
+  file_type,
+  version_name = "latest",
+  full_names = TRUE
+) {
   examples_path <- get_examples_path(
     file_type = file_type,
     stics_version = version_name
   )
-
 
   files_list <- list.files(
     pattern = "\\.[a-zA-Z]+$",
@@ -130,8 +137,15 @@ list_examples_files <- function(file_type,
 
 get_examples_types <- function() {
   file_types <- c(
-    "csv", "obs", "sti", "txt", "xml", "xl", "xml_tmpl",
-    "xml_param", "xsl"
+    "csv",
+    "obs",
+    "sti",
+    "txt",
+    "xml",
+    "xl",
+    "xml_tmpl",
+    "xml_param",
+    "xsl"
   )
   return(file_types)
 }
@@ -152,11 +166,10 @@ get_examples_types <- function() {
 #'
 # @examples
 unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
-  ex_path <- system.file("extdata",
-    package = "SticsRFiles"
-  )
+  ex_path <- system.file("extdata", package = "SticsRFiles")
 
-  dir_path <- normalizePath(file.path(tempdir(), files_type),
+  dir_path <- normalizePath(
+    file.path(tempdir(), files_type),
     winslash = "/",
     mustWork = FALSE
   )
@@ -182,9 +195,9 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 
 
 #' Copy mod, obs, lai, and weather data files
-#' @param workspace JavaStics xml workspace path
+#' @param workspace JavaSTICS xml workspace path
 #' @param file_type file type to copy among "mod", "obs", "clim"
-#' @param javastics JavaStics folder path (Optional)
+#' @param javastics JavsSTICS folder path (Optional)
 #' @param out_dir   Output directry path
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
@@ -196,12 +209,14 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 #' @keywords internal
 #' @noRd
 #'
-workspace_files_copy <- function(workspace,
-                                 file_type = NULL,
-                                 javastics = NULL,
-                                 out_dir,
-                                 overwrite = FALSE,
-                                 verbose = FALSE) {
+workspace_files_copy <- function(
+  workspace,
+  file_type = NULL,
+  javastics = NULL,
+  out_dir,
+  overwrite = FALSE,
+  verbose = FALSE
+) {
   # files types vector and associated regex
   file_types <- c("mod", "obs", "lai", "meteo")
   file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")
@@ -253,7 +268,8 @@ workspace_files_copy <- function(workspace,
     if (file_type == "mod") {
       if (is.null(javastics)) {
         warning(paste(
-          "No", "mod",
+          "No",
+          "mod",
           "files in the source workspace",
           "the Javastics path must be given",
           "as input for copying files from it"
@@ -261,7 +277,9 @@ workspace_files_copy <- function(workspace,
       }
 
       files_list <- list.files(
-        path = file.path(javastics, "example",
+        path = file.path(
+          javastics,
+          "example",
           full.names = TRUE,
           pattern = patt
         )

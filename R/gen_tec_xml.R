@@ -57,14 +57,15 @@
 #' @export
 #'
 
-gen_tec_xml <- function(param_df = NULL,
-                        file = NULL,
-                        out_dir,
-                        stics_version = "latest",
-                        na_values = NA,
-                        param_table = lifecycle::deprecated(),
-                        tec_in_file = lifecycle::deprecated(),
-                        out_path = lifecycle::deprecated()) {
+gen_tec_xml <- function(
+    param_df = NULL,
+    file = NULL,
+    out_dir,
+    stics_version = "latest",
+    na_values = NA,
+    param_table = lifecycle::deprecated(),
+    tec_in_file = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   # TODO: refactor with gen_sta_file, gen_ini_file : same code
 
   if (lifecycle::is_present(param_table)) {
@@ -95,14 +96,11 @@ gen_tec_xml <- function(param_df = NULL,
     out_path <- out_dir # to remove when we update inside the function
   }
 
-
-
   xml_doc_tmpl <- NULL
 
   if (!base::is.null(tec_in_file)) {
     xml_doc_tmpl <- xmldocument(tec_in_file)
   }
-
 
   # detecting tec names column
   param_names <- names(param_table)
@@ -111,7 +109,6 @@ gen_tec_xml <- function(param_df = NULL,
     stop("The column for identifying tec names has not been found !")
   }
   tec_col <- param_names[col_id]
-
 
   # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(
@@ -122,11 +119,9 @@ gen_tec_xml <- function(param_df = NULL,
   ) # ,
   # dict = dict)
 
-
   if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
-
 
   # Finding non NULL elements in xml_docs (i.e. no errors in doc generation)
   out_idx <- unlist(lapply(xml_docs, base::is.null))
@@ -148,8 +143,6 @@ gen_tec_xml <- function(param_df = NULL,
     return(invisible())
   }
 
-
-
   # checking if out_path exists
   if (!dir.exists(out_path)) {
     stop(paste("The directory does not exist", out_path))
@@ -162,8 +155,6 @@ gen_tec_xml <- function(param_df = NULL,
     out_name[!ids] <- paste0(param_table[[tec_col]][!ids], "_tec.xml")
   }
   tec_out_file <- file.path(out_path, out_name)
-
-
 
   # checking dimensions
   if (!length(xml_docs) == length(tec_out_file)) {

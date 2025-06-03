@@ -82,14 +82,14 @@ This document has been generated using the latest STICS version **`r stics_versi
 
 ## XML files structures describing parameters
 
-XML files are self documented files and hierarchically structured. Syntaxic rules are based on what we call nodes (i.e. nodes names, similar to html tags) and attributes (nodes attributes values).
+XML files are self documented files and hierarchically structured. Syntactic rules are based on what we call nodes (i.e. nodes names, similar to html tags) and attributes (nodes attributes values).
 
 STICS XML files are filled with different kinds of parameters description
 structures according to their type/role in the model formalisms.
 
 As we can see in the above XML file extract from a general parameter file:
 
-* Parameters are grouped according to formalisms (in a `xml <formalisme>...</formalisme>` block)
+* Parameters are grouped according to formalism (in a `xml <formalisme>...</formalisme>` block)
 
 * Parameters may be defined by single values
 This kind of definition is common for all files types and the parameter name is stored in the `nom` attribute of a `param` XML node. So the first parameter name in the example is `beta` and its value is `1.40000` (inside `param` tags).
@@ -387,7 +387,7 @@ get_param_xml(sols,
 )
 ```
 
-* For one parameter and several occurences
+* For one parameter and several occurrences
 
 ```{r}
 # For all soils
@@ -439,7 +439,7 @@ tec <- file.path(xml_loc_dir, "file_tec.xml")
 get_param_xml(tec, param = c("julapI_or_sum_upvt", "amount"))
 ```
 
-* Selecting with values index (among 5 soil layers, several irrigations supply)
+* Selecting with values index (among 5 soil layers, several water supply)
 
 ```{r}
 # For soil layers 1 to 3
@@ -542,7 +542,7 @@ get_param_xml(sols,
 )
 ```
 
-* For one parameter and several occurences
+* For one parameter and several occurrences
 
 For passing several parameters values (for one or more parameters) or single values for several parameters, the `param_value` argument must contain a list of vectors of values with the same length as `param` vector.
 
@@ -562,7 +562,7 @@ set_param_xml(sols,
 # Controlling written values
 get_param_xml(sols, param = "argi")
 
-# Setting the same value for all occurences
+# Setting the same value for all occurrences
 set_param_xml(sols, param = "argi", values = 40, overwrite = TRUE)
 
 # Controlling written values
@@ -587,7 +587,7 @@ set_param_xml(sols,
 # Controlling written values
 get_param_xml(sols, param = c("argi", "pH"))
 
-# Setting the same value for all occurences
+# Setting the same value for all occurrences
 set_param_xml(sols,
   param = c("argi", "pH"), values = list(50, 8),
   overwrite = TRUE

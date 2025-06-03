@@ -3,23 +3,20 @@ version_num <- get_version_num()
 host <- "github.com"
 
 studycase_path <-
-  file.path(tempdir(), "data-master", "study_case_1")
+  download_data(
+    example_dirs = "study_case_1",
+    stics_version = stics_version
+  )
 
-if (!dir.exists(studycase_path)) {
-  studycase_path <-
-    download_data(
-      example_dirs = "study_case_1",
-      stics_version = stics_version
-    )
+if (!is.null(studycase_path)) {
+  workspace_path <- file.path(studycase_path, "XmlFiles")
+
+  xml_usms <- file.path(workspace_path, "usms.xml")
+
+  usms_list <- get_usms_list(xml_usms)
+
+  usms_files <- get_usms_files(workspace_path)
 }
-
-workspace_path <- file.path(studycase_path, "XmlFiles")
-
-xml_usms <- file.path(workspace_path, "usms.xml")
-
-usms_list <- get_usms_list(xml_usms)
-
-usms_files <- get_usms_files(workspace_path)
 
 context("Checking usm names in list")
 test_that("checking usm exists", {

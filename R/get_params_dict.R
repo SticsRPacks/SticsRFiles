@@ -24,7 +24,8 @@
 #'
 #' get_params_dict(in_dict)
 #' }
-get_params_dict <- function(in_dict = NULL) { # , javastics_dir = NULL) {
+get_params_dict <- function(in_dict = NULL) {
+  # , javastics_dir = NULL) {
 
   # TODO: replace get_params_from_table with a call
   # to the future function that will load the correspondence table
@@ -83,10 +84,6 @@ get_params_dict <- function(in_dict = NULL) { # , javastics_dir = NULL) {
     vitreconspeupl_2 = "VitReconsPeupl(2)"
   )
 
-
-
-
-
   # Returning intern dict
   if (base::is.null(in_dict)) {
     return(base_dict)
@@ -124,12 +121,12 @@ merge_dict <- function(in_dict, base_dict) {
   return(new_dict)
 }
 
-check_dict <- function(in_dict) { # , javastics_dir, file_name = "inputs.csv") {
+check_dict <- function(in_dict) {
+  # , javastics_dir, file_name = "inputs.csv") {
 
   # TODO: will be useful when in inputs.csv when correspondence will
   # be integrated between code names and param names in XML files
   # to be able to check param names in XML files !!!
-
 
   # checks if fields values are unique
   if (base::is.null(in_dict)) {
@@ -142,7 +139,6 @@ check_dict <- function(in_dict) { # , javastics_dir, file_name = "inputs.csv") {
   if (!checked) {
     return(FALSE)
   }
-
 
   return(TRUE)
 }

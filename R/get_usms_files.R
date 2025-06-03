@@ -48,15 +48,16 @@
 #' )
 #' }
 #'
-get_usms_files <- function(workspace,
-                           usms_list = NULL,
-                           usms_file = "usms.xml",
-                           file_type = NULL,
-                           javastics = NULL,
-                           df_output = FALSE,
-                           workspace_path = lifecycle::deprecated(),
-                           file_name = lifecycle::deprecated(),
-                           javastics_path = lifecycle::deprecated()) {
+get_usms_files <- function(
+    workspace,
+    usms_list = NULL,
+    usms_file = "usms.xml",
+    file_type = NULL,
+    javastics = NULL,
+    df_output = FALSE,
+    workspace_path = lifecycle::deprecated(),
+    file_name = lifecycle::deprecated(),
+    javastics_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(workspace_path)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -87,8 +88,15 @@ get_usms_files <- function(workspace,
 
   # Types definition
   files_types <- c(
-    "fplt", "finit", "fclim1", "fclim2", "fstation", "ftec",
-    "sols", "pargen", "parnew"
+    "fplt",
+    "finit",
+    "fclim1",
+    "fclim2",
+    "fstation",
+    "ftec",
+    "sols",
+    "pargen",
+    "parnew"
   )
   if (is.null(file_type)) {
     file_type <- files_types
@@ -113,8 +121,10 @@ get_usms_files <- function(workspace,
     javastics_plt_path <- NULL
     ws_plt_path <- NULL
 
-    if (!base::is.null(javastics_path) &&
-      dir.exists(file.path(javastics_path, "plant"))) {
+    if (
+      !base::is.null(javastics_path) &&
+        dir.exists(file.path(javastics_path, "plant"))
+    ) {
       javastics_plt_path <- suppressWarnings(
         normalizePath(file.path(javastics_path, "plant"))
       )
@@ -191,10 +201,11 @@ get_usms_files <- function(workspace,
     # Keeping usms xml files, except plant files, obs, lai, null
     useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
 
-    if (length(useless_files_idx) > 0) usm_files <- usm_files[-useless_files_idx]
+    if (length(useless_files_idx) > 0) {
+      usm_files <- usm_files[-useless_files_idx]
+    }
 
     usm_files_path <- file.path(workspace_path, usm_files)
-
 
     # Specific plt files management
     plt_idx <- grep("_plt\\.xml$", usm_files_path)
@@ -272,8 +283,11 @@ get_usms_files <- function(workspace,
     # Adding the files lists
     usms_files_list[[i]] <- list(
       paths = c(
-        usm_files_path, plt_files_path, sols_file_path,
-        pargen_file_path, parnew_file_path
+        usm_files_path,
+        plt_files_path,
+        sols_file_path,
+        pargen_file_path,
+        parnew_file_path
       ),
       all_exist = c(
         usm_files_exist,

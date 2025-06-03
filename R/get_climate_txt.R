@@ -15,7 +15,7 @@
 #'   longer supported, use `file_name` instead.
 #'
 #'
-#' @note The time-related variables are summarised into one POSIXct column named
+#' @note The time-related variables are summarized into one POSIXct column named
 #'       `date`.
 #'
 #' @return A data.frame of the input meteorological variables used as input
@@ -28,16 +28,19 @@
 #'
 #' @export
 #'
-get_climate_txt <- function(workspace,
-                            file_name = "climat.txt",
-                            preserve = TRUE,
-                            dirpath = lifecycle::deprecated(),
-                            filename = lifecycle::deprecated()) {
+get_climate_txt <- function(
+  workspace,
+  file_name = "climat.txt",
+  preserve = TRUE,
+  dirpath = lifecycle::deprecated(),
+  filename = lifecycle::deprecated()
+) {
   # Managing deprecated arguments
   # dirpath
   if (lifecycle::is_present(dirpath)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "get_climate_txt(dirpath)",
+      "1.0.0",
+      "get_climate_txt(dirpath)",
       "get_climate_txt(workspace)"
     )
   } else {
@@ -46,14 +49,13 @@ get_climate_txt <- function(workspace,
   # filename
   if (lifecycle::is_present(filename)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "get_climate_txt(filename)",
+      "1.0.0",
+      "get_climate_txt(filename)",
       "get_climate_txt(file_name)"
     )
   } else {
     filename <- file_name # to remove when we update inside the function
   }
-
-
 
   file_path <- file.path(dirpath, filename)
 
@@ -65,13 +67,27 @@ get_climate_txt <- function(workspace,
 
   meteo_data <- data.table::fread(file_path, data.table = FALSE)
   colnames(meteo_data) <- c(
-    "station", "year", "month", "day", "julian", "ttmin", "ttmax",
-    "ttrg", "ttetp", "ttrr", "ttvent", "ttpm", "ttco2"
+    "station",
+    "year",
+    "month",
+    "day",
+    "julian",
+    "ttmin",
+    "ttmax",
+    "ttrg",
+    "ttetp",
+    "ttrr",
+    "ttvent",
+    "ttpm",
+    "ttco2"
   )
-  date <- data.frame(Date = as.POSIXct(
-    x = paste(meteo_data$year, meteo_data$month, meteo_data$day, sep = "-"),
-    format = "%Y-%m-%d", tz = "UTC"
-  ))
+  date <- data.frame(
+    Date = as.POSIXct(
+      x = paste(meteo_data$year, meteo_data$month, meteo_data$day, sep = "-"),
+      format = "%Y-%m-%d",
+      tz = "UTC"
+    )
+  )
 
   # For removing original date components columns
   if (!preserve) {
