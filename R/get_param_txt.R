@@ -76,16 +76,15 @@
 #' @export
 #'
 get_param_txt <- function(
-  workspace,
-  param = NULL,
-  plant_id = NULL,
-  variety = NULL,
-  value_id = NULL,
-  exact = FALSE,
-  stics_version = "latest",
-  dirpath = lifecycle::deprecated(),
-  ...
-) {
+    workspace,
+    param = NULL,
+    plant_id = NULL,
+    variety = NULL,
+    value_id = NULL,
+    exact = FALSE,
+    stics_version = "latest",
+    dirpath = lifecycle::deprecated(),
+    ...) {
   # dirpath
   if (lifecycle::is_present(dirpath)) {
     lifecycle::deprecate_warn(
@@ -259,11 +258,10 @@ get_param_txt <- function(
 
 
 filter_param <- function(
-  in_list,
-  param = NULL,
-  exact = FALSE,
-  value_id = NULL
-) {
+    in_list,
+    param = NULL,
+    exact = FALSE,
+    value_id = NULL) {
   out_list <- list()
   names_vec <- names(in_list)
 
@@ -384,10 +382,9 @@ filter_param <- function(
 #' @rdname get_param_txt
 #' @export
 get_ini_txt <- function(
-  file = "ficini.txt",
-  stics_version,
-  filepath = lifecycle::deprecated()
-) {
+    file = "ficini.txt",
+    stics_version,
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -505,9 +502,8 @@ get_ini_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_general_txt <- function(
-  file = "tempopar.sti",
-  filepath = lifecycle::deprecated()
-) {
+    file = "tempopar.sti",
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -526,9 +522,8 @@ get_general_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_tmp_txt <- function(
-  file = "tempoparv6.sti",
-  filepath = lifecycle::deprecated()
-) {
+    file = "tempoparv6.sti",
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -546,10 +541,9 @@ get_tmp_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_plant_txt <- function(
-  file = "ficplt1.txt",
-  variety = NULL,
-  filepath = lifecycle::deprecated()
-) {
+    file = "ficplt1.txt",
+    variety = NULL,
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -597,14 +591,13 @@ get_plant_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_tec_txt <- function(
-  file = "fictec1.txt",
-  stics_version = "latest",
-  several_fert = NULL,
-  several_thin = NULL,
-  is_pasture = NULL,
-  filepath = lifecycle::deprecated(),
-  ...
-) {
+    file = "fictec1.txt",
+    stics_version = "latest",
+    several_fert = NULL,
+    several_thin = NULL,
+    is_pasture = NULL,
+    filepath = lifecycle::deprecated(),
+    ...) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -950,10 +943,9 @@ get_tec_txt_ <- function(params, values) {
 #' @rdname get_param_txt
 #' @export
 get_soil_txt <- function(
-  file = "param.sol",
-  stics_version,
-  filepath = lifecycle::deprecated()
-) {
+    file = "param.sol",
+    stics_version,
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -1092,9 +1084,8 @@ get_soil_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_station_txt <- function(
-  file = "station.txt",
-  filepath = lifecycle::deprecated()
-) {
+    file = "station.txt",
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(
@@ -1113,10 +1104,9 @@ get_station_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_usm_txt <- function(
-  file = "new_travail.usm",
-  plant_id = NULL,
-  filepath = lifecycle::deprecated()
-) {
+    file = "new_travail.usm",
+    plant_id = NULL,
+    filepath = lifecycle::deprecated()) {
   # filepath
   if (lifecycle::is_present(filepath)) {
     lifecycle::deprecate_warn(

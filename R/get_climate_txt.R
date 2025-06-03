@@ -29,12 +29,11 @@
 #' @export
 #'
 get_climate_txt <- function(
-  workspace,
-  file_name = "climat.txt",
-  preserve = TRUE,
-  dirpath = lifecycle::deprecated(),
-  filename = lifecycle::deprecated()
-) {
+    workspace,
+    file_name = "climat.txt",
+    preserve = TRUE,
+    dirpath = lifecycle::deprecated(),
+    filename = lifecycle::deprecated()) {
   # Managing deprecated arguments
   # dirpath
   if (lifecycle::is_present(dirpath)) {
