@@ -1,6 +1,6 @@
 #' Upgrading _ini.xml file(s) to a newer version
 #'
-#' @param file Path of an initialisation (*_ini.xml) file or a vector of
+#' @param file Path of an initialization (*_ini.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
@@ -31,14 +31,15 @@
 #' )
 #'
 upgrade_ini_xml <- function(
-    file,
-    out_dir,
-    param_gen_file,
-    stics_version = "V9.2",
-    target_version = "V10.0",
-    check_version = TRUE,
-    overwrite = FALSE,
-    ...) {
+  file,
+  out_dir,
+  param_gen_file,
+  stics_version = "V9.2",
+  target_version = "V10.0",
+  check_version = TRUE,
+  overwrite = FALSE,
+  ...
+) {
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)

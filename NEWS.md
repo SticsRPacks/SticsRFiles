@@ -1,4 +1,4 @@
-# SticsRFiles 1.6.0 _2025-05-26_
+# SticsRFiles 1.6.0 _2025-06-03_
 * FUNCTIONS
   * convert_xml2txt allows to convert sols.xml file to text files
   * Some useless functions have been removed and functions help updated
@@ -76,7 +76,7 @@
 # SticsRFiles 1.2.0 _2024-02-21_
 
 * FUNCTIONS
-   * Text files generation from xml files are now done without using JavaStics 
+   * Text files generation from xml files are now done without using JavaSTICS 
    command line (the speedup is about 10 times)
    * Getting parameters information (get_param_info) do not use XML files 
    exploration anymore, the speed is largely improved
@@ -85,7 +85,7 @@
    * tests coverage improvement
 
 * FIXES
-   * update of a bunch of unit tests according to other packages evolutions
+   * update of a bunch of unit tests according to other packages evolution
    * STICS versions management and XML files upgrade
 
 * DATA
@@ -112,10 +112,10 @@
      between XML files and inputs.csv
    * pattern for selecting parameters in Excel files, filtering parameter 
      starting with "code_"
-   * renaming plant initialisation parameters according to 
+   * renaming plant initialization parameters according to 
      crop number tag (Crop1, Crop2)
    * tidyselect and filter syntax
-   * homogenous naming of JavaSTICS and STICS
+   * homogeneous naming of JavaSTICS and STICS
 
 * DATA
    * added: meta-data and xsl files for converting XML files to 
@@ -161,7 +161,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 * FUNCTIONS:
   * New set of functions for upgrading XML files of STICS version 9.2 to STICS version 10.0 (either each kind of XML file or a whole workspace) 
   * Homogenization of arguments names in functions
-  * Some functions have been moved from the SticsOnR package into SticsRFiles
+  * Some functions have been moved from the `SticsOnR` package into the `SticsRFiles`
   * Improvement of functions dedicated to java/JavaSTICS command line use, added checks
 
 * FIXES:
@@ -218,7 +218,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
   * FIX: force_param_values() did not work for parameters which names included parenthesis
 
-  * Added dependency to dplyr >= 1.0.0 due to use of relocate function
+  * Added dependency to `dplyr` >= 1.0.0 due to use of relocate function
 
   * Typos in doc
 

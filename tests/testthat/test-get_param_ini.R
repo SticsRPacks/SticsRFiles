@@ -5,7 +5,7 @@ xml_path <- file.path(
   get_examples_path("xml", stics_version = stics_version),
   "file_ini.xml"
 )
-context("Getting initialisation param values")
+context("Getting initialization param values")
 
 test_that("single param option value ", {
   expect_equivalent(unlist(get_param_xml(xml_path, "nbplantes")), 1)

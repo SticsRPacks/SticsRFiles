@@ -45,12 +45,12 @@ per USM, FALSE if USM files are generated in the target_path
 (only useful for usms_list of size one)}
 
 \item{java_cmd}{For unix like systems, the java virtual machine command
-name or executable path. Usefull only if the JavaSTICS command line
+name or executable path. Useful only if the JavaSTICS command line
 is used for generating files. "java" is the default system command,
 but a full path to a java executable (other than the default one)
 may be given}
 
-\item{java_converter}{logical TRUE for using JavaStics command
+\item{java_converter}{logical TRUE for using JavaSTICS command
 (a JavaSTICS path must be set in the function inputs), FALSE otherwise}
 
 \item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path}

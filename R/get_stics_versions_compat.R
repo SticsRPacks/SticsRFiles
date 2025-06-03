@@ -100,7 +100,7 @@ check_version_compat <- function(stics_version = "latest") {
 #' @param stics_version Optional version string (i.e. "VX.Y")
 #'
 #' @param versions_dir Optional, either an `extdata` directory path
-#' of the installed SticsRFiles library (default) or of the package project
+#' of the installed `SticsRFiles` library (default) or of the package project
 #'
 #' @return A data.frame with versions data
 #'

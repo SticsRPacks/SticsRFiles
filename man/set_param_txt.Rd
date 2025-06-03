@@ -115,7 +115,7 @@ input files.}
 \item{append}{Boolean. Append input to existing file}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
-Only used for plant, technical or initialisation parameters (default = 1).}
+Only used for plant, technical or initialization parameters (default = 1).}
 
 \item{variety}{The plant variety to set the parameter value,
 either the variety name (\code{codevar} in the plant file) or
@@ -147,7 +147,7 @@ longer supported, use \code{file} instead.}
 None
 }
 \description{
-Replace or set an input parameter from a pre-existing
+Replace or set an input parameter from an existing
 STICS input file.
 }
 \details{

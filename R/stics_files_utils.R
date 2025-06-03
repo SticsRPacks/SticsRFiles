@@ -21,10 +21,11 @@
 #' get_examples_path(file_type = "csv", stics_version = "V8.5")
 #'
 get_examples_path <- function(
-    file_type,
-    stics_version = "latest",
-    overwrite = FALSE,
-    version_name = lifecycle::deprecated()) {
+  file_type,
+  stics_version = "latest",
+  overwrite = FALSE,
+  version_name = lifecycle::deprecated()
+) {
   if (lifecycle::is_present(version_name)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -115,9 +116,10 @@ get_examples_path <- function(
 
 # TODO: evaluate if useful ?
 list_examples_files <- function(
-    file_type,
-    version_name = "latest",
-    full_names = TRUE) {
+  file_type,
+  version_name = "latest",
+  full_names = TRUE
+) {
   examples_path <- get_examples_path(
     file_type = file_type,
     stics_version = version_name
@@ -193,9 +195,9 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 
 
 #' Copy mod, obs, lai, and weather data files
-#' @param workspace JavaStics xml workspace path
+#' @param workspace JavaSTICS xml workspace path
 #' @param file_type file type to copy among "mod", "obs", "clim"
-#' @param javastics JavaStics folder path (Optional)
+#' @param javastics JavsSTICS folder path (Optional)
 #' @param out_dir   Output directry path
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
@@ -208,12 +210,13 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 #' @noRd
 #'
 workspace_files_copy <- function(
-    workspace,
-    file_type = NULL,
-    javastics = NULL,
-    out_dir,
-    overwrite = FALSE,
-    verbose = FALSE) {
+  workspace,
+  file_type = NULL,
+  javastics = NULL,
+  out_dir,
+  overwrite = FALSE,
+  verbose = FALSE
+) {
   # files types vector and associated regex
   file_types <- c("mod", "obs", "lai", "meteo")
   file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")

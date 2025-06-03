@@ -5,7 +5,7 @@
 #'
 #' @param javastics JavaSTICS installation root folder
 #'
-#' @return Current JavaStics workspace
+#' @return Current JavaSTICS workspace
 #'
 #' @examples
 #' \dontrun{

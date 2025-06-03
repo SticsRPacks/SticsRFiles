@@ -15,7 +15,7 @@
 #'   longer supported, use `file_name` instead.
 #'
 #'
-#' @note The time-related variables are summarised into one POSIXct column named
+#' @note The time-related variables are summarized into one POSIXct column named
 #'       `date`.
 #'
 #' @return A data.frame of the input meteorological variables used as input
@@ -29,11 +29,12 @@
 #' @export
 #'
 get_climate_txt <- function(
-    workspace,
-    file_name = "climat.txt",
-    preserve = TRUE,
-    dirpath = lifecycle::deprecated(),
-    filename = lifecycle::deprecated()) {
+  workspace,
+  file_name = "climat.txt",
+  preserve = TRUE,
+  dirpath = lifecycle::deprecated(),
+  filename = lifecycle::deprecated()
+) {
   # Managing deprecated arguments
   # dirpath
   if (lifecycle::is_present(dirpath)) {

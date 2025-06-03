@@ -24,11 +24,11 @@
 #' per USM, FALSE if USM files are generated in the target_path
 #' (only useful for usms_list of size one)
 #' @param java_cmd For unix like systems, the java virtual machine command
-#' name or executable path. Usefull only if the JavaSTICS command line
+#' name or executable path. Useful only if the JavaSTICS command line
 #' is used for generating files. "java" is the default system command,
 #' but a full path to a java executable (other than the default one)
 #' may be given
-#' @param java_converter logical TRUE for using JavaStics command
+#' @param java_converter logical TRUE for using JavaSTICS command
 #' (a JavaSTICS path must be set in the function inputs), FALSE otherwise
 #' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
 #' is no longer supported, use `javastics` instead.
@@ -65,19 +65,20 @@
 #'
 
 gen_usms_xml2txt <- function(
-    javastics = NULL,
-    workspace = NULL,
-    out_dir = NULL,
-    usm = c(),
-    stics_version = "latest",
-    verbose = TRUE,
-    dir_per_usm_flag = TRUE,
-    java_cmd = "java",
-    java_converter = FALSE,
-    javastics_path = lifecycle::deprecated(),
-    workspace_path = lifecycle::deprecated(),
-    target_path = lifecycle::deprecated(),
-    usms_list = lifecycle::deprecated()) {
+  javastics = NULL,
+  workspace = NULL,
+  out_dir = NULL,
+  usm = c(),
+  stics_version = "latest",
+  verbose = TRUE,
+  dir_per_usm_flag = TRUE,
+  java_cmd = "java",
+  java_converter = FALSE,
+  javastics_path = lifecycle::deprecated(),
+  workspace_path = lifecycle::deprecated(),
+  target_path = lifecycle::deprecated(),
+  usms_list = lifecycle::deprecated()
+) {
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
     lifecycle::deprecate_warn(
