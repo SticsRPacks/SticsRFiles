@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   Generating_Stics_text_files: Generating_Stics_text_files.html
@@ -8,7 +8,7 @@ articles:
   Manipulating_Stics_XML_files: Manipulating_Stics_XML_files.html
   SticsRFiles: SticsRFiles.html
   Upgrading_STICS_XML_files: Upgrading_STICS_XML_files.html
-last_built: 2024-11-13T12:44Z
+last_built: 2025-06-03T14:16Z
 urls:
   reference: |-
     https://sticsrpacks.github.io/SticsRFiles/
