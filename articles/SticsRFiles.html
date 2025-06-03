@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -107,8 +107,9 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The goal of SticsRFiles is to perform manipulations of all types of
-files related to the input and outputs of the STICS model.</p>
+<p>The goal of <code>SticsRFiles</code> is to perform manipulations of
+all types of files related to the input and outputs of the STICS
+model.</p>
 <p>This article presents the design of the package and its basic
 features, <em>i.e.</em> the main functions to deal with the XML files.
 For a complete introduction to SticsRPacks (managing files, running
@@ -167,10 +168,10 @@ simulation, just before calling the STICS executable.</p>
 <div class="section level3">
 <h3 id="sticsrfiles">SticsRFiles<a class="anchor" aria-label="anchor" href="#sticsrfiles"></a>
 </h3>
-<p>SticsRFiles is an R package that uses JavaSTICS from the command line
-to manage the XML and the text files. We can generate XML or text files,
-get and set parameter values, import simulations outputs, and manage
-observation files.</p>
+<p><code>SticsRFiles</code> is an R package that uses JavaSTICS from the
+command line to manage the XML and the text files. We can generate XML
+or text files, get and set parameter values, import simulations outputs,
+and manage observation files.</p>
 <p>Advanced features also include:</p>
 <ul>
 <li>The generation of XML input files from templates included in the
@@ -183,15 +184,15 @@ templates and Excel sheets containing multiple simulations contexts</li>
 <div class="section level2">
 <h2 id="short-example">Short example<a class="anchor" aria-label="anchor" href="#short-example"></a>
 </h2>
-<p>Here’s a simple example usage of SticsRFiles using an example
-workspace.</p>
+<p>Here’s a simple example usage of <code>SticsRFiles</code> using an
+example workspace.</p>
 <div class="section level3">
 <h3 id="example-data">Example data<a class="anchor" aria-label="anchor" href="#example-data"></a>
 </h3>
 <p>All the example data used in this article are available from the <a href="https://github.com/SticsRPacks/data" class="external-link"><code>data</code>
 repository</a> in the <code>SticsRPacks</code> organization.</p>
-<p>SticsRFiles provides a function to download it from the command line.
-Please execute the following command in R:</p>
+<p><code>SticsRFiles</code> provides a function to download it from the
+command line. Please execute the following command in R:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span>
 <span><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/download_data.html">download_data</a></span><span class="op">(</span></span>
@@ -388,7 +389,7 @@ so:</p>
 <div class="section level4">
 <h4 id="set-parameter-values">Set parameter values<a class="anchor" aria-label="anchor" href="#set-parameter-values"></a>
 </h4>
-<p>We can also change the value of a parameter programmatically using
+<p>We can also change the value of a parameter by programming using
 <code><a href="../reference/set_param_xml.html">set_param_xml()</a></code>. It is used similarly to
 <code><a href="../reference/get_param_xml.html">get_param_xml()</a></code>. For example if we want to increase
 <code>dlaimax</code> by 30%:</p>

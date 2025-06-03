@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -73,6 +73,28 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.6.0" id="sticsrfiles-160-2025-06-03">SticsRFiles 1.6.0 <em>2025-06-03</em>
+<a class="anchor" aria-label="anchor" href="#sticsrfiles-160-2025-06-03"></a></h2>
+<ul><li>FUNCTIONS
+<ul><li>convert_xml2txt allows to convert sols.xml file to text files</li>
+<li>Some useless functions have been removed and functions help updated</li>
+<li>download_data is now fail with an informative message if the internet resource is not available</li>
+<li>set_param_xml.R: consistency for save_as and overwrite arguments and messages improvement</li>
+<li>file_document class: useless <code>type</code> slot removed</li>
+<li>general code re-formatting and cleaning</li>
+</ul></li>
+<li>FIXES
+<ul><li>get_param_xml: management of empty strings values in XML files</li>
+<li>removed use of library() in tests</li>
+</ul></li>
+<li>DATA
+<ul><li>Added a missing parameter (concrr) in the excel files templates</li>
+</ul></li>
+<li>VIGNETTES
+<ul><li>Added a stopping message when the download_data function fails (e.g. no internet connection or resource not available)</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="sticsrfiles-150-2024-11-13">SticsRFiles 1.5.0 <em>2024-11-13</em>
 <small>2024-11-13</small><a class="anchor" aria-label="anchor" href="#sticsrfiles-150-2024-11-13"></a></h2>
 <ul><li>FUNCTIONS
@@ -122,13 +144,13 @@
 <h2 class="page-header" data-toc-text="1.2.0" id="sticsrfiles-120-2024-02-21">SticsRFiles 1.2.0 <em>2024-02-21</em>
 <small>2024-02-23</small><a class="anchor" aria-label="anchor" href="#sticsrfiles-120-2024-02-21"></a></h2>
 <ul><li>FUNCTIONS
-<ul><li>Text files generation from xml files are now done without using JavaStics command line (the speedup is about 10 times)</li>
+<ul><li>Text files generation from xml files are now done without using JavaSTICS command line (the speedup is about 10 times)</li>
 <li>Getting parameters information (get_param_info) do not use XML files exploration anymore, the speed is largely improved</li>
 <li>Improvement of XML files manipulations/generation for reducing memory use/freezing in R when intensive use is performed</li>
 <li>tests coverage improvement</li>
 </ul></li>
 <li>FIXES
-<ul><li>update of a bunch of unit tests according to other packages evolutions</li>
+<ul><li>update of a bunch of unit tests according to other packages evolution</li>
 <li>STICS versions management and XML files upgrade</li>
 </ul></li>
 <li>DATA
@@ -152,9 +174,9 @@
 <li>package namespace use in packages functions calls</li>
 <li>pattern for replacing parameters names were are not consistent between XML files and inputs.csv</li>
 <li>pattern for selecting parameters in Excel files, filtering parameter starting with “code_”</li>
-<li>renaming plant initialisation parameters according to crop number tag (Crop1, Crop2)</li>
+<li>renaming plant initialization parameters according to crop number tag (Crop1, Crop2)</li>
 <li>tidyselect and filter syntax</li>
-<li>homogenous naming of JavaSTICS and STICS</li>
+<li>homogeneous naming of JavaSTICS and STICS</li>
 </ul></li>
 <li>DATA
 <ul><li>added: meta-data and xsl files for converting XML files to text files for STICS</li>
@@ -199,7 +221,8 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <ul><li>FUNCTIONS:
 <ul><li>New set of functions for upgrading XML files of STICS version 9.2 to STICS version 10.0 (either each kind of XML file or a whole workspace)</li>
 <li>Homogenization of arguments names in functions</li>
-<li>Some functions have been moved from the SticsOnR package into SticsRFiles</li>
+<li>Some functions have been moved from the <code>SticsOnR</code> package into the <code>SticsRFiles</code>
+</li>
 <li>Improvement of functions dedicated to java/JavaSTICS command line use, added checks</li>
 </ul></li>
 <li>FIXES:
@@ -249,7 +272,7 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 <div class="section level3">
 <h3 id="changes-0-4-1">Changes<a class="anchor" aria-label="anchor" href="#changes-0-4-1"></a></h3>
 <ul><li><p>FIX: force_param_values() did not work for parameters which names included parenthesis</p></li>
-<li><p>Added dependency to dplyr &gt;= 1.0.0 due to use of relocate function</p></li>
+<li><p>Added dependency to <code>dplyr</code> &gt;= 1.0.0 due to use of relocate function</p></li>
 <li><p>Typos in doc</p></li>
 </ul></div>
 </div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -148,7 +148,7 @@ as a prefix to be detected (as shown in the table extract above).</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">xl_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example.xlsx"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/tp/bfmjfn9s0hd59bm9z80j3mgm0000gn/T//RtmpXrFrql </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/tp/bfmjfn9s0hd59bm9z80j3mgm0000gn/T//RtmpMutobK </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Consider to set overwrite = TRUE to overwrite (it | them )</span>
 <span class="r-in"><span><span class="va">sta_param_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_params_table.html">read_params_table</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">xl_path</span>, sheet_name <span class="op">=</span> <span class="st">"Station"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">gen_sta_xml</span><span class="op">(</span>out_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, param_df <span class="op">=</span> <span class="va">sta_param_df</span><span class="op">)</span></span></span>
