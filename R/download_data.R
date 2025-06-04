@@ -22,14 +22,15 @@
 #' # Getting data for a given example : study_case_1 and a given STICS version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 #' # raising an error instead of a message
-#' download_data(example_dirs = "study_case_1", stics_version = "V9.0",
-#'               raise_error = TRUE)
+#' download_data(
+#'   example_dirs = "study_case_1", stics_version = "V9.0",
+#'   raise_error = TRUE
+#' )
 download_data <- function(
-  out_dir = tempdir(),
-  example_dirs = NULL,
-  stics_version = "latest",
-  raise_error = FALSE
-) {
+    out_dir = tempdir(),
+    example_dirs = NULL,
+    stics_version = "latest",
+    raise_error = FALSE) {
   # Setting version value from input for version == "latest"
   if (is.null(stics_version) || stics_version == "latest") {
     stics_version <- get_stics_versions_compat()$latest_version
