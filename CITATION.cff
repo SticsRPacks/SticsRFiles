@@ -9,6 +9,7 @@ type: software
 license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify ''STICS'' Input/Output Files'
 version: 1.6.0
+doi: 10.32614/CRAN.package.SticsRFiles
 abstract: Manipulating input and output files of the 'STICS' crop model. Files are
   either 'JavaSTICS' XML files or text files used by the model 'fortran' executable.
   Most basic functionalities are reading or writing parameter names and values in
@@ -32,6 +33,7 @@ authors:
   given-names: Michel
   email: michel.giner@cirad.fr
   orcid: https://orcid.org/0000-0002-9310-2377
+repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
 date-released: '2025-06-03'
