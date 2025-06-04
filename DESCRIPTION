@@ -46,7 +46,6 @@ Imports:
     methods,
     rlang,
     rstudioapi,
-    stringr,
     tibble,
     tidyr,
     tidyselect,
