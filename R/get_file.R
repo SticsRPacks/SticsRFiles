@@ -32,14 +32,15 @@
 #' @noRd
 #'
 get_file <- function(
-    workspace,
-    usm_name = NULL,
-    var_list = NULL,
-    dates_list = NULL,
-    usms_filepath = NULL,
-    javastics_path = NULL,
-    verbose = TRUE,
-    type = c("sim", "obs")) {
+  workspace,
+  usm_name = NULL,
+  var_list = NULL,
+  dates_list = NULL,
+  usms_filepath = NULL,
+  javastics_path = NULL,
+  verbose = TRUE,
+  type = c("sim", "obs")
+) {
   type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
   usms_path <- NULL
@@ -120,14 +121,15 @@ get_file <- function(
 #' @noRd
 #'
 get_file_ <- function(
-    workspace,
-    usm_name = NULL,
-    usms_filepath = NULL,
-    var_list = NULL,
-    dates_list = NULL,
-    javastics_path = NULL,
-    verbose = TRUE,
-    type = c("sim", "obs")) {
+  workspace,
+  usm_name = NULL,
+  usms_filepath = NULL,
+  var_list = NULL,
+  dates_list = NULL,
+  javastics_path = NULL,
+  verbose = TRUE,
+  type = c("sim", "obs")
+) {
   # TODO: add checking dates_list format, or apply the used format in sim
   # data.frame
 
@@ -171,6 +173,7 @@ get_file_ <- function(
   if (!is.null(usm_name)) {
     workspace_sub <- file.path(workspace, usm_name)
     workspace_files_sub <- unlist(
+      # Getting files from sub-directories
       lapply(workspace_sub, {
         function(x) {
           list.files(
@@ -255,6 +258,10 @@ get_file_ <- function(
   # the .sti files as information.
   if (is.null(usms_filepath)) {
     # Getting sim/obs files list from directory
+    # adding the usm dir names as files list names
+    files_list <- as.list(basename(workspace_files))
+    names(files_list) <- basename(dirname(workspace_files))
+
     file_name <-
       parse_mixed_file(
         file_names = as.list(basename(workspace_files)),
@@ -348,12 +355,13 @@ get_file_ <- function(
 #' @noRd
 #'
 get_file_one <- function(
-    dirpath,
-    filename,
-    p_name,
-    verbose,
-    dates_list,
-    var_list) {
+  dirpath,
+  filename,
+  p_name,
+  verbose,
+  dates_list,
+  var_list
+) {
   out <-
     get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
     dplyr::select_if(function(x) {
@@ -391,11 +399,12 @@ get_file_one <- function(
 }
 
 get_file_from_usms <- function(
-    workspace,
-    usms_path,
-    type = c("sim", "obs"),
-    usm_name = NULL,
-    verbose = TRUE) {
+  workspace,
+  usms_path,
+  type = c("sim", "obs"),
+  usm_name = NULL,
+  verbose = TRUE
+) {
   # Getting usms names from the usms.xml file
   usms <- get_usms_list(file = file.path(usms_path))
 
@@ -496,7 +505,9 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
   type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
   if (type == "sim") {
+    #usm_pattern <- "^(mod_s)|(\\.sti)$"
     usm_pattern <- "^(mod_s)|(\\.sti)$"
+    mixed_start <- "^(mod_s(a|p))"
     mixed_pattern <- "^(mod_s(a|p))|(\\.sti)$"
     associated_pattern <- "^mod_sa"
   } else {
@@ -505,24 +516,52 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
     associated_pattern <- "a\\.obs$"
   }
 
-  usm_names <- gsub(pattern = usm_pattern, replacement = "", x = file_names)
-  names(file_names) <- usm_names
+  # Getting usm names from file_names list names
+  usm_names <- names(file_names)
+  if (type == "sim") {
+    starting_filter <- grepl(pattern = mixed_start, x = file_names)
+  } else {
+    starting_filter <- rep(TRUE, length(file_names))
+  }
 
-  is_potential_mixed <- grepl(mixed_pattern, file_names)
+  # Getting usm names from files names
+  usm_name_potential_mixed <- file_names
+  usm_name_potential_mixed[starting_filter] <-
+    gsub(
+      pattern = mixed_pattern,
+      replacement = "",
+      x = file_names[starting_filter]
+    )
 
-  usm_name_potential_mixed <-
-    gsub(pattern = mixed_pattern, replacement = "", x = file_names)
+  # Comparing usm names and potential mixed usm names
+  # or usm_name_potential_mixed does not contain .obs
+  is_potential_mixed <- usm_names == usm_name_potential_mixed |
+    !grepl(pattern = usm_pattern, usm_name_potential_mixed)
+
+  # not any potential mixed usm
+  # fixing usm names to file_names list using files names
+  if (!any(is_potential_mixed)) {
+    names(file_names) <- gsub(
+      pattern = usm_pattern,
+      replacement = "",
+      x = file_names
+    )
+    return(file_names)
+  }
 
   potential_mixed <- usm_name_potential_mixed[is_potential_mixed]
-
-  file_names2 <- file_names
 
   mixed_and_not_duplicated <-
     seq_along(file_names)[is_potential_mixed][!duplicated(potential_mixed)]
 
+  file_names2 <- vector(
+    mode = "list",
+    length = (length(mixed_and_not_duplicated) + sum(!is_potential_mixed))
+  )
+
   for (i in mixed_and_not_duplicated) {
     mixed <- which(
-      usm_name_potential_mixed[i] == usm_name_potential_mixed &
+      (usm_name_potential_mixed[[i]] == usm_name_potential_mixed) &
         is_potential_mixed
     )
 
@@ -534,16 +573,29 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
       file_names2[[i]] <-
         c(mixed_names[-associated_index], mixed_names[associated_index])
 
-      names(file_names2)[i] <- usm_name_potential_mixed[i]
+      names(file_names2)[i] <- usm_name_potential_mixed[[i]]
     } else {
-      # Here we thougth it was mixed, but it really is not because
+      # Here we thought it was mixed, but it really is not because
       # we did not found another associated file with the same name
       # modulo "a" or "p"
+      file_names2[i] <- file_names[i]
       names(file_names2)[i] <-
-        gsub(pattern = usm_pattern, replacement = "", x = file_names2[i])
+        gsub(pattern = usm_pattern, replacement = "", x = file_names[i])
     }
   }
-  file_names2[c(which(!is_potential_mixed), mixed_and_not_duplicated)]
+  # adding remaining not mixed usms files
+  if (any(!is_potential_mixed)) {
+    idx <- setdiff(seq_along(file_names2), seq_along(mixed_and_not_duplicated))
+    file_names2[idx] <- file_names[!is_potential_mixed]
+    names(file_names2)[idx] <-
+      gsub(
+        pattern = usm_pattern,
+        replacement = "",
+        x = file_names[!is_potential_mixed]
+      )
+  }
+  #file_names2[c(which(!is_potential_mixed), mixed_and_not_duplicated)]
+  file_names2
 }
 
 
