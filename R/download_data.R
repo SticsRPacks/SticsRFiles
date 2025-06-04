@@ -12,7 +12,8 @@
 #' @param raise_error Logical, if TRUE, an error is raised instead
 #' of message when FALSE (default)
 #'
-#' @return The path of the folder data have been downloaded into
+#' @return The path of the folder data have been downloaded into or NULL
+#' if the download fails and raise_error is FALSE.
 #'
 #' @export
 #'
