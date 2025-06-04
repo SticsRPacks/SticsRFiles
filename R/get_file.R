@@ -569,8 +569,8 @@ str2regex <- function(in_str) {
   replace_chars <- paste0("\\", regex_chars)
   out_str <- in_str
   for (i in seq_along(regex_chars)) {
-    out_str <- stringr::str_replace_all(
-      out_str,
+    out_str <- gsub(
+      x = out_str,
       pattern = regex_chars[i],
       replacement = replace_chars[i]
     )
