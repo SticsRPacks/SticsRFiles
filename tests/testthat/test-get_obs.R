@@ -121,12 +121,11 @@ test_that("reading empty usms returns a 0 row data", {
 
 example_ic <- download_data(
   example_dirs = "study_case_intercrop",
-  stics_version = stics_version
+  stics_version = stics_version,
+  raise_error = TRUE
 )
 
 test_that("get obs with intercrops", {
-  testthat::skip_if_offline(host = host)
-
   outputs <- get_obs(workspace = example_ic)
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -152,7 +151,6 @@ test_that("get obs with intercrops", {
 })
 
 test_that("get obs with intercrops, giving usms.xml file", {
-  testthat::skip_if_offline(host = host)
   outputs <- get_obs(
     workspace = example_ic,
     usms_file = file.path(example_ic, "usms.xml")
@@ -179,8 +177,6 @@ test_that("get obs with intercrops, giving usms.xml file", {
 })
 
 test_that("get obs with intercrops, giving usms.xml file as absolute path", {
-  testthat::skip_if_offline(host = host)
-
   outputs <- get_obs(
     workspace = example_ic,
     usms_file = file.path(example_ic, "usms.xml")
