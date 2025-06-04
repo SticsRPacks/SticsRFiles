@@ -9,8 +9,11 @@
 #' @param stics_version Name of the STICS version (optional)
 #' The default value is the latest version returned by
 #' get_stics_versions_compat().
+#' @param raise_error Logical, if TRUE, an error is raised instead
+#' of message when FALSE (default)
 #'
-#' @return The path of the folder data have been downloaded into
+#' @return The path of the folder data have been downloaded into or NULL
+#' if the download fails and raise_error is FALSE.
 #'
 #' @export
 #'
@@ -18,11 +21,15 @@
 #'
 #' # Getting data for a given example : study_case_1 and a given STICS version
 #' download_data(example_dirs = "study_case_1", stics_version = "V9.0")
-#'
+#' # raising an error instead of a message
+#' download_data(example_dirs = "study_case_1", stics_version = "V9.0",
+#'               raise_error = TRUE)
 download_data <- function(
-    out_dir = tempdir(),
-    example_dirs = NULL,
-    stics_version = "latest") {
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest",
+  raise_error = FALSE
+) {
   # Setting version value from input for version == "latest"
   if (is.null(stics_version) || stics_version == "latest") {
     stics_version <- get_stics_versions_compat()$latest_version
@@ -71,13 +78,20 @@ download_data <- function(
     silent = TRUE
   )
 
+  error_msg <- paste(
+    "Error while downloading data from GitHub.",
+    "Check internet connection, or resource availability."
+  )
+
   # Checking if the download was successful
+  # If not, returning an error message or raising an error
   if (inherits(try_ret, "try-error")) {
-    message(paste(
-      "Error while downloading data from GitHub.",
-      "Check internet connection, or resource availability."
-    ))
-    return(invisible())
+    if (raise_error) {
+      stop(error_msg, call. = FALSE)
+    } else {
+      message(error_msg)
+      return(invisible())
+    }
   }
 
   # Unzipping the archive
