@@ -38,30 +38,34 @@
 #'
 #' @export
 #'
-force_param_values <- function(workspace,
-                               values,
-                               javastics,
-                               param_values = lifecycle::deprecated()) {
+force_param_values <- function(
+    workspace,
+    values,
+    javastics,
+    param_values = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_values)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "force_param_values(param_values)",
-                              "force_param_values(values)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "force_param_values(param_values)",
+      "force_param_values(values)"
+    )
   } else {
     param_values <- values # to remove when we update inside the function
   }
 
   if (is.null(param_values) || all(is.na(param_values))) {
     # remove param.sti in case of previous run using it ...
-    if (suppressWarnings(file.remove(file.path(
-      workspace,
-      "param.sti"
-    )))) {
+    if (
+      suppressWarnings(file.remove(file.path(
+        workspace,
+        "param.sti"
+      )))
+    ) {
       tryCatch(set_codeoptim(workspace, value = 0), error = function(cond) {
         return(FALSE)
       })
     }
   } else {
-
     # convert into vector in case a tibble is given instead of a vector
     param_values <-
       stats::setNames(as.numeric(param_values), names(param_values))
@@ -80,7 +84,8 @@ force_param_values <- function(workspace,
     ind_non_na <- !is.na(param_values)
     if (!all(ind_non_na)) {
       warning(paste(
-        "Parameter(s)", paste(names(param_values[!ind_non_na]), collapse = ","),
+        "Parameter(s)",
+        paste(names(param_values[!ind_non_na]), collapse = ","),
         "will not be forced (maybe their values are not numeric?",
         " In that case please use set_param_*** functions)."
       ))

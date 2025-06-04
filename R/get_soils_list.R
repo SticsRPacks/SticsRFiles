@@ -27,25 +27,32 @@
 #' # Read from a soil file (all soil types available in a soil file)
 #' soil_list <- get_soils_list(file = file.path(path, "sols.xml"))
 #'
-#' soil_list <- get_soils_list(file = file.path(path, "usms.xml"),
-#'                             soil = c("solcanne", "sole"))
+#' soil_list <- get_soils_list(
+#'   file = file.path(path, "usms.xml"),
+#'   soil = c("solcanne", "sole")
+#' )
 #' @export
 #'
-get_soils_list <- function(file,
-                           soil = NULL,
-                           file_path = lifecycle::deprecated(),
-                           name = lifecycle::deprecated()) {
+get_soils_list <- function(
+    file,
+    soil = NULL,
+    file_path = lifecycle::deprecated(),
+    name = lifecycle::deprecated()) {
   if (lifecycle::is_present(file_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_soils_list(file_path)",
-                              "get_soils_list(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_soils_list(file_path)",
+      "get_soils_list(file)"
+    )
   } else {
     file_path <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_soils_list(name)",
-                              "get_soils_list(soil)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_soils_list(name)",
+      "get_soils_list(soil)"
+    )
   } else {
     name <- soil # to remove when we update inside the function
   }

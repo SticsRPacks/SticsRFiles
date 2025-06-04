@@ -17,8 +17,10 @@
 #'
 #' par_form <- get_param_formalisms(sta_doc, "zr")
 #'
-#' par_form_list <- get_param_formalisms(sta_doc,
-#'                                                    c("zr", "altistation"))
+#' par_form_list <- get_param_formalisms(
+#'   sta_doc,
+#'   c("zr", "altistation")
+#' )
 #' }
 #'
 #' @keywords internal
@@ -27,7 +29,6 @@
 #'
 #'
 get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
-
   # For multiple documents
   if (is.list(xml_doc) && length(xml_doc) > 1) {
     names <- lapply(
@@ -41,7 +42,6 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
       }
     )
 
-
     return(names)
   }
 
@@ -51,14 +51,10 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
   # If no parameter name is given
   if (base::is.null(name)) name <- get_param_names(xml_doc)
 
-
   # recursive call for a parameter name list
   if (length(name) > 1) {
     form_list <- lapply(name, function(x) {
-      get_param_formalisms(xml_doc,
-        x,
-        form_only = form_only
-      )
+      get_param_formalisms(xml_doc, x, form_only = form_only)
     })
     # if no formalism
     if (all(unlist(lapply(form_list, base::is.null)))) {
@@ -78,7 +74,6 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
     return(values)
   }
 
-
   # case : param name as value of @nomParam attribute
   x_path <- paste0("//*[@nomParam=\"", name, "\"]//ancestor::formalisme")
   values <- param_formalism_elt(xml_doc, x_path, name)
@@ -86,13 +81,11 @@ get_param_formalisms <- function(xml_doc, name = NULL, form_only = FALSE) {
     return(values)
   }
 
-
   return(values)
 }
 
 
 param_formalism_elt <- function(xml_doc, xpath, name) {
-
   # Formatting a parameter formalism list unit
   values <- get_attrs_values(xml_doc, xpath, "nom")
 
@@ -106,7 +99,6 @@ param_formalism_elt <- function(xml_doc, xpath, name) {
     }
     return(values)
   }
-
 
   # Just for an unnamed vector
   names(values[[1]]) <- NULL

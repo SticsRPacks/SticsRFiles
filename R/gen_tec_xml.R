@@ -57,47 +57,50 @@
 #' @export
 #'
 
-gen_tec_xml <- function(param_df = NULL,
-                        file = NULL,
-                        out_dir,
-                        stics_version = "latest",
-                        na_values = NA,
-                        param_table = lifecycle::deprecated(),
-                        tec_in_file = lifecycle::deprecated(),
-                        out_path = lifecycle::deprecated()) {
-
+gen_tec_xml <- function(
+    param_df = NULL,
+    file = NULL,
+    out_dir,
+    stics_version = "latest",
+    na_values = NA,
+    param_table = lifecycle::deprecated(),
+    tec_in_file = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   # TODO: refactor with gen_sta_file, gen_ini_file : same code
 
   if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_tec_xml(param_table)",
-                              "gen_tec_xml(param_df)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_tec_xml(param_table)",
+      "gen_tec_xml(param_df)"
+    )
   } else {
     param_table <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(tec_in_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_tec_xml(tec_in_file)",
-                              "gen_tec_xml(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_tec_xml(tec_in_file)",
+      "gen_tec_xml(file)"
+    )
   } else {
     tec_in_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_tec_xml(out_path)",
-                              "gen_tec_xml(out_dir)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_tec_xml(out_path)",
+      "gen_tec_xml(out_dir)"
+    )
   } else {
     out_path <- out_dir # to remove when we update inside the function
   }
-
-
 
   xml_doc_tmpl <- NULL
 
   if (!base::is.null(tec_in_file)) {
     xml_doc_tmpl <- xmldocument(tec_in_file)
   }
-
 
   # detecting tec names column
   param_names <- names(param_table)
@@ -106,7 +109,6 @@ gen_tec_xml <- function(param_df = NULL,
     stop("The column for identifying tec names has not been found !")
   }
   tec_col <- param_names[col_id]
-
 
   # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(
@@ -117,19 +119,21 @@ gen_tec_xml <- function(param_df = NULL,
   ) # ,
   # dict = dict)
 
-
   if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
-
 
   # Finding non NULL elements in xml_docs (i.e. no errors in doc generation)
   out_idx <- unlist(lapply(xml_docs, base::is.null))
 
   if (any(out_idx)) {
-    message(paste0("\nErrors have been detected while trying to replace",
-               "parameters values in xml documents\n"),
-            paste(sum(!out_idx), "files have been generated !\n"))
+    message(
+      paste0(
+        "\nErrors have been detected while trying to replace",
+        "parameters values in xml documents\n"
+      ),
+      paste(sum(!out_idx), "files have been generated !\n")
+    )
     # selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
   }
@@ -138,8 +142,6 @@ gen_tec_xml <- function(param_df = NULL,
   if (all(out_idx)) {
     return(invisible())
   }
-
-
 
   # checking if out_path exists
   if (!dir.exists(out_path)) {
@@ -153,8 +155,6 @@ gen_tec_xml <- function(param_df = NULL,
     out_name[!ids] <- paste0(param_table[[tec_col]][!ids], "_tec.xml")
   }
   tec_out_file <- file.path(out_path, out_name)
-
-
 
   # checking dimensions
   if (!length(xml_docs) == length(tec_out_file)) {
@@ -172,7 +172,7 @@ gen_tec_xml <- function(param_df = NULL,
     delete(xml_docs[[f]])
   }
 
-  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document"))
+  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
-
+  }
 }

@@ -25,23 +25,22 @@
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_usms_xml(
-#'   file = file.path(dir_path,"usms.xml"),
+#'   file = file.path(dir_path, "usms.xml"),
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
 #'
-upgrade_usms_xml <- function(file,
-                             out_dir,
-                             param_gen_file,
-                             obs_dir = NULL,
-                             stics_version = "V9.2",
-                             target_version = "V10.0",
-                             check_version = TRUE,
-                             overwrite = FALSE) {
-
+upgrade_usms_xml <- function(
+    file,
+    out_dir,
+    param_gen_file,
+    obs_dir = NULL,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE) {
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
-
 
   # checking version
   if (check_version) {
@@ -51,16 +50,20 @@ upgrade_usms_xml <- function(file,
 
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file,
-                                           stics_version,
-                                           param_gen_file = param_gen_file
+    file_version <- check_xml_file_version(
+      file,
+      stics_version,
+      param_gen_file = param_gen_file
     )
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file
+        attr(file_version, "version"),
+        " \n",
+        file
       )
     }
 
@@ -68,16 +71,16 @@ upgrade_usms_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
-
 
     # for checking only once when multiple files are treated !
     check_version <- FALSE
   }
-
 
   if (is.null(obs_dir)) obs_dir <- dirname(file)
 
@@ -85,9 +88,10 @@ upgrade_usms_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # setting file STICS version
-  set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite
+  set_xml_file_version(
+    old_doc,
+    new_version = target_version,
+    overwrite = overwrite
   )
 
   # checking if fobs exist
@@ -97,17 +101,15 @@ upgrade_usms_xml <- function(file,
   # where to add fobs fields !!!!!
   # default behavior: no existing fobs fields
   if (is.null(obs_nodes)) {
-    new_node <- XML::xmlParseString("<fobs>null</fobs>",
-                                    addFinalizer = TRUE
-    )
+    new_node <- XML::xmlParseString("<fobs>null</fobs>", addFinalizer = TRUE)
 
     parent_node <- get_nodes(old_doc, "//plante")
 
-    lapply(parent_node,
-           function(x) XML::addChildren(x, XML::xmlClone(new_node))
+    lapply(
+      parent_node,
+      function(x) XML::addChildren(x, XML::xmlClone(new_node))
     )
   }
-
 
   # Usms names
   usms_names <- get_attrs_values(old_doc, "//usm", "nom")
@@ -120,13 +122,13 @@ upgrade_usms_xml <- function(file,
   obs_val[obs_exist] <- obs_names[obs_exist]
 
   # Setting obs files names into fobs for existing files
-  set_param_value(old_doc,
-                  param_name = "fobs",
-                  param_value = obs_val,
-                  parent_name = "plante",
-                  parent_sel_attr = "1"
+  set_param_value(
+    old_doc,
+    param_name = "fobs",
+    param_value = obs_val,
+    parent_name = "plante",
+    parent_sel_attr = "1"
   )
-
 
   # writing file
   write_xml_file(old_doc, file.path(out_dir, basename(file)), overwrite)

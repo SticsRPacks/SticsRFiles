@@ -21,19 +21,29 @@
 #' @noRd
 #'
 expand_stics_names <- function(in_csv_file, out_csv_file, header = FALSE) {
-
   skip <- as.integer(header)
-  in_data <- utils::read.table(in_csv_file,
-    sep = ";", stringsAsFactors = FALSE,
-    header = FALSE, skip = skip
+  in_data <- utils::read.table(
+    in_csv_file,
+    sep = ";",
+    stringsAsFactors = FALSE,
+    header = FALSE,
+    skip = skip
   )
 
-  #if (base::is.null(header_vec)) {
-    names(in_data) <- c(
-      "name", "def", "unit", "param", "dim", "type",
-      "min", "max", "optim", "n"
-    )
-  #}
+  # if (base::is.null(header_vec)) {
+  names(in_data) <- c(
+    "name",
+    "def",
+    "unit",
+    "param",
+    "dim",
+    "type",
+    "min",
+    "max",
+    "optim",
+    "n"
+  )
+  # }
 
   # getting param names to duplicate
   par_to_expand <- in_data[in_data$dim > 1, ]
@@ -60,11 +70,14 @@ expand_stics_names <- function(in_csv_file, out_csv_file, header = FALSE) {
   out_df <- rbind(in_data, out_df, par0)
   out_df <- out_df[order(out_df$name), ]
 
-
-  utils::write.table(out_df,
+  utils::write.table(
+    out_df,
     file = out_csv_file,
-    sep = ";", col.names = FALSE, row.names = FALSE,
-    quote = FALSE, na = ""
+    sep = ";",
+    col.names = FALSE,
+    row.names = FALSE,
+    quote = FALSE,
+    na = ""
   )
 
   return(invisible(out_df))

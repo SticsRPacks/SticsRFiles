@@ -18,7 +18,6 @@
 #' @noRd
 #'
 
-
 get_daily_results <- function(...) {
   lifecycle::deprecate_warn(
     "1.0.0",
@@ -90,68 +89,80 @@ get_daily_results <- function(...) {
 #'
 #' @export
 #'
-get_sim <- function(workspace,
-                    usm = NULL,
-                    var = NULL,
-                    dates = NULL,
-                    usms_file = NULL,
-                    javastics = NULL,
-                    verbose = TRUE,
-                    usm_name = lifecycle::deprecated(),
-                    var_list = lifecycle::deprecated(),
-                    dates_list = lifecycle::deprecated(),
-                    usms_filepath = lifecycle::deprecated(),
-                    javastics_path = lifecycle::deprecated()) {
-
-
+get_sim <- function(
+    workspace,
+    usm = NULL,
+    var = NULL,
+    dates = NULL,
+    usms_file = NULL,
+    javastics = NULL,
+    verbose = TRUE,
+    usm_name = lifecycle::deprecated(),
+    var_list = lifecycle::deprecated(),
+    dates_list = lifecycle::deprecated(),
+    usms_filepath = lifecycle::deprecated(),
+    javastics_path = lifecycle::deprecated()) {
   # Managing deprecated arguments
   # usm_name
   if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_sim(usm_name)",
-                              "get_sim(usm)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_sim(usm_name)",
+      "get_sim(usm)"
+    )
   } else {
     usm_name <- usm # to remove when we update inside the function
   }
   # var_list
   if (lifecycle::is_present(var_list)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_sim(var_list)",
-                              "get_sim(var)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_sim(var_list)",
+      "get_sim(var)"
+    )
   } else {
     var_list <- var # to remove when we update inside the function
   }
   # dates_list
   if (lifecycle::is_present(dates_list)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_sim(dates_list)",
-                              "get_sim(dates)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_sim(dates_list)",
+      "get_sim(dates)"
+    )
   } else {
     dates_list <- dates # to remove when we update inside the function
   }
   # usms_filepath
   if (lifecycle::is_present(usms_filepath)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_sim(usms_filepath)",
-                              "get_sim(usms_file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_sim(usms_filepath)",
+      "get_sim(usms_file)"
+    )
   } else {
     usms_filepath <- usms_file # to remove when we update inside the function
   }
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_sim(javastics_path)",
-                              "get_sim(javastics)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_sim(javastics_path)",
+      "get_sim(javastics)"
+    )
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }
 
-
-
-
   res <- get_file(
-    workspace, usm_name, var_list, dates_list, usms_filepath,
-    javastics_path, verbose, "sim"
+    workspace,
+    usm_name,
+    var_list,
+    dates_list,
+    usms_filepath,
+    javastics_path,
+    verbose,
+    "sim"
   )
 
   # Testing if results list is not empty

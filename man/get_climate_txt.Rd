@@ -34,7 +34,7 @@ for the STICS model.
 Read the meteorology input for STICS ("climat.txt")
 }
 \note{
-The time-related variables are summarised into one POSIXct column named
+The time-related variables are summarized into one POSIXct column named
 \code{date}.
 }
 \examples{

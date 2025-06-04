@@ -28,13 +28,16 @@
 #'
 #' @export
 #'
-get_plants_nb <- function(usms_file,
-                          usms_list = c(),
-                          usm_file_path = lifecycle::deprecated()) {
+get_plants_nb <- function(
+    usms_file,
+    usms_list = c(),
+    usm_file_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_file_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_plants_nb(usm_file_path)",
-                              "get_plants_nb(usms_file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_plants_nb(usm_file_path)",
+      "get_plants_nb(usms_file)"
+    )
   } else {
     usm_file_path <- usms_file # to remove when we update inside the function
   }
@@ -49,8 +52,10 @@ get_plants_nb <- function(usms_file,
   if (!base::file.exists(usm_file_path)) stop(usm_file_path, " does not exist")
 
   if (usm) {
-    return(get_plants_nb_txt(usm_txt_path = usm_file_path,
-                             usm_name = usms_list))
+    return(get_plants_nb_txt(
+      usm_txt_path = usm_file_path,
+      usm_name = usms_list
+    ))
   } else {
     return(get_plants_nb_xml(usms_file = usm_file_path, usms_list = usms_list))
   }
@@ -85,10 +90,10 @@ get_plants_nb <- function(usms_file,
 #' @keywords internal
 #' @noRd
 #'
-get_plants_nb_xml <- function(usms_file,
-                              usms_list = c(),
-                              usm_xml_path = lifecycle::deprecated()) {
-
+get_plants_nb_xml <- function(
+    usms_file,
+    usms_list = c(),
+    usm_xml_path = lifecycle::deprecated()) {
   # usm_xml_path
   if (lifecycle::is_present(usm_xml_path)) {
     lifecycle::deprecate_warn(
@@ -119,22 +124,20 @@ get_plants_nb_xml <- function(usms_file,
 }
 
 
-
-
 get_plants_nb_txt <- function(usm_txt_path, usm_name = NULL) {
   if (base::basename(usm_txt_path) != "new_travail.usm") {
     return()
   }
 
-
   if (length(usm_name) > 1) stop("Only one usm name may be given !")
 
   # Getting usm parameters
-  usm_data <- get_usm_txt(filepath = usm_txt_path)
+  usm_data <- get_usm_txt(file = usm_txt_path)
 
   # Checking usm name
-  if (!base::is.null(usm_name) && usm_data$nom != usm_name)
+  if (!base::is.null(usm_name) && usm_data$nom != usm_name) {
     stop(usm_name, ": wrong usm name")
+  }
 
   # Returning a named vector
   plants_nb <- as.numeric(usm_data$nbplantes)

@@ -56,21 +56,24 @@
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #'
 #' sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
-#' gen_sols_xml(file = file.path(tempdir(), "sols.xml"),
-#' param_df = sols_param_df)
+#' gen_sols_xml(
+#'   file = file.path(tempdir(), "sols.xml"),
+#'   param_df = sols_param_df
+#' )
 #'
 #' @export
 #'
 #'
 #'
-gen_sols_xml <- function(file,
-                         param_df,
-                         template = NULL,
-                         stics_version = "latest",
-                         sols_in_file = lifecycle::deprecated(),
-                         sols_param = lifecycle::deprecated(),
-                         sols_out_file = lifecycle::deprecated(),
-                         sols_nb = lifecycle::deprecated()) {
+gen_sols_xml <- function(
+    file,
+    param_df,
+    template = NULL,
+    stics_version = "latest",
+    sols_in_file = lifecycle::deprecated(),
+    sols_param = lifecycle::deprecated(),
+    sols_out_file = lifecycle::deprecated(),
+    sols_nb = lifecycle::deprecated()) {
   if (lifecycle::is_present(sols_in_file)) {
     lifecycle::deprecate_warn(
       "1.0.0",
@@ -102,9 +105,10 @@ gen_sols_xml <- function(file,
   }
 
   if (lifecycle::is_present(sols_nb)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_sols_xml(sols_nb)",
-                              details = "directly computed in the function."
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_sols_xml(sols_nb)",
+      details = "directly computed in the function."
     )
   } else {
     sols_nb <- nrow(sols_param)
@@ -124,8 +128,6 @@ gen_sols_xml <- function(file,
     stics_version = stics_version
   )
 
-
-
   # checking if out dir exists
   out_path <- dirname(sols_out_file)
   if (!dir.exists(out_path)) {
@@ -138,7 +140,7 @@ gen_sols_xml <- function(file,
   # finalizing object
   delete(xml_doc)
 
-  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document"))
+  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
-
+  }
 }

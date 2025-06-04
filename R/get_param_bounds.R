@@ -21,8 +21,10 @@
 #'
 #' par_bounds <- get_param_bounds(sta_doc, "zr")
 #'
-#' par_bounds_list <- get_param_bounds(sta_doc,
-#'                                                  c("zr", "altistation"))
+#' par_bounds_list <- get_param_bounds(
+#'   sta_doc,
+#'   c("zr", "altistation")
+#' )
 #'
 #'
 #' get_param_bounds(sta_doc, c("zr", "altistation"), "min")
@@ -32,11 +34,11 @@
 #'
 #' @noRd
 #'
-get_param_bounds <- function(xml_doc,
-                             param_name,
-                             bounds_name = NULL,
-                             output = "data.frame") {
-
+get_param_bounds <- function(
+    xml_doc,
+    param_name,
+    bounds_name = NULL,
+    output = "data.frame") {
   def_names <- c("min", "max")
 
   df_out <- output == "data.frame"
@@ -62,8 +64,6 @@ get_param_bounds <- function(xml_doc,
         )
       }
     )
-
-
 
     if (df_out) {
       bounds_list <- dplyr::bind_rows(bounds_list)
@@ -100,8 +100,6 @@ get_param_bounds <- function(xml_doc,
     )
   }
 
-
-
   # Fixing bounds values
   bounds_values <- list(fix_bounds(bounds_values, bounds_name, param_name))
   names(bounds_values) <- param_name
@@ -129,7 +127,6 @@ fix_bounds <- function(values, bounds_name, param_name) {
 }
 
 
-
 #' Setting bounds values (min, max) for missing bounds and/or
 #' naming bounds values vector with bounds names
 #'
@@ -145,7 +142,6 @@ fix_bounds <- function(values, bounds_name, param_name) {
 #'
 #'
 fix_missing_bounds <- function(values, bounds_name) {
-
   # Fixing missing values
   val <- unlist(values)
 
@@ -162,8 +158,6 @@ fix_missing_bounds <- function(values, bounds_name) {
 
 
 fix_dup_bounds <- function(values, bounds_name, param_name) {
-
-
   # Fixing duplicates
   values <- lapply(values, unique)
   duplicates <- unlist(lapply(values, function(x) length(x) > 1))
@@ -186,11 +180,17 @@ fix_dup_bounds <- function(values, bounds_name, param_name) {
     warning(paste(
       "Found different values in bound(s) \n",
       paste(bounds_name[duplicates], collapse = ", "),
-      "\nfor parameter", param_name, "\nA single value has been selected.\n",
-      paste(sprintf(
-        "%s: %s", bounds_name[duplicates],
-        as.character(values[duplicates])
-      ), collapse = "\n")
+      "\nfor parameter",
+      param_name,
+      "\nA single value has been selected.\n",
+      paste(
+        sprintf(
+          "%s: %s",
+          bounds_name[duplicates],
+          as.character(values[duplicates])
+        ),
+        collapse = "\n"
+      )
     ))
   }
 

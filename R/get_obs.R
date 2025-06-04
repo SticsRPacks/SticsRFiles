@@ -75,20 +75,19 @@
 #'
 #' @export
 #'
-get_obs <- function(workspace,
-                    usm = NULL,
-                    var = NULL,
-                    dates = NULL,
-                    usms_file = NULL,
-                    javastics = NULL,
-                    verbose = TRUE,
-                    usm_name = lifecycle::deprecated(),
-                    var_list = lifecycle::deprecated(),
-                    dates_list = lifecycle::deprecated(),
-                    usms_filepath = lifecycle::deprecated(),
-                    javastics_path = lifecycle::deprecated()) {
-
-
+get_obs <- function(
+    workspace,
+    usm = NULL,
+    var = NULL,
+    dates = NULL,
+    usms_file = NULL,
+    javastics = NULL,
+    verbose = TRUE,
+    usm_name = lifecycle::deprecated(),
+    var_list = lifecycle::deprecated(),
+    dates_list = lifecycle::deprecated(),
+    usms_filepath = lifecycle::deprecated(),
+    javastics_path = lifecycle::deprecated()) {
   # Managing deprecated arguments
   # usm_name
   if (lifecycle::is_present(usm_name)) {
@@ -110,24 +109,33 @@ get_obs <- function(workspace,
   }
   # usms_filepath
   if (lifecycle::is_present(usms_filepath)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_obs(usms_filepath)",
-                              "get_obs(usms_file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_obs(usms_filepath)",
+      "get_obs(usms_file)"
+    )
   } else {
     usms_filepath <- usms_file # to remove when we update inside the function
   }
   # javastics_path
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_obs(javastics_path)",
-                              "get_obs(javastics)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_obs(javastics_path)",
+      "get_obs(javastics)"
+    )
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }
 
-
   get_file(
-    workspace, usm_name, var_list, dates_list, usms_filepath,
-    javastics_path, verbose, "obs"
+    workspace,
+    usm_name,
+    var_list,
+    dates_list,
+    usms_filepath,
+    javastics_path,
+    verbose,
+    "obs"
   )
 }

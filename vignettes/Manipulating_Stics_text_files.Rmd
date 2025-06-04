@@ -32,7 +32,7 @@ stics_version <- get_stics_versions_compat()$latest_version
 
 ## Overview
 
-This package allows the user to programmatically manipulate either the XML files used to store more information, or the text files directly used as inputs by the STICS model. This vignette explains the second one. For more details on how to manipulate XML files, please refer to the vignette [Manipulating STICS XML files](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html).
+This package allows the user by programming to manipulate either the XML files used to store more information, or the text files directly used as inputs by the STICS model. This vignette explains the second one. For more details on how to manipulate XML files, please refer to the vignette [Manipulating STICS XML files](https://sticsrpacks.github.io/SticsRFiles/articles/Manipulating_Stics_XML_files.html).
 
 > Disclaimer: These functionalities are more oriented toward advanced users and/or developers.
 
@@ -101,13 +101,17 @@ A particular search in plant parameters for specific varieties, can be done usin
 
 * either using names,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf",
-              variety = c("Pactol", "Cecilia", "clarica"))
+get_param_txt(
+  workspace = example_txt_dir, param = "stlevamf",
+  variety = c("Pactol", "Cecilia", "clarica")
+)
 ```
 * or using varieties indexes in plant file,
 ```{r}
-get_param_txt(workspace = example_txt_dir, param = "stlevamf",
-              variety = c(1, 2, 5))
+get_param_txt(
+  workspace = example_txt_dir, param = "stlevamf",
+  variety = c(1, 2, 5)
+)
 ```
 
 
@@ -177,7 +181,7 @@ There are four more arguments to the function:
 
 * `variety`: This optional argument may be used for replacing varietal parameter values either giving a name (`codevar` in the plant file) or an index of the variety specified in the technical file (`variete`)
 
-* `layer`: This may be used for replacing specific parameters values, for specific soil layers either for the soil characteristics (soil file: `param.sol`), or roots density and mineral elements concentration at the simulation start (initialisation file: `ficini.txt`). 
+* `layer`: This may be used for replacing specific parameters values, for specific soil layers either for the soil characteristics (soil file: `param.sol`), or roots density and mineral elements concentration at the simulation start (initialisztion file: `ficini.txt`). 
 
 * `stics_version`: At last, the model version can be specified through that argument, because files content may vary according to the version. 
 
@@ -191,11 +195,13 @@ get_param_txt(workspace = example_txt_dir, param = "densinitial")
 * The values for the plant 1 and layers 1 and 4 are replaced as follows:
 
 ```{r}
-set_param_txt(workspace = example_txt_dir,
-              param = "densinitial",
-              plant_id = 1,
-              layer = c(1, 4),
-              value = c(0.5, 0.1))
+set_param_txt(
+  workspace = example_txt_dir,
+  param = "densinitial",
+  plant_id = 1,
+  layer = c(1, 4),
+  value = c(0.5, 0.1)
+)
 ```
 
 * The final values in the file are:

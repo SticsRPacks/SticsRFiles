@@ -46,42 +46,47 @@
 #' @export
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
-gen_sta_xml <- function(param_df,
-                        file = NULL,
-                        out_dir,
-                        stics_version = "latest",
-                        param_table = lifecycle::deprecated(),
-                        sta_in_file = lifecycle::deprecated(),
-                        out_path = lifecycle::deprecated()) {
+gen_sta_xml <- function(
+    param_df,
+    file = NULL,
+    out_dir,
+    stics_version = "latest",
+    param_table = lifecycle::deprecated(),
+    sta_in_file = lifecycle::deprecated(),
+    out_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_sta_xml(param_table)",
-                              "gen_sta_xml(param_df)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_sta_xml(param_table)",
+      "gen_sta_xml(param_df)"
+    )
   } else {
     param_table <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(sta_in_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_sta_xml(sta_in_file)",
-                              "gen_sta_xml(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_sta_xml(sta_in_file)",
+      "gen_sta_xml(file)"
+    )
   } else {
     sta_in_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_sta_xml(out_path)",
-                              "gen_sta_xml(out_dir)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_sta_xml(out_path)",
+      "gen_sta_xml(out_dir)"
+    )
   } else {
     out_path <- out_dir # to remove when we update inside the function
   }
-
 
   xml_doc_tmpl <- NULL
 
   if (!base::is.null(sta_in_file)) {
     xml_doc_tmpl <- xmldocument(sta_in_file)
   }
-
 
   # detecting sta names column
   param_names <- names(param_table)
@@ -91,26 +96,27 @@ gen_sta_xml <- function(param_df,
   }
   sta_col <- param_names[col_id]
 
-
   xml_docs <- gen_sta_doc(
     xml_doc = xml_doc_tmpl,
     param_table = param_table[, -col_id],
     stics_version = stics_version
   )
 
-
   if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
   }
-
 
   # Finding non NULL elements in xml_docs (i.e. no errors in doc generation)
   out_idx <- unlist(lapply(xml_docs, base::is.null))
 
   if (any(out_idx)) {
-    message(paste0("\nErrors have been detected while trying to replace",
-                   "parameters values in xml documents\n"),
-            paste(sum(!out_idx), "files have been generated !\n"))
+    message(
+      paste0(
+        "\nErrors have been detected while trying to replace",
+        "parameters values in xml documents\n"
+      ),
+      paste(sum(!out_idx), "files have been generated !\n")
+    )
 
     # selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
@@ -120,7 +126,6 @@ gen_sta_xml <- function(param_df,
   if (all(out_idx)) {
     return(invisible())
   }
-
 
   # checking if out_path exists
   if (!dir.exists(out_path)) {
@@ -148,7 +153,7 @@ gen_sta_xml <- function(param_df,
     delete(xml_docs[[f]])
   }
 
-  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document"))
+  if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
-
+  }
 }

@@ -23,7 +23,6 @@
 #' @noRd
 #'
 get_options_names <- function(xml_file_path, option_names = NULL) {
-
   # Loading xml file
   xml_param <- xmldocument(xml_file_path)
 

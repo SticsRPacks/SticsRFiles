@@ -52,43 +52,53 @@
 #' @examples
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 #' usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
-#' gen_usms_xml(file = file.path(tempdir(), "usms.xml"),
-#'  param_df = usms_param_df)
+#' gen_usms_xml(
+#'   file = file.path(tempdir(), "usms.xml"),
+#'   param_df = usms_param_df
+#' )
 #'
 #' @export
 #'
 
-gen_usms_xml <- function(file,
-                         param_df = NULL,
-                         template = NULL,
-                         stics_version = "latest",
-                         usms_out_file = lifecycle::deprecated(),
-                         usms_nb = lifecycle::deprecated(),
-                         usms_param = lifecycle::deprecated(),
-                         usms_in_file = lifecycle::deprecated()) {
+gen_usms_xml <- function(
+    file,
+    param_df = NULL,
+    template = NULL,
+    stics_version = "latest",
+    usms_out_file = lifecycle::deprecated(),
+    usms_nb = lifecycle::deprecated(),
+    usms_param = lifecycle::deprecated(),
+    usms_in_file = lifecycle::deprecated()) {
   if (lifecycle::is_present(usms_out_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_usms_xml(usms_out_file)",
-                              "gen_usms_xml(file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_usms_xml(usms_out_file)",
+      "gen_usms_xml(file)"
+    )
   } else {
     usms_out_file <- file # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_param)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_usms_xml(usms_param)",
-                              "gen_usms_xml(param_df)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_usms_xml(usms_param)",
+      "gen_usms_xml(param_df)"
+    )
   } else {
     usms_param <- param_df # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_in_file)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "gen_usms_xml(usms_in_file)",
-                              "gen_usms_xml(template)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "gen_usms_xml(usms_in_file)",
+      "gen_usms_xml(template)"
+    )
   } else {
     usms_in_file <- template # to remove when we update inside the function
   }
   if (lifecycle::is_present(usms_nb)) {
-    lifecycle::deprecate_warn("1.0.0",
+    lifecycle::deprecate_warn(
+      "1.0.0",
       "gen_usms_xml(usms_nb)",
       details = "It is now directly computed in the function."
     )
@@ -129,14 +139,14 @@ gen_usms_xml <- function(file,
     stop(paste("The directory does not exist: ", out_path))
   }
 
-
   # for getting only the xml doc in return
   if (!base::is.null(usms_out_file)) {
     save_xml_doc(xml_doc, usms_out_file)
   }
 
-  if (!is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document"))
+  if (!is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
+  }
 
   delete(xml_doc)
 }

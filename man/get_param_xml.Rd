@@ -71,5 +71,4 @@ file <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 # Getting parameters for irrigation (date and quantity)
 get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
 
-
 }

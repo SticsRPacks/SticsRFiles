@@ -17,7 +17,6 @@
 #' @export
 #'
 get_cultivars_param <- function(file) {
-
   cv_list <- get_cultivars_list(file)
 
   out <- get_param_xml(file, select = "variete", select_value = cv_list)

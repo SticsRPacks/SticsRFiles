@@ -1,10 +1,6 @@
-library(SticsRFiles)
-library(dplyr)
-
 stics_version <- get_stics_versions_compat()$latest_version
 
-if (get_version_num(stics_version = stics_version)
->= 10) {
+if (get_version_num(stics_version = stics_version) >= 10) {
   stics_version <- "V10.0"
 }
 parnames <- list()
@@ -27,7 +23,8 @@ out_dir <- file.path(tempdir(), "gen_xml")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 
 gen_ini_xml(
-  param_df = ini_param[1, ], out_dir = out_dir,
+  param_df = ini_param[1, ],
+  out_dir = out_dir,
   stics_version = stics_version
 )
 
@@ -35,21 +32,27 @@ ini_xml <- file.path(out_dir, ini_param[1, ]$Ini_name)
 
 
 # For plante 1
-xl_plt1_values <- select(ini_param[1, ],
-                         ends_with("Crop1"),
-                         -starts_with("code"))
+xl_plt1_values <- dplyr::select(
+  ini_param[1, ],
+  ends_with("Crop1"),
+  -starts_with("code")
+)
 xl_params <- gsub(
-  pattern = "(.*)_(.*)", x = names(xl_plt1_values),
+  pattern = "(.*)_(.*)",
+  x = names(xl_plt1_values),
   replacement = "\\1"
 )
 
-xl_params <- gsub(pattern = "(.*)(\\_[0-9]*$)",
-                  x = xl_params,
-                  replacement = "\\1")
+xl_params <- gsub(
+  pattern = "(.*)(\\_[0-9]*$)",
+  x = xl_params,
+  replacement = "\\1"
+)
 
-xl_plt1_values <- select(xl_plt1_values, starts_with(xl_params))
+xl_plt1_values <- dplyr::select(xl_plt1_values, starts_with(xl_params))
 xml_plt1_values <- get_param_xml(
-  file = ini_xml, select = "plante",
+  file = ini_xml,
+  select = "plante",
   select_value = 1
 )[[1]]
 idx <- names(xml_plt1_values) %in% xl_params
@@ -57,25 +60,32 @@ xml_plt1_values <- unlist(xml_plt1_values[idx])
 
 # For plant 2
 xml_plt2_values <- unlist(get_param_xml(
-  file = ini_xml, select = "plante",
+  file = ini_xml,
+  select = "plante",
   select_value = 2
 )[[1]])
 
-xl_plt2_values <- select(ini_param[1, ],
-                         ends_with("Crop2"),
-                         -starts_with("code"))
+xl_plt2_values <- dplyr::select(
+  ini_param[1, ],
+  ends_with("Crop2"),
+  -starts_with("code")
+)
 xl_params <- gsub(
-  pattern = "(.*)_(.*)", x = names(xl_plt1_values),
+  pattern = "(.*)_(.*)",
+  x = names(xl_plt1_values),
   replacement = "\\1"
 )
 
-xl_params <- gsub(pattern = "(.*)(\\_[0-9]*$)",
-                  x = xl_params,
-                  replacement = "\\1")
+xl_params <- gsub(
+  pattern = "(.*)(\\_[0-9]*$)",
+  x = xl_params,
+  replacement = "\\1"
+)
 
-xl_plt2_values <- select(xl_plt2_values, starts_with(xl_params))
+xl_plt2_values <- dplyr::select(xl_plt2_values, starts_with(xl_params))
 xml_plt2_values <- get_param_xml(
-  file = ini_xml, select = "plante",
+  file = ini_xml,
+  select = "plante",
   select_value = 2
 )[[1]]
 idx <- names(xml_plt2_values) %in% xl_params
@@ -89,7 +99,7 @@ xml_hinit_values <- unlist(get_param_xml(
   param = hinit_name
 )[[1]])
 
-xl_hinit_values <- select(ini_param[1, ], starts_with(hinit_name))
+xl_hinit_values <- dplyr::select(ini_param[1, ], starts_with(hinit_name))
 
 # NO3init
 no3init_name <- parnames$no3init[[stics_version]]
@@ -97,7 +107,7 @@ xml_no3init_values <- unlist(get_param_xml(
   file = ini_xml,
   param = no3init_name
 )[[1]])
-xl_no3init_values <- select(ini_param[1, ], starts_with(no3init_name))
+xl_no3init_values <- dplyr::select(ini_param[1, ], starts_with(no3init_name))
 
 # NH4init
 nh4init_name <- parnames$nh4init[[stics_version]]
@@ -105,7 +115,7 @@ xml_nh4init_values <- unlist(get_param_xml(
   file = ini_xml,
   param = nh4init_name
 )[[1]])
-xl_nh4init_values <- select(ini_param[1, ], starts_with(nh4init_name))
+xl_nh4init_values <- dplyr::select(ini_param[1, ], starts_with(nh4init_name))
 
 context("Comparing table values vs xml ini file values")
 

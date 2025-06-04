@@ -1,7 +1,8 @@
-options(warn=-1)
+options(warn = -1)
 
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
+host <- "github.com"
 
 context("get model outputs")
 
@@ -44,15 +45,12 @@ path1 <- file.path(path, "workspace1")
 path2 <- file.path(path, "workspace2")
 paths <- c(path1, path2)
 
-test_that(
-  "get output for 2 workspaces without usm argument, without usms.xml",
-  {
-    files_nb <- length(list.files(paths))
-    outputs <- get_sim(workspace = paths)
-    expect_true(is.list(outputs) && !is.data.frame(outputs))
-    expect_true(all(unlist(lapply(outputs, is.data.frame))))
-  }
-)
+test_that("get output for 2 workspaces without usm argument, without usms.xml", {
+  files_nb <- length(list.files(paths))
+  outputs <- get_sim(workspace = paths)
+  expect_true(is.list(outputs) && !is.data.frame(outputs))
+  expect_true(all(unlist(lapply(outputs, is.data.frame))))
+})
 
 # if usm is given, even with one usm in each workspace
 test_that("get output for 2 workspaces with usm argument, without usms.xml", {
@@ -77,7 +75,8 @@ test_that("get output for 2 workspaces without usm argument, with usms.xml", {
 test_that("get output for 2 workspaces with usm argument, with usms.xml", {
   files_nb <- length(list.files(paths))
   outputs <- get_sim(
-    workspace = paths, usms_file = file.path(path, "usms_example.xml"),
+    workspace = paths,
+    usms_file = file.path(path, "usms_example.xml"),
     usm = c("maize", "wheat")
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
@@ -108,7 +107,6 @@ test_that("output is always list, without usms.xml, banana, wheat sub-dir", {
   expect_true(is.list(outputs) && !is.data.frame(outputs))
   outputs <- get_sim(path3, usm = c("banana", "wheat"))
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-
 })
 
 # Restoring usms.xml
@@ -117,16 +115,18 @@ if (file.exists(file.path(path, "usms.xml.ori"))) {
 }
 
 test_that("output is always list, with usms.xml, banana, wheat sub-dir", {
-    outputs <- get_sim(path3, "banana",
+  outputs <- get_sim(
+    path3,
+    "banana",
     usms_file = file.path(path, "usms_example.xml")
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  outputs <- get_sim(path3,
+  outputs <- get_sim(
+    path3,
     usm = c("banana", "wheat"),
     usms_file = file.path(path, "usms_example.xml")
   )
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-
 })
 
 unlink(file.path(path, "banana"))
@@ -136,18 +136,22 @@ unlink(file.path(path, "wheat"))
 # Testing intercropping usms  ------------------------------------
 example_ic <- download_data(
   example_dirs = "study_case_intercrop",
-  stics_version = stics_version
+  stics_version = stics_version,
+  raise_error = TRUE
 )
 
 test_that("get simulations with intercrops", {
   outputs <- get_sim(workspace = example_ic)
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  expect_true(all(names(outputs) %in%
-    c(
-      "IC_Wheat_Pea_2005-2006_N0", "SC_Pea_2005-2006_N0",
-      "SC_Wheat_2005-2006_N0"
-    )))
+  expect_true(all(
+    names(outputs) %in%
+      c(
+        "IC_Wheat_Pea_2005-2006_N0",
+        "SC_Pea_2005-2006_N0",
+        "SC_Wheat_2005-2006_N0"
+      )
+  ))
   expect_true(is.data.frame(outputs$`SC_Pea_2005-2006_N0`))
   expect_equal(
     unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Plant),
@@ -168,11 +172,14 @@ test_that("get simulations with intercrops, giving usms.xml file", {
   )
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  expect_true(all(names(outputs) %in%
-    c(
-      "IC_Wheat_Pea_2005-2006_N0", "SC_Pea_2005-2006_N0",
-      "SC_Wheat_2005-2006_N0"
-    )))
+  expect_true(all(
+    names(outputs) %in%
+      c(
+        "IC_Wheat_Pea_2005-2006_N0",
+        "SC_Pea_2005-2006_N0",
+        "SC_Wheat_2005-2006_N0"
+      )
+  ))
   expect_true(is.data.frame(outputs$`SC_Pea_2005-2006_N0`))
   expect_equal(
     unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Plant),

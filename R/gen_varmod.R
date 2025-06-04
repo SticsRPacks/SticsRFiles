@@ -30,23 +30,22 @@
 #' gen_varmod(tempdir(), "masec(n)", append = TRUE)
 #' # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
 #'
-#'
 #' @export
 #'
-gen_varmod <- function(workspace,
-                       var,
-                       append = FALSE,
-                       file_name = "var.mod",
-                       stics_version = "latest",
-                       force = FALSE,
-                       var_names = lifecycle::deprecated(),
-                       version = lifecycle::deprecated()) {
-
-
+gen_varmod <- function(
+    workspace,
+    var,
+    append = FALSE,
+    file_name = "var.mod",
+    stics_version = "latest",
+    force = FALSE,
+    var_names = lifecycle::deprecated(),
+    version = lifecycle::deprecated()) {
   # var_names
   if (lifecycle::is_present(var_names)) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_varmod(var_names)",
+      "1.0.0",
+      "gen_varmod(var_names)",
       "gen_varmod(var)"
     )
   } else {
@@ -59,14 +58,13 @@ gen_varmod <- function(workspace,
   # about R version and platform (see ?version)
   if (lifecycle::is_present(version) && length(version) == 1) {
     lifecycle::deprecate_warn(
-      "1.0.0", "gen_varmod(version)",
+      "1.0.0",
+      "gen_varmod(version)",
       "gen_varmod(stics_version)"
     )
   } else {
     version <- stics_version # to remove when we update inside the function
   }
-
-
 
   # Checking if workspace exists
   if (!dir.exists(workspace)) {
@@ -87,13 +85,13 @@ gen_varmod <- function(workspace,
   # Check if the variable exist:
   var_exist <- is_stics_var(var_names, version)
 
-
   if (any(!var_exist) && isFALSE(force)) {
     var_names <- var_names[var_exist]
   }
 
-  if (!length(var_names))
+  if (!length(var_names)) {
     warning("Not any variable name to add to the var.mod file!")
+  }
 
   if (isTRUE(force)) {
     var_names[var_exist] <- var_to_stics_name(var_names[var_exist])
@@ -106,9 +104,11 @@ gen_varmod <- function(workspace,
     vars <- readLines(file_path)
     commonvars <- var_names %in% vars
     if (any(commonvars)) {
-      cli::cli_alert_warning(paste0("Variable{?s} {.var ",
-                                    "{var_names[commonvars]}} already in",
-                                    " {.code var.mod}. Not repeating it."))
+      cli::cli_alert_warning(paste0(
+        "Variable{?s} {.var ",
+        "{var_names[commonvars]}} already in",
+        " {.code var.mod}. Not repeating it."
+      ))
     }
     var_names <- var_names[!commonvars]
     if (length(var_names) == 0) {

@@ -29,13 +29,12 @@
 #'
 #' @noRd
 #'
-gen_usms_sols_doc <- function(doc_type,
-                              xml_doc = NULL,
-                              nodes_nb = NULL,
-                              nodes_param = NULL,
-                              stics_version = "latest") {
-
-
+gen_usms_sols_doc <- function(
+    doc_type,
+    xml_doc = NULL,
+    nodes_nb = NULL,
+    nodes_param = NULL,
+    stics_version = "latest") {
   # for usms and sols files
 
   doc_types <- list()
@@ -100,19 +99,22 @@ gen_usms_sols_doc <- function(doc_type,
     return(xml_doc_out)
   }
 
-
   # Creating nodes for usms or sols
-  add_node_to_doc(xml_doc_out,
-                  xml_nodes[[1]],
-                  nodes_nb = elts_nb - 1,
-                  parent_path = root_str)
+  add_node_to_doc(
+    xml_doc_out,
+    xml_nodes[[1]],
+    nodes_nb = elts_nb - 1,
+    parent_path = root_str
+  )
 
   # Warning if nodes number > 1
   # I that case, the xml_doc_out cannot be considered as a template
   if (doc_nodes_nb > 1) {
-    stop("Multiple elements in ",
-         doc_type,
-         " file, cannot be used as a template !")
+    stop(
+      "Multiple elements in ",
+      doc_type,
+      " file, cannot be used as a template !"
+    )
   }
 
   # Not any parameters values for overloading
@@ -122,12 +124,16 @@ gen_usms_sols_doc <- function(doc_type,
   }
 
   switch(doc_type,
-    usms = set_usms_param_xml(xml_doc = xml_doc_out,
-                              usms_param = nodes_param,
-                              overwrite = TRUE),
-    sols = set_sols_param_xml(xml_doc = xml_doc_out,
-                              sols_param = nodes_param,
-                              overwrite = TRUE)
+    usms = set_usms_param_xml(
+      xml_doc = xml_doc_out,
+      usms_param = nodes_param,
+      overwrite = TRUE
+    ),
+    sols = set_sols_param_xml(
+      xml_doc = xml_doc_out,
+      sols_param = nodes_param,
+      overwrite = TRUE
+    )
   )
 
   rm(xml_nodes)

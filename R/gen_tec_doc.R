@@ -30,13 +30,12 @@
 #'
 #' @noRd
 #'
-gen_tec_doc <- function(xml_doc = NULL,
-                        param_table = NULL,
-                        stics_version = "latest",
-                        dict = NULL,
-                        ...) {
-
-
+gen_tec_doc <- function(
+    xml_doc = NULL,
+    param_table = NULL,
+    stics_version = "latest",
+    dict = NULL,
+    ...) {
   dot_args <- list(...)
   dot_args_names <- names(dot_args)
 
@@ -63,13 +62,12 @@ gen_tec_doc <- function(xml_doc = NULL,
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
     xml_docs <- apply(
-      param_table, 1,
+      param_table,
+      1,
       function(x) {
         gen_tec_doc(
           xml_doc = clone_xml_doc(xml_doc),
-          param_table = as.data.frame(t(x),
-                                      stringsAsFactors = FALSE
-          ),
+          param_table = as.data.frame(t(x), stringsAsFactors = FALSE),
           stics_version = stics_version,
           dict = dict,
           na_values = na_values
@@ -83,22 +81,22 @@ gen_tec_doc <- function(xml_doc = NULL,
   gen_error <- FALSE
 
   param_table <- param_table %>%
-    dplyr::select(where(function(x) !is.na(x)) &
-                    where(function(x) {
-                      c <- x != "NA"
-                      if (is.na(c)) c <- TRUE
-                      return(c)
-
-                    }
-                    ))
+    dplyr::select(
+      where(function(x) !is.na(x)) &
+        where(function(x) {
+          c <- x != "NA"
+          if (is.na(c)) c <- TRUE
+          return(c)
+        })
+    )
 
   # TODO : Avoid making conversion at each call !!!!!!
   # getting values of params declared in the table
   table_params <- get_params_from_table(
     params_table = param_table,
-    xml_doc = xml_doc, dict = dict
+    xml_doc = xml_doc,
+    dict = dict
   )
-
 
   table_names <- names(table_params)
 
@@ -123,10 +121,13 @@ gen_tec_doc <- function(xml_doc = NULL,
     table_names <- names(table_params)
   }
 
-  vec_idx <- unlist(lapply(
-    table_params,
-    function(x) length(grep(pattern = "_[0-9]*$", names(x))) > 0
-  ), use.names = FALSE)
+  vec_idx <- unlist(
+    lapply(
+      table_params,
+      function(x) length(grep(pattern = "_[0-9]*$", names(x))) > 0
+    ),
+    use.names = FALSE
+  )
 
   scal_names <- table_names[!vec_idx]
   vec_names <- table_names[vec_idx]
@@ -178,9 +179,10 @@ gen_tec_doc <- function(xml_doc = NULL,
     #
     nb_values <- length(param_values)
     if ((nb_values > 0) && nb_par == nb_values) {
-      set_param_value(xml_doc,
-                      param_name = par_name,
-                      param_value = param_values
+      set_param_value(
+        xml_doc,
+        param_name = par_name,
+        param_value = param_values
       )
     } else {
       if (nb_par > 0) {
@@ -196,18 +198,24 @@ gen_tec_doc <- function(xml_doc = NULL,
         # node cannot be removed. Consistency error between the
         # values detected in the parameters table and the param type
         # in the xml file.
-        if (XML::xmlName(XML::xmlParent(get_nodes(
-          xml_doc,
-          xpath_node
-        )[[1]])) == "formalisme") {
+        if (
+          XML::xmlName(XML::xmlParent(get_nodes(
+            xml_doc,
+            xpath_node
+          )[[1]])) ==
+            "formalisme"
+        ) {
           gen_error <- TRUE
           message(paste(
-            "The parameter", par_name,
+            "The parameter",
+            par_name,
             "is unique in the original xml file,",
             "and not attached to \"intervention\"\n"
           ))
-          message(paste0("Multiple values are present in input table,",
-                         " check consistency with formalism definition !\n"))
+          message(paste0(
+            "Multiple values are present in input table,",
+            " check consistency with formalism definition !\n"
+          ))
           message("The treatment for this parameter has aborted.\n")
           next
         }
@@ -229,7 +237,6 @@ gen_tec_doc <- function(xml_doc = NULL,
         paste0("//ta_entete[colonne[@nom='", par_name, "']]")
       )[[1]])
       XML::xmlName(op_node) <- "intervention"
-
 
       # Getting needed nodes number and formalism or choice
       # to which they are to be attached

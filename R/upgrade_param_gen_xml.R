@@ -24,18 +24,15 @@
 #'   file = file.path(dir_path, "param_gen.xml"),
 #'   out_dir = tempdir()
 #' )
-
-upgrade_param_gen_xml <- function(file,
-                                  out_dir,
-                                  stics_version = "V9.2",
-                                  target_version = "V10.0",
-                                  check_version = TRUE,
-                                  overwrite = FALSE) {
-
-
+upgrade_param_gen_xml <- function(
+    file,
+    out_dir,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE) {
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
-
 
   if (check_version) {
     min_version <- get_version_num("V9.1")
@@ -46,9 +43,12 @@ upgrade_param_gen_xml <- function(file,
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file
+        attr(file_version, "version"),
+        " \n",
+        file
       )
     }
 
@@ -56,20 +56,23 @@ upgrade_param_gen_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
   }
-
 
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc,
-                       new_version = target_version,
-                       overwrite = overwrite)
+  set_xml_file_version(
+    old_doc,
+    new_version = target_version,
+    overwrite = overwrite
+  )
 
   # Nodes to remove
   rm_names <- c("FINERT", "FMIN1", "FMIN2", "FMIN3", "khaut", "rayon", "concrr")
@@ -82,20 +85,18 @@ upgrade_param_gen_xml <- function(file,
   })
   lapply(rm_nodes, function(x) XML::removeNodes(x))
 
-
   # Nodes to change
   # <param format="real" max="20.0" min="1.0" nom="k_desat">3.0</param>
   # k_desat to kdesat
   nodes_to_change <- get_nodes(old_doc, path = "//param[@nom='k_desat']")
   if (!is.null(nodes_to_change)) {
-    set_attrs_values(old_doc,
-                  path = "//param[@nom='k_desat']",
-                  attr_name = "nom",
-                  values_list = "kdesat"
+    set_attrs_values(
+      old_doc,
+      path = "//param[@nom='k_desat']",
+      attr_name = "nom",
+      values_list = "kdesat"
     )
   }
-
-
 
   # Nodes to add
   new_node <- XML::xmlParseString(
@@ -109,7 +110,6 @@ upgrade_param_gen_xml <- function(file,
     addFinalizer = TRUE
   )
 
-
   new_nodes <- XML::getNodeSet(new_node, path = "//param")
   prev_sibling <- get_nodes(old_doc, "//param[@nom='TREFr']")[[1]]
 
@@ -120,11 +120,12 @@ upgrade_param_gen_xml <- function(file,
     prev_sibling <- new
   }
 
-
   # Writing to file param_gen.xml
-  write_xml_file(old_doc,
-                 file.path(out_dir, basename(file)),
-                 overwrite = overwrite)
+  write_xml_file(
+    old_doc,
+    file.path(out_dir, basename(file)),
+    overwrite = overwrite
+  )
 
   XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))

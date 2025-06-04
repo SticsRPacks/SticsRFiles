@@ -115,7 +115,7 @@ input files.}
 \item{append}{Boolean. Append input to existing file}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2).
-Only used for plant, technical or initialisation parameters (default = 1).}
+Only used for plant, technical or initialization parameters (default = 1).}
 
 \item{variety}{The plant variety to set the parameter value,
 either the variety name (\code{codevar} in the plant file) or
@@ -147,7 +147,7 @@ longer supported, use \code{file} instead.}
 None
 }
 \description{
-Replace or set an input parameter from a pre-existing
+Replace or set an input parameter from an existing
 STICS input file.
 }
 \details{
@@ -174,8 +174,10 @@ path <- get_examples_path(file_type = "txt")
 set_param_txt(workspace = path, param = "durvieF", value = 245)
 
 # Change the value of durvieF for another variety:
-set_param_txt(workspace = path, param = "durvieF",
-              variety = "Nefer", value = 178)
+set_param_txt(
+  workspace = path, param = "durvieF",
+  variety = "Nefer", value = 178
+)
 # Change the value of soil parameter "cailloux" for all layers
 # or a specific one
 set_param_txt(workspace = path, param = "cailloux", value = 1)
@@ -185,7 +187,5 @@ set_param_txt(workspace = path, param = "cailloux", value_id = 2, value = 2)
 # or a specific one
 set_param_txt(workspace = path, param = "amount", value = 50)
 set_param_txt(workspace = path, param = "amount", value_id = 2, value = 40)
-
-
 
 }

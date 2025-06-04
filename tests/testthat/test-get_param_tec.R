@@ -1,5 +1,3 @@
-library(SticsRFiles)
-
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
 
@@ -18,8 +16,22 @@ test_that("double associated values from single node", {
     unname(unlist(get_param_xml(xml_path, c("julapI_or_sum_upvt", "amount")))),
     c(
       c(
-        178, 185, 193, 198, 200, 204, 207, 211, 214, 218, 221, 232, 239, 249,
-        257, 264
+        178,
+        185,
+        193,
+        198,
+        200,
+        204,
+        207,
+        211,
+        214,
+        218,
+        221,
+        232,
+        239,
+        249,
+        257,
+        264
       ),
       c(20, 24, 29, 29, 28, 31, 21, 21, 23, 18, 22, 16, 16, 30, 29, 20)
     )

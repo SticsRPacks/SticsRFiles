@@ -24,10 +24,10 @@
 #'
 #' @noRd
 #'
-get_option_choice_param_values <- function(xml_file_path,
-                                           option_param_name,
-                                           choice_name_or_code) {
-
+get_option_choice_param_values <- function(
+    xml_file_path,
+    option_param_name,
+    choice_name_or_code) {
   # TODO: see if choice_name_or_code could be optional, to give
   # param values for all choices ??
 
@@ -35,19 +35,22 @@ get_option_choice_param_values <- function(xml_file_path,
   # true : choice name
   # false : choice code
   if (is.na(as.numeric(choice_name_or_code))) {
-    xpath <- paste0('//option[@nomParam="',
-                    option_param_name,
-                    '"]/choix[@nom="',
-                    choice_name_or_code,
-                    '"]/param')
+    xpath <- paste0(
+      '//option[@nomParam="',
+      option_param_name,
+      '"]/choix[@nom="',
+      choice_name_or_code,
+      '"]/param'
+    )
   } else {
-    xpath <- paste0('//option[@nomParam="',
-                    option_param_name,
-                    '"]/choix[@code="',
-                    choice_name_or_code,
-                    '"]/param')
+    xpath <- paste0(
+      '//option[@nomParam="',
+      option_param_name,
+      '"]/choix[@code="',
+      choice_name_or_code,
+      '"]/param'
+    )
   }
-
 
   param_list <- list()
   xml_param <- xmldocument(xml_file_path)

@@ -1,4 +1,3 @@
-
 #' Return all possible STICS inputs parameters
 #'
 #' @description Helper function to print the list of all possible parameters
@@ -20,21 +19,23 @@
 #' @noRd
 #'
 all_in_par <- function(stics_version = "latest") {
-
   # Checking and getting the right version
   stics_version <- check_version_compat(stics_version = stics_version)
 
   #  if (get_version_num(stics_version = stics_version) < 9.2) {
   #    cols_idx <- 1:4
   #  } else {
-  cols_idx <- c(1, 4, 7:8,2)
+  cols_idx <- c(1, 4, 7:8, 2)
   #  }
 
   par_df <- utils::read.csv2(
     file.path(
-      get_examples_path(file_type = "csv",
-                        stics_version = stics_version),
-      "inputs.csv"),
+      get_examples_path(
+        file_type = "csv",
+        stics_version = stics_version
+      ),
+      "inputs.csv"
+    ),
     header = FALSE,
     stringsAsFactors = FALSE
   )[, cols_idx]
@@ -81,13 +82,12 @@ all_in_par <- function(stics_version = "latest") {
 #' # Find for a particular version:
 #' SticsRFiles::get_param_info("alb", stics_version = "V9.0")
 #'
-#'
 #' @export
 #'
-get_param_info <- function(param = NULL,
-                           keyword = NULL,
-                           stics_version = "latest") {
-
+get_param_info <- function(
+    param = NULL,
+    keyword = NULL,
+    stics_version = "latest") {
   all_pars <- all_in_par(stics_version)
 
   if (!is.null(keyword)) {
@@ -110,13 +110,13 @@ get_param_info <- function(param = NULL,
   return(all_pars)
 }
 
-get_idx_matches <- function(string, names){
-  unlist(lapply(string,
-                function(x) {
-                  grep(x, names, ignore.case = TRUE)
-                }
-  )
-  )
+get_idx_matches <- function(string, names) {
+  unlist(lapply(
+    string,
+    function(x) {
+      grep(x, names, ignore.case = TRUE)
+    }
+  ))
 }
 
 #' Search if a STICS parameter exist
@@ -140,10 +140,7 @@ get_idx_matches <- function(string, names){
 #' @examples
 #' is_stics_param(c("adil", "adilmax", "unknown"))
 #'
-is_stics_param <- function(param,
-                           stics_version = "latest") {
-
-
+is_stics_param <- function(param, stics_version = "latest") {
   all_pars <- all_in_par(stics_version)
   par_parsed <- var_to_col_names(param)
   pars_names_parsed <- var_to_col_names(all_pars$name)
@@ -151,8 +148,10 @@ is_stics_param <- function(param,
   par_found <- !is.na(index_par)
   if (any(!par_found)) {
     cli::cli_alert_warning(
-      paste0("paremeters{?s} {.var {par_parsed[!par_found]}}",
-             " not found. Try {.code get_param_info()}.")
+      paste0(
+        "paremeters{?s} {.var {par_parsed[!par_found]}}",
+        " not found. Try {.code get_param_info()}."
+      )
     )
   }
   return(par_found)

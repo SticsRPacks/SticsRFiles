@@ -1,4 +1,3 @@
-
 #' Return all possible STICS outputs for var.mod
 #'
 #' @description Helper function to print the list of all possible variables
@@ -20,7 +19,6 @@
 #' @noRd
 #'
 all_out_var <- function(stics_version = "latest") {
-
   # Checking and getting the right version
   stics_version <- check_version_compat(stics_version = stics_version)
 
@@ -32,9 +30,12 @@ all_out_var <- function(stics_version = "latest") {
 
   var_df <- utils::read.csv2(
     file.path(
-      get_examples_path(file_type = "csv",
-                        stics_version = stics_version),
-      "outputs.csv"),
+      get_examples_path(
+        file_type = "csv",
+        stics_version = stics_version
+      ),
+      "outputs.csv"
+    ),
     header = FALSE,
     stringsAsFactors = FALSE
   )[, cols_idx]
@@ -78,23 +79,19 @@ all_out_var <- function(stics_version = "latest") {
 #' # Find for a particular version:
 #' SticsRFiles::get_var_info("lai", stics_version = "V9.0")
 #'
-#'
 #' @export
 #'
-get_var_info <- function(var = NULL,
-                         keyword = NULL,
-                         stics_version = "latest") {
-
+get_var_info <- function(var = NULL, keyword = NULL, stics_version = "latest") {
   all_vars <- all_out_var(stics_version)
   if (!is.null(var)) {
     var <- var_to_col_names(var)
     vars_names_parsed <- var_to_col_names(all_vars$name)
-    idx <- unlist(lapply(var,
-                         function(x) {
-                           grep(x, vars_names_parsed, ignore.case = TRUE)
-                           }
-                         )
-                  )
+    idx <- unlist(lapply(
+      var,
+      function(x) {
+        grep(x, vars_names_parsed, ignore.case = TRUE)
+      }
+    ))
     all_vars[idx, ]
   } else if (!is.null(keyword)) {
     idx <- grepl(keyword, all_vars$definition, ignore.case = TRUE)
@@ -125,9 +122,7 @@ get_var_info <- function(var = NULL,
 #' @examples
 #' is_stics_var(c("lai(n)", "masec(n)", "unknown"))
 #'
-is_stics_var <- function(var,
-                         stics_version = "latest") {
-
+is_stics_var <- function(var, stics_version = "latest") {
   all_vars <- all_out_var(stics_version)
   var_parsed <- var_to_col_names(var)
   vars_names_parsed <- var_to_col_names(all_vars$name)
@@ -136,8 +131,10 @@ is_stics_var <- function(var,
   var_found <- !is.na(index_var)
   if (any(!var_found)) {
     cli::cli_alert_warning(
-      paste0("Variable{?s} {.var {var_parsed[!var_found]}}",
-             " not found. Try {.code get_var_info()}.")
+      paste0(
+        "Variable{?s} {.var {var_parsed[!var_found]}}",
+        " not found. Try {.code get_var_info()}."
+      )
     )
   }
   return(var_found)

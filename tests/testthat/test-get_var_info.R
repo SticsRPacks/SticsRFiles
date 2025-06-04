@@ -1,4 +1,3 @@
-library(SticsRFiles)
 context("searching variables information")
 
 # fixing version to latest standard one
@@ -50,8 +49,10 @@ keyword_lai_df <- data.frame(
   name = c("albedolai", "diftemp1intercoupe"),
   definition = c(
     "albedo of the crop including soil and vegetation",
-    paste("mean difference between crop and air temperatures during",
-          "the vegetative phase (emergence - maximum LAI)")
+    paste(
+      "mean difference between crop and air temperatures during",
+      "the vegetative phase (emergence - maximum LAI)"
+    )
   ),
   unit = c("SD", "degreeC"),
   type = c("real", "real"),
@@ -70,21 +71,21 @@ test_that("giving an existing partial variable name in var arg or keyword", {
   )[1:2, ]
 
   common_var_lai_df <- dplyr::filter(var_df, var_df$name %in% var_lai_df$name)
-  common_keyword_lai_df <- dplyr::filter(keyword_df, keyword_df$name %in% keyword_lai_df$name)
+  common_keyword_lai_df <- dplyr::filter(
+    keyword_df,
+    keyword_df$name %in% keyword_lai_df$name
+  )
 
   testthat::expect_equivalent(var_df, var_lai_df)
   testthat::expect_equivalent(keyword_df, keyword_lai_df)
 
   testthat::expect_equivalent(var_df, common_var_lai_df)
   testthat::expect_equivalent(keyword_df, common_keyword_lai_df)
-
-
 })
 
 var_etmetr_df <- data.frame(
   name = "cep2",
-  definition =
-    "cumulative transpiration over the cropping season of plants 1 and 2",
+  definition = "cumulative transpiration over the cropping season of plants 1 and 2",
   unit = "mm",
   type = "real",
   stringsAsFactors = FALSE

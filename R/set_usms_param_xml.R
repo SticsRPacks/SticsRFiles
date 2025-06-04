@@ -10,8 +10,10 @@
 #' xml_path <- file.path(get_examples_path(file_type = "xml"), "usms.xml")
 #' usms_doc <- xmldocument(xml_path)
 #'
-#' xl_path <- file.path(get_examples_path(file_type = "xl"),
-#'                      "inputs_stics_example.xlsx")
+#' xl_path <- file.path(
+#'   get_examples_path(file_type = "xl"),
+#'   "inputs_stics_example.xlsx"
+#' )
 #' usms_df <- read_excel(xl_path, sheet = "USMs")
 #'
 #' # For updating an existing xml doc (using existing usms names)
@@ -38,10 +40,7 @@
 #' @noRd
 #'
 
-
-set_usms_param_xml <- function(xml_doc,
-                               usms_param = NULL,
-                               overwrite = FALSE) {
+set_usms_param_xml <- function(xml_doc, usms_param = NULL, overwrite = FALSE) {
   if (!base::is.null(usms_param)) {
     if (!("data.frame" %in% class(usms_param))) {
       stop("usms_param does not belong to data.frame class/type")
@@ -82,7 +81,6 @@ set_usms_param_xml <- function(xml_doc,
     # TODO : see adding usms not in xml file ?
     ###############################################
 
-
     # checking xl names against xml names
     xl_in_xml <- usms_param[[usm_col]] %in% xml_usms
 
@@ -92,7 +90,6 @@ set_usms_param_xml <- function(xml_doc,
 
     # xl usms idx in xml doc to be updated
     usms_xml_idx <- which(xml_usms %in% usms_param[[usm_col]])
-
 
     # Selecting data & ordering upon xml
     # order
@@ -121,9 +118,11 @@ set_usms_param_xml <- function(xml_doc,
         par <- paste0(p, "_", i)
         if (is.element(par, plante_params)) {
           set_param_value(
-            xml_doc, p,
+            xml_doc,
+            p,
             usms_param[[par]],
-            "plante", as.character(i),
+            "plante",
+            as.character(i),
             usms_xml_idx
           )
         }
@@ -140,7 +139,9 @@ set_usms_param_xml <- function(xml_doc,
   # Setting param values
   for (p in other_params) {
     set_param_value(
-      xml_doc, p, usms_param[[p]],
+      xml_doc,
+      p,
+      usms_param[[p]],
       usms_xml_idx
     )
   }

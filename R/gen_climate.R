@@ -10,8 +10,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' gen_climate(c("path/to/weather.year1", "path/to/weather.year2"),
-#'            "/path/to/out/dir" )
+#' gen_climate(
+#'   c("path/to/weather.year1", "path/to/weather.year2"),
+#'   "/path/to/out/dir"
+#' )
 #' }
 #'
 #' @keywords internal
@@ -19,7 +21,6 @@
 #' @noRd
 #'
 gen_climate <- function(files_path, out_dir) {
-
   # generate intermediate paths for a multi-years simulation
   # i.e. greater than 2
   files_path <- complete_climate_paths(files_path)
@@ -31,8 +32,9 @@ gen_climate <- function(files_path, out_dir) {
   }
 
   ret <- try(
-    writeLines(text = climate_lines,
-               con = file.path(out_dir, "climat.txt")
+    writeLines(
+      text = climate_lines,
+      con = file.path(out_dir, "climat.txt")
     )
   )
 
@@ -41,7 +43,6 @@ gen_climate <- function(files_path, out_dir) {
   }
 
   return(invisible(TRUE))
-
 }
 
 
@@ -54,7 +55,8 @@ gen_climate <- function(files_path, out_dir) {
 #' @examples
 #' \dontrun{
 #' complete_climate_paths(
-#'             c("path/to/weather.year1", "path/to/weather.year2"))
+#'   c("path/to/weather.year1", "path/to/weather.year2")
+#' )
 #' }
 #'
 #' @keywords internal
@@ -63,9 +65,10 @@ gen_climate <- function(files_path, out_dir) {
 #'
 #'
 complete_climate_paths <- function(files_path) {
-
   files_nb <- length(files_path)
-  if (files_nb < 2) return(files_path)
+  if (files_nb < 2) {
+    return(files_path)
+  }
 
   # Here we do not suppose that the file extension contains
   # the year of the data
@@ -83,7 +86,8 @@ complete_climate_paths <- function(files_path) {
   years_chr <- as.character(years)
   file_name <- strsplit(basename(files_path[1]), split = "\\.")[[1]][1]
   files_path <- file.path(
-    dirname(files_path[1]), paste0(file_name, ".", years_chr)
+    dirname(files_path[1]),
+    paste0(file_name, ".", years_chr)
   )
 
   return(files_path)

@@ -20,24 +20,40 @@
 #' @noRd
 #'
 
-gen_new_travail <- function(usm_data,
-                            usm,
-                            workspace,
-                            lai_forcing = NULL,
-                            codesuite = NULL,
-                            codoptim = NULL,
-                            out_dir = NULL) {
-
-
+gen_new_travail <- function(
+    usm_data,
+    usm,
+    workspace,
+    lai_forcing = NULL,
+    codesuite = NULL,
+    codoptim = NULL,
+    out_dir = NULL) {
   data_plt2 <- c()
-  if (usm_data$nbplantes > 1)
+  if (usm_data$nbplantes > 1) {
     data_plt2 <- c("fplt2", "ftec2", "flai2")
+  }
 
-  data_order <- c("codesimul", "codoptim", "codesuite", "nbplantes", "nom",
-                  "datedebut", "datefin", "finit", "numsol", "nomsol",
-                  "fstation",
-                  "fclim1", "fclim2", "nbans", "culturean", "fplt1",
-                  "ftec1", "flai1", data_plt2)
+  data_order <- c(
+    "codesimul",
+    "codoptim",
+    "codesuite",
+    "nbplantes",
+    "nom",
+    "datedebut",
+    "datefin",
+    "finit",
+    "numsol",
+    "nomsol",
+    "fstation",
+    "fclim1",
+    "fclim2",
+    "nbans",
+    "culturean",
+    "fplt1",
+    "ftec1",
+    "flai1",
+    data_plt2
+  )
 
   if (is.null(out_dir)) out_dir <- workspace
 
@@ -82,16 +98,18 @@ gen_new_travail <- function(usm_data,
 #' @noRd
 #'
 #'
-get_usm_data <- function(usms_doc,
-                         usm,
-                         workspace,
-                         lai_forcing = NULL,
-                         codesuite = NULL,
-                         codoptim = NULL) {
-
-  data <- XML::getNodeSet(usms_doc@content,
-                          path = paste0("//usm[@nom='", usm, "']"),
-                          fun = XML::xmlToList)[[1]]
+get_usm_data <- function(
+    usms_doc,
+    usm,
+    workspace,
+    lai_forcing = NULL,
+    codesuite = NULL,
+    codoptim = NULL) {
+  data <- XML::getNodeSet(
+    usms_doc@content,
+    path = paste0("//usm[@nom='", usm, "']"),
+    fun = XML::xmlToList
+  )[[1]]
   n <- names(data)
   n[11] <- "plante1"
   n[12] <- "plante2"
@@ -101,19 +119,22 @@ get_usm_data <- function(usms_doc,
   # 0: culture, 1: feuille, lai forcing
   data$codesimul <- get_codesimul(as.numeric(data$codesimul))
 
-  if (!is.null(lai_forcing) && lai_forcing %in% c(0, 1))
+  if (!is.null(lai_forcing) && lai_forcing %in% c(0, 1)) {
     data$codesimul <- get_codesimul(lai_forcing)
+  }
 
   # forcing codoptim
   data$codoptim <- 0
 
-  if (!is.null(codoptim) && codoptim %in% c(0, 1))
+  if (!is.null(codoptim) && codoptim %in% c(0, 1)) {
     data$codoptim <- codoptim
+  }
 
   data$codesuite <- 0
   # forcing codesuite
-  if (!is.null(codesuite) && codesuite %in% c(0, 1))
+  if (!is.null(codesuite) && codesuite %in% c(0, 1)) {
     data$codesuite <- codesuite
+  }
 
   # nbplantes
   data$nbplantes <- as.numeric(data$nbplantes)
@@ -148,13 +169,15 @@ get_usm_data <- function(usms_doc,
 
   # add constraint on culturean
   data$culturean <- as.numeric(data$culturean)
-  if (data$culturean != 1)
+  if (data$culturean != 1) {
     data$culturean <- 2
+  }
 
   # add constraint on culturean
   data$culturean <- as.numeric(data$culturean)
-  if (data$culturean != 1)
+  if (data$culturean != 1) {
     data$culturean <- 0
+  }
 
   # nbans
   data$nbans <- get_years_number(
@@ -169,8 +192,9 @@ get_usm_data <- function(usms_doc,
 
   data$fobs1 <- data$plante1$fobs
 
-  if (data$flai1 == "null" || data$flai1 == "defaut.lai")
+  if (data$flai1 == "null" || data$flai1 == "defaut.lai") {
     data$codesimul <- get_codesimul(0)
+  }
 
   if (data$nbplantes > 1) {
     data$fplt2 <- data$plante2$fplt
@@ -205,14 +229,19 @@ get_usm_data <- function(usms_doc,
 #' @noRd
 #'
 get_codesimul <- function(lai_forcing = 0) {
+  if (lai_forcing == 0) {
+    return("culture")
+  }
 
-  if (lai_forcing == 0) return("culture")
+  if (lai_forcing == 1) {
+    return("feuille")
+  }
 
-  if (lai_forcing == 1) return("feuille")
-
-  stop("Error on lai forcing value: ",
-       lai_forcing,
-       "\nmIt must be 0 or 1 !")
+  stop(
+    "Error on lai forcing value: ",
+    lai_forcing,
+    "\nmIt must be 0 or 1 !"
+  )
 }
 
 
@@ -229,7 +258,6 @@ get_codesimul <- function(lai_forcing = 0) {
 #'
 
 get_years_number <- function(clim_path) {
-
   year1 <- get_year(clim_path = clim_path[1])
 
   if (clim_path[1] == clim_path[2]) {
@@ -238,13 +266,13 @@ get_years_number <- function(clim_path) {
     year2 <- get_year(clim_path = clim_path[2])
   }
 
-  if (any(is.na(c(year1, year2))))
+  if (any(is.na(c(year1, year2)))) {
     stop(
       "Impossible to calculate the number of years from weather data files !"
     )
+  }
 
   return(year2 - year1 + 1)
-
 }
 
 #' Get weather data file year
@@ -259,12 +287,13 @@ get_years_number <- function(clim_path) {
 #'
 
 get_year <- function(clim_path) {
-
   if (!file.exists(clim_path)) stop()
 
-  line_str <- gsub(pattern = "\\t",
-                   x = trimws(readLines(con = clim_path, n = 1)),
-                   replacement = " ")
+  line_str <- gsub(
+    pattern = "\\t",
+    x = trimws(readLines(con = clim_path, n = 1)),
+    replacement = " "
+  )
 
   words <- strsplit(line_str, split = " ")[[1]]
 
@@ -279,5 +308,4 @@ get_year <- function(clim_path) {
   }
 
   return(year)
-
 }

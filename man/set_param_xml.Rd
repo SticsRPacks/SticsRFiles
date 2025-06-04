@@ -87,13 +87,14 @@ set_param_xml(sol_path, "argi", 50, overwrite = TRUE)
 # get_param_xml(sol_path, "argi")
 
 # Setting a specific value to "argi" for "solcanne" soil
-set_param_xml(file = sol_path, param = "argi", values = 56,
-   select = "sol", select_value = "solcanne", overwrite = TRUE
+set_param_xml(
+  file = sol_path, param = "argi", values = 56,
+  select = "sol", select_value = "solcanne", overwrite = TRUE
 )
 # Getting changed values
 # get_param_xml(sol_path, "argi",
 #   select = "sol", select_value = "solcanne"
-#)
+# )
 
 
 # Setting a specific values to 2 parameters "argi" and
@@ -104,7 +105,7 @@ set_param_xml(sol_path, c("argi", "norg"), list(100, 150),
 # Getting changed values
 # get_param_xml(sol_path, c("argi", "norg"),
 #   select = "sol", select_value = "solcanne"
-#)
+# )
 
 
 # For vector parameters per soil (5 values, one per soil layer)
@@ -126,9 +127,9 @@ set_param_xml(sol_path, "HCCF",
   select = "sol",
   select_value = "solcanne",
   values = c(46.8, 48.5, 50.1),
-  value_id = c(1,3,5),
+  value_id = c(1, 3, 5),
   overwrite = TRUE
- )
+)
 
 # Getting changed values
 # get_param_xml(sol_path, "HCCF",
@@ -147,6 +148,5 @@ set_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"),
 )
 # Getting changed values
 # get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))
-
 
 }

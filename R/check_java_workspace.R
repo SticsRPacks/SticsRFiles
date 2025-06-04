@@ -15,7 +15,6 @@
 #' @noRd
 
 check_java_workspace <- function(javastics, workspace = NULL) {
-
   # Ensure that the user working directory is unchanged after
   # the function has run
   current_wd <- getwd()
@@ -35,15 +34,20 @@ check_java_workspace <- function(javastics, workspace = NULL) {
   } else {
     tt <- try(ws <- get_java_workspace(javastics), silent = TRUE)
     if (methods::is(tt, "try-error")) {
-      warning("No workspace directory has been set, use set_java_wd to do so,
-              or \n give it as input of the function !")
+      warning(
+        "No workspace directory has been set, use set_java_wd to do so,
+              or \n give it as input of the function !"
+      )
       return()
     }
   }
 
   if (base::is.null(ws) || !dir.exists(ws)) {
-    warning(paste("The given directory does not exist or JavaSTICS working
-                  directory is not set :\n", ws))
+    warning(paste(
+      "The given directory does not exist or JavaSTICS working
+                  directory is not set :\n",
+      ws
+    ))
     return()
   }
 

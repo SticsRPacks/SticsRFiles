@@ -7,6 +7,7 @@
 convert_xml2txt(
   file,
   plant_id = 1,
+  soil_name = NULL,
   out_dir = NULL,
   save_as = NULL,
   stics_version = "latest",
@@ -19,6 +20,8 @@ convert_xml2txt(
 \item{file}{Path (including name) of the xml file to convert}
 
 \item{plant_id}{The plant identifier (main crop: 1 ; associated crop: 2)}
+
+\item{soil_name}{Soil name (optional, required for soil file)}
 
 \item{out_dir}{Path of the directory where to generate the file.
 Optional, set to the path of the input xml file by default}
@@ -48,7 +51,6 @@ is converted to a text file readable by the STICS model
 (ficini.txt, ficplt1.txt,...)
 }
 \examples{
-
 \dontrun{
 xml_path <- "/path/to/corn_plt.xml"
 javastics_path <- "/path/to/JavaSTICS/folder"

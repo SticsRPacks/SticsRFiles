@@ -1,4 +1,3 @@
-
 #' Extracting data from the STICS report file
 #'
 #' @param workspace Path of the directory containing the STICS report file
@@ -34,16 +33,18 @@
 #'
 #' get_report_results(workspace = path, file_name = "mod_rapportA.sti")
 #'
-#'
-get_report_results <- function(workspace,
-                               file_name = "mod_rapport.sti",
-                               usm = NULL,
-                               var_list = NULL,
-                               usm_name = lifecycle::deprecated()) {
+get_report_results <- function(
+    workspace,
+    file_name = "mod_rapport.sti",
+    usm = NULL,
+    var_list = NULL,
+    usm_name = lifecycle::deprecated()) {
   if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_report_results(usm_name)",
-                              "get_report_results(usm)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_report_results(usm_name)",
+      "get_report_results(usm)"
+    )
   } else {
     usm_name <- usm # to remove when we update inside the function
   }
@@ -70,8 +71,9 @@ get_report_results <- function(workspace,
       stringsAsFactors = FALSE
     )
 
-    if (any(is.na(h)))
+    if (any(is.na(h))) {
       stop("Headers strings are not homogeneous in report file!")
+    }
   } else {
     warning("Not any header in report file (no col names in ouput)!")
   }
@@ -88,8 +90,6 @@ get_report_results <- function(workspace,
     na.strings = "",
     stringsAsFactors = FALSE
   )
-
-
 
   # If report header is present
   # otherwise column are named V1 to Vncol

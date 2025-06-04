@@ -33,16 +33,15 @@
 #'   out_dir = "/path/to/an/output/directory"
 #' )
 #' }
-upgrade_workspace_xml <- function(workspace,
-                                  javastics,
-                                  out_dir,
-                                  stics_version = "V9.2",
-                                  target_version = "V10.0",
-                                  plant = FALSE,
-                                  overwrite = FALSE,
-                                  ...) {
-
-
+upgrade_workspace_xml <- function(
+    workspace,
+    javastics,
+    out_dir,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    plant = FALSE,
+    overwrite = FALSE,
+    ...) {
   # For testing if files are upgradable
   check_version <- FALSE
   verbose <- TRUE
@@ -60,7 +59,10 @@ upgrade_workspace_xml <- function(workspace,
   if (is.null(par_gen)) {
     stop(
       "param_gen.xml: file not found in\n",
-      workspace, " or ", javastics, "directory! "
+      workspace,
+      " or ",
+      javastics,
+      "directory! "
     )
   }
   if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
@@ -70,19 +72,23 @@ upgrade_workspace_xml <- function(workspace,
   file_version <- check_xml_file_version(par_gen, stics_version)
   if (!file_version) {
     stop(
-      "The input version ", stics_version,
+      "The input version ",
+      stics_version,
       " does not match file version ",
-      attr(file_version, "version"), " \n", par_gen
+      attr(file_version, "version"),
+      " \n",
+      par_gen
     )
   }
-
 
   # Compatibility checks between version and upgrade to target_version
   ver_num <- get_version_num(stics_version)
   if (ver_num < min_version) {
     stop(
-      "Files from the version ", stics_version,
-      " cannot be converted to the version ", target_version
+      "Files from the version ",
+      stics_version,
+      " cannot be converted to the version ",
+      target_version
     )
   }
 
@@ -93,8 +99,10 @@ upgrade_workspace_xml <- function(workspace,
   #----------------------------------------------------------------------------
 
   # Testing the workspace dir to be converted
-  if (!dir.exists(workspace) ||
-      !file.exists(file.path(workspace, "usms.xml"))) {
+  if (
+    !dir.exists(workspace) ||
+      !file.exists(file.path(workspace, "usms.xml"))
+  ) {
     stop(
       workspace,
       ": the directory does not exist or is not a JavaSTICS workspace !"
@@ -105,22 +113,29 @@ upgrade_workspace_xml <- function(workspace,
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
   # Testing the JavaSTICS dir
-  if (!dir.exists(javastics) ||
-      !file.exists(file.path(javastics, "JavaStics.exe"))) {
+  if (
+    !dir.exists(javastics) ||
+      !file.exists(file.path(javastics, "JavaStics.exe"))
+  ) {
     stop(
       javastics,
       " : the directory does nor exist or is not a JavaSTICS one !"
     )
   }
 
-
   if (verbose) {
-    message(paste(
-      "Upgrading files from version", stics_version, "to",
-      target_version, "\n"),
+    message(
+      paste(
+        "Upgrading files from version",
+        stics_version,
+        "to",
+        target_version,
+        "\n"
+      ),
       paste("From: ", workspace, "\n"),
       paste("To: ", out_dir, "\n"),
-      "-----------------------------------\n")
+      "-----------------------------------\n"
+    )
   }
 
   # Converting param_gen.xml
@@ -139,16 +154,19 @@ upgrade_workspace_xml <- function(workspace,
     }
   }
 
-
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
     type = "param_newform.xml",
-    workspace, javastics
+    workspace,
+    javastics
   )
   if (is.null(par_new)) {
     stop(
       "param_newform.xml: file not found in\n",
-      workspace, " or ", javastics, "directory! "
+      workspace,
+      " or ",
+      javastics,
+      "directory! "
     )
   }
   if (attr(par_new, "where") == "workspace") upgr_par_new <- TRUE
@@ -169,7 +187,6 @@ upgrade_workspace_xml <- function(workspace,
       message("param_new_form.xml\n")
     }
   }
-
 
   # Converting usms.xml file
   usms <- file.path(workspace, "usms.xml")
@@ -261,7 +278,6 @@ upgrade_workspace_xml <- function(workspace,
     message("*_tec.xml\n")
   }
 
-
   # # Copying *.mod files (for model outputs)
   # stat <- file.copy(
   #   from = list.files(path = workspace, full.names = TRUE, pattern = "*.mod"),
@@ -271,7 +287,6 @@ upgrade_workspace_xml <- function(workspace,
   # if (verbose) {
   #   message("Copying *.mod files.\n")
   # }
-
 
   # Copying observation files
   # all .obs files deteted in workspace,
@@ -309,21 +324,19 @@ upgrade_workspace_xml <- function(workspace,
   #   message("Copying weather files.\n")
   # }
 
-
   # TODO: see how to manage variables names checks in *.mod files
   # Probably, the new JavaSTICS path may be added as a new function argument
   # for getting information on output variables
   # (use get_var_info with the appropriate version string)
 
-  workspace_files_copy(workspace = workspace,
-                       file_type = c("mod", "obs", "lai", "meteo"),
-                       javastics = javastics,
-                       out_dir = out_dir,
-                       overwrite = overwrite,
-                       verbose = verbose)
-
-
-
+  workspace_files_copy(
+    workspace = workspace,
+    file_type = c("mod", "obs", "lai", "meteo"),
+    javastics = javastics,
+    out_dir = out_dir,
+    overwrite = overwrite,
+    verbose = verbose
+  )
 
   # Upgrading plant files
   # if a plant sub directory exists in workspace
@@ -355,8 +368,9 @@ upgrade_workspace_xml <- function(workspace,
   }
 
   if (verbose) {
-    message(paste0("-----------------------------------\n",
-                   "Files upgrade and copy is complete.\n")
-    )
+    message(paste0(
+      "-----------------------------------\n",
+      "Files upgrade and copy is complete.\n"
+    ))
   }
 }

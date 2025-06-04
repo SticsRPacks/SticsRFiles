@@ -38,7 +38,6 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
     stop("Unable to recognize the operating system")
   }
 
-
   pref_copy <- file.copy(
     from = system.file(pref_file, package = "SticsOnR", mustWork = TRUE),
     to = normalizePath(config_pref, mustWork = FALSE, winslash = "/"),
@@ -54,7 +53,8 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
         "Couldn't add a {.val preference.xml}",
         "file in the JavaSTICS installation. ",
         "Please run {.pkg Javastics} once to create it."
-      ))
+      )
+    )
     return(FALSE)
   }
 }

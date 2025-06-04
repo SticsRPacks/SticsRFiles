@@ -48,50 +48,67 @@
 #' )
 #' }
 #'
-get_usms_files <- function(workspace,
-                           usms_list = NULL,
-                           usms_file = "usms.xml",
-                           file_type = NULL,
-                           javastics = NULL,
-                           df_output = FALSE,
-                           workspace_path = lifecycle::deprecated(),
-                           file_name = lifecycle::deprecated(),
-                           javastics_path = lifecycle::deprecated()
-) {
+get_usms_files <- function(
+    workspace,
+    usms_list = NULL,
+    usms_file = "usms.xml",
+    file_type = NULL,
+    javastics = NULL,
+    df_output = FALSE,
+    workspace_path = lifecycle::deprecated(),
+    file_name = lifecycle::deprecated(),
+    javastics_path = lifecycle::deprecated()) {
   if (lifecycle::is_present(workspace_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_usms_files(workspace_path)",
-                              "get_usms_files(workspace)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_usms_files(workspace_path)",
+      "get_usms_files(workspace)"
+    )
   } else {
     workspace_path <- workspace # to remove when we update inside the function
   }
   if (lifecycle::is_present(file_name)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_usms_files(file_name)",
-                              "get_usms_files(usms_file)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_usms_files(file_name)",
+      "get_usms_files(usms_file)"
+    )
   } else {
     file_name <- usms_file # to remove when we update inside the function
   }
   if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn("1.0.0",
-                              "get_usms_files(javastics_path)",
-                              "get_usms_files(javastics)")
+    lifecycle::deprecate_warn(
+      "1.0.0",
+      "get_usms_files(javastics_path)",
+      "get_usms_files(javastics)"
+    )
   } else {
     javastics_path <- javastics # to remove when we update inside the function
   }
 
   # Types definition
-  files_types <- c("fplt", "finit", "fclim1", "fclim2", "fstation", "ftec",
-                   "sols", "pargen", "parnew")
+  files_types <- c(
+    "fplt",
+    "finit",
+    "fclim1",
+    "fclim2",
+    "fstation",
+    "ftec",
+    "sols",
+    "pargen",
+    "parnew"
+  )
   if (is.null(file_type)) {
     file_type <- files_types
   } else {
     # Checking if type(s) exist(s)
     type_exists <- file_type %in% files_types
-    if (!all(type_exists))
-      warning("One or more file type(s) do(es) not exist : ",
-              paste(file_type[!type_exists], collapse = ",")
+    if (!all(type_exists)) {
+      warning(
+        "One or more file type(s) do(es) not exist : ",
+        paste(file_type[!type_exists], collapse = ",")
       )
+    }
     file_type <- file_type[type_exists]
   }
 
@@ -104,8 +121,10 @@ get_usms_files <- function(workspace,
     javastics_plt_path <- NULL
     ws_plt_path <- NULL
 
-    if (!base::is.null(javastics_path) &&
-        dir.exists(file.path(javastics_path, "plant"))) {
+    if (
+      !base::is.null(javastics_path) &&
+        dir.exists(file.path(javastics_path, "plant"))
+    ) {
       javastics_plt_path <- suppressWarnings(
         normalizePath(file.path(javastics_path, "plant"))
       )
@@ -120,8 +139,10 @@ get_usms_files <- function(workspace,
     plt_dir_path <- c(ws_plt_path, javastics_plt_path)
 
     if (base::is.null(plt_dir_path)) {
-      stop("not any plant folder found, please add javastics_path directory",
-           " as function input argument or a workspace plant sub-directory !")
+      stop(
+        "not any plant folder found, please add javastics_path directory",
+        " as function input argument or a workspace plant sub-directory !"
+      )
     }
     check_plt <- TRUE
   }
@@ -162,14 +183,15 @@ get_usms_files <- function(workspace,
 
   # Loop over usms names
   for (i in 1:usms_nb) {
-
     usm_name <- usms_list[i]
 
     nodeset <- XML::getNodeSet(
       doc = xml_doc@content,
-      path = paste0("//usm[@nom='",
-                    usm_name,
-                    "']//*[starts-with(name(), 'f')]")
+      path = paste0(
+        "//usm[@nom='",
+        usm_name,
+        "']//*[starts-with(name(), 'f')]"
+      )
     )
 
     node_names <- unlist(lapply(nodeset, XML::xmlName))
@@ -179,10 +201,11 @@ get_usms_files <- function(workspace,
     # Keeping usms xml files, except plant files, obs, lai, null
     useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
 
-    if (length(useless_files_idx) > 0) usm_files <- usm_files[-useless_files_idx]
+    if (length(useless_files_idx) > 0) {
+      usm_files <- usm_files[-useless_files_idx]
+    }
 
     usm_files_path <- file.path(workspace_path, usm_files)
-
 
     # Specific plt files management
     plt_idx <- grep("_plt\\.xml$", usm_files_path)
@@ -230,10 +253,11 @@ get_usms_files <- function(workspace,
         normalizePath(file.path(workspace_path, "param_gen.xml"))
       )
 
-      if (!file.exists(pargen_file_path))
+      if (!file.exists(pargen_file_path)) {
         pargen_file_path <- suppressWarnings(
           normalizePath(file.path(javastics, "config", "param_gen.xml"))
         )
+      }
 
       pargen_file_exists <- file.exists(pargen_file_path)
     }
@@ -246,10 +270,11 @@ get_usms_files <- function(workspace,
         normalizePath(file.path(workspace_path, "param_newform.xml"))
       )
 
-      if (!file.exists(parnew_file_path))
+      if (!file.exists(parnew_file_path)) {
         parnew_file_path <- suppressWarnings(
           normalizePath(file.path(javastics, "config", "param_newform.xml"))
         )
+      }
 
       parnew_file_exists <- file.exists(parnew_file_path)
     }
@@ -257,13 +282,20 @@ get_usms_files <- function(workspace,
     #
     # Adding the files lists
     usms_files_list[[i]] <- list(
-      paths = c(usm_files_path, plt_files_path, sols_file_path,
-                pargen_file_path, parnew_file_path),
-      all_exist = c(usm_files_exist,
-                    plt_files_exist,
-                    sols_file_exists,
-                    pargen_file_exists,
-                    parnew_file_exists)
+      paths = c(
+        usm_files_path,
+        plt_files_path,
+        sols_file_path,
+        pargen_file_path,
+        parnew_file_path
+      ),
+      all_exist = c(
+        usm_files_exist,
+        plt_files_exist,
+        sols_file_exists,
+        pargen_file_exists,
+        parnew_file_exists
+      )
     )
   }
 

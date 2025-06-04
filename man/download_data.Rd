@@ -8,8 +8,7 @@ download_data(
   out_dir = tempdir(),
   example_dirs = NULL,
   stics_version = "latest",
-  dir = lifecycle::deprecated(),
-  version_name = lifecycle::deprecated()
+  raise_error = FALSE
 )
 }
 \arguments{
@@ -17,26 +16,27 @@ download_data(
 
 \item{example_dirs}{List of use case directories names (optional)}
 
-\item{stics_version}{Name of the STICS version. Optional, by default the
-latest version returned by get_stics_versions_compat() is used.}
+\item{stics_version}{Name of the STICS version (optional)
+The default value is the latest version returned by
+get_stics_versions_compat().}
 
-\item{dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dir} is no
-longer supported, use \code{out_dir} instead.}
-
-\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_path} is no
-longer supported, use \code{file} instead.}
+\item{raise_error}{Logical, if TRUE, an error is raised instead
+of message when FALSE (default)}
 }
 \value{
-The path to the folder where data have been downloaded
+The path of the folder data have been downloaded into or NULL
+if the download fails and raise_error is FALSE.
 }
 \description{
 Download locally the example data from the
 \href{https://github.com/SticsRPacks/data}{data repository} in the SticsRPacks
-organisation.
+organization.
 }
 \examples{
 
 # Getting data for a given example : study_case_1 and a given STICS version
 download_data(example_dirs = "study_case_1", stics_version = "V9.0")
-
+# raising an error instead of a message
+download_data(example_dirs = "study_case_1", stics_version = "V9.0",
+              raise_error = TRUE)
 }

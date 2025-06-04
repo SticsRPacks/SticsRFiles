@@ -1,6 +1,6 @@
-options(warn=-1)
+options(warn = -1)
 stics_version <- get_stics_versions_compat()$latest_version
-
+host <- "github.com"
 
 context("reading observations")
 
@@ -12,9 +12,13 @@ path <- file.path(
   "simple_example"
 )
 
-path_mixed <- file.path(get_examples_path(file_type = "obs",
-                                          stics_version = stics_version),
-                        "mixed")
+path_mixed <- file.path(
+  get_examples_path(
+    file_type = "obs",
+    stics_version = stics_version
+  ),
+  "mixed"
+)
 
 # Get observations for all usms, but only banana has observations:
 meas <- get_obs(workspace = path)
@@ -54,7 +58,9 @@ test_that("filtering observation list return a list of data.frame", {
 
 test_that("reading mixed usms works", {
   expect_length(meas_mixed, 3)
-  expect_named(meas_mixed, c("sorghum", "banana", "IC_banana_sorghum"),
+  expect_named(
+    meas_mixed,
+    c("sorghum", "banana", "IC_banana_sorghum"),
     ignore.order = TRUE
   )
   expect_equal(sum(meas_mixed$sorghum$lai_n, na.rm = TRUE), 19.62)
@@ -71,23 +77,24 @@ test_that("reading mixed usms with usms_filename to usms.xml", {
   )
 })
 
-test_that(
-  "reading mixed usms with usms_filename to usms.xml outside of folder",
-  {
-    expect_length(meas_mixed3, 2)
-    # NB: only two because intecrop usms absent from this usms.xml
-    expect_equal(meas_mixed$banana$lai_n, meas_mixed3$banana$lai_n)
-  }
-)
+test_that("reading mixed usms with usms_filename to usms.xml outside of folder", {
+  expect_length(meas_mixed3, 2)
+  # NB: only two because intecrop usms absent from this usms.xml
+  expect_equal(meas_mixed$banana$lai_n, meas_mixed3$banana$lai_n)
+})
 
 # Testing with .obs in different folders (e.g. one for each usm,
 # but a common usms.xml)
 
 test_that("reading mixed usms with usms_filename to usms.xml outside of folder,
           and usms in different folders", {
-  path <- file.path(get_examples_path(file_type = "obs",
-                                      stics_version = stics_version),
-                    "usms_outside")
+  path <- file.path(
+    get_examples_path(
+      file_type = "obs",
+      stics_version = stics_version
+    ),
+    "usms_outside"
+  )
   paths <- list.dirs(path)[-1]
   meas_2 <- get_obs(workspace = paths, usms_file = file.path(path, "usms.xml"))
 
@@ -99,9 +106,13 @@ test_that("reading mixed usms with usms_filename to usms.xml outside of folder,
 
 # Testing empty obs:
 test_that("reading empty usms returns a 0 row data", {
-  path_empty <- file.path(get_examples_path(file_type = "obs",
-                                            stics_version = stics_version),
-                          "empty")
+  path_empty <- file.path(
+    get_examples_path(
+      file_type = "obs",
+      stics_version = stics_version
+    ),
+    "empty"
+  )
   meas <- get_obs(workspace = path_empty)
   expect_true(is.data.frame(meas$empty))
   expect_length(meas$empty, 0)
@@ -110,18 +121,22 @@ test_that("reading empty usms returns a 0 row data", {
 
 example_ic <- download_data(
   example_dirs = "study_case_intercrop",
-  stics_version = stics_version
+  stics_version = stics_version,
+  raise_error = TRUE
 )
 
 test_that("get obs with intercrops", {
   outputs <- get_obs(workspace = example_ic)
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  expect_true(all(names(outputs) %in%
-    c(
-      "IC_Wheat_Pea_2005-2006_N0", "SC_Pea_2005-2006_N0",
-      "SC_Wheat_2005-2006_N0"
-    )))
+  expect_true(all(
+    names(outputs) %in%
+      c(
+        "IC_Wheat_Pea_2005-2006_N0",
+        "SC_Pea_2005-2006_N0",
+        "SC_Wheat_2005-2006_N0"
+      )
+  ))
   expect_true(is.data.frame(outputs$`SC_Pea_2005-2006_N0`))
   expect_equal(
     unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Plant),
@@ -142,11 +157,14 @@ test_that("get obs with intercrops, giving usms.xml file", {
   )
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  expect_true(all(names(outputs) %in%
-    c(
-      "IC_Wheat_Pea_2005-2006_N0", "SC_Pea_2005-2006_N0",
-      "SC_Wheat_2005-2006_N0"
-    )))
+  expect_true(all(
+    names(outputs) %in%
+      c(
+        "IC_Wheat_Pea_2005-2006_N0",
+        "SC_Pea_2005-2006_N0",
+        "SC_Wheat_2005-2006_N0"
+      )
+  ))
   expect_true(is.data.frame(outputs$`SC_Pea_2005-2006_N0`))
   expect_equal(
     unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Plant),
@@ -165,11 +183,14 @@ test_that("get obs with intercrops, giving usms.xml file as absolute path", {
   )
   # There are two USMs in the usms.xml file, but only one output file (banana):
   expect_true(is.list(outputs) && !is.data.frame(outputs))
-  expect_true(all(names(outputs) %in%
-    c(
-      "IC_Wheat_Pea_2005-2006_N0", "SC_Pea_2005-2006_N0",
-      "SC_Wheat_2005-2006_N0"
-    )))
+  expect_true(all(
+    names(outputs) %in%
+      c(
+        "IC_Wheat_Pea_2005-2006_N0",
+        "SC_Pea_2005-2006_N0",
+        "SC_Wheat_2005-2006_N0"
+      )
+  ))
   expect_true(is.data.frame(outputs$`SC_Pea_2005-2006_N0`))
   expect_equal(
     unique(outputs$`IC_Wheat_Pea_2005-2006_N0`$Plant),

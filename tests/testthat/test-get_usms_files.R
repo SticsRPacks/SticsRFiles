@@ -1,18 +1,13 @@
-library(dplyr)
-
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
+host <- "github.com"
 
 studycase_path <-
-  file.path(tempdir(), "data-master", "study_case_1")
-
-if (!dir.exists(studycase_path)) {
-  studycase_path <-
-    download_data(
-      example_dirs = "study_case_1",
-      stics_version = stics_version
+  download_data(
+    example_dirs = "study_case_1",
+    stics_version = stics_version,
+    raise_error = TRUE
   )
-}
 
 workspace_path <- file.path(studycase_path, "XmlFiles")
 

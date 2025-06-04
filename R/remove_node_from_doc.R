@@ -36,11 +36,12 @@
 #'
 #' @noRd
 #'
-remove_node_from_doc <- function(xml_doc, param_name,
-                                 parent_name = NULL,
-                                 remove_parent = FALSE,
-                                 nodes_ids = NULL) {
-
+remove_node_from_doc <- function(
+    xml_doc,
+    param_name,
+    parent_name = NULL,
+    remove_parent = FALSE,
+    nodes_ids = NULL) {
   # Getting the node xpath
   xpath_node <- get_param_type(
     xml_doc = xml_doc,
@@ -75,7 +76,6 @@ remove_node_from_doc <- function(xml_doc, param_name,
     nodes_ids <- 1:nodes_nb
   }
 
-
   # Returning the input object
   # ids out of range !
   if (!max(nodes_ids) <= nodes_nb) {
@@ -84,5 +84,4 @@ remove_node_from_doc <- function(xml_doc, param_name,
 
   # Removing nodes from the document object
   XML::removeNodes(xml_nodes[nodes_ids])
-
 }
