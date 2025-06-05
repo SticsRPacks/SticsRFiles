@@ -83,7 +83,7 @@ convert_xml2txt <- function(
   if (calc_name && base::is.null(save_as)) {
     tag <- tags[[idx]]
     if (tag == "_plt\\.xml" || tag == "_tec\\.xml") {
-      save_as <- files_names[[idx]][[plant_d]]
+      save_as <- files_names[[idx]][[plant_id]]
     } else {
       save_as <- files_names[[idx]][[1]]
     }
