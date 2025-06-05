@@ -32,15 +32,14 @@
 #' @noRd
 #'
 get_file <- function(
-  workspace,
-  usm_name = NULL,
-  var_list = NULL,
-  dates_list = NULL,
-  usms_filepath = NULL,
-  javastics_path = NULL,
-  verbose = TRUE,
-  type = c("sim", "obs")
-) {
+    workspace,
+    usm_name = NULL,
+    var_list = NULL,
+    dates_list = NULL,
+    usms_filepath = NULL,
+    javastics_path = NULL,
+    verbose = TRUE,
+    type = c("sim", "obs")) {
   type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
   usms_path <- NULL
@@ -115,15 +114,14 @@ get_file <- function(
 #' @noRd
 #'
 get_file_ <- function(
-  workspace,
-  usm_name = NULL,
-  usms_filepath = NULL,
-  var_list = NULL,
-  dates_list = NULL,
-  javastics_path = NULL,
-  verbose = TRUE,
-  type = c("sim", "obs")
-) {
+    workspace,
+    usm_name = NULL,
+    usms_filepath = NULL,
+    var_list = NULL,
+    dates_list = NULL,
+    javastics_path = NULL,
+    verbose = TRUE,
+    type = c("sim", "obs")) {
   # TODO: add checking dates_list format, or apply the used format in sim
   # data.frame
 
@@ -357,13 +355,12 @@ get_file_ <- function(
 #' @noRd
 #'
 get_file_one <- function(
-  dirpath,
-  filename,
-  p_name,
-  verbose,
-  dates_list,
-  var_list
-) {
+    dirpath,
+    filename,
+    p_name,
+    verbose,
+    dates_list,
+    var_list) {
   out <-
     get_file_int(dirpath, filename, p_name, verbose = verbose) %>%
     dplyr::select_if(function(x) {
@@ -401,12 +398,11 @@ get_file_one <- function(
 }
 
 get_file_from_usms <- function(
-  workspace,
-  usms_path,
-  type = c("sim", "obs"),
-  usm_name = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    usms_path,
+    type = c("sim", "obs"),
+    usm_name = NULL,
+    verbose = TRUE) {
   # Getting usms names from the usms.xml file
   usms <- get_usms_list(file = file.path(usms_path))
 
