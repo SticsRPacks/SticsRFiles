@@ -77,12 +77,6 @@ get_file <- function(
     recursive = FALSE
   )
 
-  # Manage duplicated list names ?
-  # TODO: is this useful ?
-  # If same usms exist in different folders, with different parameterization
-  # this must be taken into account and rename duplicates instead of
-  # deleting them !
-
   return(res)
 }
 
@@ -152,24 +146,38 @@ get_file_ <- function(
   # Checking if usm_name correspond to existing simulation
   # or observation files, a warning with missing outputs/obs usm
   # names
-  if (length(workspace_files) && !is.null(usm_name)) {
-    idx <- lapply(
-      str2regex(usm_name),
-      function(y) {
-        # using optional "p" or "a" in pattern for associated crops
-        # p for principal crop, a for associated crop
-        patt <- paste0(y, "[a|p]?\\.", file_ext)
-        grep(pattern = patt, x = workspace_files)
-      }
-    )
-    usm_idx <- unlist(lapply(idx, function(x) length(x) > 0))
-    files_idx <- unlist(idx)
-    workspace_files <- workspace_files[files_idx]
+  if (length(workspace_files) > 0) {
+    if (!is.null(usm_name)) {
+      idx <- lapply(
+        str2regex(usm_name),
+        function(y) {
+          # using optional "p" or "a" in pattern for associated crops
+          # p for principal crop, a for associated crop
+          patt <- paste0(y, "[a|p]?\\.", file_ext)
+          grep(pattern = patt, x = workspace_files)
+        }
+      )
+      usm_idx <- unlist(lapply(idx, function(x) length(x) > 0))
+      files_idx <- unlist(idx)
+      workspace_files <- workspace_files[files_idx]
+    }
   }
 
-  # trying to find sub-directories named with usms names
+  # Trying to find sub-directories named with usms names
   if (!is.null(usm_name)) {
     workspace_sub <- file.path(workspace, usm_name)
+  } else {
+    # If no usm_name is given, we are looking for all sub-dirs
+    # in the workspace
+    workspace_sub <- list.dirs(
+      path = workspace,
+      full.names = TRUE,
+      recursive = FALSE
+    )
+  }
+
+  # Getting the files list from sub-directories
+  if (exists("workspace_sub") && length(workspace_sub) > 0) {
     workspace_files_sub <- unlist(
       lapply(workspace_sub, {
         function(x) {
@@ -184,8 +192,8 @@ get_file_ <- function(
     )
   }
 
-  # Testing if files found aither in workspace or in sub-dirs
-  if (exists("workspace_files_sub")) {
+  # Testing if duplicates files found either in workspace or in sub-dirs
+  if (exists("workspace_files_sub") && (length(workspace_files_sub) > 0)) {
     # checking common files
     common_idx <- basename(workspace_files_sub) %in% workspace_files
     if (any(common_idx)) {
@@ -209,10 +217,9 @@ get_file_ <- function(
       warning(
         "Not any ",
         full_type,
-        " file detected neither in workspace ",
-        workspace_sub,
-        "nor in sub-dir(s)",
-        workspace_files_sub
+        " file detected, neither in workspace ",
+        workspace,
+        ", nor in sub-directory(ies)."
       )
       return()
     }
@@ -368,7 +375,7 @@ get_file_one <- function(
       dplyr::filter(out$Date %in% dates_list)
   }
 
-  # selecting variables columns
+  # Selecting variables columns
   if (!is.null(var_list)) {
     # Managing output columns according to out content
     out_cols <- var_to_col_names(var_list)
