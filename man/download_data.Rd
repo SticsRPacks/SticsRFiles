@@ -37,6 +37,8 @@ organization.
 # Getting data for a given example : study_case_1 and a given STICS version
 download_data(example_dirs = "study_case_1", stics_version = "V9.0")
 # raising an error instead of a message
-download_data(example_dirs = "study_case_1", stics_version = "V9.0",
-              raise_error = TRUE)
+download_data(
+  example_dirs = "study_case_1", stics_version = "V9.0",
+  raise_error = TRUE
+)
 }
