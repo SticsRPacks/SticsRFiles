@@ -13,11 +13,6 @@ set_param_xml(
   select_value = NULL,
   value_id = NULL,
   overwrite = FALSE,
-  xml_file = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated(),
-  param_name = lifecycle::deprecated(),
-  param_value = lifecycle::deprecated(),
-  value = lifecycle::deprecated(),
   ...
 )
 }
@@ -42,21 +37,6 @@ from the parameter values vector}
 
 \item{overwrite}{Logical TRUE for overwriting the output file,
 FALSE otherwise (default)}
-
-\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
-longer supported, use file instead.}
-
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use save_as instead.}
-
-\item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
-longer supported, use param instead.}
-
-\item{param_value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_value} is no
-longer supported, use values instead.}
-
-\item{value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{value} is no
-longer supported, use select_value instead.}
 
 \item{...}{Pass further arguments to \code{set_param_value()}.}
 }

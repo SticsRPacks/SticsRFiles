@@ -1,19 +1,11 @@
 #' @title Generate STICS sols xml file from a template or an input file
 #'
 #' @param file Path (including name) of the sols file to generate.
-#' @param sols_out_file `r lifecycle::badge("deprecated")` `sols_out_file` is no
-#'   longer supported, use `file` instead.
-#' @param sols_nb `r lifecycle::badge("deprecated")` `sols_nb` is no
-#'   longer supported, it is now computed in the function.
 #' @param param_df A table (df, tibble) containing the values of the parameters
 #'  to use (see details)
-#' @param sols_param `r lifecycle::badge("deprecated")` `sols_param` is no
-#'   longer supported, use `param_df` instead.
 #' @param template Path of a soil xml file to be used as a template. Optional,
 #' if not provided, the function will use a standard template depending on
 #' the STICS version.
-#' @param sols_in_file `r lifecycle::badge("deprecated")` `sols_in_file` is no
-#'   longer supported, use `template` instead.
 #' @param stics_version Name of the STICS version. Optional, used if the `file`
 #' argument is not provided. In this case the function uses a standard template
 #' associated to the STICS version.
@@ -63,79 +55,34 @@
 #'
 #' @export
 #'
-#'
-#'
 gen_sols_xml <- function(
     file,
     param_df,
     template = NULL,
-    stics_version = "latest",
-    sols_in_file = lifecycle::deprecated(),
-    sols_param = lifecycle::deprecated(),
-    sols_out_file = lifecycle::deprecated(),
-    sols_nb = lifecycle::deprecated()) {
-  if (lifecycle::is_present(sols_in_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sols_xml(sols_in_file)",
-      "gen_sols_xml(template)"
-    )
-  } else {
-    sols_in_file <- template
-  }
-
-  if (lifecycle::is_present(sols_param)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sols_xml(sols_param)",
-      "gen_sols_xml(param_df)"
-    )
-  } else {
-    sols_param <- param_df
-  }
-
-  if (lifecycle::is_present(sols_out_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sols_xml(sols_out_file)",
-      "gen_sols_xml(file)"
-    )
-  } else {
-    sols_out_file <- file
-  }
-
-  if (lifecycle::is_present(sols_nb)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sols_xml(sols_nb)",
-      details = "directly computed in the function."
-    )
-  } else {
-    sols_nb <- nrow(sols_param)
-  }
-
+    stics_version = "latest") {
+  sols_nb <- nrow(param_df)
   xml_doc_tmpl <- NULL
 
-  if (!base::is.null(sols_in_file)) {
-    xml_doc_tmpl <- xmldocument(sols_in_file)
+  if (!base::is.null(template)) {
+    xml_doc_tmpl <- xmldocument(template)
   }
 
   xml_doc <- gen_usms_sols_doc(
     doc_type = "sols",
     xml_doc = xml_doc_tmpl,
     nodes_nb = sols_nb,
-    nodes_param = sols_param,
+    nodes_param = param_df,
     stics_version = stics_version
   )
 
   # checking if out dir exists
-  out_path <- dirname(sols_out_file)
+  out_path <- dirname(file)
   if (!dir.exists(out_path)) {
     stop(paste("The directory does not exist: ", out_path))
   }
 
   # saving file
-  save_xml_doc(xml_doc, sols_out_file)
+  save_xml_doc(xml_doc, file)
 
   # finalizing object
   delete(xml_doc)

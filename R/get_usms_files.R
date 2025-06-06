@@ -12,12 +12,6 @@
 #' JavaSTICS distribution)
 #' @param df_output logical if TRUE returning a data.frame, otherwise returning
 #' a named list if FALSE (default)
-#' @param workspace_path `r lifecycle::badge("deprecated")` `workspace_path`
-#' is no longer supported, use `workspace` instead.
-#' @param file_name `r lifecycle::badge("deprecated")` `file_name` is no
-#'   longer supported, use `usms_file` instead.
-#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
-#' is no longer supported, use `javastics` instead.
 #'
 #' @details The possible values for file_type are: "fplt", "finit", "fclim1",
 #' "fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"
@@ -54,38 +48,7 @@ get_usms_files <- function(
     usms_file = "usms.xml",
     file_type = NULL,
     javastics = NULL,
-    df_output = FALSE,
-    workspace_path = lifecycle::deprecated(),
-    file_name = lifecycle::deprecated(),
-    javastics_path = lifecycle::deprecated()) {
-  if (lifecycle::is_present(workspace_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_usms_files(workspace_path)",
-      "get_usms_files(workspace)"
-    )
-  } else {
-    workspace_path <- workspace # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(file_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_usms_files(file_name)",
-      "get_usms_files(usms_file)"
-    )
-  } else {
-    file_name <- usms_file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_usms_files(javastics_path)",
-      "get_usms_files(javastics)"
-    )
-  } else {
-    javastics_path <- javastics # to remove when we update inside the function
-  }
-
+    df_output = FALSE) {
   # Types definition
   files_types <- c(
     "fplt",
@@ -122,17 +85,17 @@ get_usms_files <- function(
     ws_plt_path <- NULL
 
     if (
-      !base::is.null(javastics_path) &&
-        dir.exists(file.path(javastics_path, "plant"))
+      !base::is.null(javastics) &&
+        dir.exists(file.path(javastics, "plant"))
     ) {
       javastics_plt_path <- suppressWarnings(
-        normalizePath(file.path(javastics_path, "plant"))
+        normalizePath(file.path(javastics, "plant"))
       )
     }
 
-    if (dir.exists(file.path(workspace_path, "plant"))) {
+    if (dir.exists(file.path(workspace, "plant"))) {
       ws_plt_path <- suppressWarnings(
-        normalizePath(file.path(workspace_path, "plant"))
+        normalizePath(file.path(workspace, "plant"))
       )
     }
 
@@ -140,7 +103,7 @@ get_usms_files <- function(
 
     if (base::is.null(plt_dir_path)) {
       stop(
-        "not any plant folder found, please add javastics_path directory",
+        "not any plant folder found, please add javastics directory",
         " as function input argument or a workspace plant sub-directory !"
       )
     }
@@ -148,7 +111,7 @@ get_usms_files <- function(
   }
 
   # Getting usms.xml path
-  usms_xml_path <- file.path(workspace_path, file_name)
+  usms_xml_path <- file.path(workspace, usms_file)
 
   # Checking usms file
   if (!file.exists(usms_xml_path)) {
@@ -205,7 +168,7 @@ get_usms_files <- function(
       usm_files <- usm_files[-useless_files_idx]
     }
 
-    usm_files_path <- file.path(workspace_path, usm_files)
+    usm_files_path <- file.path(workspace, usm_files)
 
     # Specific plt files management
     plt_idx <- grep("_plt\\.xml$", usm_files_path)
@@ -240,7 +203,7 @@ get_usms_files <- function(
     sols_file_exists <- vector("logical", 0)
     if ("sols" %in% file_type) {
       sols_file_path <- suppressWarnings(
-        normalizePath(file.path(workspace_path, "sols.xml"))
+        normalizePath(file.path(workspace, "sols.xml"))
       )
       sols_file_exists <- file.exists(sols_file_path)
     }
@@ -250,7 +213,7 @@ get_usms_files <- function(
     pargen_file_exists <- vector("logical", 0)
     if ("pargen" %in% file_type) {
       pargen_file_path <- suppressWarnings(
-        normalizePath(file.path(workspace_path, "param_gen.xml"))
+        normalizePath(file.path(workspace, "param_gen.xml"))
       )
 
       if (!file.exists(pargen_file_path)) {
@@ -267,7 +230,7 @@ get_usms_files <- function(
     parnew_file_exists <- vector("logical", 0)
     if ("parnew" %in% file_type) {
       parnew_file_path <- suppressWarnings(
-        normalizePath(file.path(workspace_path, "param_newform.xml"))
+        normalizePath(file.path(workspace, "param_newform.xml"))
       )
 
       if (!file.exists(parnew_file_path)) {

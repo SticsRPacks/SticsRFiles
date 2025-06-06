@@ -7,8 +7,6 @@
 #' @param values named vector of parameter values to force.
 #' See Details for more information.
 #' @param javastics Path of JavaSTICS
-#' @param param_values `r lifecycle::badge("deprecated")` `param_values`
-#' is no longer supported, use `values` instead.
 #'
 #' @details This function operates on STICS text input files.
 #' Do not use it before calling `gen_usms_xml2txt()`, otherwise
@@ -41,19 +39,8 @@
 force_param_values <- function(
     workspace,
     values,
-    javastics,
-    param_values = lifecycle::deprecated()) {
-  if (lifecycle::is_present(param_values)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "force_param_values(param_values)",
-      "force_param_values(values)"
-    )
-  } else {
-    param_values <- values # to remove when we update inside the function
-  }
-
-  if (is.null(param_values) || all(is.na(param_values))) {
+    javastics) {
+  if (is.null(values) || all(is.na(values))) {
     # remove param.sti in case of previous run using it ...
     if (
       suppressWarnings(file.remove(file.path(
@@ -67,11 +54,11 @@ force_param_values <- function(
     }
   } else {
     # convert into vector in case a tibble is given instead of a vector
-    param_values <-
-      stats::setNames(as.numeric(param_values), names(param_values))
+    values <-
+      stats::setNames(as.numeric(values), names(values))
 
     # Checking parameters names
-    param_names <- names(param_values)
+    param_names <- names(values)
     param_exist <- exist_param_csv(param_names, javastics)
     if (!all(param_exist)) {
       stop(
@@ -81,22 +68,22 @@ force_param_values <- function(
       )
     }
 
-    ind_non_na <- !is.na(param_values)
+    ind_non_na <- !is.na(values)
     if (!all(ind_non_na)) {
       warning(paste(
         "Parameter(s)",
-        paste(names(param_values[!ind_non_na]), collapse = ","),
+        paste(names(values[!ind_non_na]), collapse = ","),
         "will not be forced (maybe their values are not numeric?",
         " In that case please use set_param_*** functions)."
       ))
     }
-    param_values <- param_values[ind_non_na]
+    values <- values[ind_non_na]
 
     # converting par names to STICS names
     # names conversion done in exist_param_csv()
     stics_names <- names(param_exist[ind_non_na])
 
-    ret <- gen_paramsti(workspace, stics_names, param_values)
+    ret <- gen_paramsti(workspace, stics_names, values)
     if (!ret) {
       return(invisible(FALSE))
     }

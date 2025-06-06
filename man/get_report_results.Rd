@@ -8,8 +8,7 @@ get_report_results(
   workspace,
   file_name = "mod_rapport.sti",
   usm = NULL,
-  var_list = NULL,
-  usm_name = lifecycle::deprecated()
+  var_list = NULL
 )
 }
 \arguments{
@@ -24,9 +23,6 @@ returns the results for all USMs.}
 
 \item{var_list}{vector of output variables names to filter
 (optional, see \code{get_var_info()} to get the names of the variables)}
-
-\item{usm_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_name} is no
-longer supported, use \code{usm} instead.}
 }
 \value{
 A data.frame

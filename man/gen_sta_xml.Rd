@@ -4,15 +4,7 @@
 \alias{gen_sta_xml}
 \title{Generate STICS sta xml file(s) from a template or an input file}
 \usage{
-gen_sta_xml(
-  param_df,
-  file = NULL,
-  out_dir,
-  stics_version = "latest",
-  param_table = lifecycle::deprecated(),
-  sta_in_file = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
-)
+gen_sta_xml(param_df, file = NULL, out_dir, stics_version = "latest")
 }
 \arguments{
 \item{param_df}{A table (df, tibble) containing the values of the parameters
@@ -27,15 +19,6 @@ on the STICS version.}
 \item{stics_version}{Name of the STICS version. Optional, used if
 the \code{file} argument is not provided. In this case the function uses a
 standard template associated to the STICS version.}
-
-\item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
-longer supported, use \code{param_df} instead.}
-
-\item{sta_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sta_in_file} is no
-longer supported, use \code{file} instead.}
-
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use \code{out_dir} instead.}
 }
 \value{
 None

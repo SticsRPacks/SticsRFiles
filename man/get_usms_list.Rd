@@ -4,12 +4,7 @@
 \alias{get_usms_list}
 \title{Getting usms names list for an usms.xml file}
 \usage{
-get_usms_list(
-  file,
-  usm = NULL,
-  usm_path = lifecycle::deprecated(),
-  name = lifecycle::deprecated()
-)
+get_usms_list(file, usm = NULL)
 }
 \arguments{
 \item{file}{Path (including name) of the USM xml file}
@@ -17,12 +12,6 @@ get_usms_list(
 \item{usm}{Vector of USM names (or partial names).
 Optional, if not provided, the function returns the names of all the USMs
 included in the given file.}
-
-\item{usm_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_path} is no
-longer supported, use \code{file} instead.}
-
-\item{name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{name} is no
-longer supported, use \code{usm} instead.}
 }
 \value{
 A vector of usm names
