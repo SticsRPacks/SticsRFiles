@@ -103,16 +103,15 @@
 #'
 #' @export
 set_param_xml <- function(
-  file,
-  param,
-  values,
-  save_as = NULL,
-  select = NULL,
-  select_value = NULL,
-  value_id = NULL,
-  overwrite = FALSE,
-  ...
-) {
+    file,
+    param,
+    values,
+    save_as = NULL,
+    select = NULL,
+    select_value = NULL,
+    value_id = NULL,
+    overwrite = FALSE,
+    ...) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
   # Setting output file path
