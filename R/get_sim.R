@@ -48,14 +48,13 @@
 #' @export
 #'
 get_sim <- function(
-  workspace,
-  usm = NULL,
-  var = NULL,
-  dates = NULL,
-  usms_file = NULL,
-  javastics = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    usm = NULL,
+    var = NULL,
+    dates = NULL,
+    usms_file = NULL,
+    javastics = NULL,
+    verbose = TRUE) {
   res <- get_file(
     workspace,
     usm,
