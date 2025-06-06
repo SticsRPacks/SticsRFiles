@@ -32,11 +32,10 @@
 #' get_report_results(workspace = path, file_name = "mod_rapportA.sti")
 #'
 get_report_results <- function(
-  workspace,
-  file_name = "mod_rapport.sti",
-  usm = NULL,
-  var_list = NULL
-) {
+    workspace,
+    file_name = "mod_rapport.sti",
+    usm = NULL,
+    var_list = NULL) {
   files_name <- c("mod_rapport.sti", "mod_rapportA.sti", "mod_rapportP.sti")
   usm_col <- "P_usm"
   usm_patt <- paste0("^", usm_col)
