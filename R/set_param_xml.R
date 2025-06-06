@@ -16,16 +16,6 @@
 #' from the parameter values vector
 #' @param overwrite Logical TRUE for overwriting the output file,
 #' FALSE otherwise (default)
-#' @param xml_file `r lifecycle::badge("deprecated")` `xml_file` is no
-#'   longer supported, use file instead.
-#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
-#'   longer supported, use save_as instead.
-#' @param param_name `r lifecycle::badge("deprecated")` `param_name` is no
-#'   longer supported, use param instead.
-#' @param param_value `r lifecycle::badge("deprecated")` `param_value` is no
-#'   longer supported, use values instead.
-#' @param value `r lifecycle::badge("deprecated")` `value` is no
-#'   longer supported, use select_value instead.
 #' @param... Pass further arguments to `set_param_value()`.
 #'
 #' @return A logical value TRUE for operation success, FALSE otherwise
@@ -113,76 +103,22 @@
 #'
 #' @export
 set_param_xml <- function(
-    file,
-    param,
-    values,
-    save_as = NULL,
-    select = NULL,
-    select_value = NULL,
-    value_id = NULL,
-    overwrite = FALSE,
-    xml_file = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated(),
-    param_name = lifecycle::deprecated(),
-    param_value = lifecycle::deprecated(),
-    value = lifecycle::deprecated(),
-    ...) {
+  file,
+  param,
+  values,
+  save_as = NULL,
+  select = NULL,
+  select_value = NULL,
+  value_id = NULL,
+  overwrite = FALSE,
+  ...
+) {
   # ... argument for passing : ids, show_xpath to get_param_value
-  if (lifecycle::is_present(xml_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_xml(xml_file)",
-      "set_param_xml(file)"
-    )
-  } else {
-    # to remove when we update inside the function
-    xml_file <- file
-  }
-  if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_xml(out_path)",
-      "set_param_xml(save_as)"
-    )
-  } else {
-    # to remove when we update inside the function
-    out_path <- save_as
-  }
-  if (lifecycle::is_present(param_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_xml(param_name)",
-      "set_param_xml(param)"
-    )
-  } else {
-    # to remove when we update inside the function
-    param_name <- param
-  }
-  if (lifecycle::is_present(param_value)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_xml(param_value)",
-      "set_param_xml(values)"
-    )
-  } else {
-    # to remove when we update inside the function
-    param_value <- values
-  }
-  if (lifecycle::is_present(value)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_xml(value)",
-      "set_param_xml(select_value)"
-    )
-  } else {
-    # to remove when we update inside the function
-    value <- select_value
-  }
 
   # Setting output file path
-  if (base::is.null(out_path)) {
+  if (base::is.null(save_as)) {
     if (overwrite) {
-      out_path <- xml_file
+      save_as <- file
     } else {
       warning(
         "The output file path is NULL, so the file will not be saved",
@@ -202,29 +138,29 @@ set_param_xml <- function(
 
   # For future version
   # TODO: multiple files and multiple params list and values ...ids ...?
-  xml_doc <- xmldocument(xml_file)
+  xml_doc <- xmldocument(file)
 
-  # Checking if any of param_name can be in intervention
+  # Checking if any of param can be in intervention
   # nodes of 2 option choices (specific of "cut crop" in tec files)
   check_choice_param(
     xml_doc = xml_doc,
-    param_name = param_name,
+    param_name = param,
     stop = TRUE
   )
 
   # Setting parameters values in the xmlDocument object
   set_param_value(
     xml_doc,
-    param_name = param_name,
-    param_value = param_value,
+    param_name = param,
+    param_value = values,
     parent_name = select,
-    parent_sel_attr = value,
+    parent_sel_attr = select_value,
     ids = value_id,
     ...
   )
 
   # Saving
-  save_xml_doc(xml_doc, out_path)
+  save_xml_doc(xml_doc, save_as)
 
   delete(xml_doc)
 
