@@ -59,9 +59,8 @@ is_leap_year <- function(year, integer = FALSE) {
 #'
 #' @export
 compute_day_from_date <- function(
-  date,
-  start_year = NULL
-) {
+    date,
+    start_year = NULL) {
   # In case of several input dates
   if (length(date) > 1) {
     out <- unlist(
