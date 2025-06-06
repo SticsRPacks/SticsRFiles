@@ -8,8 +8,6 @@
 #' returns the results for all USMs.
 #' @param var_list vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
-#' @param usm_name `r lifecycle::badge("deprecated")` `usm_name` is no
-#' longer supported, use `usm` instead.
 #'
 #' @details The data may be filtered using `usm_name` vector of usm names and
 #' and/or `var_list` vector of variables names. In the returned data.frame,
@@ -37,18 +35,7 @@ get_report_results <- function(
     workspace,
     file_name = "mod_rapport.sti",
     usm = NULL,
-    var_list = NULL,
-    usm_name = lifecycle::deprecated()) {
-  if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_report_results(usm_name)",
-      "get_report_results(usm)"
-    )
-  } else {
-    usm_name <- usm # to remove when we update inside the function
-  }
-
+    var_list = NULL) {
   files_name <- c("mod_rapport.sti", "mod_rapportA.sti", "mod_rapportP.sti")
   usm_col <- "P_usm"
   usm_patt <- paste0("^", usm_col)
@@ -105,8 +92,8 @@ get_report_results <- function(
   colnames(df) <- var_to_col_names(col_names)
 
   # Filtering usms
-  if (!base::is.null(usm_name)) {
-    df <- df %>% dplyr::filter(df[[usm_col]] %in% usm_name)
+  if (!base::is.null(usm)) {
+    df <- df %>% dplyr::filter(df[[usm_col]] %in% usm)
   }
 
   # Filtering variables

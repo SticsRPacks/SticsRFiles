@@ -4,12 +4,7 @@
 \alias{get_examples_path}
 \title{Getting examples files path attached to a STICS version for a given file type}
 \usage{
-get_examples_path(
-  file_type,
-  stics_version = "latest",
-  overwrite = FALSE,
-  version_name = lifecycle::deprecated()
-)
+get_examples_path(file_type, stics_version = "latest", overwrite = FALSE)
 }
 \arguments{
 \item{file_type}{A file type string among files types or a vector of
@@ -19,9 +14,6 @@ get_examples_path(
 the latest version returned by \code{get_stics_versions_compat()} is used.}
 
 \item{overwrite}{TRUE for overwriting directory; FALSE otherwise}
-
-\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no
-longer supported, use \code{stics_version} instead.}
 }
 \value{
 A directory path for examples files for given file type and STICS

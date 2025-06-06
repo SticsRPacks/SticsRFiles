@@ -5,20 +5,13 @@
 \title{Getting plants number per usm for all usms or selected from a usm
 name vector}
 \usage{
-get_plants_nb(
-  usms_file,
-  usms_list = c(),
-  usm_file_path = lifecycle::deprecated()
-)
+get_plants_nb(usms_file, usms_list = c())
 }
 \arguments{
 \item{usms_file}{Path (including name) of a USM xml file or of a
 new_travail.usm file}
 
 \item{usms_list}{Usm(s) name(s) (optional, see details)}
-
-\item{usm_file_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usm_file_path} is no
-longer supported, use \code{usms_file} instead.}
 }
 \value{
 A named numeric vector of plants number per usm
