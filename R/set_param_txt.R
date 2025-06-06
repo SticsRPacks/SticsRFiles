@@ -16,19 +16,6 @@
 #' @param value_id    The soil layers id or technical interventions id
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
-#' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
-#'   longer supported, use `workspace` instead.
-#' @param add `r lifecycle::badge("deprecated")` `add` is no
-#'   longer supported, use `append` instead.
-#' @param plant `r lifecycle::badge("deprecated")` `plant` is no
-#'   longer supported, use `plant_id` instead.
-#' @param layer `r lifecycle::badge("deprecated")` `layer` is no
-#'   longer supported, use `value_id` instead.
-#'
-#' @param file Path (including name) of the file to modify
-#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
-#'   longer supported, use `file` instead.
-#'
 #'
 #' @details The \code{plant} parameter can be either equal to \code{1},
 #'          \code{2} for the associated plant in the case of intercrop, or
@@ -71,67 +58,21 @@
 #' set_param_txt(workspace = path, param = "amount", value_id = 2, value = 40)
 #'
 set_param_txt <- function(
-    workspace,
-    param,
-    value,
-    append = FALSE,
-    plant_id = 1,
-    variety = NULL,
-    value_id = NULL,
-    stics_version = "latest",
-    dirpath = lifecycle::deprecated(),
-    add = lifecycle::deprecated(),
-    plant = lifecycle::deprecated(),
-    layer = lifecycle::deprecated()) {
-  # dirpath
-  if (lifecycle::is_present(dirpath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_txt(dirpath)",
-      "set_param_txt(workspace)"
-    )
-  } else {
-    dirpath <- workspace # to remove when we update inside the function
-  }
-
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_txt(add)",
-      "set_param_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
-  # plant
-  if (lifecycle::is_present(plant)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_param_txt(plant)",
-      "set_param_txt(plant_id)"
-    )
-  } else {
-    plant <- plant_id # to remove when we update inside the function
-  }
-
-  # layer
-  if (lifecycle::is_present(layer)) {
-    lifecycle::deprecate_warn(
-      "1.4.0",
-      "set_param_txt(plant)",
-      "set_param_txt(plant_id)"
-    )
-    value_id <- layer
-  }
-
+  workspace,
+  param,
+  value,
+  append = FALSE,
+  plant_id = 1,
+  variety = NULL,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
   param <- gsub("P_", "", param)
 
   param_val <- get_param_txt(
-    workspace = dirpath,
+    workspace = workspace,
     param = param,
     exact = TRUE,
     stics_version = stics_version
@@ -165,85 +106,86 @@ set_param_txt <- function(
       "\nPlease use the set_* functions directly to set the parameter value."
     )
   }
-  switch(file_type,
+  switch(
+    file_type,
     ini = {
       set_ini_txt(
-        file = file.path(dirpath, "ficini.txt"),
+        file = file.path(workspace, "ficini.txt"),
         param = param,
         value = value,
-        append = add,
-        plant_id = plant,
-        layer = value_id,
+        append = append,
+        plant_id = plant_id,
+        value_id = value_id,
         stics_version = stics_version
       )
     },
     general = {
       set_general_txt(
-        file = file.path(dirpath, "tempopar.sti"),
+        file = file.path(workspace, "tempopar.sti"),
         param = param,
         value = value,
-        append = add
+        append = append
       )
     },
     tmp = {
       set_tmp_txt(
-        file = file.path(dirpath, "tempoparV6.sti"),
+        file = file.path(workspace, "tempoparV6.sti"),
         param = param,
         value = value,
-        append = add
+        append = append
       )
     },
     soil = {
       set_soil_txt(
-        file = file.path(dirpath, "param.sol"),
+        file = file.path(workspace, "param.sol"),
         param = param,
         value = value,
-        layer = value_id,
+        value_id = value_id,
         stics_version = stics_version
       )
     },
     usm = {
       set_usm_txt(
-        file = file.path(dirpath, "new_travail.usm"),
+        file = file.path(workspace, "new_travail.usm"),
         param = param,
         value = value
       )
     },
     station = {
       set_station_txt(
-        file = file.path(dirpath, "station.txt"),
+        file = file.path(workspace, "station.txt"),
         param = param,
         value = value,
-        append = add
+        append = append
       )
     },
     tec = {
-      lapply(plant, function(x) {
+      lapply(plant_id, function(x) {
         set_tec_txt(
-          file = file.path(dirpath, paste0("fictec", x, ".txt")),
+          file = file.path(workspace, paste0("fictec", x, ".txt")),
           param = param,
           value = value,
-          append = add,
+          append = append,
           value_id = value_id
         )
       })
     },
     plant = {
-      lapply(plant, function(x) {
+      lapply(plant_id, function(x) {
         if (is.null(variety)) {
           variety <-
             unlist(get_param_txt(
-              workspace = dirpath,
+              workspace = workspace,
               param = "variete",
               exact = TRUE,
               stics_version = stics_version
-            ))[plant]
+            ))[plant_id]
         } else {
           if (is.character(variety)) {
             varieties <-
               get_plant_txt(
                 file = file.path(
-                  dirpath,
+                  workspace,
                   paste0(
                     "ficplt",
                     x,
@@ -265,10 +207,10 @@ set_param_txt <- function(
           }
         }
         set_plant_txt(
-          file = file.path(dirpath, paste0("ficplt", x, ".txt")),
+          file = file.path(workspace, paste0("ficplt", x, ".txt")),
           param = param,
           value = value,
-          append = add,
+          append = append,
           variety = variety
         )
       })
@@ -282,110 +224,44 @@ set_param_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_usm_txt <- function(
-    file = "new_travail.usm",
-    param,
-    value,
-    append = FALSE,
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_usm_txt(filepath)",
-      "set_usm_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_usm_txt(add)",
-      "set_usm_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
-  set_file_txt(filepath, param, value, add)
+  file = "new_travail.usm",
+  param,
+  value,
+  append = FALSE
+) {
+  set_file_txt(file, param, value, append)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_station_txt <- function(
-    file = "station.txt",
-    param,
-    value,
-    append = FALSE,
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_station_txt(filepath)",
-      "set_station_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_station_txt(add)",
-      "set_station_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
-  set_file_txt(filepath, param, value, add)
+  file = "station.txt",
+  param,
+  value,
+  append = FALSE
+) {
+  set_file_txt(file, param, value, append)
 }
 
 
 #' @rdname set_param_txt
 #' @export
 set_ini_txt <- function(
-    file = "ficini.txt",
-    param,
-    value,
-    append = FALSE,
-    plant_id = 1,
-    layer = NULL,
-    stics_version = "latest",
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_ini_txt(filepath)",
-      "set_ini_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_ini_txt(add)",
-      "set_ini_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
+  file = "ficini.txt",
+  param,
+  value,
+  append = FALSE,
+  plant_id = 1,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   set_file_txt(
-    filepath,
+    file,
     param,
     value,
-    add,
+    append,
     plant_id = plant_id,
-    value_id = layer,
+    value_id = value_id,
     stics_version = stics_version
   )
 }
@@ -394,139 +270,51 @@ set_ini_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_general_txt <- function(
-    file = "tempopar.sti",
-    param,
-    value,
-    append = FALSE,
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_general_txt(filepath)",
-      "set_general_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_general_txt(add)",
-      "set_general_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
-  set_file_txt(filepath, param, value, add)
+  file = "tempopar.sti",
+  param,
+  value,
+  append = FALSE
+) {
+  set_file_txt(file, param, value, append)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_tmp_txt <- function(
-    file = "tempoparv6.sti",
-    param,
-    value,
-    append = FALSE,
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_tmp_txt(filepath)",
-      "set_tmp_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_tmp_txt(add)",
-      "set_tmp_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
-  set_file_txt(filepath, param, value, add)
+  file = "tempoparv6.sti",
+  param,
+  value,
+  append = FALSE
+) {
+  set_file_txt(file, param, value, append)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_plant_txt <- function(
-    file = "ficplt1.txt",
-    param,
-    value,
-    append = FALSE,
-    variety = NULL,
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_plant_txt(filepath)",
-      "set_plant_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_plant_txt(add)",
-      "set_plant_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
-  set_file_txt(filepath, param, value, add, variety = variety)
+  file = "ficplt1.txt",
+  param,
+  value,
+  append = FALSE,
+  variety = NULL
+) {
+  set_file_txt(file, param, value, append, variety = variety)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_tec_txt <- function(
-    file = "fictec1.txt",
-    param,
-    value,
-    append = FALSE,
-    value_id = NULL,
-    filepath = lifecycle::deprecated(),
-    add = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_tec_txt(filepath)",
-      "set_tec_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-  # add
-  if (lifecycle::is_present(add)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_tec_txt(add)",
-      "set_tec_txt(append)"
-    )
-  } else {
-    add <- append # to remove when we update inside the function
-  }
-
+  file = "fictec1.txt",
+  param,
+  value,
+  append = FALSE,
+  value_id = NULL
+) {
   set_file_txt(
-    file = filepath,
+    file = file,
     param = param,
     value = value,
-    append = add,
+    append = append,
     value_id = value_id
   )
 }
@@ -534,35 +322,28 @@ set_tec_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_soil_txt <- function(
-    file = "param.sol",
-    param,
-    value,
-    layer = NULL,
-    stics_version = "latest",
-    filepath = lifecycle::deprecated()) {
+  file = "param.sol",
+  param,
+  value,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "set_soil_txt(filepath)",
-      "set_soil_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
   param <- gsub("P_", "", param)
-  ref <- get_soil_txt(filepath, stics_version = stics_version)
+  ref <- get_soil_txt(file, stics_version = stics_version)
   param <- paste0("^", param, "$")
 
-  if (!is.null(layer)) {
+  if (!is.null(value_id)) {
     check_param_dim(
       param = param,
       file_value = ref[[grep(param, names(ref))]],
-      value_id = layer,
+      value_id = value_id,
       value = value
     )
-    ref[[grep(param, names(ref))]][layer] <- format(value, scientific = FALSE)
+    ref[[grep(param, names(ref))]][value_id] <- format(
+      value,
+      scientific = FALSE
+    )
   } else {
     if (length(value) > 1) {
       check_param_dim(
@@ -633,7 +414,7 @@ set_soil_txt <- function(
     )
   }
 
-  writeLines(line, filepath)
+  writeLines(line, file)
 
   write(
     paste(
@@ -652,7 +433,7 @@ set_soil_txt <- function(
       ref$codenitrif,
       ref$codedenit
     ),
-    filepath,
+    file,
     append = TRUE
   )
 
@@ -674,7 +455,7 @@ set_soil_txt <- function(
       ref$profdenit,
       ref$vpotdenit
     ),
-    filepath,
+    file,
     append = TRUE
   )
 
@@ -697,7 +478,7 @@ set_soil_txt <- function(
         ref$infil[icou],
         ref$epd[icou]
       ),
-      filepath,
+      file,
       append = TRUE
     )
   }
@@ -738,14 +519,15 @@ set_soil_txt <- function(
 #' @noRd
 #'
 set_file_txt <- function(
-    file,
-    param,
-    value,
-    append,
-    plant_id = NULL,
-    variety = NULL,
-    value_id = NULL,
-    stics_version = "latest") {
+  file,
+  param,
+  value,
+  append,
+  plant_id = NULL,
+  variety = NULL,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   param <- gsub("P_", "", param)
 
   stics_version <- check_version_compat(stics_version = stics_version)
@@ -754,7 +536,8 @@ set_file_txt <- function(
   type <- strsplit(deparse(sys.call(-1)), split = "\\(")[[1]][1]
   params <- readLines(file)
   param_ <- paste0("^:{0,1}", param, "$")
-  switch(type,
+  switch(
+    type,
     set_usm_txt = {
       ref <- get_usm_txt(file)
       if (grep(param_, names(ref)) < grep("fplt", names(ref))) {
