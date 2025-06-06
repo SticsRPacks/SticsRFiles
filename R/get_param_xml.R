@@ -40,13 +40,12 @@
 #'
 #' @export
 get_param_xml <- function(
-  file,
-  param = NULL,
-  select = NULL,
-  select_value = NULL,
-  value_id = NULL,
-  ...
-) {
+    file,
+    param = NULL,
+    select = NULL,
+    select_value = NULL,
+    value_id = NULL,
+    ...) {
   # ... argument for passing : ids, show_xpath to get_param_value
 
   xml_docs <- lapply(file, xmldocument)
