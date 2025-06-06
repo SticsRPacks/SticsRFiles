@@ -53,11 +53,10 @@
 #'
 
 gen_usms_xml <- function(
-  file,
-  param_df,
-  template = NULL,
-  stics_version = "latest"
-) {
+    file,
+    param_df,
+    template = NULL,
+    stics_version = "latest") {
   xml_doc_tmpl <- NULL
 
   # If a template file is provided

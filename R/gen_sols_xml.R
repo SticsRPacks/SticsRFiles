@@ -56,11 +56,10 @@
 #' @export
 #'
 gen_sols_xml <- function(
-  file,
-  param_df,
-  template = NULL,
-  stics_version = "latest"
-) {
+    file,
+    param_df,
+    template = NULL,
+    stics_version = "latest") {
   sols_nb <- nrow(param_df)
   xml_doc_tmpl <- NULL
 
