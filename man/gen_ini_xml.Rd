@@ -9,10 +9,7 @@ gen_ini_xml(
   file = NULL,
   out_dir,
   crop_tag = "Crop",
-  stics_version = "latest",
-  ini_in_file = lifecycle::deprecated(),
-  param_table = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
+  stics_version = "latest"
 )
 }
 \arguments{
@@ -32,15 +29,6 @@ param_table example in the details section below)}
 \item{stics_version}{Name of the STICS version.
 Optional, used if the \code{file} argument is not provided. In this case
 the function uses a standard template associated to the STICS version.}
-
-\item{ini_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{ini_in_file} is no
-longer supported, use \code{file} instead.}
-
-\item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
-longer supported, use \code{param_df} instead.}
-
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use \code{out_dir} instead.}
 }
 \value{
 None
