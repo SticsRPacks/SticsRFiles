@@ -28,13 +28,12 @@
 #' @export
 #'
 gen_varmod <- function(
-  workspace,
-  var,
-  append = FALSE,
-  file_name = "var.mod",
-  stics_version = "latest",
-  force = FALSE
-) {
+    workspace,
+    var,
+    append = FALSE,
+    file_name = "var.mod",
+    stics_version = "latest",
+    force = FALSE) {
   # Checking if workspace exists
   if (!dir.exists(workspace)) {
     stop(paste(workspace, ": directory does not exist !"))
