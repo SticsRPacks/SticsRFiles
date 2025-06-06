@@ -11,12 +11,6 @@
 #' standard template associated to the STICS version.
 #' @param na_values value to use as missing value in param_table
 #' (optional, default : NA)
-#' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
-#'   longer supported, use `param_df` instead.
-#' @param tec_in_file `r lifecycle::badge("deprecated")` `tec_in_file` is no
-#'   longer supported, use `file` instead.
-#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
-#'   longer supported, use `out_dir` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
 #' STICS versions that can be used for the
@@ -58,66 +52,34 @@
 #'
 
 gen_tec_xml <- function(
-    param_df = NULL,
-    file = NULL,
-    out_dir,
-    stics_version = "latest",
-    na_values = NA,
-    param_table = lifecycle::deprecated(),
-    tec_in_file = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated()) {
+  param_df,
+  file = NULL,
+  out_dir,
+  stics_version = "latest",
+  na_values = NA
+) {
   # TODO: refactor with gen_sta_file, gen_ini_file : same code
-
-  if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_tec_xml(param_table)",
-      "gen_tec_xml(param_df)"
-    )
-  } else {
-    param_table <- param_df # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(tec_in_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_tec_xml(tec_in_file)",
-      "gen_tec_xml(file)"
-    )
-  } else {
-    tec_in_file <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_tec_xml(out_path)",
-      "gen_tec_xml(out_dir)"
-    )
-  } else {
-    out_path <- out_dir # to remove when we update inside the function
-  }
 
   xml_doc_tmpl <- NULL
 
-  if (!base::is.null(tec_in_file)) {
-    xml_doc_tmpl <- xmldocument(tec_in_file)
+  if (!base::is.null(file)) {
+    xml_doc_tmpl <- xmldocument(file)
   }
 
   # detecting tec names column
-  param_names <- names(param_table)
+  param_names <- names(param_df)
   col_id <- grep("^tec", tolower(param_names))
   if (!length(col_id)) {
     stop("The column for identifying tec names has not been found !")
   }
   tec_col <- param_names[col_id]
 
-  # Removing for the moment the dict argument
   xml_docs <- gen_tec_doc(
     xml_doc = xml_doc_tmpl,
-    param_table = param_table[, -col_id],
+    param_table = param_df[, -col_id],
     stics_version = stics_version,
     na_values = na_values
-  ) # ,
-  # dict = dict)
+  )
 
   if (!is.list(xml_docs) && methods::is(xml_docs, "xml_document")) {
     xml_docs <- list(xml_docs)
@@ -143,18 +105,18 @@ gen_tec_xml <- function(
     return(invisible())
   }
 
-  # checking if out_path exists
-  if (!dir.exists(out_path)) {
-    stop(paste("The directory does not exist", out_path))
+  # checking if out_dir exists
+  if (!dir.exists(out_dir)) {
+    stop(paste("The directory does not exist", out_dir))
   }
 
   # defining output files paths
-  out_name <- param_table[[tec_col]]
+  out_name <- param_df[[tec_col]]
   ids <- grepl("_tec.xml$", out_name)
   if (sum(ids) < length(out_name)) {
-    out_name[!ids] <- paste0(param_table[[tec_col]][!ids], "_tec.xml")
+    out_name[!ids] <- paste0(param_df[[tec_col]][!ids], "_tec.xml")
   }
-  tec_out_file <- file.path(out_path, out_name)
+  tec_out_file <- file.path(out_dir, out_name)
 
   # checking dimensions
   if (!length(xml_docs) == length(tec_out_file)) {

@@ -12,12 +12,6 @@
 #' @param stics_version Name of the STICS version.
 #' Optional, used if the `file` argument is not provided. In this case
 #' the function uses a standard template associated to the STICS version.
-#' @param ini_in_file `r lifecycle::badge("deprecated")` `ini_in_file` is no
-#'   longer supported, use `file` instead.
-#' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
-#'   longer supported, use `param_df` instead.
-#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
-#'   longer supported, use `out_dir` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
 #' STICS versions that can be used for the
@@ -64,62 +58,32 @@
 #' @export
 #'
 gen_ini_xml <- function(
-    param_df,
-    file = NULL,
-    out_dir,
-    crop_tag = "Crop",
-    stics_version = "latest",
-    ini_in_file = lifecycle::deprecated(),
-    param_table = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated()) {
-  if (lifecycle::is_present(ini_in_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_ini_xml(ini_in_file)",
-      "gen_ini_xml(file)"
-    )
-  } else {
-    ini_in_file <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_ini_xml(param_table)",
-      "gen_ini_xml(param_df)"
-    )
-  } else {
-    param_table <- param_df # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_ini_xml(out_path)",
-      "gen_ini_xml(out_dir)"
-    )
-  } else {
-    out_path <- out_dir # to remove when we update inside the function
-  }
-
+  param_df,
+  file = NULL,
+  out_dir,
+  crop_tag = "Crop",
+  stics_version = "latest"
+) {
   xml_doc_tmpl <- NULL
 
-  if (!base::is.null(ini_in_file)) {
-    xml_doc_tmpl <- xmldocument(ini_in_file)
+  if (!base::is.null(file)) {
+    xml_doc_tmpl <- xmldocument(file)
   }
 
-  # detect the ini names column
-  param_names <- names(param_table)
+  # Detect the initialization names column
+  param_names <- names(param_df)
   col_id <- grep("^ini", tolower(param_names))
   if (!length(col_id)) {
     stop("The column for identifying ini names has not been found !")
   }
-  # ini names or file names
+  # Initialization names or file names
   ini_col <- param_names[col_id]
 
-  # generating xml documents for all table lines
-  # removing ini names col
+  # Generating xml documents for all table lines
+  # and removing initialization names col
   xml_docs <- gen_ini_doc(
     xml_doc = xml_doc_tmpl,
-    param_table = param_table[, -col_id],
+    param_table = param_df[, -col_id],
     crop_tag = crop_tag,
     stics_version = stics_version
   )
@@ -138,7 +102,7 @@ gen_ini_xml <- function(
       paste(sum(!out_idx), "files have been generated !"),
       appendLF = TRUE
     )
-    # selecting available documents to produce
+    # Selecting available documents to produce
     xml_docs <- xml_docs[out_idx]
   }
 
@@ -147,33 +111,34 @@ gen_ini_xml <- function(
     return(invisible())
   }
 
-  # Checking if out_path exists
-  if (!dir.exists(out_path)) {
-    stop(paste("The directory does not exist", out_path))
+  # Checking if out_dir exists
+  if (!dir.exists(out_dir)) {
+    stop("The directory does not exist: ", out_dir)
   }
 
   # Defining output files paths
-  out_name <- param_table[[ini_col]]
+  out_name <- param_df[[ini_col]]
   ids <- grepl("_ini.xml$", out_name)
   if (sum(ids) < length(out_name)) {
-    out_name[!ids] <- paste0(param_table[[ini_col]][!ids], "_ini.xml")
+    out_name[!ids] <- paste0(param_df[[ini_col]][!ids], "_ini.xml")
   }
-  ini_out_file <- file.path(out_path, out_name)
+  ini_out_file <- file.path(out_dir, out_name)
 
   # Checking dimensions
-  if (!length(xml_docs) == length(ini_out_file)) {
+  if (length(xml_docs) != length(ini_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
 
-  # saving files
+  # Saving files
   # TODO: vectorize the saveXmlDoc method of the xml_document class
   for (f in seq_along(xml_docs)) {
     save_xml_doc(xml_docs[[f]], ini_out_file[[f]])
 
-    # finalizing objects
+    # Finalizing objects
     delete(xml_docs[[f]])
   }
 
+  # Finalizing the template object if provided
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
   }

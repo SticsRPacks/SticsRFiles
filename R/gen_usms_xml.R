@@ -9,14 +9,6 @@
 #' @param stics_version Name of the STICS version. Optional,
 #' used if the `file` argument is not provided. In this case the function uses
 #' a standard template associated to the STICS version.
-#' @param usms_out_file `r lifecycle::badge("deprecated")` `usms_out_file` is no
-#'   longer supported, use `file` instead.
-#' @param usms_nb `r lifecycle::badge("deprecated")` `usms_nb` is no
-#'   longer supported, use `NA` instead.
-#' @param usms_param `r lifecycle::badge("deprecated")` `usms_param` is no
-#'   longer supported, use `param_df` instead.
-#' @param usms_in_file `r lifecycle::badge("deprecated")` `usms_in_file` is no
-#'   longer supported, use `template` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
 #' STICS versions that can be used for the argument `stics_version`.
@@ -61,87 +53,49 @@
 #'
 
 gen_usms_xml <- function(
-    file,
-    param_df = NULL,
-    template = NULL,
-    stics_version = "latest",
-    usms_out_file = lifecycle::deprecated(),
-    usms_nb = lifecycle::deprecated(),
-    usms_param = lifecycle::deprecated(),
-    usms_in_file = lifecycle::deprecated()) {
-  if (lifecycle::is_present(usms_out_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_usms_xml(usms_out_file)",
-      "gen_usms_xml(file)"
-    )
-  } else {
-    usms_out_file <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(usms_param)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_usms_xml(usms_param)",
-      "gen_usms_xml(param_df)"
-    )
-  } else {
-    usms_param <- param_df # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(usms_in_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_usms_xml(usms_in_file)",
-      "gen_usms_xml(template)"
-    )
-  } else {
-    usms_in_file <- template # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(usms_nb)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_usms_xml(usms_nb)",
-      details = "It is now directly computed in the function."
-    )
-  } else {
-    usms_nb <- nrow(param_df) # to remove when we update inside the function
-  }
-
+  file,
+  param_df,
+  template = NULL,
+  stics_version = "latest"
+) {
   xml_doc_tmpl <- NULL
 
   # If a template file is provided
-  if (!base::is.null(usms_in_file)) {
-    xml_doc_tmpl <- xmldocument(usms_in_file)
+  if (!base::is.null(template)) {
+    xml_doc_tmpl <- xmldocument(template)
   }
 
   vars <- c("flai_1", "fplt_2", "ftec_2", "flai_2")
-  vars_idx <- vars %in% names(usms_param)
+  vars_idx <- vars %in% names(param_df)
 
-  # replacing NA or "", with "null", if any vars name in usms_param names
-  if (!base::is.null(usms_param) && any(vars_idx)) {
+  # replacing NA or "", with "null", if any vars name in param_df names
+  if (!base::is.null(param_df) && any(vars_idx)) {
     for (v in vars[vars_idx]) {
-      rep_idx <- is.na(usms_param[[v]]) | nchar(usms_param[[v]]) == 0
-      usms_param[[v]][rep_idx] <- "null"
+      rep_idx <- is.na(param_df[[v]]) | nchar(param_df[[v]]) == 0
+      param_df[[v]][rep_idx] <- "null"
     }
   }
+
+  usms_nb <- nrow(param_df)
 
   # Common switch function for sols.xml and usms.xml files
   xml_doc <- gen_usms_sols_doc(
     doc_type = "usms",
     xml_doc_tmpl,
     nodes_nb = usms_nb,
-    nodes_param = usms_param,
+    nodes_param = param_df,
     stics_version = stics_version
   )
 
   # checking if out dir exists
-  out_path <- dirname(usms_out_file)
+  out_path <- dirname(file)
   if (!dir.exists(out_path)) {
     stop(paste("The directory does not exist: ", out_path))
   }
 
   # for getting only the xml doc in return
-  if (!base::is.null(usms_out_file)) {
-    save_xml_doc(xml_doc, usms_out_file)
+  if (!base::is.null(file)) {
+    save_xml_doc(xml_doc, file)
   }
 
   if (!is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
