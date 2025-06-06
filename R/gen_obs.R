@@ -5,10 +5,6 @@
 #' @param out_dir Path of the directory where to generate the file(s).
 #' @param usms_list An optional list of usms names to be used for selecting
 #' which files to generate from the obs_table
-#' @param obs_table `r lifecycle::badge("deprecated")` `obs_table` is no
-#'   longer supported, use `df` instead.
-#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
-#'   longer supported, use `out_dir` instead.
 #'
 #' @details
 #'  `df` is a `data.frame` with the following format:
@@ -41,35 +37,24 @@
 #' @export
 #'
 gen_obs <- function(
-    df,
-    out_dir,
-    usms_list = NULL,
-    obs_table = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated()) {
-  if (lifecycle::is_present(obs_table)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_obs(obs_table)", "gen_obs(df)")
-  } else {
-    obs_table <- df # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn("1.0.0", "gen_obs(out_path)", "gen_obs(out_dir)")
-  } else {
-    out_path <- out_dir # to remove when we update inside the function
-  }
-  # Checking if out_path exists
-  if (!dir.exists(out_path)) {
-    warning(paste("The directory does not exist", out_path))
+  df,
+  out_dir,
+  usms_list = NULL
+) {
+  # Checking if out_dir exists
+  if (!dir.exists(out_dir)) {
+    warning(paste("The directory does not exist", out_dir))
     return(invisible(FALSE))
   }
 
   # Finding usm names column
-  usm_idx <- grep("usm", tolower(colnames(obs_table)))
+  usm_idx <- grep("usm", tolower(colnames(df)))
   if (length(usm_idx) > 1) {
     stop("Multiple usms names columns !")
   }
 
   # Getting usms names
-  usm_names <- unique(obs_table[[usm_idx]])
+  usm_names <- unique(df[[usm_idx]])
 
   # Treating a usms_list input
   if (!base::is.null(usms_list)) {
@@ -87,11 +72,11 @@ gen_obs <- function(
     usm_name_tmp <- usm_names[i]
 
     # Setting the output file path
-    out_file_path <- file.path(out_path, paste0(usm_name_tmp, ".obs"))
+    out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".obs"))
 
     # Selecting data for the current usm, eliminating all NA values columns
-    usm_df <- obs_table %>%
-      dplyr::filter(obs_table[[usm_idx]] %in% usm_name_tmp) %>%
+    usm_df <- df %>%
+      dplyr::filter(df[[usm_idx]] %in% usm_name_tmp) %>%
       dplyr::select_if(~ !all(is.na(.)))
 
     # Writing the file and
@@ -187,5 +172,5 @@ gen_obs_ <- function(obs_table, file_path) {
     return(invisible(FALSE))
   }
 
-  return(invisible(TRUE))
+  invisible(TRUE)
 }
