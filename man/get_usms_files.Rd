@@ -10,10 +10,7 @@ get_usms_files(
   usms_file = "usms.xml",
   file_type = NULL,
   javastics = NULL,
-  df_output = FALSE,
-  workspace_path = lifecycle::deprecated(),
-  file_name = lifecycle::deprecated(),
-  javastics_path = lifecycle::deprecated()
+  df_output = FALSE
 )
 }
 \arguments{
@@ -34,15 +31,6 @@ JavaSTICS distribution)}
 
 \item{df_output}{logical if TRUE returning a data.frame, otherwise returning
 a named list if FALSE (default)}
-
-\item{workspace_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{workspace_path}
-is no longer supported, use \code{workspace} instead.}
-
-\item{file_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_name} is no
-longer supported, use \code{usms_file} instead.}
-
-\item{javastics_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{javastics_path}
-is no longer supported, use \code{javastics} instead.}
 }
 \value{
 A named list with existing files path in each usm element

@@ -7,8 +7,6 @@
 #' @param usms_file Path (including name) of a USM xml file or of a
 #' new_travail.usm file
 #' @param usms_list Usm(s) name(s) (optional, see details)
-#' @param usm_file_path `r lifecycle::badge("deprecated")` `usm_file_path` is no
-#' longer supported, use `usms_file` instead.
 #'
 #' @details Use `get_usms_list()` to get the list of the usm names for
 #' an usms.xml file.
@@ -30,34 +28,24 @@
 #'
 get_plants_nb <- function(
     usms_file,
-    usms_list = c(),
-    usm_file_path = lifecycle::deprecated()) {
-  if (lifecycle::is_present(usm_file_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_plants_nb(usm_file_path)",
-      "get_plants_nb(usms_file)"
-    )
-  } else {
-    usm_file_path <- usms_file # to remove when we update inside the function
-  }
-  usm <- grepl(pattern = "\\.usm$", x = usm_file_path)
-  usms <- grepl(pattern = "\\.xml$", x = usm_file_path)
+    usms_list = c()) {
+  usm <- grepl(pattern = "\\.usm$", x = usms_file)
+  usms <- grepl(pattern = "\\.xml$", x = usms_file)
 
   # Neither .usm nor .xml
   if (!(usm || usms)) {
     return()
   }
 
-  if (!base::file.exists(usm_file_path)) stop(usm_file_path, " does not exist")
+  if (!base::file.exists(usms_file)) stop(usms_file, " does not exist")
 
   if (usm) {
     return(get_plants_nb_txt(
-      usm_txt_path = usm_file_path,
+      usm_txt_path = usms_file,
       usm_name = usms_list
     ))
   } else {
-    return(get_plants_nb_xml(usms_file = usm_file_path, usms_list = usms_list))
+    return(get_plants_nb_xml(usms_file = usms_file, usms_list = usms_list))
   }
   stop("Couldn't read the number of plants")
 }
@@ -70,9 +58,6 @@ get_plants_nb <- function(
 #' @param usms_file Path of usms.xml file
 #' @param usms_list Usms selection list inside usms from usms.xml file
 #' (optional, see details)
-#'
-#' @param usm_xml_path `r lifecycle::badge("deprecated")` `usm_xml_path` is no
-#' longer supported, use `usms_file` instead.
 #'
 #' @details Use `get_usms_list()` to get the list of the usm names.
 #'
@@ -92,21 +77,9 @@ get_plants_nb <- function(
 #'
 get_plants_nb_xml <- function(
     usms_file,
-    usms_list = c(),
-    usm_xml_path = lifecycle::deprecated()) {
-  # usm_xml_path
-  if (lifecycle::is_present(usm_xml_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_plants_nb_xml(usm_xml_path)",
-      "get_plants_nb_xml(usms_file)"
-    )
-  } else {
-    usm_xml_path <- usms_file # to remove when we update inside the function
-  }
-
+    usms_list = c()) {
   # Loading xml file as xml_document object
-  xml_usms <- xmldocument(usm_xml_path)
+  xml_usms <- xmldocument(usms_file)
 
   # Getting plants nb per usm
   plants_nb <- as.numeric(get_values(xml_usms, "//nbplantes"))

@@ -181,7 +181,7 @@ There are four more arguments to the function:
 
 * `variety`: This optional argument may be used for replacing varietal parameter values either giving a name (`codevar` in the plant file) or an index of the variety specified in the technical file (`variete`)
 
-* `layer`: This may be used for replacing specific parameters values, for specific soil layers either for the soil characteristics (soil file: `param.sol`), or roots density and mineral elements concentration at the simulation start (initialisztion file: `ficini.txt`). 
+* `value_id`: This may be used for replacing specific parameters values, for specific soil layers either for the soil characteristics (soil file: `param.sol`), or roots density and mineral elements concentration at the simulation start (initialization file: `ficini.txt`). 
 
 * `stics_version`: At last, the model version can be specified through that argument, because files content may vary according to the version. 
 
@@ -199,7 +199,7 @@ set_param_txt(
   workspace = example_txt_dir,
   param = "densinitial",
   plant_id = 1,
-  layer = c(1, 4),
+  value_id = c(1, 4),
   value = c(0.5, 0.1)
 )
 ```
