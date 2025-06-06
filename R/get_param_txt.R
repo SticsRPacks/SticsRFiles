@@ -18,8 +18,6 @@
 #' only for exact match.
 #' @param stics_version An optional version name as listed in
 #' get_stics_versions_compat() return
-#' @param dirpath `r lifecycle::badge("deprecated")` `dirpath` is no
-#'   longer supported, use `workspace` instead.
 #' @param ...          Further arguments to pass (for future-proofing only).
 #'
 #' @details If the `variety` is not given and a `param` is asked,
@@ -83,29 +81,19 @@ get_param_txt <- function(
     value_id = NULL,
     exact = FALSE,
     stics_version = "latest",
-    dirpath = lifecycle::deprecated(),
     ...) {
-  # dirpath
-  if (lifecycle::is_present(dirpath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_param_txt(dirpath)",
-      "get_param_txt(workspace)"
-    )
-  } else {
-    dirpath <- workspace # to remove when we update inside the function
-  }
-
   stics_version <- check_version_compat(stics_version = stics_version)
 
   ini <- get_ini_txt(
-    file.path(dirpath, "ficini.txt"),
+    file.path(workspace, "ficini.txt"),
     stics_version = stics_version
   )
 
   # specifying plant(s) to use, and checking if a given plant_id is
   # available ones
   avail_plant_id <- seq_len(ini$nbplantes)
+
+  ini$plant <- ini$plant[avail_plant_id]
 
   if (is.null(plant_id)) {
     plant_id <- avail_plant_id
@@ -122,18 +110,21 @@ get_param_txt <- function(
     }
   }
 
-  general <- get_general_txt(file.path(dirpath, "tempopar.sti"))
+  general <- get_general_txt(file.path(workspace, "tempopar.sti"))
 
   soil <- get_soil_txt(
-    file.path(dirpath, "param.sol"),
+    file.path(workspace, "param.sol"),
     stics_version = stics_version
   )
 
-  station <- get_station_txt(file.path(dirpath, "station.txt"))
+  station <- get_station_txt(file.path(workspace, "station.txt"))
 
-  usm <- get_usm_txt(file.path(dirpath, "new_travail.usm"), plant_id = plant_id)
+  usm <- get_usm_txt(
+    file.path(workspace, "new_travail.usm"),
+    plant_id = plant_id
+  )
 
-  tmp <- get_tmp_txt(file.path(dirpath, "tempoparv6.sti"))
+  tmp <- get_tmp_txt(file.path(workspace, "tempoparv6.sti"))
 
   # add tests on option_* name existence in tmp
   # NOT IN V10
@@ -174,7 +165,7 @@ get_param_txt <- function(
   for (i in plant_id) {
     tec[paste0("plant", i)] <-
       list(get_tec_txt(
-        file = file.path(dirpath, paste0("fictec", i, ".txt")),
+        file = file.path(workspace, paste0("fictec", i, ".txt")),
         several_fert = several_fert,
         several_thin = several_thin,
         is_pasture = is_pasture
@@ -183,7 +174,7 @@ get_param_txt <- function(
     varieties[[i]] <-
       get_plant_txt(
         file = file.path(
-          dirpath,
+          workspace,
           paste0("ficplt", i, ".txt")
         )
       )$codevar
@@ -197,7 +188,7 @@ get_param_txt <- function(
 
     plant[paste0("plant", i)] <-
       list(get_plant_txt(
-        file.path(dirpath, paste0("ficplt", i, ".txt")),
+        file.path(workspace, paste0("ficplt", i, ".txt")),
         variety = if (is.null(variety[[i]])) {
           if (!is.null(param)) {
             varieties[[i]][tec_variety]
@@ -329,8 +320,6 @@ filter_param <- function(
 #' @param several_thin Is there several thinning in the USM ? See details.
 #' @param is_pasture   Is the plant a pasture ? See details.
 #' @param variety      Integer. The plant variety to get the parameter from.
-#' @param filepath `r lifecycle::badge("deprecated")` `filepath` is no
-#'   longer supported, use `file` instead.
 #'
 #' @param ...          Further arguments to pass (for future-proofing only)
 #'
@@ -383,26 +372,14 @@ filter_param <- function(
 #' @export
 get_ini_txt <- function(
     file = "ficini.txt",
-    stics_version,
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_ini_txt(filepath)",
-      "get_ini_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
+    stics_version) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  if (!file.exists(filepath)) {
-    stop(filepath, ": does not exist !")
+  if (!file.exists(file)) {
+    stop(file, ": does not exist !")
   }
 
-  params <- readLines(filepath)
+  params <- readLines(file)
   ini <- list()
 
   ini$nbplantes <- params[[2]]
@@ -502,60 +479,24 @@ get_ini_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_general_txt <- function(
-    file = "tempopar.sti",
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_general_txt(filepath)",
-      "get_general_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
-  c(nbresidus = 21, get_txt_generic(filepath))
+    file = "tempopar.sti") {
+  c(nbresidus = 21, get_txt_generic(file))
 }
 
 
 #' @rdname get_param_txt
 #' @export
 get_tmp_txt <- function(
-    file = "tempoparv6.sti",
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_tmp_txt(filepath)",
-      "get_tmp_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
-  get_txt_generic(filepath)
+    file = "tempoparv6.sti") {
+  get_txt_generic(file)
 }
 
 #' @rdname get_param_txt
 #' @export
 get_plant_txt <- function(
     file = "ficplt1.txt",
-    variety = NULL,
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_plant_txt(filepath)",
-      "get_plant_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
-  x <- get_txt_generic(filepath)
+    variety = NULL) {
+  x <- get_txt_generic(file)
 
   index_codevar <- which(names(x) == "codevar")
   varieties <- x[[index_codevar]]
@@ -596,21 +537,9 @@ get_tec_txt <- function(
     several_fert = NULL,
     several_thin = NULL,
     is_pasture = NULL,
-    filepath = lifecycle::deprecated(),
     ...) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_tec_txt(filepath)",
-      "get_tec_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
-  if (!file.exists(filepath)) {
-    stop(filepath, ": does not exist !")
+  if (!file.exists(file)) {
+    stop(file, ": does not exist !")
   }
 
   # TODO: add dot args management
@@ -620,7 +549,7 @@ get_tec_txt <- function(
 
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  par_lines <- readLines(filepath)
+  par_lines <- readLines(file)
   itk <- vector(mode = "list", length = 0)
   ids_val <- !seq_along(par_lines) %% 2
   params <- par_lines[!ids_val]
@@ -936,7 +865,7 @@ get_tec_txt_ <- function(params, values) {
       itk <- c(itk, as.list(v))
     }
   }
-  return(itk)
+  itk
 }
 
 
@@ -944,26 +873,14 @@ get_tec_txt_ <- function(params, values) {
 #' @export
 get_soil_txt <- function(
     file = "param.sol",
-    stics_version,
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_soil_txt(filepath)",
-      "get_soil_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
+    stics_version) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  if (!file.exists(filepath)) {
-    stop(filepath, ": does not exist !")
+  if (!file.exists(file)) {
+    stop(file, ": does not exist !")
   }
 
-  params <- readLines(filepath, warn = FALSE)
+  params <- readLines(file, warn = FALSE)
   soil <- vector(mode = "list", length = 0)
 
   val <- function(index = 1) {
@@ -1084,20 +1001,8 @@ get_soil_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_station_txt <- function(
-    file = "station.txt",
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_station_txt(filepath)",
-      "get_station_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
-  get_txt_generic(file = filepath)
+    file = "station.txt") {
+  get_txt_generic(file = file)
 }
 
 
@@ -1105,20 +1010,8 @@ get_station_txt <- function(
 #' @export
 get_usm_txt <- function(
     file = "new_travail.usm",
-    plant_id = NULL,
-    filepath = lifecycle::deprecated()) {
-  # filepath
-  if (lifecycle::is_present(filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_usm_txt(filepath)",
-      "get_usm_txt(file)"
-    )
-  } else {
-    filepath <- file # to remove when we update inside the function
-  }
-
-  usm_params <- get_txt_generic(filepath)
+    plant_id = NULL) {
+  usm_params <- get_txt_generic(file)
 
   idx <- plant_id == 1:2
 

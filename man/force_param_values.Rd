@@ -4,12 +4,7 @@
 \alias{force_param_values}
 \title{Generates files to force parameters values in STICS simulations}
 \usage{
-force_param_values(
-  workspace,
-  values,
-  javastics,
-  param_values = lifecycle::deprecated()
-)
+force_param_values(workspace, values, javastics)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the STICS (txt)
@@ -19,9 +14,6 @@ input files.}
 See Details for more information.}
 
 \item{javastics}{Path of JavaSTICS}
-
-\item{param_values}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_values}
-is no longer supported, use \code{values} instead.}
 }
 \value{
 A logical status TRUE if successful, FALSE otherwise

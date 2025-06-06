@@ -21,17 +21,6 @@
 #' in the workspace but in the JavaSTICS distribution (see Details).
 #' @param verbose Logical value for displaying or not information while running
 #'
-#' @param usm_name `r lifecycle::badge("deprecated")` `usm_name` is no
-#'   longer supported, use `usm` instead.
-#' @param var_list `r lifecycle::badge("deprecated")` `var_list` is no
-#'   longer supported, use `var` instead.
-#' @param dates_list `r lifecycle::badge("deprecated")` `dates_list` is no
-#'   longer supported, use `dates` instead.
-#' @param usms_filepath `r lifecycle::badge("deprecated")` `usms_filepath` is no
-#'   longer supported, use `usms_file` instead.
-#' @param javastics_path `r lifecycle::badge("deprecated")` `javastics_path`
-#' is no longer supported, use `javastics` instead.
-
 #' @details **The `.obs` files names must match USMs names**, *e.g.* for a usm
 #' called "banana", the `.obs` file should be named `banana.obs`.
 #' For intercrops, the name should be suffixed by "p" for the principal
@@ -82,59 +71,14 @@ get_obs <- function(
     dates = NULL,
     usms_file = NULL,
     javastics = NULL,
-    verbose = TRUE,
-    usm_name = lifecycle::deprecated(),
-    var_list = lifecycle::deprecated(),
-    dates_list = lifecycle::deprecated(),
-    usms_filepath = lifecycle::deprecated(),
-    javastics_path = lifecycle::deprecated()) {
-  # Managing deprecated arguments
-  # usm_name
-  if (lifecycle::is_present(usm_name)) {
-    lifecycle::deprecate_warn("1.0.0", "get_obs(usm_name)", "get_obs(usm)")
-  } else {
-    usm_name <- usm # to remove when we update inside the function
-  }
-  # var_list
-  if (lifecycle::is_present(var_list)) {
-    lifecycle::deprecate_warn("1.0.0", "get_obs(var_list)", "get_obs(var)")
-  } else {
-    var_list <- var # to remove when we update inside the function
-  }
-  # dates_list
-  if (lifecycle::is_present(dates_list)) {
-    lifecycle::deprecate_warn("1.0.0", "get_obs(dates_list)", "get_obs(dates)")
-  } else {
-    dates_list <- dates # to remove when we update inside the function
-  }
-  # usms_filepath
-  if (lifecycle::is_present(usms_filepath)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_obs(usms_filepath)",
-      "get_obs(usms_file)"
-    )
-  } else {
-    usms_filepath <- usms_file # to remove when we update inside the function
-  }
-  # javastics_path
-  if (lifecycle::is_present(javastics_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_obs(javastics_path)",
-      "get_obs(javastics)"
-    )
-  } else {
-    javastics_path <- javastics # to remove when we update inside the function
-  }
-
+    verbose = TRUE) {
   get_file(
     workspace,
-    usm_name,
-    var_list,
-    dates_list,
-    usms_filepath,
-    javastics_path,
+    usm,
+    var,
+    dates,
+    usms_file,
+    javastics,
     verbose,
     "obs"
   )
