@@ -43,13 +43,12 @@
 #' }
 #'
 get_usms_files <- function(
-  workspace,
-  usms_list = NULL,
-  usms_file = "usms.xml",
-  file_type = NULL,
-  javastics = NULL,
-  df_output = FALSE
-) {
+    workspace,
+    usms_list = NULL,
+    usms_file = "usms.xml",
+    file_type = NULL,
+    javastics = NULL,
+    df_output = FALSE) {
   # Types definition
   files_types <- c(
     "fplt",
