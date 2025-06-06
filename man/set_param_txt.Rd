@@ -20,30 +20,12 @@ set_param_txt(
   plant_id = 1,
   variety = NULL,
   value_id = NULL,
-  stics_version = "latest",
-  dirpath = lifecycle::deprecated(),
-  add = lifecycle::deprecated(),
-  plant = lifecycle::deprecated(),
-  layer = lifecycle::deprecated()
+  stics_version = "latest"
 )
 
-set_usm_txt(
-  file = "new_travail.usm",
-  param,
-  value,
-  append = FALSE,
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
-)
+set_usm_txt(file = "new_travail.usm", param, value, append = FALSE)
 
-set_station_txt(
-  file = "station.txt",
-  param,
-  value,
-  append = FALSE,
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
-)
+set_station_txt(file = "station.txt", param, value, append = FALSE)
 
 set_ini_txt(
   file = "ficini.txt",
@@ -51,38 +33,20 @@ set_ini_txt(
   value,
   append = FALSE,
   plant_id = 1,
-  layer = NULL,
-  stics_version = "latest",
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
+  value_id = NULL,
+  stics_version = "latest"
 )
 
-set_general_txt(
-  file = "tempopar.sti",
-  param,
-  value,
-  append = FALSE,
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
-)
+set_general_txt(file = "tempopar.sti", param, value, append = FALSE)
 
-set_tmp_txt(
-  file = "tempoparv6.sti",
-  param,
-  value,
-  append = FALSE,
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
-)
+set_tmp_txt(file = "tempoparv6.sti", param, value, append = FALSE)
 
 set_plant_txt(
   file = "ficplt1.txt",
   param,
   value,
   append = FALSE,
-  variety = NULL,
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
+  variety = NULL
 )
 
 set_tec_txt(
@@ -90,18 +54,15 @@ set_tec_txt(
   param,
   value,
   append = FALSE,
-  value_id = NULL,
-  filepath = lifecycle::deprecated(),
-  add = lifecycle::deprecated()
+  value_id = NULL
 )
 
 set_soil_txt(
   file = "param.sol",
   param,
   value,
-  layer = NULL,
-  stics_version = "latest",
-  filepath = lifecycle::deprecated()
+  value_id = NULL,
+  stics_version = "latest"
 )
 }
 \arguments{
@@ -125,23 +86,6 @@ the index (\code{variete} in the technical file).}
 
 \item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}
-
-\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
-longer supported, use \code{workspace} instead.}
-
-\item{add}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{add} is no
-longer supported, use \code{append} instead.}
-
-\item{plant}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plant} is no
-longer supported, use \code{plant_id} instead.}
-
-\item{layer}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{layer} is no
-longer supported, use \code{value_id} instead.}
-
-\item{file}{Path (including name) of the file to modify}
-
-\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
-longer supported, use \code{file} instead.}
 }
 \value{
 None
