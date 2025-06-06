@@ -5,14 +5,11 @@
 \title{Generate STICS tec xml file(s) from a template or an input file}
 \usage{
 gen_tec_xml(
-  param_df = NULL,
+  param_df,
   file = NULL,
   out_dir,
   stics_version = "latest",
-  na_values = NA,
-  param_table = lifecycle::deprecated(),
-  tec_in_file = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
+  na_values = NA
 )
 }
 \arguments{
@@ -31,15 +28,6 @@ standard template associated to the STICS version.}
 
 \item{na_values}{value to use as missing value in param_table
 (optional, default : NA)}
-
-\item{param_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_table} is no
-longer supported, use \code{param_df} instead.}
-
-\item{tec_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{tec_in_file} is no
-longer supported, use \code{file} instead.}
-
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use \code{out_dir} instead.}
 }
 \value{
 None

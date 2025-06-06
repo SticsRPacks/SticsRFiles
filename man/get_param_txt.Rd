@@ -20,25 +20,16 @@ get_param_txt(
   value_id = NULL,
   exact = FALSE,
   stics_version = "latest",
-  dirpath = lifecycle::deprecated(),
   ...
 )
 
-get_ini_txt(
-  file = "ficini.txt",
-  stics_version,
-  filepath = lifecycle::deprecated()
-)
+get_ini_txt(file = "ficini.txt", stics_version)
 
-get_general_txt(file = "tempopar.sti", filepath = lifecycle::deprecated())
+get_general_txt(file = "tempopar.sti")
 
-get_tmp_txt(file = "tempoparv6.sti", filepath = lifecycle::deprecated())
+get_tmp_txt(file = "tempoparv6.sti")
 
-get_plant_txt(
-  file = "ficplt1.txt",
-  variety = NULL,
-  filepath = lifecycle::deprecated()
-)
+get_plant_txt(file = "ficplt1.txt", variety = NULL)
 
 get_tec_txt(
   file = "fictec1.txt",
@@ -46,23 +37,14 @@ get_tec_txt(
   several_fert = NULL,
   several_thin = NULL,
   is_pasture = NULL,
-  filepath = lifecycle::deprecated(),
   ...
 )
 
-get_soil_txt(
-  file = "param.sol",
-  stics_version,
-  filepath = lifecycle::deprecated()
-)
+get_soil_txt(file = "param.sol", stics_version)
 
-get_station_txt(file = "station.txt", filepath = lifecycle::deprecated())
+get_station_txt(file = "station.txt")
 
-get_usm_txt(
-  file = "new_travail.usm",
-  plant_id = NULL,
-  filepath = lifecycle::deprecated()
-)
+get_usm_txt(file = "new_travail.usm", plant_id = NULL)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the STICS (txt)
@@ -85,15 +67,9 @@ only for exact match.}
 \item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}
 
-\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
-longer supported, use \code{workspace} instead.}
-
 \item{...}{Further arguments to pass (for future-proofing only)}
 
 \item{file}{File path}
-
-\item{filepath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filepath} is no
-longer supported, use \code{file} instead.}
 
 \item{several_fert}{Is there several fertilization in the USM ? See details.}
 

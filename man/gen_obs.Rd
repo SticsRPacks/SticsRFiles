@@ -4,13 +4,7 @@
 \alias{gen_obs}
 \title{Generating observation data files from a data.frame}
 \usage{
-gen_obs(
-  df,
-  out_dir,
-  usms_list = NULL,
-  obs_table = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated()
-)
+gen_obs(df, out_dir, usms_list = NULL)
 }
 \arguments{
 \item{df}{A data frame containing the values of the observations to use
@@ -20,12 +14,6 @@ gen_obs(
 
 \item{usms_list}{An optional list of usms names to be used for selecting
 which files to generate from the obs_table}
-
-\item{obs_table}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{obs_table} is no
-longer supported, use \code{df} instead.}
-
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use \code{out_dir} instead.}
 }
 \value{
 A return logical status indicating if any error when writing
