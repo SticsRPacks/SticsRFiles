@@ -9,12 +9,6 @@
 #' @param stics_version Name of the STICS version. Optional, used if
 #' the `file` argument is not provided. In this case the function uses a
 #' standard template associated to the STICS version.
-#' @param param_table `r lifecycle::badge("deprecated")` `param_table` is no
-#'   longer supported, use `param_df` instead.
-#' @param sta_in_file `r lifecycle::badge("deprecated")` `sta_in_file` is no
-#'   longer supported, use `file` instead.
-#' @param out_path `r lifecycle::badge("deprecated")` `out_path` is no
-#'   longer supported, use `out_dir` instead.
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
 #' STICS versions that can be used for the argument `stics_version`.
@@ -47,49 +41,19 @@
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
 gen_sta_xml <- function(
-    param_df,
-    file = NULL,
-    out_dir,
-    stics_version = "latest",
-    param_table = lifecycle::deprecated(),
-    sta_in_file = lifecycle::deprecated(),
-    out_path = lifecycle::deprecated()) {
-  if (lifecycle::is_present(param_table)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sta_xml(param_table)",
-      "gen_sta_xml(param_df)"
-    )
-  } else {
-    param_table <- param_df # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(sta_in_file)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sta_xml(sta_in_file)",
-      "gen_sta_xml(file)"
-    )
-  } else {
-    sta_in_file <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(out_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "gen_sta_xml(out_path)",
-      "gen_sta_xml(out_dir)"
-    )
-  } else {
-    out_path <- out_dir # to remove when we update inside the function
-  }
-
+  param_df,
+  file = NULL,
+  out_dir,
+  stics_version = "latest"
+) {
   xml_doc_tmpl <- NULL
 
-  if (!base::is.null(sta_in_file)) {
-    xml_doc_tmpl <- xmldocument(sta_in_file)
+  if (!base::is.null(file)) {
+    xml_doc_tmpl <- xmldocument(file)
   }
 
   # detecting sta names column
-  param_names <- names(param_table)
+  param_names <- names(param_df)
   col_id <- grep("^sta", tolower(param_names))
   if (!length(col_id)) {
     stop("The column for identifying sta names has not been found !")
@@ -98,7 +62,7 @@ gen_sta_xml <- function(
 
   xml_docs <- gen_sta_doc(
     xml_doc = xml_doc_tmpl,
-    param_table = param_table[, -col_id],
+    param_table = param_df[, -col_id],
     stics_version = stics_version
   )
 
@@ -127,18 +91,18 @@ gen_sta_xml <- function(
     return(invisible())
   }
 
-  # checking if out_path exists
-  if (!dir.exists(out_path)) {
-    stop(paste("The directory does not exist", out_path))
+  # checking if out_dir exists
+  if (!dir.exists(out_dir)) {
+    stop(paste("The directory does not exist", out_dir))
   }
 
   # defining output files paths
-  out_name <- param_table[[sta_col]]
+  out_name <- param_df[[sta_col]]
   ids <- grepl("_sta.xml$", out_name)
   if (sum(ids) < length(out_name)) {
-    out_name[!ids] <- paste0(param_table[[sta_col]][!ids], "_sta.xml")
+    out_name[!ids] <- paste0(param_df[[sta_col]][!ids], "_sta.xml")
   }
-  sta_out_file <- file.path(out_path, out_name)
+  sta_out_file <- file.path(out_dir, out_name)
 
   # checking dimensions
   if (!length(xml_docs) == length(sta_out_file)) {
