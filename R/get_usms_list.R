@@ -22,9 +22,8 @@
 #' @export
 #'
 get_usms_list <- function(
-  file,
-  usm = NULL
-) {
+    file,
+    usm = NULL) {
   xml_doc <- xmldocument(file)
 
   # Detecting file type
@@ -49,8 +48,7 @@ find_usms_soils_names <- function(xml_doc, xml_name, name = NULL) {
       lapply(
         XML::getNodeSet(doc = xml_doc@content, path = paste0("//", xml_name)),
         function(x) {
-          switch(
-            xml_name,
+          switch(xml_name,
             nomsol = XML::xmlValue(x),
             # default case handling xml_namevalues : sol, usm
             XML::xmlGetAttr(x, "nom")

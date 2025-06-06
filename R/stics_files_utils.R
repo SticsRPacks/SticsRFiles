@@ -19,10 +19,9 @@
 #' get_examples_path(file_type = "csv", stics_version = "V8.5")
 #'
 get_examples_path <- function(
-  file_type,
-  stics_version = "latest",
-  overwrite = FALSE
-) {
+    file_type,
+    stics_version = "latest",
+    overwrite = FALSE) {
   # Getting files types list
   example_types <- get_examples_types()
 
@@ -102,10 +101,9 @@ get_examples_path <- function(
 
 # TODO: evaluate if useful ?
 list_examples_files <- function(
-  file_type,
-  stics_version = "latest",
-  full_names = TRUE
-) {
+    file_type,
+    stics_version = "latest",
+    full_names = TRUE) {
   examples_path <- get_examples_path(
     file_type = file_type,
     stics_version = stics_version
@@ -196,13 +194,12 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 #' @noRd
 #'
 workspace_files_copy <- function(
-  workspace,
-  file_type = NULL,
-  javastics = NULL,
-  out_dir,
-  overwrite = FALSE,
-  verbose = FALSE
-) {
+    workspace,
+    file_type = NULL,
+    javastics = NULL,
+    out_dir,
+    overwrite = FALSE,
+    verbose = FALSE) {
   # files types vector and associated regex
   file_types <- c("mod", "obs", "lai", "meteo")
   file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")
