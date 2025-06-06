@@ -74,14 +74,15 @@
 #' @export
 #'
 get_param_txt <- function(
-    workspace,
-    param = NULL,
-    plant_id = NULL,
-    variety = NULL,
-    value_id = NULL,
-    exact = FALSE,
-    stics_version = "latest",
-    ...) {
+  workspace,
+  param = NULL,
+  plant_id = NULL,
+  variety = NULL,
+  value_id = NULL,
+  exact = FALSE,
+  stics_version = "latest",
+  ...
+) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
   ini <- get_ini_txt(
@@ -92,6 +93,8 @@ get_param_txt <- function(
   # specifying plant(s) to use, and checking if a given plant_id is
   # available ones
   avail_plant_id <- seq_len(ini$nbplantes)
+
+  ini$plant <- ini$plant[avail_plant_id]
 
   if (is.null(plant_id)) {
     plant_id <- avail_plant_id
@@ -247,10 +250,11 @@ get_param_txt <- function(
 
 
 filter_param <- function(
-    in_list,
-    param = NULL,
-    exact = FALSE,
-    value_id = NULL) {
+  in_list,
+  param = NULL,
+  exact = FALSE,
+  value_id = NULL
+) {
   out_list <- list()
   names_vec <- names(in_list)
 
@@ -369,8 +373,9 @@ filter_param <- function(
 #' @rdname get_param_txt
 #' @export
 get_ini_txt <- function(
-    file = "ficini.txt",
-    stics_version) {
+  file = "ficini.txt",
+  stics_version
+) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
   if (!file.exists(file)) {
@@ -477,7 +482,8 @@ get_ini_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_general_txt <- function(
-    file = "tempopar.sti") {
+  file = "tempopar.sti"
+) {
   c(nbresidus = 21, get_txt_generic(file))
 }
 
@@ -485,15 +491,17 @@ get_general_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_tmp_txt <- function(
-    file = "tempoparv6.sti") {
+  file = "tempoparv6.sti"
+) {
   get_txt_generic(file)
 }
 
 #' @rdname get_param_txt
 #' @export
 get_plant_txt <- function(
-    file = "ficplt1.txt",
-    variety = NULL) {
+  file = "ficplt1.txt",
+  variety = NULL
+) {
   x <- get_txt_generic(file)
 
   index_codevar <- which(names(x) == "codevar")
@@ -530,12 +538,13 @@ get_plant_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_tec_txt <- function(
-    file = "fictec1.txt",
-    stics_version = "latest",
-    several_fert = NULL,
-    several_thin = NULL,
-    is_pasture = NULL,
-    ...) {
+  file = "fictec1.txt",
+  stics_version = "latest",
+  several_fert = NULL,
+  several_thin = NULL,
+  is_pasture = NULL,
+  ...
+) {
   if (!file.exists(file)) {
     stop(file, ": does not exist !")
   }
@@ -870,8 +879,9 @@ get_tec_txt_ <- function(params, values) {
 #' @rdname get_param_txt
 #' @export
 get_soil_txt <- function(
-    file = "param.sol",
-    stics_version) {
+  file = "param.sol",
+  stics_version
+) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
   if (!file.exists(file)) {
@@ -999,7 +1009,8 @@ get_soil_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_station_txt <- function(
-    file = "station.txt") {
+  file = "station.txt"
+) {
   get_txt_generic(file = file)
 }
 
@@ -1007,8 +1018,9 @@ get_station_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_usm_txt <- function(
-    file = "new_travail.usm",
-    plant_id = NULL) {
+  file = "new_travail.usm",
+  plant_id = NULL
+) {
   usm_params <- get_txt_generic(file)
 
   idx <- plant_id == 1:2
