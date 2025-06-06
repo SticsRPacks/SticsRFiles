@@ -86,6 +86,8 @@ the index (\code{variete} in the technical file).}
 
 \item{stics_version}{An optional version name as listed in
 get_stics_versions_compat() return}
+
+\item{file}{Path (including name) of the file to modify}
 }
 \value{
 None
