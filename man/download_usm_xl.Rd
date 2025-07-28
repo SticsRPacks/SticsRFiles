@@ -10,9 +10,6 @@ download_usm_xl(
   stics_version = "latest",
   overwrite = FALSE,
   verbose = FALSE,
-  xl_name = lifecycle::deprecated(),
-  version_name = lifecycle::deprecated(),
-  dest_dir = lifecycle::deprecated(),
   ...
 )
 }
@@ -29,15 +26,6 @@ the latest version returned by get_stics_versions_compat() is used.}
 FALSE otherwise (default)}
 
 \item{verbose}{Logical value for displaying information while running}
-
-\item{xl_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xl_name} is no
-longer supported, use file instead.}
-
-\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no
-longer supported, use stics_version instead.}
-
-\item{dest_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dest_dir} is no
-longer supported, use out_dir instead.}
 
 \item{...}{Additional arguments to be passed}
 }
@@ -56,6 +44,5 @@ values to insert into XML files, with the help of these functions:
 \examples{
 
 download_usm_xl()
-
 
 }

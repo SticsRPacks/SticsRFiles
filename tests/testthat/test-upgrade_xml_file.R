@@ -1,4 +1,3 @@
-
 stics_from_version <- "V9.2"
 stics_to_version <- "V10.0"
 
@@ -8,13 +7,16 @@ path_from <- get_examples_path("xml", stics_version = stics_from_version)
 
 # Copy example to test in tempdir since the files will be modified by set_param
 file.copy(
-  from = file.path(path_from, list.files(path_from)), to = tempdir(),
+  from = file.path(path_from, list.files(path_from)),
+  to = tempdir(),
   overwrite = TRUE
 )
 path <- tempdir()
 
 out_path <- file.path(path, "out_xml")
-if (!dir.exists(out_path)) dir.create(out_path)
+if (!dir.exists(out_path)) {
+  dir.create(out_path)
+}
 
 upgrade_ini_xml(
   file = file.path(path, "file_ini.xml"),
@@ -73,7 +75,6 @@ upgrade_usms_xml(
   param_gen_file = file.path(path, "param_gen.xml"),
   stics_version = stics_from_version
 )
-
 
 
 for (file_path in list.files(out_path, full.names = TRUE)) {

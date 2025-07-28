@@ -4,16 +4,7 @@
 \alias{gen_usms_xml}
 \title{Generate STICS usms xml file from a template or an input file}
 \usage{
-gen_usms_xml(
-  file,
-  param_df = NULL,
-  template = NULL,
-  stics_version = "latest",
-  usms_out_file = lifecycle::deprecated(),
-  usms_nb = lifecycle::deprecated(),
-  usms_param = lifecycle::deprecated(),
-  usms_in_file = lifecycle::deprecated()
-)
+gen_usms_xml(file, param_df, template = NULL, stics_version = "latest")
 }
 \arguments{
 \item{file}{Path (including name) of the usms file to generate.}
@@ -28,18 +19,6 @@ depending on the STICS version.}
 \item{stics_version}{Name of the STICS version. Optional,
 used if the \code{file} argument is not provided. In this case the function uses
 a standard template associated to the STICS version.}
-
-\item{usms_out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_out_file} is no
-longer supported, use \code{file} instead.}
-
-\item{usms_nb}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_nb} is no
-longer supported, use \code{NA} instead.}
-
-\item{usms_param}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_param} is no
-longer supported, use \code{param_df} instead.}
-
-\item{usms_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_in_file} is no
-longer supported, use \code{template} instead.}
 }
 \value{
 an invisible xml_document object
@@ -79,7 +58,9 @@ If not given (the default, \code{NULL}), the function returns the template as is
 \examples{
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 usms_param_df <- read_params_table(file = xl_path, sheet_name = "USMs")
-gen_usms_xml(file = file.path(tempdir(), "usms.xml"),
- param_df = usms_param_df)
+gen_usms_xml(
+  file = file.path(tempdir(), "usms.xml"),
+  param_df = usms_param_df
+)
 
 }

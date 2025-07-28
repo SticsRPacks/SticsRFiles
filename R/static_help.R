@@ -20,13 +20,13 @@
 #' static_help("SticsRFiles")
 #' static_help(pkg = "SticsRFiles", out_dir = "/path/to/out/dir")
 #' }
-static_help <- function(pkg,
-                        links_level = 0,
-                        topic = NULL,
-                        out_dir,
-                        overwrite = TRUE) {
+static_help <- function(
+    pkg,
+    links_level = 0,
+    topic = NULL,
+    out_dir,
+    overwrite = TRUE) {
   if (!dir.exists(out_dir)) dir.create(out_dir)
-
 
   pkg_dir <- find.package(pkg)
 
@@ -47,18 +47,23 @@ static_help <- function(pkg,
     if (file.exists(f) && !overwrite) next
     p <- gsub(pattern = "\\.html$", x = basename(f), replacement = "")
 
-    tools::Rd2HTML(pkg_rd_db[[p]], f,
-      package = pkg, Links = links, no_links = is.null(links)
+    tools::Rd2HTML(
+      pkg_rd_db[[p]],
+      f,
+      package = pkg,
+      Links = links,
+      no_links = is.null(links)
     )
   }
   return(invisible(files_path))
 }
 
 
-get_from_help <- function(html_file,
-                          tag1 = "Description",
-                          tag2 = NULL,
-                          header_level = "h4") {
+get_from_help <- function(
+    html_file,
+    tag1 = "Description",
+    tag2 = NULL,
+    header_level = "h4") {
   l <- readLines(html_file)
   l1 <- grep(pattern = tag1, x = l)
   if (is.null(tag2)) {

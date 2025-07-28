@@ -10,9 +10,7 @@ gen_varmod(
   append = FALSE,
   file_name = "var.mod",
   stics_version = "latest",
-  force = FALSE,
-  var_names = lifecycle::deprecated(),
-  version = lifecycle::deprecated()
+  force = FALSE
 )
 }
 \arguments{
@@ -31,12 +29,6 @@ to modify}
 
 \item{force}{Force variables writing even if they are not a
 STICS variable (default: FALSE).}
-
-\item{var_names}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{var_names} is no
-longer supported, use \code{var} instead.}
-
-\item{version}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version} is no
-longer supported, use \code{stics_version} instead.}
 }
 \value{
 None
@@ -56,6 +48,5 @@ gen_varmod(tempdir(), c("lai(n)", "hauteur"))
 # Add a variable to the others:
 gen_varmod(tempdir(), "masec(n)", append = TRUE)
 # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
-
 
 }

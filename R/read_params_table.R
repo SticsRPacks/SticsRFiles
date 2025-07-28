@@ -4,8 +4,6 @@
 #' @param sheet_name Name of an Excel sheet (useless for csv files)
 #' @param num_na Replacement value for numerical NA values (default: NA)
 #' @param char_na Replacement value for character NA values (default: "")
-#' @param file_path `r lifecycle::badge("deprecated")` `file_path` is no
-#'   longer supported, use `file` instead.
 #'
 #' @details After data are loaded, numerical and string NA values are
 #' replaced respectively with num_na or char_na
@@ -26,25 +24,16 @@
 #'   stics_version = "V9.2"
 #' )
 #' read_params_table(file = usm_csv_file)
-read_params_table <- function(file, sheet_name = NULL,
-                              num_na = "NA",
-                              char_na = "NA",
-                              file_path = lifecycle::deprecated()) {
-  if (lifecycle::is_present(file_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "read_params_table(file_path)",
-      "read_params_table(file)"
-    )
-  } else {
-    file_path <- file # to remove when we update inside the function
-  }
-
+read_params_table <- function(
+    file,
+    sheet_name = NULL,
+    num_na = "NA",
+    char_na = "NA") {
   # files extension list
   files_ext_lst <- c("csv", "xls", "xlsx")
 
   # Getting file extension, and checking its validity
-  file_ext <- tools::file_ext(file_path)
+  file_ext <- tools::file_ext(file)
   if (isFALSE(file_ext %in% files_ext_lst)) {
     stop(paste0('"', file_ext, '"'), ": is not a valid extension")
   }
@@ -53,12 +42,11 @@ read_params_table <- function(file, sheet_name = NULL,
   # dfault value for csv file
   sheet_exists <- TRUE
   if (isFALSE("csv" == file_ext)) {
-    xl_sheets <- readxl::excel_sheets(file_path)
+    xl_sheets <- readxl::excel_sheets(file)
     sheet_exists <- sheet_name %in% xl_sheets
   }
   # If the sheet name is not provided
   if (!length(sheet_exists)) sheet_exists <- FALSE
-
 
   # Unknown sheet in XL file
   if (isFALSE(sheet_exists)) {
@@ -75,7 +63,7 @@ read_params_table <- function(file, sheet_name = NULL,
   switch(file_ext,
     csv = {
       out_table <- utils::read.csv2(
-        file = file_path,
+        file = file,
         header = TRUE,
         sep = ";",
         stringsAsFactors = FALSE,
@@ -85,7 +73,8 @@ read_params_table <- function(file, sheet_name = NULL,
       )
     },
     {
-      out_table <- readxl::read_excel(file_path,
+      out_table <- readxl::read_excel(
+        file,
         sheet = sheet_name,
         trim_ws = TRUE,
         col_types = "text"
@@ -135,7 +124,6 @@ replace_na <- function(in_df, replacement) {
     }
   )
 
-
   # Nothing to be replaced
   if (isFALSE(any(idx_type_col))) {
     return(in_df)
@@ -158,7 +146,6 @@ replace_na <- function(in_df, replacement) {
   for (i in to_be_treated) {
     in_df[is.na(in_df[, i]), i] <- replacement
   }
-
 
   in_df
 }

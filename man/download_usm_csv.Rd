@@ -9,10 +9,7 @@ download_usm_csv(
   out_dir = tempdir(),
   stics_version = "latest",
   overwrite = FALSE,
-  verbose = FALSE,
-  csv_name = lifecycle::deprecated(),
-  version_name = lifecycle::deprecated(),
-  dest_dir = lifecycle::deprecated()
+  verbose = FALSE
 )
 }
 \arguments{
@@ -28,15 +25,6 @@ the latest version returned by get_stics_versions_compat() is used.}
 FALSE otherwise (default)}
 
 \item{verbose}{Logical value for displaying information while running}
-
-\item{csv_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{csv_name} is no
-longer supported, use file instead.}
-
-\item{version_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{version_name} is no
-longer supported, use stics_version instead.}
-
-\item{dest_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dest_dir} is no
-longer supported, use out_dir instead.}
 }
 \value{
 A vector of copied files path.

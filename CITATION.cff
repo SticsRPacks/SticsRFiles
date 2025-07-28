@@ -8,7 +8,7 @@ message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify ''STICS'' Input/Output Files'
-version: 1.5.0
+version: 1.6.0
 doi: 10.32614/CRAN.package.SticsRFiles
 abstract: Manipulating input and output files of the 'STICS' crop model. Files are
   either 'JavaSTICS' XML files or text files used by the model 'fortran' executable.
@@ -36,7 +36,7 @@ authors:
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2024-11-13'
+date-released: '2025-06-03'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -229,18 +229,6 @@ references:
     email: gary@posit.co
   year: '2025'
   doi: 10.32614/CRAN.package.rstudioapi
-- type: software
-  title: stringr
-  abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
-  notes: Imports
-  url: https://stringr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=stringr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2025'
-  doi: 10.32614/CRAN.package.stringr
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'

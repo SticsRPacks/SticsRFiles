@@ -10,10 +10,7 @@ convert_xml2txt(
   soil_name = NULL,
   out_dir = NULL,
   save_as = NULL,
-  stics_version = "latest",
-  xml_file = lifecycle::deprecated(),
-  plt_num = lifecycle::deprecated(),
-  out_file = lifecycle::deprecated()
+  stics_version = "latest"
 )
 }
 \arguments{
@@ -31,15 +28,6 @@ Optional, set to the path of the input xml file by default}
 
 \item{stics_version}{the STICS files version to use (optional,
 default to latest).}
-
-\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
-longer supported, use \code{file} instead.}
-
-\item{plt_num}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{plt_num} is no
-longer supported, use \code{plant_id} instead.}
-
-\item{out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_file} is no
-longer supported, use \code{save_as} instead.}
 }
 \value{
 None
@@ -51,11 +39,9 @@ is converted to a text file readable by the STICS model
 (ficini.txt, ficplt1.txt,...)
 }
 \examples{
-
-\dontrun{
-xml_path <- "/path/to/corn_plt.xml"
-javastics_path <- "/path/to/JavaSTICS/folder"
-convert_xml2txt(file = xml_path, javastics = javastics_path)
-}
+xml_path <- file.path(get_examples_path("xml"), "file_plt.xml")
+convert_xml2txt(file = xml_path)
+xml_path <- file.path(get_examples_path("xml"), "sols.xml")
+convert_xml2txt(file = xml_path, soil_name = "soil_rice")
 
 }

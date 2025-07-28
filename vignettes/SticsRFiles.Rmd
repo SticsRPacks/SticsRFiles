@@ -18,14 +18,14 @@ library(SticsRFiles)
 ```
 
 ```{r include=FALSE}
-suppressWarnings(library(SticsRFiles))
+suppressPackageStartupMessages(library(SticsRFiles))
 # just in case for unzipping examples files in tempdir
 get_examples_path(c("xml", "csv"))
 ```
 
 ## Introduction
 
-The goal of SticsRFiles is to perform manipulations of all types of files related to the input and outputs of the STICS model.
+The goal of `SticsRFiles` is to perform manipulations of all types of files related to the input and outputs of the STICS model.
 
 This article presents the design of the package and its basic features, *i.e.* the main functions to deal with the XML files. For a complete introduction to SticsRPacks (managing files, running simulations, plotting, optimization...), see the tutorial from the [SticsRPacks](https://sticsrpacks.github.io/SticsRPacks/) package.
 
@@ -67,7 +67,7 @@ It is important to note that only JavaSTICS interact with the XML files, **not**
 
 ### SticsRFiles
 
-SticsRFiles is an R package that uses JavaSTICS from the command line to manage the XML and the text files. We can generate XML or text files, get and set parameter values, import simulations outputs, and manage observation files.
+`SticsRFiles` is an R package that uses JavaSTICS from the command line to manage the XML and the text files. We can generate XML or text files, get and set parameter values, import simulations outputs, and manage observation files.
 
 Advanced features also include:
 
@@ -76,27 +76,31 @@ Advanced features also include:
 
 ## Short example
 
-Here's a simple example usage of SticsRFiles using an example workspace.
+Here's a simple example usage of `SticsRFiles` using an example workspace.
 
 ### Example data
 
 All the example data used in this article are available from the [`data` repository](https://github.com/SticsRPacks/data) in the `SticsRPacks` organization.
 
-SticsRFiles provides a function to download it from the command line. Please execute the following command in R:
+`SticsRFiles` provides a function to download it from the command line. Please execute the following command in R:
 
 ```{r include=FALSE}
 example_data <- SticsRFiles::download_data(
-  out_dir = tempdir(),
   example_dirs = "study_case_1",
-  "V10.0"
+  stics_version = "V10.0"
 )
+# In case of a download problem, the function will return NULL
+# stopping the vignette building
+if (is.null(example_data)) {
+  stop("The example data could not be downloaded. The internet resource is not available.")
+}
 ```
 
 ```{r eval=FALSE}
 library(SticsRFiles)
 example_data <- SticsRFiles::download_data(
   example_dirs = "study_case_1",
-  "V10.0"
+  stics_version = "V10.0"
 )
 ```
 
@@ -128,16 +132,16 @@ SticsRFiles::get_var_info(keyword = "lai")
 
 #### Get informations on parameters
 
-`get_param_info()` can be used giving a part of parameters names :
+`get_param_info()` can be used giving a part of parameters names, here is a subset of the parameters names containing `lai`:
 
 ```{r}
-get_param_info(param = "lai")
+head(get_param_info(param = "lai"))
 ```
 
-it can also be used by giving a keyword that will be searched in the parameters names and definitions:
+it can also be used by giving a keyword that will be searched in the parameters names and definitions, here is a subset of the parameters names containing `plant`:
 
 ```{r}
-get_param_info(keyword = "plant")
+head(get_param_info(keyword = "plant"))
 ```
 
 #### Get parameter values
@@ -161,10 +165,11 @@ unlist(values) # For pretty-printing
 
 #### Set parameter values
 
-We can also change the value of a parameter programmatically using `set_param_xml()`. It is used similarly to `get_param_xml()`. For example if we want to increase `dlaimax` by 30%:
+We can also change the value of a parameter by programming using `set_param_xml()`. It is used similarly to `get_param_xml()`. For example if we want to increase `dlaimax` by 30%:
 
 ```{r}
-set_param_xml(plant_file, "dlaimax", unlist(dlaimax) * 1.3, overwrite = TRUE)
+new_values <- unlist(dlaimax) * 1.3
+set_param_xml(file = plant_file, param = "dlaimax", values = new_values, overwrite = TRUE)
 ```
 
 Don't forget to use the `overwrite` argument and set it to `TRUE`. It is `FALSE` by default to avoid any mishandling.

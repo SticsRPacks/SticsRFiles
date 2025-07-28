@@ -29,5 +29,4 @@ get_lai_forcing(xml_usms)
 get_lai_forcing(xml_usms, "wheat")
 get_lai_forcing(xml_usms, c("wheat", "intercrop_pea_barley"))
 
-
 }

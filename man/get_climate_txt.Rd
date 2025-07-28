@@ -4,13 +4,7 @@
 \alias{get_climate_txt}
 \title{Read STICS input meteorology file}
 \usage{
-get_climate_txt(
-  workspace,
-  file_name = "climat.txt",
-  preserve = TRUE,
-  dirpath = lifecycle::deprecated(),
-  filename = lifecycle::deprecated()
-)
+get_climate_txt(workspace, file_name = "climat.txt", preserve = TRUE)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the STICS
@@ -19,12 +13,6 @@ climate file to read}
 \item{file_name}{The meteorology file name (default to \code{climat.txt}).}
 
 \item{preserve}{Logical, \verb{TRUE`` for keeping the STICS columns related to date calculation (year, month, day, julian), or only the Date column as a }POSIXct\verb{otherwise. Default to}TRUE`.}
-
-\item{dirpath}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{dirpath} is no
-longer supported, use \code{workspace} instead.}
-
-\item{filename}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{filename} is no
-longer supported, use \code{file_name} instead.}
 }
 \value{
 A data.frame of the input meteorological variables used as input
@@ -34,11 +22,11 @@ for the STICS model.
 Read the meteorology input for STICS ("climat.txt")
 }
 \note{
-The time-related variables are summarised into one POSIXct column named
+The time-related variables are summarized into one POSIXct column named
 \code{date}.
 }
 \examples{
 path <- get_examples_path(file_type = "txt")
-Meteo <- get_climate_txt(path)
+meteo_data <- get_climate_txt(path)
 
 }

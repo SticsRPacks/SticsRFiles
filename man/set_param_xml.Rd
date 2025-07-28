@@ -13,11 +13,6 @@ set_param_xml(
   select_value = NULL,
   value_id = NULL,
   overwrite = FALSE,
-  xml_file = lifecycle::deprecated(),
-  out_path = lifecycle::deprecated(),
-  param_name = lifecycle::deprecated(),
-  param_value = lifecycle::deprecated(),
-  value = lifecycle::deprecated(),
   ...
 )
 }
@@ -42,21 +37,6 @@ from the parameter values vector}
 
 \item{overwrite}{Logical TRUE for overwriting the output file,
 FALSE otherwise (default)}
-
-\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
-longer supported, use file instead.}
-
-\item{out_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{out_path} is no
-longer supported, use save_as instead.}
-
-\item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
-longer supported, use param instead.}
-
-\item{param_value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_value} is no
-longer supported, use values instead.}
-
-\item{value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{value} is no
-longer supported, use select_value instead.}
 
 \item{...}{Pass further arguments to \code{set_param_value()}.}
 }
@@ -87,13 +67,14 @@ set_param_xml(sol_path, "argi", 50, overwrite = TRUE)
 # get_param_xml(sol_path, "argi")
 
 # Setting a specific value to "argi" for "solcanne" soil
-set_param_xml(file = sol_path, param = "argi", values = 56,
-   select = "sol", select_value = "solcanne", overwrite = TRUE
+set_param_xml(
+  file = sol_path, param = "argi", values = 56,
+  select = "sol", select_value = "solcanne", overwrite = TRUE
 )
 # Getting changed values
 # get_param_xml(sol_path, "argi",
 #   select = "sol", select_value = "solcanne"
-#)
+# )
 
 
 # Setting a specific values to 2 parameters "argi" and
@@ -104,7 +85,7 @@ set_param_xml(sol_path, c("argi", "norg"), list(100, 150),
 # Getting changed values
 # get_param_xml(sol_path, c("argi", "norg"),
 #   select = "sol", select_value = "solcanne"
-#)
+# )
 
 
 # For vector parameters per soil (5 values, one per soil layer)
@@ -126,9 +107,9 @@ set_param_xml(sol_path, "HCCF",
   select = "sol",
   select_value = "solcanne",
   values = c(46.8, 48.5, 50.1),
-  value_id = c(1,3,5),
+  value_id = c(1, 3, 5),
   overwrite = TRUE
- )
+)
 
 # Getting changed values
 # get_param_xml(sol_path, "HCCF",
@@ -147,6 +128,5 @@ set_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"),
 )
 # Getting changed values
 # get_param_xml(tec_path, c("julapI_or_sum_upvt", "amount"))
-
 
 }

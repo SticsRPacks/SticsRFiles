@@ -42,8 +42,6 @@ is_leap_year <- function(year, integer = FALSE) {
 #' in the character format ("YYYY-MM-DD") or \code{\link[base]{Date}} format
 #' @param start_year year to be used as time reference (simulation start year).
 #' Optional.
-#' @param start_date `r lifecycle::badge("deprecated")` `start_date` is no
-#'   longer supported, use `start_year` instead.
 #' @return numeric vector
 #' @author Timothee Flutre
 #' @examples
@@ -60,37 +58,23 @@ is_leap_year <- function(year, integer = FALSE) {
 #' compute_day_from_date(date = dates, start_year = 2008)
 #'
 #' @export
-compute_day_from_date <- function(date,
-                                  start_year = NULL,
-                                  start_date = lifecycle::deprecated()) {
+compute_day_from_date <- function(
+    date,
+    start_year = NULL) {
   # In case of several input dates
   if (length(date) > 1) {
     out <- unlist(
       lapply(date, function(x) {
         compute_day_from_date(
           date = x,
-          start_year = start_year,
-          start_date = start_date
+          start_year = start_year
         )
       })
     )
     return(out)
   }
 
-  # To keep compatibility with the previous argument start_date
-  # conversion to year
-  if (lifecycle::is_present(start_date)) {
-    lifecycle::deprecate_warn(
-      "1.4.0",
-      "compute_day_from_date(start_date)",
-      "compute_day_from_date(start_year)"
-    )
-
-    start_year <- lubridate::year(as.Date(start_date))
-  }
-
   stopifnot(
-    methods::is(as.Date(date), "Date") || methods::is(date, "Date"),
     is.null(start_year) || methods::is(start_year, "numeric")
   )
 
@@ -113,8 +97,11 @@ compute_day_from_date <- function(date,
   # Impossible case
   if (start_year > date_year) {
     stop(
-      "The start year ", start_year,
-      " is greater than the date year ", date_year, "!"
+      "The start year ",
+      start_year,
+      " is greater than the date year ",
+      date_year,
+      "!"
     )
   }
 
@@ -123,7 +110,10 @@ compute_day_from_date <- function(date,
   leap_year_number <- sum(is_leap_year(years, integer = TRUE))
 
   # Calculating the day number over years
-  return(365 * (length(years) - leap_year_number) +
-    366 * leap_year_number +
-    day_of_year)
+  return(
+    365 *
+      (length(years) - leap_year_number) +
+      366 * leap_year_number +
+      day_of_year
+  )
 }

@@ -63,7 +63,6 @@ col_names_to_var <- function(var_list = c()) {
       return(x)
     })
 
-
   # for varname.n., or var_name.n.
   conv_var_list <-
     gsub("\\.$", ")", conv_var_list) %>%

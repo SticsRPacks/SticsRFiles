@@ -31,26 +31,27 @@
 #' )
 #'
 #'
-upgrade_param_newform_xml <- function(file,
-                                      out_dir,
-                                      param_gen_file,
-                                      stics_version = "V9.2",
-                                      target_version = "V10.0",
-                                      check_version = TRUE,
-                                      overwrite = FALSE) {
+upgrade_param_newform_xml <- function(
+    file,
+    out_dir,
+    param_gen_file,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE) {
   # TODO: eliminate when option will be reactivated later.
   codemineral <- FALSE
 
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
-
   if (check_version) {
     min_version <- get_version_num("V9.1")
 
     # Extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file,
+    file_version <- check_xml_file_version(
+      file,
       stics_version,
       param_gen_file = param_gen_file
     )
@@ -61,9 +62,12 @@ upgrade_param_newform_xml <- function(file,
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file
+        attr(file_version, "version"),
+        " \n",
+        file
       )
     }
 
@@ -71,27 +75,25 @@ upgrade_param_newform_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
   }
-
-
 
   # Loading the old doc
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc,
+  set_xml_file_version(
+    old_doc,
     new_version = target_version,
     overwrite = overwrite
   )
 
-
   # TODO : add from here if cond for calling specific version ranges updates
-
-
 
   # nodes to remove
   form_names <- c(
@@ -119,7 +121,6 @@ upgrade_param_newform_xml <- function(file,
   })
 
   lapply(nodes_to_rm, function(x) if (!is.null(x)) XML::removeNodes(x))
-
 
   # options to be removed
   opt_names <- c(
@@ -200,7 +201,6 @@ upgrade_param_newform_xml <- function(file,
     XML::addChildren(parent_node, XML::xmlClone(new_node))
   }
 
-
   # formalism modifications
   # replacing formalisme option @nom, choix
   set_attrs_values(
@@ -227,12 +227,11 @@ upgrade_param_newform_xml <- function(file,
     values_list = "1"
   )
 
-
-
   # TODO: see what to do for the future v10 version !
   # ---------------------------------------------------------------------------
   # ISOP specific option to temporarily add
-  new_node <- XML::xmlParseString('<formalisme nom="ISOP">
+  new_node <- XML::xmlParseString(
+    '<formalisme nom="ISOP">
 		<option choix="2" nom="activation of ISOP equations" nomParam="code_ISOP">
 			<choix code="1" nom="yes">
 			<option choix="2" nom="activation of legume fixation in grassland"
@@ -256,9 +255,9 @@ upgrade_param_newform_xml <- function(file,
   XML::addSibling(prev_sibling, XML::xmlClone(new_node))
   # ---------------------------------------------------------------------------
 
-
   # Writing to file param_newform.xml
-  write_xml_file(old_doc,
+  write_xml_file(
+    old_doc,
     file.path(out_dir, basename(file)),
     overwrite = overwrite
   )

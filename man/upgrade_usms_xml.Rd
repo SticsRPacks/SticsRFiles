@@ -51,7 +51,7 @@ See get_stics_versions_compat() for listing versions
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 
 upgrade_usms_xml(
-  file = file.path(dir_path,"usms.xml"),
+  file = file.path(dir_path, "usms.xml"),
   out_dir = tempdir(),
   param_gen_file = file.path(dir_path, "param_gen.xml")
 )

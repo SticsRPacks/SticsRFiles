@@ -4,16 +4,7 @@
 \alias{gen_sols_xml}
 \title{Generate STICS sols xml file from a template or an input file}
 \usage{
-gen_sols_xml(
-  file,
-  param_df,
-  template = NULL,
-  stics_version = "latest",
-  sols_in_file = lifecycle::deprecated(),
-  sols_param = lifecycle::deprecated(),
-  sols_out_file = lifecycle::deprecated(),
-  sols_nb = lifecycle::deprecated()
-)
+gen_sols_xml(file, param_df, template = NULL, stics_version = "latest")
 }
 \arguments{
 \item{file}{Path (including name) of the sols file to generate.}
@@ -28,18 +19,6 @@ the STICS version.}
 \item{stics_version}{Name of the STICS version. Optional, used if the \code{file}
 argument is not provided. In this case the function uses a standard template
 associated to the STICS version.}
-
-\item{sols_in_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_in_file} is no
-longer supported, use \code{template} instead.}
-
-\item{sols_param}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_param} is no
-longer supported, use \code{param_df} instead.}
-
-\item{sols_out_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_out_file} is no
-longer supported, use \code{file} instead.}
-
-\item{sols_nb}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{sols_nb} is no
-longer supported, it is now computed in the function.}
 }
 \value{
 None
@@ -83,7 +62,9 @@ If not given (the default, \code{NULL}), the function returns the template as is
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
 
 sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
-gen_sols_xml(file = file.path(tempdir(), "sols.xml"),
-param_df = sols_param_df)
+gen_sols_xml(
+  file = file.path(tempdir(), "sols.xml"),
+  param_df = sols_param_df
+)
 
 }

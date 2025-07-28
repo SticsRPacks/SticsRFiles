@@ -33,15 +33,16 @@
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
 #'
-upgrade_tec_xml <- function(file,
-                            out_dir,
-                            param_newform_file,
-                            param_gen_file,
-                            stics_version = "V9.2",
-                            target_version = "V10.0",
-                            check_version = TRUE,
-                            overwrite = FALSE,
-                            ...) {
+upgrade_tec_xml <- function(
+    file,
+    out_dir,
+    param_newform_file,
+    param_gen_file,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE,
+    ...) {
   # for verifying output dir existence
   check_dir <- TRUE
   args <- list(...)
@@ -58,7 +59,8 @@ upgrade_tec_xml <- function(file,
 
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
-    file_version <- check_xml_file_version(file,
+    file_version <- check_xml_file_version(
+      file,
       stics_version,
       param_gen_file = param_gen_file
     )
@@ -69,9 +71,12 @@ upgrade_tec_xml <- function(file,
 
     if (!file_version) {
       stop(
-        "The input version ", stics_version,
+        "The input version ",
+        stics_version,
         " does not match file version ",
-        attr(file_version, "version"), " \n", file[1]
+        attr(file_version, "version"),
+        " \n",
+        file[1]
       )
     }
 
@@ -79,15 +84,16 @@ upgrade_tec_xml <- function(file,
     ver_num <- get_version_num(stics_version)
     if (ver_num < min_version) {
       stop(
-        "Files from the version ", stics_version,
-        " cannot be converted to the version ", target_version
+        "Files from the version ",
+        stics_version,
+        " cannot be converted to the version ",
+        target_version
       )
     }
 
     # for checking only once when multiple files are treated !
     check_version <- FALSE
   }
-
 
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -110,11 +116,11 @@ upgrade_tec_xml <- function(file,
   old_doc <- xmldocument(file = file)
 
   # Setting file STICS version
-  set_xml_file_version(old_doc,
+  set_xml_file_version(
+    old_doc,
     new_version = target_version,
     overwrite = overwrite
   )
-
 
   # Getting values to keep
   mscoupemini <- get_param_value(xml_doc = old_doc, param_name = "mscoupemini")
@@ -130,11 +136,14 @@ upgrade_tec_xml <- function(file,
     param_name = "codeclaircie"
   )
 
-
   # Getting nodes to remove or move
   param_names <- c(
-    "irecbutoir", "ressuite", "engrais", "mscoupemini",
-    "juleclair", "nbinfloecl"
+    "irecbutoir",
+    "ressuite",
+    "engrais",
+    "mscoupemini",
+    "juleclair",
+    "nbinfloecl"
   )
 
   nodes_to_change <- lapply(param_names, function(x) {
@@ -148,7 +157,6 @@ upgrade_tec_xml <- function(file,
 
   # Nodes to be moved elsewhere: "irecbutoir", "ressuite"
   nodes_to_move <- nodes_to_change[1:2]
-
 
   # tillage option
   new_node <- XML::xmlParseString(
@@ -191,7 +199,6 @@ upgrade_tec_xml <- function(file,
     prev_sibling <- new
   }
 
-
   # option codedate_irrigauto
   new_node <- XML::xmlParseString(
     '<option choix="3" nom="dates to drive automatic irrigations"
@@ -220,10 +227,10 @@ upgrade_tec_xml <- function(file,
 
   XML::addSibling(prev_sibling, new_node)
 
-
   # intervention , engrais
   # -----------------------
-  new_node <- XML::xmlParseString('<colonne nom="engrais"/>',
+  new_node <- XML::xmlParseString(
+    '<colonne nom="engrais"/>',
     addFinalizer = TRUE
   )
 
@@ -279,7 +286,6 @@ upgrade_tec_xml <- function(file,
   # Moving nodes do not require cloning them (I guess)
   XML::addChildren(parent_node, kids = nodes_to_move, at = 0)
 
-
   # special techniques: codefauche
   new_node <- list(
     XML::xmlParseString(
@@ -307,7 +313,6 @@ upgrade_tec_xml <- function(file,
 
   # See if xmlClone is useful to apply ???
   XML::addChildren(parent_node, kids = new_node, at = 0)
-
 
   # special techniques: codemodfauche
   ## Choix "calendar in days"
@@ -343,25 +348,27 @@ upgrade_tec_xml <- function(file,
     # See if xmlClone is useful to apply ???
     lapply(parent_nodes, function(x) XML::addChildren(x, new_nodes))
     set_param_value(
-      xml_doc = old_doc, param_name = "engraiscoupe",
+      xml_doc = old_doc,
+      param_name = "engraiscoupe",
       param_value = engrais
     )
     set_param_value(
-      xml_doc = old_doc, param_name = "mscoupemini",
+      xml_doc = old_doc,
+      param_name = "mscoupemini",
       param_value = mscoupemini
     )
     set_param_value(
-      xml_doc = old_doc, param_name = "tauxexportfauche",
+      xml_doc = old_doc,
+      param_name = "tauxexportfauche",
       param_value = 1
     )
     set_param_value(
-      xml_doc = old_doc, param_name = "restit",
+      xml_doc = old_doc,
+      param_name = "restit",
       param_value = 2
     )
     lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "9")
   }
-
-
 
   ## Choix "calendar in degree days"
   parent_node <- get_nodes(
@@ -385,21 +392,23 @@ upgrade_tec_xml <- function(file,
     # See if xmlClone is useful to apply ???
     lapply(parent_nodes, function(x) XML::addChildren(x, new_nodes))
     set_param_value(
-      xml_doc = old_doc, param_name = "engraiscoupe",
+      xml_doc = old_doc,
+      param_name = "engraiscoupe",
       param_value = engrais
     )
     set_param_value(
-      xml_doc = old_doc, param_name = "mscoupemini",
+      xml_doc = old_doc,
+      param_name = "mscoupemini",
       param_value = mscoupemini
     )
     set_param_value(
-      xml_doc = old_doc, param_name = "tauxexportfauche",
+      xml_doc = old_doc,
+      param_name = "tauxexportfauche",
       param_value = 1
     )
     set_param_value(xml_doc = old_doc, param_name = "restit", param_value = 2)
     lapply(parent_nodes, function(x) XML::xmlAttrs(x)["nb_colonnes"] <- "9")
   }
-
 
   # special techniques: codeclaircie
   new_node <- XML::xmlParseString(
@@ -434,17 +443,18 @@ upgrade_tec_xml <- function(file,
     )[[1]]
     XML::addChildren(parent_node, op_node)
     set_param_value(
-      xml_doc = old_doc, param_name = "juleclair",
+      xml_doc = old_doc,
+      param_name = "juleclair",
       param_value = juleclair
     )
     set_param_value(
-      xml_doc = old_doc, param_name = "nbinfloecl",
+      xml_doc = old_doc,
+      param_name = "nbinfloecl",
       param_value = nbinfloecl
     )
 
     XML::xmlAttrs(parent_node)["nb_interventions"] <- "1"
   }
-
 
   # codejourdes
   new_node <- XML::xmlParseString(
@@ -465,20 +475,27 @@ upgrade_tec_xml <- function(file,
 
   XML::addChildren(parent_node, XML::xmlClone(new_node))
 
-
   # ----------------------------------------------------------------------------
   # Updating values with param_newform.xml ones
   #
 
   param_names <- c(
-    "codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis",
-    "humirac_decisemis", "code_auto_profres(1)", "resk(1)", "resz(1)",
-    "P_codedate_irrigauto", "datedeb_irrigauto", "datefin_irrigauto",
-    "stage_start_irrigauto", "stage_end_irrigauto"
+    "codetempfauche",
+    "nbj_pr_apres_semis",
+    "eau_mini_decisemis",
+    "humirac_decisemis",
+    "code_auto_profres(1)",
+    "resk(1)",
+    "resz(1)",
+    "P_codedate_irrigauto",
+    "datedeb_irrigauto",
+    "datefin_irrigauto",
+    "stage_start_irrigauto",
+    "stage_end_irrigauto"
   )
-  old_val <- get_param_xml(param_newform_file,
-    param = param_names
-  )[[basename(param_newform_file)]]
+  old_val <- get_param_xml(param_newform_file, param = param_names)[[basename(
+    param_newform_file
+  )]]
 
   # writing to file _tec.xml
   out_tec <- file.path(out_dir, basename(file))
@@ -486,10 +503,18 @@ upgrade_tec_xml <- function(file,
 
   # setting new values
   param_names <- c(
-    "codetempfauche", "nbj_pr_apres_semis", "eau_mini_decisemis",
-    "humirac_decisemis", "code_auto_profres", "resk", "resz",
-    "codedate_irrigauto", "datedeb_irrigauto", "datefin_irrigauto",
-    "stage_start_irrigauto", "stage_end_irrigauto"
+    "codetempfauche",
+    "nbj_pr_apres_semis",
+    "eau_mini_decisemis",
+    "humirac_decisemis",
+    "code_auto_profres",
+    "resk",
+    "resz",
+    "codedate_irrigauto",
+    "datedeb_irrigauto",
+    "datefin_irrigauto",
+    "stage_start_irrigauto",
+    "stage_end_irrigauto"
   )
   set_param_xml(
     file = out_tec,
@@ -497,9 +522,6 @@ upgrade_tec_xml <- function(file,
     values = old_val,
     overwrite = TRUE
   )
-
-
-
 
   XML::free(old_doc@content)
   invisible(gc(verbose = FALSE))

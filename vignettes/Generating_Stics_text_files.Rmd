@@ -41,10 +41,10 @@ gen_usms_xml2txt <- SticsRFiles::gen_usms_xml2txt
 
 In this part information are focusing on functionalities related to generation of text input files for the STICS model.
 
-Generated files will be directly usable for running the model with **SticsOnR** package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR/).
+Generated files will be directly usable for running the model with the `SticsOnR` package functions. See the documentation [here](https://sticsrpacks.github.io/SticsOnR/).
 
 ## Converting JavaSTICS workspace files
-For using the model directly neither using the JavaSTICS graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaSTICS XML files to STICS text files from a JavaStics workspace. 
+For using the model directly neither using the JavaSTICS graphical interface nor the `run_javastics` function interface, we provide a function, `gen_usms_xml2txt`, for converting JavaSTICS XML files to STICS text files from a JavaSTICS workspace. 
 
 Then, the model can be run using the [`run_stics()`](https://sticsrpacks.github.io/SticsOnR/reference/run_stics.html) function from [SticsOnR](https://sticsrpacks.github.io/SticsOnR/)
 

@@ -5,8 +5,6 @@
 #' @param stics_version Name of the STICS version. Optional, by default
 #' the latest version returned by `get_stics_versions_compat()` is used.
 #' @param overwrite TRUE for overwriting directory; FALSE otherwise
-#' @param version_name `r lifecycle::badge("deprecated")` `version_name` is no
-#'   longer supported, use `stics_version` instead.
 #'
 #' @return A directory path for examples files for given file type and STICS
 #' version or a vector of (for unknown file types "" is returned as path)
@@ -23,20 +21,8 @@
 get_examples_path <- function(
   file_type,
   stics_version = "latest",
-  overwrite = FALSE,
-  version_name = lifecycle::deprecated()
+  overwrite = FALSE
 ) {
-  if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "get_examples_path(version_name)",
-      "get_examples_path(stics_version)"
-    )
-  } else {
-    # to remove when we update inside the function
-    version_name <- stics_version
-  }
-
   # Getting files types list
   example_types <- get_examples_types()
 
@@ -56,12 +42,12 @@ get_examples_path <- function(
   }
 
   # Validating the version string
-  version_name <- check_version_compat(version_name)
+  stics_version <- check_version_compat(stics_version)
 
   # Checking if files available for the given version
-  ver_data <- get_versions_info(stics_version = version_name)
+  ver_data <- get_versions_info(stics_version = stics_version)
   if (base::is.null(ver_data)) {
-    stop("No examples available for version: ", version_name)
+    stop("No examples available for version: ", stics_version)
   }
 
   # Getting files dir path for the given type
@@ -73,7 +59,7 @@ get_examples_path <- function(
       "Not any data in examples for ",
       paste(file_type[is_na_dirs], collapse = ", "),
       " and version ",
-      version_name
+      stics_version
     )
   }
 
@@ -106,7 +92,7 @@ get_examples_path <- function(
       "Not any available ",
       paste(file_type[!exist_ex_path], collapse = ", "),
       " examples for version: ",
-      version_name
+      stics_version
     )
   }
 
@@ -117,12 +103,12 @@ get_examples_path <- function(
 # TODO: evaluate if useful ?
 list_examples_files <- function(
   file_type,
-  version_name = "latest",
+  stics_version = "latest",
   full_names = TRUE
 ) {
   examples_path <- get_examples_path(
     file_type = file_type,
-    stics_version = version_name
+    stics_version = stics_version
   )
 
   files_list <- list.files(
@@ -147,7 +133,7 @@ get_examples_types <- function() {
     "xml_param",
     "xsl"
   )
-  return(file_types)
+  file_types
 }
 
 
@@ -190,14 +176,14 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
     dir_path <- ""
   }
 
-  return(dir_path)
+  dir_path
 }
 
 
 #' Copy mod, obs, lai, and weather data files
-#' @param workspace JavaStics xml workspace path
+#' @param workspace JavaSTICS xml workspace path
 #' @param file_type file type to copy among "mod", "obs", "clim"
-#' @param javastics JavaStics folder path (Optional)
+#' @param javastics JavsSTICS folder path (Optional)
 #' @param out_dir   Output directry path
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
@@ -228,7 +214,9 @@ workspace_files_copy <- function(
   )
 
   # if file_type is not given, all files type are processed
-  if (is.null(file_type)) file_type <- file_types
+  if (is.null(file_type)) {
+    file_type <- file_types
+  }
 
   # recurive call for a vector
   if (length(file_type) > 1) {
@@ -243,7 +231,7 @@ workspace_files_copy <- function(
         verbose = verbose
       )
     }
-    return(invisible(stat_list))
+    invisible(stat_list)
   }
 
   # Just in case if the func is used outside of the workspace upgrade
@@ -314,5 +302,5 @@ workspace_files_copy <- function(
       "Consider to set as input: overwrite = TRUE"
     )
   }
-  return(invisible(stat))
+  invisible(stat)
 }

@@ -10,9 +10,6 @@ get_param_xml(
   select = NULL,
   select_value = NULL,
   value_id = NULL,
-  xml_file = lifecycle::deprecated(),
-  param_name = lifecycle::deprecated(),
-  value = lifecycle::deprecated(),
   ...
 )
 }
@@ -32,19 +29,10 @@ Optional, should be provided only if select is provided.}
 \item{value_id}{Vector of ids of the parameters values to be retrieved
 from the parameter values vector}
 
-\item{xml_file}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{xml_file} is no
-longer supported, use \code{file} instead.}
-
-\item{param_name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{param_name} is no
-longer supported, use \code{param} instead.}
-
-\item{value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{value} is no
-longer supported, use \code{select_value} instead.}
-
 \item{...}{Pass further arguments to \code{get_param_value()}}
 }
 \value{
-A list of parameter values for each xml_file (a list of list)
+A list of parameter values for each file (a list of list)
 }
 \description{
 Extracting parameter values for a list of xml files and
@@ -70,6 +58,5 @@ file <- file.path(get_examples_path(file_type = "xml"), "file_tec.xml")
 
 # Getting parameters for irrigation (date and quantity)
 get_param_xml(file, c("julapI_or_sum_upvt", "amount"))
-
 
 }

@@ -26,10 +26,11 @@
 #'
 #' @noRd
 #'
-get_values_by_param <- function(params_table,
-                                param_name = NULL,
-                                lines_id = NULL,
-                                na_values = NA) {
+get_values_by_param <- function(
+    params_table,
+    param_name = NULL,
+    lines_id = NULL,
+    na_values = NA) {
   table_names <- names(params_table)
 
   # Getting the parameter names vector, if not given
@@ -42,17 +43,21 @@ get_values_by_param <- function(params_table,
   # For multiple lines
   if (nrow(params_table) > 1) {
     # Lines selection, if any id
-    if (!base::is.null(lines_id) &&
-      base::is.numeric(lines_id) &&
-      max(lines_id) <= nrow(params_table)) {
+    if (
+      !base::is.null(lines_id) &&
+        base::is.numeric(lines_id) &&
+        max(lines_id) <= nrow(params_table)
+    ) {
       params_table <- params_table[lines_id, ]
     }
 
     # Applying to each line of the data.frame
     out_list <- apply(
-      params_table, 1,
+      params_table,
+      1,
       function(x) {
-        get_values_by_param(as.data.frame(t(x), stringsAsFactors = FALSE),
+        get_values_by_param(
+          as.data.frame(t(x), stringsAsFactors = FALSE),
           param_name = param_name
         )
       }
@@ -117,7 +122,6 @@ get_values_by_param <- function(params_table,
 
   # /!\
   # TODO: add fix for 999 instead of 999.0 !!!
-
 
   # Else
   names(par_values) <- param_names

@@ -19,14 +19,14 @@ knitr::opts_chunk$set(
  
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R build status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
+[![R-CMD-check](https://github.com/SticsRPacks/SticsRFiles/actions/workflows/check-standard.yaml/badge.svg?branch=main)](https://github.com/SticsRPacks/SticsRFiles/actions/workflows/check-standard.yaml)
 [![Codecov test coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
 ![](https://www.r-pkg.org/badges/version-ago/SticsRFiles)
 
 <!-- badges: end -->
 
-The goal of SticsRFiles is to perform manipulations of the [STICS](https://stics.inrae.fr/eng/)  model files either on XML files (used by the JavaSTICS GUI) or on text files used by the model fortran executable.
+The goal of `SticsRFiles` is to perform manipulations of the [STICS](https://stics.inrae.fr/eng/)  model files either on XML files (used by the JavaSTICS GUI) or on text files used by the model fortran executable.
 
 The basic functionalities allows to read parameters names and values through XML queries and replace parameters values in files. A starting guide is available on the [Get started page](https://sticsrpacks.github.io/SticsRFiles/articles/SticsRFiles.html).
 
@@ -37,7 +37,7 @@ If you want to be notified when a new release of this package is made, you can t
 
 ## Prerequisites and technical tips
 
-> Some information about software requirements and operating system constraints are given in the SticsOnR package documentation [here](https://sticsrpacks.github.io/SticsOnR/).
+> Some information about software requirements and operating system constraints are given in the `SticsOnR` package documentation [here](https://sticsrpacks.github.io/SticsOnR/).
 
 ## Installation
 
@@ -47,7 +47,7 @@ _**Warning:**_ *If during the installation process, packages updates are suggest
 
 * First, abort the installation.
 * Second, update the installed packages, except the `XML` package.
-* Finally, install the SticsRFiles package.
+* Finally, install the `SticsRFiles` package.
 
 ---
 

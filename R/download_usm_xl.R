@@ -16,12 +16,6 @@
 #' @param overwrite Optional logical, TRUE for overwriting files,
 #' FALSE otherwise (default)
 #' @param verbose Logical value for displaying information while running
-#' @param xl_name `r lifecycle::badge("deprecated")` `xl_name` is no
-#'   longer supported, use file instead.
-#' @param dest_dir `r lifecycle::badge("deprecated")` `dest_dir` is no
-#'   longer supported, use out_dir instead.
-#' @param version_name `r lifecycle::badge("deprecated")` `version_name` is no
-#'   longer supported, use stics_version instead.
 #' @param ... Additional arguments to be passed
 #'
 #' @return A vector of copied files path.
@@ -33,46 +27,14 @@
 #' @export
 #'
 
-download_usm_xl <- function(file = NULL,
-                            out_dir = tempdir(),
-                            stics_version = "latest",
-                            overwrite = FALSE,
-                            verbose = FALSE,
-                            xl_name = lifecycle::deprecated(),
-                            version_name = lifecycle::deprecated(),
-                            dest_dir = lifecycle::deprecated(),
-                            ...) {
-  if (lifecycle::is_present(xl_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "download_usm_xl(xl_name)",
-      "download_usm_xl(file)"
-    )
-  } else {
-    xl_name <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "download_usm_xl(version_name)",
-      "download_usm_xl(stics_version)"
-    )
-  } else {
-    version_name <- stics_version # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(dest_dir)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "download_usm_xl(dest_dir)",
-      "download_usm_xl(out_dir)"
-    )
-  } else {
-    dest_dir <- out_dir # to remove when we update inside the function
-  }
-
-
+download_usm_xl <- function(
+    file = NULL,
+    out_dir = tempdir(),
+    stics_version = "latest",
+    overwrite = FALSE,
+    verbose = FALSE,
+    ...) {
   args <- list(...)
-
 
   xl_patt <- "^inputs\\_.*(example|USMs)\\.(xls|xlsx)$"
   file_type <- "xl"
@@ -82,13 +44,13 @@ download_usm_xl <- function(file = NULL,
     file_type <- "csv"
   }
 
-  if (base::is.null(xl_name)) {
-    xl_name <- xl_patt
+  if (base::is.null(file)) {
+    file <- xl_patt
   }
 
   xl_dir <- get_examples_path(
     file_type = "xl",
-    stics_version = version_name
+    stics_version = stics_version
   )
 
   files_list <- list.files(xl_dir, pattern = xl_patt)
@@ -103,11 +65,13 @@ download_usm_xl <- function(file = NULL,
     return(list.files(xl_dir, pattern = xl_patt))
   }
 
-  dest_list <- file.path(dest_dir, files_list)
+  dest_list <- file.path(out_dir, files_list)
   exist_files <- file.exists(dest_list)
   if (!overwrite && any(exist_files)) {
     warning(paste(
-      files_list[exist_files], "already exists in ", dest_dir,
+      files_list[exist_files],
+      "already exists in ",
+      out_dir,
       "\nConsider to set overwrite = TRUE to overwrite (it | them )"
     ))
     # filtering existing files, not copied if overwrite == FALSE
@@ -115,29 +79,28 @@ download_usm_xl <- function(file = NULL,
   }
 
   src_list <- file.path(xl_dir, files_list)
-  success <- file.copy(from = src_list, to = dest_dir, overwrite = overwrite)
+  success <- file.copy(from = src_list, to = out_dir, overwrite = overwrite)
 
   if (any(success)) {
     if (verbose) {
       message(paste(
         files_list[success],
         " has been copied in directory ",
-        dest_dir
+        out_dir
       ))
     }
     dest_list <- dest_list[success]
   }
 
   if (!all(success)) {
-    warning("Error copying files:\n", paste(src_list[!success],
-      collapse = "\n"
-    ))
+    warning(
+      "Error copying files:\n",
+      paste(src_list[!success], collapse = "\n")
+    )
   }
-
 
   return(invisible(dest_list))
 }
-
 
 
 #' @title Downloading a CSV usms data file example into a directory
@@ -154,12 +117,6 @@ download_usm_xl <- function(file = NULL,
 #' @param overwrite Optional logical, TRUE for overwriting files,
 #' FALSE otherwise (default)
 #' @param verbose Logical value for displaying information while running
-#' @param csv_name `r lifecycle::badge("deprecated")` `csv_name` is no
-#'   longer supported, use file instead.
-#' @param version_name `r lifecycle::badge("deprecated")` `version_name` is no
-#'   longer supported, use stics_version instead.
-#' @param dest_dir `r lifecycle::badge("deprecated")` `dest_dir` is no
-#'   longer supported, use out_dir instead.
 #' @return A vector of copied files path.
 #'
 #' @examples
@@ -168,47 +125,16 @@ download_usm_xl <- function(file = NULL,
 #' @export
 #'
 
-download_usm_csv <- function(file = NULL,
-                             out_dir = tempdir(),
-                             stics_version = "latest",
-                             overwrite = FALSE,
-                             verbose = FALSE,
-                             csv_name = lifecycle::deprecated(),
-                             version_name = lifecycle::deprecated(),
-                             dest_dir = lifecycle::deprecated()) {
-  if (lifecycle::is_present(csv_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "download_usm_csv(csv_name)",
-      "download_usm_csv(file)"
-    )
-  } else {
-    csv_name <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(version_name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "download_usm_csv(version_name)",
-      "download_usm_csv(stics_version)"
-    )
-  } else {
-    version_name <- stics_version # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(dest_dir)) {
-    lifecycle::deprecate_warn(
-      "1.0.0",
-      "download_usm_csv(dest_dir)",
-      "download_usm_csv(out_dir)"
-    )
-  } else {
-    dest_dir <- out_dir # to remove when we update inside the function
-  }
-
-
+download_usm_csv <- function(
+    file = NULL,
+    out_dir = tempdir(),
+    stics_version = "latest",
+    overwrite = FALSE,
+    verbose = FALSE) {
   download_usm_xl(
-    file = csv_name,
-    out_dir = dest_dir,
-    stics_version = version_name,
+    file = file,
+    out_dir = out_dir,
+    stics_version = stics_version,
     overwrite = overwrite,
     verbose = verbose,
     type = "csv"

@@ -6,10 +6,6 @@
 #' @param usm Vector of USM names (or partial names).
 #' Optional, if not provided, the function returns the names of all the USMs
 #' included in the given file.
-#' @param usm_path `r lifecycle::badge("deprecated")` `usm_path` is no
-#'   longer supported, use `file` instead.
-#' @param name `r lifecycle::badge("deprecated")` `name` is no
-#'   longer supported, use `usm` instead.
 #'
 #' @return A vector of usm names
 #'
@@ -25,41 +21,21 @@
 #'
 #' @export
 #'
-get_usms_list <- function(file,
-                          usm = NULL,
-                          usm_path = lifecycle::deprecated(),
-                          name = lifecycle::deprecated()) {
-  # TODO: add select key: i.e. get all usms names
-  # with the same soil, plant 1,...
-  if (lifecycle::is_present(usm_path)) {
-    lifecycle::deprecate_warn(
-      "1.0.0", "get_usms_list(usm_path)",
-      "get_usms_list(file)"
-    )
-  } else {
-    usm_path <- file # to remove when we update inside the function
-  }
-  if (lifecycle::is_present(name)) {
-    lifecycle::deprecate_warn(
-      "1.0.0", "get_usms_list(name)",
-      "get_usms_list(usm)"
-    )
-  } else {
-    name <- usm # to remove when we update inside the function
-  }
-
-  xml_doc <- xmldocument(usm_path)
+get_usms_list <- function(
+    file,
+    usm = NULL) {
+  xml_doc <- xmldocument(file)
 
   # Detecting file type
   if (!is_stics_usms(xml_doc)) {
-    stop("The file does not exist or is not a usms file: ", usm_path)
+    stop("The file does not exist or is not a usms file: ", file)
   }
 
   return(
     find_usms_soils_names(
       xml_doc = xml_doc,
       xml_name = "usm",
-      name = name
+      name = usm
     )
   )
 }

@@ -10,7 +10,8 @@ get_used_param_xml <- function(file) {
 }
 
 get_base_used_param <- function(xml_doc) {
-  name <- get_attrs_values(xml_doc,
+  name <- get_attrs_values(
+    xml_doc,
     path = "//formalisme/param",
     attr_list = "nom"
   )
@@ -24,7 +25,8 @@ get_base_used_param <- function(xml_doc) {
   )
 
   # cultivar parameters
-  namev <- get_attrs_values(xml_doc,
+  namev <- get_attrs_values(
+    xml_doc,
     path = "//variete/param",
     attr_list = "nom"
   )
@@ -50,7 +52,8 @@ get_base_used_param <- function(xml_doc) {
 
 get_options_used_param <- function(xml_doc, param_list = NULL) {
   m_options <- unique(
-    get_attrs_values(xml_doc,
+    get_attrs_values(
+      xml_doc,
       path = "//formalisme/option",
       attr_list = c("choix", "nomParam")
     )
@@ -82,7 +85,8 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
     name <- options_data$nomParam[opt]
     value <- options_data$choix[opt]
     path_param <- paste0(
-      "//option[@nomParam=", "'",
+      "//option[@nomParam=",
+      "'",
       name,
       "']/choix[@code=",
       "'",
@@ -91,18 +95,22 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
     )
     nodes_set <- get_nodes(xml_doc, path = path_param)
 
-
     if (!is.null(nodes_set)) {
       param_names <- as.vector(
         get_attrs_values(xml_doc, path = path_param, "nom")
       )
       param_values <- as.vector(get_values(xml_doc, path = path_param))
-      param_list <- rbind(param_list, data.frame(
-        option = name, code = value,
-        name = param_names, value = param_values,
-        cultivar = "none",
-        stringsAsFactors = FALSE
-      ))
+      param_list <- rbind(
+        param_list,
+        data.frame(
+          option = name,
+          code = value,
+          name = param_names,
+          value = param_values,
+          cultivar = "none",
+          stringsAsFactors = FALSE
+        )
+      )
       #
       # data.frame avec codeoption, noms param, valeurs param
     }
@@ -117,9 +125,9 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
       "']/option"
     )
 
-
     m_sub_options <- unique(
-      get_attrs_values(xml_doc,
+      get_attrs_values(
+        xml_doc,
         path = path_suboption,
         attr_list = c("choix", "nomParam")
       )
@@ -141,7 +149,6 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
       )
     }
 
-
     nb_sub_opt <- dim(sub_options_data)[1]
 
     for (sub_opt in 1:nb_sub_opt) {
@@ -162,7 +169,6 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
 
       nodes_set <- get_nodes(xml_doc, path = sub_path_param)
 
-
       if (!is.null(nodes_set)) {
         sub_param_names <- as.vector(
           get_attrs_values(xml_doc, path = sub_path_param, "nom")
@@ -171,16 +177,20 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
         sub_param_values <- as.vector(
           get_values(xml_doc, path = sub_path_param)
         )
-        param_list <- rbind(param_list, data.frame(
-          option = sub_name, code = sub_value,
-          name = sub_param_names, value = sub_param_values,
-          cultivar = "none",
-          stringsAsFactors = FALSE
-        ))
+        param_list <- rbind(
+          param_list,
+          data.frame(
+            option = sub_name,
+            code = sub_value,
+            name = sub_param_names,
+            value = sub_param_values,
+            cultivar = "none",
+            stringsAsFactors = FALSE
+          )
+        )
       }
     }
   }
-
 
   # cultivar
   #
@@ -193,7 +203,8 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
   )
   optionv_data <- data.frame(nom = m_optionsv[, 1], stringsAsFactors = FALSE)
 
-  m_all_options <- unique(get_attrs_values(xml_doc,
+  m_all_options <- unique(get_attrs_values(
+    xml_doc,
     path = "//option",
     attr_list = c("choix", "nomParam")
   ))
@@ -220,18 +231,22 @@ get_options_used_param <- function(xml_doc, param_list = NULL) {
     )
     nodes_set <- get_nodes(xml_doc, path = v_path_param)
 
-
     if (!is.null(nodes_set)) {
       v_param_names <- as.vector(
         get_attrs_values(xml_doc, path = v_path_param, "nom")
       )
       v_param_values <- as.vector(get_values(xml_doc, path = v_path_param))
-      param_list <- rbind(param_list, data.frame(
-        option = v_name, code = v_value,
-        name = v_param_names, value = v_param_values,
-        cultivar = cultivars,
-        stringsAsFactors = FALSE
-      ))
+      param_list <- rbind(
+        param_list,
+        data.frame(
+          option = v_name,
+          code = v_value,
+          name = v_param_names,
+          value = v_param_values,
+          cultivar = cultivars,
+          stringsAsFactors = FALSE
+        )
+      )
       #
       # data.frame avec codeoption, noms param, valeurs param
     }
