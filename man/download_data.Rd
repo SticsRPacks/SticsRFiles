@@ -5,6 +5,7 @@
 \title{Download example USMs}
 \usage{
 download_data(
+  branch = NULL,
   out_dir = tempdir(),
   example_dirs = NULL,
   stics_version = "latest",
@@ -12,7 +13,10 @@ download_data(
 )
 }
 \arguments{
-\item{out_dir}{Path of the directory where to download the data}
+\item{branch}{Git branch name (optional)}
+
+\item{out_dir}{Path of the directory where to download the data
+(optional, default: tempdir())}
 
 \item{example_dirs}{List of use case directories names (optional)}
 

@@ -41,7 +41,6 @@ Imports:
     curl,
     data.table,
     dplyr (>= 1.0.0),
-    lifecycle,
     lubridate,
     methods,
     rlang,
