@@ -2,8 +2,15 @@ stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
 host <- "github.com"
 
+if (version_num < 11) {
+  branch <- get_default_branch()
+} else {
+  branch <- "update-files-v11"
+}
+
 studycase_path <-
   download_data(
+    branch = branch,
     example_dirs = "study_case_1",
     stics_version = stics_version,
     raise_error = TRUE
