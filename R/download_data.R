@@ -4,7 +4,10 @@
 #' [data repository](https://github.com/SticsRPacks/data) in the SticsRPacks
 #' organization.
 #'
+#'
+#' @param branch Git branch name (optional)
 #' @param out_dir Path of the directory where to download the data
+#' (optional, default: tempdir())
 #' @param example_dirs List of use case directories names (optional)
 #' @param stics_version Name of the STICS version (optional)
 #' The default value is the latest version returned by
@@ -27,10 +30,17 @@
 #'   raise_error = TRUE
 #' )
 download_data <- function(
-    out_dir = tempdir(),
-    example_dirs = NULL,
-    stics_version = "latest",
-    raise_error = FALSE) {
+  branch = NULL,
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest",
+  raise_error = FALSE
+) {
+  # getting the default branch name if not specified
+  if (is.null(branch)) {
+    branch <- get_default_branch()
+  }
+
   # Setting version value from input for version == "latest"
   if (is.null(stics_version) || stics_version == "latest") {
     stics_version <- get_stics_versions_compat()$latest_version
@@ -59,9 +69,9 @@ download_data <- function(
     return(prev_data_dir)
   }
 
-  url <- get_data_url()
+  url <- get_data_url(branch)
   file_name <- basename(url)
-  # directory wher to unzip the archive
+  # directory where to unzip the archive
   data_dir <- normalizePath(out_dir, winslash = "/", mustWork = FALSE)
   # Archive file path
   data_dir_zip <- normalizePath(
@@ -190,6 +200,13 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
   dirs_str
 }
 
-get_data_url <- function() {
-  "https://github.com/SticsRPacks/data/archive/master.zip"
+get_data_url <- function(branch = "master") {
+  paste0("https://github.com/SticsRPacks/data/archive/", branch, ".zip")
+}
+
+get_default_branch <- function() {
+  system(
+    "git ls-remote --symref https://github.com/SticsRPacks/data HEAD | awk -F'[/\t]' 'NR == 1 {print $3}'",
+    intern = TRUE
+  )
 }
