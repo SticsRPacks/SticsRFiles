@@ -118,7 +118,7 @@ check_version_compat <- function(stics_version = "latest") {
 #'
 #' get_versions_info(
 #'   stics_version = "V8.5",
-#'   versions_dir = "path/to/SticsRFilesproject/inst/extdata"
+#'   location = "path/to/SticsRFilesproject/inst/extdata"
 #' )
 #' }
 get_versions_info <- function(stics_version = NULL, location = "install") {
@@ -143,9 +143,16 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
     return(ver_info)
   }
 
+  # getting the version number and the id of the chosen version
+  # according to numerical version (so 10.0 is equivalent to 10)
+  ver_id <- which(
+    get_version_num(stics_version) == get_version_num(ver_info$versions)
+  )
+
   # Selecting data according to the desired version
-  if (stics_version %in% ver_info$versions) {
-    return(ver_info[ver_info$versions == stics_version, ])
+  if (length(ver_id) > 0 && ver_id > 0) {
+    # If the version is found, return the corresponding row
+    return(ver_info[ver_id, ])
   }
 
   # Nothing to return for unknown version
