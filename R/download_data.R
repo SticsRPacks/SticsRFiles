@@ -204,8 +204,13 @@ get_data_url <- function(branch = "master") {
 }
 
 get_default_branch <- function() {
-  system(
-    "git ls-remote --symref https://github.com/SticsRPacks/data HEAD | awk -F'[/\t]' 'NR == 1 {print $3}'",
-    intern = TRUE
-  )
+  # Getting the default branch name from the remote repository
+  # this has been commented bc on windows it does not work
+  # the shell command returns the right result but not the R command
+  # using system !
+  # system(
+  #   "git ls-remote --symref https://github.com/SticsRPacks/data HEAD | awk -F'[/\t]' 'NR == 1 {print $3}'",
+  #   intern = TRUE
+  # )
+  "master"
 }
