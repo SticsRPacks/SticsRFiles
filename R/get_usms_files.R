@@ -6,17 +6,16 @@
 #' @param usms_file Path (including name) of a USM XML file.
 #' @param file_type Vector of file(s) type to get (if not given,
 #' all types are returned, see details)
-#' @param javastics Path of JavaSTICS Optional, only needed if the plant files
-#' are not in the workspace
-#' (in this case the plant files used are those included in the
-#' JavaSTICS distribution)
-#' @param df_output logical if TRUE returning a data.frame, otherwise returning
-#' a named list if FALSE (default)
+#' @param javastics Path of JavaSTICS (optional), only needed when the plant
+#' files, general parameter files or .mod files are not in the workspace
+#' but included in the JavaSTICS distribution
+#' @param use_mod_files logical if TRUE adding the .mod files to the list
 #'
 #' @details The possible values for file_type are: "fplt", "finit", "fclim1",
-#' "fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"
+#' "fclim2", "fstation", "ftec", "sols", "pargen", "parnew", "usms", "mod"
 #'
-#' @return A named list with existing files path in each usm element
+#' @return A named list (usms names) with files path in `paths` field and
+#' a logical vector in `exist` field indicating if the file exists or not.
 #'
 #' @export
 #' @seealso See `get_soils_list()` to get all soils in a usm file,
@@ -40,15 +39,22 @@
 #'   workspace = "/path/to/workspace",
 #'   file_type = c("finit", "ftec")
 #' )
+#'
+#' get_usms_files(
+#'   workspace = "/path/to/workspace",
+#'   use_mod_files = TRUE,
+#'   javastics = "/path/to/JavaSTICS/folder"
+#' )
 #' }
 #'
 get_usms_files <- function(
-    workspace,
-    usms_list = NULL,
-    usms_file = "usms.xml",
-    file_type = NULL,
-    javastics = NULL,
-    df_output = FALSE) {
+  workspace,
+  usms_list = NULL,
+  usms_file = "usms.xml",
+  file_type = NULL,
+  javastics = NULL,
+  use_mod_files = FALSE
+) {
   # Types definition
   files_types <- c(
     "fplt",
@@ -57,10 +63,32 @@ get_usms_files <- function(
     "fclim2",
     "fstation",
     "ftec",
+    "flai",
+    "fobs",
     "sols",
     "pargen",
-    "parnew"
+    "parnew",
+    "usms",
+    "mod"
   )
+
+  # files names definition
+  files_names <- c(
+    "fplt" = "[name]_plt.xml",
+    "finit" = "[name]_ini.xml",
+    "fclim1" = "[name].YYYY",
+    "fclim2" = "[name].YYYY",
+    "fstation" = "[name]_sta.xml",
+    "ftec" = "[name]_tec.xml",
+    "flai" = "[name].lai.",
+    "fobs" = "[name].obs",
+    "sols" = "sols.xml",
+    "pargen" = "param_gen.xml",
+    "parnew" = "param_newform.xml",
+    "usms" = "usms.xml",
+    "mod" = c("var.mod", "rap.mod", "prof.mod")
+  )
+
   if (is.null(file_type)) {
     file_type <- files_types
   } else {
@@ -162,23 +190,32 @@ get_usms_files <- function(
     usm_files <- usm_files[node_names %in% file_type]
 
     # Keeping usms xml files, except plant files, obs, lai, null
-    useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
+    #useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
+    useless_files_idx <- grep("null", usm_files)
 
     if (length(useless_files_idx) > 0) {
       usm_files <- usm_files[-useless_files_idx]
     }
 
+    # adding usms.xml file if asked
+    if ("usms" %in% file_type) {
+      usm_files <- c(usms_file, usm_files)
+    }
+
+    # getting files path in workspace
     usm_files_path <- file.path(workspace, usm_files)
 
-    # Specific plt files management
+    # Specific plt files management, so filtering them out
     plt_idx <- grep("_plt\\.xml$", usm_files_path)
-    plt_files <- basename(usm_files_path[plt_idx])
-    plt_files_path <- NULL
-    usm_files_path <- usm_files_path[-plt_idx]
+    if (length(plt_idx) > 0) {
+      plt_files <- basename(usm_files_path[plt_idx])
+      usm_files_path <- usm_files_path[-plt_idx]
+    }
 
     usm_files_exist <- file.exists(usm_files_path)
 
     plt_files_exist <- vector("logical", 0)
+    plt_files_path <- NULL
 
     if (check_plt) {
       # getting plant files path in workspace or JavaSTICS/config folders
@@ -215,13 +252,11 @@ get_usms_files <- function(
       pargen_file_path <- suppressWarnings(
         normalizePath(file.path(workspace, "param_gen.xml"))
       )
-
       if (!file.exists(pargen_file_path)) {
         pargen_file_path <- suppressWarnings(
           normalizePath(file.path(javastics, "config", "param_gen.xml"))
         )
       }
-
       pargen_file_exists <- file.exists(pargen_file_path)
     }
 
@@ -232,17 +267,57 @@ get_usms_files <- function(
       parnew_file_path <- suppressWarnings(
         normalizePath(file.path(workspace, "param_newform.xml"))
       )
-
       if (!file.exists(parnew_file_path)) {
         parnew_file_path <- suppressWarnings(
           normalizePath(file.path(javastics, "config", "param_newform.xml"))
         )
       }
-
       parnew_file_exists <- file.exists(parnew_file_path)
     }
 
-    #
+    # add mod files if asked
+    mod_file_exists <- vector("logical", 0)
+    if ("mod" %in% file_type && use_mod_files) {
+      # && use_mod_files) {
+      # getting mod files list from the workspace
+      mod_files_path <- list.files(
+        path = workspace,
+        pattern = "\\.mod$",
+        full.names = TRUE
+      )
+
+      # If no mod files found and javastics not given
+      if (length(mod_files_path) == 0) {
+        if (is.null(javastics)) {
+          warning(
+            "No .mod files found in the workspace,",
+            " please add javastics directory as function input argument !"
+          )
+        } else {
+          # getting mod files list from the javastics folder
+          javastics_mod_files_path <- list.files(
+            path = file.path(javastics, "config"),
+            pattern = "\\.mod$",
+            full.names = TRUE
+          )
+        }
+      }
+      # diff list of mod files with those existing in javastics
+      # completion of mod files with javastics ones if not in workspace
+      if (exists("javastics_mod_files_path")) {
+        mod_diff <- setdiff(
+          basename(javastics_mod_files_path),
+          basename(mod_files_path)
+        )
+        if (length(mod_diff)) {
+          mod_files_path <- c(
+            mod_files_path,
+            file.path(javastics, "config", mod_diff)
+          )
+        }
+      }
+      mod_file_exists <- file.exists(mod_files_path)
+    }
     # Adding the files lists
     usms_files_list[[i]] <- list(
       paths = c(
@@ -252,7 +327,7 @@ get_usms_files <- function(
         pargen_file_path,
         parnew_file_path
       ),
-      all_exist = c(
+      exist = c(
         usm_files_exist,
         plt_files_exist,
         sols_file_exists,
@@ -260,15 +335,19 @@ get_usms_files <- function(
         parnew_file_exists
       )
     )
+    if (use_mod_files && exists("mod_files_path")) {
+      usms_files_list[[i]][["paths"]] <- c(
+        usms_files_list[[i]][["paths"]],
+        mod_files_path
+      )
+      usms_files_list[[i]][["exist"]] <- c(
+        usms_files_list[[i]][["exist"]],
+        mod_file_exists
+      )
+    }
   }
 
   # Returning a named list
   names(usms_files_list) <- usms_list
-
-  # returning a data.frame or a list (default)
-  if (df_output) {
-    return(dplyr::bind_rows(usms_files_list, .id = "usm"))
-  } else {
-    return(usms_files_list)
-  }
+  usms_files_list
 }
