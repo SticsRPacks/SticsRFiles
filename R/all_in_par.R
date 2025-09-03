@@ -25,7 +25,7 @@ all_in_par <- function(stics_version = "latest") {
   #  if (get_version_num(stics_version = stics_version) < 9.2) {
   #    cols_idx <- 1:4
   #  } else {
-  cols_idx <- c(1, 4, 7:8, 2)
+  cols_idx <- c(1, 4, 7:8, 2, 3, 10)
   #  }
 
   par_df <- utils::read.csv2(
@@ -40,7 +40,9 @@ all_in_par <- function(stics_version = "latest") {
     stringsAsFactors = FALSE
   )[, cols_idx]
 
-  names(par_df) <- c("name", "file", "min", "max", "definition")
+  names(par_df) <- c("name", "file", "min", "max", "definition", "unit", "cultivar")
+
+  par_df$cultivar <- as.logical(par_df$cultivar)
 
   # Adding a version  attribute
   attr(x = par_df, which = "version") <- stics_version
@@ -67,7 +69,7 @@ all_in_par <- function(stics_version = "latest") {
 #' @details The function understand \code{\link[base]{regex}} as input.
 #'
 #' @return A data.frame with information about parameter(s) with columns
-#'        `name`,`file`,`min`,`max`, `definition`
+#'        `name`, `file`, `min`, `max`, `definition`, `unit` and `cultivar`
 #'
 #'
 #' @examples
