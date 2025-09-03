@@ -48,13 +48,12 @@
 #' }
 #'
 get_usms_files <- function(
-  workspace,
-  usms_list = NULL,
-  usms_file = "usms.xml",
-  file_type = NULL,
-  javastics = NULL,
-  use_mod_files = FALSE
-) {
+    workspace,
+    usms_list = NULL,
+    usms_file = "usms.xml",
+    file_type = NULL,
+    javastics = NULL,
+    use_mod_files = FALSE) {
   # Types definition
   files_types <- c(
     "fplt",
@@ -190,7 +189,7 @@ get_usms_files <- function(
     usm_files <- usm_files[node_names %in% file_type]
 
     # Keeping usms xml files, except plant files, obs, lai, null
-    #useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
+    # useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
     useless_files_idx <- grep("null", usm_files)
 
     if (length(useless_files_idx) > 0) {

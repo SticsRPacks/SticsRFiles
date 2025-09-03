@@ -7,10 +7,12 @@
 ##' @return numeric vector
 ##' @author Timothee Flutre
 ##' @export
-approx_vapour_pressure <- function(mean_temp, rel_humid){
-  stopifnot(length(mean_temp) == length(rel_humid),
-            all(rel_humid >= 0, na.rm=TRUE),
-            all(rel_humid <= 100, na.rm=TRUE))
+approx_vapour_pressure <- function(mean_temp, rel_humid) {
+  stopifnot(
+    length(mean_temp) == length(rel_humid),
+    all(rel_humid >= 0, na.rm = TRUE),
+    all(rel_humid <= 100, na.rm = TRUE)
+  )
 
   out <- rep(NA, length(mean_temp))
 
