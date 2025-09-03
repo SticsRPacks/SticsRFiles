@@ -4,18 +4,18 @@
 \alias{approx_vapour_pressure}
 \title{Approximate vapour pressure}
 \usage{
-approx_vapour_pressure(TM, RH)
+approx_vapour_pressure(mean_temp, rel_humid)
 }
 \arguments{
-\item{TM}{numeric vector of daily mean temperature}
+\item{mean_temp}{numeric vector of daily mean air temperature (in Celsius degrees)}
 
-\item{RH}{numeric vector of relative humidity}
+\item{rel_humid}{numeric vector of relative humidity (in percentage)}
 }
 \value{
 numeric vector
 }
 \description{
-Approximates vapour pressure as the saturated vapour pressure at the daily mean temperature using relative humidity.
+Approximates vapour pressure as the saturated vapour pressure at the daily mean air temperature using relative humidity.
 See section 9.3 of the STICS book, as well as M. Launay's explanations on the STICS forum (\href{https://w3.avignon.inrae.fr/forge/boards/26/topics/2237?r=2243#message-2243}{link}).
 }
 \author{
