@@ -166,7 +166,7 @@ gen_usms_xml2txt <- function(
   # Checking XML files existence, check_files
   all_files_exist <- unlist(
     lapply(all_files_list, function(x) {
-      all(x$all_exist)
+      all(x$exist)
     })
   )
 
@@ -176,7 +176,7 @@ gen_usms_xml2txt <- function(
         lapply(
           all_files_list[!all_files_exist],
           function(x) {
-            x$paths[!x$all_exist]
+            x$paths[!x$exist]
           }
         ),
         use.names = FALSE

@@ -36,15 +36,54 @@ context("testing returned object type")
 test_that("is list", {
   expect_true(is.list(usms_files))
 })
-test_that("is data.frame", {
-  usms_files <- get_usms_files(workspace_path, df_output = TRUE)
-  expect_true(is.data.frame(usms_files))
+
+context("Checking list fields types")
+test_that("exist, paths", {
+  usms_files <- get_usms_files(workspace_path)
+  expect_is(usms_files[[1]]$exist, "logical")
+  expect_is(usms_files[[1]]$paths, "character")
 })
 
-context("Checking data.frame column types")
-test_that("usm, all_exist, paths", {
-  usms_files <- get_usms_files(workspace_path, df_output = TRUE)
-  expect_is(usms_files$usm, "character")
-  expect_is(usms_files$all_exist, "logical")
-  expect_is(usms_files$paths, "character")
+context("Checking if mod files exist")
+
+test_that("mod files exist in files", {
+  usms_files <- get_usms_files(workspace_path, use_mod_files = TRUE)
+  expect_true(
+    length(
+      grep(
+        pattern = "\\.mod$",
+        x = usms_files[["bo96iN+"]][["paths"]]
+      )
+    ) >
+      0
+  )
+})
+
+test_that("mod files do not exist in files", {
+  usms_files <- get_usms_files(workspace_path)
+  expect_true(
+    length(
+      grep(
+        pattern = "\\.mod$",
+        x = usms_files[["bo96iN+"]][["paths"]]
+      )
+    ) ==
+      0
+  )
+})
+
+# add tests for getting a sublist according to file types
+context("Getting a sublist according to file type")
+test_that("finit files", {
+  usms_files <- get_usms_files(workspace_path, file_type = c("finit"))
+  expect_true(
+    length(
+      grep(
+        pattern = "\\_ini.xml$",
+        x = usms_files[["bo96iN+"]][["paths"]]
+      )
+    ) >
+      0 &
+      length(usms_files[["bo96iN+"]][["paths"]]) == 1
+  )
 })
