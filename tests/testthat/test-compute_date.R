@@ -15,3 +15,11 @@ test_that("several-days_same-year", {
   observed <- compute_date_from_day(day = day, start_year = start_year)
   expect_equal(observed, expected)
 })
+
+test_that("input-999", {
+  day <- c(290, 999)
+  start_year <- 1994
+  expected <- c(as.Date("1994-10-17"), NA)
+  observed <- compute_date_from_day(day = day, start_year = start_year)
+  expect_equal(observed, expected)
+})

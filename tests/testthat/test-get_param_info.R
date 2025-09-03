@@ -3,13 +3,14 @@ context("searching parameter information (get_param_info)")
 
 stics_version <- get_stics_versions_compat()$latest_version
 # creating an empty df
-# `name`,`file`,`min`,`max`, `definition`
 empty_df <- data.frame(
   name = character(0),
   file = character(0),
   min = character(0),
   max = character(0),
   definition = character(0),
+  unit = character(0),
+  cultivar = logical(0),
   stringsAsFactors = FALSE
 )
 
