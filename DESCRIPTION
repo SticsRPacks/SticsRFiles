@@ -74,6 +74,7 @@ Collate:
     'add_stics_nodes.R'
     'all_in_par.R'
     'all_out_var.R'
+    'approx_vapour_pressure.R'
     'attributes_list2matrix.R'
     'check_choice_param.R'
     'check_java_path.R'
