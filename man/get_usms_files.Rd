@@ -10,7 +10,7 @@ get_usms_files(
   usms_file = "usms.xml",
   file_type = NULL,
   javastics = NULL,
-  df_output = FALSE
+  use_mod_files = FALSE
 )
 }
 \arguments{
@@ -24,23 +24,22 @@ XML input files)}
 \item{file_type}{Vector of file(s) type to get (if not given,
 all types are returned, see details)}
 
-\item{javastics}{Path of JavaSTICS Optional, only needed if the plant files
-are not in the workspace
-(in this case the plant files used are those included in the
-JavaSTICS distribution)}
+\item{javastics}{Path of JavaSTICS (optional), only needed when the plant
+files, general parameter files or .mod files are not in the workspace
+but included in the JavaSTICS distribution}
 
-\item{df_output}{logical if TRUE returning a data.frame, otherwise returning
-a named list if FALSE (default)}
+\item{use_mod_files}{logical if TRUE adding the .mod files to the list}
 }
 \value{
-A named list with existing files path in each usm element
+A named list (usms names) with files path in \code{paths} field and
+a logical vector in \code{exist} field indicating if the file exists or not.
 }
 \description{
 Getting existing xml files path list per usm from an usms.xml file
 }
 \details{
 The possible values for file_type are: "fplt", "finit", "fclim1",
-"fclim2", "fstation", "ftec", "sols", "pargen" and "parnew"
+"fclim2", "fstation", "ftec", "sols", "pargen", "parnew", "usms", "mod"
 }
 \examples{
 \dontrun{
@@ -59,6 +58,12 @@ get_usms_files(
 get_usms_files(
   workspace = "/path/to/workspace",
   file_type = c("finit", "ftec")
+)
+
+get_usms_files(
+  workspace = "/path/to/workspace",
+  use_mod_files = TRUE,
+  javastics = "/path/to/JavaSTICS/folder"
 )
 }
 
