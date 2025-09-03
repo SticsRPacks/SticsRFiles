@@ -25,6 +25,8 @@ compute_date_from_day(day = 290, start_year = 1994)
 
 compute_date_from_day(day = 700, start_year = 1994)
 
+compute_date_from_day(day = 999, start_year = 1994)
+
 }
 \author{
 Timothee Flutre

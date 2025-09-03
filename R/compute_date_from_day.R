@@ -14,6 +14,8 @@
 #'
 #' compute_date_from_day(day = 700, start_year = 1994)
 #'
+#' compute_date_from_day(day = 999, start_year = 1994)
+#'
 #' @export
 #'
 compute_date_from_day <- function(day, start_year) {
@@ -23,5 +25,13 @@ compute_date_from_day <- function(day, start_year) {
     is.numeric(start_year)
   )
 
-  return(as.Date(day - 1, origin = paste0(start_year, "-01-01")))
+  out <- as.Date(day - 1, origin = paste0(start_year, "-01-01"))
+
+  is999 <- (day == 999)
+  if(any(is999)){
+    idx <- which(is999)
+    out[idx] <- NA
+  }
+
+  return(out)
 }
