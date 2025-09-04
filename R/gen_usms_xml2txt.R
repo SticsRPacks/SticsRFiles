@@ -57,15 +57,16 @@
 #'
 
 gen_usms_xml2txt <- function(
-    javastics = NULL,
-    workspace = NULL,
-    out_dir = NULL,
-    usm = c(),
-    stics_version = "latest",
-    verbose = TRUE,
-    dir_per_usm_flag = TRUE,
-    java_cmd = "java",
-    java_converter = FALSE) {
+  javastics = NULL,
+  workspace = NULL,
+  out_dir = NULL,
+  usm = c(),
+  stics_version = "latest",
+  verbose = TRUE,
+  dir_per_usm_flag = TRUE,
+  java_cmd = "java",
+  java_converter = FALSE
+) {
   if (java_converter) {
     # javastics directory must be given
     if (is.null(javastics)) {
@@ -160,7 +161,7 @@ gen_usms_xml2txt <- function(
   all_files_list <- get_usms_files(
     workspace = workspace,
     javastics = javastics,
-    usms_list = usm
+    usm = usm
   )
 
   # Checking XML files existence, check_files
