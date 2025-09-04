@@ -160,7 +160,7 @@ gen_usms_xml2txt <- function(
   all_files_list <- get_usms_files(
     workspace = workspace,
     javastics = javastics,
-    usms_list = usm
+    usm = usm
   )
 
   # Checking XML files existence, check_files
