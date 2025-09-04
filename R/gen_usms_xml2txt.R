@@ -345,6 +345,11 @@ gen_usms_xml2txt <- function(
       for (f in seq_along(xml_files_path)) {
         file_path <- xml_files_path[f]
 
+        if (grepl(pattern = "usms.xml", x = file_path)) {
+          # usms.xml file is not converted
+          next
+        }
+
         found_plt <- grepl(pattern = "_plt", x = file_path)
         found_tec <- grepl(pattern = "_tec", x = file_path)
 
