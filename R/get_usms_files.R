@@ -2,7 +2,7 @@
 #'
 #' @param workspace Path of a JavaSTICS workspace (i.e. containing the STICS
 #' XML input files)
-#' @param usms_list Vector of usms names (Optional)
+#' @param usm Vector of usms names (Optional)
 #' @param usms_file Path (including name) of a USM XML file.
 #' @param file_type Vector of file(s) type to get (if not given,
 #' all types are returned, see details)
@@ -32,7 +32,7 @@
 #' get_usms_files(
 #'   workspace = "/path/to/workspace",
 #'   javastics = "/path/to/JavaSTICS/folder",
-#'   usm_list = c("usm1", "usm3")
+#'   usm = c("usm1", "usm3")
 #' )
 #'
 #' get_usms_files(
@@ -48,12 +48,13 @@
 #' }
 #'
 get_usms_files <- function(
-    workspace,
-    usms_list = NULL,
-    usms_file = "usms.xml",
-    file_type = NULL,
-    javastics = NULL,
-    use_mod_files = FALSE) {
+  workspace,
+  usm = NULL,
+  usms_file = "usms.xml",
+  file_type = NULL,
+  javastics = NULL,
+  use_mod_files = FALSE
+) {
   # Types definition
   files_types <- c(
     "fplt",
@@ -148,23 +149,27 @@ get_usms_files <- function(
   xml_doc <- xmldocument(usms_xml_path)
 
   # Getting usms_list
-  usms_full_list <- find_usms_soils_names(
-    xml_doc = xml_doc,
-    xml_name = "usm"
-  )
+  usms_full_list <- get_usms_list(usms_xml_path)
 
   # Getting the full list or a subset
-  if (is.null(usms_list)) {
+  if (is.null(usm)) {
     usms_list <- usms_full_list
   } else {
     # checking if usms names exist
-    usm_idx <- usms_full_list %in% usms_list
-    if (!length(usms_list) == sum(usm_idx)) {
-      usms_list <- usms_full_list[usm_idx]
+    # not any match
+    usm_idx <- usms_full_list %in% usm
+    if (length(usm_idx) == 0) {
+      stop("No usm found in the usms.xml file")
+    }
+    # some usms not found
+    if (!length(usm) == sum(usm_idx)) {
       warning(paste(
         "There are missing usms in usms.xml file:\n",
         paste(usms_full_list[!usm_idx], collapse = ", ")
       ))
+    } else {
+      # getting the usms wanted
+      usms_list <- usms_full_list[usm_idx]
     }
   }
 

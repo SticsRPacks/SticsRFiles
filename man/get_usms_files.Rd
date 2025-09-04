@@ -6,7 +6,7 @@
 \usage{
 get_usms_files(
   workspace,
-  usms_list = NULL,
+  usm = NULL,
   usms_file = "usms.xml",
   file_type = NULL,
   javastics = NULL,
@@ -17,7 +17,7 @@ get_usms_files(
 \item{workspace}{Path of a JavaSTICS workspace (i.e. containing the STICS
 XML input files)}
 
-\item{usms_list}{Vector of usms names (Optional)}
+\item{usm}{Vector of usms names (Optional)}
 
 \item{usms_file}{Path (including name) of a USM XML file.}
 
@@ -52,7 +52,7 @@ get_usms_files(
 get_usms_files(
   workspace = "/path/to/workspace",
   javastics = "/path/to/JavaSTICS/folder",
-  usm_list = c("usm1", "usm3")
+  usm = c("usm1", "usm3")
 )
 
 get_usms_files(
