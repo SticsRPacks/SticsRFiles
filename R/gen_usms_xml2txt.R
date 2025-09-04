@@ -57,16 +57,15 @@
 #'
 
 gen_usms_xml2txt <- function(
-  javastics = NULL,
-  workspace = NULL,
-  out_dir = NULL,
-  usm = c(),
-  stics_version = "latest",
-  verbose = TRUE,
-  dir_per_usm_flag = TRUE,
-  java_cmd = "java",
-  java_converter = FALSE
-) {
+    javastics = NULL,
+    workspace = NULL,
+    out_dir = NULL,
+    usm = c(),
+    stics_version = "latest",
+    verbose = TRUE,
+    dir_per_usm_flag = TRUE,
+    java_cmd = "java",
+    java_converter = FALSE) {
   if (java_converter) {
     # javastics directory must be given
     if (is.null(javastics)) {
