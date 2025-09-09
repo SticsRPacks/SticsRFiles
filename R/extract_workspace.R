@@ -85,11 +85,12 @@ extract_workspace <- function(
   )
 
   # Getting usms files from the src workspace directory
-  usms_files <- get_usms_files(
+  usms_files <- get_files_list(
     workspace = from_workspace,
     usm = sel_usms,
     javastics = javastics,
-    use_mod_files = use_mod_files
+    use_mod_files = use_mod_files,
+    only_existing = TRUE
   )
 
   # get the vector of existing files paths
@@ -106,7 +107,7 @@ extract_workspace <- function(
 
   # manage plant files: create plant directory if not exist in the to_workspace
   if (!dir.exists(file.path(to_workspace, "plant"))) {
-    print(dir.create(file.path(to_workspace, "plant")))
+    dir.create(file.path(to_workspace, "plant"))
   }
   cp_status_plt <- file.copy(
     from = plt_files_paths,
