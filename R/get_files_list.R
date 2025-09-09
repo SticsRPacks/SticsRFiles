@@ -51,14 +51,13 @@
 #' }
 #'
 get_files_list <- function(
-  workspace,
-  usm = NULL,
-  usms_file = "usms.xml",
-  file_type = NULL,
-  only_existing = TRUE,
-  javastics = NULL,
-  use_mod_files = FALSE
-) {
+    workspace,
+    usm = NULL,
+    usms_file = "usms.xml",
+    file_type = NULL,
+    only_existing = TRUE,
+    javastics = NULL,
+    use_mod_files = FALSE) {
   # Types definition
   files_types <- c(
     "fplt",

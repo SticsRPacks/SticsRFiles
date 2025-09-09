@@ -30,9 +30,8 @@
 #' @export
 #'
 get_soils_list <- function(
-  file,
-  soil = NULL
-) {
+    file,
+    soil = NULL) {
   xml_name <- NULL
 
   xml_doc <- xmldocument(file)
