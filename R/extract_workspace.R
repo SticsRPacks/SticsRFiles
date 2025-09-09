@@ -2,12 +2,12 @@
 #'
 #' @param from_workspace Source workspace path
 #' @param to_workspace Target workspace path
-#' @param javastics JavaStics directory path, needed for getting
+#' @param javastics JavaSTICS directory path, needed for getting
 #' plant files which are stored in JavaSTICS `plant` directory, or general
 #' parameters files and *.mod files from the `config` directory
 #' @param usm vector of situation names (i.e. USMs to extract.)
 #' @param use_mod_files Logical: if TRUE, *.mod files are searched in the
-#' from_workspace and copyed to the to_workspace if found. Default is FALSE.
+#' from_workspace and copied to the to_workspace if found. Default is FALSE.
 #'
 #' @return None
 #'
