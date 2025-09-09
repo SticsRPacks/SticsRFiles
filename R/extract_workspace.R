@@ -15,25 +15,26 @@
 #'
 #' @examples
 #' \dontrun{
-#'# Extract all usms from a source workspace to a target workspace
-#' extract_workspace("/path/to/source/workspace",
-#'                   "/path/to/target/workspace",
-#'                   "/path/to/javastics/dir")
+#' # Extract all usms from a source workspace to a target workspace
+#' extract_workspace(
+#'   "/path/to/source/workspace",
+#'   "/path/to/target/workspace",
+#'   "/path/to/javastics/dir"
+#' )
 #'
-#'# Extract only selected usms from a source workspace to a target workspace
+#' # Extract only selected usms from a source workspace to a target workspace
 #' extract_workspace("/path/to/source/workspace",
-#'                   "/path/to/target/workspace",
-#'                   "/path/to/javastics/dir",
-#'                   usm = c("SugarCane", "potato"))
-#'
+#'   "/path/to/target/workspace",
+#'   "/path/to/javastics/dir",
+#'   usm = c("SugarCane", "potato")
+#' )
 #' }
 extract_workspace <- function(
-  from_workspace,
-  to_workspace,
-  javastics,
-  usm = NULL,
-  use_mod_files = FALSE
-) {
+    from_workspace,
+    to_workspace,
+    javastics,
+    usm = NULL,
+    use_mod_files = FALSE) {
   # Managing workspace directory creation
   if (!dir.exists(to_workspace)) {
     dir.create(to_workspace, recursive = TRUE)
