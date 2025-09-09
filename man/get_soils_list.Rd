@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_soils_list.R
 \name{get_soils_list}
 \alias{get_soils_list}
-\title{Get the soil names for an usms.xml file}
+\title{Get the soil names for an usms.xml or sols.xml file}
 \usage{
 get_soils_list(file, soil = NULL)
 }
@@ -17,7 +17,7 @@ in the given file.}
 A vector of soil names
 }
 \description{
-Extracts the soil names from a "usms.xml" file, or from
+Extracts the soil names from a USMs file, or from
 a soil file
 }
 \details{
