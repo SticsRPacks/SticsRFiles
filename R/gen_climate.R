@@ -33,7 +33,7 @@ gen_climate <- function(files_path, out_dir) {
 
   ret <- try(
     writeLines(
-      text = climate_lines,
+      text = as.character(climate_lines),
       con = file.path(out_dir, "climat.txt")
     )
   )

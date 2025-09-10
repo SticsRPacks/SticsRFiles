@@ -1,16 +1,16 @@
-#' @title Get the soil names for an usms.xml file
+#' @title Get the soil names for an usms.xml or sols.xml file
 #'
-#' @description Extracts the soil names from a "usms.xml" file, or from
+#' @description Extracts the soil names from a USMs file, or from
 #' a soil file
 #'
 #' @param file Either the path of an usm file or of a soil file.
 #' @param soil Vector of soil names (or partial names). Optional,
 #' if not provided, the function returns the names of all the soils included
-#'  in the given file.
+#' in the given file.
 #'
 #' @details The file given as the `file_path` is either a "usms" file type
 #' to get all the soils used in a particular USM, or a soil file type ("sols")
-#'  to get all soil types available in a soil file.
+#' to get all soil types available in a soil file.
 #'
 #' @return A vector of soil names
 #'

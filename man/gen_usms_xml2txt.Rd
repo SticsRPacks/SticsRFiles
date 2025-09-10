@@ -9,7 +9,7 @@ gen_usms_xml2txt(
   javastics = NULL,
   workspace = NULL,
   out_dir = NULL,
-  usm = c(),
+  usm = NULL,
   stics_version = "latest",
   verbose = TRUE,
   dir_per_usm_flag = TRUE,
@@ -34,11 +34,12 @@ usms contained in workspace/usms.xml file will be generated.}
 \item{stics_version}{the STICS files version to use (optional,
 default to latest).}
 
-\item{verbose}{Logical value for displaying information while running}
+\item{verbose}{Logical value TRUE (default) for displaying information
+while running, FALSE otherwise}
 
-\item{dir_per_usm_flag}{logical, TRUE if one want to create one directory
-per USM, FALSE if USM files are generated in the out_dir
-(only useful for usm of size one)}
+\item{dir_per_usm_flag}{logical, optional; TRUE (default)
+if one want to create one directory per USM, FALSE if USM files
+are generated in the out_dir (only useful for usm of size one)}
 
 \item{java_cmd}{For unix like systems, the java virtual machine command
 name or executable path. Useful only if the JavaSTICS command line
@@ -46,8 +47,9 @@ is used for generating files. "java" is the default system command,
 but a full path to a java executable (other than the default one)
 may be given}
 
-\item{java_converter}{logical TRUE for using JavaSTICS command
-(a JavaSTICS path must be set in the function inputs), FALSE otherwise}
+\item{java_converter}{logical, optional; TRUE for using the JavaSTICS command
+(a JavaSTICS path must be set in the function inputs),
+FALSE otherwise (default)}
 }
 \value{
 A list with named elements:
@@ -75,8 +77,8 @@ workspace <- "/path/to/workspace"
 gen_usms_xml2txt(javastics, workspace)
 
 # For an usms list
-usm <- c("usm1", "usm2")
-gen_usms_xml2txt(javastics, workspace, usm)
+usm_list <- c("usm1", "usm2")
+gen_usms_xml2txt(javastics, workspace, usms = usm_list)
 }
 
 }
