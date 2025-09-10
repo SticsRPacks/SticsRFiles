@@ -15,6 +15,14 @@ reference:
       - upgrade_param_gen_xml
       - upgrade_param_newform_xml
 
+  - title: "Manage JavaSTICS worskpace XML files"
+    desc: Functions for manipulating workspaces
+    contents:
+      - extract_workspace
+      #- create a new workspace
+      #- create a usm
+      #- ...
+
   - title: "Find information on parameters and variables"
     contents:
       - get_param_info
