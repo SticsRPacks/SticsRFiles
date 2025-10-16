@@ -15,7 +15,7 @@ xml_usms <- file.path(workspace_path, "usms.xml")
 
 usms_list <- get_usms_list(xml_usms)
 
-usms_files <- get_usms_files(workspace_path)
+usms_files <- get_files_list(workspace_path)
 
 context("Checking usm names in list")
 test_that("checking usm exists", {
@@ -39,7 +39,7 @@ test_that("is list", {
 
 context("Checking list fields types")
 test_that("exist, paths", {
-  usms_files <- get_usms_files(workspace_path)
+  usms_files <- get_files_list(workspace_path)
   expect_is(usms_files[[1]]$exist, "logical")
   expect_is(usms_files[[1]]$paths, "character")
 })
@@ -47,7 +47,7 @@ test_that("exist, paths", {
 context("Checking if mod files exist")
 
 test_that("mod files exist in files", {
-  usms_files <- get_usms_files(workspace_path, use_mod_files = TRUE)
+  usms_files <- get_files_list(workspace_path, use_mod_files = TRUE)
   expect_true(
     length(
       grep(
@@ -60,7 +60,7 @@ test_that("mod files exist in files", {
 })
 
 test_that("mod files do not exist in files", {
-  usms_files <- get_usms_files(workspace_path)
+  usms_files <- get_files_list(workspace_path)
   expect_true(
     length(
       grep(
@@ -75,7 +75,7 @@ test_that("mod files do not exist in files", {
 # add tests for getting a sublist according to file types
 context("Getting a sublist according to file type")
 test_that("finit files", {
-  usms_files <- get_usms_files(workspace_path, file_type = c("finit"))
+  usms_files <- get_files_list(workspace_path, file_type = c("finit"))
   expect_true(
     length(
       grep(

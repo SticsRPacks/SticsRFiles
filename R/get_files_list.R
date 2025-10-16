@@ -2,14 +2,17 @@
 #'
 #' @param workspace Path of a JavaSTICS workspace (i.e. containing the STICS
 #' XML input files)
-#' @param usms_list Vector of usms names (Optional)
-#' @param usms_file Path (including name) of a USM XML file.
-#' @param file_type Vector of file(s) type to get (if not given,
+#' @param usm Vector of usms names (optional)
+#' @param usms_file Path (including name) of a USM XML file (default: usms.xml).
+#' @param file_type Vector of file(s) type to get (optional; if not given,
 #' all types are returned, see details)
+#' @param only_existing logical, optional; if TRUE (default) only existing files
+#' list is returned, FALSE otherwise for all files
 #' @param javastics Path of JavaSTICS (optional), only needed when the plant
 #' files, general parameter files or .mod files are not in the workspace
 #' but included in the JavaSTICS distribution
-#' @param use_mod_files logical if TRUE adding the .mod files to the list
+#' @param use_mod_files logical, optional; if TRUE adding the .mod files to the list FALSE
+#' otherwise (default)
 #'
 #' @details The possible values for file_type are: "fplt", "finit", "fclim1",
 #' "fclim2", "fstation", "ftec", "sols", "pargen", "parnew", "usms", "mod"
@@ -24,34 +27,35 @@
 #' @examples
 #' \dontrun{
 #'
-#' get_usms_files(
+#' get_files_list(
 #'   workspace = "/path/to/workspace",
 #'   javastics = "/path/to/JavaSTICS/folder"
 #' )
 #'
-#' get_usms_files(
+#' get_files_list(
 #'   workspace = "/path/to/workspace",
 #'   javastics = "/path/to/JavaSTICS/folder",
-#'   usm_list = c("usm1", "usm3")
+#'   usm = c("usm1", "usm3")
 #' )
 #'
-#' get_usms_files(
+#' get_files_list(
 #'   workspace = "/path/to/workspace",
 #'   file_type = c("finit", "ftec")
 #' )
 #'
-#' get_usms_files(
+#' get_files_list(
 #'   workspace = "/path/to/workspace",
 #'   use_mod_files = TRUE,
 #'   javastics = "/path/to/JavaSTICS/folder"
 #' )
 #' }
 #'
-get_usms_files <- function(
+get_files_list <- function(
     workspace,
-    usms_list = NULL,
+    usm = NULL,
     usms_file = "usms.xml",
     file_type = NULL,
+    only_existing = TRUE,
     javastics = NULL,
     use_mod_files = FALSE) {
   # Types definition
@@ -148,26 +152,31 @@ get_usms_files <- function(
   xml_doc <- xmldocument(usms_xml_path)
 
   # Getting usms_list
-  usms_full_list <- find_usms_soils_names(
-    xml_doc = xml_doc,
-    xml_name = "usm"
-  )
+  usms_full_list <- get_usms_list(usms_xml_path)
 
   # Getting the full list or a subset
-  if (is.null(usms_list)) {
+  if (is.null(usm)) {
     usms_list <- usms_full_list
   } else {
     # checking if usms names exist
-    usm_idx <- usms_full_list %in% usms_list
-    if (!length(usms_list) == sum(usm_idx)) {
-      usms_list <- usms_full_list[usm_idx]
+    # not any match
+    usm_idx <- usms_full_list %in% usm
+    if (length(usm_idx) == 0) {
+      stop("No usm found in the usms.xml file")
+    }
+    # some usms not found
+    if (!length(usm) == sum(usm_idx)) {
       warning(paste(
         "There are missing usms in usms.xml file:\n",
         paste(usms_full_list[!usm_idx], collapse = ", ")
       ))
+    } else {
+      # getting the usms wanted
+      usms_list <- usms_full_list[usm_idx]
     }
   }
 
+  # pre-allocating the list
   usms_nb <- length(usms_list)
   usms_files_list <- vector("list", usms_nb)
 
@@ -206,12 +215,11 @@ get_usms_files <- function(
 
     # Specific plt files management, so filtering them out
     plt_idx <- grep("_plt\\.xml$", usm_files_path)
+
     if (length(plt_idx) > 0) {
       plt_files <- basename(usm_files_path[plt_idx])
       usm_files_path <- usm_files_path[-plt_idx]
     }
-
-    usm_files_exist <- file.exists(usm_files_path)
 
     plt_files_exist <- vector("logical", 0)
     plt_files_path <- NULL
@@ -317,6 +325,16 @@ get_usms_files <- function(
       }
       mod_file_exists <- file.exists(mod_files_path)
     }
+
+    # Treating climate files for multiple years
+    clim_files_idx <- grep(
+      pattern = "\\.[0-9]{4}$",
+      usm_files_path
+    )
+    clim_files_path <- complete_climate_paths(usm_files_path[clim_files_idx])
+    usm_files_path <- union(usm_files_path, clim_files_path)
+    usm_files_exist <- file.exists(usm_files_path)
+
     # Adding the files lists
     usms_files_list[[i]] <- list(
       paths = c(
@@ -334,6 +352,17 @@ get_usms_files <- function(
         parnew_file_exists
       )
     )
+
+    # if only existing files are wanted
+    if (only_existing) {
+      usms_files_list[[i]][["paths"]] <-
+        usms_files_list[[i]][["paths"]][usms_files_list[[i]][["exist"]]]
+      usms_files_list[[i]][["exist"]] <- rep(
+        TRUE,
+        length(usms_files_list[[i]][["paths"]])
+      )
+    }
+
     if (use_mod_files && exists("mod_files_path")) {
       usms_files_list[[i]][["paths"]] <- c(
         usms_files_list[[i]][["paths"]],
