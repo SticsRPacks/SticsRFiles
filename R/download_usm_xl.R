@@ -28,12 +28,13 @@
 #'
 
 download_usm_xl <- function(
-    file = NULL,
-    out_dir = tempdir(),
-    stics_version = "latest",
-    overwrite = FALSE,
-    verbose = FALSE,
-    ...) {
+  file = NULL,
+  out_dir = tempdir(),
+  stics_version = "latest",
+  overwrite = FALSE,
+  verbose = FALSE,
+  ...
+) {
   args <- list(...)
 
   xl_patt <- "^inputs\\_.*(example|USMs)\\.(xls|xlsx)$"
@@ -126,11 +127,12 @@ download_usm_xl <- function(
 #'
 
 download_usm_csv <- function(
-    file = NULL,
-    out_dir = tempdir(),
-    stics_version = "latest",
-    overwrite = FALSE,
-    verbose = FALSE) {
+  file = NULL,
+  out_dir = tempdir(),
+  stics_version = "latest",
+  overwrite = FALSE,
+  verbose = FALSE
+) {
   download_usm_xl(
     file = file,
     out_dir = out_dir,

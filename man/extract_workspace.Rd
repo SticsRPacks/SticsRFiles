@@ -35,15 +35,17 @@ Extract an XML JavaSTICS workspace from a source workspace
 \examples{
 \dontrun{
 # Extract all usms from a source workspace to a target workspace
-extract_workspace("/path/to/source/workspace",
-                  "/path/to/target/workspace",
-                  "/path/to/javastics/dir")
+extract_workspace(
+  "/path/to/source/workspace",
+  "/path/to/target/workspace",
+  "/path/to/javastics/dir"
+)
 
 # Extract only selected usms from a source workspace to a target workspace
 extract_workspace("/path/to/source/workspace",
-                  "/path/to/target/workspace",
-                  "/path/to/javastics/dir",
-                  usm = c("SugarCane", "potato"))
-
+  "/path/to/target/workspace",
+  "/path/to/javastics/dir",
+  usm = c("SugarCane", "potato")
+)
 }
 }

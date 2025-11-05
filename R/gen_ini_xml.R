@@ -58,11 +58,12 @@
 #' @export
 #'
 gen_ini_xml <- function(
-    param_df,
-    file = NULL,
-    out_dir,
-    crop_tag = "Crop",
-    stics_version = "latest") {
+  param_df,
+  file = NULL,
+  out_dir,
+  crop_tag = "Crop",
+  stics_version = "latest"
+) {
   xml_doc_tmpl <- NULL
 
   if (!base::is.null(file)) {

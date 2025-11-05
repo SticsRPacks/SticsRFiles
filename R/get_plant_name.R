@@ -37,11 +37,12 @@
 #' }
 #'
 get_plant_name <- function(
-    workspace,
-    usms_filepath,
-    usm_name = NULL,
-    javastics_path = NULL,
-    verbose = TRUE) {
+  workspace,
+  usms_filepath,
+  usm_name = NULL,
+  javastics_path = NULL,
+  verbose = TRUE
+) {
   usms_path <- normalizePath(usms_filepath, mustWork = FALSE)
 
   if (!file.exists(usms_path)) {

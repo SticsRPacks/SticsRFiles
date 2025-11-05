@@ -41,10 +41,11 @@
 #'
 # TODO: refactor with gen_tec_file, gen_ini_file : same code
 gen_sta_xml <- function(
-    param_df,
-    file = NULL,
-    out_dir,
-    stics_version = "latest") {
+  param_df,
+  file = NULL,
+  out_dir,
+  stics_version = "latest"
+) {
   xml_doc_tmpl <- NULL
 
   if (!base::is.null(file)) {

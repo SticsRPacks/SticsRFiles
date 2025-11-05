@@ -44,22 +44,28 @@
 #' @noRd
 #'
 set_param_value <- function(
-    xml_doc,
-    param_name,
-    param_value,
-    parent_name = NULL,
-    parent_sel_attr = NULL,
-    ...) {
+  xml_doc,
+  param_name,
+  param_value,
+  parent_name = NULL,
+  parent_sel_attr = NULL,
+  ...
+) {
   # Calling the for several parameters
   param_nb <- length(param_name)
 
-  # For managing a vector of values
-  if (!base::is.list(param_value)) param_value <- list(param_value)
-
-  # Checking consistency between names and valuess dimensions
-  if (length(param_value) != param_nb) {
-    warning("Parameters names and list of values are no of the same length !")
-    return(invisible(FALSE))
+  # For converting a vector of values according to
+  # to the type of param_value and dimension
+  # consistency with param_name
+  if (!base::is.list(param_value)) {
+    if (param_nb == 1) {
+      param_value <- list(param_value)
+    } else if (param_nb == length(param_value)) {
+      param_value <- as.list(param_value)
+    } else {
+      warning("Parameters names and list of values are no of the same length !")
+      return(invisible(FALSE))
+    }
   }
 
   # Manage ids and show_xpath and remove them from the list

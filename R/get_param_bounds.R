@@ -35,10 +35,11 @@
 #' @noRd
 #'
 get_param_bounds <- function(
-    xml_doc,
-    param_name,
-    bounds_name = NULL,
-    output = "data.frame") {
+  xml_doc,
+  param_name,
+  bounds_name = NULL,
+  output = "data.frame"
+) {
   def_names <- c("min", "max")
 
   df_out <- output == "data.frame"

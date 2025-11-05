@@ -37,9 +37,10 @@
 #' @export
 #'
 force_param_values <- function(
-    workspace,
-    values,
-    javastics) {
+  workspace,
+  values,
+  javastics
+) {
   if (is.null(values) || all(is.na(values))) {
     # remove param.sti in case of previous run using it ...
     if (

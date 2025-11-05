@@ -24,12 +24,13 @@
 #' @export
 #'
 convert_xml2txt <- function(
-    file,
-    plant_id = 1,
-    soil_name = NULL,
-    out_dir = NULL,
-    save_as = NULL,
-    stics_version = "latest") {
+  file,
+  plant_id = 1,
+  soil_name = NULL,
+  out_dir = NULL,
+  save_as = NULL,
+  stics_version = "latest"
+) {
   # Defining which xsl file to use according to the input xml file
   xsl_files <- c(
     "ini2txt.xsl",
