@@ -30,11 +30,12 @@
 #' )
 #' }
 extract_workspace <- function(
-    from_workspace,
-    to_workspace,
-    javastics,
-    usm = NULL,
-    use_mod_files = FALSE) {
+  from_workspace,
+  to_workspace,
+  javastics,
+  usm = NULL,
+  use_mod_files = FALSE
+) {
   # Managing workspace directory creation
   if (!dir.exists(to_workspace)) {
     dir.create(to_workspace, recursive = TRUE)

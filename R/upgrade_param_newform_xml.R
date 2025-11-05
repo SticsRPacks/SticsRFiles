@@ -32,13 +32,14 @@
 #'
 #'
 upgrade_param_newform_xml <- function(
-    file,
-    out_dir,
-    param_gen_file,
-    stics_version = "V9.2",
-    target_version = "V10.0",
-    check_version = TRUE,
-    overwrite = FALSE) {
+  file,
+  out_dir,
+  param_gen_file,
+  stics_version = "V9.2",
+  target_version = "V10.0",
+  check_version = TRUE,
+  overwrite = FALSE
+) {
   # TODO: eliminate when option will be reactivated later.
   codemineral <- FALSE
 

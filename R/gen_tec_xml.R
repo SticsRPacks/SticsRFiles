@@ -52,11 +52,12 @@
 #'
 
 gen_tec_xml <- function(
-    param_df,
-    file = NULL,
-    out_dir,
-    stics_version = "latest",
-    na_values = NA) {
+  param_df,
+  file = NULL,
+  out_dir,
+  stics_version = "latest",
+  na_values = NA
+) {
   # TODO: refactor with gen_sta_file, gen_ini_file : same code
 
   xml_doc_tmpl <- NULL

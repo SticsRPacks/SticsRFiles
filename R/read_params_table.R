@@ -25,10 +25,11 @@
 #' )
 #' read_params_table(file = usm_csv_file)
 read_params_table <- function(
-    file,
-    sheet_name = NULL,
-    num_na = "NA",
-    char_na = "NA") {
+  file,
+  sheet_name = NULL,
+  num_na = "NA",
+  char_na = "NA"
+) {
   # files extension list
   files_ext_lst <- c("csv", "xls", "xlsx")
 
