@@ -44,17 +44,23 @@
 #' @noRd
 #'
 set_param_value <- function(
-    xml_doc,
-    param_name,
-    param_value,
-    parent_name = NULL,
-    parent_sel_attr = NULL,
-    ...) {
+  xml_doc,
+  param_name,
+  param_value,
+  parent_name = NULL,
+  parent_sel_attr = NULL,
+  ...
+) {
   # Calling the for several parameters
   param_nb <- length(param_name)
 
   # For managing a vector of values
-  if (!base::is.list(param_value)) param_value <- list(param_value)
+  if (
+    !base::is.list(param_value) &&
+      length(param_value) != param_nb
+  ) {
+    param_value <- as.list(param_value)
+  }
 
   # Checking consistency between names and valuess dimensions
   if (length(param_value) != param_nb) {
@@ -149,7 +155,8 @@ set_param_value <- function(
   }
 
   # TODO: see if could be simplified with a default case !
-  switch(type,
+  switch(
+    type,
     nodename = {
       value <- set_values(xml_doc, xpath, param_value, ids)
     },
