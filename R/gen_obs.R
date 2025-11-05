@@ -37,9 +37,10 @@
 #' @export
 #'
 gen_obs <- function(
-    df,
-    out_dir,
-    usms_list = NULL) {
+  df,
+  out_dir,
+  usms_list = NULL
+) {
   # Checking if out_dir exists
   if (!dir.exists(out_dir)) {
     warning(paste("The directory does not exist", out_dir))

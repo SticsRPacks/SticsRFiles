@@ -25,9 +25,10 @@
 #'
 # TODO: under construction !!!!!!!!!!!!!!!!!
 get_xml_base_node <- function(
-    file_tag,
-    form_name = NULL,
-    stics_version = "latest") {
+  file_tag,
+  form_name = NULL,
+  stics_version = "latest"
+) {
   # check/get STICS version
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 

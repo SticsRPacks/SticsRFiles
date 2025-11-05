@@ -34,13 +34,14 @@
 #' @noRd
 #'
 get_params_from_table <- function(
-    params_table,
-    param_names = NULL,
-    xml_doc,
-    lines_id = NULL,
-    stopping = FALSE,
-    dict = NULL,
-    na_values = NA) {
+  params_table,
+  param_names = NULL,
+  xml_doc,
+  lines_id = NULL,
+  stopping = FALSE,
+  dict = NULL,
+  na_values = NA
+) {
   # TODO: doing a merge with get_values_from_table
 
   if (base::is.null(dict)) {
