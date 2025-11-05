@@ -11,7 +11,6 @@ test_that("latest version", {
 })
 
 
-
 test_that("other version", {
   expect_no_error(gen_general_param_xml(
     out_dir = tempdir(),

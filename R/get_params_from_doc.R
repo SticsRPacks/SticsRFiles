@@ -11,9 +11,10 @@
 #' @noRd
 #'
 get_params_from_doc <- function(
-    xml_doc_object,
-    type_name = NULL,
-    unique_val = TRUE) {
+  xml_doc_object,
+  type_name = NULL,
+  unique_val = TRUE
+) {
   if (!methods::is(xml_doc_object, "xml_document")) {
     stop("The document is not an xml_document !")
   }

@@ -22,8 +22,9 @@
 #' @export
 #'
 get_usms_list <- function(
-    file,
-    usm = NULL) {
+  file,
+  usm = NULL
+) {
   xml_doc <- xmldocument(file)
 
   # Detecting file type

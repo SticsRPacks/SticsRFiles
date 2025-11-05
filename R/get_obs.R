@@ -65,13 +65,14 @@
 #' @export
 #'
 get_obs <- function(
-    workspace,
-    usm = NULL,
-    var = NULL,
-    dates = NULL,
-    usms_file = NULL,
-    javastics = NULL,
-    verbose = TRUE) {
+  workspace,
+  usm = NULL,
+  var = NULL,
+  dates = NULL,
+  usms_file = NULL,
+  javastics = NULL,
+  verbose = TRUE
+) {
   get_file(
     workspace,
     usm,

@@ -39,11 +39,12 @@
 #'
 
 get_param_value <- function(
-    xml_doc,
-    param_name = NULL,
-    parent_name = NULL,
-    parent_sel_attr = NULL,
-    ...) {
+  xml_doc,
+  param_name = NULL,
+  parent_name = NULL,
+  parent_sel_attr = NULL,
+  ...
+) {
   # ... for getting : ids, show_xpath and mult_par arguments
   dot_args <- list(...)
   dot_names <- names(dot_args)
