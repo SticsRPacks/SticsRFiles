@@ -33,6 +33,10 @@ authors:
   given-names: Michel
   email: michel.giner@cirad.fr
   orcid: https://orcid.org/0000-0002-9310-2377
+- family-names: Flutre
+  given-names: Timothee
+  email: timothee.flutre@inrae.fr
+  orcid: https://orcid.org/0000-0003-4489-4782
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206

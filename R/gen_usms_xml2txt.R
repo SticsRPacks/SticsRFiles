@@ -19,17 +19,19 @@
 #' usms contained in workspace/usms.xml file will be generated.
 #' @param stics_version the STICS files version to use (optional,
 #' default to latest).
-#' @param verbose Logical value for displaying information while running
-#' @param dir_per_usm_flag logical, TRUE if one want to create one directory
-#' per USM, FALSE if USM files are generated in the out_dir
-#' (only useful for usm of size one)
+#' @param verbose Logical value TRUE (default) for displaying information
+#' while running, FALSE otherwise
+#' @param dir_per_usm_flag logical, optional; TRUE (default)
+#' if one want to create one directory per USM, FALSE if USM files
+#' are generated in the out_dir (only useful for usm of size one)
 #' @param java_cmd For unix like systems, the java virtual machine command
 #' name or executable path. Useful only if the JavaSTICS command line
 #' is used for generating files. "java" is the default system command,
 #' but a full path to a java executable (other than the default one)
 #' may be given
-#' @param java_converter logical TRUE for using JavaSTICS command
-#' (a JavaSTICS path must be set in the function inputs), FALSE otherwise
+#' @param java_converter logical, optional; TRUE for using the JavaSTICS command
+#' (a JavaSTICS path must be set in the function inputs),
+#' FALSE otherwise (default)
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing STICS input files),
@@ -48,8 +50,8 @@
 #' gen_usms_xml2txt(javastics, workspace)
 #'
 #' # For an usms list
-#' usm <- c("usm1", "usm2")
-#' gen_usms_xml2txt(javastics, workspace, usm)
+#' usm_list <- c("usm1", "usm2")
+#' gen_usms_xml2txt(javastics, workspace, usms = usm_list)
 #' }
 #'
 #' @export
@@ -60,7 +62,7 @@ gen_usms_xml2txt <- function(
     javastics = NULL,
     workspace = NULL,
     out_dir = NULL,
-    usm = c(),
+    usm = NULL,
     stics_version = "latest",
     verbose = TRUE,
     dir_per_usm_flag = TRUE,
@@ -141,32 +143,49 @@ gen_usms_xml2txt <- function(
     }
   }
 
-  if (length(usm) == 0) {
+  if (is.null(usm)) {
     usm <- full_usms_list
   } else {
     # Checking if the input usm is included in the full list
     usms_exist <- usm %in% full_usms_list
 
     # Error if any unknown usm name !
-    if (!all(usms_exist)) {
+    if (!any(usms_exist)) {
       stop(
-        "At least one usm does not exist in usms.xml file : ",
+        "Not any usm exists in usms.xml file : ",
         usm[!usms_exist]
       )
+    } else {
+      if (any(!usms_exist)) {
+        warning(
+          "Not all usm exist in usms.xml file : ",
+          paste(usm[!usms_exist], collapse = ", ")
+        )
+      }
     }
+
+    # Update usm list for existing usms only in the usms.xml file
+    usm <- usm[usms_exist]
   }
 
-  # getting files list
-  all_files_list <- get_usms_files(
+  # Getting files list per usm as a named list
+  all_files_list <- get_files_list(
     workspace = workspace,
     javastics = javastics,
-    usms_list = usm
+    usm = usm
   )
+
+  # Removing non existing files from the list
+  all_files_list <- lapply(all_files_list, function(x) {
+    x$paths <- x$paths[x$exist]
+    x$exist <- x$exist[x$exist]
+    return(x)
+  })
 
   # Checking XML files existence, check_files
   all_files_exist <- unlist(
     lapply(all_files_list, function(x) {
-      all(x$all_exist)
+      all(x$exist)
     })
   )
 
@@ -176,7 +195,7 @@ gen_usms_xml2txt <- function(
         lapply(
           all_files_list[!all_files_exist],
           function(x) {
-            x$paths[!x$all_exist]
+            x$paths[!x$exist]
           }
         ),
         use.names = FALSE
@@ -195,13 +214,13 @@ gen_usms_xml2txt <- function(
       options(warning.length = mess_length)
     }
 
-    stop(
+    warning(
       "Missing files have been detected for usm(s):\n",
       miss_files_mess
     )
   }
 
-  # removing usms with missing files
+  # Removing usms with missing files
   all_files_list <- all_files_list[all_files_exist]
 
   if (java_converter) {
@@ -237,8 +256,7 @@ gen_usms_xml2txt <- function(
   global_copy_status <- rep(FALSE, usms_number)
   obs_copy_status <- lai_copy_status <- global_copy_status
 
-  # Full list of the files to copy
-
+  # Full list of the text files to copy
   files_list <- c(
     "climat.txt",
     "param.sol",
@@ -322,27 +340,39 @@ gen_usms_xml2txt <- function(
     } else {
       usm_data <- get_usm_data(usms_doc, usm_name, workspace)
 
+      # Getting the usm files paths
       usm_files_path <- all_files_list[[usm_name]]$paths
 
-      clim_files_path <- usm_files_path[grep(
-        pattern = "\\.xml$",
-        x = usm_files_path,
-        invert = TRUE
-      )]
+      # Getting climate files paths (unique paths)
+      clim_files_path <- unique(
+        usm_files_path[grep(
+          pattern = "\\.[0-9]{4}$",
+          x = usm_files_path
+        )]
+      )
+
+      # Getting xml files paths
       files_idx <- grep(
         pattern = "\\.xml$",
         usm_files_path
       )
       xml_files_path <- usm_files_path[files_idx]
 
-      # generation status vector for xml files and new_travail.usm
+      # Generation status vector for xml files and new_travail.usm
       # and climate.txt
       gen_files_status <- rep(TRUE, length(xml_files_path) + 2)
       plant_id_plt <- 0
       plant_id_tec <- 0
       plant_id <- 0
+
+      # Converting xml files to txt files
       for (f in seq_along(xml_files_path)) {
         file_path <- xml_files_path[f]
+
+        if (grepl(pattern = "usms.xml", x = file_path)) {
+          # usms.xml file is not converted
+          next
+        }
 
         found_plt <- grepl(pattern = "_plt", x = file_path)
         found_tec <- grepl(pattern = "_tec", x = file_path)
@@ -357,7 +387,7 @@ gen_usms_xml2txt <- function(
           plant_id <- plant_id_tec
         }
 
-        # defining soil name
+        # Getting soil name
         # usefull for generating sol2txt.xsl file in
         # gen_sol_xsl_file when used in convert_xml2txt
         if (grepl(pattern = "sols", x = file_path)) {
@@ -375,7 +405,7 @@ gen_usms_xml2txt <- function(
         )
       }
 
-      # generating new_travail.usm
+      # Generating new_travail.usm
       gen_files_status[f + 1] <- gen_new_travail(
         usm_data,
         usm = usm_name,
@@ -383,7 +413,7 @@ gen_usms_xml2txt <- function(
         out_dir = usm_path
       )
 
-      # generating climat.txt file
+      # Generating climat.txt file
       gen_files_status[f + 2] <- gen_climate(
         clim_files_path,
         out_dir = usm_path
@@ -434,26 +464,27 @@ gen_usms_xml2txt <- function(
       }
     }
 
-    # Copying lai files if lai forcing
-    if (lai_forcing[usm_name]) {
-      lapply(flai_usms[usm_name], function(x) {
-        if (file.exists(x)) {
-          lai_copy_status[i] <- file.copy(
-            from = x,
-            to = usm_path,
-            overwrite = TRUE
-          )
-        } else {
-          if (verbose) {
-            cli::cli_alert_warning(paste0(
-              "LAI file not found for USM ",
-              "{.val {usm_name}}: {.file ",
-              "{lai_file_path[i]}}"
-            ))
-          }
+    # Copying lai files (whatever the lai forcing value is)
+    lapply(flai_usms[usm_name], function(x) {
+      idx <- basename(x) != "null" & file.exists(x)
+      x <- x[idx]
+      if (length(x > 0)) {
+        lai_copy_status[i] <- file.copy(
+          from = x,
+          to = usm_path,
+          overwrite = TRUE
+        )
+      } else {
+        if (verbose) {
+          cli::cli_alert_warning(paste0(
+            "LAI file not found for USM ",
+            "{.val {usm_name}}: {.file ",
+            "{lai_file_path[i]}}"
+          ))
         }
-      })
-    }
+      }
+    })
+
     # Storing global files copy status
     global_copy_status[i] <- copy_status & out_copy_status
 

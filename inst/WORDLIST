@@ -18,6 +18,7 @@ Intercrops
 JavaSTICS
 LAI
 LF
+Launay's
 POSIXct
 README
 Rmd
@@ -79,7 +80,6 @@ ftec
 ian
 ies
 ini
-initialisztion
 intercrop
 intercropping
 intercrops
@@ -121,12 +121,14 @@ stade
 sti
 stics
 tec
+tempdir
 tibble
 tidyr
 tidyselect
 tmp
 usm
 usms
+vapour
 varmod
 vectorized
 workspaces

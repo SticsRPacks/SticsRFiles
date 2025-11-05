@@ -1,20 +1,9 @@
 destination: docs
 url: https://sticsrpacks.github.io/SticsRFiles/
 
-    c(person(given = "Patrice", family = "Lecharpentier", role = c("aut", "cre"), email = "patrice.lecharpentier@inra.fr"),
-      person(given = "Remi",family = "Vezy", role = c("aut"), email = "remi.vezy@cirad.fr"),
-      person(given = "SticsRPacks", role = c("aut","cph")),
-      person("Timothee", "Flutre", ,"timothee.flutre@inrae.fr", role = "ctb"),
-      person(given = "Julie", family = "Constantin", email = "julie.constantin@inra.fr", role = c("rev")),
-      person(given = "Dominique", family = "Ripoche", email = "dominique.ripoche@inra.fr", role = c("rev")),
-      person(given = "Marie", family = "Launay", email = "marie.launay@inra.fr", role = c("rev")),
-      person(given = "Alain", family = "Mollier", email = "alain.mollier@inra.fr", role = c("rev")),
-      person(given = "Christine", family = "Le Bas", email = "christine.lebas@inra.fr", role = c("rev")),
-      person(given = "Joel", family = "Leonard", email = "joel.leonard@inra.fr", role = c("rev"))
-      )
-
 reference:
-  - title: "Upgrade XML files (9.2) to STICS version 10.0 format"
+  - title: "Upgrade XML files from STICS version 9.* to 10.* format"
+    desc: Functions for upgrading parameter files
     contents:
       - upgrade_workspace_xml
       - upgrade_usms_xml
@@ -26,6 +15,14 @@ reference:
       - upgrade_param_gen_xml
       - upgrade_param_newform_xml
 
+  - title: "Manage JavaSTICS worskpace XML files"
+    desc: Functions for manipulating workspaces
+    contents:
+      - extract_workspace
+      #- create a new workspace
+      #- create a usm
+      #- ...
+
   - title: "Find information on parameters and variables"
     contents:
       - get_param_info
@@ -33,7 +30,7 @@ reference:
       - get_var_info
       - is_stics_var
 
-  - title: "Generate JavaStics Input files (XML format)"
+  - title: "Generate JavaSTICS Input files (XML format)"
     desc: Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)
     contents:
       - read_params_table
@@ -44,34 +41,21 @@ reference:
       - gen_usms_xml
       - gen_general_param_xml
 
-  - title: "Upgrade JavaStics XML files from version 9.2 or (9.1) to 10.0"
-    desc: Functions for upgrading parameter files
-    contents:
-      - upgrade_param_gen_xml
-      - upgrade_param_newform_xml
-      - upgrade_usms_xml
-      - upgrade_plt_xml
-      - upgrade_sols_xml
-      - upgrade_ini_xml
-      - upgrade_tec_xml
-      - upgrade_sta_xml
-      - upgrade_workspace_xml
-
-  - title: "Set values in JavaStics Input files (XML format)"
+  - title: "Set values in JavaSTICS Input files (XML format)"
     contents:
       - set_param_xml
 
-  - title: "Get values from JavaStics Input files (XML format)"
+  - title: "Get values from JavaSTICS Input files (XML format)"
     contents:
       - get_param_xml
       - get_plants_nb
-      - get_usms_files
+      - get_files_list
       - get_usms_list
       - get_soils_list
       - get_cultivars_list
       - get_cultivars_param
 
-  - title: "Generate Stics Input files (Text format)"
+  - title: "Generate STICS Input files (Text format)"
     desc: Input parameters files, outputs definition files or observations files
     contents:
       - gen_usms_xml2txt
@@ -79,11 +63,11 @@ reference:
       - force_param_values
       - gen_varmod
 
-  - title: "Set values in Stics Input files (Text format)"
+  - title: "Set values in STICS Input files (Text format)"
     contents:
       - set_param_txt
 
-  - title: "Get values in Stics Input files (Text format)"
+  - title: "Get values in STICS Input files (Text format)"
     contents:
       - get_param_txt
       - get_plants_nb
@@ -91,7 +75,7 @@ reference:
       - get_varmod
       - get_lai_forcing
 
-  - title: "Get values in Stics Output files"
+  - title: "Get values in STICS Output files"
     contents:
       - get_sim
       - get_report_results
@@ -102,7 +86,7 @@ reference:
       - get_obs
 
   - title: "Example data"
-    desc: For files examples by Stics version
+    desc: For files examples by STICS version
     #desc: For use cases examples
 
     contents:
@@ -121,3 +105,4 @@ reference:
       - "`[.cropr_simulation`"
       - compute_day_from_date
       - compute_date_from_day
+      - approx_vapour_pressure
