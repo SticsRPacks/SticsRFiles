@@ -98,7 +98,8 @@ complete_climate_paths <- function(files_path) {
 #' @keywords internal
 #'
 #' @examples
-#' #' \dontrun{
+#' #'
+#' \dontrun{
 #' get_year_from_file_name(
 #'   c("path/to/weather.year1", "path/to/weather.year2")
 #' )
