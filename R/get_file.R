@@ -309,8 +309,14 @@ get_file_ <- function(
     if (length(to_remove) > 0) {
       workspace <- workspace[-to_remove]
     }
-    file_name <- file_name[unlist(idx)]
+    file_name <- file_name[idx]
   }
+  # For removing duplicated usm names for intecrop
+  # bc the intercrop file names are in the same
+  # element of the named list
+  dir_names <- unique(names(file_name))
+  workspace <- unique(workspace)
+  file_name <- unique(file_name)
 
   # Getting sim/obs data list
   df_list <- mapply(
@@ -331,7 +337,7 @@ get_file_ <- function(
     USE.NAMES = FALSE
   )
 
-  names(df_list) <- names(file_name)
+  names(df_list) <- dir_names
 
   return(df_list)
 }
