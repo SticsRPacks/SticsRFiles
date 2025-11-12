@@ -273,7 +273,9 @@ get_file_ <- function(
     usms <- names(file_name)
     # fix for restoring the initial order of files dirs before parse_mixed_file
     # call
-    file_name <- file_name[unique(workspace_dir_names)]
+    if (exists("workspace_dir_names")) {
+      file_name <- file_name[unique(workspace_dir_names)]
+    }
 
     # Selecting using usm_name
     if (!is.null(usm_name)) {
