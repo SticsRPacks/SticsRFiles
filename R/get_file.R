@@ -227,6 +227,7 @@ get_file_ <- function(
     }
     workspace_files <- workspace_files_sub
     workspace <- dirname(workspace_files_sub)
+    workspace_dir_names <- basename(workspace)
   }
 
   # No usms file path is given
@@ -270,6 +271,9 @@ get_file_ <- function(
         type = type
       )
     usms <- names(file_name)
+    # fix for restoring the initial order of files dirs before parse_mixed_file
+    # call
+    file_name <- file_name[unique(workspace_dir_names)]
 
     # Selecting using usm_name
     if (!is.null(usm_name)) {
@@ -560,7 +564,10 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
         gsub(pattern = usm_pattern, replacement = "", x = file_names2[i])
     }
   }
-  file_names2[c(which(!is_potential_mixed), mixed_and_not_duplicated)]
+  file_names2[c(
+    which(!is_potential_mixed),
+    mixed_and_not_duplicated
+  )]
 }
 
 
