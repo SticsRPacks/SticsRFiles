@@ -49,13 +49,13 @@ get_plant_name <- function(
     stop(usms_filepath, ": not found !")
   }
 
-  # recalculating usms file name
+  # Recalculating usms file name
   usms_filename <- basename(usms_path)
 
-  # getting usms names from the usms.xml file:
+  # Getting usms names from the usms.xml file
   usms <- get_usms_list(file = usms_path)
 
-  # Filtering USMs if required:
+  # Filtering USMs, if required
   if (!is.null(usm_name)) {
     usm_exist <- usm_name %in% usms
 
@@ -83,11 +83,12 @@ get_plant_name <- function(
     select = "usm",
     select_value = usms
   )
+
   plant_files <- plant_files[[usms_filename]]$fplt
 
   # Getting plant list:
   if (length(plant_files) == 2 * length(usms)) {
-    # If plante dominance="1" and plante dominance="2" are declared,
+    # If plant dominance="1" and plant dominance="2" are declared,
     # put each one in a column:
     plant_list <- unlist(
       apply(
@@ -98,7 +99,7 @@ get_plant_name <- function(
       recursive = FALSE
     )
   } else if (length(plant_files) == length(usms)) {
-    # If plante dominance="2" is not declared, repeat plante dominance="1"
+    # If plant dominance="2" is not declared, repeat plant dominance="1"
     # twice to get the same data structure:
     plant_list <- unlist(
       apply(
@@ -114,6 +115,7 @@ get_plant_name <- function(
       " even for sole crops (use null as values)."
     )
   }
+
   names(plant_list) <- usms
 
   # Keeping only useful files names according to nb_plant data
@@ -128,9 +130,7 @@ get_plant_name <- function(
   )
 
   if (inherits(plant_xml, "try-error")) {
-    plant_xml <- vector(mode = "list", length = length(usms))
-    plant_xml[nb_plant == 1] <- "plant_1"
-    plant_xml[nb_plant > 1] <- c("plant_1", "plant_2")
+    plant_xml <- get_plant_id_tag(plant_xml)
     names(plant_xml) <- usms
     if (verbose) {
       cli::cli_alert_warning("Error reading usms file, using dummy plant names")
@@ -143,6 +143,7 @@ get_plant_name <- function(
     "{.code javastics_path} to use real plant names",
     " from javaStics."
   )
+
   if (is.null(javastics_path)) {
     plt_path <- file.path(workspace, "plant")
     if (!all(dir.exists(plt_path))) {
@@ -153,7 +154,7 @@ get_plant_name <- function(
     plt_path <- try(normalizePath(file.path(javastics_path, "plant")))
   }
 
-  plant_names <-
+  plants_code <-
     try(
       lapply(plant_xml, function(x) {
         unlist(get_param_xml(
@@ -163,8 +164,8 @@ get_plant_name <- function(
       })
     )
 
-  if (inherits(plant_names, "try-error")) {
-    plant_names <- plant_xml
+  if (inherits(plants_code, "try-error")) {
+    plants_code <- plant_xml
     if (verbose) {
       cli::cli_alert_warning(paste0(
         "Error reading plant names, ",
@@ -174,5 +175,25 @@ get_plant_name <- function(
     }
   }
 
-  return(plant_names)
+  plants_code
+}
+
+
+#' Getting plant tag(s) from a plant files list by usm
+#'
+#' @param usms_plant a list of plants by usm
+#'
+#' @returns a list of plant tags by usm
+#' @keywords internal
+#' @noRd
+#'
+# @examples
+get_plant_id_tag <- function(usms_plant) {
+  lapply(usms_plant, function(x) {
+    if (length(x) > 1) {
+      c("plant_1", "plant_2")
+    } else {
+      c("plant_1")
+    }
+  })
 }
