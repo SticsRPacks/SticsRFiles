@@ -62,7 +62,7 @@ get_file <- function(
   }
 
   # Extracting data for a vector of workspace
-  res <- unlist(
+  unlist(
     lapply(workspace, function(x) {
       get_file_(
         workspace = x,
@@ -77,8 +77,6 @@ get_file <- function(
     }),
     recursive = FALSE
   )
-
-  return(res)
 }
 
 #' Read STICS observation or simulation files (.obs or mod_s)
@@ -150,7 +148,7 @@ get_file_ <- function(
   # names
   if (length(workspace_files) > 0) {
     if (!is.null(usm_name)) {
-      idx <- lapply(
+      idx <- unlist(lapply(
         str2regex(usm_name),
         function(y) {
           # using optional "p" or "a" in pattern for associated crops
@@ -158,10 +156,8 @@ get_file_ <- function(
           patt <- paste0(y, "[a|p]?\\.", file_ext)
           grep(pattern = patt, x = workspace_files)
         }
-      )
-      usm_idx <- unlist(lapply(idx, function(x) length(x) > 0))
-      files_idx <- unlist(idx)
-      workspace_files <- workspace_files[files_idx]
+      ))
+      workspace_files <- workspace_files[idx]
     }
   }
 
@@ -281,19 +277,13 @@ get_file_ <- function(
     if (!is.null(usm_name)) {
       usms <- intersect(usms, usm_name)
       # Not any matching names
-      if (!length(usms)) {
+      if (length(usms) == 0) {
         return()
       }
       file_name <- file_name[usms]
     }
-    # Calculating plant ids
-    plant_names <- lapply(file_name, function(x) {
-      if (length(x) > 1) {
-        c("plant_1", "plant_2")
-      } else {
-        c("plant_1")
-      }
-    })
+    # Calculating plant ids tags
+    plant_names <- get_plant_id_tag(file_name)
   }
 
   # to be sure that file_name and workspace are in the same order ...
@@ -345,7 +335,7 @@ get_file_ <- function(
 
   names(df_list) <- dir_names
 
-  return(df_list)
+  df_list
 }
 
 
@@ -397,9 +387,15 @@ get_file_one <- function(
     time_idx <- names(out) %in% c("ian", "mo", "jo", "jul")
     time_elts <- names(out)[time_idx]
     out_cols <- c(time_elts, out_cols)
-    if ("cum_jul" %in% names(out)) out_cols <- c("cum_jul", out_cols)
-    if ("Date" %in% names(out)) out_cols <- c("Date", out_cols)
-    if ("Plant" %in% names(out)) out_cols <- c(out_cols, "Plant")
+    if ("cum_jul" %in% names(out)) {
+      out_cols <- c("cum_jul", out_cols)
+    }
+    if ("Date" %in% names(out)) {
+      out_cols <- c("Date", out_cols)
+    }
+    if ("Plant" %in% names(out)) {
+      out_cols <- c(out_cols, "Plant")
+    }
     out <-
       out %>%
       dplyr::select(dplyr::one_of(out_cols))
@@ -470,9 +466,7 @@ get_file_from_usms <- function(
     filename = file_name
   )
 
-  file_name <- file_name[files_exist]
-
-  return(file_name)
+  file_name[files_exist]
 }
 
 
@@ -566,6 +560,7 @@ parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
         gsub(pattern = usm_pattern, replacement = "", x = file_names2[i])
     }
   }
+
   file_names2[c(
     which(!is_potential_mixed),
     mixed_and_not_duplicated
