@@ -283,7 +283,7 @@ get_file_ <- function(
       file_name <- file_name[usms]
     }
     # Calculating plant ids tags
-    plant_names <- get_plant_id_tag(file_name)
+    plant_names <- get_plant_id(file_name)
   }
 
   # to be sure that file_name and workspace are in the same order ...
@@ -458,12 +458,13 @@ get_file_from_usms <- function(
 
   # Filtering with all files exist
   # Using now possibly multiple workspaces
+  workspace_unique <- unique(workspace)
   files_exist <- mapply(
     function(dirpath, filename) {
       all(file.exists(file.path(dirpath, filename)))
     },
-    dirpath = workspace,
-    filename = file_name
+    dirpath = workspace_unique,
+    filename = file_name[basename(workspace_unique)]
   )
 
   file_name[files_exist]

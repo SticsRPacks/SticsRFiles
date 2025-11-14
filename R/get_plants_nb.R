@@ -95,7 +95,7 @@ get_plants_nb_xml <- function(
     plants_nb <- plants_nb[usm_names %in% usms_list]
   }
 
-  return(plants_nb)
+  plants_nb
 }
 
 
