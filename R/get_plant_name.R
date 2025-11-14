@@ -49,9 +49,6 @@ get_plant_name <- function(
     stop(usms_filepath, ": not found !")
   }
 
-  # Recalculating usms file name
-  usms_filename <- basename(usms_path)
-
   # Getting usms names from the usms.xml file
   usms <- get_usms_list(file = usms_path)
 
@@ -74,63 +71,15 @@ get_plant_name <- function(
     usms <- usm_name
   }
 
-  nb_plant <- get_plants_nb(usms_path)[usms]
+  # STEP 1: Get plant files per usm list
+  plant_xml <- try(get_plant_files(
+    usms_file = usms_path,
+    usms = usms
+  ))
 
-  # Getting plant files (fplt) for a set of usm
-  plant_files <- get_param_xml(
-    file = usms_path,
-    param = "fplt",
-    select = "usm",
-    select_value = usms
-  )
-
-  plant_files <- plant_files[[usms_filename]]$fplt
-
-  # Getting plant list:
-  if (length(plant_files) == 2 * length(usms)) {
-    # If plant dominance="1" and plant dominance="2" are declared,
-    # put each one in a column:
-    plant_list <- unlist(
-      apply(
-        matrix(plant_files, ncol = 2, byrow = TRUE),
-        MARGIN = 1,
-        list
-      ),
-      recursive = FALSE
-    )
-  } else if (length(plant_files) == length(usms)) {
-    # If plant dominance="2" is not declared, repeat plant dominance="1"
-    # twice to get the same data structure:
-    plant_list <- unlist(
-      apply(
-        matrix(c(plant_files, plant_files), ncol = 2, byrow = TRUE),
-        MARGIN = 1,
-        list
-      ),
-      recursive = FALSE
-    )
-  } else {
-    stop(
-      "plante dominance=\"2\" should always be declared in usms.xml",
-      " even for sole crops (use null as values)."
-    )
-  }
-
-  names(plant_list) <- usms
-
-  # Keeping only useful files names according to nb_plant data
-  plant_xml <- try(
-    mapply(
-      function(x, y) {
-        list(x[1:y])
-      },
-      x = plant_list,
-      y = nb_plant
-    )
-  )
-
+  # Getting plant id instead if getting files names failed
   if (inherits(plant_xml, "try-error")) {
-    plant_xml <- get_plant_id_tag(plant_xml)
+    plant_xml <- get_plant_id(plant_xml)
     names(plant_xml) <- usms
     if (verbose) {
       cli::cli_alert_warning("Error reading usms file, using dummy plant names")
@@ -145,25 +94,42 @@ get_plant_name <- function(
   )
 
   if (is.null(javastics_path)) {
-    plt_path <- file.path(workspace, "plant")
-    if (!all(dir.exists(plt_path))) {
+    plt_dir <- unique(file.path(workspace, "plant"))
+    if (!all(dir.exists(plt_dir))) {
       cli::cli_alert_warning(alert_msg)
       return(plant_xml)
     }
   } else {
-    plt_path <- try(normalizePath(file.path(javastics_path, "plant")))
+    plt_dir <- try(normalizePath(file.path(javastics_path, "plant")))
+  }
+  # Sorting list as workspace dirs
+  if (length(workspace) > 1) {
+    plant_xml <- plant_xml[basename(unique(workspace))]
   }
 
-  plants_code <-
-    try(
-      lapply(plant_xml, function(x) {
-        unlist(get_param_xml(
-          file = normalizePath(file.path(plt_path, x)),
-          param = "codeplante"
-        ))
-      })
-    )
+  # If there are several plt dirs, one per usm directory
+  # sorting dirs as in plant_xml list
+  if (length(plt_dir) > 1) {
+    plt_dir <- plt_dir[unlist(lapply(
+      names(plant_xml),
+      function(x) grep(pattern = x, plt_dir)
+    ))]
+  } else {
+    # otherwise plt_dir is replicated
+    plt_dir <- rep(plt_dir, length(plant_xml))
+  }
 
+  # Getting plant codes
+  plants_code <- vector("list", length(plant_xml))
+  for (i in seq_along(plant_xml)) {
+    plants_code[[i]] <- unlist(get_param_xml(
+      file = file.path(plt_dir[i], plant_xml[[i]]),
+      param = "codeplante"
+    ))
+  }
+
+  # Keeping plant files names if an error occured
+  # extracting plants code
   if (inherits(plants_code, "try-error")) {
     plants_code <- plant_xml
     if (verbose) {
@@ -174,21 +140,19 @@ get_plant_name <- function(
       ))
     }
   }
-
   plants_code
 }
 
 
 #' Getting plant tag(s) from a plant files list by usm
 #'
-#' @param usms_plant a list of plants by usm
+#' @param usms_plant a list of plants files names by usm
 #'
 #' @returns a list of plant tags by usm
 #' @keywords internal
-#' @noRd
 #'
 # @examples
-get_plant_id_tag <- function(usms_plant) {
+get_plant_id <- function(usms_plant) {
   lapply(usms_plant, function(x) {
     if (length(x) > 1) {
       c("plant_1", "plant_2")
@@ -196,4 +160,52 @@ get_plant_id_tag <- function(usms_plant) {
       c("plant_1")
     }
   })
+}
+
+#' Getting xml plant files by usm from an usms.xml file
+#'
+#' @param usms_file usms.xml file path
+#' @param usms usms names to get, if NULL all teh usms are taken into account
+#'
+#' @returns A named list with usm names containing plant files names
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' get_plant_files("path/to/usms.xml")
+#'
+#' get_plant_files("path/to/usms.xml", c("usm1", "usm2")
+#' }
+#'
+get_plant_files <- function(usms_file, usms = NULL) {
+  all_usms <- get_usms_list(usms_file)
+
+  if (is.null(usms)) {
+    usms <- all_usms
+  } else {
+    ids <- usms %in% all_usms
+    if (!all(ids)) warning("At least one usm name does not exist")
+    usms <- usms[ids]
+  }
+  files_list <- lapply(
+    usms,
+    function(x) {
+      plt_files <- get_param_xml(
+        file = usms_file,
+        param = "fplt",
+        select = "usm",
+        select_value = x
+      )
+      remove_null_value(plt_files$usms.xml$fplt)
+    }
+  )
+  names(files_list) <- usms
+
+  files_list
+}
+
+remove_null_value <- function(values) {
+  idx <- values == "null"
+  if (length(idx) == 0) return(values)
+  values[!idx]
 }
