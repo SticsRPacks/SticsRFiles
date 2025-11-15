@@ -313,6 +313,7 @@ get_file_ <- function(
   dir_names <- unique(names(file_name))
   workspace <- unique(workspace)
   file_name <- unique(file_name)
+  plant_names <- plant_names[dir_names]
 
   # Getting sim/obs data list
   df_list <- mapply(
