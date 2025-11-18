@@ -140,6 +140,7 @@ get_plant_name <- function(
       ))
     }
   }
+  names(plants_code) <- names(plant_xml)
   plants_code
 }
 

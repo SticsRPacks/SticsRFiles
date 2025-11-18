@@ -48,8 +48,7 @@ get_file_int <- function(
     plant_name <- filename
   }
 
-  # Reading files, and producing a single
-  # data.frame when 2 crops are detected
+  # Loading the files
   out_table <- mapply(
     function(x, y) {
       out <- try(data.table::fread(
