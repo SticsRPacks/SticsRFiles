@@ -259,7 +259,7 @@ get_file_ <- function(
     usms <- names(file_name)
     plant_names <-
       get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
-    #names(plant_names) <- usms
+    # names(plant_names) <- usms
   }
 
   # The user did not provide any usms file path, so using the names of
@@ -291,7 +291,7 @@ get_file_ <- function(
     }
     # Calculating plant ids tags
     plant_names <- get_plant_id(file_name)
-    #names(plant_names) <- usms
+    # names(plant_names) <- usms
   }
   # Sorting lists content according to directory
   # names
