@@ -290,7 +290,7 @@ get_file_ <- function(
     }
     # Calculating plant ids tags
     plant_names <- get_plant_id(file_name)
-    #names(plant_names) <- usms
+    # names(plant_names) <- usms
   }
   # Sorting lists content according to directory
   # names
