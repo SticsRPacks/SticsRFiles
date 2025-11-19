@@ -48,6 +48,7 @@ get_file_int <- function(
     plant_name <- filename
   }
 
+  # Loading the files
   out_table <- mapply(
     function(x, y) {
       out <- try(data.table::fread(
@@ -56,10 +57,7 @@ get_file_int <- function(
         na.strings = c("************", "NA"),
         stringsAsFactors = FALSE
       ))
-
-      # Removing empty extra lines (without year)
-      out <- dplyr::filter(out, !is.na(.data$ian))
-
+      # error reading file(s)
       if (inherits(out, "try-error")) {
         cli::cli_alert_warning(paste0(
           "couldn't find valid file for ",
@@ -67,6 +65,10 @@ get_file_int <- function(
         ))
         return(NULL)
       }
+
+      # Removing empty extra lines (without year)
+      out <- dplyr::filter(out, !is.na(.data$ian))
+
       colnames(out) <- var_to_col_names(colnames(out))
       if (nrow(out) == 0) {
         return(NULL)
@@ -78,21 +80,26 @@ get_file_int <- function(
     x = filename,
     y = plant_name,
     SIMPLIFY = FALSE
-  )
+  ) %>%
+    dplyr::bind_rows()
 
-  out_table <- dplyr::bind_rows(out_table)
-
-  if (nrow(out_table) > 0) {
-    out_table <- dplyr::mutate(
-      out_table,
-      Date = as.POSIXct(
-        x = paste(out_table$ian, out_table$mo, out_table$jo, sep = "-"),
-        format = "%Y-%m-%d",
-        tz = "UTC"
-      )
-    ) %>%
-      dplyr::relocate(dplyr::all_of("Date")) %>%
-      dplyr::select(-dplyr::all_of(c("ian", "mo", "jo", "jul")))
+  # Raising an error when not any rows found in the data.frame
+  if (nrow(out_table) == 0) {
+    warning(paste0(
+      "Not any data loaded from Stics daily output or observation files: \n",
+      paste(filename, collapse = ", ")
+    ))
+    return(out_table)
   }
-  out_table
+  # Adding a Date from year, month, day if rows number > 0
+  dplyr::mutate(
+    out_table,
+    Date = as.POSIXct(
+      x = paste(out_table$ian, out_table$mo, out_table$jo, sep = "-"),
+      format = "%Y-%m-%d",
+      tz = "UTC"
+    )
+  ) %>%
+    dplyr::relocate(dplyr::all_of("Date")) %>%
+    dplyr::select(-dplyr::all_of(c("ian", "mo", "jo", "jul")))
 }

@@ -188,6 +188,10 @@ get_file_ <- function(
         }
       })
     )
+    plant_dir_idx <- grep(pattern = "plant", workspace_sub)
+    if (length(plant_dir_idx)) {
+      workspace_sub <- workspace_sub[-plant_dir_idx]
+    }
   }
 
   # Testing if duplicates files found either in workspace or in sub-dirs
@@ -222,8 +226,8 @@ get_file_ <- function(
       return()
     }
     workspace_files <- workspace_files_sub
-    workspace <- dirname(workspace_files_sub)
-    workspace_dir_names <- basename(workspace)
+    workspace <- unique(dirname(workspace_files_sub))
+    workspace_dir_names <- unique(basename(workspace))
   }
 
   # No usms file path is given
@@ -270,7 +274,9 @@ get_file_ <- function(
     # fix for restoring the initial order of files dirs before parse_mixed_file
     # call
     if (exists("workspace_dir_names")) {
-      file_name <- file_name[unique(workspace_dir_names)]
+      # updating usms
+      usms <- unique(workspace_dir_names)
+      file_name <- file_name[usms]
     }
 
     # Selecting using usm_name
@@ -284,35 +290,17 @@ get_file_ <- function(
     }
     # Calculating plant ids tags
     plant_names <- get_plant_id(file_name)
+    # names(plant_names) <- usms
   }
-
-  # to be sure that file_name and workspace are in the same order ...
-  # this may not be the case if usms_filepath is not given and if some
-  # USMs are named ****a or ****p, but are not intercrop USMs
-  if (length(workspace) > 1) {
-    idx <- sapply(
-      str2regex(basename(workspace)),
-      function(y) {
-        grep(
-          pattern = paste0("^", y, "$"),
-          x = names(file_name)
-        )
-      }
-    )
-
-    to_remove <- which(sapply(idx, function(x) (length(x) == 0)))
-
-    if (length(to_remove) > 0) {
-      workspace <- workspace[-to_remove]
-    }
-    file_name <- file_name[idx]
-  }
-  # For removing duplicated usm names for intecrop
-  # bc the intercrop file names are in the same
-  # element of the named list
-  dir_names <- unique(names(file_name))
+  # Sorting lists content according to directory
+  # names
   workspace <- unique(workspace)
-  file_name <- unique(file_name)
+  dir_names <- unique(basename(workspace))
+  # If usms stored in sub-directories
+  if (exists("workspace_dir_names")) {
+    file_name <- file_name[dir_names]
+    plant_names <- plant_names[dir_names]
+  }
 
   # Getting sim/obs data list
   df_list <- mapply(
@@ -333,7 +321,12 @@ get_file_ <- function(
     USE.NAMES = FALSE
   )
 
-  names(df_list) <- dir_names
+  # For files in sub-directories or not
+  if (exists("workspace_dir_names")) {
+    names(df_list) <- dir_names
+  } else {
+    names(df_list) <- names(file_name)
+  }
 
   df_list
 }
