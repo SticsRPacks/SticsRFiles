@@ -259,7 +259,6 @@ get_file_ <- function(
     usms <- names(file_name)
     plant_names <-
       get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
-    #names(plant_names) <- usms
   }
 
   # The user did not provide any usms file path, so using the names of
@@ -297,8 +296,11 @@ get_file_ <- function(
   # names
   workspace <- unique(workspace)
   dir_names <- unique(basename(workspace))
-  file_name <- file_name[dir_names]
-  plant_names <- plant_names[dir_names]
+  # If usms stored in sub-directories
+  if (exists("workspace_dir_names")) {
+    file_name <- file_name[dir_names]
+    plant_names <- plant_names[dir_names]
+  }
 
   # Getting sim/obs data list
   df_list <- mapply(
@@ -319,7 +321,12 @@ get_file_ <- function(
     USE.NAMES = FALSE
   )
 
-  names(df_list) <- dir_names
+  # For files in sub-directories or not
+  if (exists("workspace_dir_names")) {
+    names(df_list) <- dir_names
+  } else {
+    names(df_list) <- names(file_name)
+  }
 
   df_list
 }

@@ -89,8 +89,9 @@ get_file_int <- function(
       "Not any data loaded from Stics daily output or observation files: \n",
       paste(filename, collapse = ", ")
     ))
+    return(out_table)
   }
-  # Adding a Date from year, month, day
+  # Adding a Date from year, month, day if rows number > 0
   dplyr::mutate(
     out_table,
     Date = as.POSIXct(

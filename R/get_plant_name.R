@@ -1,11 +1,12 @@
 #' Get plant names
 #'
-#' @description Get the plant name (and file name) for each usm in a workspace
+#' @description Get the plant file name or plant id tag for plant 1 or 2, or
+#' plant code for each usm in a workspace using the usms.xml file
 #'
-#' @param workspace      Path of a JavaSTICS workspace, or a vector of
+#' @param workspace Path of a JavaSTICS workspace, or a vector of
 #' (recursive call).
-#' @param usms_filepath  Path of the usms file (`usms.xml`)
-#' @param usm_name      Vector of usms to read (optional, used to filter usms)
+#' @param usms_filepath Path of the usms file (`usms.xml`)
+#' @param usm_name Vector of usms to read (optional, used to filter usms)
 #' @param javastics_path JavaSTICS installation path (Optional, needed if the
 #' plant files are not in the `workspace` but rather in the JavaSTICS
 #' default workspace). Only used to get the plants names.
@@ -77,7 +78,8 @@ get_plant_name <- function(
     usms = usms
   ))
 
-  # Getting plant id instead if getting files names failed
+  # STEP 2: Get plant files per usm list
+  # if getting files names failed
   if (inherits(plant_xml, "try-error")) {
     plant_xml <- get_plant_id(plant_xml)
     names(plant_xml) <- usms
@@ -118,15 +120,12 @@ get_plant_name <- function(
     # otherwise plt_dir is replicated
     plt_dir <- rep(plt_dir, length(plant_xml))
   }
-
-  # Getting plant codes
-  plants_code <- vector("list", length(plant_xml))
-  for (i in seq_along(plant_xml)) {
-    plants_code[[i]] <- unlist(get_param_xml(
-      file = file.path(plt_dir[i], plant_xml[[i]]),
-      param = "codeplante"
-    ))
-  }
+  # STEP 3: Getting plants code (if usms.xml is given and
+  # plant directory exists)
+  plants_code <- get_plant_code(
+    plant_dir_path = plt_dir,
+    plant_xml_names = plant_xml
+  )
 
   # Keeping plant files names if an error occured
   # extracting plants code
@@ -141,9 +140,31 @@ get_plant_name <- function(
     }
   }
   names(plants_code) <- names(plant_xml)
-  plants_code
+  return(plants_code)
 }
 
+
+#' Getting plants code from plant files list by usm
+#'
+#' @param plant_dir_path vector of plant files directories
+#' @param plant_xml_names named list of plant files by usm
+#'
+#' @returns a named list of plant codes by usm
+#' @keywords internal
+#'
+# @examples
+get_plant_code <- function(plant_dir_path, plant_xml_names) {
+  mapply(
+    function(plant_dir_path, plant_xml_names) {
+      unlist(get_param_xml(
+        file = file.path(plant_dir_path, plant_xml_names),
+        param = "codeplante"
+      ))
+    },
+    plant_dir_path = plant_dir_path,
+    plant_xml_names = plant_xml_names
+  )
+}
 
 #' Getting plant tag(s) from a plant files list by usm
 #'
