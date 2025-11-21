@@ -476,7 +476,13 @@ gen_usms_xml2txt <- function(
     # is the workspace path, no need to copy files
     if (!dir_per_usm_flag && out_dir == workspace) {
       i_global_copy_status <- TRUE
-      next
+      return(list(
+        usms_path = usm_path,
+        exec_status = i_exec_status,
+        global_copy_status = i_global_copy_status,
+        obs_copy_status = i_obs_copy_status,
+        lai_copy_status = i_lai_copy_status
+      ))
     }
 
     # Copying observation files
