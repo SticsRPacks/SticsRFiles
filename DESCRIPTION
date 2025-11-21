@@ -43,6 +43,7 @@ Imports:
     data.table,
     doParallel,
     dplyr (>= 1.0.0),
+    foreach,
     lubridate,
     methods,
     parallel,
