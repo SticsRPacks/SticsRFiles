@@ -14,7 +14,9 @@ gen_usms_xml2txt(
   verbose = TRUE,
   dir_per_usm_flag = TRUE,
   java_cmd = "java",
-  java_converter = FALSE
+  java_converter = FALSE,
+  parallel = FALSE,
+  cores = NA
 )
 }
 \arguments{
@@ -50,6 +52,10 @@ may be given}
 \item{java_converter}{logical, optional; TRUE for using the JavaSTICS command
 (a JavaSTICS path must be set in the function inputs),
 FALSE otherwise (default)}
+
+\item{parallel}{Boolean. Is the computation to be done in parallel ?}
+
+\item{cores}{Number of cores to use for parallel computation.}
 }
 \value{
 A list with named elements:
