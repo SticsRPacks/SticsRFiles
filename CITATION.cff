@@ -169,6 +169,18 @@ references:
   doi: 10.32614/CRAN.package.dplyr
   version: '>= 1.0.0'
 - type: software
+  title: foreach
+  abstract: 'foreach: Provides Foreach Looping Construct'
+  notes: Imports
+  url: https://github.com/RevolutionAnalytics/foreach
+  repository: https://CRAN.R-project.org/package=foreach
+  authors:
+  - name: Microsoft
+  - family-names: Weston
+    given-names: Steve
+  year: '2025'
+  doi: 10.32614/CRAN.package.foreach
+- type: software
   title: lubridate
   abstract: 'lubridate: Make Dealing with Dates a Little Easier'
   notes: Imports
