@@ -130,6 +130,19 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.data.table
 - type: software
+  title: doParallel
+  abstract: 'doParallel: Foreach Parallel Adaptor for the ''parallel'' Package'
+  notes: Imports
+  url: https://github.com/RevolutionAnalytics/doparallel
+  repository: https://CRAN.R-project.org/package=doParallel
+  authors:
+  - family-names: Corporation
+    given-names: Microsoft
+  - family-names: Weston
+    given-names: Steve
+  year: '2025'
+  doi: 10.32614/CRAN.package.doParallel
+- type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
   notes: Imports
