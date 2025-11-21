@@ -32,6 +32,8 @@
 #' @param java_converter logical, optional; TRUE for using the JavaSTICS command
 #' (a JavaSTICS path must be set in the function inputs),
 #' FALSE otherwise (default)
+#' @param parallel Boolean. Is the computation to be done in parallel ?
+#' @param cores Number of cores to use for parallel computation.
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing STICS input files),
