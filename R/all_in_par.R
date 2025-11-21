@@ -87,9 +87,10 @@ all_in_par <- function(stics_version = "latest") {
 #' @export
 #'
 get_param_info <- function(
-    param = NULL,
-    keyword = NULL,
-    stics_version = "latest") {
+  param = NULL,
+  keyword = NULL,
+  stics_version = "latest"
+) {
   all_pars <- all_in_par(stics_version)
 
   if (!is.null(keyword)) {

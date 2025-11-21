@@ -27,8 +27,9 @@
 #' @export
 #'
 get_plants_nb <- function(
-    usms_file,
-    usms_list = c()) {
+  usms_file,
+  usms_list = c()
+) {
   usm <- grepl(pattern = "\\.usm$", x = usms_file)
   usms <- grepl(pattern = "\\.xml$", x = usms_file)
 
@@ -76,8 +77,9 @@ get_plants_nb <- function(
 #' @noRd
 #'
 get_plants_nb_xml <- function(
-    usms_file,
-    usms_list = c()) {
+  usms_file,
+  usms_list = c()
+) {
   # Loading xml file as xml_document object
   xml_usms <- xmldocument(usms_file)
 
@@ -93,7 +95,7 @@ get_plants_nb_xml <- function(
     plants_nb <- plants_nb[usm_names %in% usms_list]
   }
 
-  return(plants_nb)
+  plants_nb
 }
 
 

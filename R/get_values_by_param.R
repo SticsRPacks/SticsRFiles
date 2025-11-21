@@ -27,10 +27,11 @@
 #' @noRd
 #'
 get_values_by_param <- function(
-    params_table,
-    param_name = NULL,
-    lines_id = NULL,
-    na_values = NA) {
+  params_table,
+  param_name = NULL,
+  lines_id = NULL,
+  na_values = NA
+) {
   table_names <- names(params_table)
 
   # Getting the parameter names vector, if not given

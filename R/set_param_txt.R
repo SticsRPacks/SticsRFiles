@@ -59,14 +59,15 @@
 #' set_param_txt(workspace = path, param = "amount", value_id = 2, value = 40)
 #'
 set_param_txt <- function(
-    workspace,
-    param,
-    value,
-    append = FALSE,
-    plant_id = 1,
-    variety = NULL,
-    value_id = NULL,
-    stics_version = "latest") {
+  workspace,
+  param,
+  value,
+  append = FALSE,
+  plant_id = 1,
+  variety = NULL,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
   param <- gsub("P_", "", param)
@@ -223,20 +224,22 @@ set_param_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_usm_txt <- function(
-    file = "new_travail.usm",
-    param,
-    value,
-    append = FALSE) {
+  file = "new_travail.usm",
+  param,
+  value,
+  append = FALSE
+) {
   set_file_txt(file, param, value, append)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_station_txt <- function(
-    file = "station.txt",
-    param,
-    value,
-    append = FALSE) {
+  file = "station.txt",
+  param,
+  value,
+  append = FALSE
+) {
   set_file_txt(file, param, value, append)
 }
 
@@ -244,13 +247,14 @@ set_station_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_ini_txt <- function(
-    file = "ficini.txt",
-    param,
-    value,
-    append = FALSE,
-    plant_id = 1,
-    value_id = NULL,
-    stics_version = "latest") {
+  file = "ficini.txt",
+  param,
+  value,
+  append = FALSE,
+  plant_id = 1,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   set_file_txt(
     file,
     param,
@@ -266,42 +270,46 @@ set_ini_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_general_txt <- function(
-    file = "tempopar.sti",
-    param,
-    value,
-    append = FALSE) {
+  file = "tempopar.sti",
+  param,
+  value,
+  append = FALSE
+) {
   set_file_txt(file, param, value, append)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_tmp_txt <- function(
-    file = "tempoparv6.sti",
-    param,
-    value,
-    append = FALSE) {
+  file = "tempoparv6.sti",
+  param,
+  value,
+  append = FALSE
+) {
   set_file_txt(file, param, value, append)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_plant_txt <- function(
-    file = "ficplt1.txt",
-    param,
-    value,
-    append = FALSE,
-    variety = NULL) {
+  file = "ficplt1.txt",
+  param,
+  value,
+  append = FALSE,
+  variety = NULL
+) {
   set_file_txt(file, param, value, append, variety = variety)
 }
 
 #' @rdname set_param_txt
 #' @export
 set_tec_txt <- function(
-    file = "fictec1.txt",
-    param,
-    value,
-    append = FALSE,
-    value_id = NULL) {
+  file = "fictec1.txt",
+  param,
+  value,
+  append = FALSE,
+  value_id = NULL
+) {
   set_file_txt(
     file = file,
     param = param,
@@ -314,11 +322,12 @@ set_tec_txt <- function(
 #' @rdname set_param_txt
 #' @export
 set_soil_txt <- function(
-    file = "param.sol",
-    param,
-    value,
-    value_id = NULL,
-    stics_version = "latest") {
+  file = "param.sol",
+  param,
+  value,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   # filepath
   param <- gsub("P_", "", param)
   ref <- get_soil_txt(file, stics_version = stics_version)
@@ -510,14 +519,15 @@ set_soil_txt <- function(
 #' @noRd
 #'
 set_file_txt <- function(
-    file,
-    param,
-    value,
-    append,
-    plant_id = NULL,
-    variety = NULL,
-    value_id = NULL,
-    stics_version = "latest") {
+  file,
+  param,
+  value,
+  append,
+  plant_id = NULL,
+  variety = NULL,
+  value_id = NULL,
+  stics_version = "latest"
+) {
   param <- gsub("P_", "", param)
 
   stics_version <- check_version_compat(stics_version = stics_version)

@@ -37,11 +37,12 @@
 #' @noRd
 #'
 remove_node_from_doc <- function(
-    xml_doc,
-    param_name,
-    parent_name = NULL,
-    remove_parent = FALSE,
-    nodes_ids = NULL) {
+  xml_doc,
+  param_name,
+  parent_name = NULL,
+  remove_parent = FALSE,
+  nodes_ids = NULL
+) {
   # Getting the node xpath
   xpath_node <- get_param_type(
     xml_doc = xml_doc,

@@ -21,13 +21,14 @@
 #'
 
 gen_new_travail <- function(
-    usm_data,
-    usm,
-    workspace,
-    lai_forcing = NULL,
-    codesuite = NULL,
-    codoptim = NULL,
-    out_dir = NULL) {
+  usm_data,
+  usm,
+  workspace,
+  lai_forcing = NULL,
+  codesuite = NULL,
+  codoptim = NULL,
+  out_dir = NULL
+) {
   data_plt2 <- c()
   if (usm_data$nbplantes > 1) {
     data_plt2 <- c("fplt2", "ftec2", "flai2")
@@ -99,12 +100,13 @@ gen_new_travail <- function(
 #'
 #'
 get_usm_data <- function(
-    usms_doc,
-    usm,
-    workspace,
-    lai_forcing = NULL,
-    codesuite = NULL,
-    codoptim = NULL) {
+  usms_doc,
+  usm,
+  workspace,
+  lai_forcing = NULL,
+  codesuite = NULL,
+  codoptim = NULL
+) {
   data <- XML::getNodeSet(
     usms_doc@content,
     path = paste0("//usm[@nom='", usm, "']"),

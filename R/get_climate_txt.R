@@ -23,9 +23,10 @@
 #' @export
 #'
 get_climate_txt <- function(
-    workspace,
-    file_name = "climat.txt",
-    preserve = TRUE) {
+  workspace,
+  file_name = "climat.txt",
+  preserve = TRUE
+) {
   file_path <- file.path(workspace, file_name)
 
   # Checking file

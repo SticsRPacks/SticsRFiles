@@ -30,11 +30,12 @@
 #'   raise_error = TRUE
 #' )
 download_data <- function(
-    branch = NULL,
-    out_dir = tempdir(),
-    example_dirs = NULL,
-    stics_version = "latest",
-    raise_error = FALSE) {
+  branch = NULL,
+  out_dir = tempdir(),
+  example_dirs = NULL,
+  stics_version = "latest",
+  raise_error = FALSE
+) {
   # getting the default branch name if not specified
   if (is.null(branch)) {
     branch <- get_default_branch()
