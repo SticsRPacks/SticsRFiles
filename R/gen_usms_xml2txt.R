@@ -58,6 +58,9 @@
 #'
 #' @export
 #'
+#' @importFrom foreach %dopar% %do%
+#' @importFrom parallel clusterCall makeCluster stopCluster
+#' @importFrom doParallel registerDoParallel
 #'
 
 gen_usms_xml2txt <- function(
