@@ -903,7 +903,7 @@ get_soil_txt <- function(
     filepath <- file.path(workspace, file)
   }
   if (!file.exists(filepath)) {
-    stop(file, ": does not exist !")
+    stop(filepath, ": does not exist !")
   }
 
   params <- readLines(filepath, warn = FALSE)
