@@ -86,7 +86,7 @@ get_param_txt <- function(
   stics_version <- check_version_compat(stics_version = stics_version)
 
   ini <- get_ini_txt(
-    file.path(workspace, "ficini.txt"),
+    workspace = workspace,
     stics_version = stics_version
   )
 
@@ -111,21 +111,21 @@ get_param_txt <- function(
     }
   }
 
-  general <- get_general_txt(file.path(workspace, "tempopar.sti"))
+  general <- get_general_txt(workspace = workspace)
 
   soil <- get_soil_txt(
-    file.path(workspace, "param.sol"),
+    workspace = workspace,
     stics_version = stics_version
   )
 
-  station <- get_station_txt(file.path(workspace, "station.txt"))
+  station <- get_station_txt(workspace = workspace)
 
   usm <- get_usm_txt(
-    file.path(workspace, "new_travail.usm"),
+    workspace = workspace,
     plant_id = plant_id
   )
 
-  tmp <- get_tmp_txt(file.path(workspace, "tempoparv6.sti"))
+  tmp <- get_tmp_txt(workspace = workspace)
 
   # add tests on option_* name existence in tmp
   # NOT IN V10
@@ -166,7 +166,8 @@ get_param_txt <- function(
   for (i in plant_id) {
     tec[paste0("plant", i)] <-
       list(get_tec_txt(
-        file = file.path(workspace, paste0("fictec", i, ".txt")),
+        file = paste0("fictec", i, ".txt"),
+        workspace = workspace,
         several_fert = several_fert,
         several_thin = several_thin,
         is_pasture = is_pasture
@@ -174,10 +175,8 @@ get_param_txt <- function(
 
     varieties[[i]] <-
       get_plant_txt(
-        file = file.path(
-          workspace,
-          paste0("ficplt", i, ".txt")
-        )
+        file = paste0("ficplt", i, ".txt"),
+        workspace = workspace
       )$codevar
 
     tec_variety <- tec[[paste0("plant", i)]]$variete
@@ -189,7 +188,8 @@ get_param_txt <- function(
 
     plant[paste0("plant", i)] <-
       list(get_plant_txt(
-        file.path(workspace, paste0("ficplt", i, ".txt")),
+        workspace = workspace,
+        file = paste0("ficplt", i, ".txt"),
         variety = if (is.null(variety[[i]])) {
           if (!is.null(param)) {
             varieties[[i]][tec_variety]
@@ -354,17 +354,17 @@ filter_param <- function(
 #' # Read the tec file directly:
 #'
 #' # First, get the parameters from the tmp file:
-#' tmp <- get_tmp_txt(file = file.path(
-#'   get_examples_path(file_type = "txt"),
-#'   "tempoparv6.sti"
-#' ))
+#' tmp <- get_tmp_txt(
+#'   workspace = get_examples_path(file_type = "txt")
+#' )
 #' several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
 #' several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
 #' is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
 #'
 #' # Then, get the technical parameters:
 #' get_tec_txt(
-#'   file = file.path(get_examples_path(file_type = "txt"), "fictec1.txt"),
+#'   workspace = get_examples_path(file_type = "txt"),
+#'   file = "fictec1.txt",
 #'   several_fert = several_fert, several_thin = several_thin,
 #'   is_pasture = is_pasture
 #' )
@@ -374,15 +374,20 @@ filter_param <- function(
 #' @export
 get_ini_txt <- function(
   file = "ficini.txt",
-  stics_version
+  stics_version,
+  workspace = NULL
 ) {
   stics_version <- check_version_compat(stics_version = stics_version)
-
-  if (!file.exists(file)) {
-    stop(file, ": does not exist !")
+  filepath <- file
+  if (!is.null(workspace)) {
+    filepath <- file.path(workspace, file)
   }
 
-  params <- readLines(file)
+  if (!file.exists(filepath)) {
+    stop(filepath, ": does not exist !")
+  }
+
+  params <- readLines(filepath)
   ini <- list()
 
   ini$nbplantes <- params[[2]]
@@ -482,27 +487,30 @@ get_ini_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_general_txt <- function(
-  file = "tempopar.sti"
+  file = "tempopar.sti",
+  workspace = NULL
 ) {
-  c(nbresidus = 21, get_txt_generic(file))
+  c(nbresidus = 21, get_txt_generic(file, workspace = workspace))
 }
 
 
 #' @rdname get_param_txt
 #' @export
 get_tmp_txt <- function(
-  file = "tempoparv6.sti"
+  file = "tempoparv6.sti",
+  workspace = NULL
 ) {
-  get_txt_generic(file)
+  get_txt_generic(file, workspace = workspace)
 }
 
 #' @rdname get_param_txt
 #' @export
 get_plant_txt <- function(
   file = "ficplt1.txt",
-  variety = NULL
+  variety = NULL,
+  workspace = NULL
 ) {
-  x <- get_txt_generic(file)
+  x <- get_txt_generic(file, workspace = workspace)
 
   index_codevar <- which(names(x) == "codevar")
   varieties <- x[[index_codevar]]
@@ -543,10 +551,15 @@ get_tec_txt <- function(
   several_fert = NULL,
   several_thin = NULL,
   is_pasture = NULL,
+  workspace = NULL,
   ...
 ) {
-  if (!file.exists(file)) {
-    stop(file, ": does not exist !")
+  filepath <- file
+  if (!is.null(workspace)) {
+    filepath <- file.path(workspace, file)
+  }
+  if (!file.exists(filepath)) {
+    stop(filepath, ": does not exist !")
   }
 
   # TODO: add dot args management
@@ -556,7 +569,7 @@ get_tec_txt <- function(
 
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  par_lines <- readLines(file)
+  par_lines <- readLines(filepath)
   itk <- vector(mode = "list", length = 0)
   ids_val <- !seq_along(par_lines) %% 2
   params <- par_lines[!ids_val]
@@ -880,15 +893,20 @@ get_tec_txt_ <- function(params, values) {
 #' @export
 get_soil_txt <- function(
   file = "param.sol",
-  stics_version
+  stics_version,
+  workspace = NULL
 ) {
   stics_version <- check_version_compat(stics_version = stics_version)
 
-  if (!file.exists(file)) {
+  filepath <- file
+  if (!is.null(workspace)) {
+    filepath <- file.path(workspace, file)
+  }
+  if (!file.exists(filepath)) {
     stop(file, ": does not exist !")
   }
 
-  params <- readLines(file, warn = FALSE)
+  params <- readLines(filepath, warn = FALSE)
   soil <- vector(mode = "list", length = 0)
 
   val <- function(index = 1) {
@@ -1009,9 +1027,10 @@ get_soil_txt <- function(
 #' @rdname get_param_txt
 #' @export
 get_station_txt <- function(
-  file = "station.txt"
+  file = "station.txt",
+  workspace = NULL
 ) {
-  get_txt_generic(file = file)
+  get_txt_generic(file = file, workspace = workspace)
 }
 
 
@@ -1019,9 +1038,10 @@ get_station_txt <- function(
 #' @export
 get_usm_txt <- function(
   file = "new_travail.usm",
-  plant_id = NULL
+  plant_id = NULL,
+  workspace = NULL
 ) {
-  usm_params <- get_txt_generic(file)
+  usm_params <- get_txt_generic(file, workspace = workspace)
 
   idx <- plant_id == 1:2
 
@@ -1070,12 +1090,16 @@ get_usm_txt <- function(
 #' get_txt_generic(path)
 #' }
 #'
-get_txt_generic <- function(file, names = TRUE) {
-  if (!file.exists(file)) {
-    stop(file, ": does not exist !")
+get_txt_generic <- function(file, names = TRUE, workspace = NULL) {
+  filepath <- file
+  if (!is.null(workspace)) {
+    filepath <- file.path(workspace, file)
+  }
+  if (!file.exists(filepath)) {
+    stop(filepath, ": does not exist !")
   }
 
-  params <- readLines(file)
+  params <- readLines(filepath)
 
   x <- as.list(params[!seq_along(params) %% 2])
   if (names) {
