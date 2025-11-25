@@ -115,8 +115,20 @@ to_xml_version <- function(stics_version) {
 set_xml_file_version <- function(
   xml_file_or_doc,
   new_version = "V10.0",
-  overwrite = FALSE
+  overwrite = FALSE,
+  file = NULL
 ) {
+  # If an xml document is given file must not be null
+  if (inherits(xml_file_or_doc, "xml_document")) {
+    if (is.null(file)) {
+      warning("file argument must be provided when xml_document is used")
+      return(FALSE)
+    }
+  } else {
+    if (is.null(file)) {
+      file <- xml_file_or_doc
+    }
+  }
   # Getting xml_document object
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
@@ -127,14 +139,16 @@ set_xml_file_version <- function(
   att <- get_attrs(xml_doc, path = root_path)
 
   # Checking file version
-  if (!is.null(att) && att[, "version"] == new_version && !overwrite) {
-    stop(paste(
+  if (!is.null(att) && att[, "version"] == ver && !overwrite) {
+    warning(paste(
       "The version has already been updated to STICS version",
       new_version
     ))
   }
 
   add_attrs(xml_doc, path = root_path, named_vector = ver)
+
+  write_xml_file(xml_doc = xml_doc, file = file, overwrite = overwrite)
 }
 
 # TODO : see existing get_xml_stics_version, to be merged or replaced with
@@ -269,5 +283,5 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
   }
 
   save_xml_doc(xml_doc, file)
-  return(TRUE)
+  return(invisible(TRUE))
 }
