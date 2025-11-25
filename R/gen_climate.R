@@ -113,7 +113,7 @@ complete_climate_paths <- function(files_path) {
 #'
 get_year_from_file_name <- function(file_path) {
   if (length(file_path) > 1) {
-    unlist(lapply(file_path, get_year_from_file_name))
+    return(unlist(lapply(file_path, get_year_from_file_name)))
   }
 
   as.numeric(strsplit(basename(file_path), split = "\\.")[[1]][2])

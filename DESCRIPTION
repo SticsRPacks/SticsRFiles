@@ -41,9 +41,12 @@ Imports:
     crayon,
     curl,
     data.table,
+    doParallel,
     dplyr (>= 1.0.0),
+    foreach,
     lubridate,
     methods,
+    parallel,
     rlang,
     rstudioapi,
     tibble,
@@ -117,6 +120,7 @@ Collate:
     'gen_usms_xml2txt.R'
     'gen_varmod.R'
     'get_climate_txt.R'
+    'get_cores_nb.R'
     'get_cultivars_list.R'
     'get_cultivars_param.R'
     'get_file.R'
