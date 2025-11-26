@@ -71,7 +71,9 @@ get_obs <- function(
   dates = NULL,
   usms_file = NULL,
   javastics = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  parallel = FALSE,
+  cores = NA
 ) {
   get_file(
     workspace,
@@ -81,6 +83,8 @@ get_obs <- function(
     usms_file,
     javastics,
     verbose,
-    "obs"
+    "obs",
+    parallel = parallel,
+    cores = cores
   )
 }

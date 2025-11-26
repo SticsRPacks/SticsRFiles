@@ -11,7 +11,9 @@ get_sim(
   dates = NULL,
   usms_file = NULL,
   javastics = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  parallel = FALSE,
+  cores = NA
 )
 }
 \arguments{

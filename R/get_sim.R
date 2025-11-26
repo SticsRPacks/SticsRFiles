@@ -54,7 +54,9 @@ get_sim <- function(
   dates = NULL,
   usms_file = NULL,
   javastics = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  parallel = FALSE,
+  cores = NA
 ) {
   res <- get_file(
     workspace,
@@ -64,7 +66,9 @@ get_sim <- function(
     usms_file,
     javastics,
     verbose,
-    "sim"
+    "sim",
+    parallel = parallel,
+    cores = cores
   )
 
   # Testing if results list is not empty
