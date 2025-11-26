@@ -40,6 +40,10 @@ to usms_file to get the plant codes if the plant files used are not
 in the workspace but in the JavaSTICS distribution (see Details).}
 
 \item{verbose}{Logical value for displaying or not information while running}
+
+\item{parallel}{Boolean. Is the computation to be done in parallel ?}
+
+\item{cores}{Number of cores to use for parallel computation.}
 }
 \value{
 A list, where each element is a \code{data.frame} of observations
