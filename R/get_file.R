@@ -276,7 +276,9 @@ get_file_ <- function(
     if (!is.null(usm_name)) {
       usms <- intersect(usms, usm_name)
       # Not any matching names
-      if (!length(usms)) return()
+      if (!length(usms)) {
+        return()
+      }
 
       file_name <- file_name[usms]
     }

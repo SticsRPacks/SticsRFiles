@@ -71,10 +71,14 @@ get_file_int <- function(
     }
 
     # Remove lines where ian is NA
-    if (!"ian" %in% names(out)) return(NULL)
+    if (!"ian" %in% names(out)) {
+      return(NULL)
+    }
     out <- out[!is.na(out[["ian"]])]
 
-    if (nrow(out) == 0) return(NULL)
+    if (nrow(out) == 0) {
+      return(NULL)
+    }
 
     data.table::setnames(out, var_to_col_names(names(out)))
     out[out <= -999] <- NA
