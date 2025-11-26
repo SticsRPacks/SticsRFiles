@@ -20,6 +20,8 @@
 #' to usms_file to get the plant codes if the plant files used are not
 #' in the workspace but in the JavaSTICS distribution (see Details).
 #' @param verbose Logical value for displaying or not information while running
+#' @param parallel Boolean. Is the computation to be done in parallel ?
+#' @param cores Number of cores to use for parallel computation.
 #'
 #' @details
 #' If `usm` is not specified (or equal to `NULL`), the
