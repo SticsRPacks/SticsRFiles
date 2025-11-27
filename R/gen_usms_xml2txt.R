@@ -59,8 +59,7 @@
 #' @export
 #'
 #' @importFrom foreach %dopar% %do%
-#' @importFrom parallel clusterCall makeCluster stopCluster
-#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel stopCluster
 #'
 
 gen_usms_xml2txt <- function(
@@ -295,23 +294,8 @@ gen_usms_xml2txt <- function(
   }
 
   if (parallel) {
-    # Managing parallel model simulations
-    # Managing cores number to use
-    cores_nb <- get_cores_nb(parallel = parallel, required_nb = cores)
-
-    # Do not allow more cores than number of USMs: waste of time
-    cores_nb <- min(cores_nb, usms_number)
-
-    # Launching the cluster
-    cl <- makeCluster(cores_nb)
-
-    # Stopping the cluster when exiting
+    cl <- setup_parallelism(usms_number, cores)
     on.exit(stopCluster(cl))
-
-    # Registering cluster
-    registerDoParallel(cl)
-    clusterCall(cl, function(x) .libPaths(x), .libPaths())
-
     `%do_par_or_not%` <- foreach::`%dopar%`
   } else {
     `%do_par_or_not%` <- foreach::`%do%`

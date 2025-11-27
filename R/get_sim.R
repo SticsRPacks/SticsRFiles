@@ -20,6 +20,8 @@
 #' to usms_file to get the plant codes if the plant files used are not
 #' in the workspace but in the JavaSTICS distribution (see Details).
 #' @param verbose Logical value for displaying or not information while running
+#' @param parallel Boolean. Is the computation to be done in parallel ?
+#' @param cores Number of cores to use for parallel computation.
 #'
 #' @details
 #' If `usm` is not specified (or equal to `NULL`), the
@@ -54,7 +56,9 @@ get_sim <- function(
   dates = NULL,
   usms_file = NULL,
   javastics = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  parallel = FALSE,
+  cores = NA
 ) {
   res <- get_file(
     workspace,
@@ -64,7 +68,9 @@ get_sim <- function(
     usms_file,
     javastics,
     verbose,
-    "sim"
+    "sim",
+    parallel = parallel,
+    cores = cores
   )
 
   # Testing if results list is not empty

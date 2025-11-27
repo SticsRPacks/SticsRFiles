@@ -187,6 +187,7 @@ Collate:
     'set_param_xml.R'
     'set_sols_param_xml.R'
     'set_usms_param_xml.R'
+    'setup_parallelism.R'
     'static_help.R'
     'stics_environment.R'
     'stics_files_utils.R'
