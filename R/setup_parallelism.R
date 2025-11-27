@@ -1,4 +1,3 @@
-
 #' Sets up a parallelism cluster
 #'
 #' @description Read STICS observation or simulation files from a

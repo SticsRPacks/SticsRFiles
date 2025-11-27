@@ -50,7 +50,6 @@ get_file_int <- function(
   }
 
   tables <- lapply(seq_along(filename), function(i) {
-
     i_filename <- filename[i]
     i_plant_name <- plant_name[i]
     path <- file.path(workspace, i_filename)
@@ -70,12 +69,18 @@ get_file_int <- function(
       }
     )
 
-    if (is.null(out)) return(NULL)
+    if (is.null(out)) {
+      return(NULL)
+    }
 
-    if (!"ian" %in% names(out)) return(NULL)
+    if (!"ian" %in% names(out)) {
+      return(NULL)
+    }
 
     out <- out[!is.na(out[["ian"]])]
-    if (nrow(out) == 0) return(NULL)
+    if (nrow(out) == 0) {
+      return(NULL)
+    }
 
     data.table::setnames(out, var_to_col_names(names(out)))
     out[out <= -999] <- NA
