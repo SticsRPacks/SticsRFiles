@@ -112,8 +112,7 @@ get_file <- function(
 #'
 #' @importFrom rlang .data
 #' @importFrom foreach %dopar% %do%
-#' @importFrom parallel clusterCall makeCluster stopCluster
-#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel stopCluster
 #'
 #' @keywords internal
 #'
@@ -156,6 +155,8 @@ get_file_ <- function(
   # or observation files, a warning with missing outputs/obs usm
   # names
   if (length(workspace_files) > 0 && !is.null(usm_name)) {
+    # using optional "p" or "a" in pattern for associated crops
+    # p for principal crop, a for associated crop
     patterns <- paste0(str2regex(usm_name), "[a|p]?\\.", file_ext)
     regex_all <- paste(patterns, collapse = "|")
     idx <- grep(regex_all, workspace_files)
@@ -311,35 +312,21 @@ get_file_ <- function(
     USE.NAMES = FALSE
   )
   if (parallel) {
-    # Managing parallel model simulations
-    # Managing cores number to use
-    cores_nb <- get_cores_nb(parallel = parallel, required_nb = cores)
-
-    # Do not allow more cores than number of USMs: waste of time
-    cores_nb <- min(cores_nb, length(inputs))
-
-    # Launching the cluster
-    cl <- makeCluster(cores_nb)
-
-    # Stopping the cluster when exiting
+    cl <- setup_parallelism(length(inputs), cores)
     on.exit(stopCluster(cl))
-
-    # Registering cluster
-    registerDoParallel(cl)
-    clusterCall(cl, function(x) .libPaths(x), .libPaths())
-
     `%do_par_or_not%` <- foreach::`%dopar%`
   } else {
     `%do_par_or_not%` <- foreach::`%do%`
   }
+
   df_list <- foreach::foreach(
     i = seq_along(inputs)
   ) %do_par_or_not% {
-    input <- inputs[i]
+    input <- inputs[[i]]
     get_file_one(
-      input[[1]]$dirpath,
-      input[[1]]$filename,
-      input[[1]]$p_name,
+      input$dirpath,
+      input$filename,
+      input$p_name,
       verbose,
       dates_list,
       var_list

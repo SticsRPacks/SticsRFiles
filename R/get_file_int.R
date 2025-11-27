@@ -32,7 +32,8 @@ get_file_int <- function(
   plant_name = NULL,
   verbose = TRUE
 ) {
-  if (verbose) message(filename)
+  # safe verbose
+  if (verbose) cat(filename, "\n")
 
   if (is.list(filename)) filename <- unlist(filename)
   if (is.list(plant_name)) plant_name <- unlist(plant_name)
@@ -48,41 +49,38 @@ get_file_int <- function(
     plant_name <- filename
   }
 
-  # ---- Read files ----
   tables <- lapply(seq_along(filename), function(i) {
+
     i_filename <- filename[i]
     i_plant_name <- plant_name[i]
-
     path <- file.path(workspace, i_filename)
-    out <- try(
-      data.table::fread(
-        path,
-        data.table = TRUE,
-        na.strings = c("************", "NA")
-      ),
-      silent = TRUE
+
+    out <- tryCatch(
+      {
+        data.table::fread(
+          path,
+          data.table = TRUE,
+          na.strings = c("************", "NA")
+        )
+      },
+      error = function(e) {
+        # safe warning for parallel
+        warning(sprintf("couldn't find valid file for %s", path))
+        return(NULL)
+      }
     )
 
-    if (inherits(out, "try-error")) {
-      cli::cli_alert_warning(
-        paste0("couldn't find valid file for {.val ", path, "}")
-      )
-      return(NULL)
-    }
+    if (is.null(out)) return(NULL)
 
-    # Remove lines where ian is NA
-    if (!"ian" %in% names(out)) {
-      return(NULL)
-    }
+    if (!"ian" %in% names(out)) return(NULL)
+
     out <- out[!is.na(out[["ian"]])]
-
-    if (nrow(out) == 0) {
-      return(NULL)
-    }
+    if (nrow(out) == 0) return(NULL)
 
     data.table::setnames(out, var_to_col_names(names(out)))
     out[out <= -999] <- NA
     out[, Plant := i_plant_name]
+
     out
   })
 
@@ -91,7 +89,7 @@ get_file_int <- function(
   if (nrow(out_table) == 0) {
     warning(
       paste0(
-        "Not any data loaded from Stics daily output or observation files: \n",
+        "Not any data loaded from Stics daily output or observation files:\n",
         paste(filename, collapse = ", ")
       )
     )
@@ -102,10 +100,9 @@ get_file_int <- function(
     as.Date(paste(ian, mo, jo, sep = "-"), format = "%Y-%m-%d"),
     tz = "UTC"
   )]
-  data.table::setcolorder(
-    out_table,
-    c("Date", setdiff(names(out_table), "Date"))
-  )
+
+  data.table::setcolorder(out_table, c("Date", setdiff(names(out_table), "Date")))
+
   drop_cols <- intersect(c("ian", "mo", "jo", "jul"), names(out_table))
   if (length(drop_cols) > 0) out_table[, (drop_cols) := NULL]
 
