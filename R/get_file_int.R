@@ -19,6 +19,7 @@
 #' @noRd
 #'
 #' @importFrom rlang .data
+#' @importFrom data.table :=
 #'
 #' @examples
 #' \dontrun{
@@ -31,7 +32,8 @@ get_file_int <- function(
   plant_name = NULL,
   verbose = TRUE
 ) {
-  if (verbose) message(filename)
+  # safe verbose
+  if (verbose) cat(filename, "\n")
 
   if (is.list(filename)) filename <- unlist(filename)
   if (is.list(plant_name)) plant_name <- unlist(plant_name)
@@ -40,7 +42,6 @@ get_file_int <- function(
     if (length(plant_name) > 1 && length(plant_name) != length(filename)) {
       stop("length(plant_name) should be == 1 or length(filename)")
     }
-
     if (length(plant_name) == 1) {
       plant_name <- rep(plant_name, length(filename))
     }
@@ -48,58 +49,67 @@ get_file_int <- function(
     plant_name <- filename
   }
 
-  # Loading the files
-  out_table <- mapply(
-    function(x, y) {
-      out <- try(data.table::fread(
-        file.path(workspace, x),
-        data.table = FALSE,
-        na.strings = c("************", "NA"),
-        stringsAsFactors = FALSE
-      ))
-      # error reading file(s)
-      if (inherits(out, "try-error")) {
-        cli::cli_alert_warning(paste0(
-          "couldn't find valid file for ",
-          "{.val {file.path(workspace,x)}}"
-        ))
+  tables <- lapply(seq_along(filename), function(i) {
+    i_filename <- filename[i]
+    i_plant_name <- plant_name[i]
+    path <- file.path(workspace, i_filename)
+
+    out <- tryCatch(
+      {
+        data.table::fread(
+          path,
+          data.table = TRUE,
+          na.strings = c("************", "NA")
+        )
+      },
+      error = function(e) {
+        # safe warning for parallel
+        warning(sprintf("couldn't find valid file for %s", path))
         return(NULL)
       }
+    )
 
-      # Removing empty extra lines (without year)
-      out <- dplyr::filter(out, !is.na(.data$ian))
+    if (is.null(out)) {
+      return(NULL)
+    }
 
-      colnames(out) <- var_to_col_names(colnames(out))
-      if (nrow(out) == 0) {
-        return(NULL)
-      }
-      out[out <= -999.00] <- NA
-      out$Plant <- y
-      return(out)
-    },
-    x = filename,
-    y = plant_name,
-    SIMPLIFY = FALSE
-  ) %>%
-    dplyr::bind_rows()
+    if (!"ian" %in% names(out)) {
+      return(NULL)
+    }
 
-  # Raising an error when not any rows found in the data.frame
+    out <- out[!is.na(out[["ian"]])]
+    if (nrow(out) == 0) {
+      return(NULL)
+    }
+
+    data.table::setnames(out, var_to_col_names(names(out)))
+    out[out <= -999] <- NA
+    out[, Plant := i_plant_name]
+
+    out
+  })
+
+  out_table <- data.table::rbindlist(tables, use.names = TRUE, fill = TRUE)
+
   if (nrow(out_table) == 0) {
-    warning(paste0(
-      "Not any data loaded from Stics daily output or observation files: \n",
-      paste(filename, collapse = ", ")
-    ))
+    warning(
+      paste0(
+        "Not any data loaded from Stics daily output or observation files:\n",
+        paste(filename, collapse = ", ")
+      )
+    )
     return(out_table)
   }
-  # Adding a Date from year, month, day if rows number > 0
-  dplyr::mutate(
-    out_table,
-    Date = as.POSIXct(
-      x = paste(out_table$ian, out_table$mo, out_table$jo, sep = "-"),
-      format = "%Y-%m-%d",
-      tz = "UTC"
-    )
-  ) %>%
-    dplyr::relocate(dplyr::all_of("Date")) %>%
-    dplyr::select(-dplyr::all_of(c("ian", "mo", "jo", "jul")))
+
+  out_table[, Date := as.POSIXct(
+    as.Date(paste(ian, mo, jo, sep = "-"), format = "%Y-%m-%d"),
+    tz = "UTC"
+  )]
+
+  data.table::setcolorder(out_table, c("Date", setdiff(names(out_table), "Date")))
+
+  drop_cols <- intersect(c("ian", "mo", "jo", "jul"), names(out_table))
+  if (length(drop_cols) > 0) out_table[, (drop_cols) := NULL]
+
+  out_table
 }
