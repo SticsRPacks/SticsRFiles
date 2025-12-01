@@ -304,7 +304,21 @@ plt_IC_param_list <- function() {
   param$esc$haut_dev_k <- 0.00891413714283287
   param$esc$nrow <- 1
 
-  return(param)
+  param$tou$stage_const_height <- "no"
+  param$tou$elongation <- 1.0
+  param$tou$nw_height <- 0.0
+  param$tou$code_shape <- 2
+  param$tou$haut_dev_x0 <- 645.895914862214
+  param$tou$haut_dev_k <- 0.0105505841187171
+  param$tou$nrow <- 1
+
+  param$soj$stage_const_height <- "no"
+  param$soj$elongation <- 1.0
+  param$soj$nw_height <- 0.0
+  param$soj$code_shape <- 2
+  param$soj$haut_dev_x0 <- 645.651309418313
+  param$soj$haut_dev_k <- 0.00665713018807634
+  param$soj$nrow <- 1
 
 }
 
