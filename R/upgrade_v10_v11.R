@@ -1,4 +1,3 @@
-
 #' Upgrade technical file(s) from version 10 to 11
 #'
 #' @param file xml technical file path or a vector of
@@ -15,8 +14,6 @@
 upgrade_tec_xml_10_11 <- function(file,
                                   out_dir,
                                   overwrite = FALSE) {
-
-
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -36,35 +33,37 @@ upgrade_tec_xml_10_11 <- function(file,
   # set_version
   check_and_upgrade_xml_version(xml_doc, from_version = "V10.1.1", target_version = "V11.0")
 
-  format <- get_attrs_values(xml_doc, path = "//param[@nom='stage_start_irrigauto']",
-                             attr_list = "format")
+  format <- get_attrs_values(xml_doc,
+    path = "//param[@nom='stage_start_irrigauto']",
+    attr_list = "format"
+  )
 
   if (format != "character") {
-
     set_attrs_values(xml_doc,
-                     path = "//param[@nom='stage_start_irrigauto']",
-                     attr_name = "format",
-                     values_list = "character" )
+      path = "//param[@nom='stage_start_irrigauto']",
+      attr_name = "format",
+      values_list = "character"
+    )
     remove_attrs(xml_doc, path = "//param[@nom='stage_start_irrigauto']", attr_names = c("min", "max"))
   }
 
-  format <- get_attrs_values(xml_doc, path = "//param[@nom='stage_end_irrigauto']",
-                             attr_list = "format")
+  format <- get_attrs_values(xml_doc,
+    path = "//param[@nom='stage_end_irrigauto']",
+    attr_list = "format"
+  )
 
   if (format != "character") {
-
     set_attrs_values(xml_doc,
-                     path = "//param[@nom='stage_end_irrigauto']",
-                     attr_name = "format",
-                     values_list = "character" )
+      path = "//param[@nom='stage_end_irrigauto']",
+      attr_name = "format",
+      values_list = "character"
+    )
     remove_attrs(xml_doc, path = "//param[@nom='stage_end_irrigauto']", attr_names = c("min", "max"))
-
-
   }
 
   set_param_value(
     xml_doc,
-    param_name = list('stage_start_irrigauto', 'stage_end_irrigauto'),
+    param_name = list("stage_start_irrigauto", "stage_end_irrigauto"),
     param_value = list("null", "null")
   )
 
@@ -73,7 +72,6 @@ upgrade_tec_xml_10_11 <- function(file,
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-
 }
 
 #' Upgrade plant file from version 10 to 11
@@ -103,14 +101,11 @@ upgrade_plt_xml_10_11 <- function(file,
                                   elongation = NULL,
                                   nw_height = NULL,
                                   code_shape = NULL,
-                                  haut_dev_x0= NULL,
+                                  haut_dev_x0 = NULL,
                                   haut_dev_k = NULL,
                                   nrow = NULL,
                                   overwrite = FALSE,
                                   warning = TRUE) {
-
-
-
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -121,7 +116,7 @@ upgrade_plt_xml_10_11 <- function(file,
         elongation = elongation,
         nw_height = nw_height,
         code_shape = code_shape,
-        haut_dev_x0= haut_dev_x0,
+        haut_dev_x0 = haut_dev_x0,
         haut_dev_k = haut_dev_k,
         nrow = nrow,
         overwrite = overwrite
@@ -135,8 +130,9 @@ upgrade_plt_xml_10_11 <- function(file,
 
   # set_version
   check_and_upgrade_xml_version(xml_doc,
-                                from_version = "V10.1.1",
-                                target_version = "V11.0")
+    from_version = "V10.1.1",
+    target_version = "V11.0"
+  )
 
 
 
@@ -152,11 +148,13 @@ upgrade_plt_xml_10_11 <- function(file,
                     </choix>
                     </option>
                     </formalisme>',
-                                     addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
   nrow_node <- XML::xmlParseString(
     '<param format="real" max="10.0" min="1.0" nom="nrow">1</param>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
   leaves_node <- get_nodes(xml_doc, path = "//formalisme[@nom='leaves']")
 
@@ -168,20 +166,22 @@ upgrade_plt_xml_10_11 <- function(file,
 
   # Set values to added parameters if given as func inputs
   # using
-  plant <- get_param_value(xml_doc = xml_doc,
-                           param_name = "codeplante")$codeplante
+  plant <- get_param_value(
+    xml_doc = xml_doc,
+    param_name = "codeplante"
+  )$codeplante
   param <- get_plt_IC_param(crop = plant, warning = warning)
 
-  if(!is.null(stage_const_height)) param$stage_const_height <- stage_const_height
-  if(!is.null(elongation)) param$elongation <- elongation
-  if(!is.null(nw_height)) param$nw_height <- nw_height
-  if(!is.null(code_shape)) param$code_shape <- code_shape
-  if(!is.null(haut_dev_x0)) param$haut_dev_x0 <- haut_dev_x0
-  if(!is.null(haut_dev_k)) param$haut_dev_k <- haut_dev_k
-  if(!is.null(nrow)) param$nrow <- nrow
+  if (!is.null(stage_const_height)) param$stage_const_height <- stage_const_height
+  if (!is.null(elongation)) param$elongation <- elongation
+  if (!is.null(nw_height)) param$nw_height <- nw_height
+  if (!is.null(code_shape)) param$code_shape <- code_shape
+  if (!is.null(haut_dev_x0)) param$haut_dev_x0 <- haut_dev_x0
+  if (!is.null(haut_dev_k)) param$haut_dev_k <- haut_dev_k
+  if (!is.null(nrow)) param$nrow <- nrow
 
   lapply(names(param), function(x) {
-    if (!is.null(param[[x]])) set_param_value(xml_doc, x,param[[x]])
+    if (!is.null(param[[x]])) set_param_value(xml_doc, x, param[[x]])
   })
 
 
@@ -190,7 +190,6 @@ upgrade_plt_xml_10_11 <- function(file,
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-
 }
 
 
@@ -213,14 +212,15 @@ upgrade_plt_xml_10_11 <- function(file,
 #' get_plt_IC_param("poi")
 #'
 get_plt_IC_param <- function(crop, warning = TRUE) {
-
   crops_param <- plt_IC_param_list()
   crop_names <- names(crops_param)
 
   if (missing(crop)) {
     if (warning) {
-      warning("A crop name is mandatory see above list:\n",
-              sprintf(fmt = "%s, ",crop_names))
+      warning(
+        "A crop name is mandatory see above list:\n",
+        sprintf(fmt = "%s, ", crop_names)
+      )
     }
     return(invisible())
   }
@@ -234,19 +234,19 @@ get_plt_IC_param <- function(crop, warning = TRUE) {
     if (warning) {
       val <- unlist(crops_param[[name]])
       val_name <- names(val)
-      warning("Unknown crop code name: ",
-              crop,
-              #crop, "\n See above list: \n",
-              #sprintf("%s, ", crop_names),
-              #"\n",
-              " Using default parameters values!\n",
-              paste(sprintf("%s: %s",val_name, val), collapse = ", "))
+      warning(
+        "Unknown crop code name: ",
+        crop,
+        # crop, "\n See above list: \n",
+        # sprintf("%s, ", crop_names),
+        # "\n",
+        " Using default parameters values!\n",
+        paste(sprintf("%s: %s", val_name, val), collapse = ", ")
+      )
     }
-
   }
 
   return(crops_param[[name]])
-
 }
 
 
@@ -260,7 +260,6 @@ get_plt_IC_param <- function(crop, warning = TRUE) {
 #'
 # @examples
 plt_IC_param_list <- function() {
-
   # pea, wheat, fababean, barley
   param <- list()
 
@@ -320,6 +319,7 @@ plt_IC_param_list <- function() {
   param$soj$haut_dev_k <- 0.00665713018807634
   param$soj$nrow <- 1
 
+  return(param)
 }
 
 #' Upgrade xml station file from STICS version 10 to 11
@@ -339,7 +339,6 @@ plt_IC_param_list <- function() {
 upgrade_sta_xml_10_11 <- function(file,
                                   out_dir,
                                   overwrite = FALSE) {
-
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -368,25 +367,31 @@ upgrade_sta_xml_10_11 <- function(file,
                 <param format="real" max="2.0" min="1.0" nom="alphapt">1.26000</param>
             </choix>
         </option>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
   # get current values
   par_values <- get_param_value(xml_doc,
-                                param_name = c("codeetp", "alphapt"))
+    param_name = c("codeetp", "alphapt")
+  )
 
   # replace codetp node with the previous one
   codetp_node_to_rm <- get_nodes(xml_doc,
-                                 path = '//option[@nomParam="codeetp"]')
+    path = '//option[@nomParam="codeetp"]'
+  )
   XML::removeNodes(codetp_node_to_rm[[1]])
 
   par_node <- get_nodes(xml_doc,
-                        path = '//formalisme[@nom="climate"]')
+    path = '//formalisme[@nom="climate"]'
+  )
 
   XML::addChildren(par_node[[1]], XML::xmlClone(codeetp), at = 0)
 
   # set values to current values
-  set_param_value(xml_doc, param_name = c("codeetp", "alphapt"),
-                  param_value = par_values)
+  set_param_value(xml_doc,
+    param_name = c("codeetp", "alphapt"),
+    param_value = par_values
+  )
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
@@ -394,7 +399,6 @@ upgrade_sta_xml_10_11 <- function(file,
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-
 }
 
 
@@ -414,7 +418,6 @@ upgrade_sta_xml_10_11 <- function(file,
 upgrade_ini_xml_10_11 <- function(file,
                                   out_dir,
                                   overwrite = FALSE) {
-
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -432,8 +435,9 @@ upgrade_ini_xml_10_11 <- function(file,
 
   # set_version
   check_and_upgrade_xml_version(xml_doc,
-                                from_version = "V10.1.1",
-                                target_version = "V11.0")
+    from_version = "V10.1.1",
+    target_version = "V11.0"
+  )
 
 
   # voir position de magrain0
@@ -466,7 +470,6 @@ upgrade_param_gen_xml_10_11 <- function(file,
                                         hauteur_threshold = NULL,
                                         par_to_net = NULL,
                                         overwrite = FALSE) {
-
   xml_doc <- xmldocument(file)
 
 
@@ -479,14 +482,16 @@ upgrade_param_gen_xml_10_11 <- function(file,
     '<formalisme nom="Intercropping">
       <param format="real" max="1.0" min="0.05" nom="hauteur_threshold">0.2</param>
       </formalisme>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
   sim_options_node <- get_nodes(xml_doc, path = "//formalisme[@nom='Simulation options']")
   XML::addSibling(sim_options_node[[1]], XML::xmlClone(IC_form_node))
 
   # after <param format="real" max="0.6" min="0.4" nom="parsurrg">0.48000</param>
   par2net_node <- XML::xmlParseString(
     '<param format="real" max="1.0" min="0.5" nom="par_to_net">0.83</param>',
-    addFinalizer = TRUE)
+    addFinalizer = TRUE
+  )
 
   parsurg_node <- get_nodes(xml_doc, path = "//param[@nom='parsurrg']")
   XML::addSibling(parsurg_node[[1]], XML::xmlClone(par2net_node))
@@ -499,7 +504,6 @@ upgrade_param_gen_xml_10_11 <- function(file,
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-
 }
 
 #' Upgrade xml param_newform file from STICS version 10 to 11
@@ -518,8 +522,6 @@ upgrade_param_gen_xml_10_11 <- function(file,
 upgrade_param_newform_xml_10_11 <- function(file,
                                             out_dir,
                                             overwrite = FALSE) {
-
-
   xml_doc <- xmldocument(file)
 
 
@@ -552,8 +554,6 @@ upgrade_param_newform_xml_10_11 <- function(file,
 upgrade_sols_xml_10_11 <- function(file,
                                    out_dir,
                                    overwrite = FALSE) {
-
-
   xml_doc <- xmldocument(file)
 
 
@@ -566,7 +566,6 @@ upgrade_sols_xml_10_11 <- function(file,
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-
 }
 
 #' Upgrade xml usms file from STICS version 10 to 11
@@ -585,8 +584,6 @@ upgrade_sols_xml_10_11 <- function(file,
 upgrade_usms_xml_10_11 <- function(file,
                                    out_dir,
                                    overwrite = FALSE) {
-
-
   xml_doc <- xmldocument(file)
 
 
@@ -599,7 +596,6 @@ upgrade_usms_xml_10_11 <- function(file,
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-
 }
 
 
@@ -629,20 +625,22 @@ upgrade_workspace_xml_10_11 <- function(workspace,
                                         from_version = "V10.0",
                                         target_version = "V11.0",
                                         overwrite = FALSE,
-                                        verbose = FALSE){
-
-
+                                        verbose = FALSE) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
   # Getting param_gen.xml path
-  par_gen <- get_param_gen_file(type = "param_gen.xml",
-                                workspace,
-                                javastics)
+  par_gen <- get_param_gen_file(
+    type = "param_gen.xml",
+    workspace,
+    javastics
+  )
 
-  upgrade_param_gen_xml_10_11(file = par_gen,
-                              out_dir = out_dir,
-                              overwrite = overwrite)
+  upgrade_param_gen_xml_10_11(
+    file = par_gen,
+    out_dir = out_dir,
+    overwrite = overwrite
+  )
 
 
   # Getting param_newform.xml path
@@ -651,9 +649,11 @@ upgrade_workspace_xml_10_11 <- function(workspace,
     workspace, javastics
   )
 
-  upgrade_param_newform_xml_10_11(file = par_new,
-                                  out_dir = out_dir,
-                                  overwrite = overwrite)
+  upgrade_param_newform_xml_10_11(
+    file = par_new,
+    out_dir = out_dir,
+    overwrite = overwrite
+  )
 
   # Converting usms.xml file
   usms <- file.path(workspace, "usms.xml")
@@ -691,7 +691,7 @@ upgrade_workspace_xml_10_11 <- function(workspace,
 
   usms_plt_files <- usms_plt_files[!plant_idx]
 
-  if(!is.null(javastics)) {
+  if (!is.null(javastics)) {
     plant_files <- get_in_files(
       in_dir_or_files = file.path(javastics, "plant"),
       kind = "plt"
@@ -700,10 +700,14 @@ upgrade_workspace_xml_10_11 <- function(workspace,
     plant_idx <- usms_plt_files %in% basename(plant_files)
 
     # combining javastics and workspace plant files
-    full_plant_files <- c(full_plant_files,
-                          file.path(javastics,
-                                    "plant",
-                                    usms_plt_files[plant_idx]))
+    full_plant_files <- c(
+      full_plant_files,
+      file.path(
+        javastics,
+        "plant",
+        usms_plt_files[plant_idx]
+      )
+    )
   }
 
 
@@ -712,20 +716,23 @@ upgrade_workspace_xml_10_11 <- function(workspace,
     plant_out_dir <- file.path(out_dir, "plant")
     if (!dir.exists(plant_out_dir)) dir.create(plant_out_dir)
 
-    upgrade_plt_xml_10_11(file = full_plant_files,
-                          out_dir = plant_out_dir,
-                          overwrite = overwrite)
+    upgrade_plt_xml_10_11(
+      file = full_plant_files,
+      out_dir = plant_out_dir,
+      overwrite = overwrite
+    )
   }
 
   # Other files types copy from the source workspace, or from javastics "example"
   # dir for *.mod files if they do not exist in the workspace
-  workspace_files_copy(workspace = workspace,
-                       #file_type = c("mod", "obs", "lai", "meteo"),
-                       javastics = javastics,
-                       out_dir = out_dir,
-                       overwrite = overwrite,
-                       verbose = verbose)
-
+  workspace_files_copy(
+    workspace = workspace,
+    # file_type = c("mod", "obs", "lai", "meteo"),
+    javastics = javastics,
+    out_dir = out_dir,
+    overwrite = overwrite,
+    verbose = verbose
+  )
 }
 
 
@@ -747,16 +754,17 @@ upgrade_workspace_xml_10_11 <- function(workspace,
 check_and_upgrade_xml_version <- function(xml_doc,
                                           from_version,
                                           target_version) {
-
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 
-  if ((target_version_num - from_version_num) < 1e-06)
-    stop("The target version ",
-         target_version,
-         " must be higher than the initial version ",
-         from_version
+  if ((target_version_num - from_version_num) < 1e-06) {
+    stop(
+      "The target version ",
+      target_version,
+      " must be higher than the initial version ",
+      from_version
     )
+  }
 
   # Checking if target version is supported
   # raising an error if not!
@@ -767,14 +775,17 @@ check_and_upgrade_xml_version <- function(xml_doc,
   from_version <- get_major_version(from_version)
   file_version <- get_major_version(get_xml_file_version(xml_doc))
 
-  if (!file_version %in% from_version)
-    stop("file has a wrong starting version !",
-         "must be a",
-         paste0(from_version,".x"))
+  if (!file_version %in% from_version) {
+    stop(
+      "file has a wrong starting version !",
+      "must be a",
+      paste0(from_version, ".x")
+    )
+  }
 
   # Setting new file STICS version
   set_xml_file_version(xml_doc,
-                       new_version = target_version
+    new_version = target_version
   )
 }
 
@@ -788,11 +799,11 @@ check_and_upgrade_xml_version <- function(xml_doc,
 #' @noRd
 #'
 get_major_version <- function(version, to_num = FALSE) {
-
   str_version <- strsplit(x = version, split = "\\.")[[1]][1]
 
-  if(!to_num)
+  if (!to_num) {
     return(str_version)
+  }
 
   get_version_num(str_version)
 }
