@@ -231,7 +231,7 @@ workspace_files_copy <- function(
         verbose = verbose
       )
     }
-    invisible(stat_list)
+    return(stat_list)
   }
 
   # Just in case if the func is used outside of the workspace upgrade
