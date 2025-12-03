@@ -23,13 +23,13 @@ get_param_txt(
   ...
 )
 
-get_ini_txt(file = "ficini.txt", stics_version)
+get_ini_txt(file = "ficini.txt", stics_version, workspace = NULL)
 
-get_general_txt(file = "tempopar.sti")
+get_general_txt(file = "tempopar.sti", workspace = NULL)
 
-get_tmp_txt(file = "tempoparv6.sti")
+get_tmp_txt(file = "tempoparv6.sti", workspace = NULL)
 
-get_plant_txt(file = "ficplt1.txt", variety = NULL)
+get_plant_txt(file = "ficplt1.txt", variety = NULL, workspace = NULL)
 
 get_tec_txt(
   file = "fictec1.txt",
@@ -37,14 +37,15 @@ get_tec_txt(
   several_fert = NULL,
   several_thin = NULL,
   is_pasture = NULL,
+  workspace = NULL,
   ...
 )
 
-get_soil_txt(file = "param.sol", stics_version)
+get_soil_txt(file = "param.sol", stics_version, workspace = NULL)
 
-get_station_txt(file = "station.txt")
+get_station_txt(file = "station.txt", workspace = NULL)
 
-get_usm_txt(file = "new_travail.usm", plant_id = NULL)
+get_usm_txt(file = "new_travail.usm", plant_id = NULL, workspace = NULL)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the STICS (txt)
@@ -161,17 +162,17 @@ get_ini_txt(path)
 # Read the tec file directly:
 
 # First, get the parameters from the tmp file:
-tmp <- get_tmp_txt(file = file.path(
-  get_examples_path(file_type = "txt"),
-  "tempoparv6.sti"
-))
+tmp <- get_tmp_txt(
+  workspace = get_examples_path(file_type = "txt")
+)
 several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
 several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
 is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
 
 # Then, get the technical parameters:
 get_tec_txt(
-  file = file.path(get_examples_path(file_type = "txt"), "fictec1.txt"),
+  workspace = get_examples_path(file_type = "txt"),
+  file = "fictec1.txt",
   several_fert = several_fert, several_thin = several_thin,
   is_pasture = is_pasture
 )
