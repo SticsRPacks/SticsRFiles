@@ -32,17 +32,16 @@
 #' @noRd
 #'
 get_file <- function(
-  workspace,
-  usm_name = NULL,
-  var_list = NULL,
-  dates_list = NULL,
-  usms_filepath = NULL,
-  javastics_path = NULL,
-  verbose = TRUE,
-  type = c("sim", "obs"),
-  parallel = FALSE,
-  cores = NA
-) {
+    workspace,
+    usm_name = NULL,
+    var_list = NULL,
+    dates_list = NULL,
+    usms_filepath = NULL,
+    javastics_path = NULL,
+    verbose = TRUE,
+    type = c("sim", "obs"),
+    parallel = FALSE,
+    cores = NA) {
   type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
 
   usms_path <- NULL
@@ -119,17 +118,16 @@ get_file <- function(
 #' @noRd
 #'
 get_file_ <- function(
-  workspace,
-  usm_name = NULL,
-  usms_filepath = NULL,
-  var_list = NULL,
-  dates_list = NULL,
-  javastics_path = NULL,
-  verbose = TRUE,
-  type = c("sim", "obs"),
-  parallel = FALSE,
-  cores = NA
-) {
+    workspace,
+    usm_name = NULL,
+    usms_filepath = NULL,
+    var_list = NULL,
+    dates_list = NULL,
+    javastics_path = NULL,
+    verbose = TRUE,
+    type = c("sim", "obs"),
+    parallel = FALSE,
+    cores = NA) {
   # TODO: add checking dates_list format, or apply the used format in sim
   # data.frame
 
@@ -223,6 +221,10 @@ get_file_ <- function(
     workspace_files <- workspace_files_sub
     workspace <- unique(dirname(workspace_files_sub))
     workspace_dir_names <- unique(basename(workspace))
+    is_subdir <- TRUE
+    usm_name <- basename(workspace)
+  } else {
+    is_subdir <- FALSE
   }
 
   # No usms file path is given
@@ -253,8 +255,14 @@ get_file_ <- function(
     # a plant directory, otherwise setting plant name to plant file name
     # as a default.
     usms <- names(file_name)
-    plant_names <-
-      get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
+    if (!is_subdir) {
+      plant_names <-
+        get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
+    } else {
+      # If we're using sub-directories, we consider the plant folder to be on the parent directory
+      plant_names <-
+        get_plant_name(unique(dirname(workspace)), usms_filepath, usms, javastics_path, verbose)
+    }
   } else {
     # The user did not provide any usms file path, so using the names of
     # the .sti files as information.
@@ -286,6 +294,7 @@ get_file_ <- function(
     # Calculating plant ids tags
     plant_names <- get_plant_id(file_name)
   }
+
   # Sorting lists content according to directory
   # names
   workspace <- unique(workspace)
@@ -364,13 +373,12 @@ get_file_ <- function(
 #' @noRd
 #'
 get_file_one <- function(
-  dirpath,
-  filename,
-  p_name,
-  verbose,
-  dates_list,
-  var_list
-) {
+    dirpath,
+    filename,
+    p_name,
+    verbose,
+    dates_list,
+    var_list) {
   df <- get_file_int(
     dirpath,
     filename,
@@ -417,12 +425,11 @@ get_file_one <- function(
 }
 
 get_file_from_usms <- function(
-  workspace,
-  usms_path,
-  type = c("sim", "obs"),
-  usm_name = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    usms_path,
+    type = c("sim", "obs"),
+    usm_name = NULL,
+    verbose = TRUE) {
   # Getting usms names from the usms.xml file
   usms <- get_usms_list(file = file.path(usms_path))
 

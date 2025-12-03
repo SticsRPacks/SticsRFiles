@@ -27,11 +27,10 @@
 #' get_file_int(path, "banana.obs")
 #' }
 get_file_int <- function(
-  workspace,
-  filename,
-  plant_name = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    filename,
+    plant_name = NULL,
+    verbose = TRUE) {
   # safe verbose
   if (verbose) cat(filename, "\n")
 
@@ -40,7 +39,10 @@ get_file_int <- function(
 
   if (!is.null(plant_name)) {
     if (length(plant_name) > 1 && length(plant_name) != length(filename)) {
-      stop("length(plant_name) should be == 1 or length(filename)")
+      stop(
+        "length(plant_name) should be == 1 or length(filename). `plant_name`:",
+        plant_name, " filename:", filename
+      )
     }
     if (length(plant_name) == 1) {
       plant_name <- rep(plant_name, length(filename))
