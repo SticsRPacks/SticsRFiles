@@ -27,11 +27,10 @@
 #' get_file_int(path, "banana.obs")
 #' }
 get_file_int <- function(
-  workspace,
-  filename,
-  plant_name = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    filename,
+    plant_name = NULL,
+    verbose = TRUE) {
   # safe verbose
   if (verbose) cat(filename, "\n")
 
@@ -114,5 +113,5 @@ get_file_int <- function(
   drop_cols <- intersect(c("ian", "mo", "jo", "jul"), names(out_table))
   if (length(drop_cols) > 0) out_table[, (drop_cols) := NULL]
 
-  data.frame(out_table)
+  out_table
 }
