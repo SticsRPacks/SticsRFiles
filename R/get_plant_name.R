@@ -200,7 +200,12 @@ get_plant_id <- function(usms_plant) {
 #' }
 #'
 get_plant_files <- function(usms_file, usms = NULL) {
-  all_usms <- get_usms_list(usms_file)
+  doc <- xmldocument(usms_file)
+
+  # Get all usm nodes
+  usm_nodes <- XML::getNodeSet(doc@content, "//usm")
+
+  all_usms <- sapply(usm_nodes, function(x) XML::xmlGetAttr(x, "nom"))
 
   if (is.null(usms)) {
     usms <- all_usms
@@ -208,26 +213,49 @@ get_plant_files <- function(usms_file, usms = NULL) {
     ids <- usms %in% all_usms
     if (!all(ids)) warning("At least one usm name does not exist")
     usms <- usms[ids]
-  }
-  files_list <- lapply(
-    usms,
-    function(x) {
-      plt_files <- get_param_xml(
-        file = usms_file,
-        param = "fplt",
-        select = "usm",
-        select_value = x
-      )
-      remove_null_value(plt_files$usms.xml$fplt)
-    }
-  )
-  names(files_list) <- usms
-
-  files_list
 }
 
-remove_null_value <- function(values) {
-  idx <- values == "null"
-  if (length(idx) == 0) return(values)
-  values[!idx]
+  plant_files <- lapply(usm_nodes, function(usm_node) {
+    usm_name_usms <- XML::xmlGetAttr(usm_node, "nom")
+
+    # Only process if this usm is in our filter list
+    if (
+      is.null(usm_name_usms) || (!is.null(usms) && !usm_name_usms %in% usms)
+    ) {
+      return(NULL)
+    }
+
+    # Get all fplt nodes under this usm
+    fplt_nodes <- XML::getNodeSet(usm_node, ".//fplt")
+    fplt_values <- sapply(fplt_nodes, XML::xmlValue)
+
+    # Filter out "null" values
+    fplt_values <- fplt_values[fplt_values != "null"]
+
+    return(fplt_values)
+  })
+
+  # Set names and remove NULL entries
+  names(plant_files) <- sapply(usm_nodes, function(x) XML::xmlGetAttr(x, "nom"))
+  plant_files <- plant_files[!sapply(plant_files, is.null)]
+
+  # Filter to requested usms
+  if (!is.null(usms)) {
+    plant_files <- plant_files[usms]
+  }
+
+  nb_plant <- get_plants_nb(usms_file)[usms]
+
+  # Keeping only useful files names according to nb_plant data
+  plant_xml <- try(
+    mapply(
+      function(x, y) {
+        list(x[1:y])
+      },
+      x = plant_files,
+      y = nb_plant
+    )
+  )
+
+  return(plant_xml)
 }
