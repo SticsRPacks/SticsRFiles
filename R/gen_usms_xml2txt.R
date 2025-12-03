@@ -113,9 +113,6 @@ gen_usms_xml2txt <- function(
   # Retrieving usm names list from the usms.xml file
   full_usms_list <- get_usms_list(file = usms_file_path)
 
-  # Do some usms have lai forcing? If so, read it accordingly:
-  lai_forcing <- get_lai_forcing_xml_doc(usms_doc)
-
   lai_file_path <-
     file.path(
       workspace,
@@ -470,7 +467,15 @@ gen_usms_xml2txt <- function(
     }
 
     # Copying observation files
-    obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
+    if (nbplantes[i] == 2) {
+      obs_name <- c(
+        file.path(workspace, paste0(usm_name, "p.obs")),
+        file.path(workspace, paste0(usm_name, "a.obs"))
+      )
+    } else {
+      obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
+    }
+
     if (file.exists(obs_path)) {
       i_obs_copy_status <- file.copy(
         from = obs_path,
