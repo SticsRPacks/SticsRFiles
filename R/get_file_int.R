@@ -114,5 +114,5 @@ get_file_int <- function(
   drop_cols <- intersect(c("ian", "mo", "jo", "jul"), names(out_table))
   if (length(drop_cols) > 0) out_table[, (drop_cols) := NULL]
 
-  out_table
+  data.frame(out_table)
 }
