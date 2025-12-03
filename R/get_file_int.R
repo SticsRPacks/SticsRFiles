@@ -27,11 +27,10 @@
 #' get_file_int(path, "banana.obs")
 #' }
 get_file_int <- function(
-  workspace,
-  filename,
-  plant_name = NULL,
-  verbose = TRUE
-) {
+    workspace,
+    filename,
+    plant_name = NULL,
+    verbose = TRUE) {
   # safe verbose
   if (verbose) cat(filename, "\n")
 
