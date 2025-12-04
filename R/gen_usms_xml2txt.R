@@ -63,18 +63,17 @@
 #'
 
 gen_usms_xml2txt <- function(
-  javastics = NULL,
-  workspace = NULL,
-  out_dir = NULL,
-  usm = NULL,
-  stics_version = "latest",
-  verbose = TRUE,
-  dir_per_usm_flag = TRUE,
-  java_cmd = "java",
-  java_converter = FALSE,
-  parallel = FALSE,
-  cores = NA
-) {
+    javastics = NULL,
+    workspace = NULL,
+    out_dir = NULL,
+    usm = NULL,
+    stics_version = "latest",
+    verbose = TRUE,
+    dir_per_usm_flag = TRUE,
+    java_cmd = "java",
+    java_converter = FALSE,
+    parallel = FALSE,
+    cores = NA) {
   if (java_converter) {
     # javastics directory must be given
     if (is.null(javastics)) {
@@ -468,7 +467,7 @@ gen_usms_xml2txt <- function(
 
     # Copying observation files
     if (nbplantes[i] == 2) {
-      obs_name <- c(
+      obs_path <- c(
         file.path(workspace, paste0(usm_name, "p.obs")),
         file.path(workspace, paste0(usm_name, "a.obs"))
       )
