@@ -390,7 +390,7 @@ get_file_one <- function(
   )
   keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
   out <- df[, ..keep_cols]
-
+  out <- data.frame(out)
   # Filtering
   # Filtering Date on dates_list (format Posixct)
   if (!is.null(dates_list) && "Date" %in% names(out)) {
