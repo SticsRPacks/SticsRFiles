@@ -12,9 +12,11 @@ studycase_path <-
 workspace_path <- file.path(studycase_path, "XmlFiles")
 
 test_that("single USM, single year", {
-  expected <- data.frame(usm = "bo96iN+",
-                         year1 = 1996,
-                         year2 = 1996)
+  expected <- data.frame(
+    usm = "bo96iN+",
+    year1 = 1996,
+    year2 = 1996
+  )
   rownames(expected) <- expected$usm
   observed <- get_years(workspace_path, "usms.xml", "bo96iN+")
   expect_equal(observed, expected)

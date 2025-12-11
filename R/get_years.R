@@ -10,7 +10,7 @@
 #'
 #' @export
 #'
-get_years <- function(workspace, file_name = "usms.xml", usm){
+get_years <- function(workspace, file_name = "usms.xml", usm) {
   file_path <- file.path(workspace, file_name)
 
   # Checking file
@@ -28,28 +28,34 @@ get_years <- function(workspace, file_name = "usms.xml", usm){
     requested_usms <- usm
   }
 
-  values <- data.frame(usm = requested_usms,
-                       year1 = NA,
-                       year2 = NA)
+  values <- data.frame(
+    usm = requested_usms,
+    year1 = NA,
+    year2 = NA
+  )
   rownames(values) <- values$usm
 
-  for(usm in requested_usms) {
+  for (usm in requested_usms) {
     for (i in 1:2) {
-      fclim_id<- paste0("fclim", i)
-      fclim <- get_param_xml(file=file_path,
-                             param=fclim_id,
-                             select="usm",
-                             select_value=usm)[[1]]
+      fclim_id <- paste0("fclim", i)
+      fclim <- get_param_xml(
+        file = file_path,
+        param = fclim_id,
+        select = "usm",
+        select_value = usm
+      )[[1]]
       fclim_path <- file.path(workspace, fclim[[fclim_id]])
       if (!file.exists(fclim_path)) {
-        msg <- paste0("file fclim", i, "'", fclim_path, "' does not exist",
-                      " for USM '", usm, "'")
+        msg <- paste0(
+          "file fclim", i, "'", fclim_path, "' does not exist",
+          " for USM '", usm, "'"
+        )
         warning(msg)
         next
       }
-      line1 <- readLines(fclim_path, n=1)
+      line1 <- readLines(fclim_path, n = 1)
       tmp <- strsplit(line1, "\\s+")[[1]]
-      values[usm, paste0("year",i)] <- as.numeric(tmp[2])
+      values[usm, paste0("year", i)] <- as.numeric(tmp[2])
     }
   }
 
