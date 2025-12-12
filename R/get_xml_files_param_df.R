@@ -97,19 +97,12 @@ get_xml_files_param_df <- function(
           select = select,
           name = name,
           param_names = param_names,
-          wide_shape = FALSE
+          wide_shape = wide_shape
         )
       }
     )
 
-    df <- data.table::rbindlist(files_df)
-
-    # Conversion to a wider table (with type conversion)
-    if (wide_shape) {
-      df <- df_wider(df)
-    }
-
-    return(df)
+    return(dplyr::bind_rows(files_df))
   }
 
   # Getting parameters file type
@@ -146,6 +139,11 @@ get_xml_files_param_df <- function(
   if (file_type == "initialisations") {
     param_values <- reformat_param_values_init(param_values)
   }
+
+  # Filtering empty values i.e. numeric(0) corresponding to names in
+  # tables headers
+  values_id <- unlist(lapply(param_values, function(x) length(x) == 0))
+  param_values[values_id] <- NA
 
   # Checking if only one parameter, param_values == numerical vector
   if (length(param_names) == 1) {
@@ -230,7 +228,11 @@ df_wider <- function(df, convert_type = TRUE, string_as_factors = FALSE) {
   # parameters wider data.frame
   df <- df %>%
     dplyr::select(-"id") %>%
-    tidyr::pivot_wider(names_from = "param", values_from = "value")
+    tidyr::pivot_wider(
+      names_from = "param",
+      values_from = "value",
+      values_fill = NA
+    )
 
   if (convert_type) df <- utils::type.convert(df, as.is = !string_as_factors)
 
@@ -258,6 +260,7 @@ get_params_id <- function(file_type, file_path, param_values) {
     param$id <- unlist(
       lapply(param_types_data, function(x) {
         l <- NA
+        #if (x$type %in% c("table", "table2")) l <- 1:x$length
         if (x$type %in% c("table", "table2")) l <- 1:x$length
         return(l)
       }),
