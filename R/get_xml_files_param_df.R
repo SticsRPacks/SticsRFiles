@@ -260,7 +260,7 @@ get_params_id <- function(file_type, file_path, param_values) {
     param$id <- unlist(
       lapply(param_types_data, function(x) {
         l <- NA
-        #if (x$type %in% c("table", "table2")) l <- 1:x$length
+        # if (x$type %in% c("table", "table2")) l <- 1:x$length
         if (x$type %in% c("table", "table2")) l <- 1:x$length
         return(l)
       }),
