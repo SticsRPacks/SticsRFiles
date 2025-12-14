@@ -207,6 +207,13 @@ get_xml_files_param_df <- function(
     stringsAsFactors = FALSE
   )
 
+  # Filtering parameters with NA values
+  # corresponding to none crop management operations
+  # in _tec files
+  data_df <- data_df %>%
+    dplyr::filter(!is.na(value))
+
+  # Filtering on target name if any
   if (select_name) {
     data_df <- dplyr::filter(data_df, name %in% target_name)
   }
@@ -260,7 +267,6 @@ get_params_id <- function(file_type, file_path, param_values) {
     param$id <- unlist(
       lapply(param_types_data, function(x) {
         l <- NA
-        #if (x$type %in% c("table", "table2")) l <- 1:x$length
         if (x$type %in% c("table", "table2")) l <- 1:x$length
         return(l)
       }),
