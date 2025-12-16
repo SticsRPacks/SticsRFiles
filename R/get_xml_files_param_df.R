@@ -8,7 +8,8 @@
 #' parameters as columns
 #'
 #' @return A single long data.frame with name, type, param, id and value
-#' columns or a wide a data.frame with name, type, and all other columns
+#' columns, value is of type character.
+#' or a wide a data.frame with name, type, and all other columns
 #' correspond to parameter names, with indices as suffix for multiple values
 #' (as in _tec.xml files for water supply, N supply, ...)
 #'
