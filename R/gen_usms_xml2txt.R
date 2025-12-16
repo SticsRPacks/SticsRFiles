@@ -492,24 +492,27 @@ gen_usms_xml2txt <- function(
     }
 
     # Copying lai files (whatever the lai forcing value is)
-    lapply(flai_usms[usm_name], function(x) {
-      idx <- basename(x) != "null" & file.exists(x)
-      x <- x[idx]
-      if (length(x > 0)) {
-        i_lai_copy_status <- file.copy(
-          from = x,
-          to = usm_path,
-          overwrite = TRUE
-        )
-      } else {
+    lapply(flai_usms[[usm_name]], function(x) {
+      if (basename(x) == "null") {
+        return(FALSE)
+      }
+
+      if (!file.exists(x)) {
         if (verbose) {
           cli::cli_alert_warning(paste0(
             "LAI file not found for USM ",
             "{.val {usm_name}}: {.file ",
-            "{lai_file_path[i]}}"
+            "{x}}"
           ))
         }
+        return(FALSE)
       }
+
+      file.copy(
+        from = x,
+        to = usm_path,
+        overwrite = TRUE
+      )
     })
 
     # Storing global files copy status
