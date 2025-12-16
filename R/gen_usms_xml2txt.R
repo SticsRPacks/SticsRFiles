@@ -120,9 +120,9 @@ gen_usms_xml2txt <- function(
     )
 
   dominance <- get_param_value(usms_doc, param_name = "dominance")$dominance
-
+  names(dominance) <- full_usms_list
   nbplantes <- get_param_value(usms_doc, param_name = "nbplantes")$nbplantes
-
+  names(nbplantes) <- full_usms_list
   flai_usms <- vector(mode = "list", length = length(full_usms_list))
   names(flai_usms) <- full_usms_list
   usm_index <- 1 # This is equivalent of i, but tracks which usm we are doing in
@@ -467,8 +467,8 @@ gen_usms_xml2txt <- function(
     }
 
     # Copying observation files
-    if (nbplantes[i] == 2) {
-      obs_name <- c(
+    if (nbplantes[usm_name] == 2) {
+      obs_path <- c(
         file.path(workspace, paste0(usm_name, "p.obs")),
         file.path(workspace, paste0(usm_name, "a.obs"))
       )
@@ -476,7 +476,7 @@ gen_usms_xml2txt <- function(
       obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
     }
 
-    if (file.exists(obs_path)) {
+    if (any(file.exists(obs_path))) {
       i_obs_copy_status <- file.copy(
         from = obs_path,
         to = usm_path,
@@ -493,24 +493,27 @@ gen_usms_xml2txt <- function(
     }
 
     # Copying lai files (whatever the lai forcing value is)
-    lapply(flai_usms[usm_name], function(x) {
-      idx <- basename(x) != "null" & file.exists(x)
-      x <- x[idx]
-      if (length(x > 0)) {
-        i_lai_copy_status <- file.copy(
-          from = x,
-          to = usm_path,
-          overwrite = TRUE
-        )
-      } else {
+    lapply(flai_usms[[usm_name]], function(x) {
+      if (basename(x) == "null") {
+        return(FALSE)
+      }
+
+      if (!file.exists(x)) {
         if (verbose) {
           cli::cli_alert_warning(paste0(
             "LAI file not found for USM ",
             "{.val {usm_name}}: {.file ",
-            "{lai_file_path[i]}}"
+            "{x}}"
           ))
         }
+        return(FALSE)
       }
+
+      file.copy(
+        from = x,
+        to = usm_path,
+        overwrite = TRUE
+      )
     })
 
     # Storing global files copy status
@@ -525,7 +528,7 @@ gen_usms_xml2txt <- function(
       usms_path = usm_path,
       exec_status = i_exec_status,
       global_copy_status = i_global_copy_status,
-      obs_copy_status = i_obs_copy_status,
+      obs_copy_status = all(i_obs_copy_status),
       lai_copy_status = i_lai_copy_status
     ))
   }
