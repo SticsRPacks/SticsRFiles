@@ -5,21 +5,10 @@
 \title{Extracting a data.frame of parameters values for an xml file or a set of
 (whatever the xml file kind)}
 \usage{
-get_xml_files_param_df(
-  file_path,
-  select = NULL,
-  name = NULL,
-  param_names = NULL,
-  wide_shape = FALSE
-)
+get_xml_files_param_df(file_path, param_names = NULL, wide_shape = FALSE)
 }
 \arguments{
 \item{file_path}{A file path or a vector of STICS XML files}
-
-\item{select}{node name or attribute name to use for selection
-(optional, default to no selection)}
-
-\item{name}{value used for select (optional)}
 
 \item{param_names}{vector of parameters names (optional)}
 
@@ -84,11 +73,9 @@ for multiple values (as in _tec.xml files)
 \examples{
 \dontrun{
 dir_path <- get_examples_path("xml")
-get_xml_files_param_df(file_path = file.path(dir_path, "sols.xml"))
 
 get_xml_files_param_df(
-  file_path = file.path(dir_path, "sols.xml"),
-  select = "sol", c("solcanne", "solble")
+  file_path = file.path(dir_path, "sols.xml")
 )
 
 files_list <- file.path(dir_path, c("sols.xml", "usms.xml", "param_gen.xml"))

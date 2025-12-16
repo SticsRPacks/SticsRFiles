@@ -2,9 +2,6 @@
 #' (whatever the xml file kind)
 #'
 #' @param file_path A file path or a vector of STICS XML files
-#' @param select node name or attribute name to use for selection
-#' (optional, default to no selection)
-#' @param name value used for select (optional)
 #' @param param_names vector of parameters names (optional)
 #' @param wide_shape Optional logical for keeping the long data.frame
 #' format FALSE, default) or converting it to a wider format one (TRUE), with
@@ -62,11 +59,9 @@
 #' @examples
 #' \dontrun{
 #' dir_path <- get_examples_path("xml")
-#' get_xml_files_param_df(file_path = file.path(dir_path, "sols.xml"))
 #'
 #' get_xml_files_param_df(
-#'   file_path = file.path(dir_path, "sols.xml"),
-#'   select = "sol", c("solcanne", "solble")
+#'   file_path = file.path(dir_path, "sols.xml")
 #' )
 #'
 #' files_list <- file.path(dir_path, c("sols.xml", "usms.xml", "param_gen.xml"))
@@ -79,8 +74,6 @@
 #'
 get_xml_files_param_df <- function(
   file_path,
-  select = NULL,
-  name = NULL,
   param_names = NULL,
   wide_shape = FALSE
 ) {
@@ -101,44 +94,42 @@ get_xml_files_param_df <- function(
       function(x) {
         get_xml_files_param_df(
           x,
-          select = select,
-          name = name,
           param_names = param_names,
           wide_shape = wide_shape
         )
       }
     )
 
-    return(dplyr::bind_rows(files_df))
+    return(dplyr::bind_rows(files_df, ))
   }
 
   # Getting parameters file type
   file_type <- get_xml_type(file_path)
 
   # Checking if select can be set (for sols and usms)
-  if (base::is.null(select)) {
-    if (is_sols_xml(file_path)) select <- "sol"
-    if (is_usms_xml(file_path)) select <- "usm"
-  }
+  # if (base::is.null(select)) {
+  #   if (is_sols_xml(file_path)) select <- "sol"
+  #   if (is_usms_xml(file_path)) select <- "usm"
+  # }
 
-  # Getting usm or sol names vector
-  names_list <- NULL
-  if (!base::is.null(select)) {
-    names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
-  }
-
-  # Getting all usm or sol names from the file
-  select_name <- FALSE
-  if (!is.null(name)) {
-    # Checking names
-    exist_names <- names_list %in% name
-    if (sum(exist_names) < length(name)) {
-      miss_names <- setdiff(name, names_list[exist_names])
-      warning("Missing names in file: ", paste(miss_names, collapse = ","))
-    }
-    select_name <- TRUE
-    target_name <- names_list[exist_names]
-  }
+  # # Getting usm or sol names vector
+  # names_list <- NULL
+  # if (!base::is.null(select)) {
+  #   names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
+  # }
+  #
+  # # Getting all usm or sol names from the file
+  # select_name <- FALSE
+  # if (!is.null(name)) {
+  #   # Checking names
+  #   exist_names <- names_list %in% name
+  #   if (sum(exist_names) < length(name)) {
+  #     miss_names <- setdiff(name, names_list[exist_names])
+  #     warning("Missing names in file: ", paste(miss_names, collapse = ","))
+  #   }
+  #   select_name <- TRUE
+  #   target_name <- names_list[exist_names]
+  # }
 
   # for one name
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
@@ -161,42 +152,42 @@ get_xml_files_param_df <- function(
   # Getting parameters values number
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
-  if (base::is.null(select)) {
-    # calling the function calculating ids
-    param_id_names <- get_params_id(file_type, file_path, param_values)
-    param_id <- param_id_names$id
-    param_names <- param_id_names$names
+  #if (base::is.null(select)) {
+  # calling the function calculating ids
+  param_id_names <- get_params_id(file_type, file_path, param_values)
+  param_id <- param_id_names$id
+  param_names <- param_id_names$names
 
-    names(param_values) <- param_names
+  names(param_values) <- param_names
 
-    name_col <- rep(basename(file_path), sum(values_nb))
-  } else {
-    # Getting values nb for each usm or sol
-    values_per_par <- length(names_list)
-
-    param_id <- unlist(
-      lapply(values_nb, function(x) {
-        l <- rep(NA, x)
-        if (x > values_per_par) l <- rep(1:(x / values_per_par), values_per_par)
-        return(l)
-      }),
-      use.names = FALSE
-    )
-
-    name_col <- unlist(
-      lapply(values_nb, function(x) {
-        l <- names_list
-        if (x > values_per_par) {
-          l <- unlist(lapply(
-            names_list,
-            function(y) rep(y, x / values_per_par)
-          ))
-        }
-        return(l)
-      }),
-      use.names = FALSE
-    )
-  }
+  name_col <- rep(basename(file_path), sum(values_nb))
+  # } else {
+  #   # Getting values nb for each usm or sol
+  #   values_per_par <- length(names_list)
+  #
+  #   param_id <- unlist(
+  #     lapply(values_nb, function(x) {
+  #       l <- rep(NA, x)
+  #       if (x > values_per_par) l <- rep(1:(x / values_per_par), values_per_par)
+  #       return(l)
+  #     }),
+  #     use.names = FALSE
+  #   )
+  #
+  #     name_col <- unlist(
+  #       lapply(values_nb, function(x) {
+  #         l <- names_list
+  #         if (x > values_per_par) {
+  #           l <- unlist(lapply(
+  #             names_list,
+  #             function(y) rep(y, x / values_per_par)
+  #           ))
+  #         }
+  #         return(l)
+  #       }),
+  #       use.names = FALSE
+  #     )
+  #   }
 
   # Getting expanded parameters names vector
   param <- rep(names(param_values), values_nb)
@@ -217,13 +208,17 @@ get_xml_files_param_df <- function(
   # Filtering parameters with NA values
   # corresponding to none crop management operations
   # in _tec files
+  # and converting value to character to prevent
+  # type consistency between data.frames for executing
+  # bind_rows
   data_df <- data_df %>%
-    dplyr::filter(!is.na(value))
+    dplyr::filter(!is.na(value)) %>%
+    dplyr::mutate(value = as.character(value))
 
   # Filtering on target name if any
-  if (select_name) {
-    data_df <- dplyr::filter(data_df, name %in% target_name)
-  }
+  # if (select_name) {
+  #   data_df <- dplyr::filter(data_df, name %in% target_name)
+  # }
 
   # Conversion to a wider table (with type conversion)
   if (wide_shape) {
