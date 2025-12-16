@@ -351,7 +351,6 @@ gen_usms_xml2txt <- function(
         ))
       }
     } else {
-      usms_doc <- xmldocument(usms_file_path)
       usm_data <- get_usm_data(usms_doc, usm_name, workspace)
 
       # Getting the usm files paths
