@@ -107,32 +107,7 @@ get_xml_files_param_df <- function(
   # Getting parameters file type
   file_type <- get_xml_type(file_path)
 
-  # Checking if select can be set (for sols and usms)
-  # if (base::is.null(select)) {
-  #   if (is_sols_xml(file_path)) select <- "sol"
-  #   if (is_usms_xml(file_path)) select <- "usm"
-  # }
-
-  # # Getting usm or sol names vector
-  # names_list <- NULL
-  # if (!base::is.null(select)) {
-  #   names_list <- get_param_xml(file_path, param = select)[[1]][[select]]
-  # }
-  #
-  # # Getting all usm or sol names from the file
-  # select_name <- FALSE
-  # if (!is.null(name)) {
-  #   # Checking names
-  #   exist_names <- names_list %in% name
-  #   if (sum(exist_names) < length(name)) {
-  #     miss_names <- setdiff(name, names_list[exist_names])
-  #     warning("Missing names in file: ", paste(miss_names, collapse = ","))
-  #   }
-  #   select_name <- TRUE
-  #   target_name <- names_list[exist_names]
-  # }
-
-  # for one name
+  # With param_names vector query
   param_values <- get_param_xml(file_path, param = param_names)[[1]]
 
   if (file_type == "initialisations") {
@@ -153,8 +128,7 @@ get_xml_files_param_df <- function(
   # Getting parameters values number
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
-  #if (base::is.null(select)) {
-  # calling the function calculating ids
+  # Calling the function calculating values ids
   param_id_names <- get_params_id(file_type, file_path, param_values)
   param_id <- param_id_names$id
   param_names <- param_id_names$names
@@ -162,33 +136,6 @@ get_xml_files_param_df <- function(
   names(param_values) <- param_names
 
   name_col <- rep(basename(file_path), sum(values_nb))
-  # } else {
-  #   # Getting values nb for each usm or sol
-  #   values_per_par <- length(names_list)
-  #
-  #   param_id <- unlist(
-  #     lapply(values_nb, function(x) {
-  #       l <- rep(NA, x)
-  #       if (x > values_per_par) l <- rep(1:(x / values_per_par), values_per_par)
-  #       return(l)
-  #     }),
-  #     use.names = FALSE
-  #   )
-  #
-  #     name_col <- unlist(
-  #       lapply(values_nb, function(x) {
-  #         l <- names_list
-  #         if (x > values_per_par) {
-  #           l <- unlist(lapply(
-  #             names_list,
-  #             function(y) rep(y, x / values_per_par)
-  #           ))
-  #         }
-  #         return(l)
-  #       }),
-  #       use.names = FALSE
-  #     )
-  #   }
 
   # Getting expanded parameters names vector
   param <- rep(names(param_values), values_nb)
@@ -215,11 +162,6 @@ get_xml_files_param_df <- function(
   data_df <- data_df %>%
     dplyr::filter(!is.na(value)) %>%
     dplyr::mutate(value = as.character(value))
-
-  # Filtering on target name if any
-  # if (select_name) {
-  #   data_df <- dplyr::filter(data_df, name %in% target_name)
-  # }
 
   # Conversion to a wider table (with type conversion)
   if (wide_shape) {
