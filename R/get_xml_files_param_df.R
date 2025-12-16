@@ -1,20 +1,25 @@
 #' Extracting a data.frame of parameters values for an xml file or a set of
 #' (whatever the xml file kind)
 #'
-#' @param file_path A file path or a vector of
+#' @param file_path A file path or a vector of STICS XML files
 #' @param select node name or attribute name to use for selection
 #' (optional, default to no selection)
 #' @param name value used for select (optional)
 #' @param param_names vector of parameters names (optional)
 #' @param wide_shape Optional logical for keeping the long data.frame
-#' format FALSE, default) or converting it to a wider format one (TRUE)
+#' format FALSE, default) or converting it to a wider format one (TRUE), with
+#' parameters as columns
 #'
-#' @return A data.frame with name, type, param, id and value columns
+#' @return A single long data.frame with name, type, param, id and value
+#' columns or a wide a data.frame with name, type, and all other columns
+#' correspond to parameter names, with indices as suffix for multiple values
+#' (as in _tec.xml files for water supply, N supply, ...)
 #'
 #'
-#' @details An extract of an example of data.frame for the 2 formats
+#' @details An extract of returned data.frames with the 2 formats from an
+#' usms.xml file as input
 #'
-#'  * Default one
+#'  * Default data.frame long format
 #'
 #' |name          |type       |param     | id|value            |
 #' |:-------------|:----------|:---------|--:|:----------------|
@@ -37,7 +42,7 @@
 #' id: NA for scalar, integer id for vectors parameters
 #' value: parameter value
 #'
-#' * wide format
+#' * wide data.frame format
 #'
 #'  |name      |type | datedebut| datefin|finit          |nomsol    |
 #'  |:---------|:----|---------:|-------:|:--------------|:---------|
@@ -50,11 +55,9 @@
 #' name: a file name or an usm or soil name
 #' type: type of file
 #' all other columns names correspond to parameter names, with indices as suffix
-#' for multiple values
+#' for multiple values (as in _tec.xml files)
 #'
-#' @keywords internal
-#'
-#' @noRd
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -67,7 +70,11 @@
 #' )
 #'
 #' files_list <- file.path(dir_path, c("sols.xml", "usms.xml", "param_gen.xml"))
+#' # long format (default)
 #' get_xml_files_param_df(file_path = files_list)
+#'
+#' # wide format
+#' get_xml_files_param_df(file_path = files_list, wide_shape = TRUE)
 #' }
 #'
 get_xml_files_param_df <- function(
@@ -263,6 +270,11 @@ get_params_id <- function(file_type, file_path, param_values) {
       xml_doc,
       param_name = names(param_values)
     )
+    # for a unique parameter, transformation to a list
+    if (
+      inherits(param_types_data, "list") & ("type" %in% names(param_types_data))
+    )
+      param_types_data <- list(param_types_data)
 
     param$id <- unlist(
       lapply(param_types_data, function(x) {
