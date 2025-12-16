@@ -153,7 +153,7 @@ get_xml_files_param_df <- function(
   # Getting parameters values number
   values_nb <- unlist(lapply(X = param_values, function(x) length(x)))
 
-  #if (base::is.null(select)) {
+  # if (base::is.null(select)) {
   # calling the function calculating ids
   param_id_names <- get_params_id(file_type, file_path, param_values)
   param_id <- param_id_names$id
@@ -269,8 +269,9 @@ get_params_id <- function(file_type, file_path, param_values) {
     # for a unique parameter, transformation to a list
     if (
       inherits(param_types_data, "list") & ("type" %in% names(param_types_data))
-    )
+    ) {
       param_types_data <- list(param_types_data)
+    }
 
     param$id <- unlist(
       lapply(param_types_data, function(x) {
