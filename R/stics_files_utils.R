@@ -253,7 +253,7 @@ workspace_files_copy <- function(
   # Just for the *.mod files, looking in javastics if not found in the workspace
   # TODO: combine both if partial match
   if (length(files_list) == 0) {
-    if (file_type == "mod") {
+    if ("mod" %in% file_type) {
       if (is.null(javastics)) {
         warning(paste(
           "No",
