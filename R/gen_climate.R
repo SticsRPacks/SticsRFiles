@@ -71,12 +71,13 @@ complete_climate_paths <- function(files_path) {
   files_dir <- unique(dirname(files_path))
 
   if (length(files_names) < 2) {
-    if (length(files_dir) > 1)
+    if (length(files_dir) > 1) {
       stop(paste0(
         files_names[1],
         " the same file exists in 2 locations: ",
         paste(files_dir, collapse = ", ")
       ))
+    }
     return(file.path(files_dir, files_names))
   }
 
