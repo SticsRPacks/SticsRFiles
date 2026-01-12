@@ -267,7 +267,7 @@ workspace_files_copy <- function(
       files_list <- list.files(
         path = file.path(
           javastics,
-          "example",
+          "config",
           full.names = TRUE,
           pattern = patt
         )
