@@ -56,16 +56,20 @@ upgrade_workspace_xml <- function(
   min_version <- get_version_num("V9.1")
 
   # Getting param_gen.xml path
-  par_gen <- get_param_gen_file(type = "param_gen.xml", workspace, javastics)
-  if (is.null(par_gen)) {
-    stop(
-      "param_gen.xml: file not found in\n",
-      workspace,
-      " or ",
-      javastics,
-      "directory! "
-    )
-  }
+  par_gen <- get_param_gen_file(
+    file_name = "param_gen.xml",
+    workspace,
+    javastics
+  )
+  # if (is.null(par_gen)) {
+  #   stop(
+  #     "param_gen.xml: file not found in\n",
+  #     workspace,
+  #     " or ",
+  #     javastics,
+  #     "directory! "
+  #   )
+  # }
   if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
 
   # Extracting or detecting the STICS version corresponding to the xml file
@@ -161,15 +165,7 @@ upgrade_workspace_xml <- function(
     workspace,
     javastics
   )
-  if (is.null(par_new)) {
-    stop(
-      "param_newform.xml: file not found in\n",
-      workspace,
-      " or ",
-      javastics,
-      "directory! "
-    )
-  }
+
   if (attr(par_new, "where") == "workspace") upgr_par_new <- TRUE
 
   # Converting param_newform.xml
@@ -279,52 +275,6 @@ upgrade_workspace_xml <- function(
     message("*_tec.xml\n")
   }
 
-  # # Copying *.mod files (for model outputs)
-  # stat <- file.copy(
-  #   from = list.files(path = workspace, full.names = TRUE, pattern = "*.mod"),
-  #   to = out_dir, overwrite = overwrite
-  # )
-  #
-  # if (verbose) {
-  #   message("Copying *.mod files.\n")
-  # }
-
-  # Copying observation files
-  # all .obs files deteted in workspace,
-  # not only according to usms names, because now obs files names are
-  # references in the usms.xml file (i.e. not fixed a priori)
-  # stat <- file.copy(
-  #   from = list.files(path = workspace, full.names = TRUE, pattern = "*.obs"),
-  #   to = out_dir, overwrite = overwrite
-  # )
-  #
-  # if (verbose) {
-  #   message("Copying *.obs files.\n")
-  # }
-
-  # Copying weather data files
-  # Note: for the moment, all files with a numerical extension
-  # (i.e. year, as .1996) are taken into account because when USM are
-  # defined over 2 successive years, files are not explicitly mentioned
-  # in the usms.xml file.
-
-  # weather_files <-
-  #   list.files(workspace, full.names = TRUE, pattern = "\\.[0-9]")
-  #
-  # stat <- file.copy(
-  #   from = weather_files,
-  #   to = out_dir, overwrite = overwrite
-  # )
-  #
-  # if (!all(stat)) {
-  #   warning("Error when copying file(s): ",
-  #           paste(weather_files[stat], collapse = ", "))
-  # }
-  #
-  # if (verbose) {
-  #   message("Copying weather files.\n")
-  # }
-
   # TODO: see how to manage variables names checks in *.mod files
   # Probably, the new JavaSTICS path may be added as a new function argument
   # for getting information on output variables
@@ -332,7 +282,7 @@ upgrade_workspace_xml <- function(
 
   workspace_files_copy(
     workspace = workspace,
-    file_type = c("mod", "obs", "lai", "meteo"),
+    #file_type = c("mod", "obs", "lai", "meteo"),
     javastics = javastics,
     out_dir = out_dir,
     overwrite = overwrite,

@@ -46,37 +46,49 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-  type = c("param_gen.xml", "param_newform.xml"),
+  file_name,
   workspace_dir,
   javastics_dir = NULL
 ) {
-  par_file <- file.path(workspace_dir, type)
+  if (!file_name %in% c("param_gen.xml", "param_newform.xml")) {
+    stop(file_name, "is not a gerenal parameters file name !")
+  }
 
-  if (file.exists(par_file)) {
+  par_file <- file.path(workspace_dir, file_name)
+
+  exists_in_workspace <- file.exists(par_file)
+
+  if (exists_in_workspace) {
     attr(par_file, "where") <- "workspace"
     return(par_file)
   }
 
   if (is.null(javastics_dir)) {
-    warning(
-      "JavaSTICS path must be given as input argument\n",
-      type,
+    stop(
+      "JavaSTICS path is needed as as input argument\n",
+      file_name,
       " has not been found in ",
       workspace_dir
     )
     return()
   }
 
-  par_file <- file.path(javastics_dir, "config", type)
+  par_file <- file.path(javastics_dir, "config", file_name)
 
-  if (file.exists(par_file)) {
+  exists_in_javastics <- file.exists(par_file)
+
+  if (exists_in_javastics) {
     attr(par_file, "where") <- "javastics"
     return(par_file)
   }
 
-  warning(type, " has not been found in ", javastics_dir)
-
-  return()
+  stop(
+    file_name,
+    " has not been found neither in ",
+    javastics_dir,
+    " nor in",
+    workspace_dir
+  )
 }
 
 to_xml_version <- function(stics_version) {
@@ -124,11 +136,13 @@ set_xml_file_version <- function(
   ver <- to_xml_version(new_version)
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
-  att_value <- get_attrs_values(xml_doc,
-                                path = root_path,
-                                attr_list = "version")
+  att_value <- get_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_list = "version"
+  )
 
-  if(length(att_value) == 0) {
+  if (length(att_value) == 0) {
     add_attrs(xml_doc, path = root_path, named_vector = ver)
     return(invisible())
   }
@@ -141,11 +155,12 @@ set_xml_file_version <- function(
     ))
   }
 
-  set_attrs_values(xml_doc,
-                   path = root_path,
-                   attr_name = "version",
-                   values_list = ver)
-
+  set_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_name = "version",
+    values_list = ver
+  )
 }
 
 # TODO : see existing get_xml_stics_version, to be merged or replaced with
