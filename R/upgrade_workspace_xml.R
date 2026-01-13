@@ -161,7 +161,7 @@ upgrade_workspace_xml <- function(
 
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
-    type = "param_newform.xml",
+    file_name = "param_newform.xml",
     workspace,
     javastics
   )
