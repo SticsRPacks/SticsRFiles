@@ -84,7 +84,7 @@ jobs:
       - name: Wait for SticsRTests workflow to complete (block-and-fail)
         uses: actions/github-script@v8
         with:
-          github-token: ${{ secrets.STICSRTEST_TRIGGER }}
+          token: ${{ secrets.STICSRTEST_TRIGGER }}
           script: |
             const owner = 'SticsRPacks';
             const repo = 'SticsRTests';
