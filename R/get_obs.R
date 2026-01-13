@@ -20,6 +20,8 @@
 #' to usms_file to get the plant codes if the plant files used are not
 #' in the workspace but in the JavaSTICS distribution (see Details).
 #' @param verbose Logical value for displaying or not information while running
+#' @param parallel Boolean. Is the computation to be done in parallel ?
+#' @param cores Number of cores to use for parallel computation.
 #'
 #' @details **The `.obs` files names must match USMs names**, *e.g.* for a usm
 #' called "banana", the `.obs` file should be named `banana.obs`.
@@ -71,7 +73,9 @@ get_obs <- function(
   dates = NULL,
   usms_file = NULL,
   javastics = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  parallel = FALSE,
+  cores = NA
 ) {
   get_file(
     workspace,
@@ -81,6 +85,8 @@ get_obs <- function(
     usms_file,
     javastics,
     verbose,
-    "obs"
+    "obs",
+    parallel = parallel,
+    cores = cores
   )
 }

@@ -46,10 +46,9 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-  type = c("param_gen.xml", "param_newform.xml"),
-  workspace_dir,
-  javastics_dir = NULL
-) {
+    type = c("param_gen.xml", "param_newform.xml"),
+    workspace_dir,
+    javastics_dir = NULL) {
   par_file <- file.path(workspace_dir, type)
 
   if (file.exists(par_file)) {
@@ -113,10 +112,21 @@ to_xml_version <- function(stics_version) {
 # set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
 # overwrite = FALSE) {
 set_xml_file_version <- function(
-  xml_file_or_doc,
-  new_version = "V10.0",
-  overwrite = FALSE
-) {
+    xml_file_or_doc,
+    new_version = "V10.0",
+    overwrite = FALSE,
+    file = NULL) {
+  # If an xml document is given file must not be null
+  if (inherits(xml_file_or_doc, "xml_document")) {
+    if (is.null(file)) {
+      warning("file argument must be provided when xml_document is used")
+      return(FALSE)
+    }
+  } else {
+    if (is.null(file)) {
+      file <- xml_file_or_doc
+    }
+  }
   # Getting xml_document object
   xml_doc <- get_xml_doc(xml_file_or_doc)
 
@@ -125,27 +135,26 @@ set_xml_file_version <- function(
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
   att_value <- get_attrs_values(xml_doc,
-                                path = root_path,
-                                attr_list = "version")
+    path = root_path,
+    attr_list = "version"
+  )
 
-  if(length(att_value) == 0) {
+  if (length(att_value) == 0) {
     add_attrs(xml_doc, path = root_path, named_vector = ver)
     return(invisible())
   }
 
   # Checking file version
-  if (att_value[, "version"] == new_version && !overwrite) {
-    stop(paste(
+  if (!is.null(att) && att[, "version"] == ver && !overwrite) {
+    warning(paste(
       "The version has already been updated to STICS version",
       new_version
     ))
   }
 
-  set_attrs_values(xml_doc,
-                   path = root_path,
-                   attr_name = "version",
-                   values_list = ver)
+  add_attrs(xml_doc, path = root_path, named_vector = ver)
 
+  write_xml_file(xml_doc = xml_doc, file = file, overwrite = overwrite)
 }
 
 # TODO : see existing get_xml_stics_version, to be merged or replaced with
@@ -210,10 +219,9 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 # check_xml_stics_version <- function(xml_file_or_doc, version,
 # param_gen_file = NULL) {
 check_xml_file_version <- function(
-  xml_file_or_doc,
-  stics_version,
-  param_gen_file = NULL
-) {
+    xml_file_or_doc,
+    stics_version,
+    param_gen_file = NULL) {
   # xml_version <- get_xml_stics_version(xml_file_or_doc,
   # param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(
@@ -280,5 +288,5 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
   }
 
   save_xml_doc(xml_doc, file)
-  return(TRUE)
+  return(invisible(TRUE))
 }

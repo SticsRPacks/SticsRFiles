@@ -65,18 +65,15 @@ gen_climate <- function(files_path, out_dir) {
 #'
 #'
 complete_climate_paths <- function(files_path) {
-  files_nb <- length(files_path)
-  if (files_nb < 2) {
+  # Filtering duplicates
+  files_path <- unique(normalizePath(files_path))
+
+  if (length(files_path) < 2) {
     return(files_path)
   }
 
-  # Here we do not suppose that the file extension contains
-  # the year of the data
-  years <- sort(c(
-    as.numeric(strsplit(basename(files_path[1]), split = "\\.")[[1]][2]),
-    as.numeric(strsplit(basename(files_path[2]), split = "\\.")[[1]][2])
-  ))
-
+  # Getting first and last year from files names
+  years <- sort(get_year_from_file_name(files_path))
   years <- years[1]:years[2]
 
   if (length(years) < 3) {
@@ -89,6 +86,35 @@ complete_climate_paths <- function(files_path) {
     dirname(files_path[1]),
     paste0(file_name, ".", years_chr)
   )
-
   return(files_path)
+}
+
+
+#' Getting years from file(s) names(s)
+#'
+#' @param file_path a vector of weather file path(s)
+#'
+#' @returns a vector of numeric years
+#' @keywords internal
+#'
+#' @examples
+#' #'
+#' \dontrun{
+#' get_year_from_file_name(
+#'   c("path/to/weather.year1", "path/to/weather.year2")
+#' )
+#' # should return c(year1, year2)
+#'
+#' get_year_from_file_name(
+#'   c("path/to/weather.year1", "path/to/weather.year3")
+#' )
+#' # should return c(year1, year2, year3)
+#' }
+#'
+get_year_from_file_name <- function(file_path) {
+  if (length(file_path) > 1) {
+    return(unlist(lapply(file_path, get_year_from_file_name)))
+  }
+
+  as.numeric(strsplit(basename(file_path), split = "\\.")[[1]][2])
 }
