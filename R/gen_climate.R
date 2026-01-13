@@ -67,9 +67,18 @@ gen_climate <- function(files_path, out_dir) {
 complete_climate_paths <- function(files_path) {
   # Filtering duplicates
   files_path <- unique(normalizePath(files_path))
+  files_names <- unique(basename(files_path))
+  files_dir <- unique(dirname(files_path))
 
-  if (length(files_path) < 2) {
-    return(files_path)
+  if (length(files_names) < 2) {
+    if (length(files_dir) > 1) {
+      stop(paste0(
+        files_names[1],
+        " the same file exists in 2 locations: ",
+        paste(files_dir, collapse = ", ")
+      ))
+    }
+    return(file.path(files_dir, files_names))
   }
 
   # Getting first and last year from files names
