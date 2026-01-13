@@ -32,6 +32,8 @@
 #' @param java_converter logical, optional; TRUE for using the JavaSTICS command
 #' (a JavaSTICS path must be set in the function inputs),
 #' FALSE otherwise (default)
+#' @param parallel Boolean. Is the computation to be done in parallel ?
+#' @param cores Number of cores to use for parallel computation.
 #'
 #' @return A list with named elements:
 #' usms_path : created directories paths (for storing STICS input files),
@@ -56,19 +58,22 @@
 #'
 #' @export
 #'
+#' @importFrom foreach %dopar% %do%
+#' @importFrom parallel stopCluster
 #'
 
 gen_usms_xml2txt <- function(
-  javastics = NULL,
-  workspace = NULL,
-  out_dir = NULL,
-  usm = NULL,
-  stics_version = "latest",
-  verbose = TRUE,
-  dir_per_usm_flag = TRUE,
-  java_cmd = "java",
-  java_converter = FALSE
-) {
+    javastics = NULL,
+    workspace = NULL,
+    out_dir = NULL,
+    usm = NULL,
+    stics_version = "latest",
+    verbose = TRUE,
+    dir_per_usm_flag = TRUE,
+    java_cmd = "java",
+    java_converter = FALSE,
+    parallel = FALSE,
+    cores = NA) {
   if (java_converter) {
     # javastics directory must be given
     if (is.null(javastics)) {
@@ -107,9 +112,6 @@ gen_usms_xml2txt <- function(
   # Retrieving usm names list from the usms.xml file
   full_usms_list <- get_usms_list(file = usms_file_path)
 
-  # Do some usms have lai forcing? If so, read it accordingly:
-  lai_forcing <- get_lai_forcing_xml_doc(usms_doc)
-
   lai_file_path <-
     file.path(
       workspace,
@@ -117,9 +119,9 @@ gen_usms_xml2txt <- function(
     )
 
   dominance <- get_param_value(usms_doc, param_name = "dominance")$dominance
-
+  names(dominance) <- full_usms_list
   nbplantes <- get_param_value(usms_doc, param_name = "nbplantes")$nbplantes
-
+  names(nbplantes) <- full_usms_list
   flai_usms <- vector(mode = "list", length = length(full_usms_list))
   names(flai_usms) <- full_usms_list
   usm_index <- 1 # This is equivalent of i, but tracks which usm we are doing in
@@ -252,11 +254,6 @@ gen_usms_xml2txt <- function(
     dir_per_usm_flag <- TRUE
   }
 
-  # For storing if all files copy were successful or not
-  # for each usm
-  global_copy_status <- rep(FALSE, usms_number)
-  obs_copy_status <- lai_copy_status <- global_copy_status
-
   # Full list of the text files to copy
   files_list <- c(
     "climat.txt",
@@ -292,14 +289,23 @@ gen_usms_xml2txt <- function(
     )
   }
 
-  # For keeping target usms dir paths
-  usms_path <- vector(mode = "character", usms_number)
+  if (parallel) {
+    cl <- setup_parallelism(usms_number, cores)
+    on.exit(stopCluster(cl))
+    `%do_par_or_not%` <- foreach::`%dopar%`
+  } else {
+    `%do_par_or_not%` <- foreach::`%do%`
+  }
 
-  # Keeping execution status
-  exec_status <- rep(TRUE, length = usms_number)
-
-  for (i in 1:usms_number) {
+  results <- foreach::foreach(
+    i = seq_len(usms_number)
+  ) %do_par_or_not% {
     usm_name <- usm[i]
+
+    i_exec_status <- TRUE
+    i_global_copy_status <- FALSE
+    i_obs_copy_status <- FALSE
+    i_lai_copy_status <- FALSE
 
     # Removing all previous generated files, to be sure.
     file.remove(files_path[file.exists(files_path)])
@@ -321,13 +327,18 @@ gen_usms_xml2txt <- function(
         stderr = TRUE
       )
       # Get info returned by system2 for detecting errors
-      exec_status[i] <- !any(grepl(pattern = "ERROR", ret))
-      if (!exec_status[i]) {
+      i_exec_status <- !any(grepl(pattern = "ERROR", ret))
+      if (!i_exec_status) {
         # displaying usm name
         if (verbose) {
           cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
         }
-        next
+        return(list(
+          exec_status = i_exec_status,
+          global_copy_status = i_global_copy_status,
+          obs_copy_status = i_obs_copy_status,
+          lai_copy_status = i_lai_copy_status
+        ))
       }
 
       # Copying generated files to the usm directory
@@ -421,9 +432,9 @@ gen_usms_xml2txt <- function(
       )
 
       # setting exec status result
-      exec_status[i] <- all(gen_files_status)
+      i_exec_status <- all(gen_files_status)
 
-      copy_status <- exec_status[i]
+      copy_status <- i_exec_status
     }
 
     # Copying default files for outputs definition
@@ -443,14 +454,28 @@ gen_usms_xml2txt <- function(
     # If only one usm, for exiting the loop if out_dir
     # is the workspace path, no need to copy files
     if (!dir_per_usm_flag && out_dir == workspace) {
-      global_copy_status[i] <- TRUE
-      next
+      i_global_copy_status <- TRUE
+      return(list(
+        usms_path = usm_path,
+        exec_status = i_exec_status,
+        global_copy_status = i_global_copy_status,
+        obs_copy_status = i_obs_copy_status,
+        lai_copy_status = i_lai_copy_status
+      ))
     }
 
     # Copying observation files
-    obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
-    if (file.exists(obs_path)) {
-      obs_copy_status[i] <- file.copy(
+    if (nbplantes[usm_name] == 2) {
+      obs_path <- c(
+        file.path(workspace, paste0(usm_name, "p.obs")),
+        file.path(workspace, paste0(usm_name, "a.obs"))
+      )
+    } else {
+      obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
+    }
+
+    if (any(file.exists(obs_path))) {
+      i_obs_copy_status <- file.copy(
         from = obs_path,
         to = usm_path,
         overwrite = TRUE
@@ -466,37 +491,51 @@ gen_usms_xml2txt <- function(
     }
 
     # Copying lai files (whatever the lai forcing value is)
-    lapply(flai_usms[usm_name], function(x) {
-      idx <- basename(x) != "null" & file.exists(x)
-      x <- x[idx]
-      if (length(x > 0)) {
-        lai_copy_status[i] <- file.copy(
-          from = x,
-          to = usm_path,
-          overwrite = TRUE
-        )
-      } else {
+    lapply(flai_usms[[usm_name]], function(x) {
+      if (basename(x) == "null") {
+        return(FALSE)
+      }
+
+      if (!file.exists(x)) {
         if (verbose) {
           cli::cli_alert_warning(paste0(
             "LAI file not found for USM ",
             "{.val {usm_name}}: {.file ",
-            "{lai_file_path[i]}}"
+            "{x}}"
           ))
         }
+        return(FALSE)
       }
+
+      file.copy(
+        from = x,
+        to = usm_path,
+        overwrite = TRUE
+      )
     })
 
     # Storing global files copy status
-    global_copy_status[i] <- copy_status & out_copy_status
+    i_global_copy_status <- copy_status & out_copy_status
 
     # displaying usm name
     if (verbose) {
       cli::cli_alert_info("USM {.val {usm_name}} successfully created")
     }
 
-    # Storing the current usm target path
-    usms_path[i] <- usm_path
+    return(list(
+      usms_path = usm_path,
+      exec_status = i_exec_status,
+      global_copy_status = i_global_copy_status,
+      obs_copy_status = all(i_obs_copy_status),
+      lai_copy_status = i_lai_copy_status
+    ))
   }
+
+  usms_path <- sapply(results, `[[`, "usms_path")
+  exec_status <- sapply(results, `[[`, "exec_status")
+  global_copy_status <- sapply(results, `[[`, "global_copy_status")
+  obs_copy_status <- sapply(results, `[[`, "obs_copy_status")
+  lai_copy_status <- sapply(results, `[[`, "lai_copy_status")
 
   # Messages if failing copies
   if (!all(global_copy_status)) {
