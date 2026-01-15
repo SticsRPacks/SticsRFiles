@@ -9,7 +9,6 @@ upgrade_workspace_xml_10_11(
   javastics = NULL,
   out_dir,
   from_version = "V10.0",
-  target_version = "V11.0",
   overwrite = FALSE,
   verbose = FALSE
 )
@@ -22,8 +21,6 @@ upgrade_workspace_xml_10_11(
 \item{out_dir}{Output directry path}
 
 \item{from_version}{Starting STICS version (character or numeric)}
-
-\item{target_version}{Target STICS version (character or numeric)}
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
