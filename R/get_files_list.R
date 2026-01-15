@@ -51,13 +51,14 @@
 #' }
 #'
 get_files_list <- function(
-    workspace,
-    usm = NULL,
-    usms_file = "usms.xml",
-    file_type = NULL,
-    only_existing = TRUE,
-    javastics = NULL,
-    use_mod_files = FALSE) {
+  workspace,
+  usm = NULL,
+  usms_file = "usms.xml",
+  file_type = NULL,
+  only_existing = TRUE,
+  javastics = NULL,
+  use_mod_files = FALSE
+) {
   # Types definition
   files_types <- c(
     "fplt",
@@ -331,8 +332,10 @@ get_files_list <- function(
       pattern = "\\.[0-9]{4}$",
       usm_files_path
     )
-    clim_files_path <- complete_climate_paths(usm_files_path[clim_files_idx])
-    usm_files_path <- c(usm_files_path[-clim_files_idx], clim_files_path)
+    if (length(clim_files_idx) > 0) {
+      clim_files_path <- complete_climate_paths(usm_files_path[clim_files_idx])
+      usm_files_path <- c(usm_files_path[-clim_files_idx], clim_files_path)
+    }
     usm_files_exist <- file.exists(usm_files_path)
 
     # Adding the files lists

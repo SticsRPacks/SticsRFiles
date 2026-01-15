@@ -19,9 +19,10 @@
 #' get_examples_path(file_type = "csv", stics_version = "V8.5")
 #'
 get_examples_path <- function(
-    file_type,
-    stics_version = "latest",
-    overwrite = FALSE) {
+  file_type,
+  stics_version = "latest",
+  overwrite = FALSE
+) {
   # Getting files types list
   example_types <- get_examples_types()
 
@@ -101,9 +102,10 @@ get_examples_path <- function(
 
 # TODO: evaluate if useful ?
 list_examples_files <- function(
-    file_type,
-    stics_version = "latest",
-    full_names = TRUE) {
+  file_type,
+  stics_version = "latest",
+  full_names = TRUE
+) {
   examples_path <- get_examples_path(
     file_type = file_type,
     stics_version = stics_version
@@ -194,12 +196,16 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 #' @noRd
 #'
 workspace_files_copy <- function(
-    workspace,
-    file_type = NULL,
-    javastics = NULL,
-    out_dir,
-    overwrite = FALSE,
-    verbose = FALSE) {
+  workspace,
+  file_type = NULL,
+  javastics = NULL,
+  out_dir,
+  overwrite = FALSE,
+  verbose = FALSE
+) {
+  # creating the output folder if it does not exist
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   # files types vector and associated regex
   file_types <- c("mod", "obs", "lai", "meteo")
   file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")
@@ -228,7 +234,7 @@ workspace_files_copy <- function(
         verbose = verbose
       )
     }
-    return(stat_list)
+    return(invisible(stat_list))
   }
 
   # Just in case if the func is used outside of the workspace upgrade
@@ -249,44 +255,66 @@ workspace_files_copy <- function(
 
   # Just for the *.mod files, looking in javastics if not found in the workspace
   # TODO: combine both if partial match
-  if (length(files_list) == 0) {
-    if ("mod" %in% file_type) {
-      if (is.null(javastics)) {
-        warning(paste(
-          "No",
-          "mod",
-          "files in the source workspace",
-          "the Javastics path must be given",
-          "as input for copying files from it"
-        ))
-      }
+  # getting the files list to be copied from the javastics config folder
 
-      files_list <- list.files(
-        path = file.path(
-          javastics,
-          "example",
-          full.names = TRUE,
-          pattern = patt
-        )
-      )
+  #if (length(files_list) == 0) {
+  if ("mod" %in% file_type) {
+    if (is.null(javastics)) {
+      warning(paste(
+        "No",
+        "mod",
+        "files in the source workspace",
+        "the Javastics path must be given",
+        "as input for copying files from it"
+      ))
+    }
+    javastics_files <- list.files(
+      path = file.path(
+        javastics,
+        "config"
+      ),
+      full.names = TRUE,
+      pattern = patt
+    )
+
+    diff_files <- setdiff(
+      basename(javastics_files),
+      basename(files_list)
+    )
+
+    # completion of files list with javastics ones
+    if (length(diff_files) > 0) {
+      javastics_files <-
+        javastics_files[basename(javastics_files) %in% diff_files]
+
+      files_list <- c(files_list, javastics_files)
     }
   }
+  #}
 
   # nothing to do
   if (length(files_list) == 0) {
-    warning(paste0("Not any '", file_desc[type_idx], "' file to copy!"))
+    warning(
+      paste0("Not any '", file_desc[type_idx], "' file to copy!"),
+      " Neither in ",
+      javastics,
+      " nor in ",
+      workspace
+    )
     return()
   }
 
   # copy and treat of the copy return
+  dest_files <- file.path(out_dir, basename(files_list))
   stat <- file.copy(
     from = files_list,
-    to = out_dir,
+    to = dest_files,
     overwrite = overwrite
   )
 
   if (verbose) {
     message(paste("Copying", file_desc[type_idx], "files.\n"))
+    print(dest_files)
   }
 
   if (!all(stat)) {
