@@ -282,7 +282,7 @@ upgrade_workspace_xml <- function(
 
   workspace_files_copy(
     workspace = workspace,
-    #file_type = c("mod", "obs", "lai", "meteo"),
+    # file_type = c("mod", "obs", "lai", "meteo"),
     javastics = javastics,
     out_dir = out_dir,
     overwrite = overwrite,

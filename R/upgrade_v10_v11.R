@@ -185,8 +185,9 @@ upgrade_plt_xml_10_11 <- function(
   )$codeplante
   param <- get_plt_IC_param(crop = plant, warning = warning)
 
-  if (!is.null(stage_const_height))
+  if (!is.null(stage_const_height)) {
     param$stage_const_height <- stage_const_height
+  }
   if (!is.null(elongation)) param$elongation <- elongation
   if (!is.null(nw_height)) param$nw_height <- nw_height
   if (!is.null(code_shape)) param$code_shape <- code_shape
@@ -724,7 +725,7 @@ upgrade_workspace_xml_10_11 <- function(
   # dir for *.mod files if they do not exist in the workspace
   workspace_files_copy(
     workspace = workspace,
-    #file_type = c("mod", "obs", "lai", "meteo"),
+    # file_type = c("mod", "obs", "lai", "meteo"),
     javastics = javastics,
     out_dir = out_dir,
     overwrite = overwrite,
@@ -756,14 +757,14 @@ check_and_upgrade_xml_version <- function(
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 
-  if ((target_version_num - from_version_num) < 1e-06)
+  if ((target_version_num - from_version_num) < 1e-06) {
     stop(
       "The target version ",
       target_version,
       " must be higher than the initial version ",
       from_version
     )
-
+  }
   # Checking if target version is supported
   # raising an error if not!
   check_version_compat(target_version)
