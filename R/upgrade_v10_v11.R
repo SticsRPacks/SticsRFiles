@@ -75,7 +75,7 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 
   set_param_value(
     xml_doc,
-    param_name = list('stage_start_irrigauto', 'stage_end_irrigauto'),
+    param_name = list("stage_start_irrigauto", "stage_end_irrigauto"),
     param_value = list("null", "null")
   )
 
@@ -251,9 +251,9 @@ get_plt_IC_param <- function(crop, warning = TRUE) {
       warning(
         "Unknown crop code name: ",
         crop,
-        #crop, "\n See above list: \n",
-        #sprintf("%s, ", crop_names),
-        #"\n",
+        # crop, "\n See above list: \n",
+        # sprintf("%s, ", crop_names),
+        # "\n",
         " Using default parameters values!\n",
         paste(sprintf("%s: %s", val_name, val), collapse = ", ")
       )
@@ -626,7 +626,7 @@ upgrade_workspace_xml_10_11 <- function(
   javastics = NULL,
   out_dir,
   from_version = "V10.0",
-  #target_version = "V11.0",
+  # target_version = "V11.0",
   overwrite = FALSE,
   verbose = FALSE
 ) {
@@ -774,12 +774,13 @@ check_and_upgrade_xml_version <- function(
   from_version <- get_major_version(from_version)
   file_version <- get_major_version(get_xml_file_version(xml_doc))
 
-  if (!file_version %in% from_version)
+  if (!file_version %in% from_version) {
     stop(
       "file has a wrong starting version !",
       "must be a",
       paste0(from_version, ".x")
     )
+  }
 
   # Setting new file STICS version
   set_xml_file_version(xml_doc, new_version = target_version)
@@ -797,7 +798,9 @@ check_and_upgrade_xml_version <- function(
 get_major_version <- function(version, to_num = FALSE) {
   str_version <- strsplit(x = version, split = "\\.")[[1]][1]
 
-  if (!to_num) return(str_version)
+  if (!to_num) {
+    return(str_version)
+  }
 
   get_version_num(str_version)
 }

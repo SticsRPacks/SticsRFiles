@@ -257,7 +257,7 @@ workspace_files_copy <- function(
   # TODO: combine both if partial match
   # getting the files list to be copied from the javastics config folder
 
-  #if (length(files_list) == 0) {
+  # if (length(files_list) == 0) {
   if ("mod" %in% file_type) {
     if (is.null(javastics)) {
       warning(paste(
@@ -290,7 +290,7 @@ workspace_files_copy <- function(
       files_list <- c(files_list, javastics_files)
     }
   }
-  #}
+  # }
 
   # nothing to do
   if (length(files_list) == 0) {
