@@ -1,4 +1,3 @@
-
 stics_from_version <- "V10.0"
 stics_to_version <- get_stics_versions_compat()$latest_version
 
