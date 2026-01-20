@@ -48,44 +48,48 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-  type,
+  file_name,
   workspace_dir,
   javastics_dir = NULL
 ) {
-  if (!type %in% c("param_gen.xml", "param_newform.xml")) {
-    stop("type must be 'param_gen.xml' or 'param_newform.xml'")
+  if (!file_name %in% c("param_gen.xml", "param_newform.xml")) {
+    stop(file_name, "is not a gerenal parameters file name !")
   }
 
-  par_file <- file.path(workspace_dir, type)
+  par_file <- file.path(workspace_dir, file_name)
 
-  if (file.exists(par_file)) {
+  exists_in_workspace <- file.exists(par_file)
+
+  if (exists_in_workspace) {
     attr(par_file, "where") <- "workspace"
     return(par_file)
   }
 
   if (is.null(javastics_dir)) {
-    warning(
-      "JavaSTICS path must be given as input argument\n",
-      type,
+    stop(
+      "JavaSTICS path is needed as as input argument\n",
+      file_name,
       " has not been found in ",
       workspace_dir
     )
     return()
   }
 
-  par_file <- file.path(javastics_dir, "config", type)
+  par_file <- file.path(javastics_dir, "config", file_name)
 
-  if (file.exists(par_file)) {
+  exists_in_javastics <- file.exists(par_file)
+
+  if (exists_in_javastics) {
     attr(par_file, "where") <- "javastics"
     return(par_file)
   }
 
   stop(
-    type,
-    " has been found neither in ",
-    workspace_dir,
-    " nor in javastics",
-    javastics_dir
+    file_name,
+    " has not been found neither in ",
+    javastics_dir,
+    " nor in",
+    workspace_dir
   )
 }
 
@@ -172,6 +176,13 @@ set_xml_file_version <- function(
       new_version
     ))
   }
+
+  set_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_name = "version",
+    values_list = ver
+  )
 
   add_attrs(xml_doc, path = root_path, named_vector = ver)
 

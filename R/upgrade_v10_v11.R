@@ -331,22 +331,6 @@ plt_IC_param_list <- function() {
   param$esc$haut_dev_k <- 0.00891413714283287
   param$esc$nrow <- 1
 
-  param$tou$stage_const_height <- "no"
-  param$tou$elongation <- 1.0
-  param$tou$nw_height <- 0.0
-  param$tou$code_shape <- 2
-  param$tou$haut_dev_x0 <- 645.895914862214
-  param$tou$haut_dev_k <- 0.0105505841187171
-  param$tou$nrow <- 1
-
-  param$soj$stage_const_height <- "no"
-  param$soj$elongation <- 1.0
-  param$soj$nw_height <- 0.0
-  param$soj$code_shape <- 2
-  param$soj$haut_dev_x0 <- 645.651309418313
-  param$soj$haut_dev_k <- 0.00665713018807634
-  param$soj$nrow <- 1
-
   return(param)
 }
 
@@ -634,7 +618,7 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @param javastics JavaStics folder path (Optional)
 #' @param out_dir   Output directry path
 #' @param from_version Starting STICS version (character or numeric)
-#' @param target_version Target STICS version (character or numeric)
+# @param target_version Target STICS version (character or numeric)
 # @param plant
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
@@ -732,11 +716,7 @@ upgrade_workspace_xml_10_11 <- function(
     # Combining javastics and workspace plant files
     full_plant_files <- c(
       full_plant_files,
-      file.path(
-        javastics,
-        "plant",
-        usms_plt_files[plant_idx]
-      )
+      file.path(javastics, "plant", usms_plt_files[plant_idx])
     )
   }
 
@@ -798,7 +778,6 @@ check_and_upgrade_xml_version <- function(
       from_version
     )
   }
-
   # Checking if target version is supported
   # raising an error if not!
   check_version_compat(target_version)
