@@ -351,6 +351,15 @@ gen_usms_xml2txt <- function(
         ))
       }
     } else {
+      if (parallel) {
+        # In parallel mode, each worker runs in its own R environment.
+        # XMLInternalDocument objects (like `usms_doc`) cannot be serialized
+        # properly for transmission to the workers. Passing the XML object
+        # directly would result in NULL on each worker, causing
+        # xmlNamespaceDefinitions() to fail.
+        # To avoid this, we re-parse the XML file locally within each worker.
+        usms_doc <- xmldocument(usms_file_path)
+      }
       usm_data <- get_usm_data(usms_doc, usm_name, workspace)
 
       # Getting the usm files paths
