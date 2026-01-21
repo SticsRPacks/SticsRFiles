@@ -336,7 +336,9 @@ get_file_ <- function(
   } else {
     `%do_par_or_not%` <- foreach::`%do%`
   }
-
+  # instantiate i before parallel loop
+  # to avoid note: "no visible binding for global variable 'i'"
+  i <- 1
   df_list <- foreach::foreach(
     i = seq_along(inputs)
   ) %do_par_or_not%
@@ -396,6 +398,10 @@ get_file_one <- function(
     p_name,
     verbose = verbose
   )
+
+  # to fix note, no visible binding ...
+  .SD <- ..keep_cols <- NULL
+
   keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
   out <- df[, ..keep_cols]
   out <- data.frame(out)
