@@ -4,7 +4,7 @@
 #'
 #' @param xml_doc_object XML document
 #' @param param_name The parameter name or a vector of
-#' @param ... Other parameters to pass to [get_param_number()].
+#' @param ... Other parameters to pass to get_param_number.
 #'
 #' @return A vector of logical values
 #'
@@ -15,6 +15,7 @@
 #'
 #' exists_param(xml_doc, "cfes")
 #' exists_param(xml_doc, c("cfes", "mulchbat"))
+#'
 #' @keywords internal
 #'
 #' @noRd

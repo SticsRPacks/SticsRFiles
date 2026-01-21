@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_workspace_xml_10_11}
 \alias{upgrade_workspace_xml_10_11}
-\title{Upgrading a Javastics xml workspace}
+\title{Upgrading a Javastics STICS V10 xml workspace}
 \usage{
 upgrade_workspace_xml_10_11(
   workspace,
@@ -16,9 +16,9 @@ upgrade_workspace_xml_10_11(
 \arguments{
 \item{workspace}{JavaStics xml workspace path}
 
-\item{javastics}{JavaStics folder path (Optional)}
+\item{javastics}{JavaStics (STICS V10) folder path (Optional)}
 
-\item{out_dir}{Output directry path}
+\item{out_dir}{Output directory path}
 
 \item{from_version}{Starting STICS version (character or numeric)}
 
@@ -32,5 +32,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrading a Javastics xml workspace
+Upgrading a Javastics STICS V10 xml workspace
 }

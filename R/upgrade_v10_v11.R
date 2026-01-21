@@ -612,11 +612,11 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 }
 
 
-#' Upgrading a Javastics xml workspace
+#' Upgrading a Javastics STICS V10 xml workspace
 #'
 #' @param workspace JavaStics xml workspace path
-#' @param javastics JavaStics folder path (Optional)
-#' @param out_dir   Output directry path
+#' @param javastics JavaStics (STICS V10) folder path (Optional)
+#' @param out_dir   Output directory path
 #' @param from_version Starting STICS version (character or numeric)
 # @param target_version Target STICS version (character or numeric)
 # @param plant
@@ -636,7 +636,7 @@ upgrade_workspace_xml_10_11 <- function(
   javastics = NULL,
   out_dir,
   from_version = "V10.0",
-  target_version = "V11.0",
+  #target_version = "V11.0",
   overwrite = FALSE,
   verbose = FALSE
 ) {
