@@ -42,7 +42,9 @@ get_file_int <- function(
     if (length(plant_name) > 1 && length(plant_name) != length(filename)) {
       stop(
         "length(plant_name) should be == 1 or length(filename). `plant_name`:",
-        plant_name, " filename:", filename
+        plant_name,
+        " filename:",
+        filename
       )
     }
     if (length(plant_name) == 1) {
@@ -51,6 +53,12 @@ get_file_int <- function(
   } else {
     plant_name <- filename
   }
+
+  # setting global variables for manipulating
+  # data.table with := syntax
+  # if not a note in checks is raised
+  # "no visible binding for global variable ..."
+  Plant <- Date <- ian <- mo <- jo <- .SD <- NULL
 
   tables <- lapply(seq_along(filename), function(i) {
     i_filename <- filename[i]
@@ -104,12 +112,17 @@ get_file_int <- function(
     return(out_table)
   }
 
-  out_table[, Date := as.POSIXct(
-    as.Date(paste(ian, mo, jo, sep = "-"), format = "%Y-%m-%d"),
-    tz = "UTC"
-  )]
+  out_table[,
+    Date := as.POSIXct(
+      as.Date(paste(ian, mo, jo, sep = "-"), format = "%Y-%m-%d"),
+      tz = "UTC"
+    )
+  ]
 
-  data.table::setcolorder(out_table, c("Date", setdiff(names(out_table), "Date")))
+  data.table::setcolorder(
+    out_table,
+    c("Date", setdiff(names(out_table), "Date"))
+  )
 
   drop_cols <- intersect(c("ian", "mo", "jo", "jul"), names(out_table))
   if (length(drop_cols) > 0) out_table[, (drop_cols) := NULL]
