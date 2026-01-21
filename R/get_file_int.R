@@ -112,7 +112,8 @@ get_file_int <- function(
     return(out_table)
   }
 
-  out_table[,
+  out_table[
+    ,
     Date := as.POSIXct(
       as.Date(paste(ian, mo, jo, sep = "-"), format = "%Y-%m-%d"),
       tz = "UTC"
