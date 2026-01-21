@@ -212,9 +212,10 @@ get_xml_files_param_df <- function(
   # and converting value to character to prevent
   # type consistency between data.frames for executing
   # bind_rows
+
   data_df <- data_df %>%
-    dplyr::filter(!is.na(value)) %>%
-    dplyr::mutate(value = as.character(value))
+    dplyr::filter(!is.na(data_df$value)) %>%
+    dplyr::mutate(value = as.character(data_df$value))
 
   # Filtering on target name if any
   # if (select_name) {
