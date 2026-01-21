@@ -139,7 +139,7 @@ set_xml_file_version <- function(
   att <- get_attrs(xml_doc, path = root_path)
 
   # Checking file version
-  if (!is.null(att) && att[, "version"] == ver && !overwrite) {
+  if (!is.null(att_value) && att_value[, "version"] == ver && !overwrite) {
     warning(paste(
       "The version has already been updated to STICS version",
       new_version
