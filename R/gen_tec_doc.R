@@ -256,20 +256,21 @@ gen_tec_doc <- function(
       # Specific cases linked to options/choix
       # for getting parent path of intervention nodes to create
       #
-      # specific "choix" path to be calculated
-      cut_idx <- c("tempfauche", "julfauche") %in% par_name
-      choix <- c("calendar in degree days", "calendar in days")
-      if (any(cut_idx)) {
-        parent_name <- choix[cut_idx]
-        parent_path <- get_param_type(xml_doc, "ta", "choix", parent_name)$xpath
+      # specific "choix" path to be calculated for cutting techniques
+      if (par_name == "tempfauche") {
+        cut_idx <- c("tempfauche", "julfauche") %in% par_name
+        if (any(cut_idx)) {
+          choix <- c("calendar in degree days", "calendar in days")[cut_idx]
+          parent_path <- paste0(
+            "//option[@nom='Method.of.cutting']/choix[@nom='",
+            choix[cut_idx],
+            "']/ta"
+          )
+        }
       }
-
-      # specific "option" calculation
-      is_thin <- par_name %in% c("juleclair", "nbinfloecl")
-      if (is_thin) {
-        parent_name <- "thinning"
-
-        parent_path <- get_param_type(xml_doc, "ta", "choix", parent_name)$xpath
+      # specific "option" calculation for thinning
+      if (any(c("juleclair", "nbinfloecl") %in% par_name)) {
+        parent_path <- "//option[@nom='thinning']/choix[@nom='yes']/ta"
       }
       #-------------------------------------------------------------------------
 
