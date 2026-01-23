@@ -108,18 +108,17 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_plt_xml_10_11 <- function(
-  file,
-  out_dir,
-  stage_const_height = NULL,
-  elongation = NULL,
-  nw_height = NULL,
-  code_shape = NULL,
-  haut_dev_x0 = NULL,
-  haut_dev_k = NULL,
-  nrow = NULL,
-  overwrite = FALSE,
-  warning = TRUE
-) {
+    file,
+    out_dir,
+    stage_const_height = NULL,
+    elongation = NULL,
+    nw_height = NULL,
+    code_shape = NULL,
+    haut_dev_x0 = NULL,
+    haut_dev_k = NULL,
+    nrow = NULL,
+    overwrite = FALSE,
+    warning = TRUE) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -331,6 +330,22 @@ plt_IC_param_list <- function() {
   param$esc$haut_dev_k <- 0.00891413714283287
   param$esc$nrow <- 1
 
+  param$tou$stage_const_height <- "no"
+  param$tou$elongation <- 1.0
+  param$tou$nw_height <- 0.0
+  param$tou$code_shape <- 2
+  param$tou$haut_dev_x0 <- 645.895914862214
+  param$tou$haut_dev_k <- 0.0105505841187171
+  param$tou$nrow <- 1
+
+  param$soj$stage_const_height <- "no"
+  param$soj$elongation <- 1.0
+  param$soj$nw_height <- 0.0
+  param$soj$code_shape <- 2
+  param$soj$haut_dev_x0 <- 645.651309418313
+  param$soj$haut_dev_k <- 0.00665713018807634
+  param$soj$nrow <- 1
+
   return(param)
 }
 
@@ -470,12 +485,11 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @export
 #'
 upgrade_param_gen_xml_10_11 <- function(
-  file,
-  out_dir,
-  hauteur_threshold = NULL,
-  par_to_net = NULL,
-  overwrite = FALSE
-) {
+    file,
+    out_dir,
+    hauteur_threshold = NULL,
+    par_to_net = NULL,
+    overwrite = FALSE) {
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -632,14 +646,13 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_workspace_xml_10_11 <- function(
-  workspace,
-  javastics = NULL,
-  out_dir,
-  from_version = "V10.0",
-  #target_version = "V11.0",
-  overwrite = FALSE,
-  verbose = FALSE
-) {
+    workspace,
+    javastics = NULL,
+    out_dir,
+    from_version = "V10.0",
+    # target_version = "V11.0",
+    overwrite = FALSE,
+    verbose = FALSE) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -763,10 +776,9 @@ upgrade_workspace_xml_10_11 <- function(
 #' @noRd
 #'
 check_and_upgrade_xml_version <- function(
-  xml_doc,
-  from_version,
-  target_version
-) {
+    xml_doc,
+    from_version,
+    target_version) {
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 
@@ -784,17 +796,15 @@ check_and_upgrade_xml_version <- function(
 
   # checking actual version consistency between from_version
   # and file version
-  from_version <- get_major_version(from_version)
-  file_version <- get_major_version(get_xml_file_version(xml_doc))
-
-  if (!file_version %in% from_version) {
+  from_version_major <- get_major_version(from_version)
+  file_version <- get_xml_file_version(xml_doc)
+  if (!is.null(file_version) && !get_major_version(file_version) %in% from_version_major) {
     stop(
       "file has a wrong starting version !",
       "must be a",
-      paste0(from_version, ".x")
+      paste0(from_version_major, ".x")
     )
   }
-
   # Setting new file STICS version
   set_xml_file_version(xml_doc, new_version = target_version)
 }
