@@ -46,9 +46,10 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-    type = c("param_gen.xml", "param_newform.xml"),
-    workspace_dir,
-    javastics_dir = NULL) {
+  type = c("param_gen.xml", "param_newform.xml"),
+  workspace_dir,
+  javastics_dir = NULL
+) {
   par_file <- file.path(workspace_dir, type)
 
   if (file.exists(par_file)) {
@@ -198,9 +199,10 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 # check_xml_stics_version <- function(xml_file_or_doc, version,
 # param_gen_file = NULL) {
 check_xml_file_version <- function(
-    xml_file_or_doc,
-    stics_version,
-    param_gen_file = NULL) {
+  xml_file_or_doc,
+  stics_version,
+  param_gen_file = NULL
+) {
   # xml_version <- get_xml_stics_version(xml_file_or_doc,
   # param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(
