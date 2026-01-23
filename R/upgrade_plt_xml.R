@@ -34,16 +34,15 @@
 #' )
 #'
 upgrade_plt_xml <- function(
-  file,
-  out_dir,
-  param_newform_file,
-  param_gen_file,
-  stics_version = "V9.2",
-  target_version = "V10.0",
-  check_version = TRUE,
-  overwrite = FALSE,
-  ...
-) {
+    file,
+    out_dir,
+    param_newform_file,
+    param_gen_file,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE,
+    ...) {
   # For verifying output dir existence
   check_dir <- TRUE
   args_list <- list(...)
@@ -123,8 +122,7 @@ upgrade_plt_xml <- function(
   # Setting file STICS version
   set_xml_file_version(
     old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+    new_version = target_version
   )
 
   # Parameters to move to varietal parameters ----------------------------------

@@ -25,13 +25,12 @@
 #'   out_dir = tempdir()
 #' )
 upgrade_param_gen_xml <- function(
-  file,
-  out_dir,
-  stics_version = "V9.2",
-  target_version = "V10.0",
-  check_version = TRUE,
-  overwrite = FALSE
-) {
+    file,
+    out_dir,
+    stics_version = "V9.2",
+    target_version = "V10.0",
+    check_version = TRUE,
+    overwrite = FALSE) {
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
@@ -71,8 +70,7 @@ upgrade_param_gen_xml <- function(
   # Setting file STICS version
   set_xml_file_version(
     old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+    new_version = target_version
   )
 
   # Nodes to remove
