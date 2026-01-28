@@ -4,12 +4,22 @@
 \alias{upgrade_tec_xml_10_11}
 \title{Upgrade technical file(s) from version 10 to 11}
 \usage{
-upgrade_tec_xml_10_11(file, out_dir, overwrite = FALSE)
+upgrade_tec_xml_10_11(
+  file,
+  out_dir,
+  code_strip = 2,
+  nrow = 1,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{file}{xml technical file path or a vector of}
 
 \item{out_dir}{Output directory path}
+
+\item{code_strip}{Integer indicating if the crop is sown in a strip design: 1 for yes, 2 for no (default)}
+
+\item{nrow}{How many rows in the strip design if \code{code_strip} is 1 (default 1)}
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}

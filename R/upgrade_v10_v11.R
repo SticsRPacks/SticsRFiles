@@ -2,6 +2,8 @@
 #'
 #' @param file xml technical file path or a vector of
 #' @param out_dir Output directory path
+#' @param code_strip Integer indicating if the crop is sown in a strip design: 1 for yes, 2 for no (default)
+#' @param nrow How many rows in the strip design if `code_strip` is 1 (default 1)
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
 #'
@@ -11,13 +13,15 @@
 #'
 # @examples
 #'
-upgrade_tec_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
+upgrade_tec_xml_10_11 <- function(file, out_dir, code_strip = 2, nrow = 1, overwrite = FALSE) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
       upgrade_tec_xml_10_11(
         file = x,
         out_dir = out_dir,
+        code_strip = code_strip,
+        nrow = nrow,
         overwrite = overwrite
       )
     })
@@ -79,6 +83,37 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
     param_value = list("null", "null")
   )
 
+  # code_strip is either NULL, 1 or 2, and in case it is null, we set it to 2 (no)
+  if (is.null(code_strip)) {
+    code_strip <- 2
+  } else if (code_strip %in% c(1, 2)) {
+    code_strip <- as.integer(code_strip)
+  } else {
+    stop("code_strip must be either 1 (yes) or 2 (no)")
+  }
+
+  # nrow must be a positive integer
+  nrow <- as.integer(nrow)
+  if (nrow < 1) {
+    stop("nrow must be a positive integer")
+  }
+
+  strip_node <- XML::xmlParseString(
+    paste0(
+      '<option choix="', code_strip, '" nom="Is the crop sown in a strip design?" nomParam="code_strip">
+        <choix code="1" nom="yes">
+          <param format="integer" max="100" min="1" nom="nrow">', nrow, '</param>
+        </choix>
+        <choix code="2" nom="no" />
+      </option>'
+    ),
+    addFinalizer = FALSE
+  )
+
+  prev_node <- get_nodes(xml_doc, path = "//param[@nom='orientrang']")
+
+  XML::addSibling(prev_node[[1]], XML::xmlClone(strip_node))
+
   out_file <- file.path(out_dir, basename(file))
   write_xml_file(xml_doc, out_file, overwrite = overwrite)
 
@@ -95,7 +130,6 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @param code_shape Plant height computation parameter (optional)
 #' @param haut_dev_x0 Plant height computation parameter (optional)
 #' @param haut_dev_k Plant height computation parameter (optional)
-#' @param nrow Plant radiation interception parameter (optional)
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
 #' @param warning Logical for rising warnings, FALSE otherwise
@@ -108,17 +142,17 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_plt_xml_10_11 <- function(
-    file,
-    out_dir,
-    stage_const_height = NULL,
-    elongation = NULL,
-    nw_height = NULL,
-    code_shape = NULL,
-    haut_dev_x0 = NULL,
-    haut_dev_k = NULL,
-    nrow = NULL,
-    overwrite = FALSE,
-    warning = TRUE) {
+  file,
+  out_dir,
+  stage_const_height = NULL,
+  elongation = NULL,
+  nw_height = NULL,
+  code_shape = NULL,
+  haut_dev_x0 = NULL,
+  haut_dev_k = NULL,
+  overwrite = FALSE,
+  warning = TRUE
+) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -131,8 +165,8 @@ upgrade_plt_xml_10_11 <- function(
         code_shape = code_shape,
         haut_dev_x0 = haut_dev_x0,
         haut_dev_k = haut_dev_k,
-        nrow = nrow,
-        overwrite = overwrite
+        overwrite = overwrite,
+        warning = warning
       )
     })
     return(invisible())
@@ -163,18 +197,9 @@ upgrade_plt_xml_10_11 <- function(
     addFinalizer = TRUE
   )
 
-  nrow_node <- XML::xmlParseString(
-    '<param format="real" max="10.0" min="1.0" nom="nrow">1</param>',
-    addFinalizer = TRUE
-  )
-
   leaves_node <- get_nodes(xml_doc, path = "//formalisme[@nom='leaves']")
 
   XML::addSibling(leaves_node[[1]], XML::xmlClone(height_node))
-
-  dfolhaut_node <- get_nodes(xml_doc, path = "//param[@nom='dfolhaut']")
-
-  XML::addSibling(dfolhaut_node[[1]], XML::xmlClone(nrow_node))
 
   # Set values to added parameters if given as func inputs
   # using
@@ -201,9 +226,6 @@ upgrade_plt_xml_10_11 <- function(
   }
   if (!is.null(haut_dev_k)) {
     param$haut_dev_k <- haut_dev_k
-  }
-  if (!is.null(nrow)) {
-    param$nrow <- nrow
   }
 
   lapply(names(param), function(x) {
@@ -296,7 +318,6 @@ plt_IC_param_list <- function() {
   param$default$code_shape <- 1
   param$default$haut_dev_x0 <- 0.0
   param$default$haut_dev_k <- 0.0
-  param$default$nrow <- 1
 
   param$poi$stage_const_height <- "mat"
   param$poi$elongation <- 1.0
@@ -304,7 +325,6 @@ plt_IC_param_list <- function() {
   param$poi$code_shape <- 2
   param$poi$haut_dev_x0 <- 685.395497474724
   param$poi$haut_dev_k <- 0.0113605979397447
-  param$poi$nrow <- 1
 
   param$ble$stage_const_height <- "no"
   param$ble$elongation <- 1.0
@@ -312,7 +332,6 @@ plt_IC_param_list <- function() {
   param$ble$code_shape <- 2
   param$ble$haut_dev_x0 <- 886.219548558914
   param$ble$haut_dev_k <- 0.00538369741357949
-  param$ble$nrow <- 1
 
   param$faba$stage_const_height <- "no"
   param$faba$elongation <- 1.0
@@ -320,7 +339,6 @@ plt_IC_param_list <- function() {
   param$faba$code_shape <- 2
   param$faba$haut_dev_x0 <- 998.494003649625
   param$faba$haut_dev_k <- 0.00726768251150451
-  param$faba$nrow <- 1
 
   param$esc$stage_const_height <- "no"
   param$esc$elongation <- 1.0
@@ -328,7 +346,6 @@ plt_IC_param_list <- function() {
   param$esc$code_shape <- 2
   param$esc$haut_dev_x0 <- 714.811280801783
   param$esc$haut_dev_k <- 0.00891413714283287
-  param$esc$nrow <- 1
 
   param$tou$stage_const_height <- "no"
   param$tou$elongation <- 1.0
@@ -336,7 +353,6 @@ plt_IC_param_list <- function() {
   param$tou$code_shape <- 2
   param$tou$haut_dev_x0 <- 645.895914862214
   param$tou$haut_dev_k <- 0.0105505841187171
-  param$tou$nrow <- 1
 
   param$soj$stage_const_height <- "no"
   param$soj$elongation <- 1.0
@@ -344,7 +360,6 @@ plt_IC_param_list <- function() {
   param$soj$code_shape <- 2
   param$soj$haut_dev_x0 <- 645.651309418313
   param$soj$haut_dev_k <- 0.00665713018807634
-  param$soj$nrow <- 1
 
   return(param)
 }
@@ -485,11 +500,12 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @export
 #'
 upgrade_param_gen_xml_10_11 <- function(
-    file,
-    out_dir,
-    hauteur_threshold = NULL,
-    par_to_net = NULL,
-    overwrite = FALSE) {
+  file,
+  out_dir,
+  hauteur_threshold = NULL,
+  par_to_net = NULL,
+  overwrite = FALSE
+) {
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -646,13 +662,14 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_workspace_xml_10_11 <- function(
-    workspace,
-    javastics = NULL,
-    out_dir,
-    from_version = "V10.0",
-    # target_version = "V11.0",
-    overwrite = FALSE,
-    verbose = FALSE) {
+  workspace,
+  javastics = NULL,
+  out_dir,
+  from_version = "V10.0",
+  # target_version = "V11.0",
+  overwrite = FALSE,
+  verbose = FALSE
+) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -702,7 +719,10 @@ upgrade_workspace_xml_10_11 <- function(
 
   # Converting crop management files (*_tec.xml)
   tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
-  upgrade_tec_xml_10_11(tec_files, out_dir, overwrite = overwrite)
+  upgrade_tec_xml_10_11(
+    tec_files, out_dir,
+    code_strip = 2, nrow = 1, overwrite = overwrite
+  )
 
   # Upgrading plant files
   # if a plant sub directory exists in workspace
@@ -776,9 +796,10 @@ upgrade_workspace_xml_10_11 <- function(
 #' @noRd
 #'
 check_and_upgrade_xml_version <- function(
-    xml_doc,
-    from_version,
-    target_version) {
+  xml_doc,
+  from_version,
+  target_version
+) {
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 

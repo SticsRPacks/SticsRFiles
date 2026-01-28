@@ -48,9 +48,10 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-    file_name,
-    workspace_dir,
-    javastics_dir = NULL) {
+  file_name,
+  workspace_dir,
+  javastics_dir = NULL
+) {
   if (!file_name %in% c("param_gen.xml", "param_newform.xml")) {
     stop(file_name, "is not a gerenal parameters file name !")
   }
@@ -236,9 +237,10 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 # check_xml_stics_version <- function(xml_file_or_doc, version,
 # param_gen_file = NULL) {
 check_xml_file_version <- function(
-    xml_file_or_doc,
-    stics_version,
-    param_gen_file = NULL) {
+  xml_file_or_doc,
+  stics_version,
+  param_gen_file = NULL
+) {
   # xml_version <- get_xml_stics_version(xml_file_or_doc,
   # param_gen_file = param_gen_file)
   xml_version <- get_xml_file_version(

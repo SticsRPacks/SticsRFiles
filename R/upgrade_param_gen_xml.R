@@ -25,12 +25,13 @@
 #'   out_dir = tempdir()
 #' )
 upgrade_param_gen_xml <- function(
-    file,
-    out_dir,
-    stics_version = "V9.2",
-    target_version = "V10.0",
-    check_version = TRUE,
-    overwrite = FALSE) {
+  file,
+  out_dir,
+  stics_version = "V9.2",
+  target_version = "V10.0",
+  check_version = TRUE,
+  overwrite = FALSE
+) {
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
