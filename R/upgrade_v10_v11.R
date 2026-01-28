@@ -142,16 +142,17 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, code_strip = 2, nrow = 1, overw
 # @examples
 #'
 upgrade_plt_xml_10_11 <- function(
-    file,
-    out_dir,
-    stage_const_height = NULL,
-    elongation = NULL,
-    nw_height = NULL,
-    code_shape = NULL,
-    haut_dev_x0 = NULL,
-    haut_dev_k = NULL,
-    overwrite = FALSE,
-    warning = TRUE) {
+  file,
+  out_dir,
+  stage_const_height = NULL,
+  elongation = NULL,
+  nw_height = NULL,
+  code_shape = NULL,
+  haut_dev_x0 = NULL,
+  haut_dev_k = NULL,
+  overwrite = FALSE,
+  warning = TRUE
+) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -499,11 +500,12 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @export
 #'
 upgrade_param_gen_xml_10_11 <- function(
-    file,
-    out_dir,
-    hauteur_threshold = NULL,
-    par_to_net = NULL,
-    overwrite = FALSE) {
+  file,
+  out_dir,
+  hauteur_threshold = NULL,
+  par_to_net = NULL,
+  overwrite = FALSE
+) {
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -660,13 +662,14 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_workspace_xml_10_11 <- function(
-    workspace,
-    javastics = NULL,
-    out_dir,
-    from_version = "V10.0",
-    # target_version = "V11.0",
-    overwrite = FALSE,
-    verbose = FALSE) {
+  workspace,
+  javastics = NULL,
+  out_dir,
+  from_version = "V10.0",
+  # target_version = "V11.0",
+  overwrite = FALSE,
+  verbose = FALSE
+) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -793,9 +796,10 @@ upgrade_workspace_xml_10_11 <- function(
 #' @noRd
 #'
 check_and_upgrade_xml_version <- function(
-    xml_doc,
-    from_version,
-    target_version) {
+  xml_doc,
+  from_version,
+  target_version
+) {
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 
