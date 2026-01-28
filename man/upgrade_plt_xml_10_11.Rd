@@ -13,7 +13,6 @@ upgrade_plt_xml_10_11(
   code_shape = NULL,
   haut_dev_x0 = NULL,
   haut_dev_k = NULL,
-  nrow = NULL,
   overwrite = FALSE,
   warning = TRUE
 )
@@ -34,8 +33,6 @@ upgrade_plt_xml_10_11(
 \item{haut_dev_x0}{Plant height computation parameter (optional)}
 
 \item{haut_dev_k}{Plant height computation parameter (optional)}
-
-\item{nrow}{Plant radiation interception parameter (optional)}
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
