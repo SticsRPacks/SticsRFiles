@@ -3,8 +3,8 @@
   <formalisme nom="plant name and group">
     <param format="character" nom="codeplante">snu</param>
     <option choix="1" nom="monocot or dicot" nomParam="codemonocot">
-      <choix code="1" nom="monocotyledon"/>
-      <choix code="2" nom="dicotyledon"/>
+      <choix code="1" nom="monocotyledon" />
+      <choix code="2" nom="dicotyledon" />
     </option>
   </formalisme>
   <formalisme nom="effect of atmospheric CO2 concentration">
@@ -16,8 +16,8 @@
     <option choix="1" nom="driving temperature" nomParam="codetemp">
       <choix code="1" nom="air temperature">
         <option choix="1" nom="time.scale" nomParam="codegdh">
-          <choix code="1" nom="daily.scale"/>
-          <choix code="2" nom="hourly.scale"/>
+          <choix code="1" nom="daily.scale" />
+          <choix code="2" nom="hourly.scale" />
         </option>
       </choix>
       <choix code="2" nom="temperature within canopy">
@@ -32,21 +32,22 @@
     </option>
     <option choix="2" nom="photoperiodic plant" nomParam="codephot">
       <choix code="1" nom="yes">
-        <option choix="2" nom="effect of decreasing photoperiod on biomass allocation" nomParam="codephot_part">
-          <choix code="1" nom="yes"/>
-          <choix code="2" nom="no"/>
+        <option choix="2" nom="effect of decreasing photoperiod on biomass allocation"
+          nomParam="codephot_part">
+          <choix code="1" nom="yes" />
+          <choix code="2" nom="no" />
         </option>
       </choix>
-      <choix code="2" nom="no"/>
+      <choix code="2" nom="no" />
     </option>
     <option choix="2" nom="delay effect of stress" nomParam="coderetflo">
       <choix code="1" nom="yes">
         <param format="real" max="0.9" min="0.1" nom="stressdev">-999</param>
       </choix>
-      <choix code="2" nom="no"/>
+      <choix code="2" nom="no" />
     </option>
     <option choix="1" nom="cold requirements" nomParam="codebfroid">
-      <choix code="1" nom="no"/>
+      <choix code="1" nom="no" />
       <choix code="2" nom="vernalisation (herbaceous)">
         <param format="integer" max="7" min="0" nom="jvcmini">-999</param>
         <param format="integer" max="731" min="1" nom="julvernal">-999</param>
@@ -60,7 +61,7 @@
           <choix code="1" nom="forcing">
             <param format="integer" max="731" min="1" nom="ifindorm">-999</param>
           </choix>
-          <choix code="2" nom="Richardson"/>
+          <choix code="2" nom="Richardson" />
           <choix code="3" nom="Bidabe">
             <param format="real" max="3.5" min="1.5" nom="q10">-999</param>
             <param format="integer" max="731" min="1" nom="idebdorm">-999</param>
@@ -72,10 +73,10 @@
               <choix code="1" nom="Wang et Engel">
                 <param format="real" max="30" min="0" nom="tdoptdeb">-999</param>
               </choix>
-              <choix code="2" nom="no"/>
+              <choix code="2" nom="no" />
             </option>
           </choix>
-          <choix code="2" nom="hourly temperatures"/>
+          <choix code="2" nom="hourly temperatures" />
         </option>
       </choix>
     </option>
@@ -84,8 +85,8 @@
     <param format="real" max="15.0" min="-10.0" nom="tgmin">999.00000</param>
     <option choix="1" nom="annual or perennial" nomParam="codeperenne">
       <choix code="1" nom="annual">
-            </choix>
-      <choix code="2" nom="perennial"/>
+      </choix>
+      <choix code="2" nom="perennial" />
     </option>
     <option choix="1" nom="germination or latency" nomParam="codegermin">
       <choix code="1" nom="yes">
@@ -94,7 +95,7 @@
         <param format="integer" max="50" min="1" nom="nbjgerlim">50</param>
         <param format="real" max="100.0" min="0.0" nom="propjgermin">1.00000</param>
       </choix>
-      <choix code="2" nom="no"/>
+      <choix code="2" nom="no" />
     </option>
     <option choix="1" nom="plantlet growth" nomParam="codehypo">
       <choix code="1" nom="hypocotyle growth">
@@ -145,7 +146,7 @@
             <param format="real" max="0.1" min="0.01" nom="dltamsminsen">-999</param>
             <param format="real" max="1000.0" min="0.0" nom="alphaphot">-999</param>
           </choix>
-          <choix code="2" nom="no"/>
+          <choix code="2" nom="no" />
         </option>
       </choix>
       <choix code="2" nom="ground cover">
@@ -160,24 +161,24 @@
     <param format="character" max="1.0" min="0.0" nom="stage_const_height">no</param>
     <param format="real" max="2.0" min="1.0" nom="elongation">1.0</param>
     <param format="real" max="1.0" min="0.0" nom="nw_height">0.0</param>
-    <option choix="1" nom="LAI, Dry mass or phasic development relationship - Principal plant" nomParam="code_shape">
-      <choix code="1" nom="LAI"/>
+    <option choix="1" nom="LAI, Dry mass or phasic development relationship - Principal plant"
+      nomParam="code_shape">
+      <choix code="1" nom="LAI" />
       <choix code="2" nom="Development">
         <param format="real" max="5000.0" min="0.0" nom="haut_dev_x0">-999</param>
         <param format="real" max="0.05" min="0.0" nom="haut_dev_k">-999</param>
       </choix>
     </option>
-  </formalisme>  
+  </formalisme>
   <formalisme nom="radiation interception">
     <option choix="1" nom="radiation interception" nomParam="codetransrad">
-      <choix code="1" nom="Beer's law"/>
+      <choix code="1" nom="Beer's law" />
       <choix code="2" nom="radiation transfers">
         <param format="integer" max="3" min="1" nom="forme">-999</param>
         <param format="real" max="5.0" min="-5.0" nom="rapforme">-999</param>
         <param format="real" max="10.0" min="-10.0" nom="adfol">-999</param>
         <param format="real" max="10.0" min="1.0" nom="dfolbas">-999</param>
         <param format="real" max="10.0" min="1.0" nom="dfolhaut">-999</param>
-		<param format="integer" max="10.0" min="1.0" nom="nrow">1</param>
       </choix>
     </option>
   </formalisme>
@@ -209,15 +210,17 @@
         <param format="real" max="100.0" min="0.0" nom="resplmax">0.66</param>
       </choix>
     </option>
-    <option choix="2" nom="Calculation of the stem elongation stage for perenial grasslands" nomParam="codemontaison">
-      <choix code="1" nom="yes"/>
-      <choix code="2" nom="no"/>
+    <option choix="2" nom="Calculation of the stem elongation stage for perenial grasslands"
+      nomParam="codemontaison">
+      <choix code="1" nom="yes" />
+      <choix code="2" nom="no" />
     </option>
     <option choix="2" nom="Simulation of tiller dynamics for grasslands" nomParam="codedyntalle">
       <choix code="1" nom="yes">
-        <option choix="1" nom="Choice of the ratio used to calculate tiller mortality" nomParam="codetranspitalle">
-          <choix code="1" nom="et/etm"/>
-          <choix code="2" nom="ep/eop"/>
+        <option choix="1" nom="Choice of the ratio used to calculate tiller mortality"
+          nomParam="codetranspitalle">
+          <choix code="1" nom="et/etm" />
+          <choix code="2" nom="ep/eop" />
         </option>
         <param format="real" max="0.00001" min="0.0000025" nom="SurfApex">-999</param>
         <param format="real" max="0.04" min="0.01" nom="SeuilMorTalle">-999</param>
@@ -228,7 +231,7 @@
         <param format="real" max="2.0" min="0.5" nom="SeuilLAIapex">-999</param>
         <param format="real" max="10.0" min="1.0" nom="tigefeuilcoupe">-999</param>
       </choix>
-      <choix code="2" nom="no"/>
+      <choix code="2" nom="no" />
     </option>
   </formalisme>
   <formalisme nom="yield formation">
@@ -241,7 +244,7 @@
           <choix code="1" nom="days">
             <param format="real" max="1.0" min="0.2" nom="irmax">0.55000</param>
           </choix>
-          <choix code="2" nom="degree days"/>
+          <choix code="2" nom="degree days" />
         </option>
       </choix>
       <choix code="2" nom="indeterminate growing plant">
@@ -256,8 +259,8 @@
         <param format="real" max="1.0" min="0.01" nom="splaimin">-999</param>
         <param format="real" max="2.0" min="0.7" nom="splaimax">-999</param>
         <option choix="2" nom="number of inflorescences" nomParam="codcalinflo">
-          <choix code="1" nom="prescribed"/>
-          <choix code="2" nom="trophic status function"/>
+          <choix code="1" nom="prescribed" />
+          <choix code="2" nom="trophic status function" />
         </option>
       </choix>
     </option>
@@ -266,7 +269,7 @@
         <param format="real" max="20.0" min="0.0" nom="tminremp">-999</param>
         <param format="real" max="40.0" min="10.0" nom="tmaxremp">-999</param>
       </choix>
-      <choix code="2" nom="no"/>
+      <choix code="2" nom="no" />
     </option>
   </formalisme>
   <formalisme nom="roots">
@@ -276,14 +279,15 @@
     <param format="real" max="1.0" min="0.0" nom="contrdamax">0.30000</param>
     <param format="real" max="0.07" min="0.005" nom="rayon">0.02</param>
     <option choix="1" nom="driving temperature" nomParam="codetemprac">
-      <choix code="1" nom="temperature within the canopy"/>
-      <choix code="2" nom="soil (threshold TGMIN)"/>
+      <choix code="1" nom="temperature within the canopy" />
+      <choix code="2" nom="soil (threshold TGMIN)" />
     </option>
-    <option choix="2" nom="calculation of the root death at cutting date for grasslands" nomParam="codemortalracine">
+    <option choix="2" nom="calculation of the root death at cutting date for grasslands"
+      nomParam="codemortalracine">
       <choix code="1" nom="function of dry matter production between two successives cut">
         <param format="real" max="1.0" min="0.0" nom="coefracoupe">-999</param>
       </choix>
-      <choix code="2" nom="no specific root death at cutting"/>
+      <choix code="2" nom="no specific root death at cutting" />
     </option>
     <option choix="1" nom="root density" nomParam="coderacine">
       <choix code="1" nom="standard profile">
@@ -301,7 +305,7 @@
             <param format="real" max="0.01" min="0.00001" nom="kdisrac">-999</param>
             <param format="real" max="1.0" min="0.0" nom="alloperirac">-999</param>
           </choix>
-          <choix code="2" nom="no"/>
+          <choix code="2" nom="no" />
         </option>
         <option choix="2" nom="N effect on root distribution" nomParam="codazorac">
           <choix code="1" nom="yes">
@@ -309,7 +313,7 @@
             <param format="real" max="5.0" min="0.0" nom="minazorac">-999</param>
             <param format="real" max="5.0" min="0.1" nom="maxazorac">-999</param>
           </choix>
-          <choix code="2" nom="no"/>
+          <choix code="2" nom="no" />
         </option>
         <option choix="3" nom="trophic-linked production" nomParam="codtrophrac">
           <choix code="1" nom="continuous link">
@@ -322,11 +326,13 @@
             <param format="real" max="0.9" min="0.1" nom="repracseumin">-999</param>
             <param format="real" max="1.0" min="1.0E-4" nom="krepracseu">-999</param>
           </choix>
-          <choix code="3" nom="no"/>
+          <choix code="3" nom="no" />
         </option>
-        <option choix="2" nom="Preferential allocation of biomass to roots in case of water or N stress" nomParam="code_stress_root">
-          <choix code="1" nom="yes"/>
-          <choix code="2" nom="no"/>
+        <option choix="2"
+          nom="Preferential allocation of biomass to roots in case of water or N stress"
+          nomParam="code_stress_root">
+          <choix code="1" nom="yes" />
+          <choix code="2" nom="no" />
         </option>
         <option choix="2" nom="rootdeposition activation" nomParam="code_rootdeposition">
           <choix code="1" nom="yes">
@@ -338,10 +344,10 @@
                 <param format="real" max="0.80" min="0.05" nom="RTD">-999</param>
                 <param format="real" max="1.0" min="0.0" nom="propracfmax">-999</param>
               </choix>
-              <choix code="2" nom="no"/>
+              <choix code="2" nom="no" />
             </option>
           </choix>
-          <choix code="2" nom="no"/>
+          <choix code="2" nom="no" />
         </option>
       </choix>
     </option>
@@ -350,26 +356,26 @@
     <param format="real" max="-1.0" min="-30.0" nom="tletale">-25.00000</param>
     <param format="real" max="5.0" min="-5.0" nom="tdebgel">-4.00000</param>
     <option choix="2" nom="plantlet or emergence frost" nomParam="codgellev">
-      <choix code="1" nom="no"/>
+      <choix code="1" nom="no" />
       <choix code="2" nom="yes">
         <param format="integer" max="5" min="1" nom="nbfgellev">2</param>
         <param format="real" max="0.0" min="-25.0" nom="tgellev90">-20.00000</param>
       </choix>
     </option>
     <option choix="2" nom="leaf frost at juvenile phase (till AMF)" nomParam="codgeljuv">
-      <choix code="1" nom="no"/>
+      <choix code="1" nom="no" />
       <choix code="2" nom="yes">
         <param format="real" max="0.0" min="-25.0" nom="tgeljuv90">-20.00000</param>
       </choix>
     </option>
     <option choix="2" nom="leaf frost at adult phase" nomParam="codgelveg">
-      <choix code="1" nom="no"/>
+      <choix code="1" nom="no" />
       <choix code="2" nom="yes">
         <param format="real" max="0.0" min="-25.0" nom="tgelveg90">-10.00000</param>
       </choix>
     </option>
     <option choix="2" nom="flower/fruit frost (from FLO)" nomParam="codgelflo">
-      <choix code="1" nom="no"/>
+      <choix code="1" nom="no" />
       <choix code="2" nom="yes">
         <param format="real" max="0.0" min="-25.0" nom="tgelflo10">-4.50000</param>
         <param format="real" max="0.0" min="-25.0" nom="tgelflo90">-6.50000</param>
@@ -397,7 +403,7 @@
         <param format="real" max="1.0" min="0.0" nom="stemflowmax">-999</param>
         <param format="real" max="2.0" min="0.1" nom="kstemflow">-999</param>
       </choix>
-      <choix code="2" nom="no"/>
+      <choix code="2" nom="no" />
     </option>
   </formalisme>
   <formalisme nom="nitrogen">
@@ -424,11 +430,11 @@
       </choix>
     </option>
     <option choix="1" nom="calculation Nitrogen stress index (INN)" nomParam="codeINN">
-      <choix code="1" nom="INN cumulated"/>
-      <choix code="2" nom="INN instantaneous"/>
+      <choix code="1" nom="INN cumulated" />
+      <choix code="2" nom="INN instantaneous" />
     </option>
     <option choix="1" nom="leguminous" nomParam="codelegume">
-      <choix code="1" nom="no"/>
+      <choix code="1" nom="no" />
       <choix code="2" nom="yes">
         <param format="real" max="500.0" min="0.0" nom="stlevdno">-999</param>
         <param format="real" max="500.0" min="0.0" nom="stdnofno">-999</param>
@@ -454,8 +460,8 @@
       </choix>
     </option>
     <option choix="2" nom="nitrogen effect on fruit/grain number" nomParam="codazofruit">
-      <choix code="1" nom="no"/>
-      <choix code="2" nom="yes (inns)"/>
+      <choix code="1" nom="no" />
+      <choix code="2" nom="yes (inns)" />
     </option>
   </formalisme>
   <formalisme nom="correspondance code BBCH">
@@ -570,4 +576,3 @@
     </tv>
   </formalisme>
 </fichierplt>
-
