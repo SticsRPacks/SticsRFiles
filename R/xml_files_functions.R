@@ -135,6 +135,7 @@ to_xml_version <- function(stics_version) {
 # set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
 # overwrite = FALSE) {
 set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
+set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
   # If an xml document is given file must not be null
   if (!inherits(xml_doc, "xml_document")) {
     stop(
@@ -158,7 +159,7 @@ set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
   }
 
   # Checking file version
-  if (!is.null(att_value) && att_value[, "version"] == ver) {
+  if (!is.null(att) && att[, "version"] == ver) {
     warning("The file is already in version ", new_version)
     return(invisible(xml_doc))
   }
@@ -172,6 +173,7 @@ set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
 
   add_attrs(xml_doc, path = root_path, named_vector = ver)
 
+  invisible(xml_doc)
   invisible(xml_doc)
 }
 
