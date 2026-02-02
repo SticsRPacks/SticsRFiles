@@ -13,7 +13,13 @@
 #'
 # @examples
 #'
-upgrade_tec_xml_10_11 <- function(file, out_dir, code_strip = 2, nrow = 1, overwrite = FALSE) {
+upgrade_tec_xml_10_11 <- function(
+  file,
+  out_dir,
+  code_strip = 2,
+  nrow = 1,
+  overwrite = FALSE
+) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -100,9 +106,13 @@ upgrade_tec_xml_10_11 <- function(file, out_dir, code_strip = 2, nrow = 1, overw
 
   strip_node <- XML::xmlParseString(
     paste0(
-      '<option choix="', code_strip, '" nom="Is the crop sown in a strip design?" nomParam="code_strip">
+      '<option choix="',
+      code_strip,
+      '" nom="Is the crop sown in a strip design?" nomParam="code_strip">
         <choix code="1" nom="yes">
-          <param format="integer" max="100" min="1" nom="nrow">', nrow, '</param>
+          <param format="integer" max="100" min="1" nom="nrow">',
+      nrow,
+      '</param>
         </choix>
         <choix code="2" nom="no" />
       </option>'
@@ -570,6 +580,41 @@ upgrade_param_newform_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
     target_version = "V11.0"
   )
 
+  # renaming humirac parameter to code_humirac
+  humirac_node <- SticsRFiles:::get_nodes(
+    xml_doc,
+    path = "//formalisme/param[@nom='humirac']"
+  )
+
+  old_value <- SticsRFiles:::get_param_value(
+    xml_doc = xml_doc,
+    param_name = "humirac"
+  )$humirac
+
+  XML::removeNodes(humirac_node)
+
+  new_node <- XML::xmlParseString(
+    '<option choix="2" nom="option to calculate the root growth reduction factor due to soil water content" nomParam="code_humirac">
+  <choix code="0" nom="no effect of soil water content"/>
+  <choix code="1" nom="using a discontinuous function with a threshold at hminf"/>
+  <choix code="2" nom="using a linear function between hminf and hccf"/>
+  </option>',
+    addFinalizer = TRUE
+  )
+
+  parent_node <- SticsRFiles:::get_nodes(
+    xml_doc,
+    path = "//formalisme[@nom='New Roots']"
+  )[[1]]
+
+  XML::addChildren(parent_node, XML::xmlClone(new_node), at = 0)
+
+  SticsRFiles:::set_param_value(
+    xml_doc = xml_doc,
+    param_name = "code_humirac",
+    param_value = old_value
+  )
+
   # write the file
   out_file <- file.path(out_dir, basename(file))
   write_xml_file(xml_doc, out_file, overwrite = overwrite)
@@ -720,8 +765,11 @@ upgrade_workspace_xml_10_11 <- function(
   # Converting crop management files (*_tec.xml)
   tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
   upgrade_tec_xml_10_11(
-    tec_files, out_dir,
-    code_strip = 2, nrow = 1, overwrite = overwrite
+    tec_files,
+    out_dir,
+    code_strip = 2,
+    nrow = 1,
+    overwrite = overwrite
   )
 
   # Upgrading plant files
@@ -819,7 +867,10 @@ check_and_upgrade_xml_version <- function(
   # and file version
   from_version_major <- get_major_version(from_version)
   file_version <- get_xml_file_version(xml_doc)
-  if (!is.null(file_version) && !get_major_version(file_version) %in% from_version_major) {
+  if (
+    !is.null(file_version) &&
+      !get_major_version(file_version) %in% from_version_major
+  ) {
     stop(
       "file has a wrong starting version !",
       "must be a",
