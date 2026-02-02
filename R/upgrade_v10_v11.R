@@ -14,12 +14,11 @@
 # @examples
 #'
 upgrade_tec_xml_10_11 <- function(
-  file,
-  out_dir,
-  code_strip = 2,
-  nrow = 1,
-  overwrite = FALSE
-) {
+    file,
+    out_dir,
+    code_strip = 2,
+    nrow = 1,
+    overwrite = FALSE) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -152,17 +151,16 @@ upgrade_tec_xml_10_11 <- function(
 # @examples
 #'
 upgrade_plt_xml_10_11 <- function(
-  file,
-  out_dir,
-  stage_const_height = NULL,
-  elongation = NULL,
-  nw_height = NULL,
-  code_shape = NULL,
-  haut_dev_x0 = NULL,
-  haut_dev_k = NULL,
-  overwrite = FALSE,
-  warning = TRUE
-) {
+    file,
+    out_dir,
+    stage_const_height = NULL,
+    elongation = NULL,
+    nw_height = NULL,
+    code_shape = NULL,
+    haut_dev_x0 = NULL,
+    haut_dev_k = NULL,
+    overwrite = FALSE,
+    warning = TRUE) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -196,7 +194,7 @@ upgrade_plt_xml_10_11 <- function(
     <param format="character" nom="stage_const_height">no</param>
       <param format="real" max="2.0" min="1.0" nom="elongation">1.0</param>
         <param format="real" max="1.0" min="0.0" nom="nw_height">0.0</param>
-          <option choix="1" nom="LAI, Dry mass or phasic development relationship - Principal plant" nomParam="code_shape">
+          <option choix="1" nom="LAI or phasic development relationship" nomParam="code_shape">
             <choix code="1" nom="LAI"/>
               <choix code="2" nom="Development">
                 <param format="real" max="5000.0" min="0.0" nom="haut_dev_x0">0.0</param>
@@ -332,42 +330,42 @@ plt_IC_param_list <- function() {
   param$poi$stage_const_height <- "mat"
   param$poi$elongation <- 1.0
   param$poi$nw_height <- 0.0
-  param$poi$code_shape <- 2
+  param$poi$code_shape <- 1
   param$poi$haut_dev_x0 <- 685.395497474724
   param$poi$haut_dev_k <- 0.0113605979397447
 
   param$ble$stage_const_height <- "no"
   param$ble$elongation <- 1.0
   param$ble$nw_height <- 0.0
-  param$ble$code_shape <- 2
+  param$ble$code_shape <- 1
   param$ble$haut_dev_x0 <- 886.219548558914
   param$ble$haut_dev_k <- 0.00538369741357949
 
   param$faba$stage_const_height <- "no"
   param$faba$elongation <- 1.0
   param$faba$nw_height <- 0.45
-  param$faba$code_shape <- 2
+  param$faba$code_shape <- 1
   param$faba$haut_dev_x0 <- 998.494003649625
   param$faba$haut_dev_k <- 0.00726768251150451
 
   param$esc$stage_const_height <- "no"
   param$esc$elongation <- 1.0
   param$esc$nw_height <- 0.0
-  param$esc$code_shape <- 2
+  param$esc$code_shape <- 1
   param$esc$haut_dev_x0 <- 714.811280801783
   param$esc$haut_dev_k <- 0.00891413714283287
 
   param$tou$stage_const_height <- "no"
   param$tou$elongation <- 1.0
   param$tou$nw_height <- 0.0
-  param$tou$code_shape <- 2
+  param$tou$code_shape <- 1
   param$tou$haut_dev_x0 <- 645.895914862214
   param$tou$haut_dev_k <- 0.0105505841187171
 
   param$soj$stage_const_height <- "no"
   param$soj$elongation <- 1.0
   param$soj$nw_height <- 0.0
-  param$soj$code_shape <- 2
+  param$soj$code_shape <- 1
   param$soj$haut_dev_x0 <- 645.651309418313
   param$soj$haut_dev_k <- 0.00665713018807634
 
@@ -510,12 +508,11 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @export
 #'
 upgrade_param_gen_xml_10_11 <- function(
-  file,
-  out_dir,
-  hauteur_threshold = NULL,
-  par_to_net = NULL,
-  overwrite = FALSE
-) {
+    file,
+    out_dir,
+    hauteur_threshold = NULL,
+    par_to_net = NULL,
+    overwrite = FALSE) {
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -707,14 +704,13 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_workspace_xml_10_11 <- function(
-  workspace,
-  javastics = NULL,
-  out_dir,
-  from_version = "V10.0",
-  # target_version = "V11.0",
-  overwrite = FALSE,
-  verbose = FALSE
-) {
+    workspace,
+    javastics = NULL,
+    out_dir,
+    from_version = "V10.0",
+    # target_version = "V11.0",
+    overwrite = FALSE,
+    verbose = FALSE) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -844,10 +840,9 @@ upgrade_workspace_xml_10_11 <- function(
 #' @noRd
 #'
 check_and_upgrade_xml_version <- function(
-  xml_doc,
-  from_version,
-  target_version
-) {
+    xml_doc,
+    from_version,
+    target_version) {
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 
