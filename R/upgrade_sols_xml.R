@@ -89,8 +89,7 @@ upgrade_sols_xml <- function(
   # Setting file STICS version
   set_xml_file_version(
     old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+    new_version = target_version
   )
 
   # Checking if layer @nom are up to date (old @nom = horizon)
