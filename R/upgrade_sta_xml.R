@@ -116,8 +116,7 @@ upgrade_sta_xml <- function(
   # Setting file STICS version
   set_xml_file_version(
     old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+    new_version = target_version
   )
 
   # Getting old concrr value
