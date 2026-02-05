@@ -91,8 +91,7 @@ upgrade_usms_xml <- function(
   # setting file STICS version
   set_xml_file_version(
     old_doc,
-    new_version = target_version,
-    overwrite = overwrite
+    new_version = target_version
   )
 
   # checking if fobs exist

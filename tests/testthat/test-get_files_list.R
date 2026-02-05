@@ -1,6 +1,5 @@
 stics_version <- get_stics_versions_compat()$latest_version
 version_num <- get_version_num()
-host <- "github.com"
 
 studycase_path <-
   download_data(
@@ -19,7 +18,7 @@ usms_files <- get_files_list(workspace_path)
 
 context("Checking usm names in list")
 test_that("checking usm exists", {
-  expect_true("bo96iN+" %in% names(usms_files))
+  expect_true("bou00t1" %in% names(usms_files))
 })
 
 context("Checking all list usm names against usms file")
@@ -52,7 +51,7 @@ test_that("mod files exist in files", {
     length(
       grep(
         pattern = "\\.mod$",
-        x = usms_files[["bo96iN+"]][["paths"]]
+        x = usms_files[["bou00t1"]][["paths"]]
       )
     ) >
       0
@@ -65,7 +64,7 @@ test_that("mod files do not exist in files", {
     length(
       grep(
         pattern = "\\.mod$",
-        x = usms_files[["bo96iN+"]][["paths"]]
+        x = usms_files[["bou00t1"]][["paths"]]
       )
     ) ==
       0
@@ -80,10 +79,10 @@ test_that("finit files", {
     length(
       grep(
         pattern = "\\_ini.xml$",
-        x = usms_files[["bo96iN+"]][["paths"]]
+        x = usms_files[["bou00t1"]][["paths"]]
       )
     ) >
       0 &
-      length(usms_files[["bo96iN+"]][["paths"]]) == 1
+      length(usms_files[["bou00t1"]][["paths"]]) == 1
   )
 })
