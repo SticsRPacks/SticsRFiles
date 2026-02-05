@@ -1,6 +1,4 @@
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
-host <- "github.com"
 
 studycase_path <-
   download_data(
@@ -13,11 +11,11 @@ workspace_path <- file.path(studycase_path, "XmlFiles")
 
 test_that("single USM, single year", {
   expected <- data.frame(
-    usm = "bo96iN+",
-    year1 = 1996,
-    year2 = 1996
+    usm = "bou00t1",
+    year1 = 2000,
+    year2 = 2000
   )
   rownames(expected) <- expected$usm
-  observed <- get_years(workspace_path, "usms.xml", "bo96iN+")
+  observed <- get_years(workspace_path, "usms.xml", "bou00t1")
   expect_equal(observed, expected)
 })
