@@ -56,7 +56,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
   version: '>= 4.0.0'
 - type: software
   title: cli
@@ -68,7 +68,7 @@ references:
   - family-names: Csárdi
     given-names: Gábor
     email: gabor@posit.co
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.cli
 - type: software
   title: crayon
@@ -80,7 +80,7 @@ references:
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.crayon
 - type: software
   title: curl
@@ -93,7 +93,7 @@ references:
     given-names: Jeroen
     email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.curl
 - type: software
   title: data.table
@@ -114,11 +114,14 @@ references:
     email: asrini@pm.me
   - family-names: Gorecki
     given-names: Jan
+    email: j.gorecki@wit.edu.pl
   - family-names: Chirico
     given-names: Michael
+    email: michaelchirico4@gmail.com
     orcid: https://orcid.org/0000-0003-0787-087X
   - family-names: Hocking
     given-names: Toby
+    email: toby.hocking@r-project.org
     orcid: https://orcid.org/0000-0002-3146-0865
   - family-names: Schwendinger
     given-names: Benjamin
@@ -127,7 +130,7 @@ references:
     given-names: Ivan
     email: ikrylov@disroot.org
     orcid: https://orcid.org/0000-0002-0172-3812
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.data.table
 - type: software
   title: doParallel
@@ -140,7 +143,7 @@ references:
     given-names: Microsoft
   - family-names: Weston
     given-names: Steve
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.doParallel
 - type: software
   title: dplyr
@@ -165,7 +168,7 @@ references:
     given-names: Davis
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.dplyr
   version: '>= 1.0.0'
 - type: software
@@ -178,7 +181,7 @@ references:
   - name: Microsoft
   - family-names: Weston
     given-names: Steve
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.foreach
 - type: software
   title: lubridate
@@ -194,7 +197,7 @@ references:
     given-names: Garrett
   - family-names: Wickham
     given-names: Hadley
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.lubridate
 - type: software
   title: methods
@@ -205,7 +208,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
 - type: software
   title: parallel
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -215,7 +218,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
@@ -229,7 +232,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.rlang
 - type: software
   title: rstudioapi
@@ -250,7 +253,7 @@ references:
   - family-names: Ritchie
     given-names: Gary
     email: gary@posit.co
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.rstudioapi
 - type: software
   title: tibble
@@ -266,7 +269,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.tibble
 - type: software
   title: tidyr
@@ -283,7 +286,7 @@ references:
     email: davis@posit.co
   - family-names: Girlich
     given-names: Maximilian
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.tidyr
 - type: software
   title: tidyselect
@@ -298,7 +301,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.tidyselect
 - type: software
   title: tools
@@ -309,7 +312,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -319,7 +322,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2025'
+  year: '2026'
 - type: software
   title: XML
   abstract: 'XML: Tools for Parsing and Generating XML Within R and S-Plus'
@@ -331,7 +334,7 @@ references:
     given-names: Duncan
     email: duncan@r-project.org
     orcid: https://orcid.org/0000-0003-0159-1546
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.XML
 - type: software
   title: xml2
@@ -347,7 +350,7 @@ references:
   - family-names: Ooms
     given-names: Jeroen
     email: jeroenooms@gmail.com
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.xml2
 - type: software
   title: xslt
@@ -360,7 +363,7 @@ references:
     given-names: Jeroen
     email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.xslt
 - type: software
   title: covr
@@ -372,7 +375,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.covr
 - type: software
   title: formatR
@@ -385,7 +388,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.formatR
 - type: software
   title: knitr
@@ -398,7 +401,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.knitr
 - type: software
   title: learnr
@@ -422,7 +425,7 @@ references:
     given-names: Alexander
     email: alex.rossellhayes@posit.co
     orcid: https://orcid.org/0000-0001-9412-0457
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.learnr
 - type: software
   title: readxl
@@ -439,7 +442,7 @@ references:
     given-names: Jennifer
     email: jenny@posit.co
     orcid: https://orcid.org/0000-0002-6983-2759
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.readxl
 - type: software
   title: rmarkdown
@@ -483,7 +486,7 @@ references:
     given-names: Richard
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: spelling
@@ -499,7 +502,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.hester@rstudio.com
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.spelling
 - type: software
   title: testthat
@@ -511,6 +514,6 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2025'
+  year: '2026'
   doi: 10.32614/CRAN.package.testthat
 
