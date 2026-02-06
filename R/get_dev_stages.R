@@ -37,8 +37,9 @@ get_dev_stages <- function(sim,
 
   if (is.null(usm)) {
     usm <- names(sim)
+  } else {
+    stopifnot(all(usm %in% names(sim)))
   }
-  stopifnot(all(usm %in% names(sim)))
 
   for (usm_name in usm) {
     dat <- sim[[usm_name]]
