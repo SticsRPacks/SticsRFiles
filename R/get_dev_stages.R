@@ -44,7 +44,7 @@ get_dev_stages <- function(sim,
 
   for (usm_name in usm) {
     dat <- sim[[usm_name]]
-    firstYear <- min(format(dat$Date, format = "%Y"))
+    firstYear <- as.numeric(min(format(dat$Date, format = "%Y")))
     out_usm <- data.frame(
       var = dev_vars,
       day = NA,
