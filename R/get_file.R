@@ -392,7 +392,7 @@ get_file_one <- function(
   )
 
   # to fix note, no visible binding ...
-  .SD <- NULL
+  .SD <- ..keep_cols <- NULL
 
   keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
   out <- df[, ..keep_cols]
