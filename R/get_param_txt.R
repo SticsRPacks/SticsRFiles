@@ -1099,21 +1099,19 @@ get_txt_generic <- function(file, names = TRUE, workspace = NULL) {
     stop(filepath, ": does not exist !")
   }
 
-  params <- readLines(filepath)
-
-  x <- as.list(params[!seq_along(params) %% 2])
-  if (names) {
-    names(x) <- gsub(":", "", params[!!seq_along(params) %% 2])
+  lines <- scan(filepath, what = character(), sep = "\n", quiet = TRUE)
+  if (length(lines) < 2) {
+    return(list())
   }
 
-  is_dupli <- duplicated(names(x))
-  dupli_names <- unique(names(x)[is_dupli])
+  values <- lines[seq(2, length(lines), by = 2)]
 
-  # Remove duplicated names if any, and put the values as a vector instead
-  for (i in dupli_names) {
-    index_dupli <- which(names(x) == i)
-    x[[index_dupli[1]]] <- unlist(x[index_dupli], use.names = FALSE)
-    x <- x[-index_dupli[-1]]
+  if (names) {
+    keys <- lines[seq(1, length(lines), by = 2)]
+    # Create named list and remove duplicates
+    x <- split(values, factor(keys, levels = unique(keys)))
+  } else {
+    x <- values
   }
 
   character_to_numeric_list(x)
