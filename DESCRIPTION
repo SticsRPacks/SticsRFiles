@@ -123,6 +123,7 @@ Collate:
     'get_cores_nb.R'
     'get_cultivars_list.R'
     'get_cultivars_param.R'
+    'get_dev_stages.R'
     'get_file.R'
     'get_file_int.R'
     'get_files_list.R'
