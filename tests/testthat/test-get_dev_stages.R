@@ -1,6 +1,8 @@
-stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
-host <- "github.com"
+#stics_version <- get_stics_versions_compat()$latest_version
+#version_num <- get_version_num()
+
+stics_version <- "V10.5.0"
+version_num <- get_version_num(stics_version)
 
 studycase_path <-
   download_data(
@@ -14,18 +16,21 @@ workspace_path <- file.path(studycase_path, "bou00t1")
 sim <- get_sim(workspace_path)
 
 test_that("two dev vars", {
-  expected <- list(bou00t1 = data.frame(
-    var = c("iamfs", "irecs"),
-    day = c(
-      max(sim$bou00t1$iamfs),
-      max(sim$bou00t1$irecs)
-    ),
-    date = c(
-      as.Date("2000-06-19"),
-      as.Date("2000-10-31")
+  expected <- list(
+    bou00t1 = data.frame(
+      var = c("iamfs", "irecs"),
+      day = c(
+        max(sim$bou00t1$iamfs),
+        max(sim$bou00t1$irecs)
+      ),
+      date = c(
+        as.Date("2000-06-19"),
+        as.Date("2000-10-31")
+      )
     )
-  ))
-  expected$bou00t1$var <- factor(expected$bou00t1$var,
+  )
+  expected$bou00t1$var <- factor(
+    expected$bou00t1$var,
     levels = c("iamfs", "irecs"),
     ordered = TRUE
   )

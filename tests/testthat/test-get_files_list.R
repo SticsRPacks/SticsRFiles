@@ -1,5 +1,8 @@
-stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
+# stics_version <- get_stics_versions_compat()$latest_version
+# version_num <- get_version_num()
+
+stics_version <- "V10.5.0"
+version_num <- get_version_num(stics_version)
 
 studycase_path <-
   download_data(
