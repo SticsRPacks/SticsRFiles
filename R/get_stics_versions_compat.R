@@ -150,8 +150,12 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
     replic <- 1
   } else if (version_parts_number == 1) {
     replic <- 2
+  } else {
+    replic <- 0
   }
-  stics_version <- paste(c(version_parts, rep("0", replic)), collapse = ".")
+  if (replic > 0) {
+    stics_version <- paste(c(version_parts, rep("0", replic)), collapse = ".")
+  }
 
   # getting the version number and the id of the chosen version
   # according to numerical version (so 10.0 is equivalent to 10)
