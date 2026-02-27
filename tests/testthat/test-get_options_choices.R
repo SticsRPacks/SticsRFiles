@@ -1,5 +1,4 @@
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
 
 context("Get option choice")
 xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")

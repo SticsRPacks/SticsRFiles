@@ -4,10 +4,10 @@
 \alias{read_params_table}
 \title{Getting parameters data from tables files (Excel sheet, csv)}
 \usage{
-read_params_table(file, sheet_name = NULL, num_na = "NA", char_na = "NA")
+read_params_table(file_path, sheet_name = NULL, num_na = "NA", char_na = "NA")
 }
 \arguments{
-\item{file}{Excel or csv file path (including name of the file)}
+\item{file_path}{Excel or csv file path (including name of the file)}
 
 \item{sheet_name}{Name of an Excel sheet (useless for csv files)}
 
@@ -28,14 +28,14 @@ replaced respectively with num_na or char_na
 \examples{
 
 usm_xl_file <- download_usm_xl(
-  file = "inputs_stics_example.xlsx",
+  file_name = "inputs_stics_example.xlsx",
   verbose = FALSE
 )
 read_params_table(usm_xl_file, sheet = "USMs")
 usm_csv_file <- download_usm_csv(
   file = "inputs_stics_example_USMs.csv",
-  verbose = FALSE,
   stics_version = "V9.2"
 )
-read_params_table(file = usm_csv_file)
+read_params_table(file_path = usm_csv_file)
+
 }
