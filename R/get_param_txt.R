@@ -395,7 +395,7 @@ get_ini_txt <- function(
 
   stics_version_num <- get_version_num(stics_version = stics_version)
 
-  if (stics_version_num < 10) {
+  if (stics_version_num < get_version_num(10)) {
     if (length(params) > 48) {
       stop(
         "The used STICS version ",
@@ -577,7 +577,7 @@ get_tec_txt <- function(
 
   # Early return here for version >= 10.0
   # get_tec_txt_ is not fully generic for the moment!
-  if (get_version_num(stics_version = stics_version) >= 10) {
+  if (get_version_num(stics_version = stics_version) >= get_version_num(10)) {
     return(get_tec_txt_(params, values))
   }
 
@@ -918,7 +918,7 @@ get_soil_txt <- function(
 
   soil$nbcouchessol_max <- "1000"
 
-  if (get_version_num(stics_version = stics_version) < 10) {
+  if (get_version_num(stics_version = stics_version) < get_version_num(10)) {
     par_vec <- c(
       "numsol",
       "typsol",

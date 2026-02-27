@@ -1,9 +1,7 @@
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
 
 context("Creating an xml soils file to latest version")
 
-workspace_path <- get_examples_path("xml", stics_version = stics_version)
 xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx", overwrite = TRUE)
 sols_param_df <- read_params_table(file = xl_path, sheet_name = "Soils")
 

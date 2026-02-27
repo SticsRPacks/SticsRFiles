@@ -8,7 +8,7 @@ xml_path <- file.path(
 context("Getting newform param values")
 
 test_that("get option parameters from option node", {
-  if (version_num < 10) {
+  if (version_num < get_version_num(10)) {
     expect_equal(
       unname(unlist(get_param_xml(
         xml_path,
