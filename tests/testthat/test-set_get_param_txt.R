@@ -4,36 +4,36 @@ context("Getting and Setting values from txt files")
 
 path <- get_examples_path("txt", stics_version = stics_version)
 # Copy example to test in tempdir since the files will be modified by set_param
+tmp_path <- tempdir()
 file.copy(
   from = file.path(path, list.files(path)),
-  to = tempdir(),
+  to = tmp_path,
   overwrite = TRUE
 )
-path <- tempdir()
 
 tmp1 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   stics_version = stics_version
 ))
 codevar <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "codevar",
   stics_version = stics_version
 ))
 tmp2 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   variety = codevar,
   stics_version = stics_version
 ))
 variete <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "variete",
   stics_version = stics_version
 ))
 tmp3 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   variety = variete,
   stics_version = stics_version
@@ -45,18 +45,18 @@ test_that("variety argument can take NULL, integer or characters", {
 })
 
 varieties <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   stics_version = stics_version
 )$plant$plant1$codevar[1:3]
 
 tmp1 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   variety = varieties,
   stics_version = stics_version
 )$plant$plant1$stlevamf
 tmp2 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   stics_version = stics_version
 )$plant$plant1$stlevamf[1:3]
 test_that("variety argument can be a vector of characters", {
@@ -66,14 +66,14 @@ test_that("variety argument can be a vector of characters", {
 
 # Using a specific plant id
 tmp <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   stics_version = stics_version
 )$plant$plant1$stlevamf
 
 # existing id
 tmp2 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   plant_id = 1,
   stics_version = stics_version
@@ -83,7 +83,7 @@ test_that("get for an existing plant id or not", {
   expect_equal(tmp, tmp2)
   expect_error(
     get_param_txt(
-      workspace = path,
+      workspace = tmp_path,
       param = "stlevamf",
       plant_id = 2,
       stics_version = stics_version
@@ -94,32 +94,32 @@ test_that("get for an existing plant id or not", {
 # Using specific value_id, for existing id or not
 # soil layer: soil, ini parameters
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "cailloux",
   value = 2
 )
 
 tmp <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "cailloux",
   stics_version = stics_version
 )$soil$cailloux
 
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "cailloux",
   value = c(1, 3, 5),
   value_id = c(1, 3, 5)
 )
 
 tmp2 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "cailloux",
   stics_version = stics_version
 )$soil$cailloux[c(1, 3, 5)]
 
 tmp3 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "cailloux",
   stics_version = stics_version,
   value_id = c(1, 3, 5),
@@ -131,7 +131,7 @@ test_that("get for layer id", {
   expect_equal(tmp2, tmp3)
   expect_error(
     get_param_txt(
-      workspace = path,
+      workspace = tmp_path,
       param = "cailloux",
       stics_version = stics_version,
       value_id = c(1, 3, 5),
@@ -142,33 +142,33 @@ test_that("get for layer id", {
 
 # technical operations (irrigation)
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "amount",
   value = 40
 )
 
 tmp <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "amount",
   stics_version = stics_version
 )$tec$plant1$amount
 
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "amount",
   value = c(50, 60, 70),
   value_id = c(1, 9, 16)
 )
 
 tmp2 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "amount",
   stics_version = stics_version
 )$tec$plant1$amount[c(1, 9, 16)]
 
 
 tmp3 <- get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "amount",
   stics_version = stics_version,
   value_id = c(1, 9, 16)
@@ -180,7 +180,7 @@ test_that("get for layer id", {
   expect_equal(tmp2, tmp3)
   expect_error(
     get_param_txt(
-      workspace = path,
+      workspace = tmp_path,
       param = "amount",
       stics_version = stics_version,
       value_id = c(1, 9, 20)
@@ -192,20 +192,20 @@ test_that("get for layer id", {
 # (another parameter has a similar name : rapforme ...)
 
 tmp <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "forme",
   exact = TRUE,
   stics_version = stics_version
 ))
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "forme",
   value = tmp + 1,
   stics_version = stics_version
 )
 
 tmp2 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "forme",
   exact = TRUE,
   stics_version = stics_version
@@ -217,19 +217,19 @@ test_that("Set and get of a non-varietal parameter for a unique plant", {
 
 # Get and modify the varietal parameter "stlevamf" for the simulated variety
 tmp <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   stics_version = stics_version
 ))
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   value = tmp + 1,
   stics_version = stics_version
 )
 
 tmp2 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   stics_version = stics_version
 ))
@@ -241,13 +241,13 @@ test_that("Set and get of a varietal parameter for a unique plant
 
 # Get and modify the varietal parameter "stlevamf" for a given variety
 tmp <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   variety = 4,
   stics_version = stics_version
 ))
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   value = as.numeric(tmp) + 1,
   variety = 4,
@@ -255,7 +255,7 @@ set_param_txt(
 )
 
 tmp2 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   variety = 4,
   stics_version = stics_version
@@ -271,31 +271,33 @@ path <- file.path(
   get_examples_path("txt", stics_version = stics_version),
   "intercrop_pea_barley"
 )
+
+tmp_path <- tempdir()
 # Copy example to test in tempdir since the files will be modified by set_param
 file.copy(
   from = file.path(path, list.files(path)),
-  to = tempdir(),
+  to = tmp_path,
   overwrite = TRUE
 )
-path <- tempdir()
+
 
 # Get and modify the non-varietal parameter "forme" for the simulated variety
 tmp <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "forme",
   exact = TRUE,
   stics_version = stics_version
 ))
 plant <- 2
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "forme",
   value = tmp[plant] + 1,
   plant_id = plant,
   stics_version = stics_version
 )
 tmp2 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "forme",
   exact = TRUE,
   stics_version = stics_version
@@ -307,20 +309,20 @@ test_that("Set and get of a non-varietal parameter for an intercrop
 
 # Get and modify the varietal parameter "stlevamf" for the simulated variety
 tmp <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   stics_version = stics_version
 ))
 plant <- 2
 set_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   value = tmp[[plant]] + 1,
   plant_id = 2,
   stics_version = stics_version
 )
 tmp2 <- unlist(get_param_txt(
-  workspace = path,
+  workspace = tmp_path,
   param = "stlevamf",
   stics_version = stics_version
 ))

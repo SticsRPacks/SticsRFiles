@@ -13,7 +13,7 @@ test_that("single param option value ", {
 
 
 # unlist with different types produces a character vector
-if (version_num < 10) {
+if (version_num < get_version_num(10)) {
   par_list <- c(
     "stade0",
     "lai0",
@@ -58,7 +58,7 @@ test_that("multiple param option value 2", {
 
 hinit <- "hinit"
 init_par <- c("hinit", "NO3init", "NH4init")
-if (version_num >= 10) {
+if (version_num >= get_version_num(10)) {
   hinit <- "Hinitf"
   init_par <- c("Hinitf", "NO3initf", "NH4initf")
 }

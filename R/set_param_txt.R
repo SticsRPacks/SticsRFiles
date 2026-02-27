@@ -355,7 +355,7 @@ set_soil_txt <- function(
     ref[[grep(param, names(ref))]][] <- format(value, scientific = FALSE)
   }
 
-  if (get_version_num(stics_version = stics_version) < 10) {
+  if (get_version_num(stics_version = stics_version) < get_version_num(10)) {
     line <- paste(
       " ",
       " ",
@@ -718,7 +718,7 @@ set_file_txt <- function(
 
 
 get_ini_val_idx <- function(stics_version) {
-  if (get_version_num(stics_version = stics_version) < 10) {
+  if (get_version_num(stics_version = stics_version) < get_version_num(10)) {
     idx <- c(
       2,
       4:10,
