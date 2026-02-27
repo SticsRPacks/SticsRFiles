@@ -20,7 +20,6 @@
 #' read_params_table(usm_xl_file, sheet = "USMs")
 #' usm_csv_file <- download_usm_csv(
 #'   file = "inputs_stics_example_USMs.csv",
-#'   verbose = FALSE,
 #'   stics_version = "V9.2"
 #' )
 #' read_params_table(file_path = usm_csv_file)
