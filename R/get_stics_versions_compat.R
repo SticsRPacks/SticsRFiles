@@ -166,7 +166,7 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
     stics_version <- paste(c(version_parts, rep("0", replic)), collapse = ".")
   }
   # fixing the version number to X.Y.Z from X, X.Y or from Vx, Vx.y,
-  #stics_version <- complete_version_num(stics_version)
+  # stics_version <- complete_version_num(stics_version)
 
   # getting the version number and the id of the chosen version
   # according to numerical version (so 10.0 is equivalent to 10)
@@ -241,7 +241,9 @@ get_version_num <- function(stics_version = "latest", numeric = TRUE) {
 
 max_versions_num <- function(versions_num) {
   max_version <- versions_num[[1]]
-  if (length(versions_num) < 2) return(max_version)
+  if (length(versions_num) < 2) {
+    return(max_version)
+  }
   for (i in seq_along(versions_num)) {
     if (versions_num[[i]] > max_version) max_version <- versions_num[[i]]
   }
