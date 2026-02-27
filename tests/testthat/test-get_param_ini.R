@@ -13,7 +13,7 @@ test_that("single param option value ", {
 
 
 # unlist with different types produces a character vector
-if (version_num < 10) {
+if (version_num < get_version_num(10)) {
   par_list <- c(
     "stade0",
     "lai0",

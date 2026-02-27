@@ -1,5 +1,4 @@
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
 
 context("get example doc")
 usm_doc <- get_xml_doc_example("usms.xml")
