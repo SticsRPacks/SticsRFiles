@@ -1,7 +1,7 @@
 options(warn = -1)
 
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
+
 host <- "github.com"
 
 context("get model outputs")

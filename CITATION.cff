@@ -256,6 +256,20 @@ references:
   year: '2026'
   doi: 10.32614/CRAN.package.rstudioapi
 - type: software
+  title: semver
+  abstract: 'semver: ''Semantic Versioning V2.0.0'' Parser'
+  notes: Imports
+  url: https://github.com/johndharrison/semver
+  repository: https://CRAN.R-project.org/package=semver
+  authors:
+  - family-names: Harrison
+    given-names: John
+    email: johndharrison0@gmail.com
+  - family-names: Živanović
+    given-names: Marko
+  year: '2026'
+  doi: 10.32614/CRAN.package.semver
+- type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'
   notes: Imports
@@ -327,7 +341,7 @@ references:
   title: XML
   abstract: 'XML: Tools for Parsing and Generating XML Within R and S-Plus'
   notes: Imports
-  url: https://www.omegahat.net/RSXML/
+  url: https://codeberg.org/aitap/XML
   repository: https://CRAN.R-project.org/package=XML
   authors:
   - family-names: Temple Lang

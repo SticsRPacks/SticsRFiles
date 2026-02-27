@@ -49,6 +49,7 @@ Imports:
     parallel,
     rlang,
     rstudioapi,
+    semver,
     tibble,
     tidyr,
     tidyselect,
