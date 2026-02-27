@@ -38,7 +38,7 @@ download_usm_xl <- function(
   args <- list(...)
 
   xl_patt <- "^inputs\\_.*(example|USMs)\\.(xls|xlsx)$"
-  #file_type <- "xl"
+  # file_type <- "xl"
 
   if ("type" %in% names(args) && args$type == "csv") {
     xl_patt <- "^inputs\\_.*(example|USMs)\\.csv$"
@@ -50,7 +50,7 @@ download_usm_xl <- function(
   }
 
   xl_dir <- get_examples_path(
-    #file_type = file_type,
+    # file_type = file_type,
     file_type = "xl",
     stics_version = stics_version
   )
