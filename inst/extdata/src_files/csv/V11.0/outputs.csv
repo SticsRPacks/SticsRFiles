@@ -4,27 +4,27 @@ age_prairie;age of the forage crop since sowing;year;p;integer;0;1
 airg(n);daily amount of irrigation water;mm.d-1;sc;real;n;0
 albedolai;albedo of the crop including soil and vegetation;SD;sc;real;0;0
 allocfruit;allocation ratio of assimilates to the fruits;0-1;p;real;0;2
-amm_1_30;amount of   NH4-N in the soil layer 1 to 30 cm;kg.ha-1;sc;real;0;0
-amm_31_60;amount of  NH4-N in the soil layer 31-60 cm;kg.ha-1;sc;real;0;0
-amm_61_90;amount of  NH4-N in the soil layer 61-90 cm;kg.ha-1;sc;real;0;0
-ammomes;amount of NH4-N in soil over the depth profmes;kg.ha-1;sc;real;0;0
+amm_1_30;amount of NH4-N in the soil layer 1 to 30 cm;kg.ha-1;sc;real;0;0
+amm_31_60;amount of NH4-N in the soil layer 31-60 cm;kg.ha-1;sc;real;0;0
+amm_61_90;amount of NH4-N in the soil layer 61-90 cm;kg.ha-1;sc;real;0;0
+ammomes;amount of NH4-N in soil over the depth profmes;kg.ha-1;function;real;0;0
 amptcultmat;mean daily temperature range (tcult) during the reproductive phase (stages lax - rec);degreeC;c;real;0;0
 anit(n);daily amount of fertiliser-N added to crop;kg.ha-1.d-1;sc;real;n;0
 anit_engrais(n);Daily nitrogen provided by fertiliser;kgN.ha-1 j-1;sc;real;n;0
 anit_uree(n);amount of animal urine returned to the soil;kgN.ha-1 j-1;sc;real;n;0
 anoxmoy;index of anoxia over the root depth;0-1;p;real;0;1
-AZamm(1);amount of  NH4-N in soil layer 1;kg.ha-1;sc;real;1;0
-AZamm(2);amount of  NH4-N in soil layer 2;kg.ha-1;sc;real;2;0
-AZamm(3);amount of  NH4-N in soil layer 3;kg.ha-1;sc;real;3;0
-AZamm(4);amount of  NH4-N in soil layer 4;kg.ha-1;sc;real;4;0
-AZamm(5);amount of  NH4-N in soil layer 5;kg.ha-1;sc;real;5;0
+AZamm(1);amount of NH4-N in soil layer 1;kg.ha-1;sc;real;1;0
+AZamm(2);amount of NH4-N in soil layer 2;kg.ha-1;sc;real;2;0
+AZamm(3);amount of NH4-N in soil layer 3;kg.ha-1;sc;real;3;0
+AZamm(4);amount of NH4-N in soil layer 4;kg.ha-1;sc;real;4;0
+AZamm(5);amount of NH4-N in soil layer 5;kg.ha-1;sc;real;5;0
 azlesd;daily amount of NO3-N leached in mole drains;kg.ha-1.d-1;soil;real;0;0
-AZnit(1);amount of  NO3-N in soil layer 1;kg.ha-1;soil;real;1;0
-AZnit(2);amount of  NO3-N in soil layer 2;kg.ha-1;soil;real;2;0
-AZnit(3);amount of  NO3-N in soil layer 3;kg.ha-1;soil;real;3;0
-AZnit(4);amount of  NO3-N in soil layer 4;kg.ha-1;soil;real;4;0
-AZnit(5);amount of  NO3-N in soil layer 5;kg.ha-1;soil;real;5;0
-azomes;amount of NO3-N in soil over the depth profmes;kg.ha-1;sc;real;0;0
+AZnit(1);amount of NO3-N in soil layer 1;kg.ha-1;soil;real;1;0
+AZnit(2);amount of NO3-N in soil layer 2;kg.ha-1;soil;real;2;0
+AZnit(3);amount of NO3-N in soil layer 3;kg.ha-1;soil;real;3;0
+AZnit(4);amount of NO3-N in soil layer 4;kg.ha-1;soil;real;4;0
+AZnit(5);amount of NO3-N in soil layer 5;kg.ha-1;soil;real;5;0
+azomes;amount of NO3-N in soil over the depth profmes;kg.ha-1;function;real;0;0
 azsup_by_horizon(1);lixiviation under the horizon 1;kgN.ha-1;sc;real;1;0
 azsup_by_horizon(2);lixiviation under the horizon 2;kgN.ha-1;sc;real;2;0
 azsup_by_horizon(3);lixiviation under the horizon 3;kgN.ha-1;sc;real;3;0
@@ -34,7 +34,7 @@ azsup_under_profmes;lixiviation under the depth of measurement profmes;kgN.ha-1;
 bouchon;index showing if the shrinkage slots are opened (0) or closed (1);code 0/1;sc;real;0;0
 Cb;amount of C in the microbial biomass decomposing organic residues mixed with soil;kg.ha-1;sc;real;0;0
 Cbmulch;amount of C in the microbial biomass decomposing organic residues at soil surface (mulch);kg.ha-1;sc;real;0;0
-cdemande;cumulative amount of N needed by the plant  (plant needs);kg.ha-1;p;real;0;1
+cdemande;cumulative amount of N needed by the plant (plant needs);kg.ha-1;p;real;0;1
 cEdirect;total evaporation (water evaporated by the soil + intercepted by leaves and mulch) integrated over the cropping season;mm;sc;real;0;1
 cEdirecttout;total evaporation (water evaporated by the soil + intercepted by leaves and mulch) integrated over the simulation period;mm;sc;real;0;1
 cep;cumulative transpiration over the cropping season of plant 1;mm;p;real;0;1
@@ -100,8 +100,8 @@ crg;cumulative global radiation over the cropping season;MJ.m-2;p;real;0;1
 crgtout;cumulative global radiation over the simulation period;MJ.m-2;c;real;0;0
 Crprof;amount of C in deep organic residues mixed with soil (below the profhum depth);kg.ha-1;sc;real;0;0
 Crtout;total amount of C in organic residues present over the whole soil profile;kg.ha-1;sc;real;0;0
-CsurNrac;C/N ratio of living roots; g g-1;sc;real;0;0
-CsurNracmort;C/N ratio of dead roots (cumulative); g g-1;sc;real;0;0
+CsurNrac;C/N ratio of living roots; g g-1;function;real;0;0
+CsurNracmort;C/N ratio of dead roots (cumulative); g g-1;function;real;0;0
 CsurNres_pature;C/N ratio of residues in case of pasture; g g-1;sc;real;0;0
 CsurNsol;C/N ratio of soil organic matter in the profhum layer; g g-1;soil;real;0;0
 ctairtout;cumulative air temperature (tair) over the simulation period;degreeC;c;real;0;0
@@ -154,11 +154,11 @@ day_after_begin_simul;number of days from the beginning of simulation;days;sc;in
 day_after_emergence;number of days after emergence;days;p;integer;0;1
 day_after_sowing;days after sowing or planting;days;sc;integer;0;0
 day_cut;cut day;julian day;p;integer;0;0
-DCbmulch;change in C amount in microbial biomass decomposing mulch between the beginning and the end of simulation;kg.ha-1;sc;real;0;0
-DChumt;change in humified organic C in soil between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DCmulch;change in mulch C between the beginning and end of simulation;kg.ha-1;sc;real;0;0
-DCr;change in C of organic residues between begining and end of simulation;kg.ha-1;sc;real;0;0
-DCrprof;change in deep root C between the beginning and end of simulation;kg.ha-1;sc;real;0;0
+DCbmulch;change in C amount in microbial biomass decomposing mulch between the beginning and the end of simulation;kg.ha-1;function;real;0;0
+DChumt;change in humified organic C in soil between beginning and end of simulation;kg.ha-1;function;real;0;0
+DCmulch;change in mulch C between the beginning and end of simulation;kg.ha-1;function;real;0;0
+DCr;change in C of organic residues between begining and end of simulation;kg.ha-1;function;real;0;0
+DCrprof;change in deep root C between the beginning and end of simulation;kg.ha-1;function;real;0;0
 deltai(n);daily increase in green leaf index per soil surface;m2.m-2.d-1;p;real;n;2
 deltaz;rate of deepening of the root front;cm.d-1;p;real;0;1
 demande;daily N requirement of the plant to maximise crop growth;kg.ha-1.d-1;p;real;0;2
@@ -177,30 +177,30 @@ dltamsen;daily senescence rate of the plant;t.ha-1.d-1;p;real;0;2
 dltaremobil;daily amount of perennial reserves remobilised;t.ha-1.d-1;p;real;0;2
 dltaremobilN;daily amount of perennial N reserves remobilised;kg.ha-1.d-1;p;real;0;2
 dltmsrac_plante;pour sorties ArchiSTICS: biomasse journaliere allouee aux racines; g.m2.sol;p;real;0;0
-DNbmulch;change in biomass N associated with the mulch between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DNhumt;change in humified organic N in soil between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DNmulch;change in mulch N between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DNr;change in N of organic residues between begining and end of simulation;kg.ha-1;sc;real;0;0
-DNrprof;change in N of deep dead roots between begining and end of simulation;kg.ha-1;sc;real;0;0
+DNbmulch;change in biomass N associated with the mulch between beginning and end of simulation;kg.ha-1;function;real;0;0
+DNhumt;change in humified organic N in soil between beginning and end of simulation;kg.ha-1;function;real;0;0
+DNmulch;change in mulch N between beginning and end of simulation;kg.ha-1;function;real;0;0
+DNr;change in N of organic residues between begining and end of simulation;kg.ha-1;function;real;0;0
+DNrprof;change in N of deep dead roots between begining and end of simulation;kg.ha-1;function;real;0;0
 DQNtot2;change in N content of the two plants (aerial + root + perennial organs) between beginning and end of simulation;kg.ha-1;sc;real;0;0
 drain;daily amount of water drained at the base of the soil profile;mm.d-1;sc;real;0;0
 drain_from_lev;cumulative amount of water drained at the base of the soil profile during the crop cycle (emergence or budbreak to harvest);mm;sc;real;0;0
 drain_from_plt;cumulative amount of water drained at the base of the soil profile during the crop cycle (planting to harvest);mm;sc;real;0;0
 drat;cumulative amount of water drained at the base of the soil profile during the simulation period;mm;sc;real;0;0
 drlsenmortalle;root biomass corresponding to dead tillers;t.ha-1.d-1;p;real;0;0
-DSMN;change in soil mineral N between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DSOC;change in soil organic C (without residues) between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DSOCtot;change in total soil organic C (with residues) between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DSON;change in soil organic N (without residues) between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DSONtot;change in total soil organic N (with residues) between beginning and end of simulation;kg.ha-1;sc;real;0;0
-DSTN;change in total soil N (mineral + organic) between beginning and end of simulation;kg.ha-1;sc;real;0;0
+DSMN;change in soil mineral N between beginning and end of simulation;kg.ha-1;function;real;0;0
+DSOC;change in soil organic C (without residues) between beginning and end of simulation;kg.ha-1;function;real;0;0
+DSOCtot;change in total soil organic C (with residues) between beginning and end of simulation;kg.ha-1;function;real;0;0
+DSON;change in soil organic N (without residues) between beginning and end of simulation;kg.ha-1;function;real;0;0
+DSONtot;change in total soil organic N (with residues) between beginning and end of simulation;kg.ha-1;function;real;0;0
+DSTN;change in total soil N (mineral + organic) between beginning and end of simulation;kg.ha-1;function;real;0;0
 dtj(n);thermal time for root growth;degreeC.d;p;real;n;0
 dureehumec;number of hours which are wet (rainy days or days when tcult < dew point);hour;c;real;0;0
 dureeRH;number of night hours during which relative humidity exceeds a 90% threshold;hour;c;real;0;0
 durvie(n);actual life span of the leaf surface;degreeC;p;real;n;3
 eai;equilvalent leaf area for ear;m2.m-2;p;real;0;2
 ebmax;maximum value of radiation use efficiency;cg.MJ-1;p;real;0;1
-ebmax_gr; Maximum radiation use efficiency during the vegetative stage (AMF-DRP);g MJ-1;p;real;0;0
+ebmax_gr; Maximum radiation use efficiency during the vegetative stage (AMF-DRP);g MJ-1;function;real;0;0
 Edirect;daily amount of water evaporated by the soil + intercepted by leaves and mulch;mm.d-1;sc;real;0;0
 efda;reduction factor on root growth due to physical constraint (through bulk density);0-1;p;real;0;0
 efdensite;density factor on leaf area growth;0-1;p;real;0;0
@@ -251,7 +251,7 @@ fixreel;actual rate of BNF (symbiotic fixation);kg.ha-1.d-1;p;real;0;2
 flurac;daily amount of N taken up by the plant when N uptake is limited by the plant capacity absorption;kg.ha-1.d-1;p;real;0;1
 flusol;daily amount of N taken up by the plant when N uptake is limited by the transfer from soil to root;kg.ha-1.d-1;p;real;0;1
 fpari;radiation effect on  conversion efficiency;g.MJ-1;p;real;0;1
-fpari_gr;radiation factor on the calculation of conversion efficiency;g MJ-1;p;real;0;0
+fpari_gr;radiation factor on the calculation of conversion efficiency;g MJ-1;function;real;0;0
 fpft;daily sink capacity of fruits;g.m-2.d-1;p;real;0;2
 fpv(n);daily sink capacity of growing leaves;g.m-2.d-1;p;real;n;2
 FsNH3;daily amount of NH3-N emitted from soil by volatilisation;micro g.m-2.d-1;sc;real;0;0
@@ -262,20 +262,20 @@ fxn;reduction factor on BNF (symbiotic fixation) due to mineral N concentration;
 fxt;reduction factor on BNF (symbiotic fixation) due to soil temperature;0-1;sc;real;0;0
 fxw;reduction factor on BNF (symbiotic fixation) due to soil water content;0-1;sc;real;0;0
 gel1;stress factor on leaves damaged by frost before amf stage (end of juvenile phase );0-1;p;real;0;0
-gel1_percent;proportion of leaves damaged by frost before amf stage (end of juvenile phase );%;p;real;0;0
+gel1_percent;proportion of leaves damaged by frost before amf stage (end of juvenile phase );%;function;real;0;0
 gel2;stress factor on leaves damaged by frost after amf stage (end of juvenile phase );0-1;p;real;0;0
-gel2_percent;proportion of leaves damaged by frost after amf stage (end of juvenile phase );%;p;real;0;0
+gel2_percent;proportion of leaves damaged by frost after amf stage (end of juvenile phase );%;function;real;0;0
 gel3;stress factor on flowers or fruits damaged by frost;0-1;p;real;0;0
-gel3_percent;proportion of flowers or fruits damaged by frost;%;p;real;0;0
+gel3_percent;proportion of flowers or fruits damaged by frost;%;function;real;0;0
 GHG;Greenhouse Gas emission (CO2 + N2O) expressed in CO2eq/ha =Qem_N2O*44/28*296 -DSOC*44/12;kg.ha-1;sc;real;0;0
 grain_dry_weight_mg;Grain unit dry weight;mg;p;real;0;0
 H2Orec;water content of harvested organs;0-1;p;real;0;2
-H2Orec_percent;water content of harvested organs;% fresh weight;p;real;0;2
+H2Orec_percent;water content of harvested organs;% fresh weight;function;real;0;2
 hauteur;height of canopy;m;p;real;0;2
-HI_C;harvest index for carbon;0-1;p;real;0;0
-HI_N;harvest index for nitrogen;0-1;p;real;0;0
+HI_C;harvest index for carbon;0-1;function;real;0;0
+HI_N;harvest index for nitrogen;0-1;function;real;0;0
 Hmax;maximum height of water table between drains;cm;soil;real;0;0
-Hnappe;height of water table affecting plant growth;cm;soil;real;0;0
+hnappe;height of water table affecting plant growth;cm;soil;real;0;0
 Hpb;minimum depth of perched water table;cm;soil;real;0;0
 Hph;maximum depth of perched water table;cm;soil;real;0;0
 HR(1);water content of the soil layer 1;% dry weight;sc;real;1;0
@@ -299,7 +299,7 @@ HR_vol_31_60;water content of the layer 31-60 cm  (table);mm-3.mm-3;sc;real;0;0
 HR_vol_61_90;water content of the layer 61-90 cm  (table);mm-3.mm-3;sc;real;0;0
 HR_vol_91_120;water content of the layer 91-120 cm (table);mm-3.mm-3;sc;real;0;0
 huile;oil content of harvested organs;0-1;p;real;0;2
-huile_percent;oil content of harvested organs;% fresh weight;p;real;0;2
+huile_percent;oil content of harvested organs;% fresh weight;function;real;0;2
 humair;air moisture content;0-1;c;real;0;0
 humair_percent;air moisture content;% saturation;c;real;0;0
 humidite;air moisture content in the canopy;0-1;sc;real;0;0
@@ -382,26 +382,26 @@ maenfruit;biomass of harvested organ envelops;t.ha-1;p;real;0;2
 mafauche;biomass of forage cuts;t.ha-1;p;real;0;0
 mafauchetot;cumulative biomass of forage cuts;t.ha-1;p;real;0;0
 mafeuil;biomass of leaves;t.ha-1;p;real;0;2
-mafeuil_kg_ha;Dry matter of leaves;kg.ha-1;p;real;0;0
+mafeuil_kg_ha;Dry matter of leaves;kg.ha-1;function;real;0;0
 mafeuiljaune;biomass of yellow leaves;t.ha-1;p;real;0;2
 mafeuiltombe;biomass of fallen leaves;t.ha-1;p;real;0;2
 mafeuiltombefauche;biomass of fallen leaves between two cuts;t.ha-1;p;real;0;1
 mafeuilverte;biomass of green leaves;t.ha-1;p;real;0;2
 mafou;biomass of harvested organs for cut crops;t.ha-1;p;real;0;1
 mafrais;aboveground fresh matter;t.ha-1;p;real;0;2
-mafruit;biomass of harvested organs;t.ha-1;p;real;0;1
-mafruit_kg_ha;Dry matter of harvested organs;kg.ha-1;p;real;0;0
+mafruit;biomass of harvested organs;t.ha-1;function;real;0;1
+mafruit_kg_ha;Dry matter of harvested organs;kg.ha-1;function;real;0;0
 maperenne;biomass of perennial organs;t.ha-1;p;real;0;2
 maperennemort;biomass of dead perennial organs;t.ha-1;p;real;0;2
 masec(n);biomass of aboveground plant (table);t.ha-1;p;real;n;2
-masec_kg_ha;Aboveground dry matter;kg.ha-1;p;real;0;0
+masec_kg_ha;Aboveground dry matter;kg.ha-1;function;real;0;0
 masec_mx_av_cut;Aboveground dry matter before cut(for cut crops, for others = masec(n) );t.ha-1;p;real;0;1
 masecneo;biomass of newly-formed organs;t.ha-1;p;real;0;2
 masecnp;biomass of aerials and non perennial organs;t.ha-1;p;real;n;2
 masectot;total plant biomass (aerials + roots + perennial organs);t.ha-1;p;real;0;1
 masecveg;biomass of vegetative organs;t.ha-1;p;real;0;2
 matigestruc;biomass of stems (only structural parts);t.ha-1;p;real;0;2
-matigestruc_kg_ha;Dry matter of stems (only structural parts);kg.ha-1;p;real;0;0
+matigestruc_kg_ha;Dry matter of stems (only structural parts);kg.ha-1;function;real;0;0
 matuber;biomass of tuber (harvested organs, only calculated for sugarbeet);t.ha-1;p;real;0;1
 mean_swfac_flo_p_m_150;swfac mean on the period flowering minus 150 degrees day to flowering plus 150 degrees days;0-1;p;real;0;1
 mortalle;daily number of dying tillers;d-1;p;real;0;1
@@ -446,7 +446,7 @@ nb_days_frost_amf_120;number of days of tcultmin< tdebgel  from amf stage to amf
 nb_days_humair_gt_90_percent1;number of days when humair_percent >=90% between amf and lax;days;sc;integer;0;0
 nb_days_humair_gt_90_percent2;number of days when humair_percent >=90% between lax and drp;days;sc;integer;0;0
 nbfeuille;number of leaves on main stem;SD;p;integer;0;1
-nbinflo_recal;number of inflorescences per plant;SD;p;real;0;1
+nbinflo_recal;number of inflorescences per plant;SD;function;real;0;1
 nbj0remp;number of shrivelling days;d;p;integer;0;1
 nbjechaudage;number of shrivelling days between lax and rec;d;c;integer;0;0
 nbjgel;number of frosting days active on the plant;d;p;integer;0;1
@@ -462,8 +462,8 @@ nfruit(2);number of fruits in box 2;SD;p;real;2;2
 nfruit(3);number of fruits in box 3;SD;p;real;3;2
 nfruit(4);number of fruits in box 4;SD;p;real;4;2
 nfruit(5);number of fruits in box 5;SD;p;real;5;2
-nfruit(nboite);number of fruits in last box;SD;p;real;p%P_nboite;2
-nfruit(nboite-1);number of fruits in last but one box;SD;p;real;p%P_nboite-1;2
+nfruit(nboite);number of fruits in last box;SD;function;real;0;2
+nfruit(nboite-1);number of fruits in last but one box;SD;function;real;0;2
 nfruitnou;number of set fruits;fruits.m-2;p;real;0;2
 Nhuma;amount of N in active soil organic matter;kg.ha-1;sc;real;0;0
 Nhumi;amount of N in inert soil organic matter;kg.ha-1;sc;real;0;0
@@ -514,14 +514,14 @@ Nvolat_from_plt;cumulative amount of N volatilised during the crop cycle (planti
 Nvoleng;daily amount of N volatilised from fertiliser;kg.ha-1.d-1;soil;real;0;0
 Nvolorg;daily amount of N volatilised from organic inputs;kg.ha-1.d-1;soil;real;0;0
 offrenod;daily amount of N fixed symbiotically (BNF);kg.ha-1.d-1;p;real;0;2
-p1000grain;1000 grains weight (dry weight);g;p;real;0;1
+p1000grain;1000 grains weight (dry weight);g;function;real;0;1
 pdsfruit(1);weight of fruits in box 1;g.m-2;p;real;1;2
 pdsfruit(2);weight of fruits in box 2;g.m-2;p;real;2;2
 pdsfruit(3);weight of fruits in box 3;g.m-2;p;real;3;2
 pdsfruit(4);weight of fruits in box 4;g.m-2;p;real;4;2
 pdsfruit(5);weight of fruits in box 5;g.m-2;p;real;5;2
-pdsfruit(nboite);weight of fruits in last box;g.m-2;p;real;p%P_nboite;2
-pdsfruit(nboite-1);weight of fruits in last but one box;g.m-2;p;real;p%P_nboite-1;2
+pdsfruit(nboite);weight of fruits in last box;g.m-2;function;real;0;2
+pdsfruit(nboite-1);weight of fruits in last but one box;g.m-2;function;real;0;2
 pdsfruitfrais;weight of fresh fruits;g.m-2;p;real;0;2
 penfruit;ratio of fruit envelops to plant biomass;0-1;p;real;0;2
 pfeuil(n);ratio of leaves to plant biomass;0-1;p;real;n;2
@@ -622,6 +622,7 @@ QNfauche;Amount of N exported in each cut;kg.ha-1;p;real;0;0
 QNfauchetot;Cumulative amount of N exported by all cuts;kg.ha-1;p;real;0;0
 QNfauchetot2;Cumulative amount of N exported by all cuts of the two plants;kg.ha-1;sc;real;0;0
 QNfeuille;N content of structural part of the leaves;kg.ha-1;p;real;0;0
+QNfeuilleres;N content of the leaves (structural + RubisCO);kg.ha-1;function;real;0;0
 QNgaz;cumulative amount of gaseous N losses (through volatilisation and denitrification) ;kg.ha-1;soil;real;0;0
 QNgrain;amount of N in harvested organs (grains / fruits);kg.ha-1;p;real;0;2
 Qnitrif;cumulative amount of N nitrified in soil (if option nitrification is activated);kg.ha-1;sc;real;0;0
@@ -661,31 +662,32 @@ Qressuite_tot;amount of total harvest residues (aerials + roots);t.ha-1;p;real;0
 ra_recal;aerodynamic resistance between the canopy and the reference level zr;s.m-1;sta;real;0;0
 raint;photosynthetic active radiation intercepted by the canopy;MJ.m-2;p;real;0;2
 ras;aerodynamic resistance between the soil and the canopy;s.m-1;sc;real;0;0
-ratioFT;Leaves to stem ratio;SD;p;real;0;0
+ratioFT;Leaves to stem ratio;SD;function;real;0;0
+ratioTF;Stem to leaves ratio, taking the value of 0 or P_tigefeuil;SD;p;real;0;0
 Ratm;atmospheric radiation;MJ.m-2;sc;real;0;0
 rc;resistance of canopy;s.m-1;p;real;0;1
 rdif;ratio of diffuse radiation to global radiation;0-1;sc;real;0;0
-remobilj;daily amount of biomass remobilized for growth;kg.ha-1.d-1;p;real;0;2
+remobilj;daily amount of biomass remobilized for growth;t.ha-1.d-1;p;real;0;2
 remontee;capillary uptake from the base of the soil profile;mm.d-1;soil;real;0;0
 rendementsec;biomass of harvested organs (0% moisture);t.ha-1;p;real;0;1
-resmes;amount of soil water integrated on the measurement depth;mm;sc;real;0;0
+resmes;amount of soil water integrated on the measurement depth;mm;function;real;0;0
 resperenne;biomass of metabolic reserves in the perennial organs;t.ha-1;p;real;0;2
 resrac;soil water reserve in the root zone;mm;p;real;0;1
 restemp;biomass reserves (carbohydrates) in shoots that can be accumulated or mobilized for crop growth;t.ha-1;p;real;0;2
 rfpi;reduction factor on plant development due to photoperiod;0-1;p;real;0;1
 rfvi;reduction factor on plant development due to vernalization;0-1;p;real;0;1
-rlj;rate of root length growth;m.d-1;p;real;0;1
-rltot;total root length (accounting for senescent roots);cm.cm-2;p;real;0;1
-rltotf;total root length (accounting for senescent roots);cm.cm-2;p;real;0;1
-rltotg;total root length (accounting for senescent roots);cm.cm-2;p;real;0;1
+rlj;rate of root length growth;cm.cm-2.d-1;p;real;0;1
+rltot;total root length (accounting for senescent roots);cm.cm-2;function;real;0;1
+rltotf;total length of fine roots (accounting for senescent roots);cm.cm-2;p;real;0;1
+rltotg;total length of coarse roots (accounting for senescent roots);cm.cm-2;p;real;0;1
 rmaxi;maximum water reserve used;mm;p;real;0;1
 rnet;net radiation;MJ.m-2;sc;real;0;0
 rnetS;net radiation at the soil surface;MJ.m-2;sc;real;0;0
 rombre;fraction of the total radiation in the shade;0-1;p;real;0;1
 rsoleil;fraction of the total radiation in the full sun;0-1;p;real;0;1
-RsurRU;fraction of plant available water over the soil profile;0-1;sc;real;0;0
+RsurRU;fraction of plant available water over the soil profile;0-1;function;real;0;0
 RsurRUrac;fraction of plant available water over the root profile;0-1;p;real;0;1
-RU;plant available water content over the soil profile;mm;sc;real;0;0
+RU;plant available water content over the soil profile;mm;function;real;0;0
 ruissel;daily amount of water in total runoff (surface + overflow);mm.d-1;sc;real;0;0
 ruisselsurf;daily amount of water in runoff at soil surface;mm.d-1;sc;real;0;0
 ruisselt;cumulative amount of water in total runoff (surface + overflow);mm;sc;real;0;0
@@ -697,7 +699,7 @@ Sdepth(n);snow cover depth;m;c;real;n;0
 senfac;reduction factor on leaf life span due to water stress (increasing senescence rate);0-1;p;real;0;2
 sla;specific leaf area;cm2.g-1;p;real;0;2
 SMN;amount of soil mineral N content over the soil profile;kg.ha-1;sc;real;0;0
-SMNmes;amount of soil mineral N content over the depth profmes;kg.ha-1;sc;real;0;0
+SMNmes;amount of soil mineral N content over the depth profmes;kg.ha-1;function;real;0;0
 Snowaccu(n);daily snowfall accumulation (mm water equivalent);mm.d-1;c;real;n;0
 Snowmelt(n);daily snowmelt (mm water equivalent);mm.d-1;c;real;n;0
 SOC;amount of soil organic C (= Chumt + Cb) over the profhum depth;kg.ha-1;sc;real;0;0
@@ -707,15 +709,15 @@ SOCL(3);amount of soil organic C (= Chumt + Cb) in the layer 3;kg.ha-1;sc;real;0
 SOCL(4);amount of soil organic C (= Chumt + Cb) in the layer 4;kg.ha-1;sc;real;0;0
 SOCL(5);amount of soil organic C (= Chumt + Cb) in the layer 5;kg.ha-1;sc;real;0;0
 SOC0;amount of soil organic C (= Chumt + Cb) over the profhum depth at time 0;kg.ha-1;sc;real;0;0
-SOCbalance;Soil organic C balance (inputs-outputs) over the whole soil profile;kg.ha-1;sc;real;0;0
+SOCbalance;Soil organic C balance (inputs-outputs) over the whole soil profile;kg.ha-1;function;real;0;0
 SOCinputs;Soil organic C inputs to the whole soil profile;kg.ha-1;sc;real;0;0
 SOCtot;amount of soil organic C (all organic pools) over the whole soil profile;kg.ha-1;sc;real;0;0
 SoilAvW;amount of plant available water in soil over the depth profmes;mm;sc;real;0;0
-SoilAvW_by_layers(1);amount of plant available water in soil for layer 1;mm;sc;real;1;0
-SoilAvW_by_layers(2);amount of plant available water in soil for layer 2;mm;sc;real;2;0
-SoilAvW_by_layers(3);amount of plant available water in soil for layer 3;mm;sc;real;3;0
-SoilAvW_by_layers(4);amount of plant available water in soil for layer 4;mm;sc;real;4;0
-SoilAvW_by_layers(5);amount of plant available water in soil for layer 5;mm;sc;real;5;0
+SoilAvW_by_layers(1);amount of plant available water in soil for layer 1;mm;function;real;1;0
+SoilAvW_by_layers(2);amount of plant available water in soil for layer 2;mm;function;real;2;0
+SoilAvW_by_layers(3);amount of plant available water in soil for layer 3;mm;function;real;3;0
+SoilAvW_by_layers(4);amount of plant available water in soil for layer 4;mm;function;real;4;0
+SoilAvW_by_layers(5);amount of plant available water in soil for layer 5;mm;function;real;5;0
 SoilWatM;amount of plant available water in soil over the depth profmesW;mm;sc;real;0;0
 som_HUR;cumulative water content of the soil microporosity;mm;sc;real;0;0
 som_sat;cumulative amount of water in the soil macroporosity;mm;sc;real;0;0
@@ -735,7 +737,7 @@ SONL(3);amount of soil organic N (= Nhumt + Nb) in the layer 3;kg.ha-1;sc;real;0
 SONL(4);amount of soil organic N (= Nhumt + Nb) in the layer 4;kg.ha-1;sc;real;0;0
 SONL(5);amount of soil organic N (= Nhumt + Nb) in the layer 5;kg.ha-1;sc;real;0;0
 SON0;amount of soil organic N (= Nhumt + Nb) over the profhum depth at time 0;kg.ha-1;sc;real;0;0
-SONbalance;Soil organic N balance (inputs-outputs) over the whole soil profile;kg.ha-1;sc;real;0;0
+SONbalance;Soil organic N balance (inputs-outputs) over the whole soil profile;kg.ha-1;function;real;0;0
 SONinputs;Soil organic N inputs to the whole soil profile;kg.ha-1;sc;real;0;0
 SONtot;amount of soil organic N (all organic pools) over the whole soil profile;kg.ha-1;sc;real;0;0
 sourcepuits;source to sink ratio of assimilates in the plant;SD;p;real;0;2
@@ -748,14 +750,14 @@ str2intercoupe;average stomatal water stress index during the reproductive phase
 stu1intercoupe;average turgescence water stress index during the vegetative phase (emergence - maximum LAI) of forage crops;0-1;p;real;0;0
 stu2intercoupe;average turgescence water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops;0-1;p;real;0;0
 sucre;sugar content of harvested organs;0-1;p;real;0;2
-sucre_percent;sugar content of harvested organs;% fresh weight;p;real;0;2
+sucre_percent;sugar content of harvested organs;% fresh weight;function;real;0;2
 surf(ao);fraction of the soil surface in the shade;0-1;p;real;ao;0
 surf(as);fraction of the soil surface in the sun;0-1;p;real;as;0
 swfac;stomatic water stress index;0-1;p;real;0;2
 swfac1moy;average stomatic water stress index over the vegetative stage;0-1;p;real;0;1
 swfac2moy;average stomatic water stress index over the reproductive stage;0-1;p;real;0;1
 tairveille;mean air temperature at the previous day;degreeC;sc;real;0;0
-tauxcouv(n);cover rate of the canopy;SD;sc;real;n;0
+tauxcouv(n);cover rate of the canopy;SD;function;real;n;0
 tcult;crop surface temperature (daily average);degreeC;sc;real;0;0
 tcult_tairveille;difference between canopy temperature and air temperature;degreeC;sc;real;0;0
 tcultmax;crop surface temperature (daily maximum);degreeC;sc;real;0;0
@@ -772,14 +774,14 @@ tminext(n);minimum temperature of external atmsphere;degreeC;c;real;n;0
 tminrec(n);recalculated daily minimum temperature  (with presence of a snow cover);degreeC;c;real;n;0
 tmoy(n);mean active temperature of atmosphere;degreeC;c;real;n;0
 tmoyext(n);mean temperature of external atmosphere;degreeC;c;real;n;0
-tmoyIpltJuin;mean temperature from sowing or planting (iplt stage) until June 30;degreeC;p;real;0;1
-tmoyIpltSept;mean temperature from sowing or planting (iplt stage) until September 30;degreeC;p;real;0;1
+tmoyIpltJuin;mean temperature from sowing or planting (iplt stage) until June 30;degreeC;function;real;0;1
+tmoyIpltSept;mean temperature from sowing or planting (iplt stage) until September 30;degreeC;function;real;0;1
 tncultmat;average of minimum crop temperatures (tcultmin) between the stages lax and rec;degreeC;c;real;0;0
 tnhc;cumulative normalized time for the mineralisation of humus;d;sc;real;0;0
 tnrc;cumulative normalized time for the mineralisation of organic residues;d;sc;real;0;0
 totapN;cumulative amount of mineral N added by mineral fertilisers and organic fertilisers;kg.ha-1;sc;real;0;0
 totapNres;cumulative amount of mineral N added by organic fertilisers;kg.ha-1;sc;real;0;0
-totir;cumulative amount of irrigation water;mm;sc;real;0;0
+totir;cumulative amount of irrigation water;mm;function;real;0;0
 tpm(n);water vapour pressure in air;hPa;c;real;n;0
 trg(n);active radiation (entered or calculated);MJ.m-2;c;real;n;0
 trgext(n);exterior radiation;MJ.m-2;c;real;n;0
