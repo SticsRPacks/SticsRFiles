@@ -36,8 +36,14 @@
     <param format="integer" max="200" min="1" nom="variete"></param>
     <option choix="2" nom="planting structure (if radiative transfer)" nomParam="codetradtec">
       <choix code="1" nom="yes">
-                <param format="real" max="10.0" min="0.0" nom="interrang">-999</param>
-                <param format="real" max="6.28" min="0.0" nom="orientrang">-999</param>
+        <param format="real" max="10.0" min="0.0" nom="interrang">-999</param>
+        <param format="real" max="6.28" min="0.0" nom="orientrang">-999</param>
+        <option choix="2" nom="Is the crop sown in a strip design?" nomParam="code_strip">
+          <choix code="1" nom="yes">
+            <param format="integer" max="100" min="1" nom="nrow">1</param>
+          </choix>
+          <choix code="2" nom="no"/>
+        </option>
       </choix>
       <choix code="2" nom="no"/>
     </option>
