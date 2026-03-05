@@ -507,7 +507,7 @@ gen_usms_xml2txt <- function(
           basename(x) %in%
             c("null", "defaut.lai") ||
             is.null(basename(x)) ||
-            assertthat::is.dir(file.path(dirname(x), basename(x)))
+            dir.exists(file.path(dirname(x), basename(x)))
         ) {
           return(FALSE)
         }
