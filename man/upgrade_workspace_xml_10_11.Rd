@@ -10,7 +10,8 @@ upgrade_workspace_xml_10_11(
   out_dir,
   from_version = "V10.0",
   overwrite = FALSE,
-  verbose = FALSE
+  verbose = FALSE,
+  use_patho = FALSE
 )
 }
 \arguments{

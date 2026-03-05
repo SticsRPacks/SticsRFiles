@@ -1,6 +1,5 @@
 options(warn = -1)
 stics_version <- get_stics_versions_compat()$latest_version
-host <- "github.com"
 
 context("reading observations")
 
@@ -120,7 +119,6 @@ test_that("reading empty usms returns a 0 row data", {
 
 
 example_ic <- download_data(
-  branch = "update-files-v11",
   example_dirs = "study_case_intercrop",
   stics_version = stics_version,
   raise_error = TRUE

@@ -6,11 +6,13 @@ context("Upgrading xml files to latest version")
 path_from <- get_examples_path("xml", stics_version = stics_from_version)
 
 # Copy example to test in tempdir since the files will be modified by set_param
+path <- tempdir()
 file.copy(
-  from = file.path(path_from, list.files(path_from)), to = tempdir(),
+  from = file.path(path_from, list.files(path_from)),
+  to = path,
   overwrite = TRUE
 )
-path <- tempdir()
+
 
 out_path <- file.path(path, "out_xml")
 if (!dir.exists(out_path)) dir.create(out_path)

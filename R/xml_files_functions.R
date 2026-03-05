@@ -94,46 +94,10 @@ get_param_gen_file <- function(
 }
 
 to_xml_version <- function(stics_version) {
-  err <- FALSE
-
-  if (is.numeric(stics_version)) {
-    stics_version <- as.character(stics_version)
-  }
-
-  if (!grepl(pattern = "\\.", x = stics_version)) {
-    stics_version <- paste0(stics_version, ".0")
-  }
-  numbers <- grepl(pattern = "[0-9]", stics_version)
-
-  # no numbers in version
-  if (!numbers) {
-    err <- TRUE
-  }
-
-  char_no_v <- grepl(pattern = "[a-u w-z A-U W-Z]", stics_version)
-
-  # Wrong character in version
-  if (char_no_v) {
-    err <- TRUE
-  }
-
-  # No dot in version
-
-  if (grepl(pattern = "\\.$", x = stics_version)) {
-    err <- TRUE
-  }
-
-  if (err) {
-    warning("Version must be X.Y, or VX.Y, or vX.Y")
-    return()
-  }
-
-  as.character(get_version_num(stics_version = stics_version, numeric = FALSE))
+  ver <- get_version_num(stics_version = stics_version)
+  as.character(ver)
 }
 
-
-# set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
-# overwrite = FALSE) {
 set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
   # If an xml document is given file must not be null
   if (!inherits(xml_doc, "xml_document")) {
@@ -143,7 +107,7 @@ set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
     )
   }
   # Adding version to detect if the file have been previously updated to 10.0
-  ver <- to_xml_version(new_version)
+  ver <- get_version_num(new_version, numeric = FALSE)
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
   att_value <- get_attrs_values(

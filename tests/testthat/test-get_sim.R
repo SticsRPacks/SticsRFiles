@@ -1,7 +1,7 @@
 options(warn = -1)
 
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
+
 host <- "github.com"
 
 context("get model outputs")
@@ -135,7 +135,6 @@ unlink(file.path(path, "wheat"))
 
 # Testing intercropping usms  ------------------------------------
 example_ic <- download_data(
-  branch = "update-files-v11",
   example_dirs = "study_case_intercrop",
   stics_version = stics_version,
   raise_error = TRUE

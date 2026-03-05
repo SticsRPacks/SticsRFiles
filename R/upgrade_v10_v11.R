@@ -14,11 +14,12 @@
 # @examples
 #'
 upgrade_tec_xml_10_11 <- function(
-    file,
-    out_dir,
-    code_strip = 2,
-    nrow = 1,
-    overwrite = FALSE) {
+  file,
+  out_dir,
+  code_strip = 2,
+  nrow = 1,
+  overwrite = FALSE
+) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -151,16 +152,17 @@ upgrade_tec_xml_10_11 <- function(
 # @examples
 #'
 upgrade_plt_xml_10_11 <- function(
-    file,
-    out_dir,
-    stage_const_height = NULL,
-    elongation = NULL,
-    nw_height = NULL,
-    code_shape = NULL,
-    haut_dev_x0 = NULL,
-    haut_dev_k = NULL,
-    overwrite = FALSE,
-    warning = TRUE) {
+  file,
+  out_dir,
+  stage_const_height = NULL,
+  elongation = NULL,
+  nw_height = NULL,
+  code_shape = NULL,
+  haut_dev_x0 = NULL,
+  haut_dev_k = NULL,
+  overwrite = FALSE,
+  warning = TRUE
+) {
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -508,11 +510,12 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @export
 #'
 upgrade_param_gen_xml_10_11 <- function(
-    file,
-    out_dir,
-    hauteur_threshold = NULL,
-    par_to_net = NULL,
-    overwrite = FALSE) {
+  file,
+  out_dir,
+  hauteur_threshold = NULL,
+  par_to_net = NULL,
+  overwrite = FALSE
+) {
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -567,7 +570,12 @@ upgrade_param_gen_xml_10_11 <- function(
 #'
 # @examples
 #'
-upgrade_param_newform_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
+upgrade_param_newform_xml_10_11 <- function(
+  file,
+  out_dir,
+  overwrite = FALSE,
+  use_patho = FALSE
+) {
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -611,6 +619,24 @@ upgrade_param_newform_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
     param_name = "code_humirac",
     param_value = old_value
   )
+
+  # adding parameters related to pathogen use, if specified in the
+  # function inputs
+  if (use_patho) {
+    new_node <- XML::xmlParseString(
+      '<option choix="2" nom="activation of the mila module for pathogen disease" nomParam="codepatho">
+       <choix code="1" nom="yes"/>
+       <choix code="2" nom="no"/>
+    </option>',
+      addFinalizer = TRUE
+    )
+    parent_node <- SticsRFiles:::get_nodes(
+      xml_doc,
+      path = "//formalisme[@nom='coupling with pathogen models']"
+    )[[1]]
+
+    XML::addChildren(parent_node, XML::xmlClone(new_node), at = 0)
+  }
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
@@ -704,13 +730,15 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_workspace_xml_10_11 <- function(
-    workspace,
-    javastics = NULL,
-    out_dir,
-    from_version = "V10.0",
-    # target_version = "V11.0",
-    overwrite = FALSE,
-    verbose = FALSE) {
+  workspace,
+  javastics = NULL,
+  out_dir,
+  from_version = "V10.0",
+  # target_version = "V11.0",
+  overwrite = FALSE,
+  verbose = FALSE,
+  use_patho = FALSE
+) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -840,13 +868,21 @@ upgrade_workspace_xml_10_11 <- function(
 #' @noRd
 #'
 check_and_upgrade_xml_version <- function(
-    xml_doc,
-    from_version,
-    target_version) {
+  xml_doc,
+  from_version,
+  target_version
+) {
+  # Checking if target version is supported
+  # raising an error if not!
+  check_version_compat(target_version)
+
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
 
-  if ((target_version_num - from_version_num) < 1e-06) {
+  if (
+    target_version_num >
+      semver::increment_version(from_version_num, "major", 1L)
+  ) {
     stop(
       "The target version ",
       target_version,
@@ -854,43 +890,40 @@ check_and_upgrade_xml_version <- function(
       from_version
     )
   }
-  # Checking if target version is supported
-  # raising an error if not!
-  check_version_compat(target_version)
 
   # checking actual version consistency between from_version
   # and file version
-  from_version_major <- get_major_version(from_version)
-  file_version <- get_xml_file_version(xml_doc)
-  if (
-    !is.null(file_version) &&
-      !get_major_version(file_version) %in% from_version_major
-  ) {
+  from_version_major <- get_major_version(from_version_num)
+  file_version_major <- get_major_version(
+    get_version_num(
+      get_xml_file_version(
+        xml_doc
+      )
+    )
+  )
+  if (from_version_major != file_version_major) {
     stop(
-      "file has a wrong starting version !",
-      "must be a",
+      "The file major version is not consistent with the given",
+      "initial version!",
+      "it must be a",
       paste0(from_version_major, ".x")
     )
   }
   # Setting new file STICS version
-  set_xml_file_version(xml_doc, new_version = target_version)
+  set_xml_file_version(xml_doc, new_version = target_version_num)
 }
 
 #' Get the major version number of a STICS version
 #'
-#' @param version Character string representing the STICS version (i.e. "V9.2")
-#' @param to_num Logical, TRUE for converting character version to numeric one,
-#' FALSE otherwise (default)
+#' @param version A svlist class object representing the STICS version
+#' (i.e. Maj: 10 Min: 0 Pat: 0, got using get_version_num function)
 #'
 #' @keywords internal
 #' @noRd
 #'
-get_major_version <- function(version, to_num = FALSE) {
-  str_version <- strsplit(x = version, split = "\\.")[[1]][1]
-
-  if (!to_num) {
-    return(str_version)
+get_major_version <- function(version_num) {
+  if (!inherits(version_num, "svlist")) {
+    stop("The input version is not a 'svlist' type!")
   }
-
-  get_version_num(str_version)
+  semver::render_version(version_num)[[1]]$major
 }

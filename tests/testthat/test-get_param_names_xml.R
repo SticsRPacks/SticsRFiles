@@ -62,7 +62,7 @@ test_that("node name", {
 })
 
 no3 <- "NO3init"
-if (version_num >= 10) no3 <- "NO3initf"
+if (version_num >= get_version_num(10)) no3 <- "NO3initf"
 test_that("parent node name", {
   expect_true("densinitial" %in% param_names)
   expect_true(all(c("densinitial", no3) %in% param_names))
@@ -149,7 +149,7 @@ test_that("option param name", {
 context("Getting param_new param names")
 param_names <- unlist(get_param_names_xml(xml_new)[[1]])
 
-if (version_num < 10) {
+if (version_num < get_version_num(10)) {
   test_that("option name", {
     expect_true("codetempfauche" %in% param_names)
     expect_true(all(c("codetempfauche", "codecalferti") %in% param_names))

@@ -4,7 +4,12 @@
 \alias{upgrade_param_newform_xml_10_11}
 \title{Upgrade xml param_newform file from STICS version 10 to 11}
 \usage{
-upgrade_param_newform_xml_10_11(file, out_dir, overwrite = FALSE)
+upgrade_param_newform_xml_10_11(
+  file,
+  out_dir,
+  overwrite = FALSE,
+  use_patho = FALSE
+)
 }
 \arguments{
 \item{file}{xml param_newform file path or a vector of}
