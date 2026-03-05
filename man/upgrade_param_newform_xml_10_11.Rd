@@ -18,6 +18,9 @@ upgrade_param_newform_xml_10_11(
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
+
+\item{use_patho}{Logical TRUE if code_patho is to be added to the
+param_newform.xml file, FALSE otherwise}
 }
 \value{
 None

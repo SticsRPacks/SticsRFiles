@@ -28,6 +28,9 @@ FALSE otherwise (default)}
 
 \item{verbose}{logical, TRUE for displaying a copy message
 FALSE otherwise (default)}
+
+\item{use_patho}{Logical TRUE if code_patho is to be added to the
+param_newform.xml file, FALSE otherwise}
 }
 \value{
 None

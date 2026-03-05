@@ -563,6 +563,8 @@ upgrade_param_gen_xml_10_11 <- function(
 #' @param out_dir Output directory path
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
+#' @param use_patho Logical TRUE if code_patho is to be added to the
+#' param_newform.xml file, FALSE otherwise
 #'
 #' @return None
 #'
@@ -586,12 +588,12 @@ upgrade_param_newform_xml_10_11 <- function(
   )
 
   # renaming humirac parameter to code_humirac
-  humirac_node <- SticsRFiles:::get_nodes(
+  humirac_node <- get_nodes(
     xml_doc,
     path = "//formalisme/param[@nom='humirac']"
   )
 
-  old_value <- SticsRFiles:::get_param_value(
+  old_value <- get_param_value(
     xml_doc = xml_doc,
     param_name = "humirac"
   )$humirac
@@ -607,14 +609,14 @@ upgrade_param_newform_xml_10_11 <- function(
     addFinalizer = TRUE
   )
 
-  parent_node <- SticsRFiles:::get_nodes(
+  parent_node <- get_nodes(
     xml_doc,
     path = "//formalisme[@nom='New Roots']"
   )[[1]]
 
   XML::addChildren(parent_node, XML::xmlClone(new_node), at = 0)
 
-  SticsRFiles:::set_param_value(
+  set_param_value(
     xml_doc = xml_doc,
     param_name = "code_humirac",
     param_value = old_value
@@ -630,7 +632,7 @@ upgrade_param_newform_xml_10_11 <- function(
     </option>',
       addFinalizer = TRUE
     )
-    parent_node <- SticsRFiles:::get_nodes(
+    parent_node <- get_nodes(
       xml_doc,
       path = "//formalisme[@nom='coupling with pathogen models']"
     )[[1]]
@@ -722,6 +724,8 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' FALSE otherwise (default)
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
+#' @param use_patho Logical TRUE if code_patho is to be added to the
+#' param_newform.xml file, FALSE otherwise
 #'
 #' @return None
 #'
@@ -767,7 +771,8 @@ upgrade_workspace_xml_10_11 <- function(
   upgrade_param_newform_xml_10_11(
     file = par_new,
     out_dir = out_dir,
-    overwrite = overwrite
+    overwrite = overwrite,
+    use_patho = use_patho
   )
 
   # Converting usms.xml file
