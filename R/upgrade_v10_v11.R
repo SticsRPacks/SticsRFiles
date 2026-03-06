@@ -879,7 +879,7 @@ check_and_upgrade_xml_version <- function(
 ) {
   # Checking if target version is supported
   # raising an error if not!
-  check_version_compat(target_version)
+  check_version(target_version)
 
   from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)

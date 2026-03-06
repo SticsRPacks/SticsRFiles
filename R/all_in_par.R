@@ -20,7 +20,7 @@
 #'
 all_in_par <- function(stics_version = "latest") {
   # Checking and getting the right version
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   cols_idx <- c(1, 4, 7:8, 2, 3, 10)
   #  }

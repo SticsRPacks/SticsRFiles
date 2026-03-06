@@ -42,7 +42,7 @@ get_examples_path <- function(
   }
 
   # Validating the version string
-  stics_version <- check_version_compat(stics_version)
+  stics_version <- check_version(stics_version)
 
   # Checking if files available for the given version
   ver_data <- get_versions_info(stics_version = stics_version)

@@ -24,37 +24,21 @@
 #'
 #'
 get_stics_versions_compat <- function(version_index = NULL) {
-  # Getting versions list
-  ver_info <- get_versions_info()
-  versions_names <- ver_info$versions
-  # num_versions <- as.numeric(gsub(pattern = "^[V]", "", versions_names))
-  num_versions <- get_version_num(versions_names)
-
-  # Getting the latest version string
-  max_version <- max_versions_num(num_versions)
-  latest_version <- versions_names[
-    unlist(lapply(
-      num_versions,
-      function(x) max_version == x
-    ))
-  ]
-
   # List of versions strings and latest version string
-  versions <- list(
-    versions_list = versions_names,
-    latest_version = latest_version
-  )
+  versions_list = get_versions_list()
+  latest_version = get_latest_version()
 
+  # returning a list of versions string
   if (is.null(version_index)) {
-    return(versions)
+    return(list(versions_list = versions_list, latest_version = latest_version))
   }
 
   # getting relative backwards versions
-  nb_versions <- length(versions$versions_list)
+  nb_versions <- length(versions_list)
 
   if (version_index < 0) {
     if (version_index >= -nb_versions + 1) {
-      return(versions$versions_list[nb_versions + version_index])
+      return(versions_list[nb_versions + version_index])
     } else {
       return(invisible())
     }
@@ -63,18 +47,34 @@ get_stics_versions_compat <- function(version_index = NULL) {
   # or absolute rank number
   if (version_index > 0) {
     if (version_index <= nb_versions) {
-      return(versions$versions_list[version_index])
+      return(versions_list[version_index])
     } else {
       return(invisible())
     }
   }
 }
 
+get_versions_list <- function(numeric = FALSE) {
+  # Getting versions list
+  versions_names <- get_versions_info()[["versions"]]
+  if (!numeric) return(versions_names)
+  return(get_version_num(versions_names))
+}
+
+get_latest_version <- function(numeric = FALSE) {
+  versions_list <- get_versions_list(numeric = TRUE)
+  latest <- max_version_num(versions_list)
+  if (numeric) {
+    return(latest)
+  }
+  as.character(latest)
+}
+
 
 #' Checking the validity of a given version code
 #'
 #' @param stics_version An optional version name as listed in
-#' get_stics_versions_compat() return
+#' get_stics_versions_list() return
 #'
 #' @return A valid version string
 #'
@@ -85,21 +85,18 @@ get_stics_versions_compat <- function(version_index = NULL) {
 #' @examples
 #' \dontrun{
 #'
-#' check_version_compat()
+#' check_version()
 #' }
-check_version_compat <- function(stics_version = "latest") {
-  versions <- get_stics_versions_compat()
-
+check_version <- function(stics_version = "latest") {
   if (stics_version == "latest") {
-    return(versions$latest_version)
+    return(get_latest_version())
   }
   # fix the full version number
   stics_version <- complete_version_num(stics_version)
 
-  if (stics_version %in% versions$versions_list) {
+  if (stics_version %in% get_versions_list()) {
     return(stics_version)
   }
-
   stop(stics_version, ": is an unknown version!")
 }
 
@@ -238,7 +235,7 @@ get_version_num <- function(stics_version, numeric = TRUE) {
   v
 }
 
-max_versions_num <- function(versions_num) {
+max_version_num <- function(versions_num) {
   max_version <- versions_num[[1]]
   if (length(versions_num) < 2) {
     return(max_version)

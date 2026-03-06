@@ -53,7 +53,7 @@ upgrade_workspace_xml <- function(
   if ("check_version" %in% names(args)) check_version <- args$check_version
   if ("verbose" %in% names(args)) verbose <- args$verbose
 
-  min_version <- get_version_num("V9.1")
+  min_version <- get_version_num("V9.0")
 
   # Getting param_gen.xml path
   par_gen <- get_param_gen_file(
@@ -61,15 +61,7 @@ upgrade_workspace_xml <- function(
     workspace,
     javastics
   )
-  # if (is.null(par_gen)) {
-  #   stop(
-  #     "param_gen.xml: file not found in\n",
-  #     workspace,
-  #     " or ",
-  #     javastics,
-  #     "directory! "
-  #   )
-  # }
+
   if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
 
   # Extracting or detecting the STICS version corresponding to the xml file
@@ -247,7 +239,7 @@ upgrade_workspace_xml <- function(
     param_gen_file = par_gen,
     stics_version = stics_version,
     target_version = target_version,
-    check_version = TRUE,
+    check_version = check_version,
     overwrite = overwrite,
     check_dir = FALSE
   )
