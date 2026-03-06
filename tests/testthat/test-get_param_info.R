@@ -39,9 +39,9 @@ test_that("giving a unknown variable name returns a 0 row data", {
   testthat::expect_equal(nrow(empty_df), nrow(empty_df_keyword))
   testthat::expect_equal(length(empty_df), length(empty_df_keyword))
 })
-
+version_num <- get_version_num(stics_version)
 test_that("fuzzy name", {
-  if (get_version_num() < get_version_num(10)) {
+  if (version_num < get_version_num(10)) {
     lai_params <-
       c(
         "lai0",
@@ -65,7 +65,7 @@ test_that("fuzzy name", {
         "lairesiduel",
         "flai"
       )
-  } else {
+  } else if (version_num < get_version_num(11)) {
     lai_params <-
       c(
         "cielclair",
@@ -122,6 +122,32 @@ test_that("fuzzy name", {
         "udlaimax",
         "vlaimax"
       )
+  } else {
+    lai_params <-
+      c(
+        "cielclair",
+        "codeclaircie",
+        "codelaitr",
+        "codlainet",
+        "dlaimax",
+        "dlaimaxbrut",
+        "dlaimin",
+        "flai",
+        "inilai",
+        "juleclair",
+        "lai0",
+        "laicomp",
+        "laidebeff",
+        "laieffeuil",
+        "laiplantule",
+        "lairesiduel",
+        "pentlaimax",
+        "seuilLAIapex",
+        "splaimax",
+        "splaimin",
+        "udlaimax",
+        "vlaimax"
+      )
   }
   testthat::expect_equal(
     get_param_info("lai", stics_version = stics_version)$name,
@@ -130,9 +156,8 @@ test_that("fuzzy name", {
 })
 
 test_that("regex name", {
-  testthat::expect_equal(
-    get_param_info("^lai")$name,
-    c(
+  if (version_num < get_version_num(11)) {
+    lai_params <- c(
       "lai",
       "lai0",
       "laicomp",
@@ -161,7 +186,17 @@ test_that("regex name", {
       "lairesiduel(8)",
       "lairesiduel(9)"
     )
-  )
+  } else {
+    lai_params <- c(
+      "lai0",
+      "laicomp",
+      "laidebeff",
+      "laieffeuil",
+      "laiplantule",
+      "lairesiduel"
+    )
+  }
+  testthat::expect_equal(get_param_info("^lai")$name, lai_params)
 })
 
 
@@ -174,10 +209,15 @@ test_that("different STICS versions", {
     "vlaimax",
     stics_version = complete_version_num("V9.2")
   )
+  v_10 <- get_param_info(
+    "vlaimax",
+    stics_version = complete_version_num("V10.0")
+  )
   vlast <- get_param_info("vlaimax", stics_version = stics_version)
 
   testthat::expect_equal(attr(v_90, "version"), "V9.0.0")
   testthat::expect_equal(attr(v_92, "version"), "V9.2.0")
+  testthat::expect_equal(attr(v_10, "version"), "V10.0.0")
   testthat::expect_equal(attr(vlast, "version"), stics_version)
 
   # Set both versions to the same value for comparison:

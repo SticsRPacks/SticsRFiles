@@ -20,11 +20,8 @@
 #'
 all_in_par <- function(stics_version = "latest") {
   # Checking and getting the right version
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
-  #  if (get_version_num(stics_version = stics_version) < 9.2) {
-  #    cols_idx <- 1:4
-  #  } else {
   cols_idx <- c(1, 4, 7:8, 2, 3, 10)
   #  }
 
@@ -40,7 +37,15 @@ all_in_par <- function(stics_version = "latest") {
     stringsAsFactors = FALSE
   )[, cols_idx]
 
-  names(par_df) <- c("name", "file", "min", "max", "definition", "unit", "cultivar")
+  names(par_df) <- c(
+    "name",
+    "file",
+    "min",
+    "max",
+    "definition",
+    "unit",
+    "cultivar"
+  )
 
   par_df$cultivar <- as.logical(par_df$cultivar)
 
