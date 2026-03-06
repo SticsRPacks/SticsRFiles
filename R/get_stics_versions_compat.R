@@ -89,12 +89,12 @@ get_latest_version <- function(numeric = FALSE) {
 #' }
 check_version <- function(stics_version = "latest") {
   if (stics_version == "latest") {
-    return(get_latest_version())
+    stics_version <- get_latest_version()
   }
-  # fix the full version number
-  stics_version <- complete_version_num(stics_version)
-
-  if (stics_version %in% get_versions_list()) {
+  if (
+    get_version_num(stics_version) %in%
+      get_version_num(get_versions_list(), numeric = FALSE)
+  ) {
     return(stics_version)
   }
   stop(stics_version, ": is an unknown version!")

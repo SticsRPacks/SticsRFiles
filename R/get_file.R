@@ -341,17 +341,18 @@ get_file_ <- function(
   i <- 1
   df_list <- foreach::foreach(
     i = seq_along(inputs)
-  ) %do_par_or_not% {
-    input <- inputs[[i]]
-    get_file_one(
-      input$dirpath,
-      input$filename,
-      input$p_name,
-      verbose,
-      dates_list,
-      var_list
-    )
-  }
+  ) %do_par_or_not%
+    {
+      input <- inputs[[i]]
+      get_file_one(
+        input$dirpath,
+        input$filename,
+        input$p_name,
+        verbose,
+        dates_list,
+        var_list
+      )
+    }
 
   # For files in sub-directories or not
   if (exists("workspace_dir_names")) {
@@ -381,6 +382,7 @@ get_file_ <- function(
 #' @return the obs or simulation output
 #' @keywords internal
 #'
+#'
 #' @noRd
 #'
 get_file_one <- function(
@@ -397,9 +399,6 @@ get_file_one <- function(
     p_name,
     verbose = verbose
   )
-
-  # to fix note, no visible binding ...
-  .SD <- ..keep_cols <- NULL
 
   keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
   out <- df[, ..keep_cols]
