@@ -25,8 +25,8 @@
 #'
 get_stics_versions_compat <- function(version_index = NULL) {
   # List of versions strings and latest version string
-  versions_list = get_versions_list()
-  latest_version = get_latest_version()
+  versions_list <- get_versions_list()
+  latest_version <- get_latest_version()
 
   # returning a list of versions string
   if (is.null(version_index)) {
@@ -57,7 +57,9 @@ get_stics_versions_compat <- function(version_index = NULL) {
 get_versions_list <- function(numeric = FALSE) {
   # Getting versions list
   versions_names <- get_versions_info()[["versions"]]
-  if (!numeric) return(versions_names)
+  if (!numeric) {
+    return(versions_names)
+  }
   return(get_version_num(versions_names))
 }
 
