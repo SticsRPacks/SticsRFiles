@@ -162,15 +162,17 @@ get_files_list <- function(
     # checking if usms names exist
     # not any match
     usm_idx <- usms_full_list %in% usm
-    if (length(usm_idx) == 0) {
+    usm_in_usms_file <- usm %in% usms_full_list
+    if (!any(usm_in_usms_file)) {
       stop("No usm found in the usms.xml file")
     }
     # some usms not found
-    if (!length(usm) == sum(usm_idx)) {
+    if (!all(usm_in_usms_file)) {
       warning(paste(
         "There are missing usms in usms.xml file:\n",
-        paste(usms_full_list[!usm_idx], collapse = ", ")
+        paste(usm[!usm_in_usms_file], collapse = ", ")
       ))
+      usms_list <- usm[usm_in_usms_file]
     } else {
       # getting the usms wanted
       usms_list <- usms_full_list[usm_idx]
@@ -199,10 +201,9 @@ get_files_list <- function(
     usm_files <- usm_files[node_names %in% file_type]
 
     # Keeping usms xml files, except plant files, obs, lai, null
-    # useless_files_idx <- grep("\\.obs|\\.lai|null", usm_files)
-    useless_files_idx <- grep("null", usm_files)
+    useless_files_idx <- usm_files %in% c("null", "defaut.lai", "")
 
-    if (length(useless_files_idx) > 0) {
+    if (any(useless_files_idx)) {
       usm_files <- usm_files[-useless_files_idx]
     }
 
@@ -332,8 +333,10 @@ get_files_list <- function(
       pattern = "\\.[0-9]{4}$",
       usm_files_path
     )
-    clim_files_path <- complete_climate_paths(usm_files_path[clim_files_idx])
-    usm_files_path <- union(usm_files_path, clim_files_path)
+    if (length(clim_files_idx) > 0) {
+      clim_files_path <- complete_climate_paths(usm_files_path[clim_files_idx])
+      usm_files_path <- c(usm_files_path[-clim_files_idx], clim_files_path)
+    }
     usm_files_exist <- file.exists(usm_files_path)
 
     # Adding the files lists

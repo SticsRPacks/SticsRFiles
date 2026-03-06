@@ -170,7 +170,9 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
   }
 
   dirs_names <- grep(pattern = "^study_case", x = names(ver_data), value = TRUE)
-  if (base::is.null(dirs)) dirs <- dirs_names
+  if (base::is.null(dirs)) {
+    dirs <- dirs_names
+  }
   dirs_idx <- dirs_names %in% dirs
 
   # Not any existing use case dir found

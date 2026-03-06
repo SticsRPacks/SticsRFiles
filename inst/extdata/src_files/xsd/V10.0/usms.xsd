@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="usms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="usm" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="datedebut" type="xs:integer" />
+              <xs:element name="datefin"   type="xs:integer" />
+              <xs:element name="finit"     type="xs:string"  />
+              <xs:element name="nomsol"    type="xs:string"  />
+              <xs:element name="fstation"  type="xs:string"  />
+              <xs:element name="fclim1"    type="xs:string"  />
+              <xs:element name="fclim2"    type="xs:string"  />
+              <xs:element name="culturean" type="xs:integer" />
+              <xs:element name="nbplantes" type="xs:integer" />
+              <xs:element name="codesimul" type="xs:integer" />
+              <xs:element name="plante" maxOccurs="2">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="fplt" type="xs:string" />
+                    <xs:element name="ftec" type="xs:string" />
+                    <xs:element name="flai" type="xs:string"  />
+              	    <xs:element name="fobs" type="xs:string" minOccurs="0" maxOccurs="1" />
+                  </xs:sequence>
+                  <xs:attribute name="dominance" type="xs:integer" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="nom" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence> 
+      <xs:attribute name="version" type = "xs:token" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

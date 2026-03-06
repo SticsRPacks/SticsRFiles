@@ -278,15 +278,15 @@ gen_usms_xml2txt <- function(
   # in javastics for those that do not exist in
   # workspace
   out_files_def <- c("var.mod", "rap.mod", "prof.mod")
-  out_files_java_path <- file.path(javastics, "config", out_files_def)
+  # out_files_java_path <- file.path(javastics, "config", out_files_def)
   out_files_work_path <- file.path(workspace, out_files_def)
 
   out_files_idx_path <- file.exists(out_files_work_path)
   out_files_path <- out_files_work_path[out_files_idx_path]
-  if (!all(out_files_idx_path)) {
+  if (!all(out_files_idx_path) && !is.null(javastics)) {
     out_files_path <- c(
       out_files_path,
-      out_files_java_path[!out_files_idx_path]
+      file.path(javastics, "config", out_files_def)[!out_files_idx_path]
     )
   }
 
@@ -297,7 +297,7 @@ gen_usms_xml2txt <- function(
   } else {
     `%do_par_or_not%` <- foreach::`%do%`
   }
-
+  i <- 1
   results <- foreach::foreach(
     i = seq_len(usms_number)
   ) %do_par_or_not% {
@@ -502,7 +502,12 @@ gen_usms_xml2txt <- function(
 
     # Copying lai files (whatever the lai forcing value is)
     lapply(flai_usms[[usm_name]], function(x) {
-      if (basename(x) == "null") {
+      if (
+        basename(x) %in%
+          c("null", "defaut.lai") ||
+          is.null(basename(x)) ||
+          dir.exists(file.path(dirname(x), basename(x)))
+      ) {
         return(FALSE)
       }
 
