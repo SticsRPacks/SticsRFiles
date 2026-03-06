@@ -194,7 +194,7 @@ get_usm_data <- function(
 
   data$fobs1 <- data$plante1$fobs
 
-  if (data$flai1 == "null" || data$flai1 == "defaut.lai") {
+  if (data$flai1 %in% c("", "null", "defaut.lai") || is.null(data$flai1)) {
     data$codesimul <- get_codesimul(0)
   }
 

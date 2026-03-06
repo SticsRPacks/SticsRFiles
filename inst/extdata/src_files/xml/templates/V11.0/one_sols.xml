@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sols version="10.1.0">
+<sol nom="soilname">
+<param format="real" max="60.0" min="0.0" nom="argi"></param>
+<param format="real" max="0.5" min="0.05" nom="norg"></param>
+<param format="real" max="60.0" min="10.0" nom="profhum"></param>
+<param format="real" max="100.0" min="0.0" nom="calc"></param>
+<param format="real" max="9.0" min="4.0" nom="pH"></param>
+<param format="real" max="0.5" min="0.0" nom="concseuil"></param>
+<param format="real" max="0.6" min="0.05" nom="albedo"></param>
+<param format="real" max="50.0" min="0.0" nom="q0"></param>
+<param format="real" max="1.0" min="0.0" nom="ruisolnu"></param>
+<param format="real" max="1000.0" min="10.0" nom="obstarac"></param>
+<param format="real" max="100.0" min="5.0" nom="pluiebat"></param>
+<param format="real" max="2.0" min="0.0" nom="mulchbat"></param>
+<param format="real" max="150.0" min="10.0" nom="zesx"></param>
+<param format="real" max="10.0" min="-10.0" nom="cfes"></param>
+<param format="real" max="0.2" min="0.01" nom="z0solnu"></param>
+<param format="real" max="20.0" min="8.0" nom="CsurNsol"></param>
+<param nom="finert"></param>
+<param format="real" max="5.0" min="0.0" nom="penterui"></param>
+    <option choix="2" nom="pebbles" nomParam="codecailloux">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="1" nom="macroporosity" nomParam="codemacropor">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="cracks (case of swelling clay soils)" nomParam="codefente">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="artificial drainage" nomParam="codrainage">
+      <choix code="1" nom="yes">
+        <param nom="profimper">-999</param>
+        <param nom="ecartdrain">-999</param>
+        <param nom="ksol">-999</param>
+        <param nom="profdrain">-999</param>
+      </choix>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="capillary rise" nomParam="coderemontcap">
+      <choix code="1" nom="yes">
+        <param nom="capiljour">-999</param>
+        <param nom="humcapil">-999</param>
+      </choix>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="nitrification" nomParam="codenitrif">
+      <choix code="1" nom="yes"/>
+      <choix code="2" nom="no"/>
+    </option>
+    <option choix="2" nom="denitrification" nomParam="codedenit">
+      <choix code="1" nom="yes">
+        <param nom="profdenit">-999</param>
+        <param nom="vpotdenit">-999</param>
+      </choix>
+      <choix code="2" nom="no"/>
+    </option>
+    <tableau_entete nb_colonnes="8">
+      <colonne nom="epc"/>
+      <colonne nom="HCCF"/>
+      <colonne nom="HMINF"/>
+      <colonne nom="DAF"/>
+      <colonne nom="cailloux"/>
+      <colonne nom="typecailloux"/>
+      <colonne nom="infil"/>
+      <colonne nom="epd"/>
+    </tableau_entete>
+    <tableau nb_colonnes="8" nom="layer 1">
+      <colonne nom="epc">0.0</colonne>
+      <colonne nom="HCCF">0.0</colonne>
+      <colonne nom="HMINF">0.0</colonne>
+      <colonne nom="DAF">0.0</colonne>
+      <colonne nom="cailloux">0.0</colonne>
+      <colonne nom="typecailloux">0.0</colonne>
+      <colonne nom="infil">0.0</colonne>
+      <colonne nom="epd">0.0</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 2">
+      <colonne nom="epc">0.0</colonne>
+      <colonne nom="HCCF">0.0</colonne>
+      <colonne nom="HMINF">0.0</colonne>
+      <colonne nom="DAF">0.0</colonne>
+      <colonne nom="cailloux">0.0</colonne>
+      <colonne nom="typecailloux">0.0</colonne>
+      <colonne nom="infil">0.0</colonne>
+      <colonne nom="epd">0.0</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 3">
+      <colonne nom="epc">0.0</colonne>
+      <colonne nom="HCCF">0.0</colonne>
+      <colonne nom="HMINF">0.0</colonne>
+      <colonne nom="DAF">0.0</colonne>
+      <colonne nom="cailloux">0.0</colonne>
+      <colonne nom="typecailloux">0.0</colonne>
+      <colonne nom="infil">0.0</colonne>
+      <colonne nom="epd">0.0</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 4">
+      <colonne nom="epc">0.0</colonne>
+      <colonne nom="HCCF">0.0</colonne>
+      <colonne nom="HMINF">0.0</colonne>
+      <colonne nom="DAF">0.0</colonne>
+      <colonne nom="cailloux">0.0</colonne>
+      <colonne nom="typecailloux">0.0</colonne>
+      <colonne nom="infil">0.0</colonne>
+      <colonne nom="epd">0.0</colonne>
+    </tableau>
+    <tableau nb_colonnes="8" nom="layer 5">
+      <colonne nom="epc">0.0</colonne>
+      <colonne nom="HCCF">0.0</colonne>
+      <colonne nom="HMINF">0.0</colonne>
+      <colonne nom="DAF">0.0</colonne>
+      <colonne nom="cailloux">0.0</colonne>
+      <colonne nom="typecailloux">0.0</colonne>
+      <colonne nom="infil">0.0</colonne>
+      <colonne nom="epd">0.0</colonne>
+    </tableau>
+  </sol>
+ </sols>
