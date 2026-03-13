@@ -7,6 +7,9 @@
 #' @param values named vector of parameter values to force.
 #' See Details for more information.
 #' @param javastics Path of JavaSTICS
+#' @param force Logical, if `TRUE`, unknown parameter names only trigger a
+#' warning and are still written to `param.sti`. If `FALSE` (default),
+#' unknown parameter names trigger an error.
 #'
 #' @details This function operates on STICS text input files.
 #' Do not use it before calling `gen_usms_xml2txt()`, otherwise
@@ -39,7 +42,8 @@
 force_param_values <- function(
   workspace,
   values,
-  javastics
+  javastics,
+  force = FALSE
 ) {
   if (is.null(values) || all(is.na(values))) {
     # remove param.sti in case of previous run using it ...
@@ -62,11 +66,26 @@ force_param_values <- function(
     param_names <- names(values)
     param_exist <- exist_param_csv(param_names, javastics)
     if (!all(param_exist)) {
-      stop(
-        "Unknown parameters detected for STICS version ",
-        ":\n", # stics_version, ": \n",
-        paste(param_names[!param_exist], collapse = ", ")
-      )
+      unknown_param_names <- paste(param_names[!param_exist], collapse = ", ")
+
+      if (force) {
+        warning(
+          "Unknown parameters detected and kept because force=TRUE:\n",
+          unknown_param_names
+        )
+      } else {
+        stop(
+          "Unknown parameters detected for STICS version ",
+          ":\n", # stics_version, ": \n",
+          unknown_param_names
+        )
+      }
+    }
+
+    if (force && !all(param_exist)) {
+      # Keep user-provided names for unknown parameters when forcing values.
+      names(param_exist)[!param_exist] <- param_names[!param_exist]
+      param_exist[!param_exist] <- TRUE
     }
 
     ind_non_na <- !is.na(values)
