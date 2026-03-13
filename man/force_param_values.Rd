@@ -4,7 +4,7 @@
 \alias{force_param_values}
 \title{Generates files to force parameters values in STICS simulations}
 \usage{
-force_param_values(workspace, values, javastics)
+force_param_values(workspace, values, javastics, force = FALSE)
 }
 \arguments{
 \item{workspace}{Path of the workspace containing the STICS (txt)
@@ -14,6 +14,10 @@ input files.}
 See Details for more information.}
 
 \item{javastics}{Path of JavaSTICS}
+
+\item{force}{Logical, if \code{TRUE}, unknown parameter names only trigger a
+warning and are still written to \code{param.sti}. If \code{FALSE} (default),
+unknown parameter names trigger an error.}
 }
 \value{
 A logical status TRUE if successful, FALSE otherwise
