@@ -52,8 +52,6 @@ upgrade_ini_xml <- function(
 
   # checking version
   if (check_version) {
-    min_version <- get_version_num("V9.1")
-
     # extracting or detecting the STICS version corresponding to the xml file
     # based on param_gen.xml file content
     file_version <- check_xml_file_version(
@@ -77,14 +75,15 @@ upgrade_ini_xml <- function(
       )
     }
 
-    # Compatibility checks between version and update to target_version
-    ver_num <- get_version_num(stics_version)
-    if (ver_num < min_version) {
+    check_status <- check_upgrade_versions(stics_version, target_version)
+    if (!check_status) {
       stop(
         "Files from the version ",
         stics_version,
         " cannot be converted to the version ",
-        target_version
+        target_version,
+        "\n",
+        attr(check_status, "warn_msg")
       )
     }
 
