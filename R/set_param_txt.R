@@ -107,8 +107,7 @@ set_param_txt <- function(
       "\nPlease use the set_* functions directly to set the parameter value."
     )
   }
-  switch(
-    file_type,
+  switch(file_type,
     ini = {
       set_ini_txt(
         file = file.path(workspace, "ficini.txt"),
@@ -537,8 +536,7 @@ set_file_txt <- function(
   type <- strsplit(deparse(sys.call(-1)), split = "\\(")[[1]][1]
   params <- readLines(file)
   param_ <- paste0("^:{0,1}", param, "$")
-  switch(
-    type,
+  switch(type,
     set_usm_txt = {
       ref <- get_usm_txt(file)
       if (grep(param_, names(ref)) < grep("fplt", names(ref))) {

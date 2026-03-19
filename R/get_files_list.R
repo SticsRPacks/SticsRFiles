@@ -204,7 +204,7 @@ get_files_list <- function(
     useless_files_idx <- usm_files %in% c("null", "defaut.lai", "")
 
     if (any(useless_files_idx)) {
-      usm_files <- usm_files[-useless_files_idx]
+      usm_files <- usm_files[!useless_files_idx]
     }
 
     # adding usms.xml file if asked
