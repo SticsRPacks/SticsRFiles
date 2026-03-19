@@ -58,7 +58,9 @@ check_upgrade_versions <- function(stics_version, target_version) {
 }
 
 get_min_version_num <- function(version_num, target_version_num) {
-  if (version_num < get_version_num(9)) return(get_version_num(9))
+  if (version_num < get_version_num(9)) {
+    return(get_version_num(9))
+  }
 
   if (
     version_num < get_version_num(10) &&
