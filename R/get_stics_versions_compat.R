@@ -24,37 +24,21 @@
 #'
 #'
 get_stics_versions_compat <- function(version_index = NULL) {
-  # Getting versions list
-  ver_info <- get_versions_info()
-  versions_names <- ver_info$versions
-  # num_versions <- as.numeric(gsub(pattern = "^[V]", "", versions_names))
-  num_versions <- get_version_num(versions_names)
-
-  # Getting the latest version string
-  max_version <- max_versions_num(num_versions)
-  latest_version <- versions_names[
-    unlist(lapply(
-      num_versions,
-      function(x) max_version == x
-    ))
-  ]
-
   # List of versions strings and latest version string
-  versions <- list(
-    versions_list = versions_names,
-    latest_version = latest_version
-  )
+  versions_list <- get_versions_list()
+  latest_version <- get_latest_version()
 
+  # returning a list of versions string
   if (is.null(version_index)) {
-    return(versions)
+    return(list(versions_list = versions_list, latest_version = latest_version))
   }
 
   # getting relative backwards versions
-  nb_versions <- length(versions$versions_list)
+  nb_versions <- length(versions_list)
 
   if (version_index < 0) {
     if (version_index >= -nb_versions + 1) {
-      return(versions$versions_list[nb_versions + version_index])
+      return(versions_list[nb_versions + version_index])
     } else {
       return(invisible())
     }
@@ -63,18 +47,36 @@ get_stics_versions_compat <- function(version_index = NULL) {
   # or absolute rank number
   if (version_index > 0) {
     if (version_index <= nb_versions) {
-      return(versions$versions_list[version_index])
+      return(versions_list[version_index])
     } else {
       return(invisible())
     }
   }
 }
 
+get_versions_list <- function(numeric = FALSE) {
+  # Getting versions list
+  versions_names <- get_versions_info()[["versions"]]
+  if (!numeric) {
+    return(versions_names)
+  }
+  return(get_version_num(versions_names))
+}
+
+get_latest_version <- function(numeric = FALSE) {
+  versions_list <- get_versions_list(numeric = TRUE)
+  latest <- max_version_num(versions_list)
+  if (numeric) {
+    return(latest)
+  }
+  as.character(latest)
+}
+
 
 #' Checking the validity of a given version code
 #'
 #' @param stics_version An optional version name as listed in
-#' get_stics_versions_compat() return
+#' get_stics_versions_list() return
 #'
 #' @return A valid version string
 #'
@@ -85,21 +87,18 @@ get_stics_versions_compat <- function(version_index = NULL) {
 #' @examples
 #' \dontrun{
 #'
-#' check_version_compat()
+#' check_version()
 #' }
-check_version_compat <- function(stics_version = "latest") {
-  versions <- get_stics_versions_compat()
-
+check_version <- function(stics_version = "latest") {
   if (stics_version == "latest") {
-    return(versions$latest_version)
+    stics_version <- get_latest_version()
   }
-  # fix the full version number
-  stics_version <- complete_version_num(stics_version)
-
-  if (stics_version %in% versions$versions_list) {
+  if (
+    get_version_num(stics_version) %in%
+      get_version_num(get_versions_list(), numeric = FALSE)
+  ) {
     return(stics_version)
   }
-
   stop(stics_version, ": is an unknown version!")
 }
 
@@ -186,8 +185,9 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 
 #' Getting version number from the version string
 #'
-#' @param stics_version An optional version name as listed in
-#' get_stics_versions_compat() return
+#' @param stics_version A STICS character or numerical version
+#' (may be simplified, i.e. 10.1 or "10.1" or full character version
+#' "10.0.0" )
 #' @param numeric logical, TRUE for numerical output format,
 #' FALSE for character output format
 #' @return version number (numeric or character)
@@ -197,9 +197,9 @@ get_versions_info <- function(stics_version = NULL, location = "install") {
 #'
 #' @examples
 #' \dontrun{
-#' get_version_num()
+#' get_version_num("V10.0")
 #' }
-get_version_num <- function(stics_version = "latest", numeric = TRUE) {
+get_version_num <- function(stics_version, numeric = TRUE) {
   if (length(stics_version) > 1) {
     versions_list <- unlist(lapply(stics_version, function(x) {
       get_version_num(x, numeric = numeric)
@@ -208,38 +208,36 @@ get_version_num <- function(stics_version = "latest", numeric = TRUE) {
   }
 
   if (is.numeric(stics_version) && numeric) {
-    stics_version <- as.character(stics_version)
+    char_version <- as.character(stics_version)
   }
 
-  if (stics_version == "latest") {
-    stics_version <- get_stics_versions_compat()$latest_version
+  if (!inherits(stics_version, "svlist")) {
+    # fixing the version number to X.Y.Z from X, X.Y or from Vx, Vx.y,
+    char_version <- complete_version_num(stics_version)
+
+    char_version <- gsub(
+      pattern = "([V | v]{1})([0-9\\.]*)",
+      x = char_version,
+      replacement = "\\2"
+    )
+    # creating an object of type svlist
+    v <- semver::parse_version(char_version)
+  } else {
+    v <- stics_version
+    char_version <- as.character(v)
   }
 
-  # fixing the version number to X.Y.Z from X, X.Y or from Vx, Vx.y,
-  char_version <- complete_version_num(stics_version)
-
-  char_version <- gsub(
-    pattern = "([V | v]{1})([0-9\\.]*)",
-    x = char_version,
-    replacement = "\\2"
-  )
-
+  # output is a version string
   if (!numeric) {
     return(char_version)
   }
 
-  # char_version <- gsub(
-  #   pattern = "([0-9]*\\.[0-9]*)([\\.]{0,1})([0-9]{0,})",
-  #   x = char_version,
-  #   replacement = "\\1\\3"
-  # )
-  # as.numeric(char_version)
-  v <- semver::parse_version(char_version)
+  # returning an object of class svlist with a char attribute
   attr(v, "version") <- char_version
   v
 }
 
-max_versions_num <- function(versions_num) {
+max_version_num <- function(versions_num) {
   max_version <- versions_num[[1]]
   if (length(versions_num) < 2) {
     return(max_version)
@@ -294,6 +292,8 @@ get_versions_file_name <- function() {
 
 
 complete_version_num <- function(stics_version) {
+  if (is.numeric(stics_version)) stics_version <- as.character(stics_version)
+
   version_parts <- strsplit(stics_version, split = ".", fixed = TRUE)[[1]]
   version_parts_number <- length(version_parts)
   if (version_parts_number == 2) {
@@ -301,10 +301,7 @@ complete_version_num <- function(stics_version) {
   } else if (version_parts_number == 1) {
     replic <- 2
   } else {
-    replic <- 0
-  }
-  if (replic == 0) {
     return(stics_version)
   }
-  stics_version <- paste(c(version_parts, rep("0", replic)), collapse = ".")
+  paste(c(version_parts, rep("0", replic)), collapse = ".")
 }
