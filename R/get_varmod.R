@@ -5,6 +5,8 @@
 #' @param workspace Path of the directory containing the STICS var.mod file
 #' @param file_name file name to read (without path, default value: "var.mod")
 #'
+#' @details A var.mod file can be created or modified using `gen_varmod()`.
+#'
 #' @return The variables that will be returned by STICS
 #' @export
 #'

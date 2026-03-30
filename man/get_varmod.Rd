@@ -17,6 +17,9 @@ The variables that will be returned by STICS
 \description{
 Get the STICS output variables (from var.mod file)
 }
+\details{
+A var.mod file can be created or modified using \code{gen_varmod()}.
+}
 \examples{
 get_varmod(get_examples_path(file_type = "txt"))
 }
