@@ -41,7 +41,8 @@ Variable names can be found using \code{get_var_info()}. They are
 checked before writing. If any variable name does not exist,
 it will not be written by default, but the function will still write
 the variables that exist. \code{force= TRUE} may however be used to write
-variables that do not exist.
+variables that do not exist. Variables already present in a var.mod file
+can be listed using \code{get_varmod()}.
 }
 \examples{
 gen_varmod(tempdir(), c("lai(n)", "hauteur"))
