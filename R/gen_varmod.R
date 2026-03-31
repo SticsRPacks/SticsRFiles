@@ -15,7 +15,8 @@
 #' checked before writing. If any variable name does not exist,
 #' it will not be written by default, but the function will still write
 #' the variables that exist. `force= TRUE` may however be used to write
-#' variables that do not exist.
+#' variables that do not exist. Variables already present in a var.mod file
+#' can be listed using `get_varmod()`.
 #'
 #' @return None
 #'
@@ -72,13 +73,6 @@ gen_varmod <- function(
   if (isTRUE(append)) {
     vars <- readLines(file_path)
     commonvars <- var %in% vars
-    if (any(commonvars)) {
-      cli::cli_alert_warning(paste0(
-        "Variable{?s} {.var ",
-        "{var[commonvars]}} already in",
-        " {.code var.mod}. Not repeating it."
-      ))
-    }
     var <- var[!commonvars]
     if (length(var) == 0) {
       invisible()
