@@ -391,9 +391,6 @@ get_file_one <- function(
     verbose = verbose
   )
 
-  # to fix note, no visible binding ...
-  .SD <- ..keep_cols <- NULL
-
   keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
   out <- df[, ..keep_cols]
   out <- data.frame(out)
