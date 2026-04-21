@@ -258,10 +258,14 @@ get_patch_version <- function(stics_version) {
 
 
 get_version_parts <- function(stics_version, part) {
-  if (!part %in% get_version_parts_name()) return()
+  if (!part %in% get_version_parts_name()) {
+    return()
+  }
 
   ver <- try(semver::render_version(stics_version)[[1]][[part]])
-  if (inherits(ver, "try-error")) return()
+  if (inherits(ver, "try-error")) {
+    return()
+  }
   ver
 }
 
