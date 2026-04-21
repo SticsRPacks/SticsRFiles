@@ -880,25 +880,21 @@ check_and_upgrade_xml_version <- function(
   # Checking if target version is supported
   # raising an error if not!
   check_version(target_version)
-
-  from_version_num <- get_version_num(from_version)
   target_version_num <- get_version_num(target_version)
+  from_version_major <- get_major_version(get_version_num(from_version))
+  target_version_major <- get_major_version(target_version_num)
 
-  if (
-    target_version_num >
-      semver::increment_version(from_version_num, "major", 1L)
-  ) {
+  if (target_version_major > from_version_major + 1) {
     stop(
       "The target version ",
       target_version,
-      " must be higher than the initial version ",
+      " must be one major version higher than the initial version ",
       from_version
     )
   }
 
   # checking actual version consistency between from_version
   # and file version
-  from_version_major <- get_major_version(from_version_num)
   file_version_major <- get_major_version(
     get_version_num(
       get_xml_file_version(
@@ -916,19 +912,4 @@ check_and_upgrade_xml_version <- function(
   }
   # Setting new file STICS version
   set_xml_file_version(xml_doc, new_version = target_version_num)
-}
-
-#' Get the major version number of a STICS version
-#'
-#' @param version A svlist class object representing the STICS version
-#' (i.e. Maj: 10 Min: 0 Pat: 0, got using get_version_num function)
-#'
-#' @keywords internal
-#' @noRd
-#'
-get_major_version <- function(version_num) {
-  if (!inherits(version_num, "svlist")) {
-    stop("The input version is not a 'svlist' type!")
-  }
-  semver::render_version(version_num)[[1]]$major
 }

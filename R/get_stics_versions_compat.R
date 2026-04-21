@@ -237,6 +237,38 @@ get_version_num <- function(stics_version, numeric = TRUE) {
   v
 }
 
+#' Get the major version number of a STICS version
+#'
+#' @param stics_version A svlist class object representing the STICS version
+#' (i.e. Maj: 10 Min: 0 Pat: 0, got using get_version_num function)
+#'
+#' @keywords internal
+#' @noRd
+#'
+get_major_version <- function(stics_version) {
+  get_version_parts(stics_version, "major")
+}
+get_minor_version <- function(stics_version) {
+  get_version_parts(stics_version, "minor")
+}
+
+get_patch_version <- function(stics_version) {
+  get_version_parts(stics_version, "patch")
+}
+
+
+get_version_parts <- function(stics_version, part) {
+  if (!part %in% get_version_parts_name()) return()
+
+  ver <- try(semver::render_version(stics_version)[[1]][[part]])
+  if (inherits(ver, "try-error")) return()
+  ver
+}
+
+get_version_parts_name <- function() {
+  c("major", "minor", "patch", "prerelease", "build")
+}
+
 max_version_num <- function(versions_num) {
   max_version <- versions_num[[1]]
   if (length(versions_num) < 2) {
