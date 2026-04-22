@@ -1,5 +1,5 @@
 stics_version <- get_stics_versions_compat()$latest_version
-version_num <- get_version_num()
+version_num <- get_version_num(stics_version)
 
 xml_path <- file.path(
   get_examples_path("xml", stics_version = stics_version),

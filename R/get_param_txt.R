@@ -83,7 +83,7 @@ get_param_txt <- function(
   stics_version = "latest",
   ...
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   ini <- get_ini_txt(
     workspace = workspace,
@@ -377,7 +377,7 @@ get_ini_txt <- function(
   stics_version,
   workspace = NULL
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
   filepath <- file
   if (!is.null(workspace)) {
     filepath <- file.path(workspace, file)
@@ -567,7 +567,7 @@ get_tec_txt <- function(
   # breaking it. I think for example to a "version argument" because
   # the tec file is not generic.
 
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   par_lines <- readLines(filepath)
   itk <- vector(mode = "list", length = 0)
@@ -896,7 +896,7 @@ get_soil_txt <- function(
   stics_version,
   workspace = NULL
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   filepath <- file
   if (!is.null(workspace)) {

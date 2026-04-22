@@ -1,6 +1,5 @@
 options(warn = -1)
 stics_version <- get_stics_versions_compat()$latest_version
-host <- "github.com"
 
 context("reading observations")
 

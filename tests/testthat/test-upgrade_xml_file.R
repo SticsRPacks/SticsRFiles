@@ -1,5 +1,5 @@
 stics_from_version <- "V9.2"
-stics_to_version <- get_stics_versions_compat()$latest_version
+stics_to_version <- "V10.0"
 
 context("Upgrading xml files to latest version")
 
@@ -14,7 +14,9 @@ file.copy(
 path <- tempdir()
 
 out_path <- file.path(path, "out_xml")
-if (!dir.exists(out_path)) dir.create(out_path)
+if (!dir.exists(out_path)) {
+  dir.create(out_path)
+}
 
 upgrade_ini_xml(
   file = file.path(path, "file_ini.xml"),
