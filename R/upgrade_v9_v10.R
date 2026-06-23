@@ -34,7 +34,9 @@ upgrade_tec_xml_9_10 <- function(
   param_gen_file,
   overwrite = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -499,7 +501,9 @@ upgrade_plt_xml_9_10 <- function(
   param_gen_file,
   overwrite = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -582,7 +586,9 @@ upgrade_plt_xml_9_10 <- function(
 
   # Checking nodes : all must be not NULL
   nodes_null <- unlist(lapply(nodes_to_rm, is.null))
-  if (any(nodes_null)) stop("missing nodes, not a v9.1 or 9.2 _plt.xml file")
+  if (any(nodes_null)) {
+    stop("missing nodes, not a v9.1 or 9.2 _plt.xml file")
+  }
 
   # Removing nodes
   lapply(nodes_to_rm, function(x) XML::removeNodes(x))
@@ -1153,7 +1159,9 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
 
   irazomax <- pmin(1., irazomax)
 
-  if (is.nan(irazomax) || irazomax > 1) irazomax <- 1
+  if (is.nan(irazomax) || irazomax > 1) {
+    irazomax <- 1
+  }
 
   return(round(irazomax, digits = 3))
 }
@@ -1190,7 +1198,9 @@ upgrade_sta_xml_9_10 <- function(
   param_gen_file,
   overwrite = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -1202,8 +1212,8 @@ upgrade_sta_xml_9_10 <- function(
         # stics_version = stics_version,
         # target_version = target_version,
         # check_version = check_version,
-        overwrite = overwrite #,
-        #check_dir = check_dir
+        overwrite = overwrite # ,
+        # check_dir = check_dir
       )
     })
     return(invisible())
@@ -1304,7 +1314,9 @@ upgrade_ini_xml_9_10 <- function(
   param_gen_file,
   overwrite = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -1456,7 +1468,9 @@ upgrade_param_gen_xml_9_10 <- function(
   overwrite = FALSE
 ) {
   # Checking output directory
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Loading the old doc
   xml_doc <- xmldocument(file = file)
@@ -1560,7 +1574,9 @@ upgrade_param_newform_xml_9_10 <- function(
   codemineral <- FALSE
 
   # Checking output directory
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Loading the old doc
   xml_doc <- xmldocument(file = file)
@@ -1665,7 +1681,9 @@ upgrade_param_newform_xml_9_10 <- function(
       path = paste0("//option[@nomParam='codemineral']")
     )
 
-    if (!is.null(codemineral_node)) XML::removeNodes(codemineral_node)
+    if (!is.null(codemineral_node)) {
+      XML::removeNodes(codemineral_node)
+    }
 
     new_node <- XML::xmlParseString(
       '<option choix="2" nom="CsurNsol dynamic"
@@ -1776,7 +1794,9 @@ upgrade_sols_xml_9_10 <- function(
   overwrite = FALSE
 ) {
   # checking output directory
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Loading the old doc
   xml_doc <- xmldocument(file = file)
@@ -1866,9 +1886,13 @@ upgrade_usms_xml_9_10 <- function(
   overwrite = FALSE
 ) {
   # Checking output directory
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
-  if (is.null(obs_dir)) obs_dir <- dirname(file)
+  if (is.null(obs_dir)) {
+    obs_dir <- dirname(file)
+  }
 
   # loading the old doc
   xml_doc <- xmldocument(file = file)
@@ -1962,8 +1986,6 @@ upgrade_workspace_xml_9_10 <- function(
   workspace,
   javastics,
   out_dir,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
   plant = FALSE,
   overwrite = FALSE,
   verbose = FALSE
@@ -1978,7 +2000,9 @@ upgrade_workspace_xml_9_10 <- function(
   stics_version <- get_xml_file_version(par_gen)
 
   # Just in case, creating the target directory
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   if (verbose) {
     message(
@@ -2005,7 +2029,7 @@ upgrade_workspace_xml_9_10 <- function(
   if (verbose) {
     message("param_gen.xml\n")
   }
-  #}
+  # }
 
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
@@ -2108,7 +2132,9 @@ upgrade_workspace_xml_9_10 <- function(
   if (length(plant_files) > 0) {
     # For creating a sub-directory in workspace for upgraded plant files
     plant_out_dir <- file.path(out_dir, "plant")
-    if (!dir.exists(plant_out_dir)) dir.create(plant_out_dir)
+    if (!dir.exists(plant_out_dir)) {
+      dir.create(plant_out_dir)
+    }
 
     upgrade_plt_xml_9_10(
       file = plant_files,
