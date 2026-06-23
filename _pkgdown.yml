@@ -5,15 +5,15 @@ reference:
   - title: "Upgrade XML files from STICS version 9.* to 10.* format"
     desc: Functions for upgrading parameter files
     contents:
-      - upgrade_workspace_xml
-      - upgrade_usms_xml
-      - upgrade_sols_xml
-      - upgrade_sta_xml
-      - upgrade_ini_xml
-      - upgrade_plt_xml
-      - upgrade_tec_xml
-      - upgrade_param_gen_xml
-      - upgrade_param_newform_xml
+      - upgrade_workspace_xml_9_10
+      - upgrade_usms_xml_9_10
+      - upgrade_sols_xml_9_10
+      - upgrade_sta_xml_9_10
+      - upgrade_ini_xml_9_10
+      - upgrade_plt_xml_9_10
+      - upgrade_tec_xml_9_10
+      - upgrade_param_gen_xml_9_10
+      - upgrade_param_newform_xml_9_10
 
   - title: "Manage JavaSTICS worskpace XML files"
     desc: Functions for manipulating workspaces

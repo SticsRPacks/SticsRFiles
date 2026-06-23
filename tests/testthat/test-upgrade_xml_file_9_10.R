@@ -18,14 +18,14 @@ if (!dir.exists(out_path)) {
   dir.create(out_path)
 }
 
-upgrade_ini_xml(
+upgrade_ini_xml_9_10(
   file = file.path(path, "file_ini.xml"),
   out_dir = out_path,
   param_gen_file = file.path(path, "param_gen.xml"),
   stics_version = stics_from_version
 )
 
-upgrade_plt_xml(
+upgrade_plt_xml_9_10(
   file = file.path(path, "file_plt.xml"),
   out_dir = out_path,
   param_newform_file = file.path(path, "param_newform.xml"),
@@ -33,14 +33,14 @@ upgrade_plt_xml(
   stics_version = stics_from_version
 )
 
-upgrade_sta_xml(
+upgrade_sta_xml_9_10(
   file = file.path(path, "file_sta.xml"),
   out_dir = out_path,
   param_gen_file = file.path(path, "param_gen.xml"),
   stics_version = stics_from_version
 )
 
-upgrade_tec_xml(
+upgrade_tec_xml_9_10(
   file = file.path(path, "file_tec.xml"),
   out_dir = out_path,
   param_newform_file = file.path(path, "param_newform.xml"),
@@ -49,27 +49,27 @@ upgrade_tec_xml(
 )
 
 
-upgrade_param_gen_xml(
+upgrade_param_gen_xml_9_10(
   file = file.path(path, "param_gen.xml"),
   out_dir = out_path,
   stics_version = stics_from_version
 )
 
-upgrade_param_newform_xml(
+upgrade_param_newform_xml_9_10(
   file = file.path(path, "param_newform.xml"),
   out_dir = out_path,
   param_gen_file = file.path(path, "param_gen.xml"),
   stics_version = stics_from_version
 )
 
-upgrade_sols_xml(
+upgrade_sols_xml_9_10(
   file = file.path(path, "sols.xml"),
   out_dir = out_path,
   param_gen_file = file.path(path, "param_gen.xml"),
   stics_version = stics_from_version
 )
 
-upgrade_usms_xml(
+upgrade_usms_xml_9_10(
   file = file.path(path, "usms.xml"),
   out_dir = out_path,
   param_gen_file = file.path(path, "param_gen.xml"),
