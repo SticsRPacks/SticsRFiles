@@ -11,7 +11,9 @@ get_in_files <- function(in_dir_or_files, kind) {
     obs = "\\.obs$"
   )
 
-  if (!kind %in% names(files_patterns)) stop("file kind error: ", kind)
+  if (!kind %in% names(files_patterns)) {
+    stop("file kind error: ", kind)
+  }
 
   if (kind == "obs") {
     file_pattern <- files_patterns[[kind]]
@@ -46,72 +48,56 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-  type = c("param_gen.xml", "param_newform.xml"),
+  file_name,
   workspace_dir,
   javastics_dir = NULL
 ) {
-  par_file <- file.path(workspace_dir, type)
+  if (!file_name %in% c("param_gen.xml", "param_newform.xml")) {
+    stop(file_name, "is not a gerenal parameters file name !")
+  }
 
-  if (file.exists(par_file)) {
+  par_file <- file.path(workspace_dir, file_name)
+
+  exists_in_workspace <- file.exists(par_file)
+
+  if (exists_in_workspace) {
     attr(par_file, "where") <- "workspace"
     return(par_file)
   }
 
   if (is.null(javastics_dir)) {
-    warning(
-      "JavaSTICS path must be given as input argument\n",
-      type,
+    stop(
+      "JavaSTICS path is needed as as input argument\n",
+      file_name,
       " has not been found in ",
       workspace_dir
     )
     return()
   }
 
-  par_file <- file.path(javastics_dir, "config", type)
+  par_file <- file.path(javastics_dir, "config", file_name)
 
-  if (file.exists(par_file)) {
+  exists_in_javastics <- file.exists(par_file)
+
+  if (exists_in_javastics) {
     attr(par_file, "where") <- "javastics"
     return(par_file)
   }
 
-  warning(type, " has not been found in ", javastics_dir)
-
-  return()
+  stop(
+    file_name,
+    " has not been found neither in ",
+    javastics_dir,
+    " nor in",
+    workspace_dir
+  )
 }
 
 to_xml_version <- function(stics_version) {
-  err <- FALSE
-
-  if (is.numeric(stics_version)) stics_version <- as.character(stics_version)
-
-  if (!grepl(pattern = "\\.", x = stics_version)) {
-    stics_version <- paste0(stics_version, ".0")
-  }
-  numbers <- grepl(pattern = "[0-9]", stics_version)
-
-  # no numbers in version
-  if (!numbers) err <- TRUE
-
-  char_no_v <- grepl(pattern = "[a-u w-z A-U W-Z]", stics_version)
-
-  # Wrong character in version
-  if (char_no_v) err <- TRUE
-
-  # No dot in version
-
-  if (grepl(pattern = "\\.$", x = stics_version)) err <- TRUE
-
-  if (err) {
-    warning("Version must be X.Y, or VX.Y, or vX.Y")
-    return()
-  }
-
-  as.character(get_version_num(stics_version = stics_version, numeric = FALSE))
+  ver <- get_version_num(stics_version = stics_version)
+  as.character(ver)
 }
 
-
-# set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
-# overwrite = FALSE) {
 set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
   # If an xml document is given file must not be null
   if (!inherits(xml_doc, "xml_document")) {
@@ -121,16 +107,32 @@ set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
     )
   }
   # Adding version to detect if the file have been previously updated to 10.0
-  ver <- to_xml_version(new_version)
+  ver <- get_version_num(new_version, numeric = FALSE)
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
-  att <- get_attrs(xml_doc, path = root_path)
+  att_value <- get_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_list = "version"
+  )
+
+  if (length(att_value) == 0) {
+    add_attrs(xml_doc, path = root_path, named_vector = ver)
+    return(invisible())
+  }
 
   # Checking file version
-  if (!is.null(att) && att[, "version"] == ver) {
+  if (!is.null(att_value) && att_value[, "version"] == ver) {
     warning("The file is already in version ", new_version)
     return(invisible(xml_doc))
   }
+
+  set_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_name = "version",
+    values_list = ver
+  )
 
   add_attrs(xml_doc, path = root_path, named_vector = ver)
 
@@ -216,7 +218,9 @@ check_xml_file_version <- function(
     return(FALSE)
   }
 
-  if (!stics_version %in% xml_version) r <- FALSE
+  if (!stics_version %in% xml_version) {
+    r <- FALSE
+  }
 
   attr(r, "version") <- xml_version
   return(r)
