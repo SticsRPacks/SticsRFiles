@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_plt_xml_10_11}
 \alias{upgrade_plt_xml_10_11}
-\title{Upgrade plant file from version 10 to 11}
+\title{Upgrade _plt.xml file(s) from version 10 to 11}
 \usage{
 upgrade_plt_xml_10_11(
   file,
@@ -43,5 +43,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrade plant file from version 10 to 11
+Upgrade _plt.xml file(s) from version 10 to 11
 }

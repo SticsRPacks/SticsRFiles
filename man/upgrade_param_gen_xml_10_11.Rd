@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_param_gen_xml_10_11}
 \alias{upgrade_param_gen_xml_10_11}
-\title{Upgrade xml param_gen file from STICS version 10 to 11}
+\title{Upgrade a param_gen.xml file from STICS version 10 to 11}
 \usage{
 upgrade_param_gen_xml_10_11(
   file,
@@ -28,5 +28,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrade xml param_gen file from STICS version 10 to 11
+Upgrade a param_gen.xml file from STICS version 10 to 11
 }

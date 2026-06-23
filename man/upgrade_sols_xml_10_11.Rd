@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_sols_xml_10_11}
 \alias{upgrade_sols_xml_10_11}
-\title{Upgrade xml sols file from STICS version 10 to 11}
+\title{Upgrade a sols.xml file from STICS version 10 to 11}
 \usage{
 upgrade_sols_xml_10_11(file, out_dir, overwrite = FALSE)
 }
@@ -18,5 +18,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrade xml sols file from STICS version 10 to 11
+Upgrade a sols.xml file from STICS version 10 to 11
 }

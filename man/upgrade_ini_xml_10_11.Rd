@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_ini_xml_10_11}
 \alias{upgrade_ini_xml_10_11}
-\title{Upgrade xml initialisation file from STICS version 10 to 11}
+\title{Upgrade _ini.xml file(s) from STICS version 10 to 11}
 \usage{
 upgrade_ini_xml_10_11(file, out_dir, overwrite = FALSE)
 }
@@ -18,5 +18,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrade xml initialisation file from STICS version 10 to 11
+Upgrade _ini.xml file(s) from STICS version 10 to 11
 }

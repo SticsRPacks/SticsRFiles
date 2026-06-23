@@ -1,4 +1,4 @@
-#' Upgrade technical file(s) from version 10 to 11
+#' Upgrade _tec.xml  file(s) from version 10 to 11
 #'
 #' @param file xml technical file path or a vector of
 #' @param out_dir Output directory path
@@ -131,7 +131,7 @@ upgrade_tec_xml_10_11 <- function(
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrade plant file from version 10 to 11
+#' Upgrade _plt.xml file(s) from version 10 to 11
 #' @param file xml plant file path or a vector of
 #' @param out_dir Output directory path
 #' @param stage_const_height Plant height computation parameter (optional)
@@ -258,7 +258,7 @@ upgrade_plt_xml_10_11 <- function(
 #'
 #' @return A named list of V11 new plant parameters values
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' # get plant codes
@@ -374,7 +374,7 @@ plt_IC_param_list <- function() {
   return(param)
 }
 
-#' Upgrade xml station file from STICS version 10 to 11
+#' Upgrade _sta.xml file(s) from STICS version 10 to 11
 #'
 #' @param file xml plant file path or a vector of
 #' @param out_dir Output directory path
@@ -453,7 +453,7 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 }
 
 
-#' Upgrade xml initialisation file from STICS version 10 to 11
+#' Upgrade _ini.xml file(s) from STICS version 10 to 11
 #'
 #' @param file xml plant file path or a vector of
 #' @param out_dir Output directory path
@@ -496,7 +496,7 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrade xml param_gen file from STICS version 10 to 11
+#' Upgrade a param_gen.xml file from STICS version 10 to 11
 #'
 #' @param file xml param_gen file path or a vector of
 #' @param out_dir Output directory path
@@ -557,7 +557,7 @@ upgrade_param_gen_xml_10_11 <- function(
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrade xml param_newform file from STICS version 10 to 11
+#' Upgrade a param_newform.xml file from STICS version 10 to 11
 #'
 #' @param file xml param_newform file path or a vector of
 #' @param out_dir Output directory path
@@ -649,7 +649,7 @@ upgrade_param_newform_xml_10_11 <- function(
 }
 
 
-#' Upgrade xml sols file from STICS version 10 to 11
+#' Upgrade a sols.xml file from STICS version 10 to 11
 #'
 #' @param file xml sols file path
 #' @param out_dir Output directory path
@@ -680,7 +680,7 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrade xml usms file from STICS version 10 to 11
+#' Upgrade a usms.xml file from STICS version 10 to 11
 #'
 #' @param file xml usms file path
 #' @param out_dir Output directory path
@@ -712,7 +712,7 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 }
 
 
-#' Upgrading a Javastics STICS V10 xml workspace
+#' Upgrade a Javastics STICS V10 xml workspace directory
 #'
 #' @param workspace JavaStics xml workspace path
 #' @param javastics JavaStics (STICS V10) folder path (Optional)

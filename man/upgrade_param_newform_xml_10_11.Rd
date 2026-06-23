@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_param_newform_xml_10_11}
 \alias{upgrade_param_newform_xml_10_11}
-\title{Upgrade xml param_newform file from STICS version 10 to 11}
+\title{Upgrade a param_newform.xml file from STICS version 10 to 11}
 \usage{
 upgrade_param_newform_xml_10_11(
   file,
@@ -26,5 +26,5 @@ param_newform.xml file, FALSE otherwise}
 None
 }
 \description{
-Upgrade xml param_newform file from STICS version 10 to 11
+Upgrade a param_newform.xml file from STICS version 10 to 11
 }

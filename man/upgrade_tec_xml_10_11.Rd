@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_tec_xml_10_11}
 \alias{upgrade_tec_xml_10_11}
-\title{Upgrade technical file(s) from version 10 to 11}
+\title{Upgrade _tec.xml  file(s) from version 10 to 11}
 \usage{
 upgrade_tec_xml_10_11(
   file,
@@ -28,5 +28,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrade technical file(s) from version 10 to 11
+Upgrade _tec.xml  file(s) from version 10 to 11
 }

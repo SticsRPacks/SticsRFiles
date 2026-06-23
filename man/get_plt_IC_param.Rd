@@ -27,3 +27,4 @@ get_plt_IC_param(NULL)
 get_plt_IC_param("poi")
 
 }
+\keyword{internal}

@@ -29,12 +29,15 @@ stics_version <- get_stics_versions_compat()$latest_version
 ```
 
 
-The XML files structure has changed between STICS version **9.2** and versions **10.X.Y** and a transformation is mandatory.    
+The XML files structure has changed either between STICS version **9.2** and versions **10.X.Y** or between STICS versions **10.X.Y** and version 11.0.0 and a transformation is mandatory for ugrading from a major version to a upper one.    
 
 So, to avoid difficulties and errors with manual XML files modifications, functionalities have been developed to do so automatically.
 
 One can either transform a complete workspace directory at once or each kind of file individually.
 
+Here some examples of use of upgrade functions either for a whole workspace or for specific files (i.e. _tec, _ini,.. files) from version 9 to 10.
+
+For upgrading from STICS version 10 to 11, just change the functions suffix from _9_10 to _10_11
 
 ```{r, include = FALSE, eval=FALSE}
 example_data <- SticsRFiles::download_data(
@@ -56,7 +59,9 @@ upgrade_workspace_xml_9_10(
 
 In that case, a workspace adapted to the new version is recreated.
 
-So, apart from the XML files, some other files as outputs definition files (*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new workspace.
+So, apart from the XML files, some other files as outputs definition files (*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new upgraded workspace.
+
+Take care that the JavaStics folder corresponds to the initial STICS version of the workspace you want to upgrade. 
 
 ```{r, eval = FALSE, results='markup'}
 workspace <- "/path/to/workspace/dir/V9.2"

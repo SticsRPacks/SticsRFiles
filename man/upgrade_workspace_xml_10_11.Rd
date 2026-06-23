@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_workspace_xml_10_11}
 \alias{upgrade_workspace_xml_10_11}
-\title{Upgrading a Javastics STICS V10 xml workspace}
+\title{Upgrade a Javastics STICS V10 xml workspace directory}
 \usage{
 upgrade_workspace_xml_10_11(
   workspace,
@@ -36,5 +36,5 @@ param_newform.xml file, FALSE otherwise}
 None
 }
 \description{
-Upgrading a Javastics STICS V10 xml workspace
+Upgrade a Javastics STICS V10 xml workspace directory
 }

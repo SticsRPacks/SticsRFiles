@@ -1,4 +1,4 @@
-#' Upgrading _tec.xml file(s) to a newer version
+#' Upgrade _tec.xml file(s) from STICS version 9 to 10
 #'
 #' @param file Path of a crop management (*_tec.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
@@ -528,7 +528,7 @@ upgrade_tec_xml_9_10 <- function(
 }
 
 
-#' Upgrading _plt.xml file(s) to a newer version
+#' Upgrade _plt.xml file(s) from STICS version 9 to 10
 #'
 #' @param file Path of an plant (*_plt.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
@@ -1287,7 +1287,7 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
   return(round(irazomax, digits = 3))
 }
 
-#' Upgrading _sta.xml file(s) to a newer version
+#' Upgrade _sta.xml file(s) from STICS version 9 to 10
 #'
 #' @param file Path of a station (*_sta.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
@@ -1463,7 +1463,7 @@ upgrade_sta_xml_9_10 <- function(
 }
 
 
-#' Upgrading _ini.xml file(s) to a newer version
+#' Upgrade _ini.xml file(s) from STICS version 9 to 10
 #'
 #' @param file Path of an initialization (*_ini.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
@@ -1684,7 +1684,7 @@ upgrade_ini_xml_9_10 <- function(
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrading a param_gen.xml file to a newer version
+#' Upgrade a param_gen.xml file from STICS version 9 to 10
 #'
 #' @param file Path of a param_gen.xml file
 #' @param out_dir Output directory path of the generated file
@@ -1817,7 +1817,7 @@ upgrade_param_gen_xml_9_10 <- function(
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrading a param_newform.xml file to a newer version
+#' Upgrade a param_newform.xml file from STICS version 9 to 10
 #'
 #' @param file Path of a param_newform.xml file
 #' @param out_dir Output directory path of the generated file
@@ -2085,7 +2085,7 @@ upgrade_param_newform_xml_9_10 <- function(
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrading a sols.xml file to a newer version
+#' Upgrade a sols.xml file from STICS version 9 to 10
 #'
 #' @param file Path of a sols.xml file
 #' @param out_dir Output directory path of the generated file
@@ -2224,7 +2224,7 @@ upgrade_sols_xml_9_10 <- function(
 }
 
 
-#' Upgrading a usms.xml file to a newer version
+#' Upgrade a usms.xml file from STICS version 9 to 10
 #'
 #' @param file Path of a usms.xml file
 #' @param out_dir Output directory path of the generated file
@@ -2363,8 +2363,7 @@ upgrade_usms_xml_9_10 <- function(
   invisible(gc(verbose = FALSE))
 }
 
-#' Upgrading XML files of a JavaSTICS workspace directory
-#' to a newer STICS version format
+#' Upgrade XML files of a JavaSTICS V9 workspace directory
 #'
 #' @param workspace Path of a JavaSTICS workspace
 #' @param javastics Path of JavaSTICS containing the STICS version corresponding

@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v10_v11.R
 \name{upgrade_usms_xml_10_11}
 \alias{upgrade_usms_xml_10_11}
-\title{Upgrade xml usms file from STICS version 10 to 11}
+\title{Upgrade a usms.xml file from STICS version 10 to 11}
 \usage{
 upgrade_usms_xml_10_11(file, out_dir, overwrite = FALSE)
 }
@@ -18,5 +18,5 @@ FALSE otherwise (default)}
 None
 }
 \description{
-Upgrade xml usms file from STICS version 10 to 11
+Upgrade a usms.xml file from STICS version 10 to 11
 }

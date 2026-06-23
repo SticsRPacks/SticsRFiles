@@ -2,8 +2,7 @@
 % Please edit documentation in R/upgrade_v9_v10.R
 \name{upgrade_workspace_xml_9_10}
 \alias{upgrade_workspace_xml_9_10}
-\title{Upgrading XML files of a JavaSTICS workspace directory
-to a newer STICS version format}
+\title{Upgrade XML files of a JavaSTICS V9 workspace directory}
 \usage{
 upgrade_workspace_xml_9_10(
   workspace,
@@ -41,8 +40,7 @@ TRUE for overwriting files if they exist, FALSE otherwise}
 None
 }
 \description{
-Upgrading XML files of a JavaSTICS workspace directory
-to a newer STICS version format
+Upgrade XML files of a JavaSTICS V9 workspace directory
 }
 \details{
 \itemize{

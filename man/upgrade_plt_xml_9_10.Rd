@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v9_v10.R
 \name{upgrade_plt_xml_9_10}
 \alias{upgrade_plt_xml_9_10}
-\title{Upgrading _plt.xml file(s) to a newer version}
+\title{Upgrade _plt.xml file(s) from STICS version 9 to 10}
 \usage{
 upgrade_plt_xml_9_10(
   file,
@@ -45,7 +45,7 @@ TRUE for overwriting file if it exists, FALSE otherwise}
 None
 }
 \description{
-Upgrading _plt.xml file(s) to a newer version
+Upgrade _plt.xml file(s) from STICS version 9 to 10
 }
 \details{
 See get_stics_versions_compat() for listing versions

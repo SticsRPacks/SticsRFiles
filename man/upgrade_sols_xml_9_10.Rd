@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v9_v10.R
 \name{upgrade_sols_xml_9_10}
 \alias{upgrade_sols_xml_9_10}
-\title{Upgrading a sols.xml file to a newer version}
+\title{Upgrade a sols.xml file from STICS version 9 to 10}
 \usage{
 upgrade_sols_xml_9_10(
   file,
@@ -38,7 +38,7 @@ TRUE for overwriting file if it exists, FALSE otherwise}
 None
 }
 \description{
-Upgrading a sols.xml file to a newer version
+Upgrade a sols.xml file from STICS version 9 to 10
 }
 \details{
 See SticsRFiles::get_stics_versions_compat() for listing versions

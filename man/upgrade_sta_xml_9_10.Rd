@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v9_v10.R
 \name{upgrade_sta_xml_9_10}
 \alias{upgrade_sta_xml_9_10}
-\title{Upgrading _sta.xml file(s) to a newer version}
+\title{Upgrade _sta.xml file(s) from STICS version 9 to 10}
 \usage{
 upgrade_sta_xml_9_10(
   file,
@@ -41,7 +41,7 @@ TRUE for overwriting file if it exists, FALSE otherwise}
 None
 }
 \description{
-Upgrading _sta.xml file(s) to a newer version
+Upgrade _sta.xml file(s) from STICS version 9 to 10
 }
 \details{
 See SticsRFiles::get_stics_versions_compat() for listing versions

@@ -2,7 +2,7 @@
 % Please edit documentation in R/upgrade_v9_v10.R
 \name{upgrade_param_gen_xml_9_10}
 \alias{upgrade_param_gen_xml_9_10}
-\title{Upgrading a param_gen.xml file to a newer version}
+\title{Upgrade a param_gen.xml file from STICS version 9 to 10}
 \usage{
 upgrade_param_gen_xml_9_10(
   file,
@@ -34,7 +34,7 @@ TRUE for overwriting file if it exists, FALSE otherwise}
 None
 }
 \description{
-Upgrading a param_gen.xml file to a newer version
+Upgrade a param_gen.xml file from STICS version 9 to 10
 }
 \details{
 See get_stics_versions_compat() for listing versions

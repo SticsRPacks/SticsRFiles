@@ -15,6 +15,19 @@ reference:
       - upgrade_param_gen_xml_9_10
       - upgrade_param_newform_xml_9_10
 
+  - title: "Upgrade XML files from STICS version 10.* to 11.* format"
+    desc: Functions for upgrading parameter files
+    contents:
+      - upgrade_workspace_xml_10_11
+      - upgrade_usms_xml_10_11
+      - upgrade_sols_xml_10_11
+      - upgrade_sta_xml_10_11
+      - upgrade_ini_xml_10_11
+      - upgrade_plt_xml_10_11
+      - upgrade_tec_xml_10_11
+      - upgrade_param_gen_xml_10_11
+      - upgrade_param_newform_xml_10_11
+
   - title: "Manage JavaSTICS worskpace XML files"
     desc: Functions for manipulating workspaces
     contents:
@@ -27,8 +40,10 @@ reference:
     contents:
       - get_param_info
       - is_stics_param
+      - get_xml_files_param_df
       - get_var_info
       - is_stics_var
+      - get_dev_stages
 
   - title: "Generate JavaSTICS Input files (XML format)"
     desc: Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)
