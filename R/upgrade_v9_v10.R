@@ -6,12 +6,6 @@
 #' to the file version
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-# to (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-# with the file version and finally checking if the upgrade is possible
-# allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 # @param ... Additional input arguments
@@ -38,63 +32,9 @@ upgrade_tec_xml_9_10 <- function(
   out_dir,
   param_newform_file,
   param_gen_file,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE
 ) {
-  # for verifying output dir existence
-  # check_dir <- TRUE
-  # args <- list(...)
-  # if ("check_dir" %in% names(args)) check_dir <- args$check_dir
-  # if (check_dir) {
-  #   if (!dir.exists(out_dir)) dir.create(out_dir)
-  #   # for checking only once when multiple files are treated !
-  #   check_dir <- FALSE
-  # }
   if (!dir.exists(out_dir)) dir.create(out_dir)
-  # checking version
-  # if (check_version) {
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file,
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version && is.null(param_gen_file)) {
-  #     stop("param_gen_file must be provided! ")
-  #   }
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file[1]
-  #     )
-  # #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  #
-  #   # for checking only once when multiple files are treated !
-  #   check_version <- FALSE
-  # }
 
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -102,12 +42,7 @@ upgrade_tec_xml_9_10 <- function(
         file = x,
         param_newform_file = param_newform_file,
         out_dir = out_dir,
-        # stics_version = stics_version,
-        # target_version = target_version,
-        # check_version = check_version,
         param_gen_file = param_gen_file,
-        overwrite = overwrite #,
-        # check_dir = check_dir
       )
     })
     return(invisible())
@@ -115,13 +50,6 @@ upgrade_tec_xml_9_10 <- function(
 
   # Loading the old xml file
   xml_doc <- xmldocument(file = file)
-
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
 
   # Setting file STICS version
   set_xml_file_version(
@@ -543,12 +471,6 @@ upgrade_tec_xml_9_10 <- function(
 #' to the file version
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files to
-# (VX.Y format)
-# @param check_version Perform version consistency between `stics_version`
-# and the file version, for finally checking if an upgrade is possible
-# allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 # @param ... Additional input arguments
@@ -575,63 +497,9 @@ upgrade_plt_xml_9_10 <- function(
   out_dir,
   param_newform_file,
   param_gen_file,
-  # stics_version = "V9.2",
-  # target_version = "V10.0",
-  # check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE
 ) {
-  # # For verifying output dir existence
-  # check_dir <- TRUE
-  # args_list <- list(...)
-  # if ("check_dir" %in% names(args_list)) check_dir <- args_list$check_dir
-  # if (check_dir) {
-  #   if (!dir.exists(out_dir)) dir.create(out_dir)
-  #   # for checking only once when multiple files are treated !
-  #   check_dir <- FALSE
-  # }
   if (!dir.exists(out_dir)) dir.create(out_dir)
-  # # checking version
-  # if (check_version) {
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file[1],
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version && is.null(param_gen_file)) {
-  #     stop("param_gen_file must be provided! ")
-  #   }
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file[1]
-  #     )
-  #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  #
-  #   # for checking only once when multiple files are treated !
-  #   check_version <- FALSE
-  # }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -641,11 +509,7 @@ upgrade_plt_xml_9_10 <- function(
         out_dir = out_dir,
         param_newform_file = param_newform_file,
         param_gen_file = param_gen_file,
-        # stics_version = stics_version,
-        # target_version = target_version,
-        # check_version = check_version,
-        overwrite = overwrite #,
-        #check_dir = check_dir
+        overwrite = overwrite
       )
     })
     return(invisible())
@@ -656,13 +520,6 @@ upgrade_plt_xml_9_10 <- function(
 
   # Loading the old xml file
   xml_doc <- xmldocument(file = file)
-
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
 
   # Setting file STICS version
   set_xml_file_version(
@@ -1307,12 +1164,6 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
 #' @param out_dir Output directory path of the generated files
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-# to (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-# with the file version and finally checking if the upgrade is possible
-# allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 # @param ... Additional input arguments
@@ -1337,59 +1188,9 @@ upgrade_sta_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  # stics_version = "V9.2",
-  # target_version = "V10.0",
-  # check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE
 ) {
-  # for verifying output dir existence
-  # check_dir <- TRUE
-  # args <- list(...)
-  # if ("check_dir" %in% names(args)) check_dir <- args$check_dir
-  # if (check_dir) {
-  #   if (!dir.exists(out_dir)) dir.create(out_dir)
-  #   # for checking only once when multiple files are treated !
-  #   check_dir <- FALSE
-  # }
   if (!dir.exists(out_dir)) dir.create(out_dir)
-  # # checking version
-  # if (check_version) {
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file[1],
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file[1]
-  #     )
-  #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  #
-  #   # for checking only once when multiple files are treated !
-  #   check_version <- FALSE
-  # }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -1408,22 +1209,10 @@ upgrade_sta_xml_9_10 <- function(
     return(invisible())
   }
 
-  # if (!file.exists(file)) {
-  #   warning("Unknown file: ", file)
-  #   return(invisible())
-  # }
-
   # Loading xml file
   xml_doc <- xmldocument(file = file)
 
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
-
-  # # Setting file STICS version
+  # Setting file STICS version
   set_xml_file_version(
     xml_doc,
     new_version = "V10.0"
@@ -1490,15 +1279,8 @@ upgrade_sta_xml_9_10 <- function(
 #' @param out_dir Output directory path of the generated files
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-# to (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-# with the file version and finally checking if the upgrade is possible
-# allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
-# @param ... Additional input arguments
 #'
 #' @return None
 #'
@@ -1520,62 +1302,9 @@ upgrade_ini_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  # stics_version = "V9.2",
-  # target_version = "V10.0",
-  # check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE
 ) {
-  # for verifying output dir existence
-  # check_dir <- TRUE
-  # args <- list(...)
-  # if ("check_dir" %in% names(args)) check_dir <- args$check_dir
-  # if (check_dir) {
-  #   if (!dir.exists(out_dir)) dir.create(out_dir)
-  #   # for checking only once when multiple files are treated !
-  #   check_dir <- FALSE
-  # }
   if (!dir.exists(out_dir)) dir.create(out_dir)
-  # checking version
-  # if (check_version) {
-  #   # extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file[1],
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version && is.null(param_gen_file)) {
-  #     stop("param_gen_file must be provided! ")
-  #   }
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file[1]
-  #     )
-  #   }
-  #
-  #   check_status <- check_upgrade_versions(stics_version, target_version)
-  #   if (!check_status) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version,
-  #       "\n",
-  #       attr(check_status, "warn_msg")
-  #     )
-  #   }
-  #
-  #   # for checking only once when multiple files are treated !
-  #   check_version <- FALSE
-  # }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -1583,12 +1312,8 @@ upgrade_ini_xml_9_10 <- function(
       upgrade_ini_xml_9_10(
         file = x,
         out_dir = out_dir,
-        #stics_version = stics_version,
-        # target_version = target_version,
-        #check_version = check_version,
         param_gen_file = param_gen_file,
-        overwrite = overwrite #,
-        #check_dir = check_dir
+        overwrite = overwrite
       )
     })
     return(invisible())
@@ -1596,13 +1321,6 @@ upgrade_ini_xml_9_10 <- function(
 
   # Loading the old xml file
   xml_doc <- xmldocument(file = file)
-
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
 
   # Setting file STICS version
   set_xml_file_version(
@@ -1716,12 +1434,6 @@ upgrade_ini_xml_9_10 <- function(
 #'
 #' @param file Path of a param_gen.xml file
 #' @param out_dir Output directory path of the generated file
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-#  to (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-# with the file version and finally checking if the upgrade is possible
-# allowed to the target_version
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #'
@@ -1741,53 +1453,13 @@ upgrade_ini_xml_9_10 <- function(
 upgrade_param_gen_xml_9_10 <- function(
   file,
   out_dir,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
   overwrite = FALSE
 ) {
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
-  # if (check_version) {
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # Extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(file, stics_version)
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file
-  #     )
-  #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  # }
-
   # Loading the old doc
   xml_doc <- xmldocument(file = file)
-
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
 
   # # Setting file STICS version
   set_xml_file_version(
@@ -1858,13 +1530,6 @@ upgrade_param_gen_xml_9_10 <- function(
 #' @param out_dir Output directory path of the generated file
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-# to (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-#' with the file version and finally checking if the upgrade is possible
-#' allowed to the target_version. If TRUE, param_gen_file is mandatory.
-
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #'
@@ -1889,9 +1554,6 @@ upgrade_param_newform_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
   overwrite = FALSE
 ) {
   # TODO: eliminate when option will be reactivated later.
@@ -1900,55 +1562,9 @@ upgrade_param_newform_xml_9_10 <- function(
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
-  # if (check_version) {
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # Extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file,
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version && is.null(param_gen_file)) {
-  #     stop("param_gen_file must be provided! ")
-  #   }
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file
-  #     )
-  #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  # }
-
   # Loading the old doc
   xml_doc <- xmldocument(file = file)
 
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
-
-  #
   # # Setting file STICS version
   set_xml_file_version(
     xml_doc,
@@ -2134,12 +1750,6 @@ upgrade_param_newform_xml_9_10 <- function(
 #' @param out_dir Output directory path of the generated file
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files to
-#  (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-#' with the file version and finally checking if the upgrade is possible
-#' allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #'
@@ -2163,65 +1773,13 @@ upgrade_sols_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
   overwrite = FALSE
 ) {
-  # hecking output directory
+  # checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
-
-  # checking version
-  # if (check_version) {
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file,
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version && is.null(param_gen_file)) {
-  #     stop("param_gen_file must be provided! ")
-  #   }
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file
-  #     )
-  #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  #
-  #   # for checking only once when multiple files are treated !
-  #   check_version <- FALSE
-  # }
 
   # Loading the old doc
   xml_doc <- xmldocument(file = file)
-
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
 
   # Setting file STICS version
   set_xml_file_version(
@@ -2281,12 +1839,6 @@ upgrade_sols_xml_9_10 <- function(
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
 #' @param obs_dir Directory path of the observation data files
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-# to (VX.Y format)
-# @param check_version Perform version consistency with in stics_version input
-#' with the file version and finally checking if the upgrade is possible
-#' allowed to the target_version. If TRUE, param_gen_file is mandatory.
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #'
@@ -2311,65 +1863,15 @@ upgrade_usms_xml_9_10 <- function(
   out_dir,
   param_gen_file,
   obs_dir = NULL,
-  # stics_version = "V9.2",
-  # target_version = "V10.0",
-  # check_version = TRUE,
   overwrite = FALSE
 ) {
   # Checking output directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
-  #
-  # # checking version
-  # if (check_version) {
-  #   if (is.null(param_gen_file)) stop("param_gen_file must be provided! ")
-  #
-  #   min_version <- get_version_num("V9.1")
-  #
-  #   # extracting or detecting the STICS version corresponding to the xml file
-  #   # based on param_gen.xml file content
-  #   file_version <- check_xml_file_version(
-  #     file,
-  #     stics_version,
-  #     param_gen_file = param_gen_file
-  #   )
-  #
-  #   if (!file_version) {
-  #     stop(
-  #       "The input version ",
-  #       stics_version,
-  #       " does not match file version ",
-  #       attr(file_version, "version"),
-  #       " \n",
-  #       file
-  #     )
-  #   }
-  #
-  #   # Compatibility checks between version and update to target_version
-  #   ver_num <- get_version_num(stics_version)
-  #   if (ver_num < min_version) {
-  #     stop(
-  #       "Files from the version ",
-  #       stics_version,
-  #       " cannot be converted to the version ",
-  #       target_version
-  #     )
-  #   }
-  #
-  #   # for checking only once when multiple files are treated !
-  #   check_version <- FALSE
-  # }
 
   if (is.null(obs_dir)) obs_dir <- dirname(file)
 
   # loading the old doc
   xml_doc <- xmldocument(file = file)
-
-  # set_version
-  # check_and_upgrade_xml_version(
-  #   xml_doc,
-  #   from_version = "V9.1",
-  #   target_version = "V10.0"
-  # )
 
   # # setting file STICS version
   set_xml_file_version(
@@ -2466,18 +1968,6 @@ upgrade_workspace_xml_9_10 <- function(
   overwrite = FALSE,
   verbose = FALSE
 ) {
-  # For testing if files are upgradable
-  # check_version <- FALSE
-  # verbose <- TRUE
-  # upgr_par_gen <- FALSE
-  # upgr_par_new <- FALSE
-
-  # args <- list(...)
-  # if ("check_version" %in% names(args)) check_version <- args$check_version
-  # if ("verbose" %in% names(args)) verbose <- args$verbose
-
-  #min_version <- get_version_num("V9.0")
-
   # Getting param_gen.xml path
   par_gen <- get_param_gen_file(
     file_name = "param_gen.xml",
@@ -2487,63 +1977,8 @@ upgrade_workspace_xml_9_10 <- function(
 
   stics_version <- get_xml_file_version(par_gen)
 
-  #if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
-
-  # Extracting or detecting the STICS version corresponding to the xml file
-  # based on param_gen.xml file content
-  # file_version <- check_xml_file_version(par_gen, stics_version)
-  # if (!file_version) {
-  #   stop(
-  #     "The input version ",
-  #     stics_version,
-  #     " does not match file version ",
-  #     attr(file_version, "version"),
-  #     " \n",
-  #     par_gen
-  #   )
-  # }
-
-  # Compatibility checks between version and upgrade to target_version
-  # ver_num <- get_version_num(stics_version)
-  # if (ver_num < min_version) {
-  #   stop(
-  #     "Files from the version ",
-  #     stics_version,
-  #     " cannot be converted to the version ",
-  #     target_version
-  #   )
-  # }
-
-  #----------------------------------------------------------------------------
-  # TODO: add a call for getting tags
-  # check_upgrade_from_to_versions to enable
-  # switch in each upgrade function according the from/to correspondence.
-  #----------------------------------------------------------------------------
-
-  # Testing the workspace dir to be converted
-  # if (
-  #   !dir.exists(workspace) ||
-  #     !file.exists(file.path(workspace, "usms.xml"))
-  # ) {
-  #   stop(
-  #     workspace,
-  #     ": the directory does not exist or is not a JavaSTICS workspace !"
-  #   )
-  # }
-
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) dir.create(out_dir)
-
-  # Testing the JavaSTICS dir
-  # if (
-  #   !dir.exists(javastics) ||
-  #     !file.exists(file.path(javastics, "JavaStics.exe"))
-  # ) {
-  #   stop(
-  #     javastics,
-  #     " : the directory does nor exist or is not a JavaSTICS one !"
-  #   )
-  # }
 
   if (verbose) {
     message(
@@ -2561,13 +1996,9 @@ upgrade_workspace_xml_9_10 <- function(
   }
 
   # Converting param_gen.xml
-  #if (upgr_par_gen) {
   upgrade_param_gen_xml_9_10(
     file = par_gen,
     out_dir = out_dir,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
     overwrite = overwrite
   )
 
@@ -2583,24 +2014,17 @@ upgrade_workspace_xml_9_10 <- function(
     javastics
   )
 
-  #if (attr(par_new, "where") == "workspace") upgr_par_new <- TRUE
-
   # Converting param_newform.xml
-  #if (upgr_par_new) {
   upgrade_param_newform_xml_9_10(
     file = par_new,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
     overwrite = overwrite
   )
 
   if (verbose) {
     message("param_new_form.xml\n")
   }
-  #}
 
   # Converting usms.xml file
   usms <- file.path(workspace, "usms.xml")
@@ -2610,9 +2034,6 @@ upgrade_workspace_xml_9_10 <- function(
     out_dir = out_dir,
     param_gen_file = par_gen,
     obs_dir = workspace,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
     overwrite = overwrite
   )
 
@@ -2627,9 +2048,6 @@ upgrade_workspace_xml_9_10 <- function(
     file = sols,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
     overwrite = overwrite
   )
 
@@ -2644,11 +2062,7 @@ upgrade_workspace_xml_9_10 <- function(
     file = sta_files,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
-    overwrite = overwrite #,
-    #check_dir = FALSE
+    overwrite = overwrite
   )
 
   if (verbose) {
@@ -2662,11 +2076,7 @@ upgrade_workspace_xml_9_10 <- function(
     file = ini_files,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
-    overwrite = overwrite #,
-    #check_dir = FALSE
+    overwrite = overwrite
   )
 
   if (verbose) {
@@ -2681,11 +2091,7 @@ upgrade_workspace_xml_9_10 <- function(
     out_dir = out_dir,
     param_newform_file = par_new,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
-    overwrite = overwrite #,
-    #check_dir = FALSE
+    overwrite = overwrite
   )
 
   if (verbose) {
@@ -2709,11 +2115,7 @@ upgrade_workspace_xml_9_10 <- function(
       out_dir = plant_out_dir,
       param_gen_file = par_gen,
       param_newform_file = par_new,
-      #stics_version = stics_version,
-      #target_version = target_version,
-      #check_version = check_version,
-      overwrite = overwrite #,
-      #check_dir = FALSE
+      overwrite = overwrite
     )
 
     if (verbose) {
@@ -2728,7 +2130,6 @@ upgrade_workspace_xml_9_10 <- function(
 
   workspace_files_copy(
     workspace = workspace,
-    # file_type = c("mod", "obs", "lai", "meteo"),
     javastics = javastics,
     out_dir = out_dir,
     overwrite = overwrite,

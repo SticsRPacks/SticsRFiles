@@ -12,9 +12,7 @@ upgrade_sols_xml_9_10(file, out_dir, param_gen_file, overwrite = FALSE)
 \item{out_dir}{Output directory path of the generated file}
 
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
-to the file version
-with the file version and finally checking if the upgrade is possible
-allowed to the target_version. If TRUE, param_gen_file is mandatory.}
+to the file version}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}

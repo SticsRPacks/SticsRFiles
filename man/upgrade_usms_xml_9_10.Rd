@@ -20,9 +20,7 @@ upgrade_usms_xml_9_10(
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
 
-\item{obs_dir}{Directory path of the observation data files
-with the file version and finally checking if the upgrade is possible
-allowed to the target_version. If TRUE, param_gen_file is mandatory.}
+\item{obs_dir}{Directory path of the observation data files}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
