@@ -38,11 +38,11 @@ upgrade_tec_xml_9_10 <- function(
   out_dir,
   param_newform_file,
   param_gen_file,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  # stics_version = "V9.2",
+  # target_version = "V10.0",
+  # check_version = TRUE,
+  overwrite = FALSE # ,
+  # ...
 ) {
   # for verifying output dir existence
   # check_dir <- TRUE
@@ -106,7 +106,7 @@ upgrade_tec_xml_9_10 <- function(
         # target_version = target_version,
         # check_version = check_version,
         param_gen_file = param_gen_file,
-        overwrite = overwrite #,
+        overwrite = overwrite # ,
         # check_dir = check_dir
       )
     })
@@ -578,8 +578,8 @@ upgrade_plt_xml_9_10 <- function(
   # stics_version = "V9.2",
   # target_version = "V10.0",
   # check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE # ,
+  # ...
 ) {
   # # For verifying output dir existence
   # check_dir <- TRUE
@@ -644,8 +644,8 @@ upgrade_plt_xml_9_10 <- function(
         # stics_version = stics_version,
         # target_version = target_version,
         # check_version = check_version,
-        overwrite = overwrite #,
-        #check_dir = check_dir
+        overwrite = overwrite # ,
+        # check_dir = check_dir
       )
     })
     return(invisible())
@@ -1340,8 +1340,8 @@ upgrade_sta_xml_9_10 <- function(
   # stics_version = "V9.2",
   # target_version = "V10.0",
   # check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE # ,
+  # ...
 ) {
   # for verifying output dir existence
   # check_dir <- TRUE
@@ -1401,8 +1401,8 @@ upgrade_sta_xml_9_10 <- function(
         # stics_version = stics_version,
         # target_version = target_version,
         # check_version = check_version,
-        overwrite = overwrite #,
-        #check_dir = check_dir
+        overwrite = overwrite # ,
+        # check_dir = check_dir
       )
     })
     return(invisible())
@@ -1523,8 +1523,8 @@ upgrade_ini_xml_9_10 <- function(
   # stics_version = "V9.2",
   # target_version = "V10.0",
   # check_version = TRUE,
-  overwrite = FALSE #,
-  #...
+  overwrite = FALSE # ,
+  # ...
 ) {
   # for verifying output dir existence
   # check_dir <- TRUE
@@ -1583,12 +1583,12 @@ upgrade_ini_xml_9_10 <- function(
       upgrade_ini_xml_9_10(
         file = x,
         out_dir = out_dir,
-        #stics_version = stics_version,
+        # stics_version = stics_version,
         # target_version = target_version,
-        #check_version = check_version,
+        # check_version = check_version,
         param_gen_file = param_gen_file,
-        overwrite = overwrite #,
-        #check_dir = check_dir
+        overwrite = overwrite # ,
+        # check_dir = check_dir
       )
     })
     return(invisible())
@@ -1741,9 +1741,9 @@ upgrade_ini_xml_9_10 <- function(
 upgrade_param_gen_xml_9_10 <- function(
   file,
   out_dir,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
+  # stics_version = "V9.2",
+  # target_version = "V10.0",
+  # check_version = TRUE,
   overwrite = FALSE
 ) {
   # Checking output directory
@@ -1889,9 +1889,9 @@ upgrade_param_newform_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
+  # stics_version = "V9.2",
+  # target_version = "V10.0",
+  # check_version = TRUE,
   overwrite = FALSE
 ) {
   # TODO: eliminate when option will be reactivated later.
@@ -2163,9 +2163,9 @@ upgrade_sols_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
-  #check_version = TRUE,
+  # stics_version = "V9.2",
+  # target_version = "V10.0",
+  # check_version = TRUE,
   overwrite = FALSE
 ) {
   # hecking output directory
@@ -2460,8 +2460,8 @@ upgrade_workspace_xml_9_10 <- function(
   workspace,
   javastics,
   out_dir,
-  #stics_version = "V9.2",
-  #target_version = "V10.0",
+  # stics_version = "V9.2",
+  # target_version = "V10.0",
   plant = FALSE,
   overwrite = FALSE,
   verbose = FALSE
@@ -2476,7 +2476,7 @@ upgrade_workspace_xml_9_10 <- function(
   # if ("check_version" %in% names(args)) check_version <- args$check_version
   # if ("verbose" %in% names(args)) verbose <- args$verbose
 
-  #min_version <- get_version_num("V9.0")
+  # min_version <- get_version_num("V9.0")
 
   # Getting param_gen.xml path
   par_gen <- get_param_gen_file(
@@ -2487,7 +2487,7 @@ upgrade_workspace_xml_9_10 <- function(
 
   stics_version <- get_xml_file_version(par_gen)
 
-  #if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
+  # if (attr(par_gen, "where") == "workspace") upgr_par_gen <- TRUE
 
   # Extracting or detecting the STICS version corresponding to the xml file
   # based on param_gen.xml file content
@@ -2561,20 +2561,20 @@ upgrade_workspace_xml_9_10 <- function(
   }
 
   # Converting param_gen.xml
-  #if (upgr_par_gen) {
+  # if (upgr_par_gen) {
   upgrade_param_gen_xml_9_10(
     file = par_gen,
     out_dir = out_dir,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
     overwrite = overwrite
   )
 
   if (verbose) {
     message("param_gen.xml\n")
   }
-  #}
+  # }
 
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
@@ -2583,24 +2583,24 @@ upgrade_workspace_xml_9_10 <- function(
     javastics
   )
 
-  #if (attr(par_new, "where") == "workspace") upgr_par_new <- TRUE
+  # if (attr(par_new, "where") == "workspace") upgr_par_new <- TRUE
 
   # Converting param_newform.xml
-  #if (upgr_par_new) {
+  # if (upgr_par_new) {
   upgrade_param_newform_xml_9_10(
     file = par_new,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
     overwrite = overwrite
   )
 
   if (verbose) {
     message("param_new_form.xml\n")
   }
-  #}
+  # }
 
   # Converting usms.xml file
   usms <- file.path(workspace, "usms.xml")
@@ -2610,9 +2610,9 @@ upgrade_workspace_xml_9_10 <- function(
     out_dir = out_dir,
     param_gen_file = par_gen,
     obs_dir = workspace,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
     overwrite = overwrite
   )
 
@@ -2627,9 +2627,9 @@ upgrade_workspace_xml_9_10 <- function(
     file = sols,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
     overwrite = overwrite
   )
 
@@ -2644,11 +2644,11 @@ upgrade_workspace_xml_9_10 <- function(
     file = sta_files,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
-    overwrite = overwrite #,
-    #check_dir = FALSE
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
+    overwrite = overwrite # ,
+    # check_dir = FALSE
   )
 
   if (verbose) {
@@ -2662,11 +2662,11 @@ upgrade_workspace_xml_9_10 <- function(
     file = ini_files,
     out_dir = out_dir,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
-    overwrite = overwrite #,
-    #check_dir = FALSE
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
+    overwrite = overwrite # ,
+    # check_dir = FALSE
   )
 
   if (verbose) {
@@ -2681,11 +2681,11 @@ upgrade_workspace_xml_9_10 <- function(
     out_dir = out_dir,
     param_newform_file = par_new,
     param_gen_file = par_gen,
-    #stics_version = stics_version,
-    #target_version = target_version,
-    #check_version = check_version,
-    overwrite = overwrite #,
-    #check_dir = FALSE
+    # stics_version = stics_version,
+    # target_version = target_version,
+    # check_version = check_version,
+    overwrite = overwrite # ,
+    # check_dir = FALSE
   )
 
   if (verbose) {
@@ -2709,11 +2709,11 @@ upgrade_workspace_xml_9_10 <- function(
       out_dir = plant_out_dir,
       param_gen_file = par_gen,
       param_newform_file = par_new,
-      #stics_version = stics_version,
-      #target_version = target_version,
-      #check_version = check_version,
-      overwrite = overwrite #,
-      #check_dir = FALSE
+      # stics_version = stics_version,
+      # target_version = target_version,
+      # check_version = check_version,
+      overwrite = overwrite # ,
+      # check_dir = FALSE
     )
 
     if (verbose) {
