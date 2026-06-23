@@ -8,11 +8,9 @@ upgrade_workspace_xml_9_10(
   workspace,
   javastics,
   out_dir,
-  stics_version = "V9.2",
-  target_version = "V10.0",
   plant = FALSE,
   overwrite = FALSE,
-  ...
+  verbose = FALSE
 )
 }
 \arguments{
@@ -23,18 +21,14 @@ to the version of the files to be converted}
 
 \item{out_dir}{Output directory of the generated files}
 
-\item{stics_version}{Name of the STICS version (VX.Y format)}
-
-\item{target_version}{Name of the STICS version to upgrade files
-to  (VX.Y format)}
-
 \item{plant}{logical (optional), TRUE for upgrading plant files if a "plant"
 sub-directory of workspace exists, FALSE otherwise}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting files if they exist, FALSE otherwise}
 
-\item{...}{Additional input arguments}
+\item{verbose}{logical, TRUE for displaying a copy message
+FALSE otherwise (default)}
 }
 \value{
 None

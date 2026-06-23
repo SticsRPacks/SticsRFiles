@@ -20,6 +20,8 @@ upgrade_tec_xml_10_11 <- function(
   nrow = 1,
   overwrite = FALSE
 ) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -163,6 +165,8 @@ upgrade_plt_xml_10_11 <- function(
   overwrite = FALSE,
   warning = TRUE
 ) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -254,19 +258,23 @@ upgrade_plt_xml_10_11 <- function(
 #'
 #' @param crop Stics crop code among code list
 #' (to get crops codes get_plt_IC_param() )
-#' @param warning Logical for rising warnings, FALSE otherwise
+#' @param message Logical for rising warnings, FALSE otherwise
 #'
 #' @return A named list of V11 new plant parameters values
 #'
 #' @keywords internal
 #'
+#' @noRd
+#'
 #' @examples
+#' \dontrun{
 #' # get plant codes
 #' get_plt_IC_param()
 #' # get default parameters values
 #' get_plt_IC_param(NULL)
 #' # get parameters values for poi
 #' get_plt_IC_param("poi")
+#' }
 #'
 get_plt_IC_param <- function(crop, warning = TRUE) {
   crops_param <- plt_IC_param_list()
@@ -389,6 +397,8 @@ plt_IC_param_list <- function() {
 #'
 #'
 upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -467,6 +477,8 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -516,6 +528,8 @@ upgrade_param_gen_xml_10_11 <- function(
   par_to_net = NULL,
   overwrite = FALSE
 ) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -578,6 +592,8 @@ upgrade_param_newform_xml_10_11 <- function(
   overwrite = FALSE,
   use_patho = FALSE
 ) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -663,6 +679,8 @@ upgrade_param_newform_xml_10_11 <- function(
 # @examples
 #'
 upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -694,6 +712,8 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 # @examples
 #'
 upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+
   xml_doc <- xmldocument(file)
 
   # set_version
@@ -717,7 +737,7 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @param workspace JavaStics xml workspace path
 #' @param javastics JavaStics (STICS V10) folder path (Optional)
 #' @param out_dir   Output directory path
-#' @param from_version Starting STICS version (character or numeric)
+# @param from_version Starting STICS version (character or numeric)
 # @param target_version Target STICS version (character or numeric)
 # @param plant
 #' @param overwrite Logical TRUE for overwriting files,
@@ -731,13 +751,20 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#' \dontrun{
+#' upgrade_workspace_xml_10_11(
+#'   workspace = "/path/to/JavaSTICS/workspace",
+#'   javastics = "/path/to/JavaSTICS/folder",
+#'   out_dir = "/path/to/an/output/directory"
+#' )
+#' }
 #'
 upgrade_workspace_xml_10_11 <- function(
   workspace,
   javastics = NULL,
   out_dir,
-  from_version = "V10.0",
+  #from_version = "V10.0",
   # target_version = "V11.0",
   overwrite = FALSE,
   verbose = FALSE,
@@ -755,11 +782,32 @@ upgrade_workspace_xml_10_11 <- function(
     javastics
   )
 
+  stics_version <- get_xml_file_version(par_gen)
+
+  if (verbose) {
+    message(
+      paste(
+        "Upgrading files from version",
+        stics_version,
+        "to",
+        "V11",
+        "\n"
+      ),
+      paste("From: ", workspace, "\n"),
+      paste("To: ", out_dir, "\n"),
+      "-----------------------------------\n"
+    )
+  }
+
   upgrade_param_gen_xml_10_11(
     file = par_gen,
     out_dir = out_dir,
     overwrite = overwrite
   )
+
+  if (verbose) {
+    message("param_gen.xml\n")
+  }
 
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
@@ -775,21 +823,41 @@ upgrade_workspace_xml_10_11 <- function(
     use_patho = use_patho
   )
 
+  if (verbose) {
+    message("param_new_form.xml\n")
+  }
+
   # Converting usms.xml file
   usms <- file.path(workspace, "usms.xml")
   upgrade_usms_xml_10_11(usms, out_dir, overwrite = overwrite)
+
+  if (verbose) {
+    message("usms.xml\n")
+  }
 
   # Converting sols.xml file
   sols <- file.path(workspace, "sols.xml")
   upgrade_sols_xml_10_11(sols, out_dir, overwrite = overwrite)
 
+  if (verbose) {
+    message("sols.xml\n")
+  }
+
   # Converting station files (*_sta.xml)
   sta_files <- get_in_files(in_dir_or_files = workspace, kind = "sta")
   upgrade_sta_xml_10_11(sta_files, out_dir, overwrite = overwrite)
 
+  if (verbose) {
+    message("*_sta.xml\n")
+  }
+
   # Converting initialisation files (*_ini.xml)
   ini_files <- get_in_files(in_dir_or_files = workspace, kind = "ini")
   upgrade_ini_xml_10_11(ini_files, out_dir, overwrite = overwrite)
+
+  if (verbose) {
+    message("*_ini.xml\n")
+  }
 
   # Converting crop management files (*_tec.xml)
   tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
@@ -800,6 +868,10 @@ upgrade_workspace_xml_10_11 <- function(
     nrow = 1,
     overwrite = overwrite
   )
+
+  if (verbose) {
+    message("*_tec.xml\n")
+  }
 
   # Upgrading plant files
   # if a plant sub directory exists in workspace
@@ -842,6 +914,10 @@ upgrade_workspace_xml_10_11 <- function(
       out_dir = plant_out_dir,
       overwrite = overwrite
     )
+
+    if (verbose) {
+      message("*_plt.xml\n")
+    }
   }
 
   # Other files types copy from the source workspace,
@@ -854,6 +930,13 @@ upgrade_workspace_xml_10_11 <- function(
     overwrite = overwrite,
     verbose = verbose
   )
+
+  if (verbose) {
+    message(paste0(
+      "-----------------------------------\n",
+      "Files upgrade and copy is complete.\n"
+    ))
+  }
 }
 
 

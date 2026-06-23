@@ -9,11 +9,7 @@ upgrade_plt_xml_9_10(
   out_dir,
   param_newform_file,
   param_gen_file,
-  stics_version = "V9.2",
-  target_version = "V10.0",
-  check_version = TRUE,
-  overwrite = FALSE,
-  ...
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -27,19 +23,8 @@ to the file version}
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
 
-\item{stics_version}{Name of the STICS version (VX.Y format)}
-
-\item{target_version}{Name of the STICS version to upgrade files to
-(VX.Y format)}
-
-\item{check_version}{Perform version consistency between \code{stics_version}
-and the file version, for finally checking if an upgrade is possible
-allowed to the target_version. If TRUE, param_gen_file is mandatory.}
-
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
-
-\item{...}{Additional input arguments}
 }
 \value{
 None

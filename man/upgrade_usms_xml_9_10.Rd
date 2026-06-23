@@ -9,9 +9,6 @@ upgrade_usms_xml_9_10(
   out_dir,
   param_gen_file,
   obs_dir = NULL,
-  stics_version = "V9.2",
-  target_version = "V10.0",
-  check_version = TRUE,
   overwrite = FALSE
 )
 }
@@ -23,14 +20,7 @@ upgrade_usms_xml_9_10(
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
 
-\item{obs_dir}{Directory path of the observation data files}
-
-\item{stics_version}{Name of the STICS version (VX.Y format)}
-
-\item{target_version}{Name of the STICS version to upgrade files
-to (VX.Y format)}
-
-\item{check_version}{Perform version consistency with in stics_version input
+\item{obs_dir}{Directory path of the observation data files
 with the file version and finally checking if the upgrade is possible
 allowed to the target_version. If TRUE, param_gen_file is mandatory.}
 

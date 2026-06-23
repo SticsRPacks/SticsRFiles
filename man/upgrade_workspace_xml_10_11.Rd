@@ -8,7 +8,6 @@ upgrade_workspace_xml_10_11(
   workspace,
   javastics = NULL,
   out_dir,
-  from_version = "V10.0",
   overwrite = FALSE,
   verbose = FALSE,
   use_patho = FALSE
@@ -20,8 +19,6 @@ upgrade_workspace_xml_10_11(
 \item{javastics}{JavaStics (STICS V10) folder path (Optional)}
 
 \item{out_dir}{Output directory path}
-
-\item{from_version}{Starting STICS version (character or numeric)}
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
@@ -37,4 +34,14 @@ None
 }
 \description{
 Upgrade a Javastics STICS V10 xml workspace directory
+}
+\examples{
+\dontrun{
+upgrade_workspace_xml_10_11(
+  workspace = "/path/to/JavaSTICS/workspace",
+  javastics = "/path/to/JavaSTICS/folder",
+  out_dir = "/path/to/an/output/directory"
+)
+}
+
 }

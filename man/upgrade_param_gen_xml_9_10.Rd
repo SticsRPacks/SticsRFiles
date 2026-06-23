@@ -4,28 +4,12 @@
 \alias{upgrade_param_gen_xml_9_10}
 \title{Upgrade a param_gen.xml file from STICS version 9 to 10}
 \usage{
-upgrade_param_gen_xml_9_10(
-  file,
-  out_dir,
-  stics_version = "V9.2",
-  target_version = "V10.0",
-  check_version = TRUE,
-  overwrite = FALSE
-)
+upgrade_param_gen_xml_9_10(file, out_dir, overwrite = FALSE)
 }
 \arguments{
 \item{file}{Path of a param_gen.xml file}
 
 \item{out_dir}{Output directory path of the generated file}
-
-\item{stics_version}{Name of the STICS version (VX.Y format)}
-
-\item{target_version}{Name of the STICS version to upgrade files
-to (VX.Y format)}
-
-\item{check_version}{Perform version consistency with in stics_version input
-with the file version and finally checking if the upgrade is possible
-allowed to the target_version}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
