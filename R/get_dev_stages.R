@@ -22,7 +22,6 @@
 #'
 #' get_dev_stages(simulation_data_frame, "iplts")
 #'
-#'
 get_dev_stages <- function(
   sim,
   dev_vars = c(
