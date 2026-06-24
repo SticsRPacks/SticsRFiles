@@ -414,7 +414,6 @@ plt_IC_param_list <- function() {
 #'   out_dir = tempdir()
 #' )
 #'
-#'
 upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
@@ -554,7 +553,6 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'   file = file.path(dir_path, "param_gen.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
 #'
 upgrade_param_gen_xml_10_11 <- function(
   file,
