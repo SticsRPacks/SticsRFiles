@@ -92,7 +92,7 @@ download_csv_files <- function(
     )
   }
 
-  err_idx <- unlist(lapply(file_path, function(x) class(x) == "try-error"))
+  err_idx <- unlist(lapply(file_path, function(x) inherits(x, "try-error")))
 
   if (any(err_idx) && verbose) {
     warning("A least one file does not exist on the server !")

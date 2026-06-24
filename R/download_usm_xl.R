@@ -70,12 +70,12 @@ download_usm_xl <- function(
   dest_list <- file.path(out_dir, files_list)
   exist_files <- file.exists(dest_list)
   if (!overwrite && any(exist_files)) {
-    warning(paste(
+    warning(
       files_list[exist_files],
       "already exists in ",
       out_dir,
       "\nConsider to set overwrite = TRUE to overwrite (it | them )"
-    ))
+    )
     # filtering existing files, not copied if overwrite == FALSE
     files_list <- files_list[!exist_files]
   }

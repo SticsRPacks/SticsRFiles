@@ -203,7 +203,7 @@ get_param_txt <- function(
               variety[[i]],
               varieties[[i]]
             )
-            if (any(is.na(variety))) {
+            if (anyNA(variety)) {
               cli::cli_alert_danger(alert_msg)
               return()
             }
@@ -814,7 +814,7 @@ val <- function(pval = list(index = 1, val = NA), values) {
   val_txt <- unlist(strsplit(trimws(values[pval$index - 1]), split = " "))
 
   out_val <- suppressWarnings(as.numeric(val_txt))
-  if (any(is.na(out_val))) {
+  if (anyNA(out_val)) {
     out_val <- val_txt
   }
 

@@ -51,7 +51,7 @@ upgrade_param_newform_xml_10_11(
 
 upgrade_sols_xml_10_11(
   file = file.path(path, "sols.xml"),
-  out_dir = out_path,
+  out_dir = out_path
 )
 
 upgrade_usms_xml_10_11(

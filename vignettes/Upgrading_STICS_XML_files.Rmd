@@ -29,7 +29,7 @@ stics_version <- get_stics_versions_compat()$latest_version
 ```
 
 
-The XML files structure has changed either between STICS version **9.2** and versions **10.X.Y** or between STICS versions **10.X.Y** and version 11.0.0 and a transformation is mandatory for ugrading from a major version to a upper one.    
+The XML files structure has changed either between STICS version **9.2** and versions **10.X.Y** or between STICS versions **10.X.Y** and version 11.0.0 and a transformation is mandatory for upgrading from a major version to a upper one.    
 
 So, to avoid difficulties and errors with manual XML files modifications, functionalities have been developed to do so automatically.
 

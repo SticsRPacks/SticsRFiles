@@ -82,7 +82,7 @@ gen_usms_sols_doc <- function(
     elts_nb <- nodes_nb
   }
 
-  if ("data.frame" %in% class(nodes_param)) {
+  if (inherits(nodes_param, "data.frame")) {
     elts_nb <- dim(nodes_param)[1]
   }
 
@@ -124,7 +124,8 @@ gen_usms_sols_doc <- function(
     return(xml_doc_out)
   }
 
-  switch(doc_type,
+  switch(
+    doc_type,
     usms = set_usms_param_xml(
       xml_doc = xml_doc_out,
       usms_param = nodes_param,

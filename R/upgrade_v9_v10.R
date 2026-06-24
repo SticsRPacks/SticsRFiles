@@ -44,7 +44,7 @@ upgrade_tec_xml_9_10 <- function(
         file = x,
         param_newform_file = param_newform_file,
         out_dir = out_dir,
-        param_gen_file = param_gen_file,
+        param_gen_file = param_gen_file
       )
     })
     return(invisible())
