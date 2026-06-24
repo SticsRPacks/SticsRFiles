@@ -187,7 +187,7 @@ get_plant_id <- function(usms_plant) {
 #' Getting xml plant files by usm from an usms.xml file
 #'
 #' @param usms_file usms.xml file path
-#' @param usms usms names to get, if NULL all teh usms are taken into account
+#' @param usms usms names to get, if NULL all the usms are taken into account
 #'
 #' @returns A named list with usm names containing plant files names
 #' @keywords internal
@@ -213,7 +213,7 @@ get_plant_files <- function(usms_file, usms = NULL) {
     ids <- usms %in% all_usms
     if (!all(ids)) warning("At least one usm name does not exist")
     usms <- usms[ids]
-}
+  }
 
   plant_files <- lapply(usm_nodes, function(usm_node) {
     usm_name_usms <- XML::xmlGetAttr(usm_node, "nom")

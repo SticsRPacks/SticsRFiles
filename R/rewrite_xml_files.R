@@ -49,7 +49,7 @@ rewrite_usms_file <- function(usms_file, out_dir, usm = NULL) {
 
   # removing useless usm nodes
   nodes_to_remove <- unlist(lapply(usms_to_remove, function(x) {
-    xpath = paste0('//usm[@nom="', x, '"]')
+    xpath <- paste0('//usm[@nom="', x, '"]')
     XML::getNodeSet(usms_doc@content, xpath)
   }))
 
@@ -124,7 +124,7 @@ rewrite_sols_file <- function(usms_file, sols_file, out_dir, usm = NULL) {
 
   # removing useless sol nodes
   nodes_to_remove <- unlist(lapply(sols_to_remove, function(x) {
-    xpath = paste0('//sol[@nom="', x, '"]')
+    xpath <- paste0('//sol[@nom="', x, '"]')
     XML::getNodeSet(sols_doc@content, xpath)
   }))
 

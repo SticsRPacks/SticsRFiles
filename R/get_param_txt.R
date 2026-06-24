@@ -83,7 +83,7 @@ get_param_txt <- function(
   stics_version = "latest",
   ...
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   ini <- get_ini_txt(
     workspace = workspace,
@@ -203,7 +203,7 @@ get_param_txt <- function(
               variety[[i]],
               varieties[[i]]
             )
-            if (any(is.na(variety))) {
+            if (anyNA(variety)) {
               cli::cli_alert_danger(alert_msg)
               return()
             }
@@ -377,7 +377,7 @@ get_ini_txt <- function(
   stics_version,
   workspace = NULL
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
   filepath <- file
   if (!is.null(workspace)) {
     filepath <- file.path(workspace, file)
@@ -567,7 +567,7 @@ get_tec_txt <- function(
   # breaking it. I think for example to a "version argument" because
   # the tec file is not generic.
 
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   par_lines <- readLines(filepath)
   itk <- vector(mode = "list", length = 0)
@@ -814,7 +814,7 @@ val <- function(pval = list(index = 1, val = NA), values) {
   val_txt <- unlist(strsplit(trimws(values[pval$index - 1]), split = " "))
 
   out_val <- suppressWarnings(as.numeric(val_txt))
-  if (any(is.na(out_val))) {
+  if (anyNA(out_val)) {
     out_val <- val_txt
   }
 
@@ -896,7 +896,7 @@ get_soil_txt <- function(
   stics_version,
   workspace = NULL
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   filepath <- file
   if (!is.null(workspace)) {

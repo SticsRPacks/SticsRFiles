@@ -1,21 +1,21 @@
-# --------------------------------------------
-# CITATION file created with {cffr} R package
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# --------------------------------------------
+# ------------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 license: LGPL-3.0-or-later
-title: 'SticsRFiles: Read and Modify ''STICS'' Input/Output Files'
+title: 'SticsRFiles: Read and Modify STICS Input/Output Files'
 version: 1.6.0
 doi: 10.32614/CRAN.package.SticsRFiles
-abstract: Manipulating input and output files of the 'STICS' crop model. Files are
-  either 'JavaSTICS' XML files or text files used by the model 'fortran' executable.
-  Most basic functionalities are reading or writing parameter names and values in
-  both XML or text input files, and getting data from output files. Advanced functionalities
-  include XML files generation from XML templates and/or spreadsheets, or text files
-  generation from XML files by using 'xslt' transformation.
+abstract: Manipulating input and output files of the STICS crop model. Files are either
+  JavaSTICS XML files or text files used by the model fortran executable. Most basic
+  functionalities are reading or writing parameter names and values in both XML or
+  text input files, and getting data from output files. Advanced functionalities include
+  XML files generation from XML templates and/or spreadsheets, or text files generation
+  from XML files by using xslt transformation.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -40,7 +40,6 @@ authors:
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2025-06-03'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -53,10 +52,13 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
+  doi: 10.32614/R.manuals
   version: '>= 4.0.0'
 - type: software
   title: cli
@@ -205,20 +207,26 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: parallel
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
@@ -323,20 +331,26 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
+    website: https://ror.org/02zz1nj61
   institution:
     name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
     address: Vienna, Austria
   year: '2026'
+  doi: 10.32614/R.manuals
 - type: software
   title: XML
   abstract: 'XML: Tools for Parsing and Generating XML Within R and S-Plus'

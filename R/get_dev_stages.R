@@ -18,16 +18,33 @@
 #'
 #' @export
 #'
-get_dev_stages <- function(sim,
-                           dev_vars =
-                             c(
-                               "iplts", "imbs", "ilets", "igers",
-                               "idebdorms", "ifindorms",
-                               "ilevs", "iamfs", "ilaxs", # "imontaisons",
-                               "ilats", "iflos", "idrps", "inous", "idebdess", # "ilans",
-                               "imats", "irecs"
-                             ),
-                           usm = NULL) {
+#' @examples
+#'
+#' get_dev_stages(simulation_data_frame, "iplts")
+#'
+#'
+get_dev_stages <- function(
+  sim,
+  dev_vars = c(
+    "iplts",
+    "imbs",
+    "ilets",
+    "igers",
+    "idebdorms",
+    "ifindorms",
+    "ilevs",
+    "iamfs",
+    "ilaxs", # "imontaisons",
+    "ilats",
+    "iflos",
+    "idrps",
+    "inous",
+    "idebdess", # "ilans",
+    "imats",
+    "irecs"
+  ),
+  usm = NULL
+) {
   stopifnot(
     is.list(sim),
     !is.null(names(sim))
@@ -50,7 +67,7 @@ get_dev_stages <- function(sim,
       day = NA,
       date = ""
     )
-    for (i in 1:nrow(out_usm)) {
+    for (i in seq_len(nrow(out_usm))) {
       dev_var <- dev_vars[i]
       if (!dev_var %in% colnames(dat)) {
         msg <- paste0("'", dev_var, "' not found")
@@ -58,7 +75,8 @@ get_dev_stages <- function(sim,
         next
       }
       tmp <- table(dat[[dev_var]])
-      if (length(tmp) == 1) { # ex. iplts
+      if (length(tmp) == 1) {
+        # ex. iplts
         out_usm$day[i] <- as.integer(names(tmp)[1])
       } else if (length(tmp) == 2) {
         stopifnot(names(tmp)[1] == "0")
@@ -66,11 +84,15 @@ get_dev_stages <- function(sim,
       } else {
         stop(paste0(dev_var, " has more than three values"))
       }
-      out_usm$date[i] <- as.character(compute_date_from_day(out_usm$day[i], firstYear))
+      out_usm$date[i] <- as.character(compute_date_from_day(
+        out_usm$day[i],
+        firstYear
+      ))
     }
     out_usm$date <- as.Date(out_usm$date)
     out_usm$Date <- as.POSIXct(out_usm$date) # required to plot with CroPlotR
-    out_usm$var <- factor(out_usm$var,
+    out_usm$var <- factor(
+      out_usm$var,
       levels = out_usm$var[order(out_usm$day)],
       ordered = TRUE
     )

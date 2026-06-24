@@ -112,7 +112,8 @@ replace_na <- function(in_df, replacement) {
   }
 
   # Getting columns ids according to rep_type
-  switch(rep_type,
+  switch(
+    rep_type,
     numeric = {
       idx_type_col <- unlist(lapply(in_df, is.numeric), use.names = FALSE)
     },
@@ -128,7 +129,7 @@ replace_na <- function(in_df, replacement) {
 
   idx_col_has_na <- unlist(
     lapply(in_df, function(x) {
-      any(is.na(x))
+      anyNA(x)
     }),
     use.names = FALSE
   )
