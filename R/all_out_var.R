@@ -81,6 +81,10 @@ all_out_var <- function(stics_version = "latest") {
 #'
 #' @export
 #'
+#' @examples
+#'
+#' get_var_info()
+#'
 get_var_info <- function(var = NULL, keyword = NULL, stics_version = "latest") {
   all_vars <- all_out_var(stics_version)
   if (!is.null(var)) {

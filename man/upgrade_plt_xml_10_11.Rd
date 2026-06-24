@@ -45,3 +45,13 @@ None
 \description{
 Upgrade _plt.xml file(s) from version 10 to 11
 }
+\examples{
+
+dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+
+upgrade_plt_xml_10_11(
+  file = file.path(dir_path, "file_plt.xml"),
+  out_dir = tempdir()
+)
+
+}

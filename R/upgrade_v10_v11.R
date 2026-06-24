@@ -11,7 +11,13 @@
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_tec_xml_10_11(
+#'   file = file.path(dir_path, "file_tec.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 upgrade_tec_xml_10_11 <- function(
   file,
@@ -151,7 +157,14 @@ upgrade_tec_xml_10_11 <- function(
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_plt_xml_10_11(
+#'   file = file.path(dir_path, "file_plt.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 upgrade_plt_xml_10_11 <- function(
   file,
@@ -325,7 +338,6 @@ get_plt_IC_param <- function(crop, warning = TRUE) {
 #' @keywords internal
 #' @noRd
 #'
-# @examples
 plt_IC_param_list <- function() {
   # pea, wheat, fababean, barley
   param <- list()
@@ -393,7 +405,14 @@ plt_IC_param_list <- function() {
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_sta_xml_10_11(
+#'   file = file.path(dir_path, "file_sta.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 #'
 upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
@@ -474,7 +493,14 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_ini_xml_10_11(
+#'   file = file.path(dir_path, "file_ini.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) dir.create(out_dir)
@@ -520,6 +546,15 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @return None
 #'
 #' @export
+#'
+#' @examples
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_param_gen_xml_10_11(
+#'   file = file.path(dir_path, "param_gen.xml"),
+#'   out_dir = tempdir()
+#' )
+#'
 #'
 upgrade_param_gen_xml_10_11 <- function(
   file,
@@ -584,7 +619,14 @@ upgrade_param_gen_xml_10_11 <- function(
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_param_newform_xml_10_11(
+#'   file = file.path(dir_path, "param_newform.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 upgrade_param_newform_xml_10_11 <- function(
   file,
@@ -676,7 +718,14 @@ upgrade_param_newform_xml_10_11 <- function(
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_sols_xml_10_11(
+#'   file = file.path(dir_path, "sols.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) dir.create(out_dir)
@@ -709,7 +758,14 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 #' @export
 #'
-# @examples
+#' @examples
+#'
+#' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
+#'
+#' upgrade_usms_xml_10_11(
+#'   file = file.path(dir_path, "usms.xml"),
+#'   out_dir = tempdir()
+#' )
 #'
 upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) dir.create(out_dir)

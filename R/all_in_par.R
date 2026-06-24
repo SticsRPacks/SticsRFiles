@@ -91,6 +91,9 @@ all_in_par <- function(stics_version = "latest") {
 #'
 #' @export
 #'
+#' @examples
+#' get_param_info()
+#'
 get_param_info <- function(
   param = NULL,
   keyword = NULL,
