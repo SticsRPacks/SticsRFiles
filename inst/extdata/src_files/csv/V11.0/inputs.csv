@@ -331,8 +331,8 @@ hautbase;basal height of crop;m;PARPLT;1;real;0.1;2;1;1
 hautcoupe;cut height for forage crops (calendar fixed);m;PARTEC;20;real;0.01;0.5;1;0
 hautcoupedefaut;cut height for forage crops (calendar calculated);m;PARTEC;1;real;0.01;0.5;1;0
 haut_dev_x0;Inflexion point parameter for the height~phasic development relationship;SD;PARPLT;1;real;0;5000.0;1;0
-haut_dev_k;Logistic growth rate parameter for the height~phasic development relationship;SD;PARPLT;1;real;0;0,05;1;0
-hauteur_threshold;height difference between crops in intercrop below which we consider the canopies mixed (homogeneous). Used in radiative transfer option as a fallback to Beer-Lambert.;m;PARAM;1;real;0,05;1;1;0
+haut_dev_k;Logistic growth rate parameter for the height~phasic development relationship;SD;PARPLT;1;real;0;0.05;1;0
+hauteur_threshold;height difference between crops in intercrop below which we consider the canopies mixed (homogeneous). Used in radiative transfer option as a fallback to Beer-Lambert.;m;PARAM;1;real;0.05;1;1;0
 hautmax;maximum height of crop;m;PARPLT;1;real;0.1;5;1;1
 hautmaxtec;maximal height of the plant allowed by the management;m;PARTEC;1;real;0.5;3;1;0
 hautrogne;cutting height for trimmed plants;m;PARTEC;1;real;0.2;2;1;0
@@ -354,7 +354,7 @@ idor;day of the dormancy entrance;julian_d;java;1;integer;1;999;0;0
 idrp;forced day for DRP stage (999 = not forced);julian_d;PARTEC;1;integer;1;731;0;0
 ifindorm;day of dormancy break;julian_d;PARPLT;1;integer;1;999;0;0
 iflo;forced day for FLO stage (999 = not forced);julian_d;PARTEC;1;integer;1;731;0;0
-ifwater;day of the end of simulation;julian_d;USM;1;integer;1;731;0;0
+ifwater;end of simulation as cumulative julian day (>365 spans into next year);julian_d;USM;1;integer;1;731;0;0
 ilan;forced day for LAN stage (999 = not forced);julian_d;PARTEC;1;integer;1;731;0;0
 ilax;forced day for LAX stage (999 = not forced);julian_d;PARTEC;1;integer;1;731;0;0
 ilev;forced day for LEV stage (999 = not forced);julian_d;PARTEC;1;integer;1;731;0;0
@@ -492,7 +492,7 @@ Parazoper;C/N ratio of perennial organs  when crop NNI = 1;g.g-1;PARPLT;1;real;1
 parazorac;C/N ratio of roots when crop NNI = 1;g.g-1;PARPLT;1;real;10;50;1;0
 ParazoTmorte;C/N ratio of dead stems when crop NNI = 1;g.g-1;PARPLT;1;real;10;250;1;0
 parsurrg;fraction of photosynthetically active radiation in global radiation  (PAR/RG);SD;PARAM;1;real;0.4;0.6;1;0
-par_to_net;Coefficient to compute plant net radiation from absorbed PAR;SD;PARAM;1;real;0,5;1;1;0
+par_to_net;Coefficient to compute plant net radiation from absorbed PAR;SD;PARAM;1;real;0.5;1;1;0
 patm;atmospheric pressure;hPa;STATION;1;real;800;1200;1;0
 penterui;runoff coefficient taking into account the plant mulch;SD;PARSOL;1;real;0;5;1;0
 pentinflores;parameter used to calculate the inflorescences number ;kg-1;PARPLT;1;real;0;10;1;1
@@ -551,7 +551,7 @@ q10;Q10 used for the dormancy break calculation ;SD;PARPLT;1;real;1.5;3.5;1;0
 qmulchdec;maximal amount of decomposable mulch;t.ha-1;PARAM;21;real;0;5;1;0
 qmulchruis0;amount of mulch above which runoff is suppressed;t.ha-1;PARAM;21;real;0;5;1;0
 QNperenne0;initial value of nitrogen amount in storage organs in perennial crops ;kg.ha-1;INIT;1;real;0;500;1;0
-QNplante0;initial N amount in the plant (if the option to simulate N and C reserves is not activated);t.ha-1;INIT;1;real;0;10;1;0
+QNplante0;initial N amount in the plant (if the option to simulate N and C reserves is not activated);kg.ha-1;INIT;1;real;0;500;1;0
 QNplantenp0;initial N amount in non-perennial organs of the plant;kg.ha-1;INIT;1;real;0;200;1;0
 QNpltminINN;minimal amount of N in the plant required to compute INN;kg.ha-1;PARAM;1;real;0;50;1;0
 qres;mass of organic residues added to soil (fresh weight);t.ha-1;PARTEC;11;real;0;200;1;0

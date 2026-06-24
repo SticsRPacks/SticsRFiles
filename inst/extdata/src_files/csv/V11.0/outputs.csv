@@ -150,9 +150,9 @@ date_irrigations(6);date of irrigation;julian day;sc;integer;6;0
 date_irrigations(7);date of irrigation;julian day;sc;integer;7;0
 date_irrigations(8);date of irrigation;julian day;sc;integer;8;0
 date_irrigations(9);date of irrigation;julian day;sc;integer;9;0
-day_after_begin_simul;number of days from the beginning of simulation;days;sc;integer;0;0
-day_after_emergence;number of days after emergence;days;p;integer;0;1
-day_after_sowing;days after sowing or planting;days;sc;integer;0;0
+day_after_begin_simul;number of days from the beginning of simulation;days;function;integer;0;0
+day_after_emergence;number of days after emergence;days;function;integer;0;1
+day_after_sowing;days after sowing or planting;days;function;integer;0;0
 day_cut;cut day;julian day;p;integer;0;0
 DCbmulch;change in C amount in microbial biomass decomposing mulch between the beginning and the end of simulation;kg.ha-1;function;real;0;0
 DChumt;change in humified organic C in soil between beginning and end of simulation;kg.ha-1;function;real;0;0
@@ -312,25 +312,35 @@ husup_by_horizon(3);drainage under the horizon 3;mm;sc;real;3;0
 husup_by_horizon(4);drainage under the horizon 4;mm;sc;real;4;0
 husup_by_horizon(5);drainage under the horizon 5;mm;sc;real;5;0
 husup_under_profmes;drainage under the depth of measurement profmes;mm;sc;real;0;0
-iamfs;date of amf stage (maximum acceleration of leaf growth, end of juvenile phase );julian day;p;integer;0;1
-idebdess;date of onset of water dynamics in harvested organs;julian day;p;integer;0;1
-idebdorms;date of entry into dormancy;julian day;p;integer;0;1
-idrps;starting date of filling of harvested organs;julian day;p;integer;0;1
-ifindorms;date of emergence from dormancy;julian day;p;integer;0;1
-iflos;date of flowering;julian day;p;integer;0;1
-iflos_minus_150;date of flowering minus150 degrees day;julian day;p;integer;0;1
-iflos_plus_150;date of flowering plus 150 degrees day;julian day;p;integer;0;1
-igers;date of germination;julian day;p;integer;0;1
-ilans;date of lan stage (leaf index nil);julian day;p;integer;0;1
-ilaxs;date of lax stage (leaf index maximum);julian day;p;integer;0;1
-ilevs;date of emergence;julian day;p;integer;0;1
-imats;date of start of physiological maturity;julian day;p;integer;0;1
-imontaisons;date of start of stem elongation;julian day;p;integer;0;0
+iamfs;date of amf stage (maximum acceleration of leaf growth, end of juvenile phase );julian day;function;integer;0;1
+idebdess;date of onset of water dynamics in harvested organs;julian day;function;integer;0;1
+idebdorms;date of entry into dormancy;julian day;function;integer;0;1
+idrps;starting date of filling of harvested organs;julian day;function;integer;0;1
+ifindorms;date of emergence from dormancy;julian day;function;integer;0;1
+iflos;date of flowering;julian day;function;integer;0;1
+iflos_minus_150;date of flowering minus150 degrees day;julian day;function;integer;0;1
+iflos_plus_150;date of flowering plus 150 degrees day;julian day;function;integer;0;1
+igers;date of germination;julian day;function;integer;0;1
+ilans;date of lan stage (leaf index nil);julian day;function;integer;0;1
+ilaxs;date of lax stage (leaf index maximum);julian day;function;integer;0;1
+ilevs;date of emergence;julian day;function;integer;0;1
+imats;date of start of physiological maturity;julian day;function;integer;0;1
+imontaisons;date of start of stem elongation;julian day;function;integer;0;0
 infil_recal(1);infiltrability parameter at the base of the layer 1;mm.d-1;soil;real;1;0
 infil_recal(2);infiltrability parameter at the base of the layer 2;mm.d-1;soil;real;2;0
 infil_recal(3);infiltrability parameter at the base of the layer 3;mm.d-1;soil;real;3;0
 infil_recal(4);infiltrability parameter at the base of the layer 4;mm.d-1;soil;real;4;0
 infil_recal(5);infiltrability parameter at the base of the layer 5;mm.d-1;soil;real;5;0
+init_H2O_balance;total initial water balance over the simulation period;mm;function;real;0;0
+final_H2O_balance;total final water balance over the simulation period;mm;function;real;0;0
+init_plant_N_balance;total initial plant nitrogen balance over the simulation period;kg.ha-1;function;real;0;0
+final_plant_N_balance;total final plant nitrogen balance over the simulation period;kg.ha-1;function;real;0;0
+init_soil_mineral_N_balance;total initial soil mineral nitrogen balance over the simulation period;kg.ha-1;function;real;0;0
+final_soil_mineral_N_balance;total final soil mineral nitrogen balance over the simulation period;kg.ha-1;function;real;0;0
+init_soil_organic_N_balance;total initial soil organic nitrogen balance over the simulation period;kg.ha-1;function;real;0;0
+final_soil_organic_N_balance;total final soil organic nitrogen balance over the simulation period;kg.ha-1;function;real;0;0
+init_soil_organic_C_balance;total initial soil organic carbon balance over the simulation period;kg.ha-1;function;real;0;0
+final_soil_organic_C_balance;total final soil organic carbon balance over the simulation period;kg.ha-1;function;real;0;0
 inn;nitrogen nutrition index (NNI);0-2;p;real;0;2
 inn1intercoupe;average NNI during the cut (cut crop vegetative phase: emergence to maximum LAI);0-2;p;real;0;0
 inn1moy;average NNI during the vegetative stage;0-2;p;real;0;1
@@ -339,18 +349,19 @@ inn2moy;average NNI during the reproductive stage;0-2;p;real;0;1
 innlai;reduction factor on leaf growth due to NNI (nitrogen deficiency);innmin to 1;p;real;0;2
 inns;reduction factor on biomass growth due to NNI (nitrogen deficiency);innmin to 1;p;real;0;2
 innsenes;nitrogen stress index affecting leaves death;innmin to 1;p;real;0;2
-inous;ending date for setting of harvested organs;julian day;p;real;0;1
+inous;ending date for setting of harvested organs;julian day;function;real;0;1
 intermulch;daily amount of water intercepted by the mulch (vegetal);mm.d-1;sc;real;0;0
 interpluie;daily amount of water intercepted by leaves;mm.d-1;p;real;0;2
-iplts;date of sowing or planting;julian day;p;integer;0;1
+iplts;date of sowing or planting;julian day;function;integer;0;1
 irazo(n);nitrogen harvest index;0-1;p;real;n;2
 ircarb(n);carbon harvest index;0-1;p;real;n;2
-irecs;date of harvest (first if several);julian day;p;integer;0;1
+irecs;date of harvest (first if several);julian day;function;integer;0;1
 irrigjN;daily amount of mineral N added by irrigation;kg.ha-1.d-1;sc;real;0;0
 irrigN;cumulative amount of mineral N added by irrigation;kg.ha-1;sc;real;0;0
-isens;date of  begninning leaf senescence stage;julian day;p;integer;0;1
+isens;date of  begninning leaf senescence stage;julian day;function;integer;0;1
 is_dominant;1 if the plant is dominant, 0 otherwise;code 0/1;p;logical;0;0
 izrac;water excess stress index on roots;0-1;p;real;0;1
+jjul;julian day of the year corresponding to the current simulation day (resets each year);d;function;integer;0;0
 lai(n);leaf area index (table);m2.m-2;p;real;n;2
 lai_mx_av_cut;LAI before cut (for cut crops , for others = lai(n) );SD;p;real;0;1
 laimax;maximum leaf area index;m2.m-2;p;real;0;2
@@ -403,10 +414,11 @@ masecveg;biomass of vegetative organs;t.ha-1;p;real;0;2
 matigestruc;biomass of stems (only structural parts);t.ha-1;p;real;0;2
 matigestruc_kg_ha;Dry matter of stems (only structural parts);kg.ha-1;function;real;0;0
 matuber;biomass of tuber (harvested organs, only calculated for sugarbeet);t.ha-1;p;real;0;1
-mean_swfac_flo_p_m_150;swfac mean on the period flowering minus 150 degrees day to flowering plus 150 degrees days;0-1;p;real;0;1
+mean_swfac_flo_p_m_150;swfac mean on the period flowering minus 150 degrees day to flowering plus 150 degrees days;0-1;function;real;0;1
 mortalle;daily number of dying tillers;d-1;p;real;0;1
 mortmasec;cumulative biomass of dead tillers;t.ha-1;p;real;0;1
 mortreserve;biomass of reserves corresponding to dead tillers;t.ha-1.d-1;p;real;0;1
+mouillmulch;amount of water retained by the mulch;mm;sc;real;0;0
 MSexporte;cumulative amount of harvested biomass;t.ha-1;p;real;0;1
 msjaune;senescent biomass of the plant;t.ha-1;p;real;0;2
 msneojaune;newly-formed senescent biomass;t.ha-1;p;real;0;2
