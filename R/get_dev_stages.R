@@ -19,9 +19,10 @@
 #' @export
 #'
 #' @examples
-#'
-#' get_dev_stages(simulation_data_frame, "iplts")
-#'
+#' \dontrun{
+#' simulations <- get_sim(workspace)
+#' get_dev_stages(simulations, "iplts")
+#' }
 #'
 get_dev_stages <- function(
   sim,

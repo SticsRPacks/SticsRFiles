@@ -160,7 +160,7 @@ gen_usms_xml2txt <- function(
         usm[!usms_exist]
       )
     } else {
-      if (any(!usms_exist)) {
+      if (!all(usms_exist)) {
         warning(
           "Not all usm exist in usms.xml file : ",
           paste(usm[!usms_exist], collapse = ", ")

@@ -133,7 +133,7 @@ is_stics_var <- function(var, stics_version = "latest") {
 
   index_var <- match(var_parsed, vars_names_parsed)
   var_found <- !is.na(index_var)
-  if (any(!var_found)) {
+  if (!all(var_found)) {
     cli::cli_alert_warning(
       paste0(
         "Variable{?s} {.var {var_parsed[!var_found]}}",

@@ -11,9 +11,6 @@ context("Searching option names")
 xml_path <- file.path(get_examples_path(file_type = "xml"), "file_plt.xml")
 
 test_that("Researching option names", {
-  expect_equal(length(get_options_names(xml_path)), options_number)
-  expect_equal(
-    length(get_options_names(xml_path, c("codemonocot", "codlainet"))),
-    2
-  )
+  expect_length(get_options_names(xml_path), options_number)
+  expect_length(get_options_names(xml_path, c("codemonocot", "codlainet")), 2)
 })

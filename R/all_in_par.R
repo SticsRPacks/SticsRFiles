@@ -157,7 +157,7 @@ is_stics_param <- function(param, stics_version = "latest") {
   pars_names_parsed <- var_to_col_names(all_pars$name)
   index_par <- match(par_parsed, pars_names_parsed)
   par_found <- !is.na(index_par)
-  if (any(!par_found)) {
+  if (!all(par_found)) {
     cli::cli_alert_warning(
       paste0(
         "paremeters{?s} {.var {par_parsed[!par_found]}}",

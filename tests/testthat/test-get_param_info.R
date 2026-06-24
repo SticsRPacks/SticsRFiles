@@ -10,8 +10,7 @@ empty_df <- data.frame(
   max = character(0),
   definition = character(0),
   unit = character(0),
-  cultivar = logical(0),
-  stringsAsFactors = FALSE
+  cultivar = logical(0)
 )
 
 
@@ -20,7 +19,7 @@ p <- get_examples_path(file_type = "csv")
 lines_inputs <- readLines(file.path(p, "inputs.csv"))
 df_inputs <- get_param_info()
 test_that("getting all parameters from inputs.csv", {
-  testthat::expect_equal(length(lines_inputs), dim(df_inputs)[1])
+  testthat::expect_length(lines_inputs, dim(df_inputs)[1])
 })
 
 # Testing empty result
@@ -34,10 +33,10 @@ test_that("giving a unknown variable name returns a 0 row data", {
     stics_version = stics_version
   )
 
-  testthat::expect_equal(nrow(empty_df), nrow(empty_df_var))
-  testthat::expect_equal(length(empty_df), length(empty_df_var))
-  testthat::expect_equal(nrow(empty_df), nrow(empty_df_keyword))
-  testthat::expect_equal(length(empty_df), length(empty_df_keyword))
+  testthat::expect_identical(nrow(empty_df), nrow(empty_df_var))
+  testthat::expect_length(empty_df, length(empty_df_var))
+  testthat::expect_identical(nrow(empty_df), nrow(empty_df_keyword))
+  testthat::expect_length(empty_df, length(empty_df_keyword))
 })
 version_num <- get_version_num(stics_version)
 test_that("fuzzy name", {

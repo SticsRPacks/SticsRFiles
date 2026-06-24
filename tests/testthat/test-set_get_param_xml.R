@@ -85,8 +85,8 @@ tmp2 <- unlist(get_param_xml(
   stics_version = stics_version
 ))
 test_that("Set and get of a non-varietal parameter for a unique plant", {
-  expect_equal(length(tmp), 1)
-  expect_equal(tmp + 1, tmp2)
+  expect_length(tmp, 1)
+  expect_identical(tmp + 1, tmp2)
 })
 
 # Get and modify the varietal parameter "stlevamf" for the simulated variety

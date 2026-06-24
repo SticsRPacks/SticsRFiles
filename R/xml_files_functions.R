@@ -72,7 +72,6 @@ get_param_gen_file <- function(
       " has not been found in ",
       workspace_dir
     )
-    return()
   }
 
   par_file <- file.path(javastics_dir, "config", file_name)

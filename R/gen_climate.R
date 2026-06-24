@@ -26,7 +26,7 @@ gen_climate <- function(files_path, out_dir) {
   files_path <- complete_climate_paths(files_path)
 
   # data concatenation
-  climate_lines <- c()
+  climate_lines <- NULL
   for (i in seq_along(files_path)) {
     climate_lines <- c(climate_lines, trimws(readLines(files_path[i])))
   }
@@ -72,11 +72,11 @@ complete_climate_paths <- function(files_path) {
 
   if (length(files_names) < 2) {
     if (length(files_dir) > 1) {
-      stop(paste0(
+      stop(
         files_names[1],
-        " the same file exists in 2 locations: ",
+        "the same file exists in 2 locations:",
         paste(files_dir, collapse = ", ")
-      ))
+      )
     }
     return(file.path(files_dir, files_names))
   }

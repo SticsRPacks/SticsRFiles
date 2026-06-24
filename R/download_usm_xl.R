@@ -85,11 +85,11 @@ download_usm_xl <- function(
 
   if (any(success)) {
     if (verbose) {
-      message(paste(
+      message(
         files_list[success],
         " has been copied in directory ",
         out_dir
-      ))
+      )
     }
     dest_list <- dest_list[success]
   }

@@ -400,7 +400,7 @@ get_file_one <- function(
     verbose = verbose
   )
 
-  keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
+  keep_cols <- df[, sapply(.SD, function(x) !all(is.na(x)))]
   out <- df[, ..keep_cols]
   out <- data.frame(out)
   # Filtering

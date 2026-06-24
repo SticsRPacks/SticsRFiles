@@ -18,11 +18,6 @@
 #'
 #' @export
 #'
-#' @examples
-#'
-#' compute_date_from_day(156, )
-#'
-#'
 compute_date_from_day <- function(day, start_year) {
   stopifnot(
     all(is.numeric(day)),

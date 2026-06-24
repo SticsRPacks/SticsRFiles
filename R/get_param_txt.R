@@ -131,23 +131,11 @@ get_param_txt <- function(
   # NOT IN V10
   several_fert <- several_thin <- is_pasture <- NULL
   tmp_names <- names(tmp)
-  several_fert <- ifelse(
-    "option_engrais_multiple" %in%
-      tmp_names &&
-      tmp$option_engrais_multiple == 1,
-    TRUE,
-    FALSE
-  )
-  several_thin <- ifelse(
-    "option_thinning" %in% tmp_names && tmp$option_thinning == 1,
-    TRUE,
-    FALSE
-  )
-  is_pasture <- ifelse(
-    "option_pature" %in% tmp_names && tmp$option_pature == 1,
-    TRUE,
-    FALSE
-  )
+  several_fert <- "option_engrais_multiple" %in%
+    tmp_names &&
+    tmp$option_engrais_multiple == 1
+  several_thin <- ("option_thinning" %in% tmp_names) && tmp$option_thinning == 1
+  is_pasture <- "option_pature" %in% tmp_names && tmp$option_pature == 1
 
   tec <- plant <- stats::setNames(
     vector(mode = "list", length = ini$nbplantes),
@@ -357,9 +345,9 @@ filter_param <- function(
 #' tmp <- get_tmp_txt(
 #'   workspace = get_examples_path(file_type = "txt")
 #' )
-#' several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
-#' several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
-#' is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
+#' several_fert <- tmp$option_engrais_multiple == 1
+#' several_thin <- tmp$option_thinning == 1
+#' is_pasture <- tmp$option_pature == 1
 #'
 #' # Then, get the technical parameters:
 #' get_tec_txt(

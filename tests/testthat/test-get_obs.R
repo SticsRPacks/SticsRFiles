@@ -47,7 +47,7 @@ meas_mixed3 <- get_obs(workspace = path_mixed, usms_file = usms_path)
 
 
 test_that("filtering observation list works", {
-  expect_equal(length(meas_banana), 1)
+  expect_length(meas_banana, 1)
 })
 
 test_that("filtering observation list return a list of data.frame", {
