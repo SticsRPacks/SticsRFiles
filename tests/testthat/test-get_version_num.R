@@ -1,5 +1,5 @@
 test_that("Get version number as svlist object", {
-  expect_s3_class(get_version_num("10"), 'svlist')
+  expect_s3_class(get_version_num("10"), "svlist")
   expect_s3_class(get_version_num("V10"), "svlist")
   expect_s3_class(get_version_num("v10"), "svlist")
   expect_s3_class(get_version_num(10), "svlist")
