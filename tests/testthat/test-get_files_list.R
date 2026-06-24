@@ -32,7 +32,7 @@ test_that("one name", {
 
 context("testing returned object type")
 test_that("is list", {
-  expect_true(is.list(usms_files))
+  expect_type(usms_files, 'list')
 })
 
 context("Checking list fields types")
@@ -46,14 +46,14 @@ context("Checking if mod files exist")
 
 test_that("mod files exist in files", {
   usms_files <- get_files_list(workspace_path, use_mod_files = TRUE)
-  expect_true(
+  expect_gt(
     length(
       grep(
         pattern = "\\.mod$",
         x = usms_files[["bou00t1"]][["paths"]]
       )
-    ) >
-      0
+    ),
+    0
   )
 })
 

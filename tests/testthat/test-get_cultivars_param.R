@@ -14,5 +14,5 @@ test_that("type, data.frame", {
 
 context("Checking presence of row names")
 test_that("rownames", {
-  expect_identical(!is.null(rownames(cv_param_df)), TRUE)
+  expect_true(!is.null(rownames(cv_param_df)))
 })

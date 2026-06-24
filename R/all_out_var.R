@@ -20,7 +20,7 @@
 #'
 all_out_var <- function(stics_version = "latest") {
   # Checking and getting the right version
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   if (get_version_num(stics_version = stics_version) < get_version_num("9.2")) {
     cols_idx <- 1:4
@@ -81,6 +81,10 @@ all_out_var <- function(stics_version = "latest") {
 #'
 #' @export
 #'
+#' @examples
+#'
+#' get_var_info()
+#'
 get_var_info <- function(var = NULL, keyword = NULL, stics_version = "latest") {
   all_vars <- all_out_var(stics_version)
   if (!is.null(var)) {
@@ -129,7 +133,7 @@ is_stics_var <- function(var, stics_version = "latest") {
 
   index_var <- match(var_parsed, vars_names_parsed)
   var_found <- !is.na(index_var)
-  if (any(!var_found)) {
+  if (!all(var_found)) {
     cli::cli_alert_warning(
       paste0(
         "Variable{?s} {.var {var_parsed[!var_found]}}",

@@ -29,7 +29,7 @@ gen_new_travail <- function(
   codoptim = NULL,
   out_dir = NULL
 ) {
-  data_plt2 <- c()
+  data_plt2 <- NULL
   if (usm_data$nbplantes > 1) {
     data_plt2 <- c("fplt2", "ftec2", "flai2")
   }
@@ -194,7 +194,7 @@ get_usm_data <- function(
 
   data$fobs1 <- data$plante1$fobs
 
-  if (data$flai1 == "null" || data$flai1 == "defaut.lai") {
+  if (data$flai1 %in% c("", "null", "defaut.lai") || is.null(data$flai1)) {
     data$codesimul <- get_codesimul(0)
   }
 
@@ -268,7 +268,7 @@ get_years_number <- function(clim_path) {
     year2 <- get_year(clim_path = clim_path[2])
   }
 
-  if (any(is.na(c(year1, year2)))) {
+  if (anyNA(c(year1, year2))) {
     stop(
       "Impossible to calculate the number of years from weather data files !"
     )

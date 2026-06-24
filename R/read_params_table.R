@@ -128,7 +128,7 @@ replace_na <- function(in_df, replacement) {
 
   idx_col_has_na <- unlist(
     lapply(in_df, function(x) {
-      any(is.na(x))
+      anyNA(x)
     }),
     use.names = FALSE
   )
