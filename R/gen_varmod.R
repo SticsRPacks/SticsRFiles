@@ -62,7 +62,7 @@ gen_varmod <- function(
   var_exist <- is_stics_var(var, stics_version, verbose = verbose)
 
   if (!all(var_exist) && verbose && !force) {
-    warning("Not any variable name to add to the var.mod file!")
+    message("Not any variable name to add to the var.mod file!")
   }
 
   if (!force) {
