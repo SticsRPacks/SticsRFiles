@@ -10,6 +10,7 @@
 #' (used to check variable names)
 #' @param force     Force variables writing even if they are not a
 #' STICS variable (default: FALSE).
+#' @param verbose if TRUE displaying warning, FALSE otherwise (default)
 #'
 #' @details Variable names can be found using `get_var_info()`. They are
 #' checked before writing. If any variable name does not exist,
@@ -21,10 +22,12 @@
 #' @return None
 #'
 #' @examples
+#' # generate a new file
 #' gen_varmod(tempdir(), c("lai(n)", "hauteur"))
-#' # Add a variable to the others:
+#' # Add a variable to the others
+#' # var.mod will contain now "lai(n)","hauteur" and "masec(n)"
 #' gen_varmod(tempdir(), "masec(n)", append = TRUE)
-#' # NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
+#'
 #'
 #' @export
 #'
@@ -34,49 +37,51 @@ gen_varmod <- function(
   append = FALSE,
   file_name = "var.mod",
   stics_version = "latest",
-  force = FALSE
+  force = FALSE,
+  verbose = FALSE
 ) {
-  # Checking if workspace exists
+  # Checking if the workspace exists
   if (!dir.exists(workspace)) {
-    stop(paste(workspace, ": directory does not exist !"))
+    stop(workspace, ": directory does not exist !")
   }
 
   file_path <- file.path(workspace, file_name)
 
   # Checking if file exists in append use case
-  if (append && isFALSE(file.exists(file_path))) {
-    msg <- ": file does not exist, remove append argument or set it to FALSE) !"
-    stop(paste(file_path, msg))
+  if (append && !file.exists(file_path)) {
+    stop(
+      file_path,
+      ": file does not exist, remove append argument or set it to FALSE) !"
+    )
   }
 
   # Just in case: unique variable names list
   var <- unique(var)
 
-  # Check if the variable exist:
-  var_exist <- is_stics_var(var, stics_version)
+  # Checking if the variable(s) exist
+  var_exist <- is_stics_var(var, stics_version, verbose = verbose)
 
-  if (any(!var_exist) && isFALSE(force)) {
-    var <- var[var_exist]
-  }
-
-  if (!length(var)) {
+  if (!all(var_exist) && verbose && !force) {
     warning("Not any variable name to add to the var.mod file!")
   }
 
-  if (isTRUE(force)) {
+  if (!force) {
+    var <- var[var_exist]
+  }
+
+  if (force) {
     var[var_exist] <- var_to_stics_name(var[var_exist])
   } else {
     var <- var_to_stics_name(var)
   }
 
   # Add possibility to append a variable to var.mod.
-  if (isTRUE(append)) {
-    vars <- readLines(file_path)
-    commonvars <- var %in% vars
-    var <- var[!commonvars]
-    if (length(var) == 0) {
-      invisible()
-    }
+  if (append) {
+    var <- var[!(var %in% readLines(file_path))]
+  }
+  # Nothing to write
+  if (length(var) == 0) {
+    invisible()
   }
 
   cat(var, file = file_path, sep = "\n", append = append)

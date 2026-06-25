@@ -10,7 +10,8 @@ gen_varmod(
   append = FALSE,
   file_name = "var.mod",
   stics_version = "latest",
-  force = FALSE
+  force = FALSE,
+  verbose = FALSE
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ to modify}
 
 \item{force}{Force variables writing even if they are not a
 STICS variable (default: FALSE).}
+
+\item{verbose}{if TRUE displaying warning, FALSE otherwise (default)}
 }
 \value{
 None
@@ -45,9 +48,11 @@ variables that do not exist. Variables already present in a var.mod file
 can be listed using \code{get_varmod()}.
 }
 \examples{
+# generate a new file
 gen_varmod(tempdir(), c("lai(n)", "hauteur"))
-# Add a variable to the others:
+# Add a variable to the others
+# var.mod will contain now "lai(n)","hauteur" and "masec(n)"
 gen_varmod(tempdir(), "masec(n)", append = TRUE)
-# NB: var.mod will have "lai(n)","hauteur" and "masec(n)"
+
 
 }
