@@ -1,3 +1,59 @@
+# SticsRFiles 1.7.0
+* FUNCTIONS
+  * Added new functions for upgrading STICS input files from version 10 to version 11
+  * Management of STICS versions using the 'semver' package (major, minor, patch components)
+  * Removed useless warnings in some functions
+  * Using now get_version_num function for comparing versions (using 'svlist' object from 'semver' package)
+  * new function get_dev_stages for extracting STICS development stages dates from a list
+  of data.frame of simulations outputs
+  * parallelisation mode introduced for STICS inputs text files generation
+  * parallelisation mode introcuced for reading STICS output files
+  * new function for extracting a new xml workspace from a workspace, with possible usm selection (rewriting usms.xml, sols.xml)
+  * new function for calculating an approximate value of vapor pressure
+  * manage branches use in download_data function
+  
+* DOCUMENTATION
+  * functions help: added missing examples for exported functions
+  * vignettes update: for STICS files upgrading
+  
+* FIXES
+  * Download function for examples csv files 
+  * Function for reading csv or xls examples files
+  * managing text version to version number using 'semver'
+  * Remove `overwrite` argument from set_xml_file_version
+  * rename STICS humirac parameter to code_humirac following fortran code
+  * find general parameters files, .mod files location (either in workspace or in JavaStics config directory)
+  * manage duplicate values or files in gen_climate function
+  * get_xml_files_param_df: for the long format table the "value" column is converted to character for binding data.frame rows,
+  data selection with parameters names, management of empty parameters values when pivot_wider
+  * getting plants names with or without using the usms.xml file, for mixed usms directories (soles crops and intercrops)
+  * set_param_value: converting parameters values to a list if it is not a list when dimensions are compatible
+  * writing errors for weather data files
+  * functions arguments renaming to have more consistency among functions
+  * compute_date_from_day returns NA instead of 999
+  * removed old deprecated arguments management (and 'lifecycle' dependency)
+  * sub-directories detection for reading observation and simulation outputs files, and duplicates
+  * download_data: error management
+
+* DATA
+  * Input STICS files sets: simplification according to versions compatibility
+  * Update examples files for STICS version 11.0.0
+  * adaptation of functions used for data manipulation for new data set of STICS 11.0.0
+
+* REFACTORING
+  * Removed useless code, superfluous arguments and commented code
+  * Checking version function
+  * Functions simplification for upgrading files from STICS version 9 to 10
+  * code style fixes
+  
+* TESTS
+  * Checks and integration tests restructured
+  * Use of an automatic action for checking code style and updates
+  * Updates about testhat function used 
+  * Added in workflows a dependabot for checking packages updates (producing pull requests)
+  * Removed from tests useless version number
+  
+
 # SticsRFiles 1.6.0 _2025-06-03_
 * FUNCTIONS
   * convert_xml2txt allows to convert sols.xml file to text files

@@ -2,13 +2,13 @@
 # CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
 # ------------------------------------------------
- 
+
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify STICS Input/Output Files'
-version: 1.6.0
+version: 1.7.0
 doi: 10.32614/CRAN.package.SticsRFiles
 abstract: Manipulating input and output files of the STICS crop model. Files are either
   JavaSTICS XML files or text files used by the model fortran executable. Most basic

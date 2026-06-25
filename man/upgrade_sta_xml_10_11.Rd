@@ -29,5 +29,4 @@ upgrade_sta_xml_10_11(
   out_dir = tempdir()
 )
 
-
 }
