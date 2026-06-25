@@ -32,7 +32,7 @@ test_that("one name", {
 
 context("testing returned object type")
 test_that("is list", {
-  expect_type(usms_files, 'list')
+  expect_type(usms_files, "list")
 })
 
 context("Checking list fields types")
