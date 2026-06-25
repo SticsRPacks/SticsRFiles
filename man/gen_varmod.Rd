@@ -54,5 +54,4 @@ gen_varmod(tempdir(), c("lai(n)", "hauteur"))
 # var.mod will contain now "lai(n)","hauteur" and "masec(n)"
 gen_varmod(tempdir(), "masec(n)", append = TRUE)
 
-
 }

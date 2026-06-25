@@ -27,7 +27,7 @@ test_that("Append a new variable", {
     ),
     1
   )
-  expect_warning(gen_varmod(out_dir, "", verbose = TRUE))
+  expect_message(gen_varmod(out_dir, "", verbose = TRUE))
 })
 
 
@@ -48,4 +48,5 @@ test_that("Append a unknown variable", {
     ),
     1
   )
+  expect_no_message(gen_varmod(out_dir, "test", force = TRUE))
 })
