@@ -28,7 +28,6 @@
 #' # var.mod will contain now "lai(n)","hauteur" and "masec(n)"
 #' gen_varmod(tempdir(), "masec(n)", append = TRUE)
 #'
-#'
 #' @export
 #'
 gen_varmod <- function(
