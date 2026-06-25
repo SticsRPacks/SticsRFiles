@@ -38,6 +38,7 @@ var_to_col_names <- function(var_vec) {
 #'
 #' @param var     Vector of variable names
 #' @param version STICS version.
+#' @param verbose if TRUE displaying warning, FALSE otherwise (default)
 #'
 #' @return A vector of variable names compatible with STICS
 #' (usually used for `gen_varmod()`)
@@ -52,8 +53,8 @@ var_to_col_names <- function(var_vec) {
 #' var_to_stics_name(c("lai_n", "masec_n"))
 #' }
 #'
-var_to_stics_name <- function(var, version = "latest") {
-  var_exist <- is_stics_var(var, version)
+var_to_stics_name <- function(var, version = "latest", verbose = FALSE) {
+  var_exist <- is_stics_var(var, version, verbose = verbose)
   if (any(!var_exist)) {
     stop()
   }
