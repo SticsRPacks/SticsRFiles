@@ -42,7 +42,7 @@
 
 set_usms_param_xml <- function(xml_doc, usms_param = NULL, overwrite = FALSE) {
   if (!base::is.null(usms_param)) {
-    if (!("data.frame" %in% class(usms_param))) {
+    if (!inherits(usms_param, "data.frame")) {
       stop("usms_param does not belong to data.frame class/type")
     }
     # if any factor field type in data.frame

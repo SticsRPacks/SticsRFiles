@@ -99,7 +99,7 @@ exist_param_csv <- function(param, javastics) {
   # checking existence of par_names
   if (read_csv) {
     par_names <- get_param_data_df(
-      file = inputs_path,
+      file = inputs_path
     )$name
     env_stics[["par_names"]] <- par_names
   } else {
