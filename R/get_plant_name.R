@@ -154,16 +154,22 @@ get_plant_name <- function(
 #'
 # @examples
 get_plant_code <- function(plant_dir_path, plant_xml_names) {
-  mapply(
-    function(plant_dir_path, plant_xml_names) {
-      unlist(get_param_xml(
-        file = file.path(plant_dir_path, plant_xml_names),
-        param = "codeplante"
-      ))
+  # Getting files_path from plant_xml_names list
+  files_path <- mapply(
+    function(x, y) {
+      list(file.path(x, y))
     },
-    plant_dir_path = plant_dir_path,
-    plant_xml_names = plant_xml_names
+    plant_dir_path,
+    plant_xml_names
   )
+  names(files_path) <- names(plant_xml_names)
+
+  # Getting plant codes from plant files path list
+  plant_codes_list <- lapply(
+    files_path,
+    function(x) unlist(get_param_xml(x, param = "codeplante"))
+  )
+  plant_codes_list
 }
 
 #' Getting plant tag(s) from a plant files list by usm
@@ -213,7 +219,7 @@ get_plant_files <- function(usms_file, usms = NULL) {
     ids <- usms %in% all_usms
     if (!all(ids)) warning("At least one usm name does not exist")
     usms <- usms[ids]
-}
+  }
 
   plant_files <- lapply(usm_nodes, function(usm_node) {
     usm_name_usms <- XML::xmlGetAttr(usm_node, "nom")
