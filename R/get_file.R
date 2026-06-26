@@ -263,7 +263,13 @@ get_file_ <- function(
     } else {
       # If we're using sub-directories, we consider the plant folder to be on the parent directory
       plant_names <-
-        get_plant_name(unique(dirname(workspace)), usms_filepath, usms, javastics_path, verbose)
+        get_plant_name(
+          unique(dirname(workspace)),
+          usms_filepath,
+          usms,
+          javastics_path,
+          verbose
+        )
     }
   } else {
     # The user did not provide any usms file path, so using the names of
@@ -334,17 +340,18 @@ get_file_ <- function(
   i <- 1
   df_list <- foreach::foreach(
     i = seq_along(inputs)
-  ) %do_par_or_not% {
-    input <- inputs[[i]]
-    get_file_one(
-      input$dirpath,
-      input$filename,
-      input$p_name,
-      verbose,
-      dates_list,
-      var_list
-    )
-  }
+  ) %do_par_or_not%
+    {
+      input <- inputs[[i]]
+      get_file_one(
+        input$dirpath,
+        input$filename,
+        input$p_name,
+        verbose,
+        dates_list,
+        var_list
+      )
+    }
 
   # For files in sub-directories or not
   if (exists("workspace_dir_names")) {
