@@ -4,7 +4,7 @@
 \alias{is_stics_var}
 \title{Search if a STICS variable exist}
 \usage{
-is_stics_var(var, stics_version = "latest")
+is_stics_var(var, stics_version = "latest", verbose = FALSE)
 }
 \arguments{
 \item{var}{A vector of variable names}
@@ -13,6 +13,8 @@ is_stics_var(var, stics_version = "latest")
 to search parameters information relative to a specific STICS version.
 By default the latest version returned by \code{get_stics_versions_compat()}
 is used.}
+
+\item{verbose}{if TRUE displaying warning, FALSE otherwise (default)}
 }
 \value{
 A boolean vector: \code{TRUE} if the variable exist, \code{FALSE} otherwise
