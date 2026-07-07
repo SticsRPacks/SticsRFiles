@@ -12,7 +12,7 @@ test_that("single file path no year in file name", {
 
 test_that("vector of file paths", {
   years <- get_year_from_file_name(c("abc.2000", "abc.1999"))
-  expect_equal(length(years), 2)
-  expect_equal(years[1], 2000)
-  expect_equal(years[2], 1999)
+  expect_length(years, 2)
+  expect_identical(years[1], 2000)
+  expect_identical(years[2], 1999)
 })

@@ -26,7 +26,7 @@
 convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
   f_names <- c(xml_file, style_file)
   ex_files <- file.exists(f_names)
-  if (any(!ex_files)) {
+  if (!all(ex_files)) {
     warning(
       "At least one input file doesn't exist ! \n",
       paste(f_names[!ex_files], collapse = ", ")

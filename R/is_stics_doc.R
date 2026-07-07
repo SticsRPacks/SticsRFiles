@@ -60,7 +60,7 @@ is_stics_doc <- function(xml_doc, doc_type = NULL, doc_types = NULL) {
   # doc types
   root_name <- XML::xmlName(XML::xmlRoot(xml_doc@content))
 
-  if (!base::is.null(doc_type) && !doc_type == root_name) {
+  if (!base::is.null(doc_type) && doc_type != root_name) {
     return(FALSE)
   }
 
