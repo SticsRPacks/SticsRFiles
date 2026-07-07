@@ -263,7 +263,13 @@ get_file_ <- function(
     } else {
       # If we're using sub-directories, we consider the plant folder to be on the parent directory
       plant_names <-
-        get_plant_name(unique(dirname(workspace)), usms_filepath, usms, javastics_path, verbose)
+        get_plant_name(
+          unique(dirname(workspace)),
+          usms_filepath,
+          usms,
+          javastics_path,
+          verbose
+        )
     }
   } else {
     # The user did not provide any usms file path, so using the names of
