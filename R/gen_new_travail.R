@@ -74,7 +74,7 @@ gen_new_travail <- function(
     return(invisible(FALSE))
   }
 
-  return(invisible(TRUE))
+  invisible(TRUE)
 }
 
 
@@ -216,7 +216,7 @@ get_usm_data <- function(
   data[["plante2"]] <- NULL
   data[[".attrs"]] <- NULL
 
-  return(data)
+  data
 }
 
 
@@ -242,15 +242,15 @@ get_codesimul <- function(lai_forcing = 0) {
   stop(
     "Error on lai forcing value: ",
     lai_forcing,
-    "\nmIt must be 0 or 1 !"
+    "\nIt must be 0 or 1 !"
   )
 }
 
 
-#' Calculating simulation years number
+#' Calculating simulation years number from files' extension
 #'
 #' @param clim_path character vector of 2 weather data files
-#' for the first and the last year
+#' for the first and the last year (the file extension contains the year)
 #'
 #' @return years number
 
@@ -260,24 +260,40 @@ get_codesimul <- function(lai_forcing = 0) {
 #'
 
 get_years_number <- function(clim_path) {
-  year1 <- get_year(clim_path = clim_path[1])
-
-  if (clim_path[1] == clim_path[2]) {
-    year2 <- year1
-  } else {
-    year2 <- get_year(clim_path = clim_path[2])
-  }
-
-  if (anyNA(c(year1, year2))) {
+  # testing paths
+  if (
+    length(clim_path) < 2 ||
+      any(
+        grepl(pattern = "NA", x = clim_path, fixed = TRUE)
+      ) ||
+      !all(grepl(pattern = "[0-9]{4}$", x = clim_path))
+  ) {
     stop(
-      "Impossible to calculate the number of years from weather data files !"
+      "Impossible to calculate the number of years from weather data files !\n",
+      "Weather data files list is uncomplete (a file name is missing)\n",
+      "or at least a file name is unknown: \n",
+      sprintf("%s\n", clim_path)
     )
   }
 
-  return(year2 - year1 + 1)
+  year_1 <- get_year(clim_path = clim_path[1])
+
+  if (clim_path[1] == clim_path[2]) {
+    year_2 <- year_1
+  } else {
+    year_2 <- get_year(clim_path = clim_path[2])
+  }
+
+  if (anyNA(c(year_1, year_2))) {
+    stop(
+      "Impossible to calculate the number of years from weather data files !\n",
+      "At least a file content/format is not complete, or the file is corrupted."
+    )
+  }
+  year_2 - year_1 + 1
 }
 
-#' Get weather data file year
+#' Get weather data file year, from the file content
 #'
 #' @param clim_path path of a weather data file
 #'
@@ -289,7 +305,7 @@ get_years_number <- function(clim_path) {
 #'
 
 get_year <- function(clim_path) {
-  if (!file.exists(clim_path)) stop()
+  if (!file.exists(clim_path)) stop("The file")
 
   line_str <- gsub(
     pattern = "\\t",
@@ -308,6 +324,5 @@ get_year <- function(clim_path) {
   if (methods::is(ret, "try-error")) {
     return(invisible(NA))
   }
-
-  return(year)
+  year
 }

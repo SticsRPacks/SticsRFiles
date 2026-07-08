@@ -1,5 +1,3 @@
-stics_version <- get_stics_versions_compat()$latest_version
-
 context("Get years from files name")
 
 test_that("single file path", {
