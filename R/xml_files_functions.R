@@ -297,12 +297,13 @@ check_and_upgrade_xml_version <- function(
   )
   # the file version and the target version are the same!
   if (from_version_major == target_version_major) {
-    if (verbose)
+    if (verbose) {
       message(
         "The initial file version is already a ",
         from_version_major,
         "version!"
       )
+    }
     return(FALSE)
   }
 
