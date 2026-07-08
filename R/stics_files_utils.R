@@ -181,9 +181,9 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 
 #' Copy mod, obs, lai, and weather data files
 #' @param workspace JavaSTICS xml workspace path
+#' @param out_dir   Output directory path
 #' @param file_type file type to copy among "mod", "obs", "clim"
 #' @param javastics JavsSTICS folder path (Optional)
-#' @param out_dir   Output directry path
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
 #' @param overwrite Logical TRUE for overwriting files,
@@ -196,9 +196,9 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 #'
 workspace_files_copy <- function(
   workspace,
+  out_dir,
   file_type = NULL,
   javastics = NULL,
-  out_dir,
   overwrite = FALSE,
   verbose = FALSE
 ) {

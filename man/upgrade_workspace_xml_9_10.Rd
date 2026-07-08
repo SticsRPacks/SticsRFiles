@@ -6,9 +6,8 @@
 \usage{
 upgrade_workspace_xml_9_10(
   workspace,
-  javastics,
   out_dir,
-  plant = FALSE,
+  javastics = NULL,
   overwrite = FALSE,
   verbose = FALSE
 )
@@ -16,13 +15,10 @@ upgrade_workspace_xml_9_10(
 \arguments{
 \item{workspace}{Path of a JavaSTICS workspace}
 
-\item{javastics}{Path of JavaSTICS containing the STICS version corresponding
-to the version of the files to be converted}
-
 \item{out_dir}{Output directory of the generated files}
 
-\item{plant}{logical (optional), TRUE for upgrading plant files if a "plant"
-sub-directory of workspace exists, FALSE otherwise}
+\item{javastics}{Path of JavaSTICS containing the STICS version corresponding
+to the version of the files to be converted (optional)}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting files if they exist, FALSE otherwise}

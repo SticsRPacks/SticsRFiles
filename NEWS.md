@@ -11,6 +11,7 @@
   * new function for extracting a new xml workspace from a workspace, with possible usm selection (rewriting usms.xml, sols.xml)
   * new function for calculating an approximate value of vapor pressure
   * manage branches use in download_data function
+  * Added verbosity use in functions managing Stics variables and replaced warning by message in some cases
   
 * DOCUMENTATION
   * functions help: added missing examples for exported functions
@@ -34,6 +35,8 @@
   * removed old deprecated arguments management (and 'lifecycle' dependency)
   * sub-directories detection for reading observation and simulation outputs files, and duplicates
   * download_data: error management
+  * fixed default values for mandatory parameters in _tec.xml templates files (V10 and V11)
+  * Added checks for calculating weather data years number and added new tests
 
 * DATA
   * Input STICS files sets: simplification according to versions compatibility

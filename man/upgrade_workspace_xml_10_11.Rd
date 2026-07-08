@@ -6,8 +6,8 @@
 \usage{
 upgrade_workspace_xml_10_11(
   workspace,
-  javastics = NULL,
   out_dir,
+  javastics = NULL,
   overwrite = FALSE,
   verbose = FALSE,
   use_patho = FALSE
@@ -16,9 +16,10 @@ upgrade_workspace_xml_10_11(
 \arguments{
 \item{workspace}{JavaStics xml workspace path}
 
-\item{javastics}{JavaStics (STICS V10) folder path (Optional)}
-
 \item{out_dir}{Output directory path}
+
+\item{javastics}{Path of JavaSTICS containing the STICS version corresponding
+to the version of the files to be converted (optional)}
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}

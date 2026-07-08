@@ -789,11 +789,9 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' Upgrade a Javastics STICS V10 xml workspace directory
 #'
 #' @param workspace JavaStics xml workspace path
-#' @param javastics JavaStics (STICS V10) folder path (Optional)
 #' @param out_dir   Output directory path
-# @param from_version Starting STICS version (character or numeric)
-# @param target_version Target STICS version (character or numeric)
-# @param plant
+#' @param javastics Path of JavaSTICS containing the STICS version corresponding
+#' to the version of the files to be converted (optional)
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
 #' @param verbose   logical, TRUE for displaying a copy message
@@ -816,10 +814,8 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 upgrade_workspace_xml_10_11 <- function(
   workspace,
-  javastics = NULL,
   out_dir,
-  # from_version = "V10.0",
-  # target_version = "V11.0",
+  javastics = NULL,
   overwrite = FALSE,
   verbose = FALSE,
   use_patho = FALSE
@@ -831,9 +827,9 @@ upgrade_workspace_xml_10_11 <- function(
 
   # Getting param_gen.xml path
   par_gen <- get_param_gen_file(
-    "param_gen.xml",
-    workspace,
-    javastics
+    file = "param_gen.xml",
+    workspace = workspace,
+    javastics = javastics
   )
 
   stics_version <- get_xml_file_version(par_gen)
@@ -865,9 +861,9 @@ upgrade_workspace_xml_10_11 <- function(
 
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
-    "param_newform.xml",
-    workspace,
-    javastics
+    file = "param_newform.xml",
+    workspace = workspace,
+    javastics = javastics
   )
 
   upgrade_param_newform_xml_10_11(
@@ -979,8 +975,8 @@ upgrade_workspace_xml_10_11 <- function(
   # dir for *.mod files if they do not exist in the workspace
   workspace_files_copy(
     workspace = workspace,
-    javastics = javastics,
     out_dir = out_dir,
+    javastics = javastics,
     overwrite = overwrite,
     verbose = verbose
   )
@@ -991,62 +987,4 @@ upgrade_workspace_xml_10_11 <- function(
       "Files upgrade and copy is complete.\n"
     ))
   }
-}
-
-
-#' Check if the versions for upgrading xml files are compatible
-#'
-#' @param xml_doc An SticsRFiles xml_doc object
-#' @param from_version STICS starting version
-#' @param target_version STICS target version
-#'
-#' @description
-#' Defining if the starting version to use for files upgrading process
-#' is compatible with the target version.
-#' Versions may be given either as character strings (i.e. "V9.2")
-#' or numerical value (i.e. 9.2)
-#'
-#' @keywords internal
-#' @noRd
-#'
-check_and_upgrade_xml_version <- function(
-  xml_doc,
-  from_version,
-  target_version
-) {
-  # Checking if target version is supported
-  # raising an error if not!
-  check_version(target_version)
-  target_version_num <- get_version_num(target_version)
-  from_version_major <- get_major_version(get_version_num(from_version))
-  target_version_major <- get_major_version(target_version_num)
-
-  if (target_version_major > from_version_major + 1) {
-    stop(
-      "The target version ",
-      target_version,
-      " must be one major version higher than the initial version ",
-      from_version
-    )
-  }
-
-  # checking actual version consistency between from_version
-  # and file version
-  file_version_major <- get_major_version(
-    get_version_num(
-      get_xml_file_version(
-        xml_doc
-      )
-    )
-  )
-  if (from_version_major != file_version_major) {
-    stop(
-      "The file major version is not consistent with the given",
-      "initial version!",
-      "it must be a",
-      paste0(from_version_major, ".x")
-    )
-  }
-  # Setting new file STICS version
-  set_xml_file_version(xml_doc, new_version = target_version_num)
 }

@@ -1949,14 +1949,9 @@ upgrade_usms_xml_9_10 <- function(
 #' Upgrade XML files of a JavaSTICS V9 workspace directory
 #'
 #' @param workspace Path of a JavaSTICS workspace
-#' @param javastics Path of JavaSTICS containing the STICS version corresponding
-#' to the version of the files to be converted
 #' @param out_dir Output directory of the generated files
-# @param stics_version Name of the STICS version (VX.Y format)
-# @param target_version Name of the STICS version to upgrade files
-# to  (VX.Y format)
-#' @param plant logical (optional), TRUE for upgrading plant files if a "plant"
-#' sub-directory of workspace exists, FALSE otherwise
+#' @param javastics Path of JavaSTICS containing the STICS version corresponding
+#' to the version of the files to be converted (optional)
 #' @param overwrite logical (optional),
 #' TRUE for overwriting files if they exist, FALSE otherwise
 #' @param verbose   logical, TRUE for displaying a copy message
@@ -1984,17 +1979,16 @@ upgrade_usms_xml_9_10 <- function(
 #' }
 upgrade_workspace_xml_9_10 <- function(
   workspace,
-  javastics,
   out_dir,
-  plant = FALSE,
+  javastics = NULL,
   overwrite = FALSE,
   verbose = FALSE
 ) {
   # Getting param_gen.xml path
   par_gen <- get_param_gen_file(
-    file_name = "param_gen.xml",
-    workspace,
-    javastics
+    file = "param_gen.xml",
+    workspace = workspace,
+    javastics = javastics
   )
 
   stics_version <- get_xml_file_version(par_gen)
@@ -2029,13 +2023,12 @@ upgrade_workspace_xml_9_10 <- function(
   if (verbose) {
     message("param_gen.xml\n")
   }
-  # }
 
   # Getting param_newform.xml path
   par_new <- get_param_gen_file(
-    file_name = "param_newform.xml",
-    workspace,
-    javastics
+    file = "param_newform.xml",
+    workspace = workspace,
+    javastics = javastics
   )
 
   # Converting param_newform.xml
@@ -2156,8 +2149,8 @@ upgrade_workspace_xml_9_10 <- function(
 
   workspace_files_copy(
     workspace = workspace,
-    javastics = javastics,
     out_dir = out_dir,
+    javastics = javastics,
     overwrite = overwrite,
     verbose = verbose
   )
