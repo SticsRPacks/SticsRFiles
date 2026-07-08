@@ -2,9 +2,7 @@ context("Get years number for a usm from files name")
 
 data_dir <- download_data(
   example_dirs = "study_case_1",
-  stics_version = "V11.0",
-  raise_error = TRUE,
-  out_dir = "/tmp"
+  raise_error = TRUE
 )
 
 workspace <- file.path(data_dir, "XmlFiles")
