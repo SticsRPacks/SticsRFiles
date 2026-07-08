@@ -165,9 +165,9 @@ get_ini_txt(path)
 tmp <- get_tmp_txt(
   workspace = get_examples_path(file_type = "txt")
 )
-several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
-several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
-is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
+several_fert <- tmp$option_engrais_multiple == 1
+several_thin <- tmp$option_thinning == 1
+is_pasture <- tmp$option_pature == 1
 
 # Then, get the technical parameters:
 get_tec_txt(
