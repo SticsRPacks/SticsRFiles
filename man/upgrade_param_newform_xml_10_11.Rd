@@ -4,23 +4,17 @@
 \alias{upgrade_param_newform_xml_10_11}
 \title{Upgrade a param_newform.xml file from STICS version 10 to 11}
 \usage{
-upgrade_param_newform_xml_10_11(
-  file,
-  out_dir,
-  overwrite = FALSE,
-  use_patho = FALSE
-)
+upgrade_param_newform_xml_10_11(file, out_dir, ..., overwrite = FALSE)
 }
 \arguments{
 \item{file}{xml param_newform file path or a vector of}
 
 \item{out_dir}{Output directory path}
 
+\item{...}{additional argument(s) to pass}
+
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
-
-\item{use_patho}{Logical TRUE if code_patho is to be added to the
-param_newform.xml file, FALSE otherwise}
 }
 \value{
 None
@@ -38,3 +32,4 @@ upgrade_param_newform_xml_10_11(
 )
 
 }
+\keyword{internal}

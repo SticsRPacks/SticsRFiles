@@ -194,6 +194,7 @@ Collate:
     'stics_files_utils.R'
     'upgrade_v10_v11.R'
     'upgrade_v9_v10.R'
+    'upgrade_xml_files.R'
     'var_to_col_names.R'
     'xml_document.R'
     'xml_files_functions.R'

@@ -2,14 +2,15 @@
 #'
 #' @param file xml technical file path or a vector of
 #' @param out_dir Output directory path
-#' @param code_strip Integer indicating if the crop is sown in a strip design: 1 for yes, 2 for no (default)
-#' @param nrow How many rows in the strip design if `code_strip` is 1 (default 1)
+#@param code_strip Integer indicating if the crop is sown in a strip design: 1 for yes, 2 for no (default)
+#@param nrow How many rows in the strip design if `code_strip` is 1 (default 1)
+#' @param ... additional argument(s) to pass
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
@@ -22,11 +23,26 @@
 upgrade_tec_xml_10_11 <- function(
   file,
   out_dir,
-  code_strip = 2,
-  nrow = 1,
+  ...,
   overwrite = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
+
+  # dot args management ...
+  dots_args <- list(...)
+  dots_args_names <- names(dots_args)
+
+  # Setting optional args default values
+  code_strip <- 2
+  nrow <- 1
+  if ("code_strip" %in% dots_args_names) {
+    code_strip <- dots_args$code_strip
+  }
+  if ("nrow" %in% dots_args_names) {
+    nrow <- dots_args$nrow
+  }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -142,12 +158,13 @@ upgrade_tec_xml_10_11 <- function(
 #' Upgrade _plt.xml file(s) from version 10 to 11
 #' @param file xml plant file path or a vector of
 #' @param out_dir Output directory path
-#' @param stage_const_height Plant height computation parameter (optional)
-#' @param elongation Plant height computation parameter (optional)
-#' @param nw_height Plant height computation parameter (optional)
-#' @param code_shape Plant height computation parameter (optional)
-#' @param haut_dev_x0 Plant height computation parameter (optional)
-#' @param haut_dev_k Plant height computation parameter (optional)
+# @param stage_const_height Plant height computation parameter (optional)
+# @param elongation Plant height computation parameter (optional)
+# @param nw_height Plant height computation parameter (optional)
+# @param code_shape Plant height computation parameter (optional)
+# @param haut_dev_x0 Plant height computation parameter (optional)
+# @param haut_dev_k Plant height computation parameter (optional)
+#' @param ... additional argument(s) to pass
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
 #' @param warning Logical for rising warnings, FALSE otherwise
@@ -155,7 +172,7 @@ upgrade_tec_xml_10_11 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -169,17 +186,49 @@ upgrade_tec_xml_10_11 <- function(
 upgrade_plt_xml_10_11 <- function(
   file,
   out_dir,
-  stage_const_height = NULL,
-  elongation = NULL,
-  nw_height = NULL,
-  code_shape = NULL,
-  haut_dev_x0 = NULL,
-  haut_dev_k = NULL,
+  # stage_const_height = NULL,
+  # elongation = NULL,
+  # nw_height = NULL,
+  # code_shape = NULL,
+  # haut_dev_x0 = NULL,
+  # haut_dev_k = NULL,
+  ...,
   overwrite = FALSE,
   warning = TRUE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
+  # dot args management ...
+  dots_args <- list(...)
+  dots_args_names <- names(dots_args)
+
+  # Setting optional args default values
+  stage_const_height <- NULL
+  elongation <- NULL
+  nw_height <- NULL
+  code_shape <- NULL
+  haut_dev_x0 <- NULL
+  haut_dev_k <- NULL
+  if ("stage_const_height" %in% dots_args_names) {
+    stage_const_height <- dots_args$stage_const_height
+  }
+  if ("elongation" %in% dots_args_names) {
+    elongation <- dots_args$elongation
+  }
+  if ("nw_height" %in% dots_args_names) {
+    nw_height <- dots_args$nw_height
+  }
+  if ("code_shape" %in% dots_args_names) {
+    code_shape <- dots_args$code_shape
+  }
+  if ("haut_dev_x0" %in% dots_args_names) {
+    haut_dev_x0 <- dots_args$haut_dev_x0
+  }
+  if ("haut_dev_k" %in% dots_args_names) {
+    haut_dev_k <- dots_args$haut_dev_k
+  }
   # Treating a files list
   if (length(file) > 1) {
     lapply(file, function(x) {
@@ -403,7 +452,7 @@ plt_IC_param_list <- function() {
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -415,7 +464,9 @@ plt_IC_param_list <- function() {
 #' )
 #'
 upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -490,7 +541,7 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -502,7 +553,9 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' )
 #'
 upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   # Treating a files list
   if (length(file) > 1) {
@@ -537,14 +590,15 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 #' @param file xml param_gen file path or a vector of
 #' @param out_dir Output directory path
-#' @param hauteur_threshold new parameter for V11
-#' @param par_to_net new parameter for V11
+# @param hauteur_threshold new parameter for V11
+# @param par_to_net new parameter for V11
+#' @param ... additional argument(s) to pass
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
@@ -557,11 +611,29 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 upgrade_param_gen_xml_10_11 <- function(
   file,
   out_dir,
-  hauteur_threshold = NULL,
-  par_to_net = NULL,
+  # hauteur_threshold = NULL,
+  # par_to_net = NULL,
+  ...,
   overwrite = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
+
+  # dot args management ...
+  dots_args <- list(...)
+  dots_args_names <- names(dots_args)
+
+  # Setting optional args default values
+  hauteur_threshold <- NULL
+  par_to_net <- NULL
+
+  if ("hauteur_threshold" %in% dots_args_names) {
+    hauteur_threshold <- dots_args$hauteur_threshold
+  }
+  if ("par_to_net" %in% dots_args_names) {
+    par_to_net <- dots_args$par_to_net
+  }
 
   xml_doc <- xmldocument(file)
 
@@ -595,6 +667,9 @@ upgrade_param_gen_xml_10_11 <- function(
   XML::addSibling(parsurg_node[[1]], XML::xmlClone(par2net_node))
 
   # Set values to added parameters if given as func inputs
+  if (!is.null(hauteur_threshold))
+    set_param_value(xml_doc, "hauteur_threshold", hauteur_threshold)
+  if (!is.null(par_to_net)) set_param_value(xml_doc, "par_to_net", par_to_net)
 
   # write the file
   out_file <- file.path(out_dir, basename(file))
@@ -608,14 +683,15 @@ upgrade_param_gen_xml_10_11 <- function(
 #'
 #' @param file xml param_newform file path or a vector of
 #' @param out_dir Output directory path
+#' @param ... additional argument(s) to pass
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
-#' @param use_patho Logical TRUE if code_patho is to be added to the
-#' param_newform.xml file, FALSE otherwise
+# @param use_patho Logical TRUE if code_patho is to be added to the
+# param_newform.xml file, FALSE otherwise
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -629,10 +705,24 @@ upgrade_param_gen_xml_10_11 <- function(
 upgrade_param_newform_xml_10_11 <- function(
   file,
   out_dir,
-  overwrite = FALSE,
-  use_patho = FALSE
+  ...,
+  overwrite = FALSE #,
+  #use_patho = FALSE
 ) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
+
+  # dot args management ...
+  dots_args <- list(...)
+  dots_args_names <- names(dots_args)
+
+  # Setting optional args default values
+  use_patho <- FALSE
+
+  if ("use_patho" %in% dots_args_names) {
+    use_patho <- dots_args$use_patho
+  }
 
   xml_doc <- xmldocument(file)
 
@@ -714,7 +804,7 @@ upgrade_param_newform_xml_10_11 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -726,7 +816,9 @@ upgrade_param_newform_xml_10_11 <- function(
 #' )
 #'
 upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   xml_doc <- xmldocument(file)
 
@@ -754,7 +846,7 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -766,7 +858,9 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' )
 #'
 upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
-  if (!dir.exists(out_dir)) dir.create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir)
+  }
 
   xml_doc <- xmldocument(file)
 
@@ -783,208 +877,4 @@ upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-}
-
-
-#' Upgrade a Javastics STICS V10 xml workspace directory
-#'
-#' @param workspace JavaStics xml workspace path
-#' @param out_dir   Output directory path
-#' @param javastics Path of JavaSTICS containing the STICS version corresponding
-#' to the version of the files to be converted (optional)
-#' @param overwrite Logical TRUE for overwriting files,
-#' FALSE otherwise (default)
-#' @param verbose   logical, TRUE for displaying a copy message
-#' FALSE otherwise (default)
-#' @param use_patho Logical TRUE if code_patho is to be added to the
-#' param_newform.xml file, FALSE otherwise
-#'
-#' @return None
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' upgrade_workspace_xml_10_11(
-#'   workspace = "/path/to/JavaSTICS/workspace",
-#'   javastics = "/path/to/JavaSTICS/folder",
-#'   out_dir = "/path/to/an/output/directory"
-#' )
-#' }
-#'
-upgrade_workspace_xml_10_11 <- function(
-  workspace,
-  out_dir,
-  javastics = NULL,
-  overwrite = FALSE,
-  verbose = FALSE,
-  use_patho = FALSE
-) {
-  # Just in case, creating the target directory
-  if (!dir.exists(out_dir)) {
-    dir.create(out_dir)
-  }
-
-  # Getting param_gen.xml path
-  par_gen <- get_param_gen_file(
-    file = "param_gen.xml",
-    workspace = workspace,
-    javastics = javastics
-  )
-
-  stics_version <- get_xml_file_version(par_gen)
-
-  if (verbose) {
-    message(
-      paste(
-        "Upgrading files from version",
-        stics_version,
-        "to",
-        "V11",
-        "\n"
-      ),
-      paste("From: ", workspace, "\n"),
-      paste("To: ", out_dir, "\n"),
-      "-----------------------------------\n"
-    )
-  }
-
-  upgrade_param_gen_xml_10_11(
-    file = par_gen,
-    out_dir = out_dir,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("param_gen.xml\n")
-  }
-
-  # Getting param_newform.xml path
-  par_new <- get_param_gen_file(
-    file = "param_newform.xml",
-    workspace = workspace,
-    javastics = javastics
-  )
-
-  upgrade_param_newform_xml_10_11(
-    file = par_new,
-    out_dir = out_dir,
-    overwrite = overwrite,
-    use_patho = use_patho
-  )
-
-  if (verbose) {
-    message("param_new_form.xml\n")
-  }
-
-  # Converting usms.xml file
-  usms <- file.path(workspace, "usms.xml")
-  upgrade_usms_xml_10_11(usms, out_dir, overwrite = overwrite)
-
-  if (verbose) {
-    message("usms.xml\n")
-  }
-
-  # Converting sols.xml file
-  sols <- file.path(workspace, "sols.xml")
-  upgrade_sols_xml_10_11(sols, out_dir, overwrite = overwrite)
-
-  if (verbose) {
-    message("sols.xml\n")
-  }
-
-  # Converting station files (*_sta.xml)
-  sta_files <- get_in_files(in_dir_or_files = workspace, kind = "sta")
-  upgrade_sta_xml_10_11(sta_files, out_dir, overwrite = overwrite)
-
-  if (verbose) {
-    message("*_sta.xml\n")
-  }
-
-  # Converting initialisation files (*_ini.xml)
-  ini_files <- get_in_files(in_dir_or_files = workspace, kind = "ini")
-  upgrade_ini_xml_10_11(ini_files, out_dir, overwrite = overwrite)
-
-  if (verbose) {
-    message("*_ini.xml\n")
-  }
-
-  # Converting crop management files (*_tec.xml)
-  tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
-  upgrade_tec_xml_10_11(
-    tec_files,
-    out_dir,
-    code_strip = 2,
-    nrow = 1,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("*_tec.xml\n")
-  }
-
-  # Upgrading plant files
-  # if a plant sub directory exists in workspace
-  usms_plt_files <-
-    unique(unlist(get_param_xml(file = usms, param = "fplt")$usms$fplt))
-  usms_plt_files <- usms_plt_files[usms_plt_files != "null"]
-  plant_files <- get_in_files(
-    in_dir_or_files = file.path(workspace, "plant"),
-    kind = "plt"
-  )
-  plant_idx <- usms_plt_files %in% basename(plant_files)
-  full_plant_files <- file.path(workspace, "plant", usms_plt_files[plant_idx])
-
-  usms_plt_files <- usms_plt_files[!plant_idx]
-
-  if (!is.null(javastics)) {
-    plant_files <- get_in_files(
-      in_dir_or_files = file.path(javastics, "plant"),
-      kind = "plt"
-    )
-
-    plant_idx <- usms_plt_files %in% basename(plant_files)
-
-    # Combining javastics and workspace plant files
-    full_plant_files <- c(
-      full_plant_files,
-      file.path(javastics, "plant", usms_plt_files[plant_idx])
-    )
-  }
-
-  if (length(full_plant_files) > 0) {
-    # For creating a sub-directory in workspace for upgraded plant files
-    plant_out_dir <- file.path(out_dir, "plant")
-    if (!dir.exists(plant_out_dir)) {
-      dir.create(plant_out_dir)
-    }
-
-    upgrade_plt_xml_10_11(
-      file = full_plant_files,
-      out_dir = plant_out_dir,
-      overwrite = overwrite
-    )
-
-    if (verbose) {
-      message("*_plt.xml\n")
-    }
-  }
-
-  # Other files types copy from the source workspace,
-  # or from javastics "example"
-  # dir for *.mod files if they do not exist in the workspace
-  workspace_files_copy(
-    workspace = workspace,
-    out_dir = out_dir,
-    javastics = javastics,
-    overwrite = overwrite,
-    verbose = verbose
-  )
-
-  if (verbose) {
-    message(paste0(
-      "-----------------------------------\n",
-      "Files upgrade and copy is complete.\n"
-    ))
-  }
 }

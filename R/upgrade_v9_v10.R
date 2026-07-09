@@ -2,17 +2,16 @@
 #'
 #' @param file Path of a crop management (*_tec.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
-#' @param param_newform_file Path of the param_newform.xml file corresponding
-#' to the file version
 #' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
+#' @param param_newform_file Path of the param_newform.xml file corresponding
 #' to the file version
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
-# @param ... Additional input arguments
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See get_stics_versions_compat() for listing versions
 #'
@@ -23,15 +22,15 @@
 #' upgrade_tec_xml_9_10(
 #'   file = file.path(dir_path, "file_tec.xml"),
 #'   out_dir = tempdir(),
-#'   param_newform_file = file.path(dir_path, "param_newform.xml"),
-#'   param_gen_file = file.path(dir_path, "param_gen.xml")
+#'   param_gen_file = file.path(dir_path, "param_gen.xml"),
+#'   param_newform_file = file.path(dir_path, "param_newform.xml")
 #' )
 #'
 upgrade_tec_xml_9_10 <- function(
   file,
   out_dir,
-  param_newform_file,
   param_gen_file,
+  param_newform_file,
   overwrite = FALSE
 ) {
   if (!dir.exists(out_dir)) {
@@ -42,9 +41,10 @@ upgrade_tec_xml_9_10 <- function(
     lapply(file, function(x) {
       upgrade_tec_xml_9_10(
         file = x,
-        param_newform_file = param_newform_file,
         out_dir = out_dir,
-        param_gen_file = param_gen_file
+        param_gen_file = param_gen_file,
+        param_newform_file = param_newform_file,
+        overwrite = overwrite
       )
     })
     return(invisible())
@@ -469,9 +469,9 @@ upgrade_tec_xml_9_10 <- function(
 #'
 #' @param file Path of an plant (*_plt.xml) file or a vector of
 #' @param out_dir Output directory path of the generated files
-#' @param param_newform_file Path of the param_newform.xml file corresponding
-#' to the file version
 #' @param param_gen_file Path of the param_gen.xml file corresponding
+#' to the file version
+#' @param param_newform_file Path of the param_newform.xml file corresponding
 #' to the file version
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
@@ -479,7 +479,7 @@ upgrade_tec_xml_9_10 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See get_stics_versions_compat() for listing versions
 #'
@@ -490,15 +490,15 @@ upgrade_tec_xml_9_10 <- function(
 #' upgrade_plt_xml_9_10(
 #'   file = file.path(dir_path, "file_plt.xml"),
 #'   out_dir = tempdir(),
-#'   param_newform_file = file.path(dir_path, "param_newform.xml"),
-#'   param_gen_file = file.path(dir_path, "param_gen.xml")
+#'   param_gen_file = file.path(dir_path, "param_gen.xml"),
+#'   param_newform_file = file.path(dir_path, "param_newform.xml")
 #' )
 #'
 upgrade_plt_xml_9_10 <- function(
   file,
   out_dir,
-  param_newform_file,
   param_gen_file,
+  param_newform_file,
   overwrite = FALSE
 ) {
   if (!dir.exists(out_dir)) {
@@ -511,8 +511,8 @@ upgrade_plt_xml_9_10 <- function(
       upgrade_plt_xml_9_10(
         file = x,
         out_dir = out_dir,
-        param_newform_file = param_newform_file,
         param_gen_file = param_gen_file,
+        param_newform_file = param_newform_file,
         overwrite = overwrite
       )
     })
@@ -1178,7 +1178,7 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
@@ -1294,7 +1294,7 @@ upgrade_sta_xml_9_10 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
@@ -1451,7 +1451,7 @@ upgrade_ini_xml_9_10 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See get_stics_versions_compat() for listing versions
 #'
@@ -1549,7 +1549,7 @@ upgrade_param_gen_xml_9_10 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
@@ -1773,7 +1773,7 @@ upgrade_param_newform_xml_9_10 <- function(
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
@@ -1858,13 +1858,13 @@ upgrade_sols_xml_9_10 <- function(
 #' @param out_dir Output directory path of the generated file
 #' @param param_gen_file Path of the param_gen.xml file corresponding
 #' to the file version
-#' @param obs_dir Directory path of the observation data files
+#@param obs_dir Directory path of the observation data files
 #' @param overwrite logical (optional),
 #' TRUE for overwriting file if it exists, FALSE otherwise
 #'
 #' @return None
 #'
-#' @export
+#' @keywords internal
 #'
 #' @details See get_stics_versions_compat() for listing versions
 #'
@@ -1882,7 +1882,7 @@ upgrade_usms_xml_9_10 <- function(
   file,
   out_dir,
   param_gen_file,
-  obs_dir = NULL,
+  #obs_dir = NULL,
   overwrite = FALSE
 ) {
   # Checking output directory
@@ -1890,9 +1890,9 @@ upgrade_usms_xml_9_10 <- function(
     dir.create(out_dir)
   }
 
-  if (is.null(obs_dir)) {
-    obs_dir <- dirname(file)
-  }
+  #if (is.null(obs_dir)) {
+  obs_dir <- dirname(file)
+  #}
 
   # loading the old doc
   xml_doc <- xmldocument(file = file)
@@ -1944,221 +1944,4 @@ upgrade_usms_xml_9_10 <- function(
 
   XML::free(xml_doc@content)
   invisible(gc(verbose = FALSE))
-}
-
-#' Upgrade XML files of a JavaSTICS V9 workspace directory
-#'
-#' @param workspace Path of a JavaSTICS workspace
-#' @param out_dir Output directory of the generated files
-#' @param javastics Path of JavaSTICS containing the STICS version corresponding
-#' to the version of the files to be converted (optional)
-#' @param overwrite logical (optional),
-#' TRUE for overwriting files if they exist, FALSE otherwise
-#' @param verbose   logical, TRUE for displaying a copy message
-#' FALSE otherwise (default)
-# @param ... Additional input arguments
-#'
-#' @return None
-#'
-#' @export
-#'
-#' @details
-#' - See SticsRFiles::get_stics_versions_compat() for listing versions
-#' - If general parameters files exist in `workspace`, they are also upgraded.
-#' In that case, residues parameters values are kept and might not be adapted
-#' to the target model version.
-#' - Weather data and observations files are fully copied to `out_dir`
-#'
-#' @examples
-#' \dontrun{
-#' upgrade_workspace_xml_9_10(
-#'   workspace = "/path/to/JavaSTICS/workspace",
-#'   javastics = "/path/to/JavaSTICS/folder",
-#'   out_dir = "/path/to/an/output/directory"
-#' )
-#' }
-upgrade_workspace_xml_9_10 <- function(
-  workspace,
-  out_dir,
-  javastics = NULL,
-  overwrite = FALSE,
-  verbose = FALSE
-) {
-  # Getting param_gen.xml path
-  par_gen <- get_param_gen_file(
-    file = "param_gen.xml",
-    workspace = workspace,
-    javastics = javastics
-  )
-
-  stics_version <- get_xml_file_version(par_gen)
-
-  # Just in case, creating the target directory
-  if (!dir.exists(out_dir)) {
-    dir.create(out_dir)
-  }
-
-  if (verbose) {
-    message(
-      paste(
-        "Upgrading files from version",
-        stics_version,
-        "to",
-        "V10",
-        "\n"
-      ),
-      paste("From: ", workspace, "\n"),
-      paste("To: ", out_dir, "\n"),
-      "-----------------------------------\n"
-    )
-  }
-
-  # Converting param_gen.xml
-  upgrade_param_gen_xml_9_10(
-    file = par_gen,
-    out_dir = out_dir,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("param_gen.xml\n")
-  }
-
-  # Getting param_newform.xml path
-  par_new <- get_param_gen_file(
-    file = "param_newform.xml",
-    workspace = workspace,
-    javastics = javastics
-  )
-
-  # Converting param_newform.xml
-  upgrade_param_newform_xml_9_10(
-    file = par_new,
-    out_dir = out_dir,
-    param_gen_file = par_gen,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("param_new_form.xml\n")
-  }
-
-  # Converting usms.xml file
-  usms <- file.path(workspace, "usms.xml")
-
-  upgrade_usms_xml_9_10(
-    file = usms,
-    out_dir = out_dir,
-    param_gen_file = par_gen,
-    obs_dir = workspace,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("usms.xml\n")
-  }
-
-  # Converting sols.xml file
-  sols <- file.path(workspace, "sols.xml")
-
-  upgrade_sols_xml_9_10(
-    file = sols,
-    out_dir = out_dir,
-    param_gen_file = par_gen,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("sols.xml\n")
-  }
-
-  # Converting station files (*_sta.xml)
-  sta_files <- get_in_files(in_dir_or_files = workspace, kind = "sta")
-
-  upgrade_sta_xml_9_10(
-    file = sta_files,
-    out_dir = out_dir,
-    param_gen_file = par_gen,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("*_sta.xml\n")
-  }
-
-  # Converting initialisation files (*_ini.xml)
-  ini_files <- get_in_files(in_dir_or_files = workspace, kind = "ini")
-
-  upgrade_ini_xml_9_10(
-    file = ini_files,
-    out_dir = out_dir,
-    param_gen_file = par_gen,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("*_ini.xml\n")
-  }
-
-  # Converting crop management files (*_tec.xml)
-  tec_files <- get_in_files(in_dir_or_files = workspace, kind = "tec")
-
-  upgrade_tec_xml_9_10(
-    file = tec_files,
-    out_dir = out_dir,
-    param_newform_file = par_new,
-    param_gen_file = par_gen,
-    overwrite = overwrite
-  )
-
-  if (verbose) {
-    message("*_tec.xml\n")
-  }
-
-  # Upgrading plant files
-  # if a plant sub directory exists in workspace
-  plant_files <- get_in_files(
-    in_dir_or_files = file.path(workspace, "plant"),
-    kind = "plt"
-  )
-
-  if (length(plant_files) > 0) {
-    # For creating a sub-directory in workspace for upgraded plant files
-    plant_out_dir <- file.path(out_dir, "plant")
-    if (!dir.exists(plant_out_dir)) {
-      dir.create(plant_out_dir)
-    }
-
-    upgrade_plt_xml_9_10(
-      file = plant_files,
-      out_dir = plant_out_dir,
-      param_gen_file = par_gen,
-      param_newform_file = par_new,
-      overwrite = overwrite
-    )
-
-    if (verbose) {
-      message("*_plt.xml\n")
-    }
-  }
-
-  # TODO: see how to manage variables names checks in *.mod files
-  # Probably, the new JavaSTICS path may be added as a new function argument
-  # for getting information on output variables
-  # (use get_var_info with the appropriate version string)
-
-  workspace_files_copy(
-    workspace = workspace,
-    out_dir = out_dir,
-    javastics = javastics,
-    overwrite = overwrite,
-    verbose = verbose
-  )
-
-  if (verbose) {
-    message(paste0(
-      "-----------------------------------\n",
-      "Files upgrade and copy is complete.\n"
-    ))
-  }
 }

@@ -7,8 +7,8 @@
 upgrade_tec_xml_9_10(
   file,
   out_dir,
-  param_newform_file,
   param_gen_file,
+  param_newform_file,
   overwrite = FALSE
 )
 }
@@ -17,10 +17,10 @@ upgrade_tec_xml_9_10(
 
 \item{out_dir}{Output directory path of the generated files}
 
-\item{param_newform_file}{Path of the param_newform.xml file corresponding
+\item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
 
-\item{param_gen_file}{Path of the param_gen.xml file corresponding
+\item{param_newform_file}{Path of the param_newform.xml file corresponding
 to the file version}
 
 \item{overwrite}{logical (optional),
@@ -42,8 +42,9 @@ dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 upgrade_tec_xml_9_10(
   file = file.path(dir_path, "file_tec.xml"),
   out_dir = tempdir(),
-  param_newform_file = file.path(dir_path, "param_newform.xml"),
-  param_gen_file = file.path(dir_path, "param_gen.xml")
+  param_gen_file = file.path(dir_path, "param_gen.xml"),
+  param_newform_file = file.path(dir_path, "param_newform.xml")
 )
 
 }
+\keyword{internal}

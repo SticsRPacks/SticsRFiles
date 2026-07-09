@@ -4,13 +4,7 @@
 \alias{upgrade_usms_xml_9_10}
 \title{Upgrade a usms.xml file from STICS version 9 to 10}
 \usage{
-upgrade_usms_xml_9_10(
-  file,
-  out_dir,
-  param_gen_file,
-  obs_dir = NULL,
-  overwrite = FALSE
-)
+upgrade_usms_xml_9_10(file, out_dir, param_gen_file, overwrite = FALSE)
 }
 \arguments{
 \item{file}{Path of a usms.xml file}
@@ -19,8 +13,6 @@ upgrade_usms_xml_9_10(
 
 \item{param_gen_file}{Path of the param_gen.xml file corresponding
 to the file version}
-
-\item{obs_dir}{Directory path of the observation data files}
 
 \item{overwrite}{logical (optional),
 TRUE for overwriting file if it exists, FALSE otherwise}
@@ -45,3 +37,4 @@ upgrade_usms_xml_9_10(
 )
 
 }
+\keyword{internal}

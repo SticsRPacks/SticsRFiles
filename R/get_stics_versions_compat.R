@@ -246,14 +246,16 @@ get_version_num <- function(stics_version, numeric = TRUE) {
 #' @noRd
 #'
 get_major_version <- function(stics_version) {
-  get_version_parts(stics_version, "major")
-}
-get_minor_version <- function(stics_version) {
-  get_version_parts(stics_version, "minor")
-}
-
-get_patch_version <- function(stics_version) {
-  get_version_parts(stics_version, "patch")
+  if (is.character(stics_version))
+    stics_version <- get_version_num(stics_version)
+  unique(
+    unlist(
+      lapply(
+        stics_version,
+        function(x) get_version_parts(x, "major")
+      )
+    )
+  )
 }
 
 
@@ -262,7 +264,7 @@ get_version_parts <- function(stics_version, part) {
     return()
   }
 
-  ver <- try(semver::render_version(stics_version)[[1]][[part]])
+  ver <- try(semver::render_version(stics_version)[[part]])
   if (inherits(ver, "try-error")) {
     return()
   }

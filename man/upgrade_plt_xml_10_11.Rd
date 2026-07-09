@@ -4,35 +4,14 @@
 \alias{upgrade_plt_xml_10_11}
 \title{Upgrade _plt.xml file(s) from version 10 to 11}
 \usage{
-upgrade_plt_xml_10_11(
-  file,
-  out_dir,
-  stage_const_height = NULL,
-  elongation = NULL,
-  nw_height = NULL,
-  code_shape = NULL,
-  haut_dev_x0 = NULL,
-  haut_dev_k = NULL,
-  overwrite = FALSE,
-  warning = TRUE
-)
+upgrade_plt_xml_10_11(file, out_dir, ..., overwrite = FALSE, warning = TRUE)
 }
 \arguments{
 \item{file}{xml plant file path or a vector of}
 
 \item{out_dir}{Output directory path}
 
-\item{stage_const_height}{Plant height computation parameter (optional)}
-
-\item{elongation}{Plant height computation parameter (optional)}
-
-\item{nw_height}{Plant height computation parameter (optional)}
-
-\item{code_shape}{Plant height computation parameter (optional)}
-
-\item{haut_dev_x0}{Plant height computation parameter (optional)}
-
-\item{haut_dev_k}{Plant height computation parameter (optional)}
+\item{...}{additional argument(s) to pass}
 
 \item{overwrite}{Logical TRUE for overwriting files,
 FALSE otherwise (default)}
@@ -55,3 +34,4 @@ upgrade_plt_xml_10_11(
 )
 
 }
+\keyword{internal}
