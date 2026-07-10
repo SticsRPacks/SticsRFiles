@@ -246,8 +246,9 @@ get_version_num <- function(stics_version, numeric = TRUE) {
 #' @noRd
 #'
 get_major_version <- function(stics_version) {
-  if (is.character(stics_version))
+  if (is.character(stics_version)) {
     stics_version <- get_version_num(stics_version)
+  }
   unique(
     unlist(
       lapply(

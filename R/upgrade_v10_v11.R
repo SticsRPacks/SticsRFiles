@@ -2,8 +2,8 @@
 #'
 #' @param file xml technical file path or a vector of
 #' @param out_dir Output directory path
-#@param code_strip Integer indicating if the crop is sown in a strip design: 1 for yes, 2 for no (default)
-#@param nrow How many rows in the strip design if `code_strip` is 1 (default 1)
+# @param code_strip Integer indicating if the crop is sown in a strip design: 1 for yes, 2 for no (default)
+# @param nrow How many rows in the strip design if `code_strip` is 1 (default 1)
 #' @param ... additional argument(s) to pass
 #' @param overwrite Logical TRUE for overwriting files,
 #' FALSE otherwise (default)
@@ -20,7 +20,7 @@
 #'   file = file.path(dir_path, "file_tec.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_tec_xml_10_11 <- function(
   file,
   out_dir,
@@ -183,7 +183,7 @@ upgrade_tec_xml_10_11 <- function(
 #'   file = file.path(dir_path, "file_plt.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_plt_xml_10_11 <- function(
   file,
   out_dir,
@@ -463,7 +463,7 @@ plt_IC_param_list <- function() {
 #'   file = file.path(dir_path, "file_sta.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -552,7 +552,7 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'   file = file.path(dir_path, "file_ini.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -609,7 +609,7 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'   file = file.path(dir_path, "param_gen.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_param_gen_xml_10_11 <- function(
   file,
   out_dir,
@@ -669,8 +669,9 @@ upgrade_param_gen_xml_10_11 <- function(
   XML::addSibling(parsurg_node[[1]], XML::xmlClone(par2net_node))
 
   # Set values to added parameters if given as func inputs
-  if (!is.null(hauteur_threshold))
+  if (!is.null(hauteur_threshold)) {
     set_param_value(xml_doc, "hauteur_threshold", hauteur_threshold)
+  }
   if (!is.null(par_to_net)) set_param_value(xml_doc, "par_to_net", par_to_net)
 
   # write the file
@@ -703,13 +704,13 @@ upgrade_param_gen_xml_10_11 <- function(
 #'   file = file.path(dir_path, "param_newform.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_param_newform_xml_10_11 <- function(
   file,
   out_dir,
   ...,
-  overwrite = FALSE #,
-  #use_patho = FALSE
+  overwrite = FALSE # ,
+  # use_patho = FALSE
 ) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -816,7 +817,7 @@ upgrade_param_newform_xml_10_11 <- function(
 #'   file = file.path(dir_path, "sols.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -858,7 +859,7 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #'   file = file.path(dir_path, "usms.xml"),
 #'   out_dir = tempdir()
 #' )
-#'}
+#' }
 upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
