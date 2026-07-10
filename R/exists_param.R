@@ -15,6 +15,7 @@
 #'
 #' exists_param(xml_doc, "cfes")
 #' exists_param(xml_doc, c("cfes", "mulchbat"))
+#'
 #' @keywords internal
 #'
 #' @noRd

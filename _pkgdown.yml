@@ -2,7 +2,7 @@ destination: docs
 url: https://sticsrpacks.github.io/SticsRFiles/
 
 reference:
-  - title: "Upgrade XML files from STICS version 9.* to 10.* format"
+  - title: "Upgrade XML files to a next major version (i.e. from 9.2 to 10, or from 10 to 11)"
     desc: Functions for upgrading parameter files
     contents:
       - upgrade_workspace_xml
@@ -27,8 +27,10 @@ reference:
     contents:
       - get_param_info
       - is_stics_param
+      - get_xml_files_param_df
       - get_var_info
       - is_stics_var
+      - get_dev_stages
 
   - title: "Generate JavaSTICS Input files (XML format)"
     desc: Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)
@@ -67,7 +69,7 @@ reference:
     contents:
       - set_param_txt
 
-  - title: "Get values in STICS Input files (Text format)"
+  - title: "Get values from STICS Input files (Text format)"
     contents:
       - get_param_txt
       - get_plants_nb
@@ -75,7 +77,7 @@ reference:
       - get_varmod
       - get_lai_forcing
 
-  - title: "Get values in STICS Output files"
+  - title: "Get values from STICS Output files"
     contents:
       - get_sim
       - get_report_results

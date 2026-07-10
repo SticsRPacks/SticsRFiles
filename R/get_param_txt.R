@@ -83,7 +83,7 @@ get_param_txt <- function(
   stics_version = "latest",
   ...
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   ini <- get_ini_txt(
     workspace = workspace,
@@ -131,23 +131,11 @@ get_param_txt <- function(
   # NOT IN V10
   several_fert <- several_thin <- is_pasture <- NULL
   tmp_names <- names(tmp)
-  several_fert <- ifelse(
-    "option_engrais_multiple" %in%
-      tmp_names &&
-      tmp$option_engrais_multiple == 1,
-    TRUE,
-    FALSE
-  )
-  several_thin <- ifelse(
-    "option_thinning" %in% tmp_names && tmp$option_thinning == 1,
-    TRUE,
-    FALSE
-  )
-  is_pasture <- ifelse(
-    "option_pature" %in% tmp_names && tmp$option_pature == 1,
-    TRUE,
-    FALSE
-  )
+  several_fert <- "option_engrais_multiple" %in%
+    tmp_names &&
+    tmp$option_engrais_multiple == 1
+  several_thin <- ("option_thinning" %in% tmp_names) && tmp$option_thinning == 1
+  is_pasture <- "option_pature" %in% tmp_names && tmp$option_pature == 1
 
   tec <- plant <- stats::setNames(
     vector(mode = "list", length = ini$nbplantes),
@@ -203,7 +191,7 @@ get_param_txt <- function(
               variety[[i]],
               varieties[[i]]
             )
-            if (any(is.na(variety))) {
+            if (anyNA(variety)) {
               cli::cli_alert_danger(alert_msg)
               return()
             }
@@ -357,9 +345,9 @@ filter_param <- function(
 #' tmp <- get_tmp_txt(
 #'   workspace = get_examples_path(file_type = "txt")
 #' )
-#' several_fert <- ifelse(tmp$option_engrais_multiple == 1, TRUE, FALSE)
-#' several_thin <- ifelse(tmp$option_thinning == 1, TRUE, FALSE)
-#' is_pasture <- ifelse(tmp$option_pature == 1, TRUE, FALSE)
+#' several_fert <- tmp$option_engrais_multiple == 1
+#' several_thin <- tmp$option_thinning == 1
+#' is_pasture <- tmp$option_pature == 1
 #'
 #' # Then, get the technical parameters:
 #' get_tec_txt(
@@ -377,7 +365,7 @@ get_ini_txt <- function(
   stics_version,
   workspace = NULL
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
   filepath <- file
   if (!is.null(workspace)) {
     filepath <- file.path(workspace, file)
@@ -567,7 +555,7 @@ get_tec_txt <- function(
   # breaking it. I think for example to a "version argument" because
   # the tec file is not generic.
 
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   par_lines <- readLines(filepath)
   itk <- vector(mode = "list", length = 0)
@@ -814,7 +802,7 @@ val <- function(pval = list(index = 1, val = NA), values) {
   val_txt <- unlist(strsplit(trimws(values[pval$index - 1]), split = " "))
 
   out_val <- suppressWarnings(as.numeric(val_txt))
-  if (any(is.na(out_val))) {
+  if (anyNA(out_val)) {
     out_val <- val_txt
   }
 
@@ -896,7 +884,7 @@ get_soil_txt <- function(
   stics_version,
   workspace = NULL
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   filepath <- file
   if (!is.null(workspace)) {
