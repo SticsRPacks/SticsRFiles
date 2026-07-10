@@ -305,8 +305,8 @@ upgrade_param_newform_xml <- function(
   out_dir,
   param_gen_file,
   ...,
-  overwrite = FALSE #,
-  #use_patho = FALSE
+  overwrite = FALSE # ,
+  # use_patho = FALSE
 ) {
   # Getting file version if upgradable
   file_version <- file_upgradable_version(file, param_gen_file = param_gen_file)
@@ -468,8 +468,8 @@ upgrade_workspace_xml <- function(
   ...,
   javastics = NULL,
   overwrite = FALSE,
-  verbose = FALSE #,
-  #use_patho = FALSE
+  verbose = FALSE # ,
+  # use_patho = FALSE
 ) {
   # Just in case, creating the target directory
   if (!dir.exists(out_dir)) {
@@ -528,8 +528,8 @@ upgrade_workspace_xml <- function(
     out_dir = out_dir,
     param_gen_file = par_gen,
     ...,
-    overwrite = overwrite #,
-    #use_patho = use_patho
+    overwrite = overwrite # ,
+    # use_patho = use_patho
   )
   #
   if (verbose) {
@@ -599,8 +599,8 @@ upgrade_workspace_xml <- function(
     out_dir,
     param_gen_file = par_gen,
     param_newform_file = par_new,
-    #code_strip = code_strip,
-    #nrow = nrow,
+    # code_strip = code_strip,
+    # nrow = nrow,
     ...,
     overwrite = overwrite
   )
@@ -707,11 +707,12 @@ file_upgradable_version <- function(file, param_gen_file) {
         param_gen_file = param_gen_file
       )
     })))
-    if (length(major_versions) > 1)
+    if (length(major_versions) > 1) {
       stop(
         "No possible upgrade, all files versions are not identical: ",
         paste(major_versions, collapse = ", ")
       )
+    }
     return(major_versions)
   }
 
