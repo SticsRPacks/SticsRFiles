@@ -683,14 +683,21 @@ upgrade_workspace_xml <- function(
 #'
 #' @returns A numerical major version
 #' @keywords internal
-#'
 #' @noRd
 #'
 get_min_major_version <- function() {
   get_major_version(get_version_num(9))
 }
 
-
+#' Checking if the file version is an upgradable version
+#'
+#' @description
+#' If the file major version is too low an arror is raised
+#'
+#' @returns A numerical major version
+#' @keywords internal
+#' @noRd
+#'
 file_upgradable_version <- function(file, param_gen_file) {
   # Treating a files list
   if (length(file) > 1) {
@@ -722,6 +729,5 @@ file_upgradable_version <- function(file, param_gen_file) {
       major_version
     )
   }
-
   major_version
 }

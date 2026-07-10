@@ -2,31 +2,18 @@ destination: docs
 url: https://sticsrpacks.github.io/SticsRFiles/
 
 reference:
-  - title: "Upgrade XML files from STICS version 9.* to 10.* format"
+  - title: "Upgrade XML files to a next major version (i.e. from 9.2 to 10, or from 10 to 11)"
     desc: Functions for upgrading parameter files
     contents:
-      - upgrade_workspace_xml_9_10
-      - upgrade_usms_xml_9_10
-      - upgrade_sols_xml_9_10
-      - upgrade_sta_xml_9_10
-      - upgrade_ini_xml_9_10
-      - upgrade_plt_xml_9_10
-      - upgrade_tec_xml_9_10
-      - upgrade_param_gen_xml_9_10
-      - upgrade_param_newform_xml_9_10
-
-  - title: "Upgrade XML files from STICS version 10.* to 11.* format"
-    desc: Functions for upgrading parameter files
-    contents:
-      - upgrade_workspace_xml_10_11
-      - upgrade_usms_xml_10_11
-      - upgrade_sols_xml_10_11
-      - upgrade_sta_xml_10_11
-      - upgrade_ini_xml_10_11
-      - upgrade_plt_xml_10_11
-      - upgrade_tec_xml_10_11
-      - upgrade_param_gen_xml_10_11
-      - upgrade_param_newform_xml_10_11
+      - upgrade_workspace_xml
+      - upgrade_usms_xml
+      - upgrade_sols_xml
+      - upgrade_sta_xml
+      - upgrade_ini_xml
+      - upgrade_plt_xml
+      - upgrade_tec_xml
+      - upgrade_param_gen_xml
+      - upgrade_param_newform_xml
 
   - title: "Manage JavaSTICS worskpace XML files"
     desc: Functions for manipulating workspaces
@@ -82,7 +69,7 @@ reference:
     contents:
       - set_param_txt
 
-  - title: "Get values in STICS Input files (Text format)"
+  - title: "Get values from STICS Input files (Text format)"
     contents:
       - get_param_txt
       - get_plants_nb
@@ -90,7 +77,7 @@ reference:
       - get_varmod
       - get_lai_forcing
 
-  - title: "Get values in STICS Output files"
+  - title: "Get values from STICS Output files"
     contents:
       - get_sim
       - get_report_results

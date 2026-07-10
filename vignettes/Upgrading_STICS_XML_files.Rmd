@@ -33,11 +33,11 @@ The XML files structure has changed either between STICS version **9.2** and ver
 
 So, to avoid difficulties and errors with manual XML files modifications, functionalities have been developed to do so automatically.
 
-One can either transform a complete workspace directory at once or each kind of file individually.
+One can either transform each kind of file individually (i.e. _tec, _ini,.. files) or a full workspace directory at once.
 
-Here some examples of use of upgrade functions either for a whole workspace or for specific files (i.e. _tec, _ini,.. files) from version 9 to 10.
+Here are some examples of use of upgrade generic functions either from version 9 to 10 or 10 to 11.
 
-For upgrading from STICS version 10 to 11, just change the functions suffix from _9_10 to _10_11
+
 
 ```{r, include = FALSE, eval=FALSE}
 example_data <- SticsRFiles::download_data(
@@ -49,7 +49,7 @@ out_dir <- file.path(tempdir(), "XmlFiles_V10.2.0")
 if (!dir.exists(out_dir)) dir.create(out_dir)
 javastics <-
   "/home/plecharpent/tmp/TEST_UPDATE_XML_V9_V10/JavaSTICS-1.41-stics-9.2"
-upgrade_workspace_xml_9_10(
+upgrade_workspace_xml(
   workspace = workspace, javastics = javastics,
   out_dir = out_dir, overwrite = TRUE
 )
@@ -61,18 +61,31 @@ In that case, a workspace adapted to the new version is recreated.
 
 So, apart from the XML files, some other files as outputs definition files (*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new upgraded workspace.
 
-Take care that the JavaStics folder corresponds to the initial STICS version of the workspace you want to upgrade. 
+Take care that, if the JavaStics folder is needed, it must corresponds to the initial STICS version of the workspace you want to upgrade. 
 
+### Case 1: the initial workspace does not contain all needed files
+In that case the JavaStics folder path have to be set in the function inputs
 ```{r, eval = FALSE, results='markup'}
 workspace <- "/path/to/workspace/dir/V9.2"
 out_dir <- "/path/to/out/dir/V10.2.0"
 javastics <- "/path/to/JavaSTICS-1.41-stics-9.2"
-upgrade_workspace_xml_9_10(
-  workspace = workspace, javastics = javastics,
+upgrade_workspace_xml(
+  workspace = workspace,
+  javastics = javastics,
   out_dir = out_dir
 )
 ```
-Here is the output display indicating the treated files:
+### Case 2: the initial workspace contains all the input files
+In that case no need to specify the JavaStics folder path
+```{r, eval = FALSE, results='markup'}
+workspace <- "/path/to/workspace/dir/V9.2"
+out_dir <- "/path/to/out/dir/V10.2.0"
+upgrade_workspace_xml(
+  workspace = workspace,
+  out_dir = out_dir
+)
+```
+Here is the output display indicating the treated files (can be deactivated using the `verbose` argument):
 
 <pre style="font-size:11px;">
 Upgrading files from version V9.2 to V10.2.0    
@@ -100,19 +113,19 @@ Files upgrade and copy is complete.
 
 For each kind of file, a specific function is to be used for upgrading its format.
 
-* **`usms.xml`** : upgrade_usms_xml_9_10
-* **`*_ini.xml`** files: upgrade_ini_xml_9_10
-* **`param_gen.xml`**: upgrade_param_gen_xml_9_10
-* **`param_newform.xml`**: upgrade_param_newform_xml_9_10
-* **`*_plt.xml`** files: upgrade_plt_xml_9_10
-* **`sols.xml`**: upgrade_sols_xml_9_10
-* **`*_sta.xml`** files: upgrade_sta_xml_9_10
-* **`*_tec.xml`** files: upgrade_tec_xml_9_10
+* **`usms.xml`** : upgrade_usms_xml
+* **`*_ini.xml`** files: upgrade_ini_xml
+* **`param_gen.xml`**: upgrade_param_gen_xml
+* **`param_newform.xml`**: upgrade_param_newform_xml
+* **`*_plt.xml`** files: upgrade_plt_xml
+* **`sols.xml`**: upgrade_sols_xml
+* **`*_sta.xml`** files: upgrade_sta_xml
+* **`*_tec.xml`** files: upgrade_tec_xml
 
 The input arguments of these functions may vary, refer to each function help for details
 about its use.    
 
-Sometimes, general parameter files are needed as function inputs because of parameters or options codes movement to specific files. 
+Sometimes, general parameter files (`param_gen.xml` or/and `param_newform.xml`) corresponding to the initial version are needed as function inputs because of parameters or options codes transfer to specific files. 
 
 For example, the **`usms.xml`** file is to be upgraded as follows:
 
@@ -120,8 +133,9 @@ For example, the **`usms.xml`** file is to be upgraded as follows:
 usms_path <- file.path(example_data, "XmlFiles", "usms.xml")
 out_dir <- file.path(tempdir(), "XmlFiles_V10.2.0")
 param_gen_path <- file.path(javastics, "config", "param_gen.xml")
-upgrade_usms_xml_9_10(
-  file = usms_path, param_gen_file = param_gen_path,
+upgrade_usms_xml(
+  file = usms_path,
+  param_gen_file = param_gen_path,
   out_dir = out_dir, overwrite = TRUE
 )
 ```
@@ -130,8 +144,10 @@ upgrade_usms_xml_9_10(
 usms_path <- "/path/to/workspace/dir/V9.2/usms.xml"
 out_dir <- "/path/to/workspace/dir/V10.2.0"
 param_gen_path <- "/path/to/JavaSTICS-1.41-stics-9.2/config/param_gen.xml"
-upgrade_usms_xml_9_10(
-  file = usms_path, param_gen_file = param_gen_path,
+# or param_gen_path <- "/path/to/workspace/param_gen.xml"
+upgrade_usms_xml(
+  file = usms_path,
+  param_gen_file = param_gen_path,
   out_dir = out_dir
 )
 ```
