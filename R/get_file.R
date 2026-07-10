@@ -263,7 +263,13 @@ get_file_ <- function(
     } else {
       # If we're using sub-directories, we consider the plant folder to be on the parent directory
       plant_names <-
-        get_plant_name(unique(dirname(workspace)), usms_filepath, usms, javastics_path, verbose)
+        get_plant_name(
+          unique(dirname(workspace)),
+          usms_filepath,
+          usms,
+          javastics_path,
+          verbose
+        )
     }
   } else {
     # The user did not provide any usms file path, so using the names of
@@ -390,9 +396,6 @@ get_file_one <- function(
     p_name,
     verbose = verbose
   )
-
-  # to fix note, no visible binding ...
-  .SD <- ..keep_cols <- NULL
 
   keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
   out <- df[, ..keep_cols]
