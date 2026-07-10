@@ -13,13 +13,14 @@
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_tec_xml_10_11(
 #'   file = file.path(dir_path, "file_tec.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_tec_xml_10_11 <- function(
   file,
   out_dir,
@@ -175,14 +176,14 @@ upgrade_tec_xml_10_11 <- function(
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_plt_xml_10_11(
 #'   file = file.path(dir_path, "file_plt.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_plt_xml_10_11 <- function(
   file,
   out_dir,
@@ -455,14 +456,14 @@ plt_IC_param_list <- function() {
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_sta_xml_10_11(
 #'   file = file.path(dir_path, "file_sta.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -544,14 +545,14 @@ upgrade_sta_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_ini_xml_10_11(
 #'   file = file.path(dir_path, "file_ini.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -601,13 +602,14 @@ upgrade_ini_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_param_gen_xml_10_11(
 #'   file = file.path(dir_path, "param_gen.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_param_gen_xml_10_11 <- function(
   file,
   out_dir,
@@ -694,14 +696,14 @@ upgrade_param_gen_xml_10_11 <- function(
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_param_newform_xml_10_11(
 #'   file = file.path(dir_path, "param_newform.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_param_newform_xml_10_11 <- function(
   file,
   out_dir,
@@ -807,14 +809,14 @@ upgrade_param_newform_xml_10_11 <- function(
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_sols_xml_10_11(
 #'   file = file.path(dir_path, "sols.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)
@@ -849,14 +851,14 @@ upgrade_sols_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
 #' @keywords internal
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 #'
 #' upgrade_usms_xml_10_11(
 #'   file = file.path(dir_path, "usms.xml"),
 #'   out_dir = tempdir()
 #' )
-#'
+#'}
 upgrade_usms_xml_10_11 <- function(file, out_dir, overwrite = FALSE) {
   if (!dir.exists(out_dir)) {
     dir.create(out_dir)

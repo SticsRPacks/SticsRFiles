@@ -27,14 +27,14 @@ Upgrade _ini.xml file(s) from STICS version 9 to 10
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
-
+\dontrun{
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 
 upgrade_ini_xml_9_10(
-  file = file.path(dir_path, "file_ini.xml"),
+ file = file.path(dir_path, "file_ini.xml"),
   out_dir = tempdir(),
   param_gen_file = file.path(dir_path, "param_gen.xml")
 )
-
+}
 }
 \keyword{internal}

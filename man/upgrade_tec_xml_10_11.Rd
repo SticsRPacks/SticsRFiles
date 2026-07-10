@@ -23,12 +23,13 @@ None
 Upgrade _tec.xml  file(s) from version 10 to 11
 }
 \examples{
+\dontrun{
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 
 upgrade_tec_xml_10_11(
   file = file.path(dir_path, "file_tec.xml"),
   out_dir = tempdir()
 )
-
+}
 }
 \keyword{internal}

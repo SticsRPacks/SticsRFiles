@@ -32,6 +32,7 @@ Upgrade a param_newform.xml file from STICS version 9 to 10
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
+\dontrun{
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 
 upgrade_param_newform_xml_9_10(
@@ -39,7 +40,6 @@ upgrade_param_newform_xml_9_10(
   out_dir = tempdir(),
   param_gen_file = file.path(dir_path, "param_gen.xml")
 )
-
-
+}
 }
 \keyword{internal}

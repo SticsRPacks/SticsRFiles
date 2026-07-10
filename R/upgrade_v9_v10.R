@@ -16,7 +16,7 @@
 #' @details See get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_tec_xml_9_10(
@@ -25,7 +25,7 @@
 #'   param_gen_file = file.path(dir_path, "param_gen.xml"),
 #'   param_newform_file = file.path(dir_path, "param_newform.xml")
 #' )
-#'
+#'}
 upgrade_tec_xml_9_10 <- function(
   file,
   out_dir,
@@ -484,7 +484,7 @@ upgrade_tec_xml_9_10 <- function(
 #' @details See get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_plt_xml_9_10(
@@ -493,7 +493,7 @@ upgrade_tec_xml_9_10 <- function(
 #'   param_gen_file = file.path(dir_path, "param_gen.xml"),
 #'   param_newform_file = file.path(dir_path, "param_newform.xml")
 #' )
-#'
+#'}
 upgrade_plt_xml_9_10 <- function(
   file,
   out_dir,
@@ -1183,7 +1183,7 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_sta_xml_9_10(
@@ -1191,7 +1191,7 @@ calc_irazomax <- function(irmax, vitircarb, vitirazo) {
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#'
+#'}
 upgrade_sta_xml_9_10 <- function(
   file,
   out_dir,
@@ -1299,15 +1299,15 @@ upgrade_sta_xml_9_10 <- function(
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_ini_xml_9_10(
-#'   file = file.path(dir_path, "file_ini.xml"),
+#'  file = file.path(dir_path, "file_ini.xml"),
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#'
+#' }
 upgrade_ini_xml_9_10 <- function(
   file,
   out_dir,
@@ -1456,12 +1456,14 @@ upgrade_ini_xml_9_10 <- function(
 #' @details See get_stics_versions_compat() for listing versions
 #'
 #' @examples
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_param_gen_xml_9_10(
 #'   file = file.path(dir_path, "param_gen.xml"),
 #'   out_dir = tempdir()
 #' )
+#' }
 upgrade_param_gen_xml_9_10 <- function(
   file,
   out_dir,
@@ -1554,7 +1556,7 @@ upgrade_param_gen_xml_9_10 <- function(
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
-
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_param_newform_xml_9_10(
@@ -1562,8 +1564,7 @@ upgrade_param_gen_xml_9_10 <- function(
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#'
-#'
+#'}
 upgrade_param_newform_xml_9_10 <- function(
   file,
   out_dir,
@@ -1778,7 +1779,7 @@ upgrade_param_newform_xml_9_10 <- function(
 #' @details See SticsRFiles::get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_sols_xml_9_10(
@@ -1786,7 +1787,7 @@ upgrade_param_newform_xml_9_10 <- function(
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#'
+#'}
 upgrade_sols_xml_9_10 <- function(
   file,
   out_dir,
@@ -1869,7 +1870,7 @@ upgrade_sols_xml_9_10 <- function(
 #' @details See get_stics_versions_compat() for listing versions
 #'
 #' @examples
-#'
+#' \dontrun{
 #' dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 #'
 #' upgrade_usms_xml_9_10(
@@ -1877,7 +1878,7 @@ upgrade_sols_xml_9_10 <- function(
 #'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml")
 #' )
-#'
+#'}
 upgrade_usms_xml_9_10 <- function(
   file,
   out_dir,

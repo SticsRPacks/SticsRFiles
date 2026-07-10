@@ -23,12 +23,13 @@ None
 Upgrade a param_gen.xml file from STICS version 10 to 11
 }
 \examples{
+\dontrun{
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 
 upgrade_param_gen_xml_10_11(
   file = file.path(dir_path, "param_gen.xml"),
   out_dir = tempdir()
 )
-
+}
 }
 \keyword{internal}

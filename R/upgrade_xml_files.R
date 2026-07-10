@@ -79,7 +79,7 @@ upgrade_tec_xml <- function(
 #'
 #' upgrade_plt_xml(
 #'   file = file.path(dir_path, "file_plt.xml"),
-#'   out_dir = tempdir()
+#'   out_dir = tempdir(),
 #'   param_gen_file = file.path(dir_path, "param_gen.xml"),
 #'   param_newform_file = file.path(dir_path, "param_newform.xml")
 #' )

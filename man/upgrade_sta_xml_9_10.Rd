@@ -27,7 +27,7 @@ Upgrade _sta.xml file(s) from STICS version 9 to 10
 See SticsRFiles::get_stics_versions_compat() for listing versions
 }
 \examples{
-
+\dontrun{
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V9.2")
 
 upgrade_sta_xml_9_10(
@@ -35,6 +35,6 @@ upgrade_sta_xml_9_10(
   out_dir = tempdir(),
   param_gen_file = file.path(dir_path, "param_gen.xml")
 )
-
+}
 }
 \keyword{internal}

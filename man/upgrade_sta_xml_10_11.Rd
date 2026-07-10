@@ -21,13 +21,13 @@ None
 Upgrade _sta.xml file(s) from STICS version 10 to 11
 }
 \examples{
-
+\dontrun{
 dir_path <- get_examples_path(file_type = "xml", stics_version = "V10.0")
 
 upgrade_sta_xml_10_11(
   file = file.path(dir_path, "file_sta.xml"),
   out_dir = tempdir()
 )
-
+}
 }
 \keyword{internal}
