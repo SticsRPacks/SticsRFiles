@@ -43,7 +43,7 @@ gen_obs <- function(
 ) {
   # Checking if out_dir exists
   if (!dir.exists(out_dir)) {
-    warning(paste("The directory does not exist", out_dir))
+    warning("The directory does not exist", out_dir)
     return(invisible(FALSE))
   }
 

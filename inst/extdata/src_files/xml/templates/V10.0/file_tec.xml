@@ -107,10 +107,10 @@
         <param format="integer" max="30" min="0" nom="locirrig">-999</param>
       </choix>
     </option>
-    <param format="real" max="1000.0" min="10.0" nom="profmes"></param>
+    <param format="real" max="1000.0" min="10.0" nom="profmes">-999.9</param>
   </formalisme>
   <formalisme nom="fertilisation">
-    <param format="real" max="0.2" min="0.0" nom="concirr"></param>
+    <param format="real" max="0.2" min="0.0" nom="concirr">-999.9</param>
     <option choix="2" nom="date of fertilisation" nomParam="codedateappN">
       <choix code="1" nom="sum of upvt"/>
       <choix code="2" nom="julian days"/>
@@ -136,7 +136,7 @@
     </option>
   </formalisme>
   <formalisme nom="harvest">
-    <param format="integer" max="999" min="1" nom="irecbutoir"></param>
+    <param format="integer" max="999" min="1" nom="irecbutoir">999</param>
     <param format="character" nom="ressuite"></param>
     <option choix="2" nom="automatic calculation of crop aerial residues in function of user parameterization" nomParam="code_autoressuite">
       <choix code="1" nom="yes">

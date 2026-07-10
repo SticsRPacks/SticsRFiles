@@ -101,7 +101,7 @@ get_xml_files_param_df <- function(
       }
     )
 
-    return(dplyr::bind_rows(files_df, ))
+    return(dplyr::bind_rows(files_df))
   }
 
   # Getting parameters file type

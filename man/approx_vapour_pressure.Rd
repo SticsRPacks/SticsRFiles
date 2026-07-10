@@ -15,8 +15,14 @@ approx_vapour_pressure(mean_temp, rel_humid)
 numeric vector
 }
 \description{
-Approximates vapour pressure as the saturated vapour pressure at the daily mean air temperature using relative humidity.
-See section 9.3 of the STICS book, as well as M. Launay's explanations on the STICS forum (\href{https://w3.avignon.inrae.fr/forge/boards/26/topics/2237?r=2243#message-2243}{link}).
+Approximates vapour pressure as the saturated vapour pressure at the daily
+mean air temperature using relative humidity.
+See section 9.3 of the STICS book, as well as M. Launay's explanations on the STICS forum
+(\href{https://w3.avignon.inrae.fr/forge/boards/26/topics/2237?r=2243#message-2243}{link}).
+}
+\examples{
+approx_vapour_pressure(15, 60)
+
 }
 \author{
 Timothee Flutre
