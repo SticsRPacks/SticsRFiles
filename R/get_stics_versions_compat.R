@@ -36,7 +36,7 @@ get_stics_versions_compat <- function(version_index = NULL) {
   # getting relative backwards versions
   nb_versions <- length(versions_list)
 
-  if (version_index < 0) {
+  if (version_index <= 0) {
     if (version_index >= -nb_versions + 1) {
       return(versions_list[nb_versions + version_index])
     } else {
@@ -69,7 +69,7 @@ get_latest_version <- function(numeric = FALSE) {
   if (numeric) {
     return(latest)
   }
-  as.character(latest)
+  paste0("V", as.character(latest))
 }
 
 
