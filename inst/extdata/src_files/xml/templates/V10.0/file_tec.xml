@@ -137,7 +137,7 @@
   </formalisme>
   <formalisme nom="harvest">
     <param format="integer" max="999" min="1" nom="irecbutoir">999</param>
-    <param format="character" nom="ressuite"></param>
+    <param format="character" nom="ressuite">roots</param>
     <option choix="2" nom="automatic calculation of crop aerial residues in function of user parameterization" nomParam="code_autoressuite">
       <choix code="1" nom="yes">
         <param format="real" max="100.0" min="0.0" nom="Stubblevegratio">-999</param>
