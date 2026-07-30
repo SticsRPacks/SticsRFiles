@@ -74,6 +74,12 @@ gen_tec_xml <- function(
   }
   tec_col <- param_names[col_id]
 
+  # check if mandatory parameters are present
+  check_df_mandatory_parameters(
+    param_df[, -col_id],
+    c("iplt0", "profsem", "densitesem", "ressuite")
+  )
+
   xml_docs <- gen_tec_doc(
     xml_doc = xml_doc_tmpl,
     param_table = param_df[, -col_id],
@@ -119,7 +125,7 @@ gen_tec_xml <- function(
   tec_out_file <- file.path(out_dir, out_name)
 
   # checking dimensions
-  if (!length(xml_docs) == length(tec_out_file)) {
+  if (length(xml_docs) != length(tec_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
 
@@ -137,4 +143,43 @@ gen_tec_xml <- function(
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
   }
+}
+
+
+#' Check if mandatory names are present in a data.frame names
+#' and if any missing data in the corresponding column
+#'
+#' @param param_df a data.frame
+#' @param par_names a vector of names
+#'
+#' @returns None
+#' @keywords internal
+#' @noRd
+#'
+check_df_mandatory_parameters <- function(param_df, par_names) {
+  df_names <- names(param_df)
+  exist_par <- par_names %in% names(param_df)
+  if (!all(exist_par))
+    stop(
+      "The input data.frame does not contain all the mandatory parameters:\n",
+      paste(par_names[!exist_par], collapse = ", "),
+      " is/are missing"
+    )
+
+  param_df <- param_df[par_names]
+  na_values <- unlist(lapply(param_df, function(x) any(is.na(x))))
+  any_na <- any(na_values)
+  if (any_na)
+    stop(
+      "NA values have been detected in column(s): ",
+      paste(df_names[na_values], collapse = ", ")
+    )
+
+  empty_values <- unlist(lapply(param_df, function(x) any(x == "")))
+  any_empty <- any(empty_values)
+  if (any_empty)
+    stop(
+      "Empty values have been detected in column(s): ",
+      paste(df_names[empty_values], collapse = ", ")
+    )
 }

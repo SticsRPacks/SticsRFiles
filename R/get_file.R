@@ -261,7 +261,8 @@ get_file_ <- function(
       plant_names <-
         get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
     } else {
-      # If we're using sub-directories, we consider the plant folder to be on the parent directory
+      # If we're using sub-directories, we consider the plant folder
+      # to be on the parent directory
       plant_names <-
         get_plant_name(
           unique(dirname(workspace)),
@@ -330,7 +331,7 @@ get_file_ <- function(
   )
   if (parallel) {
     cl <- setup_parallelism(length(inputs), cores)
-    on.exit(stopCluster(cl))
+    on.exit(stopCluster(cl), add = TRUE)
     `%do_par_or_not%` <- foreach::`%dopar%`
   } else {
     `%do_par_or_not%` <- foreach::`%do%`
@@ -380,6 +381,7 @@ get_file_ <- function(
 #' @return the obs or simulation output
 #' @keywords internal
 #'
+#'
 #' @noRd
 #'
 get_file_one <- function(
@@ -397,7 +399,7 @@ get_file_one <- function(
     verbose = verbose
   )
 
-  keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
+  keep_cols <- df[, sapply(.SD, function(x) !all(is.na(x)))]
   out <- df[, ..keep_cols]
   out <- data.frame(out)
   # Filtering

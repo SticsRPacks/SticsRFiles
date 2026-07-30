@@ -114,7 +114,7 @@
                 <param format="integer" max="30" min="0" nom="locferti">-999</param>
             </choix>
         </option>
-        <param format="character" nom="ressuite"></param>
+        <param format="character" nom="ressuite">roots</param>
     </formalisme>
     <formalisme nom="harvest">
         <option choix="1" nom="method of harvest" nomParam="codceuille">

@@ -22,7 +22,7 @@ check_choice_param <- function(xml_doc, param_name, stop = FALSE) {
   #--------------------------------------------------------------------#
 
   # Early exiting for other docs than tec ones
-  if (!XML::xmlName(XML::xmlRoot(xml_doc@content)) == "fichiertec") {
+  if (XML::xmlName(XML::xmlRoot(xml_doc@content)) != "fichiertec") {
     return(invisible())
   }
 

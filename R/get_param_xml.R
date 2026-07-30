@@ -76,7 +76,7 @@ get_param_xml <- function(
   is_duplicated_name <- xml_names %>% duplicated()
   xml_names[is_duplicated_name] <- paste0(
     "xml_",
-    which(is_duplicated_name == TRUE),
+    which(is_duplicated_name),
     "_",
     xml_names[is_duplicated_name]
   )

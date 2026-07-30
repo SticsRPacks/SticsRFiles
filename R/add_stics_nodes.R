@@ -54,7 +54,7 @@ add_stics_nodes <- function(
     form_idx <- which(node_types$form_names[[file_tag]] == formalism_name)
 
     if (!length(form_idx)) {
-      stop(paste("Unkown formalism name", formalism_name))
+      stop("Unkown formalism name", formalism_name)
     }
 
     if (formalism_name == "special techniques") {

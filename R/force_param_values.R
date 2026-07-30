@@ -71,12 +71,12 @@ force_param_values <- function(
 
     ind_non_na <- !is.na(values)
     if (!all(ind_non_na)) {
-      warning(paste(
+      warning(
         "Parameter(s)",
         paste(names(values[!ind_non_na]), collapse = ","),
         "will not be forced (maybe their values are not numeric?",
         " In that case please use set_param_*** functions)."
-      ))
+      )
     }
     values <- values[ind_non_na]
 

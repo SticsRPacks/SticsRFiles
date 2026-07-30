@@ -42,7 +42,7 @@
 #'
 
 set_sols_param_xml <- function(xml_doc, sols_param, overwrite = FALSE) {
-  if (!"data.frame" %in% class(sols_param)) {
+  if (!inherits(sols_param, "data.frame")) {
     stop("sols_param do not belong to data.frame class/type")
   }
 
