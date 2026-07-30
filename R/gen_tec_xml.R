@@ -159,27 +159,30 @@ gen_tec_xml <- function(
 check_df_mandatory_parameters <- function(param_df, par_names) {
   df_names <- names(param_df)
   exist_par <- par_names %in% names(param_df)
-  if (!all(exist_par))
+  if (!all(exist_par)) {
     stop(
       "The input data.frame does not contain all the mandatory parameters:\n",
       paste(par_names[!exist_par], collapse = ", "),
       " is/are missing"
     )
+  }
 
   param_df <- param_df[par_names]
   na_values <- unlist(lapply(param_df, function(x) any(is.na(x))))
   any_na <- any(na_values)
-  if (any_na)
+  if (any_na) {
     stop(
       "NA values have been detected in column(s): ",
       paste(df_names[na_values], collapse = ", ")
     )
+  }
 
   empty_values <- unlist(lapply(param_df, function(x) any(x == "")))
   any_empty <- any(empty_values)
-  if (any_empty)
+  if (any_empty) {
     stop(
       "Empty values have been detected in column(s): ",
       paste(df_names[empty_values], collapse = ", ")
     )
+  }
 }
