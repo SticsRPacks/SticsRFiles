@@ -453,7 +453,7 @@ gen_usms_xml2txt <- function(
 
       # Copying files for outputs definition
       out_copy_status <- all(file.copy(
-        from = out_files_path[to_copy_idx],
+        from = out_files_path,
         to = usm_path,
         overwrite = TRUE
       ))
