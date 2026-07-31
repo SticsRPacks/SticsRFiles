@@ -2,8 +2,6 @@ options(warn = -1)
 
 stics_version <- get_stics_versions_compat()$latest_version
 
-host <- "github.com"
-
 context("get model outputs")
 
 path <- get_examples_path(file_type = "sti", stics_version = stics_version)
