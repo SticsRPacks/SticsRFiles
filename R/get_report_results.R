@@ -59,7 +59,7 @@ get_report_results <- function(
       stringsAsFactors = FALSE
     )
 
-    if (any(is.na(h))) {
+    if (anyNA(h)) {
       stop("Headers strings are not homogeneous in report file!")
     }
   } else {

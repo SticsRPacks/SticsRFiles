@@ -44,20 +44,19 @@ is_leap_year <- function(year, integer = FALSE) {
 #' Optional.
 #' @return numeric vector
 #' @author Timothee Flutre
+#'
+#' @export
+#'
 #' @examples
 #'
-#' date <- as.Date("2015-02-10")
-#' compute_day_from_date(date = date)
-#'
+#' compute_day_from_date(date = as.Date("2015-02-10"))
 #' compute_day_from_date(date = "2015-02-10", start_year = 2014)
 #'
-#' date <- as.Date("2009-02-10")
-#' compute_day_from_date(date = date, start_year = 2008)
+#' compute_day_from_date(date = as.Date("2009-02-10"), start_year = 2008)
 #'
 #' dates <- c(as.Date("2008-02-10"), as.Date("2009-02-10"))
 #' compute_day_from_date(date = dates, start_year = 2008)
 #'
-#' @export
 compute_day_from_date <- function(
   date,
   start_year = NULL

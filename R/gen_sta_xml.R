@@ -105,7 +105,7 @@ gen_sta_xml <- function(
   sta_out_file <- file.path(out_dir, out_name)
 
   # checking dimensions
-  if (!length(xml_docs) == length(sta_out_file)) {
+  if (length(xml_docs) != length(sta_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
 

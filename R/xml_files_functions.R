@@ -11,7 +11,9 @@ get_in_files <- function(in_dir_or_files, kind) {
     obs = "\\.obs$"
   )
 
-  if (!kind %in% names(files_patterns)) stop("file kind error: ", kind)
+  if (!kind %in% names(files_patterns)) {
+    stop("file kind error: ", kind)
+  }
 
   if (kind == "obs") {
     file_pattern <- files_patterns[[kind]]
@@ -46,73 +48,51 @@ get_in_files <- function(in_dir_or_files, kind) {
 }
 
 get_param_gen_file <- function(
-  type = c("param_gen.xml", "param_newform.xml"),
-  workspace_dir,
-  javastics_dir = NULL
+  file,
+  workspace,
+  javastics = NULL
 ) {
-  par_file <- file.path(workspace_dir, type)
+  if (!file %in% c("param_gen.xml", "param_newform.xml")) {
+    stop(file, "is not a gerenal parameters file name !")
+  }
 
-  if (file.exists(par_file)) {
+  par_file <- file.path(workspace, file)
+
+  exists_in_workspace <- file.exists(par_file)
+
+  if (exists_in_workspace) {
     attr(par_file, "where") <- "workspace"
     return(par_file)
   }
 
-  if (is.null(javastics_dir)) {
-    warning(
-      "JavaSTICS path must be given as input argument\n",
-      type,
+  if (is.null(javastics)) {
+    stop(
+      "JavaSTICS path is needed as as input argument\n",
+      file,
       " has not been found in ",
-      workspace_dir
+      workspace
     )
-    return()
   }
 
-  par_file <- file.path(javastics_dir, "config", type)
+  par_file <- file.path(javastics, "config", file)
 
-  if (file.exists(par_file)) {
+  exists_in_javastics <- file.exists(par_file)
+
+  if (exists_in_javastics) {
     attr(par_file, "where") <- "javastics"
     return(par_file)
   }
 
-  warning(type, " has not been found in ", javastics_dir)
-
-  return()
+  stop(
+    file,
+    " has not been found neither in ",
+    javastics,
+    " nor in",
+    workspace
+  )
 }
 
-to_xml_version <- function(stics_version) {
-  err <- FALSE
-
-  if (is.numeric(stics_version)) stics_version <- as.character(stics_version)
-
-  if (!grepl(pattern = "\\.", x = stics_version)) {
-    stics_version <- paste0(stics_version, ".0")
-  }
-  numbers <- grepl(pattern = "[0-9]", stics_version)
-
-  # no numbers in version
-  if (!numbers) err <- TRUE
-
-  char_no_v <- grepl(pattern = "[a-u w-z A-U W-Z]", stics_version)
-
-  # Wrong character in version
-  if (char_no_v) err <- TRUE
-
-  # No dot in version
-
-  if (grepl(pattern = "\\.$", x = stics_version)) err <- TRUE
-
-  if (err) {
-    warning("Version must be X.Y, or VX.Y, or vX.Y")
-    return()
-  }
-
-  as.character(get_version_num(stics_version = stics_version, numeric = FALSE))
-}
-
-
-# set_xml_stics_version <- function(xml_file_or_doc, new_version="V10.0",
-# overwrite = FALSE) {
-set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
+set_xml_file_version <- function(xml_doc, new_version) {
   # If an xml document is given file must not be null
   if (!inherits(xml_doc, "xml_document")) {
     stop(
@@ -121,16 +101,32 @@ set_xml_file_version <- function(xml_doc, new_version = "V10.0") {
     )
   }
   # Adding version to detect if the file have been previously updated to 10.0
-  ver <- to_xml_version(new_version)
+  ver <- get_version_num(new_version, numeric = FALSE)
   names(ver) <- "version"
   root_path <- paste0("/", XML::xmlName(XML::xmlRoot(xml_doc@content)))
-  att <- get_attrs(xml_doc, path = root_path)
+  att_value <- get_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_list = "version"
+  )
+
+  if (length(att_value) == 0) {
+    add_attrs(xml_doc, path = root_path, named_vector = ver)
+    return(invisible())
+  }
 
   # Checking file version
-  if (!is.null(att) && att[, "version"] == ver) {
+  if (!is.null(att_value) && att_value[, "version"] == ver) {
     warning("The file is already in version ", new_version)
     return(invisible(xml_doc))
   }
+
+  set_attrs_values(
+    xml_doc,
+    path = root_path,
+    attr_name = "version",
+    values_list = ver
+  )
 
   add_attrs(xml_doc, path = root_path, named_vector = ver)
 
@@ -145,6 +141,8 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
 
   att <- get_attrs(xml_doc, path = paste0("/", xml_root_name))
 
+  # "version" attribute added in files from version 10
+  # for 10 and above, early return
   if ("version" %in% colnames(att)) {
     version_string <- get_version_string(att[, "version"])
     return(version_string)
@@ -195,33 +193,6 @@ get_xml_file_version <- function(xml_file_or_doc, param_gen_file = NULL) {
   return()
 }
 
-# TODO: see *xml_file_version functions ...
-# check_xml_stics_version <- function(xml_file_or_doc, version,
-# param_gen_file = NULL) {
-check_xml_file_version <- function(
-  xml_file_or_doc,
-  stics_version,
-  param_gen_file = NULL
-) {
-  # xml_version <- get_xml_stics_version(xml_file_or_doc,
-  # param_gen_file = param_gen_file)
-  xml_version <- get_xml_file_version(
-    xml_file_or_doc,
-    param_gen_file = param_gen_file
-  )
-
-  r <- TRUE
-
-  if (is.null(xml_version)) {
-    return(FALSE)
-  }
-
-  if (!stics_version %in% xml_version) r <- FALSE
-
-  attr(r, "version") <- xml_version
-  return(r)
-}
-
 get_xml_doc <- function(xml_file_or_doc) {
   type_id <- c("character", "xml_document") %in% class(xml_file_or_doc)
 
@@ -270,4 +241,81 @@ write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
 
   save_xml_doc(xml_doc, file)
   return(invisible(TRUE))
+}
+
+#' Check if the versions for upgrading xml files are compatible
+#'
+#' @param xml_doc An SticsRFiles xml_doc object
+#' @param from_version STICS starting version
+#' @param target_version STICS target version
+#' @param verbose   logical, TRUE for displaying an information message
+#' FALSE otherwise (default)
+#'
+#' @return a logical value TRUE if changing the version has been successful,
+#' or FALSE otherwise; the file initial major version is identical to the
+#' target one.
+#'
+#' @description
+#' Defining if the starting version to use for files upgrading process
+#' is compatible with the target version.
+#' Versions may be given either as character strings (i.e. "V9.2")
+#' or numerical value (i.e. 9.2)
+#'
+#' @keywords internal
+#' @noRd
+#'
+check_and_upgrade_xml_version <- function(
+  xml_doc,
+  from_version,
+  target_version,
+  verbose = FALSE
+) {
+  # Checking if target version is supported
+  # raising an error if not!
+  check_version(target_version)
+  target_version_num <- get_version_num(target_version)
+  from_version_major <- get_major_version(get_version_num(from_version))
+  target_version_major <- get_major_version(target_version_num)
+
+  if (target_version_major > from_version_major + 1) {
+    stop(
+      "The target version ",
+      target_version,
+      " must be only one major version higher than the initial version ",
+      from_version
+    )
+  }
+
+  # checking actual version consistency between from_version
+  # and file version
+  file_version_major <- get_major_version(
+    get_version_num(
+      get_xml_file_version(
+        xml_doc
+      )
+    )
+  )
+  # the file version and the target version are the same!
+  if (from_version_major == target_version_major) {
+    if (verbose) {
+      message(
+        "The initial file version is already a ",
+        from_version_major,
+        "version!"
+      )
+    }
+    return(FALSE)
+  }
+
+  if (from_version_major != file_version_major) {
+    stop(
+      "The file major version is not consistent with the given",
+      "initial version!",
+      "it must be a",
+      paste0(from_version_major, ".x")
+    )
+  }
+  # Setting new file STICS version
+  set_xml_file_version(xml_doc, new_version = target_version_num)
+  TRUE
 }

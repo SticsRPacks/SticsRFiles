@@ -20,7 +20,7 @@
 #'
 all_out_var <- function(stics_version = "latest") {
   # Checking and getting the right version
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   if (get_version_num(stics_version = stics_version) < get_version_num("9.2")) {
     cols_idx <- 1:4
@@ -80,6 +80,10 @@ all_out_var <- function(stics_version = "latest") {
 #' SticsRFiles::get_var_info("lai", stics_version = "V9.0")
 #'
 #' @export
+#'
+#' @examples
+#'
+#' get_var_info()
 #'
 get_var_info <- function(var = NULL, keyword = NULL, stics_version = "latest") {
   all_vars <- all_out_var(stics_version)
