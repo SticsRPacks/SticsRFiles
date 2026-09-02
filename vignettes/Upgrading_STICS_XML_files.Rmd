@@ -29,7 +29,7 @@ stics_version <- get_stics_versions_compat()$latest_version
 ```
 
 
-The XML files structure has changed either between STICS version **9.2** and versions **10.X.Y** or between STICS versions **10.X.Y** and version 11.0.0 and a transformation is mandatory for upgrading from a major version to a upper one.    
+The XML files structure has changed either between STICS version **9.2** and versions **10.X.Y** or between STICS versions **10.X.Y** and version 11.0.0. Files conversions are mandatory to be able to use them with a upper major version.    
 
 So, to avoid difficulties and errors with manual XML files modifications, functionalities have been developed to do so automatically.
 
@@ -58,13 +58,13 @@ upgrade_workspace_xml(
 
 ## Upgrading a whole workspace
 
-In that case, a workspace adapted to the new version is recreated.
+In that case, a workspace adapted to the new version is generated.
 
-So, apart from the XML files, some other files as outputs definition files (*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new upgraded workspace.
+Apart from the XML files, some other files as outputs definition files (\*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new upgraded workspace.
 
-Take care that, if the JavaStics folder is needed, it must corresponds to the initial STICS version of the workspace you want to upgrade. 
+To achieve conversions, the JavaStics folder path may be needed by functions and it must corresponds to the initial STICS version of the workspace you want to upgrade. 
 
-The output directory will contain all needed files to run simulations. It will contain a `plant` sub-directory with all needed plant files and general parameters files.
+The output directory will contain all needed files to run simulations. But, there are slight differences in the content considering the 2 following cases.
 
 ### Case 1: the initial workspace does not contain all needed files
 In that case the JavaStics folder path have to be set in the function inputs
@@ -95,7 +95,7 @@ upgrade_workspace_xml(
   verbose = TRUE
 )
 ```
-Here is the output display indicating the treated files (can be deactivated using the `verbose` argument set to `TRUE`):
+Here is the output display indicating the treated files (can be deactivated using the `verbose` argument set to `FALSE`):
 
 <pre style="font-size:11px;">
 Upgrading files from version 9 to 10 
@@ -194,7 +194,7 @@ param_gen_path <- file.path(javastics, "config", "param_gen.xml")
 upgrade_usms_xml(
   file = usms_path,
   param_gen_file = param_gen_path,
-  out_dir = out_dir, overwrite = TRUE
+  out_dir = out_dir
 )
 ```
 
@@ -210,14 +210,14 @@ upgrade_usms_xml(
 )
 ```
 
-
-
 ## Warnings and messages
 
-When **new parameters** are introduced in an upper version, when converting them, their values can be fixed
-with default values. But, if their values depend on other parameters values, specific values 
-will be used.
+* When files **already exist**, warnings are displayed and in any case consider adding the optional
+functions' argument `overwrite = TRUE` for overwriting them.
 
+* When **new parameters** are introduced in an upper version, when converting them, their values can be fixed
+with default values. But, if their values depend on other parameters values, specific values 
+will be used.    
 For example, when parameters values depend on species, for some of them, parameters values may exist
 and will be used.
 But if they are not, a message will be displayed indicating that default values are
