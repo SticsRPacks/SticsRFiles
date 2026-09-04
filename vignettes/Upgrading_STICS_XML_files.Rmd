@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r eval=FALSE}
+```{r eval=FALSE, ,include=FALSE}
 library(SticsRFiles)
 ```
 
@@ -29,11 +29,15 @@ stics_version <- get_stics_versions_compat()$latest_version
 ```
 
 
-The XML files structure has changed between STICS version **9.2** and versions **10.X.Y** and a transformation is mandatory.    
+The XML files structure has changed either between STICS version **9.2** and versions **10.X.Y** or between STICS versions **10.X.Y** and version 11.0.0. Files conversions are mandatory to be able to use them with a upper major version.    
 
 So, to avoid difficulties and errors with manual XML files modifications, functionalities have been developed to do so automatically.
 
-One can either transform a complete workspace directory at once or each kind of file individually.
+One can either transform each kind of file individually (i.e. _tec, _ini,.. files) or a full workspace directory at once.
+
+Here are some examples of use of upgrade generic functions either from version 9 to 10 or 10 to 11.
+The initial version is detected and the target version as well. One have to chain upgrades for converting files version 9 to version 11.
+
 
 
 ```{r, include = FALSE, eval=FALSE}
@@ -54,39 +58,111 @@ upgrade_workspace_xml(
 
 ## Upgrading a whole workspace
 
-In that case, a workspace adapted to the new version is recreated.
+In that case, a workspace adapted to the new version is generated.
 
-So, apart from the XML files, some other files as outputs definition files (*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new workspace.
+Apart from the XML files, some other files as outputs definition files (\*.mod), weather files attached to USMs and also observation files (named with the USM name, \*.obs) are copied to the new upgraded workspace.
 
+To achieve conversions, the JavaStics folder path may be needed by functions and it must corresponds to the initial STICS version of the workspace you want to upgrade. 
+
+The output directory will contain all needed files to run simulations. But, there are slight differences in the content considering the 2 following cases.
+
+### Case 1: the initial workspace does not contain all needed files
+In that case the JavaStics folder path have to be set in the function inputs
 ```{r, eval = FALSE, results='markup'}
 workspace <- "/path/to/workspace/dir/V9.2"
-out_dir <- "/path/to/out/dir/V10.2.0"
+out_dir <- "/path/to/out/dir/V10"
 javastics <- "/path/to/JavaSTICS-1.41-stics-9.2"
 upgrade_workspace_xml(
-  workspace = workspace, javastics = javastics,
+  workspace = workspace,
+  javastics = javastics,
   out_dir = out_dir
 )
 ```
-Here is the output display indicating the treated files:
+The plant files (referenced in the usms.xml file) are not converted and copied in the output directory. Those given
+with the JavaStics distribution of the target release have to be used.
+
+### Case 2: the initial workspace contains all the input files
+In that case, a sub-directory `plant` exists and contains all the needed plant files (referenced in the usms.xml file).
+And the general parameter files also are in the workspace (param_gen.xml and param_newform.xml).
+So, no need to specify the JavaStics folder path.
+
+```{r, eval = FALSE, results='markup'}
+workspace <- "/path/to/workspace/dir/V9.2"
+out_dir <- "/path/to/out/dir/V10"
+upgrade_workspace_xml(
+  workspace = workspace,
+  out_dir = out_dir,
+  verbose = TRUE
+)
+```
+Here is the output display indicating the treated files (can be deactivated using the `verbose` argument set to `FALSE`):
 
 <pre style="font-size:11px;">
-Upgrading files from version V9.2 to V10.2.0    
-From:  /path/to/workspace/dir/V9.2   
-To:  /path/to/out/dir/V10.2.0    
------------------------------------   
-param_gen.xml   
-param_new_form.xml   
-usms.xml   
-sols.xml   
-*_sta.xml   
-*_ini.xml   
-*_tec.xml   
-Copying *.mod files.   
-Copying *.obs files.   
-Copying weather files.   
-*_plt.xml    
------------------------------------   
-Files upgrade and copy is complete.   
+Upgrading files from version 9 to 10 
+From:  /path/to/workspace/dir/V9.2
+To:  /path/to/out/dir/V10 
+-----------------------------------
+
+param_gen.xml
+
+param_new_form.xml
+
+usms.xml
+
+sols.xml
+
+*_sta.xml
+
+*_ini.xml
+
+*_tec.xml
+
+Copying output definition (*.mod) files.
+[1] "/path/to/out/dir/V10/prof.mod" "/path/to/out/dir/V10/rap.mod"  "/path/to/out/dir/V10/var.mod" 
+Copying observation (*.obs) files.
+ [1] "/path/to/out/dir/V10/banana.obs"             "/path/to/out/dir/V10/BareSoil.obs"          
+ [3] "/path/to/out/dir/V10/cc_BristleOat.obs"      "/path/to/out/dir/V10/cc_CrimsonClover.obs"  
+ [5] "/path/to/out/dir/V10/cc_ItalianRyegrass.obs" "/path/to/out/dir/V10/cc_mustard.obs"        
+ [7] "/path/to/out/dir/V10/cc_vetch.obs"           "/path/to/out/dir/V10/DurumWheat.obs"        
+ [9] "/path/to/out/dir/V10/fescue.obs"             "/path/to/out/dir/V10/flax.obs"              
+[11] "/path/to/out/dir/V10/grass.obs"              "/path/to/out/dir/V10/lettuce.obs"           
+[13] "/path/to/out/dir/V10/maize.obs"              "/path/to/out/dir/V10/potato.obs"            
+[15] "/path/to/out/dir/V10/proto_rice.obs"         "/path/to/out/dir/V10/rapeseed.obs"          
+[17] "/path/to/out/dir/V10/sorghum.obs"            "/path/to/out/dir/V10/soybean.obs"           
+[19] "/path/to/out/dir/V10/strawberry.obs"         "/path/to/out/dir/V10/sugarbeet.obs"         
+[21] "/path/to/out/dir/V10/SugarCane.obs"          "/path/to/out/dir/V10/sunflower.obs"         
+[23] "/path/to/out/dir/V10/timothy.obs"            "/path/to/out/dir/V10/tomato.obs"            
+[25] "/path/to/out/dir/V10/Turmeric.obs"           "/path/to/out/dir/V10/usms_fobs.xml"         
+[27] "/path/to/out/dir/V10/vine.obs"               "/path/to/out/dir/V10/wheat.obs"             
+Copying LAI dynamics (*.lai) files.
+[1] "/path/to/out/dir/V10/ble.lai"     "/path/to/out/dir/V10/bledur.lai" 
+[3] "/path/to/out/dir/V10/colza.lai"   "/path/to/out/dir/V10/mais.lai"   
+[5] "/path/to/out/dir/V10/salade.lai"  "/path/to/out/dir/V10/soja.lai"   
+[7] "/path/to/out/dir/V10/sortie.lai"  "/path/to/out/dir/V10/toursol.lai"
+[9] "/path/to/out/dir/V10/vigne.lai"  
+Copying weather data (*.YYYY) files.
+ [1] "/path/to/out/dir/V10/Auzeville.2012" "/path/to/out/dir/V10/Auzeville.2013"
+ [3] "/path/to/out/dir/V10/Auzeville.2014" "/path/to/out/dir/V10/chapaisj.2001" 
+ [5] "/path/to/out/dir/V10/clim_snow.2009" "/path/to/out/dir/V10/clim_snow.2010"
+ [7] "/path/to/out/dir/V10/climaisj.1996"  "/path/to/out/dir/V10/climbanj.1996" 
+ [9] "/path/to/out/dir/V10/climbetj.1994"  "/path/to/out/dir/V10/climbldj.2000" 
+[11] "/path/to/out/dir/V10/climbldj.2001"  "/path/to/out/dir/V10/climblej.1994" 
+[13] "/path/to/out/dir/V10/climblej.1995"  "/path/to/out/dir/V10/climcanj.1998" 
+[15] "/path/to/out/dir/V10/climcanj.1999"  "/path/to/out/dir/V10/climcolj.1994" 
+[17] "/path/to/out/dir/V10/climcolj.1995"  "/path/to/out/dir/V10/climfetj.2004" 
+[19] "/path/to/out/dir/V10/climfraj.2001"  "/path/to/out/dir/V10/climlinj.2002" 
+[21] "/path/to/out/dir/V10/climpdtj.1997"  "/path/to/out/dir/V10/climsalj.2000" 
+[23] "/path/to/out/dir/V10/climsnuj.1998"  "/path/to/out/dir/V10/climsojj.1990" 
+[25] "/path/to/out/dir/V10/climsorj.1996"  "/path/to/out/dir/V10/climtomj.2000" 
+[27] "/path/to/out/dir/V10/climtomj.2001"  "/path/to/out/dir/V10/climtouj.1996" 
+[29] "/path/to/out/dir/V10/climvigj.2003"  "/path/to/out/dir/V10/climvigj.2004" 
+[31] "/path/to/out/dir/V10/flux000j.2013"  "/path/to/out/dir/V10/fourquej.1988" 
+[33] "/path/to/out/dir/V10/prairiej.1995"  "/path/to/out/dir/V10/readingj.2004" 
+[35] "/path/to/out/dir/V10/statio5j.1992"  "/path/to/out/dir/V10/statio5j.1993" 
+[37] "/path/to/out/dir/V10/statio5j.1994"  "/path/to/out/dir/V10/statio5j.1995" 
+[39] "/path/to/out/dir/V10/statio5j.1996" 
+-----------------------------------
+Files upgrade and copy is complete.
 </pre>
 
 
@@ -107,7 +183,7 @@ For each kind of file, a specific function is to be used for upgrading its forma
 The input arguments of these functions may vary, refer to each function help for details
 about its use.    
 
-Sometimes, general parameter files are needed as function inputs because of parameters or options codes movement to specific files. 
+Sometimes, general parameter files (`param_gen.xml` or/and `param_newform.xml`) corresponding to the initial version are needed as function inputs because of parameters or options codes transfer to specific files. 
 
 For example, the **`usms.xml`** file is to be upgraded as follows:
 
@@ -116,22 +192,36 @@ usms_path <- file.path(example_data, "XmlFiles", "usms.xml")
 out_dir <- file.path(tempdir(), "XmlFiles_V10.2.0")
 param_gen_path <- file.path(javastics, "config", "param_gen.xml")
 upgrade_usms_xml(
-  file = usms_path, param_gen_file = param_gen_path,
-  out_dir = out_dir, overwrite = TRUE
+  file = usms_path,
+  param_gen_file = param_gen_path,
+  out_dir = out_dir
 )
 ```
 
 ```{r, eval = FALSE}
 usms_path <- "/path/to/workspace/dir/V9.2/usms.xml"
-out_dir <- "/path/to/workspace/dir/V10.2.0"
+out_dir <- "/path/to/workspace/dir/V10"
 param_gen_path <- "/path/to/JavaSTICS-1.41-stics-9.2/config/param_gen.xml"
+# or param_gen_path <- "/path/to/workspace/param_gen.xml"
 upgrade_usms_xml(
-  file = usms_path, param_gen_file = param_gen_path,
+  file = usms_path,
+  param_gen_file = param_gen_path,
   out_dir = out_dir
 )
 ```
 
+## Warnings and messages
 
+* When files **already exist**, warnings are displayed and in any case consider adding the optional
+functions' argument `overwrite = TRUE` for overwriting them.
+
+* When **new parameters** are introduced in an upper version, when converting them, their values can be fixed
+with default values. But, if their values depend on other parameters values, specific values 
+will be used.    
+For example, when parameters values depend on species, for some of them, parameters values may exist
+and will be used.
+But if they are not, a message will be displayed indicating that default values are
+assigned to parameters.
 
 
 

@@ -15,8 +15,8 @@ context("Getting returned type")
 test_that("type, character vector", {
   expect_is(soils_names_usms, "character")
   expect_is(soils_names_sols, "character")
-  expect_equal(length(soils_names_usms), 26)
-  expect_equal(length(soils_names_sols), 33)
+  expect_length(soils_names_usms, 26)
+  expect_length(soils_names_sols, 33)
 })
 
 

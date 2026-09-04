@@ -21,7 +21,7 @@ init_javastics_pref <- function(javastics, overwrite = FALSE) {
 
   config_pref <- file.path(javastics, "config", "preferences.xml")
 
-  if (file.exists(config_pref) && overwrite == FALSE) {
+  if (file.exists(config_pref) && !overwrite) {
     cli::cli_alert_danger(
       paste0("Preference file already exists, try with {.code overwrite= TRUE}")
     )

@@ -26,6 +26,13 @@ List of data.frame, one per USM, with one row per developmental stage.
 \description{
 Extracts the values of developmental stages from simulations
 }
+\examples{
+\dontrun{
+simulations <- get_sim(workspace)
+get_dev_stages(simulations, "iplts")
+}
+
+}
 \seealso{
 \code{\link{get_sim}}
 }

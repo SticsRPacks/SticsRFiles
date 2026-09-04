@@ -100,7 +100,7 @@ xl_fert_values <- dplyr::select(
   tec_param[4, ],
   starts_with(sort(names(xml_fert_values)))
 ) %>%
-  dplyr::select_if(~ !any(is.na(.)))
+  dplyr::select_if(~ !anyNA(.))
 
 
 xl_names <- sort(unique(gsub(
@@ -117,7 +117,7 @@ xl_fert_values <- dplyr::select(
   tec_param[4, ],
   starts_with(common_names)
 ) %>%
-  dplyr::select_if(~ !any(is.na(.)))
+  dplyr::select_if(~ !anyNA(.))
 
 
 context("Comparing table values vs xml tec file values")

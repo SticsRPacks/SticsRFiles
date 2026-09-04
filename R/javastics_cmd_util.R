@@ -202,7 +202,7 @@ get_java_version <- function(java_cmd = "java") {
     java_path <- system2("which", java_cmd, stdout = TRUE, stderr = TRUE)
   } else {
     # for Windows: splitting command if java_cmd is a full path
-    if (!basename(java_cmd) == java_cmd) {
+    if (basename(java_cmd) != java_cmd) {
       java_cmd <- c("/R", dirname(java_cmd), basename(java_cmd))
     }
 

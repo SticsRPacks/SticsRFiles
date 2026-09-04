@@ -68,7 +68,7 @@ set_param_txt <- function(
   value_id = NULL,
   stics_version = "latest"
 ) {
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   param <- gsub("P_", "", param)
 
@@ -530,7 +530,7 @@ set_file_txt <- function(
 ) {
   param <- gsub("P_", "", param)
 
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
   # access the function name from which set_file_txt was called
   type <- strsplit(deparse(sys.call(-1)), split = "\\(")[[1]][1]
