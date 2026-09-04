@@ -392,7 +392,7 @@ stics_remove <- function(name = NULL, env_name = sticsenv_name()) {
 
   if (any(list_idx)) list_var_names <- name[list_idx]
 
-  if (any(!list_idx)) var_names <- name[!list_idx]
+  if (!all(list_idx)) var_names <- name[!list_idx]
 
   ret <- FALSE
   if (length(list_var_names)) {

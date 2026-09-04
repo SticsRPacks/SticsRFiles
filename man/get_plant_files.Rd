@@ -9,7 +9,7 @@ get_plant_files(usms_file, usms = NULL)
 \arguments{
 \item{usms_file}{usms.xml file path}
 
-\item{usms}{usms names to get, if NULL all teh usms are taken into account}
+\item{usms}{usms names to get, if NULL all the usms are taken into account}
 }
 \value{
 A named list with usm names containing plant files names

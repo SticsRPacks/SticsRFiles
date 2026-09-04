@@ -10,8 +10,7 @@ empty_df <- data.frame(
   name = character(0),
   definition = character(0),
   unit = character(0),
-  type = character(0),
-  stringsAsFactors = FALSE
+  type = character(0)
 )
 
 # getting all parameters
@@ -19,7 +18,7 @@ p <- get_examples_path(file_type = "csv")
 lines_outputs <- readLines(file.path(p, "outputs.csv"))
 df_outputs <- get_var_info()
 test_that("getting all variables from outputs.csv", {
-  testthat::expect_equal(length(lines_outputs), dim(df_outputs)[1])
+  testthat::expect_length(lines_outputs, dim(df_outputs)[1])
 })
 
 # Testing empty result
@@ -27,10 +26,10 @@ test_that("giving a unknown variable name returns a 0 row data", {
   empty_df_var <- get_var_info("myunknownvariable")
   empty_df_keyword <- get_var_info(keyword = "myunknownvariable")
 
-  testthat::expect_equal(nrow(empty_df), nrow(empty_df_var))
-  testthat::expect_equal(length(empty_df), length(empty_df_var))
-  testthat::expect_equal(nrow(empty_df), nrow(empty_df_keyword))
-  testthat::expect_equal(length(empty_df), length(empty_df_keyword))
+  testthat::expect_identical(nrow(empty_df), nrow(empty_df_var))
+  testthat::expect_length(empty_df, length(empty_df_var))
+  testthat::expect_identical(nrow(empty_df), nrow(empty_df_keyword))
+  testthat::expect_length(empty_df, length(empty_df_keyword))
 })
 
 var_lai_df <- data.frame(
@@ -40,8 +39,7 @@ var_lai_df <- data.frame(
     "reduction factor on leaf growth due to water excess"
   ),
   unit = c("SD", "0-1"),
-  type = c("real", "real"),
-  stringsAsFactors = FALSE
+  type = c("real", "real")
 )
 
 keyword_lai_df <- data.frame(
@@ -54,8 +52,7 @@ keyword_lai_df <- data.frame(
     )
   ),
   unit = c("SD", "degreeC"),
-  type = c("real", "real"),
-  stringsAsFactors = FALSE
+  type = c("real", "real")
 )
 
 # Testing result for searching a variable name using lai
@@ -86,8 +83,7 @@ var_etmetr_df <- data.frame(
   name = "cep2",
   definition = "cumulative transpiration over the cropping season of plants 1 and 2",
   unit = "mm",
-  type = "real",
-  stringsAsFactors = FALSE
+  type = "real"
 )
 
 # Testing with different versions: last , previous

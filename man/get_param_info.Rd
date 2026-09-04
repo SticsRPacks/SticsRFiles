@@ -41,4 +41,6 @@ SticsRFiles::get_param_info(keyword = "bdil")
 # Find for a particular version:
 SticsRFiles::get_param_info("alb", stics_version = "V9.0")
 
+get_param_info()
+
 }

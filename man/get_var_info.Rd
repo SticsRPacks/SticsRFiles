@@ -41,4 +41,7 @@ SticsRFiles::get_var_info(keyword = "lai")
 # Find for a particular version:
 SticsRFiles::get_var_info("lai", stics_version = "V9.0")
 
+
+get_var_info()
+
 }

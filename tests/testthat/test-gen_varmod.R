@@ -1,7 +1,9 @@
 context("Creating a varmod file to latest version")
 
 out_dir <- file.path(tempdir(), "varmod")
-if (!dir.exists(out_dir)) dir.create(out_dir)
+if (!dir.exists(out_dir)) {
+  dir.create(out_dir)
+}
 
 gen_varmod(out_dir, "lai(n)")
 

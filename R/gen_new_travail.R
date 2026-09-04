@@ -29,7 +29,7 @@ gen_new_travail <- function(
   codoptim = NULL,
   out_dir = NULL
 ) {
-  data_plt2 <- c()
+  data_plt2 <- NULL
   if (usm_data$nbplantes > 1) {
     data_plt2 <- c("fplt2", "ftec2", "flai2")
   }
@@ -194,7 +194,7 @@ get_usm_data <- function(
 
   data$fobs1 <- data$plante1$fobs
 
-  if (data$flai1 == "null" || data$flai1 == "defaut.lai") {
+  if (data$flai1 %in% c("", "null", "defaut.lai") || is.null(data$flai1)) {
     data$codesimul <- get_codesimul(0)
   }
 

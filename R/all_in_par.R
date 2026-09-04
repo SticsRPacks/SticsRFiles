@@ -20,11 +20,8 @@
 #'
 all_in_par <- function(stics_version = "latest") {
   # Checking and getting the right version
-  stics_version <- check_version_compat(stics_version = stics_version)
+  stics_version <- check_version(stics_version = stics_version)
 
-  #  if (get_version_num(stics_version = stics_version) < 9.2) {
-  #    cols_idx <- 1:4
-  #  } else {
   cols_idx <- c(1, 4, 7:8, 2, 3, 10)
   #  }
 
@@ -40,7 +37,15 @@ all_in_par <- function(stics_version = "latest") {
     stringsAsFactors = FALSE
   )[, cols_idx]
 
-  names(par_df) <- c("name", "file", "min", "max", "definition", "unit", "cultivar")
+  names(par_df) <- c(
+    "name",
+    "file",
+    "min",
+    "max",
+    "definition",
+    "unit",
+    "cultivar"
+  )
 
   par_df$cultivar <- as.logical(par_df$cultivar)
 
@@ -85,6 +90,9 @@ all_in_par <- function(stics_version = "latest") {
 #' SticsRFiles::get_param_info("alb", stics_version = "V9.0")
 #'
 #' @export
+#'
+#' @examples
+#' get_param_info()
 #'
 get_param_info <- function(
   param = NULL,
@@ -149,7 +157,7 @@ is_stics_param <- function(param, stics_version = "latest") {
   pars_names_parsed <- var_to_col_names(all_pars$name)
   index_par <- match(par_parsed, pars_names_parsed)
   par_found <- !is.na(index_par)
-  if (any(!par_found)) {
+  if (!all(par_found)) {
     cli::cli_alert_warning(
       paste0(
         "paremeters{?s} {.var {par_parsed[!par_found]}}",

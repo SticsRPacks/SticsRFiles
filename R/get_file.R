@@ -261,7 +261,8 @@ get_file_ <- function(
       plant_names <-
         get_plant_name(workspace, usms_filepath, usms, javastics_path, verbose)
     } else {
-      # If we're using sub-directories, we consider the plant folder to be on the parent directory
+      # If we're using sub-directories, we consider the plant folder
+      # to be on the parent directory
       plant_names <-
         get_plant_name(
           unique(dirname(workspace)),
@@ -291,7 +292,7 @@ get_file_ <- function(
 
     # Selecting using usm_name
     if (!is.null(usm_name)) {
-      usms <- intersect(usms, usm_name)
+      usms <- intersect(usm_name, usms)
       # Not any matching names
       if (!length(usms)) {
         return()
@@ -330,7 +331,7 @@ get_file_ <- function(
   )
   if (parallel) {
     cl <- setup_parallelism(length(inputs), cores)
-    on.exit(stopCluster(cl))
+    on.exit(stopCluster(cl), add = TRUE)
     `%do_par_or_not%` <- foreach::`%dopar%`
   } else {
     `%do_par_or_not%` <- foreach::`%do%`
@@ -380,6 +381,7 @@ get_file_ <- function(
 #' @return the obs or simulation output
 #' @keywords internal
 #'
+#'
 #' @noRd
 #'
 get_file_one <- function(
@@ -396,10 +398,15 @@ get_file_one <- function(
     p_name,
     verbose = verbose
   )
+  # Conversion to data.frame
+  df <- data.frame(df)
+  # Removing useless columns and rows with all NA values
+  out <- df[
+    rowSums(is.na(df)) < ncol(df),
+    colSums(is.na(df)) < nrow(df)
+  ] %>%
+    data.frame()
 
-  keep_cols <- df[, sapply(.SD, function(x) any(!is.na(x)))]
-  out <- df[, ..keep_cols]
-  out <- data.frame(out)
   # Filtering
   # Filtering Date on dates_list (format Posixct)
   if (!is.null(dates_list) && "Date" %in% names(out)) {
