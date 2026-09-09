@@ -166,6 +166,7 @@ Collate:
     'get_xml_doc_example.R'
     'get_xml_files_param_df.R'
     'get_xml_stics_version.R'
+    'get_years.R'
     'init_javastics_pref.R'
     'is_os_name.R'
     'is_stics_doc.R'
