@@ -7,7 +7,7 @@
   * new function get_dev_stages for extracting STICS development stages dates from a list
   of data.frame of simulations outputs
   * parallelisation mode introduced for STICS inputs text files generation
-  * parallelisation mode introcuced for reading STICS output files
+  * parallelisation mode introduced for reading STICS output files
   * new function for extracting a new xml workspace from a workspace, with possible usm selection (rewriting usms.xml, sols.xml)
   * new function for calculating an approximate value of vapor pressure
   * manage branches use in download_data function
@@ -22,8 +22,8 @@
   * Function for reading csv or xls examples files
   * managing text version to version number using 'semver'
   * Remove `overwrite` argument from set_xml_file_version
-  * rename STICS humirac parameter to code_humirac following fortran code
-  * find general parameters files, .mod files location (either in workspace or in JavaStics config directory)
+  * rename STICS 'humirac' parameter to code_humirac following fortran code
+  * find general parameters files, .mod files location (either in workspace or in JavaStics 'config' directory)
   * manage duplicate values or files in gen_climate function
   * get_xml_files_param_df: for the long format table the "value" column is converted to character for binding data.frame rows,
   data selection with parameters names, management of empty parameters values when pivot_wider
@@ -52,7 +52,7 @@
 * TESTS
   * Checks and integration tests restructured
   * Use of an automatic action for checking code style and updates
-  * Updates about testhat function used 
+  * Updates about 'testhat' function used 
   * Added in workflows a dependabot for checking packages updates (producing pull requests)
   * Removed from tests useless version number
   
