@@ -94,7 +94,7 @@ check_version <- function(stics_version = "latest") {
     stics_version <- get_latest_version()
   }
   if (
-    get_version_num(stics_version) %in%
+    get_version_num(stics_version, numeric = FALSE) %in%
       get_version_num(get_versions_list(), numeric = FALSE)
   ) {
     return(stics_version)
