@@ -10,15 +10,15 @@ license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify STICS Input/Output Files'
 version: 1.7.0
 doi: 10.32614/CRAN.package.SticsRFiles
-abstract: Manipulating input and output files of the 'STICS' crop model (Brisson et
-  al. <https://hal.inrae.fr/STICS/hal-02840520v1>, Beaudouin et al. (2022) <doi.org/10.35690/978-2-7592-3679-4>).
-  The package is base on the model software, which accessible, as well as resources,
-  on its web site <https://stics.inrae.fr/eng/>. Files are either 'JavaSTICS' XML
-  files or text files used by the model 'fortran' executable. Most basic functionalities
-  are reading or writing parameter names and values in both XML or text input files,
-  and getting data from output files. Advanced functionalities include XML files generation
-  from XML templates and/or spreadsheets, or text files generation from XML files
-  by using 'xslt' transformation.
+abstract: Manipulating input and output files of the 'STICS' crop model (Beaudouin
+  et al. (2022) <https://doi.org/10.35690/978-2-7592-3679-4>). The package is based
+  on the model software, which is accessible, as well as resources, on its web site
+  <https://stics.inrae.fr/eng/>. Files are either 'JavaSTICS' XML files or text files
+  used by the model 'fortran' executable. Most basic functionalities are reading or
+  writing parameter names and values in both XML or text input files, and getting
+  data from output files. Advanced functionalities include XML files generation from
+  XML templates and/or spreadsheets, or text files generation from XML files by using
+  'xslt' transformation.
 authors:
 - family-names: Lecharpentier
   given-names: Patrice
