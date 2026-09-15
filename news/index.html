@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -69,12 +69,70 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.7.0" id="sticsrfiles-170">SticsRFiles 1.7.0<small>2026-09-14</small><a class="anchor" aria-label="anchor" href="#sticsrfiles-170"></a></h2>
+<ul><li>FUNCTIONS
+<ul><li>Added new functions for upgrading STICS input files from version 10 to version 11</li>
+<li>Management of STICS versions using the ‘semver’ package (major, minor, patch components)</li>
+<li>Removed useless warnings in some functions</li>
+<li>Using now get_version_num function for comparing versions (using ‘svlist’ object from ‘semver’ package)</li>
+<li>new function get_dev_stages for extracting STICS development stages dates from a list of data.frame of simulations outputs</li>
+<li>parallelisation mode introduced for STICS inputs text files generation</li>
+<li>parallelisation mode introduced for reading STICS output files</li>
+<li>new function for extracting a new xml workspace from a workspace, with possible usm selection (rewriting usms.xml, sols.xml)</li>
+<li>new function for calculating an approximate value of vapor pressure</li>
+<li>manage branches use in download_data function</li>
+<li>Added verbosity use in functions managing Stics variables and replaced warning by message in some cases</li>
+</ul></li>
+<li>DOCUMENTATION
+<ul><li>functions help: added missing examples for exported functions</li>
+<li>vignettes update: for STICS files upgrading</li>
+</ul></li>
+<li>FIXES
+<ul><li>Download function for examples csv files</li>
+<li>Function for reading csv or xls examples files</li>
+<li>managing text version to version number using ‘semver’</li>
+<li>Remove <code>overwrite</code> argument from set_xml_file_version</li>
+<li>rename STICS ‘humirac’ parameter to code_humirac following fortran code</li>
+<li>find general parameters files, .mod files location (either in workspace or in JavaStics ‘config’ directory)</li>
+<li>manage duplicate values or files in gen_climate function</li>
+<li>get_xml_files_param_df: for the long format table the “value” column is converted to character for binding data.frame rows, data selection with parameters names, management of empty parameters values when pivot_wider</li>
+<li>getting plants names with or without using the usms.xml file, for mixed usms directories (soles crops and intercrops)</li>
+<li>set_param_value: converting parameters values to a list if it is not a list when dimensions are compatible</li>
+<li>writing errors for weather data files</li>
+<li>functions arguments renaming to have more consistency among functions</li>
+<li>compute_date_from_day returns NA instead of 999</li>
+<li>removed old deprecated arguments management (and ‘lifecycle’ dependency)</li>
+<li>sub-directories detection for reading observation and simulation outputs files, and duplicates</li>
+<li>download_data: error management</li>
+<li>fixed default values for mandatory parameters in _tec.xml templates files (V10 and V11)</li>
+<li>Added checks for calculating weather data years number and added new tests</li>
+</ul></li>
+<li>DATA
+<ul><li>Input STICS files sets: simplification according to versions compatibility</li>
+<li>Update examples files for STICS version 11.0.0</li>
+<li>adaptation of functions used for data manipulation for new data set of STICS 11.0.0</li>
+</ul></li>
+<li>REFACTORING
+<ul><li>Removed useless code, superfluous arguments and commented code</li>
+<li>Checking version function</li>
+<li>Functions simplification for upgrading files from STICS version 9 to 10</li>
+<li>code style fixes</li>
+</ul></li>
+<li>TESTS
+<ul><li>Checks and integration tests restructured</li>
+<li>Use of an automatic action for checking code style and updates</li>
+<li>Updates about ‘testhat’ function used</li>
+<li>Added in workflows a dependabot for checking packages updates (producing pull requests)</li>
+<li>Removed from tests useless version number</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.6.0" id="sticsrfiles-160-2025-06-03">SticsRFiles 1.6.0 <em>2025-06-03</em>
-<a class="anchor" aria-label="anchor" href="#sticsrfiles-160-2025-06-03"></a></h2>
+<small>2025-06-03</small><a class="anchor" aria-label="anchor" href="#sticsrfiles-160-2025-06-03"></a></h2>
 <ul><li>FUNCTIONS
 <ul><li>convert_xml2txt allows to convert sols.xml file to text files</li>
 <li>Some useless functions have been removed and functions help updated</li>
@@ -432,11 +490,11 @@ and 1.5.0 of JavaSTICS, to homogenization of arguments names in functions and to
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

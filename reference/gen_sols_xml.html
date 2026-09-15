@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate STICS sols xml file from a template or an input file</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/R/gen_sols_xml.R" class="external-link"><code>R/gen_sols_xml.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/R/gen_sols_xml.R" class="external-link"><code>R/gen_sols_xml.R</code></a></small>
     <div class="hidden name"><code>gen_sols_xml.Rd</code></div>
     </div>
 
@@ -78,16 +78,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gen_sols_xml</span><span class="op">(</span></span>
-<span>  <span class="va">file</span>,</span>
-<span>  <span class="va">param_df</span>,</span>
-<span>  template <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
-<span>  sols_in_file <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  sols_param <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  sols_out_file <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  sols_nb <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gen_sols_xml</span><span class="op">(</span><span class="va">file</span>, <span class="va">param_df</span>, template <span class="op">=</span> <span class="cn">NULL</span>, stics_version <span class="op">=</span> <span class="st">"latest"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -114,26 +105,6 @@ the STICS version.</p></dd>
 argument is not provided. In this case the function uses a standard template
 associated to the STICS version.</p></dd>
 
-
-<dt id="arg-sols-in-file">sols_in_file<a class="anchor" aria-label="anchor" href="#arg-sols-in-file"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>sols_in_file</code> is no
-longer supported, use <code>template</code> instead.</p></dd>
-
-
-<dt id="arg-sols-param">sols_param<a class="anchor" aria-label="anchor" href="#arg-sols-param"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>sols_param</code> is no
-longer supported, use <code>param_df</code> instead.</p></dd>
-
-
-<dt id="arg-sols-out-file">sols_out_file<a class="anchor" aria-label="anchor" href="#arg-sols-out-file"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>sols_out_file</code> is no
-longer supported, use <code>file</code> instead.</p></dd>
-
-
-<dt id="arg-sols-nb">sols_nb<a class="anchor" aria-label="anchor" href="#arg-sols-nb"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>sols_nb</code> is no
-longer supported, it is now computed in the function.</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -155,7 +126,7 @@ a prefix to be detected (as shown in the table extract above).</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">xl_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="download_usm_xl.html">download_usm_xl</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"inputs_stics_example.xlsx"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsx already exists in  /var/folders/tp/bfmjfn9s0hd59bm9z80j3mgm0000gn/T//RtmpMutobK </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>inputs_stics_example.xlsxalready exists in /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp4pt0js</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Consider to set overwrite = TRUE to overwrite (it | them )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">sols_param_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="read_params_table.html">read_params_table</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">xl_path</span>, sheet_name <span class="op">=</span> <span class="st">"Soils"</span><span class="op">)</span></span></span>
@@ -174,11 +145,11 @@ a prefix to be detected (as shown in the table extract above).</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

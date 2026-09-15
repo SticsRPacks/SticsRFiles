@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generating a var.mod type file</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/R/gen_varmod.R" class="external-link"><code>R/gen_varmod.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/R/gen_varmod.R" class="external-link"><code>R/gen_varmod.R</code></a></small>
     <div class="hidden name"><code>gen_varmod.Rd</code></div>
     </div>
 
@@ -85,8 +85,7 @@
 <span>  file_name <span class="op">=</span> <span class="st">"var.mod"</span>,</span>
 <span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  var_names <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  version <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -122,14 +121,8 @@ to modify</p></dd>
 STICS variable (default: FALSE).</p></dd>
 
 
-<dt id="arg-var-names">var_names<a class="anchor" aria-label="anchor" href="#arg-var-names"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>var_names</code> is no
-longer supported, use <code>var</code> instead.</p></dd>
-
-
-<dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>version</code> is no
-longer supported, use <code>stics_version</code> instead.</p></dd>
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>if TRUE displaying warning, FALSE otherwise (default)</p></dd>
 
 </dl></div>
     <div id="value">
@@ -142,15 +135,17 @@ longer supported, use <code>stics_version</code> instead.</p></dd>
 checked before writing. If any variable name does not exist,
 it will not be written by default, but the function will still write
 the variables that exist. <code>force= TRUE</code> may however be used to write
-variables that do not exist.</p>
+variables that do not exist. Variables already present in a var.mod file
+can be listed using <code><a href="get_varmod.html">get_varmod()</a></code>.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gen_varmod</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lai(n)"</span>, <span class="st">"hauteur"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Add a variable to the others:</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># generate a new file</span></span></span>
+<span class="r-in"><span><span class="fu">gen_varmod</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lai(n)"</span>, <span class="st">"hauteur"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Add a variable to the others</span></span></span>
+<span class="r-in"><span><span class="co"># var.mod will contain now "lai(n)","hauteur" and "masec(n)"</span></span></span>
 <span class="r-in"><span><span class="fu">gen_varmod</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"masec(n)"</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># NB: var.mod will have "lai(n)","hauteur" and "masec(n)"</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -162,11 +157,11 @@ variables that do not exist.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

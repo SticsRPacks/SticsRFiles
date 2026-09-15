@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -72,45 +72,53 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="upgrade-xml-files-to-stics-version-format">Upgrade XML files (9.2) to STICS version 10.0 format <a href="#upgrade-xml-files-to-stics-version-format" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
+          <h2 id="upgrade-xml-files-to-a-next-major-version-i-e-from-to-or-from-to-">Upgrade XML files to a next major version (i.e. from 9.2 to 10, or from 10 to 11) <a href="#upgrade-xml-files-to-a-next-major-version-i-e-from-to-or-from-to-" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions for upgrading parameter files</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="upgrade_workspace_xml.html">upgrade_workspace_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading XML files of a JavaSTICS workspace directory to a newer STICS version format</p></td>
+        <td><p>Upgrade a Javastics STICS xml workspace directory to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_usms_xml.html">upgrade_usms_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading a usms.xml file to a newer version</p></td>
+        <td><p>Upgrade a usms.xml file to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_sols_xml.html">upgrade_sols_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading a sols.xml file to a newer version</p></td>
+        <td><p>Upgrade a sols.xml file to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_sta_xml.html">upgrade_sta_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading _sta.xml file(s) to a newer version</p></td>
+        <td><p>Upgrade _sta.xml file(s) to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_ini_xml.html">upgrade_ini_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading _ini.xml file(s) to a newer version</p></td>
+        <td><p>Upgrade _ini.xml file(s) to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_plt_xml.html">upgrade_plt_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading _plt.xml file(s) to a newer version</p></td>
+        <td><p>Upgrade _plt.xml file(s) to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_tec_xml.html">upgrade_tec_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading _tec.xml file(s) to a newer version</p></td>
+        <td><p>Upgrade _tec.xml file(s) to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_param_gen_xml.html">upgrade_param_gen_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading a param_gen.xml file to a newer version</p></td>
+        <td><p>Upgrade a param_gen.xml file to a next major version</p></td>
       </tr><tr><td>
           <p><code><a href="upgrade_param_newform_xml.html">upgrade_param_newform_xml()</a></code> </p>
         </td>
-        <td><p>Upgrading a param_newform.xml file to a newer version</p></td>
+        <td><p>Upgrade a param_newform.xml file to a next major version</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="manage-javastics-worskpace-xml-files">Manage JavaSTICS worskpace XML files <a href="#manage-javastics-worskpace-xml-files" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions for manipulating workspaces</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="extract_workspace.html">extract_workspace()</a></code> </p>
+        </td>
+        <td><p>Extract an XML JavaSTICS workspace from a source workspace</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="find-information-on-parameters-and-variables">Find information on parameters and variables <a href="#find-information-on-parameters-and-variables" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -124,6 +132,10 @@
         </td>
         <td><p>Search if a STICS parameter exist</p></td>
       </tr><tr><td>
+          <p><code><a href="get_xml_files_param_df.html">get_xml_files_param_df()</a></code> </p>
+        </td>
+        <td><p>Extracting a data.frame of parameters values for an xml file or a set of (whatever the xml file kind)</p></td>
+      </tr><tr><td>
           <p><code><a href="get_var_info.html">get_var_info()</a></code> </p>
         </td>
         <td><p>Find STICS output variable names and description</p></td>
@@ -131,8 +143,12 @@
           <p><code><a href="is_stics_var.html">is_stics_var()</a></code> </p>
         </td>
         <td><p>Search if a STICS variable exist</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_dev_stages.html">get_dev_stages()</a></code> </p>
+        </td>
+        <td><p>Get developmental stages from simulations</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="generate-javastics-input-files-xml-format-">Generate JavaStics Input files (XML format) <a href="#generate-javastics-input-files-xml-format-" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="generate-javastics-input-files-xml-format-">Generate JavaSTICS Input files (XML format) <a href="#generate-javastics-input-files-xml-format-" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Functions for generating a set of XML files of a given type (from existing XML file or given template, plus a data.frame describing the parameters to modify for each file to create)</p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -164,47 +180,7 @@
         </td>
         <td><p>Generate STICS general parameters xml file(s) from a template file according to a STICS version</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="upgrade-javastics-xml-files-from-version-or-to-">Upgrade JavaStics XML files from version 9.2 or (9.1) to 10.0 <a href="#upgrade-javastics-xml-files-from-version-or-to-" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for upgrading parameter files</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="upgrade_param_gen_xml.html">upgrade_param_gen_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading a param_gen.xml file to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_param_newform_xml.html">upgrade_param_newform_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading a param_newform.xml file to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_usms_xml.html">upgrade_usms_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading a usms.xml file to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_plt_xml.html">upgrade_plt_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading _plt.xml file(s) to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_sols_xml.html">upgrade_sols_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading a sols.xml file to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_ini_xml.html">upgrade_ini_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading _ini.xml file(s) to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_tec_xml.html">upgrade_tec_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading _tec.xml file(s) to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_sta_xml.html">upgrade_sta_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading _sta.xml file(s) to a newer version</p></td>
-      </tr><tr><td>
-          <p><code><a href="upgrade_workspace_xml.html">upgrade_workspace_xml()</a></code> </p>
-        </td>
-        <td><p>Upgrading XML files of a JavaSTICS workspace directory to a newer STICS version format</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="set-values-in-javastics-input-files-xml-format-">Set values in JavaStics Input files (XML format) <a href="#set-values-in-javastics-input-files-xml-format-" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="set-values-in-javastics-input-files-xml-format-">Set values in JavaSTICS Input files (XML format) <a href="#set-values-in-javastics-input-files-xml-format-" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -212,7 +188,7 @@
         </td>
         <td><p>Setting parameter values into xml files</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="get-values-from-javastics-input-files-xml-format-">Get values from JavaStics Input files (XML format) <a href="#get-values-from-javastics-input-files-xml-format-" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="get-values-from-javastics-input-files-xml-format-">Get values from JavaSTICS Input files (XML format) <a href="#get-values-from-javastics-input-files-xml-format-" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -224,7 +200,7 @@
         </td>
         <td><p>Getting plants number per usm for all usms or selected from a usm name vector</p></td>
       </tr><tr><td>
-          <p><code><a href="get_usms_files.html">get_usms_files()</a></code> </p>
+          <p><code><a href="get_files_list.html">get_files_list()</a></code> </p>
         </td>
         <td><p>Getting existing xml files path list per usm from an usms.xml file</p></td>
       </tr><tr><td>
@@ -234,7 +210,7 @@
       </tr><tr><td>
           <p><code><a href="get_soils_list.html">get_soils_list()</a></code> </p>
         </td>
-        <td><p>Get the soil names for an usms.xml file</p></td>
+        <td><p>Get the soil names for an usms.xml or sols.xml file</p></td>
       </tr><tr><td>
           <p><code><a href="get_cultivars_list.html">get_cultivars_list()</a></code> </p>
         </td>
@@ -244,7 +220,7 @@
         </td>
         <td><p>Get the values of cultivar-specific parameters from an xml plant file (*_plt.xml)</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="generate-stics-input-files-text-format-">Generate Stics Input files (Text format) <a href="#generate-stics-input-files-text-format-" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="generate-stics-input-files-text-format-">Generate STICS Input files (Text format) <a href="#generate-stics-input-files-text-format-" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Input parameters files, outputs definition files or observations files</p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -264,7 +240,7 @@
         </td>
         <td><p>Generating a var.mod type file</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="set-values-in-stics-input-files-text-format-">Set values in Stics Input files (Text format) <a href="#set-values-in-stics-input-files-text-format-" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="set-values-in-stics-input-files-text-format-">Set values in STICS Input files (Text format) <a href="#set-values-in-stics-input-files-text-format-" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -272,7 +248,7 @@
         </td>
         <td><p>Set (replace) STICS input file parameters</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="get-values-in-stics-input-files-text-format-">Get values in Stics Input files (Text format) <a href="#get-values-in-stics-input-files-text-format-" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="get-values-from-stics-input-files-text-format-">Get values from STICS Input files (Text format) <a href="#get-values-from-stics-input-files-text-format-" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -296,7 +272,7 @@
         </td>
         <td><p>Getting LAI forcing for each usm</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="get-values-in-stics-output-files">Get values in Stics Output files <a href="#get-values-in-stics-output-files" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="get-values-from-stics-output-files">Get values from STICS Output files <a href="#get-values-from-stics-output-files" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -321,7 +297,7 @@
         <td><p>Read STICS observation files (*.obs)</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="example-data">Example data <a href="#example-data" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>For files examples by Stics version</p>
+          <p class="section-desc"></p><p>For files examples by STICS version</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="get_examples_path.html">get_examples_path()</a></code> </p>
@@ -371,6 +347,10 @@
           <p><code><a href="compute_date_from_day.html">compute_date_from_day()</a></code> </p>
         </td>
         <td><p>Convert day number into date</p></td>
+      </tr><tr><td>
+          <p><code><a href="approx_vapour_pressure.html">approx_vapour_pressure()</a></code> </p>
+        </td>
+        <td><p>Approximate vapour pressure</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -380,11 +360,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

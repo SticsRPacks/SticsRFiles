@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
       <h1 data-toc-skip>SticsRFiles</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/vignettes/SticsRFiles.Rmd" class="external-link"><code>vignettes/SticsRFiles.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/vignettes/SticsRFiles.Rmd" class="external-link"><code>vignettes/SticsRFiles.Rmd</code></a></small>
       <div class="hidden name"><code>SticsRFiles.Rmd</code></div>
 
     </div>
@@ -220,34 +220,34 @@ doing a fuzzy search. For example to get all variables with
 <code class="sourceCode R"><span><span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/get_var_info.html">get_var_info</a></span><span class="op">(</span><span class="st">"lai"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;              name</span></span>
 <span><span class="co">#&gt; 5       albedolai</span></span>
-<span><span class="co">#&gt; 242        exolai</span></span>
-<span><span class="co">#&gt; 338        innlai</span></span>
-<span><span class="co">#&gt; 353        lai(n)</span></span>
-<span><span class="co">#&gt; 354 lai_mx_av_cut</span></span>
-<span><span class="co">#&gt; 355        laimax</span></span>
-<span><span class="co">#&gt; 356     laisen(n)</span></span>
-<span><span class="co">#&gt; 742         splai</span></span>
-<span><span class="co">#&gt; 805       ulai(n)</span></span>
+<span><span class="co">#&gt; 243        exolai</span></span>
+<span><span class="co">#&gt; 349        innlai</span></span>
+<span><span class="co">#&gt; 365        lai(n)</span></span>
+<span><span class="co">#&gt; 366 lai_mx_av_cut</span></span>
+<span><span class="co">#&gt; 367        laimax</span></span>
+<span><span class="co">#&gt; 368     laisen(n)</span></span>
+<span><span class="co">#&gt; 757         splai</span></span>
+<span><span class="co">#&gt; 820       ulai(n)</span></span>
 <span><span class="co">#&gt;                                                           definition</span></span>
 <span><span class="co">#&gt; 5                   albedo of the crop including soil and vegetation</span></span>
-<span><span class="co">#&gt; 242              reduction factor on leaf growth due to water excess</span></span>
-<span><span class="co">#&gt; 338 reduction factor on leaf growth due to NNI (nitrogen deficiency)</span></span>
-<span><span class="co">#&gt; 353                                          leaf area index (table)</span></span>
-<span><span class="co">#&gt; 354            LAI before cut (for cut crops , for others = lai(n) )</span></span>
-<span><span class="co">#&gt; 355                                          maximum leaf area index</span></span>
-<span><span class="co">#&gt; 356                      leaf area index of senescent leaves (table)</span></span>
-<span><span class="co">#&gt; 742                source to sink ratio of assimilates in the leaves</span></span>
-<span><span class="co">#&gt; 805                                relative development unit for LAI</span></span>
+<span><span class="co">#&gt; 243              reduction factor on leaf growth due to water excess</span></span>
+<span><span class="co">#&gt; 349 reduction factor on leaf growth due to NNI (nitrogen deficiency)</span></span>
+<span><span class="co">#&gt; 365                                          leaf area index (table)</span></span>
+<span><span class="co">#&gt; 366            LAI before cut (for cut crops , for others = lai(n) )</span></span>
+<span><span class="co">#&gt; 367                                          maximum leaf area index</span></span>
+<span><span class="co">#&gt; 368                      leaf area index of senescent leaves (table)</span></span>
+<span><span class="co">#&gt; 757                source to sink ratio of assimilates in the leaves</span></span>
+<span><span class="co">#&gt; 820                                relative development unit for LAI</span></span>
 <span><span class="co">#&gt;            unit type</span></span>
 <span><span class="co">#&gt; 5            SD real</span></span>
-<span><span class="co">#&gt; 242         0-1 real</span></span>
-<span><span class="co">#&gt; 338 innmin to 1 real</span></span>
-<span><span class="co">#&gt; 353      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 354          SD real</span></span>
-<span><span class="co">#&gt; 355      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 356      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 742          SD real</span></span>
-<span><span class="co">#&gt; 805         0-3 real</span></span></code></pre></div>
+<span><span class="co">#&gt; 243         0-1 real</span></span>
+<span><span class="co">#&gt; 349 innmin to 1 real</span></span>
+<span><span class="co">#&gt; 365      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 366          SD real</span></span>
+<span><span class="co">#&gt; 367      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 368      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 757          SD real</span></span>
+<span><span class="co">#&gt; 820         0-3 real</span></span></code></pre></div>
 <p>Sometimes it is also useful to search in the variable definition
 instead of its name. To do so, you can use the <code>keyword</code>
 argument like so:</p>
@@ -257,62 +257,62 @@ argument like so:</p>
 <span><span class="co">#&gt; 5            albedolai</span></span>
 <span><span class="co">#&gt; 171 diftemp1intercoupe</span></span>
 <span><span class="co">#&gt; 172 diftemp2intercoupe</span></span>
-<span><span class="co">#&gt; 242             exolai</span></span>
-<span><span class="co">#&gt; 334     inn1intercoupe</span></span>
-<span><span class="co">#&gt; 336     inn2intercoupe</span></span>
-<span><span class="co">#&gt; 338             innlai</span></span>
-<span><span class="co">#&gt; 353             lai(n)</span></span>
-<span><span class="co">#&gt; 354      lai_mx_av_cut</span></span>
-<span><span class="co">#&gt; 355             laimax</span></span>
-<span><span class="co">#&gt; 356          laisen(n)</span></span>
-<span><span class="co">#&gt; 360               leai</span></span>
-<span><span class="co">#&gt; 742              splai</span></span>
-<span><span class="co">#&gt; 745     str1intercoupe</span></span>
-<span><span class="co">#&gt; 746     str2intercoupe</span></span>
-<span><span class="co">#&gt; 747     stu1intercoupe</span></span>
-<span><span class="co">#&gt; 748     stu2intercoupe</span></span>
-<span><span class="co">#&gt; 801           tustress</span></span>
-<span><span class="co">#&gt; 805            ulai(n)</span></span>
+<span><span class="co">#&gt; 243             exolai</span></span>
+<span><span class="co">#&gt; 345     inn1intercoupe</span></span>
+<span><span class="co">#&gt; 347     inn2intercoupe</span></span>
+<span><span class="co">#&gt; 349             innlai</span></span>
+<span><span class="co">#&gt; 365             lai(n)</span></span>
+<span><span class="co">#&gt; 366      lai_mx_av_cut</span></span>
+<span><span class="co">#&gt; 367             laimax</span></span>
+<span><span class="co">#&gt; 368          laisen(n)</span></span>
+<span><span class="co">#&gt; 372               leai</span></span>
+<span><span class="co">#&gt; 757              splai</span></span>
+<span><span class="co">#&gt; 760     str1intercoupe</span></span>
+<span><span class="co">#&gt; 761     str2intercoupe</span></span>
+<span><span class="co">#&gt; 762     stu1intercoupe</span></span>
+<span><span class="co">#&gt; 763     stu2intercoupe</span></span>
+<span><span class="co">#&gt; 816           tustress</span></span>
+<span><span class="co">#&gt; 820            ulai(n)</span></span>
 <span><span class="co">#&gt;                                                                                                         definition</span></span>
 <span><span class="co">#&gt; 5                                                                 albedo of the crop including soil and vegetation</span></span>
 <span><span class="co">#&gt; 171        mean difference between crop and air temperatures during the vegetative phase (emergence - maximum LAI)</span></span>
 <span><span class="co">#&gt; 172       mean difference between crop and air temperatures during the reproductive phase (maximum LAI - maturity)</span></span>
-<span><span class="co">#&gt; 242                                                            reduction factor on leaf growth due to water excess</span></span>
-<span><span class="co">#&gt; 334                               average NNI during the cut (cut crop vegetative phase: emergence to maximum LAI)</span></span>
-<span><span class="co">#&gt; 336                             average NNI during the cut (cut crop reproductive phase: maximum LAI  to maturity)</span></span>
-<span><span class="co">#&gt; 338                                               reduction factor on leaf growth due to NNI (nitrogen deficiency)</span></span>
-<span><span class="co">#&gt; 353                                                                                        leaf area index (table)</span></span>
-<span><span class="co">#&gt; 354                                                          LAI before cut (for cut crops , for others = lai(n) )</span></span>
-<span><span class="co">#&gt; 355                                                                                        maximum leaf area index</span></span>
-<span><span class="co">#&gt; 356                                                                    leaf area index of senescent leaves (table)</span></span>
-<span><span class="co">#&gt; 360                                                                                 Leaf+ear area index = lai +eai</span></span>
-<span><span class="co">#&gt; 742                                                              source to sink ratio of assimilates in the leaves</span></span>
-<span><span class="co">#&gt; 745      average stomatal water stress index during the vegetative phase (emergence - maximum LAI) of forage crops</span></span>
-<span><span class="co">#&gt; 746    average stomatal water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops</span></span>
-<span><span class="co">#&gt; 747   average turgescence water stress index during the vegetative phase (emergence - maximum LAI) of forage crops</span></span>
-<span><span class="co">#&gt; 748 average turgescence water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops</span></span>
-<span><span class="co">#&gt; 801                      reduction factor on leaf growth due to the effective water stress  (= min(turfac,innlai))</span></span>
-<span><span class="co">#&gt; 805                                                                              relative development unit for LAI</span></span>
+<span><span class="co">#&gt; 243                                                            reduction factor on leaf growth due to water excess</span></span>
+<span><span class="co">#&gt; 345                               average NNI during the cut (cut crop vegetative phase: emergence to maximum LAI)</span></span>
+<span><span class="co">#&gt; 347                             average NNI during the cut (cut crop reproductive phase: maximum LAI  to maturity)</span></span>
+<span><span class="co">#&gt; 349                                               reduction factor on leaf growth due to NNI (nitrogen deficiency)</span></span>
+<span><span class="co">#&gt; 365                                                                                        leaf area index (table)</span></span>
+<span><span class="co">#&gt; 366                                                          LAI before cut (for cut crops , for others = lai(n) )</span></span>
+<span><span class="co">#&gt; 367                                                                                        maximum leaf area index</span></span>
+<span><span class="co">#&gt; 368                                                                    leaf area index of senescent leaves (table)</span></span>
+<span><span class="co">#&gt; 372                                                                                 Leaf+ear area index = lai +eai</span></span>
+<span><span class="co">#&gt; 757                                                              source to sink ratio of assimilates in the leaves</span></span>
+<span><span class="co">#&gt; 760      average stomatal water stress index during the vegetative phase (emergence - maximum LAI) of forage crops</span></span>
+<span><span class="co">#&gt; 761    average stomatal water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops</span></span>
+<span><span class="co">#&gt; 762   average turgescence water stress index during the vegetative phase (emergence - maximum LAI) of forage crops</span></span>
+<span><span class="co">#&gt; 763 average turgescence water stress index during the reproductive phase (maximum LAI  - maturity) of forage crops</span></span>
+<span><span class="co">#&gt; 816                      reduction factor on leaf growth due to the effective water stress  (= min(turfac,innlai))</span></span>
+<span><span class="co">#&gt; 820                                                                              relative development unit for LAI</span></span>
 <span><span class="co">#&gt;            unit type</span></span>
 <span><span class="co">#&gt; 5            SD real</span></span>
 <span><span class="co">#&gt; 171     degreeC real</span></span>
 <span><span class="co">#&gt; 172     degreeC real</span></span>
-<span><span class="co">#&gt; 242         0-1 real</span></span>
-<span><span class="co">#&gt; 334         0-2 real</span></span>
-<span><span class="co">#&gt; 336         0-2 real</span></span>
-<span><span class="co">#&gt; 338 innmin to 1 real</span></span>
-<span><span class="co">#&gt; 353      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 354          SD real</span></span>
-<span><span class="co">#&gt; 355      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 356      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 360      m2.m-2 real</span></span>
-<span><span class="co">#&gt; 742          SD real</span></span>
-<span><span class="co">#&gt; 745         0-1 real</span></span>
-<span><span class="co">#&gt; 746         0-1 real</span></span>
-<span><span class="co">#&gt; 747         0-1 real</span></span>
-<span><span class="co">#&gt; 748         0-1 real</span></span>
-<span><span class="co">#&gt; 801         0-1 real</span></span>
-<span><span class="co">#&gt; 805         0-3 real</span></span></code></pre></div>
+<span><span class="co">#&gt; 243         0-1 real</span></span>
+<span><span class="co">#&gt; 345         0-2 real</span></span>
+<span><span class="co">#&gt; 347         0-2 real</span></span>
+<span><span class="co">#&gt; 349 innmin to 1 real</span></span>
+<span><span class="co">#&gt; 365      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 366          SD real</span></span>
+<span><span class="co">#&gt; 367      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 368      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 372      m2.m-2 real</span></span>
+<span><span class="co">#&gt; 757          SD real</span></span>
+<span><span class="co">#&gt; 760         0-1 real</span></span>
+<span><span class="co">#&gt; 761         0-1 real</span></span>
+<span><span class="co">#&gt; 762         0-1 real</span></span>
+<span><span class="co">#&gt; 763         0-1 real</span></span>
+<span><span class="co">#&gt; 816         0-1 real</span></span>
+<span><span class="co">#&gt; 820         0-3 real</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="get-informations-on-parameters">Get informations on parameters<a class="anchor" aria-label="anchor" href="#get-informations-on-parameters"></a>
@@ -322,39 +322,53 @@ names, here is a subset of the parameters names containing
 <code>lai</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>param <span class="op">=</span> <span class="st">"lai"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;             name    file   min max</span></span>
-<span><span class="co">#&gt; 225    cielclair STATION     0   1</span></span>
-<span><span class="co">#&gt; 305 codeclaircie  PARTEC     1   2</span></span>
-<span><span class="co">#&gt; 339    codelaitr  PARPLT     1   2</span></span>
-<span><span class="co">#&gt; 408    codlainet  PARPLT     1   2</span></span>
-<span><span class="co">#&gt; 556      dlaimax  PARPLT 5e-06 0.5</span></span>
-<span><span class="co">#&gt; 557  dlaimaxbrut  PARPLT 5e-06 0.5</span></span>
+<span><span class="co">#&gt;             name    file      min max</span></span>
+<span><span class="co">#&gt; 53     cielclair STATION        0   1</span></span>
+<span><span class="co">#&gt; 94  codeclaircie  PARTEC        1   2</span></span>
+<span><span class="co">#&gt; 128    codelaitr  PARPLT        1   2</span></span>
+<span><span class="co">#&gt; 187    codlainet  PARPLT        1   2</span></span>
+<span><span class="co">#&gt; 251      dlaimax  PARPLT 0.000005 0.5</span></span>
+<span><span class="co">#&gt; 252  dlaimaxbrut  PARPLT 0.000005 0.5</span></span>
 <span><span class="co">#&gt;                                                                                       definition</span></span>
-<span><span class="co">#&gt; 225             fraction of sunny hours allowing the inversion of thermal gradient with altitude</span></span>
-<span><span class="co">#&gt; 305                     option to simulate fruit removal: 1 = no, 2 = yes (for smallest fruits) </span></span>
-<span><span class="co">#&gt; 339          option to calculate the intercepted radiation according to: 1 = LAI, 2 = soil cover</span></span>
-<span><span class="co">#&gt; 408 option to calculate the LAI: 1 = net LAI, 2 = difference between gross LAI and senescent LAI</span></span>
-<span><span class="co">#&gt; 556                                                    maximum rate of net daily increase of LAI</span></span>
-<span><span class="co">#&gt; 557                                                  maximum rate of gross daily increase of LAI</span></span></code></pre></div>
+<span><span class="co">#&gt; 53              fraction of sunny hours allowing the inversion of thermal gradient with altitude</span></span>
+<span><span class="co">#&gt; 94                      option to simulate fruit removal: 1 = no, 2 = yes (for smallest fruits) </span></span>
+<span><span class="co">#&gt; 128          option to calculate the intercepted radiation according to: 1 = LAI, 2 = soil cover</span></span>
+<span><span class="co">#&gt; 187 option to calculate the LAI: 1 = net LAI, 2 = difference between gross LAI and senescent LAI</span></span>
+<span><span class="co">#&gt; 251                                                    maximum rate of net daily increase of LAI</span></span>
+<span><span class="co">#&gt; 252                                                  maximum rate of gross daily increase of LAI</span></span>
+<span><span class="co">#&gt;              unit cultivar</span></span>
+<span><span class="co">#&gt; 53             SD       NA</span></span>
+<span><span class="co">#&gt; 94       code 1/2       NA</span></span>
+<span><span class="co">#&gt; 128      code 1/2       NA</span></span>
+<span><span class="co">#&gt; 187      code 1/2       NA</span></span>
+<span><span class="co">#&gt; 251 m2.degree_d-1       NA</span></span>
+<span><span class="co">#&gt; 252 m2.degree_d-1       NA</span></span></code></pre></div>
 <p>it can also be used by giving a keyword that will be searched in the
 parameters names and definitions, here is a subset of the parameters
 names containing <code>plant</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_param_info.html">get_param_info</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"plant"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                      name   file  min max</span></span>
-<span><span class="co">#&gt; 4                   adens PARPLT   -2   0</span></span>
-<span><span class="co">#&gt; 6                    adil PARPLT    1   7</span></span>
-<span><span class="co">#&gt; 7                 adilmax PARPLT    3  10</span></span>
-<span><span class="co">#&gt; 57     albedomulchresidus  PARAM 0.05 0.8</span></span>
-<span><span class="co">#&gt; 58  albedomulchresidus(1)  PARAM 0.05 0.8</span></span>
-<span><span class="co">#&gt; 59 albedomulchresidus(10)  PARAM 0.05 0.8</span></span>
-<span><span class="co">#&gt;                                                                 definition</span></span>
-<span><span class="co">#&gt; 4                                         Interplant competition parameter</span></span>
-<span><span class="co">#&gt; 6       parameter of the critical dilution curve [Nplante]=adil MS^(-bdil)</span></span>
-<span><span class="co">#&gt; 7  parameter of the maximum dilution curve [Nplante]=adilmax MS^(-bdilmax)</span></span>
-<span><span class="co">#&gt; 57                                                   albedo of plant mulch</span></span>
-<span><span class="co">#&gt; 58                                                   albedo of plant mulch</span></span>
-<span><span class="co">#&gt; 59                                                   albedo of plant mulch</span></span></code></pre></div>
+<span><span class="co">#&gt;                  name   file  min max</span></span>
+<span><span class="co">#&gt; 5               adens PARPLT   -2   0</span></span>
+<span><span class="co">#&gt; 7                adil PARPLT    1   7</span></span>
+<span><span class="co">#&gt; 8             adilmax PARPLT    3  10</span></span>
+<span><span class="co">#&gt; 16 albedomulchresidus  PARAM 0.05 0.8</span></span>
+<span><span class="co">#&gt; 32              bdens PARPLT    1 200</span></span>
+<span><span class="co">#&gt; 33               bdil PARPLT 0.01 0.8</span></span>
+<span><span class="co">#&gt;                                                                 definition unit</span></span>
+<span><span class="co">#&gt; 5                                         Interplant competition parameter   SD</span></span>
+<span><span class="co">#&gt; 7       parameter of the critical dilution curve [Nplante]=adil MS^(-bdil)   % </span></span>
+<span><span class="co">#&gt; 8  parameter of the maximum dilution curve [Nplante]=adilmax MS^(-bdilmax)   % </span></span>
+<span><span class="co">#&gt; 16                                                   albedo of plant mulch   SD</span></span>
+<span><span class="co">#&gt; 32         minimal plant density above which interplant competition starts  m-2</span></span>
+<span><span class="co">#&gt; 33      parameter of the critical dilution curve [Nplante]=adil MS^(-bdil)   SD</span></span>
+<span><span class="co">#&gt;    cultivar</span></span>
+<span><span class="co">#&gt; 5        NA</span></span>
+<span><span class="co">#&gt; 7        NA</span></span>
+<span><span class="co">#&gt; 8        NA</span></span>
+<span><span class="co">#&gt; 16       NA</span></span>
+<span><span class="co">#&gt; 32       NA</span></span>
+<span><span class="co">#&gt; 33       NA</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="get-parameter-values">Get parameter values<a class="anchor" aria-label="anchor" href="#get-parameter-values"></a>
@@ -432,13 +446,13 @@ after the USM they are linked to. See the help page for more details,
 <em>e.g.</em> about intercrops.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_obs.html">get_obs</a></span><span class="op">(</span><span class="va">workspace</span><span class="op">)</span></span>
-<span><span class="co">#&gt; bo96iN+.obs</span></span>
-<span><span class="co">#&gt; bou00t1.obs</span></span>
-<span><span class="co">#&gt; bou00t3.obs</span></span>
-<span><span class="co">#&gt; bou99t1.obs</span></span>
-<span><span class="co">#&gt; bou99t3.obs</span></span>
-<span><span class="co">#&gt; lu96iN+.obs</span></span>
-<span><span class="co">#&gt; lu96iN6.obs</span></span>
+<span><span class="co">#&gt; bo96iN+.obs </span></span>
+<span><span class="co">#&gt; bou00t1.obs </span></span>
+<span><span class="co">#&gt; bou00t3.obs </span></span>
+<span><span class="co">#&gt; bou99t1.obs </span></span>
+<span><span class="co">#&gt; bou99t3.obs </span></span>
+<span><span class="co">#&gt; lu96iN+.obs </span></span>
+<span><span class="co">#&gt; lu96iN6.obs </span></span>
 <span><span class="co">#&gt; lu97iN+.obs</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -470,12 +484,12 @@ plot both observations and simulations, you can use <a href="https://sticsrpacks
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+<p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>

@@ -22,7 +22,7 @@ or in a subdirectory."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -74,7 +74,7 @@ or in a subdirectory."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generating one or several usms directories from a javastics workspace content</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/R/gen_usms_xml2txt.R" class="external-link"><code>R/gen_usms_xml2txt.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/R/gen_usms_xml2txt.R" class="external-link"><code>R/gen_usms_xml2txt.R</code></a></small>
     <div class="hidden name"><code>gen_usms_xml2txt.Rd</code></div>
     </div>
 
@@ -92,16 +92,14 @@ or in a subdirectory.</p>
 <span>  javastics <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  workspace <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  out_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  usm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  usm <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stics_version <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dir_per_usm_flag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  java_cmd <span class="op">=</span> <span class="st">"java"</span>,</span>
 <span>  java_converter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  javastics_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  workspace_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  target_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  usms_list <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -136,13 +134,14 @@ default to latest).</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Logical value for displaying information while running</p></dd>
+<dd><p>Logical value TRUE (default) for displaying information
+while running, FALSE otherwise</p></dd>
 
 
 <dt id="arg-dir-per-usm-flag">dir_per_usm_flag<a class="anchor" aria-label="anchor" href="#arg-dir-per-usm-flag"></a></dt>
-<dd><p>logical, TRUE if one want to create one directory
-per USM, FALSE if USM files are generated in the target_path
-(only useful for usms_list of size one)</p></dd>
+<dd><p>logical, optional; TRUE (default)
+if one want to create one directory per USM, FALSE if USM files
+are generated in the out_dir (only useful for usm of size one)</p></dd>
 
 
 <dt id="arg-java-cmd">java_cmd<a class="anchor" aria-label="anchor" href="#arg-java-cmd"></a></dt>
@@ -154,28 +153,17 @@ may be given</p></dd>
 
 
 <dt id="arg-java-converter">java_converter<a class="anchor" aria-label="anchor" href="#arg-java-converter"></a></dt>
-<dd><p>logical TRUE for using JavaSTICS command
-(a JavaSTICS path must be set in the function inputs), FALSE otherwise</p></dd>
+<dd><p>logical, optional; TRUE for using the JavaSTICS command
+(a JavaSTICS path must be set in the function inputs),
+FALSE otherwise (default)</p></dd>
 
 
-<dt id="arg-javastics-path">javastics_path<a class="anchor" aria-label="anchor" href="#arg-javastics-path"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>javastics_path</code>
-is no longer supported, use <code>javastics</code> instead.</p></dd>
+<dt id="arg-parallel">parallel<a class="anchor" aria-label="anchor" href="#arg-parallel"></a></dt>
+<dd><p>Boolean. Is the computation to be done in parallel ?</p></dd>
 
 
-<dt id="arg-workspace-path">workspace_path<a class="anchor" aria-label="anchor" href="#arg-workspace-path"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>workspace_path</code>
-is no longer supported, use <code>workspace</code> instead.</p></dd>
-
-
-<dt id="arg-target-path">target_path<a class="anchor" aria-label="anchor" href="#arg-target-path"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>target_path</code> is no
-longer supported, use <code>out_dir</code> instead.</p></dd>
-
-
-<dt id="arg-usms-list">usms_list<a class="anchor" aria-label="anchor" href="#arg-usms-list"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>usms_list</code> is no
-longer supported, use <code>usm</code> instead.</p></dd>
+<dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
+<dd><p>Number of cores to use for parallel computation.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -199,8 +187,8 @@ have been successfully copied in usms directories</p>
 <span class="r-in"><span><span class="fu">gen_usms_xml2txt</span><span class="op">(</span><span class="va">javastics</span>, <span class="va">workspace</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># For an usms list</span></span></span>
-<span class="r-in"><span><span class="va">usm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"usm1"</span>, <span class="st">"usm2"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">gen_usms_xml2txt</span><span class="op">(</span><span class="va">javastics</span>, <span class="va">workspace</span>, <span class="va">usm</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">usm_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"usm1"</span>, <span class="st">"usm2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">gen_usms_xml2txt</span><span class="op">(</span><span class="va">javastics</span>, <span class="va">workspace</span>, usms <span class="op">=</span> <span class="va">usm_list</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -213,11 +201,11 @@ have been successfully copied in usms directories</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

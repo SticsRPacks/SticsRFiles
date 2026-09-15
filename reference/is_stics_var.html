@@ -18,7 +18,7 @@ output variables."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@ output variables."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Search if a STICS variable exist</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/R/all_out_var.R" class="external-link"><code>R/all_out_var.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/R/all_out_var.R" class="external-link"><code>R/all_out_var.R</code></a></small>
     <div class="hidden name"><code>is_stics_var.Rd</code></div>
     </div>
 
@@ -80,7 +80,7 @@ output variables.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_stics_var</span><span class="op">(</span><span class="va">var</span>, stics_version <span class="op">=</span> <span class="st">"latest"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_stics_var</span><span class="op">(</span><span class="va">var</span>, stics_version <span class="op">=</span> <span class="st">"latest"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,6 +97,10 @@ to search parameters information relative to a specific STICS version.
 By default the latest version returned by <code><a href="get_stics_versions_compat.html">get_stics_versions_compat()</a></code>
 is used.</p></dd>
 
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>if TRUE displaying warning, FALSE otherwise (default)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -110,7 +114,6 @@ is used.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">is_stics_var</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lai(n)"</span>, <span class="st">"masec(n)"</span>, <span class="st">"unknown"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Variable `unknown` not found. Try `get_var_info()`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE  TRUE FALSE</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -123,11 +126,11 @@ is used.</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

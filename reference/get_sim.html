@@ -18,7 +18,7 @@ with possible selection on variable names, cumulative DOY and dates"><!-- mathja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@ with possible selection on variable names, cumulative DOY and dates"><!-- mathja
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Load and format STICS daily output file(s)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.6.0/R/get_sim.R" class="external-link"><code>R/get_sim.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/R/get_sim.R" class="external-link"><code>R/get_sim.R</code></a></small>
     <div class="hidden name"><code>get_sim.Rd</code></div>
     </div>
 
@@ -88,11 +88,8 @@ with possible selection on variable names, cumulative DOY and dates</p>
 <span>  usms_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  javastics <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  usm_name <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  var_list <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  dates_list <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  usms_filepath <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  javastics_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -138,29 +135,12 @@ in the workspace but in the JavaSTICS distribution (see Details).</p></dd>
 <dd><p>Logical value for displaying or not information while running</p></dd>
 
 
-<dt id="arg-usm-name">usm_name<a class="anchor" aria-label="anchor" href="#arg-usm-name"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>usm_name</code> is no
-longer supported, use <code>usm</code> instead.</p></dd>
+<dt id="arg-parallel">parallel<a class="anchor" aria-label="anchor" href="#arg-parallel"></a></dt>
+<dd><p>Boolean. Is the computation to be done in parallel ?</p></dd>
 
 
-<dt id="arg-var-list">var_list<a class="anchor" aria-label="anchor" href="#arg-var-list"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>var_list</code> is no
-longer supported, use <code>var</code> instead.</p></dd>
-
-
-<dt id="arg-dates-list">dates_list<a class="anchor" aria-label="anchor" href="#arg-dates-list"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>dates_list</code> is no
-longer supported, use <code>dates</code> instead.</p></dd>
-
-
-<dt id="arg-usms-filepath">usms_filepath<a class="anchor" aria-label="anchor" href="#arg-usms-filepath"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>usms_filepath</code>
-is no longer supported, use <code>usms_file</code> instead.</p></dd>
-
-
-<dt id="arg-javastics-path">javastics_path<a class="anchor" aria-label="anchor" href="#arg-javastics-path"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>javastics_path</code>
-is no longer supported, use <code>javastics</code> instead.</p></dd>
+<dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
+<dd><p>Number of cores to use for parallel computation.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -187,7 +167,7 @@ the name of the plant file, if the plant file is not found.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_examples_path.html">get_examples_path</a></span><span class="op">(</span>file_type <span class="op">=</span> <span class="st">"sti"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sim_data</span> <span class="op">&lt;-</span> <span class="fu">get_sim</span><span class="op">(</span><span class="va">path</span>, <span class="st">"banana"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> mod_sbanana.sti</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mod_sbanana.sti </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -199,11 +179,11 @@ the name of the plant file, if the plant file is not found.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner.</p>
+  <p></p><p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>
