@@ -253,7 +253,7 @@ gen_tec_doc <- function(
 
       # Getting needed nodes number and formalism or choice
       # to which they are to be attached
-      #nodes_nb <- length(param_values)
+      # nodes_nb <- length(param_values)
       par_form <- get_param_formalisms(xml_doc = xml_doc, par_name)
 
       if (base::is.null(par_form)) {
@@ -278,7 +278,7 @@ gen_tec_doc <- function(
           "']/ta"
         )
         # replacing parent name
-        parent_name = choix
+        parent_name <- choix
       }
       # specific "option" calculation for thinning
       if (any(c("juleclair", "nbinfloecl") %in% par_name)) {
