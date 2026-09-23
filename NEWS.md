@@ -1,3 +1,11 @@
+# SticsRFiles 1.7.1
+* FIXES
+  * managing cutting parameters according to 'codemodfauche'.
+  
+* DOCUMENTATION
+  * NAMESPACE and DESCRIPTION update
+  * gen_tec_doc help and comments
+  
 # SticsRFiles 1.7.0
 * FUNCTIONS
   * Added new functions for upgrading STICS input files from version 10 to version 11
