@@ -1,6 +1,6 @@
 #' @title Generate from a template or modify a STICS tec xml_document
 #'
-#' @param xml_doc an xml_document object (created from an ini file)
+#' @param xml_doc an xml_document object (created from a technical file)
 #' @param param_table a table (df, tibble) containing parameters to use
 #' @param stics_version the STICS files version to use (optional,
 #' default to latest). Only used if xml_doc = NULL.
@@ -43,23 +43,23 @@ gen_tec_doc <- function(
   na_values <- NA
   if ("na_values" %in% dot_args_names) na_values <- dot_args$na_values
 
-  # check/get version
+  # Getting version
   stics_version <- get_xml_stics_version(
     stics_version = stics_version,
     xml_doc = xml_doc
   )
 
-  # getting a default xml template
+  # Getting a default xml template according to Stics version
   if (base::is.null(xml_doc)) {
     xml_doc <- get_xml_base_doc("tec", stics_version = stics_version)
   }
 
-  # Nothing to do
+  # Nothing to do, returning only an xml_doc from a template or a given file
   if (base::is.null(param_table)) {
     return(xml_doc)
   }
 
-  # managing several doc generation based upon the lines number in param_table
+  # Managing several doc generation based upon lines in param_table
   lines_nb <- dim(param_table)[1]
   if (lines_nb > 1) {
     xml_docs <- apply(
@@ -75,12 +75,12 @@ gen_tec_doc <- function(
         )
       }
     )
-
     return(xml_docs)
   }
 
   gen_error <- FALSE
 
+  # TODO : Avoid loading the table in each call ?
   param_table <- param_table %>%
     dplyr::select(
       where(function(x) !is.na(x)) &
@@ -91,8 +91,7 @@ gen_tec_doc <- function(
         })
     )
 
-  # TODO : Avoid making conversion at each call !!!!!!
-  # getting values of params declared in the table
+  # Getting values of parameters declared in the table
   table_params <- get_params_from_table(
     params_table = param_table,
     xml_doc = xml_doc,
@@ -105,7 +104,7 @@ gen_tec_doc <- function(
   # doc param names
   doc_params <- get_params_from_doc(xml_doc)
 
-  # getting unknown param names
+  # Getting unknown param names
   unknown_param <- setdiff(unlist(table_names), unlist(doc_params))
 
   # temporary select for avoiding errors
@@ -116,12 +115,13 @@ gen_tec_doc <- function(
     # Message for unknown parameters
     warning(
       paste(table_params[unknown_idx], collapse = ", "),
-      ": unknown parameters !"
+      ": unknown parameters, they were removed !"
     )
     table_params <- table_params[!unknown_idx]
     table_names <- names(table_params)
   }
 
+  # Getting scalar parameters list and vector parameters list
   vec_idx <- unlist(
     lapply(
       table_params,
@@ -146,29 +146,44 @@ gen_tec_doc <- function(
   # lairesiduel, msresiduel, anitcoupe
   #
   # Choice between tempfauche and julfauche
-  # 1-Checking if "codemodfauche" exists in table_params
+  # 1-Checking if "codemodfauche" exists in table_params and that
+  # one of the choices is used!
   # 2- Getting the right mode fauche parameter name
-  # 3- Excluding the other one from names vector
+  #
+
+  # checking if there is either tempfauche or
+  # julfauche, but not both !
   if ("codemodfauche" %in% table_names) {
     code <- table_params[["codemodfauche"]]
 
-    if (code == "2") {
-      rmmodfauche <- "tempfauche"
-    } else if (code == "3") {
-      rmmodfauche <- "julfauche"
-    } else {
-      rmmodfauche <- NULL
+    if (
+      any(
+        grepl("^tempfauche", table_names)
+      ) &&
+        any(grepl("^julfauche", table_names))
+    ) {
+      # Finalizing the xml doc destruction to avoid errors
+      delete(xml_doc)
+      xml_doc <- NULL
+      # both parameters exist, stopping whatever the codemodfauche value is
+      stop(
+        "The parameters 'tempfauche' and 'julfauche' cannot be used at the same time.",
+        "See what is expected according to 'codemodfauche'. Fix the table content."
+      )
     }
-    vec_names <- setdiff(vec_names, rmmodfauche)
   }
 
   # Case of thinning: removing parameters
-  # if codeclaircie is set to 1
+  # if codeclaircie is set to 1, no thinning
   if ("codeclaircie" %in% table_names) {
     if (table_params[["codeclaircie"]] == "1") {
       vec_names <- setdiff(vec_names, c("juleclair", "nbinfloecl"))
     }
   }
+
+  # Flag to fix if the intervention number has to be written
+  # will be set to FALSE, whenthe first cutting parameter is detected
+  write_cut_nb <- TRUE
 
   for (par_name in vec_names) {
     nb_par <- get_param_number(xml_doc, par_name)
@@ -179,6 +194,7 @@ gen_tec_doc <- function(
     # added needed nodes number for the parameter or set of.
     #
     nb_values <- length(param_values)
+    if (nb_values == 0) next
     if ((nb_values > 0) && nb_par == nb_values) {
       set_param_value(
         xml_doc,
@@ -229,7 +245,7 @@ gen_tec_doc <- function(
         )
       }
 
-      # Generating an "intervention" node containing par_name in colonne nom
+      # Generating an "intervention" node containing par_name in colonne 'nom'
       # attribute
       # Cloning "ta_entete" node, from the current xml_doc
       # renaming it and reusing it for intervention nodes creation
@@ -241,34 +257,34 @@ gen_tec_doc <- function(
 
       # Getting needed nodes number and formalism or choice
       # to which they are to be attached
-      nodes_nb <- length(param_values)
+      # nodes_nb <- length(param_values)
       par_form <- get_param_formalisms(xml_doc = xml_doc, par_name)
 
       if (base::is.null(par_form)) {
         message(paste("Error: formalism for:", par_name))
       }
 
-      # General case, linked to formalisms
+      # 1 - General case, linked to formalisms
       parent_path <- get_param_type(xml_doc, "ta", "formalisme", par_form)$xpath
       parent_name <- par_form
 
       #-------------------------------------------------------------------------
-      # Specific cases linked to options/choix
+      # 2 - Specific cases linked to options/choix
       # for getting parent path of intervention nodes to create
       #
-      # specific "choix" path to be calculated for cutting techniques
-      if (par_name == "tempfauche") {
-        cut_idx <- c("tempfauche", "julfauche") %in% par_name
-        if (any(cut_idx)) {
-          choix <- c("calendar in degree days", "calendar in days")[cut_idx]
-          parent_path <- paste0(
-            "//option[@nom='Method.of.cutting']/choix[@nom='",
-            choix[cut_idx],
-            "']/ta"
-          )
-        }
+      # Specific "choix" path to be calculated for cutting techniques
+      cut_idx <- c("tempfauche", "julfauche") %in% par_name
+      if (any(cut_idx)) {
+        choix <- c("calendar in degree days", "calendar in days")[cut_idx]
+        parent_path <- paste0(
+          "//option[@nom='Method.of.cutting']/choix[@nom='",
+          choix,
+          "']/ta"
+        )
+        # replacing parent name
+        parent_name <- choix
       }
-      # specific "option" calculation for thinning
+      # Specific "option" calculation for thinning
       if (any(c("juleclair", "nbinfloecl") %in% par_name)) {
         parent_path <- "//option[@nom='thinning']/choix[@nom='yes']/ta"
       }
@@ -278,7 +294,7 @@ gen_tec_doc <- function(
       add_node_to_doc(
         xml_doc = xml_doc,
         new_node = op_node,
-        nodes_nb = nodes_nb,
+        nodes_nb = length(param_values),
         parent_path = parent_path
       )
 
@@ -290,12 +306,16 @@ gen_tec_doc <- function(
       )
 
       # Finally fixing nb_interventions
-      set_param_value(
-        xml_doc = xml_doc,
-        param_name = "nb_interventions",
-        param_value = nodes_nb,
-        parent_name = parent_name
-      )
+      if (!any(cut_idx) || write_cut_nb) {
+        set_param_value(
+          xml_doc = xml_doc,
+          param_name = "nb_interventions",
+          param_value = length(param_values),
+          parent_name = parent_name
+        )
+      }
+      # When a cutting parameter is detected for the first time
+      if (any(cut_idx)) write_cut_nb <- FALSE
     }
   }
 

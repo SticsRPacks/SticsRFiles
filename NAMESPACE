@@ -76,11 +76,15 @@ importFrom(XML,free)
 importFrom(data.table,":=")
 importFrom(doParallel,registerDoParallel)
 importFrom(dplyr,"%>%")
-importFrom(foreach,"%do%")
-importFrom(foreach,"%dopar%")
-importFrom(parallel,clusterCall)
-importFrom(parallel,detectCores)
-importFrom(parallel,makeCluster)
-importFrom(parallel,stopCluster)
+importFrom(foreach,
+  "%do%",
+  "%dopar%"
+)
+importFrom(parallel,
+  clusterCall,
+  detectCores,
+  makeCluster,
+  stopCluster
+)
 importFrom(rlang,.data)
 importFrom(tidyselect,where)
