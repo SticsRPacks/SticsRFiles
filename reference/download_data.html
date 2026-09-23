@@ -19,7 +19,7 @@ organization."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.1</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@ organization."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download example USMs</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.0/R/download_data.R" class="external-link"><code>R/download_data.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/1.7.1/R/download_data.R" class="external-link"><code>R/download_data.R</code></a></small>
     <div class="hidden name"><code>download_data.Rd</code></div>
     </div>
 
@@ -130,13 +130,13 @@ if the download fails and raise_error is FALSE.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Getting data for a given example : study_case_1 and a given STICS version</span></span></span>
 <span class="r-in"><span><span class="fu">download_data</span><span class="op">(</span>example_dirs <span class="op">=</span> <span class="st">"study_case_1"</span>, stics_version <span class="op">=</span> <span class="st">"V9.0"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/private/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/Rtmp4pt0js/data-master/study_case_1/V9.0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/private/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/RtmpwqOMiR/data-master/study_case_1/V9.0"</span>
 <span class="r-in"><span><span class="co"># raising an error instead of a message</span></span></span>
 <span class="r-in"><span><span class="fu">download_data</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  example_dirs <span class="op">=</span> <span class="st">"study_case_1"</span>, stics_version <span class="op">=</span> <span class="st">"V9.0"</span>,</span></span>
 <span class="r-in"><span>  raise_error <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp4pt0js/data-master/study_case_1/V9.0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//RtmpwqOMiR/data-master/study_case_1/V9.0"</span>
 </code></pre></div>
     </div>
   </div>
