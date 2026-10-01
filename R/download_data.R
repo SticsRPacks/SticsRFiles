@@ -61,7 +61,7 @@ download_data <- function(
     if (raise_error) {
       stop(error_msg, call. = FALSE)
     } else {
-      #message(error_msg)
+      # message(error_msg)
       return(invisible())
     }
   }
@@ -217,8 +217,9 @@ get_referenced_dirs <- function(
   # Loading csv file with data information
   ver_data <- get_versions_info(stics_version = stics_version)
   if (base::is.null(ver_data)) {
-    if (verbose)
+    if (verbose) {
       message("No examples data referenced for version: ", stics_version)
+    }
     return(invisible())
   }
 
@@ -230,8 +231,9 @@ get_referenced_dirs <- function(
 
   # Not any existing use case dir found
   if (!any(dirs_idx)) {
-    if (verbose)
+    if (verbose) {
       message("Not any existing use case for version: ", stics_version)
+    }
     return(invisible())
   }
 
@@ -265,7 +267,9 @@ get_data_url <- function(branch = "master") {
     ".zip"
   )
   # If the response status is not a success
-  if (httr::GET(url_str)$status_code != 200) return(invisible())
+  if (httr::GET(url_str)$status_code != 200) {
+    return(invisible())
+  }
 
   url_str
 }

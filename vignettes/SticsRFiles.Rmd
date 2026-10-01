@@ -111,13 +111,12 @@ The example data is downloaded by default in a temporary folder.
 For the sake of readability, we'll declare the workspace path and the path to the plant file here. But remember the functions can be applied to any XML files or workspaces.
 
 ```{r eval=FALSE}
-  workspace <- file.path(example_data, "XmlFiles")
-  plant_file <- file.path(workspace, "plant", "maisopti_plt.xml")
+workspace <- file.path(example_data, "XmlFiles")
+plant_file <- file.path(workspace, "plant", "maisopti_plt.xml")
 ```
 
 
 ```{r include=FALSE, echo=TRUE, results='hold'}
-
 if (!is.null(example_data)) {
   workspace <- file.path(example_data, "XmlFiles")
   plant_file <- file.path(workspace, "plant", "maisopti_plt.xml")
@@ -171,24 +170,20 @@ if (!is.null(plant_file)) {
 } else {
   message("Skipping getting dlaimax; data unavailable")
 }
-
 ```
 
 But this function is way more powerful than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
 
 ```{r}
-
 if (!is.null(plant_file)) {
-values <- get_param_xml(plant_file,
-  select = "formalisme",
-  select_value = "radiation interception"
-)
-unlist(values) # For pretty-printing
-
+  values <- get_param_xml(plant_file,
+    select = "formalisme",
+    select_value = "radiation interception"
+  )
+  unlist(values) # For pretty-printing
 } else {
   message("Skipping getting 'radiation interception' parameters values; data unavailable")
 }
-
 ```
 
 #### Set parameter values
@@ -202,7 +197,6 @@ if (!is.null(plant_file)) {
 } else {
   message("Skipping setting dlaimax values; data unavailable")
 }
-
 ```
 
 Don't forget to use the `overwrite` argument and set it to `TRUE`. It is `FALSE` by default to avoid any mishandling.
@@ -211,8 +205,8 @@ New values written in the file can be checked:
 
 ```{r}
 if (!is.null(plant_file)) {
-dlaimax <- get_param_xml(plant_file, "dlaimax")
-dlaimax
+  dlaimax <- get_param_xml(plant_file, "dlaimax")
+  dlaimax
 } else {
   message("Skipping getting dlaimax values; data unavailable")
 }
