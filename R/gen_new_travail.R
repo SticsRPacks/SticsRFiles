@@ -81,7 +81,8 @@ gen_new_travail <- function(
 #' Get information attached to a usm from usms.xml, and possibly change
 #' some forcing options
 #'
-#' @param usms_doc xml document object loaded from an usms xml file
+#' @param usms_doc xml document object loaded from an usms xml file,
+#' or usm xml data already extracted with get_usm_xml_data
 #' @param usm Usm name
 #' @param workspace Path of a JavaSTICS workspace
 #' @param lai_forcing 1, if `lai` is to be read from a daily lai, 0 otherwise
@@ -107,11 +108,11 @@ get_usm_data <- function(
   codesuite = NULL,
   codoptim = NULL
 ) {
-  data <- XML::getNodeSet(
-    usms_doc@content,
-    path = paste0("//usm[@nom='", usm, "']"),
-    fun = XML::xmlToList
-  )[[1]]
+  if (is.list(usms_doc)) {
+    data <- usms_doc
+  } else {
+    data <- get_usm_xml_data(usms_doc, usm)
+  }
   n <- names(data)
   n[11] <- "plante1"
   n[12] <- "plante2"
@@ -217,6 +218,26 @@ get_usm_data <- function(
   data[[".attrs"]] <- NULL
 
   data
+}
+
+
+#' Get raw usm data from usms.xml (usm node content as a list)
+#'
+#' @param usms_doc xml document object loaded from an usms xml file
+#' @param usm Usm name
+#'
+#' @return a named list
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
+get_usm_xml_data <- function(usms_doc, usm) {
+  XML::getNodeSet(
+    usms_doc@content,
+    path = paste0("//usm[@nom='", usm, "']"),
+    fun = XML::xmlToList
+  )[[1]]
 }
 
 

@@ -292,6 +292,22 @@ gen_usms_xml2txt <- function(
     )
   }
 
+  # Extracting usms data once from usms.xml, as plain R lists, instead of
+  # parsing the whole file again for each usm in the loop (in parallel mode,
+  # XMLInternalDocument objects cannot be sent to workers, and re-parsing
+  # usms.xml for each usm leads to a huge memory consumption).
+  usms_data <- NULL
+  if (!java_converter) {
+    usms_data <- lapply(usm, function(x) get_usm_xml_data(usms_doc, x))
+    names(usms_data) <- usm
+  }
+  delete(usms_doc)
+  rm(usms_doc)
+
+  # Converting only once xml files shared by usms
+  set_xml2txt_cache(TRUE)
+  on.exit(set_xml2txt_cache(FALSE), add = TRUE)
+
   if (parallel) {
     cl <- setup_parallelism(usms_number, cores)
     on.exit(stopCluster(cl), add = TRUE)
@@ -353,16 +369,11 @@ gen_usms_xml2txt <- function(
         ))
       }
     } else {
-      if (parallel) {
-        # In parallel mode, each worker runs in its own R environment.
-        # XMLInternalDocument objects (like `usms_doc`) cannot be serialized
-        # properly for transmission to the workers. Passing the XML object
-        # directly would result in NULL on each worker, causing
-        # xmlNamespaceDefinitions() to fail.
-        # To avoid this, we re-parse the XML file locally within each worker.
-        usms_doc <- xmldocument(usms_file_path)
-      }
-      usm_data <- get_usm_data(usms_doc, usm_name, workspace)
+      # Enabling the conversions cache in the worker,
+      # (stopped with the cluster at the end)
+      if (parallel) set_xml2txt_cache(TRUE)
+
+      usm_data <- get_usm_data(usms_data[[usm_name]], usm_name, workspace)
 
       # Getting the usm files paths
       usm_files_path <- all_files_list[[usm_name]]$paths
