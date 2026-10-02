@@ -139,7 +139,7 @@ gen_tec_xml <- function(
       xml_file = tec_out_file[[f]]
     )
 
-    if (any(empty_xml_param_values))
+    if (any(empty_xml_param_values)) {
       stop(
         "Value(s) for parameter(s) ",
         sprintf("%s, ", par_to_check[empty_xml_param_values]),
@@ -147,6 +147,7 @@ gen_tec_xml <- function(
         "check and add it/them or fix its/their value(s)",
         "in the input parameters data.frame."
       )
+    }
 
     delete(xml_docs[[f]])
   }

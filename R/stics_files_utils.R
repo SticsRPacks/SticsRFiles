@@ -338,7 +338,9 @@ check_mandatory_parameters <- function(par_names, xml_file) {
     param = file_par_names
   )
 
-  if (is.null(xml_param_types)) return(invisible())
+  if (is.null(xml_param_types)) {
+    return(invisible())
+  }
 
   # Checking empty values for par_names condsidered as mandatory parameters
   empty_xml_param_values <- is_empty_value(
@@ -367,8 +369,9 @@ check_mandatory_parameters <- function(par_names, xml_file) {
 is_empty_value <- function(value, expected_type, par_names = NULL) {
   expected_types <- c("character", "numeric", "integer")
 
-  if (length(value) != length(expected_type))
+  if (length(value) != length(expected_type)) {
     stop("Vectors dimension consistency error !")
+  }
 
   if (!all(expected_type %in% expected_types)) stop("Type error !")
 
@@ -387,17 +390,20 @@ is_empty_value <- function(value, expected_type, par_names = NULL) {
 
   if (is.list(value)) value <- unlist(value, use.names = TRUE)
 
-  if (class(value) != expected_type)
+  if (class(value) != expected_type) {
     stop(
       "Type consistentcy error value, type or missing numeric value\n",
       "for parameter: ",
       par_names
     )
+  }
 
-  if (is.character(value))
+  if (is.character(value)) {
     is_empty_value <- value %in% c("", "-999", "999", "0", as.character(NA))
-  if (is.numeric(value))
+  }
+  if (is.numeric(value)) {
     is_empty_value <- value %in% c(-999, 999, 0, as.numeric(NA))
+  }
 
   is_empty_value
 }
@@ -433,7 +439,9 @@ get_xml_param_type <- function(xml_file, param) {
   ))
 
   # checking if the parameter exists
-  if (is.null(xml_type)) return()
+  if (is.null(xml_type)) {
+    return()
+  }
 
   # mutate xml parameter "real" type to R "numeric" type
   if (xml_type == "real" | xml_type == "integer") xml_type <- "numeric"
