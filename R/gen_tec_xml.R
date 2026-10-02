@@ -2,12 +2,12 @@
 #'
 #' @param param_df A table (df, tibble) containing the values of the parameters
 #' to use (see details)
-#' @param file Path of a tec xml file to be used as a template. Optional,
+#' @param file_tmpl Path of a tec xml file to be used as a template. Optional,
 #' if not provided, the function will use a standard template depending
 #' on the STICS version.
 #' @param out_dir Path of the directory where to generate the file(s).
 #' @param stics_version Name of the STICS version. Optional, used if
-#' the `file` argument is not provided. In this case the function uses a
+#' the `file_tmpl` argument is not provided. In this case the function uses a
 #' standard template associated to the STICS version.
 #' @param na_values value to use as missing value in param_table
 #' (optional, default : NA)
@@ -53,7 +53,7 @@
 
 gen_tec_xml <- function(
   param_df,
-  file = NULL,
+  file_tmpl = NULL,
   out_dir,
   stics_version = "latest",
   na_values = NA
@@ -62,8 +62,8 @@ gen_tec_xml <- function(
 
   xml_doc_tmpl <- NULL
 
-  if (!base::is.null(file)) {
-    xml_doc_tmpl <- xmldocument(file)
+  if (!base::is.null(file_tmpl)) {
+    xml_doc_tmpl <- xmldocument(file_tmpl)
   }
 
   # detecting tec names column
@@ -73,12 +73,6 @@ gen_tec_xml <- function(
     stop("The column for identifying tec names has not been found !")
   }
   tec_col <- param_names[col_id]
-
-  # check if mandatory parameters are present
-  check_df_mandatory_parameters(
-    param_df[, -col_id],
-    c("iplt0", "profsem", "densitesem", "ressuite")
-  )
 
   xml_docs <- gen_tec_doc(
     xml_doc = xml_doc_tmpl,
@@ -134,55 +128,30 @@ gen_tec_xml <- function(
 
   # saving files
   # TODO: vectorize the saveXmlDoc method of the xml_document class
+  # parameters to check
+  par_to_check <- c("iplt0", "profsem", "densitesem", "ressuite")
   for (f in seq_along(xml_docs)) {
     save_xml_doc(xml_docs[[f]], tec_out_file[[f]])
+
+    # check if mandatory parameters values have been set
+    empty_xml_param_values <- check_mandatory_parameters(
+      par_names = par_to_check,
+      xml_file = tec_out_file[[f]]
+    )
+
+    if (any(empty_xml_param_values))
+      stop(
+        "Value(s) for parameter(s) ",
+        sprintf("%s, ", par_to_check[empty_xml_param_values]),
+        "must be set !\n",
+        "check and add it/them or fix its/their value(s)",
+        "in the input parameters data.frame."
+      )
 
     delete(xml_docs[[f]])
   }
 
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
-  }
-}
-
-
-#' Check if mandatory names are present in a data.frame names
-#' and if any missing data in the corresponding column
-#'
-#' @param param_df a data.frame
-#' @param par_names a vector of names
-#'
-#' @returns None
-#' @keywords internal
-#' @noRd
-#'
-check_df_mandatory_parameters <- function(param_df, par_names) {
-  df_names <- names(param_df)
-  exist_par <- par_names %in% names(param_df)
-  if (!all(exist_par)) {
-    stop(
-      "The input data.frame does not contain all the mandatory parameters:\n",
-      paste(par_names[!exist_par], collapse = ", "),
-      " is/are missing"
-    )
-  }
-
-  param_df <- param_df[par_names]
-  na_values <- unlist(lapply(param_df, function(x) any(is.na(x))))
-  any_na <- any(na_values)
-  if (any_na) {
-    stop(
-      "NA values have been detected in column(s): ",
-      paste(df_names[na_values], collapse = ", ")
-    )
-  }
-
-  empty_values <- unlist(lapply(param_df, function(x) any(x == "")))
-  any_empty <- any(empty_values)
-  if (any_empty) {
-    stop(
-      "Empty values have been detected in column(s): ",
-      paste(df_names[empty_values], collapse = ", ")
-    )
   }
 }

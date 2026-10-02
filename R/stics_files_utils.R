@@ -317,3 +317,125 @@ workspace_files_copy <- function(
   }
   invisible(stat)
 }
+
+#' Check if mandatory parameters have been set with a correct value
+#' (i.e. non empty value as defined in the `is_empty_value` function)
+#' @param par_names a vector of names
+#' @param xml_file an xml file template
+#'
+#' @returns A logical vector
+#' @keywords internal
+#' @noRd
+#'
+check_mandatory_parameters <- function(par_names, xml_file) {
+  # Checking if par_names are well set in the xml file
+  # extracting data from file
+  file_par_values <- get_param_xml(file = xml_file, param = par_names)
+  file_par_names <- names(file_par_values[[1]])
+  # Getting value type in the xml file
+  xml_param_types <- get_xml_param_type(
+    xml_file = xml_file,
+    param = file_par_names
+  )
+
+  if (is.null(xml_param_types)) return(invisible())
+
+  # Checking empty values for par_names condsidered as mandatory parameters
+  empty_xml_param_values <- is_empty_value(
+    file_par_values[[1]][file_par_names],
+    xml_param_types
+  )
+
+  empty_xml_param_values
+}
+
+
+#' Detecting if a vector of values contain empty values or not
+#' @description
+#' According to predefined empty value (STICS dependent)
+#' for 3 types "character", "numeric", "integer", the function
+#' evaluates if elements of `value` are matching predefined
+#' empty values or not
+#'
+#' @param value parameter value or a vector of
+#' @param expected_type expected parameter type or a vector of
+#'
+#' @returns a logical vector of empty values or not elements in `value`
+#' @keywords internal
+#' @noRd
+#'
+is_empty_value <- function(value, expected_type, par_names = NULL) {
+  expected_types <- c("character", "numeric", "integer")
+
+  if (length(value) != length(expected_type))
+    stop("Vectors dimension consistency error !")
+
+  if (!all(expected_type %in% expected_types)) stop("Type error !")
+
+  if (is.null(par_names)) par_names <- names(value)
+
+  if (length(value) > 1) {
+    return(mapply(
+      function(x, y, z) {
+        is_empty_value(value = x, expected_type = y, par_names = z)
+      },
+      value,
+      expected_type,
+      par_names
+    ))
+  }
+
+  if (is.list(value)) value <- unlist(value, use.names = TRUE)
+
+  if (class(value) != expected_type)
+    stop(
+      "Type consistentcy error value, type or missing numeric value\n",
+      "for parameter: ",
+      par_names
+    )
+
+  if (is.character(value))
+    is_empty_value <- value %in% c("", "-999", "999", "0", as.character(NA))
+  if (is.numeric(value))
+    is_empty_value <- value %in% c(-999, 999, 0, as.numeric(NA))
+
+  is_empty_value
+}
+
+#' Getting parameters types as defined in a STICS xml file
+#'
+#' @description
+#' Basically each parameter type of a STICS xml file is set
+#' in a `format` attribute with 3 possible values integer, real and character
+#' The function is getting from the file the attributes corresponding
+#' to the vector of parameter names given as input. One of the `format`
+#' attribute value does not match a R type `real` which is replaced
+#' with `numeric`, and for simplification `integer`replaced with a
+#' `numeric` type
+#'
+#' @param xml_file a xml file path
+#' @param param a vector of parameters names
+#'
+#' @returns a vector of parameter types macthing R types
+#' @keywords internal
+#' @noRd
+get_xml_param_type <- function(xml_file, param) {
+  if (length(param) > 1) {
+    return(
+      lapply(param, function(x) get_xml_param_type(xml_file, x))
+    )
+  }
+  xpath <- paste0('//param[@nom="', param, '"]')
+  xml_type <- as.vector(get_attrs_values(
+    object = xmldocument(xml_file),
+    path = xpath,
+    attr_list = "format"
+  ))
+
+  # checking if the parameter exists
+  if (is.null(xml_type)) return()
+
+  # mutate xml parameter "real" type to R "numeric" type
+  if (xml_type == "real" | xml_type == "integer") xml_type <- "numeric"
+  xml_type
+}
