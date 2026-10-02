@@ -97,10 +97,22 @@ convert_xml2txt <- function(
   # Defining output file path
   out_file_path <- file.path(out_dir, save_as)
 
+  # Getting a previous conversion result of the same file content,
+  # if cache is enabled (see gen_usms_xml2txt)
+  cache_key <- NULL
+  if (xml2txt_cache$enabled) {
+    cache_key <- paste(tools::md5sum(file), soil_name, stics_version)
+    out <- xml2txt_cache$txt[[cache_key]]
+    if (!is.null(out)) {
+      writeBin(out, out_file_path)
+      return(invisible(TRUE))
+    }
+  }
+
   # Getting the root element name for identifying the file type
   # TODO: redundancy according to finding tags in files names
   # (see above code, finding idx!)
-  doc <- xml2::read_xml(file)
+  doc <- get_xml2txt_doc(file)
   filet <- xml2::xml_name(doc)
 
   # Calling get_examples_path
@@ -115,7 +127,7 @@ convert_xml2txt <- function(
     }
 
     # check if the soil_name is in the sols.xml file
-    soils_names <- get_soils_list(file.path(dirname(file), "sols.xml"))
+    soils_names <- xml2::xml_attr(xml2::xml_find_all(doc, "//sol"), "nom")
 
     if (!soil_name %in% soils_names) {
       stop(
@@ -141,7 +153,74 @@ convert_xml2txt <- function(
   }
 
   # calling the xml conversion function
-  status <- convert_xml2txt_int(file, style_file, out_file_path)
+  status <- convert_xml2txt_int(file, style_file, out_file_path, doc = doc)
+
+  # Storing the conversion result
+  if (!is.null(cache_key) && isTRUE(status)) {
+    assign(
+      cache_key,
+      readBin(out_file_path, "raw", file.size(out_file_path)),
+      envir = xml2txt_cache$txt
+    )
+  }
 
   return(status)
+}
+
+
+# Cache of xml to text conversions, used by gen_usms_xml2txt for converting
+# only once the xml files shared by usms:
+# - txt: text files contents, indexed by xml file content (md5 sum),
+#   soil name and STICS version,
+# - docs: parsed sols.xml documents (indexed by md5 sum), for not
+#   parsing a sols.xml file again for each soil.
+# Parsing xml files and each xslt::xml_xslt call (xslt package issue) use
+# memory which is not released quickly enough, leading to a huge
+# memory consumption when generating a lot of usms.
+xml2txt_cache <- new.env(parent = emptyenv())
+xml2txt_cache$enabled <- FALSE
+xml2txt_cache$txt <- new.env(parent = emptyenv())
+xml2txt_cache$docs <- new.env(parent = emptyenv())
+
+#' Enabling or disabling (and emptying) the xml to text conversions cache
+#'
+#' @param enable logical, TRUE for enabling the cache, FALSE for disabling
+#' and emptying it
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
+set_xml2txt_cache <- function(enable = TRUE) {
+  if (!enable) {
+    xml2txt_cache$txt <- new.env(parent = emptyenv())
+    xml2txt_cache$docs <- new.env(parent = emptyenv())
+  }
+  xml2txt_cache$enabled <- enable
+  invisible(enable)
+}
+
+#' Getting a parsed xml document, from the cache for sols.xml files
+#' if cache is enabled
+#'
+#' @param file Path of the xml file
+#'
+#' @return an xml2 xml_document
+#'
+#' @keywords internal
+#'
+#' @noRd
+#'
+get_xml2txt_doc <- function(file) {
+  if (!xml2txt_cache$enabled || basename(file) != "sols.xml") {
+    return(xml2::read_xml(file))
+  }
+
+  key <- unname(tools::md5sum(file))
+  doc <- xml2txt_cache$docs[[key]]
+  if (is.null(doc)) {
+    doc <- xml2::read_xml(file)
+    assign(key, doc, envir = xml2txt_cache$docs)
+  }
+  doc
 }
