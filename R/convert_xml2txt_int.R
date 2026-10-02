@@ -7,6 +7,7 @@
 #' @param xml_file File path of the input xml file
 #' @param style_file File path of the xsl file
 #' @param out_file File path of the generated file
+#' @param doc Optional, xml2 document already parsed from xml_file
 #'
 #' @return Path of the generated file
 #'
@@ -23,7 +24,12 @@
 #'
 #' @noRd
 #'
-convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
+convert_xml2txt_int <- function(
+  xml_file,
+  style_file,
+  out_file = NULL,
+  doc = NULL
+) {
   f_names <- c(xml_file, style_file)
   ex_files <- file.exists(f_names)
   if (!all(ex_files)) {
@@ -48,7 +54,9 @@ convert_xml2txt_int <- function(xml_file, style_file, out_file = NULL) {
 
   # converting file
   style <- xml2::read_xml(style_file)
-  doc <- xml2::read_xml(xml_file)
+  if (is.null(doc)) {
+    doc <- xml2::read_xml(xml_file)
+  }
   txt <- xslt::xml_xslt(doc, style)
   out <- substr(txt, 1, nchar(txt) - 1)
 
