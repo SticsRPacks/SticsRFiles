@@ -16,21 +16,10 @@ test_that("get data url", {
 
 
 test_that("downloading data", {
-  expect_null(download_data("branch"))
-  expect_null(download_data(example_dirs = c("a", "b")))
-  expect_null(download_data(stics_version = "V12.0"))
+  expect_warning(download_data("branch"))
+  expect_warning(download_data(example_dirs = c("a", "b")))
+  expect_warning(download_data(stics_version = "V12.0"))
   expect_error(download_data(branch = "branch", raise_error = TRUE))
   expect_error(download_data(example_dirs = c("a", "b"), raise_error = TRUE))
   expect_error(download_data(stics_version = "V12.0", raise_error = TRUE))
-
-  # captured <- new.env(parent = emptyenv())
-  #
-  # local_mocked_bindings(
-  #   get_data_url = function(branch) {
-  #     captured$branch <- branch
-  #     invisible(list())
-  #   }
-  # )
-  # invisible(get_data_url(branch))
-  # expect_equal(captured$branch, "master")
 })

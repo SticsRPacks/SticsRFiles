@@ -13,15 +13,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-```{r eval=FALSE}
+```{r eval=TRUE}
 library(SticsRFiles)
 ```
 
-```{r include=FALSE}
-suppressPackageStartupMessages(library(SticsRFiles))
-# just in case for unzipping examples files in tempdir
-get_examples_path(c("xml", "csv"))
-```
 
 ## Introduction
 
@@ -84,50 +79,39 @@ All the example data used in this article are available from the [`data` reposit
 
 `SticsRFiles` provides a function to download it from the command line. Please execute the following command in R:
 
-```{r include=FALSE, echo=TRUE}
+```{r eval=FALSE, include=TRUE}
 example_data <- SticsRFiles::download_data(
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )
-# In case of a download problem, the function will return NULL
-# stopping the vignette building
-# if (is.null(example_data)) {
-#   stop("The example data could not be downloaded. The internet resource is not available.")
-# }
 
-if (is.null(example_data)) message("no available data")
 ```
-
-```{r eval=FALSE}
-library(SticsRFiles)
+```{r results='hold', echo=FALSE}
 example_data <- SticsRFiles::download_data(
+  #branch = "test",
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )
+
 ```
 
 The example data is downloaded by default in a temporary folder.
 
 For the sake of readability, we'll declare the workspace path and the path to the plant file here. But remember the functions can be applied to any XML files or workspaces.
 
-```{r eval=FALSE}
+```{r eval=FALSE, include=TRUE}
 workspace <- file.path(example_data, "XmlFiles")
 plant_file <- file.path(workspace, "plant", "maisopti_plt.xml")
 ```
-
-
-```{r include=FALSE, echo=TRUE, results='hold'}
+```{r results='hold', echo=FALSE}
 if (!is.null(example_data)) {
   workspace <- file.path(example_data, "XmlFiles")
   plant_file <- file.path(workspace, "plant", "maisopti_plt.xml")
 } else {
   workspace <- plant_file <- NULL
-  message("Skipping setting plant file path; data unavailable")
+  warning("Skipping setting plant file path; data unavailable")
 }
-example_data <- "Not available"
 ```
-
- check example data `r example_data`
 
 ### Example usage
 
@@ -163,7 +147,13 @@ head(get_param_info(keyword = "plant"))
 
 `get_param_xml()` is used to get the values of a parameter in an XML file. For example if we want to get `dlaimax`, we would do:
 
-```{r}
+
+
+```{r eval=FALSE}
+  dlaimax <- get_param_xml(plant_file, "dlaimax")
+  dlaimax
+```
+```{r, results='hold', echo=FALSE}
 if (!is.null(plant_file)) {
   dlaimax <- get_param_xml(plant_file, "dlaimax")
   dlaimax
@@ -174,7 +164,14 @@ if (!is.null(plant_file)) {
 
 But this function is way more powerful than just that. You can also get the values for all parameters in a given formalism (`formalisme` in French, yes some variables are still written in French in STICS). To do so, use the `select` argument like so:
 
-```{r}
+```{r eval=FALSE}
+values <- get_param_xml(plant_file,
+    select = "formalisme",
+    select_value = "radiation interception"
+  )
+  unlist(values) # For pretty-printing
+```
+```{r results='hold', echo=FALSE}
 if (!is.null(plant_file)) {
   values <- get_param_xml(plant_file,
     select = "formalisme",
@@ -182,7 +179,7 @@ if (!is.null(plant_file)) {
   )
   unlist(values) # For pretty-printing
 } else {
-  message("Skipping getting 'radiation interception' parameters values; data unavailable")
+  warning("Skipping getting 'radiation interception' parameters values; data unavailable")
 }
 ```
 
@@ -190,12 +187,17 @@ if (!is.null(plant_file)) {
 
 We can also change the value of a parameter by programming using `set_param_xml()`. It is used similarly to `get_param_xml()`. For example if we want to increase `dlaimax` by 30%:
 
-```{r}
-if (!is.null(plant_file)) {
+
+```{r eval=FALSE}
+new_values <- unlist(dlaimax) * 1.3
+set_param_xml(file = plant_file, param = "dlaimax", values = new_values, overwrite = TRUE)
+```
+```{r results='hold', echo=FALSE}
+if (!is.null(plant_file) && exists("dlaimax")) {
   new_values <- unlist(dlaimax) * 1.3
   set_param_xml(file = plant_file, param = "dlaimax", values = new_values, overwrite = TRUE)
 } else {
-  message("Skipping setting dlaimax values; data unavailable")
+  warning("Skipping setting dlaimax values; the object dlaimax does not exist or data are unavailable")
 }
 ```
 
@@ -203,12 +205,16 @@ Don't forget to use the `overwrite` argument and set it to `TRUE`. It is `FALSE`
 
 New values written in the file can be checked:
 
-```{r}
+```{r eval=FALSE}
+  dlaimax <- get_param_xml(plant_file, "dlaimax")
+  dlaimax
+```
+```{r results='hold', echo=FALSE}
 if (!is.null(plant_file)) {
   dlaimax <- get_param_xml(plant_file, "dlaimax")
   dlaimax
 } else {
-  message("Skipping getting dlaimax values; data unavailable")
+  warning("Skipping getting dlaimax values; data unavailable")
 }
 ```
 

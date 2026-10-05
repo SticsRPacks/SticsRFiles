@@ -54,14 +54,14 @@ download_data <- function(
 
   # Not any examples_dirs not found in example data file
   error_msg <- paste(
-    "Error: no available data for ",
-    example_dirs
+    "Error: no available data for version",
+    stics_version
   )
   if (base::is.null(dirs_str)) {
     if (raise_error) {
       stop(error_msg, call. = FALSE)
     } else {
-      # message(error_msg)
+      warning(error_msg)
       return(invisible())
     }
   }
@@ -78,9 +78,10 @@ download_data <- function(
     return(prev_data_dir)
   }
 
+  # Data zip url for the given branch
   data_url <- get_data_url(branch)
 
-  # if the branch doesn't exist
+  # If the branch doesn't exist
   # testing internet availability:
   error_msg <- paste(
     "The internet resource could not be reached.",
@@ -90,17 +91,14 @@ download_data <- function(
     if (raise_error) {
       stop(error_msg, call. = FALSE)
     } else {
-      message(error_msg)
+      warning(error_msg)
       return(invisible())
     }
   }
 
-  #
+  # Getting file name and local archive file path
   file_name <- basename(data_url)
-
-  # directory where to unzip the archive
   data_dir <- normalizePath(out_dir, winslash = "/", mustWork = FALSE)
-  # Local archive file path
   data_zip_path <- normalizePath(
     file.path(data_dir, file_name),
     winslash = "/",
@@ -110,24 +108,24 @@ download_data <- function(
   # Download query for getting the master.zip
   try_ret <- try(
     suppressWarnings(utils::download.file(
-      url,
+      data_url,
       data_zip_path
     )),
     silent = TRUE
   )
 
+  # Checking if the download was successful
   error_msg <- paste(
-    "Error while downloading data from GitHub.",
+    "Error while downloading data from GitHub from ",
+    data_url,
     "Check internet connection, or resource availability."
   )
-
-  # Checking if the download was successful
   # If not, returning an error message or raising an error
   if (inherits(try_ret, "try-error")) {
     if (raise_error) {
       stop(error_msg, call. = FALSE)
     } else {
-      message(error_msg)
+      warning(error_msg)
       return(invisible())
     }
   }
@@ -142,30 +140,17 @@ download_data <- function(
   ))
 
   # No data corresponding to example_dirs request in the archive !
-  if (!length(arch_files)) {
-    message(
-      "No available data for example(s) in the downloaded archive, version: ",
-      example_dirs,
-      ",",
-      stics_version
-    )
-    return(invisible())
-  }
-
-  # Checking if the download was successful
-  # If not, returning an error message or raising an error
   error_msg <- paste(
     "No available data for example(s) in the downloaded archive, version: ",
     example_dirs,
     ",",
     stics_version
   )
-
   if (!length(arch_files)) {
     if (raise_error) {
       stop(error_msg, call. = FALSE)
     } else {
-      message(error_msg)
+      warning(error_msg)
       return(invisible())
     }
   }
@@ -262,7 +247,7 @@ get_referenced_dirs <- function(
 
 get_data_url <- function(branch = "master") {
   url_str <- paste0(
-    "https://github.com/SticsRPacks/data/archiv/",
+    "https://github.com/SticsRPacks/data/archive/",
     branch,
     ".zip"
   )
