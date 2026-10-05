@@ -59,7 +59,8 @@ Imports:
     utils,
     XML,
     xml2,
-    xslt
+    xslt,
+    httr
 Suggests:
     covr,
     formatR,
