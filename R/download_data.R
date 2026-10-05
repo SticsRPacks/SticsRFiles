@@ -180,6 +180,8 @@ download_data <- function(
 #'
 #' @noRd
 #'
+#' @importFrom httr GET
+#'
 #' @examples
 #' \dontrun{
 #' # Getting all available directories from the data repository
