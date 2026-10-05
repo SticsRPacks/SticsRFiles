@@ -53,8 +53,17 @@ download_data <- function(
   )
 
   # Not any examples_dirs not found in example data file
+  error_msg <- paste(
+    "Error: no available data for version",
+    stics_version
+  )
   if (base::is.null(dirs_str)) {
-    stop("Error: no available data for ", example_dirs)
+    if (raise_error) {
+      stop(error_msg, call. = FALSE)
+    } else {
+      warning(error_msg)
+      return(invisible())
+    }
   }
 
   # Checking if the path exist(s), if a prior extraction has been done
@@ -69,12 +78,28 @@ download_data <- function(
     return(prev_data_dir)
   }
 
-  url <- get_data_url(branch)
-  file_name <- basename(url)
-  # directory where to unzip the archive
+  # Data zip url for the given branch
+  data_url <- get_data_url(branch)
+
+  # If the branch doesn't exist
+  # testing internet availability:
+  error_msg <- paste(
+    "The internet resource could not be reached.",
+    "Check internet connection, or resource url."
+  )
+  if (is.null(data_url)) {
+    if (raise_error) {
+      stop(error_msg, call. = FALSE)
+    } else {
+      warning(error_msg)
+      return(invisible())
+    }
+  }
+
+  # Getting file name and local archive file path
+  file_name <- basename(data_url)
   data_dir <- normalizePath(out_dir, winslash = "/", mustWork = FALSE)
-  # Archive file path
-  data_dir_zip <- normalizePath(
+  data_zip_path <- normalizePath(
     file.path(data_dir, file_name),
     winslash = "/",
     mustWork = FALSE
@@ -83,30 +108,30 @@ download_data <- function(
   # Download query for getting the master.zip
   try_ret <- try(
     suppressWarnings(utils::download.file(
-      url,
-      data_dir_zip
+      data_url,
+      data_zip_path
     )),
     silent = TRUE
   )
 
+  # Checking if the download was successful
   error_msg <- paste(
-    "Error while downloading data from GitHub.",
+    "Error while downloading data from GitHub from ",
+    data_url,
     "Check internet connection, or resource availability."
   )
-
-  # Checking if the download was successful
   # If not, returning an error message or raising an error
   if (inherits(try_ret, "try-error")) {
     if (raise_error) {
       stop(error_msg, call. = FALSE)
     } else {
-      message(error_msg)
+      warning(error_msg)
       return(invisible())
     }
   }
 
-  # Unzipping the archive
-  df_name <- utils::unzip(data_dir_zip, exdir = data_dir, list = TRUE)
+  # Listing the archive content
+  df_name <- utils::unzip(data_zip_path, exdir = data_dir, list = TRUE)
 
   # Creating files list to extract from dirs strings
   arch_files <- unlist(lapply(
@@ -115,21 +140,26 @@ download_data <- function(
   ))
 
   # No data corresponding to example_dirs request in the archive !
+  error_msg <- paste(
+    "No available data for example(s) in the downloaded archive, version: ",
+    example_dirs,
+    ",",
+    stics_version
+  )
   if (!length(arch_files)) {
-    warning(
-      "No available data for example(s), version: ",
-      example_dirs,
-      ",",
-      stics_version
-    )
-    return(invisible())
+    if (raise_error) {
+      stop(error_msg, call. = FALSE)
+    } else {
+      warning(error_msg)
+      return(invisible())
+    }
   }
 
   # Finally extracting data and removing the archive
-  utils::unzip(data_dir_zip, exdir = data_dir, files = arch_files)
-  unlink(data_dir_zip)
+  utils::unzip(data_zip_path, exdir = data_dir, files = arch_files)
+  unlink(data_zip_path)
 
-  # Returning the path of the folder where data have been downloaded
+  # Returning the path of the folder where data have been extracted
   normalizePath(file.path(data_dir, arch_files[1]), winslash = "/")
 }
 
@@ -141,6 +171,8 @@ download_data <- function(
 #' starting with "study_case_"
 #' @param stics_version An optional version string
 #' within those given by get_stics_versions_compat()$versions_list
+#' @param verbose logical flag for activating messages display (TRUE) or not
+#' (FALSE, default value)
 #'
 #' @return Vector of referenced directories string (as "study_case_1/V9.0")
 #'
@@ -162,11 +194,18 @@ download_data <- function(
 #' get_referenced_dirs(c("study_case_1", "study_case_2"), "V9.0")
 #' }
 #'
-get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
+get_referenced_dirs <- function(
+  dirs = NULL,
+  stics_version = NULL,
+  verbose = FALSE
+) {
   # Loading csv file with data information
   ver_data <- get_versions_info(stics_version = stics_version)
   if (base::is.null(ver_data)) {
-    stop("No examples data referenced for version: ", stics_version)
+    if (verbose) {
+      message("No examples data referenced for version: ", stics_version)
+    }
+    return(invisible())
   }
 
   dirs_names <- grep(pattern = "^study_case", x = names(ver_data), value = TRUE)
@@ -177,7 +216,10 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
 
   # Not any existing use case dir found
   if (!any(dirs_idx)) {
-    return()
+    if (verbose) {
+      message("Not any existing use case for version: ", stics_version)
+    }
+    return(invisible())
   }
 
   # Filtering existing directories in examples data
@@ -191,7 +233,8 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
   }
 
   # Getting data according to version and directories
-  version_data <- ver_data %>% dplyr::select(dplyr::any_of(dirs))
+  version_data <- ver_data %>%
+    dplyr::select(dplyr::any_of(dirs))
 
   # Compiling referenced directories/version strings, for existing version
   is_na <- base::is.na(version_data)
@@ -203,7 +246,17 @@ get_referenced_dirs <- function(dirs = NULL, stics_version = NULL) {
 }
 
 get_data_url <- function(branch = "master") {
-  paste0("https://github.com/SticsRPacks/data/archive/", branch, ".zip")
+  url_str <- paste0(
+    "https://github.com/SticsRPacks/data/archive/",
+    branch,
+    ".zip"
+  )
+  # If the response status is not a success
+  if (httr::GET(url_str)$status_code != 200) {
+    return(invisible())
+  }
+
+  url_str
 }
 
 get_default_branch <- function() {
