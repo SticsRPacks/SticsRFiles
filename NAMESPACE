@@ -80,6 +80,7 @@ importFrom(foreach,
   "%do%",
   "%dopar%"
 )
+importFrom(httr,GET)
 importFrom(parallel,
   clusterCall,
   detectCores,
