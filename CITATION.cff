@@ -2,7 +2,7 @@
 # CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
 # ------------------------------------------------
-
+ 
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
@@ -396,6 +396,18 @@ references:
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2026'
   doi: 10.32614/CRAN.package.xslt
+- type: software
+  title: httr
+  abstract: 'httr: Tools for Working with URLs and HTTP'
+  notes: Imports
+  url: https://httr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=httr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.httr
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
