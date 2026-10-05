@@ -84,15 +84,13 @@ example_data <- SticsRFiles::download_data(
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )
-
 ```
 ```{r results='hold', echo=FALSE}
 example_data <- SticsRFiles::download_data(
-  #branch = "test",
+  # branch = "test",
   example_dirs = "study_case_1",
   stics_version = "V10.0"
 )
-
 ```
 
 The example data is downloaded by default in a temporary folder.
@@ -150,8 +148,8 @@ head(get_param_info(keyword = "plant"))
 
 
 ```{r eval=FALSE}
-  dlaimax <- get_param_xml(plant_file, "dlaimax")
-  dlaimax
+dlaimax <- get_param_xml(plant_file, "dlaimax")
+dlaimax
 ```
 ```{r, results='hold', echo=FALSE}
 if (!is.null(plant_file)) {
@@ -166,10 +164,10 @@ But this function is way more powerful than just that. You can also get the valu
 
 ```{r eval=FALSE}
 values <- get_param_xml(plant_file,
-    select = "formalisme",
-    select_value = "radiation interception"
-  )
-  unlist(values) # For pretty-printing
+  select = "formalisme",
+  select_value = "radiation interception"
+)
+unlist(values) # For pretty-printing
 ```
 ```{r results='hold', echo=FALSE}
 if (!is.null(plant_file)) {
@@ -206,8 +204,8 @@ Don't forget to use the `overwrite` argument and set it to `TRUE`. It is `FALSE`
 New values written in the file can be checked:
 
 ```{r eval=FALSE}
-  dlaimax <- get_param_xml(plant_file, "dlaimax")
-  dlaimax
+dlaimax <- get_param_xml(plant_file, "dlaimax")
+dlaimax
 ```
 ```{r results='hold', echo=FALSE}
 if (!is.null(plant_file)) {
