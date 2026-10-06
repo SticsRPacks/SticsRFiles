@@ -21,7 +21,7 @@ Getting xml plant files by usm from an usms.xml file
 \dontrun{
 get_plant_files("path/to/usms.xml")
 
-get_plant_files("path/to/usms.xml", c("usm1", "usm2")
+get_plant_files("path/to/usms.xml", c("usm1", "usm2"))
 }
 
 }

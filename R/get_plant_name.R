@@ -202,7 +202,7 @@ get_plant_id <- function(usms_plant) {
 #' \dontrun{
 #' get_plant_files("path/to/usms.xml")
 #'
-#' get_plant_files("path/to/usms.xml", c("usm1", "usm2")
+#' get_plant_files("path/to/usms.xml", c("usm1", "usm2"))
 #' }
 #'
 get_plant_files <- function(usms_file, usms = NULL) {
