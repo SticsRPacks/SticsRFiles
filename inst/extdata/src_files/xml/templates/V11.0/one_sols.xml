@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sols version="10.1.0">
+<sols version="11.0">
 <sol nom="soilname">
 <param format="real" max="60.0" min="0.0" nom="argi"></param>
 <param format="real" max="0.5" min="0.05" nom="norg"></param>

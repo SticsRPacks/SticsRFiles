@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<fichiersta version="10.1.0">
+<fichiersta version="11.0">
   <formalisme nom="Weather station">
         <param format="real" max="10.0" min="2.0" nom="zr"></param>
         <param format="real" max="10.0" min="0.0" nom="NH3ref"></param>
@@ -81,6 +81,6 @@
         <param format="real" max="0.5" min="-0.5" nom="tmaxseuil">0</param>
       </choix>
     </option>
-    </formalisme>   
+    </formalisme>
 </fichiersta>
 
