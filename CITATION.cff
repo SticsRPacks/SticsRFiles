@@ -2,7 +2,7 @@
 # CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
 # ------------------------------------------------
-
+ 
 cff-version: 1.2.0
 message: 'To cite package "SticsRFiles" in publications use:'
 type: software
@@ -46,6 +46,7 @@ authors:
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
+date-released: '2026-10-06'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
