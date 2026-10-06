@@ -8,7 +8,7 @@ message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify STICS Input/Output Files'
-version: 1.7.1
+version: 1.7.2
 doi: 10.32614/CRAN.package.SticsRFiles
 abstract: Manipulating input and output files of the 'STICS' crop model (Beaudouin
   et al. (2022) <https://doi.org/10.35690/978-2-7592-3679-4>). The package is based
@@ -40,9 +40,13 @@ authors:
   given-names: Timothee
   email: timothee.flutre@inrae.fr
   orcid: https://orcid.org/0000-0003-4489-4782
+- family-names: Rahier
+  given-names: Valentine
+  email: valentine.rahier@inrae.fr
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
+date-released: '2026-10-06'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice

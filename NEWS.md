@@ -1,3 +1,21 @@
+# SticsRFiles 1.7.2
+* FIXES
+  * managing errors/warnings messages for data download preventing stopping 
+  if internet resources are not available
+  * managing mandatory parameters  checking (empty values) for 'xml' files and
+  activate it in 'gen_tec_xml'
+  
+* FUNCTIONS:
+  * New utils functions for checking mandatory parameters values (technical files)
+  * Added tests (download_data,...)
+  * Added cache use for XML files generation and transformation
+  * Code styling improvement
+  
+* DOCUMENTATION
+  * NAMESPACE and DESCRIPTION update (authors, imports, known words dictionary)
+  * Package vignette update for displaying warning when internet resources
+  are not available
+
 # SticsRFiles 1.7.1
 * FIXES
   * managing cutting parameters according to 'codemodfauche'.
