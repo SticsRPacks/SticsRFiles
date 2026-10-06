@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<initialisations version="10.1.0">
+<initialisations version="11.0">
   <nbplantes>1</nbplantes>
   <plante dominance="1">
     <stade0>snu</stade0>
