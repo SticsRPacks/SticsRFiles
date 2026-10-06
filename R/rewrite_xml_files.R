@@ -8,9 +8,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' rewrite_usms_file(/path/to/usms/file,
-#'                   /path/to/output/dir,
-#'                   c("SugarCane", "potato"))
+#' rewrite_usms_file(
+#'   "/path/to/usms/file",
+#'   "/path/to/output/dir",
+#'   c("SugarCane", "potato")
+#' )
 #' }
 #'
 #' @keywords internal
@@ -39,8 +41,9 @@ rewrite_usms_file <- function(usms_file, out_dir, usm = NULL) {
   # setting the usms filter
   usms_to_remove <- all_usms[!(all_usms %in% usm)]
 
-  if (length(usms_to_remove) == length(all_usms))
+  if (length(usms_to_remove) == length(all_usms)) {
     stop("Not any remaining usm to write in usms.xml file")
+  }
 
   if (length(usms_to_remove) == 0) {
     file.copy(from = usms_file, to = out_dir)
@@ -74,10 +77,12 @@ rewrite_usms_file <- function(usms_file, out_dir, usm = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#' rewrite_sols_file(/path/to/usms/file,
-#'                   /path/to/sols/file,
-#'                   /path/to/output/dir,
-#'                   c("SugarCane", "potato"))
+#' rewrite_sols_file(
+#'   "/path/to/usms/file",
+#'   "/path/to/sols/file",
+#'   "/path/to/output/dir",
+#'   c("SugarCane", "potato")
+#' )
 #' }
 #'
 #' @keywords internal
@@ -114,8 +119,9 @@ rewrite_sols_file <- function(usms_file, sols_file, out_dir, usm = NULL) {
   # getting the soils to remove
   sols_to_remove <- setdiff(all_sols, usms_sols)
 
-  if (length(sols_to_remove) == length(all_sols))
+  if (length(sols_to_remove) == length(all_sols)) {
     stop("Not any remaining sols to write in sols.xml file")
+  }
 
   if (length(sols_to_remove) == 0) {
     file.copy(from = sols_file, to = out_dir)
