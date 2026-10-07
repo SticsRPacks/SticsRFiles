@@ -77,11 +77,7 @@ install.packages("SticsRFiles")
 ```
 * From GitHub     
 ```{r eval=FALSE}
-devtools::install_github("SticsRPacks/SticsRFiles@*release")
-
-or
-
-remotes::install_github("SticsRPacks/SticsRFiles@*release")
+pak::pak("SticsRPacks/SticsRFiles@*release")
 ```
 
 Normally, all the package dependencies will be installed for CRAN packages.
@@ -109,6 +105,29 @@ Thanks for that, this would greatly help us to improve this package.
 
 If you have used this package for a study that led to a publication or
 report, please cite us. You can either use the citation tool from GitHub if you used the last version, or use `citation("SticsRFiles")` from R otherwise.
+
+<pre>
+<font size='1.5'>
+To cite ‘SticsRFiles’ in publications use  :
+
+  Lecharpentier P, Vezy R, Buis S, Giner M, Flutre T, Rahier V (2026). _SticsRFiles: Read and Modify STICS
+  Input/Output Files_. R package version 1.7.2, https://doi.org/10.5281/zenodo.4443206,
+  <https://github.com/SticsRPacks/SticsRFiles>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {SticsRFiles: Read and Modify STICS Input/Output Files},
+    author = {Patrice Lecharpentier and Remi Vezy and Samuel Buis and Michel Giner and Timothee Flutre and Valentine Rahier},
+    year = {2026},
+    note = {R package version 1.7.2, 
+https://doi.org/10.5281/zenodo.4443206},
+    url = {https://github.com/SticsRPacks/SticsRFiles},
+  }
+</font>
+</pre>
+
+
 
 ## Code of conduct
 
