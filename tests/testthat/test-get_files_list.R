@@ -70,10 +70,52 @@ test_that("mod files do not exist in files", {
   )
 })
 
-# add tests for getting a sublist according to file types
 context("Getting a sublist according to file type")
 test_that("finit files", {
   usms_files <- get_files_list(workspace_path, file_type = c("finit"))
+  expect_true(
+    length(
+      grep(
+        pattern = "\\_ini.xml$",
+        x = usms_files[["bou00t1"]][["paths"]]
+      )
+    ) >
+      0 &
+      length(usms_files[["bou00t1"]][["paths"]]) == 1
+  )
+})
+
+
+context("Test if is 'exist' field consistent with files existence")
+test_that("exist files", {
+  usms_files <- get_files_list(workspace_path, usm = "bou00t1")
+  expect_equal(
+    all(file.exists(usms_files$bou00t1$paths)),
+    all(usms_files$bou00t1$exist)
+  )
+})
+
+
+context("Test if usms selection is consistent")
+test_that("usms match", {
+  usms_files <- get_files_list(workspace_path, usm = usms_list[1:3])
+  expect_equal(
+    names(usms_files),
+    usms_list[1:3]
+  )
+})
+
+context("Test if usms selection and file type are consistent")
+test_that("usms match", {
+  usms_files <- get_files_list(
+    workspace_path,
+    usm = usms_list[1:3],
+    file_type = "finit"
+  )
+  expect_equal(
+    names(usms_files),
+    usms_list[1:3]
+  )
   expect_true(
     length(
       grep(
