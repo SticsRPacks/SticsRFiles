@@ -48,6 +48,7 @@ Imports:
     doParallel,
     dplyr (>= 1.0.0),
     foreach,
+    httr,
     lubridate,
     methods,
     parallel,
@@ -61,8 +62,7 @@ Imports:
     utils,
     XML,
     xml2,
-    xslt,
-    httr
+    xslt
 Suggests:
     covr,
     formatR,
