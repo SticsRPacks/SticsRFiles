@@ -67,7 +67,7 @@ The package will install the packages for you at the latest release version.
 ```{r eval=FALSE, results='asis'}
 install.packages("SticsRFiles")
 
-or 
+or
 
 pak::pkg_install("SticsRFiles")
 ```     
