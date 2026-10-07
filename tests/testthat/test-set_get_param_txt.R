@@ -363,3 +363,49 @@ test_that("get for NO3init, for a wrong version", {
     )
   )
 })
+
+path <- get_examples_path("txt", stics_version = "V9.2")
+# Getting values for an unknown parameter
+test_that("get for Hinitf, for a wrong version", {
+  expect_equal(
+    get_param_txt(workspace = path, param = "Hinitf", stics_version = "v9.2"),
+    list()
+  )
+})
+
+test_that("set/get for hinit", {
+  # Setting parameters
+  # all values
+  set_param_txt(
+    workspace = path,
+    param = "hinit",
+    value = 1:5,
+    stics_version = "v9.2"
+  )
+  expect_equal(
+    get_param_txt(
+      workspace = path,
+      param = "hinit",
+      stics_version = "v9.2"
+    )$ini$hinit,
+    1:5
+  )
+
+  # for a subset
+  set_param_txt(
+    workspace = path,
+    param = "hinit",
+    value = c(10, 15),
+    value_id = c(1, 5),
+    stics_version = "v9.2"
+  )
+  expect_equal(
+    get_param_txt(
+      workspace = path,
+      param = "hinit",
+      value_id = c(1, 5),
+      stics_version = "v9.2"
+    )$ini$hinit,
+    c(10, 15)
+  )
+})
