@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SticsRFiles</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.2</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
       <h1 data-toc-skip>SticsRFiles</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/1.7.1/vignettes/SticsRFiles.Rmd" class="external-link"><code>vignettes/SticsRFiles.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SticsRPacks/SticsRFiles/blob/v1.7.2/vignettes/SticsRFiles.Rmd" class="external-link"><code>vignettes/SticsRFiles.Rmd</code></a></small>
       <div class="hidden name"><code>SticsRFiles.Rmd</code></div>
 
     </div>
@@ -103,7 +103,8 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Learn SticsRFiles at: <span style="color: #0000BB; font-weight: bold; text-decoration: underline;">https://SticsRPacks.github.io/SticsRFiles</span></span></span></code></pre></div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -194,8 +195,7 @@ repository</a> in the <code>SticsRPacks</code> organization.</p>
 <p><code>SticsRFiles</code> provides a function to download it from the
 command line. Please execute the following command in R:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SticsRPacks/SticsRFiles" class="external-link">SticsRFiles</a></span><span class="op">)</span></span>
-<span><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/download_data.html">download_data</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu">SticsRFiles</span><span class="fu">::</span><span class="fu"><a href="../reference/download_data.html">download_data</a></span><span class="op">(</span></span>
 <span>  example_dirs <span class="op">=</span> <span class="st">"study_case_1"</span>,</span>
 <span>  stics_version <span class="op">=</span> <span class="st">"V10.0"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -378,27 +378,27 @@ in an XML file. For example if we want to get <code>dlaimax</code>, we
 would do:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dlaimax</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">plant_file</span>, <span class="st">"dlaimax"</span><span class="op">)</span></span>
-<span><span class="va">dlaimax</span></span>
-<span><span class="co">#&gt; $maisopti_plt.xml</span></span>
+<span><span class="va">dlaimax</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; $maisopti_plt.xml</span></span>
 <span><span class="co">#&gt; $maisopti_plt.xml$dlaimax</span></span>
-<span><span class="co">#&gt; [1] 0.00321 0.00321 0.00321 0.00321 0.00321</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.00321 0.00321 0.00321 0.00321 0.00321</span></span></code></pre>
 <p>But this function is way more powerful than just that. You can also
 get the values for all parameters in a given formalism
 (<code>formalisme</code> in French, yes some variables are still written
 in French in STICS). To do so, use the <code>select</code> argument like
 so:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">plant_file</span>,</span>
 <span>  select <span class="op">=</span> <span class="st">"formalisme"</span>,</span>
 <span>  select_value <span class="op">=</span> <span class="st">"radiation interception"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="co"># For pretty-printing</span></span>
-<span><span class="co">#&gt; maisopti_plt.xml.codetransrad        maisopti_plt.xml.forme </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="co"># For pretty-printing</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; maisopti_plt.xml.codetransrad        maisopti_plt.xml.forme </span></span>
 <span><span class="co">#&gt;                             1                             1 </span></span>
 <span><span class="co">#&gt;     maisopti_plt.xml.rapforme        maisopti_plt.xml.adfol </span></span>
 <span><span class="co">#&gt;                             4                             1 </span></span>
 <span><span class="co">#&gt;      maisopti_plt.xml.dfolbas     maisopti_plt.xml.dfolhaut </span></span>
-<span><span class="co">#&gt;                             5                             5</span></span></code></pre></div>
+<span><span class="co">#&gt;                             5                             5</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="set-parameter-values">Set parameter values<a class="anchor" aria-label="anchor" href="#set-parameter-values"></a>
@@ -407,19 +407,19 @@ so:</p>
 <code><a href="../reference/set_param_xml.html">set_param_xml()</a></code>. It is used similarly to
 <code><a href="../reference/get_param_xml.html">get_param_xml()</a></code>. For example if we want to increase
 <code>dlaimax</code> by 30%:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">dlaimax</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.3</span></span>
 <span><span class="fu"><a href="../reference/set_param_xml.html">set_param_xml</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">plant_file</span>, param <span class="op">=</span> <span class="st">"dlaimax"</span>, values <span class="op">=</span> <span class="va">new_values</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Don’t forget to use the <code>overwrite</code> argument and set it to
 <code>TRUE</code>. It is <code>FALSE</code> by default to avoid any
 mishandling.</p>
 <p>New values written in the file can be checked:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dlaimax</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_param_xml.html">get_param_xml</a></span><span class="op">(</span><span class="va">plant_file</span>, <span class="st">"dlaimax"</span><span class="op">)</span></span>
-<span><span class="va">dlaimax</span></span>
-<span><span class="co">#&gt; $maisopti_plt.xml</span></span>
+<span><span class="va">dlaimax</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; $maisopti_plt.xml</span></span>
 <span><span class="co">#&gt; $maisopti_plt.xml$dlaimax</span></span>
-<span><span class="co">#&gt; [1] 0.004173 0.004173 0.004173 0.004173 0.004173</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.004173 0.004173 0.004173 0.004173 0.004173</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="generate-observations-files">Generate observations files<a class="anchor" aria-label="anchor" href="#generate-observations-files"></a>
@@ -427,14 +427,14 @@ mishandling.</p>
 <p>We can generate observation files from a <code>data.frame</code>
 using <code><a href="../reference/gen_obs.html">gen_obs()</a></code>.</p>
 <p>Lets create some dummy <code>data.frame</code> first:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">obs_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  usm_name <span class="op">=</span> <span class="st">"Test"</span>, ian <span class="op">=</span> <span class="fl">2021</span>, mo <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, jo <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  `masec(n)` <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Then we can write the data to a file using
 <code><a href="../reference/gen_obs.html">gen_obs()</a></code>:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gen_obs.html">gen_obs</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">obs_df</span>, out_dir <span class="op">=</span> <span class="st">"/path/to/dest/dir"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -444,7 +444,7 @@ using <code><a href="../reference/gen_obs.html">gen_obs()</a></code>.</p>
 <code><a href="../reference/get_obs.html">get_obs()</a></code>. Note that all observation files should be named
 after the USM they are linked to. See the help page for more details,
 <em>e.g.</em> about intercrops.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_obs.html">get_obs</a></span><span class="op">(</span><span class="va">workspace</span><span class="op">)</span></span>
 <span><span class="co">#&gt; bo96iN+.obs </span></span>
 <span><span class="co">#&gt; bou00t1.obs </span></span>
@@ -460,7 +460,7 @@ after the USM they are linked to. See the help page for more details,
 </h4>
 <p>Likewise, we can read the observation files in a workspace using
 <code><a href="../reference/get_sim.html">get_sim()</a></code>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sim.html">get_sim</a></span><span class="op">(</span><span class="va">workspace</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in get_file_(workspace = x, usm_name = usm_name, usms_filepath =</span></span>
 <span><span class="co">#&gt; usms_path, : Not any sim file detected in</span></span>
@@ -484,7 +484,7 @@ plot both observations and simulations, you can use <a href="https://sticsrpacks
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre.</p>
+<p>Developed by Patrice Lecharpentier, Remi Vezy, Samuel Buis, Michel Giner, Timothee Flutre, Valentine Rahier.</p>
 </div>
 
 <div class="pkgdown">
