@@ -403,16 +403,29 @@ get_ini_txt <- function(
       densinitial = params[[12]]
     )
 
-    ini$plant$plant2 <- list(
-      stade0 = params[[14]],
-      lai0 = params[[15]],
-      masec0 = params[[16]],
-      QNplante0 = params[[17]],
-      magrain0 = params[[18]],
-      zrac0 = params[[19]],
-      resperenne0 = params[[20]],
-      densinitial = params[[22]]
-    )
+    if (ini$nbplantes > 1) {
+      ini$plant$plant2 <- list(
+        stade0 = params[[14]],
+        lai0 = params[[15]],
+        masec0 = params[[16]],
+        QNplante0 = params[[17]],
+        magrain0 = params[[18]],
+        zrac0 = params[[19]],
+        resperenne0 = params[[20]],
+        densinitial = params[[22]]
+      )
+    } else {
+      ini$plant$plant2 <- list(
+        stade0 = "",
+        lai0 = "0",
+        masec0 = "0",
+        QNplante0 = "0",
+        magrain0 = "0",
+        zrac0 = "0",
+        resperenne0 = "0",
+        densinitial = "0"
+      )
+    }
 
     ini$hinit <- params[[24]]
     ini$NO3init <- params[[26]]
@@ -442,34 +455,59 @@ get_ini_txt <- function(
       densinitial = params[[18]]
     )
 
-    ini$plant$plant2 <- list(
-      stade0 = params[[20]],
-      lai0 = params[[21]],
-      magrain0 = params[[22]],
-      zrac0 = params[[23]],
-      code_acti_reserve = params[[25]],
-      maperenne0 = params[[26]],
-      QNperenne0 = params[[27]],
-      masecnp0 = params[[28]],
-      QNplantenp0 = params[[29]],
-      masec0 = params[[30]],
-      QNplante0 = params[[31]],
-      restemp0 = params[[32]],
-      densinitial = params[[34]]
-    )
+    if (ini$nbplantes > 1) {
+      ini$plant$plant2 <- list(
+        stade0 = params[[20]],
+        lai0 = params[[21]],
+        magrain0 = params[[22]],
+        zrac0 = params[[23]],
+        code_acti_reserve = params[[25]],
+        maperenne0 = params[[26]],
+        QNperenne0 = params[[27]],
+        masecnp0 = params[[28]],
+        QNplantenp0 = params[[29]],
+        masec0 = params[[30]],
+        QNplante0 = params[[31]],
+        restemp0 = params[[32]],
+        densinitial = params[[34]]
+      )
+    } else {
+      ini$plant$plant2 <- list(
+        stade0 = "",
+        lai0 = "0",
+        magrain0 = "0",
+        zrac0 = "0",
+        code_acti_reserve = "0",
+        maperenne0 = "0",
+        QNperenne0 = "0",
+        masecnp0 = "0",
+        QNplantenp0 = "0",
+        masec0 = "0",
+        QNplante0 = "0",
+        restemp0 = "0",
+        densinitial = "0"
+      )
+    }
 
     ini$Hinitf <- params[[36]]
     ini$NO3initf <- params[[38]]
     ini$NH4initf <- params[[40]]
-    ini$Sdepth0 <- params[[43]]
-    ini$Sdry0 <- params[[45]]
-    ini$Swet0 <- params[[47]]
-    ini$ps0 <- params[[49]]
+    if (any(grepl(":snow:", params, fixed = TRUE))) {
+      ini$Sdepth0 <- params[[43]]
+      ini$Sdry0 <- params[[45]]
+      ini$Swet0 <- params[[47]]
+      ini$ps0 <- params[[49]]
+    } else {
+      ini$Sdepth0 <- "0"
+      ini$Sdry0 <- "0"
+      ini$Swet0 <- "0"
+      ini$ps0 <- "0"
+    }
   }
 
   ini <- character_to_numeric_list(ini)
 
-  return(ini)
+  ini
 }
 
 #' @rdname get_param_txt
