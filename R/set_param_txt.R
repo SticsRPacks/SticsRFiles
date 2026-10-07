@@ -63,7 +63,7 @@ set_param_txt <- function(
   param,
   value,
   append = FALSE,
-  plant_id = 1,
+  plant_id = NULL,
   variety = NULL,
   value_id = NULL,
   stics_version = "latest"
@@ -107,6 +107,7 @@ set_param_txt <- function(
       "\nPlease use the set_* functions directly to set the parameter value."
     )
   }
+
   switch(file_type,
     ini = {
       set_ini_txt(
@@ -160,6 +161,7 @@ set_param_txt <- function(
       )
     },
     tec = {
+      if (is.null(plant_id)) plant_id <- 1
       lapply(plant_id, function(x) {
         set_tec_txt(
           file = file.path(workspace, paste0("fictec", x, ".txt")),
@@ -171,6 +173,7 @@ set_param_txt <- function(
       })
     },
     plant = {
+      if (is.null(plant_id)) plant_id <- 1
       lapply(plant_id, function(x) {
         if (is.null(variety)) {
           variety <-
@@ -251,7 +254,7 @@ set_ini_txt <- function(
   param,
   value,
   append = FALSE,
-  plant_id = 1,
+  plant_id = NULL,
   value_id = NULL,
   stics_version = "latest"
 ) {
@@ -494,8 +497,8 @@ set_soil_txt <- function(
 #' @param file Path to the parameter file
 #' @param param    Parameter name
 #' @param value    New parameter value
-#' @param append      Boolean. Append input to existing file
-#' @param plant_id    The plant identifier (main crop: 1 ; associated crop: 2).
+#' @param append    Boolean. Append input to existing file
+#' @param plant_id  The plant identifier (main crop: 1 ; associated crop: 2).
 #' @param variety The plant variety to set the parameter value,
 #' either the variety
 #' name (`codevar` in the plant file) or the index
@@ -581,7 +584,7 @@ set_file_txt <- function(
             value_id = value_id,
             value = value
           )
-          ref[[param]][[value_id]] <- value
+          ref[[param]][value_id] <- value
         }
       } else {
         plt_tag <- paste0("plant", plant_id)
