@@ -2,13 +2,13 @@ SticsRFiles
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R build
-status](https://github.com/SticsRPacks/SticsRFiles/workflows/R-CMD-check/badge.svg)](https://github.com/SticsRPacks/SticsRFiles/actions)
+[![R-CMD-check](https://github.com/SticsRPacks/SticsRFiles/actions/workflows/check-standard.yaml/badge.svg?branch=main)](https://github.com/SticsRPacks/SticsRFiles/actions/workflows/check-standard.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badge.svg)](https://app.codecov.io/gh/SticsRPacks/SticsRFiles?branch=master)
 [![DOI](https://zenodo.org/badge/187986787.svg)](https://zenodo.org/badge/latestdoi/187986787)
@@ -16,7 +16,7 @@ coverage](https://codecov.io/gh/SticsRPacks/SticsRFiles/branch/master/graph/badg
 
 <!-- badges: end -->
 
-The goal of SticsRFiles is to perform manipulations of the
+The goal of `SticsRFiles` is to perform manipulations of the
 [STICS](https://stics.inrae.fr/eng/) model files either on XML files
 (used by the JavaSTICS GUI) or on text files used by the model fortran
 executable.
@@ -41,7 +41,7 @@ page](https://github.com/SticsRPacks/SticsRFiles).
 ## Prerequisites and technical tips
 
 > Some information about software requirements and operating system
-> constraints are given in the SticsOnR package documentation
+> constraints are given in the `SticsOnR` package documentation
 > [here](https://sticsrpacks.github.io/SticsOnR/).
 
 ## Installation
@@ -53,7 +53,7 @@ suggested.*
 
 - First, abort the installation.
 - Second, update the installed packages, except the `XML` package.
-- Finally, install the SticsRFiles package.
+- Finally, install the `SticsRFiles` package.
 
 ------------------------------------------------------------------------
 
@@ -62,19 +62,10 @@ suggested.*
 The best way to install the packages from `SticsRPacks`, from which
 `SticsRFiles` is part of, is by installing the `[SticsRPacks]` package.
 The package can be installed from [GitHub](https://github.com/) using
-either the `devtools` package, or the more lightweight the `remotes`
-package:
-
-- With `devtools`
+the `pak` package:
 
 ``` r
-      devtools::install_github("SticsRPacks/SticsRPacks")
-```
-
-- With `remotes`
-
-``` r
-      remotes::install_github("SticsRPacks/SticsRPacks")
+pak::pak("SticsRPacks/SticsRPacks")
 ```
 
 The package will install the packages for you at the latest release
@@ -82,20 +73,20 @@ version.
 
 ### Direct installation from the CRAN or [GitHub](https://github.com/)
 
-- From the CRAN
+- From the CRAN, using either base R or `pak`
 
 ``` r
-      install.packages("SticsRFiles")
+install.packages("SticsRFiles")
+
+or 
+
+pak::pkg_install("SticsRFiles")
 ```
 
 - From GitHub
 
 ``` r
-      devtools::install_github("SticsRPacks/SticsRFiles@*release")
-
-      or 
-      
-      remotes::install_github("SticsRPacks/SticsRFiles@*release")
+pak::pak("SticsRPacks/SticsRFiles@*release")
 ```
 
 Normally, all the package dependencies will be installed for CRAN
@@ -138,6 +129,24 @@ If you have used this package for a study that led to a publication or
 report, please cite us. You can either use the citation tool from GitHub
 if you used the last version, or use `citation("SticsRFiles")` from R
 otherwise.
+
+<pre>
+<font size='1.5'>
+To cite ‘SticsRFiles’ in publications use  :
+&#10;  Lecharpentier P, Vezy R, Buis S, Giner M, Flutre T, Rahier V (2026). _SticsRFiles: Read and Modify STICS
+  Input/Output Files_. R package version 1.7.2, https://doi.org/10.5281/zenodo.4443206,
+  <https://github.com/SticsRPacks/SticsRFiles>.
+&#10;A BibTeX entry for LaTeX users is
+&#10;  @Manual{,
+    title = {SticsRFiles: Read and Modify STICS Input/Output Files},
+    author = {Patrice Lecharpentier and Remi Vezy and Samuel Buis and Michel Giner and Timothee Flutre and Valentine Rahier},
+    year = {2026},
+    note = {R package version 1.7.2, 
+https://doi.org/10.5281/zenodo.4443206},
+    url = {https://github.com/SticsRPacks/SticsRFiles},
+  }
+</font>
+</pre>
 
 ## Code of conduct
 
