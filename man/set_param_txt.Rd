@@ -17,7 +17,7 @@ set_param_txt(
   param,
   value,
   append = FALSE,
-  plant_id = 1,
+  plant_id = NULL,
   variety = NULL,
   value_id = NULL,
   stics_version = "latest"
@@ -32,7 +32,7 @@ set_ini_txt(
   param,
   value,
   append = FALSE,
-  plant_id = 1,
+  plant_id = NULL,
   value_id = NULL,
   stics_version = "latest"
 )
