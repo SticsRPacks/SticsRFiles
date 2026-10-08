@@ -28,7 +28,7 @@
 #'
 get_xml_base_doc <- function(xml_type = NULL, stics_version = "latest") {
   # types list
-  types <- c("sols", "usms", "ini", "tec", "sta")
+  types <- c("sols", "usms", "ini", "tec", "sta", "plt")
   # returning types if no args
   if (!nargs()) {
     return(types)
@@ -45,7 +45,7 @@ get_xml_base_doc <- function(xml_type = NULL, stics_version = "latest") {
   stics_version <- get_xml_stics_version(stics_version = stics_version)
 
   # getting files prefix
-  files_pref <- c("one", "one", "file", "file", "file")
+  files_pref <- c("one", "one", "file", "file", "file", "one")
   pref <- files_pref[idx]
 
   # getting a default xmldocument object template
@@ -53,6 +53,15 @@ get_xml_base_doc <- function(xml_type = NULL, stics_version = "latest") {
     get_examples_path(file_type = "xml_tmpl", stics_version = stics_version),
     paste0(pref, "_", xml_type, ".xml")
   )
+  if (!file.exists(tmpl_file)) {
+    stop(
+      "The xml template file ",
+      tmpl_file,
+      " does not exist ",
+      "for version ",
+      stics_version
+    )
+  }
   xml_doc_object <- xmldocument(tmpl_file)
 
   return(xml_doc_object)
