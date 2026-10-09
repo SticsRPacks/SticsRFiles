@@ -1,7 +1,7 @@
 #' Getting examples files path attached to a STICS version for a given file type
 #'
 #' @param file_type A file type string among files types or a vector of
-#' ("csv", "obs", "sti", "txt", "xml")
+#' ("csv", "obs", "sti", "txt", "xml", "sd")
 #' @param stics_version Name of the STICS version. Optional, by default
 #' the latest version returned by `get_stics_versions_compat()` is used.
 #' @param overwrite TRUE for overwriting directory; FALSE otherwise
@@ -41,6 +41,13 @@ get_examples_path <- function(
     stop("Unknown file_type: ", file_type[!files_type_idx])
   }
 
+  # Specific treatment for "sd" files (common dirs with obs files)
+  # detect "sd" in file_type and replace it with "obs"
+  sd_idx <- file_type %in% "sd"
+  if (any(sd_idx)) {
+    file_type[sd_idx] <- "obs"
+  }
+
   # Validating the version string
   stics_version <- check_version(stics_version)
 
@@ -72,12 +79,13 @@ get_examples_path <- function(
 
   # Getting and storing path for each kind of file
   examples_path <- vector(mode = "character", length = length(files_str))
-  for (i in seq_along(files_str)) {
-    base_path <- unzip_examples(files_str[i], overwrite = overwrite)
-    if (base_path == "") {
-      examples_path[i] <- ""
-    } else {
-      examples_path[i] <- normalizePath(
+  unique_str <- unique(files_str)
+  for (i in seq_along(unique_str)) {
+    # if multiple occurrence in files_str
+    str_idx <- files_str %in% unique_str[i]
+    base_path <- unzip_examples(unique_str[i], overwrite = overwrite)
+    if (base_path != "") {
+      examples_path[str_idx] <- normalizePath(
         file.path(base_path, version_dirs[i]),
         winslash = "/",
         mustWork = FALSE
@@ -125,6 +133,7 @@ get_examples_types <- function() {
   c(
     "csv",
     "obs",
+    "sd",
     "sti",
     "txt",
     "xml",
