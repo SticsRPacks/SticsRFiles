@@ -1,8 +1,9 @@
-#' Read STICS observation or simulation files (.obs or mod_s)
+#' Read STICS observation, simulation or standard deviation
+#' files (`*.obs`, `mod_s*.sti`, `*.sd`)
 #'
-#' @description Read STICS observation or simulation files from a JavaSTICS
-#' workspace and store data into a list per usm.
-#' Used by `get_obs()` and `get_sim()`. Operate first computation and
+#' @description Read STICS observation, simulation or standard deviation
+#' files from a JavaSTICS workspace and store data into a named list (per usm).
+#' Used by `get_obs()`, `get_sim()`and `get_obs_sd()`. . Operate first computation and
 #' then call `get_file_()`.
 #'
 #' @param workspace      Path of a JavaSTICS workspace, or a vector of.
@@ -18,15 +19,15 @@
 #' on error, FALSE otherwise (default)
 #' @param type          The type of file to read, either "obs" or "sim".
 #'
-#' @details The `.obs` files names should match USMs names, e.g.
-#' for a usm called "banana", the `.obs` file should be named `banana.obs`.
+#' The `.obs` and `.sd` files names should match USMs names, e.g. for a
+#' usm called "banana", the `.obs` file should be named `banana.obs` and
+#' the `.sd` should be named `banana.sd`
 #' For intercrops, the name should be suffixed by "p" for the principal
 #' and "a" for the associated plant.
 #'
-#' @return A named list of `data.frame`s with observations or simulation data.
-#' The list elements are named after
-#' the usms names.
-#'
+#' A named list of `data.frame`s with observations, simulation data or
+#' observations standard deviation.
+#' The list elements are named after the usms names.
 #' @keywords internal
 #'
 #' @noRd
@@ -39,11 +40,11 @@ get_file <- function(
   usms_filepath = NULL,
   javastics_path = NULL,
   verbose = TRUE,
-  type = c("sim", "obs"),
+  type = c("sim", "obs", "sd"),
   parallel = FALSE,
   cores = NA
 ) {
-  type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
+  type <- match.arg(type, c("sim", "obs", "sd"), several.ok = FALSE)
 
   usms_path <- NULL
 
@@ -83,31 +84,34 @@ get_file <- function(
   )
 }
 
-#' Read STICS observation or simulation files (.obs or mod_s)
+#' Read STICS observation, simulation or standard deviation
+#' files (`*.obs`, `mod_s*.sti`, `*.sd`)
 #'
-#' @description Read STICS observation or simulation files from a
-#' JavaSTICS workspace and store data into a list per usm.
-#' Used by `get_obs()` and `get_sim()`.
+#' @description Read STICS observation, simulation or standard deviation
+#' files from a JavaSTICS workspace and store data into a named list (per usm).
+#' Used by `get_obs()`, `get_sim()`and `get_obs_sd()`
 #'
 #' @param workspace      Path of a JavaSTICS workspace
 #' @param usm_name       Vector of usms to read (optional, used to filter usms)
 #' @param usms_filepath  Path of the usms file (optional)
-#' @param var_list   vector of output variables names to filter
+#' @param var_list   Vector of output variables names to filter
 #' (optional, see `get_var_info()` to get the names of the variables)
-#' @param dates_list list of dates to filter (optional, POSIX dates)
+#' @param dates_list List of dates to filter (optional, POSIX dates)
 #' @param javastics_path JavaSTICS installation path (optional, needed if
 #' the plant files are not in the `workspace` but rather in the JavaSTICS
 #' default workspace). Only used to get the plants names.
 #' @param verbose        Logical value (optional), TRUE to display information
 #' on error, FALSE otherwise (default)
-#' @param type          The type of file to read, either "obs" or "sim".
+#' @param type  The type of file to read, either ".obs", ".sim" or ".sd".
 #'
-#' @details The `.obs` files names should match USMs names, e.g. for a
-#' usm called "banana", the `.obs` file should be named `banana.obs`.
+#' @details The `.obs` and `.sd` files names should match USMs names, e.g. for a
+#' usm called "banana", the `.obs` file should be named `banana.obs` and
+#' the `.sd` should be named `banana.sd`
 #' For intercrops, the name should be suffixed by "p" for the principal
 #' and "a" for the associated plant.
 #'
-#' @return A named list of `data.frame`s with observations or simulation data.
+#' @return A named list of `data.frame`s with observations, simulation data or
+#' observations standard deviation.
 #' The list elements are named after the usms names.
 #'
 #' @importFrom rlang .data
@@ -126,22 +130,26 @@ get_file_ <- function(
   dates_list = NULL,
   javastics_path = NULL,
   verbose = TRUE,
-  type = c("sim", "obs"),
+  type = c("sim", "obs", "sd"),
   parallel = FALSE,
   cores = NA
 ) {
   # TODO: add checking dates_list format, or apply the used format in sim
   # data.frame
 
-  type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
+  type <- match.arg(type, c("sim", "obs", "sd"), several.ok = FALSE)
   if (type == "sim") {
     file_pattern <- "^mod_s"
     file_ext <- "sti"
     full_type <- "simulation"
-  } else {
+  } else if (type == "obs") {
     file_pattern <- "\\.obs$"
     file_ext <- "obs"
     full_type <- "observation"
+  } else if (type == "sd") {
+    file_pattern <- "\\.sd$"
+    file_ext <- "sd"
+    full_type <- "standard deviation"
   }
 
   # Getting files list from workspace vector
@@ -229,7 +237,7 @@ get_file_ <- function(
     is_subdir <- FALSE
   }
 
-  # No usms file path is given
+  # usms file path is given, and files type in c("obs", "sim")
   if (!is.null(usms_filepath)) {
     # In the get_file_from_usms the usms are filtered against
     # usm_name
@@ -341,17 +349,18 @@ get_file_ <- function(
   i <- 1
   df_list <- foreach::foreach(
     i = seq_along(inputs)
-  ) %do_par_or_not% {
-    input <- inputs[[i]]
-    get_file_one(
-      input$dirpath,
-      input$filename,
-      input$p_name,
-      verbose,
-      dates_list,
-      var_list
-    )
-  }
+  ) %do_par_or_not%
+    {
+      input <- inputs[[i]]
+      get_file_one(
+        input$dirpath,
+        input$filename,
+        input$p_name,
+        verbose,
+        dates_list,
+        var_list
+      )
+    }
 
   # For files in sub-directories or not
   if (exists("workspace_dir_names")) {
@@ -446,7 +455,7 @@ get_file_one <- function(
 get_file_from_usms <- function(
   workspace,
   usms_path,
-  type = c("sim", "obs"),
+  type = c("sim", "obs", "sd"),
   usm_name = NULL,
   verbose = TRUE
 ) {
@@ -484,10 +493,15 @@ get_file_from_usms <- function(
     file_name[mixed] <- lapply(usms[mixed], function(x) {
       paste0("mod_s", c("p", "a"), x, ".sti")
     })
-  } else {
+  } else if (type == "obs") {
     file_name[!mixed] <- paste0(usms[!mixed], ".obs")
     file_name[mixed] <- lapply(usms[mixed], function(x) {
       paste0(x, c("p", "a"), ".obs")
+    })
+  } else if (type == "sd") {
+    file_name[!mixed] <- paste0(usms[!mixed], ".sd")
+    file_name[mixed] <- lapply(usms[mixed], function(x) {
+      paste0(x, c("p", "a"), ".sd")
     })
   }
 
@@ -545,17 +559,21 @@ get_file_from_usms <- function(
 #' parse_mixed_file(file_names, type = "sim")
 #' }
 #'
-parse_mixed_file <- function(file_names, type = c("sim", "obs")) {
-  type <- match.arg(type, c("sim", "obs"), several.ok = FALSE)
+parse_mixed_file <- function(file_names, type = c("sim", "obs", "sd")) {
+  type <- match.arg(type, c("sim", "obs", "sd"), several.ok = FALSE)
 
   if (type == "sim") {
     usm_pattern <- "^(mod_s)|(\\.sti)$"
     mixed_pattern <- "^(mod_s(a|p))|(\\.sti)$"
     associated_pattern <- "^mod_sa"
-  } else {
+  } else if (type == "obs") {
     usm_pattern <- "\\.obs$"
     mixed_pattern <- "((a|p)\\.obs)$"
     associated_pattern <- "a\\.obs$"
+  } else if (type == "sd") {
+    usm_pattern <- "\\.sd$"
+    mixed_pattern <- "((a|p)\\.sd)$"
+    associated_pattern <- "a\\.sd$"
   }
 
   usm_names <- gsub(pattern = usm_pattern, replacement = "", x = file_names)
