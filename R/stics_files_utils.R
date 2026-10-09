@@ -1,7 +1,7 @@
 #' Getting examples files path attached to a STICS version for a given file type
 #'
 #' @param file_type A file type string among files types or a vector of
-#' ("csv", "obs", "sti", "txt", "xml")
+#' ("csv", "obs", "sti", "txt", "xml", "sd")
 #' @param stics_version Name of the STICS version. Optional, by default
 #' the latest version returned by `get_stics_versions_compat()` is used.
 #' @param overwrite TRUE for overwriting directory; FALSE otherwise
@@ -41,6 +41,13 @@ get_examples_path <- function(
     stop("Unknown file_type: ", file_type[!files_type_idx])
   }
 
+  # Specific treatment for "sd" files (common dirs with obs files)
+  # detect "sd" in file_type and replace it with "obs"
+  sd_idx <- file_type %in% "sd"
+  if (any(sd_idx)) {
+    file_type[sd_idx] <- "obs"
+  }
+
   # Validating the version string
   stics_version <- check_version(stics_version)
 
@@ -72,12 +79,13 @@ get_examples_path <- function(
 
   # Getting and storing path for each kind of file
   examples_path <- vector(mode = "character", length = length(files_str))
-  for (i in seq_along(files_str)) {
-    base_path <- unzip_examples(files_str[i], overwrite = overwrite)
-    if (base_path == "") {
-      examples_path[i] <- ""
-    } else {
-      examples_path[i] <- normalizePath(
+  unique_str <- unique(files_str)
+  for (i in seq_along(unique_str)) {
+    # if multiple occurrence in files_str
+    str_idx <- files_str %in% unique_str[i]
+    base_path <- unzip_examples(unique_str[i], overwrite = overwrite)
+    if (base_path != "") {
+      examples_path[str_idx] <- normalizePath(
         file.path(base_path, version_dirs[i]),
         winslash = "/",
         mustWork = FALSE
@@ -100,31 +108,11 @@ get_examples_path <- function(
   return(invisible(examples_path))
 }
 
-# TODO: evaluate if it is useful ?
-list_examples_files <- function(
-  file_type,
-  stics_version = "latest",
-  full_names = TRUE
-) {
-  examples_path <- get_examples_path(
-    file_type = file_type,
-    stics_version = stics_version
-  )
-
-  files_list <- list.files(
-    pattern = "\\.[a-zA-Z]+$",
-    path = examples_path,
-    full.names = full_names
-  )
-
-  return(files_list)
-}
-
-
 get_examples_types <- function() {
   c(
     "csv",
     "obs",
+    "sd",
     "sti",
     "txt",
     "xml",
@@ -179,10 +167,10 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 }
 
 
-#' Copy mod, obs, lai, and weather data files
+#' Copy mod, obs, sd, lai, and weather data files
 #' @param workspace JavaSTICS xml workspace path
 #' @param out_dir   Output directory path
-#' @param file_type file type to copy among "mod", "obs", "clim"
+#' @param file_type file type to copy among "mod", "obs", "meteo", "sd"
 #' @param javastics JavsSTICS folder path (Optional)
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
@@ -206,13 +194,14 @@ workspace_files_copy <- function(
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
   # files types vector and associated regex
-  file_types <- c("mod", "obs", "lai", "meteo")
-  file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")
+  file_types <- c("mod", "obs", "lai", "meteo", "sd")
+  file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$", "*.sd")
   file_desc <- c(
     "output definition (*.mod)",
     "observation (*.obs)",
     "LAI dynamics (*.lai)",
-    "weather data (*.YYYY)"
+    "weather data (*.YYYY)",
+    "observation standard deviation (*.sd)"
   )
 
   # if file_type is not given, all files type are processed
