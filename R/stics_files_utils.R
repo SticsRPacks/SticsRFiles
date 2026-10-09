@@ -108,27 +108,6 @@ get_examples_path <- function(
   return(invisible(examples_path))
 }
 
-# TODO: evaluate if it is useful ?
-list_examples_files <- function(
-  file_type,
-  stics_version = "latest",
-  full_names = TRUE
-) {
-  examples_path <- get_examples_path(
-    file_type = file_type,
-    stics_version = stics_version
-  )
-
-  files_list <- list.files(
-    pattern = "\\.[a-zA-Z]+$",
-    path = examples_path,
-    full.names = full_names
-  )
-
-  return(files_list)
-}
-
-
 get_examples_types <- function() {
   c(
     "csv",
@@ -188,10 +167,10 @@ unzip_examples <- function(files_type, version_dir, overwrite = FALSE) {
 }
 
 
-#' Copy mod, obs, lai, and weather data files
+#' Copy mod, obs, sd, lai, and weather data files
 #' @param workspace JavaSTICS xml workspace path
 #' @param out_dir   Output directory path
-#' @param file_type file type to copy among "mod", "obs", "clim"
+#' @param file_type file type to copy among "mod", "obs", "meteo", "sd"
 #' @param javastics JavsSTICS folder path (Optional)
 #' @param verbose   logical, TRUE for displaying a copy message
 #' FALSE otherwise (default)
@@ -215,13 +194,14 @@ workspace_files_copy <- function(
   if (!dir.exists(out_dir)) dir.create(out_dir)
 
   # files types vector and associated regex
-  file_types <- c("mod", "obs", "lai", "meteo")
-  file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$")
+  file_types <- c("mod", "obs", "lai", "meteo", "sd")
+  file_patt <- c("*.mod", "*.obs", "*.lai", "\\.[0-9]{4}$", "*.sd")
   file_desc <- c(
     "output definition (*.mod)",
     "observation (*.obs)",
     "LAI dynamics (*.lai)",
-    "weather data (*.YYYY)"
+    "weather data (*.YYYY)",
+    "observation standard deviation (*.sd)"
   )
 
   # if file_type is not given, all files type are processed
