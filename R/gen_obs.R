@@ -6,7 +6,7 @@
 #' @param usm An optional list of usms names to be used for selecting
 #' which files to generate from the obs_table
 #'
-#' @param na.rm `r lifecycle::badge("deprecated")` `usms_list = NULL` is no
+#' @param usms_list `r lifecycle::badge("deprecated")` `usms_list = NULL` is no
 #' longer supported; replaced buy `usm = NULL`
 #'
 #' @details

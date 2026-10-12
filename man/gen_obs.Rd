@@ -15,7 +15,7 @@ gen_obs(df, out_dir, usm = NULL, usms_list = deprecated())
 \item{usm}{An optional list of usms names to be used for selecting
 which files to generate from the obs_table}
 
-\item{na.rm}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_list = NULL} is no
+\item{usms_list}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{usms_list = NULL} is no
 longer supported; replaced buy \code{usm = NULL}}
 }
 \value{
