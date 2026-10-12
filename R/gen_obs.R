@@ -150,7 +150,7 @@ gen_obs_ <- function(
 
     # Setting the output file path
     out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".", type))
-    #out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".obs"))
+    # out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".obs"))
 
     # Selecting data for the current usm, eliminating all NA values columns
     usm_df <- df %>%
