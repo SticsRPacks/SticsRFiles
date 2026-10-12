@@ -49,6 +49,7 @@ Imports:
     dplyr (>= 1.0.0),
     foreach,
     httr,
+    lifecycle,
     lubridate,
     methods,
     parallel,
