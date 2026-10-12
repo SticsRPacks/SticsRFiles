@@ -1,9 +1,28 @@
+# SticsRFiles 1.7.3
+
+* FUNCTIONS
+  * refactoring and new function to get observations data standard deviation or
+  generate a file as for observation files (same format).
+  * deprecation of usms_list argument replaced with usm for get_obs function
+  
+* FIXES
+  * get_param_txt: plant list initialisation
+  * set_param_txt: plants ids management according to files type, ini parameters 
+  management
+  
+* TESTS
+  * new tests for rewriting xml files functions
+  * new tests added for get_usms_files (files existence, usms and file types
+  selection)
+  
+
 # SticsRFiles 1.7.2
 * FIXES
   * managing errors/warnings messages for data download preventing stopping 
   if internet resources are not available
   * managing mandatory parameters  checking (empty values) for 'xml' files and
   activate it in 'gen_tec_xml'
+  * get example data path in case of multiple files types
   
 * FUNCTIONS:
   * New utils functions for checking mandatory parameters values (technical files)

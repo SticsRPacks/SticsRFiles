@@ -8,7 +8,7 @@ message: 'To cite package "SticsRFiles" in publications use:'
 type: software
 license: LGPL-3.0-or-later
 title: 'SticsRFiles: Read and Modify STICS Input/Output Files'
-version: 1.7.2
+version: 1.7.3
 doi: 10.32614/CRAN.package.SticsRFiles
 abstract: Manipulating input and output files of the 'STICS' crop model (Beaudouin
   et al. (2022) <https://doi.org/10.35690/978-2-7592-3679-4>). The package is based
@@ -46,7 +46,7 @@ authors:
 repository: https://CRAN.R-project.org/package=SticsRFiles
 repository-code: https://github.com/SticsRPacks/SticsRFiles
 url: https://doi.org/10.5281/zenodo.4443206
-date-released: '2026-10-06'
+date-released: '2026-10-12'
 contact:
 - family-names: Lecharpentier
   given-names: Patrice
@@ -192,6 +192,34 @@ references:
     given-names: Steve
   year: '2026'
   doi: 10.32614/CRAN.package.foreach
+- type: software
+  title: httr
+  abstract: 'httr: Tools for Working with URLs and HTTP'
+  notes: Imports
+  url: https://httr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=httr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2026'
+  doi: 10.32614/CRAN.package.httr
+- type: software
+  title: lifecycle
+  abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
+  notes: Imports
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2026'
+  doi: 10.32614/CRAN.package.lifecycle
 - type: software
   title: lubridate
   abstract: 'lubridate: Make Dealing with Dates a Little Easier'
@@ -400,18 +428,6 @@ references:
     orcid: https://orcid.org/0000-0002-4035-0289
   year: '2026'
   doi: 10.32614/CRAN.package.xslt
-- type: software
-  title: httr
-  abstract: 'httr: Tools for Working with URLs and HTTP'
-  notes: Imports
-  url: https://httr.r-lib.org/
-  repository: https://CRAN.R-project.org/package=httr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2026'
-  doi: 10.32614/CRAN.package.httr
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'

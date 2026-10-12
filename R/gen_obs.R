@@ -3,8 +3,11 @@
 #' @param df A data frame containing the values of the observations to use
 #' (see Details).
 #' @param out_dir Path of the directory where to generate the file(s).
-#' @param usms_list An optional list of usms names to be used for selecting
+#' @param usm An optional list of usms names to be used for selecting
 #' which files to generate from the obs_table
+#'
+#' @param usms_list `r lifecycle::badge("deprecated")` `usms_list = NULL` is no
+#' longer supported; replaced buy `usm = NULL`
 #'
 #' @details
 #'  `df` is a `data.frame` with the following format:
@@ -36,14 +39,88 @@
 #'
 #' @export
 #'
+#' @importFrom lifecycle  is_present deprecated
+#'
+#'
+#'
 gen_obs <- function(
   df,
   out_dir,
-  usms_list = NULL
+  usm = NULL,
+  usms_list = deprecated()
 ) {
+  if (lifecycle::is_present(usms_list)) {
+    # Signaling the deprecation and point to the new argument
+    lifecycle::deprecate_warn(
+      "1.7.3",
+      "gen_obs(usms_list = 'use `usm` instead')"
+    )
+
+    # Map usms_list to usm for backward compatibility
+    usm <- usms_list
+  }
+  gen_obs_(df, out_dir, usm, "obs")
+}
+
+
+#' @title Generating observation data standard deviation files from a data.frame
+#' as for generating observations data files (`gen_obs`)
+#'
+#' @param df A data frame containing the values of the standard deviation of
+#' observations to use (see Details).
+#' @param out_dir Path of the directory where to generate the file(s).
+#' @param usm An optional list of usms names to be used for selecting
+#' which files to generate from the `df` table
+#' @details
+#'  `df` is a `data.frame` with the following format:
+#'
+#'
+#' |usm_name       |  ian| mo| jo| jul|densite | lai(n)| masec(n)|   azomes|
+#' |:--------------|----:|--:|--:|---:|:-------|------:|--------:|--------:|
+#' |USM_2017_T1_CI | 2017|  9|  6| 249|NA      |     NA|     0.31| 27.07395|
+#' |USM_2017_T1_CI | 2017|  9| 20| 263|NA      |     NA|     0.60| 27.90000|
+#' |USM_2018_T1    | 2017| 10| 20| 293|NA      |    0.1|       NA|       NA|
+#' |USM_2018_T1    | 2018|  5| 15| 482|NA      |    1.2|       NA|       NA|
+#'
+#' * `usm_name` column contains usms names which are used as output .obs
+#'    files names
+#' * `ian`, `mo`, `jo` and `jul` are mandatory
+#'    (year, month, day and julian date)
+#' * Other columns one per variable contain observationsstandard deviation
+#'  values or NA
+#'
+#'  @seealso \code{\link{get_var_info}} for getting variable right syntax or
+#'  searching a variable name.
+#'
+#' @return A return logical status indicating if any error when writing
+#' files (FALSE), TRUE when no errors.
+#'
+#' @examples
+#' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
+#' obs_sd_df <- read_params_table(file = xl_path, sheet_name = "Obs_SD")
+#' gen_obs_sd(df = obs_sd_df, out_dir = "/path/to/dest/dir")
+#'
+#' @export
+#'
+gen_obs_sd <- function(
+  df,
+  out_dir,
+  usm = NULL
+) {
+  gen_obs_(df, out_dir, usm, "sd")
+}
+
+gen_obs_ <- function(
+  df,
+  out_dir,
+  usm = NULL,
+  type = c("obs", "sd")
+) {
+  type <- match.arg(type, c("obs", "sd"), several.ok = FALSE)
+
   # Checking if out_dir exists
   if (!dir.exists(out_dir)) {
-    warning("The directory does not exist", out_dir)
+    warning("The directory does not exist: ", out_dir)
     return(invisible(FALSE))
   }
 
@@ -56,9 +133,9 @@ gen_obs <- function(
   # Getting usms names
   usm_names <- unique(df[[usm_idx]])
 
-  # Treating a usms_list input
-  if (!base::is.null(usms_list)) {
-    usm_names <- usm_names[usm_names %in% usms_list]
+  # Treating a usm vector input
+  if (!base::is.null(usm)) {
+    usm_names <- usm_names[usm_names %in% usm]
   }
 
   nb_usms <- length(usm_names)
@@ -72,7 +149,8 @@ gen_obs <- function(
     usm_name_tmp <- usm_names[i]
 
     # Setting the output file path
-    out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".obs"))
+    out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".", type))
+    # out_file_path <- file.path(out_dir, paste0(usm_name_tmp, ".obs"))
 
     # Selecting data for the current usm, eliminating all NA values columns
     usm_df <- df %>%
@@ -81,7 +159,7 @@ gen_obs <- function(
 
     # Writing the file and
     # storing file path when writing error
-    if (!gen_obs_(usm_df, out_file_path)) {
+    if (!write_obs_(usm_df, out_file_path)) {
       bad_files[i] <- out_file_path
     }
   }
@@ -95,7 +173,7 @@ gen_obs <- function(
   return(invisible(TRUE))
 }
 
-#' Write STICS obs data from data.frame
+#' Write STICS observation data or standard deviation from a data.frame
 #'
 #' @description Write STICS obs data from data.frame/tibble
 #'
@@ -122,7 +200,7 @@ gen_obs <- function(
 #'
 #' @noRd
 #'
-gen_obs_ <- function(obs_table, file_path) {
+write_obs_ <- function(obs_table, file_path) {
   # Checking file path
   dir_name <- dirname(file_path)
   if (!dir.exists(dir_name)) {
