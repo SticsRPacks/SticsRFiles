@@ -13,6 +13,7 @@ export(force_param_values)
 export(gen_general_param_xml)
 export(gen_ini_xml)
 export(gen_obs)
+export(gen_obs_sd)
 export(gen_sols_xml)
 export(gen_sta_xml)
 export(gen_tec_xml)
@@ -29,6 +30,7 @@ export(get_general_txt)
 export(get_ini_txt)
 export(get_lai_forcing)
 export(get_obs)
+export(get_obs_sd)
 export(get_param_info)
 export(get_param_txt)
 export(get_param_xml)
@@ -81,6 +83,10 @@ importFrom(foreach,
   "%dopar%"
 )
 importFrom(httr,GET)
+importFrom(lifecycle,
+  deprecated,
+  is_present
+)
 importFrom(parallel,
   clusterCall,
   detectCores,

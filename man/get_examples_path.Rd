@@ -8,7 +8,7 @@ get_examples_path(file_type, stics_version = "latest", overwrite = FALSE)
 }
 \arguments{
 \item{file_type}{A file type string among files types or a vector of
-("csv", "obs", "sti", "txt", "xml")}
+("csv", "obs", "sti", "txt", "xml", "sd")}
 
 \item{stics_version}{Name of the STICS version. Optional, by default
 the latest version returned by \code{get_stics_versions_compat()} is used.}
