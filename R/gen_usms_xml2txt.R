@@ -1,15 +1,28 @@
-#' @title Generating one or several usms directories from a javastics workspace
-#' content
+#' @title Generating one or several usms directories with STICS input files
+#' from a javastics workspace content
 #'
 #' @description The function creates sets of input files for one or multiple
 #' usms from usms data stored in a JavaSTICS workspace. For multiple usms,
 #' sets will be generated into individual folders named with usm names.
-#' Observations files will be also copied if they are named `[usm_name].obs`
 #' For one usm, files will be generated either in the workspace directory
 #' or in a subdirectory.
+#' The JavaSTICS path must be provided if all the needed files for the model
+#' are not stored in the workspace, in order to generate full sets of the model
+#' input files in each generated usms directory.
+#' The needed files are:
+#' - plant files: if they are not in a sub-directory `plant` of the workspace,
+#' JavaStics files from its `plant` subdirectory will be used
+#' - general parameter files (param_gen.xml and param_newform.xml) of JavaStics
+#' will be also used if they do not exist in the workspace
+#' - Output definition files (var.mod, prof.mod, rap.mod) will be copied
+#' from the JavaStics folder (default ones) if they do not exist in the
+#' workspace
 #'
-#' @param javastics Path of JavaSTICS. Optional (needed if the JavaSTICS
-#' converter is used, java_converter set to TRUE in inputs)
+#' Apart from input files, observations data files will be also copied if
+#' they exist (`[usm_name].obs`) in the workspace.
+#'
+#' @param javastics Path of JavaSTICS (Optional), must be set if all the
+#' needed files are not stored in the workspace
 #' @param workspace Path of a JavaSTICS workspace
 #' (i.e. containing the STICS XML input files). Optional, if not provided
 #' the current workspace stored in JavaSTICS preferences will be used.
@@ -29,9 +42,6 @@
 #' is used for generating files. "java" is the default system command,
 #' but a full path to a java executable (other than the default one)
 #' may be given
-#' @param java_converter logical, optional; TRUE for using the JavaSTICS command
-#' (a JavaSTICS path must be set in the function inputs),
-#' FALSE otherwise (default)
 #' @param parallel Boolean. Is the computation to be done in parallel ?
 #' @param cores Number of cores to use for parallel computation.
 #'
@@ -47,6 +57,9 @@
 #' \dontrun{
 #' javastics <- "/path/to/JavaSTICS/folder"
 #' workspace <- "/path/to/workspace"
+#'
+#' # For a full workspace (containing all the needed files) and all usms
+#' gen_usms_xml2txt(workspace)
 #'
 #' # For all usms
 #' gen_usms_xml2txt(javastics, workspace)
@@ -71,33 +84,9 @@ gen_usms_xml2txt <- function(
   verbose = TRUE,
   dir_per_usm_flag = TRUE,
   java_cmd = "java",
-  java_converter = FALSE,
   parallel = FALSE,
   cores = NA
 ) {
-  if (java_converter) {
-    # javastics directory must be given
-    if (is.null(javastics)) {
-      stop(
-        "For using JavaSTICS commande line converter ",
-        "the JavaSTICS directory must be set in function inputs !"
-      )
-    }
-
-    # checking javastics path
-    check_java_path(javastics)
-    start_wd <- getwd()
-    on.exit(setwd(start_wd), add = TRUE)
-
-    setwd(javastics)
-
-    # Checking and getting JavaSTICS workspace path
-    workspace <- check_java_workspace(javastics, workspace)
-    if (base::is.null(workspace)) {
-      return()
-    }
-  }
-
   # Setting the javastics workspace as root directory where to generate
   # usms files or directories (dir_per_usm_flag value is TRUE)
   if (base::is.null(out_dir)) {
@@ -229,21 +218,6 @@ gen_usms_xml2txt <- function(
   # Removing usms with missing files
   all_files_list <- all_files_list[all_files_exist]
 
-  if (java_converter) {
-    # Getting javastics cmd line
-    cmd_list <- get_javastics_cmd(
-      javastics,
-      java_cmd = java_cmd,
-      type = "generate",
-      workspace = workspace
-    )
-    cmd_args <- cmd_list$cmd_generate
-    cmd <- cmd_list$command
-  } else {
-    cmd_args <- NULL
-    cmd <- NULL
-  }
-
   usms_number <- length(usm)
 
   # Fixing dir_per_usm_flag value if FALSE and there are
@@ -291,16 +265,24 @@ gen_usms_xml2txt <- function(
       file.path(javastics, "config", out_files_def)[!out_files_idx_path]
     )
   }
+  # Warning if any file is missing
+  missing_idx <- !(out_files_def %in% basename(out_files_path))
+  if (any(missing_idx)) {
+    if (verbose) {
+      cli::cli_alert_warning(paste0(
+        "Output definition files do not exist: ",
+        sprintf("%s,", out_files_path[missing_idx])
+      ))
+    }
+  }
 
   # Extracting usms data once from usms.xml, as plain R lists, instead of
   # parsing the whole file again for each usm in the loop (in parallel mode,
   # XMLInternalDocument objects cannot be sent to workers, and re-parsing
   # usms.xml for each usm leads to a huge memory consumption).
-  usms_data <- NULL
-  if (!java_converter) {
-    usms_data <- lapply(usm, function(x) get_usm_xml_data(usms_doc, x))
-    names(usms_data) <- usm
-  }
+  usms_data <- lapply(usm, function(x) get_usm_xml_data(usms_doc, x))
+  names(usms_data) <- usm
+  # removing file and object
   delete(usms_doc)
   rm(usms_doc)
 
@@ -337,129 +319,97 @@ gen_usms_xml2txt <- function(
       usm_path <- out_dir
     }
 
-    if (java_converter) {
-      # Generating text files
-      ret <- system2(
-        command = cmd,
-        args = paste(cmd_args, usm_name),
-        stdout = TRUE,
-        stderr = TRUE
+    # Enabling the conversions cache in the worker,
+    # (stopped with the cluster at the end)
+    if (parallel) set_xml2txt_cache(TRUE)
+
+    usm_data <- get_usm_data(usms_data[[usm_name]], usm_name, workspace)
+
+    # Getting the usm files paths
+    usm_files_path <- all_files_list[[usm_name]]$paths
+
+    # Getting climate files paths (unique paths)
+    clim_files_path <- unique(
+      grep(
+        pattern = "\\.[0-9]{4}$",
+        x = usm_files_path,
+        value = TRUE
       )
-      # Get info returned by system2 for detecting errors
-      i_exec_status <- !any(grepl(pattern = "ERROR", ret))
-      if (!i_exec_status) {
-        # displaying usm name
-        if (verbose) {
-          cli::cli_alert_danger("USM {.val {usm_name}} creation failed")
-        }
-        return(list(
-          exec_status = i_exec_status,
-          global_copy_status = i_global_copy_status,
-          obs_copy_status = i_obs_copy_status,
-          lai_copy_status = i_lai_copy_status
-        ))
+    )
+
+    # Getting xml files paths
+    files_idx <- grep(
+      pattern = "\\.xml$",
+      usm_files_path
+    )
+    xml_files_path <- usm_files_path[files_idx]
+
+    # Generation status vector for xml files and new_travail.usm
+    # and climate.txt
+    gen_files_status <- rep(TRUE, length(xml_files_path) + 2)
+    plant_id_plt <- 0
+    plant_id_tec <- 0
+    plant_id <- 0
+
+    # Converting xml files to txt files
+    for (f in seq_along(xml_files_path)) {
+      file_path <- xml_files_path[f]
+
+      if (grepl(pattern = "usms.xml", x = file_path)) {
+        # usms.xml file is not converted
+        next
       }
 
-      # Copying generated files to the usm directory
-      if (dir_per_usm_flag) {
-        copy_status <- all(file.copy(
-          from = files_path[file.exists(files_path)],
-          to = usm_path,
-          overwrite = TRUE
-        ))
-      }
-    } else {
-      # Enabling the conversions cache in the worker,
-      # (stopped with the cluster at the end)
-      if (parallel) set_xml2txt_cache(TRUE)
+      found_plt <- grepl(pattern = "_plt", x = file_path, fixed = TRUE)
+      found_tec <- grepl(pattern = "_tec", x = file_path, fixed = TRUE)
 
-      usm_data <- get_usm_data(usms_data[[usm_name]], usm_name, workspace)
-
-      # Getting the usm files paths
-      usm_files_path <- all_files_list[[usm_name]]$paths
-
-      # Getting climate files paths (unique paths)
-      clim_files_path <- unique(
-        grep(
-          pattern = "\\.[0-9]{4}$",
-          x = usm_files_path,
-          value = TRUE
-        )
-      )
-
-      # Getting xml files paths
-      files_idx <- grep(
-        pattern = "\\.xml$",
-        usm_files_path
-      )
-      xml_files_path <- usm_files_path[files_idx]
-
-      # Generation status vector for xml files and new_travail.usm
-      # and climate.txt
-      gen_files_status <- rep(TRUE, length(xml_files_path) + 2)
-      plant_id_plt <- 0
-      plant_id_tec <- 0
-      plant_id <- 0
-
-      # Converting xml files to txt files
-      for (f in seq_along(xml_files_path)) {
-        file_path <- xml_files_path[f]
-
-        if (grepl(pattern = "usms.xml", x = file_path)) {
-          # usms.xml file is not converted
-          next
-        }
-
-        found_plt <- grepl(pattern = "_plt", x = file_path, fixed = TRUE)
-        found_tec <- grepl(pattern = "_tec", x = file_path, fixed = TRUE)
-
-        if (found_plt) {
-          plant_id_plt <- plant_id_plt + 1
-          plant_id <- plant_id_plt
-        }
-
-        if (found_tec) {
-          plant_id_tec <- plant_id_tec + 1
-          plant_id <- plant_id_tec
-        }
-
-        # Getting soil name
-        # usefull for generating sol2txt.xsl file in
-        # gen_sol_xsl_file when used in convert_xml2txt
-        if (grepl(pattern = "sols", x = file_path)) {
-          soil_name <- usm_data$nomsol
-        } else {
-          soil_name <- NULL
-        }
-
-        gen_files_status[f] <- convert_xml2txt(
-          file = file_path,
-          stics_version = stics_version,
-          out_dir = usm_path,
-          plant_id = plant_id,
-          soil_name = soil_name
-        )
+      if (found_plt) {
+        plant_id_plt <- plant_id_plt + 1
+        plant_id <- plant_id_plt
       }
 
-      # Generating new_travail.usm
-      gen_files_status[f + 1] <- gen_new_travail(
-        usm_data,
-        usm = usm_name,
-        workspace = workspace,
-        out_dir = usm_path
+      if (found_tec) {
+        plant_id_tec <- plant_id_tec + 1
+        plant_id <- plant_id_tec
+      }
+
+      # Getting soil name
+      # useful for generating sol2txt.xsl file in
+      # gen_sol_xsl_file when used in convert_xml2txt
+      if (grepl(pattern = "sols", x = file_path)) {
+        soil_name <- usm_data$nomsol
+      } else {
+        soil_name <- NULL
+      }
+
+      gen_files_status[f] <- convert_xml2txt(
+        file = file_path,
+        stics_version = stics_version,
+        out_dir = usm_path,
+        plant_id = plant_id,
+        soil_name = soil_name
       )
-
-      # Generating climat.txt file
-      gen_files_status[f + 2] <- gen_climate(
-        clim_files_path,
-        out_dir = usm_path
-      )
-
-      # setting exec status result
-      i_exec_status <- all(gen_files_status)
-
-      copy_status <- i_exec_status
     }
+
+    # Generating new_travail.usm
+    gen_files_status[f + 1] <- gen_new_travail(
+      usm_data,
+      usm = usm_name,
+      workspace = workspace,
+      out_dir = usm_path
+    )
+
+    # Generating climat.txt file
+    gen_files_status[f + 2] <- gen_climate(
+      clim_files_path,
+      out_dir = usm_path
+    )
+
+    # setting exec status result
+    i_exec_status <- all(gen_files_status)
+
+    copy_status <- i_exec_status
+    # }
 
     # Copying files for outputs definition
     out_copy_status <- all(file.copy(
