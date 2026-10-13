@@ -2,8 +2,8 @@
 % Please edit documentation in R/gen_usms_xml2txt.R
 \name{gen_usms_xml2txt}
 \alias{gen_usms_xml2txt}
-\title{Generating one or several usms directories from a javastics workspace
-content}
+\title{Generating one or several usms directories with STICS input files
+from a javastics workspace content}
 \usage{
 gen_usms_xml2txt(
   javastics = NULL,
@@ -14,14 +14,13 @@ gen_usms_xml2txt(
   verbose = TRUE,
   dir_per_usm_flag = TRUE,
   java_cmd = "java",
-  java_converter = FALSE,
   parallel = FALSE,
   cores = NA
 )
 }
 \arguments{
-\item{javastics}{Path of JavaSTICS. Optional (needed if the JavaSTICS
-converter is used, java_converter set to TRUE in inputs)}
+\item{javastics}{Path of JavaSTICS (Optional), must be set if all the
+needed files are not stored in the workspace}
 
 \item{workspace}{Path of a JavaSTICS workspace
 (i.e. containing the STICS XML input files). Optional, if not provided
@@ -49,10 +48,6 @@ is used for generating files. "java" is the default system command,
 but a full path to a java executable (other than the default one)
 may be given}
 
-\item{java_converter}{logical, optional; TRUE for using the JavaSTICS command
-(a JavaSTICS path must be set in the function inputs),
-FALSE otherwise (default)}
-
 \item{parallel}{Boolean. Is the computation to be done in parallel ?}
 
 \item{cores}{Number of cores to use for parallel computation.}
@@ -70,14 +65,32 @@ have been successfully copied in usms directories
 The function creates sets of input files for one or multiple
 usms from usms data stored in a JavaSTICS workspace. For multiple usms,
 sets will be generated into individual folders named with usm names.
-Observations files will be also copied if they are named \verb{[usm_name].obs}
 For one usm, files will be generated either in the workspace directory
 or in a subdirectory.
+The JavaSTICS path must be provided if all the needed files for the model
+are not stored in the workspace, in order to generate full sets of the model
+input files in each generated usms directory.
+The needed files are:
+\itemize{
+\item plant files: if they are not in a sub-directory \code{plant} of the workspace,
+JavaStics files from its \code{plant} subdirectory will be used
+\item general parameter files (param_gen.xml and param_newform.xml) of JavaStics
+will be also used if they do not exist in the workspace
+\item Output definition files (var.mod, prof.mod, rap.mod) will be copied
+from the JavaStics folder (default ones) if they do not exist in the
+workspace
+}
+
+Apart from input files, observations data files will be also copied if
+they exist (\verb{[usm_name].obs}) in the workspace.
 }
 \examples{
 \dontrun{
 javastics <- "/path/to/JavaSTICS/folder"
 workspace <- "/path/to/workspace"
+
+# For a full workspace (containing all the needed files) and all usms
+gen_usms_xml2txt(workspace)
 
 # For all usms
 gen_usms_xml2txt(javastics, workspace)
