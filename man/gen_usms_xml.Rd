@@ -21,7 +21,7 @@ used if the \code{file} argument is not provided. In this case the function uses
 a standard template associated to the STICS version.}
 }
 \value{
-an invisible xml_document object
+None
 }
 \description{
 Generate STICS usms xml file from a template or an input file

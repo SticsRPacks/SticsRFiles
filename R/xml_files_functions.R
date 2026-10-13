@@ -233,14 +233,56 @@ node_exist <- function(xml_file_or_doc, xpath) {
 }
 
 
-write_xml_file <- function(xml_doc, file, overwrite = FALSE) {
-  if (file.exists(file) && (!overwrite)) {
-    warning(file, ": \nalready exists, consider setting overwrite to TRUE")
+write_xml_file <- function(xml_doc, xml_file, overwrite = FALSE) {
+  if (!is.list(xml_doc)) xml_doc <- list(xml_doc)
+  if (!is.list(xml_file)) xml_file <- as.list(xml_file)
+
+  # Check lists length
+  if (length(xml_doc) != length(xml_file)) {
+    stop("Aborting xml file(s) writing, files list inconsistency !")
+  }
+
+  # check docs xml
+  xml_doc_check <- unlist(lapply(
+    xml_doc,
+    function(x) inherits(x, "xml_document")
+  ))
+  if (!all(xml_doc_check)) {
+    warning(
+      "Xml files could not be written!",
+      sprintf("%s, ", xml_file[!xml_doc_check])
+    )
+  }
+
+  # Checking if files exist
+  files_exist <- unlist(lapply(xml_file, file.exists))
+  if (any(files_exist) && (!overwrite)) {
+    files_vect <- basename(unlist(xml_file))
+    warning(
+      sprintf("%s, ", files_vect[files_exist]),
+      ": \nalready exist(s), consider setting overwrite to TRUE"
+    )
     return(invisible(FALSE))
   }
 
-  save_xml_doc(xml_doc, file)
-  return(invisible(TRUE))
+  # Saving xml docs
+  status <- mapply(
+    function(x, y) {
+      err <- try(save_xml_doc(x, y), silent = TRUE)
+      if (methods::is(err, "try-error")) {
+        return(invisible(FALSE))
+      }
+      invisible(TRUE)
+    },
+    xml_doc,
+    xml_file
+  )
+
+  # Finalizing objects deletion
+  lapply(xml_doc, delete)
+
+  # files generation return
+  invisible(all(status))
 }
 
 #' Check if the versions for upgrading xml files are compatible

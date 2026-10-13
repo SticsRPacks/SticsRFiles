@@ -6,28 +6,32 @@
 \usage{
 gen_tec_xml(
   param_df,
-  file_tmpl = NULL,
+  file = NULL,
   out_dir,
   stics_version = "latest",
-  na_values = NA
+  na_values = NA,
+  file_tmpl = deprecated()
 )
 }
 \arguments{
 \item{param_df}{A table (df, tibble) containing the values of the parameters
 to use (see details)}
 
-\item{file_tmpl}{Path of a tec xml file to be used as a template. Optional,
+\item{file}{Path of a tec xml file to be used as a template. Optional,
 if not provided, the function will use a standard template depending
 on the STICS version.}
 
 \item{out_dir}{Path of the directory where to generate the file(s).}
 
 \item{stics_version}{Name of the STICS version. Optional, used if
-the \code{file_tmpl} argument is not provided. In this case the function uses a
+the \code{file} argument is not provided. In this case the function uses a
 standard template associated to the STICS version.}
 
 \item{na_values}{value to use as missing value in param_table
 (optional, default : NA)}
+
+\item{file_tmpl}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{file_tmpl = NULL} is no
+longer supported; replaced buy \code{file = NULL}}
 }
 \value{
 None
