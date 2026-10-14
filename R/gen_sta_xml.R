@@ -108,14 +108,8 @@ gen_sta_xml <- function(
   if (length(xml_docs) != length(sta_out_file)) {
     stop("Xml output files names must have the same length as table lines ! ")
   }
-
-  # saving files
-  # TODO: vectorize the saveXmlDoc method of the xml_document class
-  for (f in seq_along(xml_docs)) {
-    save_xml_doc(xml_docs[[f]], sta_out_file[[f]])
-
-    delete(xml_docs[[f]])
-  }
+  # Saving files
+  write_xml_file(xml_docs, sta_out_file, overwrite = TRUE)
 
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)

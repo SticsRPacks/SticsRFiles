@@ -39,7 +39,7 @@
 #'
 #' If not given (the default, `NULL`), the function returns the template as is.
 #'
-#' @return an invisible xml_document object
+#' @return None
 #'
 #' @examples
 #' xl_path <- download_usm_xl(file = "inputs_stics_example.xlsx")
@@ -93,14 +93,9 @@ gen_usms_xml <- function(
     stop(paste("The directory does not exist: ", out_path))
   }
 
-  # for getting only the xml doc in return
-  if (!base::is.null(file)) {
-    save_xml_doc(xml_doc, file)
-  }
+  write_xml_file(xml_doc, file, overwrite = TRUE)
 
   if (!is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)
   }
-
-  delete(xml_doc)
 }

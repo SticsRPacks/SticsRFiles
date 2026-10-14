@@ -130,13 +130,7 @@ gen_ini_xml <- function(
   }
 
   # Saving files
-  # TODO: vectorize the saveXmlDoc method of the xml_document class
-  for (f in seq_along(xml_docs)) {
-    save_xml_doc(xml_docs[[f]], ini_out_file[[f]])
-
-    # Finalizing objects
-    delete(xml_docs[[f]])
-  }
+  write_xml_file(xml_docs, ini_out_file, overwrite = TRUE)
 
   # Finalizing the template object if provided
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
