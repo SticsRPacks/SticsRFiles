@@ -55,7 +55,7 @@ get_files_list <- function(
   usm = NULL,
   usms_file = "usms.xml",
   file_type = NULL,
-  only_existing = TRUE,
+  only_existing = FALSE,
   javastics = NULL,
   use_mod_files = FALSE
 ) {
