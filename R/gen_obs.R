@@ -86,7 +86,7 @@ gen_obs <- function(
 #'    files names
 #' * `ian`, `mo`, `jo` and `jul` are mandatory
 #'    (year, month, day and julian date)
-#' * Other columns one per variable contain observationsstandard deviation
+#' * Other columns one per variable contain observations standard deviation
 #'  values or NA
 #'
 #'  @seealso \code{\link{get_var_info}} for getting variable right syntax or

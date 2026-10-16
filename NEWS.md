@@ -6,7 +6,7 @@
   * deprecation of usms_list argument replaced with usm for get_obs function
   
 * FIXES
-  * get_param_txt: plant list initialisation
+  * get_param_txt: plant list initialization
   * set_param_txt: plants ids management according to files type, ini parameters 
   management
   
