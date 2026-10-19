@@ -1,4 +1,4 @@
-#' Read STICS observation standard deviation files (*.sd)
+#' @title Read STICS observation standard deviation files
 #'
 #' @description Read STICS observation standard deviation files from a
 #' JavaSTICS workspace and store data into a named list per usm

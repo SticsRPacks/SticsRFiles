@@ -162,9 +162,8 @@ gen_tec_xml <- function(
       stop(
         "Value(s) for parameter(s) ",
         sprintf("%s, ", par_to_check[empty_xml_param_values]),
-        "must be set !\n",
-        "check and add it/them or fix its/their value(s)",
-        "in the input parameters data.frame."
+        "must be set within prescribed limits (check them using get_param_info function)\n",
+        "Fix values in the input data.frame."
       )
     }
   }

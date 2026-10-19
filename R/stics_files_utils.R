@@ -7,7 +7,7 @@
 #' @param overwrite TRUE for overwriting directory; FALSE otherwise
 #'
 #' @return A directory path for examples files for given file type and STICS
-#' version or a vector of (for unknown file types "" is returned as path)
+#' version or a vector of (for unknown file types empty string is returned as path)
 #'
 #' @export
 #'
