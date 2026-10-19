@@ -82,11 +82,7 @@ gen_sols_xml <- function(
     stop(paste("The directory does not exist: ", out_path))
   }
 
-  # saving file
-  save_xml_doc(xml_doc, file)
-
-  # finalizing object
-  delete(xml_doc)
+  write_xml_file(xml_doc, file, overwrite = TRUE)
 
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
     delete(xml_doc_tmpl)

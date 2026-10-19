@@ -2,15 +2,18 @@
 #'
 #' @param param_df A table (df, tibble) containing the values of the parameters
 #' to use (see details)
-#' @param file_tmpl Path of a tec xml file to be used as a template. Optional,
+#' @param file Path of a tec xml file to be used as a template. Optional,
 #' if not provided, the function will use a standard template depending
 #' on the STICS version.
 #' @param out_dir Path of the directory where to generate the file(s).
 #' @param stics_version Name of the STICS version. Optional, used if
-#' the `file_tmpl` argument is not provided. In this case the function uses a
+#' the `file` argument is not provided. In this case the function uses a
 #' standard template associated to the STICS version.
 #' @param na_values value to use as missing value in param_table
 #' (optional, default : NA)
+#'
+#' @param file_tmpl `r lifecycle::badge("deprecated")` `file_tmpl = NULL` is no
+#' longer supported; replaced buy `file = NULL`
 #'
 #' @details Please see `get_stics_versions_compat()` for the full list of
 #' STICS versions that can be used for the
@@ -50,20 +53,34 @@
 #'
 #' @export
 #'
+#' @importFrom lifecycle  is_present deprecated
+#'
 
 gen_tec_xml <- function(
   param_df,
-  file_tmpl = NULL,
+  file = NULL,
   out_dir,
   stics_version = "latest",
-  na_values = NA
+  na_values = NA,
+  file_tmpl = deprecated()
 ) {
   # TODO: refactor with gen_sta_file, gen_ini_file : same code
 
+  if (lifecycle::is_present(file_tmpl)) {
+    # Signaling the deprecation and point to the new argument
+    lifecycle::deprecate_warn(
+      "1.7.3",
+      "gen_tec_xml(file_tmpl = 'use `file` instead')"
+    )
+
+    # Map file_tmpl to file for backward compatibility
+    file <- file_tmpl
+  }
+
   xml_doc_tmpl <- NULL
 
-  if (!base::is.null(file_tmpl)) {
-    xml_doc_tmpl <- xmldocument(file_tmpl)
+  if (!base::is.null(file)) {
+    xml_doc_tmpl <- xmldocument(file)
   }
 
   # detecting tec names column
@@ -125,14 +142,16 @@ gen_tec_xml <- function(
 
   # selecting output files names
   tec_out_file <- tec_out_file[!out_idx]
+  xml_docs <- xml_docs[!out_idx]
 
-  # saving files
+  # Saving files
   # TODO: vectorize the saveXmlDoc method of the xml_document class
-  # parameters to check
-  par_to_check <- c("iplt0", "profsem", "densitesem", "ressuite")
-  for (f in seq_along(xml_docs)) {
-    save_xml_doc(xml_docs[[f]], tec_out_file[[f]])
+  write_xml_file(xml_docs, tec_out_file, overwrite = TRUE)
 
+  # Checking parameters
+  par_to_check <- c("iplt0", "profsem", "densitesem", "ressuite")
+
+  for (f in seq_along(xml_docs)) {
     # check if mandatory parameters values have been set
     empty_xml_param_values <- check_mandatory_parameters(
       par_names = par_to_check,
@@ -147,8 +166,6 @@ gen_tec_xml <- function(
         "Fix values in the input data.frame."
       )
     }
-
-    delete(xml_docs[[f]])
   }
 
   if (!base::is.null(xml_doc_tmpl) && inherits(xml_doc_tmpl, "xml_document")) {
