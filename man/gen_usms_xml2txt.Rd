@@ -81,8 +81,9 @@ from the JavaStics folder (default ones) if they do not exist in the
 workspace
 }
 
-Apart from input files, observations data files will be also copied if
-they exist (\verb{[usm_name].obs}) in the workspace.
+Apart from input files, observations and standard deviation data files
+(\verb{[usm_name].obs}, \verb{[usm_name].sd}) will be also copied if they exist
+in the workspace.
 }
 \examples{
 \dontrun{

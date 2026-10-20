@@ -201,7 +201,7 @@ get_files_list <- function(
     usm_files <- usm_files[node_names %in% file_type]
 
     # Keeping usms xml files, except plant files, obs, lai, null
-    useless_files_idx <- usm_files %in% c("null", "defaut.lai", "")
+    useless_files_idx <- usm_files %in% c("null", "defaut.lai", "default.lai")
 
     if (any(useless_files_idx)) {
       usm_files <- usm_files[!useless_files_idx]

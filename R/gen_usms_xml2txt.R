@@ -18,8 +18,9 @@
 #' from the JavaStics folder (default ones) if they do not exist in the
 #' workspace
 #'
-#' Apart from input files, observations data files will be also copied if
-#' they exist (`[usm_name].obs`) in the workspace.
+#' Apart from input files, observations and standard deviation data files
+#' (`[usm_name].obs`, `[usm_name].sd`) will be also copied if they exist
+#' in the workspace.
 #'
 #' @param javastics Path of JavaSTICS (Optional), must be set if all the
 #' needed files are not stored in the workspace
@@ -163,7 +164,7 @@ gen_usms_xml2txt <- function(
     usm <- usm[usms_exist]
   }
 
-  # Getting files named list per us
+  # Getting files named list per usm
   # (with fields `paths` and `exist`;files existence status)
   all_files_list <- get_files_list(
     workspace = workspace,
@@ -295,6 +296,7 @@ gen_usms_xml2txt <- function(
       i_exec_status <- TRUE
       i_global_copy_status <- FALSE
       i_obs_copy_status <- FALSE
+      i_obs_sd_copy_status <- FALSE
       i_lai_copy_status <- FALSE
 
       # Removing all previous generated files, to be sure.
@@ -416,71 +418,65 @@ gen_usms_xml2txt <- function(
           exec_status = i_exec_status,
           global_copy_status = i_global_copy_status,
           obs_copy_status = i_obs_copy_status,
+          obs_sd_copy_status = i_obs_sd_copy_status,
           lai_copy_status = i_lai_copy_status
         ))
       }
 
-      # Copying observation files
-      if (nbplantes[usm_name] == 2) {
-        obs_path <- c(
-          file.path(workspace, paste0(usm_name, "p.obs")),
-          file.path(workspace, paste0(usm_name, "a.obs"))
-        )
-      } else {
-        obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
-      }
-
-      if (any(file.exists(obs_path))) {
-        i_obs_copy_status <- file.copy(
-          from = obs_path,
-          to = usm_path,
-          overwrite = TRUE
-        )
-      } else {
-        if (verbose) {
-          cli::cli_alert_warning(paste0(
-            "Obs file not found for USM",
-            "
-                                      {.val {usm_name}}: {.file {obs_path}}"
-          ))
-        }
-      }
+      i_obs_copy_status <- copy_obs_data_files(
+        workspace,
+        usm = usm_name,
+        usm_path = usm_path,
+        nbplantes[usm_name],
+        file_type = "obs",
+        verbose = verbose
+      )
+      i_obs_sd_copy_status <- copy_obs_data_files(
+        workspace,
+        usm = usm_name,
+        usm_path = usm_path,
+        nbplantes[usm_name],
+        file_type = "sd",
+        verbose = verbose
+      )
 
       # Copying lai files (whatever the lai forcing value is)
-      lapply(flai_usms[[usm_name]], function(x) {
-        if (
-          basename(x) %in%
-            c("null", "defaut.lai") ||
-            is.null(basename(x)) ||
-            dir.exists(file.path(dirname(x), basename(x)))
-        ) {
-          return(FALSE)
-        }
-
-        if (!file.exists(x)) {
-          if (verbose) {
-            cli::cli_alert_warning(paste0(
-              "LAI file not found for USM ",
-              "{.val {usm_name}}: {.file ",
-              "{x}}"
-            ))
+      i_lai_copy_status <- unlist(
+        lapply(flai_usms[[usm_name]], function(x) {
+          if (
+            basename(x) %in%
+              c("null", "defaut.lai", "default.lai") ||
+              is.null(basename(x)) ||
+              dir.exists(file.path(dirname(x), basename(x)))
+          ) {
+            return(FALSE)
           }
-          return(FALSE)
-        }
 
-        file.copy(
-          from = x,
-          to = usm_path,
-          overwrite = TRUE
-        )
-      })
+          if (!file.exists(x)) {
+            return(FALSE)
+          } else {
+            file.copy(
+              from = x,
+              to = usm_path,
+              overwrite = TRUE
+            )
+            if (verbose) {
+              cli::cli_alert_warning(paste0(
+                "     LAI file has been copied for USM ",
+                "{.val {usm_name}}: {.file ",
+                "{basename(x)}}"
+              ))
+            }
+          }
+        })
+      )
 
       # Storing global files copy status
       i_global_copy_status <- copy_status & out_copy_status
 
       # displaying usm name
       if (verbose) {
-        cli::cli_alert_info("USM {.val {usm_name}} successfully created")
+        cli::cli_alert_success("USM {.val {usm_name}} successfully created")
       }
 
       return(list(
@@ -488,6 +484,7 @@ gen_usms_xml2txt <- function(
         exec_status = i_exec_status,
         global_copy_status = i_global_copy_status,
         obs_copy_status = all(i_obs_copy_status),
+        obs_sd_copy_status = all(i_obs_sd_copy_status),
         lai_copy_status = i_lai_copy_status
       ))
     }
@@ -496,16 +493,17 @@ gen_usms_xml2txt <- function(
   exec_status <- sapply(results, `[[`, "exec_status")
   global_copy_status <- sapply(results, `[[`, "global_copy_status")
   obs_copy_status <- sapply(results, `[[`, "obs_copy_status")
+  obs_sd_copy_status <- sapply(results, `[[`, "obs_sd_copy_status")
   lai_copy_status <- sapply(results, `[[`, "lai_copy_status")
 
   # Messages for indicating if usms have been filtered
   # in case of missing files
-  if (!all(all_files_exist)) {
-    message(
-      "Missing files have been detected for usm(s) which will be filtered out:\n",
-      sprintf("%s, ", miss_files_mess)
-    )
-  }
+  # if (!all(all_files_exist)) {
+  #   message(
+  #     "Missing files have been detected for usm(s) which will be filtered out:\n",
+  #     sprintf("%s, ", miss_files_mess)
+  #   )
+  # }
 
   # Messages if failing copies
   if (!all(global_copy_status)) {
@@ -532,6 +530,47 @@ gen_usms_xml2txt <- function(
     files = basename(files_path),
     copy_status = global_copy_status,
     obs_copy_status = obs_copy_status,
+    obs_sd_copy_status = obs_sd_copy_status,
     lai_copy_status = lai_copy_status
   ))
+}
+
+
+copy_obs_data_files <- function(
+  workspace,
+  usm,
+  plant_num,
+  usm_path,
+  file_type = "obs",
+  verbose = FALSE
+) {
+  i_obs_copy_status <- FALSE
+  file_ext <- paste0(".", file_type)
+  # Copying observation files or observation standard deviation
+  if (plant_num == 2) {
+    obs_path <- c(
+      file.path(workspace, paste0(usm, "p", file_ext)),
+      file.path(workspace, paste0(usm, "a", file_ext))
+    )
+  } else {
+    obs_path <- file.path(workspace, paste0(usm, file_ext))
+  }
+
+  # Copying obs files
+  if (any(file.exists(obs_path))) {
+    i_obs_copy_status <- file.copy(
+      from = obs_path,
+      to = usm_path,
+      overwrite = TRUE
+    )
+    if (verbose) {
+      cli::cli_alert_warning(paste0(
+        "    ",
+        toupper(file_type),
+        " file has been copied for USM ",
+        "{.val {usm}}: {.file {basename(obs_path)}}"
+      ))
+    }
+  }
+  i_obs_copy_status
 }
