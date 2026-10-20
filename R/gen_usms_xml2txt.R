@@ -18,8 +18,9 @@
 #' from the JavaStics folder (default ones) if they do not exist in the
 #' workspace
 #'
-#' Apart from input files, observations data files will be also copied if
-#' they exist (`[usm_name].obs`) in the workspace.
+#' Apart from input files, observations and standard deviation data files
+#' (`[usm_name].obs`, `[usm_name].sd`) will be also copied if they exist
+#' in the workspace.
 #'
 #' @param javastics Path of JavaSTICS (Optional), must be set if all the
 #' needed files are not stored in the workspace
@@ -163,7 +164,7 @@ gen_usms_xml2txt <- function(
     usm <- usm[usms_exist]
   }
 
-  # Getting files named list per us
+  # Getting files named list per usm
   # (with fields `paths` and `exist`;files existence status)
   all_files_list <- get_files_list(
     workspace = workspace,
@@ -288,169 +289,162 @@ gen_usms_xml2txt <- function(
   i <- 1
   results <- foreach::foreach(
     i = seq_len(usms_number)
-  ) %do_par_or_not%
-    {
-      usm_name <- usm[i]
+  ) %do_par_or_not% {
+    usm_name <- usm[i]
 
-      i_exec_status <- TRUE
-      i_global_copy_status <- FALSE
-      i_obs_copy_status <- FALSE
-      i_lai_copy_status <- FALSE
+    i_exec_status <- TRUE
+    i_global_copy_status <- FALSE
+    i_obs_copy_status <- FALSE
+    i_obs_sd_copy_status <- FALSE
+    i_lai_copy_status <- FALSE
 
-      # Removing all previous generated files, to be sure.
-      file.remove(files_path[file.exists(files_path)])
+    # Removing all previous generated files, to be sure.
+    file.remove(files_path[file.exists(files_path)])
 
-      #  dir creation for the curent usm, if needed
-      if (dir_per_usm_flag) {
-        usm_path <- file.path(out_dir, usm_name)
-        if (!dir.exists(usm_path)) dir.create(usm_path)
+    #  dir creation for the curent usm, if needed
+    if (dir_per_usm_flag) {
+      usm_path <- file.path(out_dir, usm_name)
+      if (!dir.exists(usm_path)) dir.create(usm_path)
+    } else {
+      usm_path <- out_dir
+    }
+
+    # Enabling the conversions cache in the worker,
+    # (stopped with the cluster at the end)
+    if (parallel) set_xml2txt_cache(TRUE)
+
+    usm_data <- get_usm_data(usms_data[[usm_name]], usm_name, workspace)
+
+    # Getting the usm files paths
+    usm_files_path <- all_files_list[[usm_name]]$paths
+
+    # Getting climate files paths (unique paths)
+    clim_files_path <- unique(
+      grep(
+        pattern = "\\.[0-9]{4}$",
+        x = usm_files_path,
+        value = TRUE
+      )
+    )
+
+    # Getting xml files paths
+    files_idx <- grep(
+      pattern = "\\.xml$",
+      usm_files_path
+    )
+    xml_files_path <- usm_files_path[files_idx]
+
+    # Generation status vector for xml files and new_travail.usm
+    # and climate.txt
+    gen_files_status <- rep(TRUE, length(xml_files_path) + 2)
+    plant_id_plt <- 0
+    plant_id_tec <- 0
+    plant_id <- 0
+
+    # Converting xml files to txt files
+    for (f in seq_along(xml_files_path)) {
+      file_path <- xml_files_path[f]
+
+      if (grepl(pattern = "usms.xml", x = file_path)) {
+        # usms.xml file is not converted
+        next
+      }
+
+      found_plt <- grepl(pattern = "_plt", x = file_path, fixed = TRUE)
+      found_tec <- grepl(pattern = "_tec", x = file_path, fixed = TRUE)
+
+      if (found_plt) {
+        plant_id_plt <- plant_id_plt + 1
+        plant_id <- plant_id_plt
+      }
+
+      if (found_tec) {
+        plant_id_tec <- plant_id_tec + 1
+        plant_id <- plant_id_tec
+      }
+
+      # Getting soil name
+      # useful for generating sol2txt.xsl file in
+      # gen_sol_xsl_file when used in convert_xml2txt
+      if (grepl(pattern = "sols", x = file_path)) {
+        soil_name <- usm_data$nomsol
       } else {
-        usm_path <- out_dir
+        soil_name <- NULL
       }
 
-      # Enabling the conversions cache in the worker,
-      # (stopped with the cluster at the end)
-      if (parallel) set_xml2txt_cache(TRUE)
-
-      usm_data <- get_usm_data(usms_data[[usm_name]], usm_name, workspace)
-
-      # Getting the usm files paths
-      usm_files_path <- all_files_list[[usm_name]]$paths
-
-      # Getting climate files paths (unique paths)
-      clim_files_path <- unique(
-        grep(
-          pattern = "\\.[0-9]{4}$",
-          x = usm_files_path,
-          value = TRUE
-        )
+      gen_files_status[f] <- convert_xml2txt(
+        file = file_path,
+        stics_version = stics_version,
+        out_dir = usm_path,
+        plant_id = plant_id,
+        soil_name = soil_name
       )
+    }
 
-      # Getting xml files paths
-      files_idx <- grep(
-        pattern = "\\.xml$",
-        usm_files_path
-      )
-      xml_files_path <- usm_files_path[files_idx]
+    # Generating new_travail.usm
+    gen_files_status[f + 1] <- gen_new_travail(
+      usm_data,
+      usm = usm_name,
+      workspace = workspace,
+      out_dir = usm_path
+    )
 
-      # Generation status vector for xml files and new_travail.usm
-      # and climate.txt
-      gen_files_status <- rep(TRUE, length(xml_files_path) + 2)
-      plant_id_plt <- 0
-      plant_id_tec <- 0
-      plant_id <- 0
+    # Generating climat.txt file
+    gen_files_status[f + 2] <- gen_climate(
+      clim_files_path,
+      out_dir = usm_path
+    )
 
-      # Converting xml files to txt files
-      for (f in seq_along(xml_files_path)) {
-        file_path <- xml_files_path[f]
+    # setting exec status result
+    i_exec_status <- all(gen_files_status)
 
-        if (grepl(pattern = "usms.xml", x = file_path)) {
-          # usms.xml file is not converted
-          next
-        }
+    copy_status <- i_exec_status
+    # }
 
-        found_plt <- grepl(pattern = "_plt", x = file_path, fixed = TRUE)
-        found_tec <- grepl(pattern = "_tec", x = file_path, fixed = TRUE)
+    # Copying files for outputs definition
+    out_copy_status <- all(file.copy(
+      from = out_files_path,
+      to = usm_path,
+      overwrite = TRUE
+    ))
 
-        if (found_plt) {
-          plant_id_plt <- plant_id_plt + 1
-          plant_id <- plant_id_plt
-        }
-
-        if (found_tec) {
-          plant_id_tec <- plant_id_tec + 1
-          plant_id <- plant_id_tec
-        }
-
-        # Getting soil name
-        # useful for generating sol2txt.xsl file in
-        # gen_sol_xsl_file when used in convert_xml2txt
-        if (grepl(pattern = "sols", x = file_path)) {
-          soil_name <- usm_data$nomsol
-        } else {
-          soil_name <- NULL
-        }
-
-        gen_files_status[f] <- convert_xml2txt(
-          file = file_path,
-          stics_version = stics_version,
-          out_dir = usm_path,
-          plant_id = plant_id,
-          soil_name = soil_name
-        )
-      }
-
-      # Generating new_travail.usm
-      gen_files_status[f + 1] <- gen_new_travail(
-        usm_data,
-        usm = usm_name,
-        workspace = workspace,
-        out_dir = usm_path
-      )
-
-      # Generating climat.txt file
-      gen_files_status[f + 2] <- gen_climate(
-        clim_files_path,
-        out_dir = usm_path
-      )
-
-      # setting exec status result
-      i_exec_status <- all(gen_files_status)
-
-      copy_status <- i_exec_status
-      # }
-
-      # Copying files for outputs definition
-      out_copy_status <- all(file.copy(
-        from = out_files_path,
-        to = usm_path,
-        overwrite = TRUE
+    # If only one usm, for exiting the loop if out_dir
+    # is the workspace path, no need to copy files
+    if (!dir_per_usm_flag && out_dir == workspace) {
+      i_global_copy_status <- TRUE
+      return(list(
+        usms_path = usm_path,
+        exec_status = i_exec_status,
+        global_copy_status = i_global_copy_status,
+        obs_copy_status = i_obs_copy_status,
+        obs_sd_copy_status = i_obs_sd_copy_status,
+        lai_copy_status = i_lai_copy_status
       ))
+    }
 
-      # If only one usm, for exiting the loop if out_dir
-      # is the workspace path, no need to copy files
-      if (!dir_per_usm_flag && out_dir == workspace) {
-        i_global_copy_status <- TRUE
-        return(list(
-          usms_path = usm_path,
-          exec_status = i_exec_status,
-          global_copy_status = i_global_copy_status,
-          obs_copy_status = i_obs_copy_status,
-          lai_copy_status = i_lai_copy_status
-        ))
-      }
+    i_obs_copy_status <- copy_obs_data_files(
+      workspace,
+      usm = usm_name,
+      usm_path = usm_path,
+      nbplantes[usm_name],
+      file_type = "obs",
+      verbose = verbose
+    )
+    i_obs_sd_copy_status <- copy_obs_data_files(
+      workspace,
+      usm = usm_name,
+      usm_path = usm_path,
+      nbplantes[usm_name],
+      file_type = "sd",
+      verbose = verbose
+    )
 
-      # Copying observation files
-      if (nbplantes[usm_name] == 2) {
-        obs_path <- c(
-          file.path(workspace, paste0(usm_name, "p.obs")),
-          file.path(workspace, paste0(usm_name, "a.obs"))
-        )
-      } else {
-        obs_path <- file.path(workspace, paste0(usm_name, ".obs"))
-      }
-
-      if (any(file.exists(obs_path))) {
-        i_obs_copy_status <- file.copy(
-          from = obs_path,
-          to = usm_path,
-          overwrite = TRUE
-        )
-      } else {
-        if (verbose) {
-          cli::cli_alert_warning(paste0(
-            "Obs file not found for USM",
-            "
-                                      {.val {usm_name}}: {.file {obs_path}}"
-          ))
-        }
-      }
-
-      # Copying lai files (whatever the lai forcing value is)
+    # Copying lai files (whatever the lai forcing value is)
+    i_lai_copy_status <- unlist(
       lapply(flai_usms[[usm_name]], function(x) {
         if (
           basename(x) %in%
-            c("null", "defaut.lai") ||
+            c("null", "defaut.lai", "default.lai") ||
             is.null(basename(x)) ||
             dir.exists(file.path(dirname(x), basename(x)))
         ) {
@@ -458,54 +452,57 @@ gen_usms_xml2txt <- function(
         }
 
         if (!file.exists(x)) {
+          return(FALSE)
+        } else {
+          file.copy(
+            from = x,
+            to = usm_path,
+            overwrite = TRUE
+          )
           if (verbose) {
             cli::cli_alert_warning(paste0(
-              "LAI file not found for USM ",
+              "     LAI file has been copied for USM ",
               "{.val {usm_name}}: {.file ",
-              "{x}}"
+              "{basename(x)}}"
             ))
           }
-          return(FALSE)
         }
-
-        file.copy(
-          from = x,
-          to = usm_path,
-          overwrite = TRUE
-        )
       })
+    )
 
-      # Storing global files copy status
-      i_global_copy_status <- copy_status & out_copy_status
+    # Storing global files copy status
+    i_global_copy_status <- copy_status & out_copy_status
 
-      # displaying usm name
-      if (verbose) {
-        cli::cli_alert_info("USM {.val {usm_name}} successfully created")
-      }
-
-      return(list(
-        usms_path = usm_path,
-        exec_status = i_exec_status,
-        global_copy_status = i_global_copy_status,
-        obs_copy_status = all(i_obs_copy_status),
-        lai_copy_status = i_lai_copy_status
-      ))
+    # displaying usm name
+    if (verbose) {
+      cli::cli_alert_success("USM {.val {usm_name}} successfully created")
     }
+
+    return(list(
+      usms_path = usm_path,
+      exec_status = i_exec_status,
+      global_copy_status = i_global_copy_status,
+      obs_copy_status = all(i_obs_copy_status),
+      obs_sd_copy_status = all(i_obs_sd_copy_status),
+      lai_copy_status = i_lai_copy_status
+    ))
+  }
 
   usms_path <- sapply(results, `[[`, "usms_path")
   exec_status <- sapply(results, `[[`, "exec_status")
   global_copy_status <- sapply(results, `[[`, "global_copy_status")
   obs_copy_status <- sapply(results, `[[`, "obs_copy_status")
+  obs_sd_copy_status <- sapply(results, `[[`, "obs_sd_copy_status")
   lai_copy_status <- sapply(results, `[[`, "lai_copy_status")
 
   # Messages for indicating if usms have been filtered
   # in case of missing files
-  if (!all(all_files_exist)) {
-    message(
-      "Missing files have been detected for usm(s) which will be filtered out:\n",
-      sprintf("%s, ", miss_files_mess)
-    )
-  }
+  # if (!all(all_files_exist)) {
+  #   message(
+  #     "Missing files have been detected for usm(s) which will be filtered out:\n",
+  #     sprintf("%s, ", miss_files_mess)
+  #   )
+  # }
 
   # Messages if failing copies
   if (!all(global_copy_status)) {
@@ -532,6 +529,47 @@ gen_usms_xml2txt <- function(
     files = basename(files_path),
     copy_status = global_copy_status,
     obs_copy_status = obs_copy_status,
+    obs_sd_copy_status = obs_sd_copy_status,
     lai_copy_status = lai_copy_status
   ))
+}
+
+
+copy_obs_data_files <- function(
+  workspace,
+  usm,
+  plant_num,
+  usm_path,
+  file_type = "obs",
+  verbose = FALSE
+) {
+  i_obs_copy_status <- FALSE
+  file_ext <- paste0(".", file_type)
+  # Copying observation files or observation standard deviation
+  if (plant_num == 2) {
+    obs_path <- c(
+      file.path(workspace, paste0(usm, "p", file_ext)),
+      file.path(workspace, paste0(usm, "a", file_ext))
+    )
+  } else {
+    obs_path <- file.path(workspace, paste0(usm, file_ext))
+  }
+
+  # Copying obs files
+  if (any(file.exists(obs_path))) {
+    i_obs_copy_status <- file.copy(
+      from = obs_path,
+      to = usm_path,
+      overwrite = TRUE
+    )
+    if (verbose) {
+      cli::cli_alert_warning(paste0(
+        "    ",
+        toupper(file_type),
+        " file has been copied for USM ",
+        "{.val {usm}}: {.file {basename(obs_path)}}"
+      ))
+    }
+  }
+  i_obs_copy_status
 }

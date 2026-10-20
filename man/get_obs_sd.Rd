@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_obs_sd.R
 \name{get_obs_sd}
 \alias{get_obs_sd}
-\title{Read STICS observation standard deviation files (*.sd)}
+\title{Read STICS observation standard deviation files}
 \usage{
 get_obs_sd(
   workspace,

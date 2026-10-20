@@ -17,7 +17,7 @@ the latest version returned by \code{get_stics_versions_compat()} is used.}
 }
 \value{
 A directory path for examples files for given file type and STICS
-version or a vector of (for unknown file types "" is returned as path)
+version or a vector of (for unknown file types empty string is returned as path)
 }
 \description{
 Getting examples files path attached to a STICS version for a given file type

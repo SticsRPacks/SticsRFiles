@@ -38,7 +38,7 @@ as for generating observations data files (\code{gen_obs})
 files names
 \item \code{ian}, \code{mo}, \code{jo} and \code{jul} are mandatory
 (year, month, day and julian date)
-\item Other columns one per variable contain observationsstandard deviation
+\item Other columns one per variable contain observations standard deviation
 values or NA
 }
 
