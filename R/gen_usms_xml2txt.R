@@ -169,7 +169,8 @@ gen_usms_xml2txt <- function(
   all_files_list <- get_files_list(
     workspace = workspace,
     javastics = javastics,
-    usm = usm
+    usm = usm,
+    only_existing = TRUE
   )
 
   # Checking XML files existence, check_files
@@ -497,12 +498,12 @@ gen_usms_xml2txt <- function(
 
   # Messages for indicating if usms have been filtered
   # in case of missing files
-  # if (!all(all_files_exist)) {
-  #   message(
-  #     "Missing files have been detected for usm(s) which will be filtered out:\n",
-  #     sprintf("%s, ", miss_files_mess)
-  #   )
-  # }
+  if (!all(all_files_exist) && verbose) {
+    message(
+      "Missing files have been detected for usm(s) which will be filtered out:\n",
+      sprintf("%s, ", miss_files_mess)
+    )
+  }
 
   # Messages if failing copies
   if (!all(global_copy_status)) {
